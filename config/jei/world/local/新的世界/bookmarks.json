@@ -1,0 +1,12 @@
+[
+  {"version":2},
+  {"ingredient":{"id":"create_hand_made:press_hammer"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_hand_made:mortar"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_hand_made:pointer"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_hand_made:stirring_staff"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_hand_made:infusion_gun"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_hand_made:bellows"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_hand_made:hand_saw"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_hand_made:crusher_mortar"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"create_nested_factory:sequenced_assembly/space_expand_mechanism","recipeType":"create:sequenced_assembly","bookmarkType":"RECIPE"}
+]

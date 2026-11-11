@@ -1,0 +1,9 @@
+export * as minecraft from "@package/net/minecraft";
+export * as neoforged from "@package/net/neoforged";
+export * as irisshaders from "@package/net/irisshaders";
+export * as createmod from "@package/net/createmod";
+export * as caffeinemc from "@package/net/caffeinemc";
+export * as raphimc from "@package/net/raphimc";
+export * as p3pp3rf1y from "@package/net/p3pp3rf1y";
+export * as fabricmc from "@package/net/fabricmc";
+export * as covers1624 from "@package/net/covers1624";

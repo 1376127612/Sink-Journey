@@ -1,0 +1,124 @@
+import { $Level, $Explosion, $Level_ } from "@package/net/minecraft/world/level";
+import { $PartRayTraceResult } from "@package/codechicken/multipart/util";
+import { $Logger } from "@package/org/slf4j";
+import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
+import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $MCDataOutput, $MCDataInput } from "@package/codechicken/lib/data";
+import { $Vector3 } from "@package/codechicken/lib/vec";
+import { $Entity } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
+import { $LevelChunk } from "@package/net/minecraft/world/level/chunk";
+import { $VoxelShape, $CollisionContext } from "@package/net/minecraft/world/phys/shapes";
+import { $CapabilityCache } from "@package/codechicken/lib/capability";
+import { $List, $Collection_ } from "@package/java/util";
+import { $RandomSource } from "@package/net/minecraft/util";
+import { $Consumer_ } from "@package/java/util/function";
+import { $InteractionResult, $ItemInteractionResult, $InteractionHand_ } from "@package/net/minecraft/world";
+import { $HolderLookup$Provider, $BlockPos, $BlockPos_, $Direction_ } from "@package/net/minecraft/core";
+import { $UseOnContext } from "@package/net/minecraft/world/item/context";
+import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
+import { $IChunkLoadTile } from "@package/codechicken/lib/world";
+import { $MultiPart } from "@package/codechicken/multipart/api/part";
+import { $Iterable_ } from "@package/java/lang";
+import { $BlockEntityType, $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
+import { $BlockCapability } from "@package/net/neoforged/neoforge/capabilities";
+
+declare module "@package/codechicken/multipart/block" {
+    export class $TileMultipart extends $BlockEntity implements $IChunkLoadTile {
+        from(arg0: $TileMultipart): void;
+        copyFrom(arg0: $TileMultipart): void;
+        getShape(arg0: $CollisionContext): $VoxelShape;
+        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: C): T;
+        loadFrom(arg0: $TileMultipart): void;
+        getExplosionResistance(arg0: $Explosion): number;
+        getBlockSupportShape(): $VoxelShape;
+        static addPart(arg0: $Level_, arg1: $BlockPos_, arg2: $MultiPart): $TileMultipart;
+        static dropItem(arg0: $ItemStack_, arg1: $Level_, arg2: $Vector3): void;
+        static fromNBT(arg0: $CompoundTag_, arg1: $BlockPos_, arg2: $HolderLookup$Provider): $TileMultipart;
+        animateTick(arg0: $RandomSource): void;
+        onRemoved(): void;
+        getSignal(arg0: number): number;
+        attack(arg0: $Player, arg1: $PartRayTraceResult): void;
+        useItemOn(arg0: $ItemStack_, arg1: $Player, arg2: $PartRayTraceResult, arg3: $InteractionHand_): $ItemInteractionResult;
+        canConnectRedstone(arg0: number): boolean;
+        getDestroyProgress(arg0: $Player, arg1: $PartRayTraceResult): number;
+        useWithoutItem(arg0: $Player, arg1: $PartRayTraceResult): $InteractionResult;
+        getVisualShape(arg0: $CollisionContext): $VoxelShape;
+        addLandingEffects(arg0: $Vector3, arg1: number): void;
+        tile(): $TileMultipart;
+        static isUnobstructed(arg0: $Level_, arg1: $BlockPos_, arg2: $MultiPart): boolean;
+        getDirectSignal(arg0: number): number;
+        getWeakChanges(): boolean;
+        getCollisionShape(arg0: $CollisionContext): $VoxelShape;
+        addRunningEffects(arg0: $Entity): void;
+        entityInside(arg0: $Entity): void;
+        getDrops(): $List<$ItemStack>;
+        stepOn(arg0: $Entity): void;
+        static replaceable(arg0: $Level_, arg1: $BlockPos_, arg2: $UseOnContext): boolean;
+        getInteractionShape(): $VoxelShape;
+        onChunkLoad(arg0: $LevelChunk): void;
+        onNeighborBlockChanged(arg0: $BlockPos_): void;
+        onNeighborTileChange(arg0: $BlockPos_): void;
+        getRenderOcclusionShape(): $VoxelShape;
+        operate(arg0: $Consumer_<$MultiPart>): void;
+        dropItems(arg0: $Iterable_<$ItemStack>): void;
+        clearParts(): void;
+        loadTo(arg0: $TileMultipart): void;
+        remPart(arg0: $MultiPart): $TileMultipart;
+        addPart_do(arg0: $MultiPart): void;
+        onMoved(): void;
+        setValid(arg0: boolean): void;
+        partAdded(arg0: $MultiPart): void;
+        markRender(): void;
+        writeDesc(arg0: $MCDataOutput): void;
+        bindPart(arg0: $MultiPart): void;
+        canAddPart(arg0: $MultiPart): boolean;
+        static handleDescPacket(arg0: $Level_, arg1: $BlockPos_, arg2: $MCDataInput): void;
+        notifyPartChange(arg0: $MultiPart): void;
+        occlusionTest(arg0: $Iterable_<$MultiPart>, arg1: $MultiPart): boolean;
+        internalPartChange(arg0: $MultiPart): void;
+        updateLight(): void;
+        addPart_impl(arg0: $MultiPart): void;
+        multiPartChange(arg0: $Collection_<$MultiPart>): void;
+        getCapCache(): $CapabilityCache;
+        remPart_impl(arg0: $MultiPart): $TileMultipart;
+        /**
+         * @deprecated
+         */
+        markShapeChange(): void;
+        recalcLight(arg0: boolean, arg1: boolean): void;
+        canReplacePart(arg0: $MultiPart, arg1: $MultiPart): boolean;
+        static canPlacePart(arg0: $UseOnContext, arg1: $MultiPart): boolean;
+        getSlottedPart(arg0: number): $MultiPart;
+        harvestPart(arg0: $PartRayTraceResult, arg1: $Player): void;
+        isClientTile(): boolean;
+        notifyShapeChange(): void;
+        notifyTileChange(): void;
+        getPartList(): $List<$MultiPart>;
+        getCloneStack(arg0: $PartRayTraceResult, arg1: $Player): $ItemStack;
+        partRemoved(arg0: $MultiPart, arg1: number): void;
+        notifyNeighborChange(arg0: $Direction_): void;
+        notifyNeighborChange(arg0: number): void;
+        worldPosition: $BlockPos;
+        blockState: $BlockState;
+        level: $Level;
+        static ATTACHMENTS_NBT_KEY: string;
+        static LOGGER: $Logger;
+        /**
+         * @deprecated
+         */
+        type: $BlockEntityType<never>;
+        remove: boolean;
+        customPersistentData: $CompoundTag;
+        constructor(arg0: $BlockPos_, arg1: $BlockState_);
+        get blockSupportShape(): $VoxelShape;
+        get weakChanges(): boolean;
+        get drops(): $List<$ItemStack>;
+        get interactionShape(): $VoxelShape;
+        get renderOcclusionShape(): $VoxelShape;
+        set valid(value: boolean);
+        get capCache(): $CapabilityCache;
+        get clientTile(): boolean;
+        get partList(): $List<$MultiPart>;
+    }
+}

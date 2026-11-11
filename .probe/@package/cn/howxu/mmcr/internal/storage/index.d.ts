@@ -1,0 +1,60 @@
+import { $Level_ } from "@package/net/minecraft/world/level";
+import { $Predicate_ } from "@package/java/util/function";
+import { $Container } from "@package/net/minecraft/world";
+import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
+import { $IItemHandler, $IItemHandlerModifiable } from "@package/net/neoforged/neoforge/items";
+import { $List } from "@package/java/util";
+import { $LevelBlock } from "@package/dev/latvian/mods/kubejs/level";
+import { $Runnable_ } from "@package/java/lang";
+import { $ItemPredicate_ } from "@package/dev/latvian/mods/kubejs/item";
+
+declare module "@package/cn/howxu/mmcr/internal/storage" {
+    export class $LongItemStorage implements $IItemHandlerModifiable {
+        size(): number;
+        capacity(slot: number): number;
+        resource(slot: number): $ItemStack;
+        amount(slot: number): number;
+        getStackInSlot(slot: number): $ItemStack;
+        isItemValid(slot: number, stack: $ItemStack_): boolean;
+        setStackInSlot(slot: number, stack: $ItemStack_): void;
+        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
+        getSlotLimit(slot: number): number;
+        getSlots(): number;
+        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
+        setContents(slot: number, stack: $ItemStack_, amount: number): void;
+        forceExtract(slot: number, amount: number, simulate: boolean): number;
+        forceInsert(slot: number, stack: $ItemStack_, amount: number, simulate: boolean): number;
+        forceInsert(stack: $ItemStack_, amount: number, simulate: boolean): number;
+        kjs$isMutable(): boolean;
+        kjs$setStackInSlot(slot: number, stack: $ItemStack_): void;
+        kjs$self(): $IItemHandler;
+        kjs$getBlock(level: $Level_): $LevelBlock;
+        insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
+        countNonEmpty(match: $ItemPredicate_): number;
+        countNonEmpty(): number;
+        getWidth(): number;
+        getHeight(): number;
+        asContainer(): $Container;
+        getAllItems(): $List<$ItemStack>;
+        setChanged(): void;
+        isEmpty(): boolean;
+        clear(match: $ItemPredicate_): void;
+        clear(): void;
+        count(match: $ItemPredicate_): number;
+        count(): number;
+        find(): number;
+        find(match: $ItemPredicate_): number;
+        getSlots(): number;
+        getStackInSlot(slot: number): $ItemStack;
+        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
+        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
+        getSlotLimit(slot: number): number;
+        isItemValid(slot: number, stack: $ItemStack_): boolean;
+        constructor(slots: number, capacity: number, onChange: $Runnable_);
+        constructor(slots: number, capacity: number, validator: $Predicate_<$ItemStack>, onChange: $Runnable_);
+        get width(): number;
+        get height(): number;
+        get allItems(): $List<$ItemStack>;
+        get empty(): boolean;
+    }
+}

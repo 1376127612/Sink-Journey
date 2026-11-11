@@ -1,0 +1,61 @@
+import { $BuiltInConfigChannelPermissions } from "@package/xaero/lib/common/permission/config/channel";
+import { $ConfigOptionManager } from "@package/xaero/lib/common/config/option";
+import { $SingleConfigManager } from "@package/xaero/lib/common/config/single";
+import { $ConfigProfileManagerIO } from "@package/xaero/lib/common/config/profile/io";
+import { $ClientConfigManager } from "@package/xaero/lib/client/config";
+import { $ClientConfigChannelSynchronizer } from "@package/xaero/lib/client/config/sync";
+import { $Config } from "@package/xaero/lib/common/config";
+import { $ConfigOptionUITypeManager } from "@package/xaero/lib/client/config/option/ui";
+import { $ResourceLocation } from "@package/net/minecraft/resources";
+import { $SingleConfigManagerIO } from "@package/xaero/lib/common/config/single/io";
+import { $IConfigChannelClientRegistryHandler } from "@package/xaero/lib/client/config/channel/register/handler";
+import { $Logger } from "@package/org/apache/logging/log4j";
+import { $IConfigChannelCommonRegistryHandler } from "@package/xaero/lib/common/config/channel/register/handler";
+import { $ServerConfigChannelSynchronizer } from "@package/xaero/lib/common/config/server/sync";
+import { $ServerConfigManager } from "@package/xaero/lib/common/config/server";
+import { $ClientConfigOptionManager } from "@package/xaero/lib/client/config/option";
+export * as register from "@package/xaero/lib/common/config/channel/register";
+
+declare module "@package/xaero/lib/common/config/channel" {
+    export class $ConfigChannel {
+        getId(): $ResourceLocation;
+        getClientConfigProfileIO(): $ConfigProfileManagerIO;
+        getClientConfigManager(): $ClientConfigManager;
+        getPrimaryClientConfigManagerIO(): $SingleConfigManagerIO<$Config>;
+        getPrimaryClientConfigManager(): $SingleConfigManager<$Config>;
+        postLoad(): void;
+        setBuiltInPermissions(arg0: $BuiltInConfigChannelPermissions): void;
+        freezeOptionManagers(): void;
+        getCommonRegistryHandler(): $IConfigChannelCommonRegistryHandler;
+        getBuiltInPermissions(): $BuiltInConfigChannelPermissions;
+        getServerConfigProfileIO(): $ConfigProfileManagerIO;
+        getClientRegistryHandler(): $IConfigChannelClientRegistryHandler;
+        getServerConfigManager(): $ServerConfigManager;
+        getConfigOptionManager(): $ConfigOptionManager;
+        getPrimaryCommonConfigOptionManager(): $ConfigOptionManager;
+        getPrimaryClientConfigOptionManager(): $ClientConfigOptionManager;
+        getClientConfigSynchronizer(): $ClientConfigChannelSynchronizer;
+        getPrimaryCommonConfigManager(): $SingleConfigManager<$Config>;
+        getConfigOptionUITypeManager(): $ConfigOptionUITypeManager;
+        getPrimaryCommonConfigManagerIO(): $SingleConfigManagerIO<$Config>;
+        getServerConfigSynchronizer(): $ServerConfigChannelSynchronizer;
+        logger: $Logger;
+        get id(): $ResourceLocation;
+        get clientConfigProfileIO(): $ConfigProfileManagerIO;
+        get clientConfigManager(): $ClientConfigManager;
+        get primaryClientConfigManagerIO(): $SingleConfigManagerIO<$Config>;
+        get primaryClientConfigManager(): $SingleConfigManager<$Config>;
+        get commonRegistryHandler(): $IConfigChannelCommonRegistryHandler;
+        get serverConfigProfileIO(): $ConfigProfileManagerIO;
+        get clientRegistryHandler(): $IConfigChannelClientRegistryHandler;
+        get serverConfigManager(): $ServerConfigManager;
+        get configOptionManager(): $ConfigOptionManager;
+        get primaryCommonConfigOptionManager(): $ConfigOptionManager;
+        get primaryClientConfigOptionManager(): $ClientConfigOptionManager;
+        get clientConfigSynchronizer(): $ClientConfigChannelSynchronizer;
+        get primaryCommonConfigManager(): $SingleConfigManager<$Config>;
+        get configOptionUITypeManager(): $ConfigOptionUITypeManager;
+        get primaryCommonConfigManagerIO(): $SingleConfigManagerIO<$Config>;
+        get serverConfigSynchronizer(): $ServerConfigChannelSynchronizer;
+    }
+}
