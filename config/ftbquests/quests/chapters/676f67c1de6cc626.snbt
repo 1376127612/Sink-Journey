@@ -118,6 +118,11 @@
 					item: { count: 1, id: "embers:stamper" }
 					type: "item"
 				}
+				{
+					id: "75128584D4B99ACC"
+					item: { count: 1, id: "embers:stamp_base" }
+					type: "item"
+				}
 			]
 			x: 7.0d
 			y: 3.5d
