@@ -3,9 +3,70 @@
 	default_quest_shape: ""
 	filename: "62b1f88b36fcd09d"
 	group: ""
+	icon: {
+		id: "minecraft:apple"
+	}
 	id: "62B1F88B36FCD09D"
 	images: [ ]
 	order_index: 0
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			dependencies: ["1057DBBF8DC8C7C0"]
+			id: "38388EADB17FD482"
+			tasks: [
+				{
+					id: "0E9C420EA1509334"
+					item: { count: 1, id: "minecraft:stick" }
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "5F47FFA46D3891C3"
+					item: { count: 1, id: "notreepunchingremastered:flint_shard" }
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: -1.0d
+		}
+		{
+			id: "1057DBBF8DC8C7C0"
+			tasks: [{
+				id: "0C00A63A80F06A00"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["38388EADB17FD482"]
+			id: "3C36940FAC6404ED"
+			tasks: [
+				{
+					id: "37837AA149FAF92E"
+					item: { count: 1, id: "notreepunchingremastered:grass_fiber" }
+					type: "item"
+				}
+				{
+					id: "64AAB35AFF34D637"
+					item: { count: 1, id: "notreepunchingremastered:plant_string" }
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["3C36940FAC6404ED"]
+			id: "28208174AEC997F6"
+			tasks: [{
+				id: "514BE802B2770757"
+				item: { count: 1, id: "notreepunchingremastered:flint_axe" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -1.0d
+		}
+	]
 }
