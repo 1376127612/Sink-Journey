@@ -1,0 +1,13 @@
+export * as api from "@package/com/denfop/api";
+export * as inventory from "@package/com/denfop/inventory";
+export * as componets from "@package/com/denfop/componets";
+export * as network from "@package/com/denfop/network";
+export * as mixin from "@package/com/denfop/mixin";
+export * as blockentity from "@package/com/denfop/blockentity";
+export * as blocks from "@package/com/denfop/blocks";
+export * as containermenu from "@package/com/denfop/containermenu";
+export * as recipe from "@package/com/denfop/recipe";
+export * as screen from "@package/com/denfop/screen";
+export * as items from "@package/com/denfop/items";
+export * as villager from "@package/com/denfop/villager";
+export * as datagen from "@package/com/denfop/datagen";

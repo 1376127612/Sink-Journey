@@ -1,0 +1,12 @@
+export * as event from "@package/cn/howxu/mmcr/publicapi/event";
+export * as recipe from "@package/cn/howxu/mmcr/publicapi/recipe";
+export * as structure from "@package/cn/howxu/mmcr/publicapi/structure";
+export * as network from "@package/cn/howxu/mmcr/publicapi/network";
+export * as ui from "@package/cn/howxu/mmcr/publicapi/ui";
+export * as registration from "@package/cn/howxu/mmcr/publicapi/registration";
+export * as client from "@package/cn/howxu/mmcr/publicapi/client";
+export * as presentation from "@package/cn/howxu/mmcr/publicapi/presentation";
+export * as behavior from "@package/cn/howxu/mmcr/publicapi/behavior";
+export * as machine from "@package/cn/howxu/mmcr/publicapi/machine";
+export * as runtime from "@package/cn/howxu/mmcr/publicapi/runtime";
+export * as data from "@package/cn/howxu/mmcr/publicapi/data";

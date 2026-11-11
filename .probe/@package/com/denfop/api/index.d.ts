@@ -1,0 +1,14 @@
+export * as windsystem from "@package/com/denfop/api/windsystem";
+export * as item from "@package/com/denfop/api/item";
+export * as tesseract from "@package/com/denfop/api/tesseract";
+export * as energy from "@package/com/denfop/api/energy";
+export * as space from "@package/com/denfop/api/space";
+export * as otherenergies from "@package/com/denfop/api/otherenergies";
+export * as widget from "@package/com/denfop/api/widget";
+export * as water from "@package/com/denfop/api/water";
+export * as upgrades from "@package/com/denfop/api/upgrades";
+export * as container from "@package/com/denfop/api/container";
+export * as pollution from "@package/com/denfop/api/pollution";
+export * as recipe from "@package/com/denfop/api/recipe";
+export * as blockentity from "@package/com/denfop/api/blockentity";
+export * as collision from "@package/com/denfop/api/collision";

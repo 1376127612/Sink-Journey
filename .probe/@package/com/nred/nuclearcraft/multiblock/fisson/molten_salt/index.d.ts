@@ -1,0 +1,60 @@
+import { $BlockBehaviour$Properties } from "@package/net/minecraft/world/level/block/state";
+import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
+import { $IMultiblockVariant } from "@package/it/zerono/mods/zerocore/lib/multiblock/variant";
+import { $List } from "@package/java/util";
+import { $StringRepresentable } from "@package/net/minecraft/util";
+
+declare module "@package/com/nred/nuclearcraft/multiblock/fisson/molten_salt" {
+    export class $FissionCoolantHeaterPortType implements $StringRepresentable, $IMultiblockVariant {
+        getName(): string;
+        getId(): number;
+        getSerializedName(): string;
+        getTranslationKey(): string;
+        static default_values(): $List<$FissionCoolantHeaterPortType>;
+        getBlockProperties(): $BlockBehaviour$Properties;
+        getCoolantId(): $ResourceLocation;
+        getRemappedEnumConstantName(): string;
+        getDefaultBlockProperties(): $BlockBehaviour$Properties;
+        static GOLD: $FissionCoolantHeaterPortType;
+        static BORON: $FissionCoolantHeaterPortType;
+        static REDSTONE: $FissionCoolantHeaterPortType;
+        static OBSIDIAN: $FissionCoolantHeaterPortType;
+        static DIAMOND: $FissionCoolantHeaterPortType;
+        static CAROBBIITE: $FissionCoolantHeaterPortType;
+        static SILVER: $FissionCoolantHeaterPortType;
+        static COPPER: $FissionCoolantHeaterPortType;
+        static NETHER_BRICK: $FissionCoolantHeaterPortType;
+        static END_STONE: $FissionCoolantHeaterPortType;
+        static ARSENIC: $FissionCoolantHeaterPortType;
+        static MANGANESE: $FissionCoolantHeaterPortType;
+        static GLOWSTONE: $FissionCoolantHeaterPortType;
+        static SLIME: $FissionCoolantHeaterPortType;
+        static STANDARD: $FissionCoolantHeaterPortType;
+        static QUARTZ: $FissionCoolantHeaterPortType;
+        static CRYOTHEUM: $FissionCoolantHeaterPortType;
+        static EMERALD: $FissionCoolantHeaterPortType;
+        static VILLIAUMITE: $FissionCoolantHeaterPortType;
+        static LAPIS: $FissionCoolantHeaterPortType;
+        static LIQUID_HELIUM: $FissionCoolantHeaterPortType;
+        static IRON: $FissionCoolantHeaterPortType;
+        static ENDERIUM: $FissionCoolantHeaterPortType;
+        static LIQUID_NITROGEN: $FissionCoolantHeaterPortType;
+        static MAGNESIUM: $FissionCoolantHeaterPortType;
+        static ALUMINUM: $FissionCoolantHeaterPortType;
+        static PRISMARINE: $FissionCoolantHeaterPortType;
+        static PURPUR: $FissionCoolantHeaterPortType;
+        static TIN: $FissionCoolantHeaterPortType;
+        static LITHIUM: $FissionCoolantHeaterPortType;
+        static LEAD: $FissionCoolantHeaterPortType;
+        static FLUORITE: $FissionCoolantHeaterPortType;
+        constructor(arg0: string, arg1: $ResourceLocation_);
+        get name(): string;
+        get id(): number;
+        get serializedName(): string;
+        get translationKey(): string;
+        get blockProperties(): $BlockBehaviour$Properties;
+        get coolantId(): $ResourceLocation;
+        get remappedEnumConstantName(): string;
+        get defaultBlockProperties(): $BlockBehaviour$Properties;
+    }
+}
