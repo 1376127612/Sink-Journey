@@ -4,16 +4,16 @@
     "enableScreenRecovering": false,
     "recoveredScreens": [],
     "englishStateImpl": "CONVERSION_STATUS",
-    "primaryEnglishState": "CJK"
+    "primaryEnglishState": "ENG"
   },
   "advanceSettings": {
     "charSimulationScreens": [],
     "commandPrefixRegex": "^/"
   },
   "windowsCompatibilitySettings": {
-    "enableConversionStatusApi": true,
-    "enableCursorPositionTracking": true,
-    "enableCompositionFontTweaks": true,
+    "enableConversionStatusApi": false,
+    "enableCursorPositionTracking": false,
+    "enableCompositionFontTweaks": false,
     "enableIngameIME": false
   }
 }
