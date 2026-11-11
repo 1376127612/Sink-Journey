@@ -1,0 +1,49 @@
+{
+	chapter.078B49689C174792.title: "机械动力"
+	chapter.11BB336EC9B9533E.title: "高温气体"
+	chapter.1615B92EC329CC3D.title: "征战末地"
+	chapter.194AF753DB4E19B0.title: "自然魔法"
+	chapter.25ACB136E49B8BB8.title: "第一小步"
+	chapter.32C910BDF9B9291A.title: "水晶晶簇"
+	chapter.345D123B1DD75B75.title: "物质基础"
+	chapter.514FD6A3F6EE847D.title: "外星科技"
+	chapter.5255FDF38AF51C93.title: "仰望星空"
+	chapter.5E566DB5411E083C.title: "科技先锋"
+	chapter.5FE0048B1A2B6A65.title: "工业之始"
+	chapter.62B1F88B36FCD09D.title: "旅途之始"
+	chapter.6CD44026301F6F75.title: "触及星辰"
+	chapter.7C4E2F5CB393C0AE.title: "深入原子"
+	chapter.7F71D604CA5FD93C.title: "余烬科技"
+	quest.156E0D27F03959DC.quest_desc: ["坚固的列车机壳当然不会只用于火车，自动化！"]
+	quest.156E0D27F03959DC.title: "开火车！"
+	quest.15C7029E66E838F0.title: "最强的熔炉"
+	quest.16DD4183EE52B969.quest_desc: ["它就像手一样"]
+	quest.18F18597F7065BA1.quest_desc: ["你一定会想自动化它的"]
+	quest.18F18597F7065BA1.title: "这个构件很精密"
+	quest.19A9BC6D92E82033.quest_desc: ["升级你的余烬机器！"]
+	quest.1B096E65D913FAC5.title: "安山物流"
+	quest.1F47C907397E6D9B.quest_desc: ["好大的工作台，材料也好贵"]
+	quest.1F47C907397E6D9B.title: "超大工作台"
+	quest.2723FD4DEFF29767.quest_desc: ["水车的应力被减半了，减慢你的转速"]
+	quest.2723FD4DEFF29767.title: "水车仙人"
+	quest.292AC0D0FB6D3181.title: "圆石生万物！"
+	quest.2EECA8F74F7C235B.quest_desc: ["利用你的搅拌机大量获取黄铜"]
+	quest.2EECA8F74F7C235B.title: "量产黄铜"
+	quest.42EBA0AD040439BF.quest_desc: ["神之手的力量是无穷的"]
+	quest.42EBA0AD040439BF.title: "神之手"
+	quest.4717D5F0DFBD7A6C.quest_desc: [
+		"如果你有足够的毅力和时间的话，你甚至可以手搓完机械动力章节"
+		"另外，你需要用指杆制作你的第一个黄铜机壳来制作机械手"
+	]
+	quest.4717D5F0DFBD7A6C.title: "手搓仙人"
+	quest.54A917D73EE764DB.title: "黄铜物流"
+	quest.55F9AE8981565D51.title: "终于不要手搓变速了"
+	quest.585589616E4ADF3F.title: "第一块合金"
+	quest.62DA5DC7C85BB882.quest_desc: ["利用你的余烬机器做出指杆用于制作安山机壳"]
+	quest.6BDDB3A36AADF646.quest_desc: ["制作一些铝青铜板用于制作蒸汽机器"]
+	quest.6BDDB3A36AADF646.title: "好用的合金"
+	quest.6C12306C5CC22051.title: "蒸汽机"
+	quest.7A52841255FD1EFA.quest_desc: ["很简单，也很有用"]
+	quest.7A52841255FD1EFA.title: "基础传动元件"
+	quest.7C5D2124B8AE69A6.quest_desc: ["升级你的余烬机器！"]
+}

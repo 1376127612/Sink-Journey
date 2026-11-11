@@ -1,0 +1,291 @@
+#Tag names that shouldn't be unified (supports regex)
+#A name written as '<tag>\/.+' covers the tag itself and everything below it
+blacklist = [
+	"minecraft:.+",
+	"forge:glass.+"
+]
+#Tag names that should be unified (supports regex)
+#A name written as '<tag>\/.+' covers the tag itself and everything below it
+whitelist = [
+	"c:dusts/aluminum",
+	"forge:dusts/aluminum",
+	"c:dusts/arsenic",
+	"forge:dusts/arsenic",
+	"c:dusts/bismuth",
+	"forge:dusts/bismuth",
+	"c:dusts/bronze",
+	"forge:dusts/bronze",
+	"c:dusts/calcium_sulfate",
+	"forge:dusts/calcium_sulfate",
+	"c:dusts/coal",
+	"forge:dusts/coal",
+	"c:dusts/copper",
+	"forge:dusts/copper",
+	"c:dusts/diamond",
+	"forge:dusts/diamond",
+	"c:dusts/emerald",
+	"forge:dusts/emerald",
+	"c:dusts/ender_pearl",
+	"forge:dusts/ender_pearl",
+	"c:dusts/fluorite",
+	"forge:dusts/fluorite",
+	"c:dusts/gadolinium",
+	"forge:dusts/gadolinium",
+	"c:dusts/gold",
+	"forge:dusts/gold",
+	"c:dusts/iron",
+	"forge:dusts/iron",
+	"c:dusts/lapis",
+	"forge:dusts/lapis",
+	"c:dusts/lead",
+	"forge:dusts/lead",
+	"c:dusts/lithium",
+	"forge:dusts/lithium",
+	"c:dusts/magnesium",
+	"forge:dusts/magnesium",
+	"c:dusts/manganese",
+	"forge:dusts/manganese",
+	"c:dusts/molybdenum",
+	"forge:dusts/molybdenum",
+	"c:dusts/obsidian",
+	"forge:dusts/obsidian",
+	"c:dusts/osmium",
+	"forge:dusts/osmium",
+	"c:dusts/palladium",
+	"forge:dusts/palladium",
+	"c:dusts/polonium",
+	"forge:dusts/polonium",
+	"c:dusts/quartz",
+	"forge:dusts/quartz",
+	"c:dusts/silver",
+	"forge:dusts/silver",
+	"c:dusts/sulfur",
+	"forge:dusts/sulfur",
+	"c:dusts/tin",
+	"forge:dusts/tin",
+	"c:dusts/tungsten",
+	"forge:dusts/tungsten",
+	"c:dusts/uranium",
+	"forge:dusts/uranium",
+	"c:dusts/zirconium",
+	"forge:dusts/zirconium",
+	"c:gems/fluorite",
+	"forge:gems/fluorite",
+	"c:gems/ruby",
+	"forge:gems/ruby",
+	"c:gems/sapphire",
+	"forge:gems/sapphire",
+	"c:ingots/aluminum",
+	"forge:ingots/aluminum",
+	"c:ingots/bronze",
+	"forge:ingots/bronze",
+	"c:ingots/gadolinium",
+	"forge:ingots/gadolinium",
+	"c:ingots/lead",
+	"forge:ingots/lead",
+	"c:ingots/magnesium",
+	"forge:ingots/magnesium",
+	"c:ingots/manganese",
+	"forge:ingots/manganese",
+	"c:ingots/osmium",
+	"forge:ingots/osmium",
+	"c:ingots/palladium",
+	"forge:ingots/palladium",
+	"c:ingots/silver",
+	"forge:ingots/silver",
+	"c:ingots/steel",
+	"forge:ingots/steel",
+	"c:ingots/tin",
+	"forge:ingots/tin",
+	"c:ingots/tungsten",
+	"forge:ingots/tungsten",
+	"c:ingots/zinc",
+	"forge:ingots/zinc",
+	"c:ingots/zirconium",
+	"forge:ingots/zirconium",
+	"c:nuggets/copper",
+	"forge:nuggets/copper",
+	"c:nuggets/lead",
+	"forge:nuggets/lead",
+	"c:nuggets/magnesium",
+	"forge:nuggets/magnesium",
+	"c:nuggets/osmium",
+	"forge:nuggets/osmium",
+	"c:nuggets/silver",
+	"forge:nuggets/silver",
+	"c:nuggets/steel",
+	"forge:nuggets/steel",
+	"c:nuggets/tin",
+	"forge:nuggets/tin",
+	"c:nuggets/uranium",
+	"forge:nuggets/uranium",
+	"c:nuggets/zinc",
+	"forge:nuggets/zinc",
+	"c:plates/copper",
+	"forge:plates/copper",
+	"c:plates/gold",
+	"forge:plates/gold",
+	"c:plates/iron",
+	"forge:plates/iron",
+	"c:plates/lead",
+	"forge:plates/lead",
+	"c:plates/obsidian",
+	"forge:plates/obsidian",
+	"c:plates/silver",
+	"forge:plates/silver",
+	"c:plates/steel",
+	"forge:plates/steel",
+	"c:raw_materials/lead",
+	"forge:raw_materials/lead",
+	"c:raw_materials/magnesium",
+	"forge:raw_materials/magnesium",
+	"c:raw_materials/osmium",
+	"forge:raw_materials/osmium",
+	"c:raw_materials/silver",
+	"forge:raw_materials/silver",
+	"c:raw_materials/tin",
+	"forge:raw_materials/tin",
+	"c:raw_materials/tungsten",
+	"forge:raw_materials/tungsten",
+	"c:raw_materials/uranium",
+	"forge:raw_materials/uranium",
+	"c:raw_materials/zinc",
+	"forge:raw_materials/zinc",
+	"c:storage_blocks/aluminum",
+	"forge:storage_blocks/aluminum",
+	"c:storage_blocks/bronze",
+	"forge:storage_blocks/bronze",
+	"c:storage_blocks/cobalt",
+	"forge:storage_blocks/cobalt",
+	"c:storage_blocks/gadolinium",
+	"forge:storage_blocks/gadolinium",
+	"c:storage_blocks/lead",
+	"forge:storage_blocks/lead",
+	"c:storage_blocks/magnesium",
+	"forge:storage_blocks/magnesium",
+	"c:storage_blocks/manganese",
+	"forge:storage_blocks/manganese",
+	"c:storage_blocks/molybdenum",
+	"forge:storage_blocks/molybdenum",
+	"c:storage_blocks/nickel",
+	"forge:storage_blocks/nickel",
+	"c:storage_blocks/osmium",
+	"forge:storage_blocks/osmium",
+	"c:storage_blocks/palladium",
+	"forge:storage_blocks/palladium",
+	"c:storage_blocks/platinum",
+	"forge:storage_blocks/platinum",
+	"c:storage_blocks/raw_lead",
+	"forge:storage_blocks/raw_lead",
+	"c:storage_blocks/raw_magnesium",
+	"forge:storage_blocks/raw_magnesium",
+	"c:storage_blocks/raw_osmium",
+	"forge:storage_blocks/raw_osmium",
+	"c:storage_blocks/raw_silver",
+	"forge:storage_blocks/raw_silver",
+	"c:storage_blocks/raw_tin",
+	"forge:storage_blocks/raw_tin",
+	"c:storage_blocks/raw_tungsten",
+	"forge:storage_blocks/raw_tungsten",
+	"c:storage_blocks/raw_uranium",
+	"forge:storage_blocks/raw_uranium",
+	"c:storage_blocks/raw_zinc",
+	"forge:storage_blocks/raw_zinc",
+	"c:storage_blocks/silicon",
+	"forge:storage_blocks/silicon",
+	"c:storage_blocks/silver",
+	"forge:storage_blocks/silver",
+	"c:storage_blocks/steel",
+	"forge:storage_blocks/steel",
+	"c:storage_blocks/tin",
+	"forge:storage_blocks/tin",
+	"c:storage_blocks/tungsten",
+	"forge:storage_blocks/tungsten",
+	"c:storage_blocks/uranium",
+	"forge:storage_blocks/uranium",
+	"c:storage_blocks/zinc",
+	"forge:storage_blocks/zinc",
+	"c:storage_blocks/zirconium",
+	"forge:storage_blocks/zirconium"
+]
+#How the two lists above are combined
+#Allowed Values: USE_WHITELIST, USE_BLACKLIST, USE_BOTH_LISTS, USE_NO_LIST
+listMode = "USE_BOTH_LISTS"
+#Preferred Mods: the first mod in this list that provides a material wins
+preferredMods = [
+	"minecraft",
+	"kubejs",
+	"create",
+	"mekanism",
+	"ae2",
+	"mekmm",
+	"embers",
+	"ad_astra",
+	"enderio",
+	"enderio_evolution",
+	"industrialupgrade",
+	"nuclearcraftneohaul",
+	"neoecoae",
+	"appflux",
+	"extendedae",
+	"ae2cs",
+	"ae2lt",
+	"pneumaticcraft",
+	"roots",
+	"projectred_core"
+]
+#Blacklisted Mods: their items are never replaced and never used as a target
+blacklistMods = [
+	"chisel",
+	"astralsorcery"
+]
+#Exempt Mods: their items are never replaced, but other mods' items may still turn into them
+#Use this for a mod that owns a material and should stay the way it is (AE2 silicon)
+exemptMods = [
+	"ae2"
+]
+#Blacklisted Items: these item ids are never replaced (empty by default)
+blacklistItems = [
+	"nuclearcraftneohaul:fertile_isotope_americium_block",
+	"nuclearcraftneohaul:fertile_isotope_berkelium_block",
+	"nuclearcraftneohaul:fertile_isotope_californium_block",
+	"nuclearcraftneohaul:fertile_isotope_curium_block",
+	"nuclearcraftneohaul:fertile_isotope_neptunium_block",
+	"nuclearcraftneohaul:fertile_isotope_plutonium_block",
+	"nuclearcraftneohaul:fertile_isotope_uranium_block"
+]
+#Namespaces that mean the same thing, the first entry of a group is the canonical one
+#Keeps items that only ship one of the two spellings (forge: and c:) in the same group
+namespaceAliases = [
+	["forge", "c"]
+]
+#Never unify two items of the same mod with each other
+#On by default: mods ship variants that only make sense next to each other
+sameModNoUnify = true
+#Tag names that should be unified even if they are different
+alternatives = [
+	["aluminum", "aluminium", "bauxite"]
+]
+
+["Unify event"]
+	#Unify when items drop
+	drop = true
+	#Unify drops when entities die
+	death = true
+	#Unify every second items in player's inventory
+	second = false
+	#Unify items in player's inventory when they change
+	change = true
+	#Unify items when a container is opened (writes into containers)
+	gui = false
+	#Unify loot table output (block drops, mob drops, chests, fishing)
+	harvest = false
+
+[performance]
+	#Cache the material index (tag fingerprint -> dominant item) instead of scanning the item registry on every drop
+	#Turning this off restores the slow behaviour, useful for troubleshooting
+	indexCache = true
+	#Rebuild the material index automatically after this many seconds, 0 = rebuild only on tag/config changes
+	# Default: 0
+	# Range: 0 ~ 86400
+	lazyIndexRefreshSeconds = 0

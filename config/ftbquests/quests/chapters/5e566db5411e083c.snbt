@@ -1,0 +1,14 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "5e566db5411e083c"
+	group: ""
+	icon: {
+		id: "industrialforegoing:latex_processing_unit"
+	}
+	id: "5E566DB5411E083C"
+	images: [ ]
+	order_index: 8
+	quest_links: [ ]
+	quests: [ ]
+}

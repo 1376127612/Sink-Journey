@@ -1,0 +1,14 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "194af753db4e19b0"
+	group: ""
+	icon: {
+		id: "roots:wildwood_sapling"
+	}
+	id: "194AF753DB4E19B0"
+	images: [ ]
+	order_index: 1
+	quest_links: [ ]
+	quests: [ ]
+}

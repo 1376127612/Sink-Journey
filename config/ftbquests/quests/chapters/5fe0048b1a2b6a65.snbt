@@ -1,0 +1,53 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "5fe0048b1a2b6a65"
+	group: ""
+	icon: {
+		id: "industrialupgrade:steam_blade/steam_blade_wood"
+	}
+	id: "5FE0048B1A2B6A65"
+	images: [ ]
+	order_index: 4
+	quest_links: [ ]
+	quests: [
+		{
+			id: "0706F92EF2C236B8"
+			tasks: [{
+				id: "50761490B0A07143"
+				item: { count: 1, id: "kubejs:steam_casing" }
+				type: "item"
+			}]
+			x: -8.5d
+			y: 0.0d
+		}
+		{
+			id: "6BDDB3A36AADF646"
+			rewards: [{
+				count: 16
+				id: "1D361B4E62844F42"
+				item: {
+					count: 1
+					id: "industrialupgrade:alloyplate/aluminum_bronze"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 16L
+					id: "52AEA2353CB74016"
+					item: { count: 1, id: "industrialupgrade:alloyingot/aluminum_bronze" }
+					type: "item"
+				}
+				{
+					count: 16L
+					id: "1CF53A4CE997DE1C"
+					item: { count: 1, id: "industrialupgrade:alloyplate/aluminum_bronze" }
+					type: "item"
+				}
+			]
+			x: -11.5d
+			y: 0.0d
+		}
+	]
+}

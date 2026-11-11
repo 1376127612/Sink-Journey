@@ -1,0 +1,14 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "5255fdf38af51c93"
+	group: ""
+	icon: {
+		id: "astralsorcery:celestial_crystal"
+	}
+	id: "5255FDF38AF51C93"
+	images: [ ]
+	order_index: 6
+	quest_links: [ ]
+	quests: [ ]
+}

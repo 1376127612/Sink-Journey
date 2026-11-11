@@ -1,0 +1,117 @@
+#World generation: which budding blocks spawn naturally, plus the Flammable Ice
+#structure and Budding Glowstone settings.
+[worldgen]
+	#Whether the raw_iron budding block generates in the world.
+	generate_raw_iron = true
+	#Whether the raw_gold budding block generates in the world.
+	generate_raw_gold = true
+	#Whether the raw_copper budding block generates in the world.
+	generate_raw_copper = true
+	#Whether the raw_zinc budding block generates in the world.
+	generate_raw_zinc = true
+	#Whether the diamond budding block generates in the world.
+	generate_diamond = true
+	#Whether the lapis budding block generates in the world.
+	generate_lapis = true
+	#Whether the emerald budding block generates in the world.
+	generate_emerald = true
+	#Whether the echo budding block generates in the world.
+	generate_echo = true
+	#Whether the quartz budding block generates in the world.
+	generate_quartz = true
+	#Whether the ancient_debris budding block generates in the world.
+	generate_ancient_debris = true
+	#Whether the redstone budding block generates in the world.
+	generate_redstone = true
+	#Whether the glowstone budding block generates in the world.
+	generate_glowstone = true
+	#Whether the flammable_ice budding block generates in the world.
+	generate_flammable_ice = true
+	#1-in-N chance per eligible deep-ocean chunk that a flammable ice budding structure generates.
+	#Higher = rarer.
+	# Default: 256
+	# Range: 1 ~ 10000
+	flammableIceChance = 256
+	#Whether soul sand (sea-surface bubble effect) generates around flammable ice structures.
+	#Its count, scatter range and burial depth are fixed in code.
+	soulSandGenerate = true
+	#Chance (0.0–1.0) that a naturally generated glowstone cluster gets its lowest block replaced with glowstone budding.
+	#0.0 = never, 1.0 = every cluster.
+	# Default: 0.1
+	# Range: 0.0 ~ 1.0
+	glowstoneBuddingChance = 0.1
+	#Whether glowstone budding also spawns a few glowstone buds/clusters on its side faces.
+	glowstoneGenerateBuds = true
+	#Number of buds/clusters spawned around each naturally generated glowstone budding block.
+	#0 = none.
+	# Default: 5
+	# Range: 0 ~ 8
+	glowstoneBudCount = 5
+	#Whether glowstone buds also generate on nearby glowstone blocks around the budding block.
+	#If false, buds only appear on the budding block's own faces.
+	glowstoneBudsOnGlowstone = true
+
+#Budding blocks infecting neighbouring blocks.
+[infection]
+	#Whether budding blocks infect neighbouring blocks. This covers ALL of it:
+	#stone growing into ore, a raw metal block turning into a new budding block,
+	#the Echo block spreading sculk. Turning it off stops budding blocks from
+	#converting anything at all (so they no longer multiply themselves either).
+	#To keep only some budding blocks converting, list them in infectingBudding
+	buddingInfection = true
+	#Which budding blocks infect their neighbours: family ids (raw_iron, quartz)
+	#or block ids (kubejs:my_crystal_budding).
+	#Empty = all of them may (the default); a non-empty list = ONLY those may,
+	#the rest stop converting anything.
+	#Does nothing while buddingInfection is false.
+	infectingBudding = []
+
+#Ticks between two acceleration passes, shared by both accelerators.
+[accelerator]
+	#Ticks between two acceleration passes (1 = every tick, the default).
+	#Both accelerators scale with it: larger = slower. The electric one pays its energy cost per pass.
+	# Default: 1
+	# Range: 1 ~ 100
+	acceleratorIntervalTicks = 1
+	#Which blocks the accelerators may give random ticks to.
+	#BLACKLIST: blocks in the create_crystal_industry:accelerator_blacklist block tag are skipped.
+	#WHITELIST: ONLY blocks in the create_crystal_industry:accelerator_whitelist block tag are accelerated.
+	#UNLIMITED (default): neither tag is consulted; every neighbour is treated as before.
+	#Allowed Values: BLACKLIST, WHITELIST, UNLIMITED
+	acceleratorFilter = "UNLIMITED"
+
+#Scan radius, interval and per-scan result cap of the Echo Spyglass.
+[spyglass]
+	#Scan radius of the Echo Spyglass, in blocks.
+	# Default: 64
+	# Range: 4 ~ 128
+	scanRadius = 64
+	#Interval between two scans, in ticks.
+	# Default: 10
+	# Range: 1 ~ 200
+	scanIntervalTicks = 10
+	#Maximum number of blocks per scan.
+	#Prevents huge network packets from overly broad filters (e.g. stone).
+	# Default: 4096
+	# Range: 64 ~ 100000
+	maxResults = 4096
+
+#Size limits of the Crystal Battery multiblock.
+[crystalBattery]
+	#Maximum horizontal size of a Crystal Battery multiblock (width x width).
+	#The Fluid Tank this block is modelled after is limited to 3.
+	# Default: 3
+	# Range: 1 ~ 16
+	crystalBatteryMaxWidth = 3
+	#Maximum height of a Crystal Battery multiblock, in blocks.
+	# Default: 32
+	# Range: 1 ~ 256
+	crystalBatteryMaxHeight = 32
+
+#Mechanical Cleaner: what happens to the drops it sucks in.
+[cleaner]
+	#Whether drops appearing inside a sucking Mechanical Cleaner's airstream go straight into its inventory instead of spawning as item entities.
+	#Saves entities in farms; the item ends up in the same place either way.
+	#Anything that would not be picked up right away anyway (inventory full, filtered out,
+	#or a washing/smelting airstream) still spawns as a normal drop entity.
+	cleanerDirectAbsorb = true

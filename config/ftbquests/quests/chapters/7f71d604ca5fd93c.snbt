@@ -1,0 +1,14 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "7f71d604ca5fd93c"
+	group: ""
+	icon: {
+		id: "embers:ember_crystal"
+	}
+	id: "7F71D604CA5FD93C"
+	images: [ ]
+	order_index: 2
+	quest_links: [ ]
+	quests: [ ]
+}

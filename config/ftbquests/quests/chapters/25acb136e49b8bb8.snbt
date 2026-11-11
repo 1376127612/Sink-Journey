@@ -1,0 +1,17 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "25acb136e49b8bb8"
+	group: ""
+	icon: {
+		components: {
+			"industrialupgrade:energy": 0.0d
+		}
+		id: "industrialupgrade:rover/rocket"
+	}
+	id: "25ACB136E49B8BB8"
+	images: [ ]
+	order_index: 11
+	quest_links: [ ]
+	quests: [ ]
+}

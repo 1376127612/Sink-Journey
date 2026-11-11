@@ -1,0 +1,12 @@
+#Night Vision Goggles screen overlay.
+[goggles]
+	#Overall opacity of the night vision goggles screen overlay (0.0 = invisible, 1.0 = fully opaque).
+	# Default: 0.75
+	# Range: 0.0 ~ 1.0
+	gogglesOverlayAlpha = 0.75
+
+#Mechanical Cleaner: whether the suction animation plays.
+[cleaner]
+	#Whether items play the fly-into-the-cleaner animation when the Mechanical Cleaner sucks them in.
+	#Visual only: items enter the inventory at the same instant either way.
+	cleanerSuckAnimation = true

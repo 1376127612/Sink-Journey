@@ -1,0 +1,14 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "7c4e2f5cb393c0ae"
+	group: ""
+	icon: {
+		id: "nuclearcraftneohaul:fission_monitor"
+	}
+	id: "7C4E2F5CB393C0AE"
+	images: [ ]
+	order_index: 13
+	quest_links: [ ]
+	quests: [ ]
+}

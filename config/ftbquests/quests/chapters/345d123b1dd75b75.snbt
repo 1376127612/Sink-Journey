@@ -1,0 +1,14 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "345d123b1dd75b75"
+	group: ""
+	icon: {
+		id: "elementalcraft:fire_source_seed"
+	}
+	id: "345D123B1DD75B75"
+	images: [ ]
+	order_index: 12
+	quest_links: [ ]
+	quests: [ ]
+}

@@ -1,0 +1,25 @@
+.__pycache__/
+.probe/
+.vscode/
+crash-reports/
+CustomSkinLoader/
+downloads/
+dynamic-resource-pack-cache/
+ldlib2/
+libraries-integratedscripting/
+lightspeed-cache/
+local/
+logs/
+moonlight-global-datapacks/
+patchouli_books/
+PCL/
+saves/
+screenshots/
+Sink Journey-natives/
+xaero/
+XaeroWaypoints_BACKUP240807/
+command_history.txt
+options.txt
+patchouli_data.json
+usercache.json
+usernamecache.json

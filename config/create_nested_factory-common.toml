@@ -1,0 +1,30 @@
+#Maximum allowed nesting depth for nested factories
+# Default: 8
+# Range: 1 ~ 16
+maxNestingDepth = 8
+#Maximum block checks or writes processed by a Pocket room task each tick
+# Default: 16384
+# Range: 64 ~ 65536
+roomMutationBlocksPerTick = 16384
+#Absolute maximum black-box learning time in ticks
+# Default: 3600
+# Range: > 2
+blackboxMaxLearningTicks = 3600
+#Complete source events required for a cobblestone black-box source
+# Default: 3
+# Range: 3 ~ 5
+cobblestoneSourceVerificationCycles = 3
+#Complete source events required for a basalt black-box source
+# Default: 3
+# Range: 3 ~ 5
+basaltSourceVerificationCycles = 3
+#Complete growth events required for a tree black-box source
+# Default: 3
+# Range: 3 ~ 5
+treeSourceVerificationCycles = 3
+#Complete growth and harvest events required for each crop type in a black-box source
+# Default: 3
+# Range: 3 ~ 5
+cropSourceVerificationCycles = 3
+#Write structured [CNF-BLACKBOX] diagnostics for learning, runtime, stress and ownership events
+blackboxDebugLogging = false
