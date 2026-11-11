@@ -13,3 +13,9 @@
 !.github/**
 
 !.gitignore
+config/mmcr-machine-appearance.properties
+config/jei/world/local/新的世界/lookupHistory.json
+config/iris.properties
+config/nuclearcraftneohaul.ncpf.json
+config/packetfixer.properties
+resourcepacks/Minecraft-Mod-Language-Modpack-Converted-1.21.1.zip
