@@ -1,0 +1,275 @@
+{
+	autofocus_id: "2228F6297919FB7A"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "676f67c1de6cc626"
+	group: "4E6ACFFC2C539C0F"
+	icon: {
+		id: "embers:ancient_codex"
+	}
+	id: "676F67C1DE6CC626"
+	images: [ ]
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["2EC7210E5C7222BA"]
+			id: "0688CF0589EE3128"
+			tasks: [{
+				id: "0DF69F89DC14C58A"
+				item: { count: 1, id: "embers:caminite_bricks" }
+				type: "item"
+			}]
+			x: -1.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["2EC7210E5C7222BA"]
+			id: "22BECA4CD5C08010"
+			shape: "octagon"
+			tasks: [{
+				id: "3EF1D4E474A1A5EB"
+				item: { count: 1, id: "embers:tinker_hammer" }
+				type: "item"
+			}]
+			x: -3.5d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"22BECA4CD5C08010"
+				"0688CF0589EE3128"
+			]
+			dependency_requirement: "all_started"
+			id: "2228F6297919FB7A"
+			tasks: [{
+				id: "3C0AFCDDAFD4A5C6"
+				item: { count: 1, id: "embers:mechanical_core" }
+				type: "item"
+			}]
+			x: -2.5d
+			y: 1.5d
+		}
+		{
+			id: "2EC7210E5C7222BA"
+			tasks: [{
+				id: "380B08EF9EB6BB05"
+				item: { count: 1, id: "embers:ancient_codex" }
+				type: "item"
+			}]
+			x: -2.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["2228F6297919FB7A"]
+			id: "73F4EE5CA018D3AE"
+			tasks: [
+				{
+					id: "03CE2F2D79DB97B9"
+					item: { count: 1, id: "embers:ember_bore" }
+					type: "item"
+				}
+				{
+					id: "1700672CFBCB24D1"
+					item: { count: 1, id: "embers:atmospheric_gauge" }
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["73F4EE5CA018D3AE"]
+			id: "74556786D4F0C297"
+			tasks: [
+				{
+					count: 8L
+					id: "175653936A390E98"
+					item: { count: 1, id: "embers:ember_shard" }
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "042D94608FA20E3B"
+					item: { count: 1, id: "embers:ember_crystal" }
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "23AE38F0B5FC9DCA"
+					item: { count: 1, id: "embers:ember_shard" }
+					type: "item"
+				}
+			]
+			x: 2.5d
+			y: 1.5d
+		}
+		{
+			dependencies: ["749AF51E60268100"]
+			id: "541A81224FDBD420"
+			tasks: [
+				{
+					id: "2D36D2DD90088BCC"
+					item: { count: 1, id: "embers:melter" }
+					type: "item"
+				}
+				{
+					id: "6E095DEBE2221A0F"
+					item: { count: 1, id: "embers:stamper" }
+					type: "item"
+				}
+			]
+			x: 7.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["74556786D4F0C297"]
+			id: "7E2342ED402B6E97"
+			tasks: [{
+				id: "742C46D9AC0F8D52"
+				item: { count: 1, id: "embers:ember_activator" }
+				type: "item"
+			}]
+			x: 2.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["7E2342ED402B6E97"]
+			id: "749AF51E60268100"
+			tasks: [
+				{
+					id: "3BD9B64F5F2E3567"
+					item: { count: 1, id: "embers:ember_receiver" }
+					type: "item"
+				}
+				{
+					id: "548370699406959F"
+					item: { count: 1, id: "embers:ember_emitter" }
+					type: "item"
+				}
+			]
+			x: 4.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["749AF51E60268100"]
+			id: "05C904B7B3FB589E"
+			tasks: [{
+				id: "1ACC566DFDCFA387"
+				item: { count: 1, id: "embers:caminite_lever" }
+				type: "item"
+			}]
+			x: 2.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["2228F6297919FB7A"]
+			id: "2F418266BAA45470"
+			tasks: [{
+				id: "35F73C82384364E3"
+				item: { count: 1, id: "embers:tinker_lens" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["541A81224FDBD420"]
+			id: "09200AF098A644DF"
+			tasks: [{
+				id: "7680FB5A8F32001A"
+				item: { count: 1, id: "embers:mixer_centrifuge" }
+				type: "item"
+			}]
+			x: 7.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["09200AF098A644DF"]
+			id: "124E5A52D0F2A72D"
+			tasks: [{
+				count: 16L
+				id: "69D77FD7F3C6B448"
+				item: { count: 1, id: "embers:dawnstone_ingot" }
+				type: "item"
+			}]
+			x: 9.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["749AF51E60268100"]
+			id: "0B73D9E1303C41BD"
+			tasks: [{
+				id: "2C4DD5DEA89AA7A0"
+				item: { count: 1, id: "embers:cinder_plinth" }
+				type: "item"
+			}]
+			x: 7.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["124E5A52D0F2A72D"]
+			id: "0056045684755D67"
+			tasks: [
+				{
+					count: 4L
+					id: "2CFD34B9BDFFD30E"
+					item: { count: 1, id: "embers:alchemy_pedestal" }
+					type: "item"
+				}
+				{
+					id: "5222C7815BF7F404"
+					item: { count: 1, id: "embers:alchemy_tablet" }
+					type: "item"
+				}
+				{
+					id: "294B65619A4A6E05"
+					item: { count: 1, id: "embers:beam_cannon" }
+					type: "item"
+				}
+			]
+			x: 9.0d
+			y: 3.5d
+		}
+		{
+			dependencies: ["0056045684755D67"]
+			id: "3D94735C2E3745DD"
+			tasks: [{
+				id: "42E570200AE32178"
+				item: { count: 1, id: "embers:dawnstone_anvil" }
+				type: "item"
+			}]
+			x: 9.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["3D94735C2E3745DD"]
+			id: "14E2E0D36E686107"
+			tasks: [
+				{
+					id: "60378F8CDC56C51B"
+					item: { count: 1, id: "embers:inferno_forge" }
+					type: "item"
+				}
+				{
+					id: "12A5A04962CCCDE9"
+					item: { count: 1, id: "embers:mechanical_core" }
+					type: "item"
+				}
+			]
+			x: 11.5d
+			y: 5.5d
+		}
+		{
+			dependencies: ["0056045684755D67"]
+			id: "5395E48294293E81"
+			tasks: [{
+				id: "2529B574C0C2CC9F"
+				item: { count: 1, id: "embers:entropic_enumerator" }
+				type: "item"
+			}]
+			x: 11.0d
+			y: 1.5d
+		}
+	]
+}
