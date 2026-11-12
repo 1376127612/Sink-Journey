@@ -1,0 +1,10 @@
+{
+  "time": "2026-11-12T08:30:41.121248Z",
+  "elapsedMs": 7301,
+  "stages": {
+    "lastPreparationMs": 11,
+    "serverReloadMs": 7272,
+    "clientQueueWaitMs": 8,
+    "verificationCommitMs": 20
+  }
+}

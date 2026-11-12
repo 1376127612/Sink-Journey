@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "time": "2026-11-12T06:24:53.277609600Z",
+  "operation": "compatibility-ui",
+  "phase": "source",
+  "outcome": "read-only",
+  "message": "配方无法序列化：Not a JSON object: null",
+  "recipeIds": [],
+  "serializers": [],
+  "generations": {
+    "before": 0,
+    "after": 0
+  },
+  "kubeJsErrors": [],
+  "compensation": {
+    "attempted": false,
+    "tagsSent": false,
+    "recipesSent": false,
+    "players": 0,
+    "error": ""
+  },
+  "verification": {
+    "passed": false,
+    "detail": ""
+  },
+  "promoted": false,
+  "backup": "",
+  "notes": [
+    "embers:stamping / com.rekindled.embers.recipe.StampingRecipe"
+  ],
+  "timings": {},
+  "elapsedMs": 0
+}

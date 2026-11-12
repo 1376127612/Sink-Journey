@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "time": "2026-11-12T08:08:34.366628Z",
+  "operation": "compatibility-ui",
+  "phase": "edit",
+  "outcome": "failure",
+  "message": "industrialupgrade:industrialupgrade_1274 · java.lang.IllegalArgumentException: 修改未改变原生编码内容；字段可能未被模组读取，或加载条件当前被忽略",
+  "error": {
+    "type": "java.lang.IllegalArgumentException",
+    "message": "修改未改变原生编码内容；字段可能未被模组读取，或加载条件当前被忽略",
+    "stack": [
+      "java.lang.IllegalArgumentException: 修改未改变原生编码内容；字段可能未被模组读取，或加载条件当前被忽略",
+      "\tat TRANSFORMER/kubejs_editor@0.23.1/dev.kubejseditor.runtime.EditorRuntime.validatePatch(EditorRuntime.java:189)",
+      "\tat TRANSFORMER/kubejs_editor@0.23.1/dev.kubejseditor.client.CompatibilityScreen.mutate(CompatibilityScreen.java:79)",
+      "\tat TRANSFORMER/kubejs_editor@0.23.1/dev.kubejseditor.client.CompatibilityScreen.edit(CompatibilityScreen.java:78)",
+      "\tat TRANSFORMER/kubejs_editor@0.23.1/dev.kubejseditor.client.CompatibilityScreen.lambda$init$27(CompatibilityScreen.java:68)",
+      "\tat TRANSFORMER/kubejs_editor@0.23.1/dev.kubejseditor.client.CompatibilityScreen.action(CompatibilityScreen.java:27)",
+      "\tat TRANSFORMER/kubejs_editor@0.23.1/dev.kubejseditor.client.CompatibilityScreen.lambda$button$0(CompatibilityScreen.java:28)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.Button.onPress(Button.java:41)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractButton.onClick(AbstractButton.java:47)",
+      "\tat TRANSFORMER/neoforge@21.1.265/net.neoforged.neoforge.client.extensions.IAbstractWidgetExtension.onClick(IAbstractWidgetExtension.java:36)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.mouseClicked(AbstractWidget.java:144)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.events.ContainerEventHandler.mouseClicked(ContainerEventHandler.java:38)",
+      "\tat TRANSFORMER/kubejs_editor@0.23.1/dev.kubejseditor.client.CompatibilityScreen.mouseClicked(CompatibilityScreen.java:115)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$onPress$0(MouseHandler.java:98)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.wrapScreenError(Screen.java:451)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.onPress(MouseHandler.java:95)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$4(MouseHandler.java:202)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.execute(BlockableEventLoop.java:98)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$5(MouseHandler.java:202)",
+      "\tat MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFWMouseButtonCallbackI.callback(GLFWMouseButtonCallbackI.java:43)",
+      "\tat MC-BOOTSTRAP/com.sun.jna@5.14.0/com.sun.jna.Native.invokeLong(Native Method)",
+      "\tat MC-BOOTSTRAP/com.sun.jna@5.14.0/com.sun.jna.Function.invoke(Function.java:431)",
+      "\tat MC-BOOTSTRAP/com.sun.jna@5.14.0/com.sun.jna.Function.invoke(Function.java:364)",
+      "\tat MC-BOOTSTRAP/com.sun.jna@5.14.0/com.sun.jna.Library$Handler.invoke(Library.java:270)",
+      "\tat TRANSFORMER/jdk.proxy3/jdk.proxy3.$Proxy44.CallWindowProc(Unknown Source)",
+      "\tat TRANSFORMER/imblocker@5.6.2.1/io.github.reserveword.imblocker.common.IMManagerWindows.lambda$initializeIngameIME$1(IMManagerWindows.java:225)",
+      "\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+      "\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)",
+      "\tat MC-BOOTSTRAP/com.sun.jna@5.14.0/com.sun.jna.CallbackReference$DefaultCallbackProxy.invokeCallback(CallbackReference.java:585)",
+      "\tat MC-BOOTSTRAP/com.sun.jna@5.14.0/com.sun.jna.CallbackReference$DefaultCallbackProxy.callback(CallbackReference.java:613)",
+      "\tat MC-BOOTSTRAP/org.lwjgl@3.3.3+5/org.lwjgl.system.JNI.invokeV(Native Method)",
+      "\tat MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFW.glfwPollEvents(GLFW.java:3438)",
+      "\tat TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.systems.RenderSystem.pollEvents(RenderSystem.java:134)",
+      "\tat TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.systems.RenderSystem.flipFrame(RenderSystem.java:147)",
+      "\tat TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.Window.updateDisplay(Window.java:292)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1217)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807)",
+      "\tat TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230)",
+      "\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+      "\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)"
+    ]
+  },
+  "recipeIds": [],
+  "serializers": [],
+  "generations": {
+    "before": 0,
+    "after": 0
+  },
+  "kubeJsErrors": [],
+  "compensation": {
+    "attempted": false,
+    "tagsSent": false,
+    "recipesSent": false,
+    "players": 0,
+    "error": ""
+  },
+  "verification": {
+    "passed": false,
+    "detail": ""
+  },
+  "promoted": false,
+  "backup": "",
+  "notes": [
+    "industrialupgrade:industrialupgrade_1274"
+  ],
+  "timings": {},
+  "elapsedMs": 0
+}

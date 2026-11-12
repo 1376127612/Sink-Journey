@@ -40,7 +40,7 @@
 				id: "1D361B4E62844F42"
 				item: {
 					count: 1
-					id: "industrialupgrade:alloyplate/aluminum_bronze"
+					id: "industrialupgrade:itemplates/bronze_plate"
 				}
 				type: "item"
 			}]
@@ -48,13 +48,13 @@
 				{
 					count: 16L
 					id: "52AEA2353CB74016"
-					item: { count: 1, id: "industrialupgrade:alloyingot/aluminum_bronze" }
+					item: { count: 1, id: "mekanism:ingot_bronze" }
 					type: "item"
 				}
 				{
 					count: 16L
 					id: "1CF53A4CE997DE1C"
-					item: { count: 1, id: "industrialupgrade:alloyplate/aluminum_bronze" }
+					item: { count: 1, id: "industrialupgrade:itemplates/bronze_plate" }
 					type: "item"
 				}
 			]
