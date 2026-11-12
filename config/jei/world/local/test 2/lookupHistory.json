@@ -1,5 +1,12 @@
 [
   {"version":1},
+  {"ingredient":{"id":"astral_dimension:astral_amulet"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"astral_dimension:astral_ectoplasm"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"kubejs:gunmu"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"notreepunchingremastered:flint_shard"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"notreepunchingremastered:flint_axe"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"notreepunchingremastered:plant_string"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"notreepunchingremastered:grass_fiber"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:precision_mechanism"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"kubejs:precision_component_group"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"actuallyadditions:advanced_coil"},"type":"item_stack","bookmarkType":"INGREDIENT"},

@@ -1,0 +1,4 @@
+// kubejsstudio registry additions; re-apply merges by id
+StartupEvents.registry('item', event => {
+    event.create('kubejs:gunmu').displayName('滚木').texture('kubejs:item/brass_heart')
+})
