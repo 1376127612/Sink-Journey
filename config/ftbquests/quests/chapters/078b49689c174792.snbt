@@ -16,6 +16,7 @@
 				id: "create:andesite_alloy"
 			}
 			id: "585589616E4ADF3F"
+			ignore_reward_blocking: true
 			rewards: [{
 				id: "783DD9A56F3E2788"
 				item: {
@@ -465,7 +466,7 @@
 			y: -4.5d
 		}
 		{
-			dependencies: ["18F18597F7065BA1"]
+			dependencies: ["058676663FEB137F"]
 			id: "542D4E8ECA29EBDA"
 			size: 2.0d
 			tasks: [{
@@ -473,8 +474,137 @@
 				item: { count: 1, id: "kubejs:brass_heart" }
 				type: "item"
 			}]
-			x: 3.5d
-			y: 1.5d
+			x: 7.0d
+			y: 5.0d
+		}
+		{
+			dependencies: ["469AD01E07552C3C"]
+			icon: {
+				id: "create:sturdy_sheet"
+			}
+			id: "59416744F8E7ABE8"
+			rewards: [{
+				count: 16
+				id: "05A2B67472B5A3D3"
+				item: {
+					count: 1
+					id: "create:sturdy_sheet"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 8L
+					id: "36930444D35B4A1C"
+					item: { count: 1, id: "create:powdered_obsidian" }
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "6AD389542AE3EEC5"
+					item: { count: 1, id: "create:sturdy_sheet" }
+					type: "item"
+				}
+			]
+			x: 10.5d
+			y: -1.5d
+		}
+		{
+			dependencies: ["59416744F8E7ABE8"]
+			icon: {
+				id: "create_nested_factory:sturdy_alloy_ingot"
+			}
+			id: "34D552E8494DF63D"
+			rewards: [{
+				count: 16
+				id: "5080B0C46A0AEC7D"
+				item: {
+					count: 1
+					id: "create_nested_factory:sturdy_alloy_ingot"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 8L
+					id: "16D58593C04DB536"
+					item: { count: 1, id: "create_nested_factory:soaked_sturdy_alloy_ingot" }
+					type: "item"
+				}
+				{
+					count: 8L
+					id: "66E8DDA1FB937EA9"
+					item: { count: 1, id: "create_nested_factory:sturdy_alloy_ingot" }
+					type: "item"
+				}
+			]
+			x: 14.0d
+			y: -1.5d
+		}
+		{
+			dependencies: ["34D552E8494DF63D"]
+			id: "5F132AD862CA787E"
+			rewards: [{
+				count: 16
+				id: "30AC791449EF5440"
+				item: {
+					count: 1
+					id: "create_nested_factory:soaked_sturdy_alloy_sheet"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 8L
+				id: "3053D885FE18DD82"
+				item: { count: 1, id: "create_nested_factory:sturdy_alloy_sheet" }
+				type: "item"
+			}]
+			x: 16.0d
+			y: -4.5d
+		}
+		{
+			dependencies: ["34D552E8494DF63D"]
+			id: "1408793381C97EC0"
+			tasks: [{
+				id: "272B9561D47AA824"
+				item: { count: 1, id: "create_nested_factory:sturdy_casing" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1408793381C97EC0"]
+			id: "058676663FEB137F"
+			tasks: [{
+				id: "32BD96EB6FD4F01D"
+				item: { count: 1, id: "create_nested_factory:space_expand_mechanism" }
+				type: "item"
+			}]
+			x: 9.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["1408793381C97EC0"]
+			id: "214D1C36178640C8"
+			tasks: [{
+				id: "7BC854E64B648E49"
+				item: { count: 1, id: "create_nested_factory:space_collapse_mechanism" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["542D4E8ECA29EBDA"]
+			id: "11C52348E74D5414"
+			tasks: [{
+				id: "6B9C9479ED96634D"
+				item: { count: 1, id: "create_nested_factory:nested_factory" }
+				type: "item"
+			}]
+			x: 10.5d
+			y: 5.0d
 		}
 	]
 }

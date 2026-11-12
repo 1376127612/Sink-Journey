@@ -12,12 +12,24 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["6BDDB3A36AADF646"]
+			icon: {
+				id: "industrialupgrade:blockresource/steam_machine"
+			}
 			id: "0706F92EF2C236B8"
-			tasks: [{
-				id: "50761490B0A07143"
-				item: { count: 1, id: "kubejs:steam_casing" }
-				type: "item"
-			}]
+			tasks: [
+				{
+					count: 8L
+					id: "50761490B0A07143"
+					item: { count: 1, id: "kubejs:steam_casing" }
+					type: "item"
+				}
+				{
+					id: "218F344D12AFC74F"
+					item: { count: 1, id: "industrialupgrade:blockresource/steam_machine" }
+					type: "item"
+				}
+			]
 			x: -8.5d
 			y: 0.0d
 		}
@@ -48,6 +60,72 @@
 			]
 			x: -11.5d
 			y: 0.0d
+		}
+		{
+			dependencies: ["0706F92EF2C236B8"]
+			id: "4C2722480E36EC49"
+			tasks: [{
+				id: "323032CD82CA5D11"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steamboiler" }
+				type: "item"
+			}]
+			x: -5.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["79789218839D6E7D"]
+			id: "553DE08FF8207EFC"
+			tasks: [{
+				id: "0F615F33F4E66A11"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_macerator" }
+				type: "item"
+			}]
+			x: -1.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["79789218839D6E7D"]
+			id: "160B66057D2A2BC2"
+			tasks: [{
+				id: "702E2A509877A282"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_compressor" }
+				type: "item"
+			}]
+			x: -1.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["79789218839D6E7D"]
+			id: "35B9A0B50B6D5A7C"
+			tasks: [{
+				id: "3C8C8C900B41F32C"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_rolling" }
+				type: "item"
+			}]
+			x: 1.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["4C2722480E36EC49"]
+			id: "79789218839D6E7D"
+			tasks: [{
+				id: "2238E391CE5EB728"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steampressureconverter" }
+				type: "item"
+			}]
+			x: -2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["79789218839D6E7D"]
+			id: "22372738BD8CBD0F"
+			tasks: [{
+				id: "443267D608841610"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_wire_insulator" }
+				type: "item"
+			}]
+			x: 1.0d
+			y: -1.5d
 		}
 	]
 }

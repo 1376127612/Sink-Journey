@@ -27,10 +27,13 @@
 		"但如果你问我解码石板也要炼金制作怎么办，那我的回答是，只有天知道。"
 	]
 	quest.0056045684755D67.quest_subtitle: "这很魔法，对吧"
+	quest.058676663FEB137F.quest_desc: ["制作扩展构件，你可以用它来扩展嵌套工厂的空间"]
+	quest.058676663FEB137F.quest_subtitle: "空间"
 	quest.05C904B7B3FB589E.quest_desc: ["我还以为你会喜欢这个。"]
 	quest.05C904B7B3FB589E.quest_subtitle: "美丽的建材"
 	quest.0688CF0589EE3128.quest_desc: ["你不这么认为吗？"]
 	quest.0688CF0589EE3128.quest_subtitle: "这是一种很漂亮的建材"
+	quest.0706F92EF2C236B8.title: "蒸汽时代"
 	quest.09200AF098A644DF.quest_desc: ["现在，来制作你的第一块合金吧。"]
 	quest.09200AF098A644DF.quest_subtitle: "一种新奇的合金炉"
 	quest.0B73D9E1303C41BD.quest_desc: ["如果我是你的话，我会尽快制作这台机器并完成它的自动化。"]
@@ -44,6 +47,7 @@
 	quest.1057DBBF8DC8C7C0.quest_subtitle: "你连树都撸不了"
 	quest.1057DBBF8DC8C7C0.title: "你连树都撸不了"
 	quest.124E5A52D0F2A72D.quest_subtitle: "黎明石锭真的是一块好锭吗"
+	quest.1408793381C97EC0.quest_desc: ["制作坚固外壳！"]
 	quest.14E2E0D36E686107.quest_desc: ["打开炉顶活板门，投入满热值的装备，再投入若干灰烬晶体（灰烬晶体越多成功率越高），关闭活板门，即可开始强化。无论成功失败都会消耗所有的灰烬晶体。"]
 	quest.14E2E0D36E686107.quest_subtitle: "！？强强？！"
 	quest.156E0D27F03959DC.quest_desc: ["坚固的列车机壳当然不会只用于火车，自动化！"]
@@ -56,6 +60,7 @@
 	quest.1B096E65D913FAC5.title: "安山物流"
 	quest.1F47C907397E6D9B.quest_desc: ["好大的工作台，材料也好贵"]
 	quest.1F47C907397E6D9B.title: "超大工作台"
+	quest.214D1C36178640C8.quest_desc: ["制作坍缩构件，你可以用它减少不需要的空间"]
 	quest.2228F6297919FB7A.quest_desc: ["这或许是你的第一个机器框架，但请注意，它也可以用作为拓展坞来使用。"]
 	quest.2228F6297919FB7A.quest_subtitle: "机械核心"
 	quest.22BECA4CD5C08010.quest_desc: ["这把工具将用于旋转方块、链接余烬传输机器（发射器/接收器/中继器）、关闭管道侧面连接"]
@@ -72,9 +77,14 @@
 	]
 	quest.2EC7210E5C7222BA.quest_subtitle: "古代法典"
 	quest.2EECA8F74F7C235B.quest_desc: ["利用你的搅拌机大量获取黄铜"]
+	quest.2EECA8F74F7C235B.quest_subtitle: "真正的合金"
 	quest.2EECA8F74F7C235B.title: "量产黄铜"
 	quest.2F418266BAA45470.quest_desc: ["我相信你很快就会用用上的。"]
 	quest.2F418266BAA45470.quest_subtitle: "单片眼镜"
+	quest.34D552E8494DF63D.quest_desc: ["用搅拌器制作通红的坚固合金，再用水进行冷却"]
+	quest.34D552E8494DF63D.quest_subtitle: "这样的合金有什么用呢"
+	quest.34D552E8494DF63D.title: "坚固的合金"
+	quest.36A0B043CD532395.quest_subtitle: "流体喜欢铜"
 	quest.38388EADB17FD482.quest_desc: ["现在你需要匍匐在地上寻找石子或者是rock？然后再去河岸搜索一些沙砾挖掘后掉落的燧石，接着将它分解为flint shard（燧石碎片）。然后与破坏树叶后掉落的木棍组合起来，你将获得一把燧石小刀。"]
 	quest.38388EADB17FD482.quest_subtitle: "燧石，但不是打火机"
 	quest.38388EADB17FD482.title: "物理，很神奇吧"
@@ -112,11 +122,18 @@
 	quest.3D94735C2E3745DD.quest_subtitle: "？！强强！？"
 	quest.42EBA0AD040439BF.quest_desc: ["神之手的力量是无穷的"]
 	quest.42EBA0AD040439BF.title: "神之手"
+	quest.469AD01E07552C3C.quest_desc: [
+		"用你的动力合成器制作粉碎轮"
+		"当心，不要掉下去"
+	]
+	quest.469AD01E07552C3C.quest_subtitle: "自从有了粉碎轮之后家里只剩粉碎轮了"
 	quest.4717D5F0DFBD7A6C.quest_desc: [
 		"如果你有足够的毅力和时间的话，你甚至可以手搓完机械动力章节"
 		"另外，你需要用指杆制作你的第一个黄铜机壳来制作机械手"
 	]
 	quest.4717D5F0DFBD7A6C.title: "手搓仙人"
+	quest.4A1B91231661F70F.quest_desc: ["你的第一个机械动力机壳"]
+	quest.4A1B91231661F70F.quest_subtitle: "安山时代"
 	quest.5395E48294293E81.quest_desc: [
 		"炼金台每接入一个熵演枚举器，便允许两个正确的元素象征与原材料错配，在此基础上每额外接入一个，则额外多允许一个正确的元素象征错配。"
 		""
@@ -134,8 +151,20 @@
 	quest.541A81224FDBD420.quest_subtitle: "熔炉？！"
 	quest.54A917D73EE764DB.title: "黄铜物流"
 	quest.55F9AE8981565D51.title: "终于不要手搓变速了"
+	quest.585589616E4ADF3F.quest_desc: [
+		"机械动力的教程很多，因此任务的描述会略简略"
+		"另外，本整合包禁用了所有动态结构"
+	]
+	quest.585589616E4ADF3F.quest_subtitle: "简单的合金"
 	quest.585589616E4ADF3F.title: "第一块合金"
+	quest.59416744F8E7ABE8.quest_desc: ["将黑曜石粉碎再注入熔岩得到坚固板！你可以用于制作下一级的机壳"]
+	quest.59416744F8E7ABE8.quest_subtitle: "我想它一定很硬"
+	quest.59416744F8E7ABE8.title: "坚固板"
+	quest.5F132AD862CA787E.quest_desc: ["你需要将坚固合金烧红再把它压成板，或者你在一开始就这么做"]
+	quest.5F132AD862CA787E.quest_subtitle: "冲压机的力气没这么大"
+	quest.5F132AD862CA787E.title: "我想你很难把它压成板"
 	quest.62DA5DC7C85BB882.quest_desc: ["利用你的余烬机器做出指杆用于制作安山机壳"]
+	quest.62DA5DC7C85BB882.quest_subtitle: "指指点点"
 	quest.6BDDB3A36AADF646.quest_desc: ["制作一些铝青铜板用于制作蒸汽机器"]
 	quest.6BDDB3A36AADF646.title: "好用的合金"
 	quest.6C12306C5CC22051.title: "蒸汽机"
