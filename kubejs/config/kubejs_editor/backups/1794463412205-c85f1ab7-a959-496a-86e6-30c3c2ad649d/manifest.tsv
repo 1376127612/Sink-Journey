@@ -1,0 +1,3 @@
+NEW	kubejs/server_scripts/kubejs_editor/recipes.js
+NEW	kubejs/config/kubejs_editor/state.json
+OLD	kubejs/config/kubejs_editor/project.json

@@ -107,16 +107,7 @@ ServerEvents.recipes(event => {
         ]
     }).id('kubejs:railway_casing_from_brass_casing')
 
-    //蒸汽机壳：列车机壳+铝青铜板
-    event.shaped('kubejs:steam_casing',[
-        'PPP',
-        'PNP',
-        'PPP'
-    ],
-    {
-        P:'industrialupgrade:alloyplate/aluminum_bronze',
-        N:'create:railway_casing'
-    }).id('kubejs:steam_casing_from_railway_casing')
+    //蒸汽机壳：铁质壳体+青铜承压板+列车机壳
 
     //蒸汽机机身：蒸汽机壳+黄铜之心
     event.remove({ output: 'industrialupgrade:blockresource/steam_machine' })

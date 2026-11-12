@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "applied": {
+    "schemaVersion": 2,
+    "recipes": {
+      "kubejs_editor:recipe_1": {
+        "id": "kubejs_editor:recipe_1",
+        "operation": "add",
+        "origin": "add",
+        "grid": {
+          "size": 3,
+          "cells": [
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "industrialupgrade:itemplates/bronze_plate"
+            },
+            {
+              "item": "create:railway_casing"
+            },
+            {
+              "item": "industrialupgrade:itemplates/bronze_plate"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            }
+          ]
+        },
+        "simple": false,
+        "forceNative": false,
+        "enabled": true,
+        "data": {
+          "pattern": [
+            "AAA",
+            "BCB",
+            "AAA"
+          ],
+          "key": {
+            "A": {
+              "item": "create:iron_sheet"
+            },
+            "B": {
+              "item": "industrialupgrade:itemplates/bronze_plate"
+            },
+            "C": {
+              "item": "create:railway_casing"
+            }
+          },
+          "result": {
+            "id": "kubejs:steam_casing",
+            "count": 1
+          },
+          "type": "minecraft:crafting_shaped"
+        }
+      }
+    },
+    "items": {},
+    "configs": [],
+    "assets": {},
+    "scripts": {}
+  },
+  "paths": {},
+  "managedHashes": {
+    "kubejs/server_scripts/kubejs_editor/recipes.js": "f5e33dae0236f797b723dd15fe2e9921d3a3adadd397bad9796d96bdd2eb208e"
+  },
+  "frozen": {},
+  "manualFiles": []
+}

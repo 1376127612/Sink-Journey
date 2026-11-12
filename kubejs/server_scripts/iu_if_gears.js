@@ -15,7 +15,7 @@
 
 ServerEvents.tags('item', event => {
     // IF 铁齿轮和 EnderIO 铁齿轮不是同一个物品，从通用铁齿轮标签里拆出去
-    event.remove('c:gears/iron', 'industrialforegoing:iron_gear')
+    event.remove('c:gears/iron', 'enderio:iron_gear')
 
     // 冲压机输出用的专用标签（只放 IF 自己的齿轮）
     event.add('kubejs:gears/if_iron', 'industrialforegoing:iron_gear')

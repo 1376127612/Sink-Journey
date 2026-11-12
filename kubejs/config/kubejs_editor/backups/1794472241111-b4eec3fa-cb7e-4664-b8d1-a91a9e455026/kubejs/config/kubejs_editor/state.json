@@ -1,0 +1,1403 @@
+{
+  "schemaVersion": 2,
+  "applied": {
+    "schemaVersion": 2,
+    "recipes": {
+      "kubejs_editor:recipe_1": {
+        "id": "kubejs_editor:recipe_1",
+        "operation": "add",
+        "origin": "add",
+        "grid": {
+          "size": 3,
+          "cells": [
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "industrialupgrade:itemplates/bronze_plate"
+            },
+            {
+              "item": "create:railway_casing"
+            },
+            {
+              "item": "industrialupgrade:itemplates/bronze_plate"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            }
+          ]
+        },
+        "simple": false,
+        "forceNative": false,
+        "enabled": true,
+        "data": {
+          "pattern": [
+            "AAA",
+            "BCB",
+            "AAA"
+          ],
+          "key": {
+            "A": {
+              "item": "create:iron_sheet"
+            },
+            "B": {
+              "item": "industrialupgrade:itemplates/bronze_plate"
+            },
+            "C": {
+              "item": "create:railway_casing"
+            }
+          },
+          "result": {
+            "id": "kubejs:steam_casing",
+            "count": 1
+          },
+          "type": "minecraft:crafting_shaped"
+        }
+      },
+      "industrialupgrade:industrialupgrade_752": {
+        "id": "industrialupgrade:industrialupgrade_752",
+        "operation": "remove",
+        "origin": "existing",
+        "simple": false,
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "tag": "c:plates/zinc"
+            },
+            "B": {
+              "tag": "c:plates/titanium"
+            },
+            "C": {
+              "tag": "c:plates/aluminium"
+            }
+          },
+          "pattern": [
+            "AAA",
+            "BCB",
+            "   "
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_200_element"
+          },
+          "show_notification": false
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "tag": "c:plates/zinc"
+            },
+            "B": {
+              "tag": "c:plates/titanium"
+            },
+            "C": {
+              "tag": "c:plates/aluminium"
+            }
+          },
+          "pattern": [
+            "AAA",
+            "BCB",
+            "   "
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_200_element"
+          },
+          "show_notification": false
+        }
+      },
+      "kubejs_editor:recipe_2": {
+        "id": "kubejs_editor:recipe_2",
+        "operation": "replace",
+        "origin": "add",
+        "grid": {
+          "size": 3,
+          "cells": [
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "ad_astra:iron_rod"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "ad_astra:iron_rod"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "ad_astra:iron_rod"
+            },
+            {
+              "item": "create:iron_sheet"
+            }
+          ]
+        },
+        "simple": false,
+        "forceNative": false,
+        "enabled": true,
+        "data": {
+          "pattern": [
+            "ABA",
+            "ABA",
+            "ABA"
+          ],
+          "key": {
+            "A": {
+              "item": "create:iron_sheet"
+            },
+            "B": {
+              "item": "ad_astra:iron_rod"
+            }
+          },
+          "result": {
+            "id": "industrialupgrade:crafting_elements/crafting_200_element",
+            "count": 3.0
+          },
+          "type": "minecraft:crafting_shaped"
+        }
+      },
+      "industrialupgrade:industrialupgrade_756": {
+        "id": "industrialupgrade:industrialupgrade_756",
+        "operation": "replace",
+        "origin": "existing",
+        "simple": false,
+        "compatibility": {
+          "version": 1,
+          "type": "industrialupgrade:shaped_recipe",
+          "source": "jei-native",
+          "modVersion": "3.4.0.11",
+          "shape": "[category:string, key:[A:[item:string], B:[item:string]], pattern:[string], result:[count:number, id:string], show_notification:boolean, type:\"industrialupgrade:shaped_recipe\"]",
+          "autoDiscover": true,
+          "fields": [
+            {
+              "path": "/key/A",
+              "label": "/key/A",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/B",
+              "label": "/key/B",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/result",
+              "label": "/result",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "count",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "/count",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "OUTPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/show_notification",
+              "label": "/show_notification",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "CONDITION",
+              "kind": "BOOLEAN",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            }
+          ]
+        },
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "industrialupgrade:crafting_elements/crafting_200_element"
+            },
+            "B": {
+              "item": "create:iron_sheet"
+            }
+          },
+          "pattern": [
+            "BAB",
+            "B B",
+            "BAB"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_164_element"
+          },
+          "show_notification": false
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "industrialupgrade:crafting_elements/crafting_200_element"
+            },
+            "B": {
+              "tag": "c:plates/tungsten"
+            }
+          },
+          "pattern": [
+            "BAB",
+            "B B",
+            "BAB"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_164_element"
+          },
+          "show_notification": false
+        }
+      },
+      "industrialupgrade:industrialupgrade_726": {
+        "id": "industrialupgrade:industrialupgrade_726",
+        "operation": "replace",
+        "origin": "existing",
+        "simple": false,
+        "compatibility": {
+          "version": 1,
+          "type": "industrialupgrade:shaped_recipe",
+          "source": "jei-native",
+          "modVersion": "3.4.0.11",
+          "shape": "[category:string, key:[A:[item:string], B:[item:string], C:[tag:string], D:[item:string]], pattern:[string], result:[count:number, id:string], show_notification:boolean, type:\"industrialupgrade:shaped_recipe\"]",
+          "autoDiscover": true,
+          "fields": [
+            {
+              "path": "/key/A",
+              "label": "/key/A",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/B",
+              "label": "/key/B",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/C",
+              "label": "/key/C",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/D",
+              "label": "/key/D",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/result",
+              "label": "/result",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "count",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "/count",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "OUTPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/show_notification",
+              "label": "/show_notification",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "CONDITION",
+              "kind": "BOOLEAN",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            }
+          ]
+        },
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "key": {
+            "A": {
+              "item": "create:precision_mechanism"
+            },
+            "B": {
+              "item": "create:golden_sheet"
+            },
+            "C": {
+              "tag": "c:ingots/iron"
+            },
+            "D": {
+              "item": "industrialupgrade:alloygear/red_brass"
+            }
+          },
+          "pattern": [
+            "CCC",
+            "BAB",
+            "DBD"
+          ],
+          "result": {
+            "id": "industrialupgrade:crafting_elements/crafting_21_element",
+            "count": 1
+          },
+          "show_notification": false,
+          "category": "misc",
+          "type": "industrialupgrade:shaped_recipe"
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "industrialupgrade:crafting_elements/crafting_42_element"
+            },
+            "B": {
+              "tag": "c:ingots/gold"
+            },
+            "C": {
+              "tag": "c:ingots/iron"
+            },
+            "D": {
+              "item": "industrialupgrade:crafting_elements/crafting_650_element"
+            }
+          },
+          "pattern": [
+            "CCC",
+            "BAB",
+            "DBD"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_21_element"
+          },
+          "show_notification": false
+        }
+      },
+      "industrialupgrade:industrialupgrade_1917": {
+        "id": "industrialupgrade:industrialupgrade_1917",
+        "operation": "replace",
+        "origin": "existing",
+        "simple": false,
+        "compatibility": {
+          "version": 1,
+          "type": "industrialupgrade:shaped_recipe",
+          "source": "jei-native",
+          "modVersion": "3.4.0.11",
+          "shape": "[category:string, key:[A:[tag:string], B:[tag:string]], pattern:[string], result:[count:number, id:string], show_notification:boolean, type:\"industrialupgrade:shaped_recipe\"]",
+          "autoDiscover": true,
+          "fields": [
+            {
+              "path": "/key/A",
+              "label": "/key/A",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/B",
+              "label": "/key/B",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/result",
+              "label": "/result",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "count",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "/count",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "OUTPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/show_notification",
+              "label": "/show_notification",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "CONDITION",
+              "kind": "BOOLEAN",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            }
+          ]
+        },
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "tag": "c:plates/gold"
+            },
+            "B": {
+              "tag": "c:ingots/iron"
+            }
+          },
+          "pattern": [
+            "AAA",
+            "ABA",
+            "AAA"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_496_element"
+          },
+          "show_notification": false
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "tag": "c:plates/titanium"
+            },
+            "B": {
+              "tag": "c:ingots/iron"
+            }
+          },
+          "pattern": [
+            "AAA",
+            "ABA",
+            "AAA"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_496_element"
+          },
+          "show_notification": false
+        }
+      },
+      "industrialupgrade:industrialupgrade_1274": {
+        "id": "industrialupgrade:industrialupgrade_1274",
+        "operation": "replace",
+        "origin": "existing",
+        "simple": false,
+        "compatibility": {
+          "version": 1,
+          "type": "industrialupgrade:shaped_recipe",
+          "source": "jei-native",
+          "modVersion": "3.4.0.11",
+          "shape": "[category:string, key:[A:[item:string], B:[item:string], C:[item:string], D:[item:string], E:[item:string]], pattern:[string], result:[count:number, id:string], show_notification:boolean, type:\"industrialupgrade:shaped_recipe\"]",
+          "autoDiscover": true,
+          "fields": [
+            {
+              "path": "/key/A",
+              "label": "/key/A",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/B",
+              "label": "/key/B",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/C",
+              "label": "/key/C",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/D",
+              "label": "/key/D",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/E",
+              "label": "/key/E",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/result",
+              "label": "/result",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "count",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "/count",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "OUTPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/show_notification",
+              "label": "/show_notification",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "CONDITION",
+              "kind": "BOOLEAN",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            }
+          ]
+        },
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "industrialupgrade:crafting_elements/crafting_21_element"
+            },
+            "B": {
+              "item": "kubejs:bronze_gear"
+            },
+            "C": {
+              "item": "industrialupgrade:preciousgem/sapphire_gem"
+            },
+            "D": {
+              "item": "kubejs:brass_gear"
+            },
+            "E": {
+              "item": "create:brass_sheet"
+            }
+          },
+          "pattern": [
+            "CBC",
+            "BAB",
+            "EDE"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_32_element"
+          },
+          "show_notification": false
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "industrialupgrade:crafting_elements/crafting_21_element"
+            },
+            "B": {
+              "tag": "c:gears/invar"
+            },
+            "C": {
+              "tag": "c:gems/sapphire"
+            },
+            "D": {
+              "tag": "c:gears/ferromanganese"
+            },
+            "E": {
+              "tag": "c:plates/ferromanganese"
+            }
+          },
+          "pattern": [
+            "CBC",
+            "BAB",
+            "EDE"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_32_element"
+          },
+          "show_notification": false
+        }
+      },
+      "industrialupgrade:industrialupgrade_755": {
+        "id": "industrialupgrade:industrialupgrade_755",
+        "operation": "remove",
+        "origin": "existing",
+        "simple": false,
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "tag": "c:plates/iron"
+            },
+            "B": {
+              "tag": "c:plates/tungsten"
+            }
+          },
+          "pattern": [
+            "AAA",
+            " B ",
+            "AAA"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_76_element"
+          },
+          "show_notification": false
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "tag": "c:plates/iron"
+            },
+            "B": {
+              "tag": "c:plates/tungsten"
+            }
+          },
+          "pattern": [
+            "AAA",
+            " B ",
+            "AAA"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_76_element"
+          },
+          "show_notification": false
+        }
+      },
+      "kubejs_editor:recipe_3": {
+        "id": "kubejs_editor:recipe_3",
+        "operation": "add",
+        "origin": "add",
+        "grid": {
+          "size": 3,
+          "cells": [
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "minecraft:iron_block"
+            },
+            null,
+            {
+              "item": "minecraft:iron_block"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            },
+            {
+              "item": "create:iron_sheet"
+            }
+          ]
+        },
+        "simple": false,
+        "forceNative": false,
+        "enabled": true,
+        "data": {
+          "pattern": [
+            "AAA",
+            "B B",
+            "AAA"
+          ],
+          "key": {
+            "A": {
+              "item": "create:iron_sheet"
+            },
+            "B": {
+              "item": "minecraft:iron_block"
+            }
+          },
+          "result": {
+            "id": "industrialupgrade:crafting_elements/crafting_76_element",
+            "count": 1
+          },
+          "type": "minecraft:crafting_shaped"
+        }
+      },
+      "industrialupgrade:industrialupgrade_1275": {
+        "id": "industrialupgrade:industrialupgrade_1275",
+        "operation": "replace",
+        "origin": "existing",
+        "simple": false,
+        "compatibility": {
+          "version": 1,
+          "type": "industrialupgrade:shaped_recipe",
+          "source": "jei-native",
+          "modVersion": "3.4.0.11",
+          "shape": "[category:string, key:[A:[item:string], B:[item:string], C:[tag:string], D:[item:string], E:[item:string]], pattern:[string], result:[count:number, id:string], show_notification:boolean, type:\"industrialupgrade:shaped_recipe\"]",
+          "autoDiscover": true,
+          "fields": [
+            {
+              "path": "/key/A",
+              "label": "/key/A",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/B",
+              "label": "/key/B",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/C",
+              "label": "/key/C",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/D",
+              "label": "/key/D",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/E",
+              "label": "/key/E",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/result",
+              "label": "/result",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "count",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "/count",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "OUTPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/show_notification",
+              "label": "/show_notification",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "CONDITION",
+              "kind": "BOOLEAN",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            }
+          ]
+        },
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "industrialupgrade:crafting_elements/crafting_21_element"
+            },
+            "B": {
+              "item": "kubejs:brass_gear"
+            },
+            "C": {
+              "tag": "c:gems/topaz"
+            },
+            "D": {
+              "item": "kubejs:bronze_gear"
+            },
+            "E": {
+              "item": "industrialupgrade:itemplates/bronze_plate"
+            }
+          },
+          "pattern": [
+            "CBC",
+            "BAB",
+            "EDE"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_123_element"
+          },
+          "show_notification": false
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "industrialupgrade:crafting_elements/crafting_21_element"
+            },
+            "B": {
+              "tag": "c:gears/electrum"
+            },
+            "C": {
+              "tag": "c:gems/topaz"
+            },
+            "D": {
+              "tag": "c:gears/aluminumbronze"
+            },
+            "E": {
+              "tag": "c:plates/aluminumbronze"
+            }
+          },
+          "pattern": [
+            "CBC",
+            "BAB",
+            "EDE"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_123_element"
+          },
+          "show_notification": false
+        }
+      },
+      "industrialupgrade:industrialupgrade_740": {
+        "id": "industrialupgrade:industrialupgrade_740",
+        "operation": "replace",
+        "origin": "existing",
+        "simple": false,
+        "compatibility": {
+          "version": 1,
+          "type": "industrialupgrade:shaped_recipe",
+          "source": "jei-native",
+          "modVersion": "3.4.0.11",
+          "shape": "[category:string, key:[A:[item:string], B:[tag:string], C:[item:string]], pattern:[string], result:[count:number, id:string], show_notification:boolean, type:\"industrialupgrade:shaped_recipe\"]",
+          "autoDiscover": true,
+          "fields": [
+            {
+              "path": "/key/A",
+              "label": "/key/A",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/B",
+              "label": "/key/B",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/key/C",
+              "label": "/key/C",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "INPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/result",
+              "label": "/result",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "count",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "/count",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "OUTPUT",
+              "kind": "ITEM",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            },
+            {
+              "path": "/show_notification",
+              "label": "/show_notification",
+              "labelKey": "",
+              "unit": "",
+              "quantity": "",
+              "probability": "",
+              "expand": "",
+              "registry": "",
+              "valuePath": "",
+              "quantityPath": "",
+              "ingredientType": "",
+              "readOnlyReason": "",
+              "role": "CONDITION",
+              "kind": "BOOLEAN",
+              "list": false,
+              "integer": false,
+              "required": false,
+              "displayQuantity": true
+            }
+          ]
+        },
+        "loadConditionPolicy": "ignore",
+        "forceNative": true,
+        "enabled": true,
+        "data": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "minecraft:flint"
+            },
+            "B": {
+              "tag": "c:ingots/iron"
+            },
+            "C": {
+              "item": "ad_astra:iron_rod"
+            }
+          },
+          "pattern": [
+            "AAA",
+            "BCB",
+            "AAA"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_41_element"
+          },
+          "show_notification": false
+        },
+        "source": {
+          "type": "industrialupgrade:shaped_recipe",
+          "category": "misc",
+          "key": {
+            "A": {
+              "item": "minecraft:flint"
+            },
+            "B": {
+              "tag": "c:ingots/iron"
+            },
+            "C": {
+              "tag": "c:ingots/titanium"
+            }
+          },
+          "pattern": [
+            "AAA",
+            "BCB",
+            "AAA"
+          ],
+          "result": {
+            "count": 1,
+            "id": "industrialupgrade:crafting_elements/crafting_41_element"
+          },
+          "show_notification": false
+        }
+      }
+    },
+    "items": {},
+    "configs": [],
+    "assets": {},
+    "scripts": {}
+  },
+  "paths": {},
+  "managedHashes": {
+    "kubejs/server_scripts/kubejs_editor/recipes.js": "f554e5cfb328f99a8396a536cb9f881b1fc875ee47053338c8dd0752a8f73878"
+  },
+  "frozen": {},
+  "manualFiles": []
+}

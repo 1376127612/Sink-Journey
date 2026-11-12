@@ -10,5 +10,34 @@
 	images: [ ]
 	order_index: 5
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			id: "57EE18783CC19EED"
+			tasks: [{
+				count: 16L
+				id: "0AA081DAE9FF62F7"
+				item: { count: 1, id: "pneumaticcraft:ingot_iron_compressed" }
+				type: "item"
+			}]
+			x: -5.5d
+			y: -0.5d
+		}
+		{
+			id: "22A7B9C9FE943FBF"
+			tasks: [
+				{
+					id: "7F5969870B41488C"
+					item: { count: 1, id: "pneumaticcraft:pressure_chamber_wall" }
+					type: "item"
+				}
+				{
+					id: "73BBF167FDC64A9F"
+					item: { count: 1, id: "pneumaticcraft:pressure_chamber_interface" }
+					type: "item"
+				}
+			]
+			x: -2.0d
+			y: -0.5d
+		}
+	]
 }

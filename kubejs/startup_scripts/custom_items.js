@@ -21,4 +21,10 @@ StartupEvents.registry('item', event => {
     
     event.create('steam_casing')
         .displayName('蒸汽机壳')
+
+    event.create('brass_gear')
+        .displayName('黄铜齿轮')
+
+    event.create('bronze_gear')
+        .displayName('青铜齿轮')
 })
