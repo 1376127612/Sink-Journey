@@ -52,6 +52,10 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
+  "compactmachines": {
+    "show_owner": false,
+    "bound_machine": true
+  },
   "neoecoae": {
     "large_workstation_current_inputs": true,
     "eco_computation_system": true,
@@ -170,9 +174,6 @@
     "fluid": true,
     "energy": true,
     "tooltip_renderer": true
-  },
-  "create_rns": {
-    "deposit_block_info": true
   },
   "pipez": {
     "pipe": true
