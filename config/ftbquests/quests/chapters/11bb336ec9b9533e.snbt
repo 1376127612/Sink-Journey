@@ -13,12 +13,20 @@
 	quests: [
 		{
 			id: "57EE18783CC19EED"
-			tasks: [{
-				count: 16L
-				id: "0AA081DAE9FF62F7"
-				item: { count: 1, id: "pneumaticcraft:ingot_iron_compressed" }
-				type: "item"
-			}]
+			tasks: [
+				{
+					count: 16L
+					id: "0AA081DAE9FF62F7"
+					item: { count: 1, id: "pneumaticcraft:ingot_iron_compressed" }
+					type: "item"
+				}
+				{
+					count: 16L
+					id: "452308E431620D91"
+					item: { count: 1, id: "pneumaticcraft:reinforced_stone" }
+					type: "item"
+				}
+			]
 			x: -5.5d
 			y: -0.5d
 		}
@@ -38,6 +46,129 @@
 			]
 			x: -2.0d
 			y: -0.5d
+		}
+		{
+			id: "0CD5982948BFD360"
+			tasks: [{
+				id: "6DBA63FF3AD2A1B3"
+				item: { count: 1, id: "pneumaticcraft:manometer" }
+				type: "item"
+			}]
+			x: -2.5d
+			y: -3.0d
+		}
+		{
+			id: "79CF9E63494C3148"
+			tasks: [{
+				id: "3C47082CC579BA2E"
+				item: { count: 1, id: "pneumaticcraft:security_upgrade" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: 2.0d
+		}
+		{
+			id: "560D11F9F119EB2B"
+			rewards: [{
+				count: 6
+				id: "6D64234BB16F1BAD"
+				item: {
+					count: 1
+					id: "pneumaticcraft:ingot_iron_compressed"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 10L
+				id: "500AE452EF7F6062"
+				item: { count: 1, id: "pneumaticcraft:compressed_iron_block" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -0.5d
+		}
+		{
+			id: "72F0F0A761F7BAC2"
+			tasks: [{
+				id: "675C566AD7E53E29"
+				item: { count: 1, id: "pneumaticcraft:seismic_sensor" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -0.5d
+		}
+		{
+			id: "31204D143AE71F6C"
+			tasks: [{
+				id: "7B6B1D080EBDBB7C"
+				item: { count: 1, id: "pneumaticcraft:air_compressor" }
+				type: "item"
+			}]
+			x: 0.5d
+			y: 1.0d
+		}
+		{
+			id: "2C9F0BC4B2779D1F"
+			tasks: [
+				{
+					count: 25L
+					id: "3563F671DCB6D589"
+					item: { count: 1, id: "pneumaticcraft:volume_upgrade" }
+					type: "item"
+				}
+				{
+					count: 10L
+					id: "31FE13F0B4BA0664"
+					item: { count: 1, id: "pneumaticcraft:speed_upgrade" }
+					type: "item"
+				}
+			]
+			x: 3.5d
+			y: 2.0d
+		}
+		{
+			id: "3B777A65814CB1E6"
+			tasks: [{
+				id: "2C55C991DB437E8A"
+				item: { count: 1, id: "pneumaticcraft:oil_bucket" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -0.5d
+		}
+		{
+			id: "113D916789ACE093"
+			tasks: [
+				{
+					id: "597F854354E11CC3"
+					item: { count: 1, id: "pneumaticcraft:refinery" }
+					type: "item"
+				}
+				{
+					id: "24C6A7526EEEDF70"
+					item: { count: 1, id: "pneumaticcraft:refinery_output" }
+					type: "item"
+				}
+			]
+			x: 10.5d
+			y: 0.0d
+		}
+		{
+			id: "1FAB7DD2DFC2148D"
+			tasks: [
+				{
+					id: "6C0964285088B2EF"
+					item: { count: 1, id: "pneumaticcraft:plastic_bucket" }
+					type: "item"
+				}
+				{
+					id: "140BB1D2374E1FC6"
+					item: { count: 1, id: "pneumaticcraft:plastic" }
+					type: "item"
+				}
+			]
+			x: 14.0d
+			y: 0.5d
 		}
 	]
 }
