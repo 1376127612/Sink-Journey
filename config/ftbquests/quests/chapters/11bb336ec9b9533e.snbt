@@ -170,5 +170,35 @@
 			x: 14.0d
 			y: 0.5d
 		}
+		{
+			id: "765570AD06A0C483"
+			tasks: [{
+				id: "42A9482258467402"
+				item: { count: 1, id: "pneumaticcraft:empty_pcb" }
+				type: "item"
+			}]
+			x: 17.0d
+			y: 0.0d
+		}
+		{
+			id: "7AB868C12997BBC7"
+			tasks: [{
+				id: "5657574B01CED756"
+				item: { count: 1, id: "pneumaticcraft:etching_acid_bucket" }
+				type: "item"
+			}]
+			x: 16.5d
+			y: 2.0d
+		}
+		{
+			id: "2E72178081573E6E"
+			tasks: [{
+				id: "5019B2E2B5378E32"
+				item: { count: 1, id: "pneumaticcraft:uv_light_box" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: -2.5d
+		}
 	]
 }
