@@ -3,7 +3,7 @@
   "browserCollapsed": false,
   "pendingCollapsed": false,
   "sideListCollapsed": false,
-  "tab": 4,
+  "tab": 0,
   "propsBlocks": false,
   "filesExplorerCollapsed": false,
   "apiBrowserCollapsed": false,
@@ -45,7 +45,7 @@
   "pinnedFiles": [],
   "pinnedFolders": [],
   "favorites": [],
-  "recipesSelected": "notreepunchingremastered:plant_string",
+  "recipesSelected": "advanced_ae:quantum_infused_dust",
   "recipesSearch": "",
   "tagsRegistry": "item",
   "tagsSelected": "accessories:back",
@@ -57,7 +57,9 @@
   "createRegistry": "item",
   "createSelected": "kubejs:gunmu",
   "createSearch": "",
-  "filesOpen": [],
+  "filesOpen": [
+    "C:\\Users\\Administrator\\pcl\\.minecraft\\versions\\Sink Journey\\kubejs\\server_scripts\\ban_dynamic_structures.js"
+  ],
   "recentPicks": [
     "item kubejs:gunmu",
     "item notreepunchingremastered:flint_shard",
@@ -66,5 +68,5 @@
     "item actuallyadditions:black_quartz",
     "item actuallyadditions:basic_coil"
   ],
-  "filesActive": -1
+  "filesActive": 0
 }
