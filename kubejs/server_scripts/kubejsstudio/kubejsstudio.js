@@ -70,3 +70,23 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: industrialupgrade:industrialupgrade_1917
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_1917',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"tag":"c:plates/gold"},
+          "B": {"tag":"c:ingots/iron"}
+        },
+        "pattern": ["AAA","ABA","AAA"],
+        "result": {
+          "count": 1,
+          "id": "industrialupgrade:crafting_elements/crafting_496_element"
+        },
+        "show_notification": false
+      }
+    )
+})
