@@ -28,6 +28,7 @@
   "appliedcreate:kea_grid_node": null,
   "appliedcreate:me_gearbox_grid_node": null,
   "appliedcreate:power_storage": null,
+  "astages:block_component_provider": null,
   "astralsorcery:lumen": null,
   "compactmachines:bound_machine": null,
   "create_rns:deposit_block_info": null,

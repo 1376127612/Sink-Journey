@@ -1,0 +1,7 @@
+[
+  {"version":1},
+  {"ingredient":{"id":"industrialupgrade:iufluidrawlatex"},"type":"fluid_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"industrialupgrade:crafting_elements/crafting_290_element"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"industrialupgrade:crafting_elements/crafting_271_element"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"industrialupgrade:sapling/rubber_sapling"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+]

@@ -184,6 +184,9 @@
     "ender_broadcaster": true,
     "mirror_pattern_provider": true
   },
+  "astages": {
+    "block_component_provider": true
+  },
   "mmcr": {
     "ae2_input_interface_grid": true,
     "machine_controller": true,
@@ -194,9 +197,5 @@
   "appliedcreate": {
     "grid_node_state": true,
     "power_storage": true
-  },
-  "modular_machinery_reborn": {
-    "machine_component_provider": true,
-    "hatch_component_provider": true
   }
 }
