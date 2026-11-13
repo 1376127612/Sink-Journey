@@ -27,4 +27,8 @@ StartupEvents.registry('item', event => {
 
     event.create('bronze_gear')
         .displayName('青铜齿轮')
+
+    event.create('copper_boiler')
+        .displayName('铜锅炉')
+
 })

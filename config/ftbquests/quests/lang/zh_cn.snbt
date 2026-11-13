@@ -54,7 +54,8 @@
 	quest.156E0D27F03959DC.title: "开火车！"
 	quest.15C7029E66E838F0.title: "最强的熔炉"
 	quest.16DD4183EE52B969.quest_desc: ["它就像手一样"]
-	quest.18F18597F7065BA1.quest_desc: ["你一定会想自动化它的"]
+	quest.18F18597F7065BA1.quest_desc: ["由于精密构件用量较大，我把循环次数改为了3次并取消了副产物"]
+	quest.18F18597F7065BA1.quest_subtitle: "你一定会想自动化它的"
 	quest.18F18597F7065BA1.title: "这个构件很精密"
 	quest.19A9BC6D92E82033.quest_desc: ["升级你的余烬机器！"]
 	quest.1B096E65D913FAC5.title: "安山物流"

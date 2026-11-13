@@ -51,7 +51,8 @@
 
         // 风帆（允许使用，只禁止合成获取）
         'create:white_sail',
-        'create:sail_frame'
+        'create:sail_frame',
+        'industrialupgrade:crafting_elements/crafting_284_element'
     ]
 
     // 移除所有产出这些物品的配方
