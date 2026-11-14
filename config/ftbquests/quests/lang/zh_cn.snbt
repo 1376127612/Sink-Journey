@@ -38,6 +38,11 @@
 	quest.09200AF098A644DF.quest_subtitle: "一种新奇的合金炉"
 	quest.0B73D9E1303C41BD.quest_desc: ["如果我是你的话，我会尽快制作这台机器并完成它的自动化。"]
 	quest.0B73D9E1303C41BD.quest_subtitle: "好像是没有什么用的机器"
+	quest.0E2A114F298F8ACD.quest_desc: [
+		"将海蓝宝石放入聚星缸，它会产出星能液，收集你的星能液，在后面会消耗很多"
+		"你还可以用共振宝石，水晶石/共鸣水晶石，天辉水晶石/共鸣天辉水晶石来获取星能液"
+	]
+	quest.0E2A114F298F8ACD.quest_subtitle: "收集星能"
 	quest.1057DBBF8DC8C7C0.quest_desc: [
 		"我们认为一个原始人能够徒手砍伐树木过于超模了，于是对steve的双手进行了一定的限制，现在你无法通过双手来砍伐树木了。"
 		""
@@ -54,10 +59,18 @@
 	quest.156E0D27F03959DC.title: "开火车！"
 	quest.15C7029E66E838F0.title: "最强的熔炉"
 	quest.16DD4183EE52B969.quest_desc: ["它就像手一样"]
-	quest.18F18597F7065BA1.quest_desc: ["你一定会想自动化它的"]
+	quest.176BDCB97FADED40.quest_subtitle: "化为更聚焦的力量"
+	quest.176BDCB97FADED40.title: "挑剔的工作台"
+	quest.18F18597F7065BA1.quest_desc: ["由于精密构件用量较大，我把循环次数改为了3次并取消了副产物"]
+	quest.18F18597F7065BA1.quest_subtitle: "你一定会想自动化它的"
 	quest.18F18597F7065BA1.title: "这个构件很精密"
 	quest.19A9BC6D92E82033.quest_desc: ["升级你的余烬机器！"]
 	quest.1B096E65D913FAC5.title: "安山物流"
+	quest.1BEE6719FA581EC9.quest_desc: ["你可以在河边找到海蓝宝石，多收集点"]
+	quest.1BEE6719FA581EC9.quest_subtitle: "像海一样"
+	quest.1CB3010EC04C69B5.quest_desc: ["星辉魔法在高版本改动很大，不过别担心，任务会详细说明的"]
+	quest.1CB3010EC04C69B5.quest_subtitle: "熬夜魔法"
+	quest.1CB3010EC04C69B5.title: "星辉魔法"
 	quest.1F47C907397E6D9B.quest_desc: ["好大的工作台，材料也好贵"]
 	quest.1F47C907397E6D9B.title: "超大工作台"
 	quest.214D1C36178640C8.quest_desc: ["制作坍缩构件，你可以用它减少不需要的空间"]
@@ -65,6 +78,9 @@
 	quest.2228F6297919FB7A.quest_subtitle: "机械核心"
 	quest.22BECA4CD5C08010.quest_desc: ["这把工具将用于旋转方块、链接余烬传输机器（发射器/接收器/中继器）、关闭管道侧面连接"]
 	quest.22BECA4CD5C08010.quest_subtitle: "铁匠锤？扳手！"
+	quest.261BB0E84BC72316.quest_desc: ["高版本删除了所有望远镜，你现在需要用星盘寻找星座"]
+	quest.261BB0E84BC72316.title: "开始观星！"
+	quest.26C109209120EE25.quest_subtitle: "与星共振"
 	quest.2723FD4DEFF29767.quest_desc: ["水车的应力被减半了，减慢你的转速"]
 	quest.2723FD4DEFF29767.title: "水车仙人"
 	quest.28208174AEC997F6.quest_desc: ["或许你现在可以砍树了？为什么不试试看呢。"]
@@ -88,6 +104,10 @@
 	quest.38388EADB17FD482.quest_desc: ["现在你需要匍匐在地上寻找石子或者是rock？然后再去河岸搜索一些沙砾挖掘后掉落的燧石，接着将它分解为flint shard（燧石碎片）。然后与破坏树叶后掉落的木棍组合起来，你将获得一把燧石小刀。"]
 	quest.38388EADB17FD482.quest_subtitle: "燧石，但不是打火机"
 	quest.38388EADB17FD482.title: "物理，很神奇吧"
+	quest.389FD240EFC2D9A8.quest_desc: ["用共振法杖寻找水晶石矿石，它将与法杖共振"]
+	quest.389FD240EFC2D9A8.quest_subtitle: "藏于地下"
+	quest.38AE7BE9A1702B16.quest_desc: ["用星盘寻找降星点，你会看到白色光柱，把工作台和4个大理石丢进去"]
+	quest.38AE7BE9A1702B16.quest_subtitle: "光芒会教会它聆听"
 	quest.3C36940FAC6404ED.quest_desc: ["植物纤维，植物绳。看起来很简单，对吧？割草，捡纤维，搓绳子。但如果你割了十丛草只掉了两根纤维，请不要质疑概率——概率是给有工作台的人准备的，你现在没有。"]
 	quest.3C36940FAC6404ED.quest_subtitle: "植物纤维，不是植物人"
 	quest.3C36940FAC6404ED.title: "草：我招谁惹谁了"

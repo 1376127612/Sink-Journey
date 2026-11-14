@@ -31,6 +31,7 @@
 			y: -0.5d
 		}
 		{
+			dependencies: ["57EE18783CC19EED"]
 			id: "22A7B9C9FE943FBF"
 			tasks: [
 				{
@@ -44,7 +45,7 @@
 					type: "item"
 				}
 			]
-			x: -2.0d
+			x: -2.5d
 			y: -0.5d
 		}
 		{
@@ -54,20 +55,22 @@
 				item: { count: 1, id: "pneumaticcraft:manometer" }
 				type: "item"
 			}]
-			x: -2.5d
-			y: -3.0d
+			x: -8.5d
+			y: -0.5d
 		}
 		{
+			dependencies: ["31204D143AE71F6C"]
 			id: "79CF9E63494C3148"
 			tasks: [{
 				id: "3C47082CC579BA2E"
 				item: { count: 1, id: "pneumaticcraft:security_upgrade" }
 				type: "item"
 			}]
-			x: -3.0d
-			y: 2.0d
+			x: 1.0d
+			y: -3.0d
 		}
 		{
+			dependencies: ["31204D143AE71F6C"]
 			id: "560D11F9F119EB2B"
 			rewards: [{
 				count: 6
@@ -84,30 +87,33 @@
 				item: { count: 1, id: "pneumaticcraft:compressed_iron_block" }
 				type: "item"
 			}]
-			x: 1.5d
+			x: 4.5d
 			y: -0.5d
 		}
 		{
+			dependencies: ["560D11F9F119EB2B"]
 			id: "72F0F0A761F7BAC2"
 			tasks: [{
 				id: "675C566AD7E53E29"
 				item: { count: 1, id: "pneumaticcraft:seismic_sensor" }
 				type: "item"
 			}]
-			x: 4.0d
+			x: 7.5d
 			y: -0.5d
 		}
 		{
+			dependencies: ["22A7B9C9FE943FBF"]
 			id: "31204D143AE71F6C"
 			tasks: [{
 				id: "7B6B1D080EBDBB7C"
 				item: { count: 1, id: "pneumaticcraft:air_compressor" }
 				type: "item"
 			}]
-			x: 0.5d
-			y: 1.0d
+			x: 1.0d
+			y: -0.5d
 		}
 		{
+			dependencies: ["31204D143AE71F6C"]
 			id: "2C9F0BC4B2779D1F"
 			tasks: [
 				{
@@ -123,20 +129,22 @@
 					type: "item"
 				}
 			]
-			x: 3.5d
+			x: 1.0d
 			y: 2.0d
 		}
 		{
+			dependencies: ["72F0F0A761F7BAC2"]
 			id: "3B777A65814CB1E6"
 			tasks: [{
 				id: "2C55C991DB437E8A"
 				item: { count: 1, id: "pneumaticcraft:oil_bucket" }
 				type: "item"
 			}]
-			x: 6.0d
+			x: 11.0d
 			y: -0.5d
 		}
 		{
+			dependencies: ["3B777A65814CB1E6"]
 			id: "113D916789ACE093"
 			tasks: [
 				{
@@ -150,10 +158,14 @@
 					type: "item"
 				}
 			]
-			x: 10.5d
-			y: 0.0d
+			x: 13.5d
+			y: -0.5d
 		}
 		{
+			dependencies: [
+				"040AC4A0F65176E3"
+				"113D916789ACE093"
+			]
 			id: "1FAB7DD2DFC2148D"
 			tasks: [
 				{
@@ -167,8 +179,8 @@
 					type: "item"
 				}
 			]
-			x: 14.0d
-			y: 0.5d
+			x: 17.0d
+			y: -0.5d
 		}
 		{
 			id: "765570AD06A0C483"
@@ -177,8 +189,8 @@
 				item: { count: 1, id: "pneumaticcraft:empty_pcb" }
 				type: "item"
 			}]
-			x: 17.0d
-			y: 0.0d
+			x: 23.5d
+			y: -0.5d
 		}
 		{
 			id: "7AB868C12997BBC7"
@@ -187,8 +199,8 @@
 				item: { count: 1, id: "pneumaticcraft:etching_acid_bucket" }
 				type: "item"
 			}]
-			x: 16.5d
-			y: 2.0d
+			x: 20.5d
+			y: -0.5d
 		}
 		{
 			id: "2E72178081573E6E"
@@ -197,8 +209,18 @@
 				item: { count: 1, id: "pneumaticcraft:uv_light_box" }
 				type: "item"
 			}]
-			x: 15.0d
-			y: -2.5d
+			x: 23.5d
+			y: -3.0d
+		}
+		{
+			id: "040AC4A0F65176E3"
+			tasks: [{
+				id: "3E150D03F0FFB0BD"
+				item: { count: 1, id: "pneumaticcraft:thermopneumatic_processing_plant" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 2.0d
 		}
 	]
 }

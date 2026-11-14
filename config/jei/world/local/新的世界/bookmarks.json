@@ -1,13 +1,19 @@
 [
   {"version":2},
-  {"ingredient":{"id":"create_hand_made:press_hammer"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_hand_made:mortar"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_hand_made:pointer"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_hand_made:stirring_staff"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_hand_made:infusion_gun"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_hand_made:bellows"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_hand_made:hand_saw"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_hand_made:crusher_mortar"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"recipe":"create_nested_factory:sequenced_assembly/space_expand_mechanism","recipeType":"create:sequenced_assembly","bookmarkType":"RECIPE"},
-  {"ingredient":{"id":"industrialforegoing:iron_gear"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"industrialforegoing:iron_gear"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"kubejs:brass_gear"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"kubejs:bronze_gear"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"industrialforegoing:gold_gear"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"industrialupgrade:industrialupgrade_1274","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"ingredient":{"id":"industrialupgrade:alloyplate/red_brass"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:copper_sheet"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:brass_sheet"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"industrialupgrade:itemplates/bronze_plate"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"industrialupgrade:industrialupgrade_1275","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"ingredient":{"id":"industrialupgrade:crafting_elements/crafting_76_element"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"industrialupgrade:crafting_elements/crafting_41_element"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"industrialupgrade:industrialupgrade_1121","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"ingredient":{"id":"industrialupgrade:crafting_elements/crafting_21_element"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]

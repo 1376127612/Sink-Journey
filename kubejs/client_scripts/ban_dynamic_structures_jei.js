@@ -46,7 +46,10 @@
 
         // 风帆（允许使用，只隐藏获取展示）
         'create:white_sail',
-        'create:sail_frame'
+        'create:sail_frame',
+
+        // 工业升级矿机轴承的合成元素（对应服务端 ban.js 里的封禁项）
+        'industrialupgrade:crafting_elements/crafting_284_element'
     ]
 
     // removeEntriesCompletely：连配方里的原料显示一起移除

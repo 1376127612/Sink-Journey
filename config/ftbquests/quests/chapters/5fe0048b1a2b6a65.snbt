@@ -127,5 +127,83 @@
 			x: 1.0d
 			y: -1.5d
 		}
+		{
+			id: "42E849ED292EF5E7"
+			tasks: [
+				{
+					id: "6C6065FAD2FBA0EF"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_controller" }
+					type: "item"
+				}
+				{
+					count: 74L
+					id: "506F24E4BA2E4E93"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_casing" }
+					type: "item"
+				}
+				{
+					count: 18L
+					id: "1FA80C41CFCF836E"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_tank" }
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "5CE3633A07B4303C"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_fuel_tank" }
+					type: "item"
+				}
+				{
+					count: 3L
+					id: "22A7B2C069119DA4"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_furnace" }
+					type: "item"
+				}
+				{
+					id: "3B93017A6D6C3563"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_casting" }
+					type: "item"
+				}
+			]
+			x: -16.5d
+			y: 0.0d
+		}
+		{
+			id: "2C027D8994527225"
+			tasks: [{
+				id: "3C726FD7B45D8F8D"
+				item: { count: 1, id: "industrialupgrade:wiring/steam" }
+				type: "item"
+			}]
+			x: -7.5d
+			y: 2.5d
+		}
+		{
+			id: "50FFF3DA2CF84C7F"
+			tasks: [
+				{
+					id: "25941B7F70E561E1"
+					item: { count: 1, id: "mekanism:steam_bucket" }
+					type: "item"
+				}
+				{
+					id: "494FBBA4916D66C5"
+					item: { count: 1, id: "industrialupgrade:bucket/superheated_steam" }
+					type: "item"
+				}
+			]
+			x: -7.0d
+			y: -2.5d
+		}
+		{
+			id: "0FEC076007556020"
+			tasks: [{
+				id: "43601EAB9C4DA254"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_fluid_heater" }
+				type: "item"
+			}]
+			x: -9.0d
+			y: -1.5d
+		}
 	]
 }

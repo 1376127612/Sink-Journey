@@ -10,5 +10,103 @@
 	images: [ ]
 	order_index: 6
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			id: "1CB3010EC04C69B5"
+			rewards: [{
+				id: "2E02F0B2E658C1A0"
+				item: {
+					count: 1
+					id: "astralsorcery:tome"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "2A7A78DF3DB7EFD1"
+				type: "checkmark"
+			}]
+			x: -1.0d
+			y: 2.0d
+		}
+		{
+			id: "261BB0E84BC72316"
+			tasks: [{
+				id: "5E1531B82C13679E"
+				item: { count: 1, id: "astralsorcery:astrolabe" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 1.0d
+		}
+		{
+			id: "26C109209120EE25"
+			tasks: [{
+				id: "7618DAF18898AEC1"
+				item: { count: 1, id: "astralsorcery:wand" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 3.0d
+		}
+		{
+			id: "1BEE6719FA581EC9"
+			tasks: [{
+				id: "62EB0EA07C5DC8A4"
+				item: { count: 1, id: "astralsorcery:aquamarine" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: 2.0d
+		}
+		{
+			id: "389FD240EFC2D9A8"
+			tasks: [{
+				id: "64A0EF43C3BBAF14"
+				item: { count: 1, id: "astralsorcery:rock_crystal" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 5.0d
+		}
+		{
+			id: "38AE7BE9A1702B16"
+			tasks: [{
+				id: "3DA179BA23908385"
+				item: { count: 1, id: "astralsorcery:altar_illumination" }
+				type: "item"
+			}]
+			x: 6.5d
+			y: 2.0d
+		}
+		{
+			icon: {
+				id: "astralsorcery:lightwell"
+			}
+			id: "0E2A114F298F8ACD"
+			tasks: [
+				{
+					id: "5E0007B8157FA0F0"
+					item: { count: 1, id: "astralsorcery:lightwell" }
+					type: "item"
+				}
+				{
+					id: "7E66A9D78E2066DD"
+					item: { count: 1, id: "astralsorcery:liquid_starlight_bucket" }
+					type: "item"
+				}
+			]
+			x: 9.5d
+			y: 2.0d
+		}
+		{
+			id: "176BDCB97FADED40"
+			tasks: [{
+				id: "4B04D59D501AE9E1"
+				item: { count: 1, id: "astralsorcery:altar_resonance" }
+				type: "item"
+			}]
+			x: 12.5d
+			y: 2.0d
+		}
+	]
 }
