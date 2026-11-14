@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "5fe0048b1a2b6a65"
-	group: ""
+	group: "110ED09B617A1F32"
 	icon: {
 		id: "industrialupgrade:steam_blade/steam_blade_wood"
 	}

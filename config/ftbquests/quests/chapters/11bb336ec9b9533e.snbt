@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "11bb336ec9b9533e"
-	group: ""
+	group: "110ED09B617A1F32"
 	icon: {
 		id: "pneumaticcraft:pressure_gauge"
 	}

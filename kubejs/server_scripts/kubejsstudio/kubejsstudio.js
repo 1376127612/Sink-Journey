@@ -90,3 +90,23 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: roots:pyre/crushed/iron1
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'roots:recipe/pyre/crushed/iron1',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            { "item": "industrialupgrade:crushed/iron" },
+            { "item": "industrialupgrade:crushed/iron" },
+            { "item": "minecraft:calcite" },
+            { "tag": "minecraft:coals" },
+            { "tag": "minecraft:logs" }
+          ],
+          "result": { "id": "industrialupgrade:purifiedcrushed/iron", "count": 2 },
+          "priority": 0
+        }
+      }
+    )
+})

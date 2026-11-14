@@ -90,128 +90,29 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
-// kubejsstudio custom: kubejsstudio:flint_pickaxe
+// kubejsstudio custom: roots:pyre/crushed/iron1
 ServerEvents.generateData('after_mods', event => {
     event.json(
-      'kubejsstudio:recipe/flint_pickaxe',
+      'roots:recipe/pyre/crushed/iron1',
       {
-        "type": "oraculumworktables:mason_shaped",
-        "result": { "item": "notreepunchingremastered:flint_pickaxe" },
-        
-        // 修改点：tools 必须用对象数组，写明具体工具 ID 和耐久消耗
-        "tools": [
-          { "item": "minecraft:stone_pickaxe", "damage": 1 }
-        ],
-        
-        "pattern": [
-          "AA",
-          "AA"
-        ],
-        "key": {
-          "A": { "item": "minecraft:stone" }
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            { "item": "industrialupgrade:crushed/iron" },
+            { "item": "industrialupgrade:crushed/iron" },
+            { "item": "minecraft:calcite" },
+            { "tag": "minecraft:coals" },
+            { "tag": "minecraft:logs" }
+          ],
+          "result": { "id": "industrialupgrade:purifiedcrushed/iron", "count": 1 },
+          "chance_outputs": [
+            {
+              "chance": 0.7,
+              "output": { "item": "industrialupgrade:purifiedcrushed/iron", "count": 1 }
+            }
+          ],
+          "priority": 0
         }
-      }
-    )
-})
-// kubejsstudio custom: kubejsstudio:new_recipe
-ServerEvents.generateData('after_mods', event => {
-    event.json(
-      'kubejsstudio:recipe/new_recipe',
-      {
-        "type": "oraculumworktables:mason_shapeless",
-        "result": { "item": "notreepunchingremastered:flint_pickaxe" },
-        
-        // 修改点：tools 必须用对象数组，写明具体工具 ID 和耐久消耗
-        "tools": [
-          { "item": "minecraft:stone_pickaxe", "damage": 1 }
-        ],
-        
-        "pattern": [
-          "AA",
-          "AA"
-        ],
-        "key": {
-          "A": { "item": "minecraft:stone" }
-        }
-      }
-    )
-})
-// kubejsstudio custom: kubejsstudio:flint_pinkaxe2
-ServerEvents.recipes(event => {
-    event.recipes.oraculumworktables.mason_shaped(
-      'notreepunchingremastered:flint_pickaxe', // 1. result：产物
-      ['AA', 'AA'],                             // 2. pattern：字符串图案
-      { A: 'minecraft:stone' }                 // 3. key：符号与材料的映射
-    )
-    // 4. 工具配置（使用 .tools 传入对象数组）
-    .tools([{ item: 'minecraft:stone_axe', damage: 10 }]);
-})
-// kubejsstudio custom: kubejsstudio:flint_pickaxe2
-ServerEvents.generateData('after_mods', event => {
-    event.json(
-      'kubejsstudio:recipe/flint_pickaxe2',
-      {
-        "type": "oraculumworktables:mason_shaped",
-        "result": { "item": "notreepunchingremastered:flint_pickaxe", "count": 1 },
-        "pattern": [
-            'ASA',
-            'SSA',
-            'SSS'
-        ],
-        "key": {
-          "A": {"item": "minecraft:stone"},
-          "S":{"item":"minecraft:dirt"}
-        },
-        "tools": [
-          { "item": "minecraft:stone_axe", "damage": 10 }
-        ],
-      }
-      .secondaryIngredients([
-          { "item": "minecraft:cobblestone" },
-          { "item": "minecraft:cobblestone" },
-          { "item": "minecraft:cobblestone" }
-        ])
-        
-       .consumeSecondaryIngredients(true)
-    )
-})
-// kubejsstudio custom: kubejsstudio:flint_pickaex
-ServerEvents.generateData('after_mods', event => {
-    event.json(
-      'kubejsstudio:recipe/flint_pickaxe',
-      {
-        "type": "kubejs:shaped",
-        "result": {"id":"notreepunchingremastered:flint_pickaxe","count":1},
-        "pattern": ["#A","B#"],
-        "key": {
-          "A": {"item":"kubejs:flint_pickaxe_head_top"},
-          "B": {"item":"kubejs:handle"},
-          "#": {"item":"notreepunchingremastered:grass_fiber"}
-        },
-        "_kubejs_changed_marker": {
-          "source": "server_scripts:kubejsstudio/recipes.js",
-          "line": 39
-        }
-      }
-    )
-})
-// kubejsstudio custom: kubejsstudio:flint_pickaxe_head_top
-ServerEvents.generateData('after_mods', event => {
-    event.json(
-      'kubejsstudio:recipe/mason_flint_pickaxe', // 配方ID，你可以自定义
-      {
-        "type": "oraculumworktables:mason_shaped",
-        "result": { "item": "notreepunchingremastered:flint_pickaxe", "count": 1 },
-        "pattern": [
-          "AAA",
-          "AAA"
-        ],
-        "key": {
-          "A": { "item": "minecraft:stone" }
-        },
-        "tools": [
-          { "item": "minecraft:stone_axe", "damage": 10 }
-        ]
       }
     )
 })

@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "194af753db4e19b0"
-	group: ""
+	group: "110ED09B617A1F32"
 	icon: {
 		id: "roots:wildwood_sapling"
 	}

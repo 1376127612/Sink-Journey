@@ -35,4 +35,5 @@ ServerEvents.recipes(event => {
     event.remove({ id: 'notreepunchingremastered:tool/flint_pickaxe' })
     event.shaped('kubejs:mason_workbench_part_1', ['#A', '#A'], { '#': 'minecraft:leather', 'A': 'kubejs:handle' }).id('kubejsstudio:mason_workbench_part_1')
     event.shaped('oraculumworktables:worktable_mason', ['##', 'AA'], { '#': 'minecraft:granite', 'A': 'kubejs:mason_workbench_part_1' }).id('kubejsstudio:worktable_mason')
+    event.shaped(Item.of('embers:caminite_blend', 2), ['##', '#A'], { '#': 'minecraft:clay_ball', 'A': '#c:sand' }).id('embers:caminite_blend')
 })

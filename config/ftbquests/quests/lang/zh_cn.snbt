@@ -13,7 +13,10 @@
 	chapter.62B1F88B36FCD09D.title: "旅途之始"
 	chapter.676F67C1DE6CC626.title: "余烬科技"
 	chapter.6CD44026301F6F75.title: "触及星辰"
+	chapter.6E59CB6F7D053B92.title: "前情提要"
 	chapter.7C4E2F5CB393C0AE.title: "深入原子"
+	chapter_group.110ED09B617A1F32.title: "正文"
+	chapter_group.672ED601CC36FA35.title: "扉页"
 	quest.0056045684755D67.quest_desc: [
 		"在基座上放置元素象征，在上方放置对应物品。将光束炮对准炼金台，并通入红石信号，光束炮会向炼金台开炮，启动炼金仪式。"
 		""
@@ -36,6 +39,8 @@
 	quest.0706F92EF2C236B8.title: "蒸汽时代"
 	quest.09200AF098A644DF.quest_desc: ["现在，来制作你的第一块合金吧。"]
 	quest.09200AF098A644DF.quest_subtitle: "一种新奇的合金炉"
+	quest.0932DD0AA54FD551.quest_subtitle: "或许你要自己组装？"
+	quest.0932DD0AA54FD551.title: "做一把斧头有哪些步骤"
 	quest.0B73D9E1303C41BD.quest_desc: ["如果我是你的话，我会尽快制作这台机器并完成它的自动化。"]
 	quest.0B73D9E1303C41BD.quest_subtitle: "好像是没有什么用的机器"
 	quest.0E2A114F298F8ACD.quest_desc: [
@@ -183,11 +188,18 @@
 	quest.5F132AD862CA787E.quest_desc: ["你需要将坚固合金烧红再把它压成板，或者你在一开始就这么做"]
 	quest.5F132AD862CA787E.quest_subtitle: "冲压机的力气没这么大"
 	quest.5F132AD862CA787E.title: "我想你很难把它压成板"
+	quest.60E6C5DE278F8AD0.quest_desc: ["是的，你或许发现了，目前你似乎并没有能力组装出一个工作台。现在只能通过石匠工作台来制作一些现阶段必要的工具了。"]
+	quest.60E6C5DE278F8AD0.quest_subtitle: "工作台，但是石匠。"
+	quest.60E6C5DE278F8AD0.title: "奇怪，我的工作台呢？"
 	quest.62DA5DC7C85BB882.quest_desc: ["利用你的余烬机器做出指杆用于制作安山机壳"]
 	quest.62DA5DC7C85BB882.quest_subtitle: "指指点点"
+	quest.6880526327344216.quest_subtitle: "也许你也可以组装一个镐子？"
+	quest.6880526327344216.title: "燧石镐的顶端"
 	quest.6BDDB3A36AADF646.quest_desc: ["制作一些青铜板用于制作蒸汽机器"]
 	quest.6BDDB3A36AADF646.title: "好用的合金"
 	quest.6C12306C5CC22051.title: "蒸汽机"
+	quest.70828BEEEBDA74D3.quest_desc: ["很好，你现在可以通过石匠台来完成燧石工具的制备了。终于，摆脱了该死的徒手捆扎固定。"]
+	quest.70828BEEEBDA74D3.quest_subtitle: "ohhhh hoe"
 	quest.73F4EE5CA018D3AE.quest_desc: [
 		"这台机器将产出本模组最重要的材料，在放置之前你需要去寻找一块余烬能量浓郁的地方。"
 		""
@@ -205,6 +217,8 @@
 	quest.749AF51E60268100.quest_subtitle: "一种新奇的能量传输方式"
 	quest.7A52841255FD1EFA.quest_desc: ["很简单，也很有用"]
 	quest.7A52841255FD1EFA.title: "基础传动元件"
+	quest.7BFD015338811BC2.quest_desc: ["或许你现在可以尝试狩猎一些动物？哈哈，我是说，你需要它们的皮革。"]
+	quest.7BFD015338811BC2.quest_subtitle: "一块动物身上的皮"
 	quest.7C5D2124B8AE69A6.quest_desc: ["升级你的余烬机器！"]
 	quest.7E2342ED402B6E97.quest_desc: [""]
 	quest.7E2342ED402B6E97.quest_subtitle: "燃煤发电机？......！"

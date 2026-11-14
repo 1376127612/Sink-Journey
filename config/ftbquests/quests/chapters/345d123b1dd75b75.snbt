@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "345d123b1dd75b75"
-	group: ""
+	group: "110ED09B617A1F32"
 	icon: {
 		id: "elementalcraft:fire_source_seed"
 	}

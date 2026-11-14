@@ -2,7 +2,7 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "62b1f88b36fcd09d"
-	group: ""
+	group: "110ED09B617A1F32"
 	icon: {
 		id: "minecraft:apple"
 	}
@@ -24,6 +24,11 @@
 					count: 2L
 					id: "5F47FFA46D3891C3"
 					item: { count: 1, id: "notreepunchingremastered:flint_shard" }
+					type: "item"
+				}
+				{
+					id: "3CB5ED5FCBF41934"
+					item: { count: 1, id: "notreepunchingremastered:flint_knife" }
 					type: "item"
 				}
 			]
@@ -58,15 +63,94 @@
 			y: -1.0d
 		}
 		{
-			dependencies: ["3C36940FAC6404ED"]
 			id: "28208174AEC997F6"
 			tasks: [{
 				id: "514BE802B2770757"
 				item: { count: 1, id: "notreepunchingremastered:flint_axe" }
 				type: "item"
 			}]
+			x: 2.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["3C36940FAC6404ED"]
+			id: "0932DD0AA54FD551"
+			tasks: [
+				{
+					id: "408D838880B4A191"
+					item: { count: 1, id: "kubejs:handle" }
+					type: "item"
+				}
+				{
+					id: "02CA4F6E411A417A"
+					item: { count: 1, id: "kubejs:flint_axe_head_top" }
+					type: "item"
+				}
+			]
 			x: 4.0d
 			y: -1.0d
+		}
+		{
+			dependencies: ["0932DD0AA54FD551"]
+			id: "6880526327344216"
+			tasks: [{
+				id: "52435EA2CB000884"
+				item: { count: 1, id: "kubejs:flint_pickaxe_head_top" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["0932DD0AA54FD551"]
+			id: "7BFD015338811BC2"
+			tasks: [{
+				count: 4L
+				id: "0061E327DD4FA425"
+				item: { count: 1, id: "minecraft:leather" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["7BFD015338811BC2"]
+			id: "60E6C5DE278F8AD0"
+			tasks: [{
+				id: "5FEACF21936BA0F8"
+				item: { count: 1, id: "oraculumworktables:worktable_mason" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["60E6C5DE278F8AD0"]
+			id: "70828BEEEBDA74D3"
+			tasks: [
+				{
+					id: "428871F4A2B71530"
+					item: { count: 1, id: "notreepunchingremastered:flint_hoe" }
+					type: "item"
+				}
+				{
+					id: "437923AC9BE06047"
+					item: { count: 1, id: "notreepunchingremastered:flint_shovel" }
+					type: "item"
+				}
+				{
+					id: "3C5B986C746244B0"
+					item: { count: 1, id: "notreepunchingremastered:flint_axe" }
+					type: "item"
+				}
+				{
+					id: "41D45EDA96FF6C2C"
+					item: { count: 1, id: "notreepunchingremastered:flint_pickaxe" }
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 0.5d
 		}
 	]
 }

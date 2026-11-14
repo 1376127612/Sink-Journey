@@ -17,7 +17,7 @@
   "filesExplorerW": 220,
   "filesConsoleH": 120,
   "recipesBrowserW": 179,
-  "previewH": 219,
+  "previewH": 156,
   "sideListW": 200,
   "pendingHeight": 60,
   "pickerW": 0,
@@ -45,8 +45,8 @@
   "pinnedFiles": [],
   "pinnedFolders": [],
   "favorites": [],
-  "recipesSelected": "kubejsstudio:flint_pickaxe2",
-  "recipesSearch": "flint_pickaxe",
+  "recipesSelected": "embers:caminite_brick",
+  "recipesSearch": "embers:caminite_brick",
   "tagsRegistry": "item",
   "tagsSelected": "accessories:charm",
   "tagsSearch": "",
@@ -59,6 +59,9 @@
   "createSearch": "",
   "filesOpen": [],
   "recentPicks": [
+    "item embers:caminite_blend",
+    "item #c:sand",
+    "item minecraft:clay_ball",
     "item notreepunchingremastered:flint_pickaxe",
     "item kubejs:handle",
     "item notreepunchingremastered:grass_fiber",
@@ -67,10 +70,7 @@
     "item minecraft:granite",
     "item kubejs:mason_workbench_part_1",
     "item minecraft:leather",
-    "item kubejs:flint_axe_head_top",
-    "item notreepunchingremastered:plant_string",
-    "item minecraft:stick",
-    "item minecraft:flint"
+    "item kubejs:flint_axe_head_top"
   ],
   "filesActive": -1
 }
