@@ -1,0 +1,10 @@
+[
+  {"version":1},
+  {"ingredient":{"id":"betterbeginnings:stone_hatchet"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"betterbeginnings:rock_block"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"betterbeginnings:copper_sword"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"betterbeginnings:firestarter"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"betterbeginnings:copper_hoe"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"betterbeginnings:copper_pickaxe"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"betterbeginnings:copper_axe"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+]

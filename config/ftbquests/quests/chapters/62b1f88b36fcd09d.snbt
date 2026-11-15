@@ -21,14 +21,14 @@
 					type: "item"
 				}
 				{
-					count: 2L
-					id: "5F47FFA46D3891C3"
-					item: { count: 1, id: "notreepunchingremastered:flint_shard" }
+					id: "3CB5ED5FCBF41934"
+					item: { count: 1, id: "notreepunchingremastered:flint_knife" }
 					type: "item"
 				}
 				{
-					id: "3CB5ED5FCBF41934"
-					item: { count: 1, id: "notreepunchingremastered:flint_knife" }
+					count: 2L
+					id: "10F6E8EA2E4FAB8C"
+					item: { count: 1, id: "notreepunchingremastered:flint_shard" }
 					type: "item"
 				}
 			]
@@ -116,11 +116,18 @@
 		{
 			dependencies: ["7BFD015338811BC2"]
 			id: "60E6C5DE278F8AD0"
-			tasks: [{
-				id: "5FEACF21936BA0F8"
-				item: { count: 1, id: "oraculumworktables:worktable_mason" }
-				type: "item"
-			}]
+			tasks: [
+				{
+					id: "5FEACF21936BA0F8"
+					item: { count: 1, id: "oraculumworktables:worktable_mason" }
+					type: "item"
+				}
+				{
+					id: "32C781820777BC38"
+					item: { count: 1, id: "cb_microblock:stone_saw" }
+					type: "item"
+				}
+			]
 			x: 8.0d
 			y: -1.0d
 		}
@@ -129,28 +136,119 @@
 			id: "70828BEEEBDA74D3"
 			tasks: [
 				{
-					id: "428871F4A2B71530"
-					item: { count: 1, id: "notreepunchingremastered:flint_hoe" }
+					id: "66475003AE119591"
+					item: { count: 1, id: "notreepunchingremastered:flint_pickaxe" }
 					type: "item"
 				}
 				{
-					id: "437923AC9BE06047"
-					item: { count: 1, id: "notreepunchingremastered:flint_shovel" }
-					type: "item"
-				}
-				{
-					id: "3C5B986C746244B0"
+					id: "01D60409BF5D9639"
 					item: { count: 1, id: "notreepunchingremastered:flint_axe" }
 					type: "item"
 				}
 				{
-					id: "41D45EDA96FF6C2C"
-					item: { count: 1, id: "notreepunchingremastered:flint_pickaxe" }
+					id: "14A1AEB5440FA42C"
+					item: { count: 1, id: "notreepunchingremastered:flint_shovel" }
+					type: "item"
+				}
+				{
+					id: "4F7094B30A9CB5DE"
+					item: { count: 1, id: "notreepunchingremastered:flint_hoe" }
 					type: "item"
 				}
 			]
 			x: 8.0d
 			y: 0.5d
+		}
+		{
+			dependencies: [
+				"60E6C5DE278F8AD0"
+				"54292046716034B6"
+				"3679A19AA7492767"
+			]
+			id: "5A7A4F5ED830FF4C"
+			tasks: [{
+				id: "19008F7969D901B5"
+				item: { count: 1, id: "roots:runestone" }
+				type: "item"
+			}]
+			x: 10.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["60E6C5DE278F8AD0"]
+			id: "54292046716034B6"
+			tasks: [
+				{
+					id: "3EEFCABE4401642F"
+					item: { count: 1, id: "roots:wildroot" }
+					type: "item"
+				}
+				{
+					id: "5FF75568CB04F143"
+					item: { count: 1, id: "roots:grove_moss" }
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["60E6C5DE278F8AD0"]
+			id: "3679A19AA7492767"
+			tasks: [{
+				id: "42E0F2BCCD29A1DB"
+				item: { count: 1, id: "firestarters:fire_starter" }
+				type: "item"
+			}]
+			x: 10.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["5A7A4F5ED830FF4C"]
+			id: "59AD9573BD5BD642"
+			tasks: [
+				{
+					id: "1F07D242518F3F52"
+					item: { count: 1, id: "roots:pestle" }
+					type: "item"
+				}
+				{
+					id: "6EC322235BA42A65"
+					item: { count: 1, id: "roots:mortar" }
+					type: "item"
+				}
+			]
+			x: 12.0d
+			y: -1.0d
+		}
+		{
+			dependencies: ["60E6C5DE278F8AD0"]
+			id: "48BEE62B80F62549"
+			tasks: [{
+				id: "46DFC76CCFFB2B83"
+				item: { count: 1, id: "minecraft:stone_pickaxe" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["48BEE62B80F62549"]
+			id: "33CA917A7FF636A6"
+			tasks: [
+				{
+					id: "65A3298CB4B45F53"
+					item: { count: 1, id: "minecraft:raw_iron" }
+					type: "item"
+				}
+				{
+					id: "408BE0472FAE8E43"
+					item: { count: 1, id: "minecraft:raw_copper" }
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: -4.0d
 		}
 	]
 }

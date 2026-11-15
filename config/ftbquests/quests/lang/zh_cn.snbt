@@ -102,6 +102,7 @@
 	quest.2EECA8F74F7C235B.title: "量产黄铜"
 	quest.2F418266BAA45470.quest_desc: ["我相信你很快就会用用上的。"]
 	quest.2F418266BAA45470.quest_subtitle: "单片眼镜"
+	quest.33CA917A7FF636A6.quest_desc: ["很好，现在终于能够挖矿了。"]
 	quest.34D552E8494DF63D.quest_desc: ["用搅拌器制作通红的坚固合金，再用水进行冷却"]
 	quest.34D552E8494DF63D.quest_subtitle: "这样的合金有什么用呢"
 	quest.34D552E8494DF63D.title: "坚固的合金"
@@ -174,6 +175,7 @@
 		"为你的第一块金属锭而欢呼雀跃吧。"
 	]
 	quest.541A81224FDBD420.quest_subtitle: "熔炉？！"
+	quest.54292046716034B6.quest_desc: ["我曾在森林的树荫底下发现过这些自然造物，它们似乎具有某种特别的魔力？"]
 	quest.54A917D73EE764DB.title: "黄铜物流"
 	quest.55F9AE8981565D51.title: "终于不要手搓变速了"
 	quest.585589616E4ADF3F.quest_desc: [
@@ -185,6 +187,8 @@
 	quest.59416744F8E7ABE8.quest_desc: ["将黑曜石粉碎再注入熔岩得到坚固板！你可以用于制作下一级的机壳"]
 	quest.59416744F8E7ABE8.quest_subtitle: "我想它一定很硬"
 	quest.59416744F8E7ABE8.title: "坚固板"
+	quest.59AD9573BD5BD642.quest_subtitle: "研磨一些东西"
+	quest.5A7A4F5ED830FF4C.quest_desc: ["你可能需要很多，但并不用现在制作很多。"]
 	quest.5F132AD862CA787E.quest_desc: ["你需要将坚固合金烧红再把它压成板，或者你在一开始就这么做"]
 	quest.5F132AD862CA787E.quest_subtitle: "冲压机的力气没这么大"
 	quest.5F132AD862CA787E.title: "我想你很难把它压成板"
@@ -198,7 +202,7 @@
 	quest.6BDDB3A36AADF646.quest_desc: ["制作一些青铜板用于制作蒸汽机器"]
 	quest.6BDDB3A36AADF646.title: "好用的合金"
 	quest.6C12306C5CC22051.title: "蒸汽机"
-	quest.70828BEEEBDA74D3.quest_desc: ["很好，你现在可以通过石匠台来完成燧石工具的制备了。终于，摆脱了该死的徒手捆扎固定。"]
+	quest.70828BEEEBDA74D3.quest_desc: ["很好，你现在可以通过石匠台来完成燧石工具的制备了。终于，摆脱了该死的徒手捆扎固定。但我想你此时应该有了更好的替代品。"]
 	quest.70828BEEEBDA74D3.quest_subtitle: "ohhhh hoe"
 	quest.73F4EE5CA018D3AE.quest_desc: [
 		"这台机器将产出本模组最重要的材料，在放置之前你需要去寻找一块余烬能量浓郁的地方。"
