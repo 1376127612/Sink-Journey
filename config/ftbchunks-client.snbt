@@ -138,22 +138,30 @@
 		# Default: true
 		entity_heads: true
 		entity_icon: {
-			"roots:deer": true
+			"astral_dimension:amethyst_knight": true
 			"minecraft:creeper": true
+			"astral_dimension:postrum_eye": true
+			"astral_dimension:fiery_cow": true
+			"minecraft:zombie": true
+			"minecraft:bat": true
+			"astral_dimension:lunatic": true
+			"minecraft:skeleton": true
+			"minecraft:enderman": true
+			"astral_dimension:amethyst_crawler": true
 			"minecraft:cow": true
+			"astral_dimension:nihlin": true
+			"roots:deer": true
+			"minecraft:wolf": true
+			"roots:purple_sprout": true
+			"astral_dimension:ghost_jellyfish": true
+			"minecraft:zombie_villager": true
+			"embers:ancient_golem": true
+			"roots:beetle": true
+			"astral_dimension:instigator": true
 			"minecraft:spider": true
 			"minecraft:sheep": true
-			"minecraft:wolf": true
-			"minecraft:skeleton": true
-			"minecraft:zombie": true
-			"minecraft:zombie_villager": true
-			"minecraft:bat": true
-			"roots:purple_sprout": true
-			"roots:beetle": true
 			"minecraft:bee": true
 			"minecraft:chicken": true
-			"minecraft:enderman": true
-			"embers:ancient_golem": true
 		}
 		
 		# Minimap font scaling (values not a multiple of 0.5 may look bad)
@@ -273,7 +281,7 @@
 		
 		# Enables creation of death waypoints
 		# Default: true
-		death_waypoints: true
+		death_waypoints: false
 		
 		# Show waypoints in world
 		# Default: true

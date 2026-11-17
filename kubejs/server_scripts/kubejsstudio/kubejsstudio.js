@@ -110,3 +110,83 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: roots:pyre/crushed/copper_nugget1
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'roots:recipe/pyre/crushed/copper_nugget1',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"industrialupgrade:crushed/copper"},
+            {"item":"industrialupgrade:crushed/copper"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:logs"}
+          ],
+          "result": {"id":"create:copper_nugget","count":6},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:crushed/copper1
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/crushed/copper1',
+      {
+        "type": "roots:mortar",
+        "data": {
+          "ingredients": [{"tag":"c:raw_materials/copper"}],
+          "priority": 0,
+          "result": {"count":1,"id":"industrialupgrade:crushed/copper"}
+        },
+        "times": 5
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:crushed/copper5
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/crushed/copper5',
+      {
+        "type": "roots:mortar",
+        "data": {
+          "ingredients": [{"tag":"c:raw_materials/copper"},{"tag":"c:raw_materials/copper"},{"tag":"c:raw_materials/copper"},{"tag":"c:raw_materials/copper"},{"tag":"c:raw_materials/copper"}],
+          "priority": 0,
+          "result": {"count":5,"id":"industrialupgrade:crushed/copper"}
+        },
+        "times": 15
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:crushed/iron1
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/crushed/iron1',
+      {
+        "type": "roots:mortar",
+        "data": {
+          "ingredients": [{"tag":"c:raw_materials/iron"}],
+          "priority": 0,
+          "result": {"count":1,"id":"industrialupgrade:crushed/iron"}
+        },
+        "times": 5
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:crushed/iron5
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/crushed/iron5',
+      {
+        "type": "roots:mortar",
+        "data": {
+          "ingredients": [{"tag":"c:raw_materials/iron"},{"tag":"c:raw_materials/iron"},{"tag":"c:raw_materials/iron"},{"tag":"c:raw_materials/iron"},{"tag":"c:raw_materials/iron"}],
+          "priority": 0,
+          "result": {"count":5,"id":"industrialupgrade:crushed/iron"}
+        },
+        "times": 15
+      }
+    )
+})

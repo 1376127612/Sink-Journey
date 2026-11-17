@@ -21,5 +21,14 @@
   {"ingredient":{"id":"minecraft:amethyst_shard"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"minecraft:lapis_lazuli"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"minecraft:quartz"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"minecraft:glowstone_dust"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"minecraft:glowstone_dust"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"astral_dimension:astral_eye_recipe","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"recipe":"astral_dimension:astral_altar_recipe","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"recipe":"astral_dimension:nanta_star_recipe","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"ingredient":{"id":"astral_dimension:faded_lantern"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"astral_dimension:blooming_dread_recipe","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"recipe":"astral_dimension:poked_bean_recipe","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"recipe":"astral_dimension:chili_beans_recipe","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"},
+  {"ingredient":{"id":"minecraft:raw_copper"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"recipe":"roots:pyre","recipeType":"minecraft:crafting","bookmarkType":"RECIPE"}
 ]

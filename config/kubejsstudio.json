@@ -45,8 +45,8 @@
   "pinnedFiles": [],
   "pinnedFolders": [],
   "favorites": [],
-  "recipesSelected": "notreepunchingremastered:tool/flint_hoe",
-  "recipesSearch": "notreepunchingremastered:tool/flint_hoe",
+  "recipesSelected": "embers:flat_stamp",
+  "recipesSearch": "embers:flat_stamp",
   "tagsRegistry": "item",
   "tagsSelected": "accessories:charm",
   "tagsSearch": "",
@@ -59,18 +59,18 @@
   "createSearch": "",
   "filesOpen": [],
   "recentPicks": [
+    "item #c:stripped_woods",
+    "item #minecraft:oak_logs",
+    "item notreepunchingremastered:flint_shard",
+    "item notreepunchingremastered:stone_rock",
+    "item minecraft:crafting_table",
+    "item #minecraft:planks",
+    "item minecraft:leather",
+    "item minecraft:copper_ingot",
     "item kubejs:handle",
     "item notreepunchingremastered:grass_fiber",
     "item kubejs:flint_pickaxe_head_top",
-    "item embers:caminite_blend",
-    "item #c:sand",
-    "item minecraft:clay_ball",
-    "item notreepunchingremastered:flint_pickaxe",
-    "item oraculumworktables:worktable_mason",
-    "item minecraft:granite",
-    "item kubejs:mason_workbench_part_1",
-    "item minecraft:leather",
-    "item kubejs:flint_axe_head_top"
+    "item embers:caminite_blend"
   ],
   "filesActive": -1
 }

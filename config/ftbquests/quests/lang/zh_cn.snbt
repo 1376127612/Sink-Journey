@@ -88,9 +88,6 @@
 	quest.26C109209120EE25.quest_subtitle: "与星共振"
 	quest.2723FD4DEFF29767.quest_desc: ["水车的应力被减半了，减慢你的转速"]
 	quest.2723FD4DEFF29767.title: "水车仙人"
-	quest.28208174AEC997F6.quest_desc: ["或许你现在可以砍树了？为什么不试试看呢。"]
-	quest.28208174AEC997F6.quest_subtitle: "燧石斧"
-	quest.28208174AEC997F6.title: "燧石斧"
 	quest.292AC0D0FB6D3181.title: "圆石生万物！"
 	quest.2EC7210E5C7222BA.quest_desc: [
 		"夜晚寻找太古魔像，击杀后用其掉落物合成 “远古法典” 。"
@@ -102,7 +99,11 @@
 	quest.2EECA8F74F7C235B.title: "量产黄铜"
 	quest.2F418266BAA45470.quest_desc: ["我相信你很快就会用用上的。"]
 	quest.2F418266BAA45470.quest_subtitle: "单片眼镜"
-	quest.33CA917A7FF636A6.quest_desc: ["很好，现在终于能够挖矿了。"]
+	quest.33CA917A7FF636A6.quest_desc: [
+		"很好，现在终于能够挖矿了。"
+		""
+		"可恶，难道我辛辛苦苦制作的燧石镐，连一块铁都挖不下来吗。我到底该怎么制作更强大的镐子来供我驱使。"
+	]
 	quest.34D552E8494DF63D.quest_desc: ["用搅拌器制作通红的坚固合金，再用水进行冷却"]
 	quest.34D552E8494DF63D.quest_subtitle: "这样的合金有什么用呢"
 	quest.34D552E8494DF63D.title: "坚固的合金"
@@ -114,6 +115,8 @@
 	quest.389FD240EFC2D9A8.quest_subtitle: "藏于地下"
 	quest.38AE7BE9A1702B16.quest_desc: ["用星盘寻找降星点，你会看到白色光柱，把工作台和4个大理石丢进去"]
 	quest.38AE7BE9A1702B16.quest_subtitle: "光芒会教会它聆听"
+	quest.39F17AE9D43DCF5C.quest_desc: ["哈哈哈，天不亡我，我现在就将那铁矿斩于镐下。"]
+	quest.39F17AE9D43DCF5C.quest_subtitle: "似乎更强大了？"
 	quest.3C36940FAC6404ED.quest_desc: ["植物纤维，植物绳。看起来很简单，对吧？割草，捡纤维，搓绳子。但如果你割了十丛草只掉了两根纤维，请不要质疑概率——概率是给有工作台的人准备的，你现在没有。"]
 	quest.3C36940FAC6404ED.quest_subtitle: "植物纤维，不是植物人"
 	quest.3C36940FAC6404ED.title: "草：我招谁惹谁了"
@@ -187,8 +190,10 @@
 	quest.59416744F8E7ABE8.quest_desc: ["将黑曜石粉碎再注入熔岩得到坚固板！你可以用于制作下一级的机壳"]
 	quest.59416744F8E7ABE8.quest_subtitle: "我想它一定很硬"
 	quest.59416744F8E7ABE8.title: "坚固板"
+	quest.59AD9573BD5BD642.quest_desc: ["这种力量，前所未有的力量在指掌间迸发，你似乎能将万物都碾磨成碎渣。"]
 	quest.59AD9573BD5BD642.quest_subtitle: "研磨一些东西"
 	quest.5A7A4F5ED830FF4C.quest_desc: ["你可能需要很多，但并不用现在制作很多。"]
+	quest.5A7A4F5ED830FF4C.quest_subtitle: "不是石头"
 	quest.5F132AD862CA787E.quest_desc: ["你需要将坚固合金烧红再把它压成板，或者你在一开始就这么做"]
 	quest.5F132AD862CA787E.quest_subtitle: "冲压机的力气没这么大"
 	quest.5F132AD862CA787E.title: "我想你很难把它压成板"
@@ -202,8 +207,6 @@
 	quest.6BDDB3A36AADF646.quest_desc: ["制作一些青铜板用于制作蒸汽机器"]
 	quest.6BDDB3A36AADF646.title: "好用的合金"
 	quest.6C12306C5CC22051.title: "蒸汽机"
-	quest.70828BEEEBDA74D3.quest_desc: ["很好，你现在可以通过石匠台来完成燧石工具的制备了。终于，摆脱了该死的徒手捆扎固定。但我想你此时应该有了更好的替代品。"]
-	quest.70828BEEEBDA74D3.quest_subtitle: "ohhhh hoe"
 	quest.73F4EE5CA018D3AE.quest_desc: [
 		"这台机器将产出本模组最重要的材料，在放置之前你需要去寻找一块余烬能量浓郁的地方。"
 		""

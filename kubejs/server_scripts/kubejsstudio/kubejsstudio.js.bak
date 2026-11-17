@@ -104,15 +104,52 @@ ServerEvents.generateData('after_mods', event => {
             { "tag": "minecraft:coals" },
             { "tag": "minecraft:logs" }
           ],
-          "result": { "id": "industrialupgrade:purifiedcrushed/iron", "count": 1 },
-          "chance_outputs": [
-            {
-              "chance": 0.7,
-              "output": { "item": "industrialupgrade:purifiedcrushed/iron", "count": 1 }
-            }
-          ],
+          "result": { "id": "industrialupgrade:purifiedcrushed/iron", "count": 2 },
           "priority": 0
         }
+      }
+    )
+})
+// kubejsstudio custom: roots:pyre/crushed/copper_nugget1
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'roots:recipe/pyre/crushed/copper_nugget1',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"industrialupgrade:crushed/copper"},
+            {"item":"industrialupgrade:crushed/copper"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:logs"}
+          ],
+          "result": {"id":"create:copper_nugget","count":6},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:crushed/copper1
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/crushed/copper1',
+      {
+        "type": "roots:mortar",
+        "data": {
+          "chance_outputs": [
+            {
+              "chance": 0.3,
+              "output": {"count":1,"id":"industrialupgrade:smalldust/tin"}
+            }
+          ],
+          "ingredients": [
+            {"tag":"c:raw_materials/copper"}
+          ],
+          "priority": 0,
+          "result": {"count":1,"id":"industrialupgrade:crushed/copper"}
+        },
+        "times": 10
       }
     )
 })
