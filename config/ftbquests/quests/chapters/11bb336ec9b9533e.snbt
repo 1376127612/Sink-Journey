@@ -183,6 +183,10 @@
 			y: -0.5d
 		}
 		{
+			dependencies: [
+				"1FAB7DD2DFC2148D"
+				"7AB868C12997BBC7"
+			]
 			id: "765570AD06A0C483"
 			tasks: [{
 				id: "42A9482258467402"
@@ -193,6 +197,7 @@
 			y: -0.5d
 		}
 		{
+			dependencies: ["1FAB7DD2DFC2148D"]
 			id: "7AB868C12997BBC7"
 			tasks: [{
 				id: "5657574B01CED756"

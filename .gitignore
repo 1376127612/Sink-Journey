@@ -19,12 +19,14 @@ config/iris.properties
 config/nuclearcraftneohaul.ncpf.json
 config/packetfixer.properties
 resourcepacks/Minecraft-Mod-Language-Modpack-Converted-1.21.1.zip
-config/flywheel-client-1.toml.bak
-config/flywheel-client-2.toml.bak
 config/imblocker.json
+
+# 运行时自动生成或按机器变化的配置，不纳入版本控制
+*.bak
 config/flywheel-client.toml
-config/imblocker.json
-config/flywheel-client.toml
-config/imblocker.json
 config/sodium-fingerprint.json
+config/ftbchunks-client.snbt
+config/modular-machinery-community-refoxed/server.toml
+config/xaero/
+
 __pycache__/unify_tags.cpython-315.pyc

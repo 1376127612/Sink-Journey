@@ -29,6 +29,7 @@
 			y: 2.0d
 		}
 		{
+			dependencies: ["1BEE6719FA581EC9"]
 			id: "261BB0E84BC72316"
 			tasks: [{
 				id: "5E1531B82C13679E"
@@ -39,6 +40,7 @@
 			y: 1.0d
 		}
 		{
+			dependencies: ["1BEE6719FA581EC9"]
 			id: "26C109209120EE25"
 			tasks: [{
 				id: "7618DAF18898AEC1"
@@ -49,6 +51,7 @@
 			y: 3.0d
 		}
 		{
+			dependencies: ["1CB3010EC04C69B5"]
 			id: "1BEE6719FA581EC9"
 			tasks: [{
 				id: "62EB0EA07C5DC8A4"
@@ -69,6 +72,10 @@
 			y: 5.0d
 		}
 		{
+			dependencies: [
+				"261BB0E84BC72316"
+				"26C109209120EE25"
+			]
 			id: "38AE7BE9A1702B16"
 			tasks: [{
 				id: "3DA179BA23908385"
@@ -79,6 +86,7 @@
 			y: 2.0d
 		}
 		{
+			dependencies: ["38AE7BE9A1702B16"]
 			icon: {
 				id: "astralsorcery:lightwell"
 			}
