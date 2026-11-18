@@ -326,6 +326,20 @@ PlayerEvents.advancement('minecraft:end/kill_dragon', event => {
     srGrant(event.server, node.unlock || [], 'advancement:kill_dragon', true)
 })
 
+// ---- 3b. 研究笔记：解锁机械时代（电力前唯一的时代入口） --------
+
+PlayerEvents.inventoryChanged('kubejs:research_notes', event => {
+    srGrant(event.server, ['era.kinetic'], 'item:research_notes')
+})
+
+PlayerEvents.inventoryChanged('kubejs:research_notes_ember', event => {
+    srGrant(event.server, ['era.ember'], 'item:research_notes_ember')
+})
+
+PlayerEvents.inventoryChanged('kubejs:research_notes_radiance', event => {
+    srGrant(event.server, ['era.radiance'], 'item:research_notes_radiance')
+})
+
 // ---- 4. 存档迁移 / 回填 --------------------------------------
 
 var srPlayerHasItem = (server, itemId) => {

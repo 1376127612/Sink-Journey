@@ -1,5 +1,6 @@
 {
 	chapter.03ACDBAA92810814.title: "远古残响"
+	chapter.040A1DAAABA7E2BD.title: "烂尾工程"
 	chapter.078B49689C174792.title: "机械动力"
 	chapter.11BB336EC9B9533E.title: "高温气体"
 	chapter.1615B92EC329CC3D.title: "征战末地"
@@ -53,6 +54,7 @@
 		"你还可以用共振宝石，水晶石/共鸣水晶石，天辉水晶石/共鸣天辉水晶石来获取星能液"
 	]
 	quest.0E2A114F298F8ACD.quest_subtitle: "收集星能"
+	quest.0F63E5FD6083EF59.title: "不要动"
 	quest.1057DBBF8DC8C7C0.quest_desc: [
 		"我们认为一个原始人能够徒手砍伐树木过于超模了，于是对steve的双手进行了一定的限制，现在你无法通过双手来砍伐树木了。"
 		""
@@ -254,4 +256,5 @@
 	quest.7C5D2124B8AE69A6.quest_desc: ["升级你的余烬机器！"]
 	quest.7E2342ED402B6E97.quest_desc: [""]
 	quest.7E2342ED402B6E97.quest_subtitle: "燃煤发电机？......！"
+	task.0DFBBB1E418A4DB5.title: "不要动"
 }

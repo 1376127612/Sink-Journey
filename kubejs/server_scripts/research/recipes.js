@@ -3,7 +3,7 @@
 // ------------------------------------------------------------
 // 研究分三个阶段：
 //   原始研究台（单方块）：纸 + 墨囊 -> 研究笔记；笔记 + 纸 -> 蓝图·原始
-//   机械研究台（3x3x3）：研究笔记 -> 演算数据；刻录蓝图·蒸汽
+//   机械研究台（3x3x3）：研究笔记 -> 演算数据；刻录蓝图·机械（耗旋转应力）
 //   溯洄研究枢纽（7x7x5 + 模块）：刻录余烬 / 星辉 / 终界蓝图
 //
 // 资源循环（阶段三）：
@@ -15,6 +15,7 @@
 
 ServerEvents.recipes(event => {
     // ---- 阶段二：机械研究台 ----
+    // 应力按 Create 负载计：8 基础应力 @32 RPM ≈ 256 SU（约一台机械压床），刻录蓝图翻倍
     event.custom({
         type: 'mmcr:machine_recipe',
         recipe_pool: 'sinkjourney:mechanical_lab',
@@ -23,7 +24,7 @@ ServerEvents.recipes(event => {
         requirements: [
             { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_notes' }, count: 2 },
             { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
-            { type: 'neoforge:energy', io: 'input', fe_per_tick: 64 },
+            { type: 'create:stress', io: 'input', stress: 8, min_rpm: 32 },
             { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_data', count: 1 } }
         ]
     }).id('kubejs:mechanical_lab/research_data')
@@ -37,7 +38,7 @@ ServerEvents.recipes(event => {
             { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:blank_blueprint' }, count: 1 },
             { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 6 },
             { type: 'minecraft:item', io: 'input', item: { item: 'create:precision_mechanism' }, count: 2 },
-            { type: 'neoforge:energy', io: 'input', fe_per_tick: 256 },
+            { type: 'create:stress', io: 'input', stress: 16, min_rpm: 32 },
             { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:blueprint_steam', count: 1 } }
         ]
     }).id('kubejs:mechanical_lab/blueprint_steam')

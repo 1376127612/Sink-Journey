@@ -11,13 +11,24 @@
           "grant": [ "era.electric" ]
         },
         {
-          "id": "backfill_era_steam_by_item",
+          "id": "backfill_era_kinetic_by_blueprint",
           "when": { "item_any_player": "kubejs:blueprint_steam" },
-          "grant": [ "era.kinetic", "era.steam" ]
+          "grant": [ "era.kinetic" ]
         },
         {
           "id": "backfill_era_kinetic_by_item",
           "when": { "item_any_player": "kubejs:blueprint_primitive" },
+          "grant": [ "era.kinetic" ]
+        }
+      ]
+    },
+    {
+      "from": 1,
+      "to": 2,
+      "rules": [
+        {
+          "id": "backfill_era_kinetic_by_research_notes",
+          "when": { "item_any_player": "kubejs:research_notes" },
           "grant": [ "era.kinetic" ]
         }
       ]

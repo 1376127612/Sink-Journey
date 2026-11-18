@@ -5,22 +5,36 @@
     "machine.sinkjourney.trace_cooling": "Entropy-Reversal Cooling Core",
     "level.sinkjourney.research_tier": "Research Core Tier",
 
-    "jei.sinkjourney.mechanical_lab.info": "The stage-two bench: turns research notes from the primitive table into computation data and engraves the Steam blueprint. A hollow 3x3x3 brass shell with four upgrade slots.",
+    "research.page.era_ember": "Embers and Starlight",
+    "research.ember_notes.desc": "Reproduce the ember heat cycle with dawnstone and write the furnace, heat and ash down as a transferable research note; obtaining the note unlocks Ember tech.",
+    "research.radiance_notes.desc": "Using the ember note as a base, record the observation and resonance of starlight to complete the last piece for the End expedition; obtaining the note unlocks Starlight tech.",
+
+    "jei.sinkjourney.mechanical_lab.info": "The stage-two bench: its west face takes a stress input interface (32 RPM minimum) and turns research notes from the primitive table into computation data, engraving the Mechanical blueprint. A hollow 3x3x3 brass shell with four upgrade slots; before the electric era there is no FE, so it runs purely on Create rotational stress.",
     "jei.sinkjourney.trace_nexus.info": "Engraves blueprints: feed blank blueprints, computation data and era materials, then spend FE. Upgrade modules can be installed on all four sides; the level slot decides which era can be engraved.",
     "jei.sinkjourney.trace_compute.info": "The CPU of the array: continuously consumes research substrate and water while venting steam. That steam must be reclaimed by the cooling core, otherwise backed-up outputs stall the computation.",
     "jei.sinkjourney.trace_cooling.info": "Continuously draws off the steam vented by the computation core and dissipates it as heat. It needs constant power; without it steam backs up and the CPU stops.",
 
+    "jei.sinkjourney.primitive_research": "Primitive Research",
+    "jei.sinkjourney.primitive_research.info": "The primitive research table: the only research device before the stress era. Right-click to open its UI. Slot 0 takes the main material, slot 1 the additive, slot 2 is the output; clicking Start consumes the materials immediately, and the product drops into slot 2 when the progress bar fills.",
+    "jei.sinkjourney.primitive_research.info2": "Recipes: paper + ink sac -> research notes x2 (3s); research notes x4 + paper -> primitive blueprint (6s). Research notes are the entry material for the mechanical research bench.",
+    "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so the timings are measured in seconds rather than ticks.",
+
     "machine.kubejs.charcoal_furnace": "Charcoal Furnace",
     "jei.kubejs.charcoal_furnace.info": "A 3x3x3 brick-built charcoal furnace: crushed silver/gold and the electrum alloy can only be smelted here. Fuel is fed through the input bus; any coal or charcoal works (minecraft:coals).",
-    "jei.kubejs.charcoal_furnace.info2": "Build layout: controller in the middle of the front face, input bus on its left, output bus on its right; a lit campfire sits at the very heart of the furnace (directly behind the controller) with a one-block flue left open at the top centre so you can see the flame. Dousing the fire halts the furnace; an atmospheric bellows attached anywhere to the furnace shell speeds it up by 20%.",
+    "jei.kubejs.charcoal_furnace.info2": "Build layout: controller in the middle of the front face, input bus on its left, output bus on its right, plus one input bus in each side wall of the hearth (three input buses in total); a lit campfire sits at the very heart of the furnace (directly behind the controller) with a one-block flue left open at the top centre so you can see the flame. Dousing the fire halts the furnace; an atmospheric bellows attached anywhere to the furnace shell speeds it up by 20%.",
     "jei.kubejs.charcoal_furnace.info3": "Pyres cannot touch precious metals: crushed silver/gold have no pyre recipe at all; their reducing smelt belongs to the charcoal furnace only.",
 
     "block.mmcr.charcoal_furnace_controller": "Charcoal Furnace Controller",
     "block.mmcr.earth_blast_furnace_controller": "Earthen Blast Furnace Controller",
+    "block.mmcr.mechanical_lab_controller": "Mechanical Research Bench Controller",
+    "block.mmcr.trace_nexus_controller": "Backflow Research Nexus Controller",
+    "block.mmcr.trace_compute_controller": "Backflow Computation Core Controller",
+    "block.mmcr.trace_cooling_controller": "Entropy-Reversal Cooling Core Controller",
+    "block.mmcr.research_station_controller": "Backflow Research Station Controller",
 
     "machine.kubejs.earth_blast_furnace": "Earthen Blast Furnace",
     "jei.kubejs.earth_blast_furnace.info": "A 3x3x4 mud-brick earthen blast furnace: the dedicated iron reduction furnace. Crushed iron x2 + calcite x1 + coal/charcoal x2 -> iron ingot x2, 70s per batch. Vanilla smelting of iron ore, raw iron and iron dust has been removed.",
-    "jei.kubejs.earth_blast_furnace.info2": "Build: set one electrum block into the middle of the bottom front row (the tuyere); the row above is input bus | controller | output bus, everything else is mud bricks; a lit campfire sits at the heart (directly behind the controller), and the two-block flue above it must reach the sky.",
+    "jei.kubejs.earth_blast_furnace.info2": "Build: set one electrum block into the middle of the bottom front row (the tuyere); the row above is input bus | controller | output bus, with one more input bus in each side wall of the hearth (three input buses in total), everything else is mud bricks; a lit campfire sits at the heart (directly behind the controller), and the two-block flue above it must reach the sky.",
     "jei.kubejs.earth_blast_furnace.info3": "Forced draft: an atmospheric bellows must be attached to the lower half of the shell (at or below tuyere height), otherwise the machine will not start. Dousing the campfire also halts it.",
     "jei.kubejs.earth_blast_furnace.info4": "Why: under forced draft the coal burns to CO first, and CO reduces the iron oxides; the calcite decomposes into CaO, which fluxes the silica/alumina gangue into slag, protecting the lining and cutting iron loss. Puddling/forging is abstracted away, so the furnace taps usable iron ingots directly."
 }

@@ -10,23 +10,36 @@
     "research.kinetic_brass.desc": "用安山合金与研究基质在演算环境里复现黄铜配比。",
     "research.steam_precision.desc": "把黄铜压成精密构件，蒸汽时代的入场券。",
     "research.gate_dragon.desc": "击败末影龙，证明这条产线撑得起末地远征，电力时代由此开启。",
+    "research.page.era_ember": "余烬与星辉",
+    "research.ember_notes.desc": "用黎明石复现余烬热循环，把炉火、热力与灰烬写成可推广的研究笔记；拿到笔记即解锁余烬科技。",
+    "research.radiance_notes.desc": "以余烬笔记为底稿记录星辉的观测与共鸣，为终界远征补上最后一块拼图；拿到笔记即解锁星辉科技。",
 
-    "jei.sinkjourney.mechanical_lab.info": "阶段二的机械研究台：把原始研究台产出的研究笔记加工成演算数据，并刻录蓝图·蒸汽。结构为 3x3x3 空心铜壳，自带四个升级槽。",
+    "jei.sinkjourney.mechanical_lab.info": "阶段二的机械研究台：西面接应力输入接口（最低 32 RPM），把原始研究台产出的研究笔记加工成演算数据，并刻录蓝图·机械。结构为 3x3x3 空心铜壳，自带四个升级槽；电力之前没有 FE，只吃 Create 旋转应力。",
     "jei.sinkjourney.trace_nexus.info": "刻录蓝图：输入空白蓝图、演算数据与对应时代材料，消耗 FE 产出蓝图。四面升级槽可安装升级模块，等级槽决定可刻录的蓝图时代。",
     "jei.sinkjourney.trace_compute.info": "溯洄阵列的 CPU：持续消耗研究基质与水并排出蒸汽。蒸汽必须由冷却核心回收，否则产物堵塞会让演算停摆。",
     "jei.sinkjourney.trace_cooling.info": "逆熵冷却核心：持续抽走演算核心排出的蒸汽并转化为热量排出。需要持续供能，否则蒸汽积压会使 CPU 停机。",
 
+    "jei.sinkjourney.primitive_research": "原始研究",
+    "jei.sinkjourney.primitive_research.info": "原始研究台：应力时代之前唯一的研究设备。右键打开界面，槽0 放主料、槽1 放辅料、槽2 是产物槽，点击「开始研究」后材料立即扣除，进度条走完产物进入槽2。",
+    "jei.sinkjourney.primitive_research.info2": "配方：纸 + 墨囊 → 研究笔记×2（3 秒）；研究笔记×4 + 纸 → 蓝图·原始（6 秒）。研究笔记是机械研究台的入场材料。",
+    "jei.sinkjourney.primitive_research.info3": "为什么：记录与复现是两种不同的劳动——先花墨把观察写成笔记，再拿多份笔记互相比对、誊抄成蓝图；原始阶段没有机械，只能靠手抄，所以耗时以秒计而不是以 tick 计。",
+
     "machine.kubejs.charcoal_furnace": "炭炉",
     "jei.kubejs.charcoal_furnace.info": "3×3×3 砖砌炭炉：金银碎矿与琥珀金合金只能在这里炼。燃料随配方投入输入口，煤炭/木炭通用（minecraft:coals）。",
-    "jei.kubejs.charcoal_furnace.info2": "搭建：正面中间放控制器，左边输入口、右边输出口；炉膛正中（控制器正后方）放一支点燃的篝火，顶部中心留一格烟道就能看到火光。篝火被浇灭即停工；炉体外壁任意位置贴陶风箱（atmospheric_bellows）可提速 20%。",
+    "jei.kubejs.charcoal_furnace.info2": "搭建：正面中间放控制器，左边输入口、右边输出口，炉膛左右两壁再各放一个输入口（合计 3 个输入仓）；炉膛正中（控制器正后方）放一支点燃的篝火，顶部中心留一格烟道就能看到火光。篝火被浇灭即停工；炉体外壁任意位置贴陶风箱（atmospheric_bellows）可提速 20%。",
     "jei.kubejs.charcoal_furnace.info3": "柴堆烧不了金银：碎银/碎金在柴堆上没有任何配方，贵金属的还原冶炼只能在炭炉完成。",
 
     "block.mmcr.charcoal_furnace_controller": "炭炉控制器",
     "block.mmcr.earth_blast_furnace_controller": "土高炉控制器",
+    "block.mmcr.mechanical_lab_controller": "机械研究台控制器",
+    "block.mmcr.trace_nexus_controller": "溯洄研究枢纽控制器",
+    "block.mmcr.trace_compute_controller": "溯洄演算核心控制器",
+    "block.mmcr.trace_cooling_controller": "逆熵冷却核心控制器",
+    "block.mmcr.research_station_controller": "溯洄研究站控制器",
 
     "machine.kubejs.earth_blast_furnace": "土高炉",
     "jei.kubejs.earth_blast_furnace.info": "3×3×4 泥砖土高炉：铁的专用还原炉。碎铁×2 + 方解石×1 + 煤/木炭×2 → 铁锭×2，70 秒一批。铁矿/生铁/铁粉的原版直烧路径已全部移除。",
-    "jei.kubejs.earth_blast_furnace.info2": "搭建：正面底格中间嵌一块琥珀金块（风口），上一排从左到右为 输入口 / 控制器 / 输出口，其余全部是泥砖；炉膛正中（控制器正后方）放一支点燃的篝火，上方两格烟道要通到天空。",
+    "jei.kubejs.earth_blast_furnace.info2": "搭建：正面底格中间嵌一块琥珀金块（风口），上一排从左到右为 输入口 / 控制器 / 输出口，炉膛左右两壁再各放一个输入口（合计 3 个输入仓），其余全部是泥砖；炉膛正中（控制器正后方）放一支点燃的篝火，上方两格烟道要通到天空。",
     "jei.kubejs.earth_blast_furnace.info3": "强制鼓风：炉体下半部（风口高度及以下）外壁必须贴陶风箱 atmospheric_bellows，没有风箱机器不会开工；篝火被浇灭同样停工。",
     "jei.kubejs.earth_blast_furnace.info4": "为什么：煤在鼓风下先烧成 CO，CO 再把铁氧化物还原成铁；方解石高温分解出 CaO，与矿石里的硅铝脉石造渣，保护炉衬也减少铁损。省略炒铁/锻打，土高炉直接出可用铁锭。"
 }

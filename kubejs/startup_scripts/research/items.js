@@ -22,14 +22,24 @@ StartupEvents.registry('item', event => {
         .displayName('演算数据')
         .tooltip('§7研究枢纽刻录蓝图所需的演算产物')
 
+    // 时代研究笔记：拿到即解锁对应时代（由研究站产出）
+    event.create('research_notes_ember')
+        .displayName('研究笔记·余烬')
+        .tooltip('§7记录余烬热力学的笔记，拿到即解锁余烬科技')
+
+    event.create('research_notes_radiance')
+        .displayName('研究笔记·星辉')
+        .tooltip('§7记录星辉观测的笔记，拿到即解锁星辉科技')
+
     event.create('blank_blueprint')
         .displayName('空白蓝图')
         .tooltip('§7放入研究枢纽，配合演算数据刻录蓝图')
 
     // 蓝图成品
+    // id 沿用 blueprint_steam：旧存档与配方引用不变，蒸汽时代已并入机械时代
     event.create('blueprint_steam')
-        .displayName('蓝图·蒸汽时代')
-        .tooltip('§7用于合成升级模块')
+        .displayName('蓝图·机械')
+        .tooltip('§7用于合成研究阵列控制器与升级模块')
 
     event.create('blueprint_ember')
         .displayName('蓝图·余烬熔炉')

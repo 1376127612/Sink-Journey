@@ -23,6 +23,7 @@ StartupEvents.registry('block', event => {
     upgradeBlock('efficiency_module', '节能核心')
 
     // 原始阶段：单方块研究台
+    // 槽位 0：主料（纸 / 研究笔记）；槽位 1：辅料（墨囊 / 纸）；槽位 2：产物
     event.create('primitive_research_table')
         .displayName('原始研究台')
         .soundType('wood')
@@ -31,4 +32,9 @@ StartupEvents.registry('block', event => {
         .tag('minecraft:mineable/axe')
         .texture('kubejs:block/primitive_research_table')
         .item(item => item.displayName('原始研究台'))
+        .blockEntity(info => {
+            info.inventory('inv', Java.loadClass('java.util.Collections').emptySet(), 3, 1)
+            info.serverTicking()
+            info.enableSync()
+        })
 })

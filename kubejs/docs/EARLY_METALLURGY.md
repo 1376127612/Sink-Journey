@@ -22,13 +22,13 @@
 | L2 土高炉 | ✔ 已实装 | MMCR 3×3×4 泥砖外壳 + 琥珀金风口；**强制鼓风**；碎铁+方解石+煤 → 铁锭×2 |
 
 > B 档已实装（`startup_scripts/metallurgy/furnace_startup.js` + `server_scripts/metallurgy/furnace_structure.js` + `furnace_recipes.js` + `client_scripts/metallurgy/jei_info.js`）。
-> 结构：3×3×3 原版砖块外壳。正面一排是「输入口 / 控制器 / 输出口」，篝火在控制器正后方的炉膛正中，
+> 结构：3×3×3 原版砖块外壳。正面一排是「输入口 / 控制器 / 输出口」，炉膛左右两壁再各一个输入口（共 3 个输入仓），篝火在控制器正后方的炉膛正中，
 > 顶部中心留一格烟道（可不填）可以看到火光。
 > 控制器右键开 MMCR 机器 UI（套熔炉使用体验：输入口投料、输出口取粒）。
 > 点炉仪式：先放篝火并点燃（燧石/firestarters 都行），再封砖；篝火被水/雪铲浇灭即停工。
 >
 > L2 土高炉（`blast_furnace_startup.js` + `blast_furnace_structure.js` + `blast_furnace_recipes.js`）：
-> 3×3×4 泥砖壳，正面底格中间嵌**琥珀金块**（风口，9 锭一次性投入），上一排「输入口 / 控制器 / 输出口」；
+> 3×3×4 泥砖壳，正面底格中间嵌**琥珀金块**（风口，9 锭一次性投入），上一排「输入口 / 控制器 / 输出口」，炉膛左右两壁再各一个输入口（共 3 个输入仓）；
 > 炉膛篝火 + **炉体下半部外壁必须有陶风箱**（强制鼓风），两者缺一不开工。
 
 ---
@@ -235,8 +235,8 @@ industrialupgrade:crushed/<metal>
   注册 `kubejs:charcoal_furnace` 机器 + `recipeBehavior`（炉膛篝火点燃判定、
   风箱判定（炉体外壁半径 3 内） → `setDuration` ×0.8）；
 - `kubejs/server_scripts/metallurgy/furnace_structure.js`：
-  3×3×3 砖壳：z=-1 后墙全砖、z=0 炉膛（篝火居中 + 顶心烟道）、
-  z=+1 正面「输入口 I / 控制器 C / 输出口 O」，`/reload` 可热重载；
+  3×3×3 砖壳：z=-1 后墙全砖、z=0 炉膛（篝火居中 + 左右壁各一个输入口 + 顶心烟道）、
+  z=+1 正面「输入口 I / 控制器 C / 输出口 O」，共 3 个输入仓，`/reload` 可热重载；
 - `kubejs/server_scripts/metallurgy/furnace_recipes.js`：
   银金 nugget×7、琥珀金合金（银锭/金锭用 tag 输入）、
   控制器合成（minecraft:bricks + 黏土球 + 煤 tag）；
@@ -248,9 +248,9 @@ industrialupgrade:crushed/<metal>
   **下半部风箱强制判定**（XZ 半径 3 / Y -2..0，缺失直接 `cancel()`）；
   拒绝原因按控制器坐标缓存，只在状态切换时打日志；
 - `kubejs/server_scripts/metallurgy/blast_furnace_structure.js`：
-  3×3×4 泥砖壳：z=-1 后墙全泥砖；z=0 炉膛（篝火居中 + 上方两格烟道）；
+  3×3×4 泥砖壳：z=-1 后墙全泥砖；z=0 炉膛（篝火居中 + 左右壁各一个输入口 + 上方两格烟道）；
   z=+1 正面底格中间 = 琥珀金块 `industrialupgrade:baseblockingot/electrum`（风口），
-  上一排「输入口 I / 控制器 C / 输出口 O」，其余泥砖；`/reload` 可热重载；
+  上一排「输入口 I / 控制器 C / 输出口 O」，共 3 个输入仓，其余泥砖；`/reload` 可热重载；
 - `kubejs/server_scripts/metallurgy/blast_furnace_recipes.js`：
   碎铁×2 + 方解石×1 + 煤×2 → 铁锭×2（1400t）；控制器合成（泥砖 + 琥珀金锭 tag + 黏土球）；
   remove 原版熔炉/高炉的铁直烧（ore / raw / dust / crushed / purifiedcrushed）；
@@ -261,10 +261,10 @@ industrialupgrade:crushed/<metal>
 1. 重启日志出现 `[CF] 已注册炭炉 kubejs:charcoal_furnace`；
 2. mortar 磨 raw_silver/raw_gold/raw_tin/raw_lead 出对应 `industrialupgrade:crushed/*`；
 3. 柴堆对碎银/碎金无任何配方（JEI 柴堆分类里搜不到）；
-4. 摆放：3×3×3 砖壳，**正面一排 = 输入口 | 控制器 | 输出口**；
+4. 摆放：3×3×3 砖壳，**正面一排 = 输入口 | 控制器 | 输出口**，炉膛左右两壁各再放一个输入口（共 3 个）；
    篝火放在控制器正后方的炉膛正中并点燃（顶部中心留一格烟道即可看到火光）；
    控制器合成 `mmcr:charcoal_furnace_controller`；篝火未点燃机器不开工；
-5. 输入口投 碎银×2+煤×1 → 40s 出 `mekmm:nugget_silver` ×7；贴风箱后 32s；
+5. 任一输入口投 碎银×2+煤×1 → 40s 出 `mekmm:nugget_silver` ×7；贴风箱后 32s；
 6. 金锭+银锭+煤/木炭 → `industrialupgrade:itemingots/electrum_ingot` ×2（60s）；
 7. 琥珀金锭可合成下游（IU 齿轮/板、蒸汽电线）；
 8. `/research tree` 冶金页节点（研究挂钩另行排期）。
@@ -274,10 +274,10 @@ industrialupgrade:crushed/<metal>
 2. JEI 里原版熔炉/高炉烧铁矿、生铁、碎铁、净化碎铁、铁粉全部消失（只剩土高炉配方）；
 3. 柴堆里搜不到净化碎铁配方；
 4. 摆放：3×3×4 泥砖壳，正面底格中间嵌 `industrialupgrade:baseblockingot/electrum`（琥珀金块），
-   上一排「输入口 | 控制器 | 输出口」；篝火在控制器正后方并点燃；上方两格烟道通到天空；
+   上一排「输入口 | 控制器 | 输出口」，炉膛左右两壁各再放一个输入口（共 3 个），其余泥砖；篝火在控制器正后方并点燃；上方两格烟道通到天空；
 5. 不放风箱 → 机器拒绝开工（日志提示"下半部外壁没有陶风箱"）；
    下半部外壁贴 `embers:atmospheric_bellows` 后开工；
-6. 输入口投 碎铁×2 + 方解石×1 + 煤×2 → 70s 出 `minecraft:iron_ingot` ×2；
+6. 任一输入口投 碎铁×2 + 方解石×1 + 煤×2 → 70s 出 `minecraft:iron_ingot` ×2；
 7. 控制器合成 `mmcr:earth_blast_furnace_controller`：泥砖×6 + 琥珀金锭×2 + 黏土球。
 
 ---
@@ -288,7 +288,7 @@ industrialupgrade:crushed/<metal>
 2. **锡的定位**：琥珀金取代合金位后，锡初期只剩"炼了存着"。可选：
    a) 锡留给蒸汽时代焊料/白镴；b) 锡+银出低配琥珀金（收率 80%）作为缺金过渡。
 3. ~~氧化渣回收率~~ 已随负反馈方案废弃。
-4. ~~炭炉 UI~~ **已定**：控制器右键开 MMCR 机器 UI（熔炉使用体验：输入口投料、输出口取粒），3×3×3 砖壳、正面「输入口 / 控制器 / 输出口」一排。
+4. ~~炭炉 UI~~ **已定**：控制器右键开 MMCR 机器 UI（熔炉使用体验：输入口投料、输出口取粒），3×3×3 砖壳、正面「输入口 / 控制器 / 输出口」一排 + 炉膛左右壁两个输入口（共 3 个输入仓）。
 
 ---
 

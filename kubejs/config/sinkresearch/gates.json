@@ -9,7 +9,7 @@
     {
       "id": "electric_entry",
       "unlock": "era.electric",
-      "comment": "电力时代入口：冶金灌注机 / 富集仓 / AE2 压印器这一档",
+      "comment": "电力时代入口：冶金灌注机 / 富集仓 / AE2 压印器这一档；溯洄研究站同样只在电力后开放",
       "outputs": [
         "mekanism:metallurgic_infuser",
         "mekanism:enrichment_chamber",
@@ -22,7 +22,8 @@
         "ae2:drive",
         "ae2:crafting_terminal",
         "industrialforegoing:machine_frame_pity",
-        "industrialforegoing:dissolution_chamber"
+        "industrialforegoing:dissolution_chamber",
+        "mmcr:research_station_controller"
       ],
       "blocks": [
         "mekanism:metallurgic_infuser",
@@ -36,7 +37,8 @@
         "ae2:drive",
         "ae2:crafting_terminal",
         "industrialforegoing:machine_frame_pity",
-        "industrialforegoing:dissolution_chamber"
+        "industrialforegoing:dissolution_chamber",
+        "mmcr:research_station_controller"
       ],
       "recipes": []
     }

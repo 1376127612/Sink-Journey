@@ -12,7 +12,7 @@
 //   屋顶 B = 模块桥接器（可装演算核心 / 冷却核心）
 //
 // 机械研究台「机械研究台」3 x 3 x 3：
-//   北墙 I = 物品输入，西墙 E = 能量输入，东墙 O = 物品输出
+//   北墙 I = 物品输入，西墙 E = 应力输入，东墙 O = 物品输出
 //   南墙 F = 控制器，顶层四角 U = 升级槽
 //
 // 两个模块都是 3 x 3 x 4：
@@ -47,7 +47,7 @@ MMCREvents.server(event => {
         .set('X', api.block('create:brass_casing'))
         .set('I', api.anyOfItemInput())
         .set('O', api.anyOfItemOutput())
-        .set('E', api.anyOfEnergyInput())
+        .set('E', api.anyStressInput())
 
     applyUpgradeSlots(mechanicalLab, 'create:brass_casing')
         .controller('F')

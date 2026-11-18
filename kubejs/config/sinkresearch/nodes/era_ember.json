@@ -1,0 +1,54 @@
+{
+  "_comment": "余烬/星辉时代研究：产出对应研究笔记，拿到即解锁 era.ember / era.radiance。",
+  "page": "era_ember",
+  "title_key": "research.page.era_ember",
+  "nodes": [
+    {
+      "id": "sink:ember_notes",
+      "kind": "craft",
+      "era": "ember",
+      "rank": 4,
+      "requires": { "and": [ "sink:steam_precision" ] },
+      "inputs": {
+        "items": [
+          { "id": "embers:dawnstone_ingot", "count": 4 },
+          { "id": "kubejs:research_data", "count": 8 }
+        ],
+        "fluids": [ { "id": "minecraft:water", "amount": 500 } ],
+        "energy": 3000
+      },
+      "duration": 600,
+      "outputs": {
+        "items": [ { "id": "kubejs:research_notes_ember", "count": 1 } ]
+      },
+      "unlock": [ "era.ember" ],
+      "ui": { "x": 0, "y": 0, "doc": "research.ember_notes.desc" },
+      "recipe_pool": "sinkjourney:research_station",
+      "recipe_id": "kubejs:research_station/ember_notes"
+    },
+    {
+      "id": "sink:radiance_notes",
+      "kind": "craft",
+      "era": "radiance",
+      "rank": 5,
+      "requires": { "and": [ "sink:ember_notes" ] },
+      "inputs": {
+        "items": [
+          { "id": "astralsorcery:starmetal_ingot", "count": 4 },
+          { "id": "kubejs:research_notes_ember", "count": 1 },
+          { "id": "kubejs:research_data", "count": 12 }
+        ],
+        "fluids": [],
+        "energy": 5000
+      },
+      "duration": 900,
+      "outputs": {
+        "items": [ { "id": "kubejs:research_notes_radiance", "count": 1 } ]
+      },
+      "unlock": [ "era.radiance" ],
+      "ui": { "x": 2, "y": 0, "doc": "research.radiance_notes.desc" },
+      "recipe_pool": "sinkjourney:research_station",
+      "recipe_id": "kubejs:research_station/radiance_notes"
+    }
+  ]
+}
