@@ -1,0 +1,12 @@
+{
+    "machine.sinkjourney.mechanical_lab": "机械研究台",
+    "machine.sinkjourney.trace_nexus": "溯洄研究枢纽",
+    "machine.sinkjourney.trace_compute": "溯洄演算核心",
+    "machine.sinkjourney.trace_cooling": "逆熵冷却核心",
+    "level.sinkjourney.research_tier": "研究核心规格",
+
+    "jei.sinkjourney.mechanical_lab.info": "阶段二的机械研究台：把原始研究台产出的研究笔记加工成演算数据，并刻录蓝图·蒸汽。结构为 3x3x3 空心铜壳，自带四个升级槽。",
+    "jei.sinkjourney.trace_nexus.info": "刻录蓝图：输入空白蓝图、演算数据与对应时代材料，消耗 FE 产出蓝图。四面升级槽可安装升级模块，等级槽决定可刻录的蓝图时代。",
+    "jei.sinkjourney.trace_compute.info": "溯洄阵列的 CPU：持续消耗研究基质与水并排出蒸汽。蒸汽必须由冷却核心回收，否则产物堵塞会让演算停摆。",
+    "jei.sinkjourney.trace_cooling.info": "逆熵冷却核心：持续抽走演算核心排出的蒸汽并转化为热量排出。需要持续供能，否则蒸汽积压会使 CPU 停机。"
+}

@@ -1,6 +1,6 @@
 // ============================================================
 // 在 JEI 中隐藏村民交易配方类别
-// （与服务端 ban_villagers.js 配套）
+// （与服务端 server_scripts/bans/villagers.js 配套）
 //
 // 说明：JEI 本体在 1.21 已不再显示村民交易，
 //       这里显示的交易类别来自 JustEnoughResources (JER)，

@@ -1,6 +1,6 @@
 // ============================================================
 // 在 JEI 中隐藏被禁止“获取”的动态结构相关物品
-// （与服务端 ban_dynamic_structures.js 的列表保持一致）
+// （与服务端 server_scripts/bans/dynamic_structures.js 的列表保持一致）
 //
 // 注意：只影响 JEI 展示，不影响创造模式物品栏里的取用，
 //       也不影响已经拥有这些物品的玩家正常使用。
@@ -48,7 +48,7 @@
         'create:white_sail',
         'create:sail_frame',
 
-        // 工业升级矿机轴承的合成元素（对应服务端 ban.js 里的封禁项）
+        // 工业升级矿机轴承的合成元素（对应服务端 bans/dynamic_structures.js 里的封禁项）
         'industrialupgrade:crafting_elements/crafting_284_element'
     ]
 

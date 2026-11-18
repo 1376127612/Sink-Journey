@@ -190,3 +190,22 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: kubejsstudio:crafting_table
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/crafting_table',
+      {
+        "type": "kubejs:shaped",
+        "result": {"id":"minecraft:crafting_table","count":1},
+        "pattern": ["##","AA"],
+        "key": {
+          "A": {"tag":"minecraft:logs"},
+          "#": {"item":"minecraft:leather"}
+        },
+        "_kubejs_changed_marker": {
+          "source": "server_scripts:kubejsstudio/recipes.js",
+          "line": 41
+        }
+      }
+    )
+})

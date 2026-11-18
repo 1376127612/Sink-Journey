@@ -1,0 +1,12 @@
+{
+    "machine.sinkjourney.mechanical_lab": "Mechanical Research Bench",
+    "machine.sinkjourney.trace_nexus": "Backflow Research Nexus",
+    "machine.sinkjourney.trace_compute": "Backflow Computation Core",
+    "machine.sinkjourney.trace_cooling": "Entropy-Reversal Cooling Core",
+    "level.sinkjourney.research_tier": "Research Core Tier",
+
+    "jei.sinkjourney.mechanical_lab.info": "The stage-two bench: turns research notes from the primitive table into computation data and engraves the Steam blueprint. A hollow 3x3x3 brass shell with four upgrade slots.",
+    "jei.sinkjourney.trace_nexus.info": "Engraves blueprints: feed blank blueprints, computation data and era materials, then spend FE. Upgrade modules can be installed on all four sides; the level slot decides which era can be engraved.",
+    "jei.sinkjourney.trace_compute.info": "The CPU of the array: continuously consumes research substrate and water while venting steam. That steam must be reclaimed by the cooling core, otherwise backed-up outputs stall the computation.",
+    "jei.sinkjourney.trace_cooling.info": "Continuously draws off the steam vented by the computation core and dissipates it as heat. It needs constant power; without it steam backs up and the CPU stops."
+}
