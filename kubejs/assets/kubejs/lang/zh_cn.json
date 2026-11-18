@@ -14,7 +14,10 @@
     "research.ember_notes.desc": "用黎明石复现余烬热循环，把炉火、热力与灰烬写成可推广的研究笔记；拿到笔记即解锁余烬科技。",
     "research.radiance_notes.desc": "以余烬笔记为底稿记录星辉的观测与共鸣，为终界远征补上最后一块拼图；拿到笔记即解锁星辉科技。",
 
+    "recipe_pool.sinkjourney.mechanical_lab": "机械研究台",
     "jei.sinkjourney.mechanical_lab.info": "阶段二的机械研究台：西面接应力输入接口（最低 32 RPM），把原始研究台产出的研究笔记加工成演算数据，并刻录蓝图·机械。结构为 3x3x3 空心铜壳，自带四个升级槽；电力之前没有 FE，只吃 Create 旋转应力。",
+    "jei.sinkjourney.mechanical_lab.ember_notes": "研究笔记·余烬",
+    "jei.sinkjourney.mechanical_lab.radiance_notes": "研究笔记·星辉",
     "jei.sinkjourney.trace_nexus.info": "刻录蓝图：输入空白蓝图、演算数据与对应时代材料，消耗 FE 产出蓝图。四面升级槽可安装升级模块，等级槽决定可刻录的蓝图时代。",
     "jei.sinkjourney.trace_compute.info": "溯洄阵列的 CPU：持续消耗研究基质与水并排出蒸汽。蒸汽必须由冷却核心回收，否则产物堵塞会让演算停摆。",
     "jei.sinkjourney.trace_cooling.info": "逆熵冷却核心：持续抽走演算核心排出的蒸汽并转化为热量排出。需要持续供能，否则蒸汽积压会使 CPU 停机。",

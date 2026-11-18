@@ -7,6 +7,10 @@ MMCREvents.client(event => {
     event.addRecipePoolInfo('sinkjourney:trace_nexus', 'jei.sinkjourney.trace_nexus.info')
     event.addRecipePoolInfo('sinkjourney:trace_compute', 'jei.sinkjourney.trace_compute.info')
     event.addRecipePoolInfo('sinkjourney:trace_cooling', 'jei.sinkjourney.trace_cooling.info')
+
+    // 逐条配方的名字（JEI 配方详情页）
+    event.addRecipeInfo('kubejs:mechanical_lab/ember_notes', 'jei.sinkjourney.mechanical_lab.ember_notes')
+    event.addRecipeInfo('kubejs:mechanical_lab/radiance_notes', 'jei.sinkjourney.mechanical_lab.radiance_notes')
 })
 
 // ---- 原始研究台：自定义 JEI 配方类别 ---------------------------

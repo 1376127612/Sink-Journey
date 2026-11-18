@@ -43,6 +43,38 @@ ServerEvents.recipes(event => {
         ]
     }).id('kubejs:mechanical_lab/blueprint_steam')
 
+    // ---- 阶段二：时代研究笔记 ----
+    // 机械研究台没有流体/能量口，研究站配方里的水冷与 FE 折算成持续应力；
+    // 笔记是纸面记录，机械刻录只需一张纸作载体。
+    event.custom({
+        type: 'mmcr:machine_recipe',
+        recipe_pool: 'sinkjourney:mechanical_lab',
+        tick_time: 600,
+        parallelized: true,
+        requirements: [
+            { type: 'minecraft:item', io: 'input', item: { item: 'embers:dawnstone_ingot' }, count: 4 },
+            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 8 },
+            { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
+            { type: 'create:stress', io: 'input', stress: 16, min_rpm: 32 },
+            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_notes_ember', count: 1 } }
+        ]
+    }).id('kubejs:mechanical_lab/ember_notes')
+
+    event.custom({
+        type: 'mmcr:machine_recipe',
+        recipe_pool: 'sinkjourney:mechanical_lab',
+        tick_time: 900,
+        parallelized: true,
+        requirements: [
+            { type: 'minecraft:item', io: 'input', item: { item: 'astralsorcery:starmetal_ingot' }, count: 4 },
+            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_notes_ember' }, count: 1 },
+            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 12 },
+            { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
+            { type: 'create:stress', io: 'input', stress: 32, min_rpm: 32 },
+            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_notes_radiance', count: 1 } }
+        ]
+    }).id('kubejs:mechanical_lab/radiance_notes')
+
     // ---- 阶段三：主机蓝图刻录 ----
     const blueprints = [
         {
