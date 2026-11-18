@@ -26,6 +26,17 @@ StartupEvents.registry('block', event => {
         })
         .texture('kubejs:block/example_block') // 自动生成 cube_all 模型，放链式调用最后
 
+    // ---- 蒸汽机壳：铁壳 + 青铜承压板，蒸汽机机身材质 --------------
+    event.create('steam_casing')
+        .displayName('蒸汽机壳')
+        .soundType('metal')
+        .hardness(3)
+        .resistance(6)
+        .requiresTool()
+        .tag('minecraft:mineable/pickaxe')
+        .item(item => item.displayName('蒸汽机壳'))
+        .texture('kubejs:block/steam_casing')
+
     // ------------------------------------------------------------
     // 模板 A：六面不同贴图
     // ------------------------------------------------------------

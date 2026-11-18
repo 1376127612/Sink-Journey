@@ -4,6 +4,12 @@
     "machine.sinkjourney.trace_compute": "溯洄演算核心",
     "machine.sinkjourney.trace_cooling": "逆熵冷却核心",
     "level.sinkjourney.research_tier": "研究核心规格",
+    "machine.sinkjourney.research_station": "溯洄研究站",
+    "jei.sinkjourney.research_station.info": "溯洄研究站：从研究节点 JSON 自动生成配方。前置研究未完成时机器会拒绝开工，完成后按已解锁时代数提速（有下限）。",
+    "research.page.era_steam": "蒸汽与末地",
+    "research.kinetic_brass.desc": "用安山合金与研究基质在演算环境里复现黄铜配比。",
+    "research.steam_precision.desc": "把黄铜压成精密构件，蒸汽时代的入场券。",
+    "research.gate_dragon.desc": "击败末影龙，证明这条产线撑得起末地远征，电力时代由此开启。",
 
     "jei.sinkjourney.mechanical_lab.info": "阶段二的机械研究台：把原始研究台产出的研究笔记加工成演算数据，并刻录蓝图·蒸汽。结构为 3x3x3 空心铜壳，自带四个升级槽。",
     "jei.sinkjourney.trace_nexus.info": "刻录蓝图：输入空白蓝图、演算数据与对应时代材料，消耗 FE 产出蓝图。四面升级槽可安装升级模块，等级槽决定可刻录的蓝图时代。",

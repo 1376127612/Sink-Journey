@@ -1,0 +1,7 @@
+{
+  "_comment": "P3 研究网络参数。require_network=false 时，没有网络中心也允许研究站开工（调试用）。",
+  "require_network": true,
+  "default_capacity": 1,
+  "job_ttl_ms": 10000,
+  "search_radius": 16
+}

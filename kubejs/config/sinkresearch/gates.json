@@ -1,0 +1,44 @@
+{
+  "_comment": "P2 解锁拦截清单（全服，AStages 实现）。object 格式：item 用物品 id；recipe 用 <配方类型>//<配方 id>。",
+  "settings": {
+    "recipe_restrictions": false,
+    "recipe_separator": "//",
+    "_recipe_note": "AStages 的 recipe 限制对象必须形如 'minecraft:crafting//命名空间:路径'，单个 id 会让 ASimpleElaborator 抛 ArrayIndexOutOfBounds 直接崩服。确认稳了再改 true。"
+  },
+  "gates": [
+    {
+      "id": "electric_entry",
+      "unlock": "era.electric",
+      "comment": "电力时代入口：冶金灌注机 / 富集仓 / AE2 压印器这一档",
+      "outputs": [
+        "mekanism:metallurgic_infuser",
+        "mekanism:enrichment_chamber",
+        "mekanism:crusher",
+        "mekanism:energized_smelter",
+        "mekanism:osmium_compressor",
+        "ae2:inscriber",
+        "ae2:charger",
+        "ae2:energy_acceptor",
+        "ae2:drive",
+        "ae2:crafting_terminal",
+        "industrialforegoing:machine_frame_pity",
+        "industrialforegoing:dissolution_chamber"
+      ],
+      "blocks": [
+        "mekanism:metallurgic_infuser",
+        "mekanism:enrichment_chamber",
+        "mekanism:crusher",
+        "mekanism:energized_smelter",
+        "mekanism:osmium_compressor",
+        "ae2:inscriber",
+        "ae2:charger",
+        "ae2:energy_acceptor",
+        "ae2:drive",
+        "ae2:crafting_terminal",
+        "industrialforegoing:machine_frame_pity",
+        "industrialforegoing:dissolution_chamber"
+      ],
+      "recipes": []
+    }
+  ]
+}

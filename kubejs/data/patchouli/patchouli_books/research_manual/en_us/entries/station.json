@@ -1,0 +1,16 @@
+{
+  "name": "溯洄研究站",
+  "category": "patchouli:basics",
+  "icon": "kubejs:research_terminal",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "研究站是 3x3x3 的多方块：外壳用黄铜机壳，北面接物品输入，西面接能量输入，东面接物品输出，南面正中放 $(l)研究站控制器$()。$(br2)成型后投入节点配方要求的材料，研究就会开始。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "研究站必须接入$(l)研究网络$()（16 格内有在线网络中心），否则会拒绝开工。$(br2)网络里的计算机提供算力，数据库提供并发上限。$(br2)断网时这一条研究会被中断。"
+    }
+  ]
+}

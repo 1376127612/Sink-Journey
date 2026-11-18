@@ -1,6 +1,6 @@
 // ============================================================
 // 自定义物品注册
-//   精密构件组 / 黄铜之心 / 未完成的黄铜之心 /蒸汽机壳
+//   精密构件组 / 黄铜之心 / 未完成的黄铜之心
 // 说明：材质留空，未指定 texture，补图时把 PNG 放到
 //       kubejs/assets/kubejs/textures/item/ 下即可：
 //         precision_component_group.png
@@ -19,9 +19,6 @@ StartupEvents.registry('item', event => {
     event.create('incomplete_brass_heart')
         .displayName('未完成的黄铜之心')
     
-    event.create('steam_casing')
-        .displayName('蒸汽机壳')
-
     event.create('brass_gear')
         .displayName('黄铜齿轮')
 

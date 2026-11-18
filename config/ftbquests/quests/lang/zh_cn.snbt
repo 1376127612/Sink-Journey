@@ -1,4 +1,5 @@
 {
+	chapter.03ACDBAA92810814.title: "远古残响"
 	chapter.078B49689C174792.title: "机械动力"
 	chapter.11BB336EC9B9533E.title: "高温气体"
 	chapter.1615B92EC329CC3D.title: "征战末地"
@@ -12,12 +13,15 @@
 	chapter.5FE0048B1A2B6A65.title: "工业之始"
 	chapter.62B1F88B36FCD09D.title: "旅途之始"
 	chapter.676F67C1DE6CC626.title: "余烬科技"
+	chapter.6BB0D29314D7C897.title: "星界探索"
 	chapter.6CD44026301F6F75.title: "触及星辰"
 	chapter.6E59CB6F7D053B92.title: "前情提要"
 	chapter.7C4E2F5CB393C0AE.title: "深入原子"
+	chapter.A1B2C3D4E5F60718.title: "研究图谱"
 	chapter_group.110ED09B617A1F32.title: "初来乍到"
-	chapter_group.1D6589548F232270.title: "工业革命"
+	chapter_group.1D6589548F232270.title: "科技革命"
 	chapter_group.672ED601CC36FA35.title: "扉页"
+	chapter_group.705D4C8363D05D0F.title: "工业起步"
 	quest.0056045684755D67.quest_desc: [
 		"在基座上放置元素象征，在上方放置对应物品。将光束炮对准炼金台，并通入红石信号，光束炮会向炼金台开炮，启动炼金仪式。"
 		""
@@ -193,6 +197,23 @@
 	quest.59416744F8E7ABE8.title: "坚固板"
 	quest.59AD9573BD5BD642.quest_desc: ["这种力量，前所未有的力量在指掌间迸发，你似乎能将万物都碾磨成碎渣。"]
 	quest.59AD9573BD5BD642.quest_subtitle: "研磨一些东西"
+	quest.5A1B000000000001.quest_desc: [
+		"在溯洄研究站跑通第一条研究，拿到演算数据。"
+		""
+		"研究站需要接入研究网络（网络中心 16 格内），否则拒绝开工。"
+	]
+	quest.5A1B000000000001.title: "机动研究"
+	quest.5A1B000000000002.quest_desc: [
+		"用黄铜锭与演算数据解锁精密构件。"
+		"这条完成后蒸汽时代的地基就有了。"
+	]
+	quest.5A1B000000000002.title: "蒸汽精度"
+	quest.5A1B000000000003.quest_desc: [
+		"亲自击杀末影龙，电力时代由此开启。"
+		""
+		"§7注意：必须玩家本人击杀，命令或环境伤害不算。"
+	]
+	quest.5A1B000000000003.title: "龙之证"
 	quest.5A7A4F5ED830FF4C.quest_desc: ["你可能需要很多，但并不用现在制作很多。"]
 	quest.5A7A4F5ED830FF4C.quest_subtitle: "不是石头"
 	quest.5F132AD862CA787E.quest_desc: ["你需要将坚固合金烧红再把它压成板，或者你在一开始就这么做"]

@@ -1,0 +1,70 @@
+{
+  "_comment": "P1 示例研究：机动 -> 蒸汽 -> 末地(末影龙) 三节点。id 全局唯一，unlock key 全局唯一。",
+  "page": "era_steam",
+  "title_key": "research.page.era_steam",
+  "nodes": [
+    {
+      "id": "sink:kinetic_brass",
+      "kind": "craft",
+      "era": "kinetic",
+      "rank": 2,
+      "requires": { "and": [] },
+      "inputs": {
+        "items": [
+          { "id": "create:andesite_alloy", "count": 32 },
+          { "id": "kubejs:research_substrate", "count": 4 }
+        ],
+        "fluids": [ { "id": "minecraft:water", "amount": 500 } ],
+        "energy": 1000,
+        "compute": 1
+      },
+      "duration": 300,
+      "outputs": {
+        "items": [ { "id": "kubejs:research_data", "count": 2 } ]
+      },
+      "unlock": [ "era.kinetic" ],
+      "ui": { "x": 0, "y": 0, "doc": "research.kinetic_brass.desc" },
+      "recipe_pool": "sinkjourney:research_station",
+      "recipe_id": "kubejs:research_station/kinetic_brass"
+    },
+    {
+      "id": "sink:steam_precision",
+      "kind": "craft",
+      "era": "steam",
+      "rank": 3,
+      "requires": { "and": [ "sink:kinetic_brass" ] },
+      "inputs": {
+        "items": [
+          { "id": "create:brass_ingot", "count": 16 },
+          { "id": "kubejs:research_data", "count": 4 }
+        ],
+        "fluids": [],
+        "energy": 4000,
+        "compute": 2
+      },
+      "duration": 600,
+      "outputs": {
+        "items": [ { "id": "kubejs:research_data", "count": 4 } ]
+      },
+      "unlock": [ "era.steam", "recipe.create:precision_mechanism" ],
+      "ui": { "x": 2, "y": 0, "doc": "research.steam_precision.desc" },
+      "recipe_pool": "sinkjourney:research_station",
+      "recipe_id": "kubejs:research_station/steam_precision"
+    },
+    {
+      "id": "sink:gate_dragon",
+      "kind": "milestone",
+      "era": "end",
+      "rank": 3.5,
+      "requires": { "and": [ "sink:steam_precision" ] },
+      "trigger": {
+        "type": "entity_death",
+        "entity": "minecraft:ender_dragon",
+        "dimension": "minecraft:the_end",
+        "require_player_kill": true
+      },
+      "unlock": [ "era.electric" ],
+      "ui": { "x": 4, "y": 0, "doc": "research.gate_dragon.desc" }
+    }
+  ]
+}

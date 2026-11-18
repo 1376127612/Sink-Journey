@@ -1,0 +1,16 @@
+{
+  "name": "时代门槛",
+  "category": "patchouli:basics",
+  "icon": "minecraft:dragon_head",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "研究按时代推进：原始 → 根源/余烬 → 机动 → 蒸汽 → $(l)末地$() → 电力 → 外星 → 原子 → 水晶。$(br2)其中 $(l)蒸汽 → 电力$() 的门槛是$(l)亲自击杀末影龙$()，命令或环境伤害不算。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "未解锁时代的机器会被 AStages 拦住：放不下去、用不了、配方合成不出来。$(br2)解锁是全服共享的——任何一个人完成研究，所有人都解锁。"
+    }
+  ]
+}

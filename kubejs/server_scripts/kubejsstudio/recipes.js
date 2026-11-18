@@ -36,7 +36,6 @@ ServerEvents.recipes(event => {
     event.shaped('kubejs:flint_axe_head_top', ['#A', 'AB'], { '#': 'minecraft:flint', 'A': 'notreepunchingremastered:flint_shard', 'B': 'notreepunchingremastered:plant_string' }).id('kubejsstudio:flint_axe_head_top')
     event.shaped('kubejs:flint_pickaxe_head_top', ['#A', 'B#'], { '#': 'notreepunchingremastered:flint_shard', 'A': 'minecraft:flint', 'B': 'notreepunchingremastered:plant_string' }).id('kubejsstudio:flint_pickaxe_head_top')
     event.shaped('kubejs:handle', [' #', '#A'], { '#': 'minecraft:stick', 'A': 'notreepunchingremastered:plant_string' }).id('kubejsstudio:handle')
-    event.shaped('kubejs:mason_workbench_part_1', ['#A', '#A'], { '#': 'minecraft:leather', 'A': 'kubejs:handle' }).id('kubejsstudio:mason_workbench_part_1')
     event.shaped(Item.of('embers:caminite_blend', 2), ['##', '#A'], { '#': 'minecraft:clay_ball', 'A': '#c:sand' }).id('embers:caminite_blend')
     event.shaped('minecraft:crafting_table', ['##', 'AA'], { '#': 'minecraft:leather', 'A': '#minecraft:logs' }).id('kubejsstudio:crafting_table')
     event.remove({ id: 'minecraft:crafting_table' })
