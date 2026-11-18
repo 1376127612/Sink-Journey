@@ -2,13 +2,13 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "5255fdf38af51c93"
-	group: "705D4C8363D05D0F"
+	group: "110ED09B617A1F32"
 	icon: {
 		id: "astralsorcery:celestial_crystal"
 	}
 	id: "5255FDF38AF51C93"
 	images: [ ]
-	order_index: 3
+	order_index: 6
 	quest_links: [ ]
 	quests: [
 		{
@@ -29,7 +29,6 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["1BEE6719FA581EC9"]
 			id: "261BB0E84BC72316"
 			tasks: [{
 				id: "5E1531B82C13679E"
@@ -40,7 +39,6 @@
 			y: 1.0d
 		}
 		{
-			dependencies: ["1BEE6719FA581EC9"]
 			id: "26C109209120EE25"
 			tasks: [{
 				id: "7618DAF18898AEC1"
@@ -51,7 +49,6 @@
 			y: 3.0d
 		}
 		{
-			dependencies: ["1CB3010EC04C69B5"]
 			id: "1BEE6719FA581EC9"
 			tasks: [{
 				id: "62EB0EA07C5DC8A4"
@@ -72,10 +69,6 @@
 			y: 5.0d
 		}
 		{
-			dependencies: [
-				"261BB0E84BC72316"
-				"26C109209120EE25"
-			]
 			id: "38AE7BE9A1702B16"
 			tasks: [{
 				id: "3DA179BA23908385"
@@ -86,7 +79,6 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["38AE7BE9A1702B16"]
 			icon: {
 				id: "astralsorcery:lightwell"
 			}
@@ -107,7 +99,6 @@
 			y: 2.0d
 		}
 		{
-			dependencies: ["0E2A114F298F8ACD"]
 			id: "176BDCB97FADED40"
 			tasks: [{
 				id: "4B04D59D501AE9E1"

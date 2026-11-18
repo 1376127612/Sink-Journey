@@ -2,13 +2,13 @@
 	default_hide_dependency_lines: false
 	default_quest_shape: ""
 	filename: "11bb336ec9b9533e"
-	group: "705D4C8363D05D0F"
+	group: "110ED09B617A1F32"
 	icon: {
 		id: "pneumaticcraft:pressure_gauge"
 	}
 	id: "11BB336EC9B9533E"
 	images: [ ]
-	order_index: 2
+	order_index: 5
 	quest_links: [ ]
 	quests: [
 		{
@@ -183,10 +183,6 @@
 			y: -0.5d
 		}
 		{
-			dependencies: [
-				"1FAB7DD2DFC2148D"
-				"7AB868C12997BBC7"
-			]
 			id: "765570AD06A0C483"
 			tasks: [{
 				id: "42A9482258467402"
@@ -197,7 +193,6 @@
 			y: -0.5d
 		}
 		{
-			dependencies: ["1FAB7DD2DFC2148D"]
 			id: "7AB868C12997BBC7"
 			tasks: [{
 				id: "5657574B01CED756"
