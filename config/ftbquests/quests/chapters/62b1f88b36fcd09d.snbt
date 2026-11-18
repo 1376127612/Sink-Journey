@@ -248,5 +248,36 @@
 			x: 14.0d
 			y: 0.5d
 		}
+		{
+			id: "1BD1136626335DA9"
+			rewards: [
+				{
+					auto: "enabled"
+					command: "/say Hi, @p!"
+					id: "6257C6120F44A8D0"
+					type: "command"
+				}
+				{
+					auto: "enabled"
+					command: "/say Hi, @p!2"
+					id: "3E984E0E31A48914"
+					silent: true
+					type: "command"
+				}
+				{
+					command: "/stage_say stage1"
+					id: "52E3C840B68E2B44"
+					permission_level: 2
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "781B453EA9B82071"
+				item: { count: 1, id: "minecraft:oak_log" }
+				type: "item"
+			}]
+			x: 3.5d
+			y: -4.0d
+		}
 	]
 }
