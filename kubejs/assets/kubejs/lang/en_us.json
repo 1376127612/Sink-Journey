@@ -17,10 +17,13 @@
     "jei.sinkjourney.trace_compute.info": "The CPU of the array: continuously consumes research substrate and water while venting steam. That steam must be reclaimed by the cooling core, otherwise backed-up outputs stall the computation.",
     "jei.sinkjourney.trace_cooling.info": "Continuously draws off the steam vented by the computation core and dissipates it as heat. It needs constant power; without it steam backs up and the CPU stops.",
 
+    "recipe_type.sinkjourney.primitive_research": "Primitive Research",
+    "block.kubejs.primitive_research_table": "Primitive Research Table",
+
     "jei.sinkjourney.primitive_research": "Primitive Research",
-    "jei.sinkjourney.primitive_research.info": "The primitive research table: the only research device before the stress era. Right-click to open its UI. Slot 0 takes the main material, slot 1 the additive, slot 2 is the output; clicking Start consumes the materials immediately, and the product drops into slot 2 when the progress bar fills.",
-    "jei.sinkjourney.primitive_research.info2": "Recipes: paper + ink sac -> research notes x2 (3s); research notes x4 + paper -> primitive blueprint (6s). Research notes are the entry material for the mechanical research bench.",
-    "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so the timings are measured in seconds rather than ticks.",
+    "jei.sinkjourney.primitive_research.info": "The primitive research table: the only research device before the stress era. Right-click to open its UI, put the materials into the two input slots (paper + ink sac, or research notes x4 + paper), and the machine starts on its own; when the bar fills the product moves to the output slot on the right.",
+    "jei.sinkjourney.primitive_research.info2": "Recipes: paper + ink sac -> research notes x2 (5 min); research notes x4 + paper -> primitive blueprint (5 min). Research notes are the entry material for the mechanical research bench.",
+    "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so every recipe takes 5 minutes. The UI has a minesweeper entry: clearing one round advances the current progress by 50%.",
 
     "machine.kubejs.charcoal_furnace": "Charcoal Furnace",
     "jei.kubejs.charcoal_furnace.info": "A 3x3x3 brick-built charcoal furnace: crushed silver/gold and the electrum alloy can only be smelted here. Fuel is fed through the input bus; any coal or charcoal works (minecraft:coals).",

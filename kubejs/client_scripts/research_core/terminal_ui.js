@@ -279,13 +279,45 @@ var SRTU_openStyled = function (ev, model) {
 }
 
 // 兜底：样式版构建失败时退回纯文本版，保证一定能打开
+// 顺便放一个扫雷入口：通关后由服务端加速原始研究台当前进度
 var SRTU_openPlain = function (ev, lines) {
     var Label = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.elements.Label')
+    var Button = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.elements.Button')
+    var UIElement = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UIElement')
     var UI = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UI')
     var ModularUI = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.ModularUI')
+
+    var width = 240
+    var height = Math.max(60, lines.length * 10 + 44)
+
+    var root = new UIElement()
+    root.lss('width', width)
+    root.lss('height', height)
+    root.lss('flex-direction', 'column')
+    root.lss('padding-all', 6)
+    root.lss('gap-all', 4)
+
     var label = new Label()
     label.setText(lines.join('\n'))
-    ev.modularUI = ModularUI.of(UI.of(label), ev.player)
+    label.lss('width', 'stretch')
+    root.addChild(label)
+
+    var btn = new Button()
+    btn.setText('§e扫雷 §7· 通关加速原始研究台')
+    btn.lss('width', 'stretch')
+    btn.lss('height', 16)
+    btn.setOnClick(function () {
+        try {
+            // 由服务端 /sweeper 打开玩家界面
+            ev.player.connection.sendCommand('sweeper')
+        } catch (e2) {
+            console.warn('[SRTU] 打开扫雷失败: ' + e2)
+            try { ev.player.tell(Text.of('§7扫雷打不开，用 §e/sweeper')) } catch (e3) { }
+        }
+    })
+    root.addChild(btn)
+
+    ev.modularUI = ModularUI.of(UI.of(root), ev.player)
 }
 
 // ---- 注册 ----------------------------------------------------
