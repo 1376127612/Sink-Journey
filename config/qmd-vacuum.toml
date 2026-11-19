@@ -1,0 +1,39 @@
+[vacuum_chamber]
+	# Default: 5
+	# Range: 5 ~ 7
+	minimum_interior_size = 5
+	# Default: 7
+	# Range: 5 ~ 31
+	maximum_interior_size = 7
+	# Default: 40000
+	# Range: > 1
+	base_energy_capacity = 40000
+	# Default: 1000
+	# Range: > 1
+	base_input_tank_capacity = 1000
+	# Default: 1000
+	# Range: > 1
+	base_output_tank_capacity = 1000
+	part_power = [400, 500, 500, 500, 1000]
+	part_heat = [200, 500, 100, 100, 500]
+	part_maximum_temperature = [110, 110, 110, 110, 110]
+	heater_heat_removed = [5000, 10000, 20000, 40000, 80000, 160000, 320000, 640000]
+	exotic_containment_explosion = true
+	exotic_containment_gamma_flash = true
+	nucleosynthesis_chamber_explosion = true
+	# Default: 1024000.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	exotic_containment_radiation = 1024000.0
+	# Default: 50.0
+	# Range: 0.0 ~ 1000.0
+	exotic_containment_explosion_size = 50.0
+
+	[vacuum_chamber.heater_rules]
+		iron = "one casing"
+		redstone = "one beam"
+		quartz = "two glass"
+		obsidian = "exactly one quartz heater && exactly one redstone heater"
+		glowstone = "two axial obsidian heaters"
+		lapis = "exactly one redstone heater && two iron heaters"
+		gold = "one obsidian heater && one quartz heater"
+		diamond = "one nozzle"

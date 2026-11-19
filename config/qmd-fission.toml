@@ -1,0 +1,9 @@
+# Default: 15.0
+# Range: 0.0 ~ 32767.0
+shield_heat_per_flux = 15.0
+# Default: 1.0
+# Range: 0.0 ~ 255.0
+shield_efficiency = 1.0
+# Default: 50
+# Range: > 0
+strontium_rtg_power = 50

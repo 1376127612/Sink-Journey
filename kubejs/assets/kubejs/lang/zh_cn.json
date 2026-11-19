@@ -22,10 +22,13 @@
     "jei.sinkjourney.trace_compute.info": "溯洄阵列的 CPU：持续消耗研究基质与水并排出蒸汽。蒸汽必须由冷却核心回收，否则产物堵塞会让演算停摆。",
     "jei.sinkjourney.trace_cooling.info": "逆熵冷却核心：持续抽走演算核心排出的蒸汽并转化为热量排出。需要持续供能，否则蒸汽积压会使 CPU 停机。",
 
+    "recipe_type.sinkjourney.primitive_research": "原始研究",
+    "block.kubejs.primitive_research_table": "原始研究台",
+
     "jei.sinkjourney.primitive_research": "原始研究",
-    "jei.sinkjourney.primitive_research.info": "原始研究台：应力时代之前唯一的研究设备。右键打开界面，槽0 放主料、槽1 放辅料、槽2 是产物槽，点击「开始研究」后材料立即扣除，进度条走完产物进入槽2。",
-    "jei.sinkjourney.primitive_research.info2": "配方：纸 + 墨囊 → 研究笔记×2（3 秒）；研究笔记×4 + 纸 → 蓝图·原始（6 秒）。研究笔记是机械研究台的入场材料。",
-    "jei.sinkjourney.primitive_research.info3": "为什么：记录与复现是两种不同的劳动——先花墨把观察写成笔记，再拿多份笔记互相比对、誊抄成蓝图；原始阶段没有机械，只能靠手抄，所以耗时以秒计而不是以 tick 计。",
+    "jei.sinkjourney.primitive_research.info": "原始研究台：应力时代之前唯一的研究设备。右键打开界面，两个输入槽放入材料（纸 + 墨囊，或研究笔记×4 + 纸），放入后机器自动开始研究，进度条走完产物进入右侧产物槽。",
+    "jei.sinkjourney.primitive_research.info2": "配方：纸 + 墨囊 → 研究笔记×2（5 分钟）；研究笔记×4 + 纸 → 蓝图·原始（5 分钟）。研究笔记是机械研究台的入场材料。",
+    "jei.sinkjourney.primitive_research.info3": "为什么：记录与复现是两种不同的劳动——先花墨把观察写成笔记，再拿多份笔记互相比对、誊抄成蓝图；原始阶段没有机械，全靠手抄，每条配方都要 5 分钟。界面上有扫雷入口，通关一局可推进当前进度的 50%。",
 
     "machine.kubejs.charcoal_furnace": "炭炉",
     "jei.kubejs.charcoal_furnace.info": "3×3×3 砖砌炭炉：金银碎矿与琥珀金合金只能在这里炼。燃料随配方投入输入口，煤炭/木炭通用（minecraft:coals）。",

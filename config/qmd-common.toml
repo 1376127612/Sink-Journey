@@ -1,0 +1,33 @@
+[accelerator]
+	#Beam focus lost per block. Legacy default: 0.02.
+	# Default: 0.02
+	# Range: 0.0 ~ 1000.0
+	beam_attenuation_rate = 0.02
+
+[other]
+	#Particle count scale used by beam physics. Legacy default: 10000.
+	# Default: 10000
+	# Range: > 1
+	beam_scaling = 10000
+
+[processors]
+	#Base ore leacher processing time in ticks.
+	# Default: 400
+	# Range: > 1
+	ore_leacher_time = 400
+	#Base ore leacher energy use in FE per tick.
+	# Default: 50
+	# Range: > 0
+	ore_leacher_power = 50
+	#Liquid collector energy use in FE per productive tick.
+	# Default: 50
+	# Range: > 0
+	liquid_collector_power = 50
+	#Atmosphere collector energy use in FE per productive tick.
+	# Default: 100
+	# Range: > 0
+	atmosphere_collector_power = 100
+
+[recipes]
+	#Use legacy QMD cooling ratios for the migrated gas recipes. Takes effect on server resource reload.
+	override_nc_recipes = true

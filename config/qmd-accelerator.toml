@@ -1,0 +1,548 @@
+[accelerator]
+	# Default: 6
+	# Range: 6 ~ 255
+	linear_min_size = 6
+	# Default: 100
+	# Range: 6 ~ 255
+	linear_max_size = 100
+	# Default: 11
+	# Range: 11 ~ 255
+	ring_min_size = 11
+	# Default: 100
+	# Range: 11 ~ 255
+	ring_max_size = 100
+	# Default: 40000
+	# Range: > 1
+	base_energy_capacity = 40000
+	# Default: 25000
+	# Range: > 1
+	base_heat_capacity = 25000
+	# Default: 10
+	# Range: > 1
+	base_input_tank_capacity = 10
+	# Default: 3200
+	# Range: > 1
+	base_output_tank_capacity = 3200
+	# Default: 5000
+	# Range: > 0
+	minimum_ring_input_energy = 5000
+	# Default: 160
+	# Range: 1 ~ 1000
+	beam_diverter_radius = 160
+	# Default: 1000
+	# Range: > 1
+	mass_spectrometer_process_time = 1000
+	# Default: 12000
+	# Range: > 0
+	mass_spectrometer_power_usage = 12000
+	# Default: 3000
+	# Range: > 0
+	mass_spectrometer_heat = 3000
+	mass_spectrometer_valid_magnets = ["bscco", "ybco", "hbcco"]
+	mass_spectrometer_valid_sources = ["basic", "laser"]
+	# Default: 0.0025
+	# Range: 0.0 ~ 1.7976931348623157E308
+	thermal_conductivity = 0.0025
+	quench_explosions = true
+
+		[accelerator.materials.copper]
+			# Default: 200
+			# Range: > 0
+			voltage = 200
+			# Default: 0.2
+			# Range: 0.0 ~ 100.0
+			strength = 0.2
+			# Default: 0.7
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 0.7
+			# Default: 0.7
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 0.7
+			# Default: 300
+			# Range: > 0
+			cavity_heat = 300
+			# Default: 300
+			# Range: > 0
+			magnet_heat = 300
+			# Default: 500
+			# Range: > 0
+			cavity_power = 500
+			# Default: 1000
+			# Range: > 0
+			magnet_power = 1000
+			# Default: 350
+			# Range: 0 ~ 400
+			cavity_max_temperature = 350
+			# Default: 350
+			# Range: 0 ~ 400
+			magnet_max_temperature = 350
+
+		[accelerator.materials.magnesium_diboride]
+			# Default: 500
+			# Range: > 0
+			voltage = 500
+			# Default: 0.5
+			# Range: 0.0 ~ 100.0
+			strength = 0.5
+			# Default: 0.9
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 0.9
+			# Default: 0.9
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 0.9
+			# Default: 540
+			# Range: > 0
+			cavity_heat = 540
+			# Default: 540
+			# Range: > 0
+			magnet_heat = 540
+			# Default: 1000
+			# Range: > 0
+			cavity_power = 1000
+			# Default: 2000
+			# Range: > 0
+			magnet_power = 2000
+			# Default: 39
+			# Range: 0 ~ 400
+			cavity_max_temperature = 39
+			# Default: 39
+			# Range: 0 ~ 400
+			magnet_max_temperature = 39
+
+		[accelerator.materials.niobium_tin]
+			# Default: 1000
+			# Range: > 0
+			voltage = 1000
+			# Default: 1.0
+			# Range: 0.0 ~ 100.0
+			strength = 1.0
+			# Default: 1.1
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 1.1
+			# Default: 1.1
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 1.1
+			# Default: 1020
+			# Range: > 0
+			cavity_heat = 1020
+			# Default: 1020
+			# Range: > 0
+			magnet_heat = 1020
+			# Default: 2000
+			# Range: > 0
+			cavity_power = 2000
+			# Default: 4000
+			# Range: > 0
+			magnet_power = 4000
+			# Default: 18
+			# Range: 0 ~ 400
+			cavity_max_temperature = 18
+			# Default: 18
+			# Range: 0 ~ 400
+			magnet_max_temperature = 18
+
+		[accelerator.materials.niobium_titanium]
+			# Default: 2000
+			# Range: > 0
+			voltage = 2000
+			# Default: 2.0
+			# Range: 0.0 ~ 100.0
+			strength = 2.0
+			# Default: 1.3
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 1.3
+			# Default: 1.3
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 1.3
+			# Default: 1980
+			# Range: > 0
+			cavity_heat = 1980
+			# Default: 1980
+			# Range: > 0
+			magnet_heat = 1980
+			# Default: 4000
+			# Range: > 0
+			cavity_power = 4000
+			# Default: 8000
+			# Range: > 0
+			magnet_power = 8000
+			# Default: 10
+			# Range: 0 ~ 400
+			cavity_max_temperature = 10
+			# Default: 10
+			# Range: 0 ~ 400
+			magnet_max_temperature = 10
+
+		[accelerator.materials.bscco]
+			# Default: 4000
+			# Range: > 0
+			voltage = 4000
+			# Default: 4.0
+			# Range: 0.0 ~ 100.0
+			strength = 4.0
+			# Default: 1.5
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 1.5
+			# Default: 1.5
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 1.5
+			# Default: 3900
+			# Range: > 0
+			cavity_heat = 3900
+			# Default: 3900
+			# Range: > 0
+			magnet_heat = 3900
+			# Default: 8000
+			# Range: > 0
+			cavity_power = 8000
+			# Default: 16000
+			# Range: > 0
+			magnet_power = 16000
+			# Default: 110
+			# Range: 0 ~ 400
+			cavity_max_temperature = 110
+			# Default: 110
+			# Range: 0 ~ 400
+			magnet_max_temperature = 110
+
+		[accelerator.materials.aluminium]
+			# Default: 100
+			# Range: > 0
+			voltage = 100
+			# Default: 0.1
+			# Range: 0.0 ~ 100.0
+			strength = 0.1
+			# Default: 0.5
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 0.5
+			# Default: 0.5
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 0.5
+			# Default: 180
+			# Range: > 0
+			cavity_heat = 180
+			# Default: 180
+			# Range: > 0
+			magnet_heat = 180
+			# Default: 250
+			# Range: > 0
+			cavity_power = 250
+			# Default: 500
+			# Range: > 0
+			magnet_power = 500
+			# Default: 350
+			# Range: 0 ~ 400
+			cavity_max_temperature = 350
+			# Default: 350
+			# Range: 0 ~ 400
+			magnet_max_temperature = 350
+
+		[accelerator.materials.ssfaf]
+			# Default: 1500
+			# Range: > 0
+			voltage = 1500
+			# Default: 1.5
+			# Range: 0.0 ~ 100.0
+			strength = 1.5
+			# Default: 1.2
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 1.2
+			# Default: 1.2
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 1.2
+			# Default: 1500
+			# Range: > 0
+			cavity_heat = 1500
+			# Default: 1500
+			# Range: > 0
+			magnet_heat = 1500
+			# Default: 3000
+			# Range: > 0
+			cavity_power = 3000
+			# Default: 6000
+			# Range: > 0
+			magnet_power = 6000
+			# Default: 56
+			# Range: 0 ~ 400
+			cavity_max_temperature = 56
+			# Default: 56
+			# Range: 0 ~ 400
+			magnet_max_temperature = 56
+
+		[accelerator.materials.ybco]
+			# Default: 3000
+			# Range: > 0
+			voltage = 3000
+			# Default: 3.0
+			# Range: 0.0 ~ 100.0
+			strength = 3.0
+			# Default: 1.4
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 1.4
+			# Default: 1.4
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 1.4
+			# Default: 2940
+			# Range: > 0
+			cavity_heat = 2940
+			# Default: 2940
+			# Range: > 0
+			magnet_heat = 2940
+			# Default: 6000
+			# Range: > 0
+			cavity_power = 6000
+			# Default: 12000
+			# Range: > 0
+			magnet_power = 12000
+			# Default: 95
+			# Range: 0 ~ 400
+			cavity_max_temperature = 95
+			# Default: 95
+			# Range: 0 ~ 400
+			magnet_max_temperature = 95
+
+		[accelerator.materials.hbcco]
+			# Default: 750
+			# Range: > 0
+			voltage = 750
+			# Default: 0.75
+			# Range: 0.0 ~ 100.0
+			strength = 0.75
+			# Default: 1.0
+			# Range: 0.01 ~ 100.0
+			cavity_efficiency = 1.0
+			# Default: 1.0
+			# Range: 0.01 ~ 100.0
+			magnet_efficiency = 1.0
+			# Default: 780
+			# Range: > 0
+			cavity_heat = 780
+			# Default: 780
+			# Range: > 0
+			magnet_heat = 780
+			# Default: 1500
+			# Range: > 0
+			cavity_power = 1500
+			# Default: 3000
+			# Range: > 0
+			magnet_power = 3000
+			# Default: 133
+			# Range: 0 ~ 400
+			cavity_max_temperature = 133
+			# Default: 133
+			# Range: 0 ~ 400
+			magnet_max_temperature = 133
+
+		[accelerator.coolers.water]
+			# Default: 60
+			# Range: > 0
+			cooling = 60
+			rule = "one cavity"
+
+		[accelerator.coolers.iron]
+			# Default: 55
+			# Range: > 0
+			cooling = 55
+			rule = "one magnet"
+
+		[accelerator.coolers.redstone]
+			# Default: 115
+			# Range: > 0
+			cooling = 115
+			rule = "one cavity && one magnet"
+
+		[accelerator.coolers.quartz]
+			# Default: 75
+			# Range: > 0
+			cooling = 75
+			rule = "one redstone cooler"
+
+		[accelerator.coolers.obsidian]
+			# Default: 70
+			# Range: > 0
+			cooling = 70
+			rule = "two glowstone coolers"
+
+		[accelerator.coolers.nether_brick]
+			# Default: 90
+			# Range: > 0
+			cooling = 90
+			rule = "one obsidian cooler"
+
+		[accelerator.coolers.glowstone]
+			# Default: 110
+			# Range: > 0
+			cooling = 110
+			rule = "two different magnets"
+
+		[accelerator.coolers.lapis]
+			# Default: 130
+			# Range: > 0
+			cooling = 130
+			rule = "one yoke && one magnet"
+
+		[accelerator.coolers.gold]
+			# Default: 95
+			# Range: > 0
+			cooling = 95
+			rule = "two iron coolers"
+
+		[accelerator.coolers.prismarine]
+			# Default: 85
+			# Range: > 0
+			cooling = 85
+			rule = "two water coolers"
+
+		[accelerator.coolers.slime]
+			# Default: 165
+			# Range: > 0
+			cooling = 165
+			rule = "two lead coolers && one water cooler"
+
+		[accelerator.coolers.end_stone]
+			# Default: 50
+			# Range: > 0
+			cooling = 50
+			rule = "one yoke"
+
+		[accelerator.coolers.purpur]
+			# Default: 100
+			# Range: > 0
+			cooling = 100
+			rule = "two end_stone coolers"
+
+		[accelerator.coolers.diamond]
+			# Default: 185
+			# Range: > 0
+			cooling = 185
+			rule = "one gold cooler && one prismarine cooler"
+
+		[accelerator.coolers.emerald]
+			# Default: 135
+			# Range: > 0
+			cooling = 135
+			rule = "one cavity && one prismarine cooler"
+
+		[accelerator.coolers.copper]
+			# Default: 80
+			# Range: > 0
+			cooling = 80
+			rule = "one water cooler"
+
+		[accelerator.coolers.tin]
+			# Default: 120
+			# Range: > 0
+			cooling = 120
+			rule = "two lapis coolers"
+
+		[accelerator.coolers.lead]
+			# Default: 65
+			# Range: > 0
+			cooling = 65
+			rule = "one iron cooler"
+
+		[accelerator.coolers.boron]
+			# Default: 105
+			# Range: > 0
+			cooling = 105
+			rule = "one yoke && one cavity"
+
+		[accelerator.coolers.lithium]
+			# Default: 125
+			# Range: > 0
+			cooling = 125
+			rule = "one boron cooler"
+
+		[accelerator.coolers.magnesium]
+			# Default: 150
+			# Range: > 0
+			cooling = 150
+			rule = "one end_stone cooler && one prismarine cooler"
+
+		[accelerator.coolers.manganese]
+			# Default: 180
+			# Range: > 0
+			cooling = 180
+			rule = "one gold cooler && one quartz cooler"
+
+		[accelerator.coolers.aluminum]
+			# Default: 175
+			# Range: > 0
+			cooling = 175
+			rule = "one tin cooler && one quartz cooler"
+
+		[accelerator.coolers.silver]
+			# Default: 160
+			# Range: > 0
+			cooling = 160
+			rule = "two arsenic coolers"
+
+		[accelerator.coolers.fluorite]
+			# Default: 155
+			# Range: > 0
+			cooling = 155
+			rule = "three gold coolers"
+
+		[accelerator.coolers.villiaumite]
+			# Default: 170
+			# Range: > 0
+			cooling = 170
+			rule = "one purpur cooler && one prismarine cooler"
+
+		[accelerator.coolers.carobbiite]
+			# Default: 140
+			# Range: > 0
+			cooling = 140
+			rule = "one end_stone cooler && one gold cooler"
+
+		[accelerator.coolers.arsenic]
+			# Default: 145
+			# Range: > 0
+			cooling = 145
+			rule = "two different cavity"
+
+		[accelerator.coolers.liquid_nitrogen]
+			# Default: 195
+			# Range: > 0
+			cooling = 195
+			rule = "one lapis cooler && one gold cooler"
+
+		[accelerator.coolers.liquid_helium]
+			# Default: 200
+			# Range: > 0
+			cooling = 200
+			rule = "one boron cooler && one lapis cooler"
+
+		[accelerator.coolers.enderium]
+			# Default: 190
+			# Range: > 0
+			cooling = 190
+			rule = "three purpur coolers"
+
+		[accelerator.coolers.cryotheum]
+			# Default: 205
+			# Range: > 0
+			cooling = 205
+			rule = "three tin coolers"
+
+	[accelerator.basic_ion_source]
+		# Default: 500
+		# Range: > 0
+		power = 500
+		# Default: 1
+		# Range: 1 ~ 100000
+		output_multiplier = 1
+		# Default: 0.4
+		# Range: 0.0 ~ 1.7976931348623157E308
+		focus = 0.4
+
+	[accelerator.laser_ion_source]
+		# Default: 2000
+		# Range: > 0
+		power = 2000
+		# Default: 2
+		# Range: 1 ~ 100000
+		output_multiplier = 2
+		# Default: 0.2
+		# Range: 0.0 ~ 1.7976931348623157E308
+		focus = 0.2

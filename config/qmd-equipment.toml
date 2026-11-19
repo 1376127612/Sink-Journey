@@ -1,0 +1,5 @@
+[equipment]
+	#Enable tungsten-carbide tool recipes and creative-tab entries. Legacy default: true.
+	enable_tungsten_carbide_tools = true
+	#Enable basic and advanced drill recipes and creative-tab entries. Legacy default: true.
+	enable_drills = true

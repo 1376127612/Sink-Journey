@@ -1,0 +1,4 @@
+#Radiation immunity time, in ticks, granted by a potassium iodine tablet.
+# Default: 400
+# Range: > 1
+ki_time = 400

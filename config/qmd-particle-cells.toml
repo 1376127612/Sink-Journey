@@ -1,0 +1,10 @@
+#Dropped exotic cell lifetime in ticks. Zero disables cell hazards.
+# Default: 200
+# Range: 0 ~ 6000
+cell_lifetime = 200
+# Default: 102400.0
+# Range: 0.0 ~ 1.7976931348623157E308
+cell_radiation = 102400.0
+# Default: 5.0
+# Range: 0.0 ~ 1000.0
+cell_explosion_size = 5.0

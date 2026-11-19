@@ -1,0 +1,10 @@
+# Default: 200
+# Range: > 1
+process_time = 200
+#Particle units consumed per unit of irradiation work.
+# Default: 10
+# Range: > 0
+fuel_usage = 10
+# Default: 10000.0
+# Range: 0.0 ~ 1.7976931348623157E308
+radiation_resistance = 10000.0
