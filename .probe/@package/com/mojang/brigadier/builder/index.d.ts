@@ -12,36 +12,36 @@ declare module "@package/com/mojang/brigadier/builder" {
         getLiteral(): string;
     }
     export class $ArgumentBuilder<S, T extends $ArgumentBuilder<S, T>> {
+        forward(arg0: $CommandNode<S>, arg1: $RedirectModifier_<S>, arg2: boolean): T;
+        executes(arg0: $Command_<S>): T;
+        getCommand(): $Command<S>;
+        getRedirectModifier(): $RedirectModifier<S>;
+        isFork(): boolean;
         build(): $CommandNode<S>;
         requires(arg0: $Predicate_<S>): T;
         redirect(arg0: $CommandNode<S>): T;
         redirect(arg0: $CommandNode<S>, arg1: $SingleRedirectModifier_<S>): T;
         fork(arg0: $CommandNode<S>, arg1: $RedirectModifier_<S>): T;
-        forward(arg0: $CommandNode<S>, arg1: $RedirectModifier_<S>, arg2: boolean): T;
         getArguments(): $Collection<$CommandNode<S>>;
+        getRequirement(): $Predicate<S>;
+        getRedirect(): $CommandNode<S>;
         then(arg0: $CommandNode<S>): T;
         then(arg0: $ArgumentBuilder<S, never>): T;
-        executes(arg0: $Command_<S>): T;
-        isFork(): boolean;
-        getCommand(): $Command<S>;
-        getRedirect(): $CommandNode<S>;
-        getRequirement(): $Predicate<S>;
-        getRedirectModifier(): $RedirectModifier<S>;
         constructor();
-        get arguments(): $Collection<$CommandNode<S>>;
         get command(): $Command<S>;
-        get requirement(): $Predicate<S>;
         get redirectModifier(): $RedirectModifier<S>;
+        get arguments(): $Collection<$CommandNode<S>>;
+        get requirement(): $Predicate<S>;
     }
     export class $RequiredArgumentBuilder<S, T> extends $ArgumentBuilder<S, $RequiredArgumentBuilder<S, T>> {
+        suggests(arg0: $SuggestionProvider_<S>): $RequiredArgumentBuilder<S, $RequiredArgumentBuilder<S, T>>;
+        getSuggestionsProvider(): $SuggestionProvider<S>;
         getName(): string;
         getType(): $ArgumentType<$RequiredArgumentBuilder<S, T>>;
         static argument<S, T>(arg0: string, arg1: $ArgumentType_<T>): $RequiredArgumentBuilder<S, T>;
         build(): $ArgumentCommandNode<S, $RequiredArgumentBuilder<S, T>>;
-        getSuggestionsProvider(): $SuggestionProvider<S>;
-        suggests(arg0: $SuggestionProvider_<S>): $RequiredArgumentBuilder<S, $RequiredArgumentBuilder<S, T>>;
+        get suggestionsProvider(): $SuggestionProvider<S>;
         get name(): string;
         get type(): $ArgumentType<$RequiredArgumentBuilder<S, T>>;
-        get suggestionsProvider(): $SuggestionProvider<S>;
     }
 }

@@ -60,10 +60,10 @@ declare module "@package/dev/worldgen/lithostitched/mixin/common" {
     export class $StructureTemplatePoolAccessor {
     }
     export interface $StructureTemplatePoolAccessor {
-        getRawTemplates(): $List<$Pair<$StructurePoolElement, number>>;
         setRawTemplates(arg0: $List_<$Pair<$StructurePoolElement, number>>): void;
-        getVanillaTemplates(): $ObjectArrayList<$StructurePoolElement>;
+        getRawTemplates(): $List<$Pair<$StructurePoolElement, number>>;
         setVanillaTemplates(arg0: $ObjectArrayList<$StructurePoolElement>): void;
+        getVanillaTemplates(): $ObjectArrayList<$StructurePoolElement>;
     }
     export class $StructureProcessorListAccessor {
     }
@@ -88,10 +88,10 @@ declare module "@package/dev/worldgen/lithostitched/mixin/common" {
     export class $BiomeAccessor {
     }
     export interface $BiomeAccessor {
-        setClimateSettings(arg0: $Biome$ClimateSettings_): void;
         setSpecialEffects(arg0: $BiomeSpecialEffects): void;
-        setMobSettings(arg0: $MobSpawnSettings): void;
         getSpecialEffects(): $BiomeSpecialEffects;
+        setClimateSettings(arg0: $Biome$ClimateSettings_): void;
+        setMobSettings(arg0: $MobSpawnSettings): void;
         getClimateSettings(): $Biome$ClimateSettings;
         setGenerationSettings(arg0: $BiomeGenerationSettings): void;
         set mobSettings(value: $MobSpawnSettings);
@@ -123,19 +123,19 @@ declare module "@package/dev/worldgen/lithostitched/mixin/common" {
     export class $ChunkGeneratorAccessor {
     }
     export interface $ChunkGeneratorAccessor {
+        getBiomeSource(): $BiomeSource;
         getGetter(): $Function<$Holder<$Biome>, $BiomeGenerationSettings>;
         setBiomeSource(arg0: $BiomeSource): void;
         setFeaturesPerStep(arg0: $Supplier_<$List<$FeatureSorter$StepFeatureData>>): void;
-        getBiomeSource(): $BiomeSource;
         get getter(): $Function<$Holder<$Biome>, $BiomeGenerationSettings>;
         set featuresPerStep(value: $Supplier_<$List<$FeatureSorter$StepFeatureData>>);
     }
     export class $SinglePoolElementAccessor {
     }
     export interface $SinglePoolElementAccessor {
+        setProcessors(arg0: $Holder_<$StructureProcessorList>): void;
         getProcessors(): $Holder<$StructureProcessorList>;
         getTemplate(): $Either<$ResourceLocation, $StructureTemplate>;
-        setProcessors(arg0: $Holder_<$StructureProcessorList>): void;
         get template(): $Either<$ResourceLocation, $StructureTemplate>;
     }
     export class $HolderReferenceAccessor<T> {
@@ -151,10 +151,10 @@ declare module "@package/dev/worldgen/lithostitched/mixin/common" {
     export class $MobSpawnSettingsAccessor {
     }
     export interface $MobSpawnSettingsAccessor {
-        lithostitched$setSpawnCosts(arg0: $Map_<$EntityType_<never>, $MobSpawnSettings$MobSpawnCost_>): void;
-        lithostitched$getSpawnCosts(): $Map<$EntityType<never>, $MobSpawnSettings$MobSpawnCost>;
         getSpawners(): $Map<$MobCategory, $WeightedRandomList<$MobSpawnSettings$SpawnerData>>;
         setSpawners(arg0: $Map_<$MobCategory_, $WeightedRandomList<$MobSpawnSettings$SpawnerData>>): void;
+        lithostitched$setSpawnCosts(arg0: $Map_<$EntityType_<never>, $MobSpawnSettings$MobSpawnCost_>): void;
+        lithostitched$getSpawnCosts(): $Map<$EntityType<never>, $MobSpawnSettings$MobSpawnCost>;
     }
     export class $RandomStateAccessor {
     }
@@ -186,12 +186,12 @@ declare module "@package/dev/worldgen/lithostitched/mixin/common" {
     export class $NoiseGeneratorSettingsAccessor {
     }
     export interface $NoiseGeneratorSettingsAccessor {
+        getSurfaceRuleBecauseTerriblenderSucksAndWontLetMeUseTheNormalMethodToGetTheSurfaceRules(): $SurfaceRules$RuleSource;
         setNoiseRouter(arg0: $NoiseRouter_): void;
         setSurfaceRule(arg0: $SurfaceRules$RuleSource_): void;
-        getSurfaceRuleBecauseTerriblenderSucksAndWontLetMeUseTheNormalMethodToGetTheSurfaceRules(): $SurfaceRules$RuleSource;
+        get surfaceRuleBecauseTerriblenderSucksAndWontLetMeUseTheNormalMethodToGetTheSurfaceRules(): $SurfaceRules$RuleSource;
         set noiseRouter(value: $NoiseRouter_);
         set surfaceRule(value: $SurfaceRules$RuleSource_);
-        get surfaceRuleBecauseTerriblenderSucksAndWontLetMeUseTheNormalMethodToGetTheSurfaceRules(): $SurfaceRules$RuleSource;
     }
     export class $BiomeSourceInvoker {
     }

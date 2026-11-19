@@ -13,36 +13,36 @@ declare module "@package/com/denfop/api/space/research/api" {
     export class $IResearchTable {
     }
     export interface $IResearchTable {
-        setLevel(arg0: $EnumLevels_): void;
-        getPlayer(): $UUID;
         getLevelTable(): $EnumLevels;
         getSpaceBody(): $Map<$IBody, $SpaceOperation>;
-        set level(value: $EnumLevels_);
-        get player(): $UUID;
+        setLevel(arg0: $EnumLevels_): void;
+        getPlayer(): $UUID;
         get levelTable(): $EnumLevels;
         get spaceBody(): $Map<$IBody, $SpaceOperation>;
+        set level(value: $EnumLevels_);
+        get player(): $UUID;
     }
     export class $IRocketLaunchPad {
     }
     export interface $IRocketLaunchPad {
         getPos(): $BlockPos;
-        charge(arg0: $ItemStack_): void;
-        getPlayer(): $UUID;
-        refuel(arg0: $ItemStack_, arg1: $IRoversItem): void;
         addFluidStack(arg0: $FluidStack_): void;
+        refuel(arg0: $ItemStack_, arg1: $IRoversItem): void;
         getRover(): $IRoversItem;
+        getSlotOutput(): $InventoryOutput;
+        consumeRover(): void;
+        addDataRocket(arg0: $ItemStack_): void;
         getRoverStack(): $ItemStack;
         getRoverSlot(): $Inventory;
         getWorldPad(): $Level;
-        getSlotOutput(): $InventoryOutput;
-        addDataRocket(arg0: $ItemStack_): void;
-        consumeRover(): void;
+        charge(arg0: $ItemStack_): void;
+        getPlayer(): $UUID;
         get pos(): $BlockPos;
-        get player(): $UUID;
         get rover(): $IRoversItem;
+        get slotOutput(): $InventoryOutput;
         get roverStack(): $ItemStack;
         get roverSlot(): $Inventory;
         get worldPad(): $Level;
-        get slotOutput(): $InventoryOutput;
+        get player(): $UUID;
     }
 }

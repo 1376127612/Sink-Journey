@@ -10,10 +10,10 @@ import { $Couple } from "@package/net/createmod/catnip/data";
 
 declare module "@package/com/simibubi/create/foundation/gui/widget" {
     export class $Label extends $AbstractSimiWidget {
-        withSuffix(arg0: string): $Label;
-        setTextAndTrim(arg0: $Component_, arg1: boolean, arg2: number): void;
-        withShadow(): $Label;
         colored(arg0: number): $Label;
+        withShadow(): $Label;
+        setTextAndTrim(arg0: $Component_, arg1: boolean, arg2: number): void;
+        withSuffix(arg0: string): $Label;
         static COLOR_SUCCESS: $Couple<$Color>;
         visible: boolean;
         static HEADER_RGB: $Color;
@@ -33,23 +33,24 @@ declare module "@package/com/simibubi/create/foundation/gui/widget" {
         static COLOR_DISABLED: $Couple<$Color>;
         text: $Component;
         static COLOR_FAIL: $Couple<$Color>;
+        height: number;
         constructor(arg0: number, arg1: number, arg2: $Component_);
     }
     export class $ScrollInput extends $AbstractSimiWidget {
-        format(arg0: $Function_<number, $Component>): $ScrollInput;
-        getState(): number;
-        setState(arg0: number): $ScrollInput;
-        withStepFunction(arg0: $Function_<$ScrollValueBehaviour$StepContext, number>): $ScrollInput;
-        standardStep(): $Function<$ScrollValueBehaviour$StepContext, number>;
-        inverted(): $ScrollInput;
-        writingTo(arg0: $Label): $ScrollInput;
-        addHint(arg0: $MutableComponent_): $ScrollInput;
-        onChanged(): void;
-        removeCallback(): $ScrollInput;
+        withRange(arg0: number, arg1: number): $ScrollInput;
         titled(arg0: $MutableComponent_): $ScrollInput;
         calling(arg0: $Consumer_<number>): $ScrollInput;
         withShiftStep(arg0: number): $ScrollInput;
-        withRange(arg0: number, arg1: number): $ScrollInput;
+        removeCallback(): $ScrollInput;
+        standardStep(): $Function<$ScrollValueBehaviour$StepContext, number>;
+        withStepFunction(arg0: $Function_<$ScrollValueBehaviour$StepContext, number>): $ScrollInput;
+        writingTo(arg0: $Label): $ScrollInput;
+        addHint(arg0: $MutableComponent_): $ScrollInput;
+        format(arg0: $Function_<number, $Component>): $ScrollInput;
+        getState(): number;
+        setState(arg0: number): $ScrollInput;
+        inverted(): $ScrollInput;
+        onChanged(): void;
         static COLOR_SUCCESS: $Couple<$Color>;
         visible: boolean;
         static HEADER_RGB: $Color;
@@ -67,6 +68,7 @@ declare module "@package/com/simibubi/create/foundation/gui/widget" {
         focused: boolean;
         static COLOR_DISABLED: $Couple<$Color>;
         static COLOR_FAIL: $Couple<$Color>;
+        height: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
     }
     export class $TooltipArea extends $AbstractSimiWidget {
@@ -89,6 +91,7 @@ declare module "@package/com/simibubi/create/foundation/gui/widget" {
         focused: boolean;
         static COLOR_DISABLED: $Couple<$Color>;
         static COLOR_FAIL: $Couple<$Color>;
+        height: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
     }
     export class $SelectionScrollInput extends $ScrollInput {
@@ -110,6 +113,7 @@ declare module "@package/com/simibubi/create/foundation/gui/widget" {
         focused: boolean;
         static COLOR_DISABLED: $Couple<$Color>;
         static COLOR_FAIL: $Couple<$Color>;
+        height: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
     }
 }

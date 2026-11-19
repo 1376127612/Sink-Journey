@@ -47,22 +47,22 @@ declare module "@package/javax/management" {
         hashCode(): number;
         clone(): $Object;
         getFields(): string[];
-        getFieldNames(): string[];
-        getFieldValues(...arg0: string[]): $Object[];
         isValid(): boolean;
-        getFieldValue(arg0: string): $Object;
         setFields(arg0: string[], arg1: $Object[]): void;
         setField(arg0: string, arg1: $Object): void;
         removeField(arg0: string): void;
-        get fieldNames(): string[];
+        getFieldNames(): string[];
+        getFieldValues(...arg0: string[]): $Object[];
+        getFieldValue(arg0: string): $Object;
         get valid(): boolean;
+        get fieldNames(): string[];
     }
     export class $MBeanInfo implements $Cloneable, $Serializable, $DescriptorRead {
         clone(): $Object;
         getDescriptor(): $Descriptor;
         getConstructors(): $MBeanConstructorInfo[];
-        getAttributes(): $MBeanAttributeInfo[];
         getClassName(): string;
+        getAttributes(): $MBeanAttributeInfo[];
         getDescription(): string;
         getOperations(): $MBeanOperationInfo[];
         getNotifications(): $MBeanNotificationInfo[];
@@ -70,8 +70,8 @@ declare module "@package/javax/management" {
         constructor(arg0: string, arg1: string, arg2: $MBeanAttributeInfo[], arg3: $MBeanConstructorInfo[], arg4: $MBeanOperationInfo[], arg5: $MBeanNotificationInfo[], arg6: $Descriptor);
         get descriptor(): $Descriptor;
         get constructors(): $MBeanConstructorInfo[];
-        get attributes(): $MBeanAttributeInfo[];
         get className(): string;
+        get attributes(): $MBeanAttributeInfo[];
         get description(): string;
         get operations(): $MBeanOperationInfo[];
         get notifications(): $MBeanNotificationInfo[];
@@ -132,15 +132,15 @@ declare module "@package/javax/management" {
         get impact(): number;
     }
     export class $AttributeList extends $ArrayList<$Object> {
-        add(arg0: number, arg1: $Attribute): void;
         add(arg0: $Attribute): void;
-        addAll(arg0: number, arg1: $AttributeList): boolean;
+        add(arg0: number, arg1: $Attribute): void;
         addAll(arg0: $AttributeList): boolean;
+        addAll(arg0: number, arg1: $AttributeList): boolean;
         set(arg0: number, arg1: $Attribute): void;
         asList(): $List<$Attribute>;
         constructor(arg0: $List_<$Attribute>);
-        constructor(arg0: $AttributeList);
-        constructor(arg0: number);
         constructor();
+        constructor(arg0: number);
+        constructor(arg0: $AttributeList);
     }
 }

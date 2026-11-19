@@ -14,19 +14,19 @@ declare module "@package/mekanism/common/capabilities/energy" {
         static notExternal: $Predicate<$AutomationType>;
     }
     export class $BasicEnergyContainer implements $IEnergyContainer {
+        deserializeNBT(provider: $HolderLookup$Provider, nbt: $CompoundTag_): void;
+        serializeNBT(provider: $HolderLookup$Provider): $CompoundTag;
+        onContentsChanged(): void;
         extract(amount: number, action: $Action_, automationType: $AutomationType_): number;
         insert(amount: number, action: $Action_, automationType: $AutomationType_): number;
         isEmpty(): boolean;
-        static create(maxEnergy: number, listener: $IContentsListener_): $BasicEnergyContainer;
         static create(maxEnergy: number, canExtract: $Predicate_<$AutomationType>, canInsert: $Predicate_<$AutomationType>, listener: $IContentsListener_): $BasicEnergyContainer;
+        static create(maxEnergy: number, listener: $IContentsListener_): $BasicEnergyContainer;
         static input(maxEnergy: number, listener: $IContentsListener_): $BasicEnergyContainer;
         static output(maxEnergy: number, listener: $IContentsListener_): $BasicEnergyContainer;
-        getMaxEnergy(): number;
-        serializeNBT(provider: $HolderLookup$Provider): $CompoundTag;
-        deserializeNBT(provider: $HolderLookup$Provider, nbt: $CompoundTag_): void;
-        getEnergy(): number;
-        onContentsChanged(): void;
         setEnergy(energy: number): void;
+        getMaxEnergy(): number;
+        getEnergy(): number;
         setEmpty(): void;
         getNeeded(): number;
         static internalOnly: $Predicate<$AutomationType>;

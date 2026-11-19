@@ -6,8 +6,8 @@ export * as view from "@package/cn/howxu/mmcr/api/network/view";
 
 declare module "@package/cn/howxu/mmcr/api/network" {
     export class $RequestInfo extends $Record {
-        peer(): $MachineReference;
         requestId(): $ResourceLocation;
+        peer(): $MachineReference;
         constructor(requestId: $ResourceLocation_, peer: $MachineReference_);
     }
     /**

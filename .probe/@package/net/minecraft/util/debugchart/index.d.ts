@@ -9,7 +9,7 @@ declare module "@package/net/minecraft/util/debugchart" {
     /**
      * Values that may be interpreted as {@link $DebugSampleSubscriptionTracker$SubscriptionStartedAt}.
      */
-    export type $DebugSampleSubscriptionTracker$SubscriptionStartedAt_ = { millis?: number, tick?: number,  } | [millis?: number, tick?: number, ];
+    export type $DebugSampleSubscriptionTracker$SubscriptionStartedAt_ = { tick?: number, millis?: number,  } | [tick?: number, millis?: number, ];
     export class $DebugSampleSubscriptionTracker$SubscriptionRequest extends $Record {
     }
     /**
@@ -48,10 +48,10 @@ declare module "@package/net/minecraft/util/debugchart" {
      */
     export type $TpsDebugDimensions_ = "full_tick" | "tick_server_method" | "scheduled_tasks" | "idle";
     export class $DebugSampleSubscriptionTracker {
-        shouldLogSamples(sampleType: $RemoteDebugSampleType_): boolean;
-        broadcast(packet: $ClientboundDebugSamplePacket_): void;
-        subscribe(player: $ServerPlayer, sampleType: $RemoteDebugSampleType_): void;
         tick(tick: number): void;
+        subscribe(player: $ServerPlayer, sampleType: $RemoteDebugSampleType_): void;
+        broadcast(packet: $ClientboundDebugSamplePacket_): void;
+        shouldLogSamples(sampleType: $RemoteDebugSampleType_): boolean;
         static STOP_SENDING_AFTER_MS: number;
         static STOP_SENDING_AFTER_TICKS: number;
         constructor(playerList: $PlayerList);
@@ -66,15 +66,15 @@ declare module "@package/net/minecraft/util/debugchart" {
      */
     export type $RemoteDebugSampleType_ = "tick_time";
     export class $AbstractSampleLogger implements $SampleLogger {
-        logSample(value: number): void;
         logPartialSample(value: number, arg1: number): void;
+        logSample(value: number): void;
         logFullSample(sample: number[]): void;
     }
     export class $SampleLogger {
     }
     export interface $SampleLogger {
-        logSample(value: number): void;
         logPartialSample(value: number, arg1: number): void;
+        logSample(value: number): void;
         logFullSample(sample: number[]): void;
     }
     export class $RemoteSampleLogger extends $AbstractSampleLogger {

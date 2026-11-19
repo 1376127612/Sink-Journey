@@ -27,24 +27,24 @@ import { $ICapabilityProvider } from "@package/net/neoforged/neoforge/capabiliti
 
 declare module "@package/mekanism/common/tile/transmitter" {
     export class $TileEntityTransmitter extends $CapabilityTileEntity implements $ProxyConfigurable$ISidedConfigurable, $IAlloyInteraction {
-        isLoaded(): boolean;
-        static tickServer(level: $Level_, pos: $BlockPos_, state: $BlockState_, transmitter: $TileEntityTransmitter): void;
-        saveAdditional(nbtTags: $CompoundTag_, provider: $HolderLookup$Provider): void;
-        onRightClick(player: $Player, side: $Direction_): $InteractionResult;
-        sideChanged(side: $Direction_, old: $ConnectionType_, type: $ConnectionType_): void;
         setForceUpdate(): void;
-        onSneakRightClick(player: $Player, side: $Direction_): $InteractionResult;
-        onAlloyInteraction(player: $Player, stack: $ItemStack_, tier: $IAlloyTier_): void;
+        saveAdditional(nbtTags: $CompoundTag_, provider: $HolderLookup$Provider): void;
+        getSideLookingAt(player: $Player, fallback: $Direction_): $Direction;
+        getSideLookingAt(player: $Player): $Direction;
+        getTransmitterType(): $TransmitterType;
+        getCollisionBoxes(): $List<$VoxelShape>;
+        redstoneChanged(powered: boolean): void;
+        static tickServer(level: $Level_, pos: $BlockPos_, state: $BlockState_, transmitter: $TileEntityTransmitter): void;
+        sideChanged(side: $Direction_, old: $ConnectionType_, type: $ConnectionType_): void;
         onNeighborBlockChange(side: $Direction_): void;
         chunkAccessibilityChange(loaded: boolean): void;
         getTransmitter(): $Transmitter<never, never, never>;
-        getCollisionBoxes(): $List<$VoxelShape>;
-        redstoneChanged(powered: boolean): void;
-        getTransmitterType(): $TransmitterType;
-        getSideLookingAt(player: $Player, fallback: $Direction_): $Direction;
-        getSideLookingAt(player: $Player): $Direction;
-        onRightClick(player: $Player): $InteractionResult;
+        onSneakRightClick(player: $Player, side: $Direction_): $InteractionResult;
+        onRightClick(player: $Player, side: $Direction_): $InteractionResult;
+        onAlloyInteraction(player: $Player, stack: $ItemStack_, tier: $IAlloyTier_): void;
+        isLoaded(): boolean;
         onSneakRightClick(player: $Player): $InteractionResult;
+        onRightClick(player: $Player): $InteractionResult;
         blockState: $BlockState;
         level: $Level;
         static CHEMICAL_HANDLER_PROVIDER: $ICapabilityProvider<$CapabilityTileEntity, $Direction, $IChemicalHandler>;
@@ -63,9 +63,9 @@ declare module "@package/mekanism/common/tile/transmitter" {
         static LOGGER: $Logger;
         customPersistentData: $CompoundTag;
         constructor(blockProvider: $Holder_<$Block>, pos: $BlockPos_, state: $BlockState_);
-        get loaded(): boolean;
-        get transmitter(): $Transmitter<never, never, never>;
-        get collisionBoxes(): $List<$VoxelShape>;
         get transmitterType(): $TransmitterType;
+        get collisionBoxes(): $List<$VoxelShape>;
+        get transmitter(): $Transmitter<never, never, never>;
+        get loaded(): boolean;
     }
 }

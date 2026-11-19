@@ -12,27 +12,27 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure" {
     export class $BlockCondition {
     }
     export interface $BlockCondition {
+        alternatives(): $List<$BlockCondition>;
+        isAny(): boolean;
+        isMachineCoupler(): boolean;
         block(): ($Block) | undefined;
         tag(): ($TagKey<$Block>) | undefined;
-        isAir(): boolean;
         blockState(): ($BlockState) | undefined;
-        isAny(): boolean;
+        isAir(): boolean;
         blockSupplier(): ($Supplier<$Block>) | undefined;
-        alternatives(): $List<$BlockCondition>;
-        isMachineCoupler(): boolean;
         isNetworkInterface(): boolean;
-        get air(): boolean;
         get any(): boolean;
         get machineCoupler(): boolean;
+        get air(): boolean;
         get networkInterface(): boolean;
     }
     export class $StructureConstraints$Builder {
     }
     export interface $StructureConstraints$Builder {
-        build(): $StructureConstraints;
-        modifier(symbol: string, modifierId: $ResourceLocation_): $StructureConstraints$Builder;
-        modifier(symbol: string, modifierId: $ResourceLocation_, replacement: $BlockCondition): $StructureConstraints$Builder;
         levelSlot(symbol: string, typeId: $ResourceLocation_): $StructureConstraints$Builder;
+        build(): $StructureConstraints;
+        modifier(symbol: string, modifierId: $ResourceLocation_, replacement: $BlockCondition): $StructureConstraints$Builder;
+        modifier(symbol: string, modifierId: $ResourceLocation_): $StructureConstraints$Builder;
     }
     export class $PatternDraft {
     }
@@ -40,8 +40,8 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure" {
         pattern(...rows: string[]): $PatternDraft;
         layer(...rows: string[]): $PatternDraft;
         build(): $PatternSpec;
-        where(symbol: string, condition: $BlockCondition): $PatternDraft;
         controller(symbol: string): $PatternDraft;
+        where(symbol: string, condition: $BlockCondition): $PatternDraft;
     }
     export class $StructureStageSpec$Kind extends $Enum<$StructureStageSpec$Kind> {
         static values(): $StructureStageSpec$Kind[];
@@ -78,11 +78,11 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure" {
     export class $StructureStageSpec {
     }
     export interface $StructureStageSpec {
-        pattern(): $PatternSpec;
-        kind(): $StructureStageSpec$Kind;
         requirements(): $StructureConstraints;
         portRequirements(): $PortLimits;
         portTiers(): $PortTierLimits;
+        pattern(): $PatternSpec;
+        kind(): $StructureStageSpec$Kind;
     }
     export class $PortTierLimits$ItemTier extends $Enum<$PortTierLimits$ItemTier> {
         static values(): $PortTierLimits$ItemTier[];
@@ -103,9 +103,9 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure" {
     export class $PortTierLimits$RequirementView {
     }
     export interface $PortTierLimits$RequirementView {
-        category(): $PortTierLimits$PortCategory;
-        minTierId(): string;
         ioType(): $IoDirection;
+        minTierId(): string;
+        category(): $PortTierLimits$PortCategory;
         minTier(): number;
     }
     export class $PortLimits$CountRangeView {
@@ -134,24 +134,24 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure" {
     export class $StructureConstraints$ModifierPlacementView {
     }
     export interface $StructureConstraints$ModifierPlacementView {
-        replacement(): $BlockCondition;
         modifierId(): $ResourceLocation;
+        replacement(): $BlockCondition;
     }
     export class $PatternSpec {
     }
     export interface $PatternSpec {
+        controllerSymbol(): string;
         depth(): number;
         layers(): $List<$List<string>>;
         width(): number;
         predicates(): $Map<string, $BlockCondition>;
         height(): number;
-        controllerSymbol(): string;
     }
     export class $StructureSpec {
     }
     export interface $StructureSpec {
-        machineId(): $ResourceLocation;
         stateSensitive(): boolean;
+        machineId(): $ResourceLocation;
         stages(): $List<$StructureStageSpec>;
     }
     export class $PortTierLimits$FluidTier extends $Enum<$PortTierLimits$FluidTier> {
@@ -208,61 +208,61 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure" {
         build(): $PortLimits;
     }
     export class $PortTierLimits {
-        static builder(): $PortTierLimits$Builder;
-        static combine(...declarations: $PortTierLimits_[]): $PortTierLimits;
-        static item(id: string): $PortTierLimits;
-        static item(tier: $PortTierLimits$ItemTier_, io: $IoDirection_): $PortTierLimits;
-        static item(tier: $PortTierLimits$ItemTier_): $PortTierLimits;
-        static none(): $PortTierLimits;
-        static manaOutput(): $PortTierLimits;
-        static manaOutput(id: string): $PortTierLimits;
-        static airOutput(): $PortTierLimits;
-        static heatOutput(): $PortTierLimits;
-        static airInput(): $PortTierLimits;
-        static manaInput(id: string): $PortTierLimits;
-        static manaInput(): $PortTierLimits;
         static air(): $PortTierLimits;
         static air(io: $IoDirection_): $PortTierLimits;
         static fluid(tier: $PortTierLimits$FluidTier_, io: $IoDirection_): $PortTierLimits;
-        static fluid(tier: $PortTierLimits$FluidTier_): $PortTierLimits;
         static fluid(id: string): $PortTierLimits;
-        static heat(io: $IoDirection_): $PortTierLimits;
-        static heat(): $PortTierLimits;
-        static fluidOutput(tier: $PortTierLimits$FluidTier_): $PortTierLimits;
-        static fluidOutput(id: string): $PortTierLimits;
-        static chemical(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits;
-        static chemical(id: string): $PortTierLimits;
-        static chemical(tier: $PortTierLimits$ChemicalTier_, io: $IoDirection_): $PortTierLimits;
-        static energy(tier: $PortTierLimits$EnergyTier_): $PortTierLimits;
-        static energy(tier: $PortTierLimits$EnergyTier_, io: $IoDirection_): $PortTierLimits;
-        static energy(id: string): $PortTierLimits;
-        static fluidInput(tier: $PortTierLimits$FluidTier_): $PortTierLimits;
-        static fluidInput(id: string): $PortTierLimits;
-        static itemInput(tier: $PortTierLimits$ItemTier_): $PortTierLimits;
-        static itemInput(id: string): $PortTierLimits;
-        static itemOutput(tier: $PortTierLimits$ItemTier_): $PortTierLimits;
-        static itemOutput(id: string): $PortTierLimits;
-        static chemicalInput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits;
-        static chemicalInput(id: string): $PortTierLimits;
-        static stressOutput(): $PortTierLimits;
-        static sourceInput(): $PortTierLimits;
-        static sourceInput(id: string): $PortTierLimits;
-        static stressInput(): $PortTierLimits;
-        static chemicalOutput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits;
-        static chemicalOutput(id: string): $PortTierLimits;
-        static energyInput(id: string): $PortTierLimits;
-        static energyInput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits;
-        static sourceOutput(): $PortTierLimits;
-        static sourceOutput(id: string): $PortTierLimits;
-        static energyOutput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits;
-        static energyOutput(id: string): $PortTierLimits;
+        static fluid(tier: $PortTierLimits$FluidTier_): $PortTierLimits;
         static stress(): $PortTierLimits;
         static stress(io: $IoDirection_): $PortTierLimits;
+        static heat(io: $IoDirection_): $PortTierLimits;
+        static heat(): $PortTierLimits;
+        static chemicalOutput(id: string): $PortTierLimits;
+        static chemicalOutput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits;
+        static fluidOutput(id: string): $PortTierLimits;
+        static fluidOutput(tier: $PortTierLimits$FluidTier_): $PortTierLimits;
+        static chemicalInput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits;
+        static chemicalInput(id: string): $PortTierLimits;
+        static energy(id: string): $PortTierLimits;
+        static energy(tier: $PortTierLimits$EnergyTier_): $PortTierLimits;
+        static energy(tier: $PortTierLimits$EnergyTier_, io: $IoDirection_): $PortTierLimits;
+        static sourceOutput(id: string): $PortTierLimits;
+        static sourceOutput(): $PortTierLimits;
+        static stressOutput(): $PortTierLimits;
+        static energyInput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits;
+        static energyInput(id: string): $PortTierLimits;
+        static sourceInput(id: string): $PortTierLimits;
+        static sourceInput(): $PortTierLimits;
+        static energyOutput(id: string): $PortTierLimits;
+        static energyOutput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits;
+        static stressInput(): $PortTierLimits;
+        static airInput(): $PortTierLimits;
+        static heatOutput(): $PortTierLimits;
+        static manaOutput(id: string): $PortTierLimits;
+        static manaOutput(): $PortTierLimits;
+        static manaInput(id: string): $PortTierLimits;
+        static manaInput(): $PortTierLimits;
+        static airOutput(): $PortTierLimits;
+        static heatInput(): $PortTierLimits;
         static radioactiveChemicalInput(): $PortTierLimits;
         static radioactiveChemicalOutput(): $PortTierLimits;
+        static builder(): $PortTierLimits$Builder;
+        static combine(...declarations: $PortTierLimits_[]): $PortTierLimits;
+        static item(tier: $PortTierLimits$ItemTier_, io: $IoDirection_): $PortTierLimits;
+        static item(tier: $PortTierLimits$ItemTier_): $PortTierLimits;
+        static item(id: string): $PortTierLimits;
+        static none(): $PortTierLimits;
+        static itemOutput(id: string): $PortTierLimits;
+        static itemOutput(tier: $PortTierLimits$ItemTier_): $PortTierLimits;
+        static itemInput(id: string): $PortTierLimits;
+        static itemInput(tier: $PortTierLimits$ItemTier_): $PortTierLimits;
+        static fluidInput(tier: $PortTierLimits$FluidTier_): $PortTierLimits;
+        static fluidInput(id: string): $PortTierLimits;
+        static chemical(id: string): $PortTierLimits;
+        static chemical(tier: $PortTierLimits$ChemicalTier_, io: $IoDirection_): $PortTierLimits;
+        static chemical(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits;
         static radioactiveChemical(io: $IoDirection_): $PortTierLimits;
         static radioactiveChemical(): $PortTierLimits;
-        static heatInput(): $PortTierLimits;
     }
     export interface $PortTierLimits {
         requirements(): $List<$PortTierLimits$RequirementView>;
@@ -274,58 +274,58 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure" {
     export class $PortTierLimits$Builder {
     }
     export interface $PortTierLimits$Builder {
-        build(): $PortTierLimits;
         anyManaOutput(): $PortTierLimits$Builder;
-        anyManaInput(): $PortTierLimits$Builder;
-        anyAirInput(): $PortTierLimits$Builder;
-        anySourceOutput(): $PortTierLimits$Builder;
-        anyStressInput(): $PortTierLimits$Builder;
-        anySourceInput(): $PortTierLimits$Builder;
-        anyStressOutput(): $PortTierLimits$Builder;
         anyAirOutput(): $PortTierLimits$Builder;
-        anyChemicalInput(): $PortTierLimits$Builder;
-        anyHeatInput(): $PortTierLimits$Builder;
-        minItemInput(tier: $PortTierLimits$ItemTier_): $PortTierLimits$Builder;
-        minFluidInput(tier: $PortTierLimits$FluidTier_): $PortTierLimits$Builder;
+        anySourceOutput(): $PortTierLimits$Builder;
+        anyManaInput(): $PortTierLimits$Builder;
+        anyStressOutput(): $PortTierLimits$Builder;
+        anySourceInput(): $PortTierLimits$Builder;
+        anyAirInput(): $PortTierLimits$Builder;
+        anyStressInput(): $PortTierLimits$Builder;
+        build(): $PortTierLimits;
         anyItemInput(): $PortTierLimits$Builder;
         anyItemOutput(): $PortTierLimits$Builder;
-        anyFluidInput(): $PortTierLimits$Builder;
         anyEnergyOutput(): $PortTierLimits$Builder;
+        anyHeatInput(): $PortTierLimits$Builder;
+        anyChemicalInput(): $PortTierLimits$Builder;
         anyChemicalOutput(): $PortTierLimits$Builder;
-        anyHeatOutput(): $PortTierLimits$Builder;
-        minEnergyInput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits$Builder;
-        minEnergyOutput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits$Builder;
-        minFluidOutput(tier: $PortTierLimits$FluidTier_): $PortTierLimits$Builder;
-        minChemicalOutput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits$Builder;
-        minItemOutput(tier: $PortTierLimits$ItemTier_): $PortTierLimits$Builder;
-        anyFluidOutput(): $PortTierLimits$Builder;
         anyEnergyInput(): $PortTierLimits$Builder;
-        minChemicalInput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits$Builder;
+        anyFluidOutput(): $PortTierLimits$Builder;
+        anyFluidInput(): $PortTierLimits$Builder;
+        anyHeatOutput(): $PortTierLimits$Builder;
         anyRadioactiveChemicalInput(): $PortTierLimits$Builder;
         anyRadioactiveChemicalOutput(): $PortTierLimits$Builder;
+        minItemOutput(tier: $PortTierLimits$ItemTier_): $PortTierLimits$Builder;
+        minFluidInput(tier: $PortTierLimits$FluidTier_): $PortTierLimits$Builder;
+        minFluidOutput(tier: $PortTierLimits$FluidTier_): $PortTierLimits$Builder;
+        minEnergyInput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits$Builder;
+        minEnergyOutput(tier: $PortTierLimits$EnergyTier_): $PortTierLimits$Builder;
+        minChemicalInput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits$Builder;
+        minChemicalOutput(tier: $PortTierLimits$ChemicalTier_): $PortTierLimits$Builder;
+        minItemInput(tier: $PortTierLimits$ItemTier_): $PortTierLimits$Builder;
     }
     export class $StructureDraft {
     }
     export interface $StructureDraft {
+        stateSensitive(): $StructureDraft;
         build(machineId: $ResourceLocation_): $StructureSpec;
         extension(configure: $Consumer_<$StructureStageDraft>): $StructureDraft;
-        stateSensitive(): $StructureDraft;
-        stateInsensitive(): $StructureDraft;
         fullStructure(configure: $Consumer_<$StructureStageDraft>): $StructureDraft;
         expandStructure(configure: $Consumer_<$StructureStageDraft>): $StructureDraft;
+        stateInsensitive(): $StructureDraft;
         singlePattern(configure: $Consumer_<$PatternDraft>): $StructureDraft;
     }
     export class $StructureStageDraft {
     }
     export interface $StructureStageDraft {
+        requirements(configure: $Consumer_<$StructureConstraints$Builder>): $StructureStageDraft;
+        ports(configure: $Consumer_<$PortLimits$Builder>): $StructureStageDraft;
+        portTiers(configure: $Consumer_<$PortTierLimits$Builder>): $StructureStageDraft;
         pattern(configure: $Consumer_<$PatternDraft>): $StructureStageDraft;
         full(): $StructureStageDraft;
         build(): $StructureStageSpec;
         modifier(symbol: string, modifierId: $ResourceLocation_, replacement: $BlockCondition): $StructureStageDraft;
         extension(): $StructureStageDraft;
         expansion(): $StructureStageDraft;
-        requirements(configure: $Consumer_<$StructureConstraints$Builder>): $StructureStageDraft;
-        ports(configure: $Consumer_<$PortLimits$Builder>): $StructureStageDraft;
-        portTiers(configure: $Consumer_<$PortTierLimits$Builder>): $StructureStageDraft;
     }
 }

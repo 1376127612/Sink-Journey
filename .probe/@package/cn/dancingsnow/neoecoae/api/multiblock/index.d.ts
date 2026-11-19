@@ -16,15 +16,15 @@ declare module "@package/cn/dancingsnow/neoecoae/api/multiblock" {
      */
     export type $ECOMachineKind_ = "computation" | "crafting" | "storage";
     export class $ECOMultiblockRequirement extends $Record {
+        alternatives(): $List<$BlockState>;
+        defaultState(): $BlockState;
         static of(arg0: $BlockState_, ...arg1: $BlockState_[]): $ECOMultiblockRequirement;
         transform(arg0: $UnaryOperator_<$BlockState>): $ECOMultiblockRequirement;
         accepts(arg0: $BlockState_): boolean;
-        defaultState(): $BlockState;
-        alternatives(): $List<$BlockState>;
         constructor(defaultState: $BlockState_, alternatives: $List_<$BlockState_>);
     }
     /**
      * Values that may be interpreted as {@link $ECOMultiblockRequirement}.
      */
-    export type $ECOMultiblockRequirement_ = { alternatives?: $List_<$BlockState_>, defaultState?: $BlockState_,  } | [alternatives?: $List_<$BlockState_>, defaultState?: $BlockState_, ];
+    export type $ECOMultiblockRequirement_ = { defaultState?: $BlockState_, alternatives?: $List_<$BlockState_>,  } | [defaultState?: $BlockState_, alternatives?: $List_<$BlockState_>, ];
 }

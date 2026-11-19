@@ -45,7 +45,7 @@ declare module "@package/xaero/common/minimap/waypoints/render" {
         /**
          * @deprecated
          */
-        render(arg0: $MinimapSession, arg1: number, arg2: $MinimapProcessor, arg3: $Matrix4f, arg4: $Matrix4f): void;
+        drawIconInWorld(arg0: $PoseStack, arg1: $MinimapRendererHelper, arg2: $Waypoint, arg3: $ModSettings, arg4: $Tesselator, arg5: $Font, arg6: string, arg7: string, arg8: number, arg9: boolean, arg10: $MultiBufferSource$BufferSource, arg11: $VertexConsumer, arg12: boolean, arg13: string): void;
         /**
          * @deprecated
          */
@@ -53,7 +53,7 @@ declare module "@package/xaero/common/minimap/waypoints/render" {
         /**
          * @deprecated
          */
-        drawIconInWorld(arg0: $PoseStack, arg1: $MinimapRendererHelper, arg2: $Waypoint, arg3: $ModSettings, arg4: $Tesselator, arg5: $Font, arg6: string, arg7: string, arg8: number, arg9: boolean, arg10: $MultiBufferSource$BufferSource, arg11: $VertexConsumer, arg12: boolean, arg13: string): void;
+        render(arg0: $MinimapSession, arg1: number, arg2: $MinimapProcessor, arg3: $Matrix4f, arg4: $Matrix4f): void;
         constructor(arg0: $MinimapElementReader<$Waypoint, $WaypointWorldRenderContext>, arg1: $WaypointWorldRenderProvider, arg2: $WaypointWorldRenderContext, arg3: $Vector4f);
     }
     /**
@@ -67,22 +67,22 @@ declare module "@package/xaero/common/minimap/waypoints/render" {
         /**
          * @deprecated
          */
-        updateWaypointCollection(arg0: $IXaeroMinimap): void;
+        drawIconOnGUI(arg0: $GuiGraphics, arg1: $MinimapRendererHelper, arg2: $Waypoint, arg3: $ModSettings, arg4: number, arg5: number, arg6: $MultiBufferSource$BufferSource, arg7: $VertexConsumer): void;
         /**
          * @deprecated
          */
-        drawIconOnGUI(arg0: $GuiGraphics, arg1: $MinimapRendererHelper, arg2: $Waypoint, arg3: $ModSettings, arg4: number, arg5: number, arg6: $MultiBufferSource$BufferSource, arg7: $VertexConsumer): void;
+        updateWaypointCollection(arg0: $IXaeroMinimap): void;
         constructor(arg0: $WaypointReader, arg1: $WaypointRenderProvider, arg2: $WaypointGuiRenderContext);
     }
     /**
      * @deprecated
      */
     export class $WaypointRenderProvider extends $WaypointRenderProvider$1 {
+        setupContextAndGetNext(arg0: number, arg1: $WaypointMapRenderContext): $Waypoint;
         begin(arg0: number, arg1: $WaypointMapRenderContext): void;
         end(arg0: number, arg1: $WaypointMapRenderContext): void;
         hasNext(arg0: number, arg1: $WaypointMapRenderContext): boolean;
         getNext(arg0: number, arg1: $WaypointMapRenderContext): $Waypoint;
-        setupContextAndGetNext(arg0: number, arg1: $WaypointMapRenderContext): $Waypoint;
         filter: $Predicate<$Waypoint>;
         constructor();
     }

@@ -15,8 +15,8 @@ declare module "@package/org/cyclops/integrateddynamics/core/network" {
         insert(arg0: number, arg1: T, arg2: boolean): T;
     }
     export class $IIngredientChannelInsertPreConsumer$Result<T> extends $Record {
-        remaining(): T;
         unclaimed(): T;
+        remaining(): T;
         constructor(remaining: T, unclaimed: T);
     }
     /**

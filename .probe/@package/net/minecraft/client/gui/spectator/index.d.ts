@@ -9,9 +9,9 @@ declare module "@package/net/minecraft/client/gui/spectator" {
     export class $SpectatorMenuItem {
     }
     export interface $SpectatorMenuItem {
+        renderIcon(guiGraphics: $GuiGraphics, shadeColor: number, alpha: number): void;
         getName(): $Component;
         isEnabled(): boolean;
-        renderIcon(guiGraphics: $GuiGraphics, shadeColor: number, alpha: number): void;
         selectItem(menu: $SpectatorMenu): void;
         get name(): $Component;
         get enabled(): boolean;
@@ -28,47 +28,47 @@ declare module "@package/net/minecraft/client/gui/spectator" {
      */
     export type $SpectatorMenuListener_ = ((arg0: $SpectatorMenu) => void);
     export class $SpectatorMenu {
-        exit(): void;
-        getItem(index: number): $SpectatorMenuItem;
-        getSelectedItem(): $SpectatorMenuItem;
         getItems(): $List<$SpectatorMenuItem>;
         getCurrentPage(): $SpectatorPage;
         selectSlot(slot: number): void;
         getSelectedCategory(): $SpectatorMenuCategory;
         getSelectedSlot(): number;
+        getSelectedItem(): $SpectatorMenuItem;
         selectCategory(category: $SpectatorMenuCategory): void;
+        exit(): void;
+        getItem(index: number): $SpectatorMenuItem;
         static EMPTY_SLOT: $SpectatorMenuItem;
         constructor(listener: $SpectatorMenuListener_);
-        get selectedItem(): $SpectatorMenuItem;
         get items(): $List<$SpectatorMenuItem>;
         get currentPage(): $SpectatorPage;
         get selectedCategory(): $SpectatorMenuCategory;
         get selectedSlot(): number;
+        get selectedItem(): $SpectatorMenuItem;
     }
     export class $SpectatorMenu$CloseSpectatorItem implements $SpectatorMenuItem {
     }
     export class $SpectatorMenuCategory {
     }
     export interface $SpectatorMenuCategory {
-        getPrompt(): $Component;
         getItems(): $List<$SpectatorMenuItem>;
-        get prompt(): $Component;
+        getPrompt(): $Component;
         get items(): $List<$SpectatorMenuItem>;
+        get prompt(): $Component;
     }
     export class $PlayerMenuItem implements $SpectatorMenuItem {
+        renderIcon(guiGraphics: $GuiGraphics, shadeColor: number, alpha: number): void;
         getName(): $Component;
         isEnabled(): boolean;
-        renderIcon(guiGraphics: $GuiGraphics, shadeColor: number, alpha: number): void;
         selectItem(menu: $SpectatorMenu): void;
         constructor(profile: $GameProfile);
         get name(): $Component;
         get enabled(): boolean;
     }
     export class $RootSpectatorMenuCategory implements $SpectatorMenuCategory {
-        getPrompt(): $Component;
         getItems(): $List<$SpectatorMenuItem>;
+        getPrompt(): $Component;
         constructor();
-        get prompt(): $Component;
         get items(): $List<$SpectatorMenuItem>;
+        get prompt(): $Component;
     }
 }

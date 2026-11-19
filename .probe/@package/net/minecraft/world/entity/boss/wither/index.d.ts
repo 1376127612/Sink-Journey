@@ -7,6 +7,7 @@ import { $BlockPos } from "@package/net/minecraft/core";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
 import { $WalkAnimationState, $PowerableMob, $EntityType_, $Entity$RemovalReason, $LivingEntity, $PortalProcessor } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $RangedAttackMob, $Monster } from "@package/net/minecraft/world/entity/monster";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 
@@ -14,25 +15,15 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
     export class $WitherBoss$WitherDoNothingGoal extends $Goal {
     }
     export class $WitherBoss extends $Monster implements $PowerableMob, $RangedAttackMob {
-        /**
-         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
-         */
-        makeInvulnerable(): void;
         static createAttributes(): $AttributeSupplier$Builder;
-        getHeadYRot(head: number): number;
-        getHeadXRot(head: number): number;
-        /**
-         * @deprecated
-         */
-        static canDestroy(state: $BlockState_): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isPowered(): boolean;
         /**
          * Attack the specified entity using a ranged attack.
          */
         performRangedAttack(target: $LivingEntity, distanceFactor: number): void;
+        getHeadYRot(head: number): number;
+        getHeadXRot(head: number): number;
+        getInvulnerableTicks(): number;
         setInvulnerableTicks(invulnerableTicks: number): void;
         /**
          * Returns the target entity ID if present, or -1 if not
@@ -43,9 +34,13 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
          */
         setAlternativeTarget(targetOffset: number, newId: number): void;
         /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
+         * @deprecated
          */
-        getInvulnerableTicks(): number;
+        static canDestroy(state: $BlockState_): boolean;
+        /**
+         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
+         */
+        makeInvulnerable(): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -92,6 +87,7 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -102,6 +98,7 @@ declare module "@package/net/minecraft/world/entity/boss/wither" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;

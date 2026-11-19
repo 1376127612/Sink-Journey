@@ -24,12 +24,12 @@ declare module "@package/com/mojang/realmsclient" {
     export class $RealmsMainScreen$ButtonEntry extends $RealmsMainScreen$Entry {
     }
     export class $RealmsAvailability$Result extends $Record {
+        createErrorScreen(lastScreen: $Screen): $Screen;
         type(): $RealmsAvailability$Type;
         exception(): $RealmsServiceException;
-        createErrorScreen(lastScreen: $Screen): $Screen;
+        constructor(type: $RealmsAvailability$Type_);
         constructor(arg0: $RealmsAvailability$Type_, arg1: $RealmsServiceException | null);
         constructor(exception: $RealmsServiceException);
-        constructor(type: $RealmsAvailability$Type_);
     }
     /**
      * Values that may be interpreted as {@link $RealmsAvailability$Result}.
@@ -60,6 +60,7 @@ declare module "@package/com/mojang/realmsclient" {
         focused: boolean;
         static BIG_WIDTH: number;
         static DEFAULT_SPACING: number;
+        height: number;
     }
     export class $RealmsMainScreen$ServerEntry extends $RealmsMainScreen$Entry {
     }
@@ -77,6 +78,7 @@ declare module "@package/com/mojang/realmsclient" {
         focused: boolean;
         static BIG_WIDTH: number;
         static DEFAULT_SPACING: number;
+        height: number;
     }
     export class $RealmsMainScreen$Entry extends $ObjectSelectionList$Entry<$RealmsMainScreen$Entry> {
     }
@@ -98,12 +100,12 @@ declare module "@package/com/mojang/realmsclient" {
     export class $RealmsMainScreen$NotificationMessageEntry extends $RealmsMainScreen$Entry {
     }
     export class $Unit extends $Enum<$Unit> {
+        static convertTo(bytes: number, arg1: $Unit_): number;
+        static humanReadable(bytes: number, arg1: $Unit_): string;
+        static humanReadable(bytes: number): string;
         static values(): $Unit[];
         static valueOf(arg0: string): $Unit;
-        static convertTo(bytes: number, arg1: $Unit_): number;
         static getLargest(bytes: number): $Unit;
-        static humanReadable(bytes: number): string;
-        static humanReadable(bytes: number, arg1: $Unit_): string;
         static B: $Unit;
         static MB: $Unit;
         static KB: $Unit;
@@ -120,18 +122,15 @@ declare module "@package/com/mojang/realmsclient" {
      */
     export type $RealmsMainScreen$LayoutState_ = "loading" | "no_realms" | "list";
     export class $RealmsMainScreen extends $RealmsScreen {
-        init(): void;
-        static play(realmsServer: $RealmsServer | null, lastScreen: $Screen, allowSnapshots: boolean): void;
-        static play(realmsServer: $RealmsServer | null, lastScreen: $Screen): void;
-        /**
-         * @return `true` if the GUI element is dragging, `false` otherwise
-         */
-        static isSnapshot(): boolean;
         static refreshPendingInvites(): void;
-        static refreshServerList(): void;
-        static getVersionComponent(version: string, color: number): $Component;
         static getVersionComponent(version: string, compatible: boolean): $Component;
+        static getVersionComponent(version: string, color: number): $Component;
+        static refreshServerList(): void;
         resetScreen(): void;
+        init(): void;
+        static isSnapshot(): boolean;
+        static play(realmsServer: $RealmsServer | null, lastScreen: $Screen): void;
+        static play(realmsServer: $RealmsServer | null, lastScreen: $Screen, allowSnapshots: boolean): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -152,13 +151,19 @@ declare module "@package/com/mojang/realmsclient" {
     export class $RealmsMainScreen$ParentEntry extends $RealmsMainScreen$Entry {
     }
     export class $RealmsMainScreen$RealmSelectionList extends $RealmsObjectSelectionList<$RealmsMainScreen$Entry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $RealmsMainScreen$Entry;
+        height: number;
     }
 }

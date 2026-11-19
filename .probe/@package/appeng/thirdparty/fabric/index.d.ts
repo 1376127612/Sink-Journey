@@ -33,12 +33,19 @@ declare module "@package/appeng/thirdparty/fabric" {
         static VANILLA_VERTEX_STRIDE: number;
     }
     export interface $QuadView {
-        posByIndex(arg0: number, arg1: number): number;
-        copyUv(arg0: number, arg1: $Vector2f): $Vector2f;
-        copyPos(arg0: number, arg1: $Vector3f): $Vector3f;
-        copyNormal(arg0: number, arg1: $Vector3f): $Vector3f;
+        toBakedQuad(arg0: $TextureAtlasSprite): $BakedQuad;
+        normalZ(arg0: number): number;
+        cullFace(): $Direction;
+        colorIndex(): number;
+        lightFace(): $Direction;
         nominalFace(): $Direction;
         toBlockBakedQuad(): $BakedQuad;
+        hasShade(): boolean;
+        faceNormal(): $Vector3f;
+        copyPos(arg0: number, arg1: $Vector3f): $Vector3f;
+        copyUv(arg0: number, arg1: $Vector2f): $Vector2f;
+        posByIndex(arg0: number, arg1: number): number;
+        copyNormal(arg0: number, arg1: $Vector3f): $Vector3f;
         x(arg0: number): number;
         v(arg0: number): number;
         z(arg0: number): number;
@@ -48,18 +55,11 @@ declare module "@package/appeng/thirdparty/fabric" {
         tag(): number;
         normalX(arg0: number): number;
         normalY(arg0: number): number;
+        hasNormal(arg0: number): boolean;
         copyTo(arg0: $MutableQuadView): void;
+        hasAmbientOcclusion(): boolean;
         lightmap(arg0: number): number;
         toVanilla(arg0: number[], arg1: number): void;
-        normalZ(arg0: number): number;
-        lightFace(): $Direction;
-        cullFace(): $Direction;
-        hasNormal(arg0: number): boolean;
-        colorIndex(): number;
-        faceNormal(): $Vector3f;
-        hasAmbientOcclusion(): boolean;
-        hasShade(): boolean;
-        toBakedQuad(arg0: $TextureAtlasSprite): $BakedQuad;
     }
     export class $MutableQuadView {
         static getInstance(): $MutableQuadView;
@@ -74,8 +74,10 @@ declare module "@package/appeng/thirdparty/fabric" {
         static get instance(): $MutableQuadView;
     }
     export interface $MutableQuadView extends $QuadView {
-        spriteBake(arg0: $TextureAtlasSprite, arg1: number): $MutableQuadView;
+        cullFace(arg0: $Direction_): $MutableQuadView;
+        colorIndex(arg0: number): $MutableQuadView;
         nominalFace(arg0: $Direction_): $MutableQuadView;
+        spriteBake(arg0: $TextureAtlasSprite, arg1: number): $MutableQuadView;
         color(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
         color(arg0: number, arg1: number): $MutableQuadView;
         pos(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
@@ -83,15 +85,13 @@ declare module "@package/appeng/thirdparty/fabric" {
         normal(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
         normal(arg0: number, arg1: $Vector3f): $MutableQuadView;
         tag(arg0: number): $MutableQuadView;
-        uv(arg0: number, arg1: number, arg2: number): $MutableQuadView;
-        uv(arg0: number, arg1: $Vector2f): $MutableQuadView;
-        ambientOcclusion(arg0: boolean): $MutableQuadView;
         shade(arg0: boolean): $MutableQuadView;
-        lightmap(arg0: number, arg1: number): $MutableQuadView;
-        lightmap(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
-        cullFace(arg0: $Direction_): $MutableQuadView;
-        colorIndex(arg0: number): $MutableQuadView;
         fromVanilla(arg0: number[], arg1: number): $MutableQuadView;
         fromVanilla(arg0: $BakedQuad, arg1: $Direction_): $MutableQuadView;
+        ambientOcclusion(arg0: boolean): $MutableQuadView;
+        lightmap(arg0: number, arg1: number): $MutableQuadView;
+        lightmap(arg0: number, arg1: number, arg2: number, arg3: number): $MutableQuadView;
+        uv(arg0: number, arg1: number, arg2: number): $MutableQuadView;
+        uv(arg0: number, arg1: $Vector2f): $MutableQuadView;
     }
 }

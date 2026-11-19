@@ -6,19 +6,19 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/net/irisshaders/iris/pbr/texture" {
     export class $PBRAtlasHolder {
-        cycleAnimationFrames(): void;
         setSpecularAtlas(arg0: $PBRAtlasTexture): void;
         getNormalAtlas(): $PBRAtlasTexture;
-        getSpecularAtlas(): $PBRAtlasTexture;
         setNormalAtlas(arg0: $PBRAtlasTexture): void;
+        getSpecularAtlas(): $PBRAtlasTexture;
+        cycleAnimationFrames(): void;
         constructor();
     }
     export class $PBRSpriteHolder {
-        setNormalSprite(arg0: $TextureAtlasSprite): void;
-        setSpecularSprite(arg0: $TextureAtlasSprite): void;
-        close(): void;
         getSpecularSprite(): $TextureAtlasSprite;
         getNormalSprite(): $TextureAtlasSprite;
+        close(): void;
+        setNormalSprite(arg0: $TextureAtlasSprite): void;
+        setSpecularSprite(arg0: $TextureAtlasSprite): void;
         constructor();
     }
     export class $PBRAtlasTexture extends $AbstractTexture implements $PBRDumpable {
@@ -26,20 +26,20 @@ declare module "@package/net/irisshaders/iris/pbr/texture" {
         getType(): $PBRType;
         upload(arg0: number, arg1: number, arg2: number): void;
         getSprite(arg0: $ResourceLocation_): $AtlasPBRLoader$PBRTextureAtlasSprite;
-        getAtlasId(): $ResourceLocation;
+        cycleAnimationFrames(): void;
         dumpContents(arg0: $ResourceLocation_, arg1: $Path_): void;
         getDefaultDumpLocation(): $ResourceLocation;
-        cycleAnimationFrames(): void;
         addSprite(arg0: $AtlasPBRLoader$PBRTextureAtlasSprite): void;
-        tryUpload(arg0: number, arg1: number, arg2: number): boolean;
         static syncAnimation(arg0: $SpriteContents$Ticker, arg1: $SpriteContents$Ticker): void;
+        tryUpload(arg0: number, arg1: number, arg2: number): boolean;
+        getAtlasId(): $ResourceLocation;
         static NOT_ASSIGNED: number;
         mipmap: boolean;
         blur: boolean;
         constructor(arg0: $TextureAtlas, arg1: $PBRType_);
         get type(): $PBRType;
-        get atlasId(): $ResourceLocation;
         get defaultDumpLocation(): $ResourceLocation;
+        get atlasId(): $ResourceLocation;
     }
     export class $SpriteContentsExtension {
     }
@@ -61,9 +61,9 @@ declare module "@package/net/irisshaders/iris/pbr/texture" {
         getDefaultValue(): number;
         static values(): $PBRType[];
         static valueOf(arg0: string): $PBRType;
-        appendSuffix(arg0: string): string;
         getSuffix(): string;
         static removeSuffix(arg0: string): string;
+        appendSuffix(arg0: string): string;
         static fromFileLocation(arg0: string): $PBRType;
         static SPECULAR: $PBRType;
         static NORMAL: $PBRType;

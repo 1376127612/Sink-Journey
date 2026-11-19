@@ -15,17 +15,17 @@ import { $BlockEntityType, $BlockEntityType_ } from "@package/net/minecraft/worl
 
 declare module "@package/com/simibubi/create/content/trains/display" {
     export class $FlapDisplaySection {
+        rightAligned(): $FlapDisplaySection;
+        renderCharsIndividually(): boolean;
         getSize(): number;
         update(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         static load(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $FlapDisplaySection;
         write(arg0: $HolderLookup$Provider): $CompoundTag;
-        setText(arg0: $Component_): void;
         refresh(arg0: boolean): void;
-        getText(): $Component;
         tick(arg0: boolean, arg1: $RandomSource): number;
-        renderCharsIndividually(): boolean;
+        setText(arg0: $Component_): void;
+        getText(): $Component;
         wideFlaps(): $FlapDisplaySection;
-        rightAligned(): $FlapDisplaySection;
         static getFlapCycle(arg0: string): string[];
         static WIDE_MONOSPACE: number;
         static MONOSPACE: number;
@@ -41,19 +41,19 @@ declare module "@package/com/simibubi/create/content/trains/display" {
         constructor(arg0: $Train, arg1: number, arg2: $MutableComponent_, arg3: string);
     }
     export class $FlapDisplayBlockEntity extends $KineticBlockEntity {
-        getLines(): $List<$FlapDisplayLayout>;
-        updateControllerStatus(): void;
-        initDefaultSections(): void;
-        getDirection(): $Direction;
         setGlowing(arg0: number): void;
-        setColour(arg0: number, arg1: $DyeColor_): void;
-        getLineColor(arg0: number): number;
-        getController(): $FlapDisplayBlockEntity;
-        applyTextManually(arg0: number, arg1: $Component_): void;
         getLineIndexAt(arg0: number): number;
+        getLineColor(arg0: number): number;
         isLineGlowing(arg0: number): boolean;
+        setColour(arg0: number, arg1: $DyeColor_): void;
+        applyTextManually(arg0: number, arg1: $Component_): void;
         getMaxCharCount(arg0: number): number;
         getMaxCharCount(): number;
+        initDefaultSections(): void;
+        updateControllerStatus(): void;
+        getDirection(): $Direction;
+        getLines(): $List<$FlapDisplayLayout>;
+        getController(): $FlapDisplayBlockEntity;
         blockState: $BlockState;
         glowingLines: boolean[];
         level: $Level;
@@ -79,17 +79,17 @@ declare module "@package/com/simibubi/create/content/trains/display" {
         preventSpeedUpdate: number;
         customPersistentData: $CompoundTag;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get direction(): $Direction;
         set glowing(value: number);
+        get direction(): $Direction;
         get controller(): $FlapDisplayBlockEntity;
     }
     export class $FlapDisplayLayout {
+        loadDefault(arg0: number): void;
+        isLayout(arg0: string): boolean;
         write(arg0: $HolderLookup$Provider): $CompoundTag;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         configure(arg0: string, arg1: $List_<$FlapDisplaySection>): void;
         getSections(): $List<$FlapDisplaySection>;
-        loadDefault(arg0: number): void;
-        isLayout(arg0: string): boolean;
         constructor(arg0: number);
         get sections(): $List<$FlapDisplaySection>;
     }

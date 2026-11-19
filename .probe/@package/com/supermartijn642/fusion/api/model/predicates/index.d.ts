@@ -15,16 +15,16 @@ declare module "@package/com/supermartijn642/fusion/api/model/predicates" {
         static of(predicate: $ItemModelPredicate): $ModelPredicate;
     }
     export interface $ModelPredicate {
+        simplify(): $ModelPredicate;
+        alwaysFalse(): boolean;
+        testForItem(stack: $ItemStack_): boolean;
+        testForBlockState(level: $BlockAndTintGetter, pos: $BlockPos_, state: $BlockState_): boolean;
+        alwaysTrue(): boolean;
+        getSerializer(): $Serializer<$ModelPredicate>;
         or(...predicates: $ModelPredicate[]): $ModelPredicate;
         negate(): $ModelPredicate;
         and(...predicates: $ModelPredicate[]): $ModelPredicate;
-        alwaysTrue(): boolean;
         applyTransform(transform: $ModelTransform): $ModelPredicate;
-        alwaysFalse(): boolean;
-        simplify(): $ModelPredicate;
-        getSerializer(): $Serializer<$ModelPredicate>;
-        testForItem(stack: $ItemStack_): boolean;
-        testForBlockState(level: $BlockAndTintGetter, pos: $BlockPos_, state: $BlockState_): boolean;
         get serializer(): $Serializer<$ModelPredicate>;
     }
 }

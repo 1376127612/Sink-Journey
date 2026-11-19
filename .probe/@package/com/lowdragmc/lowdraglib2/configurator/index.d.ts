@@ -1,7 +1,9 @@
 import { $Function_, $Consumer_, $BiConsumer_ } from "@package/java/util/function";
 import { $INBTSerializable } from "@package/net/neoforged/neoforge/common/util";
-import { $Tag } from "@package/net/minecraft/nbt";
+import { $HolderLookup$Provider } from "@package/net/minecraft/core";
+import { $CompoundTag, $CompoundTag_, $Tag } from "@package/net/minecraft/nbt";
 import { $Component, $Component_ } from "@package/net/minecraft/network/chat";
+import { $IPersistedSerializable } from "@package/com/lowdragmc/lowdraglib2/syncdata";
 import { $Object, $Runnable_ } from "@package/java/lang";
 import { $ConfiguratorGroup, $Configurator } from "@package/com/lowdragmc/lowdraglib2/configurator/ui";
 import { $IHistoryStack } from "@package/com/lowdragmc/lowdraglib2/gui/ui/utils";
@@ -9,14 +11,24 @@ export * as ui from "@package/com/lowdragmc/lowdraglib2/configurator/ui";
 export * as annotation from "@package/com/lowdragmc/lowdraglib2/configurator/annotation";
 
 declare module "@package/com/lowdragmc/lowdraglib2/configurator" {
+    export class $IToggleConfigurable {
+    }
+    export interface $IToggleConfigurable extends $IConfigurable, $IPersistedSerializable {
+        deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        skipDisableSerialize(): boolean;
+        buildConfigurator(arg0: $ConfiguratorGroup): void;
+        isEnable(): boolean;
+        setEnable(arg0: boolean): void;
+    }
     export class $SerializableRecordAction<T extends $INBTSerializable<never>> implements $EditAction {
-        static of<T extends $INBTSerializable<never>>(arg0: T, arg1: $Function_<T, $Tag>, arg2: $BiConsumer_<T, $Tag>): $SerializableRecordAction<T>;
-        static of<T extends $INBTSerializable<never>>(arg0: T): $SerializableRecordAction<T>;
-        execute(): void;
-        setOnExecute(arg0: $Consumer_<T>): $SerializableRecordAction<T>;
         undo(): void;
-        setOnUndo(arg0: $Consumer_<T>): $SerializableRecordAction<T>;
         updateSnapshot(): void;
+        setOnExecute(arg0: $Consumer_<T>): $SerializableRecordAction<T>;
+        static of<T extends $INBTSerializable<never>>(arg0: T): $SerializableRecordAction<T>;
+        static of<T extends $INBTSerializable<never>>(arg0: T, arg1: $Function_<T, $Tag>, arg2: $BiConsumer_<T, $Tag>): $SerializableRecordAction<T>;
+        execute(): void;
+        setOnUndo(arg0: $Consumer_<T>): $SerializableRecordAction<T>;
         setOnAction(arg0: $Consumer_<T>): $SerializableRecordAction<T>;
         mergeExecuteAfter(arg0: $EditAction): $EditAction;
         mergeExecuteBefore(arg0: $EditAction): $EditAction;
@@ -41,9 +53,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/configurator" {
     }
     export interface $IConfigurable {
         buildConfigurator(arg0: $ConfiguratorGroup): void;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
         get configurableName(): string;
     }
     export class $IConfigurableHistory$Handle {
@@ -58,9 +70,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/configurator" {
         static of(arg0: $Runnable_, arg1: $Runnable_): $EditAction;
     }
     export interface $EditAction {
-        execute(): void;
         undo(): void;
         mergeExecuteAfter(arg0: $EditAction): $EditAction;
+        execute(): void;
         mergeExecuteBefore(arg0: $EditAction): $EditAction;
     }
 }

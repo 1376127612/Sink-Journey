@@ -16,33 +16,33 @@ export * as content from "@package/dev/latvian/apps/tinyserver/content";
 
 declare module "@package/dev/latvian/apps/tinyserver" {
     export class $OptionalString extends $Record {
+        isMissing(): boolean;
+        asBoolean(): boolean;
+        asBoolean(def: boolean): boolean;
+        asLong(): number;
+        asLong(def: number): number;
+        asFloat(def: number): number;
+        asFloat(): number;
         value(): string;
         static of(str: string): $OptionalString;
         isPresent(): boolean;
         as<T>(mapper: $Function_<string, T>): T;
         as<T>(mapper: $Function_<string, T>, def: T): T;
-        asString(def: string): string;
-        asString(): string;
         asInt(): number;
         asInt(def: number): number;
-        asDouble(): number;
+        asString(): string;
+        asString(def: string): string;
         asDouble(def: number): number;
-        asFloat(def: number): number;
-        asFloat(): number;
-        asLong(): number;
-        asLong(def: number): number;
-        isMissing(): boolean;
-        asBoolean(): boolean;
-        asBoolean(def: boolean): boolean;
+        asDouble(): number;
         require(): $OptionalString;
-        asZoneId(): $ZoneId;
-        asULong(): number;
         asULong(def: number): number;
+        asULong(): number;
+        asZoneId(): $ZoneId;
         static MISSING: $OptionalString;
         static EMPTY: $OptionalString;
         constructor(value: string);
-        get present(): boolean;
         get missing(): boolean;
+        get present(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $OptionalString}.
@@ -56,7 +56,7 @@ declare module "@package/dev/latvian/apps/tinyserver" {
     /**
      * Values that may be interpreted as {@link $StatusCode}.
      */
-    export type $StatusCode_ = { message?: string, code?: number,  } | [message?: string, code?: number, ];
+    export type $StatusCode_ = { code?: number, message?: string,  } | [code?: number, message?: string, ];
     export class $CompiledPath$Part extends $Record {
         name(): string;
         matches(string: string): boolean;
@@ -66,18 +66,17 @@ declare module "@package/dev/latvian/apps/tinyserver" {
     /**
      * Values that may be interpreted as {@link $CompiledPath$Part}.
      */
-    export type $CompiledPath$Part_ = { name?: string, variable?: boolean,  } | [name?: string, variable?: boolean, ];
+    export type $CompiledPath$Part_ = { variable?: boolean, name?: string,  } | [variable?: boolean, name?: string, ];
     export class $HTTPConnection<REQ extends $HTTPRequest> implements $Runnable {
-        readDirectly(buffer: $ByteBuffer): number;
-        writeDirectly(buffer: $ByteBuffer): void;
+        readCRLF(): string;
         run(): void;
         write(buffer: $ByteBuffer): void;
         read(buffer: $ByteBuffer): void;
-        close(): void;
         close(reason: string, error: boolean): void;
+        close(): void;
         readInt(): number;
-        readBytes(bytes: number[]): void;
         readBytes(bytes: number[], off: number, len: number): void;
+        readBytes(bytes: number[]): void;
         readFloat(): number;
         readLong(): number;
         readByte(): number;
@@ -85,7 +84,8 @@ declare module "@package/dev/latvian/apps/tinyserver" {
         readDouble(): number;
         server(): $HTTPServer<REQ>;
         upgrade(): $HTTPUpgrade<REQ>;
-        readCRLF(): string;
+        writeDirectly(buffer: $ByteBuffer): void;
+        readDirectly(buffer: $ByteBuffer): number;
         static SOCKET_CLOSED: $StatusCode;
         static CLOSED: $StatusCode;
         static INVALID_REQUEST: $StatusCode;
@@ -95,75 +95,75 @@ declare module "@package/dev/latvian/apps/tinyserver" {
         constructor(server: $HTTPServer<REQ>, socketChannel: $SocketChannel, createdTime: $Instant);
     }
     export class $HTTPServer<REQ extends $HTTPRequest> implements $Runnable, $ServerRegistry<REQ> {
+        setServerName(name: string): void;
+        setAddress(address: string): void;
+        setKeepAliveTimeout(duration: $Duration_): void;
+        setMaxKeepAliveConnections(max: number): void;
         run(): void;
         setDaemon(daemon: boolean): void;
         start(): number;
         stop(): void;
         handlers(): $Stream<$HTTPPathHandler<REQ>>;
+        connections(): $Set<$HTTPConnection<REQ>>;
+        http(method: $HTTPMethod_, path: string, handler: $HTTPHandler_<REQ>): void;
+        isRunning(): boolean;
+        setBufferSize(bufferSize: number): void;
         createBuilder(req: REQ, handler: $HTTPHandler_<REQ>): $HTTPPayload;
         setPort(port: number): void;
         setPort(range: $IntStream): void;
-        connections(): $Set<$HTTPConnection<REQ>>;
-        isRunning(): boolean;
-        http(method: $HTTPMethod_, path: string, handler: $HTTPHandler_<REQ>): void;
-        setBufferSize(bufferSize: number): void;
-        setServerName(name: string): void;
-        setKeepAliveTimeout(duration: $Duration_): void;
-        setMaxKeepAliveConnections(max: number): void;
-        setAddress(address: string): void;
+        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
+        staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        acceptPostTask(path: string, task: $Runnable_): void;
+        acceptPostString(path: string, handler: $Consumer_<string>): void;
         get(path: string, handler: $HTTPHandler_<REQ>): void;
         put(path: string, handler: $HTTPHandler_<REQ>): void;
         "delete"(path: string, handler: $HTTPHandler_<REQ>): void;
         patch(path: string, handler: $HTTPHandler_<REQ>): void;
-        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         ws<WSS extends $WSSession<REQ>>(path: string): $WSHandler<REQ, WSS>;
-        redirect(path: string, redirect: string): void;
+        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         post(path: string, handler: $HTTPHandler_<REQ>): void;
-        acceptPostTask(path: string, task: $Runnable_): void;
-        acceptPostString(path: string, handler: $Consumer_<string>): void;
-        dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
-        staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
-        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
+        redirect(path: string, redirect: string): void;
         constructor(requestFactory: $Supplier_<REQ>);
+        set serverName(value: string);
+        set address(value: string);
+        set keepAliveTimeout(value: $Duration_);
+        set maxKeepAliveConnections(value: number);
         set daemon(value: boolean);
         get running(): boolean;
         set bufferSize(value: number);
-        set serverName(value: string);
-        set keepAliveTimeout(value: $Duration_);
-        set maxKeepAliveConnections(value: number);
-        set address(value: string);
     }
     export class $CompiledPath extends $Record {
+        variables(): number;
         matches(path: string[]): string[];
         static compile(string: string): $CompiledPath;
         parts(): $CompiledPath$Part[];
         string(): string;
         wildcard(): boolean;
-        variables(): number;
         static EMPTY: $CompiledPath;
         constructor(parts: $CompiledPath$Part_[], string: string, variables: number, wildcard: boolean);
     }
     /**
      * Values that may be interpreted as {@link $CompiledPath}.
      */
-    export type $CompiledPath_ = { variables?: number, wildcard?: boolean, string?: string, parts?: $CompiledPath$Part_[],  } | [variables?: number, wildcard?: boolean, string?: string, parts?: $CompiledPath$Part_[], ];
+    export type $CompiledPath_ = { wildcard?: boolean, string?: string, parts?: $CompiledPath$Part_[], variables?: number,  } | [wildcard?: boolean, string?: string, parts?: $CompiledPath$Part_[], variables?: number, ];
     export class $ServerRegistry<REQ extends $HTTPRequest> {
     }
     export interface $ServerRegistry<REQ extends $HTTPRequest> {
+        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
+        staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
+        acceptPostTask(path: string, task: $Runnable_): void;
+        acceptPostString(path: string, handler: $Consumer_<string>): void;
         get(path: string, handler: $HTTPHandler_<REQ>): void;
         put(path: string, handler: $HTTPHandler_<REQ>): void;
         "delete"(path: string, handler: $HTTPHandler_<REQ>): void;
         patch(path: string, handler: $HTTPHandler_<REQ>): void;
-        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         ws<WSS extends $WSSession<REQ>>(path: string): $WSHandler<REQ, WSS>;
-        redirect(path: string, redirect: string): void;
+        ws<WSS extends $WSSession<REQ>>(path: string, factory: $WSSessionFactory_<REQ, WSS>): $WSHandler<REQ, WSS>;
         post(path: string, handler: $HTTPHandler_<REQ>): void;
+        redirect(path: string, redirect: string): void;
         http(method: $HTTPMethod_, path: string, handler: $HTTPHandler_<REQ>): void;
-        acceptPostTask(path: string, task: $Runnable_): void;
-        acceptPostString(path: string, handler: $Consumer_<string>): void;
-        dynamicFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
-        staticFiles(path: string, directory: $Path_, responseHandler: $FileResponseHandler_, autoIndex: boolean): void;
-        singleFile(path: string, file: $Path_, responseHandler: $FileResponseHandler_): void;
     }
     /**
      * Values that may be interpreted as {@link $ServerRegistry}.

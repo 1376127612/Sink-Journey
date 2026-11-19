@@ -7,34 +7,34 @@ import { $IIngredientCollection } from "@package/org/cyclops/cyclopscore/ingredi
 
 declare module "@package/org/cyclops/integrateddynamics/api/ingredient" {
     export class $IIngredientComponentStorageObservable$StorageChangeEvent<T, M> {
-        isCompleteChange(): boolean;
-        getChannel(): number;
-        getDiff(): $IngredientCollectionDiff<T, M>;
-        getPos(): $PrioritizedPartPos;
         getInstances(): $IIngredientCollection<T, M>;
+        getPos(): $PrioritizedPartPos;
+        isCompleteChange(): boolean;
+        getDiff(): $IngredientCollectionDiff<T, M>;
         getChangeType(): $IIngredientComponentStorageObservable$Change;
+        getChannel(): number;
         isInitialChange(): boolean;
         constructor(arg0: number, arg1: $PrioritizedPartPos, arg2: $IIngredientComponentStorageObservable$Change_, arg3: boolean, arg4: $IIngredientCollection<T, M>, arg5: boolean);
-        get completeChange(): boolean;
-        get channel(): number;
-        get diff(): $IngredientCollectionDiff<T, M>;
-        get pos(): $PrioritizedPartPos;
         get instances(): $IIngredientCollection<T, M>;
+        get pos(): $PrioritizedPartPos;
+        get completeChange(): boolean;
+        get diff(): $IngredientCollectionDiff<T, M>;
         get changeType(): $IIngredientComponentStorageObservable$Change;
+        get channel(): number;
         get initialChange(): boolean;
     }
     export class $IIngredientComponentStorageObservable<T, M> {
     }
     export interface $IIngredientComponentStorageObservable<T, M> {
+        scheduleObservation(): void;
+        scheduleObservationForced(arg0: number, arg1: $PartPos): void;
+        isObservationForcedPending(arg0: number): boolean;
+        shouldObserve(): boolean;
+        runObserverSync(): void;
+        getChannelIndex(arg0: number): $IIngredientPositionsIndex<T, M>;
         addObserver(arg0: $IIngredientComponentStorageObservable$IIndexChangeObserver_<T, M>): void;
         removeObserver(arg0: $IIngredientComponentStorageObservable$IIndexChangeObserver_<T, M>): void;
         getComponent(): $IngredientComponent<T, M>;
-        getChannelIndex(arg0: number): $IIngredientPositionsIndex<T, M>;
-        shouldObserve(): boolean;
-        runObserverSync(): void;
-        scheduleObservation(): void;
-        isObservationForcedPending(arg0: number): boolean;
-        scheduleObservationForced(arg0: number, arg1: $PartPos): void;
         get component(): $IngredientComponent<T, M>;
     }
     export class $IIngredientPositionsIndex<T, M> {

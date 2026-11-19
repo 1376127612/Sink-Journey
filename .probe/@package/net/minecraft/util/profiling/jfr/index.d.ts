@@ -34,44 +34,44 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         recordingStopped(outputPath: $Path_ | null): void;
     }
     export class $JfrProfiler implements $JvmProfiler {
-        onPacketReceived(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
-        onRegionFileWrite(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
-        onChunkGenerate(chunkPos: $ChunkPos, level: $ResourceKey_<$Level>, name: string): $ProfiledDuration;
-        onPacketSent(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
-        onRegionFileRead(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
+        onServerTick(currentAverageTickTime: number): void;
+        onWorldLoadedStarted(): $ProfiledDuration;
         static getInstance(): $JfrProfiler;
         start(environment: $Environment_): boolean;
         stop(): $Path;
-        isRunning(): boolean;
         isAvailable(): boolean;
-        onServerTick(currentAverageTickTime: number): void;
-        onWorldLoadedStarted(): $ProfiledDuration;
+        isRunning(): boolean;
+        onPacketSent(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
+        onRegionFileRead(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
+        onPacketReceived(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
+        onChunkGenerate(chunkPos: $ChunkPos, level: $ResourceKey_<$Level>, name: string): $ProfiledDuration;
+        onRegionFileWrite(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
         static TICK_CATEGORY: string;
         static WORLD_GEN_CATEGORY: string;
         static STORAGE_CATEGORY: string;
         static NETWORK_CATEGORY: string;
         static ROOT_CATEGORY: string;
         static get instance(): $JfrProfiler;
-        get running(): boolean;
         get available(): boolean;
+        get running(): boolean;
     }
     export class $JvmProfiler {
         static INSTANCE: $JvmProfiler;
     }
     export interface $JvmProfiler {
-        onPacketReceived(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
-        onRegionFileWrite(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
-        onChunkGenerate(chunkPos: $ChunkPos, level: $ResourceKey_<$Level>, name: string): $ProfiledDuration;
-        onPacketSent(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
-        onRegionFileRead(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
-        start(environment: $Environment_): boolean;
-        stop(): $Path;
-        isRunning(): boolean;
-        isAvailable(): boolean;
         onServerTick(currentAverageTickTime: number): void;
         onWorldLoadedStarted(): $ProfiledDuration;
-        get running(): boolean;
+        start(environment: $Environment_): boolean;
+        stop(): $Path;
+        isAvailable(): boolean;
+        isRunning(): boolean;
+        onPacketSent(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
+        onRegionFileRead(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
+        onPacketReceived(protocol: $ConnectionProtocol_, packetType: $PacketType_<never>, address: $SocketAddress, size: number): void;
+        onChunkGenerate(chunkPos: $ChunkPos, level: $ResourceKey_<$Level>, name: string): $ProfiledDuration;
+        onRegionFileWrite(regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos, version: $RegionFileVersion, bytes: number): void;
         get available(): boolean;
+        get running(): boolean;
     }
     export class $Percentiles {
         static evaluate(input: number[]): $Map<number, number>;
@@ -79,19 +79,19 @@ declare module "@package/net/minecraft/util/profiling/jfr" {
         static DEFAULT_INDEXES: $Quantiles$ScaleAndIndexes;
     }
     export class $JvmProfiler$NoOpProfiler implements $JvmProfiler {
-        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
-        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
-        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
-        start(arg0: $Environment_): boolean;
-        stop(): $Path;
-        isRunning(): boolean;
-        isAvailable(): boolean;
         onServerTick(arg0: number): void;
         onWorldLoadedStarted(): $ProfiledDuration;
+        start(arg0: $Environment_): boolean;
+        stop(): $Path;
+        isAvailable(): boolean;
+        isRunning(): boolean;
+        onPacketSent(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onRegionFileRead(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
+        onPacketReceived(arg0: $ConnectionProtocol_, arg1: $PacketType_<never>, arg2: $SocketAddress, arg3: number): void;
+        onChunkGenerate(arg0: $ChunkPos, arg1: $ResourceKey_<$Level>, arg2: string): $ProfiledDuration;
+        onRegionFileWrite(arg0: $RegionStorageInfo_, arg1: $ChunkPos, arg2: $RegionFileVersion, arg3: number): void;
         constructor();
-        get running(): boolean;
         get available(): boolean;
+        get running(): boolean;
     }
 }

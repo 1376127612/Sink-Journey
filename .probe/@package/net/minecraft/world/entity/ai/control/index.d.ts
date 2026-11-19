@@ -25,38 +25,38 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
      */
     export type $MoveControl$Operation_ = "wait" | "move_to" | "strafe" | "jumping";
     export class $LookControl implements $Control {
-        /**
-         * Updates look
-         */
-        tick(): void;
-        /**
-         * Sets the mob's look vector
-         */
-        setLookAt(lookVector: $Vec3_): void;
-        /**
-         * Sets position to look at
-         */
-        setLookAt(x: number, arg1: number, y: number, arg3: number, z: number): void;
-        setLookAt(x: number, arg1: number, y: number): void;
-        /**
-         * Sets position to look at using entity
-         */
-        setLookAt(entity: $Entity, deltaYaw: number, deltaPitch: number): void;
+        getWantedZ(): number;
+        getWantedY(): number;
+        getWantedX(): number;
         /**
          * Sets the controlling mob's look vector to the provided entity's location
          */
         setLookAt(entity: $Entity): void;
-        getWantedX(): number;
-        getWantedZ(): number;
-        getWantedY(): number;
+        /**
+         * Sets the mob's look vector
+         */
+        setLookAt(lookVector: $Vec3_): void;
+        setLookAt(x: number, arg1: number, y: number): void;
+        /**
+         * Sets position to look at
+         */
+        setLookAt(x: number, arg1: number, y: number, arg3: number, z: number): void;
+        /**
+         * Sets position to look at using entity
+         */
+        setLookAt(entity: $Entity, deltaYaw: number, deltaPitch: number): void;
         isLookingAtTarget(): boolean;
+        /**
+         * Updates look
+         */
+        tick(): void;
         xMaxRotAngle: number;
         yMaxRotSpeed: number;
         lookAtCooldown: number;
         constructor(mob: $Mob);
-        get wantedX(): number;
         get wantedZ(): number;
         get wantedY(): number;
+        get wantedX(): number;
         get lookingAtTarget(): boolean;
     }
     export class $SmoothSwimmingMoveControl extends $MoveControl {
@@ -77,26 +77,26 @@ declare module "@package/net/minecraft/world/entity/ai/control" {
         constructor(mob: $Mob);
     }
     export class $MoveControl implements $Control {
-        tick(): void;
+        getWantedZ(): number;
         /**
          * @return If the mob is currently trying to go somewhere
          */
         hasWanted(): boolean;
-        strafe(forward: number, strafe: number): void;
-        getWantedX(): number;
-        getWantedZ(): number;
         getWantedY(): number;
-        getSpeedModifier(): number;
+        getWantedX(): number;
+        strafe(forward: number, strafe: number): void;
         /**
          * Sets the speed and location to move to
          */
         setWantedPosition(x: number, arg1: number, y: number, arg3: number): void;
+        tick(): void;
+        getSpeedModifier(): number;
         static MIN_SPEED_SQR: number;
         static MIN_SPEED: number;
         constructor(mob: $Mob);
-        get wantedX(): number;
         get wantedZ(): number;
         get wantedY(): number;
+        get wantedX(): number;
         get speedModifier(): number;
     }
     export class $SmoothSwimmingLookControl extends $LookControl {

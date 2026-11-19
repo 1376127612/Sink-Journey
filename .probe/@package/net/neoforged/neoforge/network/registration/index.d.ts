@@ -28,27 +28,27 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
      */
     export type $NetworkChannel_ = { id?: $ResourceLocation_, chosenVersion?: string,  } | [id?: $ResourceLocation_, chosenVersion?: string, ];
     export class $PayloadRegistration<T extends $CustomPacketPayload> extends $Record {
-        matchesFlow(arg0: $PacketFlow_): boolean;
+        codec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
+        protocols(): $List<$ConnectionProtocol>;
         type(): $CustomPacketPayload$Type<T>;
         version(): string;
         id(): $ResourceLocation;
         handler(): $IPayloadHandler<T>;
         optional(): boolean;
-        protocols(): $List<$ConnectionProtocol>;
         flow(): ($PacketFlow) | undefined;
-        codec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
+        matchesFlow(arg0: $PacketFlow_): boolean;
         constructor(type: $CustomPacketPayload$Type_<T>, codec: $StreamCodec<$RegistryFriendlyByteBuf, T>, handler: $IPayloadHandler_<T>, protocols: $List_<$ConnectionProtocol_>, flow: ($PacketFlow_) | undefined, version: string, optional: boolean);
     }
     /**
      * Values that may be interpreted as {@link $PayloadRegistration}.
      */
-    export type $PayloadRegistration_<T> = { optional?: boolean, version?: string, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, protocols?: $List_<$ConnectionProtocol_>, flow?: ($PacketFlow_) | undefined, handler?: $IPayloadHandler_<$CustomPacketPayload>,  } | [optional?: boolean, version?: string, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, protocols?: $List_<$ConnectionProtocol_>, flow?: ($PacketFlow_) | undefined, handler?: $IPayloadHandler_<$CustomPacketPayload>, ];
+    export type $PayloadRegistration_<T> = { flow?: ($PacketFlow_) | undefined, handler?: $IPayloadHandler_<$CustomPacketPayload>, optional?: boolean, version?: string, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, protocols?: $List_<$ConnectionProtocol_>,  } | [flow?: ($PacketFlow_) | undefined, handler?: $IPayloadHandler_<$CustomPacketPayload>, optional?: boolean, version?: string, codec?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, type?: $CustomPacketPayload$Type_<$CustomPacketPayload_>, protocols?: $List_<$ConnectionProtocol_>, ];
     export class $NetworkPayloadSetup extends $Record {
         static from(arg0: $Map_<$ConnectionProtocol_, $NegotiationResult_>): $NetworkPayloadSetup;
         static empty(): $NetworkPayloadSetup;
         getChannel(arg0: $ConnectionProtocol_, arg1: $ResourceLocation_): $NetworkChannel;
-        channels(): $Map<$ConnectionProtocol, $Map<$ResourceLocation, $NetworkChannel>>;
         getChannels(arg0: $ConnectionProtocol_): $Map<$ResourceLocation, $NetworkChannel>;
+        channels(): $Map<$ConnectionProtocol, $Map<$ResourceLocation, $NetworkChannel>>;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $NetworkPayloadSetup>;
         constructor(channels: $Map_<$ConnectionProtocol_, $Map_<$ResourceLocation_, $NetworkChannel_>>);
     }
@@ -66,7 +66,7 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
     /**
      * Values that may be interpreted as {@link $ModdedPlayPayloadRegistration}.
      */
-    export type $ModdedPlayPayloadRegistration_<T> = { type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>,  } | [type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, ];
+    export type $ModdedPlayPayloadRegistration_<T> = { id?: $ResourceLocation_, reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>,  } | [id?: $ResourceLocation_, reader?: $StreamCodec<$RegistryFriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>, ];
     export class $HandlerThread extends $Enum<$HandlerThread> {
         static values(): $HandlerThread[];
         static valueOf(arg0: string): $HandlerThread;
@@ -87,29 +87,29 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
     /**
      * Values that may be interpreted as {@link $ModdedConfigurationPayloadRegistration}.
      */
-    export type $ModdedConfigurationPayloadRegistration_<T> = { type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>,  } | [type?: $Class<$CustomPacketPayload_>, id?: $ResourceLocation_, reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, ];
+    export type $ModdedConfigurationPayloadRegistration_<T> = { id?: $ResourceLocation_, reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>,  } | [id?: $ResourceLocation_, reader?: $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload_>, handler?: $IPayloadHandler_<$CustomPacketPayload>, type?: $Class<$CustomPacketPayload_>, ];
     export class $PayloadRegistrar {
+        configurationToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        configurationBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        commonToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        commonToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        configurationToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         optional(): $PayloadRegistrar;
+        playToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        playToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        playBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
+        commonBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         versioned(arg0: string): $PayloadRegistrar;
         executesOn(arg0: $HandlerThread_): $PayloadRegistrar;
-        commonBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        playToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        playBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        playToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        configurationToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        commonToClient<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        configurationBidirectional<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        configurationToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
-        commonToServer<T extends $CustomPacketPayload>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<$FriendlyByteBuf, T>, arg2: $IPayloadHandler_<T>): $PayloadRegistrar;
         constructor(arg0: string);
     }
     export class $ChannelAttributes {
+        static getOrCreateAdHocChannels(arg0: $Connection): $Set<$ResourceLocation>;
+        static getOrCreateCommonChannels(arg0: $Connection, arg1: $ConnectionProtocol_): $Set<$ResourceLocation>;
+        static getConnectionType(arg0: $Connection): $ConnectionType;
+        static setPayloadSetup(arg0: $Connection, arg1: $NetworkPayloadSetup_): void;
         static setConnectionType(arg0: $Connection, arg1: $ConnectionType_): void;
         static getPayloadSetup(arg0: $Connection): $NetworkPayloadSetup;
-        static setPayloadSetup(arg0: $Connection, arg1: $NetworkPayloadSetup_): void;
-        static getOrCreateCommonChannels(arg0: $Connection, arg1: $ConnectionProtocol_): $Set<$ResourceLocation>;
-        static getOrCreateAdHocChannels(arg0: $Connection): $Set<$ResourceLocation>;
-        static getConnectionType(arg0: $Connection): $ConnectionType;
         static PAYLOAD_SETUP: $AttributeKey<$NetworkPayloadSetup>;
         static CONNECTION_TYPE: $AttributeKey<$ConnectionType>;
         static ADHOC_CHANNELS: $AttributeKey<$Set<$ResourceLocation>>;
@@ -117,34 +117,34 @@ declare module "@package/net/neoforged/neoforge/network/registration" {
         constructor();
     }
     export class $NetworkRegistry {
+        static handleModdedPayload(arg0: $ServerCommonPacketListener, arg1: $ServerboundCustomPayloadPacket_): void;
+        static handleModdedPayload(arg0: $ClientCommonPacketListener, arg1: $ClientboundCustomPayloadPacket_): void;
+        static onMinecraftUnregister(arg0: $Connection, arg1: $Set_<$ResourceLocation_>): void;
+        static onMinecraftRegister(arg0: $Connection, arg1: $Set_<$ResourceLocation_>): void;
+        static getCodec(arg0: $ResourceLocation_, arg1: $ConnectionProtocol_, arg2: $PacketFlow_): $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload>;
+        static isModdedPayload(arg0: $CustomPacketPayload_): boolean;
+        static checkCommonVersion(arg0: $ICommonPacketListener, arg1: $CommonVersionPayload_): void;
+        static checkPacket(arg0: $Packet<never>, arg1: $ClientCommonPacketListener): void;
+        static checkPacket(arg0: $Packet<never>, arg1: $ServerCommonPacketListener): void;
+        static onCommonRegister(arg0: $ICommonPacketListener, arg1: $CommonRegisterPayload_): void;
+        static configureMockConnection(arg0: $Connection): void;
+        static initializeOtherConnection(arg0: $ServerConfigurationPacketListener): boolean;
+        static initializeOtherConnection(arg0: $ClientConfigurationPacketListener): void;
+        static filterGameBundlePackets<T extends $PacketListener>(arg0: $ChannelHandlerContext, arg1: $Iterable_<$Packet<T>>): $List<$Packet<never>>;
+        static getCommonPlayChannels(arg0: $PacketFlow_): $Set<$ResourceLocation>;
+        static onConfigurationFinished(arg0: $ICommonPacketListener): void;
         static getInitialServerUnregisterChannels(): $Set<$ResourceLocation>;
         static initializeNeoForgeConnection(arg0: $ClientConfigurationPacketListener, arg1: $NetworkPayloadSetup_): void;
         static initializeNeoForgeConnection(arg0: $ServerConfigurationPacketListener, arg1: $Map_<$ConnectionProtocol_, $Set_<$ModdedNetworkQueryComponent_>>): void;
         static getInitialListeningChannels(arg0: $PacketFlow_): $Set<$ResourceLocation>;
-        static onNetworkQuery(arg0: $ClientConfigurationPacketListener): void;
-        static filterGameBundlePackets<T extends $PacketListener>(arg0: $ChannelHandlerContext, arg1: $Iterable_<$Packet<T>>): $List<$Packet<never>>;
-        static configureMockConnection(arg0: $Connection): void;
-        static getCommonPlayChannels(arg0: $PacketFlow_): $Set<$ResourceLocation>;
-        static initializeOtherConnection(arg0: $ServerConfigurationPacketListener): boolean;
-        static initializeOtherConnection(arg0: $ClientConfigurationPacketListener): void;
-        static onConfigurationFinished(arg0: $ICommonPacketListener): void;
         static register<T extends $CustomPacketPayload, B extends $FriendlyByteBuf>(arg0: $CustomPacketPayload$Type_<T>, arg1: $StreamCodec<B, T>, arg2: $IPayloadHandler_<T>, arg3: $List_<$ConnectionProtocol_>, arg4: ($PacketFlow_) | undefined, arg5: string, arg6: boolean): void;
         static setup(): void;
         static guard<T>(arg0: $CompletableFuture<T>, arg1: $ResourceLocation_): $CompletableFuture<T>;
-        static getCodec(arg0: $ResourceLocation_, arg1: $ConnectionProtocol_, arg2: $PacketFlow_): $StreamCodec<$FriendlyByteBuf, $CustomPacketPayload>;
+        static getConnectionType(arg0: $Connection): $ConnectionType;
         static hasChannel(arg0: $ICommonPacketListener, arg1: $ResourceLocation_): boolean;
         static hasChannel(arg0: $Connection, arg1: $ConnectionProtocol_, arg2: $ResourceLocation_): boolean;
         static handlePacketUnchecked<T extends $PacketListener>(arg0: $Packet<T>, arg1: $PacketListener): void;
-        static getConnectionType(arg0: $Connection): $ConnectionType;
-        static onMinecraftUnregister(arg0: $Connection, arg1: $Set_<$ResourceLocation_>): void;
-        static handleModdedPayload(arg0: $ServerCommonPacketListener, arg1: $ServerboundCustomPayloadPacket_): void;
-        static handleModdedPayload(arg0: $ClientCommonPacketListener, arg1: $ClientboundCustomPayloadPacket_): void;
-        static onMinecraftRegister(arg0: $Connection, arg1: $Set_<$ResourceLocation_>): void;
-        static isModdedPayload(arg0: $CustomPacketPayload_): boolean;
-        static checkPacket(arg0: $Packet<never>, arg1: $ClientCommonPacketListener): void;
-        static checkPacket(arg0: $Packet<never>, arg1: $ServerCommonPacketListener): void;
-        static checkCommonVersion(arg0: $ICommonPacketListener, arg1: $CommonVersionPayload_): void;
-        static onCommonRegister(arg0: $ICommonPacketListener, arg1: $CommonRegisterPayload_): void;
+        static onNetworkQuery(arg0: $ClientConfigurationPacketListener): void;
         static SUPPORTED_COMMON_NETWORKING_VERSIONS: $List<number>;
         static get initialServerUnregisterChannels(): $Set<$ResourceLocation>;
     }

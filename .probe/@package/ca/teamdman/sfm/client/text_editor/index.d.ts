@@ -17,54 +17,54 @@ declare module "@package/ca/teamdman/sfm/client/text_editor" {
         static EXIT_WITHOUT_SAVING_CONFIRM_SCREEN_YES_BUTTON: $LocalizationEntry;
     }
     export interface $ISFMTextEditScreenOpenContext {
-        initialValue(): string;
-        labelPositionHolder(): $LabelPositionHolder;
-        saveWriter(): $Consumer<string>;
-        onTryClose(arg0: string, arg1: $Runnable_): void;
         onSaveAndClose(arg0: string): void;
+        initialValue(): string;
+        onTryClose(arg0: string, arg1: $Runnable_): void;
+        saveWriter(): $Consumer<string>;
+        labelPositionHolder(): $LabelPositionHolder;
     }
     export class $Caret extends $Record {
-        gapIndex(): number;
-        compareTo(arg0: $Caret_): number;
-        moveLeftOneCharacter(arg0: $Int2IntFunction_): $Caret;
-        moveRightOneCharacter(arg0: $Int2IntFunction_, arg1: number): $Caret;
-        moveDownOneLine(arg0: $Int2IntFunction_, arg1: number): $Caret;
-        moveUpOneLine(arg0: $Int2IntFunction_): $Caret;
         lineIndex(): number;
+        moveUpOneLine(arg0: $Int2IntFunction_): $Caret;
+        compareTo(arg0: $Caret_): number;
+        moveDownOneLine(arg0: $Int2IntFunction_, arg1: number): $Caret;
+        moveRightOneCharacter(arg0: $Int2IntFunction_, arg1: number): $Caret;
+        moveLeftOneCharacter(arg0: $Int2IntFunction_): $Caret;
+        gapIndex(): number;
         constructor(lineIndex: number, gapIndex: number);
     }
     /**
      * Values that may be interpreted as {@link $Caret}.
      */
-    export type $Caret_ = { lineIndex?: number, gapIndex?: number,  } | [lineIndex?: number, gapIndex?: number, ];
+    export type $Caret_ = { gapIndex?: number, lineIndex?: number,  } | [gapIndex?: number, lineIndex?: number, ];
     export class $TextEditContext extends $Record {
-        selectedCharactersByLine(): $Int2ObjectOpenHashMap<$IntervalSet>;
-        insertTextAtCursors(arg0: string): void;
+        lineLengths(): $Int2IntFunction;
+        deleteSelectedText(): void;
+        multiCursor(): $MultiCursor;
         lines(): $LinkedList<$StringBuilder>;
         copy(): $TextEditContext;
         getContent(): string;
-        lineLengths(): $Int2IntFunction;
-        multiCursor(): $MultiCursor;
-        deleteSelectedText(): void;
         assertInvariants(): void;
         getCharacterCount(): number;
-        constructor();
+        selectedCharactersByLine(): $Int2ObjectOpenHashMap<$IntervalSet>;
+        insertTextAtCursors(arg0: string): void;
         constructor(multiCursor: $MultiCursor_, lines: $LinkedList<$StringBuilder>);
         constructor(arg0: string);
+        constructor();
         get content(): string;
         get characterCount(): number;
     }
     /**
      * Values that may be interpreted as {@link $TextEditContext}.
      */
-    export type $TextEditContext_ = { lines?: $LinkedList<$StringBuilder>, multiCursor?: $MultiCursor_,  } | [lines?: $LinkedList<$StringBuilder>, multiCursor?: $MultiCursor_, ];
+    export type $TextEditContext_ = { multiCursor?: $MultiCursor_, lines?: $LinkedList<$StringBuilder>,  } | [multiCursor?: $MultiCursor_, lines?: $LinkedList<$StringBuilder>, ];
     export class $Cursor extends $Record {
+        getEnd(): $Caret;
+        growSelectionLeft(arg0: $Int2IntFunction_): $Cursor;
+        growSelectionRight(arg0: $Int2IntFunction_, arg1: number): $Cursor;
+        hasSelection(): boolean;
         tail(): $Caret;
         head(): $Caret;
-        getEnd(): $Caret;
-        hasSelection(): boolean;
-        growSelectionRight(arg0: $Int2IntFunction_, arg1: number): $Cursor;
-        growSelectionLeft(arg0: $Int2IntFunction_): $Cursor;
         getBeginning(): $Caret;
         isHeadOnLeft(): boolean;
         constructor(arg0: number);

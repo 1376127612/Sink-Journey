@@ -10,8 +10,8 @@ declare module "@package/net/minecraft/world/flag" {
         static FILTERED_REGISTRIES: $Set<$ResourceKey<$Registry<$FeatureElement>>>;
     }
     export interface $FeatureElement {
-        isEnabled(enabledFeatures: $FeatureFlagSet): boolean;
         requiredFeatures(): $FeatureFlagSet;
+        isEnabled(enabledFeatures: $FeatureFlagSet): boolean;
     }
     /**
      * Values that may be interpreted as {@link $FeatureElement}.
@@ -20,13 +20,13 @@ declare module "@package/net/minecraft/world/flag" {
     export class $FeatureFlagSet {
         isEmpty(): boolean;
         join(other: $FeatureFlagSet): $FeatureFlagSet;
+        static of(flag: $FeatureFlag): $FeatureFlagSet;
         static of(): $FeatureFlagSet;
         static of(flag: $FeatureFlag, ...others: $FeatureFlag[]): $FeatureFlagSet;
-        static of(flag: $FeatureFlag): $FeatureFlagSet;
         contains(flag: $FeatureFlag): boolean;
         subtract(other: $FeatureFlagSet): $FeatureFlagSet;
-        intersects(set: $FeatureFlagSet): boolean;
         isSubsetOf(set: $FeatureFlagSet): boolean;
+        intersects(set: $FeatureFlagSet): boolean;
         static MAX_CONTAINER_SIZE: number;
         get empty(): boolean;
     }
@@ -61,15 +61,15 @@ declare module "@package/net/minecraft/world/flag" {
         get modded(): boolean;
     }
     export class $FeatureFlagRegistry {
+        codec(): $Codec<$FeatureFlagSet>;
+        toNames(set: $FeatureFlagSet): $Set<$ResourceLocation>;
+        isSubset(set: $FeatureFlagSet): boolean;
+        fromNames(names: $Iterable_<$ResourceLocation>, onError: $Consumer_<$ResourceLocation>): $FeatureFlagSet;
+        fromNames(names: $Iterable_<$ResourceLocation>): $FeatureFlagSet;
         subset(...flags: $FeatureFlag[]): $FeatureFlagSet;
         getAllFlags(): $Map<$ResourceLocation, $FeatureFlag>;
         getFlag(arg0: $ResourceLocation_): $FeatureFlag;
         allFlags(): $FeatureFlagSet;
-        codec(): $Codec<$FeatureFlagSet>;
-        toNames(set: $FeatureFlagSet): $Set<$ResourceLocation>;
-        fromNames(names: $Iterable_<$ResourceLocation>, onError: $Consumer_<$ResourceLocation>): $FeatureFlagSet;
-        fromNames(names: $Iterable_<$ResourceLocation>): $FeatureFlagSet;
-        isSubset(set: $FeatureFlagSet): boolean;
         hasAnyModdedFlags(): boolean;
     }
 }

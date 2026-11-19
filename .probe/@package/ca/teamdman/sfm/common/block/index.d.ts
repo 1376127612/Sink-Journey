@@ -4,11 +4,11 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/ca/teamdman/sfm/common/block" {
     export class $BufferBlockTier extends $Enum<$BufferBlockTier> {
+        getIntScalarMaxStackSize(): number;
+        getLongScalarMaxStackSize(): number;
         static values(): $BufferBlockTier[];
         static valueOf(arg0: string): $BufferBlockTier;
         getIntMaxStackSize(): number;
-        getIntScalarMaxStackSize(): number;
-        getLongScalarMaxStackSize(): number;
         static Basic: $BufferBlockTier;
         static MaxUnit: $BufferBlockTier;
         numSlots: number;
@@ -18,19 +18,19 @@ declare module "@package/ca/teamdman/sfm/common/block" {
         static DoubleSatisfying: $BufferBlockTier;
         static Unit: $BufferBlockTier;
         static Paltry: $BufferBlockTier;
-        get intMaxStackSize(): number;
         get intScalarMaxStackSize(): number;
         get longScalarMaxStackSize(): number;
+        get intMaxStackSize(): number;
     }
     /**
      * Values that may be interpreted as {@link $BufferBlockTier}.
      */
     export type $BufferBlockTier_ = "unit" | "paltry" | "basic" | "satisfying" | "doublesatisfying" | "maxunit" | "maxgrande";
     export class $BufferBlock$ContainedResource extends $Enum<$BufferBlock$ContainedResource> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $BufferBlock$ContainedResource[];
         static valueOf(arg0: string): $BufferBlock$ContainedResource;
         static from(arg0: $ResourceType_<never, never, never>): $BufferBlock$ContainedResource;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static Item: $BufferBlock$ContainedResource;
         static Redstone: $BufferBlock$ContainedResource;

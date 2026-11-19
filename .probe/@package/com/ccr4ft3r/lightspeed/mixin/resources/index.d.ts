@@ -8,15 +8,15 @@ declare module "@package/com/ccr4ft3r/lightspeed/mixin/resources" {
     export class $SharedZipFileAccessAccessor {
     }
     export interface $SharedZipFileAccessAccessor {
-        lightspeed$close(): void;
         lightspeed$getOrCreateZipFile(): $ZipFile;
+        lightspeed$close(): void;
     }
     export class $FallbackResourceManagerPackEntryAccessor {
     }
     export interface $FallbackResourceManagerPackEntryAccessor extends $ResourcePackEntry {
-        lightspeed$resources(): $PackResources;
-        lightspeed$isFiltered(arg0: $ResourceLocation_): boolean;
         lightspeed$name(): string;
         lightspeed$filter(): $Predicate<$ResourceLocation>;
+        lightspeed$isFiltered(arg0: $ResourceLocation_): boolean;
+        lightspeed$resources(): $PackResources;
     }
 }

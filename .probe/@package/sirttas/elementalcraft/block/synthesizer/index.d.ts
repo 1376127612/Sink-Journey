@@ -7,13 +7,13 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/sirttas/elementalcraft/block/synthesizer" {
     export class $SynthesizerProperties extends $Record implements $IConfigurableBlockEntityProperties {
+        synthesisMultiplier(): number;
+        transferSpeed(): number;
+        maxRunes(): number;
         elementType(): $ElementType;
         getType(): $ConfigurableBlockEntityPropertiesType<never>;
         range(): $Holder<$Range>;
         bufferCapacity(): number;
-        transferSpeed(): number;
-        synthesisMultiplier(): number;
-        maxRunes(): number;
         static CODEC: $MapCodec<$SynthesizerProperties>;
         static DEFAULT: $SynthesizerProperties;
         constructor(elementType: $ElementType_, transferSpeed: number, bufferCapacity: number, maxRunes: number, synthesisMultiplier: number, range: $Holder_<$Range>);
@@ -22,5 +22,5 @@ declare module "@package/sirttas/elementalcraft/block/synthesizer" {
     /**
      * Values that may be interpreted as {@link $SynthesizerProperties}.
      */
-    export type $SynthesizerProperties_ = { range?: $Holder_<$Range>, maxRunes?: number, transferSpeed?: number, elementType?: $ElementType_, bufferCapacity?: number, synthesisMultiplier?: number,  } | [range?: $Holder_<$Range>, maxRunes?: number, transferSpeed?: number, elementType?: $ElementType_, bufferCapacity?: number, synthesisMultiplier?: number, ];
+    export type $SynthesizerProperties_ = { elementType?: $ElementType_, bufferCapacity?: number, synthesisMultiplier?: number, range?: $Holder_<$Range>, maxRunes?: number, transferSpeed?: number,  } | [elementType?: $ElementType_, bufferCapacity?: number, synthesisMultiplier?: number, range?: $Holder_<$Range>, maxRunes?: number, transferSpeed?: number, ];
 }

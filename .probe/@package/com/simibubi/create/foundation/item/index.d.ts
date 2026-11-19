@@ -8,28 +8,28 @@ import { $IItemHandler, $IItemHandlerModifiable } from "@package/net/neoforged/n
 
 declare module "@package/com/simibubi/create/foundation/item" {
     export class $SmartInventory extends $ItemHandlerContainer implements $IItemHandlerModifiable, $INBTSerializable<$CompoundTag> {
-        whenContentsChanged(arg0: $Consumer_<number>): $SmartInventory;
-        getStackInSlot(arg0: number): $ItemStack;
-        isItemValid(arg0: number, arg1: $ItemStack_): boolean;
-        setStackInSlot(arg0: number, arg1: $ItemStack_): void;
+        withMaxStackSize(arg0: number): $SmartInventory;
+        insertItem(arg0: number, arg1: $ItemStack_, arg2: boolean): $ItemStack;
         extractItem(arg0: number, arg1: number, arg2: boolean): $ItemStack;
         getSlotLimit(arg0: number): number;
-        getSlots(): number;
-        getStackLimit(arg0: number, arg1: $ItemStack_): number;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        isItemValid(arg0: number, arg1: $ItemStack_): boolean;
+        setStackInSlot(arg0: number, arg1: $ItemStack_): void;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
-        forbidExtraction(): $SmartInventory;
-        insertItem(arg0: number, arg1: $ItemStack_, arg2: boolean): $ItemStack;
-        allowExtraction(): $SmartInventory;
-        allowInsertion(): $SmartInventory;
-        withMaxStackSize(arg0: number): $SmartInventory;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        getStackInSlot(arg0: number): $ItemStack;
+        getStackLimit(arg0: number, arg1: $ItemStack_): number;
+        whenContentsChanged(arg0: $Consumer_<number>): $SmartInventory;
         forbidInsertion(): $SmartInventory;
+        allowInsertion(): $SmartInventory;
+        allowExtraction(): $SmartInventory;
+        forbidExtraction(): $SmartInventory;
+        getSlots(): number;
         kjs$self(): $IItemHandler;
-        constructor(arg0: $IItemHandlerModifiable, arg1: number, arg2: boolean);
-        constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: number, arg3: boolean, arg4: $BiPredicate_<number, $ItemStack>);
         constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: number, arg3: boolean);
-        constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: $BiPredicate_<number, $ItemStack>);
         constructor(arg0: number, arg1: $SyncedBlockEntity);
+        constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: $BiPredicate_<number, $ItemStack>);
+        constructor(arg0: number, arg1: $SyncedBlockEntity, arg2: number, arg3: boolean, arg4: $BiPredicate_<number, $ItemStack>);
+        constructor(arg0: $IItemHandlerModifiable, arg1: number, arg2: boolean);
         get slots(): number;
     }
 }

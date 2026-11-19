@@ -144,47 +144,47 @@ declare module "@package/net/minecraft/world/entity/ai/memory" {
      */
     export type $MemoryStatus_ = "value_present" | "value_absent" | "registered";
     export class $WalkTarget {
-        getCloseEnoughDist(): number;
         getTarget(): $PositionTracker;
         getSpeedModifier(): number;
-        /**
-         * Constructs a walk target that tracks a position
-         */
-        constructor(pos: $BlockPos_, speedModifier: number, closeEnoughDist: number);
+        getCloseEnoughDist(): number;
         constructor(target: $PositionTracker, speedModifier: number, closeEnoughDist: number);
+        /**
+         * Constructs a walk target that tracks an entity's position
+         */
+        constructor(targetEntity: $Entity, speedModifier: number, closeEnoughDist: number);
         /**
          * Constructs a walk target using a vector that's directly converted to a BlockPos.
          */
         constructor(vectorPos: $Vec3_, speedModifier: number, closeEnoughDist: number);
         /**
-         * Constructs a walk target that tracks an entity's position
+         * Constructs a walk target that tracks a position
          */
-        constructor(targetEntity: $Entity, speedModifier: number, closeEnoughDist: number);
-        get closeEnoughDist(): number;
+        constructor(pos: $BlockPos_, speedModifier: number, closeEnoughDist: number);
         get target(): $PositionTracker;
         get speedModifier(): number;
+        get closeEnoughDist(): number;
     }
     export interface $MemoryModuleType<U> extends RegistryMarked<RegistryTypes.MemoryModuleTypeTag, RegistryTypes.MemoryModuleType> {}
     export class $ExpirableValue<T> {
+        hasExpired(): boolean;
+        static codec<T>(valueCodec: $Codec<T>): $Codec<$ExpirableValue<T>>;
+        canExpire(): boolean;
         getValue(): T;
         static of<T>(value: T): $ExpirableValue<T>;
         static of<T>(value: T, timeToLive: number): $ExpirableValue<T>;
-        getTimeToLive(): number;
         tick(): void;
-        static codec<T>(valueCodec: $Codec<T>): $Codec<$ExpirableValue<T>>;
-        hasExpired(): boolean;
-        canExpire(): boolean;
+        getTimeToLive(): number;
         constructor(value: T, timeToLive: number);
         get value(): T;
         get timeToLive(): number;
     }
     export class $NearestVisibleLivingEntities {
-        contains(predicate: $Predicate_<$LivingEntity>): boolean;
+        findClosest(predicate: $Predicate_<$LivingEntity>): ($LivingEntity) | undefined;
         contains(entity: $LivingEntity): boolean;
+        contains(predicate: $Predicate_<$LivingEntity>): boolean;
         static empty(): $NearestVisibleLivingEntities;
         find(predicate: $Predicate_<$LivingEntity>): $Stream<$LivingEntity>;
         findAll(predicate: $Predicate_<$LivingEntity>): $Iterable<$LivingEntity>;
-        findClosest(predicate: $Predicate_<$LivingEntity>): ($LivingEntity) | undefined;
         constructor(livingEntity: $LivingEntity, nearbyLivingEntities: $List_<$LivingEntity>);
     }
 }

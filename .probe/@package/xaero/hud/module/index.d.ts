@@ -13,33 +13,33 @@ import { $TriFunction_ } from "@package/org/apache/commons/lang3/function";
 
 declare module "@package/xaero/hud/module" {
     export class $ModuleSession<MS extends $ModuleSession<MS>> {
+        getHeight(arg0: number): number;
+        getModMain(): $HudMod;
+        shouldFlipVertically(arg0: number, arg1: number): boolean;
+        shouldFlipHorizontally(arg0: number, arg1: number): boolean;
+        getEffectiveY(arg0: number, arg1: number): number;
+        onPostGameOverlay(): void;
+        prePotentialRender(): void;
+        isFlippedHor(): boolean;
+        isFlippedVer(): boolean;
+        getEffectiveX(arg0: number, arg1: number): number;
         getModule(): $HudModule<MS>;
         close(): void;
         isActive(): boolean;
         getWidth(arg0: number): number;
-        getHeight(arg0: number): number;
         isCentered(): boolean;
-        getModMain(): $HudMod;
-        getEffectiveY(arg0: number, arg1: number): number;
-        onPostGameOverlay(): void;
-        prePotentialRender(): void;
-        shouldFlipVertically(arg0: number, arg1: number): boolean;
-        shouldFlipHorizontally(arg0: number, arg1: number): boolean;
-        isFlippedHor(): boolean;
-        getEffectiveX(arg0: number, arg1: number): number;
-        isFlippedVer(): boolean;
         constructor(arg0: $HudMod, arg1: $HudModule<MS>);
-        get module(): $HudModule<MS>;
-        get active(): boolean;
-        get centered(): boolean;
         get modMain(): $HudMod;
         get flippedHor(): boolean;
         get flippedVer(): boolean;
+        get module(): $HudModule<MS>;
+        get active(): boolean;
+        get centered(): boolean;
     }
     export class $ModuleManager {
+        getModules(): $Iterable<$HudModule<never>>;
         get(arg0: $ResourceLocation_): $HudModule<never>;
         register(arg0: $HudModule<never>): void;
-        getModules(): $Iterable<$HudModule<never>>;
         constructor();
         get modules(): $Iterable<$HudModule<never>>;
     }
@@ -61,30 +61,30 @@ declare module "@package/xaero/hud/module" {
         constructor();
     }
     export class $HudModule<MS extends $ModuleSession<MS>> {
+        getRenderer(): $IModuleRenderer<MS>;
+        getCurrentSession(): MS;
+        getConfirmedTransform(): $ModuleTransform;
+        cancelTransform(): void;
+        confirmTransform(): void;
+        getPushState(): $PushboxHandler$State;
+        getUsedTransform(): $ModuleTransform;
+        getUnconfirmedTransform(): $ModuleTransform;
+        getConfigScreenFactory(): $Function<$Screen, $Screen>;
         getId(): $ResourceLocation;
         isActive(arg0: $ClientConfigManager): boolean;
         getDisplayName(): $Component;
-        setActive(arg0: $ClientConfigManager, arg1: boolean): void;
-        getRenderer(): $IModuleRenderer<MS>;
-        getCurrentSession(): MS;
         setTransform(arg0: $ModuleTransform): void;
-        getUsedTransform(): $ModuleTransform;
-        getPushState(): $PushboxHandler$State;
-        getUnconfirmedTransform(): $ModuleTransform;
-        getConfigScreenFactory(): $Function<$Screen, $Screen>;
-        getConfirmedTransform(): $ModuleTransform;
-        confirmTransform(): void;
-        cancelTransform(): void;
+        setActive(arg0: $ClientConfigManager, arg1: boolean): void;
         constructor(arg0: $ResourceLocation_, arg1: $Component_, arg2: $TriFunction_<$HudMod, $HudModule<MS>, $ClientPacketListener, MS>, arg3: $Supplier_<$IModuleRenderer<MS>>, arg4: $Function_<$Screen, $Screen>, arg5: $BooleanConfigOption);
-        get id(): $ResourceLocation;
-        get displayName(): $Component;
         get renderer(): $IModuleRenderer<MS>;
         get currentSession(): MS;
-        set transform(value: $ModuleTransform);
-        get usedTransform(): $ModuleTransform;
+        get confirmedTransform(): $ModuleTransform;
         get pushState(): $PushboxHandler$State;
+        get usedTransform(): $ModuleTransform;
         get unconfirmedTransform(): $ModuleTransform;
         get configScreenFactory(): $Function<$Screen, $Screen>;
-        get confirmedTransform(): $ModuleTransform;
+        get id(): $ResourceLocation;
+        get displayName(): $Component;
+        set transform(value: $ModuleTransform);
     }
 }

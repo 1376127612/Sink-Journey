@@ -12,20 +12,20 @@ declare module "@package/mekanism/api/chemical/attribute" {
      * @deprecated
      */
     export class $ChemicalAttribute implements $IChemicalAttribute {
+        toLegacyAttribute(): $ChemicalAttribute;
+        collectTooltips(arg0: $Item$TooltipContext, arg1: $List_<$Component_>, arg2: $TooltipFlag): void;
+        collectTooltips(arg0: $Consumer_<$Component>): void;
         /**
          * @deprecated
          */
         addTooltipText(arg0: $List_<$Component_>): $List<$Component>;
-        toLegacyAttribute(): $ChemicalAttribute;
-        collectTooltips(arg0: $Item$TooltipContext, arg1: $List_<$Component_>, arg2: $TooltipFlag): void;
-        collectTooltips(arg0: $Consumer_<$Component>): void;
         asModern(): $IChemicalAttribute;
         needsValidation(): boolean;
         constructor();
     }
     export class $ChemicalAttributeValidator {
-        static createStrict(...arg0: $Class<$ChemicalAttribute>[]): $ChemicalAttributeValidator;
         static create(...arg0: $Class<$ChemicalAttribute>[]): $ChemicalAttributeValidator;
+        static createStrict(...arg0: $Class<$ChemicalAttribute>[]): $ChemicalAttributeValidator;
         static DEFAULT: $ChemicalAttributeValidator;
         static ALWAYS_ALLOW: $ChemicalAttributeValidator;
     }
@@ -36,8 +36,8 @@ declare module "@package/mekanism/api/chemical/attribute" {
         validate(arg0: $ChemicalAttribute): boolean;
         validate(arg0: $IChemicalAttribute_): boolean;
         process(arg0: $ChemicalStack): boolean;
-        process(arg0: $Chemical_): boolean;
         process(arg0: $Holder_<$Chemical>): boolean;
+        process(arg0: $Chemical_): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ChemicalAttributeValidator}.
@@ -46,6 +46,46 @@ declare module "@package/mekanism/api/chemical/attribute" {
     export class $IChemicalAttributeContainer<SELF extends $IChemicalAttributeContainer<SELF>> {
     }
     export interface $IChemicalAttributeContainer<SELF extends $IChemicalAttributeContainer<SELF>> {
+        /**
+         * @deprecated
+         */
+        getAttributeTypes(): $Collection<$Class<$ChemicalAttribute>>;
+        /**
+         * @deprecated
+         */
+        mapAttributeToInt<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToIntFunction_<ATTRIBUTE>): number;
+        /**
+         * @deprecated
+         */
+        mapAttributeToInt<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToIntBiFunction_<SELF, ATTRIBUTE>): number;
+        /**
+         * @deprecated
+         */
+        mapAttribute<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class<ATTRIBUTE>, arg1: $BiFunction_<SELF, ATTRIBUTE, V>, arg2: V): V;
+        /**
+         * @deprecated
+         */
+        mapAttribute<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class<ATTRIBUTE>, arg1: $Function_<ATTRIBUTE, V>, arg2: V): V;
+        /**
+         * @deprecated
+         */
+        ifAttributePresent<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $Consumer_<ATTRIBUTE>): void;
+        /**
+         * @deprecated
+         */
+        mapAttributeToLong<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToLongFunction_<ATTRIBUTE>): number;
+        /**
+         * @deprecated
+         */
+        mapAttributeToLong<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToLongBiFunction_<SELF, ATTRIBUTE>): number;
+        /**
+         * @deprecated
+         */
+        mapAttributeToDouble<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToDoubleFunction_<ATTRIBUTE>): number;
+        /**
+         * @deprecated
+         */
+        mapAttributeToDouble<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToDoubleBiFunction_<SELF, ATTRIBUTE>): number;
         /**
          * @deprecated
          */
@@ -61,52 +101,12 @@ declare module "@package/mekanism/api/chemical/attribute" {
         /**
          * @deprecated
          */
-        mapAttributeToDouble<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToDoubleFunction_<ATTRIBUTE>): number;
-        /**
-         * @deprecated
-         */
-        mapAttributeToDouble<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToDoubleBiFunction_<SELF, ATTRIBUTE>): number;
-        /**
-         * @deprecated
-         */
-        getAttributeTypes(): $Collection<$Class<$ChemicalAttribute>>;
-        /**
-         * @deprecated
-         */
-        mapAttributeToInt<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToIntBiFunction_<SELF, ATTRIBUTE>): number;
-        /**
-         * @deprecated
-         */
-        mapAttributeToInt<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToIntFunction_<ATTRIBUTE>): number;
-        /**
-         * @deprecated
-         */
-        mapAttributeToLong<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToLongBiFunction_<SELF, ATTRIBUTE>): number;
-        /**
-         * @deprecated
-         */
-        mapAttributeToLong<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $ToLongFunction_<ATTRIBUTE>): number;
-        /**
-         * @deprecated
-         */
-        mapAttribute<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class<ATTRIBUTE>, arg1: $Function_<ATTRIBUTE, V>, arg2: V): V;
-        /**
-         * @deprecated
-         */
-        mapAttribute<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class<ATTRIBUTE>, arg1: $BiFunction_<SELF, ATTRIBUTE, V>, arg2: V): V;
-        /**
-         * @deprecated
-         */
-        ifAttributePresent<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>, arg1: $Consumer_<ATTRIBUTE>): void;
+        hasLegacy(arg0: $Class<$ChemicalAttribute>): boolean;
         /**
          * @deprecated
          */
         getLegacy<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class<ATTRIBUTE>): ATTRIBUTE;
-        /**
-         * @deprecated
-         */
-        hasLegacy(arg0: $Class<$ChemicalAttribute>): boolean;
-        get attributes(): $Collection<$ChemicalAttribute>;
         get attributeTypes(): $Collection<$Class<$ChemicalAttribute>>;
+        get attributes(): $Collection<$ChemicalAttribute>;
     }
 }

@@ -22,25 +22,25 @@ declare module "@package/hellfirepvp/astralsorcery/common/focal/node" {
      */
     export type $FocalPointNode$Type_<T> = RegistryTypes.AstralsorceryFocalNodeTypes | { syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FocalPointNode>, codec?: $MapCodec_<$FocalPointNode>,  } | [syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $FocalPointNode>, codec?: $MapCodec_<$FocalPointNode>, ];
     export class $FocalPointNode {
-        getType(): $FocalPointNode$Type<never>;
-        onLoad(arg0: $ServerLevel): void;
-        tick(arg0: $ServerLevel, arg1: boolean): void;
-        getPos(): $ColumnPos;
-        getConstellation(): $BaseConstellation;
-        getTicksExisted(): number;
-        tickEffects(arg0: $ClientLevel): void;
         markDirty(arg0: $Level_): void;
-        onUnload(arg0: $ServerLevel): void;
+        getPos(): $ColumnPos;
+        getTicksExisted(): number;
+        updateFocalPosition(arg0: $Level_): void;
         markForSync(arg0: $ServerLevel): void;
         getFocalPosition(): ($BlockPos) | undefined;
-        updateFocalPosition(arg0: $Level_): void;
+        getType(): $FocalPointNode$Type<never>;
+        tick(arg0: $ServerLevel, arg1: boolean): void;
+        onLoad(arg0: $ServerLevel): void;
+        tickEffects(arg0: $ClientLevel): void;
+        onUnload(arg0: $ServerLevel): void;
+        getConstellation(): $BaseConstellation;
         static CODEC: $Codec<$FocalPointNode>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $FocalPointNode>;
         constructor(arg0: $ColumnPos_, arg1: $BaseConstellation_, arg2: number, arg3: ($BlockPos_) | undefined);
-        get type(): $FocalPointNode$Type<never>;
         get pos(): $ColumnPos;
-        get constellation(): $BaseConstellation;
         get ticksExisted(): number;
         get focalPosition(): ($BlockPos) | undefined;
+        get type(): $FocalPointNode$Type<never>;
+        get constellation(): $BaseConstellation;
     }
 }

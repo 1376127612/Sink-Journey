@@ -11,31 +11,31 @@ export * as listener from "@package/xaero/lib/common/config/server/listener";
 
 declare module "@package/xaero/lib/common/config/server" {
     export class $ServerConfigManager {
-        getChannel(): $ConfigChannel;
-        getRaw<T>(arg0: $ServerPlayer, arg1: $ConfigOption<T>): T;
-        getRaw<T>(arg0: $ConfigProfile, arg1: $ConfigOption<T>): T;
-        getRaw<T>(arg0: $ServerPlayerData, arg1: $ConfigOption<T>): T;
-        setChannel(arg0: $ConfigChannel): void;
-        getServer(): $MinecraftServer;
-        getChangeListener(): $ServerConfigChangeListener;
+        hasServerProfileEditPermission(arg0: $ServerPlayerData): boolean;
+        getEnforcedProfileForPlayer(arg0: $ServerPlayerData): $ConfigProfile;
+        getPermissionBasedProfileId(arg0: $ServerPlayerData): string;
+        setDefaultEnforcedProfileId(arg0: string): void;
         postLoad(): void;
-        setServer(arg0: $MinecraftServer): void;
-        setChangeListener(arg0: $ServerConfigChangeListener): void;
+        getChangeListener(): $ServerConfigChangeListener;
         getProfileManager(): $ConfigProfileManager;
-        getRedirectorManager(): $OptionValueRedirectorManager;
-        getDefaultEnforcedProfile(): $ConfigProfile;
-        getPermissionBasedProfile(arg0: $ServerPlayerData): $ConfigProfile;
+        getEffective<T>(arg0: $ServerPlayer, arg1: $ConfigOption<T>): T;
+        getEffective<T>(arg0: $ServerPlayerData, arg1: $ConfigOption<T>): T;
         usesDefaultEnforcedProfile(arg0: $ServerPlayer): boolean;
         usesDefaultEnforcedProfile(arg0: $ServerPlayerData): boolean;
-        setDefaultEnforcedProfileId(arg0: string): void;
-        getEffective<T>(arg0: $ServerPlayerData, arg1: $ConfigOption<T>): T;
-        getEffective<T>(arg0: $ServerPlayer, arg1: $ConfigOption<T>): T;
-        getPermissionBasedProfileId(arg0: $ServerPlayerData): string;
-        getEnforcedProfileForPlayer(arg0: $ServerPlayerData): $ConfigProfile;
-        hasServerProfileEditPermission(arg0: $ServerPlayerData): boolean;
-        get profileManager(): $ConfigProfileManager;
-        get redirectorManager(): $OptionValueRedirectorManager;
-        get defaultEnforcedProfile(): $ConfigProfile;
+        getPermissionBasedProfile(arg0: $ServerPlayerData): $ConfigProfile;
+        getDefaultEnforcedProfile(): $ConfigProfile;
+        getRedirectorManager(): $OptionValueRedirectorManager;
+        setChangeListener(arg0: $ServerConfigChangeListener): void;
+        getChannel(): $ConfigChannel;
+        setChannel(arg0: $ConfigChannel): void;
+        getServer(): $MinecraftServer;
+        getRaw<T>(arg0: $ConfigProfile, arg1: $ConfigOption<T>): T;
+        getRaw<T>(arg0: $ServerPlayerData, arg1: $ConfigOption<T>): T;
+        getRaw<T>(arg0: $ServerPlayer, arg1: $ConfigOption<T>): T;
+        setServer(arg0: $MinecraftServer): void;
         set defaultEnforcedProfileId(value: string);
+        get profileManager(): $ConfigProfileManager;
+        get defaultEnforcedProfile(): $ConfigProfile;
+        get redirectorManager(): $OptionValueRedirectorManager;
     }
 }

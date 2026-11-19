@@ -60,13 +60,13 @@ declare module "@package/net/neoforged/neoforge/fluids" {
         register(arg0: $Block_, arg1: $Fluid_, arg2: number, arg3: $IntegerProperty): void;
     }
     export class $FluidInteractionRegistry$InteractionInformation extends $Record {
-        predicate(): $FluidInteractionRegistry$HasFluidInteraction;
         interaction(): $FluidInteractionRegistry$FluidInteraction;
+        predicate(): $FluidInteractionRegistry$HasFluidInteraction;
         constructor(predicate: $FluidInteractionRegistry$HasFluidInteraction_, interaction: $FluidInteractionRegistry$FluidInteraction_);
         constructor(arg0: $FluidInteractionRegistry$HasFluidInteraction_, arg1: $Function_<$FluidState, $BlockState>);
-        constructor(arg0: $FluidType_, arg1: $Function_<$FluidState, $BlockState>);
-        constructor(arg0: $FluidInteractionRegistry$HasFluidInteraction_, arg1: $BlockState_);
         constructor(arg0: $FluidType_, arg1: $BlockState_);
+        constructor(arg0: $FluidInteractionRegistry$HasFluidInteraction_, arg1: $BlockState_);
+        constructor(arg0: $FluidType_, arg1: $Function_<$FluidState, $BlockState>);
     }
     /**
      * Values that may be interpreted as {@link $FluidInteractionRegistry$InteractionInformation}.
@@ -74,24 +74,24 @@ declare module "@package/net/neoforged/neoforge/fluids" {
     export type $FluidInteractionRegistry$InteractionInformation_ = { predicate?: $FluidInteractionRegistry$HasFluidInteraction_, interaction?: $FluidInteractionRegistry$FluidInteraction_,  } | [predicate?: $FluidInteractionRegistry$HasFluidInteraction_, interaction?: $FluidInteractionRegistry$FluidInteraction_, ];
     export interface $FluidType extends RegistryMarked<RegistryTypes.NeoforgeFluidTypeTag, RegistryTypes.NeoforgeFluidType> {}
     export class $SimpleFluidContent implements $DataComponentHolder {
+        getAmount(): number;
+        getFluidType(): $FluidType;
         static copyOf(arg0: $FluidStack_): $SimpleFluidContent;
         isEmpty(): boolean;
         matches(arg0: $FluidStack_): boolean;
         copy(): $FluidStack;
-        is(arg0: $FluidType_): boolean;
-        is(arg0: $HolderSet_<$Fluid>): boolean;
-        is(arg0: $TagKey_<$Fluid>): boolean;
         is(arg0: $Fluid_): boolean;
+        is(arg0: $TagKey_<$Fluid>): boolean;
+        is(arg0: $FluidType_): boolean;
         is(arg0: $Predicate_<$Holder<$Fluid>>): boolean;
         is(arg0: $Holder_<$Fluid>): boolean;
+        is(arg0: $HolderSet_<$Fluid>): boolean;
         getComponents(): $DataComponentMap;
         getFluid(): $Fluid;
-        getFluidType(): $FluidType;
-        getAmount(): number;
         getFluidHolder(): $Holder<$Fluid>;
-        isSameFluidSameComponents(arg0: $SimpleFluidContent): boolean;
-        isSameFluidSameComponents(arg0: $FluidStack_): boolean;
         isSameFluid(arg0: $FluidStack_): boolean;
+        isSameFluidSameComponents(arg0: $FluidStack_): boolean;
+        isSameFluidSameComponents(arg0: $SimpleFluidContent): boolean;
         get<T>(arg0: $DataComponentType_<T>): T;
         getOrDefault<T>(arg0: $DataComponentType_<T>, arg1: T): T;
         has(arg0: $DataComponentType_<never>): boolean;
@@ -103,11 +103,11 @@ declare module "@package/net/neoforged/neoforge/fluids" {
         static CODEC: $Codec<$SimpleFluidContent>;
         static EMPTY: $SimpleFluidContent;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $SimpleFluidContent>;
+        get amount(): number;
+        get fluidType(): $FluidType;
         get empty(): boolean;
         get components(): $DataComponentMap;
         get fluid(): $Fluid;
-        get fluidType(): $FluidType;
-        get amount(): number;
         get fluidHolder(): $Holder<$Fluid>;
     }
     export class $FluidInteractionRegistry$FluidInteraction {
@@ -120,22 +120,22 @@ declare module "@package/net/neoforged/neoforge/fluids" {
      */
     export type $FluidInteractionRegistry$FluidInteraction_ = ((arg0: $Level, arg1: $BlockPos, arg2: $BlockPos, arg3: $FluidState) => void);
     export class $FluidUtil {
-        static destroyBlockOnFluidPlacement(arg0: $Level_, arg1: $BlockPos_): void;
-        static getFluidContained(arg0: $ItemStack_): ($FluidStack) | undefined;
-        static tryFluidTransfer(arg0: $IFluidHandler, arg1: $IFluidHandler, arg2: $FluidStack_, arg3: boolean): $FluidStack;
         static tryFluidTransfer(arg0: $IFluidHandler, arg1: $IFluidHandler, arg2: number, arg3: boolean): $FluidStack;
-        static getFluidHandler(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_): ($IFluidHandler) | undefined;
+        static tryFluidTransfer(arg0: $IFluidHandler, arg1: $IFluidHandler, arg2: $FluidStack_, arg3: boolean): $FluidStack;
+        static tryEmptyContainer(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: number, arg3: $Player, arg4: boolean): $FluidActionResult;
+        static tryFillContainer(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: number, arg3: $Player, arg4: boolean): $FluidActionResult;
+        static getFluidContained(arg0: $ItemStack_): ($FluidStack) | undefined;
+        static interactWithFluidHandler(arg0: $Player, arg1: $InteractionHand_, arg2: $IFluidHandler): boolean;
+        static interactWithFluidHandler(arg0: $Player, arg1: $InteractionHand_, arg2: $Level_, arg3: $BlockPos_, arg4: $Direction_): boolean;
+        static getFilledBucket(arg0: $FluidStack_): $ItemStack;
+        static tryFillContainerAndStow(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: $IItemHandler, arg3: number, arg4: $Player, arg5: boolean): $FluidActionResult;
+        static tryEmptyContainerAndStow(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: $IItemHandler, arg3: number, arg4: $Player, arg5: boolean): $FluidActionResult;
+        static destroyBlockOnFluidPlacement(arg0: $Level_, arg1: $BlockPos_): void;
         static getFluidHandler(arg0: $ItemStack_): ($IFluidHandlerItem) | undefined;
+        static getFluidHandler(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_): ($IFluidHandler) | undefined;
         static tryPickUpFluid(arg0: $ItemStack_, arg1: $Player, arg2: $Level_, arg3: $BlockPos_, arg4: $Direction_): $FluidActionResult;
         static tryPlaceFluid(arg0: $Player, arg1: $Level_, arg2: $InteractionHand_, arg3: $BlockPos_, arg4: $ItemStack_, arg5: $FluidStack_): $FluidActionResult;
         static tryPlaceFluid(arg0: $Player, arg1: $Level_, arg2: $InteractionHand_, arg3: $BlockPos_, arg4: $IFluidHandler, arg5: $FluidStack_): boolean;
-        static getFilledBucket(arg0: $FluidStack_): $ItemStack;
-        static tryFillContainer(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: number, arg3: $Player, arg4: boolean): $FluidActionResult;
-        static tryEmptyContainer(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: number, arg3: $Player, arg4: boolean): $FluidActionResult;
-        static tryFillContainerAndStow(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: $IItemHandler, arg3: number, arg4: $Player, arg5: boolean): $FluidActionResult;
-        static tryEmptyContainerAndStow(arg0: $ItemStack_, arg1: $IFluidHandler, arg2: $IItemHandler, arg3: number, arg4: $Player, arg5: boolean): $FluidActionResult;
-        static interactWithFluidHandler(arg0: $Player, arg1: $InteractionHand_, arg2: $IFluidHandler): boolean;
-        static interactWithFluidHandler(arg0: $Player, arg1: $InteractionHand_, arg2: $Level_, arg3: $BlockPos_, arg4: $Direction_): boolean;
     }
     export class $FluidInteractionRegistry$HasFluidInteraction {
     }
@@ -147,16 +147,38 @@ declare module "@package/net/neoforged/neoforge/fluids" {
      */
     export type $FluidInteractionRegistry$HasFluidInteraction_ = ((arg0: $Level, arg1: $BlockPos, arg2: $BlockPos, arg3: $FluidState) => boolean);
     export class $FluidType$DripstoneDripInfo extends $Record {
-        filledCauldron(): $Block;
         chance(): number;
+        filledCauldron(): $Block;
         dripParticle(): $ParticleOptions;
         constructor(chance: number, dripParticle: $ParticleOptions_, filledCauldron: $Block_);
     }
     /**
      * Values that may be interpreted as {@link $FluidType$DripstoneDripInfo}.
      */
-    export type $FluidType$DripstoneDripInfo_ = { dripParticle?: $ParticleOptions_, filledCauldron?: $Block_, chance?: number,  } | [dripParticle?: $ParticleOptions_, filledCauldron?: $Block_, chance?: number, ];
+    export type $FluidType$DripstoneDripInfo_ = { chance?: number, dripParticle?: $ParticleOptions_, filledCauldron?: $Block_,  } | [chance?: number, dripParticle?: $ParticleOptions_, filledCauldron?: $Block_, ];
     export class $FluidStack implements $MutableDataComponentHolder, $FluidStackKJS {
+        getAmount(): number;
+        setAmount(arg0: number): void;
+        getComponentsPatch(): $DataComponentPatch;
+        static lenientOtionalFieldOf(arg0: string): $MapCodec<$FluidStack>;
+        /**
+         * @deprecated
+         */
+        getTranslationKey(): string;
+        static parseOptional(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $FluidStack;
+        getFluidType(): $FluidType;
+        /**
+         * @deprecated
+         */
+        isFluidEqual(arg0: $FluidStack_): boolean;
+        /**
+         * @deprecated
+         */
+        isFluidEqual(arg0: $ItemStack_): boolean;
+        /**
+         * @deprecated
+         */
+        containsFluid(arg0: $FluidStack_): boolean;
         isEmpty(): boolean;
         static matches(arg0: $FluidStack_, arg1: $FluidStack_): boolean;
         split(arg0: number): $FluidStack;
@@ -164,38 +186,25 @@ declare module "@package/net/neoforged/neoforge/fluids" {
         save(arg0: $HolderLookup$Provider, arg1: $Tag_): $Tag;
         static parse(arg0: $HolderLookup$Provider, arg1: $Tag_): ($FluidStack) | undefined;
         copy(): $FluidStack;
-        is(arg0: $Fluid_): boolean;
-        is(arg0: $Holder_<$Fluid>): boolean;
-        is(arg0: $HolderSet_<$Fluid>): boolean;
-        is(arg0: $Predicate_<$Holder<$Fluid>>): boolean;
         is(arg0: $FluidType_): boolean;
+        is(arg0: $Predicate_<$Holder<$Fluid>>): boolean;
         is(arg0: $TagKey_<$Fluid>): boolean;
+        is(arg0: $HolderSet_<$Fluid>): boolean;
+        is(arg0: $Holder_<$Fluid>): boolean;
+        is(arg0: $Fluid_): boolean;
         grow(arg0: number): void;
         /**
          * @deprecated
          */
         getDisplayName(): $Component;
-        limitSize(arg0: number): void;
-        getComponents(): $PatchedDataComponentMap;
-        setAmount(arg0: number): void;
         shrink(arg0: number): void;
-        /**
-         * @deprecated
-         */
-        getTranslationKey(): string;
-        copyAndClear(): $FluidStack;
-        getDescriptionId(): string;
+        getComponents(): $PatchedDataComponentMap;
         getFluid(): $Fluid;
-        getFluidType(): $FluidType;
-        getComponentsPatch(): $DataComponentPatch;
-        static parseOptional(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $FluidStack;
-        saveOptional(arg0: $HolderLookup$Provider): $Tag;
-        getTags(): $Stream<$TagKey<$Fluid>>;
-        getAmount(): number;
-        isComponentsPatchEmpty(): boolean;
         getFluidHolder(): $Holder<$Fluid>;
-        getHoverName(): $Component;
-        static hashFluidAndComponents(arg0: $FluidStack_): number;
+        copyWithAmount(arg0: number): $FluidStack;
+        static isSameFluid(arg0: $FluidStack_, arg1: $FluidStack_): boolean;
+        static fixedAmountCodec(arg0: number): $Codec<$FluidStack>;
+        getDescriptionId(): string;
         /**
          * @deprecated
          */
@@ -204,86 +213,77 @@ declare module "@package/net/neoforged/neoforge/fluids" {
          * @deprecated
          */
         static areFluidStackTagsEqual(arg0: $FluidStack_, arg1: $FluidStack_): boolean;
-        static lenientOtionalFieldOf(arg0: string): $MapCodec<$FluidStack>;
+        saveOptional(arg0: $HolderLookup$Provider): $Tag;
+        isComponentsPatchEmpty(): boolean;
+        getHoverName(): $Component;
+        copyAndClear(): $FluidStack;
+        limitSize(arg0: number): void;
         static isSameFluidSameComponents(arg0: $FluidStack_, arg1: $FluidStack_): boolean;
-        static fixedAmountCodec(arg0: number): $Codec<$FluidStack>;
-        /**
-         * @deprecated
-         */
-        containsFluid(arg0: $FluidStack_): boolean;
-        copyWithAmount(arg0: number): $FluidStack;
-        /**
-         * @deprecated
-         */
-        isFluidEqual(arg0: $ItemStack_): boolean;
-        /**
-         * @deprecated
-         */
-        isFluidEqual(arg0: $FluidStack_): boolean;
-        static isSameFluid(arg0: $FluidStack_, arg1: $FluidStack_): boolean;
+        static hashFluidAndComponents(arg0: $FluidStack_): number;
+        getTags(): $Stream<$TagKey<$Fluid>>;
         update<T>(arg0: $DataComponentType_<T>, arg1: T, arg2: $UnaryOperator_<T>): T;
         update<T>(arg0: $Supplier_<$DataComponentType<T>>, arg1: T, arg2: $UnaryOperator_<T>): T;
         update<T, U>(arg0: $Supplier_<$DataComponentType<T>>, arg1: T, arg2: U, arg3: $BiFunction_<T, U, T>): T;
         update<T, U>(arg0: $DataComponentType_<T>, arg1: T, arg2: U, arg3: $BiFunction_<T, U, T>): T;
         copyFrom(arg0: $DataComponentHolder_, ...arg1: $Supplier_<$DataComponentType<never>>[]): void;
         copyFrom(arg0: $DataComponentHolder_, ...arg1: $DataComponentType_<never>[]): void;
-        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
-        matches(cx: $RecipeMatchContext, ingredient: $FluidIngredient_, exact: boolean): boolean;
-        getCodec(): $Codec<never>;
-        specialEquals(o: $Object, shallow: boolean): boolean;
         kjs$isEmpty(): boolean;
+        specialEquals(o: $Object, shallow: boolean): boolean;
         kjs$self(): $FluidStack;
         kjs$getKey(): $ResourceKey<$Fluid>;
+        kjs$getRegistryId(): $ResourceKey<$Registry<$Fluid>>;
         kjs$getIdLocation(): $ResourceLocation;
         replaceThisWith(cx: $RecipeScriptContext, arg1: $Object): $Object;
-        kjs$getRegistryId(): $ResourceKey<$Registry<$Fluid>>;
-        kjs$getRegistry(): $Registry<$Fluid>;
         kjs$asHolder(): $Holder<$Fluid>;
+        kjs$getRegistry(): $Registry<$Fluid>;
         kjs$getAmount(): number;
         kjs$getFluid(): $Fluid;
-        kjs$getId(): string;
-        kjs$getMod(): string;
-        kjs$copy(amount: number): $FluidLike;
+        getCodec(): $Codec<never>;
+        matches(cx: $RecipeMatchContext, s: $FluidStack_, exact: boolean): boolean;
+        matches(cx: $RecipeMatchContext, ingredient: $FluidIngredient_, exact: boolean): boolean;
         kjs$getWebIconURL(ops: $DynamicOps<$Tag_>, size: number): $RelativeURL;
         kjs$equalsIgnoringCount(stack: $FluidStack_): boolean;
+        kjs$getMod(): string;
+        kjs$copy(amount: number): $FluidLike;
+        kjs$getId(): string;
         has(arg0: $DataComponentType_<never>): boolean;
         getComponentHolder(): $MutableDataComponentHolder;
         getComponentMap(): $DataComponentMap;
         patch(components: $DataComponentPatch_): $MutableDataComponentHolderFunctions;
-        toJson(): $JsonElement;
         toNBT(): $Tag;
+        toJson(): $JsonElement;
         getTagKeys(): $List<$TagKey<$Fluid>>;
         getTags(): $List<$ResourceLocation>;
         hasTag(tag: $ResourceLocation_): boolean;
         has(arg0: $Supplier_<$DataComponentType<never>>): boolean;
         addToTooltip<T extends $TooltipProvider>(arg0: $DataComponentType_<T>, arg1: $Item$TooltipContext, arg2: $Consumer_<$Component>, arg3: $TooltipFlag): void;
         addToTooltip<T extends $TooltipProvider>(arg0: $Supplier_<$DataComponentType<T>>, arg1: $Item$TooltipContext, arg2: $Consumer_<$Component>, arg3: $TooltipFlag): void;
-        getCustomData(): $CompoundTag;
-        setUnit(component: $DataComponentType_<$Unit_>): $ComponentFunctions;
-        setPotionId(potion: $Holder_<$Potion>): void;
+        setAdditionalTooltipHidden(): void;
+        setDyedColorWithTooltip(color: $KubeColor_): void;
+        setBlockStateProperties(properties: $Map_<string, string>): void;
         setRarity(rarity: $Rarity_): void;
-        setBaseColor(color: $DyeColor_): void;
-        setLore(lines: $List_<$Component_>, styledLines: $List_<$Component_>): void;
-        setLore(lines: $List_<$Component_>): void;
-        setCustomData(tag: $CompoundTag_): void;
-        setDyedColor(color: $KubeColor_): void;
+        setUnit(component: $DataComponentType_<$Unit_>): $ComponentFunctions;
         setEntityData(tag: $CompoundTag_): void;
+        setCustomData(tag: $CompoundTag_): void;
+        setBaseColor(color: $DyeColor_): void;
+        setPotionId(potion: $Holder_<$Potion>): void;
+        setDyedColor(color: $KubeColor_): void;
+        getCustomData(): $CompoundTag;
         setLockCode(lock: string): void;
-        getCustomName(): $Component;
         setProfile(name: string, uuid: $UUID_): void;
         setProfile(profile: $GameProfile): void;
         setCustomName(name: $Component_): void;
-        getComponentString(): string;
-        resetComponents(): $ComponentFunctions;
+        getCustomName(): $Component;
+        setLore(lines: $List_<$Component_>): void;
+        setLore(lines: $List_<$Component_>, styledLines: $List_<$Component_>): void;
         setCustomModelData(data: number): void;
         setPotionContents(contents: $PotionContents_): void;
         setContainerLootTable(lootTable: $ResourceKey_<$LootTable>): void;
         setContainerLootTable(lootTable: $ResourceKey_<$LootTable>, seed: number): void;
+        resetComponents(): $ComponentFunctions;
         setTooltipHidden(): void;
         setGlintOverride(override: boolean): void;
-        setAdditionalTooltipHidden(): void;
-        setDyedColorWithTooltip(color: $KubeColor_): void;
-        setBlockStateProperties(properties: $Map_<string, string>): void;
+        getComponentString(): string;
         remove(type: $DataComponentType_<never>): $ComponentFunctions;
         static CODEC: $Codec<$FluidStack>;
         static FLUID_NON_EMPTY_CODEC: $Codec<$Holder<$Fluid>>;
@@ -298,34 +298,34 @@ declare module "@package/net/neoforged/neoforge/fluids" {
         getOrDefault<T extends keyof DataComponentTypes.OutputMap>(type: T, _default: DataComponentTypes.OutputMap[T]): DataComponentTypes.OutputMap[T];
         set(components: $DataComponentMap_): this;
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
+        get componentsPatch(): $DataComponentPatch;
+        get translationKey(): string;
+        get fluidType(): $FluidType;
         get empty(): boolean;
         get displayName(): $Component;
         get components(): $PatchedDataComponentMap;
-        get translationKey(): string;
-        get descriptionId(): string;
         get fluid(): $Fluid;
-        get fluidType(): $FluidType;
-        get componentsPatch(): $DataComponentPatch;
-        get componentsPatchEmpty(): boolean;
         get fluidHolder(): $Holder<$Fluid>;
+        get descriptionId(): string;
+        get componentsPatchEmpty(): boolean;
         get hoverName(): $Component;
         get codec(): $Codec<never>;
         get componentHolder(): $MutableDataComponentHolder;
         get componentMap(): $DataComponentMap;
         get tagKeys(): $List<$TagKey<$Fluid>>;
-        set unit(value: $DataComponentType_<$Unit_>);
-        set potionId(value: $Holder_<$Potion>);
+        set dyedColorWithTooltip(value: $KubeColor_);
+        set blockStateProperties(value: $Map_<string, string>);
         set rarity(value: $Rarity_);
-        set baseColor(value: $DyeColor_);
-        set dyedColor(value: $KubeColor_);
+        set unit(value: $DataComponentType_<$Unit_>);
         set entityData(value: $CompoundTag_);
+        set baseColor(value: $DyeColor_);
+        set potionId(value: $Holder_<$Potion>);
+        set dyedColor(value: $KubeColor_);
         set lockCode(value: string);
-        get componentString(): string;
         set customModelData(value: number);
         set potionContents(value: $PotionContents_);
         set glintOverride(value: boolean);
-        set dyedColorWithTooltip(value: $KubeColor_);
-        set blockStateProperties(value: $Map_<string, string>);
+        get componentString(): string;
     }
     /**
      * Values that may be interpreted as {@link $FluidStack}.
@@ -339,83 +339,83 @@ declare module "@package/net/neoforged/neoforge/fluids" {
     export class $IFluidTank {
     }
     export interface $IFluidTank {
+        getFluidAmount(): number;
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        getCapacity(): number;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        getCapacity(): number;
         getFluid(): $FluidStack;
         isFluidValid(arg0: $FluidStack_): boolean;
-        getFluidAmount(): number;
+        get fluidAmount(): number;
         get capacity(): number;
         get fluid(): $FluidStack;
-        get fluidAmount(): number;
     }
     export class $FluidType {
-        move(arg0: $FluidState, arg1: $LivingEntity, arg2: $Vec3_, arg3: number): boolean;
-        getDescription(): $Component;
-        getDescription(arg0: $FluidStack_): $Component;
+        isVanilla(): boolean;
         /**
          * @deprecated
          */
         initializeClient(arg0: $Consumer_<$IClientFluidTypeExtensions>): void;
-        getBucket(arg0: $FluidStack_): $ItemStack;
-        getBlockForFluidState(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): $BlockState;
-        getStateForPlacement(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidStack_): $FluidState;
-        isVaporizedOnPlacement(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidStack_): boolean;
-        getAdjacentBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: $PathType_): $PathType;
-        getLightLevel(arg0: $FluidStack_): number;
-        getLightLevel(): number;
-        getLightLevel(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
-        getTemperature(arg0: $FluidStack_): number;
+        motionScale(arg0: $Entity): number;
+        canExtinguish(arg0: $Entity): boolean;
+        canExtinguish(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
+        canPushEntity(arg0: $Entity): boolean;
+        move(arg0: $FluidState, arg1: $LivingEntity, arg2: $Vec3_, arg3: number): boolean;
+        getDescription(arg0: $FluidStack_): $Component;
+        getDescription(): $Component;
         getTemperature(): number;
+        getTemperature(arg0: $FluidStack_): number;
         getTemperature(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
+        getLightLevel(): number;
+        getLightLevel(arg0: $FluidStack_): number;
+        getLightLevel(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
         canBePlacedInLevel(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidStack_): boolean;
         canBePlacedInLevel(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): boolean;
+        getDripInfo(): $FluidType$DripstoneDripInfo;
+        setItemMovement(arg0: $ItemEntity): void;
+        getBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: boolean): $PathType;
+        canConvertToSource(arg0: $FluidStack_): boolean;
+        canConvertToSource(arg0: $FluidState, arg1: $LevelReader, arg2: $BlockPos_): boolean;
+        isLighterThanAir(): boolean;
         getViscosity(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
         getViscosity(arg0: $FluidStack_): number;
         getViscosity(): number;
-        getDripInfo(): $FluidType$DripstoneDripInfo;
-        canConvertToSource(arg0: $FluidState, arg1: $LevelReader, arg2: $BlockPos_): boolean;
-        canConvertToSource(arg0: $FluidStack_): boolean;
-        supportsBoating(arg0: $Boat): boolean;
-        supportsBoating(arg0: $FluidState, arg1: $Boat): boolean;
         handleCauldronDrip(arg0: $Fluid_, arg1: $Level_, arg2: $BlockPos_): boolean;
-        getBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: boolean): $PathType;
-        setItemMovement(arg0: $ItemEntity): void;
-        isLighterThanAir(): boolean;
-        getDescriptionId(arg0: $FluidStack_): string;
-        getDescriptionId(): string;
-        canRideVehicleUnder(arg0: $Entity, arg1: $Entity): boolean;
-        getFallDistanceModifier(arg0: $Entity): number;
+        supportsBoating(arg0: $FluidState, arg1: $Boat): boolean;
+        supportsBoating(arg0: $Boat): boolean;
+        onVaporize(arg0: $Player, arg1: $Level_, arg2: $BlockPos_, arg3: $FluidStack_): void;
         getDensity(arg0: $FluidStack_): number;
         getDensity(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
         getDensity(): number;
-        onVaporize(arg0: $Player, arg1: $Level_, arg2: $BlockPos_, arg3: $FluidStack_): void;
         getRarity(arg0: $FluidStack_): $Rarity;
         getRarity(): $Rarity;
+        getBucket(arg0: $FluidStack_): $ItemStack;
+        getAdjacentBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: $PathType_): $PathType;
+        getStateForPlacement(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidStack_): $FluidState;
+        isVaporizedOnPlacement(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidStack_): boolean;
+        getBlockForFluidState(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): $BlockState;
         isAir(): boolean;
-        canExtinguish(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
-        canExtinguish(arg0: $Entity): boolean;
-        motionScale(arg0: $Entity): number;
-        canPushEntity(arg0: $Entity): boolean;
+        getDescriptionId(): string;
+        getDescriptionId(arg0: $FluidStack_): string;
+        canRideVehicleUnder(arg0: $Entity, arg1: $Entity): boolean;
+        getFallDistanceModifier(arg0: $Entity): number;
+        getSound(arg0: $Player, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $SoundAction): $SoundEvent;
+        getSound(arg0: $SoundAction): $SoundEvent;
+        getSound(arg0: $Entity, arg1: $SoundAction): $SoundEvent;
+        getSound(arg0: $FluidStack_, arg1: $SoundAction): $SoundEvent;
+        canDrownIn(arg0: $LivingEntity): boolean;
+        canSwim(arg0: $Entity): boolean;
+        canHydrate(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockPos_): boolean;
         canHydrate(arg0: $Entity): boolean;
         canHydrate(arg0: $FluidStack_): boolean;
-        canHydrate(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockPos_): boolean;
-        getSound(arg0: $Entity, arg1: $SoundAction): $SoundEvent;
-        getSound(arg0: $SoundAction): $SoundEvent;
-        getSound(arg0: $Player, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $SoundAction): $SoundEvent;
-        getSound(arg0: $FluidStack_, arg1: $SoundAction): $SoundEvent;
-        canSwim(arg0: $Entity): boolean;
-        canDrownIn(arg0: $LivingEntity): boolean;
-        isVanilla(): boolean;
         static SIZE: $Lazy<number>;
         static BUCKET_VOLUME: number;
         constructor(arg0: $FluidType$Properties);
+        get vanilla(): boolean;
         get dripInfo(): $FluidType$DripstoneDripInfo;
         set itemMovement(value: $ItemEntity);
         get lighterThanAir(): boolean;
         get air(): boolean;
-        get vanilla(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $FluidType}.
@@ -428,11 +428,11 @@ declare module "@package/net/neoforged/neoforge/fluids" {
         constructor(arg0: $BaseFlowingFluid$Properties);
     }
     export class $CauldronFluidContent {
+        static getForFluid(arg0: $Fluid_): $CauldronFluidContent;
         static init(): void;
-        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         currentLevel(arg0: $BlockState_): number;
         static getForBlock(arg0: $Block_): $CauldronFluidContent;
-        static getForFluid(arg0: $Fluid_): $CauldronFluidContent;
+        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         maxLevel: number;
         totalAmount: number;
         levelProperty: $IntegerProperty;
@@ -445,11 +445,11 @@ declare module "@package/net/neoforged/neoforge/fluids" {
         constructor();
     }
     export class $FluidInteractionRegistry implements $FluidInteractionRegistryAccessor {
-        static canInteract(arg0: $Level_, arg1: $BlockPos_): boolean;
-        static getInteractions$create_$md$796745$0(): $Map<any, any>;
         static addInteraction(arg0: $FluidType_, arg1: $FluidInteractionRegistry$InteractionInformation_): void;
+        static getInteractions$create_$md$e03d8d$0(): $Map<any, any>;
+        static canInteract(arg0: $Level_, arg1: $BlockPos_): boolean;
         constructor();
-        static get interactions$create_$md$796745$0(): $Map<any, any>;
+        static get interactions$create_$md$e03d8d$0(): $Map<any, any>;
     }
     export class $BaseFlowingFluid$Flowing extends $BaseFlowingFluid {
         static FLUID_STATE_REGISTRY: $IdMapper<$FluidState>;
@@ -463,39 +463,39 @@ declare module "@package/net/neoforged/neoforge/fluids" {
         static get instance(): $DispenseFluidContainer;
     }
     export class $FluidType$Properties {
-        static create(): $FluidType$Properties;
-        descriptionId(arg0: string): $FluidType$Properties;
+        density(arg0: number): $FluidType$Properties;
         temperature(arg0: number): $FluidType$Properties;
-        fallDistanceModifier(arg0: number): $FluidType$Properties;
-        adjacentPathType(arg0: $PathType_): $FluidType$Properties;
+        descriptionId(arg0: string): $FluidType$Properties;
+        motionScale(arg0: number): $FluidType$Properties;
+        canExtinguish(arg0: boolean): $FluidType$Properties;
+        canPushEntity(arg0: boolean): $FluidType$Properties;
+        addDripstoneDripping(arg0: number, arg1: $ParticleOptions_, arg2: $Block_, arg3: $SoundEvent_): $FluidType$Properties;
+        static create(): $FluidType$Properties;
         canConvertToSource(arg0: boolean): $FluidType$Properties;
+        adjacentPathType(arg0: $PathType_): $FluidType$Properties;
         supportsBoating(arg0: boolean): $FluidType$Properties;
         rarity(arg0: $Rarity_): $FluidType$Properties;
-        viscosity(arg0: number): $FluidType$Properties;
-        lightLevel(arg0: number): $FluidType$Properties;
-        pathType(arg0: $PathType_): $FluidType$Properties;
         canDrown(arg0: boolean): $FluidType$Properties;
+        lightLevel(arg0: number): $FluidType$Properties;
+        viscosity(arg0: number): $FluidType$Properties;
+        pathType(arg0: $PathType_): $FluidType$Properties;
+        fallDistanceModifier(arg0: number): $FluidType$Properties;
         sound(arg0: $SoundAction, arg1: $SoundEvent_): $FluidType$Properties;
-        canExtinguish(arg0: boolean): $FluidType$Properties;
-        motionScale(arg0: number): $FluidType$Properties;
-        canPushEntity(arg0: boolean): $FluidType$Properties;
-        canHydrate(arg0: boolean): $FluidType$Properties;
         canSwim(arg0: boolean): $FluidType$Properties;
-        density(arg0: number): $FluidType$Properties;
-        addDripstoneDripping(arg0: number, arg1: $ParticleOptions_, arg2: $Block_, arg3: $SoundEvent_): $FluidType$Properties;
+        canHydrate(arg0: boolean): $FluidType$Properties;
     }
     export class $BaseFlowingFluid$Properties {
-        block(arg0: $Supplier_<$LiquidBlock>): $BaseFlowingFluid$Properties;
-        bucket(arg0: $Supplier_<$Item>): $BaseFlowingFluid$Properties;
-        explosionResistance(arg0: number): $BaseFlowingFluid$Properties;
-        tickRate(arg0: number): $BaseFlowingFluid$Properties;
         levelDecreasePerBlock(arg0: number): $BaseFlowingFluid$Properties;
+        tickRate(arg0: number): $BaseFlowingFluid$Properties;
+        block(arg0: $Supplier_<$LiquidBlock>): $BaseFlowingFluid$Properties;
+        explosionResistance(arg0: number): $BaseFlowingFluid$Properties;
+        bucket(arg0: $Supplier_<$Item>): $BaseFlowingFluid$Properties;
         slopeFindDistance(arg0: number): $BaseFlowingFluid$Properties;
         constructor(arg0: $Supplier_<$FluidType>, arg1: $Supplier_<$Fluid>, arg2: $Supplier_<$Fluid>);
     }
     export class $FluidActionResult {
-        getResult(): $ItemStack;
         isSuccess(): boolean;
+        getResult(): $ItemStack;
         result: $ItemStack;
         success: boolean;
         static FAILURE: $FluidActionResult;

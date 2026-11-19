@@ -5,15 +5,15 @@ import { $IEventBus } from "@package/net/neoforged/bus/api";
 import { $MapCodec_, $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $ResourceKey } from "@package/net/minecraft/resources";
-import { $ElementContainerProperties } from "@package/sirttas/elementalcraft/block/container";
 import { $SynthesizerProperties } from "@package/sirttas/elementalcraft/block/synthesizer";
+import { $ElementContainerProperties } from "@package/sirttas/elementalcraft/block/container";
 import { $Record } from "@package/java/lang";
 import { $CraftingBlockEntityProperties } from "@package/sirttas/elementalcraft/block/entity/crafting";
 
 declare module "@package/sirttas/elementalcraft/block/entity/properties" {
     export class $ConfigurableBlockEntityPropertiesType<T extends $IConfigurableBlockEntityProperties> extends $Record {
-        static register(arg0: $IEventBus): void;
         codec(): $MapCodec<T>;
+        static register(arg0: $IEventBus): void;
         static SYNTHESIZER: $DeferredHolder<$ConfigurableBlockEntityPropertiesType<never>, $ConfigurableBlockEntityPropertiesType<$SynthesizerProperties>>;
         static REGISTRY_KEY: $ResourceKey<$Registry<$ConfigurableBlockEntityPropertiesType<never>>>;
         static CRAFTING: $DeferredHolder<$ConfigurableBlockEntityPropertiesType<never>, $ConfigurableBlockEntityPropertiesType<$CraftingBlockEntityProperties>>;

@@ -7,16 +7,16 @@ declare module "@package/com/denfop/api/space/rovers/api" {
     export class $IRoversItem {
     }
     export interface $IRoversItem {
+        getUpgradeModules(): $List<$EnumTypeUpgrade>;
+        getAddProgress(): number;
         getName(): string;
         getType(): $EnumTypeRovers;
         getLevel(): $EnumRoversLevel;
-        getUpgradeModules(): $List<$EnumTypeUpgrade>;
-        getAddProgress(): number;
         getFluidHandler(arg0: $ItemStack_): $IFluidHandlerItem;
+        get upgradeModules(): $List<$EnumTypeUpgrade>;
+        get addProgress(): number;
         get name(): string;
         get type(): $EnumTypeRovers;
         get level(): $EnumRoversLevel;
-        get upgradeModules(): $List<$EnumTypeUpgrade>;
-        get addProgress(): number;
     }
 }

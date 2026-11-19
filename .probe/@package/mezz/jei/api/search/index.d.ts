@@ -31,11 +31,11 @@ declare module "@package/mezz/jei/api/search" {
     export class $ISearchStorage<T> {
     }
     export interface $ISearchStorage<T> {
+        statistics(): string;
+        getAllElements(arg0: $Consumer_<$Collection<T>>): void;
+        getSearchResults(arg0: string, arg1: $Consumer_<$Collection<T>>): void;
         put(arg0: string, arg1: T): void;
         removeAll(arg0: $Collection_<T>): boolean;
-        getSearchResults(arg0: string, arg1: $Consumer_<$Collection<T>>): void;
-        getAllElements(arg0: $Consumer_<$Collection<T>>): void;
-        statistics(): string;
         supportsDeletion(): boolean;
     }
 }

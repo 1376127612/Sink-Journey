@@ -9,16 +9,16 @@ declare module "@package/com/supermartijn642/fusion/api/model/predicates/blockst
     export class $BlockStateModelPredicate {
     }
     export interface $BlockStateModelPredicate {
+        simplify(): $BlockStateModelPredicate;
+        alwaysFalse(): boolean;
+        alwaysTrue(): boolean;
+        getSerializer(): $Serializer<$BlockStateModelPredicate>;
+        asModelPredicate(): $ModelPredicate;
         test(level: $BlockAndTintGetter, pos: $BlockPos_, state: $BlockState_): boolean;
         or(...predicates: $BlockStateModelPredicate[]): $BlockStateModelPredicate;
         negate(): $BlockStateModelPredicate;
         and(...predicates: $BlockStateModelPredicate[]): $BlockStateModelPredicate;
-        alwaysTrue(): boolean;
         applyTransform(transform: $ModelTransform): $BlockStateModelPredicate;
-        alwaysFalse(): boolean;
-        simplify(): $BlockStateModelPredicate;
-        getSerializer(): $Serializer<$BlockStateModelPredicate>;
-        asModelPredicate(): $ModelPredicate;
         get serializer(): $Serializer<$BlockStateModelPredicate>;
     }
 }

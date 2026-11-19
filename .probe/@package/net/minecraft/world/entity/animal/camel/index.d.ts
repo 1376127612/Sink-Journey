@@ -4,6 +4,7 @@ import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $MoveControl, $BodyRotationControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $AnimationState, $EntityDimensions, $EntityType_, $Entity$RemovalReason, $Saddleable, $PortalProcessor, $Pose_, $AgeableMob, $WalkAnimationState, $PlayerRideableJumping } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $AbstractHorse } from "@package/net/minecraft/world/entity/animal/horse";
 import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
@@ -26,9 +27,9 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         lookAtCooldown: number;
     }
     export class $CamelAi {
-        static brainProvider(): $Brain$Provider<$Camel>;
-        static updateActivity(camel: $Camel): void;
         static getTemptations(): $Predicate<$ItemStack>;
+        static updateActivity(camel: $Camel): void;
+        static brainProvider(): $Brain$Provider<$Camel>;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }
@@ -42,47 +43,29 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
     }
     export class $Camel extends $AbstractHorse implements $PlayerRideableJumping, $Saddleable {
         /**
-         * Return whether this entity should be rendered as on fire.
+         * Called to update the entity's position/logic.
          */
-        isDashing(): boolean;
+        standUp(): void;
         setDashing(dashing: boolean): void;
+        isDashing(): boolean;
         /**
          * Called to update the entity's position/logic.
          */
         sitDown(): void;
-        /**
-         * Called to update the entity's position/logic.
-         */
-        standUp(): void;
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         static createAttributes(): $AttributeSupplier$Builder;
-        getBreedOffspring(level: $ServerLevel, otherParent: $AgeableMob): $Camel;
-        resetLastPoseChangeTick(lastPoseChangeTick: number): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isCamelVisuallySitting(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isCamelSitting(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        refuseToMove(): boolean;
+        resetLastPoseChangeTick(lastPoseChangeTick: number): void;
         getPoseTime(): number;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        canCamelChangePose(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isInPoseTransition(): boolean;
+        refuseToMove(): boolean;
         /**
          * Called to update the entity's position/logic.
          */
         standUpInstantly(): void;
+        isCamelSitting(): boolean;
+        canCamelChangePose(): boolean;
+        getBreedOffspring(level: $ServerLevel, otherParent: $AgeableMob): $Camel;
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         static MAX_WEARING_ARMOR_CHANCE: number;
         sitAnimationState: $AnimationState;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -107,6 +90,7 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         static DATA_HEALTH_ID: $EntityDataAccessor<number>;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         xRotO: number;
+        static MAX_JUMP_STRENGTH: number;
         zo: number;
         static CHEST_SLOT_OFFSET: number;
         walkDist: number;
@@ -137,6 +121,8 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
+        static MAX_MOVEMENT_SPEED: number;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -149,6 +135,7 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         static BREEDING_CROSS_FACTOR: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -209,8 +196,8 @@ declare module "@package/net/minecraft/world/entity/animal/camel" {
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Camel>, level: $Level_);
         get camelVisuallySitting(): boolean;
-        get camelSitting(): boolean;
         get poseTime(): number;
         get inPoseTransition(): boolean;
+        get camelSitting(): boolean;
     }
 }

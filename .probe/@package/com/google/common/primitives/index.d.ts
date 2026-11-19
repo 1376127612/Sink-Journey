@@ -12,9 +12,9 @@ declare module "@package/com/google/common/primitives" {
         static valueOf(string: string, radix: number): $UnsignedLong;
         static valueOf(value: number): $UnsignedLong;
         mod(val: $UnsignedLong): $UnsignedLong;
-        dividedBy(val: $UnsignedLong): $UnsignedLong;
         plus(val: $UnsignedLong): $UnsignedLong;
         minus(val: $UnsignedLong): $UnsignedLong;
+        dividedBy(val: $UnsignedLong): $UnsignedLong;
         times(val: $UnsignedLong): $UnsignedLong;
         bigIntegerValue(): $BigInteger;
         static ZERO: $UnsignedLong;

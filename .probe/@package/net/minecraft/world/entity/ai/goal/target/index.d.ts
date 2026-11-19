@@ -7,6 +7,7 @@ import { $IronGolem } from "@package/net/minecraft/world/entity/animal";
 
 declare module "@package/net/minecraft/world/entity/ai/goal/target" {
     export class $NonTameRandomTargetGoal<T extends $LivingEntity> extends $NearestAttackableTargetGoal<T> {
+        targetType: $Class<T>;
         constructor(tamableMob: $TamableAnimal, targetType: $Class<T>, mustSee: boolean, targetPredicate: $Predicate_<$LivingEntity> | null);
     }
     export class $DefendVillageTargetGoal extends $TargetGoal {
@@ -33,25 +34,28 @@ declare module "@package/net/minecraft/world/entity/ai/goal/target" {
         constructor(tameAnimal: $TamableAnimal);
     }
     export class $NearestHealableRaiderTargetGoal<T extends $LivingEntity> extends $NearestAttackableTargetGoal<T> {
-        getCooldown(): number;
         /**
          * Execute a one shot task or start executing a continuous task
          */
         decrementCooldown(): void;
+        getCooldown(): number;
+        targetType: $Class<T>;
         constructor(mob: $Raider, targetType: $Class<T>, mustSee: boolean, targetPredicate: $Predicate_<$LivingEntity> | null);
         get cooldown(): number;
     }
     export class $NearestAttackableWitchTargetGoal<T extends $LivingEntity> extends $NearestAttackableTargetGoal<T> {
         setCanAttack(active: boolean): void;
+        targetType: $Class<T>;
         constructor(mob: $Raider, targetType: $Class<T>, randomInterval: number, mustSee: boolean, mustReach: boolean, targetPredicate: $Predicate_<$LivingEntity> | null);
         set canAttack(value: boolean);
     }
     export class $NearestAttackableTargetGoal<T extends $LivingEntity> extends $TargetGoal {
         setTarget(target: $LivingEntity | null): void;
-        constructor(mob: $Mob, targetType: $Class<T>, randomInterval: number, mustSee: boolean, mustReach: boolean, targetPredicate: $Predicate_<$LivingEntity> | null);
-        constructor(mob: $Mob, targetType: $Class<T>, mustSee: boolean, mustReach: boolean);
-        constructor(mob: $Mob, targetType: $Class<T>, mustSee: boolean, targetPredicate: $Predicate_<$LivingEntity>);
+        targetType: $Class<T>;
         constructor(mob: $Mob, targetType: $Class<T>, mustSee: boolean);
+        constructor(mob: $Mob, targetType: $Class<T>, mustSee: boolean, mustReach: boolean);
+        constructor(mob: $Mob, targetType: $Class<T>, randomInterval: number, mustSee: boolean, mustReach: boolean, targetPredicate: $Predicate_<$LivingEntity> | null);
+        constructor(mob: $Mob, targetType: $Class<T>, mustSee: boolean, targetPredicate: $Predicate_<$LivingEntity>);
         set target(value: $LivingEntity | null);
     }
 }

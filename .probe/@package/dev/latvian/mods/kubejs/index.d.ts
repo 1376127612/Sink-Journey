@@ -40,10 +40,12 @@ export * as core from "@package/dev/latvian/mods/kubejs/core";
 export * as server from "@package/dev/latvian/mods/kubejs/server";
 export * as component from "@package/dev/latvian/mods/kubejs/component";
 export * as fluid from "@package/dev/latvian/mods/kubejs/fluid";
+export * as create from "@package/dev/latvian/mods/kubejs/create";
 export * as codec from "@package/dev/latvian/mods/kubejs/codec";
 export * as misc from "@package/dev/latvian/mods/kubejs/misc";
 export * as integration from "@package/dev/latvian/mods/kubejs/integration";
 export * as plugin from "@package/dev/latvian/mods/kubejs/plugin";
+export * as mekanism from "@package/dev/latvian/mods/kubejs/mekanism";
 export * as web from "@package/dev/latvian/mods/kubejs/web";
 export * as gui from "@package/dev/latvian/mods/kubejs/gui";
 export * as color from "@package/dev/latvian/mods/kubejs/color";
@@ -57,12 +59,12 @@ export * as ingredient from "@package/dev/latvian/mods/kubejs/ingredient";
 
 declare module "@package/dev/latvian/mods/kubejs" {
     export class $CommonProperties extends $BaseProperties {
+        getCreativeModeTabName(): $Component;
+        getMaxSlotSize(original: number): number;
+        setPackMode(s: string): void;
         static get(): $CommonProperties;
         static reload(): void;
         getMaxStackSize(original: number): number;
-        setPackMode(s: string): void;
-        getCreativeModeTabName(): $Component;
-        getMaxSlotSize(original: number): number;
         matchJsonRecipes: boolean;
         allowAsyncStreams: boolean;
         announceReload: boolean;
@@ -84,8 +86,8 @@ declare module "@package/dev/latvian/mods/kubejs" {
     }
     export class $KubeJS {
         static id(path: string): $ResourceLocation;
-        static getStartupScriptManager(): $ScriptManager;
         static getClientScriptManager(): $ScriptManager;
+        static getStartupScriptManager(): $ScriptManager;
         static thisMod: $ModContainer;
         static PROXY: $KubeJSCommon;
         static MC_VERSION_STRING: string;
@@ -98,13 +100,13 @@ declare module "@package/dev/latvian/mods/kubejs" {
         static MC_VERSION_NUMBER: number;
         static DISPLAY_NAME: string;
         constructor(bus: $IEventBus, dist: $Dist_, mod: $ModContainer);
-        static get startupScriptManager(): $ScriptManager;
         static get clientScriptManager(): $ScriptManager;
+        static get startupScriptManager(): $ScriptManager;
     }
     export class $KubeJSModEventHandler {
-        static registerCapabilities(event: $RegisterCapabilitiesEvent): void;
-        static loadComplete(event: $FMLLoadCompleteEvent): void;
         static creativeTab(event: $BuildCreativeModeTabContentsEvent): void;
+        static loadComplete(event: $FMLLoadCompleteEvent): void;
+        static registerCapabilities(event: $RegisterCapabilitiesEvent): void;
         constructor();
     }
     export class $StartupScriptManager extends $ScriptManager {
@@ -115,16 +117,16 @@ declare module "@package/dev/latvian/mods/kubejs" {
         constructor();
     }
     export class $KubeJSMixinPlugin implements $IMixinConfigPlugin {
-        onLoad(mixinPackage: string): void;
-        getRefMapperConfig(): string;
-        shouldApplyMixin(targetClassName: string, mixinClassName: string): boolean;
-        acceptTargets(myTargets: $Set_<string>, otherTargets: $Set_<string>): void;
         getMixins(): $List<string>;
         postApply(targetClassName: string, targetClass: $ClassNode, mixinClassName: string, mixinInfo: $IMixinInfo): void;
         preApply(targetClassName: string, targetClass: $ClassNode, mixinClassName: string, mixinInfo: $IMixinInfo): void;
+        getRefMapperConfig(): string;
+        shouldApplyMixin(targetClassName: string, mixinClassName: string): boolean;
+        acceptTargets(myTargets: $Set_<string>, otherTargets: $Set_<string>): void;
+        onLoad(mixinPackage: string): void;
         constructor();
-        get refMapperConfig(): string;
         get mixins(): $List<string>;
+        get refMapperConfig(): string;
     }
     export class $DevProperties extends $BaseProperties {
         static get(): $DevProperties;
@@ -152,11 +154,11 @@ declare module "@package/dev/latvian/mods/kubejs" {
         kubedexSound: string;
     }
     export class $KubeJSPaths {
-        static get(type: $PackType_): $Path;
-        static dir(dir: $Path_, markFirstRun: boolean): $Path;
-        static dir(dir: $Path_): $Path;
-        static verifyFilePath(path: $Path_): $Path;
         static getLocalDevProperties(): $Path;
+        static verifyFilePath(path: $Path_): $Path;
+        static get(type: $PackType_): $Path;
+        static dir(dir: $Path_): $Path;
+        static dir(dir: $Path_, markFirstRun: boolean): $Path;
         static ASSETS: $Path;
         static CLIENT_PROPERTIES: $Path;
         static WEB_SERVER_PROPERTIES: $Path;
@@ -187,19 +189,19 @@ declare module "@package/dev/latvian/mods/kubejs" {
     /**
      * Values that may be interpreted as {@link $KubeJSModEventHandler$KubeEntityCapabilityProvider}.
      */
-    export type $KubeJSModEventHandler$KubeEntityCapabilityProvider_<CAP, SRC> = { attachment?: $BlockEntityAttachmentInfo_, capability?: $BlockCapability<any, any>,  } | [attachment?: $BlockEntityAttachmentInfo_, capability?: $BlockCapability<any, any>, ];
+    export type $KubeJSModEventHandler$KubeEntityCapabilityProvider_<CAP, SRC> = { capability?: $BlockCapability<any, any>, attachment?: $BlockEntityAttachmentInfo_,  } | [capability?: $BlockCapability<any, any>, attachment?: $BlockEntityAttachmentInfo_, ];
     export class $KubeJSCommon {
-        "export"(packs: $List_<$ExportablePackResources>): void;
-        updateServerData(data: $KubeServerData_): void;
-        runInMainThread(runnable: $Runnable_): void;
-        reloadConfig(): void;
-        generateTypings(source: $CommandSourceStack): void;
-        getClientPlayer(): $Player;
-        reloadStartupScripts(dedicated: boolean): void;
-        handleDataFromServerPacket(channel: string, data: $CompoundTag_): void;
-        getWebServerWindowTitle(): string;
-        openErrors(type: $ScriptType_, errors: $List_<$ConsoleLine>, warnings: $List_<$ConsoleLine>): void;
         openErrors(type: $ScriptType_): void;
+        openErrors(type: $ScriptType_, errors: $List_<$ConsoleLine>, warnings: $List_<$ConsoleLine>): void;
+        "export"(packs: $List_<$ExportablePackResources>): void;
+        runInMainThread(runnable: $Runnable_): void;
+        getClientPlayer(): $Player;
+        generateTypings(source: $CommandSourceStack): void;
+        updateServerData(data: $KubeServerData_): void;
+        reloadConfig(): void;
+        handleDataFromServerPacket(channel: string, data: $CompoundTag_): void;
+        reloadStartupScripts(dedicated: boolean): void;
+        getWebServerWindowTitle(): string;
         constructor();
         get clientPlayer(): $Player;
         get webServerWindowTitle(): string;

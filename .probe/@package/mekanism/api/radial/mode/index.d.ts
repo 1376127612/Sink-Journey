@@ -6,30 +6,30 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/mekanism/api/radial/mode" {
     export class $NestedRadialMode extends $Record implements $INestedRadialMode {
-        color(): $EnumColor;
         icon(): $ResourceLocation;
+        hasNestedData(): boolean;
         sliceName(): $Component;
         nestedData(): $RadialData<never>;
-        hasNestedData(): boolean;
-        constructor(nestedData: $RadialData<never>, sliceName: $Component_, icon: $ResourceLocation_, color: $EnumColor_);
-        constructor(arg0: $RadialData<never>, arg1: $ILangEntry_, arg2: $ResourceLocation_, arg3: $EnumColor_);
+        color(): $EnumColor;
         constructor(arg0: $RadialData<never>, arg1: $Component_, arg2: $ResourceLocation_);
+        constructor(arg0: $RadialData<never>, arg1: $ILangEntry_, arg2: $ResourceLocation_, arg3: $EnumColor_);
+        constructor(nestedData: $RadialData<never>, sliceName: $Component_, icon: $ResourceLocation_, color: $EnumColor_);
     }
     /**
      * Values that may be interpreted as {@link $NestedRadialMode}.
      */
-    export type $NestedRadialMode_ = { sliceName?: $Component_, color?: $EnumColor_, icon?: $ResourceLocation_, nestedData?: $RadialData<never>,  } | [sliceName?: $Component_, color?: $EnumColor_, icon?: $ResourceLocation_, nestedData?: $RadialData<never>, ];
+    export type $NestedRadialMode_ = { color?: $EnumColor_, icon?: $ResourceLocation_, nestedData?: $RadialData<never>, sliceName?: $Component_,  } | [color?: $EnumColor_, icon?: $ResourceLocation_, nestedData?: $RadialData<never>, sliceName?: $Component_, ];
     export class $IRadialMode {
     }
     export interface $IRadialMode {
-        color(): $EnumColor;
         icon(): $ResourceLocation;
         sliceName(): $Component;
+        color(): $EnumColor;
     }
     export class $INestedRadialMode {
     }
     export interface $INestedRadialMode extends $IRadialMode {
-        nestedData(): $RadialData<never>;
         hasNestedData(): boolean;
+        nestedData(): $RadialData<never>;
     }
 }

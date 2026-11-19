@@ -21,11 +21,11 @@ declare module "@package/com/simibubi/create/api/registry" {
         addProvider(arg0: $SimpleRegistry$Provider_<K, $List<V>>): void;
     }
     export class $SimpleRegistry$Provider<K, V> {
-        static forTag<K, V>(arg0: $TagKey_<K>, arg1: $Function_<K, $Holder<K>>, arg2: V): $SimpleRegistry$Provider<K, V>;
+        static forBlockTag<V>(arg0: $TagKey_<$Block>, arg1: V): $SimpleRegistry$Provider<$Block, V>;
         static forFluidTag<V>(arg0: $TagKey_<$Fluid>, arg1: V): $SimpleRegistry$Provider<$Fluid, V>;
         static forBlockEntityTag<V>(arg0: $TagKey_<$BlockEntityType<never>>, arg1: V): $SimpleRegistry$Provider<$BlockEntityType<never>, V>;
         static forEntityTag<V>(arg0: $TagKey_<$EntityType<never>>, arg1: V): $SimpleRegistry$Provider<$EntityType<never>, V>;
-        static forBlockTag<V>(arg0: $TagKey_<$Block>, arg1: V): $SimpleRegistry$Provider<$Block, V>;
+        static forTag<K, V>(arg0: $TagKey_<K>, arg1: $Function_<K, $Holder<K>>, arg2: V): $SimpleRegistry$Provider<K, V>;
         static forItemTag<V>(arg0: $TagKey_<$Item>, arg1: V): $SimpleRegistry$Provider<$Item, V>;
     }
     export interface $SimpleRegistry$Provider<K, V> {

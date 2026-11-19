@@ -10,16 +10,16 @@ import { $HistoryStack } from "@package/com/lowdragmc/lowdraglib2/gui/ui/utils";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/debugger" {
     export class $UIDebugger extends $UIElement {
-        isFloating(): boolean;
         isFocusMode(): boolean;
-        setRenderUIShaping(arg0: boolean): void;
-        pickHovered(): void;
-        renderHostOverlay(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         isRenderUIShaping(): boolean;
-        setFocusMode(arg0: boolean): void;
-        setFloating(arg0: boolean): $UIDebugger;
+        pickHovered(): void;
         focusElement(arg0: $UIElement): void;
+        setRenderUIShaping(arg0: boolean): void;
+        setFloating(arg0: boolean): $UIDebugger;
+        renderHostOverlay(arg0: $GuiGraphics, arg1: number, arg2: number): void;
         getShapingElement(): $UIElement;
+        setFocusMode(arg0: boolean): void;
+        isFloating(): boolean;
         container: $UIElement;
         border: $LayoutPanel;
         padding: $LayoutPanel;
@@ -41,8 +41,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/debugger" {
         get shapingElement(): $UIElement;
     }
     export class $LayoutPanel extends $UIElement {
-        setValue(arg0: $FloatRect): void;
         addCenter(arg0: $UIElement): $LayoutPanel;
+        setValue(arg0: $FloatRect): void;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         constructor(arg0: number);

@@ -6,9 +6,9 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/sirttas/elementalcraft/block/container" {
     export class $ElementContainerProperties extends $Record implements $IConfigurableBlockEntityProperties {
+        compatibleTools(): $HolderSet<$Block>;
         getType(): $ConfigurableBlockEntityPropertiesType<$ElementContainerProperties>;
         capacity(): number;
-        compatibleTools(): $HolderSet<$Block>;
         static CODEC: $MapCodec<$ElementContainerProperties>;
         static DEFAULT: $ElementContainerProperties;
         constructor(compatibleTools: $HolderSet_<$Block>, capacity: number);

@@ -18,16 +18,16 @@ import { $BlockEntityType, $BlockEntity } from "@package/net/minecraft/world/lev
 
 declare module "@package/com/simibubi/create/api/behaviour/display" {
     export class $DisplayTarget {
-        static get(arg0: $ResourceLocation_): $DisplayTarget;
+        requiresComponentSanitization(): boolean;
+        getMultiblockBounds(arg0: $LevelAccessor, arg1: $BlockPos_): $AABB;
+        acceptText(arg0: number, arg1: $List_<$MutableComponent_>, arg2: $DisplayLinkContext): void;
+        provideStats(arg0: $DisplayLinkContext): $DisplayTargetStats;
+        getLineOptionText(arg0: number): $Component;
         static get(arg0: $LevelAccessor, arg1: $BlockPos_): $DisplayTarget;
+        static get(arg0: $ResourceLocation_): $DisplayTarget;
         static reserve(arg0: number, arg1: $BlockEntity, arg2: $DisplayLinkContext): void;
         static displayTarget<B extends $Block, P>(arg0: $RegistryEntry<$DisplayTarget_, $DisplayTarget_>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
         isReserved(arg0: number, arg1: $BlockEntity, arg2: $DisplayLinkContext): boolean;
-        getMultiblockBounds(arg0: $LevelAccessor, arg1: $BlockPos_): $AABB;
-        acceptText(arg0: number, arg1: $List_<$MutableComponent_>, arg2: $DisplayLinkContext): void;
-        requiresComponentSanitization(): boolean;
-        getLineOptionText(arg0: number): $Component;
-        provideStats(arg0: $DisplayLinkContext): $DisplayTargetStats;
         static BY_BLOCK_ENTITY: $SimpleRegistry<$BlockEntityType<never>, $DisplayTarget>;
         static BY_BLOCK: $SimpleRegistry<$Block, $DisplayTarget>;
         constructor();
@@ -37,28 +37,28 @@ declare module "@package/com/simibubi/create/api/behaviour/display" {
      */
     export type $DisplayTarget_ = RegistryTypes.CreateDisplayTarget;
     export class $DisplaySource {
+        loadFlapDisplayLayout(arg0: $DisplayLinkContext, arg1: $FlapDisplayBlockEntity, arg2: $FlapDisplayLayout): void;
+        loadFlapDisplayLayout(arg0: $DisplayLinkContext, arg1: $FlapDisplayBlockEntity, arg2: $FlapDisplayLayout, arg3: number): void;
+        getPassiveRefreshTicks(): number;
+        provideFlapDisplayText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$List<$MutableComponent>>;
+        initConfigurationWidgets(arg0: $DisplayLinkContext, arg1: $ModularGuiLineBuilder, arg2: boolean): void;
+        provideText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$MutableComponent>;
+        populateData(arg0: $DisplayLinkContext): void;
+        transferData(arg0: $DisplayLinkContext, arg1: $DisplayTarget_, arg2: number): void;
+        onSignalReset(arg0: $DisplayLinkContext): void;
+        shouldPassiveReset(): boolean;
         getName(): $Component;
         static get(arg0: $ResourceLocation_): $DisplaySource;
         static getAll(arg0: $LevelAccessor, arg1: $BlockPos_): $List<$DisplaySource>;
         static displaySource<B extends $Block, P>(arg0: $RegistryEntry<$DisplaySource_, $DisplaySource_>): $NonNullUnaryOperator<$BlockBuilder<B, P>>;
-        getPassiveRefreshTicks(): number;
-        loadFlapDisplayLayout(arg0: $DisplayLinkContext, arg1: $FlapDisplayBlockEntity, arg2: $FlapDisplayLayout): void;
-        loadFlapDisplayLayout(arg0: $DisplayLinkContext, arg1: $FlapDisplayBlockEntity, arg2: $FlapDisplayLayout, arg3: number): void;
-        provideFlapDisplayText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$List<$MutableComponent>>;
-        initConfigurationWidgets(arg0: $DisplayLinkContext, arg1: $ModularGuiLineBuilder, arg2: boolean): void;
-        populateData(arg0: $DisplayLinkContext): void;
-        transferData(arg0: $DisplayLinkContext, arg1: $DisplayTarget_, arg2: number): void;
-        shouldPassiveReset(): boolean;
-        provideText(arg0: $DisplayLinkContext, arg1: $DisplayTargetStats_): $List<$MutableComponent>;
-        onSignalReset(arg0: $DisplayLinkContext): void;
         static BY_BLOCK_ENTITY: $SimpleRegistry$Multi<$BlockEntityType<never>, $DisplaySource>;
         static WHITESPACE: $MutableComponent;
         static EMPTY: $List<$MutableComponent>;
         static EMPTY_LINE: $MutableComponent;
         static BY_BLOCK: $SimpleRegistry$Multi<$Block, $DisplaySource>;
         constructor();
-        get name(): $Component;
         get passiveRefreshTicks(): number;
+        get name(): $Component;
     }
     /**
      * Values that may be interpreted as {@link $DisplaySource}.

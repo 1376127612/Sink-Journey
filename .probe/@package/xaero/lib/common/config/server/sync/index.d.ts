@@ -12,34 +12,34 @@ import { $ConfigProfile } from "@package/xaero/lib/common/config/profile";
 
 declare module "@package/xaero/lib/common/config/server/sync" {
     export class $ServerConfigChannelSynchronizer extends $CommonConfigChannelSynchronizer {
+        onDeleteConfigProfilePacket(arg0: string, arg1: $ServerPlayerData): void;
         postLoad(): void;
         syncProfileDeletion(arg0: $ConfigProfile): void;
         syncOptionValueChange(arg0: $ConfigProfile, arg1: $ConfigOption<never>): void;
+        syncDefaultEnforcedConfigProfileSwitch(arg0: $ConfigProfile): void;
+        onEditProfilePacket(arg0: string, arg1: $Iterable_<$AbstractConfigPacket$OptionEntry>, arg2: $ServerPlayerData): void;
+        onConfigProfileInfoPacket(arg0: $List_<$ConfigProfileInfoPacket$Entry>, arg1: string, arg2: $ServerPlayerData): void;
+        handleLogin(arg0: $ServerPlayerConfigSynchronizer): void;
         onProfileRequestPacket(arg0: $ServerPlayerConfigSynchronizer, arg1: string): void;
         syncProfileInfoChange(arg0: $ConfigProfile): void;
-        onDeleteConfigProfilePacket(arg0: string, arg1: $ServerPlayerData): void;
-        onConfigProfileInfoPacket(arg0: $List_<$ConfigProfileInfoPacket$Entry>, arg1: string, arg2: $ServerPlayerData): void;
-        onEditProfilePacket(arg0: string, arg1: $Iterable_<$AbstractConfigPacket$OptionEntry>, arg2: $ServerPlayerData): void;
-        syncDefaultEnforcedConfigProfileSwitch(arg0: $ConfigProfile): void;
-        handleLogin(arg0: $ServerPlayerConfigSynchronizer): void;
         syncEnforcedConfigProfileDeletion(arg0: $ConfigProfile): void;
         syncServerProfileEditingInfo(arg0: $ServerPlayerConfigSynchronizer): void;
         onCreateConfigProfilePacket(arg0: string, arg1: string, arg2: string): void;
         logger: $Logger;
     }
     export class $ServerPlayerConfigSynchronizer {
-        getCurrentInputChannel(): $ConfigChannel;
-        send(arg0: $ConfigChannel, arg1: $Object): void;
-        onProfileRequestPacket(arg0: string): void;
         onDeleteConfigProfilePacket(arg0: string): void;
-        onConfigProfileInfoPacket(arg0: $List_<$ConfigProfileInfoPacket$Entry>, arg1: string): void;
-        onEditProfilePacket(arg0: string, arg1: $Iterable_<$AbstractConfigPacket$OptionEntry>): void;
         getPlayerData(): $ServerPlayerData;
+        onEditProfilePacket(arg0: string, arg1: $Iterable_<$AbstractConfigPacket$OptionEntry>): void;
+        onConfigProfileInfoPacket(arg0: $List_<$ConfigProfileInfoPacket$Entry>, arg1: string): void;
         handleLogin(): void;
+        onProfileRequestPacket(arg0: string): void;
         onCreateConfigProfilePacket(arg0: string, arg1: string, arg2: string): void;
         receiveChannelId(arg0: $ResourceLocation_): void;
+        getCurrentInputChannel(): $ConfigChannel;
+        send(arg0: $ConfigChannel, arg1: $Object): void;
         constructor(arg0: $ServerPlayerData);
-        get currentInputChannel(): $ConfigChannel;
         get playerData(): $ServerPlayerData;
+        get currentInputChannel(): $ConfigChannel;
     }
 }

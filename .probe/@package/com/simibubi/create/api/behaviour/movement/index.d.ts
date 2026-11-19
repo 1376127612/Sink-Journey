@@ -16,25 +16,25 @@ declare module "@package/com/simibubi/create/api/behaviour/movement" {
         static REGISTRY: $SimpleRegistry<$Block, $MovementBehaviour>;
     }
     export interface $MovementBehaviour {
-        isActive(arg0: $MovementContext): boolean;
-        tick(arg0: $MovementContext): void;
-        mustTickWhileDisabled(): boolean;
-        onDisabledByControls(arg0: $MovementContext): void;
-        getActiveAreaOffset(arg0: $MovementContext): $Vec3;
-        renderInContraption(arg0: $MovementContext, arg1: $VirtualRenderWorld, arg2: $ContraptionMatrices, arg3: $MultiBufferSource_): void;
         disableBlockEntityRendering(): boolean;
+        stopMoving(arg0: $MovementContext): void;
         /**
          * @deprecated
          */
         dropItem(arg0: $MovementContext, arg1: $ItemStack_): void;
-        onSpeedChanged(arg0: $MovementContext, arg1: $Vec3_, arg2: $Vec3_): void;
-        startMoving(arg0: $MovementContext): void;
-        visitNewPosition(arg0: $MovementContext, arg1: $BlockPos_): void;
-        canBeDisabledVia(arg0: $MovementContext): $ItemStack;
+        getActiveAreaOffset(arg0: $MovementContext): $Vec3;
+        mustTickWhileDisabled(): boolean;
+        renderInContraption(arg0: $MovementContext, arg1: $VirtualRenderWorld, arg2: $ContraptionMatrices, arg3: $MultiBufferSource_): void;
+        onDisabledByControls(arg0: $MovementContext): void;
         cancelStall(arg0: $MovementContext): void;
-        collectOrDropItem(arg0: $MovementContext, arg1: $ItemStack_): void;
-        writeExtraData(arg0: $MovementContext): void;
         createVisual(arg0: $VisualizationContext, arg1: $VirtualRenderWorld, arg2: $MovementContext): $ActorVisual;
-        stopMoving(arg0: $MovementContext): void;
+        canBeDisabledVia(arg0: $MovementContext): $ItemStack;
+        startMoving(arg0: $MovementContext): void;
+        collectOrDropItem(arg0: $MovementContext, arg1: $ItemStack_): void;
+        visitNewPosition(arg0: $MovementContext, arg1: $BlockPos_): void;
+        writeExtraData(arg0: $MovementContext): void;
+        isActive(arg0: $MovementContext): boolean;
+        tick(arg0: $MovementContext): void;
+        onSpeedChanged(arg0: $MovementContext, arg1: $Vec3_, arg2: $Vec3_): void;
     }
 }

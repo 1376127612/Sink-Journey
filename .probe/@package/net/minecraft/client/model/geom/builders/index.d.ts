@@ -14,32 +14,32 @@ declare module "@package/net/minecraft/client/model/geom/builders" {
         constructor(grow: number);
     }
     export class $PartDefinition {
-        getChild(name: string): $PartDefinition;
         bake(texWidth: number, texHeight: number): $ModelPart;
         addOrReplaceChild(name: string, cubes: $CubeListBuilder, partPose: $PartPose): $PartDefinition;
+        getChild(name: string): $PartDefinition;
         children: $Map<string, $PartDefinition>;
         constructor(cubes: $List_<$CubeDefinition>, partPose: $PartPose);
     }
     export class $LayerDefinition {
-        static create(mesh: $MeshDefinition, texWidth: number, texHeight: number): $LayerDefinition;
         bakeRoot(): $ModelPart;
+        static create(mesh: $MeshDefinition, texWidth: number, texHeight: number): $LayerDefinition;
         constructor(mesh: $MeshDefinition, material: $MaterialDefinition);
     }
     export class $CubeListBuilder {
+        getCubes(): $List<$CubeDefinition>;
         static create(): $CubeListBuilder;
         mirror(): $CubeListBuilder;
         mirror(mirror: boolean): $CubeListBuilder;
-        addBox(originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, cubeDeformation: $CubeDeformation, texScaleU: number, texScaleV: number): $CubeListBuilder;
+        texOffs(xTexOffs: number, yTexOffs: number): $CubeListBuilder;
         addBox(originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, mirror: boolean): $CubeListBuilder;
-        addBox(comment: string, originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, cubeDeformation: $CubeDeformation): $CubeListBuilder;
+        addBox(originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, cubeDeformation: $CubeDeformation, texScaleU: number, texScaleV: number): $CubeListBuilder;
         addBox(originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, cubeDeformation: $CubeDeformation): $CubeListBuilder;
         addBox(comment: string, originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number): $CubeListBuilder;
+        addBox(comment: string, originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, cubeDeformation: $CubeDeformation, xTexOffs: number, yTexOffs: number): $CubeListBuilder;
         addBox(comment: string, originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, xTexOffs: number, yTexOffs: number): $CubeListBuilder;
         addBox(originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number): $CubeListBuilder;
         addBox(originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, visibleFaces: $Set_<$Direction_>): $CubeListBuilder;
-        addBox(comment: string, originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, cubeDeformation: $CubeDeformation, xTexOffs: number, yTexOffs: number): $CubeListBuilder;
-        texOffs(xTexOffs: number, yTexOffs: number): $CubeListBuilder;
-        getCubes(): $List<$CubeDefinition>;
+        addBox(comment: string, originX: number, originY: number, originZ: number, dimensionX: number, dimensionY: number, dimensionZ: number, cubeDeformation: $CubeDeformation): $CubeListBuilder;
         constructor();
         get cubes(): $List<$CubeDefinition>;
     }

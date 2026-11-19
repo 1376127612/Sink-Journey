@@ -7,14 +7,14 @@ declare module "@package/net/createmod/catnip/gui" {
     export class $TextureSheetSegment {
     }
     export interface $TextureSheetSegment extends $BindableTexture {
-        getWidth(): number;
         getHeight(): number;
-        getStartY(): number;
         getStartX(): number;
-        get width(): number;
+        getStartY(): number;
+        getWidth(): number;
         get height(): number;
-        get startY(): number;
         get startX(): number;
+        get startY(): number;
+        get width(): number;
     }
     export class $TickableGuiEventListener {
     }

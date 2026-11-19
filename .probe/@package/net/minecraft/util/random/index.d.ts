@@ -11,12 +11,12 @@ declare module "@package/net/minecraft/util/random" {
         get weight(): $Weight;
     }
     export class $SimpleWeightedRandomList<E> extends $WeightedRandomList<$WeightedEntry$Wrapper<E>> {
+        static wrappedCodec<E>(elementCodec: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
+        static wrappedCodecAllowingEmpty<E>(elementCodec: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
         static builder<E>(): $SimpleWeightedRandomList$Builder<E>;
         static single<E>(data: E): $SimpleWeightedRandomList<E>;
         static empty<E>(): $SimpleWeightedRandomList<E>;
         getRandomValue(random: $RandomSource): ($WeightedEntry$Wrapper<E>) | undefined;
-        static wrappedCodec<E>(elementCodec: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
-        static wrappedCodecAllowingEmpty<E>(elementCodec: $Codec<E>): $Codec<$SimpleWeightedRandomList<E>>;
     }
     export class $WeightedEntry {
         static wrap<T>(data: T, weight: number): $WeightedEntry$Wrapper<T>;
@@ -36,13 +36,13 @@ declare module "@package/net/minecraft/util/random" {
         constructor();
     }
     export class $WeightedRandomList<E extends $WeightedEntry> {
+        static codec<E extends $WeightedEntry>(elementCodec: $Codec<E>): $Codec<$WeightedRandomList<E>>;
+        getRandom(random: $RandomSource): (E) | undefined;
         isEmpty(): boolean;
+        static create<E extends $WeightedEntry>(): $WeightedRandomList<E>;
         static create<E extends $WeightedEntry>(items: $List_<E>): $WeightedRandomList<E>;
         static create<E extends $WeightedEntry>(...items: E[]): $WeightedRandomList<E>;
-        static create<E extends $WeightedEntry>(): $WeightedRandomList<E>;
         unwrap(): $List<any>;
-        getRandom(random: $RandomSource): (E) | undefined;
-        static codec<E extends $WeightedEntry>(elementCodec: $Codec<E>): $Codec<$WeightedRandomList<E>>;
         get empty(): boolean;
     }
     export class $Weight {
@@ -51,20 +51,20 @@ declare module "@package/net/minecraft/util/random" {
         static CODEC: $Codec<$Weight>;
     }
     export class $WeightedEntry$Wrapper<T> extends $Record implements $WeightedEntry {
+        static codec<E>(elementCodec: $Codec<E>): $Codec<$WeightedEntry$Wrapper<E>>;
         data(): T;
         weight(): $Weight;
         getWeight(): $Weight;
-        static codec<E>(elementCodec: $Codec<E>): $Codec<$WeightedEntry$Wrapper<E>>;
         constructor(data: T, weight: $Weight);
     }
     /**
      * Values that may be interpreted as {@link $WeightedEntry$Wrapper}.
      */
-    export type $WeightedEntry$Wrapper_<T> = { data?: any, weight?: $Weight,  } | [data?: any, weight?: $Weight, ];
+    export type $WeightedEntry$Wrapper_<T> = { weight?: $Weight, data?: any,  } | [weight?: $Weight, data?: any, ];
     export class $WeightedRandom {
+        static getTotalWeight(entries: $List_<$WeightedEntry_>): number;
+        static getWeightedItem<T extends $WeightedEntry>(entries: $List_<T>, weightedIndex: number): (T) | undefined;
         static getRandomItem<T extends $WeightedEntry>(random: $RandomSource, entries: $List_<T>): (T) | undefined;
         static getRandomItem<T extends $WeightedEntry>(random: $RandomSource, entries: $List_<T>, totalWeight: number): (T) | undefined;
-        static getWeightedItem<T extends $WeightedEntry>(entries: $List_<T>, weightedIndex: number): (T) | undefined;
-        static getTotalWeight(entries: $List_<$WeightedEntry_>): number;
     }
 }

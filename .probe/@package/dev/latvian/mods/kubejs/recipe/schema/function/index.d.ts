@@ -31,7 +31,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/function" {
     /**
      * Values that may be interpreted as {@link $SetFunction}.
      */
-    export type $SetFunction_ = { key?: string, value?: $JsonElement_,  } | [key?: string, value?: $JsonElement_, ];
+    export type $SetFunction_ = { value?: $JsonElement_, key?: string,  } | [value?: $JsonElement_, key?: string, ];
     export class $SetFunction$Resolved<T> extends $Record implements $ResolvedRecipeSchemaFunction {
         to(): T;
         key(): $RecipeKey<T>;
@@ -42,7 +42,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/function" {
     /**
      * Values that may be interpreted as {@link $SetFunction$Resolved}.
      */
-    export type $SetFunction$Resolved_<T> = { to?: any, key?: $RecipeKey<any>,  } | [to?: any, key?: $RecipeKey<any>, ];
+    export type $SetFunction$Resolved_<T> = { key?: $RecipeKey<any>, to?: any,  } | [key?: $RecipeKey<any>, to?: any, ];
     export class $RecipeFunctionInstance extends $Record {
         name(): string;
         "function"(): $ResolvedRecipeSchemaFunction;
@@ -130,8 +130,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/function" {
      */
     export type $AddToListFunction$Resolved_<T> = { key?: $RecipeKey<$List_<any>>,  } | [key?: $RecipeKey<$List_<any>>, ];
     export class $RecipeSchemaFunctionType<T extends $RecipeSchemaFunction> extends $Record {
-        id(): string;
         mapCodec(): $MapCodec<T>;
+        id(): string;
         static CODEC: $Codec<$RecipeSchemaFunctionType<never>>;
         static REGISTRY: $Lazy<$Map<string, $RecipeSchemaFunctionType<never>>>;
         constructor(id: string, mapCodec: $MapCodec_<T>);

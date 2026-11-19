@@ -9,28 +9,28 @@ declare module "@package/dev/tr7zw/entityculling/access" {
     export class $Cullable {
     }
     export interface $Cullable {
-        setTimeout(): void;
-        isShouldEntityAppearGlowing(): boolean;
-        setShouldEntityAppearGlowing(arg0: boolean): void;
-        setOutOfCamera(arg0: boolean): void;
-        getEc$BoundingBox(): $AABB;
-        isOutOfCamera(): boolean;
-        setEc$BoundingBox(arg0: $AABB_): void;
-        getEc$Position(): $Vec3;
-        isForcedVisible(): boolean;
-        setEc$Position(arg0: $Vec3_): void;
-        setEc$PBlockPos(arg0: $BlockPos_): void;
-        getEc$PBlockPos(): $BlockPos;
-        setCulled(arg0: boolean): void;
         isCulled(): boolean;
+        setCulled(arg0: boolean): void;
+        setShouldEntityAppearGlowing(arg0: boolean): void;
+        isShouldEntityAppearGlowing(): boolean;
+        getEc$PBlockPos(): $BlockPos;
+        setEc$Position(arg0: $Vec3_): void;
+        isForcedVisible(): boolean;
+        setOutOfCamera(arg0: boolean): void;
+        isOutOfCamera(): boolean;
+        setEc$PBlockPos(arg0: $BlockPos_): void;
+        setEc$BoundingBox(arg0: $AABB_): void;
+        getEc$BoundingBox(): $AABB;
+        getEc$Position(): $Vec3;
+        setTimeout(): void;
         get forcedVisible(): boolean;
     }
     export class $EntityRendererInter<T extends $Entity> {
     }
     export interface $EntityRendererInter<T extends $Entity> {
-        entityCullingIgnoresCulling(arg0: T): boolean;
-        shadowRenderNameTag(arg0: T, arg1: $Component_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
-        shadowShouldShowName(arg0: T): boolean;
         entityCullingGetCullingBox(arg0: T): $AABB;
+        entityCullingIgnoresCulling(arg0: T): boolean;
+        shadowShouldShowName(arg0: T): boolean;
+        shadowRenderNameTag(arg0: T, arg1: $Component_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
     }
 }

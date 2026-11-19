@@ -11,39 +11,39 @@ declare module "@package/cn/howxu/mmcr/publicapi/client/render" {
     export class $ControllerRenderContext {
     }
     export interface $ControllerRenderContext {
-        lightCoords(): number;
-        structure(): $ControllerRenderContext$StructureView;
-        partialTick(): number;
         crafting(): $ControllerRenderContext$CraftingView;
         facing(): $Direction;
-        machineId(): $ResourceLocation;
         controllerPos(): $BlockPos;
         dataStorageValues(): $Map<string, $DataKey>;
+        machineId(): $ResourceLocation;
+        structure(): $ControllerRenderContext$StructureView;
+        partialTick(): number;
+        lightCoords(): number;
     }
     export class $ControllerRenderContext$CraftingView {
     }
     export interface $ControllerRenderContext$CraftingView {
+        totalTick(): number;
+        statusMessage(): string;
+        maxParallelism(): number;
         status(): $ControllerRenderContext$Status;
         failure(): $RuntimeFailure;
         parallelism(): number;
         tick(): number;
         recipeId(): $ResourceLocation;
-        maxParallelism(): number;
-        statusMessage(): string;
-        totalTick(): number;
     }
     export class $ControllerRenderContext$StructureView {
     }
     export interface $ControllerRenderContext$StructureView {
-        formed(): boolean;
-        structureAreaLoaded(): boolean;
         matchedStage(): number;
+        structureAreaLoaded(): boolean;
+        formed(): boolean;
     }
     export class $ControllerRenderer {
     }
     export interface $ControllerRenderer {
-        render(context: $ControllerRenderContext, poses: $PoseStack, buffers: $MultiBufferSource_, light: number, overlay: number): void;
         getViewDistance(): number;
+        render(context: $ControllerRenderContext, poses: $PoseStack, buffers: $MultiBufferSource_, light: number, overlay: number): void;
         shouldRenderOffScreen(): boolean;
         get viewDistance(): number;
     }

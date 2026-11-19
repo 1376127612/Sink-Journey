@@ -14,35 +14,35 @@ declare module "@package/appeng/api/crafting" {
     /**
      * Values that may be interpreted as {@link $PatternDetailsTooltip$Property}.
      */
-    export type $PatternDetailsTooltip$Property_ = { name?: $Component_, value?: $Component_,  } | [name?: $Component_, value?: $Component_, ];
+    export type $PatternDetailsTooltip$Property_ = { value?: $Component_, name?: $Component_,  } | [value?: $Component_, name?: $Component_, ];
     export class $IPatternDetails {
     }
     export interface $IPatternDetails {
+        getPrimaryOutput(): $GenericStack;
+        supportsPushInputsToExternalInventory(): boolean;
+        pushInputsToExternalInventory(arg0: $KeyCounter[], arg1: $IPatternDetails$PatternInputSink_): void;
         getDefinition(): $AEItemKey;
         getInputs(): $IPatternDetails$IInput[];
-        getTooltip(arg0: $Level_, arg1: $TooltipFlag): $PatternDetailsTooltip;
         getOutputs(): $List<$GenericStack>;
-        getPrimaryOutput(): $GenericStack;
-        pushInputsToExternalInventory(arg0: $KeyCounter[], arg1: $IPatternDetails$PatternInputSink_): void;
-        supportsPushInputsToExternalInventory(): boolean;
+        getTooltip(arg0: $Level_, arg1: $TooltipFlag): $PatternDetailsTooltip;
+        get primaryOutput(): $GenericStack;
         get definition(): $AEItemKey;
         get inputs(): $IPatternDetails$IInput[];
         get outputs(): $List<$GenericStack>;
-        get primaryOutput(): $GenericStack;
     }
     export class $PatternDetailsTooltip {
-        getProperties(): $List<$PatternDetailsTooltip$Property>;
-        addProperty(arg0: $Component_): void;
-        addProperty(arg0: $Component_, arg1: $Component_): void;
-        getInputs(): $List<$GenericStack>;
-        getOutputs(): $List<$GenericStack>;
         addOutput(arg0: $GenericStack_): void;
         addOutput(arg0: $AEKey, arg1: number): void;
-        addInput(arg0: $AEKey, arg1: number): void;
         addInput(arg0: $GenericStack_): void;
+        addInput(arg0: $AEKey, arg1: number): void;
         addInputsAndOutputs(arg0: $IPatternDetails): void;
         getOutputMethod(): $Component;
         setOutputMethod(arg0: $Component_): void;
+        getProperties(): $List<$PatternDetailsTooltip$Property>;
+        getInputs(): $List<$GenericStack>;
+        addProperty(arg0: $Component_): void;
+        addProperty(arg0: $Component_, arg1: $Component_): void;
+        getOutputs(): $List<$GenericStack>;
         static OUTPUT_TEXT_PRODUCES: $Component;
         static OUTPUT_TEXT_CRAFTS: $Component;
         constructor(arg0: $Component_);
@@ -62,11 +62,11 @@ declare module "@package/appeng/api/crafting" {
     export class $IPatternDetails$IInput {
     }
     export interface $IPatternDetails$IInput {
-        isValid(arg0: $AEKey, arg1: $Level_): boolean;
-        getMultiplier(): number;
         getPossibleInputs(): $GenericStack[];
         getRemainingKey(arg0: $AEKey): $AEKey;
-        get multiplier(): number;
+        isValid(arg0: $AEKey, arg1: $Level_): boolean;
+        getMultiplier(): number;
         get possibleInputs(): $GenericStack[];
+        get multiplier(): number;
     }
 }

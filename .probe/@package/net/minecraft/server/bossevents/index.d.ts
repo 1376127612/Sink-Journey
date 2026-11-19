@@ -7,41 +7,41 @@ import { $UUID_, $Collection_, $Collection } from "@package/java/util";
 
 declare module "@package/net/minecraft/server/bossevents" {
     export class $CustomBossEvents {
+        getIds(): $Collection<$ResourceLocation>;
+        onPlayerConnect(player: $ServerPlayer): void;
+        onPlayerDisconnect(player: $ServerPlayer): void;
         remove(bossbar: $CustomBossEvent): void;
         get(id: $ResourceLocation_): $CustomBossEvent;
         load(tag: $CompoundTag_, levelRegistry: $HolderLookup$Provider): void;
         save(levelRegistry: $HolderLookup$Provider): $CompoundTag;
         create(id: $ResourceLocation_, name: $Component_): $CustomBossEvent;
         getEvents(): $Collection<$CustomBossEvent>;
-        getIds(): $Collection<$ResourceLocation>;
-        onPlayerDisconnect(player: $ServerPlayer): void;
-        onPlayerConnect(player: $ServerPlayer): void;
         constructor();
-        get events(): $Collection<$CustomBossEvent>;
         get ids(): $Collection<$ResourceLocation>;
+        get events(): $Collection<$CustomBossEvent>;
     }
     export class $CustomBossEvent extends $ServerBossEvent {
-        setPlayers(serverPlayerList: $Collection_<$ServerPlayer>): boolean;
+        setMax(max: number): void;
+        /**
+         * Makes the boss visible to the given player.
+         */
+        onPlayerConnect(player: $ServerPlayer): void;
+        /**
+         * Makes the boss visible to the given player.
+         */
+        onPlayerDisconnect(player: $ServerPlayer): void;
         static load(tag: $CompoundTag_, id: $ResourceLocation_, levelRegistry: $HolderLookup$Provider): $CustomBossEvent;
         getValue(): number;
         save(levelRegistry: $HolderLookup$Provider): $CompoundTag;
         setValue(max: number): void;
         getDisplayName(): $Component;
-        getMax(): number;
-        setMax(max: number): void;
-        /**
-         * Makes the boss visible to the given player.
-         */
-        onPlayerDisconnect(player: $ServerPlayer): void;
-        /**
-         * Makes the boss visible to the given player.
-         */
-        onPlayerConnect(player: $ServerPlayer): void;
         getTextId(): $ResourceLocation;
+        getMax(): number;
+        setPlayers(serverPlayerList: $Collection_<$ServerPlayer>): boolean;
         addOfflinePlayer(player: $UUID_): void;
         constructor(id: $ResourceLocation_, name: $Component_);
-        set players(value: $Collection_<$ServerPlayer>);
         get displayName(): $Component;
         get textId(): $ResourceLocation;
+        set players(value: $Collection_<$ServerPlayer>);
     }
 }

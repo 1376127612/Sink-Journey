@@ -22,37 +22,37 @@ declare module "@package/xaero/hud/minimap/radar/category" {
     export class $EntityRadarCategory extends $FilterObjectCategory<$Entity, $Player, $EntityRadarCategoryData, $EntityRadarCategory> {
     }
     export class $EntityRadarCategoryManager {
-        init(): void;
-        getSyncedRootCategory(): $EntityRadarCategory;
-        updateFromConfigChange(arg0: $Config): void;
-        fetchDefaultServerCategory(arg0: number): $EntityRadarCategory;
-        fetchDefaultServerCategory(): $EntityRadarCategory;
-        storeEditedCategory(arg0: boolean): void;
-        storeEditedCategory(arg0: $EntityRadarCategory, arg1: boolean): void;
-        editedCategoryNeedsSaving(): boolean;
-        forgetEditedCategory(): void;
-        getSecondaryLegacyFilePath(): $Path;
-        fetchDefaultClientCategory(arg0: number): $EntityRadarCategory;
-        fetchDefaultClientCategory(): $EntityRadarCategory;
-        resetRootCategorySettings(arg0: $IEditConfigScreenContext): void;
-        getEditedCategoryConfig(): $Config;
         getMainIO(): $EntityRadarCategoryConfigIO;
-        getEditedCategory(): $EntityRadarCategory;
-        getRuleResolver(): $ObjectCategoryRuleResolver;
-        getRootCategory(): $EntityRadarCategory;
-        loadEditedCategory(arg0: $Config, arg1: boolean): $EntityRadarCategory;
+        getDefaultCategoryConfigurator(): $EntityRadarDefaultCategories;
         getEffectiveSyncedRootCategory(): $EntityRadarCategory;
         setEditedCategoryNeedsSaving(arg0: boolean): void;
-        getDefaultCategoryConfigurator(): $EntityRadarDefaultCategories;
-        get syncedRootCategory(): $EntityRadarCategory;
+        updateFromConfigChange(arg0: $Config): void;
+        fetchDefaultServerCategory(): $EntityRadarCategory;
+        fetchDefaultServerCategory(arg0: number): $EntityRadarCategory;
+        editedCategoryNeedsSaving(): boolean;
+        getSecondaryLegacyFilePath(): $Path;
+        getEditedCategoryConfig(): $Config;
+        getSyncedRootCategory(): $EntityRadarCategory;
+        storeEditedCategory(arg0: $EntityRadarCategory, arg1: boolean): void;
+        storeEditedCategory(arg0: boolean): void;
+        forgetEditedCategory(): void;
+        resetRootCategorySettings(arg0: $IEditConfigScreenContext): void;
+        fetchDefaultClientCategory(arg0: number): $EntityRadarCategory;
+        fetchDefaultClientCategory(): $EntityRadarCategory;
+        getRuleResolver(): $ObjectCategoryRuleResolver;
+        loadEditedCategory(arg0: $Config, arg1: boolean): $EntityRadarCategory;
+        getRootCategory(): $EntityRadarCategory;
+        getEditedCategory(): $EntityRadarCategory;
+        init(): void;
+        get mainIO(): $EntityRadarCategoryConfigIO;
+        get defaultCategoryConfigurator(): $EntityRadarDefaultCategories;
+        get effectiveSyncedRootCategory(): $EntityRadarCategory;
         get secondaryLegacyFilePath(): $Path;
         get editedCategoryConfig(): $Config;
-        get mainIO(): $EntityRadarCategoryConfigIO;
-        get editedCategory(): $EntityRadarCategory;
+        get syncedRootCategory(): $EntityRadarCategory;
         get ruleResolver(): $ObjectCategoryRuleResolver;
         get rootCategory(): $EntityRadarCategory;
-        get effectiveSyncedRootCategory(): $EntityRadarCategory;
-        get defaultCategoryConfigurator(): $EntityRadarDefaultCategories;
+        get editedCategory(): $EntityRadarCategory;
     }
     export class $EntityRadarBackwardsCompatibilityConfig {
         readSetting(arg0: string[]): boolean;

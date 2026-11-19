@@ -11,33 +11,33 @@ declare module "@package/cn/howxu/mmcr/publicapi/machine" {
     export class $MachineSpec {
     }
     export interface $MachineSpec {
-        factory(): $FactoryOptions$View;
-        id(): $ResourceLocation;
-        displayNameKey(): string;
-        controller(): $ControllerOptions$View;
-        role(): $MachineKind;
-        maxParallelism(): number;
-        requestFailures(): $Map<$ResourceLocation, $FailureHandler>;
-        recipePoolIds(): $List<$ResourceLocation>;
-        requestProcessors(): $Map<$ResourceLocation, $RequestHandler>;
-        parallelizable(): boolean;
-        maxParallelAmount(): number;
-        failureAction(): $RecipeFailureMode;
-        requestFailureIds(): $Set<$ResourceLocation>;
-        acceptedModuleIds(): $Set<$ResourceLocation>;
-        recipeHooks(): ($MachineSpec$RecipeHooksView) | undefined;
-        appearance(): $AppearanceOptions$View;
         recipePoolId(): $ResourceLocation;
         networkInterface(): $NetworkSettings;
-        runningSoundId(): $ResourceLocation;
-        finishSoundId(): $ResourceLocation;
-        allowModifiers(): boolean;
-        tickHooks(): ($MachineSpec$TickHooksView) | undefined;
+        recipeHooks(): ($MachineSpec$RecipeHooksView) | undefined;
+        requestFailureIds(): $Set<$ResourceLocation>;
         smartInterfaceModifiers(): $List<$SmartModifierSpec>;
+        allowMultithreading(): boolean;
         shareSmartInterfaces(): boolean;
         smartInterfaceTypes(): $Map<string, $SmartInterfaceSpec>;
-        allowMultithreading(): boolean;
+        tickHooks(): ($MachineSpec$TickHooksView) | undefined;
+        allowModifiers(): boolean;
+        acceptedModuleIds(): $Set<$ResourceLocation>;
+        finishSoundId(): $ResourceLocation;
+        requestFailures(): $Map<$ResourceLocation, $FailureHandler>;
+        failureAction(): $RecipeFailureMode;
+        maxParallelism(): number;
+        runningSoundId(): $ResourceLocation;
+        requestProcessors(): $Map<$ResourceLocation, $RequestHandler>;
+        parallelizable(): boolean;
+        recipePoolIds(): $List<$ResourceLocation>;
+        maxParallelAmount(): number;
         requestProcessorIds(): $Set<$ResourceLocation>;
+        factory(): $FactoryOptions$View;
+        id(): $ResourceLocation;
+        controller(): $ControllerOptions$View;
+        displayNameKey(): string;
+        role(): $MachineKind;
+        appearance(): $AppearanceOptions$View;
     }
     export class $SmartInterfaces$ValueType extends $Enum<$SmartInterfaces$ValueType> {
         static values(): $SmartInterfaces$ValueType[];
@@ -53,47 +53,47 @@ declare module "@package/cn/howxu/mmcr/publicapi/machine" {
     export class $AppearanceOptions {
     }
     export interface $AppearanceOptions {
-        build(): $AppearanceOptions$View;
-        appearance(id: $ResourceLocation_): $AppearanceOptions;
-        machineBasicBlock(id: $ResourceLocation_): $AppearanceOptions;
         controllerIdleOverlayTexture(id: $ResourceLocation_): $AppearanceOptions;
         controllerActiveOverlayTexture(id: $ResourceLocation_): $AppearanceOptions;
         controllerBaseTexture(id: $ResourceLocation_): $AppearanceOptions;
         formedPortBaseTexture(id: $ResourceLocation_): $AppearanceOptions;
+        machineBasicBlock(id: $ResourceLocation_): $AppearanceOptions;
+        build(): $AppearanceOptions$View;
+        appearance(id: $ResourceLocation_): $AppearanceOptions;
     }
     export class $AppearanceOptions$View {
     }
     export interface $AppearanceOptions$View {
-        machineBasicBlock(): $ResourceLocation;
         controllerIdleOverlayTexture(): $ResourceLocation;
         controllerActiveOverlayTexture(): $ResourceLocation;
         controllerBaseTexture(): $ResourceLocation;
         formedPortBaseTexture(): $ResourceLocation;
+        machineBasicBlock(): $ResourceLocation;
     }
     export class $FactoryOptions$ThreadView {
     }
     export interface $FactoryOptions$ThreadView {
-        name(): string;
         recipeIds(): $List<$ResourceLocation>;
+        name(): string;
     }
     export class $ControllerOptions {
     }
     export interface $ControllerOptions {
-        id(id: $ResourceLocation_): $ControllerOptions;
-        build(): $ControllerOptions$View;
         topTexture(id: $ResourceLocation_): $ControllerOptions;
-        textures(front: $ResourceLocation_, otherFaces: $ResourceLocation_): $ControllerOptions;
-        textures(front: $ResourceLocation_, side: $ResourceLocation_, top: $ResourceLocation_, bottom: $ResourceLocation_): $ControllerOptions;
-        tooltip(...translationKeys: string[]): $ControllerOptions;
         sideTexture(id: $ResourceLocation_): $ControllerOptions;
-        bottomTexture(id: $ResourceLocation_): $ControllerOptions;
-        frontTexture(id: $ResourceLocation_): $ControllerOptions;
-        requireVerticalFacing(enabled: boolean): $ControllerOptions;
-        requireVerticalFacing(): $ControllerOptions;
-        allowVerticalFacing(): $ControllerOptions;
         allowVerticalFacing(enabled: boolean): $ControllerOptions;
+        allowVerticalFacing(): $ControllerOptions;
         fullyRotationallySymmetric(): $ControllerOptions;
         fullyRotationallySymmetric(enabled: boolean): $ControllerOptions;
+        requireVerticalFacing(enabled: boolean): $ControllerOptions;
+        requireVerticalFacing(): $ControllerOptions;
+        frontTexture(id: $ResourceLocation_): $ControllerOptions;
+        bottomTexture(id: $ResourceLocation_): $ControllerOptions;
+        id(id: $ResourceLocation_): $ControllerOptions;
+        build(): $ControllerOptions$View;
+        textures(front: $ResourceLocation_, side: $ResourceLocation_, top: $ResourceLocation_, bottom: $ResourceLocation_): $ControllerOptions;
+        textures(front: $ResourceLocation_, otherFaces: $ResourceLocation_): $ControllerOptions;
+        tooltip(...translationKeys: string[]): $ControllerOptions;
     }
     export class $MachineKind extends $Enum<$MachineKind> {
         static values(): $MachineKind[];
@@ -109,6 +109,7 @@ declare module "@package/cn/howxu/mmcr/publicapi/machine" {
     export class $SmartInterfaceSpec {
     }
     export interface $SmartInterfaceSpec {
+        descriptionKey(): string;
         validatedValue(value: number): number;
         priority(): number;
         type(): string;
@@ -118,46 +119,45 @@ declare module "@package/cn/howxu/mmcr/publicapi/machine" {
         accepts(value: number): boolean;
         translationKey(): string;
         minValue(): number;
-        descriptionKey(): string;
     }
     export class $MachineSpec$RecipeHooksView {
     }
     export interface $MachineSpec$RecipeHooksView {
-        hasPostServerTick(): boolean;
+        hasIdleEnd(): boolean;
         hasIdleStart(): boolean;
         hasPreServerTick(): boolean;
-        hasIdleEnd(): boolean;
-        hasBeforeStart(): boolean;
+        hasPostServerTick(): boolean;
         hasRecipeTick(): boolean;
         hasBeforeFinish(): boolean;
+        hasBeforeStart(): boolean;
     }
     export class $FactoryOptions {
     }
     export interface $FactoryOptions {
-        thread(name: string, ...recipeIds: $ResourceLocation_[]): $FactoryOptions;
-        build(): $FactoryOptions$View;
         hasFactory(enabled: boolean): $FactoryOptions;
         threadLimit(limit: number): $FactoryOptions;
+        thread(name: string, ...recipeIds: $ResourceLocation_[]): $FactoryOptions;
+        build(): $FactoryOptions$View;
     }
     export class $FactoryOptions$View {
     }
     export interface $FactoryOptions$View {
-        threads(): $List<$FactoryOptions$ThreadView>;
         hasFactory(): boolean;
         threadLimit(): number;
+        threads(): $List<$FactoryOptions$ThreadView>;
     }
     export class $ControllerOptions$View {
     }
     export interface $ControllerOptions$View {
-        id(): $ResourceLocation;
         topTexture(): $ResourceLocation;
-        tooltip(): $List<string>;
         sideTexture(): $ResourceLocation;
-        bottomTexture(): $ResourceLocation;
-        frontTexture(): $ResourceLocation;
-        requireVerticalFacing(): boolean;
         allowVerticalFacing(): boolean;
         fullyRotationallySymmetric(): boolean;
+        requireVerticalFacing(): boolean;
+        frontTexture(): $ResourceLocation;
+        bottomTexture(): $ResourceLocation;
+        id(): $ResourceLocation;
+        tooltip(): $List<string>;
     }
     export class $MachineSpec$TickHooksView {
     }
@@ -171,35 +171,35 @@ declare module "@package/cn/howxu/mmcr/publicapi/machine" {
     export class $MachineDraft {
     }
     export interface $MachineDraft {
-        factory(configure: $Consumer_<$FactoryOptions>): $MachineDraft;
-        build(): $MachineSpec;
-        displayNameKey(key: string): $MachineDraft;
-        controller(configure: $Consumer_<$ControllerOptions>): $MachineDraft;
-        role(kind: $MachineKind_): $MachineDraft;
-        maxParallelism(amount: number): $MachineDraft;
         postServerTick(callback: $Consumer_<$MachineContext>): $MachineDraft;
         preServerTick(callback: $Consumer_<$MachineContext>): $MachineDraft;
-        requestFailed(id: $ResourceLocation_, handler: $FailureHandler_): $MachineDraft;
-        acceptedModule(id: $ResourceLocation_): $MachineDraft;
-        parallelizable(enabled: boolean): $MachineDraft;
-        runningSound(id: $ResourceLocation_): $MachineDraft;
-        maxParallelAmount(amount: number): $MachineDraft;
-        failureAction(mode: $RecipeFailureMode_): $MachineDraft;
-        requestProcess(id: $ResourceLocation_, handler: $RequestHandler_): $MachineDraft;
-        finishSound(id: $ResourceLocation_): $MachineDraft;
-        appearance(configure: $Consumer_<$AppearanceOptions>): $MachineDraft;
-        networkInterface(maxCount: number, maxConnections: number): $MachineDraft;
         smartInterface(type: $SmartInterfaceSpec): $MachineDraft;
-        allowModifiers(): $MachineDraft;
-        allowModifiers(enabled: boolean): $MachineDraft;
-        tickBehavior(configure: $Consumer_<$TickHooks>): $MachineDraft;
-        recipeBehavior(configure: $Consumer_<$RecipeHooks>): $MachineDraft;
+        networkInterface(maxCount: number, maxConnections: number): $MachineDraft;
         recipePool(...ids: $ResourceLocation_[]): $MachineDraft;
-        shareSmartInterfaces(enabled: boolean): $MachineDraft;
-        shareSmartInterfaces(): $MachineDraft;
-        allowNetworkMachine(id: $ResourceLocation_): $MachineDraft;
+        smartInterfaceModifier(modifier: $SmartModifierSpec): $MachineDraft;
         allowMultithreading(enabled: boolean): $MachineDraft;
         allowMultithreading(): $MachineDraft;
-        smartInterfaceModifier(modifier: $SmartModifierSpec): $MachineDraft;
+        allowNetworkMachine(id: $ResourceLocation_): $MachineDraft;
+        shareSmartInterfaces(enabled: boolean): $MachineDraft;
+        shareSmartInterfaces(): $MachineDraft;
+        allowModifiers(): $MachineDraft;
+        allowModifiers(enabled: boolean): $MachineDraft;
+        runningSound(id: $ResourceLocation_): $MachineDraft;
+        failureAction(mode: $RecipeFailureMode_): $MachineDraft;
+        requestFailed(id: $ResourceLocation_, handler: $FailureHandler_): $MachineDraft;
+        maxParallelism(amount: number): $MachineDraft;
+        tickBehavior(configure: $Consumer_<$TickHooks>): $MachineDraft;
+        parallelizable(enabled: boolean): $MachineDraft;
+        finishSound(id: $ResourceLocation_): $MachineDraft;
+        requestProcess(id: $ResourceLocation_, handler: $RequestHandler_): $MachineDraft;
+        maxParallelAmount(amount: number): $MachineDraft;
+        recipeBehavior(configure: $Consumer_<$RecipeHooks>): $MachineDraft;
+        acceptedModule(id: $ResourceLocation_): $MachineDraft;
+        factory(configure: $Consumer_<$FactoryOptions>): $MachineDraft;
+        build(): $MachineSpec;
+        controller(configure: $Consumer_<$ControllerOptions>): $MachineDraft;
+        displayNameKey(key: string): $MachineDraft;
+        role(kind: $MachineKind_): $MachineDraft;
+        appearance(configure: $Consumer_<$AppearanceOptions>): $MachineDraft;
     }
 }

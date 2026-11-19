@@ -43,11 +43,8 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         constructor();
     }
     export class $PiglinBrute extends $AbstractPiglin {
-        static createAttributes(): $AttributeSupplier$Builder;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         canHunt(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -94,6 +91,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -104,6 +102,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -169,13 +168,13 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         constructor();
     }
     export class $PiglinAi {
-        static getNearestVisibleTargetablePlayer(piglin: $AbstractPiglin): ($Player) | undefined;
-        static angerNearbyPiglins(player: $Player, angerOnlyIfCanSee: boolean): void;
         static mobInteract(piglin: $Piglin, player: $Player, hand: $InteractionHand_): $InteractionResult;
         static getSoundForCurrentActivity(piglin: $Piglin): ($SoundEvent) | undefined;
-        static isPlayerHoldingLovedItem(piglin: $LivingEntity): boolean;
-        static isZombified(entityType: $EntityType_<never>): boolean;
         static isWearingGold(piglin: $LivingEntity): boolean;
+        static isZombified(entityType: $EntityType_<never>): boolean;
+        static isPlayerHoldingLovedItem(piglin: $LivingEntity): boolean;
+        static angerNearbyPiglins(player: $Player, angerOnlyIfCanSee: boolean): void;
+        static getNearestVisibleTargetablePlayer(piglin: $AbstractPiglin): ($Player) | undefined;
         static getAvoidTarget(piglin: $Piglin): ($LivingEntity) | undefined;
         static REPELLENT_DETECTION_RANGE_VERTICAL: number;
         static BARTERING_ITEM: $Item;
@@ -188,15 +187,9 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
     }
     export class $AbstractPiglin extends $Monster {
         getArmPose(): $PiglinArmPose;
-        setImmuneToZombification(immuneToZombification: boolean): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isConverting(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isAdult(): boolean;
+        setImmuneToZombification(immuneToZombification: boolean): void;
+        isConverting(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -243,6 +236,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -253,6 +247,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -305,42 +300,39 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$AbstractPiglin>, level: $Level_);
         get armPose(): $PiglinArmPose;
+        get adult(): boolean;
         set immuneToZombification(value: boolean);
         get converting(): boolean;
-        get adult(): boolean;
     }
     export class $Piglin extends $AbstractPiglin implements $CrossbowAttackMob, $InventoryCarrier {
-        /**
-         * Set whether this zombie is a child.
-         */
-        setDancing(childZombie: boolean): void;
         /**
          * If Animal, checks if the age timer is negative
          */
         isDancing(): boolean;
-        getInventory(): $SimpleContainer;
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
+        /**
+         * Set whether this zombie is a child.
+         */
+        setDancing(childZombie: boolean): void;
         static createAttributes(): $AttributeSupplier$Builder;
         mobInteract(player: $Player, hand: $InteractionHand_): $InteractionResult;
-        /**
-         * Attack the specified entity using a ranged attack.
-         */
-        performRangedAttack(target: $LivingEntity, distanceFactor: number): void;
-        static checkPiglinSpawnRules(piglin: $EntityType_<$Piglin>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
-        /**
-         * Dismounts this entity from the entity it is riding.
-         */
         onCrossbowAttackPerformed(): void;
         /**
          * Set whether this zombie is a child.
          */
         setChargingCrossbow(childZombie: boolean): void;
+        static checkPiglinSpawnRules(piglin: $EntityType_<$Piglin>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        /**
+         * Attack the specified entity using a ranged attack.
+         */
+        performRangedAttack(target: $LivingEntity, distanceFactor: number): void;
+        getInventory(): $SimpleContainer;
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         /**
          * Attack the specified entity using a ranged attack.
          */
         performCrossbowAttack(target: $LivingEntity, distanceFactor: number): void;
-        readInventoryFromTag(tag: $CompoundTag_, levelRegistry: $HolderLookup$Provider): void;
-        writeInventoryToTag(tag: $CompoundTag_, levelRegistry: $HolderLookup$Provider): void;
+        readInventoryFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        writeInventoryToTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -387,6 +379,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -397,6 +390,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -448,7 +442,7 @@ declare module "@package/net/minecraft/world/entity/monster/piglin" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$AbstractPiglin>, level: $Level_);
-        get inventory(): $SimpleContainer;
         set chargingCrossbow(value: boolean);
+        get inventory(): $SimpleContainer;
     }
 }

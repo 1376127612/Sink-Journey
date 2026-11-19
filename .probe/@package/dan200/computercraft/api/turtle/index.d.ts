@@ -33,46 +33,46 @@ declare module "@package/dan200/computercraft/api/turtle" {
     export class $ITurtleAccess {
     }
     export interface $ITurtleAccess {
-        getPosition(): $BlockPos;
-        getLevel(): $Level;
-        getDirection(): $Direction;
-        addFuel(arg0: number): void;
-        setFuelLevel(arg0: number): void;
-        getFuelLevel(): number;
-        getUpgradeWithData(arg0: $TurtleSide_): $UpgradeData<$ITurtleUpgrade>;
-        getFuelLimit(): number;
-        getInventory(): $Container;
-        isRemoved(): boolean;
-        executeCommand(arg0: $TurtleCommand_): $MethodResult;
-        teleportTo(arg0: $Level_, arg1: $BlockPos_): boolean;
         playAnimation(arg0: $TurtleAnimation_): void;
-        setSelectedSlot(arg0: number): void;
-        getOwningPlayer(): $GameProfile;
-        isFuelNeeded(): boolean;
-        getPeripheral(arg0: $TurtleSide_): $IPeripheral;
+        consumeFuel(arg0: number): boolean;
+        getColour(): number;
+        setColour(arg0: number): void;
         /**
          * @deprecated
          */
         getUpgradeData(arg0: $TurtleSide_): $DataComponentPatch;
-        setDirection(arg0: $Direction_): void;
-        getUpgrade(arg0: $TurtleSide_): $ITurtleUpgrade;
-        setColour(arg0: number): void;
+        executeCommand(arg0: $TurtleCommand_): $MethodResult;
+        getUpgradeWithData(arg0: $TurtleSide_): $UpgradeData<$ITurtleUpgrade>;
+        getPeripheral(arg0: $TurtleSide_): $IPeripheral;
         setUpgrade(arg0: $TurtleSide_, arg1: $UpgradeData<$ITurtleUpgrade_>): void;
-        getColour(): number;
-        consumeFuel(arg0: number): boolean;
+        getUpgrade(arg0: $TurtleSide_): $ITurtleUpgrade;
+        getFuelLevel(): number;
+        getFuelLimit(): number;
+        setFuelLevel(arg0: number): void;
+        addFuel(arg0: number): void;
         getSelectedSlot(): number;
+        getUpgradeHandle(arg0: $TurtleSide_): $UpgradeHandle<$ITurtleUpgrade>;
         /**
          * @deprecated
          */
         setUpgradeData(arg0: $TurtleSide_, arg1: $DataComponentPatch_): void;
-        getUpgradeHandle(arg0: $TurtleSide_): $UpgradeHandle<$ITurtleUpgrade>;
-        get position(): $BlockPos;
-        get level(): $Level;
+        setSelectedSlot(arg0: number): void;
+        getOwningPlayer(): $GameProfile;
+        isFuelNeeded(): boolean;
+        getPosition(): $BlockPos;
+        getLevel(): $Level;
+        getDirection(): $Direction;
+        getInventory(): $Container;
+        setDirection(arg0: $Direction_): void;
+        isRemoved(): boolean;
+        teleportTo(arg0: $Level_, arg1: $BlockPos_): boolean;
         get fuelLimit(): number;
-        get inventory(): $Container;
-        get removed(): boolean;
         get owningPlayer(): $GameProfile;
         get fuelNeeded(): boolean;
+        get position(): $BlockPos;
+        get level(): $Level;
+        get inventory(): $Container;
+        get removed(): boolean;
     }
     export interface $ITurtleUpgrade extends RegistryMarked<RegistryTypes.ComputercraftTurtleUpgradeTag, RegistryTypes.ComputercraftTurtleUpgrade> {}
     export class $TurtleSide extends $Enum<$TurtleSide> {
@@ -91,35 +91,35 @@ declare module "@package/dan200/computercraft/api/turtle" {
         static REGISTRY: $ResourceKey<$Registry<$ITurtleUpgrade>>;
     }
     export interface $ITurtleUpgrade extends $UpgradeBase {
+        getUpgradeType(): $TurtleUpgradeType;
+        createPeripheral(arg0: $ITurtleAccess, arg1: $TurtleSide_): $IPeripheral;
+        useTool(arg0: $ITurtleAccess, arg1: $TurtleSide_, arg2: $TurtleVerb_, arg3: $Direction_): $TurtleCommandResult;
+        getPersistedData(arg0: $DataComponentPatch_): $DataComponentPatch;
         update(arg0: $ITurtleAccess, arg1: $TurtleSide_): void;
         getType(): $UpgradeType<$ITurtleUpgrade>;
-        getPersistedData(arg0: $DataComponentPatch_): $DataComponentPatch;
-        getUpgradeType(): $TurtleUpgradeType;
-        useTool(arg0: $ITurtleAccess, arg1: $TurtleSide_, arg2: $TurtleVerb_, arg3: $Direction_): $TurtleCommandResult;
-        createPeripheral(arg0: $ITurtleAccess, arg1: $TurtleSide_): $IPeripheral;
-        get type(): $UpgradeType<$ITurtleUpgrade>;
         get upgradeType(): $TurtleUpgradeType;
+        get type(): $UpgradeType<$ITurtleUpgrade>;
     }
     /**
      * Values that may be interpreted as {@link $ITurtleUpgrade}.
      */
     export type $ITurtleUpgrade_ = RegistryTypes.ComputercraftTurtleUpgrade;
     export class $TurtleCommandResult {
-        static failure(): $TurtleCommandResult;
-        static failure(arg0: string): $TurtleCommandResult;
-        getErrorMessage(): string;
-        static success(): $TurtleCommandResult;
-        static success(arg0: $Object[]): $TurtleCommandResult;
         isSuccess(): boolean;
+        static failure(arg0: string): $TurtleCommandResult;
+        static failure(): $TurtleCommandResult;
+        getErrorMessage(): string;
+        static success(arg0: $Object[]): $TurtleCommandResult;
+        static success(): $TurtleCommandResult;
         getResults(): $Object[];
         get errorMessage(): string;
         get results(): $Object[];
     }
     export class $TurtleUpgradeType extends $Enum<$TurtleUpgradeType> {
-        static values(): $TurtleUpgradeType[];
-        static valueOf(arg0: string): $TurtleUpgradeType;
         isPeripheral(): boolean;
         isTool(): boolean;
+        static values(): $TurtleUpgradeType[];
+        static valueOf(arg0: string): $TurtleUpgradeType;
         static PERIPHERAL: $TurtleUpgradeType;
         static BOTH: $TurtleUpgradeType;
         static TOOL: $TurtleUpgradeType;

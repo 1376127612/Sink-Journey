@@ -1,3 +1,4 @@
+import { $Set } from "@package/java/util";
 import { $Enum } from "@package/java/lang";
 
 declare module "@package/com/denfop/api/upgrades" {
@@ -16,4 +17,12 @@ declare module "@package/com/denfop/api/upgrades" {
      * Values that may be interpreted as {@link $UpgradableProperty}.
      */
     export type $UpgradableProperty_ = "processing" | "transformer" | "energystorage" | "itemextract" | "iteminput" | "fluidextract" | "fluidinput";
+    export class $IUpgradableBlock {
+    }
+    export interface $IUpgradableBlock {
+        getAllPossibleUpgradableProperties(): $Set<$UpgradableProperty>;
+        getUpgradableProperties(): $Set<$UpgradableProperty>;
+        get allPossibleUpgradableProperties(): $Set<$UpgradableProperty>;
+        get upgradableProperties(): $Set<$UpgradableProperty>;
+    }
 }

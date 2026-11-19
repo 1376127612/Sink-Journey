@@ -13,18 +13,18 @@ declare module "@package/net/neoforged/neoforge/server/command/generation" {
         complete(arg0: number): void;
     }
     export class $GenerationTask {
-        getSkippedCount(): number;
+        getErrorCount(): number;
         run(arg0: $GenerationTask$Listener): void;
         stop(): void;
-        getTotalCount(): number;
-        getErrorCount(): number;
         getOkCount(): number;
+        getTotalCount(): number;
+        getSkippedCount(): number;
         static NEOFORGE_GENERATE_FORCED: $TicketType<$ChunkPos>;
         constructor(arg0: $ServerLevel, arg1: number, arg2: number, arg3: number);
-        get skippedCount(): number;
-        get totalCount(): number;
         get errorCount(): number;
         get okCount(): number;
+        get totalCount(): number;
+        get skippedCount(): number;
     }
     export class $GenerationBar implements $AutoCloseable {
         update(arg0: number, arg1: number, arg2: number, arg3: number): void;

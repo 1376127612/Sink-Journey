@@ -4,8 +4,8 @@ declare module "@package/org/cyclops/cyclopscore/inventory/container/button" {
     export class $IContainerButtonClickAcceptorServer<C extends $AbstractContainerMenu> {
     }
     export interface $IContainerButtonClickAcceptorServer<C extends $AbstractContainerMenu> {
-        putButtonAction(arg0: string, arg1: $IContainerButtonAction_<C>): void;
         onButtonClick(arg0: string): boolean;
+        putButtonAction(arg0: string, arg1: $IContainerButtonAction_<C>): void;
     }
     export class $IContainerButtonAction<C extends $AbstractContainerMenu> {
     }

@@ -5,9 +5,9 @@ declare module "@package/com/denfop/datagen/blocktags" {
     export class $IBlockTag {
     }
     export interface $IBlockTag {
-        getBlock(): $Block;
         getHarvestLevel(): $Pair<string, number>;
-        get block(): $Block;
+        getBlock(): $Block;
         get harvestLevel(): $Pair<string, number>;
+        get block(): $Block;
     }
 }

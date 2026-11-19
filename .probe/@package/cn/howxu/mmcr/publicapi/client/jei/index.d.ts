@@ -9,27 +9,27 @@ declare module "@package/cn/howxu/mmcr/publicapi/client/jei" {
     export class $RecipeInformationRegistrar {
     }
     export interface $RecipeInformationRegistrar {
-        entries(): $List<$RecipeInformation>;
         registerRecipe(id: $ResourceLocation_, translationKey: string, ...arg2: $Object[]): void;
         registerRecipePool(id: $ResourceLocation_, translationKey: string, ...arg2: $Object[]): void;
+        entries(): $List<$RecipeInformation>;
     }
     export class $RecipeInformation {
     }
     export interface $RecipeInformation {
+        targetId(): $ResourceLocation;
         target(): $RecipeInformation$Target;
         component(): $Component;
         "arguments"(): $List<$Object>;
         translationKey(): string;
-        targetId(): $ResourceLocation;
     }
     export class $WorkstationRegistrar {
     }
     export interface $WorkstationRegistrar {
-        entries(): $List<$Workstation>;
-        addRecipePoolWorkstation(poolId: $ResourceLocation_, itemId: $ResourceLocation_): void;
+        addMachineWorkstation(machineId: $ResourceLocation_, recipeTypeId: $ResourceLocation_): void;
         addRecipePoolWorkstation(poolId: $ResourceLocation_, workstation: $ItemStack_): void;
         addRecipePoolWorkstation(poolId: $ResourceLocation_, workstation: $ItemLike_): void;
-        addMachineWorkstation(machineId: $ResourceLocation_, recipeTypeId: $ResourceLocation_): void;
+        addRecipePoolWorkstation(poolId: $ResourceLocation_, itemId: $ResourceLocation_): void;
+        entries(): $List<$Workstation>;
     }
     export class $Workstation {
     }

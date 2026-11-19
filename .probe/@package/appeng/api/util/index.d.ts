@@ -11,15 +11,15 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/appeng/api/util" {
     export class $AECableType extends $Enum<$AECableType> {
+        isDense(): boolean;
+        isSmart(): boolean;
         size(): $AECableSize;
         static values(): $AECableType[];
         static min(arg0: $AECableType_, arg1: $AECableType_): $AECableType;
         static max(arg0: $AECableType_, arg1: $AECableType_): $AECableType;
         static valueOf(arg0: string): $AECableType;
-        variant(): $AECableVariant;
         isValid(): boolean;
-        isSmart(): boolean;
-        isDense(): boolean;
+        variant(): $AECableVariant;
         static GLASS: $AECableType;
         static VALIDCABLES: $AECableType[];
         static COVERED: $AECableType;
@@ -27,24 +27,24 @@ declare module "@package/appeng/api/util" {
         static SMART: $AECableType;
         static DENSE_COVERED: $AECableType;
         static DENSE_SMART: $AECableType;
-        get valid(): boolean;
-        get smart(): boolean;
         get dense(): boolean;
+        get smart(): boolean;
+        get valid(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $AECableType}.
      */
     export type $AECableType_ = "none" | "glass" | "covered" | "smart" | "dense_covered" | "dense_smart";
     export class $DimensionalBlockPos {
-        getLevel(): $Level;
         isInWorld(arg0: $LevelAccessor): boolean;
         getPos(): $BlockPos;
+        getLevel(): $Level;
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number);
-        constructor(arg0: $Level_, arg1: $BlockPos_);
-        constructor(arg0: $BlockEntity);
         constructor(arg0: $DimensionalBlockPos);
-        get level(): $Level;
+        constructor(arg0: $BlockEntity);
+        constructor(arg0: $Level_, arg1: $BlockPos_);
         get pos(): $BlockPos;
+        get level(): $Level;
     }
     export class $AECableSize extends $Enum<$AECableSize> {
         static values(): $AECableSize[];
@@ -60,11 +60,11 @@ declare module "@package/appeng/api/util" {
      */
     export type $AECableSize_ = "none" | "normal" | "dense";
     export class $AEColor extends $Enum<$AEColor> implements $StringRepresentable {
+        getSerializedName(): string;
+        static fromDye(arg0: $DyeColor_): $AEColor;
+        getVariantByTintIndex(arg0: number): number;
         static values(): $AEColor[];
         static valueOf(arg0: string): $AEColor;
-        getSerializedName(): string;
-        getVariantByTintIndex(arg0: number): number;
-        static fromDye(arg0: $DyeColor_): $AEColor;
         getEnglishName(): string;
         getRemappedEnumConstantName(): string;
         mediumVariant: number;

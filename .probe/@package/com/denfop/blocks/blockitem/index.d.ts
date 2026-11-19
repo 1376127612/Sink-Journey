@@ -11,8 +11,8 @@ import { $ItemBlockCore, $BlockTileEntity } from "@package/com/denfop/blocks";
 
 declare module "@package/com/denfop/blocks/blockitem" {
     export class $ItemBlockTileEntity<T extends $Enum<T>> extends $ItemBlockCore<T> {
-        getTeBlock(arg0: $ItemStack_): $MultiBlockEntity;
         placeTeBlock(arg0: $ItemStack_, arg1: $FakePlayerSpawner, arg2: $Level_, arg3: $BlockPos_): boolean;
+        getTeBlock(arg0: $ItemStack_): $MultiBlockEntity;
         identifier: $ResourceLocation;
         static BASE_ATTACK_DAMAGE_ID: $ResourceLocation;
         static DEFAULT_MAX_STACK_SIZE: number;

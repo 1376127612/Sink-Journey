@@ -8,27 +8,27 @@ import { $FormattedCharSequence } from "@package/net/minecraft/util";
 
 declare module "@package/net/minecraft/locale" {
     export class $Language implements $ILanguage {
+        languagereload_setTranslationStorage(arg0: $ClientLanguage): void;
+        getVisualOrder(text: $FormattedText): $FormattedCharSequence;
+        getVisualOrder(text: $List_<any>): $List<any>;
+        static loadFromJson(arg0: $InputStream, arg1: $BiConsumer_<string, string>, arg2: $BiConsumer_<string, $Component>): void;
+        static loadFromJson(stream: $InputStream, output: $BiConsumer_<string, string>): void;
+        getLanguageData(): $Map<string, string>;
+        languagereload_getTranslationStorage(): $ClientLanguage;
         /**
          * Return the StringTranslate singleton instance
          */
         static getInstance(): $Language;
-        getOrDefault(id: string): string;
         getOrDefault(key: string, defaultValue: string): string;
+        getOrDefault(id: string): string;
         has(id: string): boolean;
-        static inject(instance: $Language): void;
         getComponent(arg0: string): $Component;
-        languagereload_getTranslationStorage(): $ClientLanguage;
-        static loadFromJson(arg0: $InputStream, arg1: $BiConsumer_<string, string>, arg2: $BiConsumer_<string, $Component>): void;
-        static loadFromJson(stream: $InputStream, output: $BiConsumer_<string, string>): void;
-        getVisualOrder(text: $FormattedText): $FormattedCharSequence;
-        getVisualOrder(text: $List_<any>): $List<any>;
-        getLanguageData(): $Map<string, string>;
+        static inject(instance: $Language): void;
         isDefaultRightToLeft(): boolean;
-        languagereload_setTranslationStorage(arg0: $ClientLanguage): void;
         static DEFAULT: string;
         constructor();
-        static get instance(): $Language;
         get languageData(): $Map<string, string>;
+        static get instance(): $Language;
         get defaultRightToLeft(): boolean;
     }
 }

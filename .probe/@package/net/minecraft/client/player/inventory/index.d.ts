@@ -6,9 +6,9 @@ import { $List } from "@package/java/util";
 
 declare module "@package/net/minecraft/client/player/inventory" {
     export class $Hotbar {
+        storeFrom(inventory: $Inventory, registryAccess: $RegistryAccess): void;
         load(registries: $HolderLookup$Provider): $List<$ItemStack>;
         isEmpty(): boolean;
-        storeFrom(inventory: $Inventory, registryAccess: $RegistryAccess): void;
         static CODEC: $Codec<$Hotbar>;
         constructor();
         get empty(): boolean;

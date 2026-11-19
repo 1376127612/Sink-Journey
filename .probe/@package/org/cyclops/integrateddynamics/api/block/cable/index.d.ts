@@ -5,20 +5,20 @@ declare module "@package/org/cyclops/integrateddynamics/api/block/cable" {
     export class $ICable {
     }
     export interface $ICable {
+        updateConnections(arg0: boolean): void;
+        updateConnections(): void;
+        canConnect(arg0: $ICable, arg1: $Direction_): boolean;
         reconnect(arg0: $Direction_): void;
         destroy(): void;
         isConnected(arg0: $Direction_): boolean;
-        getItemStack(): $ItemStack;
         disconnect(arg0: $Direction_): void;
-        canConnect(arg0: $ICable, arg1: $Direction_): boolean;
-        updateConnections(): void;
-        updateConnections(arg0: boolean): void;
+        getItemStack(): $ItemStack;
         get itemStack(): $ItemStack;
     }
     export class $ICableFakeable {
     }
     export interface $ICableFakeable {
-        setRealCable(arg0: boolean): void;
         isRealCable(): boolean;
+        setRealCable(arg0: boolean): void;
     }
 }

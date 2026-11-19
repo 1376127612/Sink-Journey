@@ -1,4 +1,5 @@
 import { $Level_ } from "@package/net/minecraft/world/level";
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $BlockPos } from "@package/net/minecraft/core";
 import { $ServerPlayer } from "@package/net/minecraft/server/level";
 import { $ItemStack_ } from "@package/net/minecraft/world/item";
@@ -10,11 +11,11 @@ export * as item from "@package/hellfirepvp/astralsorcery/common/entity/item";
 
 declare module "@package/hellfirepvp/astralsorcery/common/entity" {
     export class $ItemEntityHighlighted extends $ItemEntityReplacement {
-        setColor<T extends $ItemEntityHighlighted>(arg0: $ColorWrapper | null): T;
-        getColor(): ($ColorWrapper) | undefined;
-        hasColor(): boolean;
         setNoColor<T extends $ItemEntityHighlighted>(): T;
         static factoryHighlighted(): $EntityType$EntityFactory<$ItemEntityHighlighted>;
+        setColor<T extends $ItemEntityHighlighted>(arg0: $ColorWrapper | null): T;
+        hasColor(): boolean;
+        getColor(): ($ColorWrapper) | undefined;
         lifespan: number;
         hasImpulse: boolean;
         tickCount: number;
@@ -68,17 +69,18 @@ declare module "@package/hellfirepvp/astralsorcery/common/entity" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number, arg6: number, arg7: number);
-        constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_);
         constructor(arg0: $EntityType_<$ItemEntityReplacement>, arg1: $Level_);
+        constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_);
+        constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number, arg6: number, arg7: number);
     }
     export class $ItemEntityReplacement extends $ItemEntity {
-        static replace<T extends $ItemEntityReplacement>(arg0: $EntityType_<T>, arg1: $ItemEntity): T;
         setReplacedEntity(arg0: $ItemEntity | null): void;
+        static replace<T extends $ItemEntityReplacement>(arg0: $EntityType_<T>, arg1: $ItemEntity): T;
         lifespan: number;
         hasImpulse: boolean;
         tickCount: number;
@@ -132,13 +134,14 @@ declare module "@package/hellfirepvp/astralsorcery/common/entity" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(arg0: $EntityType_<$ItemEntityReplacement>, arg1: $Level_);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number, arg6: number, arg7: number);
         constructor(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_);
-        constructor(arg0: $EntityType_<$ItemEntityReplacement>, arg1: $Level_);
         set replacedEntity(value: $ItemEntity | null);
     }
     export class $ItemEntityChiselAttackable extends $ItemEntityHighlighted {
@@ -197,12 +200,13 @@ declare module "@package/hellfirepvp/astralsorcery/common/entity" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(arg0: $EntityType_<$ItemEntityChiselAttackable>, arg1: $Level_);
         constructor(arg0: $EntityType_<$ItemEntityChiselAttackable>, arg1: $Level_, arg2: number, arg3: number, arg4: number, arg5: $ItemStack_, arg6: number, arg7: number, arg8: number);
         constructor(arg0: $EntityType_<$ItemEntityChiselAttackable>, arg1: $Level_, arg2: number, arg3: number, arg4: number, arg5: $ItemStack_);
-        constructor(arg0: $EntityType_<$ItemEntityChiselAttackable>, arg1: $Level_);
     }
 }

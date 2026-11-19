@@ -20,11 +20,11 @@ declare module "@package/hellfirepvp/astralsorcery/common/perk/source" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ModifierSource>;
     }
     export interface $ModifierSource {
+        onRemove(arg0: $Player, arg1: $LogicalSide_): void;
+        canApplySource(arg0: $Player, arg1: $LogicalSide_): boolean;
+        getSourceProvider(): $ModifierSourceProvider<never>;
         isEqual(arg0: $ModifierSource): boolean;
         onApply(arg0: $Player, arg1: $LogicalSide_): void;
-        onRemove(arg0: $Player, arg1: $LogicalSide_): void;
-        getSourceProvider(): $ModifierSourceProvider<never>;
-        canApplySource(arg0: $Player, arg1: $LogicalSide_): boolean;
         get sourceProvider(): $ModifierSourceProvider<never>;
     }
     export class $ModifierSourceProvider<T extends $ModifierSource> {

@@ -10,23 +10,23 @@ declare module "@package/malte0811/ferritecore/ducks" {
     }
     export interface $FastMapStateHolder<S> {
         replacePropertyMap(arg0: $Reference2ObjectMap<$Property<never>, $Comparable_<never>>): void;
-        getVanillaPropertyMap(): $Reference2ObjectMap<$Property<never>, $Comparable<never>>;
+        setNeighborTable(arg0: $Table<$Property<never>, $Comparable_<never>, S>): void;
         getStateIndex(): number;
         getStateMap(): $FastMap<S>;
         setStateMap(arg0: $FastMap<S>): void;
-        setStateIndex(arg0: number): void;
-        setNeighborTable(arg0: $Table<$Property<never>, $Comparable_<never>, S>): void;
         getNeighborTable(): $Table<$Property<never>, $Comparable<never>, S>;
+        setStateIndex(arg0: number): void;
+        getVanillaPropertyMap(): $Reference2ObjectMap<$Property<never>, $Comparable<never>>;
         get vanillaPropertyMap(): $Reference2ObjectMap<$Property<never>, $Comparable<never>>;
     }
     export class $BlockStateCacheAccess {
     }
     export interface $BlockStateCacheAccess {
         getCollisionShape(): $VoxelShape;
+        setFaceSturdy(arg0: boolean[]): void;
         setCollisionShape(arg0: $VoxelShape): void;
         setOcclusionShapes(arg0: $VoxelShape[]): void;
-        getOcclusionShapes(): $VoxelShape[];
-        setFaceSturdy(arg0: boolean[]): void;
         getFaceSturdy(): boolean[];
+        getOcclusionShapes(): $VoxelShape[];
     }
 }

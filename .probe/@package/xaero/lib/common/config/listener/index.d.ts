@@ -6,8 +6,8 @@ declare module "@package/xaero/lib/common/config/listener" {
     export class $IConfigChangeListener {
     }
     export interface $IConfigChangeListener {
+        onFullChange(arg0: $Config): void;
         onChange(arg0: $Config, arg1: $ConfigOption<never>): void;
         onRemoved(arg0: $Config): void;
-        onFullChange(arg0: $Config): void;
     }
 }

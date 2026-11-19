@@ -9,26 +9,26 @@ declare module "@package/mekanism/common/config" {
         static getSectionTitle(title: string, isSection: boolean): string;
     }
     export interface $IConfigTranslation extends $IHasTranslationKey {
+        applyToBuilder(builder: $ModConfigSpec$Builder): $ModConfigSpec$Builder;
         title(): string;
         button(): string;
         tooltip(): string;
-        applyToBuilder(builder: $ModConfigSpec$Builder): $ModConfigSpec$Builder;
     }
     export class $IMekanismConfig {
     }
     export interface $IMekanismConfig {
+        getTranslation(): string;
+        getConfigSpec(): $ModConfigSpec;
+        getConfigType(): $ModConfig$Type;
+        addCachedValue(configValue: $CachedValue<never>): void;
         save(): void;
         getFileName(): string;
         isLoaded(): boolean;
         clearCache(unloading: boolean): void;
-        getTranslation(): string;
-        getConfigSpec(): $ModConfigSpec;
-        addCachedValue(configValue: $CachedValue<never>): void;
-        getConfigType(): $ModConfig$Type;
-        get fileName(): string;
-        get loaded(): boolean;
         get translation(): string;
         get configSpec(): $ModConfigSpec;
         get configType(): $ModConfig$Type;
+        get fileName(): string;
+        get loaded(): boolean;
     }
 }

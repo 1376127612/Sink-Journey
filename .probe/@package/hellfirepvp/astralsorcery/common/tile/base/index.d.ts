@@ -28,19 +28,19 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile/base" {
     export class $TileEntityLumenDisplay {
     }
     export interface $TileEntityLumenDisplay {
-        self<T extends $BlockEntity>(): T;
         getDisplayComponentIdentifier(): $UUID;
         getDisplayTooltip(): ($StoredLumenDisplayTooltip) | undefined;
+        self<T extends $BlockEntity>(): T;
         get displayComponentIdentifier(): $UUID;
         get displayTooltip(): ($StoredLumenDisplayTooltip) | undefined;
     }
     export class $TileEntitySynchronized<T extends $TileEntitySynchronized$Data> extends $BlockEntity {
-        setLight(arg0: $ServerLevel, arg1: number): void;
+        dataCodec(): $Codec<T>;
+        markForUpdate(): void;
+        onTileEntityRemove(arg0: $Level_, arg1: $BlockPos_): void;
         getTileData(): T;
         netDataCodec(): $Codec<T>;
-        onTileEntityRemove(arg0: $Level_, arg1: $BlockPos_): void;
-        markForUpdate(): void;
-        dataCodec(): $Codec<T>;
+        setLight(arg0: $ServerLevel, arg1: number): void;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -70,8 +70,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile/base" {
     export class $TileEntityNetwork<N extends $TransmissionNode, T extends $TileEntityNetwork$Data> extends $TileEntityTick<T> {
         setChanged(arg0: boolean): void;
         markForUpdate(arg0: boolean): void;
-        getNetworkNode(): (N) | undefined;
         onNodeCreate(arg0: N): void;
+        getNetworkNode(): (N) | undefined;
         getNodeProvider(): $DeferredHolder<$TransmissionNodeProvider<never>, $TransmissionNodeProvider<N>>;
         worldPosition: $BlockPos;
         blockState: $BlockState;
@@ -90,17 +90,17 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile/base" {
         get nodeProvider(): $DeferredHolder<$TransmissionNodeProvider<never>, $TransmissionNodeProvider<N>>;
     }
     export class $TileEntityTick<T extends $TileEntityTick$Data> extends $TileEntitySynchronized<T> {
+        shouldRemoveStructureObserver(arg0: $BlockState_, arg1: $BlockState_): boolean;
+        serverTick(arg0: $ServerLevel): void;
+        removeBlock(arg0: $Level_): boolean;
+        removeBlock(): boolean;
+        getStructureObserver(): ($ChangeSubscriber<never>) | undefined;
+        seesSkyInNoSkyWorlds(): boolean;
+        getRequiredObserver(): $ObserverRegistryObject;
+        hasStructure(): boolean;
         removeObserver(arg0: $Level_): void;
         clientTick(arg0: $Level_): void;
-        hasStructure(): boolean;
-        serverTick(arg0: $ServerLevel): void;
-        removeBlock(): boolean;
-        removeBlock(arg0: $Level_): boolean;
-        shouldRemoveStructureObserver(arg0: $BlockState_, arg1: $BlockState_): boolean;
         doesSeeSky(): boolean;
-        seesSkyInNoSkyWorlds(): boolean;
-        getStructureObserver(): ($ChangeSubscriber<never>) | undefined;
-        getRequiredObserver(): $ObserverRegistryObject;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -120,15 +120,15 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile/base" {
         static ownedFields<T extends $TileDataOwned>(arg0: $RecordCodecBuilder$Instance<T>): $Products$P1<$RecordCodecBuilder$Mu<T>, ($UUID) | undefined>;
     }
     export interface $TileDataOwned {
+        markDirty(): void;
+        markForUpdate(): void;
+        hasOwner(): boolean;
+        setOwnerId(arg0: $UUID_): void;
         self<T extends $TileEntitySynchronized$Data>(): T;
         getOwner(arg0: $MinecraftServer): ($ServerPlayer) | undefined;
         getOwner(arg0: $ServerLevel): ($ServerPlayer) | undefined;
         getOwnerId(): $UUID;
-        markDirty(): void;
-        markForUpdate(): void;
         isOwner(arg0: $UUID_): boolean;
         isOwner(arg0: $Player): boolean;
-        setOwnerId(arg0: $UUID_): void;
-        hasOwner(): boolean;
     }
 }

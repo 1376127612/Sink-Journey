@@ -10,9 +10,9 @@ declare module "@package/com/supermartijn642/fusion/entity" {
         transform(poseStack: $PoseStack): void;
         getOffsetX(): number;
         getOffsetY(): number;
-        shouldFlipX(): boolean;
-        shouldFlipY(): boolean;
         shouldFlipZ(): boolean;
+        shouldFlipY(): boolean;
+        shouldFlipX(): boolean;
         get offsetZ(): number;
         get offsetX(): number;
         get offsetY(): number;

@@ -15,16 +15,16 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile/network" {
         receiveStarlight(arg0: $ServerLevel, arg1: $StarlightTransmissionPacket_): void;
     }
     export class $ForwardingStarlightReceiverNode implements $TransmissionReceiverNode {
-        getProvider(): $TransmissionNodeProvider<never>;
         getNodePos(): $BlockPos;
         receiveStarlight(arg0: $ServerLevel, arg1: $StarlightTransmissionPacket_): void;
+        getProvider(): $TransmissionNodeProvider<never>;
+        getTransmissionLossMultiplier(): number;
         markDirty(arg0: $Level_): void;
         updateFromTileEntity<T extends $BlockEntity>(arg0: T): boolean;
-        getTransmissionLossMultiplier(): number;
         static CODEC: $MapCodec<$ForwardingStarlightReceiverNode>;
         constructor(arg0: $BlockPos_);
-        get provider(): $TransmissionNodeProvider<never>;
         get nodePos(): $BlockPos;
+        get provider(): $TransmissionNodeProvider<never>;
         get transmissionLossMultiplier(): number;
     }
 }

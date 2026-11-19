@@ -13,9 +13,9 @@ declare module "@package/cn/howxu/mmcr/internal/assembly" {
     }
     export interface $StructureItemSource {
         copyStacks(): $List<$ItemStack>;
+        placeFluidSource(fluid: $Fluid_, placement: $BooleanSupplier_): boolean;
         canExtractAll(requirements: $List_<$ItemStack_>): boolean;
         copyFluidSources(): $Map<$Fluid, number>;
-        placeFluidSource(fluid: $Fluid_, placement: $BooleanSupplier_): boolean;
         extractAll(requirements: $List_<$ItemStack_>): boolean;
     }
     export class $MultiblockAssemblyService$Placement extends $Record {
@@ -31,18 +31,18 @@ declare module "@package/cn/howxu/mmcr/internal/assembly" {
     /**
      * Values that may be interpreted as {@link $MultiblockAssemblyService$Placement}.
      */
-    export type $MultiblockAssemblyService$Placement_ = { predicate?: $BlockPredicate_, pos?: $BlockPos_, requirement?: $ItemStack_, state?: $BlockState_,  } | [predicate?: $BlockPredicate_, pos?: $BlockPos_, requirement?: $ItemStack_, state?: $BlockState_, ];
+    export type $MultiblockAssemblyService$Placement_ = { pos?: $BlockPos_, requirement?: $ItemStack_, state?: $BlockState_, predicate?: $BlockPredicate_,  } | [pos?: $BlockPos_, requirement?: $ItemStack_, state?: $BlockState_, predicate?: $BlockPredicate_, ];
     export class $MultiblockAssemblyService$BuildTask {
-        static create(controllerKey: $BlockPos_, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number): $MultiblockAssemblyService$BuildTask;
-        static create(controllerKey: $BlockPos_, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number, reservedMaterial: boolean): $MultiblockAssemblyService$BuildTask;
-        static create(controllerKey: $BlockPos_, stage: number, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number, reservedMaterial: boolean, materialSource: $StructureItemSource): $MultiblockAssemblyService$BuildTask;
-        static create(controllerKey: $BlockPos_, stage: number, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number, reservedMaterial: boolean): $MultiblockAssemblyService$BuildTask;
-        advance(placementAction: $Predicate_<$MultiblockAssemblyService$Placement>): number;
-        stage(): number;
-        isComplete(): boolean;
         placedCount(): number;
         refundRequirements(): $List<$ItemStack>;
         takeCompletionReport(): ($Component) | undefined;
+        static create(controllerKey: $BlockPos_, stage: number, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number, reservedMaterial: boolean): $MultiblockAssemblyService$BuildTask;
+        static create(controllerKey: $BlockPos_, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number): $MultiblockAssemblyService$BuildTask;
+        static create(controllerKey: $BlockPos_, stage: number, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number, reservedMaterial: boolean, materialSource: $StructureItemSource): $MultiblockAssemblyService$BuildTask;
+        static create(controllerKey: $BlockPos_, placements: $List_<$MultiblockAssemblyService$Placement_>, budget: number, reservedMaterial: boolean): $MultiblockAssemblyService$BuildTask;
+        advance(placementAction: $Predicate_<$MultiblockAssemblyService$Placement>): number;
+        stage(): number;
+        isComplete(): boolean;
         controllerKey(): $BlockPos;
         unconsumedPlacements(): $List<$MultiblockAssemblyService$Placement>;
         unconsumedRequirements(): $List<$ItemStack>;

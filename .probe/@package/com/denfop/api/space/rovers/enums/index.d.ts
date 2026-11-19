@@ -4,11 +4,11 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/com/denfop/api/space/rovers/enums" {
     export class $EnumTypeUpgrade extends $Enum<$EnumTypeUpgrade> {
+        getUpgrade(): string;
+        static getFromID(arg0: number): $EnumTypeUpgrade;
         static values(): $EnumTypeUpgrade[];
         static valueOf(arg0: string): $EnumTypeUpgrade;
         getMax(): number;
-        static getFromID(arg0: number): $EnumTypeUpgrade;
-        getUpgrade(): string;
         static PRESSURE: $EnumTypeUpgrade;
         static PROTECTION: $EnumTypeUpgrade;
         static HEATER: $EnumTypeUpgrade;
@@ -16,8 +16,8 @@ declare module "@package/com/denfop/api/space/rovers/enums" {
         static SOLAR: $EnumTypeUpgrade;
         static ENGINE: $EnumTypeUpgrade;
         static DRILL: $EnumTypeUpgrade;
-        get max(): number;
         get upgrade(): string;
+        get max(): number;
     }
     /**
      * Values that may be interpreted as {@link $EnumTypeUpgrade}.
@@ -36,9 +36,9 @@ declare module "@package/com/denfop/api/space/rovers/enums" {
      */
     export type $EnumTypeRovers_ = "rocket" | "satellite" | "rovers" | "probe";
     export class $EnumRoversLevel extends $Enum<$EnumRoversLevel> {
+        getLevelsList(): $List<$EnumLevels>;
         static values(): $EnumRoversLevel[];
         static valueOf(arg0: string): $EnumRoversLevel;
-        getLevelsList(): $List<$EnumLevels>;
         static ONE: $EnumRoversLevel;
         static FOUR: $EnumRoversLevel;
         static TWO: $EnumRoversLevel;

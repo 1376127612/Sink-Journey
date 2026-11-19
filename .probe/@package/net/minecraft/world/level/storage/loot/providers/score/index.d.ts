@@ -11,16 +11,16 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/score"
      * A `ScoreboardNameProvider` that provides the scoreboard name for an entity selected by a `EntityTarget`.
      */
     export class $ContextScoreboardNameProvider extends $Record implements $ScoreboardNameProvider {
+        static forTarget(target: $LootContext$EntityTarget_): $ScoreboardNameProvider;
+        getScoreHolder(context: $LootContext): $ScoreHolder;
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         target(): $LootContext$EntityTarget;
         getType(): $LootScoreProviderType;
-        static forTarget(target: $LootContext$EntityTarget_): $ScoreboardNameProvider;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
-        getScoreHolder(context: $LootContext): $ScoreHolder;
         static INLINE_CODEC: $Codec<$ContextScoreboardNameProvider>;
         static CODEC: $MapCodec<$ContextScoreboardNameProvider>;
         constructor(target: $LootContext$EntityTarget_);
-        get type(): $LootScoreProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootScoreProviderType;
     }
     /**
      * Values that may be interpreted as {@link $ContextScoreboardNameProvider}.
@@ -32,11 +32,11 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/score"
     export class $ScoreboardNameProvider {
     }
     export interface $ScoreboardNameProvider {
-        getType(): $LootScoreProviderType;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         getScoreHolder(context: $LootContext): $ScoreHolder;
-        get type(): $LootScoreProviderType;
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
+        getType(): $LootScoreProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootScoreProviderType;
     }
     /**
      * The SerializerType for `ScoreboardNameProvider`.
@@ -63,15 +63,15 @@ declare module "@package/net/minecraft/world/level/storage/loot/providers/score"
      * A `ScoreboardNameProvider` that always provides a fixed name.
      */
     export class $FixedScoreboardNameProvider extends $Record implements $ScoreboardNameProvider {
+        getScoreHolder(context: $LootContext): $ScoreHolder;
+        getReferencedContextParams(): $Set<$LootContextParam<never>>;
         name(): string;
         static forName(name: string): $ScoreboardNameProvider;
         getType(): $LootScoreProviderType;
-        getReferencedContextParams(): $Set<$LootContextParam<never>>;
-        getScoreHolder(context: $LootContext): $ScoreHolder;
         static CODEC: $MapCodec<$FixedScoreboardNameProvider>;
         constructor(name: string);
-        get type(): $LootScoreProviderType;
         get referencedContextParams(): $Set<$LootContextParam<never>>;
+        get type(): $LootScoreProviderType;
     }
     /**
      * Values that may be interpreted as {@link $FixedScoreboardNameProvider}.

@@ -8,10 +8,10 @@ declare module "@package/hellfirepvp/astralsorcery/mixin/client" {
     export class $AccessorPostChain {
     }
     export interface $AccessorPostChain {
-        getResourceProvider(): $ResourceProvider;
         getPasses(): $List<$PostPass>;
-        get resourceProvider(): $ResourceProvider;
+        getResourceProvider(): $ResourceProvider;
         get passes(): $List<$PostPass>;
+        get resourceProvider(): $ResourceProvider;
     }
     export class $AccessorPostPass {
     }

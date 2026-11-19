@@ -9,21 +9,21 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/mekanism/api/tier" {
     export class $BaseTier extends $Enum<$BaseTier> implements $StringRepresentable, $SupportsColorMap {
+        getSerializedName(): string;
+        setColorFromAtlas(arg0: number[]): void;
+        getLowerName(): string;
+        getPackedColor(): number;
+        static getTier(arg0: number): $BaseTier;
         static values(): $BaseTier[];
         static valueOf(arg0: string): $BaseTier;
         getSimpleName(): string;
-        getSerializedName(): string;
         getColor(): $TextColor;
         getMapColor(): $MapColor;
-        static getTier(arg0: number): $BaseTier;
-        setColorFromAtlas(arg0: number[]): void;
-        getPackedColor(): number;
-        getLowerName(): string;
         getRgbCode(): number[];
         getRemappedEnumConstantName(): string;
-        getColor(arg0: number): number;
-        getRgbCodeFloat(): number[];
         getPackedColor(arg0: number): number;
+        getRgbCodeFloat(): number[];
+        getColor(arg0: number): number;
         static CREATIVE: $BaseTier;
         static BY_ID: $IntFunction<$BaseTier>;
         static ELITE: $BaseTier;
@@ -31,11 +31,11 @@ declare module "@package/mekanism/api/tier" {
         static BASIC: $BaseTier;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $BaseTier>;
         static ADVANCED: $BaseTier;
-        get simpleName(): string;
         get serializedName(): string;
-        get mapColor(): $MapColor;
         set colorFromAtlas(value: number[]);
         get lowerName(): string;
+        get simpleName(): string;
+        get mapColor(): $MapColor;
         get rgbCode(): number[];
         get remappedEnumConstantName(): string;
         get rgbCodeFloat(): number[];
@@ -57,10 +57,10 @@ declare module "@package/mekanism/api/tier" {
     export class $ITier {
     }
     export interface $ITier {
-        getBaseTierLevel(): number;
         getBaseTier(): $BaseTier;
-        get baseTierLevel(): number;
+        getBaseTierLevel(): number;
         get baseTier(): $BaseTier;
+        get baseTierLevel(): number;
     }
     /**
      * Values that may be interpreted as {@link $ITier}.

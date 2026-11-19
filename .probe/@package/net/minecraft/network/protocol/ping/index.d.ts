@@ -15,15 +15,15 @@ declare module "@package/net/minecraft/network/protocol/ping" {
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isTerminal(): boolean;
+        isSkippable(): boolean;
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundPongResponsePacket>;
         constructor(arg0: number);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundPongResponsePacket}.
@@ -51,18 +51,12 @@ declare module "@package/net/minecraft/network/protocol/ping" {
          */
         handle(handler: $ServerPingPacketListener): void;
         getTime(): number;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ServerboundPingRequestPacket>;
         constructor(time: number);
         get time(): number;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
 }

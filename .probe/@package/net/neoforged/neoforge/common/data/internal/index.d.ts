@@ -5,7 +5,7 @@ import { $BiomeTagsProvider, $ItemTagsProvider, $StructureTagsProvider, $TagsPro
 import { $CompletableFuture } from "@package/java/util/concurrent";
 import { $ImmutableList } from "@package/com/google/common/collect";
 import { $List, $Map, $List_ } from "@package/java/util";
-import { $CachedOutput_, $DataProvider, $PackOutput } from "@package/net/minecraft/data";
+import { $CachedOutput_, $DataProvider, $PackOutput$PathProvider, $PackOutput } from "@package/net/minecraft/data";
 import { $Criterion } from "@package/net/minecraft/advancements";
 import { $BiFunction_ } from "@package/java/util/function";
 import { $HolderLookup$Provider } from "@package/net/minecraft/core";
@@ -31,7 +31,7 @@ declare module "@package/net/neoforged/neoforge/common/data/internal" {
     /**
      * Values that may be interpreted as {@link $NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator}.
      */
-    export type $NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator_ = { criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>, vanillaProvider?: $AdvancementSubProvider_,  } | [criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>, vanillaProvider?: $AdvancementSubProvider_, ];
+    export type $NeoForgeAdvancementProvider$NeoForgeAdvancementGenerator_ = { vanillaProvider?: $AdvancementSubProvider_, criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>,  } | [vanillaProvider?: $AdvancementSubProvider_, criteriaReplacers?: $List_<$BiFunction_<$Criterion<never>, $HolderLookup$Provider, $Criterion<never>>>, ];
     export class $NeoForgeFluidTagsProvider extends $FluidTagsProvider {
         addTags(arg0: $HolderLookup$Provider): void;
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: $ExistingFileHelper);
@@ -50,6 +50,9 @@ declare module "@package/net/neoforged/neoforge/common/data/internal" {
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: $ExistingFileHelper);
     }
     export class $NeoForgeAdvancementProvider extends $AdvancementProvider {
+        pathProvider: $PackOutput$PathProvider;
+        registries: $CompletableFuture<$HolderLookup$Provider>;
+        subProviders: $List<$AdvancementSubProvider>;
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: $ExistingFileHelper);
     }
     export class $NeoForgeDamageTypeTagsProvider extends $DamageTypeTagsProvider {
@@ -88,12 +91,14 @@ declare module "@package/net/neoforged/neoforge/common/data/internal" {
     }
     export class $NeoForgeRecipeProvider extends $VanillaRecipeProvider {
         static LAPIS_SMELTABLES: $ImmutableList<$ItemLike>;
+        advancementPathProvider: $PackOutput$PathProvider;
         static EMERALD_SMELTABLES: $ImmutableList<$ItemLike>;
         static COPPER_SMELTABLES: $ImmutableList<$ItemLike>;
         static REDSTONE_SMELTABLES: $ImmutableList<$ItemLike>;
         static COAL_SMELTABLES: $ImmutableList<$ItemLike>;
         static GOLD_SMELTABLES: $ImmutableList<$ItemLike>;
         static IRON_SMELTABLES: $ImmutableList<$ItemLike>;
+        recipePathProvider: $PackOutput$PathProvider;
         static DIAMOND_SMELTABLES: $ImmutableList<$ItemLike>;
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>);
     }

@@ -8,21 +8,21 @@ declare module "@package/com/denfop/api/otherenergies/pressure" {
     export class $IPressureTile {
     }
     export interface $IPressureTile {
-        setId(arg0: number): void;
+        getPos(): $BlockPos;
+        getTiles(): $Map<$Direction, $IPressureTile>;
         getValidReceivers(): $List<$InfoTile<$IPressureTile>>;
-        setHashCodeSource(arg0: number): void;
         getHashCodeSource(): number;
         getIdNetwork(): number;
-        getPos(): $BlockPos;
-        getTile(): $BlockEntity;
-        getTiles(): $Map<$Direction, $IPressureTile>;
-        AddTile(arg0: $IPressureTile, arg1: $Direction_): void;
         RemoveTile(arg0: $IPressureTile, arg1: $Direction_): void;
-        set id(value: number);
+        AddTile(arg0: $IPressureTile, arg1: $Direction_): void;
+        setHashCodeSource(arg0: number): void;
+        setId(arg0: number): void;
+        getTile(): $BlockEntity;
+        get pos(): $BlockPos;
+        get tiles(): $Map<$Direction, $IPressureTile>;
         get validReceivers(): $List<$InfoTile<$IPressureTile>>;
         get idNetwork(): number;
-        get pos(): $BlockPos;
+        set id(value: number);
         get tile(): $BlockEntity;
-        get tiles(): $Map<$Direction, $IPressureTile>;
     }
 }

@@ -7,12 +7,12 @@ import { $Object, $Iterable_ } from "@package/java/lang";
 
 declare module "@package/com/google/common/cache" {
     export class $CacheLoader<K, V> {
+        static asyncReloading<K, V>(loader: $CacheLoader<K, V>, executor: $Executor_): $CacheLoader<K, V>;
         load(key: K): V;
-        static from<V>(supplier: $Supplier_<V>): $CacheLoader<$Object, V>;
         static from<K, V>(arg0: $Function<K, V>): $CacheLoader<K, V>;
+        static from<V>(supplier: $Supplier_<V>): $CacheLoader<$Object, V>;
         reload(key: K, oldValue: V): $ListenableFuture<V>;
         loadAll(keys: $Iterable_<K>): $Map<K, V>;
-        static asyncReloading<K, V>(loader: $CacheLoader<K, V>, executor: $Executor_): $CacheLoader<K, V>;
     }
     export class $LoadingCache<K, V> {
     }
@@ -24,17 +24,10 @@ declare module "@package/com/google/common/cache" {
         apply(key: K): V;
         getUnchecked(key: K): V;
         refresh(key: K): void;
-        asMap(): $ConcurrentMap<K, V>;
         getAll(keys: $Iterable_<K>): $ImmutableMap<K, V>;
+        asMap(): $ConcurrentMap<K, V>;
     }
     export class $CacheStats {
-        plus(other: $CacheStats): $CacheStats;
-        minus(other: $CacheStats): $CacheStats;
-        hitCount(): number;
-        missCount(): number;
-        hitRate(): number;
-        loadCount(): number;
-        missRate(): number;
         loadSuccessCount(): number;
         loadExceptionCount(): number;
         totalLoadTime(): number;
@@ -42,22 +35,29 @@ declare module "@package/com/google/common/cache" {
         requestCount(): number;
         loadExceptionRate(): number;
         averageLoadPenalty(): number;
+        plus(other: $CacheStats): $CacheStats;
+        minus(other: $CacheStats): $CacheStats;
+        missRate(): number;
+        hitRate(): number;
+        loadCount(): number;
+        missCount(): number;
+        hitCount(): number;
         constructor(hitCount: number, missCount: number, loadSuccessCount: number, loadExceptionCount: number, totalLoadTime: number, evictionCount: number);
     }
     export class $Cache<K, V> {
     }
     export interface $Cache<K, V> {
+        cleanUp(): void;
+        stats(): $CacheStats;
+        getIfPresent(key: $Object): V;
+        getAllPresent(keys: $Iterable_<never>): $ImmutableMap<K, V>;
         size(): number;
         get(key: K, loader: $Callable_<V>): V;
         put(key: K, value: V): void;
         putAll(m: $Map_<K, V>): void;
         invalidate(key: $Object): void;
         asMap(): $ConcurrentMap<K, V>;
-        invalidateAll(): void;
         invalidateAll(keys: $Iterable_<never>): void;
-        stats(): $CacheStats;
-        cleanUp(): void;
-        getIfPresent(key: $Object): V;
-        getAllPresent(keys: $Iterable_<never>): $ImmutableMap<K, V>;
+        invalidateAll(): void;
     }
 }

@@ -20,28 +20,29 @@ declare module "@package/com/mojang/blaze3d/pipeline" {
      */
     export type $RenderCall_ = (() => void);
     export class $RenderTarget implements $Blaze3dRenderTargetExt {
+        iris$getColorBufferVersion(): number;
+        iris$getDepthBufferVersion(): number;
         finalize(): void;
         clear(useDepth: boolean): void;
         resize(width: number, height: number, disableBlend: boolean): void;
-        setClearColor(red: number, green: number, blue: number, alpha: number): void;
-        checkStatus(): void;
-        unbindWrite(): void;
-        blitToScreen(width: number, height: number): void;
-        blitToScreen(width: number, height: number, disableBlend: boolean): void;
-        destroyBuffers(): void;
         unbindRead(): void;
         bindRead(): void;
         bindWrite(useDepth: boolean): void;
+        setClearColor(red: number, green: number, blue: number, alpha: number): void;
+        checkStatus(): void;
+        unbindWrite(): void;
+        blitToScreen(width: number, height: number, disableBlend: boolean): void;
+        blitToScreen(width: number, height: number): void;
+        destroyBuffers(): void;
+        getDepthTextureId(): number;
         createBuffers(width: number, height: number, disableBlend: boolean): void;
-        copyDepthFrom(otherTarget: $RenderTarget): void;
+        enableStencil(): void;
+        setFilterMode(filterMode: number, force: boolean): void;
         setFilterMode(filterMode: number): void;
         isStencilEnabled(): boolean;
+        copyDepthFrom(otherTarget: $RenderTarget): void;
         getColorTextureId(): number;
-        enableStencil(): void;
-        getDepthTextureId(): number;
-        handler$dap000$sodium$blitToScreen(arg0: number, arg1: number, arg2: boolean, arg3: $CallbackInfo): void;
-        iris$getColorBufferVersion(): number;
-        iris$getDepthBufferVersion(): number;
+        handler$clj000$sodium$blitToScreen(arg0: number, arg1: number, arg2: boolean, arg3: $CallbackInfo): void;
         useDepth: boolean;
         filterMode: number;
         viewWidth: number;
@@ -51,8 +52,8 @@ declare module "@package/com/mojang/blaze3d/pipeline" {
         height: number;
         stencilEnabled: boolean;
         constructor(useDepth: boolean);
-        get colorTextureId(): number;
         get depthTextureId(): number;
+        get colorTextureId(): number;
     }
     export class $MainTarget extends $RenderTarget {
         useDepth: boolean;
@@ -68,17 +69,17 @@ declare module "@package/com/mojang/blaze3d/pipeline" {
         constructor(width: number, height: number);
     }
     export class $RenderPipeline {
+        beginProcessing(): boolean;
         getProcessedQueue(): $ConcurrentLinkedQueue<$RenderCall>;
         getRecordingQueue(): $ConcurrentLinkedQueue<$RenderCall>;
-        recordRenderCall(renderCall: $RenderCall_): void;
-        beginRecording(): boolean;
-        endRecording(): void;
-        processRecordedQueue(): void;
-        endProcessing(): void;
-        beginProcessing(): boolean;
-        canBeginRecording(): boolean;
         canBeginProcessing(): boolean;
         startRendering(): $ConcurrentLinkedQueue<$RenderCall>;
+        canBeginRecording(): boolean;
+        endProcessing(): void;
+        beginRecording(): boolean;
+        endRecording(): void;
+        recordRenderCall(renderCall: $RenderCall_): void;
+        processRecordedQueue(): void;
         constructor();
         get processedQueue(): $ConcurrentLinkedQueue<$RenderCall>;
         get recordingQueue(): $ConcurrentLinkedQueue<$RenderCall>;

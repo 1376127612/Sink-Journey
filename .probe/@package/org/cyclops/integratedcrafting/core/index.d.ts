@@ -15,8 +15,8 @@ declare module "@package/org/cyclops/integratedcrafting/core" {
      */
     export type $CraftingHelpers$IIdentifierGenerator_ = (() => number);
     export class $MissingIngredients$PrototypedWithRequested<T, M> {
-        setQuantityMissing(arg0: number): void;
         getQuantityMissing(): number;
+        setQuantityMissing(arg0: number): void;
         getRequestedPrototype(): $IPrototypedIngredient<T, M>;
         constructor(arg0: $IPrototypedIngredient<T, M>, arg1: number);
         get requestedPrototype(): $IPrototypedIngredient<T, M>;

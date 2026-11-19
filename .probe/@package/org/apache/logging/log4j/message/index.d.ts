@@ -36,13 +36,13 @@ declare module "@package/org/apache/logging/log4j/message" {
     }
     export interface $Message extends $Serializable {
         getParameters(): $Object[];
-        getFormattedMessage(): string;
         getThrowable(): $Throwable;
         getFormat(): string;
+        getFormattedMessage(): string;
         get parameters(): $Object[];
-        get formattedMessage(): string;
         get throwable(): $Throwable;
         get format(): string;
+        get formattedMessage(): string;
     }
     export class $ExitMessage {
     }

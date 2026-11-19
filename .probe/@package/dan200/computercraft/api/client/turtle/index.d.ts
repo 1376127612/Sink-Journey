@@ -13,14 +13,14 @@ declare module "@package/dan200/computercraft/api/client/turtle" {
         constructor(arg0: $RegisterTurtleUpgradeModeller_);
     }
     export class $TurtleUpgradeModeller<T extends $ITurtleUpgrade> {
-        static sided<T extends $ITurtleUpgrade>(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $TurtleUpgradeModeller<T>;
         static sided<T extends $ITurtleUpgrade>(arg0: $ModelLocation, arg1: $ModelLocation): $TurtleUpgradeModeller<T>;
+        static sided<T extends $ITurtleUpgrade>(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $TurtleUpgradeModeller<T>;
         static flatItem<T extends $ITurtleUpgrade>(): $TurtleUpgradeModeller<T>;
     }
     export interface $TurtleUpgradeModeller<T extends $ITurtleUpgrade> {
-        getDependencies(): $Stream<$ResourceLocation>;
-        getModel(arg0: T, arg1: $ITurtleAccess, arg2: $TurtleSide_, arg3: $DataComponentPatch_): $TransformedModel;
         getModel(arg0: T, arg1: $UpgradeData<$ITurtleUpgrade_>, arg2: $TurtleSide_): $TransformedModel;
+        getModel(arg0: T, arg1: $ITurtleAccess, arg2: $TurtleSide_, arg3: $DataComponentPatch_): $TransformedModel;
+        getDependencies(): $Stream<$ResourceLocation>;
         get dependencies(): $Stream<$ResourceLocation>;
     }
     /**

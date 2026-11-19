@@ -2,62 +2,46 @@ import { $Level_ } from "@package/net/minecraft/world/level";
 import { $ItemEntityAccess } from "@package/me/desht/pneumaticcraft/mixin/accessors";
 import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $ItemEntityAccessor } from "@package/de/dafuqs/spectrum/mixin/accessors";
 import { $EntityType_, $Entity$RemovalReason, $LivingEntity, $PortalProcessor, $Entity, $TraceableEntity } from "@package/net/minecraft/world/entity";
-import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
+import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $FallingBlockEntityAccessor } from "@package/com/simibubi/create/foundation/mixin/accessor";
 import { $UUID, $UUID_ } from "@package/java/util";
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
+import { $AccessFallingBlockEntity } from "@package/com/blamejared/crafttweaker/mixin/common/access/entity";
 import { $Block_ } from "@package/net/minecraft/world/level/block";
-import { $ItemEntityAccessor } from "@package/net/caffeinemc/mods/lithium/mixin/util/accessors";
+import { $ItemEntityAccessor as $ItemEntityAccessor$1 } from "@package/net/caffeinemc/mods/lithium/mixin/util/accessors";
 import { $ItemEntityKJS } from "@package/dev/latvian/mods/kubejs/core";
 import { $Object } from "@package/java/lang";
+import { $DamageSource_ } from "@package/net/minecraft/world/damagesource";
 import { $ChangeSubscriber$CountChangeSubscriber, $ChangeSubscriber, $ChangePublisher } from "@package/net/caffeinemc/mods/lithium/common/util/change_tracking";
 
 declare module "@package/net/minecraft/world/entity/item" {
-    export class $ItemEntity extends $Entity implements $TraceableEntity, $ItemEntityKJS, $ItemEntityAccessor, $ChangePublisher<any>, $ChangeSubscriber$CountChangeSubscriber<any>, $ItemEntityAccess {
-        static merge(destinationStack: $ItemStack_, originStack: $ItemStack_, amount: number): $ItemStack;
-        copy(): $ItemEntity;
-        getTarget(): $UUID;
-        setTarget(target: $UUID_ | null): void;
-        /**
-         * Get entity this is riding
-         */
-        getOwner(): $Entity;
-        /**
-         * Gets the item that this entity represents.
-         */
-        getItem(): $ItemStack;
-        readAdditionalSaveData(compound: $CompoundTag_): void;
-        addAdditionalSaveData(compound: $CompoundTag_): void;
-        handler$fjo004$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
-        lithium$forceUnsubscribe(arg0: $ItemStack_, arg1: number): void;
-        lithium$notifyCount(arg0: $ItemStack_, arg1: number, arg2: number): void;
-        /**
-         * Looks for other itemstacks nearby and tries to stack them together
-         */
-        setDefaultPickUpDelay(): void;
-        lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
-        /**
-         * Looks for other itemstacks nearby and tries to stack them together
-         */
-        setExtendedLifetime(): void;
-        /**
-         * Looks for other itemstacks nearby and tries to stack them together
-         */
-        setUnlimitedLifetime(): void;
-        lithium$notify(arg0: $ItemStack_, arg1: number): void;
-        lithium$subscribe(arg0: $ChangeSubscriber<any>, arg1: number): void;
-        /**
-         * Sets the item that this entity represents.
-         */
-        setItem(stack: $ItemStack_): void;
-        setPickUpDelay(pickupDelay: number): void;
+    export class $ItemEntity extends $Entity implements $TraceableEntity, $ItemEntityAccessor$1, $ChangePublisher<any>, $ChangeSubscriber$CountChangeSubscriber<any>, $ItemEntityAccess, $ItemEntityAccessor, $ItemEntityKJS {
         /**
          * Prepares this entity in new dimension by copying NBT data from entity in old dimension
          */
         setThrower(entity: $Entity): void;
-        getSpin(partialTicks: number): number;
+        addAdditionalSaveData(compound: $CompoundTag_): void;
+        readAdditionalSaveData(compound: $CompoundTag_): void;
+        /**
+         * Looks for other itemstacks nearby and tries to stack them together
+         */
+        setExtendedLifetime(): void;
+        lithium$unsubscribe(arg0: $ChangeSubscriber<any>): number;
+        /**
+         * Looks for other itemstacks nearby and tries to stack them together
+         */
+        setUnlimitedLifetime(): void;
+        /**
+         * Sets the item that this entity represents.
+         */
+        setItem(stack: $ItemStack_): void;
+        lithium$notify(arg0: $ItemStack_, arg1: number): void;
+        lithium$subscribe(arg0: $ChangeSubscriber<any>, arg1: number): void;
+        setPickUpDelay(pickupDelay: number): void;
         static areMergable(destinationStack: $ItemStack_, originStack: $ItemStack_): boolean;
         /**
          * Looks for other itemstacks nearby and tries to stack them together
@@ -75,6 +59,31 @@ declare module "@package/net/minecraft/world/entity/item" {
          * Looks for other itemstacks nearby and tries to stack them together
          */
         makeFakeItem(): void;
+        static merge(destinationStack: $ItemStack_, originStack: $ItemStack_, amount: number): $ItemStack;
+        copy(): $ItemEntity;
+        setTarget(target: $UUID_ | null): void;
+        getTarget(): $UUID;
+        /**
+         * Get entity this is riding
+         */
+        getOwner(): $Entity;
+        /**
+         * Gets the item that this entity represents.
+         */
+        getItem(): $ItemStack;
+        handler$eha000$spectrum$spectrumItemStackDamageActions(arg0: $DamageSource_, arg1: number, arg2: $CallbackInfoReturnable<any>): void;
+        getSpin(partialTicks: number): number;
+        handler$dnh004$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
+        handler$eha001$spectrum$tick(arg0: $CallbackInfo): void;
+        handler$eha000$spectrum$ItemEntity(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_, arg5: number, arg6: number, arg7: number, arg8: $CallbackInfo): void;
+        lithium$forceUnsubscribe(arg0: $ItemStack_, arg1: number): void;
+        lithium$notifyCount(arg0: $ItemStack_, arg1: number, arg2: number): void;
+        /**
+         * Looks for other itemstacks nearby and tries to stack them together
+         */
+        setDefaultPickUpDelay(): void;
+        lithium$unsubscribeWithData(arg0: $ChangeSubscriber<$Object>, arg1: number): void;
+        lithium$isSubscribedWithData(arg0: $ChangeSubscriber<$ItemStack_>, arg1: number): boolean;
         /**
          * Looks for other itemstacks nearby and tries to stack them together
          */
@@ -87,11 +96,12 @@ declare module "@package/net/minecraft/world/entity/item" {
          * The maximum height from where the entity is allowed to jump (used in pathfinder)
          */
         getTicksUntilDespawn(): number;
-        setTicksUntilDespawn(pickupDelay: number): void;
         /**
          * Looks for other itemstacks nearby and tries to stack them together
          */
         setInfinitePickUpDelay(): void;
+        setTicksUntilDespawn(pickupDelay: number): void;
+        setLifespan(pickupDelay: number): void;
         /**
          * The maximum height from where the entity is allowed to jump (used in pathfinder)
          */
@@ -100,15 +110,16 @@ declare module "@package/net/minecraft/world/entity/item" {
          * Looks for other itemstacks nearby and tries to stack them together
          */
         setNoDespawn(): void;
-        setLifespan(pickupDelay: number): void;
-        lithium$isSubscribedWithData(arg0: $ChangeSubscriber<$ItemStack_>, arg1: number): boolean;
-        lithium$unsubscribeWithData(arg0: $ChangeSubscriber<$Object>, arg1: number): void;
+        setAge(pickupDelay: number): void;
+        lithium$getOwner(): $UUID;
+        /**
+         * The maximum height from where the entity is allowed to jump (used in pathfinder)
+         */
+        getPickupDelay(): number;
         /**
          * The maximum height from where the entity is allowed to jump (used in pathfinder)
          */
         getAge(): number;
-        lithium$getOwner(): $UUID;
-        setAge(pickupDelay: number): void;
         lifespan: number;
         hasImpulse: boolean;
         tickCount: number;
@@ -162,29 +173,30 @@ declare module "@package/net/minecraft/world/entity/item" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$ItemEntity>, level: $Level_);
         constructor(level: $Level_, posX: number, arg2: number, posY: number, arg4: $ItemStack_, posZ: number, arg6: number, itemStack: number);
+        constructor(entityType: $EntityType_<$ItemEntity>, level: $Level_);
         constructor(level: $Level_, posX: number, arg2: number, posY: number, arg4: $ItemStack_);
-        get owner(): $Entity;
         set pickUpDelay(value: number);
+        get owner(): $Entity;
     }
     export class $PrimedTnt extends $Entity implements $TraceableEntity {
-        /**
-         * Returns null or the entityliving it was ignited by
-         */
-        getOwner(): $LivingEntity;
-        handler$fjo004$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
         setFuse(life: number): void;
         /**
          * Gets the fuse from the data manager
          */
         getFuse(): number;
-        getBlockState(): $BlockState;
         setBlockState(blockState: $BlockState_): void;
+        /**
+         * Returns null or the entityliving it was ignited by
+         */
+        getOwner(): $LivingEntity;
+        handler$dnh004$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
+        getBlockState(): $BlockState;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
@@ -231,27 +243,31 @@ declare module "@package/net/minecraft/world/entity/item" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$PrimedTnt>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $LivingEntity | null);
+        constructor(entityType: $EntityType_<$PrimedTnt>, level: $Level_);
         get owner(): $LivingEntity;
     }
-    export class $FallingBlockEntity extends $Entity implements $FallingBlockEntityAccessor {
-        setHurtsEntities(fallDamagePerDistance: number, fallDamageMax: number): void;
-        getBlockState(): $BlockState;
-        handler$bjj000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
-        static fall(level: $Level_, pos: $BlockPos_, blockState: $BlockState_): $FallingBlockEntity;
-        static callInit$create_$md$796745$0(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
+    export class $FallingBlockEntity extends $Entity implements $AccessFallingBlockEntity, $FallingBlockEntityAccessor {
+        static callInit$create_$md$e03d8d$1(arg0: $Level_, arg1: number, arg2: number, arg3: number, arg4: $BlockState_): $FallingBlockEntity;
+        getStartPos(): $BlockPos;
+        setStartPos(startPos: $BlockPos_): void;
+        setBlockState(state: $BlockState_): void;
         callOnBrokenAfterFall(block: $Block_, pos: $BlockPos_): void;
+        getBlockState(): $BlockState;
+        handler$fcb000$architectury$handleLand(ci: $CallbackInfo, block: $Block_, blockPos2: $BlockPos_, bl: boolean, bl2: boolean, d: number, blockState: $BlockState_): void;
+        static fall(level: $Level_, pos: $BlockPos_, blockState: $BlockState_): $FallingBlockEntity;
         /**
          * Called to update the entity's position/logic.
          */
         disableDrop(): void;
-        setStartPos(startPos: $BlockPos_): void;
-        getStartPos(): $BlockPos;
-        setBlockState(state: $BlockState_): void;
+        setHurtsEntities(fallDamagePerDistance: number, fallDamageMax: number): void;
+        crafttweaker$setBlockState(arg0: $BlockState_): void;
+        blockState: $BlockState;
+        cancelDrop: boolean;
         hasImpulse: boolean;
         dropItem: boolean;
         tickCount: number;
@@ -300,10 +316,12 @@ declare module "@package/net/minecraft/world/entity/item" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         time: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         constructor(entityType: $EntityType_<$FallingBlockEntity>, level: $Level_);
+        constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $BlockState_);
     }
 }

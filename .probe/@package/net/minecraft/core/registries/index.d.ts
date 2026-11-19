@@ -47,7 +47,8 @@ import { $GameEvent, $PositionSourceType } from "@package/net/minecraft/world/le
 import { $Attribute } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $RootPlacerType } from "@package/net/minecraft/world/level/levelgen/feature/rootplacers";
 import { $PaintingVariant } from "@package/net/minecraft/world/entity/decoration";
-import { $Set } from "@package/java/util";
+import { $Map, $Set } from "@package/java/util";
+import { $Supplier } from "@package/java/util/function";
 import { $DefaultedRegistry, $Registry, $WritableRegistry } from "@package/net/minecraft/core";
 import { $LevelBasedValue, $Enchantment } from "@package/net/minecraft/world/item/enchantment";
 import { $ChunkStatus } from "@package/net/minecraft/world/level/chunk/status";
@@ -74,10 +75,10 @@ import { $DamageType } from "@package/net/minecraft/world/damagesource";
 
 declare module "@package/net/minecraft/core/registries" {
     export class $Registries {
-        static elementsDirPath(registryKey: $ResourceKey_<$Registry<never>>): string;
-        static levelStemToLevel(levelStem: $ResourceKey_<$LevelStem>): $ResourceKey<$Level>;
         static levelToLevelStem(levelStem: $ResourceKey_<$Level>): $ResourceKey<$LevelStem>;
         static tagsDirPath(registryKey: $ResourceKey_<$Registry<never>>): string;
+        static elementsDirPath(registryKey: $ResourceKey_<$Registry<never>>): string;
+        static levelStemToLevel(levelStem: $ResourceKey_<$LevelStem>): $ResourceKey<$Level>;
         static ENCHANTMENT_LOCATION_BASED_EFFECT_TYPE: $ResourceKey<$Registry<$MapCodec<$EnchantmentLocationBasedEffect>>>;
         static VILLAGER_TYPE: $ResourceKey<$Registry<$VillagerType>>;
         static PROCESSOR_LIST: $ResourceKey<$Registry<$StructureProcessorList>>;
@@ -193,6 +194,7 @@ declare module "@package/net/minecraft/core/registries" {
     }
     export class $BuiltInRegistries {
         static bootStrap(): void;
+        static registerSimple<T>(key: $ResourceKey_<$Registry<T>>, bootstrap: $BuiltInRegistries$RegistryBootstrap_<T>): $Registry<T>;
         static getVanillaRegistrationOrder(): $Set<$ResourceLocation>;
         static FOLIAGE_PLACER_TYPE: $Registry<$FoliagePlacerType<never>>;
         static POOL_ALIAS_BINDING_TYPE: $Registry<$MapCodec<$PoolAliasBinding>>;
@@ -270,6 +272,7 @@ declare module "@package/net/minecraft/core/registries" {
         static GAME_EVENT: $DefaultedRegistry<$GameEvent>;
         static ENCHANTMENT_ENTITY_EFFECT_TYPE: $Registry<$MapCodec<$EnchantmentEntityEffect>>;
         static MENU: $Registry<$MenuType<never>>;
+        static LOADERS: $Map<$ResourceLocation, $Supplier<never>>;
         static POS_RULE_TEST: $Registry<$PosRuleTestType<never>>;
         static ACTIVITY: $Registry<$Activity>;
         static BLOCK_PREDICATE_TYPE: $Registry<$BlockPredicateType<never>>;

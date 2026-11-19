@@ -21,20 +21,20 @@ declare module "@package/org/cyclops/commoncapabilities/api/ingredient/capabilit
         get ingredientComponent(): $IngredientComponent<T, M>;
     }
     export class $ICapabilityGetter<C> {
-        static forEntity<C>(arg0: $Entity): $ICapabilityGetter<C>;
+        static forItem<C>(arg0: $ItemStack_): $ICapabilityGetter<C>;
         static forBlock<C>(arg0: $ILevelExtension, arg1: $BlockPos_, arg2: $BlockState_ | null, arg3: $BlockEntity | null): $ICapabilityGetter<C>;
         static forBlockEntity<C>(arg0: $BlockEntity): $ICapabilityGetter<C>;
-        static forItem<C>(arg0: $ItemStack_): $ICapabilityGetter<C>;
+        static forEntity<C>(arg0: $Entity): $ICapabilityGetter<C>;
     }
     export interface $ICapabilityGetter<C> {
-        getCapability<T>(arg0: $BaseCapability<T, C>, arg1: C | null): T;
         canHandleCapabilityType(arg0: $BaseCapability<never, never>): boolean;
+        getCapability<T>(arg0: $BaseCapability<T, C>, arg1: C | null): T;
     }
     export class $IngredientComponentCapability<T, C> extends $BaseCapability<T, C> {
         static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $IngredientComponentCapability<T, C>;
-        getCapability(arg0: $IngredientComponent_<never, never>, arg1: C): T;
         static getAll(): $List<$IngredientComponentCapability<never, never>>;
         static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $IngredientComponentCapability<T, void>;
+        getCapability(arg0: $IngredientComponent_<never, never>, arg1: C): T;
         static get all(): $List<$IngredientComponentCapability<never, never>>;
     }
 }

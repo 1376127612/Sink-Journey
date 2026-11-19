@@ -5,21 +5,21 @@ declare module "@package/vazkii/patchouli/mixin" {
     export class $AccessorSmithingTrimRecipe {
     }
     export interface $AccessorSmithingTrimRecipe {
+        getAddition(): $Ingredient;
         getBase(): $Ingredient;
         getTemplate(): $Ingredient;
-        getAddition(): $Ingredient;
+        get addition(): $Ingredient;
         get base(): $Ingredient;
         get template(): $Ingredient;
-        get addition(): $Ingredient;
     }
     export class $AccessorSmithingTransformRecipe {
     }
     export interface $AccessorSmithingTransformRecipe {
+        getAddition(): $Ingredient;
         getBase(): $Ingredient;
         getTemplate(): $Ingredient;
-        getAddition(): $Ingredient;
+        get addition(): $Ingredient;
         get base(): $Ingredient;
         get template(): $Ingredient;
-        get addition(): $Ingredient;
     }
 }

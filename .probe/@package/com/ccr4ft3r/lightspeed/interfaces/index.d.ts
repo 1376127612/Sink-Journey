@@ -31,7 +31,7 @@ declare module "@package/com/ccr4ft3r/lightspeed/interfaces" {
     export class $IPathResourcePack {
     }
     export interface $IPathResourcePack extends $PackResources, $IPackResources {
-        lightspeed$hasIndexedResource(arg0: $PackType_, arg1: $ResourceLocation_): boolean;
         lightspeed$setModFile(arg0: $IModFile): void;
+        lightspeed$hasIndexedResource(arg0: $PackType_, arg1: $ResourceLocation_): boolean;
     }
 }

@@ -17,24 +17,24 @@ export * as upgrade from "@package/sirttas/elementalcraft/block/pipe/upgrade";
 
 declare module "@package/sirttas/elementalcraft/block/pipe" {
     export class $ElementPipeBlockEntity extends $AbstractECBlockEntity {
-        getConnection(arg0: $Direction_): $ConnectionType;
-        getShape(arg0: $Direction_ | null): $VoxelShape;
-        getShape(): $VoxelShape;
-        loadAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        copyTo(arg0: $ElementPipeBlockEntity): void;
-        activatePipe(arg0: $Player | null, arg1: $Direction_): $ItemInteractionResult;
-        getCoverState(): $BlockState;
-        getMaxTransferAmount(): number;
-        getUpgrades(): $Map<$Direction, $PipeUpgrade>;
         static serverTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ElementPipeBlockEntity): void;
-        getConnectionMessage(arg0: $Direction_): $Component;
         isCovered(): boolean;
-        setCover(arg0: $Player, arg1: $InteractionHand_): $ItemInteractionResult;
         saveAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        getTransferer(): $IElementTransferer;
-        getUpgrade(arg0: $Direction_): $PipeUpgrade;
-        setUpgrade(arg0: $Direction_, arg1: $PipeUpgrade): void;
+        getUpgrades(): $Map<$Direction, $PipeUpgrade>;
+        setCover(arg0: $Player, arg1: $InteractionHand_): $ItemInteractionResult;
         static commonTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ElementPipeBlockEntity): void;
+        getConnectionMessage(arg0: $Direction_): $Component;
+        setUpgrade(arg0: $Direction_, arg1: $PipeUpgrade): void;
+        getUpgrade(arg0: $Direction_): $PipeUpgrade;
+        getMaxTransferAmount(): number;
+        getTransferer(): $IElementTransferer;
+        getCoverState(): $BlockState;
+        activatePipe(arg0: $Player | null, arg1: $Direction_): $ItemInteractionResult;
+        getShape(): $VoxelShape;
+        getShape(arg0: $Direction_ | null): $VoxelShape;
+        getConnection(arg0: $Direction_): $ConnectionType;
+        copyTo(arg0: $ElementPipeBlockEntity): void;
+        loadAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -47,11 +47,11 @@ declare module "@package/sirttas/elementalcraft/block/pipe" {
         remove: boolean;
         customPersistentData: $CompoundTag;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
-        get coverState(): $BlockState;
-        get maxTransferAmount(): number;
-        get upgrades(): $Map<$Direction, $PipeUpgrade>;
         get covered(): boolean;
+        get upgrades(): $Map<$Direction, $PipeUpgrade>;
+        get maxTransferAmount(): number;
         get transferer(): $IElementTransferer;
+        get coverState(): $BlockState;
     }
     export class $ConnectionType extends $Enum<$ConnectionType> {
         getName(): string;

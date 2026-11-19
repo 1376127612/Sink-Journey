@@ -7,35 +7,35 @@ declare module "@package/net/caffeinemc/mods/sodium/client/model/quad" {
     export class $ModelQuadView {
     }
     export interface $ModelQuadView {
-        getFlags(): number;
-        getY(arg0: number): number;
-        getColorIndex(): number;
-        getLightFace(): $Direction;
-        calculateNormal(): number;
-        getVertexNormal(arg0: number): number;
-        getAccurateNormal(arg0: number): number;
-        getFaceNormal(): number;
-        getX(arg0: number): number;
         getZ(arg0: number): number;
-        getSprite(): $TextureAtlasSprite;
-        getColor(arg0: number): number;
-        hasColor(): boolean;
-        getTexU(arg0: number): number;
-        getTexV(arg0: number): number;
+        calculateNormal(): number;
+        getAccurateNormal(arg0: number): number;
+        getVertexNormal(arg0: number): number;
+        getLightFace(): $Direction;
+        getFaceNormal(): number;
         getLight(arg0: number): number;
-        get flags(): number;
-        get colorIndex(): number;
+        getFlags(): number;
+        getColorIndex(): number;
+        hasColor(): boolean;
+        getTexV(arg0: number): number;
+        getTexU(arg0: number): number;
+        getColor(arg0: number): number;
+        getSprite(): $TextureAtlasSprite;
+        getX(arg0: number): number;
+        getY(arg0: number): number;
         get lightFace(): $Direction;
         get faceNormal(): number;
+        get flags(): number;
+        get colorIndex(): number;
         get sprite(): $TextureAtlasSprite;
     }
     export class $BakedQuadView {
     }
     export interface $BakedQuadView extends $ModelQuadView {
         getFaceNormal(): number;
+        getNormalFace(): $ModelQuadFacing;
         hasShade(): boolean;
         hasAO(): boolean;
-        getNormalFace(): $ModelQuadFacing;
         get faceNormal(): number;
         get normalFace(): $ModelQuadFacing;
     }

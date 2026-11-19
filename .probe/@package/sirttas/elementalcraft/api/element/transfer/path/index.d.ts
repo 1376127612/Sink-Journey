@@ -20,12 +20,12 @@ declare module "@package/sirttas/elementalcraft/api/element/transfer/path" {
     }
     export interface $IElementTransferPathNode {
         getPos(): $BlockPos;
-        getWeight(arg0: $ElementType_, arg1: $IElementTransferPathNode_ | null, arg2: $IElementTransferPathNode_ | null): number;
-        getStorage(): $IElementStorage;
         getTransferer(): $IElementTransferer;
+        getStorage(): $IElementStorage;
+        getWeight(arg0: $ElementType_, arg1: $IElementTransferPathNode_ | null, arg2: $IElementTransferPathNode_ | null): number;
         get pos(): $BlockPos;
-        get storage(): $IElementStorage;
         get transferer(): $IElementTransferer;
+        get storage(): $IElementStorage;
     }
     /**
      * Values that may be interpreted as {@link $IElementTransferPathNode}.

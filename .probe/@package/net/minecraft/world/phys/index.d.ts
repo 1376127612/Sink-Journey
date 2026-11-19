@@ -10,129 +10,11 @@ export * as shapes from "@package/net/minecraft/world/phys/shapes";
 
 declare module "@package/net/minecraft/world/phys" {
     export class $AABB {
+        static ofSize(center: $Vec3_, xSize: number, arg2: number, ySize: number): $AABB;
         /**
          * Returns the average length of the edges of the bounding box.
          */
-        getSize(): number;
-        min(axis: $Direction$Axis_): number;
-        max(axis: $Direction$Axis_): number;
-        isInfinite(): boolean;
-        /**
-         * Creates a new `AxisAlignedBB` that has been contracted by the given amount, with positive changes decreasing max values and negative changes increasing min values.
-         * 
-         * If the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see last sample).
-         * 
-         * ### Samples:
-         * 
-         * | Input | Result |
-         * |---|---|
-         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(2, 2, 2)` | `box[0.0, 0.0, 0.0 -> 2.0, 2.0, 2.0]` |
-         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(-2, -2, -2)` | `box[2.0, 2.0, 2.0 -> 4.0, 4.0, 4.0]` |
-         * | `new AxisAlignedBB(5, 5, 5, 7, 7, 7).contract(0, 1, -1)` | `box[5.0, 5.0, 6.0 -> 7.0, 6.0, 7.0]` |
-         * | `new AxisAlignedBB(-2, -2, -2, 2, 2, 2).contract(4, -4, 0)` | `box[-8.0, 2.0, -2.0 -> -2.0, 8.0, 2.0]` |
-         * 
-         * ### See Also:
-         * 
-         * - `#expand(double, double, double)` - like this, except for expanding.
-         * - `#grow(double, double, double)` and `#grow(double)` - expands in all directions.
-         * - `#shrink(double)` - contracts in all directions (like `#grow(double)`)
-         * 
-         * @return A new modified bounding box.
-         */
-        inflate(x: number, arg1: number, y: number): $AABB;
-        /**
-         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
-         * 
-         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
-         * 
-         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
-         * 
-         * @return A modified AABB.
-         */
-        inflate(value: number): $AABB;
-        static of(mutableBox: $BoundingBox): $AABB;
-        contains(x: number, arg1: number, y: number): boolean;
-        /**
-         * Returns if the supplied Vec3D is completely inside the bounding box
-         */
-        contains(vec: $Vec3_): boolean;
-        move(pos: $BlockPos_): $AABB;
-        move(vector: $Vec3_): $AABB;
-        /**
-         * Creates a new `AxisAlignedBB` that has been contracted by the given amount, with positive changes decreasing max values and negative changes increasing min values.
-         * 
-         * If the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see last sample).
-         * 
-         * ### Samples:
-         * 
-         * | Input | Result |
-         * |---|---|
-         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(2, 2, 2)` | `box[0.0, 0.0, 0.0 -> 2.0, 2.0, 2.0]` |
-         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(-2, -2, -2)` | `box[2.0, 2.0, 2.0 -> 4.0, 4.0, 4.0]` |
-         * | `new AxisAlignedBB(5, 5, 5, 7, 7, 7).contract(0, 1, -1)` | `box[5.0, 5.0, 6.0 -> 7.0, 6.0, 7.0]` |
-         * | `new AxisAlignedBB(-2, -2, -2, 2, 2, 2).contract(4, -4, 0)` | `box[-8.0, 2.0, -2.0 -> -2.0, 8.0, 2.0]` |
-         * 
-         * ### See Also:
-         * 
-         * - `#expand(double, double, double)` - like this, except for expanding.
-         * - `#grow(double, double, double)` and `#grow(double)` - expands in all directions.
-         * - `#shrink(double)` - contracts in all directions (like `#grow(double)`)
-         * 
-         * @return A new modified bounding box.
-         */
-        move(x: number, arg1: number, y: number): $AABB;
-        move(vec: $Vector3f): $AABB;
-        /**
-         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
-         * 
-         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
-         * 
-         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
-         * 
-         * @return A modified AABB.
-         */
-        deflate(value: number): $AABB;
-        /**
-         * Creates a new `AxisAlignedBB` that has been contracted by the given amount, with positive changes decreasing max values and negative changes increasing min values.
-         * 
-         * If the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see last sample).
-         * 
-         * ### Samples:
-         * 
-         * | Input | Result |
-         * |---|---|
-         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(2, 2, 2)` | `box[0.0, 0.0, 0.0 -> 2.0, 2.0, 2.0]` |
-         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(-2, -2, -2)` | `box[2.0, 2.0, 2.0 -> 4.0, 4.0, 4.0]` |
-         * | `new AxisAlignedBB(5, 5, 5, 7, 7, 7).contract(0, 1, -1)` | `box[5.0, 5.0, 6.0 -> 7.0, 6.0, 7.0]` |
-         * | `new AxisAlignedBB(-2, -2, -2, 2, 2, 2).contract(4, -4, 0)` | `box[-8.0, 2.0, -2.0 -> -2.0, 8.0, 2.0]` |
-         * 
-         * ### See Also:
-         * 
-         * - `#expand(double, double, double)` - like this, except for expanding.
-         * - `#grow(double, double, double)` and `#grow(double)` - expands in all directions.
-         * - `#shrink(double)` - contracts in all directions (like `#grow(double)`)
-         * 
-         * @return A new modified bounding box.
-         */
-        deflate(x: number, arg1: number, y: number): $AABB;
-        static getDirection(aabb: $AABB_, start: $Vec3_, minDistance: number[], facing: $Direction_ | null, deltaX: number, arg5: number, deltaY: number): $Direction;
-        intersects(min: $Vec3_, max: $Vec3_): boolean;
-        /**
-         * Checks if the bounding box intersects with another.
-         */
-        intersects(other: $AABB_): boolean;
-        intersects(x1: number, arg1: number, y1: number, arg3: number, z1: number, arg5: number): boolean;
-        /**
-         * Returns the average length of the edges of the bounding box.
-         */
-        getXsize(): number;
-        /**
-         * Returns the average length of the edges of the bounding box.
-         */
-        getZsize(): number;
-        clip(from: $Vec3_, to: $Vec3_): ($Vec3) | undefined;
-        static clip(boxes: $Iterable_<$AABB>, start: $Vec3_, end: $Vec3_, pos: $BlockPos_): $BlockHitResult;
-        intersect(other: $AABB_): $AABB;
+        getYsize(): number;
         static encapsulatingFullBlocks(startPos: $BlockPos_, endPos: $BlockPos_): $AABB;
         distanceToSqr(vec: $Vec3_): number;
         expandTowards(vector: $Vec3_): $AABB;
@@ -159,47 +41,7 @@ declare module "@package/net/minecraft/world/phys" {
          * @return A new modified bounding box.
          */
         expandTowards(x: number, arg1: number, y: number): $AABB;
-        /**
-         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
-         * 
-         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
-         * 
-         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
-         * 
-         * @return A modified AABB.
-         */
-        setMinY(value: number): $AABB;
-        minmax(other: $AABB_): $AABB;
         getBottomCenter(): $Vec3;
-        getMinPosition(): $Vec3;
-        getMaxPosition(): $Vec3;
-        getCenter(): $Vec3;
-        static ofSize(center: $Vec3_, xSize: number, arg2: number, ySize: number): $AABB;
-        /**
-         * Returns the average length of the edges of the bounding box.
-         */
-        getYsize(): number;
-        static unitCubeFromLowerCorner(vector: $Vec3_): $AABB;
-        /**
-         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
-         * 
-         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
-         * 
-         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
-         * 
-         * @return A modified AABB.
-         */
-        setMaxZ(value: number): $AABB;
-        /**
-         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
-         * 
-         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
-         * 
-         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
-         * 
-         * @return A modified AABB.
-         */
-        setMinZ(value: number): $AABB;
         /**
          * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
          * 
@@ -252,8 +94,166 @@ declare module "@package/net/minecraft/world/phys" {
          * 
          * @return A modified AABB.
          */
+        setMinZ(value: number): $AABB;
+        /**
+         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
+         * 
+         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
+         * 
+         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
+         * 
+         * @return A modified AABB.
+         */
+        setMaxZ(value: number): $AABB;
+        /**
+         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
+         * 
+         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
+         * 
+         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
+         * 
+         * @return A modified AABB.
+         */
         setMinX(value: number): $AABB;
         hasNaN(): boolean;
+        getMinPosition(): $Vec3;
+        getMaxPosition(): $Vec3;
+        static unitCubeFromLowerCorner(vector: $Vec3_): $AABB;
+        /**
+         * Returns the average length of the edges of the bounding box.
+         */
+        getXsize(): number;
+        /**
+         * Returns the average length of the edges of the bounding box.
+         */
+        getZsize(): number;
+        /**
+         * Returns the average length of the edges of the bounding box.
+         */
+        getSize(): number;
+        min(axis: $Direction$Axis_): number;
+        max(axis: $Direction$Axis_): number;
+        isInfinite(): boolean;
+        /**
+         * Creates a new `AxisAlignedBB` that has been contracted by the given amount, with positive changes decreasing max values and negative changes increasing min values.
+         * 
+         * If the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see last sample).
+         * 
+         * ### Samples:
+         * 
+         * | Input | Result |
+         * |---|---|
+         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(2, 2, 2)` | `box[0.0, 0.0, 0.0 -> 2.0, 2.0, 2.0]` |
+         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(-2, -2, -2)` | `box[2.0, 2.0, 2.0 -> 4.0, 4.0, 4.0]` |
+         * | `new AxisAlignedBB(5, 5, 5, 7, 7, 7).contract(0, 1, -1)` | `box[5.0, 5.0, 6.0 -> 7.0, 6.0, 7.0]` |
+         * | `new AxisAlignedBB(-2, -2, -2, 2, 2, 2).contract(4, -4, 0)` | `box[-8.0, 2.0, -2.0 -> -2.0, 8.0, 2.0]` |
+         * 
+         * ### See Also:
+         * 
+         * - `#expand(double, double, double)` - like this, except for expanding.
+         * - `#grow(double, double, double)` and `#grow(double)` - expands in all directions.
+         * - `#shrink(double)` - contracts in all directions (like `#grow(double)`)
+         * 
+         * @return A new modified bounding box.
+         */
+        inflate(x: number, arg1: number, y: number): $AABB;
+        /**
+         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
+         * 
+         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
+         * 
+         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
+         * 
+         * @return A modified AABB.
+         */
+        inflate(value: number): $AABB;
+        static of(mutableBox: $BoundingBox): $AABB;
+        contains(x: number, arg1: number, y: number): boolean;
+        /**
+         * Returns if the supplied Vec3D is completely inside the bounding box
+         */
+        contains(vec: $Vec3_): boolean;
+        move(vec: $Vector3f): $AABB;
+        move(vector: $Vec3_): $AABB;
+        move(pos: $BlockPos_): $AABB;
+        /**
+         * Creates a new `AxisAlignedBB` that has been contracted by the given amount, with positive changes decreasing max values and negative changes increasing min values.
+         * 
+         * If the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see last sample).
+         * 
+         * ### Samples:
+         * 
+         * | Input | Result |
+         * |---|---|
+         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(2, 2, 2)` | `box[0.0, 0.0, 0.0 -> 2.0, 2.0, 2.0]` |
+         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(-2, -2, -2)` | `box[2.0, 2.0, 2.0 -> 4.0, 4.0, 4.0]` |
+         * | `new AxisAlignedBB(5, 5, 5, 7, 7, 7).contract(0, 1, -1)` | `box[5.0, 5.0, 6.0 -> 7.0, 6.0, 7.0]` |
+         * | `new AxisAlignedBB(-2, -2, -2, 2, 2, 2).contract(4, -4, 0)` | `box[-8.0, 2.0, -2.0 -> -2.0, 8.0, 2.0]` |
+         * 
+         * ### See Also:
+         * 
+         * - `#expand(double, double, double)` - like this, except for expanding.
+         * - `#grow(double, double, double)` and `#grow(double)` - expands in all directions.
+         * - `#shrink(double)` - contracts in all directions (like `#grow(double)`)
+         * 
+         * @return A new modified bounding box.
+         */
+        move(x: number, arg1: number, y: number): $AABB;
+        /**
+         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
+         * 
+         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
+         * 
+         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
+         * 
+         * @return A modified AABB.
+         */
+        deflate(value: number): $AABB;
+        /**
+         * Creates a new `AxisAlignedBB` that has been contracted by the given amount, with positive changes decreasing max values and negative changes increasing min values.
+         * 
+         * If the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see last sample).
+         * 
+         * ### Samples:
+         * 
+         * | Input | Result |
+         * |---|---|
+         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(2, 2, 2)` | `box[0.0, 0.0, 0.0 -> 2.0, 2.0, 2.0]` |
+         * | `new AxisAlignedBB(0, 0, 0, 4, 4, 4).contract(-2, -2, -2)` | `box[2.0, 2.0, 2.0 -> 4.0, 4.0, 4.0]` |
+         * | `new AxisAlignedBB(5, 5, 5, 7, 7, 7).contract(0, 1, -1)` | `box[5.0, 5.0, 6.0 -> 7.0, 6.0, 7.0]` |
+         * | `new AxisAlignedBB(-2, -2, -2, 2, 2, 2).contract(4, -4, 0)` | `box[-8.0, 2.0, -2.0 -> -2.0, 8.0, 2.0]` |
+         * 
+         * ### See Also:
+         * 
+         * - `#expand(double, double, double)` - like this, except for expanding.
+         * - `#grow(double, double, double)` and `#grow(double)` - expands in all directions.
+         * - `#shrink(double)` - contracts in all directions (like `#grow(double)`)
+         * 
+         * @return A new modified bounding box.
+         */
+        deflate(x: number, arg1: number, y: number): $AABB;
+        static getDirection(aabb: $AABB_, start: $Vec3_, minDistance: number[], facing: $Direction_ | null, deltaX: number, arg5: number, deltaY: number): $Direction;
+        /**
+         * Checks if the bounding box intersects with another.
+         */
+        intersects(other: $AABB_): boolean;
+        intersects(min: $Vec3_, max: $Vec3_): boolean;
+        intersects(x1: number, arg1: number, y1: number, arg3: number, z1: number, arg5: number): boolean;
+        static clip(boxes: $Iterable_<$AABB>, start: $Vec3_, end: $Vec3_, pos: $BlockPos_): $BlockHitResult;
+        clip(from: $Vec3_, to: $Vec3_): ($Vec3) | undefined;
+        intersect(other: $AABB_): $AABB;
+        /**
+         * Creates a new `AxisAlignedBB` that is expanded by the given value in all directions. Equivalent to `#grow(double)` with value set to the negative of the value provided here. Passing a negative value to this method values will grow the AABB.
+         * 
+         * Side lengths will be decreased by 2 times the value of the parameter, since both min and max are changed.
+         * 
+         * If contracting and the amount to contract by is larger than the length of a side, then the side will wrap (still creating a valid AABB - see samples on `#grow(double, double, double)`).
+         * 
+         * @return A modified AABB.
+         */
+        setMinY(value: number): $AABB;
+        minmax(other: $AABB_): $AABB;
+        getCenter(): $Vec3;
         minY: number;
         minX: number;
         maxZ: number;
@@ -264,15 +264,15 @@ declare module "@package/net/minecraft/world/phys" {
         constructor(x1: number, arg1: number, y1: number, arg3: number, z1: number, arg5: number);
         constructor(start: $Vec3_, end: $Vec3_);
         constructor(pos: $BlockPos_);
-        get size(): number;
-        get infinite(): boolean;
-        get xsize(): number;
-        get zsize(): number;
+        get ysize(): number;
         get bottomCenter(): $Vec3;
         get minPosition(): $Vec3;
         get maxPosition(): $Vec3;
+        get xsize(): number;
+        get zsize(): number;
+        get size(): number;
+        get infinite(): boolean;
         get center(): $Vec3;
-        get ysize(): number;
     }
     /**
      * Values that may be interpreted as {@link $AABB}.
@@ -296,6 +296,34 @@ declare module "@package/net/minecraft/world/phys" {
         get entity(): $Entity;
     }
     export class $Vec3 implements $Position {
+        zRot(pitch: number): $Vec3;
+        /**
+         * Returns the length of the vector.
+         */
+        lengthSqr(): number;
+        /**
+         * Lerps between this vector and the given vector.
+         * @see net.minecraft.util.Mth#lerp(double, double, double)
+         */
+        lerp(to: $Vec3_, delta: number): $Vec3;
+        distanceToSqr(x: number, arg1: number, y: number): number;
+        /**
+         * Euclidean distance between this and the specified vector, returned as double.
+         */
+        distanceToSqr(vec: $Vec3_): number;
+        /**
+         * Copies the coordinates of an int vector and centers them horizontally (x and z)
+         */
+        static atBottomCenterOf(toCopy: $Vec3i): $Vec3;
+        /**
+         * Returns the length of the vector.
+         */
+        horizontalDistance(): number;
+        cross(vec: $Vec3_): $Vec3;
+        /**
+         * Copies the coordinates of an int vector and centers them horizontally (x and z)
+         */
+        static atCenterOf(toCopy: $Vec3i): $Vec3;
         get(axis: $Direction$Axis_): number;
         /**
          * Returns the length of the vector.
@@ -337,51 +365,33 @@ declare module "@package/net/minecraft/world/phys" {
          * Normalizes the vector to a length of 1 (except if it is the zero vector)
          */
         normalize(): $Vec3;
+        vectorTo(vec: $Vec3_): $Vec3;
+        relative(direction: $Direction_, length: number): $Vec3;
         subtract(vec: $Vec3_): $Vec3;
         /**
          * Adds the specified x,y,z vector components to this vector and returns the resulting vector. Does not change this vector.
          */
         subtract(x: number, arg1: number, y: number): $Vec3;
-        relative(direction: $Direction_, length: number): $Vec3;
+        toVector3f(): $Vector3f;
+        static fromRGB24(packed: number): $Vec3;
+        /**
+         * Copies the coordinates of an int vector and centers them horizontally (x and z)
+         */
+        static atLowerCornerOf(toCopy: $Vec3i): $Vec3;
+        offsetRandom(random: $RandomSource, factor: number): $Vec3;
         align(axes: $EnumSet<$Direction$Axis_>): $Vec3;
-        cross(vec: $Vec3_): $Vec3;
         /**
          * Returns the length of the vector.
          */
         horizontalDistanceSqr(): number;
         /**
-         * Returns a `Vec3` from the given pitch and yaw degrees.
-         */
-        static directionFromRotation(pitch: number, yaw: number): $Vec3;
-        /**
          * Returns a `Vec3` from the given pitch and yaw degrees as `Vec2`.
          */
         static directionFromRotation(vec: $Vec2): $Vec3;
         /**
-         * Copies the coordinates of an int vector and centers them horizontally (x and z)
+         * Returns a `Vec3` from the given pitch and yaw degrees.
          */
-        static atCenterOf(toCopy: $Vec3i): $Vec3;
-        static fromRGB24(packed: number): $Vec3;
-        /**
-         * Lerps between this vector and the given vector.
-         * @see net.minecraft.util.Mth#lerp(double, double, double)
-         */
-        lerp(to: $Vec3_, delta: number): $Vec3;
-        toVector3f(): $Vector3f;
-        distanceToSqr(x: number, arg1: number, y: number): number;
-        /**
-         * Euclidean distance between this and the specified vector, returned as double.
-         */
-        distanceToSqr(vec: $Vec3_): number;
-        /**
-         * Returns the length of the vector.
-         */
-        horizontalDistance(): number;
-        /**
-         * Copies the coordinates of an int vector and centers them horizontally (x and z)
-         */
-        static atBottomCenterOf(toCopy: $Vec3i): $Vec3;
-        vectorTo(vec: $Vec3_): $Vec3;
+        static directionFromRotation(pitch: number, yaw: number): $Vec3;
         /**
          * Euclidean distance between this and the specified vector, returned as double.
          */
@@ -393,21 +403,11 @@ declare module "@package/net/minecraft/world/phys" {
          */
         closerThan(pos: $Position, distance: number): boolean;
         closerThan(pos: $Vec3_, horizontalDistance: number, arg2: number): boolean;
-        /**
-         * Returns the length of the vector.
-         */
-        lengthSqr(): number;
-        zRot(pitch: number): $Vec3;
+        static atLowerCornerWithOffset(toCopy: $Vec3i, offsetX: number, arg2: number, offsetY: number): $Vec3;
         /**
          * Copies the coordinates of an int vector and centers them horizontally and applies a vertical offset.
          */
         static upFromBottomCenterOf(toCopy: $Vec3i, verticalOffset: number): $Vec3;
-        static atLowerCornerWithOffset(toCopy: $Vec3i, offsetX: number, arg2: number, offsetY: number): $Vec3;
-        offsetRandom(random: $RandomSource, factor: number): $Vec3;
-        /**
-         * Copies the coordinates of an int vector and centers them horizontally (x and z)
-         */
-        static atLowerCornerOf(toCopy: $Vec3i): $Vec3;
         static ZERO: $Vec3;
         static CODEC: $Codec<$Vec3>;
         constructor(vector: $Vector3f);
@@ -418,6 +418,8 @@ declare module "@package/net/minecraft/world/phys" {
      */
     export type $Vec3_ = [x: number, y: number, z: number, ];
     export class $Vec2 {
+        distanceToSqr(other: $Vec2): number;
+        lengthSquared(): number;
         equals(other: $Vec2): boolean;
         length(): number;
         scale(value: number): $Vec2;
@@ -426,8 +428,6 @@ declare module "@package/net/minecraft/world/phys" {
         dot(other: $Vec2): number;
         normalized(): $Vec2;
         negated(): $Vec2;
-        lengthSquared(): number;
-        distanceToSqr(other: $Vec2): number;
         static ZERO: $Vec2;
         static NEG_UNIT_Y: $Vec2;
         static NEG_UNIT_X: $Vec2;
@@ -452,6 +452,10 @@ declare module "@package/net/minecraft/world/phys" {
     }
     export class $BlockHitResult extends $HitResult {
         /**
+         * @return `true` if the player's head is inside a block (used by scaffolding)
+         */
+        isInside(): boolean;
+        /**
          * Gets the face of the block that was clicked
          */
         getDirection(): $Direction;
@@ -460,19 +464,15 @@ declare module "@package/net/minecraft/world/phys" {
          * Creates a new BlockRayTraceResult marked as a miss.
          */
         static miss(location: $Vec3_, direction: $Direction_, pos: $BlockPos_): $BlockHitResult;
-        /**
-         * @return `true` if the player's head is inside a block (used by scaffolding)
-         */
-        isInside(): boolean;
+        withPosition(pos: $BlockPos_): $BlockHitResult;
         /**
          * Creates a new BlockRayTraceResult, with the clicked face replaced with the given one
          */
         withDirection(newFace: $Direction_): $BlockHitResult;
-        withPosition(pos: $BlockPos_): $BlockHitResult;
         constructor(miss: boolean, location: $Vec3_, direction: $Direction_, blockPos: $BlockPos_, inside: boolean);
         constructor(location: $Vec3_, direction: $Direction_, blockPos: $BlockPos_, inside: boolean);
+        get inside(): boolean;
         get direction(): $Direction;
         get blockPos(): $BlockPos;
-        get inside(): boolean;
     }
 }

@@ -14,21 +14,21 @@ declare module "@package/net/caffeinemc/mods/sodium/client/render/viewport" {
      */
     export type $ViewportProvider_ = (() => $Viewport);
     export class $Viewport {
-        isBoxVisibleLooser(arg0: number, arg1: number, arg2: number): boolean;
         isBoxVisible(arg0: number, arg1: number, arg2: number): boolean;
         getTransform(): $CameraTransform;
-        getChunkCoord(): $SectionPos;
-        getBoxIntersectionDirect(arg0: number, arg1: number, arg2: number, arg3: number): number;
         isBoxVisibleDirect(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         getBlockCoord(): $BlockPos;
+        getBoxIntersectionDirect(arg0: number, arg1: number, arg2: number, arg3: number): number;
+        getChunkCoord(): $SectionPos;
+        isBoxVisibleLooser(arg0: number, arg1: number, arg2: number): boolean;
         static CHUNK_SECTION_RADIUS: number;
         static CHUNK_SECTION_MARGIN: number;
         static CHUNK_SECTION_NEARBY_MARGIN: number;
         static CHUNK_SECTION_PADDED_RADIUS: number;
         constructor(arg0: $Frustum, arg1: $Vector3d);
         get transform(): $CameraTransform;
-        get chunkCoord(): $SectionPos;
         get blockCoord(): $BlockPos;
+        get chunkCoord(): $SectionPos;
     }
     export class $CameraTransform {
         intX: number;

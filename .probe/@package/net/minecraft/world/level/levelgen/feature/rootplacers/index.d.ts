@@ -14,36 +14,36 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/net/minecraft/world/level/levelgen/feature/rootplacers" {
     export class $RootPlacer {
-        placeRoots(level: $LevelSimulatedReader, blockSetter: $BiConsumer_<$BlockPos, $BlockState>, random: $RandomSource, pos: $BlockPos_, trunkOrigin: $BlockPos_, treeConfig: $TreeConfiguration): boolean;
         getTrunkOrigin(pos: $BlockPos_, random: $RandomSource): $BlockPos;
+        placeRoots(level: $LevelSimulatedReader, blockSetter: $BiConsumer_<$BlockPos, $BlockState>, random: $RandomSource, pos: $BlockPos_, trunkOrigin: $BlockPos_, treeConfig: $TreeConfiguration): boolean;
         static CODEC: $Codec<$RootPlacer>;
         constructor(trunkOffset: $IntProvider_, rootProvider: $BlockStateProvider, aboveRootPlacement: ($AboveRootPlacement_) | undefined);
     }
     export class $AboveRootPlacement extends $Record {
-        aboveRootPlacementChance(): number;
         aboveRootProvider(): $BlockStateProvider;
+        aboveRootPlacementChance(): number;
         static CODEC: $Codec<$AboveRootPlacement>;
         constructor(arg0: $BlockStateProvider, arg1: number);
     }
     /**
      * Values that may be interpreted as {@link $AboveRootPlacement}.
      */
-    export type $AboveRootPlacement_ = { aboveRootPlacementChance?: number, aboveRootProvider?: $BlockStateProvider,  } | [aboveRootPlacementChance?: number, aboveRootProvider?: $BlockStateProvider, ];
+    export type $AboveRootPlacement_ = { aboveRootProvider?: $BlockStateProvider, aboveRootPlacementChance?: number,  } | [aboveRootProvider?: $BlockStateProvider, aboveRootPlacementChance?: number, ];
     export interface $RootPlacerType<P> extends RegistryMarked<RegistryTypes.WorldgenRootPlacerTypeTag, RegistryTypes.WorldgenRootPlacerType> {}
     export class $MangroveRootPlacement extends $Record {
-        randomSkewChance(): number;
-        muddyRootsProvider(): $BlockStateProvider;
-        muddyRootsIn(): $HolderSet<$Block>;
+        canGrowThrough(): $HolderSet<$Block>;
         maxRootLength(): number;
         maxRootWidth(): number;
-        canGrowThrough(): $HolderSet<$Block>;
+        muddyRootsProvider(): $BlockStateProvider;
+        muddyRootsIn(): $HolderSet<$Block>;
+        randomSkewChance(): number;
         static CODEC: $Codec<$MangroveRootPlacement>;
         constructor(arg0: $HolderSet_<$Block>, arg1: $HolderSet_<$Block>, arg2: $BlockStateProvider, arg3: number, arg4: number, arg5: number);
     }
     /**
      * Values that may be interpreted as {@link $MangroveRootPlacement}.
      */
-    export type $MangroveRootPlacement_ = { maxRootLength?: number, canGrowThrough?: $HolderSet_<$Block>, muddyRootsIn?: $HolderSet_<$Block>, muddyRootsProvider?: $BlockStateProvider, randomSkewChance?: number, maxRootWidth?: number,  } | [maxRootLength?: number, canGrowThrough?: $HolderSet_<$Block>, muddyRootsIn?: $HolderSet_<$Block>, muddyRootsProvider?: $BlockStateProvider, randomSkewChance?: number, maxRootWidth?: number, ];
+    export type $MangroveRootPlacement_ = { muddyRootsIn?: $HolderSet_<$Block>, muddyRootsProvider?: $BlockStateProvider, randomSkewChance?: number, maxRootWidth?: number, maxRootLength?: number, canGrowThrough?: $HolderSet_<$Block>,  } | [muddyRootsIn?: $HolderSet_<$Block>, muddyRootsProvider?: $BlockStateProvider, randomSkewChance?: number, maxRootWidth?: number, maxRootLength?: number, canGrowThrough?: $HolderSet_<$Block>, ];
     export class $MangroveRootPlacer extends $RootPlacer {
         simulateRoots(level: $LevelSimulatedReader, random: $RandomSource, pos: $BlockPos_, direction: $Direction_, trunkOrigin: $BlockPos_, roots: $List_<$BlockPos_>, length: number): boolean;
         static CODEC: $MapCodec<$MangroveRootPlacer>;

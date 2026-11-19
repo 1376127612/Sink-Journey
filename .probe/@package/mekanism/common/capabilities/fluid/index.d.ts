@@ -9,28 +9,30 @@ import { $AutomationType, $AutomationType_, $Action_, $IContentsListener_ } from
 
 declare module "@package/mekanism/common/capabilities/fluid" {
     export class $BasicFluidTank implements $IExtendedFluidTank {
+        serializeNBT(provider: $HolderLookup$Provider): $CompoundTag;
+        onContentsChanged(): void;
+        isFluidEqual(other: $FluidStack_): boolean;
+        setStackUnchecked(stack: $FluidStack_): void;
+        setStackSize(amount: number, action: $Action_): number;
+        getFluidAmount(): number;
         extract(amount: number, action: $Action_, automationType: $AutomationType_): $FluidStack;
         insert(stack: $FluidStack_, action: $Action_, automationType: $AutomationType_): $FluidStack;
         isEmpty(): boolean;
+        static create(capacity: number, canExtract: $Predicate_<$FluidStack>, canInsert: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
+        static create(capacity: number, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
+        static create(capacity: number, listener: $IContentsListener_): $BasicFluidTank;
         static create(capacity: number, canExtract: $BiPredicate_<$FluidStack, $AutomationType>, canInsert: $BiPredicate_<$FluidStack, $AutomationType>, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
         static create(capacity: number, canExtract: $Predicate_<$FluidStack>, canInsert: $Predicate_<$FluidStack>, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
-        static create(capacity: number, listener: $IContentsListener_): $BasicFluidTank;
-        static create(capacity: number, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
-        static create(capacity: number, canExtract: $Predicate_<$FluidStack>, canInsert: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
-        static input(capacity: number, canInsert: $Predicate_<$FluidStack>, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
         static input(capacity: number, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
+        static input(capacity: number, canInsert: $Predicate_<$FluidStack>, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $BasicFluidTank;
         static output(capacity: number, listener: $IContentsListener_): $BasicFluidTank;
         getCapacity(): number;
-        setStack(stack: $FluidStack_): void;
         getFluid(): $FluidStack;
-        serializeNBT(provider: $HolderLookup$Provider): $CompoundTag;
+        setStack(stack: $FluidStack_): void;
         isFluidValid(stack: $FluidStack_): boolean;
-        getFluidAmount(): number;
-        isFluidEqual(other: $FluidStack_): boolean;
-        onContentsChanged(): void;
-        setStackSize(amount: number, action: $Action_): number;
-        setStackUnchecked(stack: $FluidStack_): void;
         growStack(amount: number, action: $Action_): number;
+        deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        shrinkStack(arg0: number, arg1: $Action_): number;
         /**
          * @deprecated
          */
@@ -44,21 +46,19 @@ declare module "@package/mekanism/common/capabilities/fluid" {
          */
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         setEmpty(): void;
-        deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         getNeeded(): number;
-        shrinkStack(arg0: number, arg1: $Action_): number;
-        get capacity(): number;
-        set stack(value: $FluidStack_);
-        get fluid(): $FluidStack;
-        get fluidAmount(): number;
         set stackUnchecked(value: $FluidStack_);
+        get fluidAmount(): number;
+        get capacity(): number;
+        get fluid(): $FluidStack;
+        set stack(value: $FluidStack_);
         get needed(): number;
     }
     export class $VariableCapacityFluidTank extends $BasicFluidTank {
-        static create(capacity: $IntSupplier_, canExtract: $BiPredicate_<$FluidStack, $AutomationType>, canInsert: $BiPredicate_<$FluidStack, $AutomationType>, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
         static create(multiblock: $MultiblockData, capacity: $IntSupplier_, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
-        static input(capacity: $IntSupplier_, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
+        static create(capacity: $IntSupplier_, canExtract: $BiPredicate_<$FluidStack, $AutomationType>, canInsert: $BiPredicate_<$FluidStack, $AutomationType>, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
         static input(multiblock: $MultiblockData, capacity: $IntSupplier_, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
+        static input(capacity: $IntSupplier_, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
         static output(capacity: $IntSupplier_, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
         static output(multiblock: $MultiblockData, capacity: $IntSupplier_, validator: $Predicate_<$FluidStack>, listener: $IContentsListener_): $VariableCapacityFluidTank;
     }

@@ -3,10 +3,10 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/cn/dancingsnow/neoecoprototype/api" {
     export class $MatrixMaterials$Kind extends $Enum<$MatrixMaterials$Kind> {
+        driveModel(): $ResourceLocation;
+        inventoryModel(): $ResourceLocation;
         static values(): $MatrixMaterials$Kind[];
         static valueOf(arg0: string): $MatrixMaterials$Kind;
-        inventoryModel(): $ResourceLocation;
-        driveModel(): $ResourceLocation;
         static OTHER: $MatrixMaterials$Kind;
         static ITEM: $MatrixMaterials$Kind;
         static FLUID: $MatrixMaterials$Kind;

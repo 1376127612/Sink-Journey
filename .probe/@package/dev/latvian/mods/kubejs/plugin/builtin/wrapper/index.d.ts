@@ -2,7 +2,7 @@ import { $JsonElement_, $JsonElement } from "@package/com/google/gson";
 import { $NumberProvider } from "@package/net/minecraft/world/level/storage/loot/providers/number";
 import { $Ingredient_, $Ingredient } from "@package/net/minecraft/world/item/crafting";
 import { $DataResult, $DynamicOps } from "@package/com/mojang/serialization";
-import { $Tag_, $Tag, $CollectionTag, $ListTag, $CompoundTag } from "@package/net/minecraft/nbt";
+import { $Tag_, $Tag, $CollectionTag, $CompoundTag, $ListTag } from "@package/net/minecraft/nbt";
 import { $CompletableFuture } from "@package/java/util/concurrent";
 import { $StringReader } from "@package/com/mojang/brigadier";
 import { $ParticleOptions, $DustParticleOptions, $ParticleOptions_ } from "@package/net/minecraft/core/particles";
@@ -50,6 +50,12 @@ import { $Matrix4f, $Vector3d, $Vector3f, $Quaternionf, $Vector4f, $Matrix3f } f
 
 declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     export class $JavaWrapper {
+        static mergeRecord<R extends $Record>(original: R, merge: $Map_<string, never>): R;
+        static makeFunctionProxy<T>(targetClass: $TypeInfo_, arg1: $BaseFunction): T;
+        /**
+         * Creates a custom ConsoleJS instance for you to use to, well, log stuff
+         */
+        static createConsole(name: string): $ConsoleJS;
         /**
          * Loads the specified class, and throws error if class it not found or allowed.
          * The returned object can have public static methods and fields accessed directly from it.
@@ -60,12 +66,6 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
          * Cast the object to a target type, use if Rhino can't determine the parameter type due to type erasure.
          */
         static cast<T>(targetClass: $Class<T>, object: $Object): T;
-        /**
-         * Creates a custom ConsoleJS instance for you to use to, well, log stuff
-         */
-        static createConsole(name: string): $ConsoleJS;
-        static makeFunctionProxy<T>(targetClass: $TypeInfo_, arg1: $BaseFunction): T;
-        static mergeRecord<R extends $Record>(original: R, merge: $Map_<string, never>): R;
         /**
          * Loads the specified class, and returns null if class is not found or allowed.
          * The returned object can have public static methods and fields accessed directly from it.
@@ -97,15 +97,15 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     export interface $DirectionWrapper {
     }
     export class $SizedIngredientWrapper {
-        /**
-         * Returns a sized ingredient of the input
-         */
-        static of(ingredient: $SizedIngredient_): $SizedIngredient;
+        static ofTag(tag: $TagKey_<$Item>, count: number): $SizedIngredient;
         /**
          * Returns a sized ingredient of the input
          */
         static of(ingredient: $Ingredient_, count: number): $SizedIngredient;
-        static ofTag(tag: $TagKey_<$Item>, count: number): $SizedIngredient;
+        /**
+         * Returns a sized ingredient of the input
+         */
+        static of(ingredient: $SizedIngredient_): $SizedIngredient;
         static all: $SizedIngredient;
         static TYPE_INFO: $TypeInfo;
         static empty: $SizedIngredient;
@@ -126,40 +126,40 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
      */
     export type $NativeEventWrapper$Listeners_ = { listeners?: $Collection_<$Consumer_<$Event>>,  } | [listeners?: $Collection_<$Consumer_<$Event>>, ];
     export class $BlockWrapper {
+        /**
+         * Gets a list of the classname of all registered blocks
+         */
+        static getTypeList(): $List<string>;
+        static parseBlockState(registries: $RegistryAccessContainer, string: string): $BlockState;
+        static wrapSetType(from: $Object, target: $TypeInfo_): $BlockSetType;
+        /**
+         * Parses a block state from the input string. May throw for invalid inputs!
+         */
+        static wrapBlockState(registries: $RegistryAccessContainer, o: $Object): $BlockState;
+        static getAllBlockStates(): $Collection<$BlockState>;
+        /**
+         * Gets a list of all blocks with tags
+         */
+        static getTaggedIds(tag: $ResourceLocation_): $List<$ResourceLocation>;
+        static registerBuildingMaterial(event: $RegistryKubeEvent<$Block_>, id: $ResourceLocation_, properties: $BuildingMaterialProperties_): void;
+        static registerBuildingMaterial(event: $RegistryKubeEvent<$Block_>, id: $ResourceLocation_): void;
         static id(id: $ResourceLocation_, properties: $Map_<string, $Object>): $BlockIDPredicate;
         static id(id: $ResourceLocation_): $BlockIDPredicate;
         /**
          * Gets a blocks id from the Block
          */
         static getId(block: $Block_): $ResourceLocation;
-        /**
-         * Gets a list of the classname of all registered blocks
-         */
-        static getTypeList(): $List<string>;
+        static custom(predicate: $BlockPredicate_): $BlockPredicate;
+        static withProperties(state: $BlockState_, properties: $Map_<never, never>): $BlockState;
+        static entity(id: $ResourceLocation_): $BlockEntityPredicate;
         /**
          * Gets a Block from a block id
          */
         static getBlock(id: $ResourceLocation_): $Block;
-        static custom(predicate: $BlockPredicate_): $BlockPredicate;
-        static entity(id: $ResourceLocation_): $BlockEntityPredicate;
-        static withProperties(state: $BlockState_, properties: $Map_<never, never>): $BlockState;
-        /**
-         * Gets a list of all blocks with tags
-         */
-        static getTaggedIds(tag: $ResourceLocation_): $List<$ResourceLocation>;
-        static getAllBlockStates(): $Collection<$BlockState>;
-        static parseBlockState(registries: $RegistryAccessContainer, string: string): $BlockState;
-        static registerBuildingMaterial(event: $RegistryKubeEvent<$Block_>, id: $ResourceLocation_, properties: $BuildingMaterialProperties_): void;
-        static registerBuildingMaterial(event: $RegistryKubeEvent<$Block_>, id: $ResourceLocation_): void;
         /**
          * Get a map of direction name to Direction. Functionally identical to Direction.ALL
          */
         static getFacing(): $Map<string, $Direction>;
-        /**
-         * Parses a block state from the input string. May throw for invalid inputs!
-         */
-        static wrapBlockState(registries: $RegistryAccessContainer, o: $Object): $BlockState;
-        static wrapSetType(from: $Object, target: $TypeInfo_): $BlockSetType;
         static TYPE_INFO: $TypeInfo;
         static STATE_TYPE_INFO: $TypeInfo;
         constructor();
@@ -169,6 +169,24 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     }
     export class $ItemWrapper {
         /**
+         * Get a list of all the item ids in the game
+         */
+        static getTypeList(): $List<string>;
+        static parseJson(registryOps: $DynamicOps<$Tag_>, json: $JsonElement_): $DataResult<$ItemStack>;
+        /**
+         * Checks if the passed in object is an ItemStack.
+         * Note that this does not mean it will not function as an ItemStack if passed to something that requests one.
+         */
+        static isItem(o: $Object): boolean;
+        static wrapItemAbility(object: $Object): $ItemAbility;
+        static playerHeadFromUrl(url: string): $ItemStack;
+        static getTypeToStackMap(): $Map<$ResourceLocation, $Collection<$ItemStack>>;
+        static isItemStackLike(from: $Object): boolean;
+        static playerHeadFromSkinHash(hash: string): $ItemStack;
+        static playerHeadFromBase64(uuid: $UUID_, textureBase64: string): $ItemStack;
+        static playerHead(name: string): $ItemStack;
+        static findItem(s: string): $DataResult<$Item>;
+        /**
          * Returns an ItemStack of the input
          */
         static of(arg0: $ItemStack_): $ItemStack;
@@ -177,13 +195,13 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
          */
         static of(arg0: $ItemStack_, count: number, components: $DataComponentMap_): $ItemStack;
         /**
-         * Returns an ItemStack of the input, with the specified data components
-         */
-        static of(arg0: $ItemStack_, components: $DataComponentMap_): $ItemStack;
-        /**
          * Returns an ItemStack of the input, with the specified count
          */
         static of(arg0: $ItemStack_, count: number): $ItemStack;
+        /**
+         * Returns an ItemStack of the input, with the specified data components
+         */
+        static of(arg0: $ItemStack_, components: $DataComponentMap_): $ItemStack;
         static read(registryOps: $DynamicOps<$Tag_>, reader: $StringReader): $DataResult<$ItemStack>;
         /**
          * Gets an items id from the Item
@@ -199,55 +217,37 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
         static getItem(id: $ResourceLocation_): $Item;
         static getVariants(item: $ItemStack_): $Collection<$ItemStack>;
         /**
-         * Get a list of all the item ids in the game
-         */
-        static getTypeList(): $List<string>;
-        static parseString(registryOps: $DynamicOps<$Tag_>, s: string): $DataResult<$ItemStack>;
-        static findItem(s: string): $DataResult<$Item>;
-        static playerHead(name: string): $ItemStack;
-        /**
-         * Get the item that represents air/an empty slot
-         */
-        static getEmpty(): $ItemStack;
-        /**
          * Returns a Firework with the input properties
          */
         static fireworks(fireworks: $Fireworks_): $Fireworks;
+        static parseString(registryOps: $DynamicOps<$Tag_>, s: string): $DataResult<$ItemStack>;
         /**
          * Get a list of most items in the game. Items not in a creative tab are ignored
          */
         static getList(): $List<$ItemStack>;
-        static parseJson(registryOps: $DynamicOps<$Tag_>, json: $JsonElement_): $DataResult<$ItemStack>;
         /**
-         * Checks if the passed in object is an ItemStack.
-         * Note that this does not mean it will not function as an ItemStack if passed to something that requests one.
+         * Get the item that represents air/an empty slot
          */
-        static isItem(o: $Object): boolean;
-        static getTypeToStackMap(): $Map<$ResourceLocation, $Collection<$ItemStack>>;
-        static playerHeadFromUrl(url: string): $ItemStack;
-        static isItemStackLike(from: $Object): boolean;
-        static wrapItemAbility(object: $Object): $ItemAbility;
-        static playerHeadFromSkinHash(hash: string): $ItemStack;
-        static playerHeadFromBase64(uuid: $UUID_, textureBase64: string): $ItemStack;
+        static getEmpty(): $ItemStack;
         static ITEM_TYPE_INFO: $TypeInfo;
         static EMPTY_ARRAY: $ItemStack[];
         static TYPE_INFO: $TypeInfo;
         static get typeList(): $List<string>;
-        static get empty(): $ItemStack;
-        static get list(): $List<$ItemStack>;
         static get typeToStackMap(): $Map<$ResourceLocation, $Collection<$ItemStack>>;
+        static get list(): $List<$ItemStack>;
+        static get empty(): $ItemStack;
     }
     export interface $ItemWrapper {
     }
     export class $HolderSetWrapper<T> extends $Record implements $Iterable<T> {
+        getRandom(random: $RandomSource): T;
+        getRandom(): T;
         size(): number;
         isEmpty(): boolean;
         iterator(): $Iterator<T>;
         contains(id: $ResourceLocation_): boolean;
         containsValue(value: T): boolean;
         getKeys(): $Set<$ResourceLocation>;
-        getRandom(random: $RandomSource): T;
-        getRandom(): T;
         registry(): $Registry<T>;
         getValues(): $List<T>;
         holders(): $HolderSet<T>;
@@ -262,7 +262,7 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     /**
      * Values that may be interpreted as {@link $HolderSetWrapper}.
      */
-    export type $HolderSetWrapper_<T> = { holders?: $HolderSet_<any>, registry?: $Registry<any>,  } | [holders?: $HolderSet_<any>, registry?: $Registry<any>, ];
+    export type $HolderSetWrapper_<T> = { registry?: $Registry<any>, holders?: $HolderSet_<any>,  } | [registry?: $Registry<any>, holders?: $HolderSet_<any>, ];
     export class $UUIDWrapper {
         static toString(id: $UUID_): string;
         static digits(sb: $StringBuilder, val: number, digits: number): void;
@@ -271,6 +271,11 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     export interface $UUIDWrapper {
     }
     export class $RegistryWrapper<T> extends $Record implements $Iterable<T> {
+        unknownKey(): $ResourceKey<T>;
+        getRandom(random: $RandomSource): T;
+        getRandom(): T;
+        getValueMap(): $Map<$ResourceLocation, T>;
+        getEntrySet(): $Set<$Map$Entry<$ResourceLocation, T>>;
         get(id: $ResourceLocation_): T;
         iterator(): $ListIterator<T>;
         static of(id: $ResourceLocation_): $RegistryWrapper<never>;
@@ -280,59 +285,54 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
         getId(value: T): $ResourceLocation;
         containsValue(value: T): boolean;
         getKeys(): $Set<$ResourceLocation>;
-        getRandom(random: $RandomSource): T;
-        getRandom(): T;
         registry(): $Registry<T>;
         getValues(filter: $Object): $HolderSetWrapper<T>;
         getValues(): $List<T>;
         getDataMap(id: $ResourceLocation_): $DataMapWrapper<T, never>;
-        unknownKey(): $ResourceKey<T>;
-        getValueMap(): $Map<$ResourceLocation, T>;
-        getEntrySet(): $Set<$Map$Entry<$ResourceLocation, T>>;
         spliterator(): $Spliterator<T>;
         forEach(arg0: $Consumer_<T>): void;
         constructor(registry: $Registry<T>, unknownKey: $ResourceKey_<T>);
-        get keys(): $Set<$ResourceLocation>;
         get valueMap(): $Map<$ResourceLocation, T>;
         get entrySet(): $Set<$Map$Entry<$ResourceLocation, T>>;
+        get keys(): $Set<$ResourceLocation>;
     }
     /**
      * Values that may be interpreted as {@link $RegistryWrapper}.
      */
-    export type $RegistryWrapper_<T> = { unknownKey?: $ResourceKey_<any>, registry?: $Registry<any>,  } | [unknownKey?: $ResourceKey_<any>, registry?: $Registry<any>, ];
+    export type $RegistryWrapper_<T> = { registry?: $Registry<any>, unknownKey?: $ResourceKey_<any>,  } | [registry?: $Registry<any>, unknownKey?: $ResourceKey_<any>, ];
     export class $DamageSourceWrapper {
         static wrap(registries: $RegistryAccessContainer, from: $Object): $DamageSource;
         constructor();
     }
     export class $IngredientWrapper {
-        /**
-         * Returns an ingredient of the input
-         */
-        static of(ingredient: $Ingredient_): $Ingredient;
-        /**
-         * Returns an ingredient of the input, with the specified count
-         */
-        static of(ingredient: $Ingredient_, count: number): $SizedIngredient;
-        static first(ingredient: $Ingredient_): $ItemStack;
-        static read(reader: $StringReader): $DataResult<$Ingredient>;
-        static parseString(s: string): $DataResult<$Ingredient>;
         static tagKeyOf(arg0: $Ingredient_): $TagKey<$Item>;
+        static parseJson(json: $JsonElement_): $DataResult<$Ingredient>;
+        static containsAnyTag(arg0: $Ingredient_): boolean;
         /**
          * Checks if the passed in object is an Ingredient.
          * Note that this does not mean it will not function as an Ingredient if passed to something that requests one.
          */
         static isIngredient(o: $Object): boolean;
-        static parseJson(json: $JsonElement_): $DataResult<$Ingredient>;
+        static isIngredientLike(from: $Object): boolean;
         /**
-         * Returns an ingredient that accepts the given set of items under the given (optionally strict) component filter.
+         * Returns an ingredient of the input, with the specified count
          */
-        static withData(base: $HolderSet_<$Item>, data: $DataComponentMap_, strict: boolean): $Ingredient;
+        static of(ingredient: $Ingredient_, count: number): $SizedIngredient;
+        /**
+         * Returns an ingredient of the input
+         */
+        static of(ingredient: $Ingredient_): $Ingredient;
+        static first(ingredient: $Ingredient_): $ItemStack;
+        static read(reader: $StringReader): $DataResult<$Ingredient>;
+        static parseString(s: string): $DataResult<$Ingredient>;
         /**
          * Returns an ingredient that accepts the given set of items under the given component filter.
          */
         static withData(base: $HolderSet_<$Item>, data: $DataComponentMap_): $Ingredient;
-        static containsAnyTag(arg0: $Ingredient_): boolean;
-        static isIngredientLike(from: $Object): boolean;
+        /**
+         * Returns an ingredient that accepts the given set of items under the given (optionally strict) component filter.
+         */
+        static withData(base: $HolderSet_<$Item>, data: $DataComponentMap_, strict: boolean): $Ingredient;
         static all: $Ingredient;
         static TYPE_INFO: $TypeInfo;
         static none: $Ingredient;
@@ -340,19 +340,19 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     export interface $IngredientWrapper {
     }
     export class $BuildingMaterialProperties extends $Record {
+        baseBlock(): (boolean) | undefined;
+        baseBlockSuffix(): (boolean) | undefined;
         properties(): $Consumer<$BlockBuilder>;
         blocks(): $BuildingMaterialProperties$Blocks;
-        ticksToStayPressed(): ($TickDuration) | undefined;
-        baseBlock(): (boolean) | undefined;
         behaviour(): ($BlockSetType) | undefined;
-        baseBlockSuffix(): (boolean) | undefined;
+        ticksToStayPressed(): ($TickDuration) | undefined;
         static TYPE_INFO: $TypeInfo;
         constructor(blocks: $BuildingMaterialProperties$Blocks_, baseBlock: (boolean) | undefined, baseBlockSuffix: (boolean) | undefined, properties: $Consumer_<$BlockBuilder>, behaviour: ($BlockSetType_) | undefined, ticksToStayPressed: ($TickDuration_) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $BuildingMaterialProperties}.
      */
-    export type $BuildingMaterialProperties_ = { properties?: $Consumer_<$BlockBuilder>, blocks?: $BuildingMaterialProperties$Blocks_, baseBlockSuffix?: (boolean) | undefined, ticksToStayPressed?: ($TickDuration_) | undefined, behaviour?: ($BlockSetType_) | undefined, baseBlock?: (boolean) | undefined,  } | [properties?: $Consumer_<$BlockBuilder>, blocks?: $BuildingMaterialProperties$Blocks_, baseBlockSuffix?: (boolean) | undefined, ticksToStayPressed?: ($TickDuration_) | undefined, behaviour?: ($BlockSetType_) | undefined, baseBlock?: (boolean) | undefined, ];
+    export type $BuildingMaterialProperties_ = { ticksToStayPressed?: ($TickDuration_) | undefined, behaviour?: ($BlockSetType_) | undefined, baseBlock?: (boolean) | undefined, properties?: $Consumer_<$BlockBuilder>, blocks?: $BuildingMaterialProperties$Blocks_, baseBlockSuffix?: (boolean) | undefined,  } | [ticksToStayPressed?: ($TickDuration_) | undefined, behaviour?: ($BlockSetType_) | undefined, baseBlock?: (boolean) | undefined, properties?: $Consumer_<$BlockBuilder>, blocks?: $BuildingMaterialProperties$Blocks_, baseBlockSuffix?: (boolean) | undefined, ];
     export class $DataMapWrapper$Data<T, A> extends $Record {
         data(): A;
         element(): T;
@@ -361,8 +361,77 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     /**
      * Values that may be interpreted as {@link $DataMapWrapper$Data}.
      */
-    export type $DataMapWrapper$Data_<T, A> = { data?: any, element?: any,  } | [data?: any, element?: any, ];
+    export type $DataMapWrapper$Data_<T, A> = { element?: any, data?: any,  } | [element?: any, data?: any, ];
     export class $TextWrapper {
+        /**
+         * Returns a component of the input, colored aqua
+         */
+        static aqua(text: $MutableComponent_): $MutableComponent;
+        /**
+         * Returns a component of the input, colored dark blue
+         */
+        static darkBlue(text: $MutableComponent_): $MutableComponent;
+        /**
+         * Returns a component of the input, colored dark red
+         */
+        static darkRed(text: $MutableComponent_): $MutableComponent;
+        /**
+         * Returns a component of the input, colored dark aqua
+         */
+        static darkAqua(text: $MutableComponent_): $MutableComponent;
+        /**
+         * Returns a component of the input, colored dark green
+         */
+        static darkGreen(text: $MutableComponent_): $MutableComponent;
+        /**
+         * Returns a component of the input, colored dark purple
+         */
+        static darkPurple(text: $MutableComponent_): $MutableComponent;
+        /**
+         * Returns a component of the input, colored gray
+         */
+        static gray(text: $MutableComponent_): $MutableComponent;
+        /**
+         * Returns a keybinding component of the input keybinding descriptor
+         */
+        static keybind(keybind: string): $MutableComponent;
+        /**
+         * Returns a translatable component of the input key
+         */
+        static translatable(key: string): $MutableComponent;
+        /**
+         * Returns a translatable component of the input key, with args of the objects
+         */
+        static translatable(key: string, ...objects: $Object[]): $MutableComponent;
+        /**
+         * Returns a plain component of the string, or empty if it is an empty string
+         */
+        static ofString(s: string): $MutableComponent;
+        /**
+         * Returns a component of the input, colored light purple
+         */
+        static lightPurple(text: $MutableComponent_): $MutableComponent;
+        static ofTag(tag: $Tag_): $Component;
+        /**
+         * Joins all components in the list with the separator component
+         */
+        static joinSep(separator: $MutableComponent_, texts: $Iterable_<$Component>): $MutableComponent;
+        /**
+         * Returns a translatable component of the input key, with args of the objects and a fallback translation in case the client does not have one
+         */
+        static translateWithFallback(key: string, fallback: string): $MutableComponent;
+        /**
+         * Returns a translatable component of the input key, with args of the objects and a fallback translation in case the client does not have one
+         */
+        static translateWithFallback(key: string, fallback: string, ...objects: $Object[]): $MutableComponent;
+        /**
+         * Returns a colorful representation of the input nbt. Useful for displaying NBT to the player
+         */
+        static prettyPrintNbt(tag: $Tag_): $Component;
+        /**
+         * Returns a ClickEvent of the input
+         */
+        static clickEventOf(event: $ClickEvent_): $ClickEvent;
         /**
          * Checks if the passed in component, and all its children are empty
          */
@@ -402,17 +471,17 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
          */
         static selector(selector: string, separator: $Component_): $MutableComponent;
         /**
-         * Returns a component of the input, colored green
+         * Returns a component of the input, colored blue
          */
-        static green(text: $MutableComponent_): $MutableComponent;
+        static blue(text: $MutableComponent_): $MutableComponent;
         /**
          * Returns a component of the input, colored black
          */
         static black(text: $MutableComponent_): $MutableComponent;
         /**
-         * Returns a component of the input, colored blue
+         * Returns a component of the input, colored green
          */
-        static blue(text: $MutableComponent_): $MutableComponent;
+        static green(text: $MutableComponent_): $MutableComponent;
         /**
          * Returns a component of the input, colored yellow
          */
@@ -422,62 +491,14 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
          */
         static white(text: $MutableComponent_): $MutableComponent;
         /**
-         * Returns a keybinding component of the input keybinding descriptor
-         */
-        static keybind(keybind: string): $MutableComponent;
-        /**
-         * Returns a translatable component of the input key, with args of the objects
-         */
-        static translatable(key: string, ...objects: $Object[]): $MutableComponent;
-        /**
-         * Returns a translatable component of the input key
-         */
-        static translatable(key: string): $MutableComponent;
-        /**
-         * Returns a score component of the input objective, for the provided selector
-         */
-        static score(selector: string, objective: string): $MutableComponent;
-        /**
-         * Returns a plain component of the string, or empty if it is an empty string
-         */
-        static ofString(s: string): $MutableComponent;
-        /**
-         * Returns a component of the input, colored dark gray
-         */
-        static darkGray(text: $MutableComponent_): $MutableComponent;
-        /**
-         * Returns a component of the input, colored dark red
-         */
-        static darkRed(text: $MutableComponent_): $MutableComponent;
-        /**
-         * Returns a component of the input, colored aqua
-         */
-        static aqua(text: $MutableComponent_): $MutableComponent;
-        /**
-         * Returns a component of the input, colored dark purple
-         */
-        static darkPurple(text: $MutableComponent_): $MutableComponent;
-        /**
-         * Returns a component of the input, colored dark green
-         */
-        static darkGreen(text: $MutableComponent_): $MutableComponent;
-        /**
-         * Returns a component of the input, colored dark aqua
-         */
-        static darkAqua(text: $MutableComponent_): $MutableComponent;
-        /**
-         * Returns a component of the input, colored dark blue
-         */
-        static darkBlue(text: $MutableComponent_): $MutableComponent;
-        /**
          * Returns a component of the input, colored gold
          */
         static gold(text: $MutableComponent_): $MutableComponent;
         static lore(lore: $List_<$Component_>): $ItemLore;
         /**
-         * Returns a component of the input, colored gray
+         * Returns a component of the input, colored dark gray
          */
-        static gray(text: $MutableComponent_): $MutableComponent;
+        static darkGray(text: $MutableComponent_): $MutableComponent;
         /**
          * Returns a translatable component of the input key
          */
@@ -487,54 +508,43 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
          */
         static translate(key: string, ...objects: $Object[]): $MutableComponent;
         /**
-         * Returns a translatable component of the input key, with args of the objects and a fallback translation in case the client does not have one
+         * Returns a score component of the input objective, for the provided selector
          */
-        static translatableWithFallback(key: string, fallback: string): $MutableComponent;
+        static score(selector: string, objective: string): $MutableComponent;
         /**
          * Returns a translatable component of the input key, with args of the objects and a fallback translation in case the client does not have one
          */
         static translatableWithFallback(key: string, fallback: string, ...objects: $Object[]): $MutableComponent;
         /**
-         * Returns a component of the input, colored light purple
-         */
-        static lightPurple(text: $MutableComponent_): $MutableComponent;
-        /**
-         * Returns a ClickEvent of the input
-         */
-        static clickEventOf(event: $ClickEvent_): $ClickEvent;
-        /**
-         * Returns a colorful representation of the input nbt. Useful for displaying NBT to the player
-         */
-        static prettyPrintNbt(tag: $Tag_): $Component;
-        /**
          * Returns a translatable component of the input key, with args of the objects and a fallback translation in case the client does not have one
          */
-        static translateWithFallback(key: string, fallback: string): $MutableComponent;
-        /**
-         * Returns a translatable component of the input key, with args of the objects and a fallback translation in case the client does not have one
-         */
-        static translateWithFallback(key: string, fallback: string, ...objects: $Object[]): $MutableComponent;
-        /**
-         * Joins all components in the list with the separator component
-         */
-        static joinSep(separator: $MutableComponent_, texts: $Iterable_<$Component>): $MutableComponent;
-        static ofTag(tag: $Tag_): $Component;
+        static translatableWithFallback(key: string, fallback: string): $MutableComponent;
         static TYPE_INFO: $TypeInfo;
     }
     export interface $TextWrapper {
     }
     export class $MiscWrappers {
-        static wrapNumberProvider(o: $Object): $NumberProvider;
         static wrapBlockPos(o: $Object): $BlockPos;
-        static wrapIntProvider(o: $Object): $IntProvider;
+        static wrapNumberProvider(o: $Object): $NumberProvider;
         static wrapFloatProvider(o: $Object): $FloatProvider;
-        static wrapPath(o: $Object): $Path;
+        static wrapIntProvider(o: $Object): $IntProvider;
         static wrapVec3(o: $Object): $Vec3;
         static wrapFile(o: $Object): $File;
+        static wrapPath(o: $Object): $Path;
     }
     export interface $MiscWrappers {
     }
     export class $NBTWrapper {
+        static fromTag(t: $Tag_): $Object;
+        static compoundTag(map: $Map_<never, never>): $Tag;
+        static compoundTag(): $Tag;
+        static byteArrayTag(v: number[]): $Tag;
+        static intArrayTag(v: number[]): $Tag;
+        static longArrayTag(v: number[]): $Tag;
+        static isTagCollection(o: $Object): boolean;
+        static isTagCompound(o: $Object): boolean;
+        static wrapListTag(list: $Object): $ListTag;
+        static wrapCompound(v: $Object): $CompoundTag;
         static wrap(v: $Object): $Tag;
         static i(v: number): $Tag;
         static b(v: number): $Tag;
@@ -544,34 +554,26 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
         static l(v: number): $Tag;
         static d(v: number): $Tag;
         static read(buf: $FriendlyByteBuf): $OrderedCompoundTag;
-        static toJson(t: $Tag_): $JsonElement;
         static stringTag(v: string): $Tag;
         static ia(v: number[]): $Tag;
-        static compoundTag(): $Tag;
-        static compoundTag(map: $Map_<never, never>): $Tag;
-        static la(v: number[]): $Tag;
         static wrapCollection(v: $Object): $CollectionTag<never>;
+        static la(v: number[]): $Tag;
+        static toJson(t: $Tag_): $JsonElement;
+        static toTag(tag: $Tag_): $Tag;
         static listTag(): $Tag;
         static listTag(list: $List_<never>): $Tag;
-        static shortTag(v: number): $Tag;
-        static doubleTag(v: number): $Tag;
-        static floatTag(v: number): $Tag;
         static byteTag(v: number): $Tag;
-        static longTag(v: number): $Tag;
         static intTag(v: number): $Tag;
-        static toTag(tag: $Tag_): $Tag;
-        static fromTag(t: $Tag_): $Object;
-        static intArrayTag(v: number[]): $Tag;
-        static longArrayTag(v: number[]): $Tag;
-        static byteArrayTag(v: number[]): $Tag;
-        static isTagCollection(o: $Object): boolean;
-        static isTagCompound(o: $Object): boolean;
-        static wrapCompound(v: $Object): $CompoundTag;
-        static wrapListTag(list: $Object): $ListTag;
+        static shortTag(v: number): $Tag;
+        static floatTag(v: number): $Tag;
+        static longTag(v: number): $Tag;
+        static doubleTag(v: number): $Tag;
     }
     export interface $NBTWrapper {
     }
     export class $DataMapWrapper<T, A> extends $Record implements $Iterable<$DataMapWrapper$Data<T, A>> {
+        static typeOf<T>(registry: $RegistryWrapper_<T>, id: $ResourceLocation_): $DataMapType<T, never>;
+        static typeOf(registry: $ResourceLocation_, id: $ResourceLocation_): $DataMapType<never, never>;
         get(item: $DataMapWrapper$Data_<T, A>): A;
         type(): $DataMapType<$DataMapWrapper$Data<T, A>, A>;
         iterator(): $Iterator<$DataMapWrapper$Data<$DataMapWrapper$Data<T, A>, A>>;
@@ -580,8 +582,6 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
         keys(): $Stream<$DataMapWrapper$Data<T, A>>;
         registry(): $Registry<$DataMapWrapper$Data<T, A>>;
         byKey(): $Map<$ResourceKey<$DataMapWrapper$Data<T, A>>, A>;
-        static typeOf(registry: $ResourceLocation_, id: $ResourceLocation_): $DataMapType<never, never>;
-        static typeOf<T>(registry: $RegistryWrapper_<T>, id: $ResourceLocation_): $DataMapType<T, never>;
         spliterator(): $Spliterator<$DataMapWrapper$Data<T, A>>;
         forEach(arg0: $Consumer_<$DataMapWrapper$Data<T, A>>): void;
         constructor(registry: $Registry<$DataMapWrapper$Data_<T, A>>, type: $DataMapType<$DataMapWrapper$Data_<T, A>, A>);
@@ -590,13 +590,13 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     /**
      * Values that may be interpreted as {@link $DataMapWrapper}.
      */
-    export type $DataMapWrapper_<T, A> = { type?: $DataMapType<any, any>, registry?: $Registry<any>,  } | [type?: $DataMapType<any, any>, registry?: $Registry<any>, ];
+    export type $DataMapWrapper_<T, A> = { registry?: $Registry<any>, type?: $DataMapType<any, any>,  } | [registry?: $Registry<any>, type?: $DataMapType<any, any>, ];
     export class $ColorWrapper {
+        static createMapped(o: $Object, ...names: string[]): $KubeColor;
+        static wrapColorRGBA(o: $Object): $ColorRGBA;
+        static wrapTextColor(o: $Object): $TextColor;
         static wrap(o: $Object): $KubeColor;
         static rgba(r: number, g: number, b: number, a: number): $KubeColor;
-        static createMapped(o: $Object, ...names: string[]): $KubeColor;
-        static wrapTextColor(o: $Object): $TextColor;
-        static wrapColorRGBA(o: $Object): $ColorRGBA;
         static BLUE_DYE: $KubeColor;
         static GOLD: $KubeColor;
         static GRAY: $KubeColor;
@@ -637,6 +637,19 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     export interface $ColorWrapper {
     }
     export class $KMath {
+        static lerp(value: number, min: number, max: number): number;
+        static approach(current: number, target: number, speed: number): number;
+        static quaternion(x: number, y: number, z: number, w: number): $Quaternionf;
+        static degreesDifference(current: number, target: number): number;
+        static rotateIfNecessary(current: number, target: number, max: number): number;
+        static wrapDegrees(d: number): number;
+        static approachDegrees(current: number, target: number, speed: number): number;
+        static clampedLerp(value: number, min: number, max: number): number;
+        static v4f(x: number, y: number, z: number, w: number): $Vector4f;
+        static v3d(x: number, y: number, z: number): $Vector3d;
+        static v3f(x: number, y: number, z: number): $Vector3f;
+        static m4f(): $Matrix4f;
+        static m3f(): $Matrix3f;
         static floor(value: number): number;
         static ceil(value: number): number;
         static clamp(value: number, min: number, max: number): number;
@@ -644,21 +657,8 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
         static v3(x: number, y: number, z: number): $Vec3;
         static block(x: number, y: number, z: number): $BlockPos;
         static isPowerOfTwo(value: number): boolean;
-        static rad(value: number): number;
-        static v3d(x: number, y: number, z: number): $Vector3d;
-        static m3f(): $Matrix3f;
-        static v3f(x: number, y: number, z: number): $Vector3f;
-        static v4f(x: number, y: number, z: number, w: number): $Vector4f;
-        static m4f(): $Matrix4f;
-        static lerp(value: number, min: number, max: number): number;
-        static approach(current: number, target: number, speed: number): number;
-        static approachDegrees(current: number, target: number, speed: number): number;
-        static clampedLerp(value: number, min: number, max: number): number;
-        static wrapDegrees(d: number): number;
-        static rotateIfNecessary(current: number, target: number, max: number): number;
-        static degreesDifference(current: number, target: number): number;
-        static quaternion(x: number, y: number, z: number, w: number): $Quaternionf;
         static deg(value: number): number;
+        static rad(value: number): number;
         static DEGREES_TO_RADIANS: number;
         static E: number;
         static PI: number;
@@ -674,13 +674,50 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     }
     export class $UtilsWrapper {
         /**
-         * Returns a regex pattern of the input with the specified flags
+         * Gets the current system time, in milliseconds
          */
-        static regex(pattern: string, flags: number): $Pattern;
+        static getSystemTime(): number;
+        /**
+         * Returns the creative tab associated with the id
+         */
+        static findCreativeTab(id: $ResourceLocation_): $CreativeModeTab;
+        /**
+         * Get a Random, for generating random numbers. Note this will always return the same Random instance
+         */
+        static getRandom(): $RandomSource;
+        /**
+         * Returns a Stat of the passed in ResourceLocation.
+         * Note that this requires the same ResourceLocation to get the same stat, so should not be used unless you want to make your own stat, and are storing an actual ResourceLocation somewhere to access it.
+         */
+        static getStat(id: $ResourceLocation_): $Stat<$ResourceLocation>;
+        /**
+         * Returns a lazy value with the supplier function as its value factory, that will expire after the specified time
+         */
+        static expiringLazy<T>(supplier: $Supplier_<T>, expires: $Duration_): $Lazy<T>;
+        /**
+         * Returns a new counting map
+         */
+        static newCountingMap(): $CountingMap;
+        /**
+         * Gets a random object from the list using the passed in random source
+         */
+        static randomOf(random: $RandomSource, objects: $Collection_<$Object>): $Object;
+        /**
+         * Gets a random object from the list using the passed in random
+         */
+        static randomOf(random: $Random, objects: $Collection_<$Object>): $Object;
+        /**
+         * Get a new random with the specified seed
+         */
+        static newRandom(seed: number): $RandomSource;
         /**
          * Returns a regex pattern of the input
          */
         static regex(s: $Object): $Pattern;
+        /**
+         * Returns a regex pattern of the input with the specified flags
+         */
+        static regex(pattern: string, flags: number): $Pattern;
         /**
          * Get an immutable empty list
          */
@@ -698,88 +735,51 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
          */
         static emptyMap<K, V>(): $Map<K, V>;
         /**
-         * Get a Random, for generating random numbers. Note this will always return the same Random instance
+         * Runs the provided runnable function in KubeJS' background thread and returns its CompletableFuture
          */
-        static getRandom(): $RandomSource;
-        /**
-         * Returns a new mutable list
-         */
-        static newList(): $List<never>;
+        static runAsync(task: $Runnable_): $CompletableFuture<void>;
         /**
          * Returns a lazy value with the supplier function as its value factory
          */
         static lazy<T>(supplier: $Supplier_<T>): $Lazy<T>;
         /**
-         * Runs the provided runnable function in KubeJS' background thread and returns its CompletableFuture
-         */
-        static runAsync(task: $Runnable_): $CompletableFuture<void>;
-        /**
          * Runs the provided supplier function in KubeJS' background thread and returns its CompletableFuture
          */
         static supplyAsync(task: $Supplier_<$Object>): $CompletableFuture<$Object>;
         /**
-         * Gets a random object from the list using the passed in random source
+         * Returns a new mutable list
          */
-        static randomOf(random: $RandomSource, objects: $Collection_<$Object>): $Object;
-        /**
-         * Gets a random object from the list using the passed in random
-         */
-        static randomOf(random: $Random, objects: $Collection_<$Object>): $Object;
-        /**
-         * Get a new random with the specified seed
-         */
-        static newRandom(seed: number): $RandomSource;
+        static newList(): $List<never>;
         /**
          * Gets a SoundEvent from the id
          */
         static getSound(id: $ResourceLocation_): $SoundEvent;
-        /**
-         * Returns the creative tab associated with the id
-         */
-        static findCreativeTab(id: $ResourceLocation_): $CreativeModeTab;
-        /**
-         * Returns a Stat of the passed in ResourceLocation.
-         * Note that this requires the same ResourceLocation to get the same stat, so should not be used unless you want to make your own stat, and are storing an actual ResourceLocation somewhere to access it.
-         */
-        static getStat(id: $ResourceLocation_): $Stat<$ResourceLocation>;
-        /**
-         * Gets the current system time, in milliseconds
-         */
-        static getSystemTime(): number;
-        /**
-         * Returns a lazy value with the supplier function as its value factory, that will expire after the specified time
-         */
-        static expiringLazy<T>(supplier: $Supplier_<T>, expires: $Duration_): $Lazy<T>;
-        /**
-         * Returns a new counting map
-         */
-        static newCountingMap(): $CountingMap;
-        static get random(): $RandomSource;
         static get systemTime(): number;
+        static get random(): $RandomSource;
     }
     export interface $UtilsWrapper {
     }
     export class $TextIcons {
+        static crafting(): $Component;
+        static camera(): $Component;
+        static prototypeComponent(): $Component;
+        static patchedComponent(): $Component;
+        static vscode(): $Component;
+        static tilde(): $Component;
+        static logo(): $Component;
+        static smallSpace(): $Component;
         static info(): $Component;
         static id(): $Component;
         static copy(): $Component;
         static error(): $Component;
         static warn(): $Component;
         static tag(): $Component;
-        static yes(yes: boolean): $Component;
         static yes(): $Component;
+        static yes(yes: boolean): $Component;
         static plus(): $Component;
         static minus(): $Component;
         static no(): $Component;
-        static crafting(): $Component;
-        static camera(): $Component;
         static fire(): $Component;
-        static patchedComponent(): $Component;
-        static prototypeComponent(): $Component;
-        static vscode(): $Component;
-        static logo(): $Component;
-        static smallSpace(): $Component;
-        static tilde(): $Component;
         static STYLE: $Style;
         static CRAFTING: $Component;
         static LOGO: $Component;
@@ -793,26 +793,26 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     export class $BuildingMaterialProperties$Blocks extends $Record {
         fence(): (boolean) | undefined;
         wall(): (boolean) | undefined;
-        button(): (boolean) | undefined;
-        pressurePlate(): (boolean) | undefined;
-        fenceGate(): (boolean) | undefined;
-        stairs(): (boolean) | undefined;
         door(): (boolean) | undefined;
         trapdoor(): (boolean) | undefined;
         slab(): (boolean) | undefined;
+        pressurePlate(): (boolean) | undefined;
+        stairs(): (boolean) | undefined;
+        fenceGate(): (boolean) | undefined;
+        button(): (boolean) | undefined;
         constructor(slab: (boolean) | undefined, stairs: (boolean) | undefined, fence: (boolean) | undefined, fenceGate: (boolean) | undefined, wall: (boolean) | undefined, pressurePlate: (boolean) | undefined, button: (boolean) | undefined, trapdoor: (boolean) | undefined, door: (boolean) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $BuildingMaterialProperties$Blocks}.
      */
-    export type $BuildingMaterialProperties$Blocks_ = { pressurePlate?: (boolean) | undefined, slab?: (boolean) | undefined, trapdoor?: (boolean) | undefined, wall?: (boolean) | undefined, stairs?: (boolean) | undefined, fenceGate?: (boolean) | undefined, door?: (boolean) | undefined, button?: (boolean) | undefined, fence?: (boolean) | undefined,  } | [pressurePlate?: (boolean) | undefined, slab?: (boolean) | undefined, trapdoor?: (boolean) | undefined, wall?: (boolean) | undefined, stairs?: (boolean) | undefined, fenceGate?: (boolean) | undefined, door?: (boolean) | undefined, button?: (boolean) | undefined, fence?: (boolean) | undefined, ];
+    export type $BuildingMaterialProperties$Blocks_ = { trapdoor?: (boolean) | undefined, wall?: (boolean) | undefined, stairs?: (boolean) | undefined, fenceGate?: (boolean) | undefined, door?: (boolean) | undefined, button?: (boolean) | undefined, fence?: (boolean) | undefined, pressurePlate?: (boolean) | undefined, slab?: (boolean) | undefined,  } | [trapdoor?: (boolean) | undefined, wall?: (boolean) | undefined, stairs?: (boolean) | undefined, fenceGate?: (boolean) | undefined, door?: (boolean) | undefined, button?: (boolean) | undefined, fence?: (boolean) | undefined, pressurePlate?: (boolean) | undefined, slab?: (boolean) | undefined, ];
     export class $AABBWrapper {
+        static ofSize(vec3: $Vec3_, x: number, y: number, z: number): $AABB;
+        static ofSize(x: number, y: number, z: number): $AABB;
+        static ofBlocks(pos1: $BlockPos_, pos2: $BlockPos_): $AABB;
+        static ofBlock(pos: $BlockPos_): $AABB;
         static wrap(o: $Object): $AABB;
         static of(x0: number, y0: number, z0: number, x1: number, y1: number, z1: number): $AABB;
-        static ofSize(x: number, y: number, z: number): $AABB;
-        static ofSize(vec3: $Vec3_, x: number, y: number, z: number): $AABB;
-        static ofBlock(pos: $BlockPos_): $AABB;
-        static ofBlocks(pos1: $BlockPos_, pos2: $BlockPos_): $AABB;
         static CUBE: $AABB;
         static EMPTY: $AABB;
     }
@@ -826,7 +826,7 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     /**
      * Values that may be interpreted as {@link $NativeEventWrapper$Listeners$Key}.
      */
-    export type $NativeEventWrapper$Listeners$Key_ = { eventClass?: $Class<never>, priority?: $EventPriority_,  } | [eventClass?: $Class<never>, priority?: $EventPriority_, ];
+    export type $NativeEventWrapper$Listeners$Key_ = { priority?: $EventPriority_, eventClass?: $Class<never>,  } | [priority?: $EventPriority_, eventClass?: $Class<never>, ];
     type ResolveJavaClass<E, N extends string> = N extends `${infer H}.${infer T}` ? H extends keyof E ? ResolveJavaClass<E[H], T> : never : `$${N}` extends keyof E ? E[`$${N}`] : never;
     export class $NativeEventWrapper {
         static onEvent<E extends $Event>(eventClass: new (...args: any[]) => E, callback: (event: E) => void): void;
@@ -835,18 +835,34 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
     export interface $NativeEventWrapper {
     }
     export class $StringUtilsWrapper {
+        static getUniqueId<T>(input: T, toJson: $Function_<T, $JsonElement>): string;
+        static getUniqueId(json: $JsonElement_): string;
+        static stripIdForEvent(id: $ResourceLocation_): string;
+        static tryParseNumber<T extends $Number>(input: $Object, getter: $Function_<$Number, T>, parser: $Function_<string, T>): $DataResult<T>;
+        static tryParseFloat(input: $Object): $DataResult<number>;
+        static stripEventName(s: string): string;
+        static tryParseLong(input: $Object): $DataResult<number>;
+        static tryParseDouble(input: $Object): $DataResult<number>;
+        /**
+         * Returns the provided snake_case_string in camelCase
+         */
+        static snakeCaseToCamelCase(string: string): string;
+        /**
+         * Returns the provided snake_case_string in Title Case
+         */
+        static snakeCaseToTitleCase(string: string): string;
         /**
          * Tries to parse the first parameter as an integer, and returns that. The second parameter is returned if parsing fails
          */
         static parseInt(object: $Object, def: number): number;
         /**
-         * Capitalises the first letter of the string unless it is "a", "an", "the", "of", "on", "in", "and", "or", "but" or "for"
-         */
-        static toTitleCase(s: string): string;
-        /**
          * Capitalises the first letter of the string. If ignoreSpecial is true, it will also capitalise articles and prepositions
          */
         static toTitleCase(s: string, ignoreSpecial: boolean): string;
+        /**
+         * Capitalises the first letter of the string unless it is "a", "an", "the", "of", "on", "in", "and", "or", "but" or "for"
+         */
+        static toTitleCase(s: string): string;
         /**
          * Tries to parse the first parameter as a float and returns that. The second parameter is returned if parsing fails
          */
@@ -856,23 +872,7 @@ declare module "@package/dev/latvian/mods/kubejs/plugin/builtin/wrapper" {
          */
         static parseDouble(object: $Object, def: number): number;
         static parseLong(object: $Object, def: number): number;
-        /**
-         * Returns the provided snake_case_string in Title Case
-         */
-        static snakeCaseToTitleCase(string: string): string;
-        /**
-         * Returns the provided snake_case_string in camelCase
-         */
-        static snakeCaseToCamelCase(string: string): string;
         static tryParseInt(input: $Object): $DataResult<number>;
-        static tryParseLong(input: $Object): $DataResult<number>;
-        static tryParseFloat(input: $Object): $DataResult<number>;
-        static tryParseDouble(input: $Object): $DataResult<number>;
-        static tryParseNumber<T extends $Number>(input: $Object, getter: $Function_<$Number, T>, parser: $Function_<string, T>): $DataResult<T>;
-        static stripEventName(s: string): string;
-        static stripIdForEvent(id: $ResourceLocation_): string;
-        static getUniqueId<T>(input: T, toJson: $Function_<T, $JsonElement>): string;
-        static getUniqueId(json: $JsonElement_): string;
         static ALWAYS_LOWER_CASE: $Set<string>;
         static SNAKE_CASE_SPLIT: $Pattern;
         static EMPTY_STRING_ARRAY: string[];

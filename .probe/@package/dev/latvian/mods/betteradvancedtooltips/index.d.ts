@@ -17,8 +17,8 @@ import { $BannerPattern } from "@package/net/minecraft/world/level/block/entity"
 
 declare module "@package/dev/latvian/mods/betteradvancedtooltips" {
     export class $TooltipTagType<T> extends $Record {
-        component(): $Component;
         registryKey(): $ResourceKey<$Registry<T>>;
+        component(): $Component;
         static INSTRUMENT: $TooltipTagType<$Instrument>;
         static PAINTING_VARIANT: $TooltipTagType<$PaintingVariant>;
         static BANNER_PATTERN: $TooltipTagType<$BannerPattern>;
@@ -33,7 +33,7 @@ declare module "@package/dev/latvian/mods/betteradvancedtooltips" {
     /**
      * Values that may be interpreted as {@link $TooltipTagType}.
      */
-    export type $TooltipTagType_<T> = { registryKey?: $ResourceKey_<$Registry<any>>, component?: $Component_,  } | [registryKey?: $ResourceKey_<$Registry<any>>, component?: $Component_, ];
+    export type $TooltipTagType_<T> = { component?: $Component_, registryKey?: $ResourceKey_<$Registry<any>>,  } | [component?: $Component_, registryKey?: $ResourceKey_<$Registry<any>>, ];
     export class $TagInstance implements $Comparable<$TagInstance> {
         compareTo(o: $TagInstance): number;
         toText(): $Component;
@@ -42,11 +42,11 @@ declare module "@package/dev/latvian/mods/betteradvancedtooltips" {
         constructor(tag: $ResourceLocation_);
     }
     export class $ItemTagIconsEvent extends $Event {
+        getParentEvent(): $ItemTooltipEvent;
         append<T>(type: $TooltipTagType_<T>, tags: $Stream<$TagKey_<T>>): void;
         getItem(): $ItemStack;
-        getParentEvent(): $ItemTooltipEvent;
         constructor(parentEvent: $ItemTooltipEvent, map: $Map_<$ResourceLocation_, $TagInstance>);
-        get item(): $ItemStack;
         get parentEvent(): $ItemTooltipEvent;
+        get item(): $ItemStack;
     }
 }

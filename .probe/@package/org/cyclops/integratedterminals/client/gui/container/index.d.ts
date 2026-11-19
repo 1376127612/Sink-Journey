@@ -18,25 +18,25 @@ import { $Font, $GuiGraphics } from "@package/net/minecraft/client/gui";
 
 declare module "@package/org/cyclops/integratedterminals/client/gui/container" {
     export class $ContainerScreenTerminalStorage<L, C extends $ContainerTerminalStorageBase<L>> extends $ContainerScreenExtended<C> {
-        static drawPanel(arg0: $GuiGraphics, arg1: $ResourceLocation_, arg2: number, arg3: number, arg4: number, arg5: number): void;
-        getMenu(): C;
+        hasVariableFilterSlots(): boolean;
+        repositionInventorySlots(): void;
+        getSelectedClientTab(): ($ITerminalStorageTabClient<never>) | undefined;
         containerTick(): void;
         getStorageSlotIndexAtPosition(arg0: number, arg1: number): number;
-        getFieldSearch(): $WidgetTextFieldExtended;
-        getGridXSize(): number;
-        getBaseYSize(): number;
-        getScrollHeight(): number;
-        static blitRescalable(arg0: $GuiGraphics, arg1: $ResourceLocation_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): void;
-        getGridYSize(): number;
-        hasSearchField(): boolean;
-        getStorageSlotRect(arg0: number): $Rect2i;
         hasScrollbar(): boolean;
-        hasChannelField(): boolean;
-        getBaseXSize(): number;
         getSearchWidth(): number;
-        getSelectedClientTab(): ($ITerminalStorageTabClient<never>) | undefined;
-        repositionInventorySlots(): void;
-        hasVariableFilterSlots(): boolean;
+        hasChannelField(): boolean;
+        getGridXSize(): number;
+        getScrollHeight(): number;
+        hasSearchField(): boolean;
+        getGridYSize(): number;
+        getStorageSlotRect(arg0: number): $Rect2i;
+        static blitRescalable(arg0: $GuiGraphics, arg1: $ResourceLocation_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): void;
+        getBaseXSize(): number;
+        getBaseYSize(): number;
+        getMenu(): C;
+        getFieldSearch(): $WidgetTextFieldExtended;
+        static drawPanel(arg0: $GuiGraphics, arg1: $ResourceLocation_, arg2: number, arg3: number, arg4: number, arg5: number): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -54,6 +54,7 @@ declare module "@package/org/cyclops/integratedterminals/client/gui/container" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -69,15 +70,15 @@ declare module "@package/org/cyclops/integratedterminals/client/gui/container" {
         static INWORLD_MENU_BACKGROUND: $ResourceLocation;
         font: $Font;
         constructor(arg0: C, arg1: $Inventory, arg2: $Component_);
-        get menu(): C;
-        get fieldSearch(): $WidgetTextFieldExtended;
+        get selectedClientTab(): ($ITerminalStorageTabClient<never>) | undefined;
+        get searchWidth(): number;
         get gridXSize(): number;
-        get baseYSize(): number;
         get scrollHeight(): number;
         get gridYSize(): number;
         get baseXSize(): number;
-        get searchWidth(): number;
-        get selectedClientTab(): ($ITerminalStorageTabClient<never>) | undefined;
+        get baseYSize(): number;
+        get menu(): C;
+        get fieldSearch(): $WidgetTextFieldExtended;
     }
     export class $ContainerScreenTerminalStorage$DrawLayer extends $Enum<$ContainerScreenTerminalStorage$DrawLayer> {
         static values(): $ContainerScreenTerminalStorage$DrawLayer[];

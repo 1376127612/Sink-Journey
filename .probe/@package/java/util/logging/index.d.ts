@@ -5,31 +5,6 @@ import { $Object, $Throwable, $Exception } from "@package/java/lang";
 
 declare module "@package/java/util/logging" {
     export class $LogRecord implements $Serializable {
-        getParameters(): $Object[];
-        getMessage(): string;
-        getSequenceNumber(): number;
-        setSequenceNumber(arg0: number): void;
-        setInstant(arg0: $Instant): void;
-        getInstant(): $Instant;
-        setMessage(arg0: string): void;
-        setThrown(arg0: $Throwable): void;
-        getMillis(): number;
-        getThrown(): $Throwable;
-        setLevel(arg0: $Level): void;
-        getLevel(): $Level;
-        /**
-         * @deprecated
-         */
-        setMillis(arg0: number): void;
-        setLoggerName(arg0: string): void;
-        getLoggerName(): string;
-        getResourceBundle(): $ResourceBundle;
-        getResourceBundleName(): string;
-        setResourceBundleName(arg0: string): void;
-        setResourceBundle(arg0: $ResourceBundle): void;
-        setParameters(arg0: $Object[]): void;
-        setSourceClassName(arg0: string): void;
-        setSourceMethodName(arg0: string): void;
         /**
          * @deprecated
          */
@@ -40,16 +15,41 @@ declare module "@package/java/util/logging" {
         setThreadID(arg0: number): void;
         getLongThreadID(): number;
         setLongThreadID(arg0: number): $LogRecord;
+        getParameters(): $Object[];
+        getMessage(): string;
+        getInstant(): $Instant;
+        getResourceBundle(): $ResourceBundle;
+        setInstant(arg0: $Instant): void;
+        getResourceBundleName(): string;
+        setResourceBundleName(arg0: string): void;
+        setResourceBundle(arg0: $ResourceBundle): void;
+        setParameters(arg0: $Object[]): void;
+        setSourceClassName(arg0: string): void;
+        setSourceMethodName(arg0: string): void;
         getSourceClassName(): string;
         getSourceMethodName(): string;
+        setLevel(arg0: $Level): void;
+        getLevel(): $Level;
+        getThrown(): $Throwable;
+        setMessage(arg0: string): void;
+        setThrown(arg0: $Throwable): void;
+        /**
+         * @deprecated
+         */
+        setMillis(arg0: number): void;
+        getLoggerName(): string;
+        setLoggerName(arg0: string): void;
+        getMillis(): number;
+        getSequenceNumber(): number;
+        setSequenceNumber(arg0: number): void;
         constructor(arg0: $Level, arg1: string);
     }
     export class $Level implements $Serializable {
         getName(): string;
         intValue(): number;
         static parse(arg0: string): $Level;
-        getLocalizedName(): string;
         getResourceBundleName(): string;
+        getLocalizedName(): string;
         static CONFIG: $Level;
         static ALL: $Level;
         static SEVERE: $Level;
@@ -60,8 +60,8 @@ declare module "@package/java/util/logging" {
         static WARNING: $Level;
         static OFF: $Level;
         get name(): string;
-        get localizedName(): string;
         get resourceBundleName(): string;
+        get localizedName(): string;
     }
     export class $Handler {
         flush(): void;
@@ -69,15 +69,15 @@ declare module "@package/java/util/logging" {
         getEncoding(): string;
         publish(arg0: $LogRecord): void;
         getFilter(): $Filter;
+        isLoggable(arg0: $LogRecord): boolean;
+        setEncoding(arg0: string): void;
+        setLevel(arg0: $Level): void;
+        getLevel(): $Level;
+        setFilter(arg0: $Filter_): void;
         setFormatter(arg0: $Formatter): void;
         getFormatter(): $Formatter;
         setErrorManager(arg0: $ErrorManager): void;
         getErrorManager(): $ErrorManager;
-        isLoggable(arg0: $LogRecord): boolean;
-        setFilter(arg0: $Filter_): void;
-        setLevel(arg0: $Level): void;
-        getLevel(): $Level;
-        setEncoding(arg0: string): void;
     }
     export class $Filter {
     }
@@ -90,9 +90,9 @@ declare module "@package/java/util/logging" {
     export type $Filter_ = ((arg0: $LogRecord) => boolean);
     export class $Formatter {
         format(arg0: $LogRecord): string;
-        formatMessage(arg0: $LogRecord): string;
         getHead(arg0: $Handler): string;
         getTail(arg0: $Handler): string;
+        formatMessage(arg0: $LogRecord): string;
     }
     export class $ErrorManager {
         error(arg0: string, arg1: $Exception, arg2: number): void;

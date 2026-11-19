@@ -8,6 +8,8 @@ export * as io from "@package/xaero/lib/common/config/profile/io";
 
 declare module "@package/xaero/lib/common/config/profile" {
     export class $ConfigProfileManager implements $Iterable<$ConfigProfile> {
+        getConfigType(): string;
+        setChangeListener(arg0: $IConfigChangeListener): void;
         remove(arg0: string): void;
         reset(): void;
         get(arg0: string): $ConfigProfile;
@@ -15,14 +17,12 @@ declare module "@package/xaero/lib/common/config/profile" {
         add(arg0: number, arg1: $ConfigProfile): void;
         iterator(): $Iterator<$ConfigProfile>;
         getIndex(arg0: string): number;
-        setChangeListener(arg0: $IConfigChangeListener): void;
-        getConfigType(): string;
         spliterator(): $Spliterator<$ConfigProfile>;
         forEach(arg0: $Consumer_<$ConfigProfile>): void;
         logger: $Logger;
         [Symbol.iterator](): Iterator<$ConfigProfile>
-        set changeListener(value: $IConfigChangeListener);
         get configType(): string;
+        set changeListener(value: $IConfigChangeListener);
     }
     export class $IConfigProfileInfo {
     }

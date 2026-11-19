@@ -48,7 +48,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/filter" {
     /**
      * Values that may be interpreted as {@link $RecipeMatchContext$Impl}.
      */
-    export type $RecipeMatchContext$Impl_ = { recipe?: $RecipeLikeKJS, cx?: $Context, registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer,  } | [recipe?: $RecipeLikeKJS, cx?: $Context, registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer, ];
+    export type $RecipeMatchContext$Impl_ = { registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer, recipe?: $RecipeLikeKJS, cx?: $Context,  } | [registries?: $RegistryAccessContainer, ops?: $RegistryOpsContainer, recipe?: $RecipeLikeKJS, cx?: $Context, ];
     export class $OrFilter implements $RecipeFilter {
         test(cx: $RecipeMatchContext): boolean;
         or(arg0: $Predicate_<$RecipeMatchContext>): $Predicate<$RecipeMatchContext>;

@@ -43,10 +43,10 @@ declare module "@package/net/minecraft/client/gui/screens/inventory/tooltip" {
         static create(visualTooltipComponent: $TooltipComponent): $ClientTooltipComponent;
     }
     export interface $ClientTooltipComponent {
-        renderImage(font: $Font, x: number, y: number, guiGraphics: $GuiGraphics): void;
-        renderText(font: $Font, mouseX: number, mouseY: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource$BufferSource): void;
-        getWidth(font: $Font): number;
         getHeight(): number;
+        renderImage(font: $Font, x: number, y: number, guiGraphics: $GuiGraphics): void;
+        getWidth(font: $Font): number;
+        renderText(font: $Font, mouseX: number, mouseY: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource$BufferSource): void;
         get height(): number;
     }
     export class $BelowOrAboveWidgetTooltipPositioner implements $ClientTooltipPositioner {
@@ -54,18 +54,18 @@ declare module "@package/net/minecraft/client/gui/screens/inventory/tooltip" {
         constructor(screenRectangle: $ScreenRectangle_);
     }
     export class $ClientBundleTooltip implements $ClientTooltipComponent {
+        getHeight(): number;
         renderImage(font: $Font, x: number, y: number, guiGraphics: $GuiGraphics): void;
         getWidth(font: $Font): number;
-        getHeight(): number;
         renderText(font: $Font, mouseX: number, mouseY: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource$BufferSource): void;
         constructor(contents: $BundleContents);
         get height(): number;
     }
     export class $ClientActivePlayersTooltip implements $ClientTooltipComponent {
+        getHeight(): number;
         renderImage(font: $Font, x: number, y: number, guiGraphics: $GuiGraphics): void;
         getWidth(font: $Font): number;
-        getHeight(): number;
-        renderText(font: $Font, mouseX: number, mouseY: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource$BufferSource): void;
+        renderText(arg0: $Font, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $MultiBufferSource$BufferSource): void;
         constructor(tooltip: $ClientActivePlayersTooltip$ActivePlayersTooltip_);
         get height(): number;
     }
@@ -86,13 +86,13 @@ declare module "@package/net/minecraft/client/gui/screens/inventory/tooltip" {
         constructor(screenRectangle: $ScreenRectangle_);
     }
     export class $ClientTextTooltip implements $ClientTooltipComponent, $AccessClientTextTooltip {
-        renderText(font: $Font, mouseX: number, mouseY: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource$BufferSource): void;
-        getWidth(font: $Font): number;
         getHeight(): number;
-        renderImage(font: $Font, x: number, y: number, guiGraphics: $GuiGraphics): void;
+        getWidth(font: $Font): number;
+        renderText(font: $Font, mouseX: number, mouseY: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource$BufferSource): void;
+        renderImage(arg0: $Font, arg1: number, arg2: number, arg3: $GuiGraphics): void;
         getText(): $FormattedCharSequence;
+        text: $FormattedCharSequence;
         constructor(text: $FormattedCharSequence_);
         get height(): number;
-        get text(): $FormattedCharSequence;
     }
 }

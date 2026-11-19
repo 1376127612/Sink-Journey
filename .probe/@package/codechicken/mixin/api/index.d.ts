@@ -8,9 +8,9 @@ declare module "@package/codechicken/mixin/api" {
     export class $MixinBackend {
     }
     export interface $MixinBackend {
+        filterMethodAnnotations(arg0: string, arg1: string): boolean;
         getBytes(arg0: string): number[];
         getContextClassLoader(): $ClassLoader;
-        filterMethodAnnotations(arg0: string, arg1: string): boolean;
         get contextClassLoader(): $ClassLoader;
     }
     export class $MixinLanguageSupport {
@@ -20,23 +20,23 @@ declare module "@package/codechicken/mixin/api" {
         buildMixinTrait(arg0: $ClassNode): $MixinInfo;
     }
     export class $MixinCompiler {
-        static create(arg0: $MixinBackend, arg1: $MixinDebugger_, arg2: $Collection_<$Class<$MixinLanguageSupport>>): $MixinCompiler;
-        static create(arg0: $MixinBackend, arg1: $MixinDebugger_): $MixinCompiler;
-        static create(arg0: $MixinBackend): $MixinCompiler;
         static create(): $MixinCompiler;
+        static create(arg0: $MixinBackend): $MixinCompiler;
+        static create(arg0: $MixinBackend, arg1: $MixinDebugger_): $MixinCompiler;
+        static create(arg0: $MixinBackend, arg1: $MixinDebugger_, arg2: $Collection_<$Class<$MixinLanguageSupport>>): $MixinCompiler;
     }
     export interface $MixinCompiler {
-        defineClass<T>(arg0: string, arg1: number[]): $Class<T>;
-        getClassNode(arg0: string): $ClassNode;
-        getClassInfo(arg0: $Class<never>): $ClassInfo;
-        getClassInfo(arg0: $ClassNode): $ClassInfo;
         getClassInfo(arg0: string): $ClassInfo;
-        registerTrait(arg0: $ClassNode): $MixinInfo;
+        getClassInfo(arg0: $ClassNode): $ClassInfo;
+        getClassInfo(arg0: $Class<never>): $ClassInfo;
+        getDefinedClass<T>(arg0: string): $Class<T>;
+        getLanguageSupport<T extends $MixinLanguageSupport>(arg0: string): T;
         compileMixinClass<T>(arg0: string, arg1: string, arg2: $Set_<string>): $Class<T>;
+        defineClass<T>(arg0: string, arg1: number[]): $Class<T>;
+        registerTrait(arg0: $ClassNode): $MixinInfo;
+        getClassNode(arg0: string): $ClassNode;
         getMixinBackend(): $MixinBackend;
         getMixinInfo(arg0: string): $MixinInfo;
-        getLanguageSupport<T extends $MixinLanguageSupport>(arg0: string): T;
-        getDefinedClass<T>(arg0: string): $Class<T>;
         get mixinBackend(): $MixinBackend;
     }
     export class $MixinDebugger {
@@ -51,11 +51,11 @@ declare module "@package/codechicken/mixin/api" {
     export class $MixinFactory<B, F> {
     }
     export interface $MixinFactory<B, F> {
+        getTraitsForClass(arg0: $Class<never>): $ImmutableSet<$MixinFactory$TraitKey>;
+        getMixinCompiler(): $MixinCompiler;
         construct(arg0: $ImmutableSet<$MixinFactory$TraitKey_>): F;
         registerTrait(arg0: $Class<never>): $MixinFactory$TraitKey;
         registerTrait(arg0: $ClassNode): $MixinFactory$TraitKey;
-        getMixinCompiler(): $MixinCompiler;
-        getTraitsForClass(arg0: $Class<never>): $ImmutableSet<$MixinFactory$TraitKey>;
         get mixinCompiler(): $MixinCompiler;
     }
     export class $MixinFactory$TraitKey extends $Record {

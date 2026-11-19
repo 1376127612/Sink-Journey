@@ -17,48 +17,48 @@ export * as capability from "@package/hellfirepvp/astralsorcery/common/lumen/cap
 
 declare module "@package/hellfirepvp/astralsorcery/common/lumen" {
     export class $Lumen implements $LumenLike {
+        getHolder(): ($Holder<$Lumen>) | undefined;
+        getRegistryKey(): ($ResourceKey<$Lumen>) | undefined;
+        isElementary(): boolean;
+        asLumen(): $Lumen;
+        maySee(arg0: $Level_, arg1: $PlayerProgress): boolean;
         getName(): $Component;
         stack(arg0: number): $LumenStack;
-        getRegistryKey(): ($ResourceKey<$Lumen>) | undefined;
-        getHolder(): ($Holder<$Lumen>) | undefined;
         getColor(arg0: $Level_, arg1: $Vector3): $ColorWrapper;
         getColor(arg0: $Level_, arg1: $BlockPos_): $ColorWrapper;
         getColor(arg0: number): $ColorWrapper;
         getHoverName(): $Component;
-        asLumen(): $Lumen;
-        maySee(arg0: $Level_, arg1: $PlayerProgress): boolean;
-        isElementary(): boolean;
-        constructor(arg0: $ColorWrapper);
         constructor(arg0: $ColorWrapper, arg1: boolean);
-        get name(): $Component;
-        get registryKey(): ($ResourceKey<$Lumen>) | undefined;
+        constructor(arg0: $ColorWrapper);
         get holder(): ($Holder<$Lumen>) | undefined;
-        get hoverName(): $Component;
+        get registryKey(): ($ResourceKey<$Lumen>) | undefined;
         get elementary(): boolean;
+        get name(): $Component;
+        get hoverName(): $Component;
     }
     /**
      * Values that may be interpreted as {@link $Lumen}.
      */
     export type $Lumen_ = RegistryTypes.AstralsorceryLumen;
     export class $LumenStack {
+        getAmount(): number;
+        setAmount(arg0: number): void;
+        isSameLumen(arg0: $LumenStack): boolean;
+        getLumen(): $Lumen;
         isEmpty(): boolean;
         static of(arg0: $Lumen_, arg1: number): $LumenStack;
         copy(): $LumenStack;
         is(arg0: $Lumen_): boolean;
         is(arg0: $Supplier_<$Lumen>): boolean;
         grow(arg0: number): void;
-        setAmount(arg0: number): void;
         shrink(arg0: number): void;
-        getAmount(): number;
-        getLumen(): $Lumen;
         copyWithAmount(arg0: number): $LumenStack;
-        isSameLumen(arg0: $LumenStack): boolean;
         static CODEC: $Codec<$LumenStack>;
         static FLASK_VALUE: number;
         static EMPTY: $LumenStack;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $LumenStack>;
-        get empty(): boolean;
         get lumen(): $Lumen;
+        get empty(): boolean;
     }
     export class $ILumenHandler {
         static voiding(): $ILumenHandler;
@@ -67,14 +67,14 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen" {
         static BLOCK: $BlockCapability<$ILumenHandler, $Direction>;
     }
     export interface $ILumenHandler {
+        getContainedLumen(arg0: $LumenLike_): ($LumenStack) | undefined;
+        getContainedLumen(): $List<$LumenStack>;
         isEmpty(): boolean;
         fill(arg0: $LumenStack, arg1: $ILumenHandler$Action_): number;
         contains(arg0: $LumenLike_): boolean;
-        getCapacity(arg0: $LumenLike_): number;
         drain(arg0: $LumenLike_, arg1: number, arg2: $ILumenHandler$Action_): $LumenStack;
         drain(arg0: $LumenStack, arg1: $ILumenHandler$Action_): $LumenStack;
-        getContainedLumen(arg0: $LumenLike_): ($LumenStack) | undefined;
-        getContainedLumen(): $List<$LumenStack>;
+        getCapacity(arg0: $LumenLike_): number;
         get empty(): boolean;
     }
     export class $LumenLike {
@@ -87,9 +87,9 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen" {
      */
     export type $LumenLike_ = (() => $Lumen_);
     export class $ILumenHandler$Action extends $Enum<$ILumenHandler$Action> {
+        isSimulate(): boolean;
         static values(): $ILumenHandler$Action[];
         static valueOf(arg0: string): $ILumenHandler$Action;
-        isSimulate(): boolean;
         static EXECUTE: $ILumenHandler$Action;
         static SIMULATE: $ILumenHandler$Action;
         get simulate(): boolean;

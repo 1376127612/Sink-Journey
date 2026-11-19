@@ -21,7 +21,7 @@ import { $Item, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/ite
 import { $FluidState, $Fluid_ } from "@package/net/minecraft/world/level/material";
 import { $KubeColor_ } from "@package/dev/latvian/mods/kubejs/color";
 import { $Player } from "@package/net/minecraft/world/entity/player";
-import { $DirectionProperty, $BlockSetType_, $EnumProperty, $IntegerProperty, $BooleanProperty, $WoodType_ } from "@package/net/minecraft/world/level/block/state/properties";
+import { $DirectionProperty, $WoodType, $BlockSetType_, $EnumProperty, $IntegerProperty, $BooleanProperty } from "@package/net/minecraft/world/level/block/state/properties";
 import { $BlockPlaceContext } from "@package/net/minecraft/world/item/context";
 import { $ResourceLocation_, $ResourceKey, $ResourceLocation } from "@package/net/minecraft/resources";
 import { $FallingBlock, $Rotation_, $PressurePlateBlock, $EntityBlock, $Mirror_, $Block$BlockStatePairKey, $CropBlock, $SimpleWaterloggedBlock, $Block } from "@package/net/minecraft/world/level/block";
@@ -53,8 +53,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(i: $ResourceLocation_);
     }
     export class $PressurePlateBlockBuilder extends $ShapedBlockBuilder implements $ButtonOrPressurePlateBuilder {
-        ticksToStayPressed(ticks: $TickDuration_): this;
         behaviour(behaviour: $BlockSetType_): this;
+        ticksToStayPressed(ticks: $TickDuration_): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         randomTickCallback: $Consumer<$RandomTickCallback>;
@@ -80,6 +80,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     }
     export class $FallingBlockBuilder$KubeJSFallingBlock extends $FallingBlock {
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$Block>;
         static UPDATE_NEIGHBORS: number;
         static INDESTRUCTIBLE: number;
@@ -102,6 +103,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         newBlockEntity(pos: $BlockPos_, state: $BlockState_): $BlockEntity;
         getListener<T extends $BlockEntity>(arg0: $ServerLevel, arg1: T): $GameEventListener;
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$Block>;
         shape: $VoxelShape;
         static UPDATE_NEIGHBORS: number;
@@ -124,7 +126,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     }
     export class $FenceGateBlockBuilder extends $ShapedBlockBuilder {
         behaviour(wt: string): this;
-        behaviour(wt: $WoodType_): this;
+        behaviour(wt: $WoodType): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         static FENCE_GATE_TAGS: $ResourceLocation[];
@@ -145,6 +147,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         canSurvive(blockState: $BlockState_, levelReader: $LevelReader, blockPos: $BlockPos_): boolean;
         randomTick(blockState: $BlockState_, serverLevel: $ServerLevel, blockPos: $BlockPos_, random: $RandomSource): void;
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$CropBlock>;
         static UPDATE_NEIGHBORS: number;
         static INDESTRUCTIBLE: number;
@@ -166,8 +169,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(builder: $CropBlockBuilder);
     }
     export class $ButtonBlockBuilder extends $ShapedBlockBuilder implements $ButtonOrPressurePlateBuilder {
-        ticksToStayPressed(ticks: $TickDuration_): this;
         behaviour(behaviour: $BlockSetType_): this;
+        ticksToStayPressed(ticks: $TickDuration_): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         static BUTTON_TAGS: $ResourceLocation[];
@@ -180,6 +183,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         newBlockEntity(pos: $BlockPos_, state: $BlockState_): $BlockEntity;
         getListener<T extends $BlockEntity>(arg0: $ServerLevel, arg1: T): $GameEventListener;
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$Block>;
         shape: $VoxelShape;
         static UPDATE_NEIGHBORS: number;
@@ -210,8 +214,8 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(i: $ResourceLocation_);
     }
     export class $DoorBlockBuilder extends $ShapedBlockBuilder {
-        behaviour(wt: $BlockSetType_): this;
         wooden(): this;
+        behaviour(wt: $BlockSetType_): this;
         static DOOR_TAGS: $ResourceLocation[];
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -222,6 +226,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     }
     export class $PressurePlateBlockBuilder$KubePressurePlateBlock extends $PressurePlateBlock {
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$PressurePlateBlock>;
         static UPDATE_NEIGHBORS: number;
         static INDESTRUCTIBLE: number;
@@ -265,18 +270,28 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(i: $ResourceLocation_);
     }
     export class $BasicKubeBlock extends $Block implements $SimpleWaterloggedBlock {
+        onRemove(state: $BlockState_, level: $Level_, pos: $BlockPos_, newState: $BlockState_, bl: boolean): void;
+        /**
+         * @deprecated
+         */
+        getFluidState(state: $BlockState_): $FluidState;
+        canBeReplaced(blockState: $BlockState_, context: $BlockPlaceContext): boolean;
+        /**
+         * @deprecated
+         */
+        getShadeBrightness(state: $BlockState_, level: $BlockGetter, pos: $BlockPos_): number;
+        /**
+         * @deprecated
+         */
+        getVisualShape(state: $BlockState_, level: $BlockGetter, pos: $BlockPos_, ctx: $CollisionContext): $VoxelShape;
+        isRandomlyTicking(state: $BlockState_): boolean;
+        getPickupSound(): ($SoundEvent) | undefined;
         rotate(blockState: $BlockState_, rotation: $Rotation_): $BlockState;
         /**
          * @deprecated
          */
         getShape(state: $BlockState_, level: $BlockGetter, pos: $BlockPos_, context: $CollisionContext): $VoxelShape;
-        canBeReplaced(blockState: $BlockState_, context: $BlockPlaceContext): boolean;
         propagatesSkylightDown(state: $BlockState_, level: $BlockGetter, pos: $BlockPos_): boolean;
-        mirror(blockState: $BlockState_, mirror: $Mirror_): $BlockState;
-        /**
-         * @deprecated
-         */
-        getFluidState(state: $BlockState_): $FluidState;
         useItemOn(stack: $ItemStack_, state: $BlockState_, level: $Level_, pos: $BlockPos_, player: $Player, hand: $InteractionHand_, hit: $BlockHitResult): $ItemInteractionResult;
         /**
          * @deprecated
@@ -286,26 +301,17 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
          * @deprecated
          */
         skipRendering(state: $BlockState_, state2: $BlockState_, direction: $Direction_): boolean;
-        isRandomlyTicking(state: $BlockState_): boolean;
-        getPickupSound(): ($SoundEvent) | undefined;
-        /**
-         * @deprecated
-         */
-        getShadeBrightness(state: $BlockState_, level: $BlockGetter, pos: $BlockPos_): number;
-        /**
-         * @deprecated
-         */
-        getVisualShape(state: $BlockState_, level: $BlockGetter, pos: $BlockPos_, ctx: $CollisionContext): $VoxelShape;
+        mirror(blockState: $BlockState_, mirror: $Mirror_): $BlockState;
         /**
          * @deprecated
          */
         randomTick(state: $BlockState_, level: $ServerLevel, pos: $BlockPos_, random: $RandomSource): void;
-        onRemove(state: $BlockState_, level: $Level_, pos: $BlockPos_, newState: $BlockState_, bl: boolean): void;
-        placeLiquid(levelAccessor: $LevelAccessor, blockPos: $BlockPos_, blockState: $BlockState_, fluidState: $FluidState): boolean;
         canPlaceLiquid(player: $Player, blockGetter: $BlockGetter, blockPos: $BlockPos_, blockState: $BlockState_, fluid: $Fluid_): boolean;
         pickupBlock(player: $Player, levelAccessor: $LevelAccessor, blockPos: $BlockPos_, blockState: $BlockState_): $ItemStack;
+        placeLiquid(levelAccessor: $LevelAccessor, blockPos: $BlockPos_, blockState: $BlockState_, fluidState: $FluidState): boolean;
         getPickupSound(arg0: $BlockState_): ($SoundEvent) | undefined;
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$Block>;
         shape: $VoxelShape;
         static UPDATE_NEIGHBORS: number;
@@ -329,31 +335,32 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     export class $ButtonOrPressurePlateBuilder {
     }
     export interface $ButtonOrPressurePlateBuilder {
-        ticksToStayPressed(ticks: $TickDuration_): this;
         behaviour(behaviour: $BlockSetType_): this;
+        ticksToStayPressed(ticks: $TickDuration_): this;
     }
     export class $PillarBlockBuilder$WithEntity extends $PillarBlockBuilder$PillarKubeBlock implements $EntityBlock {
         getTicker<T extends $BlockEntity>(level: $Level_, state: $BlockState_, blockEntityType: $BlockEntityType_<T>): $BlockEntityTicker<T>;
         newBlockEntity(pos: $BlockPos_, state: $BlockState_): $BlockEntity;
         getListener<T extends $BlockEntity>(arg0: $ServerLevel, arg1: T): $GameEventListener;
-        static UPDATE_IMMEDIATE: number;
-        static CODEC: $MapCodec<$Block>;
-        shape: $VoxelShape;
-        static UPDATE_NEIGHBORS: number;
-        static INDESTRUCTIBLE: number;
         static OCCLUSION_CACHE: $ThreadLocal<$Object2ByteLinkedOpenHashMap<$Block$BlockStatePairKey>>;
-        blockBuilder: $BlockBuilder;
         static UPDATE_NONE: number;
         static UPDATE_INVISIBLE: number;
         stateDefinition: $StateDefinition<$Block, $BlockState>;
         static UPDATE_MOVE_BY_PISTON: number;
         static UPDATE_LIMIT: number;
-        static BLOCK_STATE_REGISTRY: $IdMapper<$BlockState>;
         static UPDATE_ALL: number;
-        shapeX: $VoxelShape;
-        static UPDATE_ALL_IMMEDIATE: number;
         static UPDATE_KNOWN_SHAPE: number;
         static UPDATE_SUPPRESS_DROPS: number;
+        static UPDATE_IMMEDIATE: number;
+        item: $Item;
+        static CODEC: $MapCodec<$Block>;
+        shape: $VoxelShape;
+        static UPDATE_NEIGHBORS: number;
+        static INDESTRUCTIBLE: number;
+        blockBuilder: $BlockBuilder;
+        static BLOCK_STATE_REGISTRY: $IdMapper<$BlockState>;
+        shapeX: $VoxelShape;
+        static UPDATE_ALL_IMMEDIATE: number;
         static INSTANT: number;
         static UPDATE_CLIENTS: number;
         shapeY: $VoxelShape;
@@ -363,22 +370,22 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     }
     export class $CropBlockBuilder$ShapeBuilder {
         /**
+         * Makes the block to have a box like wheat for each stage.
+         */
+        wheat(): $CropBlockBuilder$ShapeBuilder;
+        /**
          * Describe the shape of the crop at a specific age.
          * min/max coordinates are double values between 0 and 16.
          */
         shape(age: number, minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): $CropBlockBuilder$ShapeBuilder;
         /**
-         * Makes the block to have a box like wheat for each stage.
+         * Makes the block to have a box like beetroot for each stage.
          */
-        wheat(): $CropBlockBuilder$ShapeBuilder;
+        beetroot(): $CropBlockBuilder$ShapeBuilder;
         /**
          * Makes the block to have a box like carrot for each stage.
          */
         carrot(): $CropBlockBuilder$ShapeBuilder;
-        /**
-         * Makes the block to have a box like beetroot for each stage.
-         */
-        beetroot(): $CropBlockBuilder$ShapeBuilder;
         /**
          * Makes the block to have a box like potato for each stage.
          */
@@ -388,24 +395,25 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         get shapes(): $List<$VoxelShape>;
     }
     export class $PillarBlockBuilder$PillarKubeBlock extends $BasicKubeBlock {
-        static UPDATE_IMMEDIATE: number;
-        static CODEC: $MapCodec<$Block>;
-        shape: $VoxelShape;
-        static UPDATE_NEIGHBORS: number;
-        static INDESTRUCTIBLE: number;
         static OCCLUSION_CACHE: $ThreadLocal<$Object2ByteLinkedOpenHashMap<$Block$BlockStatePairKey>>;
-        blockBuilder: $BlockBuilder;
         static UPDATE_NONE: number;
         static UPDATE_INVISIBLE: number;
         stateDefinition: $StateDefinition<$Block, $BlockState>;
         static UPDATE_MOVE_BY_PISTON: number;
         static UPDATE_LIMIT: number;
-        static BLOCK_STATE_REGISTRY: $IdMapper<$BlockState>;
         static UPDATE_ALL: number;
-        shapeX: $VoxelShape;
-        static UPDATE_ALL_IMMEDIATE: number;
         static UPDATE_KNOWN_SHAPE: number;
         static UPDATE_SUPPRESS_DROPS: number;
+        static UPDATE_IMMEDIATE: number;
+        item: $Item;
+        static CODEC: $MapCodec<$Block>;
+        shape: $VoxelShape;
+        static UPDATE_NEIGHBORS: number;
+        static INDESTRUCTIBLE: number;
+        blockBuilder: $BlockBuilder;
+        static BLOCK_STATE_REGISTRY: $IdMapper<$BlockState>;
+        shapeX: $VoxelShape;
+        static UPDATE_ALL_IMMEDIATE: number;
         static INSTANT: number;
         static UPDATE_CLIENTS: number;
         shapeY: $VoxelShape;
@@ -414,30 +422,30 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
         constructor(p: $BlockBuilder);
     }
     export class $CropBlockBuilder extends $BlockBuilder {
+        bonemeal(bonemealCallback: $ToIntFunction_<$RandomTickCallback>): this;
+        survive(surviveCallback: $CropBlockBuilder$SurviveCallback_): this;
+        growTick(growSpeedCallback: $ToDoubleFunction_<$RandomTickCallback>): this;
         /**
-         * Set the age of the crop. Note that the box will be the same for all ages (A full block size).
+         * Remove seed drops from the loot table, does not prevent seed item from creating.
          */
-        age(age: number): this;
-        /**
-         * Set the age of the crop and the shape of the crop at that age.
-         */
-        age(age: number, builder: $Consumer_<$CropBlockBuilder$ShapeBuilder>): this;
+        noSeeds(): this;
         farmersCanPlant(): this;
-        /**
-         * Add a crop output with exactly one output.
-         */
-        crop(output: $Holder_<$Item>): this;
         /**
          * Add a crop output with a specific amount.
          */
         crop(output: $Holder_<$Item>, chance: $NumberProvider_): this;
         /**
-         * Remove seed drops from the loot table, does not prevent seed item from creating.
+         * Add a crop output with exactly one output.
          */
-        noSeeds(): this;
-        survive(surviveCallback: $CropBlockBuilder$SurviveCallback_): this;
-        bonemeal(bonemealCallback: $ToIntFunction_<$RandomTickCallback>): this;
-        growTick(growSpeedCallback: $ToDoubleFunction_<$RandomTickCallback>): this;
+        crop(output: $Holder_<$Item>): this;
+        /**
+         * Set the age of the crop and the shape of the crop at that age.
+         */
+        age(age: number, builder: $Consumer_<$CropBlockBuilder$ShapeBuilder>): this;
+        /**
+         * Set the age of the crop. Note that the box will be the same for all ages (A full block size).
+         */
+        age(age: number): this;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         static CROP_ITEM_TAGS: $ResourceLocation[];
@@ -448,6 +456,7 @@ declare module "@package/dev/latvian/mods/kubejs/block/custom" {
     }
     export class $CardinalBlockBuilder$CardinalKubeBlock extends $BasicKubeBlock {
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$Block>;
         shape: $VoxelShape;
         static UPDATE_NEIGHBORS: number;

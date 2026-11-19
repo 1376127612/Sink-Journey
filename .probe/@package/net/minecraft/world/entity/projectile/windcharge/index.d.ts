@@ -1,3 +1,4 @@
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $ExplosionDamageCalculator, $Level_ } from "@package/net/minecraft/world/level";
 import { $BlockPos } from "@package/net/minecraft/core";
 import { $ItemStack } from "@package/net/minecraft/world/item";
@@ -14,6 +15,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -53,6 +55,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
@@ -60,6 +63,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
@@ -72,6 +76,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -111,6 +116,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
@@ -118,18 +124,20 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$AbstractWindCharge>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $Vec3_);
         constructor(player: $Player, level: $Level_, x: number, arg3: number, y: number);
-        constructor(entityType: $EntityType_<$AbstractWindCharge>, level: $Level_);
     }
     export class $BreezeWindCharge extends $AbstractWindCharge {
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -169,6 +177,7 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
@@ -176,10 +185,11 @@ declare module "@package/net/minecraft/world/entity/projectile/windcharge" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$AbstractWindCharge>, level: $Level_);
         constructor(breeze: $Breeze, level: $Level_);
+        constructor(entityType: $EntityType_<$AbstractWindCharge>, level: $Level_);
     }
 }

@@ -6,13 +6,13 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/com/nred/nuclearcraft/multiblock/fisson/molten_salt" {
     export class $FissionCoolantHeaterPortType implements $StringRepresentable, $IMultiblockVariant {
+        getBlockProperties(): $BlockBehaviour$Properties;
+        getTranslationKey(): string;
+        getSerializedName(): string;
+        getCoolantId(): $ResourceLocation;
+        static default_values(): $List<$FissionCoolantHeaterPortType>;
         getName(): string;
         getId(): number;
-        getSerializedName(): string;
-        getTranslationKey(): string;
-        static default_values(): $List<$FissionCoolantHeaterPortType>;
-        getBlockProperties(): $BlockBehaviour$Properties;
-        getCoolantId(): $ResourceLocation;
         getRemappedEnumConstantName(): string;
         getDefaultBlockProperties(): $BlockBehaviour$Properties;
         static GOLD: $FissionCoolantHeaterPortType;
@@ -48,12 +48,12 @@ declare module "@package/com/nred/nuclearcraft/multiblock/fisson/molten_salt" {
         static LEAD: $FissionCoolantHeaterPortType;
         static FLUORITE: $FissionCoolantHeaterPortType;
         constructor(arg0: string, arg1: $ResourceLocation_);
+        get blockProperties(): $BlockBehaviour$Properties;
+        get translationKey(): string;
+        get serializedName(): string;
+        get coolantId(): $ResourceLocation;
         get name(): string;
         get id(): number;
-        get serializedName(): string;
-        get translationKey(): string;
-        get blockProperties(): $BlockBehaviour$Properties;
-        get coolantId(): $ResourceLocation;
         get remappedEnumConstantName(): string;
         get defaultBlockProperties(): $BlockBehaviour$Properties;
     }

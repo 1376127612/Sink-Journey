@@ -49,12 +49,22 @@ declare module "@package/java/math" {
         shiftLeft(arg0: number): $BigInteger;
         setBit(arg0: number): $BigInteger;
         multiply(arg0: $BigInteger): $BigInteger;
-        toByteArray(): number[];
         or(arg0: $BigInteger): $BigInteger;
         negate(): $BigInteger;
         and(arg0: $BigInteger): $BigInteger;
         not(): $BigInteger;
+        toByteArray(): number[];
         remainder(arg0: $BigInteger): $BigInteger;
+        sqrtAndRemainder(): $BigInteger[];
+        gcd(arg0: $BigInteger): $BigInteger;
+        xor(arg0: $BigInteger): $BigInteger;
+        andNot(arg0: $BigInteger): $BigInteger;
+        clearBit(arg0: number): $BigInteger;
+        flipBit(arg0: number): $BigInteger;
+        isProbablePrime(arg0: number): boolean;
+        intValueExact(): number;
+        shortValueExact(): number;
+        byteValueExact(): number;
         divide(arg0: $BigInteger): $BigInteger;
         longValueExact(): number;
         divideAndRemainder(arg0: $BigInteger): $BigInteger[];
@@ -68,16 +78,6 @@ declare module "@package/java/math" {
         static probablePrime(arg0: number, arg1: $Random): $BigInteger;
         nextProbablePrime(): $BigInteger;
         parallelMultiply(arg0: $BigInteger): $BigInteger;
-        sqrtAndRemainder(): $BigInteger[];
-        gcd(arg0: $BigInteger): $BigInteger;
-        xor(arg0: $BigInteger): $BigInteger;
-        andNot(arg0: $BigInteger): $BigInteger;
-        clearBit(arg0: number): $BigInteger;
-        flipBit(arg0: number): $BigInteger;
-        isProbablePrime(arg0: number): boolean;
-        intValueExact(): number;
-        shortValueExact(): number;
-        byteValueExact(): number;
         static ZERO: $BigInteger;
         static ONE: $BigInteger;
         static TEN: $BigInteger;
@@ -97,66 +97,66 @@ declare module "@package/java/math" {
         abs(): $BigDecimal;
         abs(arg0: $MathContext): $BigDecimal;
         sqrt(arg0: $MathContext): $BigDecimal;
-        pow(arg0: number): $BigDecimal;
         pow(arg0: number, arg1: $MathContext): $BigDecimal;
+        pow(arg0: number): $BigDecimal;
         min(arg0: $BigDecimal): $BigDecimal;
         max(arg0: $BigDecimal): $BigDecimal;
         round(arg0: $MathContext): $BigDecimal;
         signum(): number;
         compareTo(arg0: $BigDecimal): number;
-        static valueOf(arg0: number): $BigDecimal;
-        static valueOf(arg0: number): $BigDecimal;
         static valueOf(arg0: number, arg1: number): $BigDecimal;
+        static valueOf(arg0: number): $BigDecimal;
+        static valueOf(arg0: number): $BigDecimal;
         scale(): number;
-        add(arg0: $BigDecimal): $BigDecimal;
         add(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
+        add(arg0: $BigDecimal): $BigDecimal;
         multiply(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         multiply(arg0: $BigDecimal): $BigDecimal;
         ulp(): $BigDecimal;
-        negate(arg0: $MathContext): $BigDecimal;
         negate(): $BigDecimal;
+        negate(arg0: $MathContext): $BigDecimal;
         remainder(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         remainder(arg0: $BigDecimal): $BigDecimal;
+        intValueExact(): number;
+        shortValueExact(): number;
+        byteValueExact(): number;
+        plus(): $BigDecimal;
+        plus(arg0: $MathContext): $BigDecimal;
+        precision(): number;
+        divide(arg0: $BigDecimal): $BigDecimal;
         divide(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
         divide(arg0: $BigDecimal, arg1: number, arg2: $RoundingMode_): $BigDecimal;
         /**
          * @deprecated
          */
-        divide(arg0: $BigDecimal, arg1: number): $BigDecimal;
+        divide(arg0: $BigDecimal, arg1: number, arg2: number): $BigDecimal;
+        divide(arg0: $BigDecimal, arg1: $RoundingMode_): $BigDecimal;
         /**
          * @deprecated
          */
-        divide(arg0: $BigDecimal, arg1: number, arg2: number): $BigDecimal;
-        divide(arg0: $BigDecimal, arg1: $RoundingMode_): $BigDecimal;
-        divide(arg0: $BigDecimal): $BigDecimal;
-        divideToIntegralValue(arg0: $BigDecimal): $BigDecimal;
+        divide(arg0: $BigDecimal, arg1: number): $BigDecimal;
         divideToIntegralValue(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
+        divideToIntegralValue(arg0: $BigDecimal): $BigDecimal;
         longValueExact(): number;
         movePointRight(arg0: number): $BigDecimal;
         toBigIntegerExact(): $BigInteger;
         divideAndRemainder(arg0: $BigDecimal): $BigDecimal[];
         divideAndRemainder(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal[];
-        subtract(arg0: $BigDecimal): $BigDecimal;
         subtract(arg0: $BigDecimal, arg1: $MathContext): $BigDecimal;
+        subtract(arg0: $BigDecimal): $BigDecimal;
         toBigInteger(): $BigInteger;
-        intValueExact(): number;
-        shortValueExact(): number;
-        byteValueExact(): number;
-        plus(arg0: $MathContext): $BigDecimal;
-        plus(): $BigDecimal;
-        precision(): number;
-        stripTrailingZeros(): $BigDecimal;
-        scaleByPowerOfTen(arg0: number): $BigDecimal;
-        movePointLeft(arg0: number): $BigDecimal;
-        toEngineeringString(): string;
-        toPlainString(): string;
         unscaledValue(): $BigInteger;
+        setScale(arg0: number): $BigDecimal;
         /**
          * @deprecated
          */
         setScale(arg0: number, arg1: number): $BigDecimal;
         setScale(arg0: number, arg1: $RoundingMode_): $BigDecimal;
-        setScale(arg0: number): $BigDecimal;
+        stripTrailingZeros(): $BigDecimal;
+        scaleByPowerOfTen(arg0: number): $BigDecimal;
+        movePointLeft(arg0: number): $BigDecimal;
+        toEngineeringString(): string;
+        toPlainString(): string;
         static ZERO: $BigDecimal;
         /**
          * @deprecated

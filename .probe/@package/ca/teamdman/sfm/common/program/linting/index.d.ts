@@ -25,8 +25,8 @@ declare module "@package/ca/teamdman/sfm/common/program/linting" {
     export class $ProblemTracker extends $Record {
         size(): number;
         add(arg0: $TranslatableContents): $ProblemTracker$AddProblemResult;
-        isSaturated(): boolean;
         problems(): $HashSet<$TranslatableContents>;
+        isSaturated(): boolean;
         constructor();
         constructor(problems: $HashSet<$TranslatableContents>);
         get saturated(): boolean;
@@ -38,8 +38,8 @@ declare module "@package/ca/teamdman/sfm/common/program/linting" {
     export class $IProgramLinter {
     }
     export interface $IProgramLinter {
-        fixWarnings(arg0: $Program_, arg1: $LabelPositionHolder_, arg2: $ManagerBlockEntity, arg3: $Level_, arg4: $ItemStack_): void;
         gatherWarnings(arg0: $Program_, arg1: $LabelPositionHolder_, arg2: $ManagerBlockEntity, arg3: $ProblemTracker_): void;
+        fixWarnings(arg0: $Program_, arg1: $LabelPositionHolder_, arg2: $ManagerBlockEntity, arg3: $Level_, arg4: $ItemStack_): void;
     }
     /**
      * Values that may be interpreted as {@link $IProgramLinter}.

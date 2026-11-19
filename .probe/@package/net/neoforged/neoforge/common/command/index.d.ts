@@ -4,9 +4,9 @@ import { $EntitySelector, $EntitySelectorParser } from "@package/net/minecraft/c
 
 declare module "@package/net/neoforged/neoforge/common/command" {
     export class $EntitySelectorManager {
-        static register(arg0: string, arg1: $IEntitySelectorType): void;
         static parseSelector(arg0: $EntitySelectorParser): $EntitySelector;
         static fillSelectorSuggestions(arg0: $SuggestionsBuilder): void;
+        static register(arg0: string, arg1: $IEntitySelectorType): void;
         constructor();
     }
     export class $IEntitySelectorType {

@@ -1,4 +1,5 @@
 import { $RenderType } from "@package/net/minecraft/client/renderer";
+import { $AgeableListModelAccessor as $AgeableListModelAccessor$1 } from "@package/net/mehvahdjukaar/moonlight/core/mixins/accessor";
 import { $HumanoidArm, $Entity, $LivingEntity, $HumanoidArm_, $Mob } from "@package/net/minecraft/world/entity";
 import { $AbstractWindCharge } from "@package/net/minecraft/world/entity/projectile/windcharge";
 import { $Goat } from "@package/net/minecraft/world/entity/animal/goat";
@@ -29,6 +30,7 @@ import { $VertexConsumer, $PoseStack } from "@package/com/mojang/blaze3d/vertex"
 import { $Bogged, $Zombie, $Monster, $Slime, $Strider, $Guardian, $Giant, $Shulker, $Ravager, $Phantom, $Vex, $AbstractIllager } from "@package/net/minecraft/world/entity/monster";
 import { $WitherBoss } from "@package/net/minecraft/world/entity/boss/wither";
 import { $Boat } from "@package/net/minecraft/world/entity/vehicle";
+import { $Vector3f } from "@package/org/joml";
 export * as geom from "@package/net/minecraft/client/model/geom";
 export * as dragon from "@package/net/minecraft/client/model/dragon";
 
@@ -43,27 +45,27 @@ declare module "@package/net/minecraft/client/model" {
      */
     export type $WaterPatchModel_ = (() => $ModelPart);
     export class $RabbitModel<T extends $Rabbit> extends $EntityModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
-        handler$dpa004$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$ddh004$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $BoatModel extends $ListModel<$Boat> implements $WaterPatchModel {
-        waterPatch(): $ModelPart;
-        parts(): $ImmutableList<$ModelPart>;
-        static createBodyModel(): $LayerDefinition;
-        static createChildren(root: $PartDefinition): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Boat, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static createBodyModel(): $LayerDefinition;
+        waterPatch(): $ModelPart;
+        static createChildren(root: $PartDefinition): void;
+        parts(): $ImmutableList<$ModelPart>;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -71,28 +73,29 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $EndermiteModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $RaftModel extends $ListModel<$Boat> {
-        parts(): $ImmutableList<$ModelPart>;
-        static createBodyModel(): $LayerDefinition;
-        static createChildren(root: $PartDefinition): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Boat, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static createBodyModel(): $LayerDefinition;
+        static createChildren(root: $PartDefinition): void;
+        parts(): $ImmutableList<$ModelPart>;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $ShieldModel extends $Model {
-        handle(): $ModelPart;
         plate(): $ModelPart;
         static createLayer(): $LayerDefinition;
+        handle(): $ModelPart;
         constructor(root: $ModelPart);
     }
     export class $QuadrupedModel<T extends $Entity> extends $AgeableListModel<T> {
@@ -192,6 +195,7 @@ declare module "@package/net/minecraft/client/model" {
     export type $ArmedModel_ = ((arg0: $HumanoidArm, arg1: $PoseStack) => void);
     export class $PufferfishMidModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -199,11 +203,12 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $VexModel extends $HierarchicalModel<$Vex> implements $ArmedModel {
         static createBodyLayer(): $LayerDefinition;
+        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Vex, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -227,11 +232,11 @@ declare module "@package/net/minecraft/client/model" {
         constructor(root: $ModelPart);
     }
     export class $CatModel<T extends $Cat> extends $OcelotModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         scaleHead: boolean;
         attackTime: number;
         babyZHeadOffset: number;
@@ -254,29 +259,30 @@ declare module "@package/net/minecraft/client/model" {
      */
     export type $HeadedModel_ = (() => $ModelPart);
     export class $AnimationUtils {
+        static bobModelPart(modelPart: $ModelPart, ageInTicks: number, multiplier: number): void;
+        static swingWeaponDown<T extends $Mob>(rightArm: $ModelPart, leftArm: $ModelPart, mob: T, attackTime: number, ageInTicks: number): void;
         static bobArms(rightArm: $ModelPart, leftArm: $ModelPart, ageInTicks: number): void;
         static animateZombieArms(leftArm: $ModelPart, rightArm: $ModelPart, isAggressive: boolean, attackTime: number, ageInTicks: number): void;
-        static swingWeaponDown<T extends $Mob>(rightArm: $ModelPart, leftArm: $ModelPart, mob: T, attackTime: number, ageInTicks: number): void;
-        static animateCrossbowHold(rightArm: $ModelPart, leftArm: $ModelPart, head: $ModelPart, rightHanded: boolean): void;
         static animateCrossbowCharge(rightArm: $ModelPart, leftArm: $ModelPart, livingEntity: $LivingEntity, rightHanded: boolean): void;
-        static bobModelPart(modelPart: $ModelPart, ageInTicks: number, multiplier: number): void;
+        static animateCrossbowHold(rightArm: $ModelPart, leftArm: $ModelPart, head: $ModelPart, rightHanded: boolean): void;
         constructor();
     }
     export class $BlazeModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $ZombieVillagerModel<T extends $Zombie> extends $HumanoidModel<T> implements $VillagerHeadModel {
-        hatVisible(visible: boolean): void;
-        static createArmorLayer(cubeDeformation: $CubeDeformation): $LayerDefinition;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static createArmorLayer(cubeDeformation: $CubeDeformation): $LayerDefinition;
+        hatVisible(visible: boolean): void;
         scaleHead: boolean;
         young: boolean;
         rightArm: $ModelPart;
@@ -305,12 +311,12 @@ declare module "@package/net/minecraft/client/model" {
         constructor(root: $ModelPart);
     }
     export class $FoxModel<T extends $Fox> extends $AgeableListModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         head: $ModelPart;
         scaleHead: boolean;
         attackTime: number;
@@ -325,32 +331,36 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $EvokerFangsModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $AgeableHierarchicalModel<E extends $Entity> extends $HierarchicalModel<E> {
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
-        constructor(youngScaleFactor: number, bodyYOffset: number);
         constructor(youngScaleFactor: number, bodyYOffset: number, renderType: $Function_<$ResourceLocation, $RenderType>);
+        constructor(youngScaleFactor: number, bodyYOffset: number);
     }
     export class $HierarchicalModel<E extends $Entity> extends $EntityModel<E> {
-        root(): $ModelPart;
-        handler$dpb005$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$ddi005$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         getAnyDescendantWithName(name: string): ($ModelPart) | undefined;
+        root(): $ModelPart;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor();
         constructor(renderType: $Function_<$ResourceLocation, $RenderType>);
     }
-    export class $AgeableListModel<E extends $Entity> extends $EntityModel<E> implements $AgeableListModelAccessor {
-        handler$dof000$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+    export class $AgeableListModel<E extends $Entity> extends $EntityModel<E> implements $AgeableListModelAccessor, $AgeableListModelAccessor$1 {
+        handler$dcm000$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         create$callHeadParts(): $Iterable<$ModelPart>;
         create$callBodyParts(): $Iterable<$ModelPart>;
+        moonlight$invokeBodyParts(): $Iterable<$ModelPart>;
         scaleHead: boolean;
         attackTime: number;
         babyZHeadOffset: number;
@@ -362,8 +372,8 @@ declare module "@package/net/minecraft/client/model" {
         bodyYOffset: number;
     }
     export class $ArmorStandModel extends $ArmorStandArmorModel {
-        static createBodyLayer(): $LayerDefinition;
         prepareMobModel(entity: $ArmorStand, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        static createBodyLayer(): $LayerDefinition;
         scaleHead: boolean;
         young: boolean;
         rightArm: $ModelPart;
@@ -396,6 +406,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $SilverfishModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -419,20 +430,22 @@ declare module "@package/net/minecraft/client/model" {
         constructor(root: $ModelPart);
     }
     export class $RavagerModel extends $HierarchicalModel<$Ravager> {
+        prepareMobModel(entity: $Ravager, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Ravager, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: $Ravager, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $SnowGolemModel<T extends $Entity> extends $HierarchicalModel<T> {
-        getHead(): $ModelPart;
         static createBodyLayer(): $LayerDefinition;
+        getHead(): $ModelPart;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -462,18 +475,19 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Guardian, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $SheepModel<T extends $Sheep> extends $QuadrupedModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         scaleHead: boolean;
         attackTime: number;
         babyZHeadOffset: number;
@@ -487,6 +501,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $SquidModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -512,16 +527,17 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        getBioluminescentLayerModelParts(): $List<$ModelPart>;
         getPulsatingSpotsLayerModelParts(): $List<$ModelPart>;
+        getBioluminescentLayerModelParts(): $List<$ModelPart>;
         getTendrilsLayerModelParts(): $List<$ModelPart>;
         getHeartLayerModelParts(): $List<$ModelPart>;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
-        get bioluminescentLayerModelParts(): $List<$ModelPart>;
         get pulsatingSpotsLayerModelParts(): $List<$ModelPart>;
+        get bioluminescentLayerModelParts(): $List<$ModelPart>;
         get tendrilsLayerModelParts(): $List<$ModelPart>;
         get heartLayerModelParts(): $List<$ModelPart>;
     }
@@ -557,12 +573,12 @@ declare module "@package/net/minecraft/client/model" {
         constructor(root: $ModelPart);
     }
     export class $HorseModel<T extends $AbstractHorse> extends $AgeableListModel<T> {
-        static createBodyMesh(cubeDeformation: $CubeDeformation): $MeshDefinition;
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        static createBodyMesh(cubeDeformation: $CubeDeformation): $MeshDefinition;
         headParts(): $Iterable<$ModelPart>;
         scaleHead: boolean;
         attackTime: number;
@@ -577,11 +593,12 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $AllayModel extends $HierarchicalModel<$Allay> implements $ArmedModel {
         static createBodyLayer(): $LayerDefinition;
+        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Allay, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -606,12 +623,12 @@ declare module "@package/net/minecraft/client/model" {
         constructor(root: $ModelPart);
     }
     export class $EntityModel<T extends $Entity> extends $Model {
+        copyPropertiesTo(otherModel: $EntityModel<T>): void;
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        copyPropertiesTo(otherModel: $EntityModel<T>): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -622,6 +639,7 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Armadillo, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -641,11 +659,11 @@ declare module "@package/net/minecraft/client/model" {
      */
     export type $ParrotModel$State_ = "flying" | "standing" | "sitting" | "party" | "on_shoulder";
     export class $WolfModel<T extends $Wolf> extends $ColorableAgeableListModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createMeshDefinition(cubeDeformation: $CubeDeformation): $MeshDefinition;
         scaleHead: boolean;
         attackTime: number;
@@ -670,6 +688,7 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Bat, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -678,23 +697,24 @@ declare module "@package/net/minecraft/client/model" {
     export class $SlimeModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createOuterBodyLayer(): $LayerDefinition;
         static createInnerBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $SkullModel extends $SkullModelBase {
-        static createMobHeadLayer(): $LayerDefinition;
         static createHeadModel(): $MeshDefinition;
         static createHumanoidHeadLayer(): $LayerDefinition;
+        static createMobHeadLayer(): $LayerDefinition;
         constructor(root: $ModelPart);
     }
     export class $SheepFurModel<T extends $Sheep> extends $QuadrupedModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createFurLayer(): $LayerDefinition;
         scaleHead: boolean;
         attackTime: number;
@@ -747,13 +767,13 @@ declare module "@package/net/minecraft/client/model" {
         babyBodyScale: number;
         rightEar: $ModelPart;
         rightArmPose: $HumanoidModel$ArmPose;
-        constructor(root: $ModelPart);
+        constructor(arg0: $ModelPart);
     }
     export class $HumanoidModel$ArmPose extends $Enum<$HumanoidModel$ArmPose> implements $IExtensibleEnum {
         static values(): $HumanoidModel$ArmPose[];
         static valueOf(arg0: string): $HumanoidModel$ArmPose;
-        static getExtensionInfo(): $ExtensionInfo;
         applyTransform<T extends $LivingEntity>(arg0: $HumanoidModel<T>, arg1: T, arg2: $HumanoidArm_): void;
+        static getExtensionInfo(): $ExtensionInfo;
         isTwoHanded(): boolean;
         static ITEM: $HumanoidModel$ArmPose;
         static BOW_AND_ARROW: $HumanoidModel$ArmPose;
@@ -774,31 +794,33 @@ declare module "@package/net/minecraft/client/model" {
     export type $HumanoidModel$ArmPose_ = "empty" | "item" | "block" | "bow_and_arrow" | "throw_spear" | "crossbow_charge" | "crossbow_hold" | "spyglass" | "toot_horn" | "brush";
     export class $GhastModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $Model {
-        renderType(location: $ResourceLocation_): $RenderType;
         renderToBuffer(poseStack: $PoseStack, vertexConsumer: $VertexConsumer, packedLight: number, packedOverlay: number): void;
         renderToBuffer(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number, color: number): void;
+        renderType(location: $ResourceLocation_): $RenderType;
         constructor(renderType: $Function_<$ResourceLocation, $RenderType>);
     }
     export class $PufferfishBigModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $BeeModel<T extends $Bee> extends $AgeableListModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         scaleHead: boolean;
         attackTime: number;
         babyZHeadOffset: number;
@@ -829,15 +851,17 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $SalmonModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $VillagerModel<T extends $Entity> extends $HierarchicalModel<T> implements $HeadedModel, $VillagerHeadModel {
-        hatVisible(visible: boolean): void;
         static createBodyModel(): $MeshDefinition;
+        hatVisible(visible: boolean): void;
         getHead(): $ModelPart;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -846,6 +870,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $TropicalFishModelA<T extends $Entity> extends $ColorableHierarchicalModel<T> {
         static createBodyLayer(cubeDeformation: $CubeDeformation): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -853,6 +878,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $TropicalFishModelB<T extends $Entity> extends $ColorableHierarchicalModel<T> {
         static createBodyLayer(cubeDeformation: $CubeDeformation): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -872,14 +898,15 @@ declare module "@package/net/minecraft/client/model" {
         constructor(root: $ModelPart);
     }
     export class $IllagerModel<T extends $AbstractIllager> extends $HierarchicalModel<T> implements $ArmedModel, $HeadedModel {
-        getHat(): $ModelPart;
-        getHead(): $ModelPart;
         static createBodyLayer(): $LayerDefinition;
+        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
+        getHat(): $ModelPart;
+        getHead(): $ModelPart;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -893,24 +920,25 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $BookModel extends $Model {
-        render(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number, color: number): void;
         static createBodyLayer(): $LayerDefinition;
         setupAnim(time: number, rightPageFlipAmount: number, leftPageFlipAmount: number, bookOpenAmount: number): void;
+        render(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number, color: number): void;
         constructor(root: $ModelPart);
     }
     export class $DrownedModel<T extends $Zombie> extends $ZombieModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(cubeDeformation: $CubeDeformation): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         scaleHead: boolean;
         young: boolean;
         rightArm: $ModelPart;
@@ -940,15 +968,19 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $HumanoidModel<T extends $LivingEntity> extends $AgeableListModel<T> implements $ArmedModel, $HeadedModel {
         static createMesh(cubeDeformation: $CubeDeformation, yOffset: number): $MeshDefinition;
-        getHead(): $ModelPart;
+        handler$gha001$moonlight$poseRightArm(arg0: $LivingEntity, arg1: $CallbackInfo): void;
+        handler$gha000$moonlight$poseLeftArm(arg0: $LivingEntity, arg1: $CallbackInfo): void;
+        copyPropertiesTo(model: $HumanoidModel<T>): void;
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        copyPropertiesTo(model: $HumanoidModel<T>): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        getHead(): $ModelPart;
         setAllVisible(visible: boolean): void;
-        translateToHand(side: $HumanoidArm_, poseStack: $PoseStack): void;
+        handler$gha000$moonlight$setupAnim(arg0: $LivingEntity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CallbackInfo): void;
+        handler$ein000$spectrum$tpose(arg0: $LivingEntity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         scaleHead: boolean;
         young: boolean;
         rightArm: $ModelPart;
@@ -979,8 +1011,8 @@ declare module "@package/net/minecraft/client/model" {
         set allVisible(value: boolean);
     }
     export class $CowModel<T extends $Entity> extends $QuadrupedModel<T> {
-        getHead(): $ModelPart;
         static createBodyLayer(): $LayerDefinition;
+        getHead(): $ModelPart;
         scaleHead: boolean;
         attackTime: number;
         babyZHeadOffset: number;
@@ -995,15 +1027,16 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $CreeperModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(cubeDeformation: $CubeDeformation): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $PlayerModel<T extends $LivingEntity> extends $HumanoidModel<T> {
-        renderEars(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number): void;
         static createMesh(cubeDeformation: $CubeDeformation, slim: boolean): $MeshDefinition;
         renderCloak(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number): void;
+        renderEars(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number): void;
         getRandomModelPart(random: $RandomSource): $ModelPart;
         scaleHead: boolean;
         young: boolean;
@@ -1045,6 +1078,7 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Strider, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1052,6 +1086,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $MinecartModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1059,30 +1094,32 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $SpiderModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createSpiderBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $WitchModel<T extends $Entity> extends $VillagerModel<T> {
-        getNose(): $ModelPart;
-        setHoldingItem(holdingItem: boolean): void;
         static createBodyLayer(): $LayerDefinition;
+        setHoldingItem(holdingItem: boolean): void;
+        getNose(): $ModelPart;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
-        get nose(): $ModelPart;
         set holdingItem(value: boolean);
+        get nose(): $ModelPart;
     }
     export class $ShulkerModel<T extends $Shulker> extends $ListModel<T> {
-        getLid(): $ModelPart;
-        getHead(): $ModelPart;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        getLid(): $ModelPart;
+        getHead(): $ModelPart;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1097,14 +1134,15 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $CodModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $ListModel<E extends $Entity> extends $EntityModel<E> {
+        handler$ddc001$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         parts(): $Iterable<$ModelPart>;
-        handler$dol001$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1112,12 +1150,13 @@ declare module "@package/net/minecraft/client/model" {
         constructor(arg0: $Function_<$ResourceLocation, $RenderType>);
     }
     export class $SkeletonModel<T extends $Mob> extends $HumanoidModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        handler$gie000$apotheosis$apoth_setupCrossbowAnimations(arg0: $Mob, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         scaleHead: boolean;
         young: boolean;
         rightArm: $ModelPart;
@@ -1168,6 +1207,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $DolphinModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1179,21 +1219,23 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $BreezeModel<T extends $Breeze> extends $HierarchicalModel<T> {
-        head(): $ModelPart;
-        wind(): $ModelPart;
         eyes(): $ModelPart;
+        wind(): $ModelPart;
         static createBodyLayer(width: number, height: number): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        head(): $ModelPart;
         rods(): $ModelPart;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1251,6 +1293,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $LeashKnotModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1262,6 +1305,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $ColorableHierarchicalModel<E extends $Entity> extends $HierarchicalModel<E> {
         setColor(color: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1269,13 +1313,14 @@ declare module "@package/net/minecraft/client/model" {
         set color(value: number);
     }
     export class $ParrotModel extends $HierarchicalModel<$Parrot> {
-        renderOnShoulder(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number, limbSwing: number, limbSwingAmount: number, netHeadYaw: number, headPitch: number, tickCount: number): void;
+        prepareMobModel(entity: $Parrot, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $Parrot, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: $Parrot, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        renderOnShoulder(poseStack: $PoseStack, buffer: $VertexConsumer, packedLight: number, packedOverlay: number, limbSwing: number, limbSwingAmount: number, netHeadYaw: number, headPitch: number, tickCount: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1287,7 +1332,7 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        handler$doo003$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$ddf003$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1299,6 +1344,7 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1331,13 +1377,14 @@ declare module "@package/net/minecraft/client/model" {
         constructor(root: $ModelPart);
     }
     export class $IronGolemModel<T extends $IronGolem> extends $HierarchicalModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         getFlowerHoldingArm(): $ModelPart;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1345,24 +1392,26 @@ declare module "@package/net/minecraft/client/model" {
         get flowerHoldingArm(): $ModelPart;
     }
     export class $LavaSlimeModel<T extends $Slime> extends $HierarchicalModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $WitherBossModel<T extends $WitherBoss> extends $HierarchicalModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(cubeDeformation: $CubeDeformation): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1378,6 +1427,7 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1447,6 +1497,7 @@ declare module "@package/net/minecraft/client/model" {
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $AbstractWindCharge, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1489,18 +1540,19 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $LlamaSpitModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
         constructor(root: $ModelPart);
     }
     export class $PandaModel<T extends $Panda> extends $QuadrupedModel<T> {
+        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         static createBodyLayer(): $LayerDefinition;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: T, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: T, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         scaleHead: boolean;
         attackTime: number;
         babyZHeadOffset: number;
@@ -1528,6 +1580,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $PufferfishSmallModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -1535,6 +1588,7 @@ declare module "@package/net/minecraft/client/model" {
     }
     export class $ShulkerBulletModel<T extends $Entity> extends $HierarchicalModel<T> {
         static createBodyLayer(): $LayerDefinition;
+        static ANIMATION_VECTOR_CACHE: $Vector3f;
         attackTime: number;
         young: boolean;
         riding: boolean;

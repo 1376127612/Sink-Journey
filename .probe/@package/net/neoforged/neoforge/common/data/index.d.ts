@@ -5,13 +5,13 @@ import { $EntityType_, $EntityType } from "@package/net/minecraft/world/entity";
 import { $ResourceManager, $Resource } from "@package/net/minecraft/server/packs/resources";
 import { $List, $Map_, $Set_, $Collection_, $List_ } from "@package/java/util";
 import { $SpriteSource } from "@package/net/minecraft/client/renderer/texture/atlas";
-import { $DataProvider, $PackOutput, $PackOutput$Target_, $CachedOutput_ } from "@package/net/minecraft/data";
+import { $DataProvider, $PackOutput$PathProvider, $PackOutput, $PackOutput$Target_, $CachedOutput_ } from "@package/net/minecraft/data";
 import { $MetadataSectionType } from "@package/net/minecraft/server/packs/metadata";
 import { $AdvancementHolder } from "@package/net/minecraft/advancements";
 import { $BiConsumer, $Consumer, $Supplier_, $Consumer_ } from "@package/java/util/function";
 import { $HolderLookup$Provider, $Holder_, $RegistrySetBuilder$PatchedRegistries_, $RegistrySetBuilder } from "@package/net/minecraft/core";
 import { $Path_ } from "@package/java/nio/file";
-import { $OverlayMetadataSection$OverlayEntry_, $OverlayMetadataSection$OverlayEntry, $PackType_, $PackType } from "@package/net/minecraft/server/packs";
+import { $OverlayMetadataSection$OverlayEntry, $OverlayMetadataSection$OverlayEntry_, $PackType_, $PackType } from "@package/net/minecraft/server/packs";
 import { $WithConditions$Builder, $WithConditions_, $ICondition, $WithConditions } from "@package/net/neoforged/neoforge/common/conditions";
 import { $Enum, $Record } from "@package/java/lang";
 import { $File_ } from "@package/java/io";
@@ -31,23 +31,23 @@ export * as fixes from "@package/net/neoforged/neoforge/common/data/fixes";
 
 declare module "@package/net/neoforged/neoforge/common/data" {
     export class $SoundDefinition$Sound {
-        stream(): $SoundDefinition$Sound;
-        stream(arg0: boolean): $SoundDefinition$Sound;
-        weight(arg0: number): $SoundDefinition$Sound;
-        volume(arg0: number): $SoundDefinition$Sound;
-        volume(arg0: number): $SoundDefinition$Sound;
-        static sound(arg0: $ResourceLocation_, arg1: $SoundDefinition$SoundType_): $SoundDefinition$Sound;
-        preload(arg0: boolean): $SoundDefinition$Sound;
         preload(): $SoundDefinition$Sound;
-        pitch(arg0: number): $SoundDefinition$Sound;
-        pitch(arg0: number): $SoundDefinition$Sound;
+        preload(arg0: boolean): $SoundDefinition$Sound;
         attenuationDistance(arg0: number): $SoundDefinition$Sound;
+        volume(arg0: number): $SoundDefinition$Sound;
+        volume(arg0: number): $SoundDefinition$Sound;
+        stream(arg0: boolean): $SoundDefinition$Sound;
+        stream(): $SoundDefinition$Sound;
+        weight(arg0: number): $SoundDefinition$Sound;
+        static sound(arg0: $ResourceLocation_, arg1: $SoundDefinition$SoundType_): $SoundDefinition$Sound;
+        pitch(arg0: number): $SoundDefinition$Sound;
+        pitch(arg0: number): $SoundDefinition$Sound;
     }
     export class $GlobalLootModifierProvider implements $DataProvider {
         getName(): string;
         run(arg0: $CachedOutput_): $CompletableFuture<never>;
-        add<T extends $IGlobalLootModifier>(arg0: string, arg1: T, ...arg2: $ICondition[]): void;
         add<T extends $IGlobalLootModifier>(arg0: string, arg1: T, arg2: $List_<$ICondition>): void;
+        add<T extends $IGlobalLootModifier>(arg0: string, arg1: T, ...arg2: $ICondition[]): void;
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: string);
         get name(): string;
     }
@@ -139,6 +139,9 @@ declare module "@package/net/neoforged/neoforge/common/data" {
         get registryProvider(): $CompletableFuture<$HolderLookup$Provider>;
     }
     export class $AdvancementProvider extends $AdvancementProvider$1 {
+        pathProvider: $PackOutput$PathProvider;
+        registries: $CompletableFuture<$HolderLookup$Provider>;
+        subProviders: $List<$AdvancementSubProvider>;
         constructor(arg0: $PackOutput, arg1: $CompletableFuture<$HolderLookup$Provider>, arg2: $ExistingFileHelper, arg3: $List_<$AdvancementProvider$AdvancementGenerator_>);
     }
     export class $SpriteSourceProvider$SourceList extends $Record {
@@ -148,15 +151,15 @@ declare module "@package/net/neoforged/neoforge/common/data" {
      */
     export type $SpriteSourceProvider$SourceList_ = { sources?: $List_<$SpriteSource>,  } | [sources?: $List_<$SpriteSource>, ];
     export class $ExistingFileHelper implements $ExistingFileHelperAccessor {
-        isEnabled(): boolean;
-        getResource(arg0: $ResourceLocation_, arg1: $PackType_, arg2: string, arg3: string): $Resource;
-        getResource(arg0: $ResourceLocation_, arg1: $PackType_): $Resource;
-        exists(arg0: $ResourceLocation_, arg1: $PackType_, arg2: string, arg3: string): boolean;
-        exists(arg0: $ResourceLocation_, arg1: $PackType_): boolean;
-        exists(arg0: $ResourceLocation_, arg1: $ExistingFileHelper$IResourceType): boolean;
         getResourceStack(arg0: $ResourceLocation_, arg1: $PackType_): $List<$Resource>;
         trackGenerated(arg0: $ResourceLocation_, arg1: $PackType_, arg2: string, arg3: string): void;
         trackGenerated(arg0: $ResourceLocation_, arg1: $ExistingFileHelper$IResourceType): void;
+        isEnabled(): boolean;
+        getResource(arg0: $ResourceLocation_, arg1: $PackType_): $Resource;
+        getResource(arg0: $ResourceLocation_, arg1: $PackType_, arg2: string, arg3: string): $Resource;
+        exists(arg0: $ResourceLocation_, arg1: $ExistingFileHelper$IResourceType): boolean;
+        exists(arg0: $ResourceLocation_, arg1: $PackType_, arg2: string, arg3: string): boolean;
+        exists(arg0: $ResourceLocation_, arg1: $PackType_): boolean;
         invokeGetManager(arg0: $PackType_): $ResourceManager;
         constructor(arg0: $Collection_<$Path_>, arg1: $Set_<string>, arg2: boolean, arg3: string, arg4: $File_);
         get enabled(): boolean;
@@ -167,35 +170,35 @@ declare module "@package/net/neoforged/neoforge/common/data" {
     export class $AdvancementProvider$AdvancementGenerator {
     }
     export interface $AdvancementProvider$AdvancementGenerator {
-        generate(arg0: $HolderLookup$Provider, arg1: $Consumer_<$AdvancementHolder>, arg2: $ExistingFileHelper): void;
         toSubProvider(arg0: $ExistingFileHelper): $AdvancementSubProvider;
+        generate(arg0: $HolderLookup$Provider, arg1: $Consumer_<$AdvancementHolder>, arg2: $ExistingFileHelper): void;
     }
     /**
      * Values that may be interpreted as {@link $AdvancementProvider$AdvancementGenerator}.
      */
     export type $AdvancementProvider$AdvancementGenerator_ = ((arg0: $HolderLookup$Provider, arg1: $Consumer<$AdvancementHolder>, arg2: $ExistingFileHelper) => void);
     export class $SoundDefinition {
+        subtitle(arg0: string): $SoundDefinition;
         replace(arg0: boolean): $SoundDefinition;
         "with"(...arg0: $SoundDefinition$Sound[]): $SoundDefinition;
         "with"(arg0: $SoundDefinition$Sound): $SoundDefinition;
-        subtitle(arg0: string): $SoundDefinition;
         static definition(): $SoundDefinition;
     }
     export class $LanguageProvider implements $DataProvider {
-        getName(): string;
-        run(arg0: $CachedOutput_): $CompletableFuture<never>;
-        add(arg0: $Item_, arg1: string): void;
-        add(arg0: $EntityType_<never>, arg1: string): void;
-        add(arg0: $ItemStack_, arg1: string): void;
-        add(arg0: $MobEffect_, arg1: string): void;
-        add(arg0: string, arg1: string): void;
-        add(arg0: $Block_, arg1: string): void;
-        add(arg0: $TagKey_<never>, arg1: string): void;
-        addItem(arg0: $Supplier_<$Item>, arg1: string): void;
         addItemStack(arg0: $Supplier_<$ItemStack>, arg1: string): void;
         addDimension(arg0: $ResourceKey_<$Level>, arg1: string): void;
         addEntityType(arg0: $Supplier_<$EntityType<never>>, arg1: string): void;
+        getName(): string;
+        run(arg0: $CachedOutput_): $CompletableFuture<never>;
+        add(arg0: string, arg1: string): void;
+        add(arg0: $TagKey_<never>, arg1: string): void;
+        add(arg0: $MobEffect_, arg1: string): void;
+        add(arg0: $EntityType_<never>, arg1: string): void;
+        add(arg0: $Block_, arg1: string): void;
+        add(arg0: $Item_, arg1: string): void;
+        add(arg0: $ItemStack_, arg1: string): void;
         addEffect(arg0: $Supplier_<$MobEffect>, arg1: string): void;
+        addItem(arg0: $Supplier_<$Item>, arg1: string): void;
         addBlock(arg0: $Supplier_<$Block>, arg1: string): void;
         addTag(arg0: $Supplier_<$TagKey<never>>, arg1: string): void;
         constructor(arg0: $PackOutput, arg1: string, arg2: string);

@@ -69,8 +69,8 @@ declare module "@package/com/simibubi/create/foundation/mixin/accessor" {
     }
     export interface $PotionBrewingAccessor {
         create$isContainer(arg0: $ItemStack_): boolean;
-        create$getPotionMixes(): $List<$PotionBrewing$Mix<$Potion>>;
         create$getContainerMixes(): $List<$PotionBrewing$Mix<$Item>>;
+        create$getPotionMixes(): $List<$PotionBrewing$Mix<$Potion>>;
     }
     export class $DispenserBlockAccessor {
     }
@@ -144,10 +144,10 @@ declare module "@package/com/simibubi/create/foundation/mixin/accessor" {
     export class $MappedRegistryAccessor<T> {
     }
     export interface $MappedRegistryAccessor<T> {
-        getByValue(): $Map<T, $Holder$Reference<T>>;
         getToId(): $Reference2IntMap<T>;
-        get byValue(): $Map<T, $Holder$Reference<T>>;
+        getByValue(): $Map<T, $Holder$Reference<T>>;
         get toId(): $Reference2IntMap<T>;
+        get byValue(): $Map<T, $Holder$Reference<T>>;
     }
     export class $LevelRendererAccessor {
     }
@@ -177,9 +177,9 @@ declare module "@package/com/simibubi/create/foundation/mixin/accessor" {
         static create$getArmorLocationCache(): $Map<string, $ResourceLocation>;
     }
     export interface $HumanoidArmorLayerAccessor {
+        create$callSetPartVisibility(arg0: $HumanoidModel<never>, arg1: $EquipmentSlot_): void;
         create$getInnerModel(): $HumanoidModel<never>;
         create$getOuterModel(): $HumanoidModel<never>;
-        create$callSetPartVisibility(arg0: $HumanoidModel<never>, arg1: $EquipmentSlot_): void;
     }
     export class $UseOnContextAccessor {
     }
@@ -225,8 +225,8 @@ declare module "@package/com/simibubi/create/foundation/mixin/accessor" {
     export class $MouseHandlerAccessor {
     }
     export interface $MouseHandlerAccessor {
-        create$setXPos(arg0: number): void;
         create$setYPos(arg0: number): void;
+        create$setXPos(arg0: number): void;
     }
     export class $GameTestHelperAccessor {
     }

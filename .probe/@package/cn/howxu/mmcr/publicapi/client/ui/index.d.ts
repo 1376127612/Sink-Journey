@@ -35,11 +35,11 @@ declare module "@package/cn/howxu/mmcr/publicapi/client/ui" {
         slots(): $ControllerUiSlots;
         request<Q, R>(type: $UiRequestType<Q, R>, laneId: string, body: Q): $CompletionStage<$UiResult<R>>;
         request<Q, R>(type: $UiRequestType<Q, R>, body: Q): $CompletionStage<$UiResult<R>>;
-        subscribe<T>(type: $UiStateType<T>, executor: $Executor_, listener: $Consumer_<T>): $UiSubscription;
-        subscribe(executor: $Executor_, listener: $Consumer_<$ControllerUiSnapshot>): $UiSubscription;
+        onClosed(executor: $Executor_, listener: $Runnable_): $UiSubscription;
         supports(type: $UiStateType<never>): boolean;
         supports(type: $UiRequestType<never, never>): boolean;
-        onClosed(executor: $Executor_, listener: $Runnable_): $UiSubscription;
+        subscribe(executor: $Executor_, listener: $Consumer_<$ControllerUiSnapshot>): $UiSubscription;
+        subscribe<T>(type: $UiStateType<T>, executor: $Executor_, listener: $Consumer_<T>): $UiSubscription;
         get open(): boolean;
     }
     export class $ControllerUiOpenContext {
@@ -47,8 +47,8 @@ declare module "@package/cn/howxu/mmcr/publicapi/client/ui" {
     export interface $ControllerUiOpenContext {
         session(): $ControllerUiSession;
         title(): $Component;
-        menu(): $AbstractContainerMenu;
         inventory(): $Inventory;
+        menu(): $AbstractContainerMenu;
     }
     export class $ControllerUiFactory {
     }

@@ -2,8 +2,8 @@ import { $AdvancementHolder } from "@package/net/minecraft/advancements";
 import { $Consumer_, $Consumer } from "@package/java/util/function";
 import { $HolderLookup$Provider } from "@package/net/minecraft/core";
 import { $CompletableFuture } from "@package/java/util/concurrent";
-import { $List_ } from "@package/java/util";
-import { $DataProvider, $CachedOutput_, $PackOutput } from "@package/net/minecraft/data";
+import { $List, $List_ } from "@package/java/util";
+import { $DataProvider, $CachedOutput_, $PackOutput$PathProvider, $PackOutput } from "@package/net/minecraft/data";
 export * as packs from "@package/net/minecraft/data/advancements/packs";
 
 declare module "@package/net/minecraft/data/advancements" {
@@ -16,6 +16,9 @@ declare module "@package/net/minecraft/data/advancements" {
          */
         getName(): string;
         run(output: $CachedOutput_): $CompletableFuture<never>;
+        pathProvider: $PackOutput$PathProvider;
+        registries: $CompletableFuture<$HolderLookup$Provider>;
+        subProviders: $List<$AdvancementSubProvider>;
         constructor(output: $PackOutput, registries: $CompletableFuture<$HolderLookup$Provider>, subProviders: $List_<$AdvancementSubProvider_>);
         get name(): string;
     }

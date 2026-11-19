@@ -1,6 +1,7 @@
 import { $TagKey } from "@package/net/minecraft/tags";
 import { $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { $Either } from "@package/com/mojang/datafixers/util";
+import { $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $Spliterator, $Iterator, $List, $Set, $List_ } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Consumer_ } from "@package/java/util/function";
@@ -29,6 +30,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
     }
     export interface $HolderSetType extends RegistryMarked<RegistryTypes.NeoforgeHolderSetTypeTag, RegistryTypes.NeoforgeHolderSetType> {}
     export class $NotHolderSet<T> implements $ICustomHolderSet<T> {
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
+        registryLookup(): $HolderLookup$RegistryLookup<T>;
         size(): number;
         get(arg0: number): $Holder<T>;
         type(): $HolderSetType;
@@ -38,10 +41,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         contains(arg0: $Holder_<T>): boolean;
         unwrap(): $Either<$TagKey<T>, $List<$Holder<T>>>;
         unwrapKey(): ($TagKey<T>) | undefined;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         canSerializeIn(arg0: $HolderOwner<T>): boolean;
         addInvalidationListener(arg0: $Runnable_): void;
-        registryLookup(): $HolderLookup$RegistryLookup<T>;
         serializationType(): $IHolderSetExtension$SerializationType;
         spliterator(): $Spliterator<T>;
         forEach(arg0: $Consumer_<T>): void;
@@ -64,30 +65,30 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         constructor();
     }
     export class $CompositeHolderSet<T> implements $ICustomHolderSet<T> {
-        isHomogenous(): boolean;
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         size(): number;
         get(arg0: number): $Holder<T>;
         iterator(): $Iterator<$Holder<T>>;
         stream(): $Stream<$Holder<T>>;
         contains(arg0: $Holder_<T>): boolean;
         unwrap(): $Either<$TagKey<T>, $List<$Holder<T>>>;
-        getComponents(): $List<$HolderSet<T>>;
-        getSet(): $Set<$Holder<T>>;
-        unwrapKey(): ($TagKey<T>) | undefined;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
-        getList(): $List<$Holder<T>>;
         homogenize(): $List<$HolderSet<T>>;
+        getComponents(): $List<$HolderSet<T>>;
+        unwrapKey(): ($TagKey<T>) | undefined;
+        getSet(): $Set<$Holder<T>>;
+        getList(): $List<$Holder<T>>;
         canSerializeIn(arg0: $HolderOwner<T>): boolean;
         addInvalidationListener(arg0: $Runnable_): void;
+        isHomogenous(): boolean;
         serializationType(): $IHolderSetExtension$SerializationType;
         spliterator(): $Spliterator<T>;
         forEach(arg0: $Consumer_<T>): void;
         constructor(arg0: $List_<$HolderSet_<T>>);
         [Symbol.iterator](): Iterator<$Holder<T>>
-        get homogenous(): boolean;
         get components(): $List<$HolderSet<T>>;
         get set(): $Set<$Holder<T>>;
         get list(): $List<$Holder<T>>;
+        get homogenous(): boolean;
     }
     export class $AnyHolderSet$Type implements $HolderSetType {
         makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;
@@ -95,6 +96,9 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         constructor();
     }
     export class $AnyHolderSet<T> extends $Record implements $ICustomHolderSet<T> {
+        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
+        registryLookup(): $HolderLookup$RegistryLookup<T>;
+        handler$ghe000$apotheosis$apoth_canSerialize(arg0: $HolderOwner<any>, arg1: $CallbackInfoReturnable<any>): void;
         size(): number;
         get(arg0: number): $Holder<T>;
         type(): $HolderSetType;
@@ -103,9 +107,7 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
         contains(arg0: $Holder_<T>): boolean;
         unwrap(): $Either<$TagKey<T>, $List<$Holder<T>>>;
         unwrapKey(): ($TagKey<T>) | undefined;
-        getRandomElement(arg0: $RandomSource): ($Holder<T>) | undefined;
         canSerializeIn(arg0: $HolderOwner<T>): boolean;
-        registryLookup(): $HolderLookup$RegistryLookup<T>;
         serializationType(): $IHolderSetExtension$SerializationType;
         spliterator(): $Spliterator<T>;
         forEach(arg0: $Consumer_<T>): void;
@@ -120,8 +122,8 @@ declare module "@package/net/neoforged/neoforge/registries/holdersets" {
     export class $ICustomHolderSet<T> {
     }
     export interface $ICustomHolderSet<T> extends $HolderSet<T> {
-        type(): $HolderSetType;
         serializationType(): $IHolderSetExtension$SerializationType;
+        type(): $HolderSetType;
     }
     export class $AndHolderSet$Type implements $HolderSetType {
         makeCodec<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<$Holder_<T>>, arg2: boolean): $MapCodec<$ICustomHolderSet<T>>;

@@ -29,11 +29,13 @@ import { $Quaternionf } from "@package/org/joml";
 import { $EndCrystal, $EnderDragon } from "@package/net/minecraft/world/entity/boss/enderdragon";
 import { $ItemColors } from "@package/net/minecraft/client/color/item";
 import { $Goat } from "@package/net/minecraft/world/entity/animal/goat";
+import { $AccessorMixinEntityRenderer, $AccessorMixinItemRenderer } from "@package/mysticmods/roots/mixin/client/accessor";
 import { $BakedModel, $ModelResourceLocation, $ModelManager } from "@package/net/minecraft/client/resources/model";
 import { $EntityRenderDispatcherAccessor } from "@package/com/simibubi/create/foundation/mixin/accessor";
 import { $RenderLayer } from "@package/net/minecraft/client/renderer/entity/layers";
 import { $Map, $List, $List_ } from "@package/java/util";
 import { $ItemFrame, $Painting, $LeashFenceKnotEntity, $ArmorStand } from "@package/net/minecraft/world/entity/decoration";
+import { $EntityRendererAccessor } from "@package/de/dafuqs/additionalentityattributes/mixin/client";
 import { $Warden } from "@package/net/minecraft/world/entity/monster/warden";
 import { $AbstractHorse, $Llama, $Horse, $AbstractChestedHorse } from "@package/net/minecraft/world/entity/animal/horse";
 import { $PiglinModel, $ZombieModel, $RavagerModel, $SkeletonModel, $SalmonModel, $GhastModel, $CodModel, $VillagerModel, $TurtleModel, $IronGolemModel, $BlazeModel, $VexModel, $LlamaModel, $TadpoleModel, $SnifferModel, $CatModel, $PolarBearModel, $EndermiteModel, $ZombieVillagerModel, $ArmorStandArmorModel, $CowModel, $FoxModel, $SheepModel, $SnowGolemModel, $DolphinModel, $EntityModel, $ChestedHorseModel, $OcelotModel, $ArmadilloModel, $WolfModel, $ColorableHierarchicalModel, $SquidModel, $ParrotModel, $ChickenModel, $EndermanModel, $DrownedModel, $BatModel, $RabbitModel, $WitherBossModel, $WardenModel, $IllagerModel, $PandaModel, $SlimeModel, $GoatModel, $SpiderModel, $HorseModel, $StriderModel, $FrogModel, $AxolotlModel, $WitchModel, $BeeModel, $CamelModel, $SilverfishModel, $CreeperModel, $LavaSlimeModel, $AllayModel, $ListModel, $PhantomModel, $HumanoidModel, $PigModel, $HoglinModel, $ShulkerModel, $BreezeModel, $GuardianModel } from "@package/net/minecraft/client/model";
@@ -62,12 +64,12 @@ export * as player from "@package/net/minecraft/client/renderer/entity/player";
 
 declare module "@package/net/minecraft/client/renderer/entity" {
     export class $EnderDragonRenderer$DragonModel extends $EntityModel<$EnderDragon> {
+        prepareMobModel(entity: $EnderDragon, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
         /**
          * Sets this entity's model rotation angles
          */
         setupAnim(entity: $EnderDragon, limbSwing: number, limbSwingAmount: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        prepareMobModel(entity: $EnderDragon, limbSwing: number, limbSwingAmount: number, partialTick: number): void;
-        handler$dom002$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        handler$ddd002$xaerominimap$onRender(arg0: $PoseStack, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
         attackTime: number;
         young: boolean;
         riding: boolean;
@@ -88,11 +90,11 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(context: $EntityRendererProvider$Context, layer: $ModelLayerLocation);
     }
     export class $WolfRenderer extends $MobRenderer<$Wolf, $WolfModel<$Wolf>> {
-        render(entity: $Wolf, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Wolf): $ResourceLocation;
+        render(entity: $Wolf, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Wolf, $WolfModel<$Wolf>>>;
         constructor(context: $EntityRendererProvider$Context);
@@ -113,56 +115,56 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Villager): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Villager, $VillagerModel<$Villager>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ThrownTridentRenderer extends $EntityRenderer<$ThrownTrident> {
-        render(entity: $ThrownTrident, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $ThrownTrident): $ResourceLocation;
+        render(entity: $ThrownTrident, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         static TRIDENT_LOCATION: $ResourceLocation;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $TntRenderer extends $EntityRenderer<$PrimedTnt> {
-        render(entity: $PrimedTnt, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $PrimedTnt): $ResourceLocation;
+        render(entity: $PrimedTnt, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $EntityRendererProvider$Context {
+        getEntityRenderDispatcher(): $EntityRenderDispatcher;
+        getItemInHandRenderer(): $ItemInHandRenderer;
+        getModelSet(): $EntityModelSet;
+        getBlockRenderDispatcher(): $BlockRenderDispatcher;
         getResourceManager(): $ResourceManager;
         getItemRenderer(): $ItemRenderer;
-        getItemInHandRenderer(): $ItemInHandRenderer;
-        getEntityRenderDispatcher(): $EntityRenderDispatcher;
-        getModelSet(): $EntityModelSet;
-        getModelManager(): $ModelManager;
         getFont(): $Font;
+        getModelManager(): $ModelManager;
         bakeLayer(layer: $ModelLayerLocation): $ModelPart;
-        getBlockRenderDispatcher(): $BlockRenderDispatcher;
         constructor(entityRenderDispatcher: $EntityRenderDispatcher, itemRenderer: $ItemRenderer, blockRenderDispatcher: $BlockRenderDispatcher, itemInHandRenderer: $ItemInHandRenderer, resourceManager: $ResourceManager, modelSet: $EntityModelSet, font: $Font);
+        get entityRenderDispatcher(): $EntityRenderDispatcher;
+        get itemInHandRenderer(): $ItemInHandRenderer;
+        get modelSet(): $EntityModelSet;
+        get blockRenderDispatcher(): $BlockRenderDispatcher;
         get resourceManager(): $ResourceManager;
         get itemRenderer(): $ItemRenderer;
-        get itemInHandRenderer(): $ItemInHandRenderer;
-        get entityRenderDispatcher(): $EntityRenderDispatcher;
-        get modelSet(): $EntityModelSet;
-        get modelManager(): $ModelManager;
         get font(): $Font;
-        get blockRenderDispatcher(): $BlockRenderDispatcher;
+        get modelManager(): $ModelManager;
     }
     export class $TropicalFishRenderer extends $MobRenderer<$TropicalFish, $ColorableHierarchicalModel<$TropicalFish>> {
-        render(entity: $TropicalFish, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $TropicalFish): $ResourceLocation;
+        render(entity: $TropicalFish, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$TropicalFish, $ColorableHierarchicalModel<$TropicalFish>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $PigRenderer extends $MobRenderer<$Pig, $PigModel<$Pig>> {
         /**
@@ -171,38 +173,40 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Pig): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Pig, $PigModel<$Pig>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
-    export class $EntityRenderer<T extends $Entity> implements $EntityRendererExtension, $EntityRendererInter<any> {
-        getPackedLightCoords(entity: $Object, partialTicks: number): number;
-        render(entity: $Object, entityYaw: number, partialTick: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number): void;
-        /**
-         * Returns the font renderer from the set render manager
-         */
-        getFont(): $Font;
-        shouldRender(livingEntity: $Object, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
+    export class $EntityRenderer<T extends $Entity> implements $EntityRendererAccessor, $EntityRendererExtension, $EntityRendererInter<any>, $AccessorMixinEntityRenderer {
         getRenderOffset(entity: $Object, partialTicks: number): $Vec3;
-        entityCullingIgnoresCulling(entity: $Entity): boolean;
-        shadowRenderNameTag(entity: $Entity, displayName: $Component_, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number, partialTick: number): void;
-        shadowShouldShowName(entity: $Entity): boolean;
+        getFusionModelParts(): $List<any>;
+        entityCullingGetCullingBox(entity: $Entity): $AABB;
+        setFusionModelParts(parts: $List_<any>): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Object): $ResourceLocation;
-        setFusionModelParts(parts: $List_<any>): void;
-        entityCullingGetCullingBox(entity: $Entity): $AABB;
-        getFusionModelParts(): $List<any>;
-        handler$fki000$ad_astra$adastra$shouldRender(arg0: $Entity, arg1: $Frustum, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfoReturnable<any>): void;
+        handler$dob000$ad_astra$adastra$shouldRender(arg0: $Entity, arg1: $Frustum, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfoReturnable<any>): void;
+        shouldRender(livingEntity: $Object, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
+        entityCullingIgnoresCulling(entity: $Entity): boolean;
+        shadowShouldShowName(entity: $Entity): boolean;
+        shadowRenderNameTag(entity: $Entity, displayName: $Component_, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number, partialTick: number): void;
+        /**
+         * Returns the font renderer from the set render manager
+         */
+        getFont(): $Font;
+        render(entity: $Object, entityYaw: number, partialTick: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number): void;
+        getPackedLightCoords(entity: $Object, partialTicks: number): number;
+        roots$GetEntityRenderDispatcher(): $EntityRenderDispatcher;
+        additionalEntityAttributes$getShadowRadius(): number;
         static LEASH_RENDER_STEPS: number;
         get font(): $Font;
     }
     export class $PaintingRenderer extends $EntityRenderer<$Painting> {
-        render(entity: $Painting, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Painting): $ResourceLocation;
-        handler$zea000$sodium_extra$render(painting: $Painting, f: number, g: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, ci: $CallbackInfo): void;
+        handler$zcj000$sodium_extra$render(painting: $Painting, f: number, g: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, ci: $CallbackInfo): void;
+        render(entity: $Painting, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -216,8 +220,8 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(context: $EntityRendererProvider$Context, model: $SquidModel<T>);
     }
     export class $OminousItemSpawnerRenderer extends $EntityRenderer<$OminousItemSpawner> {
-        render(arg0: $OminousItemSpawner, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         getTextureLocation(arg0: $OminousItemSpawner): $ResourceLocation;
+        render(arg0: $OminousItemSpawner, arg1: number, arg2: number, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number): void;
         static LEASH_RENDER_STEPS: number;
     }
     export class $PolarBearRenderer extends $MobRenderer<$PolarBear, $PolarBearModel<$PolarBear>> {
@@ -227,33 +231,34 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $PolarBear): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$PolarBear, $PolarBearModel<$PolarBear>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ArmorStandRenderer extends $LivingEntityRenderer<$ArmorStand, $ArmorStandArmorModel> {
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $ArmorStand): $ResourceLocation;
+        handler$dlm000$betterend$be_addCustomLayer(arg0: $EntityRendererProvider$Context, arg1: $CallbackInfo): void;
         static DEFAULT_SKIN_LOCATION: $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$ArmorStand, $ArmorStandArmorModel>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ZombieRenderer extends $AbstractZombieRenderer<$Zombie, $ZombieModel<$Zombie>> {
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Zombie, $ZombieModel<$Zombie>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
         constructor(context: $EntityRendererProvider$Context, zombieLayer: $ModelLayerLocation, innerArmor: $ModelLayerLocation, outerArmor: $ModelLayerLocation);
     }
     export class $IllusionerRenderer extends $IllagerRenderer<$Illusioner> {
-        render(entity: $Illusioner, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Illusioner): $ResourceLocation;
+        render(entity: $Illusioner, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Illusioner, $IllagerModel<$Illusioner>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $RabbitRenderer extends $MobRenderer<$Rabbit, $RabbitModel<$Rabbit>> {
         /**
@@ -262,7 +267,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Rabbit): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Rabbit, $RabbitModel<$Rabbit>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $CowRenderer extends $MobRenderer<$Cow, $CowModel<$Cow>> {
         /**
@@ -271,7 +276,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Cow): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Cow, $CowModel<$Cow>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $DolphinRenderer extends $MobRenderer<$Dolphin, $DolphinModel<$Dolphin>> {
         /**
@@ -280,14 +285,14 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Dolphin): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Dolphin, $DolphinModel<$Dolphin>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $WindChargeRenderer extends $EntityRenderer<$AbstractWindCharge> {
-        render(entity: $AbstractWindCharge, entityYaw: number, partialTick: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $AbstractWindCharge): $ResourceLocation;
+        render(entity: $AbstractWindCharge, entityYaw: number, partialTick: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -298,7 +303,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Sheep): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Sheep, $SheepModel<$Sheep>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $GhastRenderer extends $MobRenderer<$Ghast, $GhastModel<$Ghast>> {
         /**
@@ -307,23 +312,23 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Ghast): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Ghast, $GhastModel<$Ghast>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ShulkerBulletRenderer extends $EntityRenderer<$ShulkerBullet> {
-        render(entity: $ShulkerBullet, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $ShulkerBullet): $ResourceLocation;
+        render(entity: $ShulkerBullet, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $LightningBoltRenderer extends $EntityRenderer<$LightningBolt> {
-        render(entity: $LightningBolt, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $LightningBolt): $ResourceLocation;
+        render(entity: $LightningBolt, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -351,7 +356,6 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(context: $EntityRendererProvider$Context, layer: $ModelLayerLocation);
     }
     export class $ParrotRenderer extends $MobRenderer<$Parrot, $ParrotModel> {
-        static getVariantTexture(variant: $Parrot$Variant_): $ResourceLocation;
         /**
          * Defines what float the third param in setRotationAngles of ModelBase is
          */
@@ -360,19 +364,20 @@ declare module "@package/net/minecraft/client/renderer/entity" {
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Parrot): $ResourceLocation;
+        static getVariantTexture(variant: $Parrot$Variant_): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Parrot, $ParrotModel>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $SlimeRenderer extends $MobRenderer<$Slime, $SlimeModel<$Slime>> {
-        render(entity: $Slime, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Slime): $ResourceLocation;
+        render(entity: $Slime, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Slime, $SlimeModel<$Slime>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $GlowSquidRenderer extends $SquidRenderer<$GlowSquid> {
         getTextureLocation(arg0: $GlowSquid): $ResourceLocation;
@@ -387,7 +392,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Stray): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Stray, $SkeletonModel<$Stray>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $PiglinRenderer extends $HumanoidMobRenderer<$Mob, $PiglinModel<$Mob>> {
         /**
@@ -415,7 +420,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Hoglin): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Hoglin, $HoglinModel<$Hoglin>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $CreeperRenderer extends $MobRenderer<$Creeper, $CreeperModel<$Creeper>> {
         /**
@@ -424,17 +429,17 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Creeper): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Creeper, $CreeperModel<$Creeper>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $PufferfishRenderer extends $MobRenderer<$Pufferfish, $EntityModel<$Pufferfish>> {
-        render(entity: $Pufferfish, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Pufferfish): $ResourceLocation;
+        render(entity: $Pufferfish, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Pufferfish, $EntityModel<$Pufferfish>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $PandaRenderer extends $MobRenderer<$Panda, $PandaModel<$Panda>> {
         /**
@@ -443,17 +448,17 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Panda): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Panda, $PandaModel<$Panda>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $WitchRenderer extends $MobRenderer<$Witch, $WitchModel<$Witch>> {
-        render(entity: $Witch, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Witch): $ResourceLocation;
+        render(entity: $Witch, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Witch, $WitchModel<$Witch>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $AbstractZombieRenderer<T extends $Zombie, M extends $ZombieModel<T>> extends $HumanoidMobRenderer<T, M> {
         /**
@@ -479,7 +484,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Phantom): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Phantom, $PhantomModel<$Phantom>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $SalmonRenderer extends $MobRenderer<$Salmon, $SalmonModel<$Salmon>> {
         /**
@@ -488,83 +493,89 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Salmon): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Salmon, $SalmonModel<$Salmon>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EvokerFangsRenderer extends $EntityRenderer<$EvokerFangs> {
-        render(entity: $EvokerFangs, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $EvokerFangs): $ResourceLocation;
+        render(entity: $EvokerFangs, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $DragonFireballRenderer extends $EntityRenderer<$DragonFireball> {
-        render(entity: $DragonFireball, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $DragonFireball): $ResourceLocation;
+        render(entity: $DragonFireball, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $EndermanRenderer extends $MobRenderer<$EnderMan, $EndermanModel<$EnderMan>> {
-        render(entity: $EnderMan, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         getRenderOffset(entity: $EnderMan, partialTicks: number): $Vec3;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $EnderMan): $ResourceLocation;
+        render(entity: $EnderMan, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$EnderMan, $EndermanModel<$EnderMan>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EntityRenderDispatcher implements $ResourceManagerReloadListener, $EntityRenderDispatcherAccessor {
-        getPackedLightCoords<E extends $Entity>(entity: E, partialTicks: number): number;
+        getRenderer<T extends $Entity>(entity: T): $EntityRenderer<T>;
+        getItemInHandRenderer(): $ItemInHandRenderer;
+        distanceToSqr(entity: $Entity): number;
+        distanceToSqr(x: number, arg1: number, y: number): number;
+        overrideCameraOrientation(cameraOrientation: $Quaternionf): void;
+        shouldRenderHitBoxes(): boolean;
+        setRenderShadow(debugBoundingBox: boolean): void;
+        shouldRender<E extends $Entity>(entity: E, frustum: $Frustum, camX: number, arg3: number, camY: number): boolean;
+        cameraOrientation(): $Quaternionf;
+        handler$fkf000$chloride$inject$shouldRender(arg0: $Entity, arg1: $Frustum, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfoReturnable<any>): void;
+        handler$ejf000$spectrum$render(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: $Entity, arg3: $Quaternionf, arg4: $CallbackInfo): void;
+        handler$ejf000$spectrum$render(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $PoseStack, arg7: $MultiBufferSource_, arg8: number, arg9: $CallbackInfo): void;
         prepare(level: $Level_, activeRenderInfo: $Camera, entity: $Entity): void;
         /**
          * World sets this RenderManager's worldObj to the world provided
          */
         setLevel(level: $Level_ | null): void;
         render<E extends $Entity>(entity: E, x: number, arg2: number, y: number, arg4: number, z: number, arg6: $PoseStack, rotationYaw: $MultiBufferSource_, partialTicks: number): void;
-        getRenderer<T extends $Entity>(entity: T): $EntityRenderer<T>;
-        getItemInHandRenderer(): $ItemInHandRenderer;
-        setRenderHitBoxes(debugBoundingBox: boolean): void;
-        shouldRenderHitBoxes(): boolean;
-        distanceToSqr(x: number, arg1: number, y: number): number;
-        distanceToSqr(entity: $Entity): number;
-        setRenderShadow(debugBoundingBox: boolean): void;
-        shouldRender<E extends $Entity>(entity: E, frustum: $Frustum, camX: number, arg3: number, camY: number): boolean;
-        overrideCameraOrientation(cameraOrientation: $Quaternionf): void;
-        onResourceManagerReload(resourceManager: $ResourceManager): void;
         getSkinMap(): $Map<$PlayerSkin$Model, $EntityRenderer<$Player>>;
-        cameraOrientation(): $Quaternionf;
-        handler$ddg000$chloride$inject$shouldRender(arg0: $Entity, arg1: $Frustum, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfoReturnable<any>): void;
-        reload(preparationBarrier: $PreparableReloadListener$PreparationBarrier_, resourceManager: $ResourceManager, preparationsProfiler: $ProfilerFiller, reloadProfiler: $ProfilerFiller, backgroundExecutor: $Executor_, gameExecutor: $Executor_): $CompletableFuture<void>;
+        setRenderHitBoxes(debugBoundingBox: boolean): void;
+        onResourceManagerReload(resourceManager: $ResourceManager): void;
+        getPackedLightCoords<E extends $Entity>(entity: E, partialTicks: number): number;
+        reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
         create$getRenderers(): $Map<$EntityType<never>, $EntityRenderer<never>>;
+        itemRenderer: $ItemRenderer;
+        entityModels: $EntityModelSet;
+        blockRenderDispatcher: $BlockRenderDispatcher;
         crosshairPickEntity: $Entity;
         renderers: $Map<$EntityType<never>, $EntityRenderer<never>>;
         options: $Options;
         textureManager: $TextureManager;
         camera: $Camera;
+        font: $Font;
         constructor(minecraft: $Minecraft, textureManager: $TextureManager, itemRenderer: $ItemRenderer, blockRenderDispatcher: $BlockRenderDispatcher, font: $Font, options: $Options, entityModels: $EntityModelSet);
-        set level(value: $Level_ | null);
         get itemInHandRenderer(): $ItemInHandRenderer;
-        set renderHitBoxes(value: boolean);
         set renderShadow(value: boolean);
+        set level(value: $Level_ | null);
         get skinMap(): $Map<$PlayerSkin$Model, $EntityRenderer<$Player>>;
+        set renderHitBoxes(value: boolean);
         get name(): string;
     }
     export class $MagmaCubeRenderer extends $MobRenderer<$MagmaCube, $LavaSlimeModel<$MagmaCube>> {
-        render(entity: $MagmaCube, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $MagmaCube): $ResourceLocation;
+        render(entity: $MagmaCube, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$MagmaCube, $LavaSlimeModel<$MagmaCube>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $TurtleRenderer extends $MobRenderer<$Turtle, $TurtleModel<$Turtle>> {
         /**
@@ -573,7 +584,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Turtle): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Turtle, $TurtleModel<$Turtle>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $PillagerRenderer extends $IllagerRenderer<$Pillager> {
         /**
@@ -582,7 +593,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Pillager): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Pillager, $IllagerModel<$Pillager>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $DisplayRenderer$TextDisplayRenderer extends $DisplayRenderer<$Display$TextDisplay, $Display$TextDisplay$TextRenderState> {
         renderInner(textDisplay: $Display$TextDisplay, renderState: $Display$TextDisplay$TextRenderState_, poseStack: $PoseStack, buffer: $MultiBufferSource_, lightmapUV: number, partialTick: number): void;
@@ -601,7 +612,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Zoglin): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Zoglin, $HoglinModel<$Zoglin>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $DisplayRenderer$ItemDisplayRenderer extends $DisplayRenderer<$Display$ItemDisplay, $Display$ItemDisplay$ItemRenderState> {
         renderInner(arg0: $Display$ItemDisplay, arg1: $Display$ItemDisplay$ItemRenderState_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
@@ -614,7 +625,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Fox): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Fox, $FoxModel<$Fox>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ZombieVillagerRenderer extends $HumanoidMobRenderer<$ZombieVillager, $ZombieVillagerModel<$ZombieVillager>> {
         /**
@@ -623,7 +634,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $ZombieVillager): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$ZombieVillager, $ZombieVillagerModel<$ZombieVillager>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $VexRenderer extends $MobRenderer<$Vex, $VexModel> {
         /**
@@ -632,17 +643,17 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Vex): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Vex, $VexModel>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EndCrystalRenderer extends $EntityRenderer<$EndCrystal> {
-        static getY(endCrystal: $EndCrystal, partialTick: number): number;
-        render(entity: $EndCrystal, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
-        shouldRender(livingEntity: $EndCrystal, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
-        static createBodyLayer(): $LayerDefinition;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $EndCrystal): $ResourceLocation;
+        shouldRender(livingEntity: $EndCrystal, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
+        static createBodyLayer(): $LayerDefinition;
+        render(entity: $EndCrystal, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
+        static getY(endCrystal: $EndCrystal, partialTick: number): number;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -661,11 +672,11 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $ExperienceOrbRenderer extends $EntityRenderer<$ExperienceOrb> {
-        render(entity: $ExperienceOrb, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $ExperienceOrb): $ResourceLocation;
+        render(entity: $ExperienceOrb, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -676,9 +687,9 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: T): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<T, $SkeletonModel<T>>>;
+        constructor(context: $EntityRendererProvider$Context);
         constructor(context: $EntityRendererProvider$Context, skeletonLayer: $ModelLayerLocation, innerModelLayer: $ModelLayerLocation, model: $SkeletonModel<T>);
         constructor(context: $EntityRendererProvider$Context, skeletonLayer: $ModelLayerLocation, innerModelLayer: $ModelLayerLocation, outerModelLayer: $ModelLayerLocation);
-        constructor(context: $EntityRendererProvider$Context);
     }
     export class $GoatRenderer extends $MobRenderer<$Goat, $GoatModel<$Goat>> {
         getTextureLocation(arg0: $Goat): $ResourceLocation;
@@ -706,16 +717,16 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Bee): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Bee, $BeeModel<$Bee>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $RenderLayerParent<T extends $Entity, M extends $EntityModel<T>> {
     }
     export interface $RenderLayerParent<T extends $Entity, M extends $EntityModel<T>> {
-        getModel(): M;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: T): $ResourceLocation;
+        getModel(): M;
         get model(): M;
     }
     export class $AllayRenderer extends $MobRenderer<$Allay, $AllayModel> {
@@ -725,11 +736,11 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $LeashKnotRenderer extends $EntityRenderer<$LeashFenceKnotEntity> {
-        render(entity: $LeashFenceKnotEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $LeashFenceKnotEntity): $ResourceLocation;
+        render(entity: $LeashFenceKnotEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -755,7 +766,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Cat): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Cat, $CatModel<$Cat>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $SilverfishRenderer extends $MobRenderer<$Silverfish, $SilverfishModel<$Silverfish>> {
         /**
@@ -764,7 +775,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Silverfish): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Silverfish, $SilverfishModel<$Silverfish>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $StriderRenderer extends $MobRenderer<$Strider, $StriderModel<$Strider>> {
         /**
@@ -773,27 +784,28 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Strider): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Strider, $StriderModel<$Strider>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $LivingEntityRenderer<T extends $LivingEntity, M extends $EntityModel<T>> extends $EntityRenderer<T> implements $RenderLayerParent<T, M> {
-        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
-        addLayer(layer: $RenderLayer<T, M>): boolean;
-        getModel(): M;
         static getOverlayCoords(livingEntity: $LivingEntity, u: number): number;
+        handler$hhd000$enderio$test(arg0: $LivingEntity, arg1: $PoseStack, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CallbackInfo): void;
+        getModel(): M;
+        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static isEntityUpsideDown(livingEntity: $LivingEntity): boolean;
+        addLayer(layer: $RenderLayer<T, M>): boolean;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<T, M>>;
         constructor(context: $EntityRendererProvider$Context, model: M, shadowRadius: number);
         get model(): M;
     }
     export class $BoatRenderer extends $EntityRenderer<$Boat> {
-        render(entity: $Boat, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * @deprecated
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Boat): $ResourceLocation;
         getModelWithLocation(arg0: $Boat): $Pair<$ResourceLocation, $ListModel<$Boat>>;
+        render(entity: $Boat, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context, chestBoat: boolean);
     }
@@ -803,15 +815,15 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(context: $EntityRendererProvider$Context, model: M, shadowRadius: number);
     }
     export class $BreezeRenderer extends $MobRenderer<$Breeze, $BreezeModel<$Breeze>> {
-        static enable(model: $BreezeModel<$Breeze>, ...parts: $ModelPart[]): $BreezeModel<$Breeze>;
-        render(entity: $Breeze, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Breeze): $ResourceLocation;
+        static enable(model: $BreezeModel<$Breeze>, ...parts: $ModelPart[]): $BreezeModel<$Breeze>;
+        render(entity: $Breeze, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Breeze, $BreezeModel<$Breeze>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $RavagerRenderer extends $MobRenderer<$Ravager, $RavagerModel> {
         /**
@@ -820,7 +832,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Ravager): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Ravager, $RavagerModel>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $IronGolemRenderer extends $MobRenderer<$IronGolem, $IronGolemModel<$IronGolem>> {
         /**
@@ -829,12 +841,12 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $IronGolem): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$IronGolem, $IronGolemModel<$IronGolem>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $HuskRenderer extends $ZombieRenderer {
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Zombie, $ZombieModel<$Zombie>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $GiantMobRenderer extends $MobRenderer<$Giant, $HumanoidModel<$Giant>> {
         /**
@@ -852,39 +864,39 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $WitherBoss): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$WitherBoss, $WitherBossModel<$WitherBoss>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $WitherSkullRenderer extends $EntityRenderer<$WitherSkull> {
-        render(entity: $WitherSkull, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
-        static createSkullLayer(): $LayerDefinition;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $WitherSkull): $ResourceLocation;
+        static createSkullLayer(): $LayerDefinition;
+        render(entity: $WitherSkull, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $ArrowRenderer<T extends $AbstractArrow> extends $EntityRenderer<T> {
-        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         vertex(pose: $PoseStack$Pose, consumer: $VertexConsumer, x: number, y: number, z: number, u: number, v: number, normalX: number, normalY: number, normalZ: number, packedLight: number): void;
+        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $FishingHookRenderer extends $EntityRenderer<$FishingHook> {
-        render(entity: $FishingHook, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $FishingHook): $ResourceLocation;
+        render(entity: $FishingHook, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $FallingBlockRenderer extends $EntityRenderer<$FallingBlockEntity> {
-        render(entity: $FallingBlockEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $FallingBlockEntity): $ResourceLocation;
+        render(entity: $FallingBlockEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -892,7 +904,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Guardian, $GuardianModel>>;
         static GUARDIAN_ELDER_LOCATION: $ResourceLocation;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $CodRenderer extends $MobRenderer<$Cod, $CodModel<$Cod>> {
         /**
@@ -901,7 +913,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Cod): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Cod, $CodModel<$Cod>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $SpiderRenderer<T extends $Spider> extends $MobRenderer<T, $SpiderModel<T>> {
         /**
@@ -910,7 +922,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: T): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<T, $SpiderModel<T>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
         constructor(context: $EntityRendererProvider$Context, layer: $ModelLayerLocation);
     }
     export class $TadpoleRenderer extends $MobRenderer<$Tadpole, $TadpoleModel<$Tadpole>> {
@@ -926,27 +938,28 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Blaze): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Blaze, $BlazeModel<$Blaze>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ItemFrameRenderer<T extends $ItemFrame> extends $EntityRenderer<T> {
-        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
-        handler$zdo000$sodium_extra$render(itemFrame: $ItemFrame, f: number, g: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, ci: $CallbackInfo): void;
         getRenderOffset(entity: T, partialTicks: number): $Vec3;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: T): $ResourceLocation;
+        getLightVal(itemFrame: T, glowLightVal: number, regularLightVal: number): number;
+        handler$zch000$sodium_extra$render(itemFrame: $ItemFrame, f: number, g: number, poseStack: $PoseStack, multiBufferSource: $MultiBufferSource_, i: number, ci: $CallbackInfo): void;
+        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         static BRIGHT_MAP_LIGHT_ADJUSTMENT: number;
         static GLOW_FRAME_BRIGHTNESS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $DisplayRenderer<T extends $Display, S> extends $EntityRenderer<T> {
-        render(entity: T, entityYaw: number, partialTick: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: T): $ResourceLocation;
+        render(entity: T, entityYaw: number, partialTick: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
     }
     export class $HorseRenderer extends $AbstractHorseRenderer<$Horse, $HorseModel<$Horse>> {
@@ -956,19 +969,19 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Horse): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Horse, $HorseModel<$Horse>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ShulkerRenderer extends $MobRenderer<$Shulker, $ShulkerModel<$Shulker>> {
-        shouldRender(livingEntity: $Shulker, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
         getRenderOffset(entity: $Shulker, partialTicks: number): $Vec3;
+        static getTextureLocation(color: $DyeColor_ | null): $ResourceLocation;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Shulker): $ResourceLocation;
-        static getTextureLocation(color: $DyeColor_ | null): $ResourceLocation;
+        shouldRender(livingEntity: $Shulker, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Shulker, $ShulkerModel<$Shulker>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $WitherSkeletonRenderer extends $SkeletonRenderer<$WitherSkeleton> {
         /**
@@ -977,7 +990,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $WitherSkeleton): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$WitherSkeleton, $SkeletonModel<$WitherSkeleton>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $CaveSpiderRenderer extends $SpiderRenderer<$CaveSpider> {
         /**
@@ -986,7 +999,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $CaveSpider): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$CaveSpider, $SpiderModel<$CaveSpider>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $BoggedRenderer extends $SkeletonRenderer<$Bogged> {
         getTextureLocation(arg0: $Bogged): $ResourceLocation;
@@ -995,13 +1008,13 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EnderDragonRenderer extends $EntityRenderer<$EnderDragon> {
-        render(entity: $EnderDragon, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
-        static renderCrystalBeams(x: number, y: number, z: number, partialTick: number, tickCount: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number): void;
-        static createBodyLayer(): $LayerDefinition;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $EnderDragon): $ResourceLocation;
+        static createBodyLayer(): $LayerDefinition;
+        static renderCrystalBeams(x: number, y: number, z: number, partialTick: number, tickCount: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number): void;
+        render(entity: $EnderDragon, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         static CRYSTAL_BEAM_LOCATION: $ResourceLocation;
         constructor(context: $EntityRendererProvider$Context);
@@ -1013,18 +1026,18 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $MinecartRenderer<T extends $AbstractMinecart> extends $EntityRenderer<T> {
-        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: T): $ResourceLocation;
+        render(entity: T, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context, layer: $ModelLayerLocation);
     }
     export class $TntMinecartRenderer extends $MinecartRenderer<$MinecartTNT> {
         static renderWhiteSolidBlock(blockRenderDispatcher: $BlockRenderDispatcher, state: $BlockState_, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, whiteOverlay: boolean): void;
         static LEASH_RENDER_STEPS: number;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $MushroomCowRenderer extends $MobRenderer<$MushroomCow, $CowModel<$MushroomCow>> {
         /**
@@ -1033,7 +1046,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $MushroomCow): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$MushroomCow, $CowModel<$MushroomCow>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ArmadilloRenderer extends $MobRenderer<$Armadillo, $ArmadilloModel> {
         getTextureLocation(arg0: $Armadillo): $ResourceLocation;
@@ -1042,30 +1055,31 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $HumanoidMobRenderer<T extends $Mob, M extends $HumanoidModel<T>> extends $MobRenderer<T, M> {
+        handler$dmb000$betterend$be_addCustomLayer(arg0: $EntityRendererProvider$Context, arg1: $HumanoidModel<any>, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<T, M>>;
-        constructor(context: $EntityRendererProvider$Context, model: M, shadowRadius: number);
         constructor(context: $EntityRendererProvider$Context, model: M, shadowRadius: number, scaleX: number, scaleY: number, scaleZ: number);
+        constructor(context: $EntityRendererProvider$Context, model: M, shadowRadius: number);
     }
     export class $LlamaSpitRenderer extends $EntityRenderer<$LlamaSpit> {
-        render(entity: $LlamaSpit, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $LlamaSpit): $ResourceLocation;
+        render(entity: $LlamaSpit, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
     export class $DrownedRenderer extends $AbstractZombieRenderer<$Drowned, $DrownedModel<$Drowned>> {
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Drowned, $DrownedModel<$Drowned>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EntityRenderers {
-        static register<T extends $Entity>(entityType: $EntityType_<T>, provider: $EntityRendererProvider_<T>): void;
         static validateRegistrations(): boolean;
-        static createEntityRenderers(context: $EntityRendererProvider$Context): $Map<$EntityType<never>, $EntityRenderer<never>>;
         static createPlayerRenderers(context: $EntityRendererProvider$Context): $Map<$PlayerSkin$Model, $EntityRenderer<$Player>>;
+        static createEntityRenderers(context: $EntityRendererProvider$Context): $Map<$EntityType<never>, $EntityRenderer<never>>;
+        static register<T extends $Entity>(entityType: $EntityType_<T>, provider: $EntityRendererProvider_<T>): void;
         constructor();
     }
     export class $OcelotRenderer extends $MobRenderer<$Ocelot, $OcelotModel<$Ocelot>> {
@@ -1075,39 +1089,44 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Ocelot): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Ocelot, $OcelotModel<$Ocelot>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $FireworkEntityRenderer extends $EntityRenderer<$FireworkRocketEntity> {
-        render(entity: $FireworkRocketEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $FireworkRocketEntity): $ResourceLocation;
+        render(entity: $FireworkRocketEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
-    export class $ItemRenderer implements $ResourceManagerReloadListener, $ItemRendererAccessor$1, $ItemRendererAccessor {
-        static hasAnimatedTexture$sodium_$md$796745$1(stack: $ItemStack_): boolean;
-        handler$fla000$codechickenl$onRenderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
-        handler$bdi000$ldlib2$injectRenderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
-        handler$zbh000$astralsorcery$getCustomSextantModel(arg0: $ItemStack_, arg1: $Level_, arg2: $LivingEntity, arg3: number, arg4: $CallbackInfoReturnable<any>): void;
-        handler$zbh000$astralsorcery$replaceRenderModel(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
-        render(itemStack: $ItemStack_, displayContext: $ItemDisplayContext_, leftHand: boolean, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, combinedLight: number, combinedOverlay: number, model: $BakedModel): void;
-        renderStatic(stack: $ItemStack_, displayContext: $ItemDisplayContext_, combinedLight: number, combinedOverlay: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, level: $Level_ | null, seed: number): void;
+    export class $ItemRenderer implements $ResourceManagerReloadListener, $ItemRendererAccessor$1, $ItemRendererAccessor, $AccessorMixinItemRenderer {
         renderStatic(entity: $LivingEntity | null, itemStack: $ItemStack_, diplayContext: $ItemDisplayContext_, leftHand: boolean, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, level: $Level_ | null, combinedLight: number, combinedOverlay: number, seed: number): void;
-        static getFoilBuffer(bufferSource: $MultiBufferSource_, renderType: $RenderType, isItem: boolean, glint: boolean): $VertexConsumer;
-        renderQuadList(poseStack: $PoseStack, buffer: $VertexConsumer, quads: $List_<$BakedQuad>, itemStack: $ItemStack_, combinedLight: number, combinedOverlay: number): void;
-        static getArmorFoilBuffer(bufferSource: $MultiBufferSource_, renderType: $RenderType, hasFoil: boolean): $VertexConsumer;
+        renderStatic(stack: $ItemStack_, displayContext: $ItemDisplayContext_, combinedLight: number, combinedOverlay: number, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, level: $Level_ | null, seed: number): void;
+        handler$dpk000$astralsorcery$getCustomSextantModel(arg0: $ItemStack_, arg1: $Level_, arg2: $LivingEntity, arg3: number, arg4: $CallbackInfoReturnable<any>): void;
         getItemModelShaper(): $ItemModelShaper;
+        static getFoilBuffer(bufferSource: $MultiBufferSource_, renderType: $RenderType, isItem: boolean, glint: boolean): $VertexConsumer;
+        static getArmorFoilBuffer(bufferSource: $MultiBufferSource_, renderType: $RenderType, hasFoil: boolean): $VertexConsumer;
+        renderQuadList(poseStack: $PoseStack, buffer: $VertexConsumer, quads: $List_<$BakedQuad>, itemStack: $ItemStack_, combinedLight: number, combinedOverlay: number): void;
         renderModelLists(model: $BakedModel, stack: $ItemStack_, combinedLight: number, combinedOverlay: number, poseStack: $PoseStack, buffer: $VertexConsumer): void;
+        handler$dpk000$astralsorcery$replaceRenderModel(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
         getModel(stack: $ItemStack_, level: $Level_ | null, entity: $LivingEntity | null, seed: number): $BakedModel;
-        static getFoilBufferDirect(bufferSource: $MultiBufferSource_, renderType: $RenderType, isItem: boolean, glint: boolean): $VertexConsumer;
+        static hasAnimatedTexture$sodium_$md$e03d8d$0(stack: $ItemStack_): boolean;
+        handler$icg000$codechickenl$onRenderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
+        handler$bfn000$ldlib2$injectRenderItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: boolean, arg3: $PoseStack, arg4: $MultiBufferSource_, arg5: number, arg6: number, arg7: $BakedModel, arg8: $CallbackInfo): void;
+        render(itemStack: $ItemStack_, displayContext: $ItemDisplayContext_, leftHand: boolean, poseStack: $PoseStack, bufferSource: $MultiBufferSource_, combinedLight: number, combinedOverlay: number, model: $BakedModel): void;
         getBlockEntityRenderer(): $BlockEntityWithoutLevelRenderer;
         static getCompassFoilBuffer(bufferSource: $MultiBufferSource_, renderType: $RenderType, pose: $PoseStack$Pose): $VertexConsumer;
+        static getFoilBufferDirect(bufferSource: $MultiBufferSource_, renderType: $RenderType, isItem: boolean, glint: boolean): $VertexConsumer;
         onResourceManagerReload(resourceManager: $ResourceManager): void;
-        reload(preparationBarrier: $PreparableReloadListener$PreparationBarrier_, resourceManager: $ResourceManager, preparationsProfiler: $ProfilerFiller, reloadProfiler: $ProfilerFiller, backgroundExecutor: $Executor_, gameExecutor: $Executor_): $CompletableFuture<void>;
+        reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
+        roots$GetSpyglassInHandModel(): $ModelResourceLocation;
+        roots$GetTridentInHandModel(): $ModelResourceLocation;
         catnip$getTextureManager(): $TextureManager;
+        roots$GetTridentModel(): $ModelResourceLocation;
+        roots$GetSpyglassModel(): $ModelResourceLocation;
+        roots$GetItemModelShaper(): $ItemModelShaper;
         static GUI_SLOT_CENTER_X: number;
         static COMPASS_FOIL_UI_SCALE: number;
         static COMPASS_FOIL_FIRST_PERSON_SCALE: number;
@@ -1137,17 +1156,17 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $SnowGolem): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$SnowGolem, $SnowGolemModel<$SnowGolem>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ItemEntityRenderer extends $EntityRenderer<$ItemEntity> {
-        render(entity: $ItemEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
+        static getSeedForItemStack(stack: $ItemStack_): number;
+        static renderMultipleFromCount(itemRenderer: $ItemRenderer, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, item: $ItemStack_, model: $BakedModel, isGui3d: boolean, random: $RandomSource): void;
+        static renderMultipleFromCount(itemRenderer: $ItemRenderer, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, item: $ItemStack_, random: $RandomSource, level: $Level_): void;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $ItemEntity): $ResourceLocation;
-        static renderMultipleFromCount(itemRenderer: $ItemRenderer, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, item: $ItemStack_, model: $BakedModel, isGui3d: boolean, random: $RandomSource): void;
-        static renderMultipleFromCount(itemRenderer: $ItemRenderer, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, item: $ItemStack_, random: $RandomSource, level: $Level_): void;
-        static getSeedForItemStack(stack: $ItemStack_): number;
+        render(entity: $ItemEntity, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         constructor(context: $EntityRendererProvider$Context);
     }
@@ -1158,7 +1177,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Bat): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Bat, $BatModel>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $DisplayRenderer$BlockDisplayRenderer extends $DisplayRenderer<$Display$BlockDisplay, $Display$BlockDisplay$BlockRenderState> {
         renderInner(arg0: $Display$BlockDisplay, arg1: $Display$BlockDisplay$BlockRenderState_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
@@ -1174,15 +1193,15 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         constructor(context: $EntityRendererProvider$Context, layerLocation: $ModelLayerLocation);
     }
     export class $GuardianRenderer extends $MobRenderer<$Guardian, $GuardianModel> {
-        render(entity: $Guardian, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
-        shouldRender(livingEntity: $Guardian, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
         /**
          * Returns the location of an entity's texture.
          */
         getTextureLocation(entity: $Guardian): $ResourceLocation;
+        shouldRender(livingEntity: $Guardian, camera: $Frustum, camX: number, arg3: number, camY: number): boolean;
+        render(entity: $Guardian, entityYaw: number, partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number): void;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Guardian, $GuardianModel>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $EvokerRenderer<T extends $SpellcasterIllager> extends $IllagerRenderer<T> {
         /**
@@ -1191,7 +1210,7 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: T): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<T, $IllagerModel<T>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
     export class $ChickenRenderer extends $MobRenderer<$Chicken, $ChickenModel<$Chicken>> {
         /**
@@ -1200,6 +1219,6 @@ declare module "@package/net/minecraft/client/renderer/entity" {
         getTextureLocation(entity: $Chicken): $ResourceLocation;
         static LEASH_RENDER_STEPS: number;
         layers: $List<$RenderLayer<$Chicken, $ChickenModel<$Chicken>>>;
-        constructor(context: $EntityRendererProvider$Context);
+        constructor(arg0: $EntityRendererProvider$Context);
     }
 }

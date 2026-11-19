@@ -46,25 +46,25 @@ declare module "@package/codechicken/multipart/util" {
      */
     export type $MultipartGenerator$Factory_ = ((arg0: $BlockPos, arg1: $BlockState) => $TileMultipart);
     export class $MultipartGenerator extends $SidedFactory<$TileMultipart, $MultipartGenerator$Factory, $MultiPart> {
-        load(arg0: $IEventBus): void;
-        generateCompositeTile(arg0: $BlockEntity, arg1: $BlockPos_, arg2: $Collection_<$MultiPart>, arg3: boolean): $TileMultipart;
-        registerPassthroughTrait(arg0: $Class<never>): $MixinFactory$TraitKey;
-        getTraits(arg0: $Collection_<$MultiPart>, arg1: boolean): $ImmutableSet<$MixinFactory$TraitKey>;
-        getTraits(arg0: $MultiPart, arg1: boolean): $ImmutableSet<$MixinFactory$TraitKey>;
-        registerPassThroughInterface(arg0: $Class<never>): void;
         registerPassThroughInterface(arg0: $Class<never>, arg1: boolean, arg2: boolean): void;
+        registerPassThroughInterface(arg0: $Class<never>): void;
+        load(arg0: $IEventBus): void;
+        getTraits(arg0: $MultiPart, arg1: boolean): $ImmutableSet<$MixinFactory$TraitKey>;
+        getTraits(arg0: $Collection_<$MultiPart>, arg1: boolean): $ImmutableSet<$MixinFactory$TraitKey>;
+        registerPassthroughTrait(arg0: $Class<never>): $MixinFactory$TraitKey;
+        generateCompositeTile(arg0: $BlockEntity, arg1: $BlockPos_, arg2: $Collection_<$MultiPart>, arg3: boolean): $TileMultipart;
         static MIXIN_COMPILER: $MixinCompiler;
         static INSTANCE: $MultipartGenerator;
     }
     export class $MultipartPlaceContext extends $BlockPlaceContext {
-        applyOffset(): $MultipartPlaceContext;
+        isOffset(): boolean;
         getHitDepth(): number;
         canPlacePart(arg0: $MultiPart): boolean;
-        isOffset(): boolean;
+        applyOffset(): $MultipartPlaceContext;
         hitResult: $BlockHitResult;
         constructor(arg0: $UseOnContext);
         constructor(arg0: $Player, arg1: $InteractionHand_, arg2: $BlockHitResult);
-        get hitDepth(): number;
         get offset(): boolean;
+        get hitDepth(): number;
     }
 }

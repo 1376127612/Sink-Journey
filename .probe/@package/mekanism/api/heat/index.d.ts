@@ -9,19 +9,19 @@ declare module "@package/mekanism/api/heat" {
     export class $IHeatCapacitor {
     }
     export interface $IHeatCapacitor extends $INBTSerializable<$CompoundTag>, $IContentsListener {
-        getTemperature(): number;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
-        handleHeat(arg0: number): void;
-        isAmbientTemperature(): boolean;
         getInverseConduction(): number;
         getInverseInsulation(): number;
-        getHeatCapacity(): number;
         setHeat(arg0: number): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         getHeat(): number;
-        get temperature(): number;
-        get ambientTemperature(): boolean;
+        getTemperature(): number;
+        isAmbientTemperature(): boolean;
+        handleHeat(arg0: number): void;
+        getHeatCapacity(): number;
         get inverseConduction(): number;
         get inverseInsulation(): number;
+        get temperature(): number;
+        get ambientTemperature(): boolean;
         get heatCapacity(): number;
     }
     export class $HeatAPI$HeatTransfer extends $Record {
@@ -32,40 +32,40 @@ declare module "@package/mekanism/api/heat" {
     /**
      * Values that may be interpreted as {@link $HeatAPI$HeatTransfer}.
      */
-    export type $HeatAPI$HeatTransfer_ = { environmentTransfer?: number, adjacentTransfer?: number,  } | [environmentTransfer?: number, adjacentTransfer?: number, ];
+    export type $HeatAPI$HeatTransfer_ = { adjacentTransfer?: number, environmentTransfer?: number,  } | [adjacentTransfer?: number, environmentTransfer?: number, ];
     export class $IMekanismHeatHandler {
     }
     export interface $IMekanismHeatHandler extends $ISidedHeatHandler, $IContentsListener {
+        getTotalHeatCapacity(arg0: $Direction_): number;
+        getTotalInverseInsulation(arg0: $Direction_): number;
+        getTotalTemperature(arg0: $Direction_): number;
+        getInverseConduction(arg0: number, arg1: $Direction_): number;
+        getInverseInsulation(arg0: number, arg1: $Direction_): number;
+        getHeatCapacitorCount(arg0: $Direction_): number;
+        getTotalInverseConductionCoefficient(arg0: $Direction_): number;
         getTemperature(arg0: number, arg1: $Direction_): number;
         handleHeat(arg0: number, arg1: $Direction_): void;
         handleHeat(arg0: number, arg1: number, arg2: $Direction_): void;
-        getTotalInverseConductionCoefficient(arg0: $Direction_): number;
-        getHeatCapacitorCount(arg0: $Direction_): number;
-        getTotalHeatCapacity(arg0: $Direction_): number;
-        getInverseConduction(arg0: number, arg1: $Direction_): number;
-        getTotalTemperature(arg0: $Direction_): number;
-        getTotalInverseInsulation(arg0: $Direction_): number;
-        getInverseInsulation(arg0: number, arg1: $Direction_): number;
-        getHeatCapacity(arg0: number, arg1: $Direction_): number;
-        getHeatCapacitor(arg0: number, arg1: $Direction_): $IHeatCapacitor;
-        canHandleHeat(): boolean;
         getHeatCapacitors(arg0: $Direction_): $List<$IHeatCapacitor>;
+        getHeatCapacitor(arg0: number, arg1: $Direction_): $IHeatCapacitor;
+        getHeatCapacity(arg0: number, arg1: $Direction_): number;
+        canHandleHeat(): boolean;
     }
     export class $IHeatHandler {
     }
     export interface $IHeatHandler {
+        getTotalHeatCapacity(): number;
+        getTotalTemperature(): number;
+        getTotalInverseConduction(): number;
+        getInverseConduction(arg0: number): number;
+        getHeatCapacitorCount(): number;
         getTemperature(arg0: number): number;
         handleHeat(arg0: number): void;
         handleHeat(arg0: number, arg1: number): void;
-        getHeatCapacitorCount(): number;
-        getTotalHeatCapacity(): number;
-        getTotalInverseConduction(): number;
-        getInverseConduction(arg0: number): number;
-        getTotalTemperature(): number;
         getHeatCapacity(arg0: number): number;
-        get heatCapacitorCount(): number;
         get totalHeatCapacity(): number;
-        get totalInverseConduction(): number;
         get totalTemperature(): number;
+        get totalInverseConduction(): number;
+        get heatCapacitorCount(): number;
     }
 }

@@ -13,15 +13,15 @@ import { $RandomSource } from "@package/net/minecraft/util";
 
 declare module "@package/com/simibubi/create/foundation/virtualWorld" {
     export class $VirtualRenderWorld extends $Level implements $VisualizationLevel {
-        setBlockEntities(arg0: $Collection_<$BlockEntity>): void;
-        clear(): void;
         runLightEngine(): void;
         static nextMultipleOf16(arg0: number): number;
+        setBlockEntities(arg0: $Collection_<$BlockEntity>): void;
+        clear(): void;
         getBlockState(arg0: number, arg1: number, arg2: number): $BlockState;
-        resetExternalLight(): void;
-        setExternalLight(arg0: number): void;
         getChunkAtImmediately(arg0: number, arg1: number): $LevelChunk;
         getAnyChunkImmediately(arg0: number, arg1: number): $ChunkAccess;
+        setExternalLight(arg0: number): void;
+        resetExternalLight(): void;
         supportsVisualization(): boolean;
         restoringBlockSnapshots: boolean;
         oThunderLevel: number;

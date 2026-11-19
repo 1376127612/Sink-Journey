@@ -12,28 +12,28 @@ import { $IConfigurable } from "@package/com/lowdragmc/lowdraglib2/configurator"
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor/settings" {
     export class $EditorSettings implements $IPersistedSerializable {
-        isDirty(): boolean;
-        getSettings(arg0: $ResourceLocation_): ($Settings) | undefined;
+        createSettingsPanel(): $UIElement;
+        loadAllSettingsFromFile(): void;
+        applyCurrentSettings(): void;
+        saveAllSettingsToFile(): void;
         markDirty(): void;
         registerSettings<T extends $Settings>(arg0: T, arg1: $Codec<T>): void;
         restoreSettings(): void;
-        createSettingsPanel(): $UIElement;
-        saveAllSettingsToFile(): void;
-        loadAllSettingsFromFile(): void;
-        applyCurrentSettings(): void;
-        setSettingsFile(arg0: $File_): $EditorSettings;
+        isDirty(): boolean;
+        getSettings(arg0: $ResourceLocation_): ($Settings) | undefined;
         unregisterSettings(arg0: $ResourceLocation_): void;
         getSettingsFile(): $File;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        setSettingsFile(arg0: $File_): $EditorSettings;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         afterSerialize(): void;
+        beforeDeserialize(): void;
+        writeToBuff(arg0: $ByteBuf): void;
         afterDeserialize(): void;
         readFromBuff(arg0: $ByteBuf): void;
         beforeSerialize(): void;
-        writeToBuff(arg0: $ByteBuf): void;
-        beforeDeserialize(): void;
-        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         deserializeAdditionalNBT(arg0: $Tag_, arg1: $HolderLookup$Provider): void;
+        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         editor: $Editor;
         constructor(arg0: $Editor);
         get dirty(): boolean;
@@ -44,8 +44,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/editor/settings" {
         getId(): $ResourceLocation;
         getPath(): string;
         getDisplayName(): $Component;
-        onApply(arg0: $Editor): void;
         onLoaded(arg0: $Editor): void;
+        onApply(arg0: $Editor): void;
         get id(): $ResourceLocation;
         get path(): string;
         get displayName(): $Component;

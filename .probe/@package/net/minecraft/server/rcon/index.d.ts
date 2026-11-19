@@ -5,6 +5,11 @@ export * as thread from "@package/net/minecraft/server/rcon/thread";
 
 declare module "@package/net/minecraft/server/rcon" {
     export class $RconConsoleSource implements $CommandSource {
+        sendSystemMessage(component: $Component_): void;
+        acceptsSuccess(): boolean;
+        shouldInformAdmins(): boolean;
+        acceptsFailure(): boolean;
+        createCommandSourceStack(): $CommandSourceStack;
         /**
          * Clears the RCon log
          */
@@ -13,11 +18,6 @@ declare module "@package/net/minecraft/server/rcon" {
          * Gets the contents of the RCon log
          */
         getCommandResponse(): string;
-        createCommandSourceStack(): $CommandSourceStack;
-        sendSystemMessage(component: $Component_): void;
-        shouldInformAdmins(): boolean;
-        acceptsSuccess(): boolean;
-        acceptsFailure(): boolean;
         alwaysAccepts(): boolean;
         constructor(server: $MinecraftServer);
         get commandResponse(): string;
@@ -33,11 +33,11 @@ declare module "@package/net/minecraft/server/rcon" {
          * Writes the given byte array to the output stream
          */
         writeBytes(data: number[]): void;
+        writeFloat(data: number): void;
         /**
          * Returns the contents of the output stream as a byte array
          */
         toByteArray(): number[];
-        writeFloat(data: number): void;
         /**
          * Writes the given String to the output stream
          */
@@ -54,6 +54,14 @@ declare module "@package/net/minecraft/server/rcon" {
          */
         static stringFromByteArray(input: number[], offset: number, length: number): string;
         /**
+         * Read 4 bytes from the given array in little-endian format and return them as an int
+         */
+        static intFromNetworkByteArray(input: number[], offset: number, length: number): number;
+        /**
+         * Returns a String representation of the byte in hexadecimal format
+         */
+        static toHexString(input: number): string;
+        /**
          * Read 4 bytes from the
          */
         static intFromByteArray(input: number[], offset: number): number;
@@ -61,14 +69,6 @@ declare module "@package/net/minecraft/server/rcon" {
          * Read 4 bytes from the given array in little-endian format and return them as an int
          */
         static intFromByteArray(input: number[], offset: number, length: number): number;
-        /**
-         * Returns a String representation of the byte in hexadecimal format
-         */
-        static toHexString(input: number): string;
-        /**
-         * Read 4 bytes from the given array in little-endian format and return them as an int
-         */
-        static intFromNetworkByteArray(input: number[], offset: number, length: number): number;
         static MAX_PACKET_SIZE: number;
         static HEX_CHAR: string[];
         constructor();

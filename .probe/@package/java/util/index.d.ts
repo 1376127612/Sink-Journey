@@ -88,21 +88,21 @@ declare module "@package/java/util" {
         nextInt(): number;
     }
     export class $IntSummaryStatistics implements $IntConsumer {
+        getSum(): number;
+        getAverage(): number;
         accept(arg0: number): void;
         combine(arg0: $IntSummaryStatistics): void;
         getCount(): number;
-        getMax(): number;
         getMin(): number;
-        getSum(): number;
-        getAverage(): number;
+        getMax(): number;
         andThen(arg0: $IntConsumer_): $IntConsumer;
         constructor();
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
-        get count(): number;
-        get max(): number;
-        get min(): number;
         get sum(): number;
         get average(): number;
+        get count(): number;
+        get min(): number;
+        get max(): number;
     }
     export class $ImmutableCollections$MapN<K, V> extends $ImmutableCollections$AbstractImmutableMap<K, V> {
     }
@@ -118,19 +118,23 @@ declare module "@package/java/util" {
         static getInstance(arg0: $Locale): $Calendar;
         static getInstance(arg0: $TimeZone, arg1: $Locale): $Calendar;
         set(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        set(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         set(arg0: number, arg1: number, arg2: number): void;
+        set(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         set(arg0: number, arg1: number): void;
         isSet(arg0: number): boolean;
         before(arg0: $Object): boolean;
         after(arg0: $Object): boolean;
         getTime(): $Date;
         toInstant(): $Instant;
+        getTimeZone(): $TimeZone;
+        setTimeZone(arg0: $TimeZone): void;
         getDisplayName(arg0: number, arg1: number, arg2: $Locale): string;
         static getAvailableLocales(): $Locale[];
         setTime(arg0: $Date): void;
-        getTimeZone(): $TimeZone;
-        setTimeZone(arg0: $TimeZone): void;
+        setTimeInMillis(arg0: number): void;
+        isWeekDateSupported(): boolean;
+        getWeekYear(): number;
+        getLeastMaximum(arg0: number): number;
         getMinimum(arg0: number): number;
         getMaximum(arg0: number): number;
         getDisplayNames(arg0: number, arg1: number, arg2: $Locale): $Map<string, number>;
@@ -139,10 +143,6 @@ declare module "@package/java/util" {
         isLenient(): boolean;
         getFirstDayOfWeek(): number;
         getMinimalDaysInFirstWeek(): number;
-        setTimeInMillis(arg0: number): void;
-        isWeekDateSupported(): boolean;
-        getWeekYear(): number;
-        getLeastMaximum(arg0: number): number;
         getTimeInMillis(): number;
         roll(arg0: number, arg1: number): void;
         roll(arg0: number, arg1: boolean): void;
@@ -205,9 +205,9 @@ declare module "@package/java/util" {
         static PM: number;
         static SHORT_FORMAT: number;
         static get availableLocales(): $Locale[];
-        get calendarType(): string;
         get weekDateSupported(): boolean;
         get weekYear(): number;
+        get calendarType(): string;
         static get availableCalendarTypes(): $Set<string>;
         get weeksInWeekYear(): number;
     }
@@ -293,15 +293,15 @@ declare module "@package/java/util" {
     }
     export class $ResourceBundle$Control {
         toResourceName(arg0: string, arg1: string): string;
-        static getControl(arg0: $List_<string>): $ResourceBundle$Control;
         getFormats(arg0: string): $List<string>;
-        getCandidateLocales(arg0: string, arg1: $Locale): $List<$Locale>;
-        static getNoFallbackControl(arg0: $List_<string>): $ResourceBundle$Control;
         toBundleName(arg0: string, arg1: $Locale): string;
         getFallbackLocale(arg0: string, arg1: $Locale): $Locale;
         newBundle(arg0: string, arg1: $Locale, arg2: string, arg3: $ClassLoader, arg4: boolean): $ResourceBundle;
         getTimeToLive(arg0: string, arg1: $Locale): number;
         needsReload(arg0: string, arg1: $Locale, arg2: string, arg3: $ClassLoader, arg4: $ResourceBundle, arg5: number): boolean;
+        getCandidateLocales(arg0: string, arg1: $Locale): $List<$Locale>;
+        static getNoFallbackControl(arg0: $List_<string>): $ResourceBundle$Control;
+        static getControl(arg0: $List_<string>): $ResourceBundle$Control;
         static FORMAT_PROPERTIES: $List<string>;
         static TTL_DONT_CACHE: number;
         static FORMAT_DEFAULT: $List<string>;
@@ -358,31 +358,31 @@ declare module "@package/java/util" {
         orElse(arg0: number): number;
         orElseThrow<X extends $Throwable>(arg0: $Supplier_<X>): number;
         orElseThrow(): number;
-        ifPresent(arg0: $LongConsumer_): void;
-        orElseGet(arg0: $LongSupplier_): number;
         ifPresentOrElse(arg0: $LongConsumer_, arg1: $Runnable_): void;
+        orElseGet(arg0: $LongSupplier_): number;
+        ifPresent(arg0: $LongConsumer_): void;
         getAsLong(): number;
         get present(): boolean;
         get asLong(): number;
     }
     export class $LongSummaryStatistics implements $LongConsumer, $IntConsumer {
+        getSum(): number;
+        getAverage(): number;
         accept(arg0: number): void;
         accept(arg0: number): void;
         combine(arg0: $LongSummaryStatistics): void;
         getCount(): number;
-        getMax(): number;
         getMin(): number;
-        getSum(): number;
-        getAverage(): number;
+        getMax(): number;
         andThen(arg0: $LongConsumer_): $LongConsumer;
         andThen(arg0: $IntConsumer_): $IntConsumer;
         constructor();
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
-        get count(): number;
-        get max(): number;
-        get min(): number;
         get sum(): number;
         get average(): number;
+        get count(): number;
+        get min(): number;
+        get max(): number;
     }
     export class $Hashtable<K, V> extends $Dictionary<K, V> implements $Map<K, V>, $Cloneable, $Serializable {
         remove(arg0: $Object, arg1: $Object): boolean;
@@ -443,9 +443,9 @@ declare module "@package/java/util" {
         orElse(arg0: number): number;
         orElseThrow<X extends $Throwable>(arg0: $Supplier_<X>): number;
         orElseThrow(): number;
-        ifPresent(arg0: $IntConsumer_): void;
-        orElseGet(arg0: $IntSupplier_): number;
         ifPresentOrElse(arg0: $IntConsumer_, arg1: $Runnable_): void;
+        orElseGet(arg0: $IntSupplier_): number;
+        ifPresent(arg0: $IntConsumer_): void;
         getAsInt(): number;
         get present(): boolean;
         get asInt(): number;
@@ -459,9 +459,9 @@ declare module "@package/java/util" {
         orElse(arg0: number): number;
         orElseThrow<X extends $Throwable>(arg0: $Supplier_<X>): number;
         orElseThrow(): number;
-        ifPresent(arg0: $DoubleConsumer_): void;
-        orElseGet(arg0: $DoubleSupplier_): number;
         ifPresentOrElse(arg0: $DoubleConsumer_, arg1: $Runnable_): void;
+        orElseGet(arg0: $DoubleSupplier_): number;
+        ifPresent(arg0: $DoubleConsumer_): void;
         getAsDouble(): number;
         get present(): boolean;
         get asDouble(): number;
@@ -662,6 +662,30 @@ declare module "@package/java/util" {
         setValue(arg0: V): V;
         get key(): K;
     }
+    export class $NavigableSet<E> {
+        [Symbol.iterator](): Iterator<E>
+    }
+    export interface $NavigableSet<E> extends $SortedSet<E> {
+        floor(arg0: E): E;
+        iterator(): $Iterator<E>;
+        lower(arg0: E): E;
+        reversed(): $NavigableSet<E>;
+        removeFirst(): E;
+        removeLast(): E;
+        pollFirst(): E;
+        pollLast(): E;
+        descendingIterator(): $Iterator<E>;
+        subSet(arg0: E, arg1: boolean, arg2: E, arg3: boolean): $NavigableSet<E>;
+        subSet(arg0: E, arg1: E): $SortedSet<E>;
+        headSet(arg0: E, arg1: boolean): $NavigableSet<E>;
+        headSet(arg0: E): $SortedSet<E>;
+        tailSet(arg0: E): $SortedSet<E>;
+        tailSet(arg0: E, arg1: boolean): $NavigableSet<E>;
+        descendingSet(): $NavigableSet<E>;
+        ceiling(arg0: E): E;
+        higher(arg0: E): E;
+        [Symbol.iterator](): Iterator<E>
+    }
     export class $ListIterator<E> {
     }
     export interface $ListIterator<E> extends $Iterator<E> {
@@ -678,15 +702,15 @@ declare module "@package/java/util" {
     export class $Locale$LanguageRange {
         static parse(arg0: string): $List<$Locale$LanguageRange>;
         static parse(arg0: string, arg1: $Map_<string, $List_<string>>): $List<$Locale$LanguageRange>;
-        getRange(): string;
         static mapEquivalents(arg0: $List_<$Locale$LanguageRange>, arg1: $Map_<string, $List_<string>>): $List<$Locale$LanguageRange>;
         getWeight(): number;
+        getRange(): string;
         static MAX_WEIGHT: number;
         static MIN_WEIGHT: number;
         constructor(arg0: string);
         constructor(arg0: string, arg1: number);
-        get range(): string;
         get weight(): number;
+        get range(): string;
     }
     export class $SortedMap<K, V> {
     }
@@ -697,12 +721,12 @@ declare module "@package/java/util" {
         reversed(): $SortedMap<K, V>;
         comparator(): $Comparator<K>;
         firstKey(): K;
-        putFirst(arg0: K, arg1: V): V;
-        putLast(arg0: K, arg1: V): V;
         subMap(arg0: K, arg1: K): $SortedMap<K, V>;
         headMap(arg0: K): $SortedMap<K, V>;
         tailMap(arg0: K): $SortedMap<K, V>;
         lastKey(): K;
+        putFirst(arg0: K, arg1: V): V;
+        putLast(arg0: K, arg1: V): V;
     }
     export class $Optional<T> {
         get(): T;
@@ -717,11 +741,11 @@ declare module "@package/java/util" {
         orElse(arg0: T): T;
         orElseThrow<X extends $Throwable>(arg0: $Supplier_<X>): T;
         orElseThrow(): T;
+        ifPresentOrElse(arg0: $Consumer_<T>, arg1: $Runnable_): void;
         static ofNullable<T>(arg0: T): (T) | undefined;
-        ifPresent(arg0: $Consumer_<T>): void;
         or(arg0: $Supplier_<(T) | undefined>): (T) | undefined;
         orElseGet(arg0: $Supplier_<T>): T;
-        ifPresentOrElse(arg0: $Consumer_<T>, arg1: $Runnable_): void;
+        ifPresent(arg0: $Consumer_<T>): void;
         get present(): boolean;
     }
     export class $AbstractSequentialList<E> extends $AbstractList<E> {
@@ -766,11 +790,11 @@ declare module "@package/java/util" {
         getDisplayName(arg0: $Locale): string;
         getDefaultFractionDigits(): number;
         getCurrencyCode(): string;
-        getSymbol(): string;
-        getSymbol(arg0: $Locale): string;
         static getAvailableCurrencies(): $Set<$Currency>;
         getNumericCode(): number;
         getNumericCodeAsString(): string;
+        getSymbol(): string;
+        getSymbol(arg0: $Locale): string;
         get defaultFractionDigits(): number;
         get currencyCode(): string;
         static get availableCurrencies(): $Set<$Currency>;
@@ -805,13 +829,13 @@ declare module "@package/java/util" {
         addFirst(arg0: E): void;
         addLast(arg0: E): void;
         comparator(): $Comparator<E>;
+        pollFirst(): E;
         pollLast(): E;
         descendingIterator(): $Iterator<E>;
-        pollFirst(): E;
         subSet(arg0: E, arg1: E): $SortedSet<E>;
         subSet(arg0: E, arg1: boolean, arg2: E, arg3: boolean): $NavigableSet<E>;
-        headSet(arg0: E, arg1: boolean): $NavigableSet<E>;
         headSet(arg0: E): $SortedSet<E>;
+        headSet(arg0: E, arg1: boolean): $NavigableSet<E>;
         tailSet(arg0: E, arg1: boolean): $NavigableSet<E>;
         tailSet(arg0: E): $SortedSet<E>;
         descendingSet(): $NavigableSet<E>;
@@ -851,21 +875,21 @@ declare module "@package/java/util" {
         get empty(): boolean;
     }
     export class $DoubleSummaryStatistics implements $DoubleConsumer {
+        getSum(): number;
+        getAverage(): number;
         accept(arg0: number): void;
         combine(arg0: $DoubleSummaryStatistics): void;
         getCount(): number;
-        getMax(): number;
         getMin(): number;
-        getSum(): number;
-        getAverage(): number;
+        getMax(): number;
         andThen(arg0: $DoubleConsumer_): $DoubleConsumer;
         constructor();
         constructor(arg0: number, arg1: number, arg2: number, arg3: number);
-        get count(): number;
-        get max(): number;
-        get min(): number;
         get sum(): number;
         get average(): number;
+        get count(): number;
+        get min(): number;
+        get max(): number;
     }
     export class $Spliterator$OfPrimitive<T, T_CONS, T_SPLITR extends $Spliterator$OfPrimitive<T, T_CONS, T_SPLITR>> {
     }
@@ -917,6 +941,9 @@ declare module "@package/java/util" {
         removeFirst(): E;
         removeLast(): E;
         poll(): E;
+        push(arg0: E): void;
+        pop(): E;
+        pollFirst(): E;
         pollLast(): E;
         offerLast(arg0: E): boolean;
         peekFirst(): E;
@@ -926,9 +953,6 @@ declare module "@package/java/util" {
         removeLastOccurrence(arg0: $Object): boolean;
         offer(arg0: E): boolean;
         descendingIterator(): $Iterator<E>;
-        push(arg0: E): void;
-        pop(): E;
-        pollFirst(): E;
         [Symbol.iterator](): Iterator<E>
         get first(): E;
         get last(): E;
@@ -945,6 +969,9 @@ declare module "@package/java/util" {
         removeFirst(): E;
         removeLast(): E;
         poll(): E;
+        push(arg0: E): void;
+        pop(): E;
+        pollFirst(): E;
         pollLast(): E;
         offerLast(arg0: E): boolean;
         peekFirst(): E;
@@ -954,9 +981,6 @@ declare module "@package/java/util" {
         removeLastOccurrence(arg0: $Object): boolean;
         offer(arg0: E): boolean;
         descendingIterator(): $Iterator<E>;
-        push(arg0: E): void;
-        pop(): E;
-        pollFirst(): E;
         reversed(): $Deque<E>;
         constructor(arg0: number);
         constructor();
@@ -1096,19 +1120,19 @@ declare module "@package/java/util" {
         getOffset(arg0: number): number;
         static setDefault(arg0: $TimeZone): void;
         getID(): string;
-        getDisplayName(arg0: boolean, arg1: number): string;
-        getDisplayName(arg0: boolean, arg1: number, arg2: $Locale): string;
-        getDisplayName(): string;
-        getDisplayName(arg0: $Locale): string;
         static getTimeZone(arg0: string): $TimeZone;
         static getTimeZone(arg0: $ZoneId): $TimeZone;
+        getDisplayName(): string;
+        getDisplayName(arg0: $Locale): string;
+        getDisplayName(arg0: boolean, arg1: number): string;
+        getDisplayName(arg0: boolean, arg1: number, arg2: $Locale): string;
         toZoneId(): $ZoneId;
         inDaylightTime(arg0: $Date): boolean;
         getRawOffset(): number;
         getDSTSavings(): number;
         useDaylightTime(): boolean;
-        static getAvailableIDs(arg0: number): string[];
         static getAvailableIDs(): string[];
+        static getAvailableIDs(arg0: number): string[];
         setID(arg0: string): void;
         setRawOffset(arg0: number): void;
         observesDaylightTime(): boolean;
@@ -1142,12 +1166,11 @@ declare module "@package/java/util" {
         getObject(arg0: string): $Object;
         getKeys(): $Enumeration<string>;
         getString(arg0: string): string;
-        getLocale(): $Locale;
         static getBundle(arg0: string, arg1: $Locale, arg2: $ResourceBundle$Control): $ResourceBundle;
         static getBundle(arg0: string, arg1: $Locale, arg2: $ClassLoader): $ResourceBundle;
         static getBundle(arg0: string, arg1: $Locale, arg2: $ClassLoader, arg3: $ResourceBundle$Control): $ResourceBundle;
-        static getBundle(arg0: string): $ResourceBundle;
         static getBundle(arg0: string, arg1: $ResourceBundle$Control): $ResourceBundle;
+        static getBundle(arg0: string): $ResourceBundle;
         static getBundle(arg0: string, arg1: $Locale): $ResourceBundle;
         static getBundle(arg0: string, arg1: $Module): $ResourceBundle;
         static getBundle(arg0: string, arg1: $Locale, arg2: $Module): $ResourceBundle;
@@ -1155,10 +1178,11 @@ declare module "@package/java/util" {
         getStringArray(arg0: string): string[];
         static clearCache(): void;
         static clearCache(arg0: $ClassLoader): void;
+        getLocale(): $Locale;
         constructor();
         get keys(): $Enumeration<string>;
-        get locale(): $Locale;
         get baseBundleName(): string;
+        get locale(): $Locale;
     }
     export class $Enumeration<E> {
     }
@@ -1174,6 +1198,9 @@ declare module "@package/java/util" {
         reversed(): $LinkedList<E>;
         element(): E;
         poll(): E;
+        push(arg0: E): void;
+        pop(): E;
+        pollFirst(): E;
         pollLast(): E;
         offerLast(arg0: E): boolean;
         peekFirst(): E;
@@ -1183,9 +1210,6 @@ declare module "@package/java/util" {
         removeLastOccurrence(arg0: $Object): boolean;
         offer(arg0: E): boolean;
         descendingIterator(): $Iterator<E>;
-        push(arg0: E): void;
-        pop(): E;
-        pollFirst(): E;
         constructor();
         constructor(arg0: $Collection_<E>);
     }
@@ -1210,33 +1234,33 @@ declare module "@package/java/util" {
     export class $Random implements $RandomGenerator, $Serializable {
         static from(arg0: $RandomGenerator_): $Random;
         nextDouble(): number;
-        nextInt(): number;
         nextInt(arg0: number): number;
-        nextBytes(arg0: number[]): void;
+        nextInt(): number;
         nextBoolean(): boolean;
         nextLong(): number;
         nextFloat(): number;
-        ints(arg0: number, arg1: number, arg2: number): $IntStream;
         ints(): $IntStream;
         ints(arg0: number): $IntStream;
+        ints(arg0: number, arg1: number, arg2: number): $IntStream;
         ints(arg0: number, arg1: number): $IntStream;
-        longs(arg0: number): $LongStream;
-        longs(arg0: number, arg1: number): $LongStream;
         longs(arg0: number, arg1: number, arg2: number): $LongStream;
         longs(): $LongStream;
-        doubles(arg0: number): $DoubleStream;
+        longs(arg0: number): $LongStream;
+        longs(arg0: number, arg1: number): $LongStream;
         doubles(arg0: number, arg1: number): $DoubleStream;
-        doubles(): $DoubleStream;
         doubles(arg0: number, arg1: number, arg2: number): $DoubleStream;
+        doubles(arg0: number): $DoubleStream;
+        doubles(): $DoubleStream;
         setSeed(arg0: number): void;
         nextGaussian(): number;
+        nextBytes(arg0: number[]): void;
         nextDouble(arg0: number): number;
         nextDouble(arg0: number, arg1: number): number;
         nextInt(arg0: number, arg1: number): number;
         nextLong(arg0: number, arg1: number): number;
         nextLong(arg0: number): number;
-        nextFloat(arg0: number): number;
         nextFloat(arg0: number, arg1: number): number;
+        nextFloat(arg0: number): number;
         nextGaussian(arg0: number, arg1: number): number;
         isDeprecated(): boolean;
         nextExponential(): number;
@@ -1264,7 +1288,6 @@ declare module "@package/java/util" {
         elementAt(arg0: number): E;
         copyInto(arg0: $Object[]): void;
         setSize(arg0: number): void;
-        removeElementAt(arg0: number): void;
         addElement(arg0: E): void;
         removeElement(arg0: $Object): boolean;
         insertElementAt(arg0: E, arg1: number): void;
@@ -1272,6 +1295,7 @@ declare module "@package/java/util" {
         lastElement(): E;
         setElementAt(arg0: E, arg1: number): void;
         removeAllElements(): void;
+        removeElementAt(arg0: number): void;
         constructor(arg0: $Collection_<E>);
         constructor();
         constructor(arg0: number);
@@ -1320,11 +1344,11 @@ declare module "@package/java/util" {
          * @deprecated
          */
         static UTC(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): number;
-        setTime(arg0: number): void;
         /**
          * @deprecated
          */
         getDate(): number;
+        setTime(arg0: number): void;
         /**
          * @deprecated
          */
@@ -1455,24 +1479,24 @@ declare module "@package/java/util" {
         length(): number;
         clone(): $Object;
         static valueOf(arg0: number[]): $BitSet;
-        static valueOf(arg0: $LongBuffer): $BitSet;
         static valueOf(arg0: number[]): $BitSet;
+        static valueOf(arg0: $LongBuffer): $BitSet;
         static valueOf(arg0: $ByteBuffer): $BitSet;
-        clear(arg0: number): void;
         clear(arg0: number, arg1: number): void;
         clear(): void;
+        clear(arg0: number): void;
         isEmpty(): boolean;
         stream(): $IntStream;
-        set(arg0: number, arg1: number): void;
-        set(arg0: number): void;
-        set(arg0: number, arg1: number, arg2: boolean): void;
         set(arg0: number, arg1: boolean): void;
+        set(arg0: number): void;
+        set(arg0: number, arg1: number): void;
+        set(arg0: number, arg1: number, arg2: boolean): void;
         flip(arg0: number, arg1: number): void;
         flip(arg0: number): void;
-        toByteArray(): number[];
         nextClearBit(arg0: number): number;
         or(arg0: $BitSet): void;
         and(arg0: $BitSet): void;
+        toByteArray(): number[];
         xor(arg0: $BitSet): void;
         andNot(arg0: $BitSet): void;
         cardinality(): number;

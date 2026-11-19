@@ -6,19 +6,19 @@ import { $RequirementType, $RequirementHandler_, $MachineRequirement } from "@pa
 
 declare module "@package/cn/howxu/mmcr/compat/ars_nouveau" {
     export class $SourceRequirement extends $Record implements $MachineRequirement {
+        chance(): number;
+        consumeChance(): number;
+        static supportsSearchSnapshot(): boolean;
+        static installHandler(handler: $RequirementHandler_<$SourceRequirement>): void;
+        static installUnavailableHandler(): void;
         type(): $RequirementType<$SourceRequirement>;
-        static input(amount: number, consumeChance: number): $SourceRequirement;
         static input(amount: number): $SourceRequirement;
+        static input(amount: number, consumeChance: number): $SourceRequirement;
         io(): $RecipeModifier$IOType;
-        static output(amount: number): $SourceRequirement;
         static output(amount: number, chance: number): $SourceRequirement;
+        static output(amount: number): $SourceRequirement;
         tags(): $List<string>;
         amount(): number;
-        chance(): number;
-        static installHandler(handler: $RequirementHandler_<$SourceRequirement>): void;
-        static supportsSearchSnapshot(): boolean;
-        static installUnavailableHandler(): void;
-        consumeChance(): number;
         static CODEC: $MapCodec<$SourceRequirement>;
         static TYPE: $RequirementType<$SourceRequirement>;
         constructor(io: $RecipeModifier$IOType_, amount: number, tags: $List_<string>);
@@ -27,5 +27,5 @@ declare module "@package/cn/howxu/mmcr/compat/ars_nouveau" {
     /**
      * Values that may be interpreted as {@link $SourceRequirement}.
      */
-    export type $SourceRequirement_ = { io?: $RecipeModifier$IOType_, chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>,  } | [io?: $RecipeModifier$IOType_, chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>, ];
+    export type $SourceRequirement_ = { chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>, io?: $RecipeModifier$IOType_,  } | [chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>, io?: $RecipeModifier$IOType_, ];
 }

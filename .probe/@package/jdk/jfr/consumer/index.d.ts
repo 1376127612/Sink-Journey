@@ -24,15 +24,15 @@ declare module "@package/jdk/jfr/consumer" {
         get type(): $RecordedClass;
     }
     export class $RecordedFrame extends $RecordedObject {
+        getBytecodeIndex(): number;
         getMethod(): $RecordedMethod;
         getType(): string;
         getLineNumber(): number;
-        getBytecodeIndex(): number;
         isJavaFrame(): boolean;
+        get bytecodeIndex(): number;
         get method(): $RecordedMethod;
         get type(): string;
         get lineNumber(): number;
-        get bytecodeIndex(): number;
         get javaFrame(): boolean;
     }
     export class $RecordedClass extends $RecordedObject {
@@ -52,6 +52,8 @@ declare module "@package/jdk/jfr/consumer" {
         get truncated(): boolean;
     }
     export class $RecordedObject {
+        getThread(arg0: string): $RecordedThread;
+        hasField(arg0: string): boolean;
         getClass(arg0: string): $RecordedClass;
         getBoolean(arg0: string): boolean;
         getByte(arg0: string): number;
@@ -66,8 +68,6 @@ declare module "@package/jdk/jfr/consumer" {
         getDuration(arg0: string): $Duration;
         getString(arg0: string): string;
         getInstant(arg0: string): $Instant;
-        getThread(arg0: string): $RecordedThread;
-        hasField(arg0: string): boolean;
         get fields(): $List<$ValueDescriptor>;
     }
     export class $RecordedThreadGroup extends $RecordedObject {
@@ -77,33 +77,33 @@ declare module "@package/jdk/jfr/consumer" {
         get parent(): $RecordedThreadGroup;
     }
     export class $RecordedThread extends $RecordedObject {
+        getOSName(): string;
+        getOSThreadId(): number;
         isVirtual(): boolean;
         getThreadGroup(): $RecordedThreadGroup;
         getId(): number;
-        getOSName(): string;
-        getOSThreadId(): number;
         getJavaName(): string;
         getJavaThreadId(): number;
+        get OSName(): string;
+        get OSThreadId(): number;
         get virtual(): boolean;
         get threadGroup(): $RecordedThreadGroup;
         get id(): number;
-        get OSName(): string;
-        get OSThreadId(): number;
         get javaName(): string;
         get javaThreadId(): number;
     }
     export class $RecordedEvent extends $RecordedObject {
+        getEventType(): $EventType;
+        getThread(): $RecordedThread;
         getStackTrace(): $RecordedStackTrace;
         getDuration(): $Duration;
-        getEndTime(): $Instant;
         getStartTime(): $Instant;
-        getThread(): $RecordedThread;
-        getEventType(): $EventType;
+        getEndTime(): $Instant;
+        get eventType(): $EventType;
+        get thread(): $RecordedThread;
         get stackTrace(): $RecordedStackTrace;
         get duration(): $Duration;
-        get endTime(): $Instant;
         get startTime(): $Instant;
-        get thread(): $RecordedThread;
-        get eventType(): $EventType;
+        get endTime(): $Instant;
     }
 }

@@ -12,25 +12,25 @@ declare module "@package/cn/howxu/mmcr/publicapi/registration" {
     export class $MachineRegistrar {
     }
     export interface $MachineRegistrar {
-        definitions(): $Map<$ResourceLocation, $MachineSpec>;
-        registerMachine(definition: $MachineSpec): void;
         registerMachine(id: $ResourceLocation_, configuration: $Consumer_<$MachineDraft>): void;
+        registerMachine(definition: $MachineSpec): void;
+        definitions(): $Map<$ResourceLocation, $MachineSpec>;
     }
     export class $StructureRegistrar {
     }
     export interface $StructureRegistrar {
-        modifiers(): $Map<$ResourceLocation, $ModifierBundle>;
-        levels(): $Map<$ResourceLocation, $MachineLevelSpec>;
-        registerLevelType(type: $LevelTypeSpec): void;
-        registerLevel(level: $MachineLevelSpec): void;
-        registerModifier(id: $ResourceLocation_, modifier: $ModifierBundle_): void;
-        registerStructure(structure: $StructureSpec): void;
-        registerStructure(machineId: $ResourceLocation_, configuration: $Consumer_<$StructureDraft>): void;
         structures(): $Map<$ResourceLocation, $StructureSpec>;
+        registerStructure(machineId: $ResourceLocation_, configuration: $Consumer_<$StructureDraft>): void;
+        registerStructure(structure: $StructureSpec): void;
         registerModifierItem(itemId: $ResourceLocation_, modifierId: $ResourceLocation_): void;
+        registerLevelType(type: $LevelTypeSpec): void;
         modifierItems(): $Map<$ResourceLocation, $List<$ItemStack>>;
+        registerModifier(id: $ResourceLocation_, modifier: $ModifierBundle_): void;
+        registerLevel(level: $MachineLevelSpec): void;
         modifierItemIds(): $Map<$ResourceLocation, $ResourceLocation>;
         levelTypes(): $Map<$ResourceLocation, $LevelTypeSpec>;
+        modifiers(): $Map<$ResourceLocation, $ModifierBundle>;
+        levels(): $Map<$ResourceLocation, $MachineLevelSpec>;
     }
     export class $RecipeRegistrar {
     }

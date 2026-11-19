@@ -28,31 +28,28 @@ declare module "@package/javax/swing/plaf" {
     export class $ButtonUI extends $ComponentUI {
     }
     export class $ComponentUI {
-        update(arg0: $Graphics, arg1: $JComponent): void;
-        contains(arg0: $JComponent, arg1: number, arg2: number): boolean;
-        getBaseline(arg0: $JComponent, arg1: number, arg2: number): number;
+        paint(arg0: $Graphics, arg1: $JComponent): void;
         getAccessibleChildrenCount(arg0: $JComponent): number;
         getAccessibleChild(arg0: $JComponent, arg1: number): $Accessible;
         getMaximumSize(arg0: $JComponent): $Dimension;
         getBaselineResizeBehavior(arg0: $JComponent): $Component$BaselineResizeBehavior;
+        update(arg0: $Graphics, arg1: $JComponent): void;
+        contains(arg0: $JComponent, arg1: number, arg2: number): boolean;
+        getBaseline(arg0: $JComponent, arg1: number, arg2: number): number;
         getPreferredSize(arg0: $JComponent): $Dimension;
         getMinimumSize(arg0: $JComponent): $Dimension;
-        paint(arg0: $Graphics, arg1: $JComponent): void;
         static createUI(arg0: $JComponent): $ComponentUI;
         installUI(arg0: $JComponent): void;
         uninstallUI(arg0: $JComponent): void;
         constructor();
     }
     export class $PopupMenuUI extends $ComponentUI {
-        getPopup(arg0: $JPopupMenu, arg1: number, arg2: number): $Popup;
         isPopupTrigger(arg0: $MouseEvent): boolean;
+        getPopup(arg0: $JPopupMenu, arg1: number, arg2: number): $Popup;
     }
     export class $TextUI extends $ComponentUI {
+        getNextVisualPositionFrom(arg0: $JTextComponent, arg1: number, arg2: $Position$Bias, arg3: number, arg4: $Position$Bias[]): number;
         getEditorKit(arg0: $JTextComponent): $EditorKit;
-        /**
-         * @deprecated
-         */
-        viewToModel(arg0: $JTextComponent, arg1: $Point, arg2: $Position$Bias[]): number;
         /**
          * @deprecated
          */
@@ -60,18 +57,21 @@ declare module "@package/javax/swing/plaf" {
         /**
          * @deprecated
          */
-        modelToView(arg0: $JTextComponent, arg1: number): $Rectangle;
+        viewToModel(arg0: $JTextComponent, arg1: $Point, arg2: $Position$Bias[]): number;
         /**
          * @deprecated
          */
         modelToView(arg0: $JTextComponent, arg1: number, arg2: $Position$Bias): $Rectangle;
-        getRootView(arg0: $JTextComponent): $View;
-        getNextVisualPositionFrom(arg0: $JTextComponent, arg1: number, arg2: $Position$Bias, arg3: number, arg4: $Position$Bias[]): number;
+        /**
+         * @deprecated
+         */
+        modelToView(arg0: $JTextComponent, arg1: number): $Rectangle;
+        modelToView2D(arg0: $JTextComponent, arg1: number, arg2: $Position$Bias): $Rectangle2D;
+        viewToModel2D(arg0: $JTextComponent, arg1: $Point2D, arg2: $Position$Bias[]): number;
         damageRange(arg0: $JTextComponent, arg1: number, arg2: number): void;
         damageRange(arg0: $JTextComponent, arg1: number, arg2: number, arg3: $Position$Bias, arg4: $Position$Bias): void;
         getToolTipText2D(arg0: $JTextComponent, arg1: $Point2D): string;
-        modelToView2D(arg0: $JTextComponent, arg1: number, arg2: $Position$Bias): $Rectangle2D;
-        viewToModel2D(arg0: $JTextComponent, arg1: $Point2D, arg2: $Position$Bias[]): number;
+        getRootView(arg0: $JTextComponent): $View;
         /**
          * @deprecated
          */

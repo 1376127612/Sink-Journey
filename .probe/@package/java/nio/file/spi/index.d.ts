@@ -2,7 +2,7 @@ import { $InputStream, $OutputStream } from "@package/java/io";
 import { $Path_, $CopyOption, $FileStore, $DirectoryStream$Filter_, $DirectoryStream, $AccessMode_, $LinkOption_, $OpenOption, $FileSystem, $Path } from "@package/java/nio/file";
 import { $URI } from "@package/java/net";
 import { $ExecutorService } from "@package/java/util/concurrent";
-import { $BasicFileAttributes, $FileAttribute, $FileAttributeView } from "@package/java/nio/file/attribute";
+import { $BasicFileAttributes, $FileAttributeView, $FileAttribute } from "@package/java/nio/file/attribute";
 import { $Object, $Class } from "@package/java/lang";
 import { $List, $Map_, $Map, $Set_ } from "@package/java/util";
 import { $AsynchronousFileChannel, $SeekableByteChannel, $FileChannel } from "@package/java/nio/channels";
@@ -36,9 +36,9 @@ declare module "@package/java/nio/file/spi" {
         deleteIfExists(arg0: $Path_): boolean;
         newInputStream(arg0: $Path_, ...arg1: $OpenOption[]): $InputStream;
         newOutputStream(arg0: $Path_, ...arg1: $OpenOption[]): $OutputStream;
-        readAttributesIfExists<A extends $BasicFileAttributes>(arg0: $Path_, arg1: $Class<A>, ...arg2: $LinkOption_[]): A;
         createDirectory(arg0: $Path_, ...arg1: $FileAttribute<never>[]): void;
         getFileSystem(arg0: $URI): $FileSystem;
+        readAttributesIfExists<A extends $BasicFileAttributes>(arg0: $Path_, arg1: $Class<A>, ...arg2: $LinkOption_[]): A;
         get scheme(): string;
     }
 }

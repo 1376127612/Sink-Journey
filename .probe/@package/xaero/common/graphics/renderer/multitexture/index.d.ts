@@ -8,10 +8,10 @@ declare module "@package/xaero/common/graphics/renderer/multitexture" {
         begin(arg0: number): $BufferBuilder;
     }
     export class $MultiTextureRenderTypeRendererProvider {
-        draw(arg0: $MultiTextureRenderTypeRenderer): void;
         getRenderer(arg0: $IntConsumer_, arg1: $IntConsumer_, arg2: $Runnable_, arg3: $RenderType): $MultiTextureRenderTypeRenderer;
         getRenderer(arg0: $IntConsumer_, arg1: $IntConsumer_, arg2: $RenderType): $MultiTextureRenderTypeRenderer;
         static defaultTextureBind(arg0: number): void;
+        draw(arg0: $MultiTextureRenderTypeRenderer): void;
         constructor(arg0: number);
     }
 }

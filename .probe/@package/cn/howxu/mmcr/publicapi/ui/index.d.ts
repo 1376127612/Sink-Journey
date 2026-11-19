@@ -15,6 +15,7 @@ declare module "@package/cn/howxu/mmcr/publicapi/ui" {
     export class $ControllerUiSnapshot$Lane {
     }
     export interface $ControllerUiSnapshot$Lane {
+        totalTick(): number;
         index(): number;
         base(): boolean;
         lines(): $List<$ControllerUiSnapshot$TextLine>;
@@ -26,7 +27,6 @@ declare module "@package/cn/howxu/mmcr/publicapi/ui" {
         active(): boolean;
         tick(): number;
         recipeId(): ($ResourceLocation) | undefined;
-        totalTick(): number;
     }
     export class $ControllerUiSnapshot$Role extends $Enum<$ControllerUiSnapshot$Role> {
         static values(): $ControllerUiSnapshot$Role[];
@@ -49,34 +49,34 @@ declare module "@package/cn/howxu/mmcr/publicapi/ui" {
     export class $ControllerUiSnapshot {
     }
     export interface $ControllerUiSnapshot {
+        sessionId(): $UUID;
+        controllerPos(): $BlockPos;
+        redstonePaused(): boolean;
+        matchedStage(): number;
+        connectedHostId(): ($ResourceLocation) | undefined;
+        foundLevelIds(): $List<$ResourceLocation>;
+        dataStorageValues(): $Map<string, $DataKey>;
+        lanes(): $List<$ControllerUiSnapshot$Lane>;
+        stageCount(): number;
+        currentRecipePoolId(): ($ResourceLocation) | undefined;
+        installedModuleCount(): number;
+        parallelSlots(): number;
+        activeThreadCount(): number;
+        machineName(): $Component;
+        maxParallelism(): number;
+        recipePoolIds(): $List<$ResourceLocation>;
+        threadLimit(): number;
+        hasDataStorage(): boolean;
         lines(): $List<$ControllerUiSnapshot$TextLine>;
         kind(): $ControllerUiSnapshot$Kind;
         failure(): ($RuntimeFailure) | undefined;
         ready(): boolean;
-        revision(): number;
         active(): boolean;
-        sessionId(): $UUID;
         dimension(): $ResourceKey<$Level>;
-        activeThreadCount(): number;
-        parallelSlots(): number;
-        hasDataStorage(): boolean;
         role(): $ControllerUiSnapshot$Role;
-        maxParallelism(): number;
-        recipePoolIds(): $List<$ResourceLocation>;
         machineId(): $ResourceLocation;
-        controllerPos(): $BlockPos;
         formed(): boolean;
-        redstonePaused(): boolean;
-        currentRecipePoolId(): ($ResourceLocation) | undefined;
-        installedModuleCount(): number;
-        machineName(): $Component;
-        matchedStage(): number;
-        connectedHostId(): ($ResourceLocation) | undefined;
-        dataStorageValues(): $Map<string, $DataKey>;
-        foundLevelIds(): $List<$ResourceLocation>;
-        threadLimit(): number;
-        stageCount(): number;
-        lanes(): $List<$ControllerUiSnapshot$Lane>;
+        revision(): number;
     }
     export class $UiRequestType<Q, R> {
         static of<Q, R>(id: $ResourceLocation_, version: number, requestCodec: $StreamCodec<$RegistryFriendlyByteBuf, Q>, responseCodec: $StreamCodec<$RegistryFriendlyByteBuf, R>): $UiRequestType<Q, R>;
@@ -127,8 +127,8 @@ declare module "@package/cn/howxu/mmcr/publicapi/ui" {
     export class $UiServerContext {
     }
     export interface $UiServerContext {
-        machine(): $MachineContext;
         player(): $ServerPlayer;
+        machine(): $MachineContext;
         laneId(): (string) | undefined;
     }
     export class $UiResult<R> {

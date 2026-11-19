@@ -84,23 +84,23 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         static TRANSLATION_PREFIX: string;
     }
     export interface $ILevelExtension {
-        getDescription(): $Component;
-        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity): T;
-        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
-        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: C): T;
-        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_): T;
-        getPartEntities(): $Collection<$PartEntity<never>>;
         getMaxEntityRadius(): number;
-        getDescriptionKey(): string;
+        getPartEntities(): $Collection<$PartEntity<never>>;
+        increaseMaxEntityRadius(arg0: number): number;
         invalidateCapabilities(arg0: $ChunkPos): void;
         invalidateCapabilities(arg0: $BlockPos_): void;
-        increaseMaxEntityRadius(arg0: number): number;
         getModelDataManager(): $ModelDataManager;
-        get description(): $Component;
-        get partEntities(): $Collection<$PartEntity<never>>;
+        getDescription(): $Component;
+        getDescriptionKey(): string;
+        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: C): T;
+        getCapability<T, C>(arg0: $BlockCapability<T, C>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: C): T;
+        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity): T;
+        getCapability<T>(arg0: $BlockCapability<T, void>, arg1: $BlockPos_): T;
         get maxEntityRadius(): number;
-        get descriptionKey(): string;
+        get partEntities(): $Collection<$PartEntity<never>>;
         get modelDataManager(): $ModelDataManager;
+        get description(): $Component;
+        get descriptionKey(): string;
     }
     export class $IPackResourcesExtension {
     }
@@ -113,11 +113,11 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         static FORMAT: $DecimalFormat;
     }
     export interface $IAttributeExtension {
-        toValueComponent(arg0: $AttributeModifier$Operation_, arg1: number, arg2: $TooltipFlag): $MutableComponent;
         getMergedStyle(arg0: boolean): $TextColor;
+        toBaseComponent(arg0: number, arg1: number, arg2: boolean, arg3: $TooltipFlag): $MutableComponent;
         getDebugInfo(arg0: $AttributeModifier_, arg1: $TooltipFlag): $Component;
         toComponent(arg0: $AttributeModifier_, arg1: $TooltipFlag): $MutableComponent;
-        toBaseComponent(arg0: number, arg1: number, arg2: boolean, arg3: $TooltipFlag): $MutableComponent;
+        toValueComponent(arg0: $AttributeModifier$Operation_, arg1: number, arg2: $TooltipFlag): $MutableComponent;
         getBaseId(): $ResourceLocation;
         get baseId(): $ResourceLocation;
     }
@@ -133,66 +133,66 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IBlockExtension {
     }
     export interface $IBlockExtension {
-        isEmpty(arg0: $BlockState_): boolean;
-        rotate(arg0: $BlockState_, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $Rotation_): $BlockState;
-        getAdjacentBlockPathType(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: $PathType_): $PathType;
-        getExplosionResistance(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Explosion): number;
-        hasDynamicLightEmission(arg0: $BlockState_): boolean;
-        supportsExternalFaceHiding(arg0: $BlockState_): boolean;
-        onDestroyedByPushReaction(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Direction_, arg4: $FluidState): void;
-        getEnchantPowerBonus(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): number;
-        onDestroyedByPlayer(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Player, arg4: boolean, arg5: $FluidState): boolean;
-        getBeaconColorMultiplier(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockPos_): number;
-        shouldDisplayFluidOverlay(arg0: $BlockState_, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $FluidState): boolean;
-        getToolModifiedState(arg0: $BlockState_, arg1: $UseOnContext, arg2: $ItemAbility_, arg3: boolean): $BlockState;
-        canDropFromExplosion(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Explosion): boolean;
-        getBubbleColumnDirection(arg0: $BlockState_): $BubbleColumnDirection;
-        getStateAtViewpoint(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Vec3_): $BlockState;
-        getBlockPathType(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob): $PathType;
-        getCloneItemStack(arg0: $BlockState_, arg1: $HitResult, arg2: $LevelReader, arg3: $BlockPos_, arg4: $Player): $ItemStack;
-        collisionExtendsVertically(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Entity): boolean;
-        getPistonPushReaction(arg0: $BlockState_): $PushReaction;
-        ignitedByLava(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
-        hidesNeighborFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_, arg4: $Direction_): boolean;
-        canSustainPlant(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_, arg4: $BlockState_): $TriState;
-        getFlammability(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): number;
-        isPortalFrame(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
-        getFireSpreadSpeed(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): number;
-        isConduitFrame(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockPos_): boolean;
-        canConnectRedstone(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
-        canBeHydrated(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $FluidState, arg4: $BlockPos_): boolean;
-        isStickyBlock(arg0: $BlockState_): boolean;
-        getMapColor(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $MapColor): $MapColor;
-        isFlammable(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
-        onCaughtFire(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Direction_, arg4: $LivingEntity): void;
-        isFireSource(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Direction_): boolean;
-        onBlockExploded(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Explosion): void;
-        getRespawnPosition(arg0: $BlockState_, arg1: $EntityType_<never>, arg2: $LevelReader, arg3: $BlockPos_, arg4: number): ($ServerPlayer$RespawnPosAngle) | undefined;
-        canEntityDestroy(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Entity): boolean;
-        getAppearance(arg0: $BlockState_, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $Direction_, arg4: $BlockState_, arg5: $BlockPos_): $BlockState;
-        canHarvestBlock(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Player): boolean;
-        isSlimeBlock(arg0: $BlockState_): boolean;
-        addLandingEffects(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $BlockState_, arg4: $LivingEntity, arg5: number): boolean;
+        setBedOccupied(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $LivingEntity, arg4: boolean): void;
+        getBedDirection(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): $Direction;
+        addRunningEffects(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Entity): boolean;
         getSoundType(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Entity): $SoundType;
         isScaffolding(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $LivingEntity): boolean;
         getFriction(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Entity): number;
-        setBedOccupied(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $LivingEntity, arg4: boolean): void;
-        getBedDirection(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): $Direction;
-        isBed(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $LivingEntity): boolean;
         getLightEmission(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): number;
         onBlockStateChange(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_): void;
-        onNeighborChange(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockPos_): void;
         getWeakChanges(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): boolean;
+        onNeighborChange(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockPos_): void;
+        shouldCheckWeakPower(arg0: $BlockState_, arg1: $SignalGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
+        isEmpty(arg0: $BlockState_): boolean;
+        rotate(arg0: $BlockState_, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $Rotation_): $BlockState;
         makesOpenTrapdoorAboveClimbable(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockState_): boolean;
         shouldHideAdjacentFluidFace(arg0: $BlockState_, arg1: $Direction_, arg2: $FluidState): boolean;
-        addRunningEffects(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Entity): boolean;
+        getBlockPathType(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob): $PathType;
+        getAdjacentBlockPathType(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: $PathType_): $PathType;
+        supportsExternalFaceHiding(arg0: $BlockState_): boolean;
+        getExplosionResistance(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Explosion): number;
+        onDestroyedByPushReaction(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Direction_, arg4: $FluidState): void;
+        getBeaconColorMultiplier(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockPos_): number;
+        getToolModifiedState(arg0: $BlockState_, arg1: $UseOnContext, arg2: $ItemAbility_, arg3: boolean): $BlockState;
+        getStateAtViewpoint(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Vec3_): $BlockState;
+        hasDynamicLightEmission(arg0: $BlockState_): boolean;
+        getBubbleColumnDirection(arg0: $BlockState_): $BubbleColumnDirection;
+        canDropFromExplosion(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Explosion): boolean;
+        getEnchantPowerBonus(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): number;
+        onDestroyedByPlayer(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Player, arg4: boolean, arg5: $FluidState): boolean;
+        shouldDisplayFluidOverlay(arg0: $BlockState_, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $FluidState): boolean;
+        getCloneItemStack(arg0: $BlockState_, arg1: $HitResult, arg2: $LevelReader, arg3: $BlockPos_, arg4: $Player): $ItemStack;
+        hidesNeighborFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_, arg4: $Direction_): boolean;
+        canHarvestBlock(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Player): boolean;
+        canBeHydrated(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $FluidState, arg4: $BlockPos_): boolean;
+        isPortalFrame(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
+        isSlimeBlock(arg0: $BlockState_): boolean;
+        ignitedByLava(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
+        onCaughtFire(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Direction_, arg4: $LivingEntity): void;
+        getFlammability(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): number;
+        getFireSpreadSpeed(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): number;
+        canEntityDestroy(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Entity): boolean;
+        onBlockExploded(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Explosion): void;
+        canConnectRedstone(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
+        getMapColor(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $MapColor): $MapColor;
+        isStickyBlock(arg0: $BlockState_): boolean;
+        getAppearance(arg0: $BlockState_, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $Direction_, arg4: $BlockState_, arg5: $BlockPos_): $BlockState;
+        canSustainPlant(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_, arg4: $BlockState_): $TriState;
+        isFireSource(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Direction_): boolean;
+        getRespawnPosition(arg0: $BlockState_, arg1: $EntityType_<never>, arg2: $LevelReader, arg3: $BlockPos_, arg4: number): ($ServerPlayer$RespawnPosAngle) | undefined;
+        isConduitFrame(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $BlockPos_): boolean;
+        isFlammable(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
+        canStickTo(arg0: $BlockState_, arg1: $BlockState_): boolean;
+        isFertile(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
+        getExpDrop(arg0: $BlockState_, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $BlockEntity, arg4: $Entity, arg5: $ItemStack_): number;
         isBurning(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
         onTreeGrow(arg0: $BlockState_, arg1: $LevelReader, arg2: $BiConsumer_<$BlockPos, $BlockState>, arg3: $RandomSource, arg4: $BlockPos_, arg5: $TreeConfiguration): boolean;
         isLadder(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $LivingEntity): boolean;
-        getExpDrop(arg0: $BlockState_, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $BlockEntity, arg4: $Entity, arg5: $ItemStack_): number;
-        isFertile(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
-        canStickTo(arg0: $BlockState_, arg1: $BlockState_): boolean;
-        shouldCheckWeakPower(arg0: $BlockState_, arg1: $SignalGetter, arg2: $BlockPos_, arg3: $Direction_): boolean;
+        addLandingEffects(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $BlockState_, arg4: $LivingEntity, arg5: number): boolean;
+        collisionExtendsVertically(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Entity): boolean;
+        getPistonPushReaction(arg0: $BlockState_): $PushReaction;
+        isBed(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $LivingEntity): boolean;
     }
     export class $IHolderExtension<T> {
     }
@@ -209,52 +209,52 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         static DEFAULT_MAX_SPEED_AIR_LATERAL: number;
     }
     export interface $IAbstractMinecartExtension {
-        setCurrentCartSpeedCapOnRail(arg0: number): void;
-        getCurrentCartSpeedCapOnRail(): number;
         canUseRail(): boolean;
-        setDragAir(arg0: number): void;
         getDragAir(): number;
-        getComparatorLevel(): number;
-        setMaxSpeedAirVertical(arg0: number): void;
-        getMaxSpeedAirLateral(): number;
-        shouldDoRailFunctions(): boolean;
-        setMaxSpeedAirLateral(arg0: number): void;
+        setDragAir(arg0: number): void;
         getMaxCartSpeedOnRail(): number;
         getMaxSpeedWithRail(): number;
-        getMaxSpeedAirVertical(): number;
         getCurrentRailPosition(): $BlockPos;
+        setMaxSpeedAirLateral(arg0: number): void;
+        shouldDoRailFunctions(): boolean;
+        setMaxSpeedAirVertical(arg0: number): void;
+        getMaxSpeedAirLateral(): number;
+        getMaxSpeedAirVertical(): number;
+        canBeRidden(): boolean;
         isPoweredCart(): boolean;
+        moveMinecartOnRail(arg0: $BlockPos_): void;
         getSlopeAdjustment(): number;
         setCanUseRail(arg0: boolean): void;
-        moveMinecartOnRail(arg0: $BlockPos_): void;
-        canBeRidden(): boolean;
-        get comparatorLevel(): number;
+        setCurrentCartSpeedCapOnRail(arg0: number): void;
+        getCurrentCartSpeedCapOnRail(): number;
+        getComparatorLevel(): number;
         get maxCartSpeedOnRail(): number;
         get maxSpeedWithRail(): number;
         get currentRailPosition(): $BlockPos;
         get poweredCart(): boolean;
         get slopeAdjustment(): number;
+        get comparatorLevel(): number;
     }
     export class $IPacketFlowExtension {
     }
     export interface $IPacketFlowExtension {
-        self(): $PacketFlow;
         isClientbound(): boolean;
-        getReceptionSide(): $LogicalSide;
         isServerbound(): boolean;
+        self(): $PacketFlow;
+        getReceptionSide(): $LogicalSide;
         get clientbound(): boolean;
-        get receptionSide(): $LogicalSide;
         get serverbound(): boolean;
+        get receptionSide(): $LogicalSide;
     }
     export class $IBaseRailBlockExtension {
     }
     export interface $IBaseRailBlockExtension {
-        onMinecartPass(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $AbstractMinecart): void;
-        isFlexibleRail(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
         getRailDirection(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $AbstractMinecart): $RailShape;
         isValidRailShape(arg0: $RailShape_): boolean;
         canMakeSlopes(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
         getRailMaxSpeed(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $AbstractMinecart): number;
+        onMinecartPass(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $AbstractMinecart): void;
+        isFlexibleRail(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
     }
     export class $IDispensibleContainerItemExtension {
     }
@@ -267,78 +267,79 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
         /**
          * @deprecated
          */
-        remove(arg0: $TagEntry, arg1: string): $TagBuilder;
+        removeTag(arg0: $ResourceLocation_, arg1: string): $TagBuilder;
+        removeTag(arg0: $ResourceLocation_): $TagBuilder;
         /**
          * @deprecated
          */
-        removeElement(arg0: $ResourceLocation_, arg1: string): $TagBuilder;
+        remove(arg0: $TagEntry, arg1: string): $TagBuilder;
         removeElement(arg0: $ResourceLocation_): $TagBuilder;
         /**
          * @deprecated
          */
-        removeTag(arg0: $ResourceLocation_, arg1: string): $TagBuilder;
-        removeTag(arg0: $ResourceLocation_): $TagBuilder;
+        removeElement(arg0: $ResourceLocation_, arg1: string): $TagBuilder;
         getRawBuilder(): $TagBuilder;
         get rawBuilder(): $TagBuilder;
     }
     export class $IEntityExtension {
     }
     export interface $IEntityExtension extends $INBTSerializable<$CompoundTag> {
-        getPickedResult(arg0: $HitResult): $ItemStack;
-        getMaxHeightFluidType(): $FluidType;
-        getSoundFromFluidType(arg0: $FluidType_, arg1: $SoundAction): $SoundEvent;
-        canHydrateInFluidType(arg0: $FluidType_): boolean;
-        canBeRiddenUnderFluidType(arg0: $FluidType_, arg1: $Entity): boolean;
-        hasCustomOutlineRendering(arg0: $Player): boolean;
-        copyAttachmentsFrom(arg0: $Entity, arg1: boolean): void;
-        getFluidMotionScale(arg0: $FluidType_): number;
         getFluidFallDistanceModifier(arg0: $FluidType_): number;
-        isPushedByFluid(arg0: $FluidType_): boolean;
-        /**
-         * @deprecated
-         */
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        revive(): void;
+        getEyeInFluidType(): $FluidType;
         canStartSwimming(): boolean;
+        isPushedByFluid(arg0: $FluidType_): boolean;
+        isEyeInFluidType(arg0: $FluidType_): boolean;
+        sendPairingData(arg0: $ServerPlayer, arg1: $Consumer_<$CustomPacketPayload>): void;
+        canFluidExtinguish(arg0: $FluidType_): boolean;
+        canRiderInteract(): boolean;
+        canSwimInFluidType(arg0: $FluidType_): boolean;
         /**
          * @deprecated
          */
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
-        isMultipartEntity(): boolean;
-        canRiderInteract(): boolean;
-        getPersistentData(): $CompoundTag;
-        onAddedToLevel(): void;
-        isEyeInFluidType(arg0: $FluidType_): boolean;
-        sendPairingData(arg0: $ServerPlayer, arg1: $Consumer_<$CustomPacketPayload>): void;
-        onRemovedFromLevel(): void;
+        /**
+         * @deprecated
+         */
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        getClassification(arg0: boolean): $MobCategory;
         isAddedToLevel(): boolean;
         shouldRiderSit(): boolean;
-        getClassification(arg0: boolean): $MobCategory;
-        isInFluidType(arg0: $FluidState): boolean;
-        isInFluidType(arg0: $FluidType_): boolean;
-        isInFluidType(): boolean;
-        isInFluidType(arg0: $BiPredicate_<$FluidType, number>, arg1: boolean): boolean;
-        isInFluidType(arg0: $BiPredicate_<$FluidType, number>): boolean;
+        onAddedToLevel(): void;
+        onRemovedFromLevel(): void;
+        isMultipartEntity(): boolean;
+        getPersistentData(): $CompoundTag;
+        modifyReturnValue$egn000$spectrum$getEyeInFluidType(arg0: boolean, arg1: $FluidType_): boolean;
         captureDrops(): $Collection<$ItemEntity>;
         captureDrops(arg0: $Collection_<$ItemEntity>): $Collection<$ItemEntity>;
         getFluidTypeHeight(arg0: $FluidType_): number;
-        canSwimInFluidType(arg0: $FluidType_): boolean;
-        getEyeInFluidType(): $FluidType;
-        canFluidExtinguish(arg0: $FluidType_): boolean;
+        getPickedResult(arg0: $HitResult): $ItemStack;
+        isInFluidType(arg0: $FluidState): boolean;
+        isInFluidType(arg0: $FluidType_): boolean;
+        isInFluidType(arg0: $BiPredicate_<$FluidType, number>, arg1: boolean): boolean;
+        isInFluidType(arg0: $BiPredicate_<$FluidType, number>): boolean;
+        isInFluidType(): boolean;
+        getMaxHeightFluidType(): $FluidType;
+        getFluidMotionScale(arg0: $FluidType_): number;
+        canHydrateInFluidType(arg0: $FluidType_): boolean;
+        getSoundFromFluidType(arg0: $FluidType_, arg1: $SoundAction): $SoundEvent;
+        hasCustomOutlineRendering(arg0: $Player): boolean;
+        copyAttachmentsFrom(arg0: $Entity, arg1: boolean): void;
+        canBeRiddenUnderFluidType(arg0: $FluidType_, arg1: $Entity): boolean;
         canTrample(arg0: $BlockState_, arg1: $BlockPos_, arg2: number): boolean;
         getParts(): $PartEntity<never>[];
-        revive(): void;
-        get maxHeightFluidType(): $FluidType;
+        get addedToLevel(): boolean;
         get multipartEntity(): boolean;
         get persistentData(): $CompoundTag;
-        get addedToLevel(): boolean;
+        get maxHeightFluidType(): $FluidType;
         get parts(): $PartEntity<never>[];
     }
     export class $IClientCommonPacketListenerExtension {
     }
     export interface $IClientCommonPacketListenerExtension extends $ICommonPacketListener {
-        send(arg0: $CustomPacketPayload_): void;
-        disconnect(arg0: $Component_): void;
         getMainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
+        disconnect(arg0: $Component_): void;
+        send(arg0: $CustomPacketPayload_): void;
         get mainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
     }
     export class $IAdvancementBuilderExtension {
@@ -365,14 +366,14 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IFluidExtension {
     }
     export interface $IFluidExtension {
-        move(arg0: $FluidState, arg1: $LivingEntity, arg2: $Vec3_, arg3: number): boolean;
-        getAdjacentBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: $PathType_): $PathType;
-        getExplosionResistance(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Explosion): number;
-        canConvertToSource(arg0: $FluidState, arg1: $Level_, arg2: $BlockPos_): boolean;
-        supportsBoating(arg0: $FluidState, arg1: $Boat): boolean;
-        getBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: boolean): $PathType;
         canExtinguish(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_): boolean;
         getFluidType(): $FluidType;
+        move(arg0: $FluidState, arg1: $LivingEntity, arg2: $Vec3_, arg3: number): boolean;
+        getBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: boolean): $PathType;
+        canConvertToSource(arg0: $FluidState, arg1: $Level_, arg2: $BlockPos_): boolean;
+        supportsBoating(arg0: $FluidState, arg1: $Boat): boolean;
+        getAdjacentBlockPathType(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Mob, arg4: $PathType_): $PathType;
+        getExplosionResistance(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $Explosion): number;
         canHydrate(arg0: $FluidState, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockPos_): boolean;
         get fluidType(): $FluidType;
     }
@@ -383,13 +384,14 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IHolderLookupProviderExtension {
     }
     export interface $IHolderLookupProviderExtension {
-        holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         holderOrThrow<T>(arg0: $ResourceKey_<T>): $Holder<T>;
+        holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
     }
     export class $IRecipeOutputExtension {
     }
     export interface $IRecipeOutputExtension {
         accept(arg0: $ResourceLocation_, arg1: $Recipe<never>, arg2: $AdvancementHolder_, ...arg3: $ICondition[]): void;
+        getRecipeIdentifier(arg0: $ResourceLocation_): $ResourceLocation;
         withConditions(...arg0: $ICondition[]): $RecipeOutput;
     }
     /**
@@ -399,8 +401,8 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $ILevelReaderExtension {
     }
     export interface $ILevelReaderExtension {
-        holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         holderOrThrow<T>(arg0: $ResourceKey_<T>): $Holder<T>;
+        holder<T>(arg0: $ResourceKey_<T>): ($Holder$Reference<T>) | undefined;
         isAreaLoaded(arg0: $BlockPos_, arg1: number): boolean;
     }
     export class $IServerConfigurationPacketListenerExtension {
@@ -411,64 +413,64 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IItemExtension {
     }
     export interface $IItemExtension {
-        canWalkOnPowderedSnow(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
-        makesPiglinsNeutral(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
-        getMaxStackSize(arg0: $ItemStack_): number;
-        createEntity(arg0: $Level_, arg1: $Entity, arg2: $ItemStack_): $Entity;
-        canGrindstoneRepair(arg0: $ItemStack_): boolean;
-        getEnchantmentLevel(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): number;
-        getCraftingRemainingItem(arg0: $ItemStack_): $ItemStack;
-        canFitInsideContainerItems(arg0: $ItemStack_): boolean;
-        shouldCauseBlockBreakReset(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        hasCraftingRemainingItem(arg0: $ItemStack_): boolean;
-        getEnchantmentValue(arg0: $ItemStack_): number;
-        supportsEnchantment(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
-        onDroppedByPlayer(arg0: $ItemStack_, arg1: $Player): boolean;
         onDestroyed(arg0: $ItemEntity, arg1: $DamageSource_): void;
-        isDamageable(arg0: $ItemStack_): boolean;
+        getAllEnchantments(arg0: $ItemStack_, arg1: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
         isRepairable(arg0: $ItemStack_): boolean;
+        hasCustomEntity(arg0: $ItemStack_): boolean;
+        onEntityItemUpdate(arg0: $ItemStack_, arg1: $ItemEntity): boolean;
+        doesSneakBypassUse(arg0: $ItemStack_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): boolean;
+        getCreatorModId(arg0: $ItemStack_): string;
+        onDroppedByPlayer(arg0: $ItemStack_, arg1: $Player): boolean;
+        onLeftClickEntity(arg0: $ItemStack_, arg1: $Player, arg2: $Entity): boolean;
+        isBookEnchantable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
+        getBurnTime(arg0: $ItemStack_, arg1: $RecipeType_<never>): number;
+        onAnimalArmorTick(arg0: $ItemStack_, arg1: $Level_, arg2: $Mob): void;
+        isEnderMask(arg0: $ItemStack_, arg1: $Player, arg2: $EnderMan): boolean;
+        getArmorTexture(arg0: $ItemStack_, arg1: $Entity, arg2: $EquipmentSlot_, arg3: $ArmorMaterial$Layer, arg4: boolean): $ResourceLocation;
+        canBeHurtBy(arg0: $ItemStack_, arg1: $DamageSource_): boolean;
         getMaxDamage(arg0: $ItemStack_): number;
+        isDamageable(arg0: $ItemStack_): boolean;
         getHighlightTip(arg0: $ItemStack_, arg1: $Component_): $Component;
         onItemUseFirst(arg0: $ItemStack_, arg1: $UseOnContext): $InteractionResult;
         isPiglinCurrency(arg0: $ItemStack_): boolean;
-        getXpRepairRatio(arg0: $ItemStack_): number;
-        onLeftClickEntity(arg0: $ItemStack_, arg1: $Player, arg2: $Entity): boolean;
-        hasCustomEntity(arg0: $ItemStack_): boolean;
-        isEnderMask(arg0: $ItemStack_, arg1: $Player, arg2: $EnderMan): boolean;
-        getAllEnchantments(arg0: $ItemStack_, arg1: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
-        applyEnchantments(arg0: $ItemStack_, arg1: $List_<$EnchantmentInstance>): $ItemStack;
-        getCreatorModId(arg0: $ItemStack_): string;
-        isPrimaryItemFor(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
-        getBurnTime(arg0: $ItemStack_, arg1: $RecipeType_<never>): number;
-        isBookEnchantable(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        canBeHurtBy(arg0: $ItemStack_, arg1: $DamageSource_): boolean;
-        doesSneakBypassUse(arg0: $ItemStack_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): boolean;
         getEntityLifespan(arg0: $ItemStack_, arg1: $Level_): number;
-        onAnimalArmorTick(arg0: $ItemStack_, arg1: $Level_, arg2: $Mob): void;
-        onEntityItemUpdate(arg0: $ItemStack_, arg1: $ItemEntity): boolean;
-        getArmorTexture(arg0: $ItemStack_, arg1: $Entity, arg2: $EquipmentSlot_, arg3: $ArmorMaterial$Layer, arg4: boolean): $ResourceLocation;
-        getEquipmentSlot(arg0: $ItemStack_): $EquipmentSlot;
+        getXpRepairRatio(arg0: $ItemStack_): number;
+        isPrimaryItemFor(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
+        applyEnchantments(arg0: $ItemStack_, arg1: $List_<$EnchantmentInstance>): $ItemStack;
+        getDamage(arg0: $ItemStack_): number;
+        canPerformAction(arg0: $ItemStack_, arg1: $ItemAbility_): boolean;
+        canContinueUsing(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
+        getFoodProperties(arg0: $ItemStack_, arg1: $LivingEntity): $FoodProperties;
+        canDisableShield(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $LivingEntity, arg3: $LivingEntity): boolean;
+        onStopUsing(arg0: $ItemStack_, arg1: $LivingEntity, arg2: number): void;
+        getSweepHitBox(arg0: $ItemStack_, arg1: $Player, arg2: $Entity): $AABB;
         onEntitySwing(arg0: $ItemStack_, arg1: $LivingEntity, arg2: $InteractionHand_): boolean;
         /**
          * @deprecated
          */
         onEntitySwing(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
-        canElytraFly(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
-        onStopUsing(arg0: $ItemStack_, arg1: $LivingEntity, arg2: number): void;
         elytraFlightTick(arg0: $ItemStack_, arg1: $LivingEntity, arg2: number): boolean;
-        canContinueUsing(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
-        canPerformAction(arg0: $ItemStack_, arg1: $ItemAbility_): boolean;
-        canDisableShield(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $LivingEntity, arg3: $LivingEntity): boolean;
-        getFoodProperties(arg0: $ItemStack_, arg1: $LivingEntity): $FoodProperties;
-        getSweepHitBox(arg0: $ItemStack_, arg1: $Player, arg2: $Entity): $AABB;
+        canElytraFly(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
+        createEntity(arg0: $Level_, arg1: $Entity, arg2: $ItemStack_): $Entity;
+        getMaxStackSize(arg0: $ItemStack_): number;
+        canFitInsideContainerItems(arg0: $ItemStack_): boolean;
+        hasCraftingRemainingItem(arg0: $ItemStack_): boolean;
+        supportsEnchantment(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): boolean;
+        shouldCauseBlockBreakReset(arg0: $ItemStack_, arg1: $ItemStack_): boolean;
+        getEnchantmentValue(arg0: $ItemStack_): number;
+        getCraftingRemainingItem(arg0: $ItemStack_): $ItemStack;
+        getDefaultAttributeModifiers(arg0: $ItemStack_): $ItemAttributeModifiers;
         isNotReplaceableByPickAction(arg0: $ItemStack_, arg1: $Player, arg2: number): boolean;
         shouldCauseReequipAnimation(arg0: $ItemStack_, arg1: $ItemStack_, arg2: boolean): boolean;
         isDamaged(arg0: $ItemStack_): boolean;
         setDamage(arg0: $ItemStack_, arg1: number): void;
-        damageItem<T extends $LivingEntity>(arg0: $ItemStack_, arg1: number, arg2: T, arg3: $Consumer_<$Item>): number;
         canEquip(arg0: $ItemStack_, arg1: $EquipmentSlot_, arg2: $LivingEntity): boolean;
-        getDamage(arg0: $ItemStack_): number;
-        getDefaultAttributeModifiers(arg0: $ItemStack_): $ItemAttributeModifiers;
+        damageItem<T extends $LivingEntity>(arg0: $ItemStack_, arg1: number, arg2: T, arg3: $Consumer_<$Item>): number;
+        getEquipmentSlot(arg0: $ItemStack_): $EquipmentSlot;
+        canWalkOnPowderedSnow(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
+        makesPiglinsNeutral(arg0: $ItemStack_, arg1: $LivingEntity): boolean;
+        getEnchantmentLevel(arg0: $ItemStack_, arg1: $Holder_<$Enchantment>): number;
+        canGrindstoneRepair(arg0: $ItemStack_): boolean;
     }
     /**
      * Values that may be interpreted as {@link $IItemExtension}.
@@ -491,15 +493,15 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IBlockEntityExtension {
     }
     export interface $IBlockEntityExtension {
-        onLoad(): void;
-        hasCustomOutlineRendering(arg0: $Player): boolean;
         getPersistentData(): $CompoundTag;
-        getModelData(): $ModelData;
+        onDataPacket(arg0: $Connection, arg1: $ClientboundBlockEntityDataPacket, arg2: $HolderLookup$Provider): void;
+        onChunkUnloaded(): void;
+        handleUpdateTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         requestModelDataUpdate(): void;
         invalidateCapabilities(): void;
-        onDataPacket(arg0: $Connection, arg1: $ClientboundBlockEntityDataPacket, arg2: $HolderLookup$Provider): void;
-        handleUpdateTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        onChunkUnloaded(): void;
+        onLoad(): void;
+        getModelData(): $ModelData;
+        hasCustomOutlineRendering(arg0: $Player): boolean;
         get persistentData(): $CompoundTag;
         get modelData(): $ModelData;
     }
@@ -510,57 +512,57 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IItemStackExtension {
     }
     export interface $IItemStackExtension {
-        getCapability<T, C>(arg0: $ItemCapability<T, C>, arg1: C): T;
-        getCapability<T>(arg0: $ItemCapability<T, void>): T;
-        canWalkOnPowderedSnow(arg0: $LivingEntity): boolean;
-        makesPiglinsNeutral(arg0: $LivingEntity): boolean;
-        canGrindstoneRepair(): boolean;
-        getEnchantmentLevel(arg0: $Holder_<$Enchantment>): number;
-        getCraftingRemainingItem(): $ItemStack;
-        canFitInsideContainerItems(): boolean;
-        shouldCauseBlockBreakReset(arg0: $ItemStack_): boolean;
-        hasCraftingRemainingItem(): boolean;
-        getEnchantmentValue(): number;
-        supportsEnchantment(arg0: $Holder_<$Enchantment>): boolean;
-        onDroppedByPlayer(arg0: $Player): boolean;
         onDestroyed(arg0: $ItemEntity, arg1: $DamageSource_): void;
+        getAllEnchantments(arg0: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
         isRepairable(): boolean;
+        onEntityItemUpdate(arg0: $ItemEntity): boolean;
+        doesSneakBypassUse(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Player): boolean;
+        onDroppedByPlayer(arg0: $Player): boolean;
+        isBookEnchantable(arg0: $ItemStack_): boolean;
+        getBurnTime(arg0: $RecipeType_<never>): number;
+        onAnimalArmorTick(arg0: $Level_, arg1: $Mob): void;
+        isEnderMask(arg0: $Player, arg1: $EnderMan): boolean;
         getHighlightTip(arg0: $Component_): $Component;
         onItemUseFirst(arg0: $UseOnContext): $InteractionResult;
         isPiglinCurrency(): boolean;
-        getXpRepairRatio(): number;
-        isEnderMask(arg0: $Player, arg1: $EnderMan): boolean;
-        getAllEnchantments(arg0: $HolderLookup$RegistryLookup<$Enchantment_>): $ItemEnchantments;
-        isPrimaryItemFor(arg0: $Holder_<$Enchantment>): boolean;
-        getBurnTime(arg0: $RecipeType_<never>): number;
-        isBookEnchantable(arg0: $ItemStack_): boolean;
-        doesSneakBypassUse(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Player): boolean;
         getEntityLifespan(arg0: $Level_): number;
-        onAnimalArmorTick(arg0: $Level_, arg1: $Mob): void;
-        onEntityItemUpdate(arg0: $ItemEntity): boolean;
-        getEquipmentSlot(): $EquipmentSlot;
+        getXpRepairRatio(): number;
+        isPrimaryItemFor(arg0: $Holder_<$Enchantment>): boolean;
+        canPerformAction(arg0: $ItemAbility_): boolean;
+        getFoodProperties(arg0: $LivingEntity): $FoodProperties;
+        canDisableShield(arg0: $ItemStack_, arg1: $LivingEntity, arg2: $LivingEntity): boolean;
+        onStopUsing(arg0: $LivingEntity, arg1: number): void;
+        getSweepHitBox(arg0: $Player, arg1: $Entity): $AABB;
         /**
          * @deprecated
          */
         onEntitySwing(arg0: $LivingEntity): boolean;
         onEntitySwing(arg0: $LivingEntity, arg1: $InteractionHand_): boolean;
-        canElytraFly(arg0: $LivingEntity): boolean;
-        onStopUsing(arg0: $LivingEntity, arg1: number): void;
         elytraFlightTick(arg0: $LivingEntity, arg1: number): boolean;
-        canPerformAction(arg0: $ItemAbility_): boolean;
-        canDisableShield(arg0: $ItemStack_, arg1: $LivingEntity, arg2: $LivingEntity): boolean;
-        getFoodProperties(arg0: $LivingEntity): $FoodProperties;
-        getSweepHitBox(arg0: $Player, arg1: $Entity): $AABB;
+        canElytraFly(arg0: $LivingEntity): boolean;
+        getAttributeModifiers(): $ItemAttributeModifiers;
+        canFitInsideContainerItems(): boolean;
+        hasCraftingRemainingItem(): boolean;
+        supportsEnchantment(arg0: $Holder_<$Enchantment>): boolean;
+        shouldCauseBlockBreakReset(arg0: $ItemStack_): boolean;
+        getEnchantmentValue(): number;
+        getCraftingRemainingItem(): $ItemStack;
         isNotReplaceableByPickAction(arg0: $Player, arg1: number): boolean;
         canEquip(arg0: $EquipmentSlot_, arg1: $LivingEntity): boolean;
-        getAttributeModifiers(): $ItemAttributeModifiers;
-        get craftingRemainingItem(): $ItemStack;
-        get enchantmentValue(): number;
+        getEquipmentSlot(): $EquipmentSlot;
+        canWalkOnPowderedSnow(arg0: $LivingEntity): boolean;
+        makesPiglinsNeutral(arg0: $LivingEntity): boolean;
+        getCapability<T>(arg0: $ItemCapability<T, void>): T;
+        getCapability<T, C>(arg0: $ItemCapability<T, C>, arg1: C): T;
+        getEnchantmentLevel(arg0: $Holder_<$Enchantment>): number;
+        canGrindstoneRepair(): boolean;
         get repairable(): boolean;
         get piglinCurrency(): boolean;
         get xpRepairRatio(): number;
-        get equipmentSlot(): $EquipmentSlot;
         get attributeModifiers(): $ItemAttributeModifiers;
+        get enchantmentValue(): number;
+        get craftingRemainingItem(): $ItemStack;
+        get equipmentSlot(): $EquipmentSlot;
     }
     export class $IBoatExtension {
     }
@@ -571,70 +573,72 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IFriendlyByteBufExtension {
     }
     export interface $IFriendlyByteBufExtension {
-        writeByte(arg0: number): $FriendlyByteBuf;
         readMap<K, V>(arg0: $StreamDecoder_<$FriendlyByteBuf, K>, arg1: $BiFunction_<$FriendlyByteBuf, K, V>): $Map<K, V>;
+        writeArray<T>(arg0: T[], arg1: $StreamEncoder_<$FriendlyByteBuf, T>): $FriendlyByteBuf;
+        writeByte(arg0: number): $FriendlyByteBuf;
         writeMap<K, V>(arg0: $Map_<K, V>, arg1: $StreamEncoder_<$FriendlyByteBuf, K>, arg2: $TriConsumer_<$FriendlyByteBuf, K, V>): void;
         readArray<T>(arg0: $IntFunction_<T[]>, arg1: $StreamDecoder_<$FriendlyByteBuf, T>): T[];
-        writeArray<T>(arg0: T[], arg1: $StreamEncoder_<$FriendlyByteBuf, T>): $FriendlyByteBuf;
         writeObjectCollection<T>(arg0: $Collection_<T>, arg1: $BiConsumer_<T, $FriendlyByteBuf>): void;
     }
     export class $IPlayerListExtension {
     }
     export interface $IPlayerListExtension {
         self(): $PlayerList;
+        broadcastAll(arg0: $CustomPacketPayload_, arg1: $ResourceKey_<$Level>): void;
+        broadcastAll(arg0: $CustomPacketPayload_): void;
         broadcast(arg0: number, arg1: number, arg2: number, arg3: number, arg4: $ResourceKey_<$Level>, arg5: $CustomPacketPayload_): void;
         broadcast(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $ResourceKey_<$Level>, arg6: $CustomPacketPayload_): void;
-        broadcastAll(arg0: $CustomPacketPayload_): void;
-        broadcastAll(arg0: $CustomPacketPayload_, arg1: $ResourceKey_<$Level>): void;
     }
     export class $ITagAppenderExtension<T> {
     }
     export interface $ITagAppenderExtension<T> {
+        addOptionalTag(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
+        addOptionalTags(...arg0: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
         remove(arg0: $TagKey_<T>, ...arg1: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
         remove(arg0: $ResourceLocation_, ...arg1: $ResourceLocation_[]): $TagsProvider$TagAppender<T>;
         remove(arg0: $ResourceKey_<T>): $TagsProvider$TagAppender<T>;
-        remove(arg0: $ResourceKey_<T>, ...arg1: $ResourceKey_<T>[]): $TagsProvider$TagAppender<T>;
         remove(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
+        remove(arg0: $ResourceKey_<T>, ...arg1: $ResourceKey_<T>[]): $TagsProvider$TagAppender<T>;
         remove(arg0: $ResourceLocation_): $TagsProvider$TagAppender<T>;
-        replace(arg0: boolean): $TagsProvider$TagAppender<T>;
         replace(): $TagsProvider$TagAppender<T>;
-        addOptionalTags(...arg0: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
+        replace(arg0: boolean): $TagsProvider$TagAppender<T>;
         addTags(...arg0: $TagKey_<T>[]): $TagsProvider$TagAppender<T>;
-        addOptionalTag(arg0: $TagKey_<T>): $TagsProvider$TagAppender<T>;
     }
     export class $IFluidStateExtension {
     }
     export interface $IFluidStateExtension {
-        move(arg0: $LivingEntity, arg1: $Vec3_, arg2: number): boolean;
-        getAdjacentBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob, arg3: $PathType_): $PathType;
-        getExplosionResistance(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): number;
-        canConvertToSource(arg0: $Level_, arg1: $BlockPos_): boolean;
-        supportsBoating(arg0: $Boat): boolean;
-        getBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob, arg3: boolean): $PathType;
         canExtinguish(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
         getFluidType(): $FluidType;
+        move(arg0: $LivingEntity, arg1: $Vec3_, arg2: number): boolean;
+        getBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob, arg3: boolean): $PathType;
+        canConvertToSource(arg0: $Level_, arg1: $BlockPos_): boolean;
+        supportsBoating(arg0: $Boat): boolean;
+        getAdjacentBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob, arg3: $PathType_): $PathType;
+        getExplosionResistance(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): number;
         canHydrate(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockPos_): boolean;
         get fluidType(): $FluidType;
     }
     export class $ILivingEntityExtension {
     }
     export interface $ILivingEntityExtension extends $IEntityExtension {
-        self(): $LivingEntity;
-        canDrownInFluidType(arg0: $FluidType_): boolean;
+        modifyExpressionValue$zgc000$additionalentityattributes$additionalEntityAttributes$modifyUpwardSwimming(arg0: number, arg1: $FluidType_): number;
+        jumpInFluid(arg0: $FluidType_): void;
+        sinkInFluid(arg0: $FluidType_): void;
+        canSwimInFluidType(arg0: $FluidType_): boolean;
         onDamageTaken(arg0: $DamageContainer): void;
         moveInFluid(arg0: $FluidState, arg1: $Vec3_, arg2: number): boolean;
-        jumpInFluid(arg0: $FluidType_): void;
-        canSwimInFluidType(arg0: $FluidType_): boolean;
-        sinkInFluid(arg0: $FluidType_): void;
+        self(): $LivingEntity;
+        modifyExpressionValue$zgc000$additionalentityattributes$additionalEntityAttributes$knockDownwards(arg0: number, arg1: $FluidType_): number;
+        canDrownInFluidType(arg0: $FluidType_): boolean;
     }
     export class $IPlayerExtension {
     }
     export interface $IPlayerExtension {
-        isCloseEnough(arg0: $Entity, arg1: number): boolean;
-        isFakePlayer(): boolean;
         openMenu(arg0: $MenuProvider, arg1: $Consumer_<$RegistryFriendlyByteBuf>): $OptionalInt;
         openMenu(arg0: $MenuProvider, arg1: $BlockPos_): $OptionalInt;
         mayFly(): boolean;
+        isCloseEnough(arg0: $Entity, arg1: number): boolean;
+        isFakePlayer(): boolean;
         get fakePlayer(): boolean;
     }
     export class $IServerGamePacketListenerExtension {
@@ -646,39 +650,39 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $TooltipFlagExtension {
     }
     export interface $TooltipFlagExtension {
+        hasShiftDown(): boolean;
+        hasAltDown(): boolean;
         shouldDisplayAllInformation(): boolean;
         hasControlDown(): boolean;
-        hasAltDown(): boolean;
-        hasShiftDown(): boolean;
     }
     export class $IHolderSetExtension<T> {
     }
     export interface $IHolderSetExtension<T> {
-        addInvalidationListener(arg0: $Runnable_): void;
         serializationType(): $IHolderSetExtension$SerializationType;
+        addInvalidationListener(arg0: $Runnable_): void;
     }
     export class $IServerChunkCacheExtension {
     }
     export interface $IServerChunkCacheExtension {
+        broadcastAndSend(arg0: $Entity, arg1: $CustomPacketPayload_): void;
         self(): $ServerChunkCache;
         broadcast(arg0: $Entity, arg1: $CustomPacketPayload_): void;
-        broadcastAndSend(arg0: $Entity, arg1: $CustomPacketPayload_): void;
     }
     export class $ICommonPacketListener {
     }
     export interface $ICommonPacketListener extends $PacketListener {
+        getMainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
         getConnection(): $Connection;
+        disconnect(arg0: $Component_): void;
         send(arg0: $Packet<never>): void;
         send(arg0: $CustomPacketPayload_): void;
-        disconnect(arg0: $Component_): void;
-        hasChannel(arg0: $ResourceLocation_): boolean;
-        hasChannel(arg0: $CustomPacketPayload$Type_<never>): boolean;
-        hasChannel(arg0: $CustomPacketPayload_): boolean;
         getConnectionType(): $ConnectionType;
-        getMainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
+        hasChannel(arg0: $ResourceLocation_): boolean;
+        hasChannel(arg0: $CustomPacketPayload_): boolean;
+        hasChannel(arg0: $CustomPacketPayload$Type_<never>): boolean;
+        get mainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
         get connection(): $Connection;
         get connectionType(): $ConnectionType;
-        get mainThreadEventLoop(): $ReentrantBlockableEventLoop<never>;
     }
     export class $IBlockGetterExtension {
     }
@@ -710,78 +714,78 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $IBlockStateExtension {
     }
     export interface $IBlockStateExtension {
-        isEmpty(): boolean;
-        rotate(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Rotation_): $BlockState;
-        getAdjacentBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob, arg3: $PathType_): $PathType;
-        getExplosionResistance(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): number;
-        hasDynamicLightEmission(): boolean;
-        supportsExternalFaceHiding(): boolean;
-        onDestroyedByPushReaction(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: $FluidState): void;
-        getEnchantPowerBonus(arg0: $LevelReader, arg1: $BlockPos_): number;
-        onDestroyedByPlayer(arg0: $Level_, arg1: $BlockPos_, arg2: $Player, arg3: boolean, arg4: $FluidState): boolean;
-        getBeaconColorMultiplier(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_): number;
-        shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): boolean;
-        getToolModifiedState(arg0: $UseOnContext, arg1: $ItemAbility_, arg2: boolean): $BlockState;
-        canDropFromExplosion(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): boolean;
-        getBubbleColumnDirection(): $BubbleColumnDirection;
-        getStateAtViewpoint(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Vec3_): $BlockState;
-        getBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob): $PathType;
-        getCloneItemStack(arg0: $HitResult, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): $ItemStack;
-        collisionExtendsVertically(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity): boolean;
-        canRedstoneConnectTo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
-        ignitedByLava(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
-        hidesNeighborFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): boolean;
-        canSustainPlant(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $BlockState_): $TriState;
-        getFlammability(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): number;
-        isPortalFrame(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        getFireSpreadSpeed(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): number;
-        isConduitFrame(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_): boolean;
-        canBeHydrated(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockPos_): boolean;
-        isStickyBlock(): boolean;
-        isFlammable(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
-        onCaughtFire(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: $LivingEntity): void;
-        isFireSource(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_): boolean;
-        onBlockExploded(arg0: $Level_, arg1: $BlockPos_, arg2: $Explosion): void;
-        getRespawnPosition(arg0: $EntityType_<never>, arg1: $LevelReader, arg2: $BlockPos_, arg3: number): ($ServerPlayer$RespawnPosAngle) | undefined;
-        canEntityDestroy(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity): boolean;
-        getAppearance(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $BlockState_, arg4: $BlockPos_): $BlockState;
-        canHarvestBlock(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Player): boolean;
-        isSlimeBlock(): boolean;
-        addLandingEffects(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $BlockState_, arg3: $LivingEntity, arg4: number): boolean;
+        setBedOccupied(arg0: $Level_, arg1: $BlockPos_, arg2: $LivingEntity, arg3: boolean): void;
+        getBedDirection(arg0: $LevelReader, arg1: $BlockPos_): $Direction;
+        addRunningEffects(arg0: $Level_, arg1: $BlockPos_, arg2: $Entity): boolean;
         getSoundType(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Entity): $SoundType;
         isScaffolding(arg0: $LivingEntity): boolean;
         getFriction(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Entity): number;
-        setBedOccupied(arg0: $Level_, arg1: $BlockPos_, arg2: $LivingEntity, arg3: boolean): void;
-        getBedDirection(arg0: $LevelReader, arg1: $BlockPos_): $Direction;
-        isBed(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $LivingEntity): boolean;
         getLightEmission(arg0: $BlockGetter, arg1: $BlockPos_): number;
         onBlockStateChange(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockState_): void;
-        onNeighborChange(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_): void;
         getWeakChanges(arg0: $LevelReader, arg1: $BlockPos_): boolean;
+        onNeighborChange(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_): void;
+        shouldCheckWeakPower(arg0: $SignalGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        isEmpty(): boolean;
+        rotate(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Rotation_): $BlockState;
         shouldHideAdjacentFluidFace(arg0: $Direction_, arg1: $FluidState): boolean;
-        addRunningEffects(arg0: $Level_, arg1: $BlockPos_, arg2: $Entity): boolean;
+        getBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob): $PathType;
+        getAdjacentBlockPathType(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Mob, arg3: $PathType_): $PathType;
+        supportsExternalFaceHiding(): boolean;
+        getExplosionResistance(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): number;
+        onDestroyedByPushReaction(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: $FluidState): void;
+        getBeaconColorMultiplier(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_): number;
+        getToolModifiedState(arg0: $UseOnContext, arg1: $ItemAbility_, arg2: boolean): $BlockState;
+        getStateAtViewpoint(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Vec3_): $BlockState;
+        hasDynamicLightEmission(): boolean;
+        getBubbleColumnDirection(): $BubbleColumnDirection;
+        canDropFromExplosion(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Explosion): boolean;
+        getEnchantPowerBonus(arg0: $LevelReader, arg1: $BlockPos_): number;
+        onDestroyedByPlayer(arg0: $Level_, arg1: $BlockPos_, arg2: $Player, arg3: boolean, arg4: $FluidState): boolean;
+        shouldDisplayFluidOverlay(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $FluidState): boolean;
+        getCloneItemStack(arg0: $HitResult, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Player): $ItemStack;
+        hidesNeighborFace(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_): boolean;
+        canHarvestBlock(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Player): boolean;
+        canBeHydrated(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $FluidState, arg3: $BlockPos_): boolean;
+        isPortalFrame(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        isSlimeBlock(): boolean;
+        ignitedByLava(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        onCaughtFire(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: $LivingEntity): void;
+        getFlammability(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): number;
+        getFireSpreadSpeed(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): number;
+        canEntityDestroy(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity): boolean;
+        onBlockExploded(arg0: $Level_, arg1: $BlockPos_, arg2: $Explosion): void;
+        isStickyBlock(): boolean;
+        getAppearance(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $BlockState_, arg4: $BlockPos_): $BlockState;
+        canSustainPlant(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_, arg3: $BlockState_): $TriState;
+        isFireSource(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        getRespawnPosition(arg0: $EntityType_<never>, arg1: $LevelReader, arg2: $BlockPos_, arg3: number): ($ServerPlayer$RespawnPosAngle) | undefined;
+        isConduitFrame(arg0: $LevelReader, arg1: $BlockPos_, arg2: $BlockPos_): boolean;
+        isFlammable(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        canStickTo(arg0: $BlockState_): boolean;
+        isFertile(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
+        getExpDrop(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockEntity, arg3: $Entity, arg4: $ItemStack_): number;
         isBurning(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
         onTreeGrow(arg0: $LevelReader, arg1: $BiConsumer_<$BlockPos, $BlockState>, arg2: $RandomSource, arg3: $BlockPos_, arg4: $TreeConfiguration): boolean;
         isLadder(arg0: $LevelReader, arg1: $BlockPos_, arg2: $LivingEntity): boolean;
-        getExpDrop(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockEntity, arg3: $Entity, arg4: $ItemStack_): number;
-        isFertile(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        canStickTo(arg0: $BlockState_): boolean;
-        shouldCheckWeakPower(arg0: $SignalGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
+        addLandingEffects(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $BlockState_, arg3: $LivingEntity, arg4: number): boolean;
+        collisionExtendsVertically(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Entity): boolean;
+        isBed(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $LivingEntity): boolean;
+        canRedstoneConnectTo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Direction_): boolean;
         get empty(): boolean;
         get bubbleColumnDirection(): $BubbleColumnDirection;
-        get stickyBlock(): boolean;
         get slimeBlock(): boolean;
+        get stickyBlock(): boolean;
     }
     export class $ITransformationExtension {
     }
     export interface $ITransformationExtension {
-        isIdentity(): boolean;
-        transformNormal(arg0: $Vector3f): void;
-        transformPosition(arg0: $Vector4f): void;
         blockCornerToCenter(): $Transformation;
         blockCenterToCorner(): $Transformation;
         applyOrigin(arg0: $Vector3f): $Transformation;
         rotateTransform(arg0: $Direction_): $Direction;
+        isIdentity(): boolean;
+        transformNormal(arg0: $Vector3f): void;
+        transformPosition(arg0: $Vector4f): void;
         get identity(): boolean;
     }
     export class $IBucketPickupExtension {
@@ -792,13 +796,13 @@ declare module "@package/net/neoforged/neoforge/common/extensions" {
     export class $ICommandSourceStackExtension {
     }
     export interface $ICommandSourceStackExtension {
+        getUnsidedLevel(): $Level;
         getScoreboard(): $Scoreboard;
         getRecipeManager(): $RecipeManager;
-        getUnsidedLevel(): $Level;
         getAdvancement(arg0: $ResourceLocation_): $AdvancementHolder;
+        get unsidedLevel(): $Level;
         get scoreboard(): $Scoreboard;
         get recipeManager(): $RecipeManager;
-        get unsidedLevel(): $Level;
     }
     export class $IBlockAndTintGetterExtension {
     }

@@ -1,17 +1,21 @@
+import { $IntOpenHashSet } from "@package/it/unimi/dsi/fastutil/ints";
 import { $ClipContext$Block_, $Level_ } from "@package/net/minecraft/world/level";
-import { $EyeOfEnderEntityAccessor } from "@package/com/teamremastered/endrem/mixin/accessor";
 import { $Item_, $Item, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $TridentEntityAccessor, $PersistentProjectileEntityAccessor } from "@package/de/dafuqs/spectrum/mixin/accessors";
 import { $EntityType_, $PortalProcessor, $Entity, $Entity$RemovalReason, $LivingEntity, $TraceableEntity } from "@package/net/minecraft/world/entity";
 import { $MobEffectInstance } from "@package/net/minecraft/world/effect";
 import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Llama } from "@package/net/minecraft/world/entity/animal/horse";
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $InteractionHand } from "@package/net/minecraft/world";
 import { $Predicate, $Predicate_ } from "@package/java/util/function";
 import { $SoundEvent_ } from "@package/net/minecraft/sounds";
 import { $BlockPos, $Direction$Axis_, $BlockPos_ } from "@package/net/minecraft/core";
+import { $AccessorMixinAbstractArrow } from "@package/mysticmods/roots/mixin/accessor";
+import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
 import { $DoubleDoubleImmutablePair } from "@package/it/unimi/dsi/fastutil/doubles";
 import { $FireworkRocketEntityKJS } from "@package/dev/latvian/mods/kubejs/core";
 import { $Enum } from "@package/java/lang";
@@ -21,11 +25,13 @@ export * as windcharge from "@package/net/minecraft/world/entity/projectile/wind
 
 declare module "@package/net/minecraft/world/entity/projectile" {
     export class $ThrownPotion extends $ThrowableItemProjectile implements $ItemSupplier {
-        handler$fkb002$ad_astra$adastra$getDefaultGravity(arg0: $CallbackInfoReturnable<any>): void;
+        handler$dnk002$ad_astra$adastra$getDefaultGravity(arg0: $CallbackInfoReturnable<any>): void;
+        handler$ggb000$moonlight$extinguishILightables(arg0: $BlockPos_, arg1: $CallbackInfo, arg2: $BlockState_): void;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -62,6 +68,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
@@ -69,26 +76,29 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
         static SPLASH_RANGE: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(level: $Level_, x: number, arg2: number, y: number);
-        constructor(level: $Level_, shooter: $LivingEntity);
         constructor(entityType: $EntityType_<$ThrownPotion>, level: $Level_);
+        constructor(level: $Level_, shooter: $LivingEntity);
+        constructor(level: $Level_, x: number, arg2: number, y: number);
     }
-    export class $ThrownTrident extends $AbstractArrow {
+    export class $ThrownTrident extends $AbstractArrow implements $TridentEntityAccessor {
         /**
          * Called to update the entity's position/logic.
          */
         tickDespawn(): void;
-        /**
-         * Checks if players can use this entity to access operator (permission level 2) commands either directly or indirectly, such as give or setblock. A similar method exists for entities at `Entity#onlyOpCanSetNbt()`.For example, command block minecarts and mob spawner minecarts (spawning command block minecarts or drops) are considered accessible.@return true if this entity offers ways for unauthorized players to use restricted commands
-         */
+        constant$eff000$apothic_attributes$apoth_getTridentDamage(arg0: number): number;
         isFoil(): boolean;
+        handler$blb000$apothic_enchanting$startHitEntity(arg0: $EntityHitResult, arg1: $CallbackInfo): void;
+        handler$blb000$apothic_enchanting$endHitEntity(arg0: $EntityHitResult, arg1: $CallbackInfo): void;
+        spectrum$setDealtDamage(arg0: boolean): void;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -106,6 +116,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         noCulling: boolean;
         wasInPowderSnow: boolean;
         hurtMarked: boolean;
+        piercingIgnoreEntityIds: $IntOpenHashSet;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
@@ -119,7 +130,9 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
+        static ID_LOYALTY: $EntityDataAccessor<number>;
         minorHorizontalCollision: boolean;
+        static ID_FOIL: $EntityDataAccessor<boolean>;
         static DEFAULT_BB_HEIGHT: number;
         inGround: boolean;
         walkDistO: number;
@@ -128,21 +141,27 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$ThrownTrident>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $ItemStack_);
         constructor(level: $Level_, shooter: $LivingEntity, pickupItemStack: $ItemStack_);
-        constructor(entityType: $EntityType_<$ThrownTrident>, level: $Level_);
         get foil(): boolean;
     }
     export class $ProjectileUtil {
+        /**
+         * Gets the EntityHitResult representing the entity hit
+         */
+        static getEntityHitResult(level: $Level_, projectile: $Entity, startVec: $Vec3_, endVec: $Vec3_, boundingBox: $AABB_, filter: $Predicate_<$Entity>): $EntityHitResult;
         /**
          * Gets the EntityRayTraceResult representing the entity hit
          */
@@ -150,30 +169,27 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         /**
          * Gets the EntityHitResult representing the entity hit
          */
-        static getEntityHitResult(level: $Level_, projectile: $Entity, startVec: $Vec3_, endVec: $Vec3_, boundingBox: $AABB_, filter: $Predicate_<$Entity>): $EntityHitResult;
-        /**
-         * Gets the EntityHitResult representing the entity hit
-         */
         static getEntityHitResult(level: $Level_, projectile: $Entity, startVec: $Vec3_, endVec: $Vec3_, boundingBox: $AABB_, filter: $Predicate_<$Entity>, inflationAmount: number): $EntityHitResult;
         static getHitResultOnViewVector(projectile: $Entity, filter: $Predicate_<$Entity>, scale: number): $HitResult;
-        static getHitResultOnMoveVector(projectile: $Entity, filter: $Predicate_<$Entity>, clipContext: $ClipContext$Block_): $HitResult;
         static getHitResultOnMoveVector(projectile: $Entity, filter: $Predicate_<$Entity>): $HitResult;
-        static getWeaponHoldingHand(arg0: $LivingEntity, arg1: $Predicate_<$Item>): $InteractionHand;
+        static getHitResultOnMoveVector(projectile: $Entity, filter: $Predicate_<$Entity>, clipContext: $ClipContext$Block_): $HitResult;
+        static rotateTowardsMovement(projectile: $Entity, rotationSpeed: number): void;
         /**
          * @deprecated
          */
         static getWeaponHoldingHand(shooter: $LivingEntity, weapon: $Item_): $InteractionHand;
-        static rotateTowardsMovement(projectile: $Entity, rotationSpeed: number): void;
+        static getWeaponHoldingHand(arg0: $LivingEntity, arg1: $Predicate_<$Item>): $InteractionHand;
         static getMobArrow(shooter: $LivingEntity, arrow: $ItemStack_, velocity: number, weapon: $ItemStack_ | null): $AbstractArrow;
         constructor();
     }
     export class $Fireball extends $AbstractHurtingProjectile implements $ItemSupplier {
-        getItem(): $ItemStack;
         setItem(stack: $ItemStack_): void;
+        getItem(): $ItemStack;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -212,117 +228,125 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$Fireball>, owner: $LivingEntity, movement: $Vec3_, level: $Level_);
-        constructor(entityType: $EntityType_<$Fireball>, x: number, arg2: number, y: number, arg4: $Vec3_, z: $Level_);
         constructor(entityType: $EntityType_<$Fireball>, level: $Level_);
+        constructor(entityType: $EntityType_<$Fireball>, x: number, arg2: number, y: number, arg4: $Vec3_, z: $Level_);
+        constructor(entityType: $EntityType_<$Fireball>, owner: $LivingEntity, movement: $Vec3_, level: $Level_);
     }
     export class $ThrowableProjectile extends $Projectile {
-        handler$fjp000$ad_astra$adastra$getDefaultGravity(arg0: $CallbackInfoReturnable<any>): void;
+        handler$dni000$ad_astra$adastra$getDefaultGravity(arg0: $CallbackInfoReturnable<any>): void;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
     }
     export class $ShulkerBullet extends $Projectile {
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         constructor(entityType: $EntityType_<$ShulkerBullet>, level: $Level_);
@@ -333,6 +357,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -371,148 +396,157 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$LargeFireball>, level: $Level_);
         constructor(level: $Level_, owner: $LivingEntity, movement: $Vec3_, explosionPower: number);
+        constructor(entityType: $EntityType_<$LargeFireball>, level: $Level_);
     }
     export class $FishingHook extends $Projectile {
-        retrieve(stack: $ItemStack_): number;
-        readAdditionalSaveData(compound: $CompoundTag_): void;
         addAdditionalSaveData(compound: $CompoundTag_): void;
-        handler$fjn003$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
-        getPlayerOwner(): $Player;
-        /**
-         * Get entity this is riding
-         */
+        readAdditionalSaveData(compound: $CompoundTag_): void;
         getHookedIn(): $Entity;
-        /**
-         * Checks if players can use this entity to access operator (permission level 2) commands either directly or indirectly, such as give or setblock. A similar method exists for entities at `Entity#onlyOpCanSetNbt()`.For example, command block minecarts and mob spawner minecarts (spawning command block minecarts or drops) are considered accessible.@return true if this entity offers ways for unauthorized players to use restricted commands
-         */
+        getPlayerOwner(): $Player;
         isOpenWaterFishing(): boolean;
+        calculateOpenWater(pos: $BlockPos_): boolean;
+        retrieve(stack: $ItemStack_): number;
+        handler$dng003$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
+        lureSpeed: number;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(player: $Player, level: $Level_, luck: number, lureSpeed: number);
         constructor(entityType: $EntityType_<$FishingHook>, level: $Level_);
-        get playerOwner(): $Player;
+        constructor(player: $Player, level: $Level_, luck: number, lureSpeed: number);
         get hookedIn(): $Entity;
+        get playerOwner(): $Player;
         get openWaterFishing(): boolean;
     }
     export class $ThrownEnderpearl extends $ThrowableItemProjectile {
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         constructor(entityType: $EntityType_<$ThrownEnderpearl>, level: $Level_);
         constructor(level: $Level_, shooter: $LivingEntity);
     }
     export class $FishingHook$FishHookState extends $Enum<$FishingHook$FishHookState> {
+        static values(): $FishingHook$FishHookState[];
+        static valueOf(arg0: string): $FishingHook$FishHookState;
+        static HOOKED_IN_ENTITY: $FishingHook$FishHookState;
+        static FLYING: $FishingHook$FishHookState;
+        static BOBBING: $FishingHook$FishHookState;
     }
     /**
      * Values that may be interpreted as {@link $FishingHook$FishHookState}.
      */
     export type $FishingHook$FishHookState_ = "flying" | "hooked_in_entity" | "bobbing";
     export class $AbstractArrow$Pickup extends $Enum<$AbstractArrow$Pickup> {
+        static byOrdinal(ordinal: number): $AbstractArrow$Pickup;
         static values(): $AbstractArrow$Pickup[];
         static valueOf(arg0: string): $AbstractArrow$Pickup;
-        static byOrdinal(ordinal: number): $AbstractArrow$Pickup;
         static ALLOWED: $AbstractArrow$Pickup;
         static CREATIVE_ONLY: $AbstractArrow$Pickup;
         static DISALLOWED: $AbstractArrow$Pickup;
@@ -522,114 +556,120 @@ declare module "@package/net/minecraft/world/entity/projectile" {
      */
     export type $AbstractArrow$Pickup_ = "disallowed" | "allowed" | "creative_only";
     export class $Snowball extends $ThrowableItemProjectile {
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$Snowball>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number);
         constructor(level: $Level_, shooter: $LivingEntity);
-        constructor(entityType: $EntityType_<$Snowball>, level: $Level_);
     }
     export class $ThrowableItemProjectile extends $ThrowableProjectile implements $ItemSupplier {
-        getItem(): $ItemStack;
-        readAdditionalSaveData(compound: $CompoundTag_): void;
         addAdditionalSaveData(compound: $CompoundTag_): void;
+        readAdditionalSaveData(compound: $CompoundTag_): void;
         setItem(stack: $ItemStack_): void;
+        getItem(): $ItemStack;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$ThrowableItemProjectile>, shooter: $LivingEntity, level: $Level_);
-        constructor(entityType: $EntityType_<$ThrowableItemProjectile>, x: number, arg2: number, y: number, arg4: $Level_);
         constructor(entityType: $EntityType_<$ThrowableItemProjectile>, level: $Level_);
+        constructor(entityType: $EntityType_<$ThrowableItemProjectile>, x: number, arg2: number, y: number, arg4: $Level_);
+        constructor(entityType: $EntityType_<$ThrowableItemProjectile>, shooter: $LivingEntity, level: $Level_);
     }
     export class $WitherSkull extends $AbstractHurtingProjectile {
         /**
@@ -644,6 +684,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -682,83 +723,88 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$WitherSkull>, level: $Level_);
         constructor(level: $Level_, owner: $LivingEntity, movement: $Vec3_);
+        constructor(entityType: $EntityType_<$WitherSkull>, level: $Level_);
     }
     export class $FireworkRocketEntity extends $Projectile implements $ItemSupplier, $FireworkRocketEntityKJS {
-        getItem(): $ItemStack;
-        readAdditionalSaveData(compound: $CompoundTag_): void;
         addAdditionalSaveData(compound: $CompoundTag_): void;
+        readAdditionalSaveData(compound: $CompoundTag_): void;
         /**
          * Returns `true` if it's possible to attack this entity with an item.
          */
         isShotAtAngle(): boolean;
+        getItem(): $ItemStack;
         setLifetimeKJS(target: number): void;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(level: $Level_, shooter: $Entity | null, x: number, arg3: number, y: number, arg5: $ItemStack_);
+        constructor(level: $Level_, stack: $ItemStack_, shooter: $LivingEntity);
         constructor(level: $Level_, stack: $ItemStack_, shooter: $Entity, x: number, arg4: number, y: number, arg6: boolean);
         constructor(level: $Level_, stack: $ItemStack_, x: number, arg3: number, y: number, arg5: boolean);
-        constructor(level: $Level_, stack: $ItemStack_, shooter: $LivingEntity);
         constructor(entityType: $EntityType_<$FireworkRocketEntity>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $ItemStack_);
-        constructor(level: $Level_, shooter: $Entity | null, x: number, arg3: number, y: number, arg5: $ItemStack_);
-        get item(): $ItemStack;
         get shotAtAngle(): boolean;
+        get item(): $ItemStack;
         set lifetimeKJS(value: number);
     }
     export class $DragonFireball extends $AbstractHurtingProjectile {
@@ -766,6 +812,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -804,6 +851,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
@@ -811,76 +859,77 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
         static SPLASH_RANGE: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         constructor(entityType: $EntityType_<$DragonFireball>, level: $Level_);
         constructor(level: $Level_, owner: $LivingEntity, movement: $Vec3_);
     }
-    export class $EyeOfEnder extends $Entity implements $ItemSupplier, $EyeOfEnderEntityAccessor {
-        getItem(): $ItemStack;
-        readAdditionalSaveData(compound: $CompoundTag_): void;
+    export class $EyeOfEnder extends $Entity implements $ItemSupplier {
         addAdditionalSaveData(compound: $CompoundTag_): void;
-        signalTo(pos: $BlockPos_): void;
+        readAdditionalSaveData(compound: $CompoundTag_): void;
         setItem(stack: $ItemStack_): void;
-        setSurviveAfterDeath(isInPowderSnow: boolean): void;
+        signalTo(pos: $BlockPos_): void;
+        getItem(): $ItemStack;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(entityType: $EntityType_<$EyeOfEnder>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number);
-        set surviveAfterDeath(value: boolean);
+        constructor(entityType: $EntityType_<$EyeOfEnder>, level: $Level_);
     }
     export class $SpectralArrow extends $AbstractArrow {
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -897,6 +946,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         noCulling: boolean;
         wasInPowderSnow: boolean;
         hurtMarked: boolean;
+        piercingIgnoreEntityIds: $IntOpenHashSet;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
@@ -919,23 +969,25 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$SpectralArrow>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $ItemStack_, z: $ItemStack_ | null);
         constructor(level: $Level_, owner: $LivingEntity, pickupItemStack: $ItemStack_, firedFromWeapon: $ItemStack_ | null);
-        constructor(entityType: $EntityType_<$SpectralArrow>, level: $Level_);
     }
     export class $EvokerFangs extends $Entity implements $TraceableEntity {
+        getAnimationProgress(partialTicks: number): number;
         getOwner(): $LivingEntity;
         setOwner(target: $LivingEntity | null): void;
-        getAnimationProgress(partialTicks: number): number;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
@@ -984,6 +1036,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
@@ -991,22 +1044,30 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: number, z: number, arg6: $LivingEntity);
     }
     export class $FishingHook$OpenWaterType extends $Enum<$FishingHook$OpenWaterType> {
+        static values(): $FishingHook$OpenWaterType[];
+        static valueOf(arg0: string): $FishingHook$OpenWaterType;
+        static ABOVE_WATER: $FishingHook$OpenWaterType;
+        static INSIDE_WATER: $FishingHook$OpenWaterType;
+        static INVALID: $FishingHook$OpenWaterType;
     }
     /**
      * Values that may be interpreted as {@link $FishingHook$OpenWaterType}.
      */
     export type $FishingHook$OpenWaterType_ = "above_water" | "inside_water" | "invalid";
-    export class $AbstractArrow extends $Projectile {
-        readAdditionalSaveData(compound: $CompoundTag_): void;
+    export class $AbstractArrow extends $Projectile implements $PersistentProjectileEntityAccessor, $AccessorMixinAbstractArrow {
         addAdditionalSaveData(compound: $CompoundTag_): void;
-        getPierceLevel(): number;
+        readAdditionalSaveData(compound: $CompoundTag_): void;
+        setPierceLevel(pierceLevel: number): void;
+        /**
+         * Returns `true` if it's possible to attack this entity with an item.
+         */
+        shotFromCrossbow(): boolean;
         setBaseDamage(baseDamage: number): void;
-        getBaseDamage(): number;
-        setSoundEvent(soundEvent: $SoundEvent_): void;
         /**
          * Whether the arrow has a stream of critical hit particles flying behind it.
          */
-        setCritArrow(critArrow: boolean): void;
+        setNoPhysics(critArrow: boolean): void;
+        setSoundEvent(soundEvent: $SoundEvent_): void;
         /**
          * Returns `true` if it's possible to attack this entity with an item.
          */
@@ -1016,20 +1077,22 @@ declare module "@package/net/minecraft/world/entity/projectile" {
          */
         isNoPhysics(): boolean;
         /**
-         * Returns `true` if it's possible to attack this entity with an item.
-         */
-        shotFromCrossbow(): boolean;
-        /**
          * Whether the arrow has a stream of critical hit particles flying behind it.
          */
-        setNoPhysics(critArrow: boolean): void;
-        handler$fjl002$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
+        setCritArrow(critArrow: boolean): void;
+        getBaseDamage(): number;
+        getPierceLevel(): number;
         setBaseDamageFromMob(velocity: number): void;
         getPickupItemStackOrigin(): $ItemStack;
+        handler$dne002$ad_astra$adastra$tick(arg0: $CallbackInfo): void;
+        setLife(arg0: number): void;
+        getLife(): number;
+        roots$getPickupItem(): $ItemStack;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -1046,6 +1109,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         noCulling: boolean;
         wasInPowderSnow: boolean;
         hurtMarked: boolean;
+        piercingIgnoreEntityIds: $IntOpenHashSet;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
@@ -1068,16 +1132,17 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        get pierceLevel(): number;
         set soundEvent(value: $SoundEvent_);
         set baseDamageFromMob(value: number);
         get pickupItemStackOrigin(): $ItemStack;
@@ -1096,57 +1161,60 @@ declare module "@package/net/minecraft/world/entity/projectile" {
      */
     export type $ProjectileDeflection_ = ((arg0: $Projectile, arg1: $Entity, arg2: $RandomSource) => void);
     export class $ThrownEgg extends $ThrowableItemProjectile {
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(level: $Level_, x: number, arg2: number, y: number);
-        constructor(level: $Level_, shooter: $LivingEntity);
         constructor(entityType: $EntityType_<$ThrownEgg>, level: $Level_);
+        constructor(level: $Level_, shooter: $LivingEntity);
+        constructor(level: $Level_, x: number, arg2: number, y: number);
     }
     export class $ItemSupplier {
     }
@@ -1159,12 +1227,13 @@ declare module "@package/net/minecraft/world/entity/projectile" {
      */
     export type $ItemSupplier_ = (() => $ItemStack_);
     export class $AbstractHurtingProjectile extends $Projectile {
-        readAdditionalSaveData(compound: $CompoundTag_): void;
         addAdditionalSaveData(compound: $CompoundTag_): void;
+        readAdditionalSaveData(compound: $CompoundTag_): void;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -1203,12 +1272,14 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
@@ -1216,145 +1287,145 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         constructor(entityType: $EntityType_<$AbstractHurtingProjectile>, x: number, arg2: number, y: number, arg4: $Vec3_, z: $Level_);
     }
     export class $ThrownExperienceBottle extends $ThrowableItemProjectile {
-        handler$fka001$ad_astra$adastra$getDefaultGravity(arg0: $CallbackInfoReturnable<any>): void;
+        handler$dnj001$ad_astra$adastra$getDefaultGravity(arg0: $CallbackInfoReturnable<any>): void;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$ThrownExperienceBottle>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number);
         constructor(level: $Level_, shooter: $LivingEntity);
-        constructor(entityType: $EntityType_<$ThrownExperienceBottle>, level: $Level_);
     }
     export class $Projectile extends $Entity implements $TraceableEntity {
+        deflect(deflection: $ProjectileDeflection_, entity: $Entity | null, owner: $Entity | null, deflectedByPlayer: boolean): boolean;
+        mayBreak(level: $Level_): boolean;
         /**
-         * Get entity this is riding
+         * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
          */
+        shoot(x: number, arg1: number, y: number, arg3: number, z: number): void;
+        getMovementToShoot(x: number, arg1: number, y: number, arg3: number, z: number): $Vec3;
+        /**
+         * Returns `true` if other Entities should be prevented from moving through this Entity.
+         */
+        checkLeftOwner(): boolean;
+        getEffectSource(): $Entity;
+        shootFromRotation(shooter: $Entity, x: number, y: number, z: number, velocity: number, inaccuracy: number): void;
         getOwner(): $Entity;
         /**
          * Prepares this entity in new dimension by copying NBT data from entity in old dimension
          */
         setOwner(entity: $Entity | null): void;
         calculateHorizontalHurtKnockbackDirection(entity: $LivingEntity, damageSource: $DamageSource_): $DoubleDoubleImmutablePair;
-        mayBreak(level: $Level_): boolean;
-        /**
-         * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
-         */
-        shoot(x: number, arg1: number, y: number, arg3: number, z: number): void;
-        /**
-         * Returns the current X rotation of the entity.
-         */
-        localvar$zbb000$astralsorcery$modifyInaccuracy(partialTicks: number): number;
-        getMovementToShoot(x: number, arg1: number, y: number, arg3: number, z: number): $Vec3;
-        shootFromRotation(shooter: $Entity, x: number, y: number, z: number, velocity: number, inaccuracy: number): void;
-        /**
-         * Get entity this is riding
-         */
-        getEffectSource(): $Entity;
-        deflect(deflection: $ProjectileDeflection_, entity: $Entity | null, owner: $Entity | null, deflectedByPlayer: boolean): boolean;
+        localvar$dpe000$astralsorcery$modifyInaccuracy(arg0: number): number;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$Projectile>, level: $Level_);
         get effectSource(): $Entity;
     }
     export class $Arrow extends $AbstractArrow {
-        /**
-         * The maximum height from where the entity is allowed to jump (used in pathfinder)
-         */
-        getColor(): number;
         addEffect(effectInstance: $MobEffectInstance): void;
+        getColor(): number;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -1371,6 +1442,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         noCulling: boolean;
         wasInPowderSnow: boolean;
         hurtMarked: boolean;
+        piercingIgnoreEntityIds: $IntOpenHashSet;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
@@ -1393,67 +1465,72 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$Arrow>, level: $Level_);
         constructor(level: $Level_, owner: $LivingEntity, pickupItemStack: $ItemStack_, firedFromWeapon: $ItemStack_ | null);
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $ItemStack_, z: $ItemStack_ | null);
-        constructor(entityType: $EntityType_<$Arrow>, level: $Level_);
         get color(): number;
     }
     export class $LlamaSpit extends $Projectile {
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        leftOwner: boolean;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         constructor(entityType: $EntityType_<$LlamaSpit>, level: $Level_);
@@ -1464,6 +1541,7 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -1502,17 +1580,19 @@ declare module "@package/net/minecraft/world/entity/projectile" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
+        constructor(entityType: $EntityType_<$SmallFireball>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number, arg4: $Vec3_);
         constructor(level: $Level_, owner: $LivingEntity, movement: $Vec3_);
-        constructor(entityType: $EntityType_<$SmallFireball>, level: $Level_);
     }
 }

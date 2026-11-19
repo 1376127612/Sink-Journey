@@ -14,17 +14,17 @@ import { $ServerPlayer } from "@package/net/minecraft/server/level";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
 import { $ResourceKey_ } from "@package/net/minecraft/resources";
-import { $MenuConstructor_, $MenuType_, $MenuType, $MenuConstructor, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
+import { $MenuType_, $MenuConstructor_, $MenuType, $MenuConstructor, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
 import { $Block_, $Block } from "@package/net/minecraft/world/level/block";
 import { $BlockEntityType, $BlockEntityType_, $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/com/tterrag/registrate/util/entry" {
     export class $ItemProviderEntry<R extends $ItemLike, T extends R> extends $RegistryEntry<R, T> implements $ItemLike {
-        is(arg0: $Item_): boolean;
-        asStack(): $ItemStack;
-        asStack(arg0: number): $ItemStack;
-        isIn(arg0: $ItemStack_): boolean;
         asItem(): $Item;
+        is(arg0: $Item_): boolean;
+        asStack(arg0: number): $ItemStack;
+        asStack(): $ItemStack;
+        isIn(arg0: $ItemStack_): boolean;
         constructor(arg0: $AbstractRegistrate<never>, arg1: $DeferredHolder<R, T>);
     }
     export class $ItemEntry<T extends $Item> extends $ItemProviderEntry<$Item, T> {
@@ -40,22 +40,22 @@ declare module "@package/com/tterrag/registrate/util/entry" {
     }
     export class $EntityEntry<T extends $Entity> extends $RegistryEntry<$EntityType<never>, $EntityType<T>> {
         static cast<T extends $Entity>(arg0: $RegistryEntry<$EntityType_<never>, $EntityType_<T>>): $EntityEntry<T>;
-        is(arg0: $Entity): boolean;
         create(arg0: $Level_): $EntityType<T>;
+        is(arg0: $Entity): boolean;
         constructor(arg0: $AbstractRegistrate<never>, arg1: $DeferredHolder<$EntityType_<never>, $EntityType_<$EntityType_<T>>>);
     }
     export class $RegistryEntry<R, S extends R> extends $DeferredHolder<R, S> implements $NonNullSupplier<S> {
+        getSibling<X, Y extends X>(arg0: $Registry<X>): $RegistryEntry<X, Y>;
+        getSibling<X, Y extends X>(arg0: $ResourceKey_<$Registry<X>>): $RegistryEntry<X, Y>;
         filter(arg0: $Predicate_<R>): ($RegistryEntry<R, S>) | undefined;
         is<X>(arg0: X): boolean;
-        getSibling<X, Y extends X>(arg0: $ResourceKey_<$Registry<X>>): $RegistryEntry<X, Y>;
-        getSibling<X, Y extends X>(arg0: $Registry<X>): $RegistryEntry<X, Y>;
         lazy(): $NonNullSupplier<S>;
         constructor(arg0: $AbstractRegistrate<never>, arg1: $DeferredHolder<R, S>);
     }
     export class $MenuEntry<T extends $AbstractContainerMenu> extends $RegistryEntry<$MenuType<never>, $MenuType<T>> {
+        open(arg0: $ServerPlayer, arg1: $Component_, arg2: $MenuConstructor_, arg3: $Consumer_<$RegistryFriendlyByteBuf>): void;
         open(arg0: $ServerPlayer, arg1: $Component_, arg2: $Consumer_<$RegistryFriendlyByteBuf>): void;
         open(arg0: $ServerPlayer, arg1: $Component_, arg2: $MenuConstructor_): void;
-        open(arg0: $ServerPlayer, arg1: $Component_, arg2: $MenuConstructor_, arg3: $Consumer_<$RegistryFriendlyByteBuf>): void;
         open(arg0: $ServerPlayer, arg1: $Component_): void;
         create(arg0: number, arg1: $Inventory): $MenuType<T>;
         asProvider(): $MenuConstructor;
@@ -64,20 +64,20 @@ declare module "@package/com/tterrag/registrate/util/entry" {
     export class $FluidEntry<T extends $BaseFlowingFluid> extends $RegistryEntry<$Fluid, T> {
         getType(): $FluidType;
         getSource<S extends $BaseFlowingFluid>(): S;
-        getBlock<B extends $Block>(): (B) | undefined;
         getBucket<I extends $Item>(): (I) | undefined;
+        getBlock<B extends $Block>(): (B) | undefined;
         constructor(arg0: $AbstractRegistrate<never>, arg1: $DeferredHolder<$Fluid_, T>);
         get type(): $FluidType;
         get source(): S;
-        get block(): (B) | undefined;
         get bucket(): (I) | undefined;
+        get block(): (B) | undefined;
     }
     export class $BlockEntityEntry<T extends $BlockEntity> extends $RegistryEntry<$BlockEntityType<never>, $BlockEntityType<T>> {
+        getNullable(arg0: $BlockGetter, arg1: $BlockPos_): $BlockEntityType<T>;
         get(arg0: $BlockGetter, arg1: $BlockPos_): ($BlockEntityType<T>) | undefined;
         static cast<T extends $BlockEntity>(arg0: $RegistryEntry<$BlockEntityType_<never>, $BlockEntityType_<T>>): $BlockEntityEntry<T>;
-        is(arg0: $BlockEntity | null): boolean;
         create(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntityType<T>;
-        getNullable(arg0: $BlockGetter, arg1: $BlockPos_): $BlockEntityType<T>;
+        is(arg0: $BlockEntity | null): boolean;
         constructor(arg0: $AbstractRegistrate<never>, arg1: $DeferredHolder<$BlockEntityType_<never>, $BlockEntityType_<$BlockEntityType_<T>>>);
     }
 }

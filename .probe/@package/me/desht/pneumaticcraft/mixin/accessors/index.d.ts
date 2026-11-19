@@ -16,8 +16,8 @@ declare module "@package/me/desht/pneumaticcraft/mixin/accessors" {
     export class $ServerPlayerGameModeAccess {
     }
     export interface $ServerPlayerGameModeAccess {
-        isDestroyingBlock(): boolean;
         hasDelayedDestroy(): boolean;
+        isDestroyingBlock(): boolean;
         get destroyingBlock(): boolean;
     }
     export class $TooltipAccess {
@@ -53,15 +53,15 @@ declare module "@package/me/desht/pneumaticcraft/mixin/accessors" {
     export class $BaseSpawnerAccess {
     }
     export interface $BaseSpawnerAccess {
-        getSpin(): number;
-        getRequiredPlayerRange(): number;
-        setRequiredPlayerRange(arg0: number): void;
         setOSpin(arg0: number): void;
-        getNextSpawnData(): $SpawnData;
+        setRequiredPlayerRange(arg0: number): void;
+        getSpin(): number;
         setSpawnDelay(arg0: number): void;
+        getNextSpawnData(): $SpawnData;
         getSpawnDelay(): number;
-        get spin(): number;
+        getRequiredPlayerRange(): number;
         set OSpin(value: number);
+        get spin(): number;
         get nextSpawnData(): $SpawnData;
     }
     export class $BoatItemAccess {
@@ -95,8 +95,8 @@ declare module "@package/me/desht/pneumaticcraft/mixin/accessors" {
     export class $ItemEntityAccess {
     }
     export interface $ItemEntityAccess {
-        getAge(): number;
         setAge(arg0: number): void;
+        getAge(): number;
     }
     export class $MobAccess {
     }
@@ -137,18 +137,18 @@ declare module "@package/me/desht/pneumaticcraft/mixin/accessors" {
     export class $StructureTemplatePoolAccess {
     }
     export interface $StructureTemplatePoolAccess {
-        getRawTemplates(): $List<$Pair<$StructurePoolElement, number>>;
         setRawTemplates(arg0: $List_<$Pair<$StructurePoolElement, number>>): void;
+        getRawTemplates(): $List<$Pair<$StructurePoolElement, number>>;
         getTemplates(): $ObjectArrayList<$StructurePoolElement>;
         get templates(): $ObjectArrayList<$StructurePoolElement>;
     }
     export class $AbstractFurnaceBlockEntityAccess {
     }
     export interface $AbstractFurnaceBlockEntityAccess {
+        setLitTime(arg0: number): void;
+        getLitTime(): number;
         setLitDuration(arg0: number): void;
         getCookingProgress(): number;
-        getLitTime(): number;
-        setLitTime(arg0: number): void;
         set litDuration(value: number);
         get cookingProgress(): number;
     }

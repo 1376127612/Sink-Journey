@@ -31,15 +31,15 @@ declare module "@package/net/minecraft/util/profiling/metrics" {
      */
     export type $MetricSampler$ThresholdTest_ = ((arg0: number) => boolean);
     export class $MetricSampler {
+        onFinished(): void;
+        onEndTick(tickTime: number): void;
+        onStartTick(): void;
         getName(): string;
         static builder<T>(name: string, category: $MetricCategory_, sampler: $ToDoubleFunction_<T>, context: T): $MetricSampler$MetricSamplerBuilder<T>;
         result(): $MetricSampler$SamplerResult;
         static create<T>(name: string, category: $MetricCategory_, context: T, sampler: $ToDoubleFunction_<T>): $MetricSampler;
         static create(name: string, category: $MetricCategory_, sampler: $DoubleSupplier_): $MetricSampler;
         getCategory(): $MetricCategory;
-        onStartTick(): void;
-        onFinished(): void;
-        onEndTick(tickTime: number): void;
         triggersThreshold(): boolean;
         get name(): string;
         get category(): $MetricCategory;
@@ -63,8 +63,8 @@ declare module "@package/net/minecraft/util/profiling/metrics" {
      */
     export type $ProfilerMeasured_ = (() => $List_<$MetricSampler>);
     export class $MetricsRegistry {
-        add(key: $ProfilerMeasured_): void;
         getRegisteredSamplers(): $List<$MetricSampler>;
+        add(key: $ProfilerMeasured_): void;
         static INSTANCE: $MetricsRegistry;
         get registeredSamplers(): $List<$MetricSampler>;
     }

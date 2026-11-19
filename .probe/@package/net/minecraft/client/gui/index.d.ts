@@ -1,30 +1,34 @@
+import { $GuiGraphicsAccessor as $GuiGraphicsAccessor$2 } from "@package/dev/shadowsoffire/apotheosis/mixin/client";
 import { $MultiBufferSource, $MultiBufferSource$BufferSource, $MultiBufferSource_, $RenderType } from "@package/net/minecraft/client/renderer";
 import { $Either } from "@package/com/mojang/datafixers/util";
 import { $SpectatorGui } from "@package/net/minecraft/client/gui/components/spectator";
 import { $LivingEntity } from "@package/net/minecraft/world/entity";
+import { $AccessorMixinGui } from "@package/mysticmods/roots/mixin/client/accessor";
 import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $FontAccessor, $GuiAccessor } from "@package/com/simibubi/create/foundation/mixin/accessor";
 import { $Minecraft, $DeltaTracker, $StringSplitter } from "@package/net/minecraft/client";
+import { $JadeFont } from "@package/snownee/jade/gui";
 import { $List, $List_ } from "@package/java/util";
 import { $GuiRenderStateSink } from "@package/dev/isxander/yacl3/gui/render";
 import { $IMapRenderer } from "@package/net/raphimc/immediatelyfast/injection/interfaces";
 import { $FormattedCharSequence, $FormattedCharSequence_, $RandomSource, $FormattedCharSink } from "@package/net/minecraft/util";
-import { $Function_, $BooleanSupplier_, $Function } from "@package/java/util/function";
+import { $Function_, $UnaryOperator_, $BooleanSupplier_, $Function } from "@package/java/util/function";
 import { $Operation_ } from "@package/com/llamalad7/mixinextras/injector/wrapoperation";
 import { $GuiGraphicsAccessor } from "@package/it/zerono/mods/zerocore/internal/mixin/client";
 import { $IFontExtension, $IGuiGraphicsExtension } from "@package/net/neoforged/neoforge/client/extensions";
 import { $MapAtlasTexture } from "@package/net/raphimc/immediatelyfast/feature/map_atlas_generation";
 import { $ClientTooltipComponent, $ClientTooltipPositioner_ } from "@package/net/minecraft/client/gui/screens/inventory/tooltip";
-import { $MapId_, $MapItemSavedData } from "@package/net/minecraft/world/level/saveddata/maps";
-import { $TextureAtlasSprite, $TextureManager, $TextureAtlas } from "@package/net/minecraft/client/renderer/texture";
+import { $LocalRef } from "@package/com/llamalad7/mixinextras/sugar/ref";
+import { $MapDecoration_, $MapId_, $MapItemSavedData } from "@package/net/minecraft/world/level/saveddata/maps";
+import { $TextureAtlasSprite, $DynamicTexture, $TextureManager, $TextureAtlas } from "@package/net/minecraft/client/renderer/texture";
 import { $FontSet } from "@package/net/minecraft/client/gui/font";
 import { $Enum, $Record, $AutoCloseable, $Runnable_ } from "@package/java/lang";
 import { $IExtensibleEnum, $ExtensionInfo } from "@package/net/neoforged/fml/common/asm/enumextension";
 import { $Level_ } from "@package/net/minecraft/world/level";
 import { $GuiGraphicsAccessor as $GuiGraphicsAccessor$1 } from "@package/com/lowdragmc/lowdraglib2/core/mixins/accessor";
-import { $ItemStack_ } from "@package/net/minecraft/world/item";
+import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $DrawContextAccessor } from "@package/dev/tr7zw/trender/gui/impl/mixin/client";
-import { $Component_, $FormattedText, $Style } from "@package/net/minecraft/network/chat";
+import { $MutableComponent, $Component_, $FormattedText, $MutableComponent_, $Style } from "@package/net/minecraft/network/chat";
 import { $BossHealthOverlay, $SubtitleOverlay, $DebugScreenOverlay, $PlayerTabOverlay, $ChatComponent } from "@package/net/minecraft/client/gui/components";
 import { $GuiSpriteScaling$NineSlice_, $GuiSpriteScaling } from "@package/net/minecraft/client/resources/metadata/gui";
 import { $ScreenRectangle_, $ScreenRectangle } from "@package/net/minecraft/client/gui/navigation";
@@ -51,15 +55,19 @@ declare module "@package/net/minecraft/client/gui" {
          * @return `true` to accept more characters, `false` to stop traversing the sequence.
          */
         accept(positionInCurrentSequence: number, style: $Style, codePoint: number): boolean;
-        handler$ddn000$chloride$inject$accept(arg0: number, arg1: $Style, arg2: number, arg3: $CallbackInfoReturnable<any>): void;
-        handler$bce000$chat_heads$chatheads$renderChatHead(i: number, style: $Style, j: number, cir: $CallbackInfoReturnable<any>): void;
+        handler$bek000$chat_heads$chatheads$renderChatHead(i: number, style: $Style, j: number, cir: $CallbackInfoReturnable<any>): void;
+        handler$fkm000$chloride$inject$accept(arg0: number, arg1: $Style, arg2: number, arg3: $CallbackInfoReturnable<any>): void;
         constructor(bufferSource: $Font, x: $MultiBufferSource_, y: number, color: number, dropShadow: number, pose: boolean, mode: $Matrix4f, packedLightCoords: $Font$DisplayMode_, arg8: number);
     }
-    export class $GuiGraphics implements $IGuiGraphicsExtension, $GuiGraphicsAccessor$1, $DrawContextAccessor, $GuiGraphicsAccessor, $GuiRenderStateSink {
+    export class $GuiGraphics implements $IGuiGraphicsExtension, $GuiGraphicsAccessor$1, $GuiGraphicsAccessor, $DrawContextAccessor, $GuiGraphicsAccessor$2, $GuiRenderStateSink {
         /**
          * Disables scissoring.
          */
         flush(): void;
+        /**
+         * Fills a rectangle with the specified color and z-level using the given render type and coordinates as the boundaries.
+         */
+        fill(renderType: $RenderType, minX: number, minY: number, maxX: number, maxY: number, z: number, color: number): void;
         /**
          * Fills a rectangle with the specified color using the given coordinates as the boundaries.
          */
@@ -73,13 +81,33 @@ declare module "@package/net/minecraft/client/gui" {
          */
         fill(renderType: $RenderType, minX: number, minY: number, maxX: number, maxY: number, color: number): void;
         /**
-         * Fills a rectangle with the specified color and z-level using the given render type and coordinates as the boundaries.
-         */
-        fill(renderType: $RenderType, minX: number, minY: number, maxX: number, maxY: number, z: number, color: number): void;
-        /**
          * Sets the current rendering color.
          */
         setColor(red: number, green: number, blue: number, alpha: number): void;
+        /**
+         * Renders additional decorations for an item stack at the specified coordinates with optional custom text.
+         */
+        renderItemDecorations(font: $Font, stack: $ItemStack_, x: number, y: number, text: string | null): void;
+        /**
+         * Renders additional decorations for an item stack at the specified coordinates.
+         */
+        renderItemDecorations(font: $Font, stack: $ItemStack_, x: number, y: number): void;
+        /**
+         * Renders an internal tooltip with customizable tooltip components at the specified mouse coordinates using a tooltip positioner.
+         */
+        renderTooltipInternal(font: $Font, components: $List_<$ClientTooltipComponent>, mouseX: number, mouseY: number, tooltipPositioner: $ClientTooltipPositioner_): void;
+        /**
+         * Renders a hover effect for a text component at the specified mouse coordinates.
+         */
+        renderComponentHoverEffect(font: $Font, style: $Style | null, mouseX: number, mouseY: number): void;
+        renderComponentTooltip(arg0: $Font, arg1: $List_<$FormattedText>, arg2: number, arg3: number, arg4: $ItemStack_): void;
+        /**
+         * Renders a tooltip with multiple lines of component-based text at the specified mouse coordinates.
+         */
+        renderComponentTooltip(font: $Font, tooltipLines: $List_<$Component_>, mouseX: number, mouseY: number): void;
+        drawStringWithBackdrop(font: $Font, text: $Component_, x: number, y: number, xOffset: number, color: number): number;
+        blitNineSlicedSprite(sprite: $TextureAtlasSprite, nineSlice: $GuiSpriteScaling$NineSlice_, x: number, y: number, blitOffset: number, width: number, height: number): void;
+        containsPointInScissor(x: number, y: number): boolean;
         /**
          * @return returns the buffer source for rendering.
          */
@@ -90,50 +118,31 @@ declare module "@package/net/minecraft/client/gui" {
          */
         drawManaged(runnable: $Runnable_): void;
         /**
-         * Draws a centered string at the specified coordinates using the given font, text, and color.
+         * Fills a rectangle with the specified color using the given coordinates as the boundaries.
          */
-        drawCenteredString(font: $Font, text: string, x: number, y: number, color: number): void;
+        renderOutline(minX: number, minY: number, maxX: number, maxY: number, color: number): void;
         /**
-         * Draws a centered string at the specified coordinates using the given font, text component, and color.
+         * Fills a rectangle with the specified color using the given render type and coordinates as the boundaries.
          */
-        drawCenteredString(font: $Font, text: $Component_, x: number, y: number, color: number): void;
-        /**
-         * Draws a centered string at the specified coordinates using the given font, formatted character sequence, and color.
-         */
-        drawCenteredString(font: $Font, text: $FormattedCharSequence_, x: number, y: number, color: number): void;
-        /**
-         * Enables scissoring with the specified screen coordinates.
-         */
-        enableScissor(minX: number, minY: number, maxX: number, maxY: number): void;
-        /**
-         * Fills a rectangle with a gradient color from colorFrom to colorTo at the specified z-level using the given coordinates as the boundaries.
-         */
-        fillGradient(x1: number, y1: number, x2: number, y2: number, z: number, colorFrom: number, colorTo: number): void;
-        /**
-         * Fills a rectangle with the specified color and z-level using the given coordinates as the boundaries.
-         */
-        fillGradient(minX: number, minY: number, maxX: number, maxY: number, z: number, color: number): void;
-        /**
-         * Fills a rectangle with a gradient color from colorFrom to colorTo at the specified z-level using the given render type and coordinates as the boundaries.
-         */
-        fillGradient(renderType: $RenderType, x1: number, y1: number, x2: number, y2: number, colorFrom: number, colorTo: number, z: number): void;
-        renderTooltip(arg0: $Font, arg1: $List_<$Component_>, arg2: ($TooltipComponent) | undefined, arg3: $ItemStack_, arg4: number, arg5: number): void;
-        /**
-         * Renders a tooltip with customizable components at the specified mouse coordinates.
-         */
-        renderTooltip(font: $Font, tooltipLines: $List_<$Component_>, visualTooltipComponent: ($TooltipComponent) | undefined, mouseX: number, mouseY: number): void;
+        fillRenderType(renderType: $RenderType, minX: number, minY: number, maxX: number, maxY: number, color: number): void;
+        blitTiledSprite(sprite: $TextureAtlasSprite, x: number, y: number, blitOffset: number, width: number, height: number, uPosition: number, vPosition: number, spriteWidth: number, spriteHeight: number, nineSliceWidth: number, nineSliceHeight: number): void;
         /**
          * Renders a tooltip with multiple lines of component-based text at the specified mouse coordinates.
          */
         renderTooltip(font: $Font, tooltipLines: $List_<$FormattedCharSequence_>, mouseX: number, mouseY: number): void;
         /**
+         * Renders a tooltip with multiple lines of formatted text using a custom tooltip positioner at the specified mouse coordinates.
+         */
+        renderTooltip(font: $Font, tooltipLines: $List_<$FormattedCharSequence_>, tooltipPositioner: $ClientTooltipPositioner_, mouseX: number, mouseY: number): void;
+        renderTooltip(arg0: $Font, arg1: $List_<$Component_>, arg2: ($TooltipComponent) | undefined, arg3: $ItemStack_, arg4: number, arg5: number): void;
+        /**
          * Renders a tooltip with a single line of text at the specified mouse coordinates.
          */
         renderTooltip(font: $Font, text: $Component_, mouseX: number, mouseY: number): void;
         /**
-         * Renders a tooltip with multiple lines of formatted text using a custom tooltip positioner at the specified mouse coordinates.
+         * Renders a tooltip with customizable components at the specified mouse coordinates.
          */
-        renderTooltip(font: $Font, tooltipLines: $List_<$FormattedCharSequence_>, tooltipPositioner: $ClientTooltipPositioner_, mouseX: number, mouseY: number): void;
+        renderTooltip(font: $Font, tooltipLines: $List_<$Component_>, visualTooltipComponent: ($TooltipComponent) | undefined, mouseX: number, mouseY: number): void;
         /**
          * Renders additional decorations for an item stack at the specified coordinates.
          */
@@ -142,24 +151,67 @@ declare module "@package/net/minecraft/client/gui" {
          * Draws a formatted text with word wrapping at the specified coordinates using the given font, text, line width, and color.
          */
         drawWordWrap(font: $Font, text: $FormattedText, x: number, y: number, lineWidth: number, color: number): void;
-        yacl$bufferSource(): $MultiBufferSource;
+        /**
+         * @deprecated
+         * Disables scissoring.
+         */
+        flushIfUnmanaged(): void;
+        /**
+         * Enables scissoring with the specified screen coordinates.
+         */
+        enableScissor(minX: number, minY: number, maxX: number, maxY: number): void;
+        renderFakeItem(stack: $ItemStack_, x: number, y: number, seed: number): void;
         /**
          * Renders a fake item stack at the specified coordinates.
          */
         renderFakeItem(stack: $ItemStack_, x: number, y: number): void;
-        renderFakeItem(stack: $ItemStack_, x: number, y: number, seed: number): void;
+        /**
+         * Fills a rectangle with a gradient color from colorFrom to colorTo at the specified z-level using the given coordinates as the boundaries.
+         */
+        fillGradient(x1: number, y1: number, x2: number, y2: number, z: number, colorFrom: number, colorTo: number): void;
+        /**
+         * Fills a rectangle with a gradient color from colorFrom to colorTo at the specified z-level using the given render type and coordinates as the boundaries.
+         */
+        fillGradient(renderType: $RenderType, x1: number, y1: number, x2: number, y2: number, colorFrom: number, colorTo: number, z: number): void;
+        /**
+         * Fills a rectangle with the specified color and z-level using the given coordinates as the boundaries.
+         */
+        fillGradient(minX: number, minY: number, maxX: number, maxY: number, z: number, color: number): void;
         /**
          * Disables scissoring.
          */
         disableScissor(): void;
         /**
-         * Fills a rectangle with the specified color using the given coordinates as the boundaries.
+         * Draws a centered string at the specified coordinates using the given font, formatted character sequence, and color.
          */
-        renderOutline(minX: number, minY: number, maxX: number, maxY: number, color: number): void;
+        drawCenteredString(font: $Font, text: $FormattedCharSequence_, x: number, y: number, color: number): void;
         /**
-         * Fills a rectangle with the specified color using the given render type and coordinates as the boundaries.
+         * Draws a centered string at the specified coordinates using the given font, text, and color.
          */
-        fillRenderType(renderType: $RenderType, minX: number, minY: number, maxX: number, maxY: number, color: number): void;
+        drawCenteredString(font: $Font, text: string, x: number, y: number, color: number): void;
+        /**
+         * Draws a centered string at the specified coordinates using the given font, text component, and color.
+         */
+        drawCenteredString(font: $Font, text: $Component_, x: number, y: number, color: number): void;
+        yacl$bufferSource(): $MultiBufferSource;
+        /**
+         * Renders an item stack for a living entity at the specified coordinates with a random seed.
+         */
+        renderItem(entity: $LivingEntity, stack: $ItemStack_, x: number, y: number, seed: number): void;
+        /**
+         * Renders an item stack for a living entity in a specific level at the specified coordinates with a random seed and a custom GUI offset.
+         */
+        renderItem(entity: $LivingEntity | null, level: $Level_ | null, stack: $ItemStack_, x: number, y: number, seed: number, guiOffset: number): void;
+        renderItem(stack: $ItemStack_, x: number, y: number, seed: number): void;
+        /**
+         * Renders an item stack at the specified coordinates with a random seed and a custom value.
+         */
+        renderItem(stack: $ItemStack_, x: number, y: number, seed: number, guiOffset: number): void;
+        /**
+         * Renders a fake item stack at the specified coordinates.
+         */
+        renderItem(stack: $ItemStack_, x: number, y: number): void;
+        renderComponentTooltipFromElements(arg0: $Font, arg1: $List_<$Either<$FormattedText, $TooltipComponent>>, arg2: number, arg3: number, arg4: $ItemStack_): void;
         /**
          * @return returns the height of the GUI screen in pixels
          */
@@ -172,6 +224,10 @@ declare module "@package/net/minecraft/client/gui" {
          * Blits a portion of the texture specified by the atlas location onto the screen at the given coordinates with a blit offset and texture coordinates.
          */
         blit(atlasLocation: $ResourceLocation_, x: number, y: number, blitOffset: number, uOffset: number, vOffset: number, uWidth: number, vHeight: number, textureWidth: number, textureHeight: number): void;
+        /**
+         * Blits a portion of the specified texture atlas sprite onto the screen at the given coordinates with a color tint.
+         */
+        blit(x: number, y: number, blitOffset: number, width: number, height: number, sprite: $TextureAtlasSprite, red: number, green: number, blue: number, alpha: number): void;
         /**
          * Blits a portion of the texture specified by the atlas location onto the screen at the given coordinates.
          */
@@ -189,10 +245,6 @@ declare module "@package/net/minecraft/client/gui" {
          */
         blit(x: number, y: number, blitOffset: number, width: number, height: number, sprite: $TextureAtlasSprite): void;
         /**
-         * Blits a portion of the specified texture atlas sprite onto the screen at the given coordinates with a color tint.
-         */
-        blit(x: number, y: number, blitOffset: number, width: number, height: number, sprite: $TextureAtlasSprite, red: number, green: number, blue: number, alpha: number): void;
-        /**
          * @return returns the height of the GUI screen in pixels
          */
         guiHeight(): number;
@@ -201,21 +253,46 @@ declare module "@package/net/minecraft/client/gui" {
          */
         pose(): $PoseStack;
         /**
-         * Enables scissoring with the specified screen coordinates.
-         */
-        hLine(minX: number, minY: number, maxX: number, maxY: number): void;
-        /**
          * Draws a horizontal line from minX to maxX at the specified y-coordinate with the given color using the specified render type.
          */
         hLine(renderType: $RenderType, minX: number, maxX: number, y: number, color: number): void;
         /**
          * Enables scissoring with the specified screen coordinates.
          */
-        vLine(minX: number, minY: number, maxX: number, maxY: number): void;
+        hLine(minX: number, minY: number, maxX: number, maxY: number): void;
         /**
          * Draws a horizontal line from minX to maxX at the specified y-coordinate with the given color using the specified render type.
          */
         vLine(renderType: $RenderType, minX: number, maxX: number, y: number, color: number): void;
+        /**
+         * Enables scissoring with the specified screen coordinates.
+         */
+        vLine(minX: number, minY: number, maxX: number, maxY: number): void;
+        drawString(arg0: $Font, arg1: $FormattedCharSequence_, arg2: number, arg3: number, arg4: number, arg5: boolean): number;
+        /**
+         * Draws a component's visual order text at the specified coordinates using the given font, text component, color, and drop shadow.
+         * 
+         * @return the width of the drawn string.
+         */
+        drawString(font: $Font, text: $Component_, x: number, y: number, color: number, dropShadow: boolean): number;
+        /**
+         * Draws a formatted character sequence at the specified coordinates using the given font, text, color, and drop shadow. Returns the width of the drawn string.
+         * 
+         * @return returns the width of the drawn string.
+         */
+        drawString(font: $Font, text: $FormattedCharSequence_, x: number, y: number, color: number, dropShadow: boolean): number;
+        /**
+         * Draws a component's visual order text at the specified coordinates using the given font, text component, and color.
+         * 
+         * @return the width of the drawn string.
+         */
+        drawString(font: $Font, text: $Component_, x: number, y: number, color: number): number;
+        /**
+         * Draws a formatted character sequence at the specified coordinates using the given font, text, and color. Returns the width of the drawn string.
+         * 
+         * @return the width of the drawn string.
+         */
+        drawString(font: $Font, text: $FormattedCharSequence_, x: number, y: number, color: number): number;
         /**
          * Draws a string at the specified coordinates using the given font, text, color, and drop shadow. Returns the width of the drawn string.
          * 
@@ -228,105 +305,40 @@ declare module "@package/net/minecraft/client/gui" {
          * @return the width of the drawn string.
          */
         drawString(font: $Font, text: string | null, x: number, y: number, color: number): number;
-        /**
-         * Draws a formatted character sequence at the specified coordinates using the given font, text, color, and drop shadow. Returns the width of the drawn string.
-         * 
-         * @return returns the width of the drawn string.
-         */
-        drawString(font: $Font, text: $FormattedCharSequence_, x: number, y: number, color: number, dropShadow: boolean): number;
-        drawString(arg0: $Font, arg1: $FormattedCharSequence_, arg2: number, arg3: number, arg4: number, arg5: boolean): number;
-        /**
-         * Draws a component's visual order text at the specified coordinates using the given font, text component, and color.
-         * 
-         * @return the width of the drawn string.
-         */
-        drawString(font: $Font, text: $Component_, x: number, y: number, color: number): number;
-        /**
-         * Draws a component's visual order text at the specified coordinates using the given font, text component, color, and drop shadow.
-         * 
-         * @return the width of the drawn string.
-         */
-        drawString(font: $Font, text: $Component_, x: number, y: number, color: number, dropShadow: boolean): number;
         drawString(arg0: $Font, arg1: string | null, arg2: number, arg3: number, arg4: number, arg5: boolean): number;
-        /**
-         * Draws a formatted character sequence at the specified coordinates using the given font, text, and color. Returns the width of the drawn string.
-         * 
-         * @return the width of the drawn string.
-         */
-        drawString(font: $Font, text: $FormattedCharSequence_, x: number, y: number, color: number): number;
-        renderComponentTooltipFromElements(arg0: $Font, arg1: $List_<$Either<$FormattedText, $TooltipComponent>>, arg2: number, arg3: number, arg4: $ItemStack_): void;
         /**
          * Performs the inner blit operation for rendering a texture with the specified coordinates and texture coordinates without color tinting.
          */
         innerBlit(atlasLocation: $ResourceLocation_, x1: number, x2: number, y1: number, y2: number, blitOffset: number, minU: number, maxU: number, minV: number, maxV: number): void;
+        blitSprite(sprite: $ResourceLocation_, x: number, y: number, width: number, height: number): void;
         blitSprite(sprite: $ResourceLocation_, textureWidth: number, textureHeight: number, uPosition: number, vPosition: number, x: number, y: number, uWidth: number, vHeight: number): void;
         blitSprite(sprite: $ResourceLocation_, x: number, y: number, blitOffset: number, width: number, height: number): void;
-        blitSprite(sprite: $ResourceLocation_, textureWidth: number, textureHeight: number, uPosition: number, vPosition: number, x: number, y: number, blitOffset: number, uWidth: number, vHeight: number): void;
-        blitSprite(sprite: $ResourceLocation_, x: number, y: number, width: number, height: number): void;
         blitSprite(sprite: $TextureAtlasSprite, textureWidth: number, textureHeight: number, uPosition: number, vPosition: number, x: number, y: number, blitOffset: number, uWidth: number, vHeight: number): void;
-        /**
-         * Renders a fake item stack at the specified coordinates.
-         */
-        renderItem(stack: $ItemStack_, x: number, y: number): void;
-        renderItem(stack: $ItemStack_, x: number, y: number, seed: number): void;
-        /**
-         * Renders an item stack at the specified coordinates with a random seed and a custom value.
-         */
-        renderItem(stack: $ItemStack_, x: number, y: number, seed: number, guiOffset: number): void;
-        /**
-         * Renders an item stack for a living entity at the specified coordinates with a random seed.
-         */
-        renderItem(entity: $LivingEntity, stack: $ItemStack_, x: number, y: number, seed: number): void;
-        /**
-         * Renders an item stack for a living entity in a specific level at the specified coordinates with a random seed and a custom GUI offset.
-         */
-        renderItem(entity: $LivingEntity | null, level: $Level_ | null, stack: $ItemStack_, x: number, y: number, seed: number, guiOffset: number): void;
-        drawStringWithBackdrop(font: $Font, text: $Component_, x: number, y: number, xOffset: number, color: number): number;
-        /**
-         * Renders an internal tooltip with customizable tooltip components at the specified mouse coordinates using a tooltip positioner.
-         */
-        renderTooltipInternal(font: $Font, components: $List_<$ClientTooltipComponent>, mouseX: number, mouseY: number, tooltipPositioner: $ClientTooltipPositioner_): void;
-        containsPointInScissor(x: number, y: number): boolean;
-        /**
-         * Renders additional decorations for an item stack at the specified coordinates.
-         */
-        renderItemDecorations(font: $Font, stack: $ItemStack_, x: number, y: number): void;
-        /**
-         * Renders additional decorations for an item stack at the specified coordinates with optional custom text.
-         */
-        renderItemDecorations(font: $Font, stack: $ItemStack_, x: number, y: number, text: string | null): void;
-        /**
-         * Renders a hover effect for a text component at the specified mouse coordinates.
-         */
-        renderComponentHoverEffect(font: $Font, style: $Style | null, mouseX: number, mouseY: number): void;
-        blitNineSlicedSprite(sprite: $TextureAtlasSprite, nineSlice: $GuiSpriteScaling$NineSlice_, x: number, y: number, blitOffset: number, width: number, height: number): void;
-        /**
-         * Renders a tooltip with multiple lines of component-based text at the specified mouse coordinates.
-         */
-        renderComponentTooltip(font: $Font, tooltipLines: $List_<$Component_>, mouseX: number, mouseY: number): void;
-        renderComponentTooltip(arg0: $Font, arg1: $List_<$FormattedText>, arg2: number, arg3: number, arg4: $ItemStack_): void;
-        blitWithBorder(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): void;
-        blitWithBorder(sprite: $ResourceLocation_, textureWidth: number, textureHeight: number, uPosition: number, vPosition: number, x: number, y: number, blitOffset: number, uWidth: number, vHeight: number): void;
+        blitSprite(sprite: $ResourceLocation_, textureWidth: number, textureHeight: number, uPosition: number, vPosition: number, x: number, y: number, blitOffset: number, uWidth: number, vHeight: number): void;
+        drawScrollingString(font: $Font, text: $Component_, x: number, y: number, xOffset: number, color: number): number;
+        blitInscribed(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean): void;
         /**
          * Blits a portion of the texture specified by the atlas location onto the screen at the given coordinates.
          */
         blitInscribed(atlasLocation: $ResourceLocation_, x: number, y: number, uOffset: number, vOffset: number, uWidth: number, vHeight: number): void;
-        blitInscribed(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean): void;
+        blitWithBorder(sprite: $ResourceLocation_, textureWidth: number, textureHeight: number, uPosition: number, vPosition: number, x: number, y: number, blitOffset: number, uWidth: number, vHeight: number): void;
+        blitWithBorder(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): void;
         getColorFromFormattingCharacter(arg0: string, arg1: boolean): number;
-        drawScrollingString(font: $Font, text: $Component_, x: number, y: number, xOffset: number, color: number): number;
-        /**
-         * Renders an internal tooltip with customizable tooltip components at the specified mouse coordinates using a tooltip positioner.
-         */
-        ldlib2$renderTooltipInternal(font: $Font, components: $List_<$ClientTooltipComponent>, mouseX: number, mouseY: number, tooltipPositioner: $ClientTooltipPositioner_): void;
-        /**
-         * Performs the inner blit operation for rendering a texture with the specified coordinates and texture coordinates without color tinting.
-         */
-        zerocore_invokeInnerBlit(atlasLocation: $ResourceLocation_, x1: number, x2: number, y1: number, y2: number, blitOffset: number, minU: number, maxU: number, minV: number, maxV: number): void;
         ldlib2$setTooltipStack(arg0: $ItemStack_): void;
         /**
          * @return returns the buffer source for rendering.
          */
         libgui$getVertexConsumers(): $MultiBufferSource$BufferSource;
+        /**
+         * Performs the inner blit operation for rendering a texture with the specified coordinates and texture coordinates without color tinting.
+         */
+        zerocore_invokeInnerBlit(atlasLocation: $ResourceLocation_, x1: number, x2: number, y1: number, y2: number, blitOffset: number, minU: number, maxU: number, minV: number, maxV: number): void;
+        setTooltipStack(arg0: $ItemStack_): void;
+        getTooltipStack(): $ItemStack;
+        /**
+         * Renders an internal tooltip with customizable tooltip components at the specified mouse coordinates using a tooltip positioner.
+         */
+        ldlib2$renderTooltipInternal(font: $Font, components: $List_<$ClientTooltipComponent>, mouseX: number, mouseY: number, tooltipPositioner: $ClientTooltipPositioner_): void;
         minecraft: $Minecraft;
         static MIN_GUI_Z: number;
         managed: boolean;
@@ -345,25 +357,28 @@ declare module "@package/net/minecraft/client/gui" {
         /**
          * Updates a map texture.
          */
-        close(): void;
+        forceUpload(): void;
+        wrapOperation$ggl000$moonlight$forceMipMap(arg0: $DynamicTexture, arg1: $Operation_<any>): void;
         /**
          * Updates a map texture.
          */
-        forceUpload(): void;
+        close(): void;
+        wrapOperation$ejm000$spectrum$scaleDecorations(arg0: $PoseStack, arg1: number, arg2: number, arg3: number, arg4: $Operation_<any>, arg5: $MapDecoration_): void;
+        wrapOperation$ejm000$spectrum$scaleDecorations$mixinextras$bridge$16(arg0: $PoseStack, arg1: number, arg2: number, arg3: number, arg4: $Operation_<any>, arg5: $LocalRef<any>): void;
     }
     export class $MapRenderer implements $AutoCloseable, $IMapRenderer {
+        immediatelyFast$getAtlasMapping(mapId: number): number;
+        immediatelyFast$getMapAtlasTexture(id: number): $MapAtlasTexture;
         update(mapId: $MapId_, mapData: $MapItemSavedData): void;
         /**
          * Clears the currently loaded maps and removes their corresponding textures
          */
         close(): void;
-        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, mapId: $MapId_, mapData: $MapItemSavedData, active: boolean, packedLight: number): void;
         /**
          * Clears the currently loaded maps and removes their corresponding textures
          */
         resetData(): void;
-        immediatelyFast$getMapAtlasTexture(id: number): $MapAtlasTexture;
-        immediatelyFast$getAtlasMapping(mapId: number): number;
+        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, mapId: $MapId_, mapData: $MapItemSavedData, active: boolean, packedLight: number): void;
         constructor(textureManager: $TextureManager, decorationTextures: $MapDecorationTextureManager);
     }
     /**
@@ -390,42 +405,44 @@ declare module "@package/net/minecraft/client/gui" {
     /**
      * Values that may be interpreted as {@link $Gui$1DisplayEntry}.
      */
-    export type $Gui$1DisplayEntry_ = { scoreWidth?: number, name?: $Component_, score?: $Component_,  } | [scoreWidth?: number, name?: $Component_, score?: $Component_, ];
-    export class $Font implements $IFontExtension, $FontAccessor {
+    export type $Gui$1DisplayEntry_ = { name?: $Component_, score?: $Component_, scoreWidth?: number,  } | [name?: $Component_, score?: $Component_, scoreWidth?: number, ];
+    export class $Font implements $IFontExtension, $FontAccessor, $JadeFont {
+        handler$fkl000$chloride$inject$renderText(arg0: string, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: $Matrix4f, arg6: $MultiBufferSource_, arg7: $Font$DisplayMode_, arg8: number, arg9: number, arg10: $CallbackInfoReturnable<any>): void;
+        handler$fkl000$chloride$inject$renderText(arg0: $FormattedCharSequence_, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: $Matrix4f, arg6: $MultiBufferSource_, arg7: $Font$DisplayMode_, arg8: number, arg9: number, arg10: $CallbackInfoReturnable<any>): void;
+        jade$setGlint(arg0: number, arg1: number): void;
+        getSplitter(): $StringSplitter;
+        /**
+         * Apply Unicode Bidirectional Algorithm to string and return a new possibly reordered string for visual rendering.
+         */
+        bidirectionalShaping(text: string): string;
+        jade$setGlintStrength(arg0: number, arg1: number): void;
+        drawInBatch8xOutline(text: $FormattedCharSequence_, x: number, y: number, color: number, backgroundColor: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource_, packedLightCoords: number): void;
+        getFontSet(fontLocation: $ResourceLocation_): $FontSet;
         split(text: $FormattedText, maxWidth: number): $List<$FormattedCharSequence>;
         self(): $Font;
-        width(text: $FormattedCharSequence_): number;
         /**
          * Returns the width of this string. Equivalent of FontMetrics.stringWidth(String s).
          */
         width(text: string): number;
+        width(text: $FormattedCharSequence_): number;
         width(text: $FormattedText): number;
+        substrByWidth(text: $FormattedText, maxWidth: number): $FormattedText;
+        wordWrapHeight(text: $FormattedText, maxWidth: number): number;
+        /**
+         * Returns the height (in pixels) of the given string if it is wordwrapped to the given max width.
+         */
+        wordWrapHeight(text: string, maxWidth: number): number;
         /**
          * Get bidiFlag that controls if the Unicode Bidirectional Algorithm should be run before rendering any string
          */
         isBidirectional(): boolean;
         drawInBatch(text: string, x: number, y: number, color: number, dropShadow: boolean, matrix: $Matrix4f, buffer: $MultiBufferSource_, displayMode: $Font$DisplayMode_, backgroundColor: number, packedLightCoords: number): number;
         drawInBatch(text: $Component_, x: number, y: number, color: number, dropShadow: boolean, matrix: $Matrix4f, buffer: $MultiBufferSource_, displayMode: $Font$DisplayMode_, backgroundColor: number, packedLightCoords: number): number;
-        drawInBatch(text: string, x: number, y: number, color: number, dropShadow: boolean, matrix: $Matrix4f, buffer: $MultiBufferSource_, displayMode: $Font$DisplayMode_, backgroundColor: number, packedLightCoords: number, bidirectional: boolean): number;
         drawInBatch(text: $FormattedCharSequence_, x: number, y: number, color: number, dropShadow: boolean, matrix: $Matrix4f, buffer: $MultiBufferSource_, displayMode: $Font$DisplayMode_, backgroundColor: number, packedLightCoords: number): number;
+        drawInBatch(text: string, x: number, y: number, color: number, dropShadow: boolean, matrix: $Matrix4f, buffer: $MultiBufferSource_, displayMode: $Font$DisplayMode_, backgroundColor: number, packedLightCoords: number, bidirectional: boolean): number;
         renderText(text: string, x: number, y: number, color: number, dropShadow: boolean, matrix: $Matrix4f, buffer: $MultiBufferSource_, displayMode: $Font$DisplayMode_, backgroundColor: number, packedLightCoords: number): number;
-        substrByWidth(text: $FormattedText, maxWidth: number): $FormattedText;
-        plainSubstrByWidth(text: string, maxWidth: number): string;
         plainSubstrByWidth(text: string, maxWidth: number, tail: boolean): string;
-        getSplitter(): $StringSplitter;
-        wordWrapHeight(text: $FormattedText, maxWidth: number): number;
-        /**
-         * Returns the height (in pixels) of the given string if it is wordwrapped to the given max width.
-         */
-        wordWrapHeight(text: string, maxWidth: number): number;
-        getFontSet(fontLocation: $ResourceLocation_): $FontSet;
-        handler$ddm000$chloride$inject$renderText(arg0: string, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: $Matrix4f, arg6: $MultiBufferSource_, arg7: $Font$DisplayMode_, arg8: number, arg9: number, arg10: $CallbackInfoReturnable<any>): void;
-        handler$ddm000$chloride$inject$renderText(arg0: $FormattedCharSequence_, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: $Matrix4f, arg6: $MultiBufferSource_, arg7: $Font$DisplayMode_, arg8: number, arg9: number, arg10: $CallbackInfoReturnable<any>): void;
-        drawInBatch8xOutline(text: $FormattedCharSequence_, x: number, y: number, color: number, backgroundColor: number, matrix: $Matrix4f, bufferSource: $MultiBufferSource_, packedLightCoords: number): void;
-        /**
-         * Apply Unicode Bidirectional Algorithm to string and return a new possibly reordered string for visual rendering.
-         */
-        bidirectionalShaping(text: string): string;
+        plainSubstrByWidth(text: string, maxWidth: number): string;
         ellipsize(text: $FormattedText, maxWidth: number): $FormattedText;
         create$getFonts(): $Function<$ResourceLocation, $FontSet>;
         static SHADOW_OFFSET: $Vector3f;
@@ -486,24 +503,19 @@ declare module "@package/net/minecraft/client/gui" {
         pop(): $ScreenRectangle;
         containsPoint(x: number, y: number): boolean;
     }
-    export class $Gui implements $GuiAccessor {
+    export class $Gui implements $GuiAccessor, $AccessorMixinGui {
         /**
-         * Clears the title and subtitle, resetting the title display time.
+         * Sets the currently playing record display name and updates the overlay message.
          */
-        clear(): void;
-        renderSavingIndicator(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker): void;
-        /**
-         * Sets the fade-in, stay, and fade-out times for the title display.
-         */
-        setTimes(titleFadeInTime: number, titleStayTime: number, titleFadeOutTime: number): void;
+        setTitle(displayName: $Component_): void;
         /**
          * Sets the currently playing record display name and updates the overlay message.
          */
         setNowPlaying(displayName: $Component_): void;
         /**
-         * @return `true` if the chat is disabled, `false` if chat is enabled
+         * @return the `PlayerTabOverlay` overlay
          */
-        setChatDisabledByPlayerShown(chatDisabledByPlayerShown: boolean): void;
+        getTabList(): $PlayerTabOverlay;
         /**
          * @return `true` if the chat disabled message is being shown, `false` otherwise
          */
@@ -511,17 +523,55 @@ declare module "@package/net/minecraft/client/gui" {
         /**
          * @return `true` if the chat is disabled, `false` if chat is enabled
          */
-        tick(chatDisabledByPlayerShown: boolean): void;
-        render(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker): void;
+        setChatDisabledByPlayerShown(chatDisabledByPlayerShown: boolean): void;
+        /**
+         * @return the number of GUI ticks elapsed
+         */
+        getGuiTicks(): number;
         /**
          * Clears the title and subtitle, resetting the title display time.
          */
-        clearCache(): void;
-        handler$zbg000$astralsorcery$renderAstrolabeOverlay(arg0: $GuiGraphics, arg1: number, arg2: $CallbackInfo): void;
+        resetTitleTimes(): void;
+        /**
+         * Sets the currently playing record display name and updates the overlay message.
+         */
+        setSubtitle(displayName: $Component_): void;
+        handler$gmd000$ae2wtlib$restockOverlay(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: $DeltaTracker, arg4: $Player, arg5: $ItemStack_, arg6: number, arg7: $CallbackInfo): void;
         /**
          * Renders the experience bar on the screen using the provided GuiGraphics object and x-coordinate.
          */
         renderSelectedItemName(guiGraphics: $GuiGraphics, x: number): void;
+        handler$dpj000$astralsorcery$renderAstrolabeOverlay(arg0: $GuiGraphics, arg1: number, arg2: $CallbackInfo): void;
+        /**
+         * Clears the title and subtitle, resetting the title display time.
+         */
+        initModdedOverlays(): void;
+        /**
+         * Retrieves the number of rows of visible hearts needed to represent the given mount health.
+         * 
+         * @return the number of rows of visible hearts needed to represent the mount health.
+         */
+        constant$gic000$apotheosis$apoth_extendTime(vehicleHealth: number): number;
+        redirect$dfd000$astages$renderSelectedItemName(instance: $MutableComponent_, styleFunc: $UnaryOperator_<any>): $MutableComponent;
+        handler$gcf000$ftbchunks$onRenderEffectsReturn(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker, info: $CallbackInfo): void;
+        handler$gcf000$ftbchunks$onRenderEffectsEnter(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker, info: $CallbackInfo): void;
+        wrapMethod$zpo000$iris$handleHudHidingScreens(arg0: $GuiGraphics, arg1: $DeltaTracker, arg2: $Operation_<any>): void;
+        /**
+         * Clears the title and subtitle, resetting the title display time.
+         */
+        clear(): void;
+        /**
+         * Sets the fade-in, stay, and fade-out times for the title display.
+         */
+        setTimes(titleFadeInTime: number, titleStayTime: number, titleFadeOutTime: number): void;
+        /**
+         * @return `true` if the chat is disabled, `false` if chat is enabled
+         */
+        tick(chatDisabledByPlayerShown: boolean): void;
+        /**
+         * @return the `Font` used for rendering text in the GUI
+         */
+        getFont(): $Font;
         getDebugOverlay(): $DebugScreenOverlay;
         /**
          * Sets the overlay message to be displayed on the screen.
@@ -540,50 +590,26 @@ declare module "@package/net/minecraft/client/gui" {
          */
         getBossOverlay(): $BossHealthOverlay;
         /**
+         * Clears the title and subtitle, resetting the title display time.
+         */
+        clearCache(): void;
+        render(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker): void;
+        /**
          * @return a pointer to the persistent Chat GUI, containing all previous chat messages and such
          */
         getChat(): $ChatComponent;
         /**
-         * @return the `PlayerTabOverlay` overlay
-         */
-        getTabList(): $PlayerTabOverlay;
-        /**
-         * Sets the currently playing record display name and updates the overlay message.
-         */
-        setTitle(displayName: $Component_): void;
-        /**
-         * @return the `Font` used for rendering text in the GUI
-         */
-        getFont(): $Font;
-        /**
-         * @return the number of GUI ticks elapsed
-         */
-        getGuiTicks(): number;
-        /**
          * @return the number of GUI ticks elapsed
          */
         getLayerCount(): number;
-        /**
-         * Clears the title and subtitle, resetting the title display time.
-         */
-        resetTitleTimes(): void;
-        /**
-         * Sets the currently playing record display name and updates the overlay message.
-         */
-        setSubtitle(displayName: $Component_): void;
-        handler$dfj000$ftbchunks$onRenderEffectsEnter(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker, info: $CallbackInfo): void;
-        handler$dfj000$ftbchunks$onRenderEffectsReturn(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker, info: $CallbackInfo): void;
-        wrapMethod$zod000$iris$handleHudHidingScreens(arg0: $GuiGraphics, arg1: $DeltaTracker, arg2: $Operation_<any>): void;
-        /**
-         * Clears the title and subtitle, resetting the title display time.
-         */
-        initModdedOverlays(): void;
-        handler$boe000$ae2wtlib$restockOverlay(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: $DeltaTracker, arg4: $Player, arg5: $ItemStack_, arg6: number, arg7: $CallbackInfo): void;
+        renderSavingIndicator(guiGraphics: $GuiGraphics, deltaTracker: $DeltaTracker): void;
         create$getSubtitleOverlay(): $SubtitleOverlay;
+        roots$SetLastToolHighlight(arg0: $ItemStack_): void;
         /**
          * @return the number of GUI ticks elapsed
          */
         create$getToolHighlightTimer(): number;
+        roots$SetToolHighlightTimer(arg0: number): void;
         /**
          * Renders a texture overlay on the screen with the specified shader location and alpha value.
          */
@@ -595,26 +621,22 @@ declare module "@package/net/minecraft/client/gui" {
         leftHeight: number;
         overlayMessageTime: number;
         constructor(minecraft: $Minecraft);
+        set title(value: $Component_);
         set nowPlaying(value: $Component_);
-        set chatDisabledByPlayerShown(value: boolean);
+        get tabList(): $PlayerTabOverlay;
         get showingChatDisabledByPlayer(): boolean;
+        set chatDisabledByPlayerShown(value: boolean);
+        get guiTicks(): number;
+        set subtitle(value: $Component_);
+        get font(): $Font;
         get debugOverlay(): $DebugScreenOverlay;
         get spectatorGui(): $SpectatorGui;
         get bossOverlay(): $BossHealthOverlay;
         get chat(): $ChatComponent;
-        get tabList(): $PlayerTabOverlay;
-        set title(value: $Component_);
-        get font(): $Font;
-        get guiTicks(): number;
         get layerCount(): number;
-        set subtitle(value: $Component_);
     }
     export class $GuiSpriteManager extends $TextureAtlasHolder {
         getSpriteScaling(sprite: $TextureAtlasSprite): $GuiSpriteScaling;
-        /**
-         * Gets a sprite associated with the passed resource location.
-         */
-        getSprite(location: $ResourceLocation_): $TextureAtlasSprite;
         textureAtlas: $TextureAtlas;
         constructor(textureManager: $TextureManager);
     }
@@ -640,7 +662,7 @@ declare module "@package/net/minecraft/client/gui" {
     /**
      * Values that may be interpreted as {@link $ComponentPath$Path}.
      */
-    export type $ComponentPath$Path_ = { component?: $ContainerEventHandler, childPath?: $ComponentPath,  } | [component?: $ContainerEventHandler, childPath?: $ComponentPath, ];
+    export type $ComponentPath$Path_ = { childPath?: $ComponentPath, component?: $ContainerEventHandler,  } | [childPath?: $ComponentPath, component?: $ContainerEventHandler, ];
     export class $LayeredDraw$Layer {
     }
     export interface $LayeredDraw$Layer {

@@ -19,6 +19,25 @@ declare module "@package/net/minecraft/world/ticks" {
     export class $ContainerSingleItem {
     }
     export interface $ContainerSingleItem extends $Container {
+        /**
+         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+         */
+        setItem(slot: number, stack: $ItemStack_): void;
+        getTheItem(): $ItemStack;
+        setTheItem(item: $ItemStack_): void;
+        /**
+         * Returns the stack in the given slot.
+         */
+        removeItemNoUpdate(slot: number): $ItemStack;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        getContainerSize(): number;
+        removeTheItem(): $ItemStack;
+        /**
+         * Returns the stack in the given slot.
+         */
+        splitTheItem(slot: number): $ItemStack;
         isEmpty(): boolean;
         /**
          * Returns the stack in the given slot.
@@ -28,31 +47,9 @@ declare module "@package/net/minecraft/world/ticks" {
          * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
          */
         removeItem(slot: number, amount: number): $ItemStack;
-        /**
-         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
-         */
         clearContent(): void;
-        /**
-         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-         */
-        setItem(slot: number, stack: $ItemStack_): void;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        getContainerSize(): number;
-        /**
-         * Returns the stack in the given slot.
-         */
-        removeItemNoUpdate(slot: number): $ItemStack;
-        removeTheItem(): $ItemStack;
-        /**
-         * Returns the stack in the given slot.
-         */
-        splitTheItem(slot: number): $ItemStack;
-        getTheItem(): $ItemStack;
-        setTheItem(item: $ItemStack_): void;
-        get empty(): boolean;
         get containerSize(): number;
+        get empty(): boolean;
     }
     export class $ScheduledTick<T> extends $Record {
         subTickOrder(): number;
@@ -70,18 +67,18 @@ declare module "@package/net/minecraft/world/ticks" {
     /**
      * Values that may be interpreted as {@link $ScheduledTick}.
      */
-    export type $ScheduledTick_<T> = { type?: any, pos?: $BlockPos_, priority?: $TickPriority_, triggerTick?: number, subTickOrder?: number,  } | [type?: any, pos?: $BlockPos_, priority?: $TickPriority_, triggerTick?: number, subTickOrder?: number, ];
+    export type $ScheduledTick_<T> = { triggerTick?: number, subTickOrder?: number, type?: any, pos?: $BlockPos_, priority?: $TickPriority_,  } | [triggerTick?: number, subTickOrder?: number, type?: any, pos?: $BlockPos_, priority?: $TickPriority_, ];
     export class $LevelTicks<T> implements $LevelTickAccess<T>, $LevelTicksAccessor<any> {
+        clearArea(area: $BoundingBox): void;
+        removeContainer(chunkPos: $ChunkPos): void;
         copyAreaFrom(levelTicks: $LevelTicks<T>, area: $BoundingBox, offset: $Vec3i): void;
         count(): number;
         schedule(tick: $ScheduledTick_<T>): void;
-        copyArea(area: $BoundingBox, offset: $Vec3i): void;
         tick(gameTime: number, arg1: number, maxAllowedTicks: $BiConsumer_<$BlockPos, T>): void;
+        copyArea(area: $BoundingBox, offset: $Vec3i): void;
         addContainer(chunkPos: $ChunkPos, chunkTicks: $LevelChunkTicks<T>): void;
         willTickThisTick(pos: $BlockPos_, type: T): boolean;
         hasScheduledTick(pos: $BlockPos_, type: T): boolean;
-        removeContainer(chunkPos: $ChunkPos): void;
-        clearArea(area: $BoundingBox): void;
         createNestedFactory$getAllContainers(): $Long2ObjectMap<$LevelChunkTicks<T>>;
         constructor(tickCheck: $LongPredicate_, profiler: $Supplier_<$ProfilerFiller>);
     }
@@ -144,11 +141,11 @@ declare module "@package/net/minecraft/world/ticks" {
         peek(): $ScheduledTick<any>;
         removeIf(predicate: $Predicate_<any>): void;
         poll(): $ScheduledTick<any>;
-        unpack(gameTime: number): void;
         getAll(): $Stream<any>;
+        unpack(gameTime: number): void;
         hasScheduledTick(pos: $BlockPos_, type: $Object): boolean;
-        constructor();
         constructor(pendingTicks: $List_<$SavedTick_<T>>);
+        constructor();
         set onTickAdded(value: $BiConsumer_<$LevelChunkTicks<T>, $ScheduledTick<T>> | null);
         get all(): $Stream<any>;
     }
@@ -166,12 +163,12 @@ declare module "@package/net/minecraft/world/ticks" {
      */
     export type $SerializableTickContainer_<T> = ((arg0: number, arg1: $Function<T, string>) => $Tag_);
     export class $ProtoChunkTicks<T> implements $SerializableTickContainer<T>, $TickContainerAccess<T> {
-        scheduledTicks(): $List<$SavedTick<T>>;
         static load<T>(tag: $ListTag_, idParser: $Function_<string, (T) | undefined>, chunkPos: $ChunkPos): $ProtoChunkTicks<T>;
         count(): number;
         schedule(tick: $ScheduledTick_<T>): void;
         save(gameTime: number, arg1: $Function_<T, string>): $Tag;
         hasScheduledTick(pos: $BlockPos_, type: T): boolean;
+        scheduledTicks(): $List<$SavedTick<T>>;
         constructor();
     }
     export class $ContainerSingleItem$BlockContainerSingleItem {
@@ -182,7 +179,8 @@ declare module "@package/net/minecraft/world/ticks" {
         get containerBlockEntity(): $BlockEntity;
     }
     export class $SavedTick<T> extends $Record {
-        static loadTickList<T>(tag: $ListTag_, idParser: $Function_<string, (T) | undefined>, chunkPos: $ChunkPos, output: $Consumer_<$SavedTick<T>>): void;
+        static saveTick(id: string, pos: $BlockPos_, delay: number, priority: $TickPriority_): $CompoundTag;
+        static saveTick<T>(tick: $ScheduledTick_<T>, idGetter: $Function_<T, string>, gameTime: number): $CompoundTag;
         priority(): $TickPriority;
         type(): T;
         delay(): number;
@@ -190,14 +188,13 @@ declare module "@package/net/minecraft/world/ticks" {
         static probe<T>(type: T, pos: $BlockPos_): $SavedTick<T>;
         pos(): $BlockPos;
         unpack(gameTime: number, arg1: number): $ScheduledTick<T>;
+        static loadTickList<T>(tag: $ListTag_, idParser: $Function_<string, (T) | undefined>, chunkPos: $ChunkPos, output: $Consumer_<$SavedTick<T>>): void;
         static loadTick<T>(tag: $CompoundTag_, idParser: $Function_<string, (T) | undefined>): ($SavedTick<T>) | undefined;
-        static saveTick(id: string, pos: $BlockPos_, delay: number, priority: $TickPriority_): $CompoundTag;
-        static saveTick<T>(tick: $ScheduledTick_<T>, idGetter: $Function_<T, string>, gameTime: number): $CompoundTag;
         static UNIQUE_TICK_HASH: $Hash$Strategy<$SavedTick<never>>;
         constructor(arg0: T, arg1: $BlockPos_, arg2: number, arg3: $TickPriority_);
     }
     /**
      * Values that may be interpreted as {@link $SavedTick}.
      */
-    export type $SavedTick_<T> = { priority?: $TickPriority_, pos?: $BlockPos_, delay?: number, type?: any,  } | [priority?: $TickPriority_, pos?: $BlockPos_, delay?: number, type?: any, ];
+    export type $SavedTick_<T> = { pos?: $BlockPos_, delay?: number, type?: any, priority?: $TickPriority_,  } | [pos?: $BlockPos_, delay?: number, type?: any, priority?: $TickPriority_, ];
 }

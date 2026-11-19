@@ -9,7 +9,10 @@ import { $Vec3 } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/minecraft/world/level/pathfinder" {
     export class $BinaryHeap {
-        getHeap(): $Node[];
+        /**
+         * Changes the provided point's total cost if costIn is smaller
+         */
+        changeCost(point: $Node, cost: number): void;
         remove(node: $Node): void;
         size(): number;
         /**
@@ -32,20 +35,17 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
          * Returns and removes the first point in the path
          */
         pop(): $Node;
-        /**
-         * Changes the provided point's total cost if costIn is smaller
-         */
-        changeCost(point: $Node, cost: number): void;
+        getHeap(): $Node[];
         constructor();
-        get heap(): $Node[];
         get empty(): boolean;
+        get heap(): $Node[];
     }
     export class $Path$DebugData extends $Record {
+        openSet(): $Node[];
         closedSet(): $Node[];
         write(buffer: $FriendlyByteBuf): void;
         static read(buffer: $FriendlyByteBuf): $Path$DebugData;
         targetNodes(): $Set<$Target>;
-        openSet(): $Node[];
         constructor(arg0: $Node[], arg1: $Node[], arg2: $Set_<$Target>);
     }
     /**
@@ -68,17 +68,14 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
      */
     export type $PathComputationType_ = "land" | "water" | "air";
     export class $Target extends $Node {
-        /**
-         * Returns `true` if this point has already been assigned to a path
-         */
-        isReached(): boolean;
-        setReached(): void;
-        updateBest(heuristic: number, node: $Node): void;
         static createFromStream(buffer: $FriendlyByteBuf): $Target;
         /**
          * Gets the nearest path point of the path that is constructed
          */
         getBestNode(): $Node;
+        updateBest(heuristic: number, node: $Node): void;
+        setReached(): void;
+        isReached(): boolean;
         cameFrom: $Node;
         f: number;
         g: number;
@@ -96,15 +93,15 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         get bestNode(): $Node;
     }
     export class $PathTypeCache {
-        invalidate(pos: $BlockPos_): void;
         getOrCompute(level: $BlockGetter, pos: $BlockPos_): $PathType;
+        invalidate(pos: $BlockPos_): void;
         constructor();
     }
     export class $PathfindingContext {
+        getPathTypeFromState(x: number, y: number, z: number): $PathType;
         level(): $CollisionGetter;
         getBlockState(pos: $BlockPos_): $BlockState;
         mobPosition(): $BlockPos;
-        getPathTypeFromState(x: number, y: number, z: number): $PathType;
         constructor(level: $CollisionGetter, mob: $Mob);
     }
     export class $PathFinder {
@@ -115,6 +112,13 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         constructor(nodeEvaluator: $NodeEvaluator, maxVisitedNodes: number);
     }
     export class $NodeEvaluator {
+        getNeighbors(outputArray: $Node[], node: $Node): number;
+        canFloat(): boolean;
+        setCanWalkOverFences(canFloat: boolean): void;
+        getPathType(mob: $Mob, pos: $BlockPos_): $PathType;
+        getPathType(context: $PathfindingContext, x: number, y: number, z: number): $PathType;
+        canPassDoors(): boolean;
+        canOpenDoors(): boolean;
         /**
          * This method is called when all nodes have been processed and PathEntity is created.
          */
@@ -122,26 +126,19 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         prepare(level: $PathNavigationRegion, mob: $Mob): void;
         getTarget(x: number, arg1: number, y: number): $Target;
         getStart(): $Node;
-        static isBurningBlock(state: $BlockState_): boolean;
+        setCanOpenDoors(canFloat: boolean): void;
         setCanFloat(canFloat: boolean): void;
         setCanPassDoors(canFloat: boolean): void;
-        setCanOpenDoors(canFloat: boolean): void;
-        canFloat(): boolean;
-        setCanWalkOverFences(canFloat: boolean): void;
-        canOpenDoors(): boolean;
-        canPassDoors(): boolean;
-        getPathType(mob: $Mob, pos: $BlockPos_): $PathType;
-        getPathType(context: $PathfindingContext, x: number, y: number, z: number): $PathType;
-        getNeighbors(outputArray: $Node[], node: $Node): number;
-        canWalkOverFences(): boolean;
+        static isBurningBlock(state: $BlockState_): boolean;
         getPathTypeOfMob(context: $PathfindingContext, x: number, y: number, z: number, mob: $Mob): $PathType;
+        canWalkOverFences(): boolean;
         constructor();
         get start(): $Node;
     }
     export class $PathType extends $Enum<$PathType> {
+        getMalus(): number;
         static values(): $PathType[];
         static valueOf(arg0: string): $PathType;
-        getMalus(): number;
         static LAVA: $PathType;
         static DANGER_POWDER_SNOW: $PathType;
         static LEAVES: $PathType;
@@ -178,23 +175,23 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
         constructor(allowBreaching: boolean);
     }
     export class $Node {
-        distanceToXZ(point: $Node): number;
-        distanceManhattan(pos: $BlockPos_): number;
-        distanceManhattan(point: $Node): number;
-        writeToStream(buffer: $FriendlyByteBuf): void;
         static createHash(x: number, y: number, z: number): number;
-        asBlockPos(): $BlockPos;
-        distanceToSqr(point: $Node): number;
-        distanceToSqr(pos: $BlockPos_): number;
-        distanceTo(pos: $BlockPos_): number;
-        distanceTo(point: $Node): number;
         /**
          * Returns `true` if this point has already been assigned to a path
          */
         inOpenSet(): boolean;
+        distanceToSqr(pos: $BlockPos_): number;
+        distanceToSqr(point: $Node): number;
+        writeToStream(buffer: $FriendlyByteBuf): void;
         cloneAndMove(x: number, y: number, z: number): $Node;
-        asVec3(): $Vec3;
+        asBlockPos(): $BlockPos;
         static createFromStream(buffer: $FriendlyByteBuf): $Node;
+        distanceTo(point: $Node): number;
+        distanceTo(pos: $BlockPos_): number;
+        distanceToXZ(point: $Node): number;
+        distanceManhattan(pos: $BlockPos_): number;
+        distanceManhattan(point: $Node): number;
+        asVec3(): $Vec3;
         cameFrom: $Node;
         f: number;
         g: number;
@@ -215,25 +212,43 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
     }
     export class $WalkNodeEvaluator extends $NodeEvaluator {
         static getFloorLevel(level: $BlockGetter, pos: $BlockPos_): number;
-        static getPathTypeStatic(mob: $Mob, pos: $BlockPos_): $PathType;
         static getPathTypeStatic(context: $PathfindingContext, pos: $BlockPos$MutableBlockPos): $PathType;
-        static checkNeighbourBlocks(context: $PathfindingContext, x: number, y: number, z: number, pathType: $PathType_): $PathType;
-        getPathTypeWithinMobBB(context: $PathfindingContext, x: number, y: number, z: number): $Set<$PathType>;
+        static getPathTypeStatic(mob: $Mob, pos: $BlockPos_): $PathType;
         static getPathTypeFromState(level: $BlockGetter, pos: $BlockPos_): $PathType;
+        getPathTypeWithinMobBB(context: $PathfindingContext, x: number, y: number, z: number): $Set<$PathType>;
+        static checkNeighbourBlocks(context: $PathfindingContext, x: number, y: number, z: number, pathType: $PathType_): $PathType;
         static SPACE_BETWEEN_WALL_POSTS: number;
         constructor();
     }
     export class $Path {
-        setNextNodeIndex(currentPathIndex: number): void;
-        /**
-         * Gets the vector of the `Node` associated with the given index.
-         */
-        getEntityPosAtNode(entity: $Entity, index: number): $Vec3;
         /**
          * Returns the last `Node` of the Array.
          */
-        getPreviousNode(): $Node;
-        getDistToTarget(): number;
+        getEndNode(): $Node;
+        /**
+         * Returns `true` if the EntityPath are the same. Non instance related equals.
+         */
+        sameAs(pathentity: $Path | null): boolean;
+        getNodePos(index: number): $BlockPos;
+        /**
+         * Returns `true` if this path has reached the end
+         */
+        notStarted(): boolean;
+        writeToStream(buffer: $FriendlyByteBuf): void;
+        /**
+         * @return the current `PathEntity` target node as a `Vec3D`
+         */
+        getNextEntityPos(entity: $Entity): $Vec3;
+        truncateNodes(currentPathIndex: number): void;
+        /**
+         * Returns the last `Node` of the Array.
+         */
+        getNextNode(): $Node;
+        getNextNodePos(): $BlockPos;
+        getNextNodeIndex(): number;
+        getNodeCount(): number;
+        debugData(): $Path$DebugData;
+        static createFromStream(buf: $FriendlyByteBuf): $Path;
         /**
          * Returns `true` if this path has reached the end
          */
@@ -249,46 +264,29 @@ declare module "@package/net/minecraft/world/level/pathfinder" {
          * Returns the `Node` located at the specified index, usually the current one.
          */
         getNode(index: number): $Node;
-        debugData(): $Path$DebugData;
-        /**
-         * Returns `true` if the EntityPath are the same. Non instance related equals.
-         */
-        sameAs(pathentity: $Path | null): boolean;
-        /**
-         * Returns the last `Node` of the Array.
-         */
-        getEndNode(): $Node;
-        getNodePos(index: number): $BlockPos;
-        writeToStream(buffer: $FriendlyByteBuf): void;
         /**
          * Returns `true` if this path has reached the end
          */
         canReach(): boolean;
-        getNodeCount(): number;
-        getNextNodePos(): $BlockPos;
-        /**
-         * @return the current `PathEntity` target node as a `Vec3D`
-         */
-        getNextEntityPos(entity: $Entity): $Vec3;
+        setDebug(openSet: $Node[], closedSet: $Node[], targetNodes: $Set_<$Target>): void;
+        setNextNodeIndex(currentPathIndex: number): void;
         /**
          * Returns the last `Node` of the Array.
          */
-        getNextNode(): $Node;
-        getNextNodeIndex(): number;
-        truncateNodes(currentPathIndex: number): void;
+        getPreviousNode(): $Node;
         /**
-         * Returns `true` if this path has reached the end
+         * Gets the vector of the `Node` associated with the given index.
          */
-        notStarted(): boolean;
-        static createFromStream(buf: $FriendlyByteBuf): $Path;
+        getEntityPosAtNode(entity: $Entity, index: number): $Vec3;
+        getDistToTarget(): number;
         constructor(nodes: $List_<$Node>, target: $BlockPos_, reached: boolean);
-        get previousNode(): $Node;
-        get distToTarget(): number;
+        get endNode(): $Node;
+        get nextNode(): $Node;
+        get nextNodePos(): $BlockPos;
+        get nodeCount(): number;
         get done(): boolean;
         get target(): $BlockPos;
-        get endNode(): $Node;
-        get nodeCount(): number;
-        get nextNodePos(): $BlockPos;
-        get nextNode(): $Node;
+        get previousNode(): $Node;
+        get distToTarget(): number;
     }
 }

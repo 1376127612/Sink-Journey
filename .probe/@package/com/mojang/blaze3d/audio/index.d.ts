@@ -1,4 +1,5 @@
 import { $AudioStream } from "@package/net/minecraft/client/sounds";
+import { $SourceAccessor } from "@package/de/dafuqs/spectrum/mixin/client/accessors";
 import { $AudioFormat } from "@package/javax/sound/sampled";
 import { $Enum, $Record } from "@package/java/lang";
 import { $List, $OptionalInt } from "@package/java/util";
@@ -9,22 +10,26 @@ declare module "@package/com/mojang/blaze3d/audio" {
     export class $Library$CountingChannelPool implements $Library$ChannelPool {
     }
     export class $ListenerTransform extends $Record {
+        forward(): $Vec3;
         position(): $Vec3;
         right(): $Vec3;
         up(): $Vec3;
-        forward(): $Vec3;
         static INITIAL: $ListenerTransform;
         constructor(arg0: $Vec3_, arg1: $Vec3_, arg2: $Vec3_);
     }
     /**
      * Values that may be interpreted as {@link $ListenerTransform}.
      */
-    export type $ListenerTransform_ = { position?: $Vec3_, forward?: $Vec3_, up?: $Vec3_,  } | [position?: $Vec3_, forward?: $Vec3_, up?: $Vec3_, ];
+    export type $ListenerTransform_ = { forward?: $Vec3_, up?: $Vec3_, position?: $Vec3_,  } | [forward?: $Vec3_, up?: $Vec3_, position?: $Vec3_, ];
     export class $Library {
+        /**
+         * @return A list of strings representing the names of available sound devices, or an empty list if no devices are available.
+         */
+        getAvailableSoundDevices(): $List<string>;
         /**
          * @return the name of the default audio device, or `null` if it cannot be determined
          */
-        getCurrentDeviceName(): string;
+        static getDefaultDeviceName(): string;
         /**
          * Checks if the default audio device has changed since the last time this method was called.
          * 
@@ -35,17 +40,11 @@ declare module "@package/com/mojang/blaze3d/audio" {
         /**
          * @return the name of the default audio device, or `null` if it cannot be determined
          */
-        static getDefaultDeviceName(): string;
+        getCurrentDeviceName(): string;
         /**
-         * Initializes the OpenAL device and context.
-         * @throws IllegalStateException if an error occurs during initialization.
+         * @return the name of the default audio device, or `null` if it cannot be determined
          */
-        init(deviceSpecifier: string | null, enableHrtf: boolean): void;
-        /**
-         * Cleans up all resources used by the library.
-         */
-        cleanup(): void;
-        getListener(): $Listener;
+        getDebugString(): string;
         /**
          * Releases a channel.
          * @return whether the channel was successfully released
@@ -56,27 +55,29 @@ declare module "@package/com/mojang/blaze3d/audio" {
          */
         acquireChannel(pool: $Library$Pool_): $Channel;
         /**
-         * @return A list of strings representing the names of available sound devices, or an empty list if no devices are available.
-         */
-        getAvailableSoundDevices(): $List<string>;
-        /**
-         * @return the name of the default audio device, or `null` if it cannot be determined
-         */
-        getDebugString(): string;
-        /**
          * Checks if the default audio device has changed since the last time this method was called.
          * 
          * If the default device has changed, updates the stored default device name accordingly.
          * @return `true` if the default device has changed since the last time this method was called, `false` otherwise
          */
         isCurrentDeviceDisconnected(): boolean;
+        /**
+         * Initializes the OpenAL device and context.
+         * @throws IllegalStateException if an error occurs during initialization.
+         */
+        init(deviceSpecifier: string | null, enableHrtf: boolean): void;
+        /**
+         * Cleans up all resources used by the library.
+         */
+        cleanup(): void;
+        getListener(): $Listener;
         constructor();
-        get currentDeviceName(): string;
-        static get defaultDeviceName(): string;
-        get listener(): $Listener;
         get availableSoundDevices(): $List<string>;
+        static get defaultDeviceName(): string;
+        get currentDeviceName(): string;
         get debugString(): string;
         get currentDeviceDisconnected(): boolean;
+        get listener(): $Listener;
     }
     export class $Library$Pool extends $Enum<$Library$Pool> {
         static values(): $Library$Pool[];
@@ -99,12 +100,6 @@ declare module "@package/com/mojang/blaze3d/audio" {
      */
     export class $Listener {
         /**
-         * Resets the listener's position and orientation to default values.
-         */
-        reset(): void;
-        getTransform(): $ListenerTransform;
-        setTransform(transform: $ListenerTransform_): void;
-        /**
          * Sets the listener's gain.
          */
         setGain(gain: number): void;
@@ -112,6 +107,12 @@ declare module "@package/com/mojang/blaze3d/audio" {
          * @return the current gain value of the listener
          */
         getGain(): number;
+        /**
+         * Resets the listener's position and orientation to default values.
+         */
+        reset(): void;
+        getTransform(): $ListenerTransform;
+        setTransform(transform: $ListenerTransform_): void;
         constructor();
     }
     /**
@@ -123,8 +124,47 @@ declare module "@package/com/mojang/blaze3d/audio" {
     /**
      * Represents an OpenAL audio channel.
      */
-    export class $Channel {
-        pumpBuffers(source: number): void;
+    export class $Channel implements $SourceAccessor {
+        /**
+         * Sets linear attenuation for the audio channel.
+         */
+        setPitch(linearAttenuation: number): void;
+        /**
+         * @return `true` if the audio channel is currently playing, `false` otherwise
+         */
+        playing(): boolean;
+        /**
+         * Sets whether the audio channel should loop.
+         */
+        setRelative(looping: boolean): void;
+        /**
+         * Attaches a buffer stream to the audio channel.
+         */
+        attachBufferStream(stream: $AudioStream): void;
+        /**
+         * Attaches a static buffer to the audio channel.
+         */
+        attachStaticBuffer(buffer: $SoundBuffer): void;
+        /**
+         * Sets linear attenuation for the audio channel.
+         */
+        linearAttenuation(linearAttenuation: number): void;
+        /**
+         * Stops the audio channel and releases resources.
+         */
+        disableAttenuation(): void;
+        /**
+         * Sets the position of the audio channel.
+         */
+        setSelfPosition(source: $Vec3_): void;
+        /**
+         * Sets whether the audio channel should loop.
+         */
+        setLooping(looping: boolean): void;
+        /**
+         * Stops the audio channel and releases resources.
+         */
+        updateStream(): void;
         /**
          * Stops the audio channel and releases resources.
          */
@@ -140,65 +180,31 @@ declare module "@package/com/mojang/blaze3d/audio" {
         /**
          * Stops the audio channel and releases resources.
          */
-        play(): void;
+        unpause(): void;
         /**
          * Stops the audio channel and releases resources.
          */
         pause(): void;
         /**
-         * Sets linear attenuation for the audio channel.
-         */
-        setPitch(linearAttenuation: number): void;
-        /**
-         * Attaches a buffer stream to the audio channel.
-         */
-        attachBufferStream(stream: $AudioStream): void;
-        /**
-         * Attaches a static buffer to the audio channel.
-         */
-        attachStaticBuffer(buffer: $SoundBuffer): void;
-        /**
          * Stops the audio channel and releases resources.
          */
-        disableAttenuation(): void;
-        /**
-         * Sets the position of the audio channel.
-         */
-        setSelfPosition(source: $Vec3_): void;
-        /**
-         * Sets linear attenuation for the audio channel.
-         */
-        linearAttenuation(linearAttenuation: number): void;
-        /**
-         * Stops the audio channel and releases resources.
-         */
-        updateStream(): void;
-        /**
-         * Sets whether the audio channel should loop.
-         */
-        setRelative(looping: boolean): void;
-        /**
-         * @return `true` if the audio channel is currently playing, `false` otherwise
-         */
-        playing(): boolean;
+        play(): void;
         /**
          * Sets linear attenuation for the audio channel.
          */
         setVolume(linearAttenuation: number): void;
+        pumpBuffers(source: number): void;
         /**
-         * Stops the audio channel and releases resources.
+         * @return the state of the audio channel
          */
-        unpause(): void;
-        /**
-         * Sets whether the audio channel should loop.
-         */
-        setLooping(looping: boolean): void;
+        getSource(): number;
         static BUFFER_DURATION_SECONDS: number;
         set pitch(value: number);
-        set selfPosition(value: $Vec3_);
         set relative(value: boolean);
-        set volume(value: number);
+        set selfPosition(value: $Vec3_);
         set looping(value: boolean);
+        set volume(value: number);
+        get source(): number;
     }
     /**
      * The SoundBuffer class represents an audio buffer containing audio data in a particular format.
@@ -207,16 +213,16 @@ declare module "@package/com/mojang/blaze3d/audio" {
      */
     export class $SoundBuffer {
         /**
+         * Deletes the OpenAL buffer associated with this SoundBuffer, if it exists.
+         */
+        discardAlBuffer(): void;
+        /**
          * Returns an OptionalInt containing the OpenAL buffer handle for this SoundBuffer.
          * If the buffer has not been created yet, creates the buffer and returns the handle.
          * If the buffer cannot be created, returns an empty OptionalInt.
          * @return An OptionalInt containing the OpenAL buffer handle, or an empty OptionalInt if the buffer cannot be created.
          */
         releaseAlBuffer(): $OptionalInt;
-        /**
-         * Deletes the OpenAL buffer associated with this SoundBuffer, if it exists.
-         */
-        discardAlBuffer(): void;
         constructor(data: $ByteBuffer, format: $AudioFormat);
     }
 }

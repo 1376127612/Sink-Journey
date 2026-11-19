@@ -11,14 +11,14 @@ declare module "@package/net/neoforged/neoforge/internal" {
         constructor();
     }
     export class $BrandingControl {
-        static getServerBranding(): string;
         static getClientBranding(): string;
-        static resourceManagerReloadListener(): $ResourceManagerReloadListener;
+        static getServerBranding(): string;
         static forEachLine(arg0: boolean, arg1: boolean, arg2: $BiConsumer_<number, string>): void;
         static forEachAboveCopyrightLine(arg0: $BiConsumer_<number, string>): void;
+        static resourceManagerReloadListener(): $ResourceManagerReloadListener;
         constructor();
-        static get serverBranding(): string;
         static get clientBranding(): string;
+        static get serverBranding(): string;
     }
     export class $NeoForgeBindings implements $IBindingsProvider {
         getGameBus(): $IEventBus;

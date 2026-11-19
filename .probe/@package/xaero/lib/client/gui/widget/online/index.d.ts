@@ -5,8 +5,8 @@ declare module "@package/xaero/lib/client/gui/widget/online" {
     export class $WidgetScreen {
     }
     export interface $WidgetScreen {
-        getScreen<S extends $Screen>(): S;
         addButtonVisible(arg0: $AbstractWidget): void;
+        getScreen<S extends $Screen>(): S;
         get screen(): S;
     }
 }

@@ -21,9 +21,9 @@ declare module "@package/org/antlr/v4/runtime/tree" {
         getParent(): $ParseTree;
         accept<T>(arg0: $ParseTreeVisitor<T>): T;
         getChild(arg0: number): $ParseTree;
+        toStringTree(arg0: $Parser): string;
         getText(): string;
         setParent(arg0: $RuleContext): void;
-        toStringTree(arg0: $Parser): string;
         get text(): string;
     }
     export class $ParseTreeVisitor<T> {
@@ -44,10 +44,10 @@ declare module "@package/org/antlr/v4/runtime/tree" {
     export class $ParseTreeListener {
     }
     export interface $ParseTreeListener {
+        exitEveryRule(arg0: $ParserRuleContext): void;
+        enterEveryRule(arg0: $ParserRuleContext): void;
         visitTerminal(arg0: $TerminalNode): void;
         visitErrorNode(arg0: $ErrorNode): void;
-        enterEveryRule(arg0: $ParserRuleContext): void;
-        exitEveryRule(arg0: $ParserRuleContext): void;
     }
     export class $TerminalNode {
     }

@@ -11,46 +11,46 @@ import { $SourceLine } from "@package/dev/latvian/mods/kubejs/script";
 
 declare module "@package/com/minecart/yunxian/integration/kubejs" {
     export class $CustomBudding$Family extends $Record {
-        cluster(): $ResourceLocation;
+        budding(): $ResourceLocation;
         largeBud(): $ResourceLocation;
         smallBud(): $ResourceLocation;
         mediumBud(): $ResourceLocation;
-        budding(): $ResourceLocation;
+        cluster(): $ResourceLocation;
         constructor(budding: $ResourceLocation_, smallBud: $ResourceLocation_, mediumBud: $ResourceLocation_, largeBud: $ResourceLocation_, cluster: $ResourceLocation_);
     }
     /**
      * Values that may be interpreted as {@link $CustomBudding$Family}.
      */
-    export type $CustomBudding$Family_ = { smallBud?: $ResourceLocation_, largeBud?: $ResourceLocation_, budding?: $ResourceLocation_, cluster?: $ResourceLocation_, mediumBud?: $ResourceLocation_,  } | [smallBud?: $ResourceLocation_, largeBud?: $ResourceLocation_, budding?: $ResourceLocation_, cluster?: $ResourceLocation_, mediumBud?: $ResourceLocation_, ];
+    export type $CustomBudding$Family_ = { cluster?: $ResourceLocation_, mediumBud?: $ResourceLocation_, smallBud?: $ResourceLocation_, largeBud?: $ResourceLocation_, budding?: $ResourceLocation_,  } | [cluster?: $ResourceLocation_, mediumBud?: $ResourceLocation_, smallBud?: $ResourceLocation_, largeBud?: $ResourceLocation_, budding?: $ResourceLocation_, ];
     export class $CustomBudding$Options {
-        group(arg0: string): $CustomBudding$Options;
-        transform(arg0: string, arg1: string, arg2: number): $CustomBudding$Options;
-        transform(arg0: string, arg1: string, arg2: number, arg3: number): $CustomBudding$Options;
-        transform(arg0: string, arg1: string): $CustomBudding$Options;
-        displayName(arg0: string): $CustomBudding$Options;
-        dropCount(arg0: number): $CustomBudding$Options;
+        chance(arg0: number): $CustomBudding$Options;
+        dropItem(arg0: string, arg1: number): $CustomBudding$Options;
+        dropItem(arg0: string): $CustomBudding$Options;
+        maxLight(arg0: number): $CustomBudding$Options;
+        stageLevel(arg0: string): $CustomBudding$Options;
+        stageTool(arg0: string): $CustomBudding$Options;
+        outsideGrowthChance(arg0: number): $CustomBudding$Options;
         needfluid(arg0: string): $CustomBudding$Options;
         needfluid(arg0: string, arg1: number, arg2: number): $CustomBudding$Options;
-        buddingLevel(arg0: string): $CustomBudding$Options;
+        requiresWater(): $CustomBudding$Options;
+        requiresWater(arg0: boolean): $CustomBudding$Options;
         stageTextures(...arg0: string[]): $CustomBudding$Options;
         buddingSound(arg0: $SoundType_): $CustomBudding$Options;
-        buddingTexture(arg0: string): $CustomBudding$Options;
-        buddingTool(arg0: string): $CustomBudding$Options;
-        requiresWater(arg0: boolean): $CustomBudding$Options;
-        requiresWater(): $CustomBudding$Options;
         growthDimensions(...arg0: string[]): $CustomBudding$Options;
+        buddingTool(arg0: string): $CustomBudding$Options;
+        buddingLevel(arg0: string): $CustomBudding$Options;
+        buddingTexture(arg0: string): $CustomBudding$Options;
         growthBiomes(...arg0: string[]): $CustomBudding$Options;
         stageDisplayNames(...arg0: string[]): $CustomBudding$Options;
-        outsideGrowthChance(arg0: number): $CustomBudding$Options;
-        dropItem(arg0: string): $CustomBudding$Options;
-        dropItem(arg0: string, arg1: number): $CustomBudding$Options;
-        tool(arg0: string): $CustomBudding$Options;
-        chance(arg0: number): $CustomBudding$Options;
-        minLight(arg0: number): $CustomBudding$Options;
-        stageTool(arg0: string): $CustomBudding$Options;
-        stageLevel(arg0: string): $CustomBudding$Options;
         stageSound(arg0: $SoundType_): $CustomBudding$Options;
-        maxLight(arg0: number): $CustomBudding$Options;
+        minLight(arg0: number): $CustomBudding$Options;
+        group(arg0: string): $CustomBudding$Options;
+        transform(arg0: string, arg1: string): $CustomBudding$Options;
+        transform(arg0: string, arg1: string, arg2: number, arg3: number): $CustomBudding$Options;
+        transform(arg0: string, arg1: string, arg2: number): $CustomBudding$Options;
+        displayName(arg0: string): $CustomBudding$Options;
+        dropCount(arg0: number): $CustomBudding$Options;
+        tool(arg0: string): $CustomBudding$Options;
         fluidCostPerGrowth: number;
         transforms: $List<$CustomBudding$Options$Transform>;
         fluid: string;
@@ -71,11 +71,11 @@ declare module "@package/com/minecart/yunxian/integration/kubejs" {
         registryKey: $ResourceKey<$Registry<$Block>>;
     }
     export class $CustomBudding {
-        static create(arg0: $RegistryKubeEvent<$Block_>, arg1: string, arg2: $CustomBudding$Options): $CustomBudding$Family;
-        static create(arg0: $RegistryKubeEvent<$Block_>, arg1: string, arg2: number): $CustomBudding$Family;
-        static clearTransformRequests(): void;
-        static modify(arg0: string, arg1: $CustomBudding$Options): void;
         static transformRequests(): $List<$CustomBudding$TransformRequest>;
+        static clearTransformRequests(): void;
+        static create(arg0: $RegistryKubeEvent<$Block_>, arg1: string, arg2: number): $CustomBudding$Family;
+        static create(arg0: $RegistryKubeEvent<$Block_>, arg1: string, arg2: $CustomBudding$Options): $CustomBudding$Family;
+        static modify(arg0: string, arg1: $CustomBudding$Options): void;
     }
     export class $CustomBudding$StageBuilder extends $BasicKubeBlock$Builder {
         sourceLine: $SourceLine;
@@ -84,22 +84,22 @@ declare module "@package/com/minecart/yunxian/integration/kubejs" {
         registryKey: $ResourceKey<$Registry<$Block>>;
     }
     export class $CustomBudding$TransformRequest extends $Record {
-        input(): string;
-        output(): string;
         radius(): number;
         chance(): number;
         budding(): $ResourceLocation;
+        input(): string;
+        output(): string;
         constructor(budding: $ResourceLocation_, input: string, output: string, chance: number, radius: number);
     }
     /**
      * Values that may be interpreted as {@link $CustomBudding$TransformRequest}.
      */
-    export type $CustomBudding$TransformRequest_ = { input?: string, budding?: $ResourceLocation_, chance?: number, output?: string, radius?: number,  } | [input?: string, budding?: $ResourceLocation_, chance?: number, output?: string, radius?: number, ];
+    export type $CustomBudding$TransformRequest_ = { chance?: number, output?: string, radius?: number, input?: string, budding?: $ResourceLocation_,  } | [chance?: number, output?: string, radius?: number, input?: string, budding?: $ResourceLocation_, ];
     export class $CustomBudding$Options$Transform extends $Record {
-        input(): string;
-        output(): string;
         radius(): number;
         chance(): number;
+        input(): string;
+        output(): string;
         constructor(input: string, output: string, chance: number, radius: number);
     }
     /**

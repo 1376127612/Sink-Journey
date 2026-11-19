@@ -2,7 +2,7 @@ import { $MultiBlockEntity } from "@package/com/denfop/api/blockentity";
 import { $Property } from "@package/net/minecraft/world/level/block/state/properties";
 import { $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $List } from "@package/java/util";
-import { $Enum } from "@package/java/lang";
+import { $Comparable, $Enum } from "@package/java/lang";
 
 declare module "@package/com/denfop/blocks/state" {
     export class $DefaultDrop extends $Enum<$DefaultDrop> {
@@ -19,10 +19,10 @@ declare module "@package/com/denfop/blocks/state" {
      */
     export type $DefaultDrop_ = "self" | "none" | "generator" | "machine" | "advmachine";
     export class $TypeProperty extends $Property<$State> {
+        getAllStates(): $List<$TypeProperty$StatesBlocks>;
         getName(arg0: $State): string;
         getState(arg0: $MultiBlockEntity, arg1: string): $State;
         getState(arg0: $MultiBlockEntity): $State;
-        getAllStates(): $List<$TypeProperty$StatesBlocks>;
         allowedValues: $List<$State>;
         resourceLocationName: string;
         constructor(arg0: $ResourceLocation_, arg1: $MultiBlockEntity);
@@ -43,4 +43,22 @@ declare module "@package/com/denfop/blocks/state" {
      * Values that may be interpreted as {@link $HarvestTool}.
      */
     export type $HarvestTool_ = "none" | "pickaxe" | "shovel" | "axe" | "wrench";
+    export class $State implements $Comparable<$State> {
+        compareTo(arg0: $State): number;
+        static compare(arg0: string, arg1: string): number;
+        state: string;
+        teBlock: $MultiBlockEntity;
+        constructor(arg0: $MultiBlockEntity, arg1: string);
+    }
+    export class $TypeProperty$StatesBlocks {
+        getName(): string;
+        getState(arg0: string): $State;
+        hasItem(): boolean;
+        getBlock(): $MultiBlockEntity;
+        hasActive(): boolean;
+        statesBlocks: $List<$State>;
+        constructor(arg0: $MultiBlockEntity, arg1: string, arg2: string[]);
+        get name(): string;
+        get block(): $MultiBlockEntity;
+    }
 }

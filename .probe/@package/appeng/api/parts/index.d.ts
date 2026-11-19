@@ -31,83 +31,83 @@ declare module "@package/appeng/api/parts" {
     export class $IPartCollisionHelper {
     }
     export interface $IPartCollisionHelper {
-        getWorldZ(): $Direction;
-        getWorldY(): $Direction;
         getWorldX(): $Direction;
-        addBox(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
+        getWorldY(): $Direction;
+        getWorldZ(): $Direction;
         isBBCollision(): boolean;
-        get worldZ(): $Direction;
-        get worldY(): $Direction;
+        addBox(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         get worldX(): $Direction;
+        get worldY(): $Direction;
+        get worldZ(): $Direction;
         get BBCollision(): boolean;
     }
     export class $IPartItem<P extends $IPart> {
-        static getId(arg0: $IPartItem<never>): $ResourceLocation;
         static byId(arg0: $ResourceLocation_): $IPartItem<never>;
         static byNetworkId(arg0: number): $IPartItem<never>;
         static getNetworkId(arg0: $IPartItem<never>): number;
+        static getId(arg0: $IPartItem<never>): $ResourceLocation;
     }
     export interface $IPartItem<P extends $IPart> extends $ItemLike {
-        getPartClass(): $Class<P>;
         createPart(): P;
+        getPartClass(): $Class<P>;
         get partClass(): $Class<P>;
     }
     export class $IPart {
     }
     export interface $IPart extends $ICustomCableConnection, $Clearable {
-        writeToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        readFromStream(arg0: $RegistryFriendlyByteBuf): boolean;
-        writeToStream(arg0: $RegistryFriendlyByteBuf): void;
-        getLightLevel(): number;
-        clearContent(): void;
-        animateTick(arg0: $Level_, arg1: $BlockPos_, arg2: $RandomSource): void;
-        canConnectRedstone(): boolean;
-        getModelData(): $ModelData;
-        isSolid(): boolean;
-        isLadder(arg0: $LivingEntity): boolean;
-        onEntityCollision(arg0: $Entity): void;
+        renderDynamic(arg0: number, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number): void;
         canBePlacedOn(arg0: $BusSupport_): boolean;
+        getGridNode(): $IGridNode;
         readFromNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         onNeighborChanged(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockPos_): void;
-        onClicked(arg0: $Player, arg1: $Vec3_): boolean;
-        writeVisualStateToNBT(arg0: $CompoundTag_): void;
-        getDesiredConnectionType(): $AECableType;
-        isProvidingStrongPower(): number;
-        readVisualStateFromNBT(arg0: $CompoundTag_): void;
-        getExternalFacingNode(): $IGridNode;
-        requireDynamicRender(): boolean;
-        isProvidingWeakPower(): number;
-        exportSettings(arg0: $SettingsFrom_, arg1: $DataComponentMap$Builder): void;
-        importSettings(arg0: $SettingsFrom_, arg1: $DataComponentMap_, arg2: $Player): void;
-        onUseItemOn(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $Vec3_): boolean;
-        getPartItem(): $IPartItem<never>;
-        getGridNode(): $IGridNode;
-        addToWorld(): void;
-        addEntityCrashInfo(arg0: $CrashReportCategory): void;
-        getCableConnectionLength(arg0: $AECableType_): number;
-        getExternalCableConnectionType(): $AECableType;
-        onPlacement(arg0: $Player): void;
-        onShiftClicked(arg0: $Player, arg1: $Vec3_): boolean;
+        readFromStream(arg0: $RegistryFriendlyByteBuf): boolean;
+        writeToStream(arg0: $RegistryFriendlyByteBuf): void;
+        onEntityCollision(arg0: $Entity): void;
         removeFromWorld(): void;
-        addAdditionalDrops(arg0: $List_<$ItemStack_>, arg1: boolean): void;
-        onUpdateShape(arg0: $Direction_): void;
-        addPartDrop(arg0: $List_<$ItemStack_>, arg1: boolean): void;
-        getStaticModels(): $IPartModel;
-        setPartHostInfo(arg0: $Direction_, arg1: $IPartHost, arg2: $BlockEntity): void;
-        renderDynamic(arg0: number, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: number, arg4: number): void;
         onUseWithoutItem(arg0: $Player, arg1: $Vec3_): boolean;
+        getCableConnectionLength(arg0: $AECableType_): number;
+        isProvidingStrongPower(): number;
+        writeVisualStateToNBT(arg0: $CompoundTag_): void;
+        requireDynamicRender(): boolean;
+        getDesiredConnectionType(): $AECableType;
+        readVisualStateFromNBT(arg0: $CompoundTag_): void;
+        isProvidingWeakPower(): number;
+        getExternalFacingNode(): $IGridNode;
+        getExternalCableConnectionType(): $AECableType;
+        onShiftClicked(arg0: $Player, arg1: $Vec3_): boolean;
+        setPartHostInfo(arg0: $Direction_, arg1: $IPartHost, arg2: $BlockEntity): void;
+        getStaticModels(): $IPartModel;
+        addPartDrop(arg0: $List_<$ItemStack_>, arg1: boolean): void;
+        onUpdateShape(arg0: $Direction_): void;
+        onPlacement(arg0: $Player): void;
+        addAdditionalDrops(arg0: $List_<$ItemStack_>, arg1: boolean): void;
         getBoxes(arg0: $IPartCollisionHelper): void;
-        get lightLevel(): number;
-        get modelData(): $ModelData;
-        get solid(): boolean;
-        get desiredConnectionType(): $AECableType;
-        get providingStrongPower(): number;
-        get externalFacingNode(): $IGridNode;
-        get providingWeakPower(): number;
-        get partItem(): $IPartItem<never>;
+        addEntityCrashInfo(arg0: $CrashReportCategory): void;
+        addToWorld(): void;
+        importSettings(arg0: $SettingsFrom_, arg1: $DataComponentMap_, arg2: $Player): void;
+        getPartItem(): $IPartItem<never>;
+        exportSettings(arg0: $SettingsFrom_, arg1: $DataComponentMap$Builder): void;
+        onUseItemOn(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $Vec3_): boolean;
+        getLightLevel(): number;
+        animateTick(arg0: $Level_, arg1: $BlockPos_, arg2: $RandomSource): void;
+        canConnectRedstone(): boolean;
+        isSolid(): boolean;
+        isLadder(arg0: $LivingEntity): boolean;
+        clearContent(): void;
+        getModelData(): $ModelData;
+        writeToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        onClicked(arg0: $Player, arg1: $Vec3_): boolean;
         get gridNode(): $IGridNode;
+        get providingStrongPower(): number;
+        get desiredConnectionType(): $AECableType;
+        get providingWeakPower(): number;
+        get externalFacingNode(): $IGridNode;
         get externalCableConnectionType(): $AECableType;
         get staticModels(): $IPartModel;
+        get partItem(): $IPartItem<never>;
+        get lightLevel(): number;
+        get solid(): boolean;
+        get modelData(): $ModelData;
     }
     export class $SelectedPart {
         side: $Direction;
@@ -129,50 +129,50 @@ declare module "@package/appeng/api/parts" {
     export class $IFacadeContainer {
     }
     export interface $IFacadeContainer {
-        isEmpty(): boolean;
-        writeToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        readFromStream(arg0: $RegistryFriendlyByteBuf): boolean;
-        writeToStream(arg0: $RegistryFriendlyByteBuf): void;
         getFacade(arg0: $Direction_): $IFacadePart;
         readFromNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        addFacade(arg0: $IFacadePart): boolean;
+        readFromStream(arg0: $RegistryFriendlyByteBuf): boolean;
+        writeToStream(arg0: $RegistryFriendlyByteBuf): void;
         canAddFacade(arg0: $IFacadePart): boolean;
+        addFacade(arg0: $IFacadePart): boolean;
         removeFacade(arg0: $IPartHost, arg1: $Direction_): void;
+        isEmpty(): boolean;
+        writeToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         get empty(): boolean;
     }
     export class $IPartHost {
     }
     export interface $IPartHost extends $ICustomCableConnection {
+        addPart<T extends $IPart>(arg0: $IPartItem<T>, arg1: $Direction_, arg2: $Player): T;
+        isInWorld(): boolean;
+        getCollisionShape(arg0: $CollisionContext): $VoxelShape;
+        clearContainer(): void;
+        markForSave(): void;
+        markForUpdate(): void;
+        removePartFromSide(arg0: $Direction_): void;
+        notifyNeighborNow(arg0: $Direction_): void;
+        partChanged(): void;
+        getFacadeContainer(): $IFacadeContainer;
+        selectPartWorld(arg0: $Vec3_): $SelectedPart;
+        selectPartLocal(arg0: $Vec3_): $SelectedPart;
+        removePart(arg0: $IPart): boolean;
+        replacePart<T extends $IPart>(arg0: $IPartItem<T>, arg1: $Direction_, arg2: $Player, arg3: $InteractionHand_): T;
         isEmpty(): boolean;
         getLocation(): $DimensionalBlockPos;
         cleanup(): void;
-        isInWorld(): boolean;
-        addPart<T extends $IPart>(arg0: $IPartItem<T>, arg1: $Direction_, arg2: $Player): T;
-        notifyNeighbors(): void;
-        getBlockEntity(): $BlockEntity;
+        hasRedstone(): boolean;
+        getPart(arg0: $Direction_): $IPart;
         getColor(): $AEColor;
         isBlocked(arg0: $Direction_): boolean;
-        hasRedstone(): boolean;
-        getCollisionShape(arg0: $CollisionContext): $VoxelShape;
-        clearContainer(): void;
-        getPart(arg0: $Direction_): $IPart;
-        markForUpdate(): void;
+        getBlockEntity(): $BlockEntity;
         canAddPart(arg0: $ItemStack_, arg1: $Direction_): boolean;
-        markForSave(): void;
-        replacePart<T extends $IPart>(arg0: $IPartItem<T>, arg1: $Direction_, arg2: $Player, arg3: $InteractionHand_): T;
-        removePart(arg0: $IPart): boolean;
-        partChanged(): void;
-        selectPartLocal(arg0: $Vec3_): $SelectedPart;
-        notifyNeighborNow(arg0: $Direction_): void;
-        removePartFromSide(arg0: $Direction_): void;
-        selectPartWorld(arg0: $Vec3_): $SelectedPart;
-        getFacadeContainer(): $IFacadeContainer;
+        notifyNeighbors(): void;
+        get inWorld(): boolean;
+        get facadeContainer(): $IFacadeContainer;
         get empty(): boolean;
         get location(): $DimensionalBlockPos;
-        get inWorld(): boolean;
-        get blockEntity(): $BlockEntity;
         get color(): $AEColor;
-        get facadeContainer(): $IFacadeContainer;
+        get blockEntity(): $BlockEntity;
     }
     export class $BusSupport extends $Enum<$BusSupport> {
         static values(): $BusSupport[];
@@ -187,31 +187,31 @@ declare module "@package/appeng/api/parts" {
     export class $IPartModel {
     }
     export interface $IPartModel {
-        getModels(): $List<$ResourceLocation>;
         requireCableConnection(): boolean;
+        getModels(): $List<$ResourceLocation>;
         get models(): $List<$ResourceLocation>;
     }
     export class $IFacadePart {
     }
     export interface $IFacadePart {
-        getItem(): $Item;
-        getSide(): $Direction;
-        getItemStack(): $ItemStack;
-        getBlockState(): $BlockState;
-        onClicked(arg0: $Player, arg1: $Vec3_): boolean;
-        onUseItemOn(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $Vec3_): boolean;
         getTextureItem(): $ItemStack;
         getBoxes(arg0: $IPartCollisionHelper, arg1: boolean): void;
+        onUseItemOn(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $Vec3_): boolean;
+        getItem(): $Item;
+        getItemStack(): $ItemStack;
+        getBlockState(): $BlockState;
+        getSide(): $Direction;
+        onClicked(arg0: $Player, arg1: $Vec3_): boolean;
+        get textureItem(): $ItemStack;
         get item(): $Item;
-        get side(): $Direction;
         get itemStack(): $ItemStack;
         get blockState(): $BlockState;
-        get textureItem(): $ItemStack;
+        get side(): $Direction;
     }
     export class $RegisterPartCapabilitiesEvent extends $Event implements $IModBusEvent {
+        registerContext<T, C>(arg0: $BlockCapability<T, C>, arg1: $Function_<C, $Direction>): void;
         register<T, C, P extends $IPart>(arg0: $BlockCapability<T, C>, arg1: $ICapabilityProvider_<P, C, T>, arg2: $Class<P>): void;
         addHostType<T extends $BlockEntity>(arg0: $BlockEntityType_<T>): void;
-        registerContext<T, C>(arg0: $BlockCapability<T, C>, arg1: $Function_<C, $Direction>): void;
         constructor();
     }
 }

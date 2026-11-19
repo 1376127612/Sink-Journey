@@ -32,9 +32,9 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         constructor();
     }
     export class $MobSensor<T extends $LivingEntity> extends $Sensor<T> {
-        clearMemory(sensingEntity: T): void;
-        checkForMobsNearby(sensingEntity: T): void;
         mobDetected(sensingEntity: T): void;
+        checkForMobsNearby(sensingEntity: T): void;
+        clearMemory(sensingEntity: T): void;
         constructor(scanRate: number, mobTest: $BiPredicate_<T, $LivingEntity>, readyTest: $Predicate_<T>, toSet: $MemoryModuleType_<boolean>, memoryTimeToLive: number);
     }
     export class $SensorType<U extends $Sensor<never>> {
@@ -78,16 +78,16 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         constructor();
     }
     export class $PiglinSpecificSensor extends $Sensor<$LivingEntity> {
-        redirect$cdk000$lithium$redirectFindNearestRepellent(level: $ServerLevel, livingEntity: $LivingEntity): $Optional<any>;
+        redirect$bpd000$lithium$redirectFindNearestRepellent(level: $ServerLevel, livingEntity: $LivingEntity): $Optional<any>;
         constructor();
     }
     export class $Sensor<E extends $LivingEntity> implements $SensorAccessor {
-        requires(): $Set<$MemoryModuleType<never>>;
-        tick(level: $ServerLevel, entity: E): void;
         /**
          * @return if entity is remembered as an attack target and is valid to attack
          */
-        static isEntityAttackableIgnoringLineOfSight(attacker: $LivingEntity, target: $LivingEntity): boolean;
+        static isEntityTargetable(attacker: $LivingEntity, target: $LivingEntity): boolean;
+        requires(): $Set<$MemoryModuleType<never>>;
+        tick(level: $ServerLevel, entity: E): void;
         /**
          * @return if entity is remembered as an attack target and is valid to attack
          */
@@ -95,10 +95,10 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
         /**
          * @return if entity is remembered as an attack target and is valid to attack
          */
-        static isEntityTargetable(attacker: $LivingEntity, target: $LivingEntity): boolean;
+        static isEntityAttackableIgnoringLineOfSight(attacker: $LivingEntity, target: $LivingEntity): boolean;
+        setLastSenseTime(arg0: number): void;
         getLastSenseTime(): number;
         getSenseInterval(): number;
-        setLastSenseTime(arg0: number): void;
         constructor(scanRate: number);
         constructor();
         get senseInterval(): number;
@@ -108,13 +108,13 @@ declare module "@package/net/minecraft/world/entity/ai/sensing" {
     }
     export class $Sensing {
         /**
-         * Clears seen and unseen.
-         */
-        tick(): void;
-        /**
          * Updates list of visible and not visible entities for the given entity
          */
         hasLineOfSight(entity: $Entity): boolean;
+        /**
+         * Clears seen and unseen.
+         */
+        tick(): void;
         constructor(mob: $Mob);
     }
     export class $NearestLivingEntitySensor<T extends $LivingEntity> extends $Sensor<T> {

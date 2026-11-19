@@ -10,14 +10,14 @@ declare module "@package/net/neoforged/neoforge/network/filters" {
         isNecessary(arg0: $Connection): boolean;
     }
     export class $NetworkFilters {
-        static cleanIfNecessary(arg0: $Connection): void;
         static injectIfNecessary(arg0: $Connection): void;
+        static cleanIfNecessary(arg0: $Connection): void;
     }
     export class $GenericPacketSplitter extends $MessageToMessageEncoder<$Packet<never>> implements $DynamicChannelHandler {
         static getRemoteCompatibility(arg0: $Connection): $GenericPacketSplitter$RemoteCompatibility;
         static determineMaxPayloadSize(arg0: number): number;
-        isNecessary(arg0: $Connection): boolean;
         static isRemoteCompatible(arg0: $Connection): boolean;
+        isNecessary(arg0: $Connection): boolean;
         static CHANNEL_HANDLER_NAME: string;
         constructor();
     }
@@ -44,7 +44,7 @@ declare module "@package/net/neoforged/neoforge/network/filters" {
     /**
      * Values that may be interpreted as {@link $GenericPacketSplitter$SizeLimits}.
      */
-    export type $GenericPacketSplitter$SizeLimits_ = { part?: number, packet?: number,  } | [part?: number, packet?: number, ];
+    export type $GenericPacketSplitter$SizeLimits_ = { packet?: number, part?: number,  } | [packet?: number, part?: number, ];
     export class $CommandTreeCleaner {
     }
 }

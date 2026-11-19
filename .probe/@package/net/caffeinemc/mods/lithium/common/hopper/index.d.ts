@@ -14,32 +14,32 @@ declare module "@package/net/caffeinemc/mods/lithium/common/hopper" {
         lithium$invalidateCacheOnNeighborUpdate(arg0: $Direction_): void;
     }
     export class $LithiumStackList extends $NonNullList<$ItemStack> implements $LithiumDefaultedList, $ChangeSubscriber$CountChangeSubscriber<$ItemStack> {
-        setReducedSignalStrengthOverride(): void;
-        clearSignalStrengthOverride(): void;
-        changedInteractionConditions(): void;
+        lithium$notify(arg0: $ItemStack_, arg1: number): void;
         remove(arg0: number): $ItemStack;
         add(arg0: number, arg1: $ItemStack_): void;
         set(arg0: number, arg1: $ItemStack_): $ItemStack;
         changed(): void;
-        getSignalStrength(arg0: $Container): number;
-        maybeSendsComparatorUpdatesOnFailedExtract(): boolean;
         runComparatorUpdatePatternOnFailedExtract(arg0: $LithiumStackList, arg1: $Container): void;
-        lithium$forceUnsubscribe(arg0: $ItemStack_, arg1: number): void;
-        lithium$notifyCount(arg0: $ItemStack_, arg1: number, arg2: number): void;
+        maybeSendsComparatorUpdatesOnFailedExtract(): boolean;
+        getOccupiedSlots(): number;
+        getFullSlots(): number;
+        getModCount(): number;
         removeInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
         setNextInventoryModificationCallback(arg0: $InventoryChangeTracker): void;
-        lithium$notify(arg0: $ItemStack_, arg1: number): void;
-        getOccupiedSlots(): number;
-        getModCount(): number;
-        getFullSlots(): number;
+        getSignalStrength(arg0: $Container): number;
+        lithium$forceUnsubscribe(arg0: $ItemStack_, arg1: number): void;
+        lithium$notifyCount(arg0: $ItemStack_, arg1: number, arg2: number): void;
+        changedInteractionConditions(): void;
+        setReducedSignalStrengthOverride(): void;
+        clearSignalStrengthOverride(): void;
         hasSignalStrengthOverride(): boolean;
         changedALot(): void;
         constructor(arg0: $NonNullList<$ItemStack_>, arg1: number);
         constructor(arg0: number);
-        set nextInventoryModificationCallback(value: $InventoryChangeTracker);
         get occupiedSlots(): number;
-        get modCount(): number;
         get fullSlots(): number;
+        get modCount(): number;
+        set nextInventoryModificationCallback(value: $InventoryChangeTracker);
     }
     export class $BlockStateOnlyInventory {
     }

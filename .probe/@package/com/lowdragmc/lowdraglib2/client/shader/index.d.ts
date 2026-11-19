@@ -3,7 +3,7 @@ import { $ShaderInstanceAccessor } from "@package/com/lowdragmc/lowdraglib2/core
 import { $ShaderInstance } from "@package/net/minecraft/client/renderer";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $ResourceProvider_ } from "@package/net/minecraft/server/packs/resources";
-import { $List, $Set, $Set_, $Collection_ } from "@package/java/util";
+import { $List, $Map, $Set, $Set_, $Collection_ } from "@package/java/util";
 import { $HDRColor } from "@package/com/lowdragmc/lowdraglib2/math";
 import { $ConfiguratorGroup, $Configurator } from "@package/com/lowdragmc/lowdraglib2/configurator/ui";
 import { $IConfigurable, $IConfigurableHistory } from "@package/com/lowdragmc/lowdraglib2/configurator";
@@ -24,11 +24,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/shader" {
         get shaderInstanceAccessor(): $ShaderInstanceAccessor;
     }
     export class $LDShaderInstance extends $ShaderInstance implements $ILDShaderInstance {
+        getGeometry(): $Program;
+        applySamplers(): void;
         static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderInstance;
         static create(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat, arg3: $Set_<string>): $LDShaderInstance;
         static create(arg0: $ResourceLocation_, arg1: $VertexFormat, arg2: $Set_<string>): $LDShaderInstance;
-        getGeometry(): $Program;
-        applySamplers(): void;
         isSamplerCacheDirty(): boolean;
         FOG_START: $Uniform;
         shaderLocation: $ResourceLocation;
@@ -43,6 +43,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/shader" {
         GLINT_ALPHA: $Uniform;
         COLOR_MODULATOR: $Uniform;
         LINE_WIDTH: $Uniform;
+        uniformMap: $Map<string, $Uniform>;
         LIGHT0_DIRECTION: $Uniform;
         CHUNK_OFFSET: $Uniform;
         FOG_COLOR: $Uniform;
@@ -53,31 +54,31 @@ declare module "@package/com/lowdragmc/lowdraglib2/client/shader" {
         get samplerCacheDirty(): boolean;
     }
     export class $LDShaderHolder implements $IConfigurable, $INBTSerializable<$CompoundTag>, $AutoCloseable {
+        addDynamicUniform(arg0: string, arg1: $Consumer_<$Uniform>): void;
+        getShaderInstance(arg0: $Collection_<string>): $LDShaderInstance;
+        getShaderInstance(arg0: $Collection_<string>, arg1: $ResourceProvider_): $LDShaderInstance;
+        getShaderInstance(): $LDShaderInstance;
+        deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        removeDynamicUniform(arg0: string): void;
+        removeDynamicSampler(arg0: string): void;
+        serializeSampler(arg0: $Object): $CompoundTag;
+        isBuiltinUniform(arg0: $Uniform, arg1: $ShaderInstance): boolean;
+        isBuiltinSampler(arg0: string): boolean;
+        deserializeSampler(arg0: $CompoundTag_): $Object;
+        isHDRUniform(arg0: string): boolean;
+        setHDRUniform(arg0: string, arg1: $HDRColor): void;
+        getHDRUniform(arg0: string): $HDRColor;
         close(): void;
         static create(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat): $LDShaderHolder;
         static create(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderHolder;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
-        static createSafe(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderHolder;
-        static createSafe(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat): $LDShaderHolder;
-        removeDynamicSampler(arg0: string): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
-        deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         addDynamicSampler(arg0: string, arg1: $Supplier_<$Object>): void;
-        addDynamicUniform(arg0: string, arg1: $Consumer_<$Uniform>): void;
-        getShaderInstance(arg0: $Collection_<string>): $LDShaderInstance;
-        getShaderInstance(): $LDShaderInstance;
-        getShaderInstance(arg0: $Collection_<string>, arg1: $ResourceProvider_): $LDShaderInstance;
-        removeDynamicUniform(arg0: string): void;
-        serializeSampler(arg0: $Object): $CompoundTag;
-        setHDRUniform(arg0: string, arg1: $HDRColor): void;
-        isHDRUniform(arg0: string): boolean;
-        getHDRUniform(arg0: string): $HDRColor;
-        deserializeSampler(arg0: $CompoundTag_): $Object;
-        isBuiltinUniform(arg0: $Uniform, arg1: $ShaderInstance): boolean;
-        isBuiltinSampler(arg0: string): boolean;
+        static createSafe(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat): $LDShaderHolder;
+        static createSafe(arg0: $ResourceLocation_, arg1: $VertexFormat): $LDShaderHolder;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
         baseInstance: $LDShaderInstance;
         static HDR_UNIFORM_VERSION: number;
         shaderUid: string;

@@ -10,7 +10,7 @@ declare module "@package/net/minecraft/world/level/redstone" {
     /**
      * Values that may be interpreted as {@link $CollectingNeighborUpdater$ShapeUpdate}.
      */
-    export type $CollectingNeighborUpdater$ShapeUpdate_ = { direction?: $Direction_, neighborPos?: $BlockPos_, pos?: $BlockPos_, updateLimit?: number, updateFlags?: number, state?: $BlockState_,  } | [direction?: $Direction_, neighborPos?: $BlockPos_, pos?: $BlockPos_, updateLimit?: number, updateFlags?: number, state?: $BlockState_, ];
+    export type $CollectingNeighborUpdater$ShapeUpdate_ = { updateLimit?: number, updateFlags?: number, state?: $BlockState_, direction?: $Direction_, neighborPos?: $BlockPos_, pos?: $BlockPos_,  } | [updateLimit?: number, updateFlags?: number, state?: $BlockState_, direction?: $Direction_, neighborPos?: $BlockPos_, pos?: $BlockPos_, ];
     export class $CollectingNeighborUpdater$SimpleNeighborUpdate extends $Record implements $CollectingNeighborUpdater$NeighborUpdates {
     }
     /**
@@ -18,10 +18,10 @@ declare module "@package/net/minecraft/world/level/redstone" {
      */
     export type $CollectingNeighborUpdater$SimpleNeighborUpdate_ = { pos?: $BlockPos_, block?: $Block_, neighborPos?: $BlockPos_,  } | [pos?: $BlockPos_, block?: $Block_, neighborPos?: $BlockPos_, ];
     export class $InstantNeighborUpdater implements $NeighborUpdater {
+        shapeUpdate(direction: $Direction_, state: $BlockState_, pos: $BlockPos_, neighborPos: $BlockPos_, flags: number, recursionLevel: number): void;
         neighborChanged(state: $BlockState_, pos: $BlockPos_, neighborBlock: $Block_, neighborPos: $BlockPos_, movedByPiston: boolean): void;
         neighborChanged(pos: $BlockPos_, neighborBlock: $Block_, neighborPos: $BlockPos_): void;
-        shapeUpdate(direction: $Direction_, state: $BlockState_, pos: $BlockPos_, neighborPos: $BlockPos_, flags: number, recursionLevel: number): void;
-        updateNeighborsAtExceptFromFacing(pos: $BlockPos_, block: $Block_, facing: $Direction_ | null): void;
+        updateNeighborsAtExceptFromFacing(arg0: $BlockPos_, arg1: $Block_, arg2: $Direction_ | null): void;
         constructor(level: $Level_);
     }
     export class $Redstone {
@@ -31,9 +31,9 @@ declare module "@package/net/minecraft/world/level/redstone" {
         constructor();
     }
     export class $CollectingNeighborUpdater implements $NeighborUpdater {
+        shapeUpdate(direction: $Direction_, state: $BlockState_, pos: $BlockPos_, neighborPos: $BlockPos_, flags: number, recursionLevel: number): void;
         neighborChanged(pos: $BlockPos_, neighborBlock: $Block_, neighborPos: $BlockPos_): void;
         neighborChanged(state: $BlockState_, pos: $BlockPos_, neighborBlock: $Block_, neighborPos: $BlockPos_, movedByPiston: boolean): void;
-        shapeUpdate(direction: $Direction_, state: $BlockState_, pos: $BlockPos_, neighborPos: $BlockPos_, flags: number, recursionLevel: number): void;
         updateNeighborsAtExceptFromFacing(pos: $BlockPos_, block: $Block_, facing: $Direction_ | null): void;
         constructor(level: $Level_, maxChainedNeighborUpdates: number);
     }
@@ -50,7 +50,7 @@ declare module "@package/net/minecraft/world/level/redstone" {
     /**
      * Values that may be interpreted as {@link $CollectingNeighborUpdater$FullNeighborUpdate}.
      */
-    export type $CollectingNeighborUpdater$FullNeighborUpdate_ = { pos?: $BlockPos_, state?: $BlockState_, movedByPiston?: boolean, neighborPos?: $BlockPos_, block?: $Block_,  } | [pos?: $BlockPos_, state?: $BlockState_, movedByPiston?: boolean, neighborPos?: $BlockPos_, block?: $Block_, ];
+    export type $CollectingNeighborUpdater$FullNeighborUpdate_ = { movedByPiston?: boolean, neighborPos?: $BlockPos_, block?: $Block_, pos?: $BlockPos_, state?: $BlockState_,  } | [movedByPiston?: boolean, neighborPos?: $BlockPos_, block?: $Block_, pos?: $BlockPos_, state?: $BlockState_, ];
     export class $CollectingNeighborUpdater$MultiNeighborUpdate implements $CollectingNeighborUpdater$NeighborUpdates {
     }
     export class $NeighborUpdater {
@@ -59,9 +59,9 @@ declare module "@package/net/minecraft/world/level/redstone" {
         static UPDATE_ORDER: $Direction[];
     }
     export interface $NeighborUpdater {
+        shapeUpdate(direction: $Direction_, state: $BlockState_, pos: $BlockPos_, neighborPos: $BlockPos_, flags: number, recursionLevel: number): void;
         neighborChanged(state: $BlockState_, pos: $BlockPos_, neighborBlock: $Block_, neighborPos: $BlockPos_, movedByPiston: boolean): void;
         neighborChanged(pos: $BlockPos_, neighborBlock: $Block_, neighborPos: $BlockPos_): void;
-        shapeUpdate(direction: $Direction_, state: $BlockState_, pos: $BlockPos_, neighborPos: $BlockPos_, flags: number, recursionLevel: number): void;
         updateNeighborsAtExceptFromFacing(pos: $BlockPos_, block: $Block_, facing: $Direction_ | null): void;
     }
 }

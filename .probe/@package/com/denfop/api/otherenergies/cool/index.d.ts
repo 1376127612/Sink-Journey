@@ -8,22 +8,32 @@ declare module "@package/com/denfop/api/otherenergies/cool" {
     export class $ICoolTile {
     }
     export interface $ICoolTile {
-        hashCode(): number;
-        setId(arg0: number): void;
-        setHashCodeSource(arg0: number): void;
+        getPos(): $BlockPos;
         getHashCodeSource(): number;
         getIdNetwork(): number;
-        getPos(): $BlockPos;
-        getTile(): $BlockEntity;
+        getCoolValidReceivers(): $List<$InfoTile<$ICoolTile>>;
+        setHashCodeSource(arg0: number): void;
+        getCoolTiles(): $Map<$Direction, $ICoolTile>;
         AddCoolTile(arg0: $ICoolTile, arg1: $Direction_): void;
         RemoveCoolTile(arg0: $ICoolTile, arg1: $Direction_): void;
-        getCoolTiles(): $Map<$Direction, $ICoolTile>;
-        getCoolValidReceivers(): $List<$InfoTile<$ICoolTile>>;
-        set id(value: number);
-        get idNetwork(): number;
+        hashCode(): number;
+        setId(arg0: number): void;
+        getTile(): $BlockEntity;
         get pos(): $BlockPos;
-        get tile(): $BlockEntity;
-        get coolTiles(): $Map<$Direction, $ICoolTile>;
+        get idNetwork(): number;
         get coolValidReceivers(): $List<$InfoTile<$ICoolTile>>;
+        get coolTiles(): $Map<$Direction, $ICoolTile>;
+        set id(value: number);
+        get tile(): $BlockEntity;
+    }
+    export class $ICoolAcceptor {
+    }
+    export interface $ICoolAcceptor extends $ICoolTile {
+        acceptsCoolFrom(arg0: $ICoolEmitter, arg1: $Direction_): boolean;
+    }
+    export class $ICoolEmitter {
+    }
+    export interface $ICoolEmitter extends $ICoolTile {
+        emitsCoolTo(arg0: $ICoolAcceptor, arg1: $Direction_): boolean;
     }
 }

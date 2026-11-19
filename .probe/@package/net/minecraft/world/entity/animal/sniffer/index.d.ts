@@ -4,6 +4,7 @@ import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $AnimationState, $EntityDimensions, $EntityType_, $Entity$RemovalReason, $PortalProcessor, $Pose_, $WalkAnimationState } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
@@ -39,25 +40,13 @@ declare module "@package/net/minecraft/world/entity/animal/sniffer" {
         static get temptations(): $Predicate<$ItemStack>;
     }
     export class $Sniffer extends $Animal {
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         static createAttributes(): $AttributeSupplier$Builder;
+        isSearching(): boolean;
         transitionTo(state: $Sniffer$State_): $Sniffer;
         onDiggingComplete(storeExploredPosition: boolean): $Sniffer;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isSearching(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         canPlayDiggingSound(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         canSniff(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isTempted(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -110,6 +99,7 @@ declare module "@package/net/minecraft/world/entity/animal/sniffer" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -120,6 +110,7 @@ declare module "@package/net/minecraft/world/entity/animal/sniffer" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;

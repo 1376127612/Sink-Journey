@@ -7,30 +7,30 @@ import { $LogicalSide_ } from "@package/net/neoforged/fml";
 
 declare module "@package/hellfirepvp/astralsorcery/common/recipe/attunement" {
     export class $AttunementRecipe<T extends $AttunementRecipe$Active<never, never>> {
-        getIdentifier(): $ResourceLocation;
+        codec(): $MapCodec<T>;
+        static initRecipes(): void;
         static getAllRecipes(): $Collection<$AttunementRecipe<never>>;
         canStartCrafting(arg0: $TileAttunementAltar): boolean;
         createActiveRecipe(arg0: $TileAttunementAltar): T;
-        codec(): $MapCodec<T>;
-        static initRecipes(): void;
+        getIdentifier(): $ResourceLocation;
         static CODEC: $Codec<$AttunementRecipe<never>>;
         static ACTIVE_CODEC: $Codec<$AttunementRecipe$Active<never, never>>;
-        get identifier(): $ResourceLocation;
         static get allRecipes(): $Collection<$AttunementRecipe<never>>;
+        get identifier(): $ResourceLocation;
     }
     export class $AttunementRecipe$Active<T extends $AttunementRecipe<A>, A extends $AttunementRecipe$Active<T, A>> {
-        matches(arg0: $TileAttunementAltar): boolean;
-        tick(arg0: $LogicalSide_, arg1: $TileAttunementAltar): void;
+        isFinished(arg0: $TileAttunementAltar): boolean;
         doTick(arg0: $LogicalSide_, arg1: $TileAttunementAltar): void;
-        getConstellation(): $BaseConstellation;
-        startCrafting(arg0: $TileAttunementAltar): void;
-        finishRecipe(arg0: $TileAttunementAltar): void;
-        stopEffects(arg0: $TileAttunementAltar): void;
+        getRecipe(): T;
         stopCrafting(arg0: $TileAttunementAltar): void;
         copyEffectDataTo(arg0: A): void;
-        getRecipe(): T;
-        isFinished(arg0: $TileAttunementAltar): boolean;
-        get constellation(): $BaseConstellation;
+        finishRecipe(arg0: $TileAttunementAltar): void;
+        stopEffects(arg0: $TileAttunementAltar): void;
+        startCrafting(arg0: $TileAttunementAltar): void;
+        matches(arg0: $TileAttunementAltar): boolean;
+        tick(arg0: $LogicalSide_, arg1: $TileAttunementAltar): void;
+        getConstellation(): $BaseConstellation;
         get recipe(): T;
+        get constellation(): $BaseConstellation;
     }
 }

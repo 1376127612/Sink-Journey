@@ -5,10 +5,10 @@ declare module "@package/com/supermartijn642/core/util/playerprofile" {
     export class $PlayerProfileCache$Skin {
     }
     export interface $PlayerProfileCache$Skin {
-        body(): $ResourceLocation;
-        cape(): $ResourceLocation;
-        elytra(): $ResourceLocation;
         modelType(): $PlayerProfileCache$Skin$ModelType;
+        cape(): $ResourceLocation;
+        body(): $ResourceLocation;
+        elytra(): $ResourceLocation;
     }
     export class $PlayerProfileCache$Skin$ModelType extends $Enum<$PlayerProfileCache$Skin$ModelType> {
         static values(): $PlayerProfileCache$Skin$ModelType[];

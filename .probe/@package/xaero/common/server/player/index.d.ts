@@ -9,18 +9,18 @@ declare module "@package/xaero/common/server/player" {
         constructor();
     }
     export class $ServerPlayerData {
-        static get(arg0: $ServerPlayer): $ServerPlayerData;
         hasMod(): boolean;
         ensureCurrentlySyncedPlayers(): $Set<$UUID>;
-        getLastSyncedData(): $SyncedTrackedPlayer;
         setOpacData(arg0: $Object): void;
+        getLastSyncedData(): $SyncedTrackedPlayer;
         getOpacData(): $Object;
-        getCurrentlySyncedPlayers(): $Set<$UUID>;
         ensureLastSyncedData(): $SyncedTrackedPlayer;
         setLastTrackedPlayerSync(arg0: number): void;
         getClientModNetworkVersion(): number;
-        getLastTrackedPlayerSync(): number;
+        getCurrentlySyncedPlayers(): $Set<$UUID>;
         setClientModNetworkVersion(arg0: number): void;
+        getLastTrackedPlayerSync(): number;
+        static get(arg0: $ServerPlayer): $ServerPlayerData;
         constructor(arg0: $UUID_);
         get lastSyncedData(): $SyncedTrackedPlayer;
         get currentlySyncedPlayers(): $Set<$UUID>;

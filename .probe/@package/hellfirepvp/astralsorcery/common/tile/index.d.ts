@@ -40,9 +40,9 @@ export * as base from "@package/hellfirepvp/astralsorcery/common/tile/base";
 declare module "@package/hellfirepvp/astralsorcery/common/tile" {
     export class $TileLumenCrystallizer extends $TileEntityTick<$TileLumenCrystallizer$Data> implements $TileEntityLumenDisplay {
         breakCatalyst(): void;
-        self<T extends $BlockEntity>(): T;
         getDisplayComponentIdentifier(): $UUID;
         getDisplayTooltip(): ($StoredLumenDisplayTooltip) | undefined;
+        self<T extends $BlockEntity>(): T;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -83,27 +83,27 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile" {
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
     }
     export class $TileChalice$LiquidDrawInstance {
-        update(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidStack_): void;
-        static newInstance(): $TileChalice$LiquidDrawInstance;
-        consumeLiquid(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidStack_, arg3: boolean): boolean;
         playLiquidDrawEffect(arg0: $Level_, arg1: $Vector3, arg2: $FluidStack_): void;
         playLiquidDrawEffect(arg0: $Level_, arg1: $Supplier_<$Vector3>, arg2: $FluidStack_, arg3: number, arg4: number): void;
+        consumeLiquid(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidStack_, arg3: boolean): boolean;
         getChalices(): $Set<$BlockPos>;
+        update(arg0: $Level_, arg1: $BlockPos_, arg2: $FluidStack_): void;
+        static newInstance(): $TileChalice$LiquidDrawInstance;
         static CODEC: $Codec<$TileChalice$LiquidDrawInstance>;
         get chalices(): $Set<$BlockPos>;
     }
     export class $TileAltar extends $TileEntityNetwork<$ForwardingStarlightReceiverNode, $TileAltar$Data> implements $ForwardingStarlightReceiverNode$ReceiverTile, $TileEntityLumenDisplay {
-        startCrafting(arg0: $RecipeHolder_<$AltarRecipe>, arg1: $UUID_): void;
         static getOuterRelaySlots(): $List<number>;
-        createInput(arg0: $Level_, arg1: $UUID_): $AltarCraftingInput;
-        static getInnerRelaySlots(): $List<number>;
-        abortCrafting(): void;
-        findMatchingRecipe(arg0: $Level_, arg1: $UUID_ | null): ($RecipeHolder<$AltarRecipe>) | undefined;
         getDisplayTooltip(): ($StoredLumenDisplayTooltip) | undefined;
         receiveStarlight(arg0: $ServerLevel, arg1: $StarlightTransmissionPacket_): void;
+        findMatchingRecipe(arg0: $Level_, arg1: $UUID_ | null): ($RecipeHolder<$AltarRecipe>) | undefined;
         static getRelayGridOffsets(): $Map<number, $BlockPos>;
-        self<T extends $BlockEntity>(): T;
+        startCrafting(arg0: $RecipeHolder_<$AltarRecipe>, arg1: $UUID_): void;
+        createInput(arg0: $Level_, arg1: $UUID_): $AltarCraftingInput;
+        abortCrafting(): void;
+        static getInnerRelaySlots(): $List<number>;
         getDisplayComponentIdentifier(): $UUID;
+        self<T extends $BlockEntity>(): T;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -118,53 +118,53 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile" {
         customPersistentData: $CompoundTag;
         constructor(arg0: $BlockPos_, arg1: $BlockState_);
         static get outerRelaySlots(): $List<number>;
-        static get innerRelaySlots(): $List<number>;
         get displayTooltip(): ($StoredLumenDisplayTooltip) | undefined;
         static get relayGridOffsets(): $Map<number, $BlockPos>;
+        static get innerRelaySlots(): $List<number>;
         get displayComponentIdentifier(): $UUID;
     }
     export class $TileLumenArray$Data extends $TileEntityTick$Data implements $TileDataOwned {
+        getLumenHandler(): $LumenHandlerView;
+        getLumenFilledPercentage(): number;
+        setOwnerId(arg0: $UUID_): void;
         getOwnerId(): $UUID;
         getInventory(): $FilteredInventoryView;
         getContainedFluid(): $FluidStack;
-        setOwnerId(arg0: $UUID_): void;
         getFluidTank(): $FluidTankView;
-        getLumenHandler(): $LumenHandlerView;
-        getLumenFilledPercentage(): number;
+        hasOwner(): boolean;
         self<T extends $TileEntitySynchronized$Data>(): T;
         getOwner(arg0: $MinecraftServer): ($ServerPlayer) | undefined;
         getOwner(arg0: $ServerLevel): ($ServerPlayer) | undefined;
         isOwner(arg0: $UUID_): boolean;
         isOwner(arg0: $Player): boolean;
-        hasOwner(): boolean;
         static CODEC: $Codec<$TileLumenArray$Data>;
         static TANK_CAPACITY: number;
         static LUMEN_TANK_CAPACITY: number;
+        get lumenHandler(): $LumenHandlerView;
+        get lumenFilledPercentage(): number;
         get inventory(): $FilteredInventoryView;
         get containedFluid(): $FluidStack;
         get fluidTank(): $FluidTankView;
-        get lumenHandler(): $LumenHandlerView;
-        get lumenFilledPercentage(): number;
     }
     export class $TileAttunementAltar$Data extends $TileEntityTick$Data {
         getActiveRecipe(): ($AttunementRecipe$Active<never, never>) | undefined;
-        setActiveRecipe(arg0: $AttunementRecipe$Active<never, never> | null): void;
         setActiveConstellation(arg0: $BaseConstellation_ | null): void;
+        setActiveRecipe(arg0: $AttunementRecipe$Active<never, never> | null): void;
         getActiveConstellation(): ($BaseConstellation) | undefined;
         static CODEC: $Codec<$TileAttunementAltar$Data>;
     }
     export class $TileAltar$AltarType extends $Enum<$TileAltar$AltarType> implements $StringRepresentable {
+        getCollisionShape(): $VoxelShape;
+        getSerializedName(): string;
+        isThisLaterOrEqual(arg0: $TileAltar$AltarType_): boolean;
+        isThisLater(arg0: $TileAltar$AltarType_): boolean;
+        getRequiredStructure(): $ObserverRegistryObject;
+        getAltarItem(): $ItemStack;
+        getRequiredTier(): $ResearchTier;
         static values(): $TileAltar$AltarType[];
         static valueOf(arg0: string): $TileAltar$AltarType;
         getShape(): $VoxelShape;
-        getSerializedName(): string;
-        getCollisionShape(): $VoxelShape;
-        getRequiredStructure(): $ObserverRegistryObject;
-        isThisLater(arg0: $TileAltar$AltarType_): boolean;
-        getRequiredTier(): $ResearchTier;
-        getAltarItem(): $ItemStack;
         getContainerType(): $ContainerAltar$Type;
-        isThisLaterOrEqual(arg0: $TileAltar$AltarType_): boolean;
         getRemappedEnumConstantName(): string;
         static RADIANCE: $TileAltar$AltarType;
         static CODEC: $Codec<$TileAltar$AltarType>;
@@ -172,12 +172,12 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile" {
         static ILLUMINATION: $TileAltar$AltarType;
         static LUMINANCE: $TileAltar$AltarType;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $TileAltar$AltarType>;
-        get shape(): $VoxelShape;
-        get serializedName(): string;
         get collisionShape(): $VoxelShape;
+        get serializedName(): string;
         get requiredStructure(): $ObserverRegistryObject;
-        get requiredTier(): $ResearchTier;
         get altarItem(): $ItemStack;
+        get requiredTier(): $ResearchTier;
+        get shape(): $VoxelShape;
         get containerType(): $ContainerAltar$Type;
         get remappedEnumConstantName(): string;
     }
@@ -186,41 +186,41 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile" {
      */
     export type $TileAltar$AltarType_ = "illumination" | "resonance" | "luminance" | "radiance";
     export class $TileInfuser$Data extends $TileEntityTick$Data {
-        getInventory(): $InventoryView;
         getActiveRecipe(): ($ActiveInfusionRecipe) | undefined;
         setActiveRecipe(arg0: $ActiveInfusionRecipe | null): void;
+        getInventory(): $InventoryView;
         static CODEC: $Codec<$TileInfuser$Data>;
         get inventory(): $InventoryView;
     }
     export class $TileLumenCrystallizer$Data extends $TileEntityTick$Data {
+        getContainedLumen(): $LumenStack;
+        getLumenHandler(): $LumenHandlerView;
+        setTransmittedLumen(arg0: $Lumen_, arg1: number): void;
+        getLumenContents(): $LumenStackList;
+        getFluidContents(): $FluidContainerList;
+        getInventoryContents(): $InventoryStackList;
+        getRecentlyTransmittedLumen(): $Lumen;
+        getTransmittedLumenGameTime(): number;
         getInventory(): $FilteredInventoryView;
         getContainedFluid(): $FluidStack;
         getFluidTank(): $FluidTankView;
-        getLumenHandler(): $LumenHandlerView;
-        getContainedLumen(): $LumenStack;
-        getInventoryContents(): $InventoryStackList;
-        getLumenContents(): $LumenStackList;
-        getTransmittedLumenGameTime(): number;
-        getRecentlyTransmittedLumen(): $Lumen;
-        getFluidContents(): $FluidContainerList;
-        setTransmittedLumen(arg0: $Lumen_, arg1: number): void;
         static CODEC: $Codec<$TileLumenCrystallizer$Data>;
+        get containedLumen(): $LumenStack;
+        get lumenHandler(): $LumenHandlerView;
+        get lumenContents(): $LumenStackList;
+        get fluidContents(): $FluidContainerList;
+        get inventoryContents(): $InventoryStackList;
+        get recentlyTransmittedLumen(): $Lumen;
+        get transmittedLumenGameTime(): number;
         get inventory(): $FilteredInventoryView;
         get containedFluid(): $FluidStack;
         get fluidTank(): $FluidTankView;
-        get lumenHandler(): $LumenHandlerView;
-        get containedLumen(): $LumenStack;
-        get inventoryContents(): $InventoryStackList;
-        get lumenContents(): $LumenStackList;
-        get transmittedLumenGameTime(): number;
-        get recentlyTransmittedLumen(): $Lumen;
-        get fluidContents(): $FluidContainerList;
     }
     export class $TileLumenArray extends $TileEntityTick<$TileLumenArray$Data> implements $TileEntityLumenDisplay {
         getDisplayTooltip(): ($StoredLumenDisplayTooltip) | undefined;
         breakCatalyst(): void;
-        self<T extends $BlockEntity>(): T;
         getDisplayComponentIdentifier(): $UUID;
+        self<T extends $BlockEntity>(): T;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -238,10 +238,10 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile" {
         get displayComponentIdentifier(): $UUID;
     }
     export class $TileInfuser extends $TileEntityTick<$TileInfuser$Data> {
-        startCrafting(arg0: $Level_, arg1: $RecipeHolder_<$InfusionRecipe>): void;
-        createInput(arg0: $Level_): $InfusionRecipeInput;
         static getLiquidOffsets(): $Set<$BlockPos>;
         findMatchingRecipe(arg0: $Level_): ($RecipeHolder<$InfusionRecipe>) | undefined;
+        startCrafting(arg0: $Level_, arg1: $RecipeHolder_<$InfusionRecipe>): void;
+        createInput(arg0: $Level_): $InfusionRecipeInput;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -260,19 +260,19 @@ declare module "@package/hellfirepvp/astralsorcery/common/tile" {
     export class $TileAltar$Data extends $TileEntityNetwork$Data {
         getActiveRecipe(): ($ActiveAltarRecipe) | undefined;
         setActiveRecipe(arg0: $ActiveAltarRecipe | null): void;
-        getAltarInventory(): $InventoryView;
+        getFocusedConstellation(): ($BaseConstellation) | undefined;
+        getFocusItem(): $ItemStack;
+        removeKnownRecipe(arg0: $ResourceLocation_): boolean;
+        getKnownRecipes(): $Set<$ResourceLocation>;
         canSetFocusItem(arg0: $ItemStack_): boolean;
         setFocusItem(arg0: $ItemStack_): void;
+        getAltarInventory(): $InventoryView;
+        getAltarType(): $TileAltar$AltarType;
         setAltarType(arg0: $TileAltar$AltarType_): void;
         addKnownRecipe(arg0: $ResourceLocation_): boolean;
-        getAltarType(): $TileAltar$AltarType;
-        getFocusItem(): $ItemStack;
-        getFocusedConstellation(): ($BaseConstellation) | undefined;
-        getKnownRecipes(): $Set<$ResourceLocation>;
-        removeKnownRecipe(arg0: $ResourceLocation_): boolean;
         static CODEC: $Codec<$TileAltar$Data>;
-        get altarInventory(): $InventoryView;
         get focusedConstellation(): ($BaseConstellation) | undefined;
         get knownRecipes(): $Set<$ResourceLocation>;
+        get altarInventory(): $InventoryView;
     }
 }

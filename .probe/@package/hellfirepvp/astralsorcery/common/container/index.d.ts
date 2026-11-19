@@ -7,8 +7,8 @@ import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $MenuTypeRegistryObject, $MenuTypeRegistryObject_ } from "@package/hellfirepvp/astralsorcery/common/util/data";
 import { $Player, $Inventory } from "@package/net/minecraft/world/entity/player";
-import { $Slot, $MenuType_, $MenuType } from "@package/net/minecraft/world/inventory";
-import { $Map } from "@package/java/util";
+import { $ContainerListener, $Slot, $MenuType_, $MenuType } from "@package/net/minecraft/world/inventory";
+import { $List, $Map } from "@package/java/util";
 import { $TriFunction_ } from "@package/hellfirepvp/astralsorcery/common/util";
 export * as base from "@package/hellfirepvp/astralsorcery/common/container/base";
 export * as transfer from "@package/hellfirepvp/astralsorcery/common/container/transfer";
@@ -26,8 +26,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/container" {
     export class $ContainerAltar extends $ContainerTileEntity<$TileAltar> implements $PlayerInventorySlots, $DefaultQuickMoveTransfer {
         customTransfer(arg0: $ItemStack_, arg1: number): ($ItemStack) | undefined;
         writeClientData(arg0: $RegistryFriendlyByteBuf): void;
-        addDefaultPlayerSlots(arg0: $Inventory, arg1: number, arg2: number): void;
         addDefaultPlayerSlots(arg0: number, arg1: number, arg2: $TriFunction_<number, number, number, $Slot>): void;
+        addDefaultPlayerSlots(arg0: $Inventory, arg1: number, arg2: number): void;
         defaultQuickMoveStack(arg0: $Player, arg1: number): $ItemStack;
         canQuickTransferItemToSlot(arg0: $ItemStack_, arg1: $Slot, arg2: boolean): boolean;
         defaultMoveItemStackTo(arg0: $ItemStack_, arg1: number, arg2: number, arg3: boolean): boolean;
@@ -44,13 +44,14 @@ declare module "@package/hellfirepvp/astralsorcery/common/container" {
         ldlib2$itemSlotMap: $Map<any, any>;
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
     }
     export class $ContainerAltar$Type {
-        getMenuType(): $MenuTypeRegistryObject<$ContainerAltar>;
         provideClientContainer(arg0: $TileAltar, arg1: $Inventory, arg2: number, arg3: $RegistryFriendlyByteBuf): $ContainerAltar;
         provideServerContainer(arg0: number, arg1: $Inventory, arg2: $TileAltar): $ContainerAltar;
+        getMenuType(): $MenuTypeRegistryObject<$ContainerAltar>;
         constructor(arg0: $MenuTypeRegistryObject_<$ContainerAltar>, arg1: $ContainerAltar$Provider_, arg2: $ContainerAltar$ClientProvider_);
         get menuType(): $MenuTypeRegistryObject<$ContainerAltar>;
     }

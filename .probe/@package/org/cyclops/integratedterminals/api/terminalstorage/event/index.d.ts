@@ -10,53 +10,53 @@ import { $ContainerTerminalStorageBase } from "@package/org/cyclops/integratedte
 
 declare module "@package/org/cyclops/integratedterminals/api/terminalstorage/event" {
     export class $TerminalStorageTabClientLoadButtonsEvent extends $Event {
-        getContainer(): $ContainerTerminalStorageBase<any>;
         getButtons(): $List<$ITerminalButton<never, never, never>>;
-        getClientTab(): $ITerminalStorageTabClient<never>;
+        getContainer(): $ContainerTerminalStorageBase<any>;
         setButtons(arg0: $List_<$ITerminalButton<never, never, never>>): void;
+        getClientTab(): $ITerminalStorageTabClient<never>;
         constructor(arg0: $ContainerTerminalStorageBase<any>, arg1: $ITerminalStorageTabClient<never>, arg2: $List_<$ITerminalButton<never, never, never>>);
         get container(): $ContainerTerminalStorageBase<any>;
         get clientTab(): $ITerminalStorageTabClient<never>;
     }
     export class $TerminalCraftingJobFinishedEvent extends $Event {
+        getInitiator(): $UUID;
+        getCraftingJobId(): $Object;
         getChannel(): number;
         getHandler(): $ITerminalStorageTabIngredientCraftingHandler<never, never>;
         static post(arg0: $ITerminalStorageTabIngredientCraftingHandler<never, never>, arg1: $Object, arg2: number, arg3: boolean, arg4: $UUID_ | null, arg5: $List_<$IPrototypedIngredient<never, never>>): void;
-        isRootJob(): boolean;
         getOutputs(): $List<$IPrototypedIngredient<never, never>>;
-        getInitiator(): $UUID;
-        getCraftingJobId(): $Object;
+        isRootJob(): boolean;
         constructor(arg0: $ITerminalStorageTabIngredientCraftingHandler<never, never>, arg1: $Object, arg2: number, arg3: boolean, arg4: $UUID_ | null, arg5: $List_<$IPrototypedIngredient<never, never>>);
-        get channel(): number;
-        get handler(): $ITerminalStorageTabIngredientCraftingHandler<never, never>;
-        get rootJob(): boolean;
-        get outputs(): $List<$IPrototypedIngredient<never, never>>;
         get initiator(): $UUID;
         get craftingJobId(): $Object;
+        get channel(): number;
+        get handler(): $ITerminalStorageTabIngredientCraftingHandler<never, never>;
+        get outputs(): $List<$IPrototypedIngredient<never, never>>;
+        get rootJob(): boolean;
     }
     export class $TerminalStorageScreenSizeEvent extends $Event {
-        getWidth(): number;
-        setHeight(arg0: number): void;
-        setWidth(arg0: number): void;
         getHeight(): number;
         static getWidthHeight(): $Pair<number, number>;
+        setWidth(arg0: number): void;
+        setHeight(arg0: number): void;
+        getWidth(): number;
         constructor(arg0: number, arg1: number);
         static get widthHeight(): $Pair<number, number>;
     }
     export class $TerminalStorageTabClientSearchFieldUpdateEvent extends $Event {
         setSearchString(arg0: string): void;
-        getSearchString(): string;
         getClientTab(): $ITerminalStorageTabClient<never>;
+        getSearchString(): string;
         constructor(arg0: $ITerminalStorageTabClient<never>, arg1: string);
         get clientTab(): $ITerminalStorageTabClient<never>;
     }
     export class $TerminalStorageTabCommonLoadSlotsEvent extends $Event {
-        getContainer(): $ContainerTerminalStorageBase<any>;
+        getCommonTab(): $ITerminalStorageTabCommon;
         setSlots(arg0: $List_<$Pair<$Slot, $ITerminalStorageTabCommon$ISlotPositionCallback_>>): void;
         getSlots(): $List<$Pair<$Slot, $ITerminalStorageTabCommon$ISlotPositionCallback>>;
-        getCommonTab(): $ITerminalStorageTabCommon;
+        getContainer(): $ContainerTerminalStorageBase<any>;
         constructor(arg0: $ITerminalStorageTabCommon_, arg1: $ContainerTerminalStorageBase<any>, arg2: $List_<$Pair<$Slot, $ITerminalStorageTabCommon$ISlotPositionCallback_>>);
-        get container(): $ContainerTerminalStorageBase<any>;
         get commonTab(): $ITerminalStorageTabCommon;
+        get container(): $ContainerTerminalStorageBase<any>;
     }
 }

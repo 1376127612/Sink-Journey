@@ -6,13 +6,13 @@ declare module "@package/mekanism/common/tile/interfaces" {
     export class $ITileWrapper {
     }
     export interface $ITileWrapper {
+        getTileChunk(): $Chunk3D;
+        getTileGlobalPos(): $GlobalPos;
         getLevel(): $Level;
         getBlockPos(): $BlockPos;
-        getTileGlobalPos(): $GlobalPos;
-        getTileChunk(): $Chunk3D;
+        get tileChunk(): $Chunk3D;
+        get tileGlobalPos(): $GlobalPos;
         get level(): $Level;
         get blockPos(): $BlockPos;
-        get tileGlobalPos(): $GlobalPos;
-        get tileChunk(): $Chunk3D;
     }
 }

@@ -23,17 +23,17 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
      */
     export type $EnchantmentProvider_ = RegistryTypes.EnchantmentProvider;
     export class $SingleEnchantment extends $Record implements $EnchantmentProvider {
-        level(): $IntProvider;
-        enchantment(): $Holder<$Enchantment>;
         codec(): $MapCodec<$SingleEnchantment>;
+        level(): $IntProvider;
         enchant(stack: $ItemStack_, enchantments: $ItemEnchantments$Mutable, random: $RandomSource, difficulty: $DifficultyInstance): void;
+        enchantment(): $Holder<$Enchantment>;
         static CODEC: $MapCodec<$SingleEnchantment>;
         constructor(arg0: $Holder_<$Enchantment>, arg1: $IntProvider_);
     }
     /**
      * Values that may be interpreted as {@link $SingleEnchantment}.
      */
-    export type $SingleEnchantment_ = { enchantment?: $Holder_<$Enchantment>, level?: $IntProvider_,  } | [enchantment?: $Holder_<$Enchantment>, level?: $IntProvider_, ];
+    export type $SingleEnchantment_ = { level?: $IntProvider_, enchantment?: $Holder_<$Enchantment>,  } | [level?: $IntProvider_, enchantment?: $Holder_<$Enchantment>, ];
     export class $EnchantmentProviderTypes {
         static bootstrap(registry: $Registry<$MapCodec_<$EnchantmentProvider_>>): $MapCodec<$EnchantmentProvider>;
     }
@@ -81,10 +81,10 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
     export interface $TradeRebalanceEnchantmentProviders {
     }
     export class $EnchantmentsByCost extends $Record implements $EnchantmentProvider {
-        cost(): $IntProvider;
-        enchantments(): $HolderSet<$Enchantment>;
         codec(): $MapCodec<$EnchantmentsByCost>;
+        enchantments(): $HolderSet<$Enchantment>;
         enchant(stack: $ItemStack_, enchantments: $ItemEnchantments$Mutable, random: $RandomSource, difficulty: $DifficultyInstance): void;
+        cost(): $IntProvider;
         static CODEC: $MapCodec<$EnchantmentsByCost>;
         constructor(arg0: $HolderSet_<$Enchantment>, arg1: $IntProvider_);
     }
@@ -93,11 +93,11 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
      */
     export type $EnchantmentsByCost_ = { cost?: $IntProvider_, enchantments?: $HolderSet_<$Enchantment>,  } | [cost?: $IntProvider_, enchantments?: $HolderSet_<$Enchantment>, ];
     export class $EnchantmentsByCostWithDifficulty extends $Record implements $EnchantmentProvider {
-        enchantments(): $HolderSet<$Enchantment>;
         codec(): $MapCodec<$EnchantmentsByCostWithDifficulty>;
-        enchant(stack: $ItemStack_, enchantments: $ItemEnchantments$Mutable, random: $RandomSource, difficulty: $DifficultyInstance): void;
-        maxCostSpan(): number;
+        enchantments(): $HolderSet<$Enchantment>;
         minCost(): number;
+        maxCostSpan(): number;
+        enchant(stack: $ItemStack_, enchantments: $ItemEnchantments$Mutable, random: $RandomSource, difficulty: $DifficultyInstance): void;
         static CODEC: $MapCodec<$EnchantmentsByCostWithDifficulty>;
         static MAX_ALLOWED_VALUE_PART: number;
         constructor(arg0: $HolderSet_<$Enchantment>, arg1: number, arg2: number);
@@ -105,7 +105,7 @@ declare module "@package/net/minecraft/world/item/enchantment/providers" {
     /**
      * Values that may be interpreted as {@link $EnchantmentsByCostWithDifficulty}.
      */
-    export type $EnchantmentsByCostWithDifficulty_ = { minCost?: number, maxCostSpan?: number, enchantments?: $HolderSet_<$Enchantment>,  } | [minCost?: number, maxCostSpan?: number, enchantments?: $HolderSet_<$Enchantment>, ];
+    export type $EnchantmentsByCostWithDifficulty_ = { maxCostSpan?: number, enchantments?: $HolderSet_<$Enchantment>, minCost?: number,  } | [maxCostSpan?: number, enchantments?: $HolderSet_<$Enchantment>, minCost?: number, ];
     export interface $EnchantmentProvider extends RegistryMarked<RegistryTypes.EnchantmentProviderTag, RegistryTypes.EnchantmentProvider> {}
     export class $VanillaEnchantmentProviders {
         static create(name: string): $ResourceKey<$EnchantmentProvider>;

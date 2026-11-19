@@ -7,9 +7,9 @@ declare module "@package/mekanism/common/capabilities/proxy" {
     export class $ProxyConfigurable$ISidedConfigurable {
     }
     export interface $ProxyConfigurable$ISidedConfigurable extends $IConfigurable {
+        onSneakRightClick(player: $Player, side: $Direction_): $InteractionResult;
+        onSneakRightClick(player: $Player): $InteractionResult;
         onRightClick(player: $Player): $InteractionResult;
         onRightClick(player: $Player, side: $Direction_): $InteractionResult;
-        onSneakRightClick(player: $Player): $InteractionResult;
-        onSneakRightClick(player: $Player, side: $Direction_): $InteractionResult;
     }
 }

@@ -14,19 +14,19 @@ export * as reflect from "@package/com/google/gson/reflect";
 
 declare module "@package/com/google/gson" {
     export class $FieldAttributes {
+        getDeclaredType(): $Type;
         getName(): string;
         getDeclaringClass(): $Class<never>;
         getAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
         getAnnotations(): $Collection<$Annotation>;
-        hasModifier(arg0: number): boolean;
         getDeclaredClass(): $Class<never>;
-        getDeclaredType(): $Type;
+        hasModifier(arg0: number): boolean;
         constructor(arg0: $Field);
+        get declaredType(): $Type;
         get name(): string;
         get declaringClass(): $Class<never>;
         get annotations(): $Collection<$Annotation>;
         get declaredClass(): $Class<never>;
-        get declaredType(): $Type;
     }
     export class $FieldNamingStrategy {
     }
@@ -39,41 +39,41 @@ declare module "@package/com/google/gson" {
     export type $FieldNamingStrategy_ = ((arg0: $Field) => string);
     export class $GsonBuilder {
         create(): $Gson;
-        setLenient(): $GsonBuilder;
         setVersion(arg0: number): $GsonBuilder;
-        generateNonExecutableJson(): $GsonBuilder;
-        setPrettyPrinting(): $GsonBuilder;
-        setDateFormat(arg0: number): $GsonBuilder;
-        setDateFormat(arg0: number, arg1: number): $GsonBuilder;
-        setDateFormat(arg0: string): $GsonBuilder;
-        disableJdkUnsafe(): $GsonBuilder;
-        serializeSpecialFloatingPointValues(): $GsonBuilder;
-        excludeFieldsWithoutExposeAnnotation(): $GsonBuilder;
-        addDeserializationExclusionStrategy(arg0: $ExclusionStrategy): $GsonBuilder;
+        setLenient(): $GsonBuilder;
         serializeNulls(): $GsonBuilder;
+        disableJdkUnsafe(): $GsonBuilder;
+        setDateFormat(arg0: string): $GsonBuilder;
+        setDateFormat(arg0: number, arg1: number): $GsonBuilder;
+        setDateFormat(arg0: number): $GsonBuilder;
+        setPrettyPrinting(): $GsonBuilder;
+        serializeSpecialFloatingPointValues(): $GsonBuilder;
+        addDeserializationExclusionStrategy(arg0: $ExclusionStrategy): $GsonBuilder;
+        excludeFieldsWithoutExposeAnnotation(): $GsonBuilder;
+        disableHtmlEscaping(): $GsonBuilder;
+        registerTypeAdapterFactory(arg0: $TypeAdapterFactory_): $GsonBuilder;
+        excludeFieldsWithModifiers(...arg0: number[]): $GsonBuilder;
+        setFieldNamingStrategy(arg0: $FieldNamingStrategy_): $GsonBuilder;
+        setExclusionStrategies(...arg0: $ExclusionStrategy[]): $GsonBuilder;
+        setLongSerializationPolicy(arg0: $LongSerializationPolicy_): $GsonBuilder;
+        setObjectToNumberStrategy(arg0: $ToNumberStrategy_): $GsonBuilder;
+        addReflectionAccessFilter(arg0: $ReflectionAccessFilter_): $GsonBuilder;
+        registerTypeAdapter(arg0: $Type, arg1: $Object): $GsonBuilder;
+        setNumberToNumberStrategy(arg0: $ToNumberStrategy_): $GsonBuilder;
+        generateNonExecutableJson(): $GsonBuilder;
+        setFieldNamingPolicy(arg0: $FieldNamingPolicy_): $GsonBuilder;
+        disableInnerClassSerialization(): $GsonBuilder;
+        enableComplexMapKeySerialization(): $GsonBuilder;
         addSerializationExclusionStrategy(arg0: $ExclusionStrategy): $GsonBuilder;
         registerTypeHierarchyAdapter(arg0: $Class<never>, arg1: $Object): $GsonBuilder;
-        enableComplexMapKeySerialization(): $GsonBuilder;
-        setFieldNamingPolicy(arg0: $FieldNamingPolicy_): $GsonBuilder;
-        setExclusionStrategies(...arg0: $ExclusionStrategy[]): $GsonBuilder;
-        setFieldNamingStrategy(arg0: $FieldNamingStrategy_): $GsonBuilder;
-        registerTypeAdapter(arg0: $Type, arg1: $Object): $GsonBuilder;
-        registerTypeAdapterFactory(arg0: $TypeAdapterFactory_): $GsonBuilder;
-        setNumberToNumberStrategy(arg0: $ToNumberStrategy_): $GsonBuilder;
-        addReflectionAccessFilter(arg0: $ReflectionAccessFilter_): $GsonBuilder;
-        setObjectToNumberStrategy(arg0: $ToNumberStrategy_): $GsonBuilder;
-        disableHtmlEscaping(): $GsonBuilder;
-        excludeFieldsWithModifiers(...arg0: number[]): $GsonBuilder;
-        setLongSerializationPolicy(arg0: $LongSerializationPolicy_): $GsonBuilder;
-        disableInnerClassSerialization(): $GsonBuilder;
         constructor();
         set version(value: number);
-        set fieldNamingPolicy(value: $FieldNamingPolicy_);
-        set exclusionStrategies(value: $ExclusionStrategy[]);
         set fieldNamingStrategy(value: $FieldNamingStrategy_);
-        set numberToNumberStrategy(value: $ToNumberStrategy_);
-        set objectToNumberStrategy(value: $ToNumberStrategy_);
+        set exclusionStrategies(value: $ExclusionStrategy[]);
         set longSerializationPolicy(value: $LongSerializationPolicy_);
+        set objectToNumberStrategy(value: $ToNumberStrategy_);
+        set numberToNumberStrategy(value: $ToNumberStrategy_);
+        set fieldNamingPolicy(value: $FieldNamingPolicy_);
     }
     export class $ToNumberStrategy {
     }
@@ -86,53 +86,53 @@ declare module "@package/com/google/gson" {
     export type $ToNumberStrategy_ = ((arg0: $JsonReader) => $Number);
     export class $JsonElement {
         getAsBoolean(): boolean;
-        getAsShort(): number;
-        isJsonNull(): boolean;
-        deepCopy(): $JsonElement;
-        getAsFloat(): number;
-        getAsByte(): number;
         getAsDouble(): number;
         getAsInt(): number;
         getAsLong(): number;
         getAsString(): string;
-        isJsonPrimitive(): boolean;
+        isJsonObject(): boolean;
+        getAsJsonObject(): $JsonObject;
+        getAsJsonNull(): $JsonNull;
         getAsJsonPrimitive(): $JsonPrimitive;
         getAsBigDecimal(): $BigDecimal;
-        getAsJsonArray(): $JsonArray;
+        getAsNumber(): $Number;
         getAsBigInteger(): $BigInteger;
         /**
          * @deprecated
          */
         getAsCharacter(): string;
+        getAsJsonArray(): $JsonArray;
         isJsonArray(): boolean;
-        getAsJsonObject(): $JsonObject;
-        getAsNumber(): $Number;
-        getAsJsonNull(): $JsonNull;
-        isJsonObject(): boolean;
+        isJsonPrimitive(): boolean;
+        isJsonNull(): boolean;
+        deepCopy(): $JsonElement;
+        getAsByte(): number;
+        getAsFloat(): number;
+        getAsShort(): number;
         /**
          * @deprecated
          */
         constructor();
         get asBoolean(): boolean;
-        get asShort(): number;
-        get jsonNull(): boolean;
-        get asFloat(): number;
-        get asByte(): number;
         get asDouble(): number;
         get asInt(): number;
         get asLong(): number;
         get asString(): string;
-        get jsonPrimitive(): boolean;
+        get jsonObject(): boolean;
+        get asJsonObject(): $JsonObject;
+        get asJsonNull(): $JsonNull;
         get asJsonPrimitive(): $JsonPrimitive;
         get asBigDecimal(): $BigDecimal;
-        get asJsonArray(): $JsonArray;
+        get asNumber(): $Number;
         get asBigInteger(): $BigInteger;
         get asCharacter(): string;
+        get asJsonArray(): $JsonArray;
         get jsonArray(): boolean;
-        get asJsonObject(): $JsonObject;
-        get asNumber(): $Number;
-        get asJsonNull(): $JsonNull;
-        get jsonObject(): boolean;
+        get jsonPrimitive(): boolean;
+        get jsonNull(): boolean;
+        get asByte(): number;
+        get asFloat(): number;
+        get asShort(): number;
     }
     /**
      * Values that may be interpreted as {@link $JsonElement}.
@@ -147,15 +147,15 @@ declare module "@package/com/google/gson" {
         entrySet(): $Set<$Map$Entry<string, $JsonElement>>;
         keySet(): $Set<string>;
         has(arg0: string): boolean;
-        addProperty(arg0: string, arg1: $Number): void;
-        addProperty(arg0: string, arg1: boolean): void;
-        addProperty(arg0: string, arg1: string): void;
-        addProperty(arg0: string, arg1: string): void;
-        deepCopy(): $JsonObject;
         asMap(): $Map<string, $JsonElement>;
+        getAsJsonObject(arg0: string): $JsonObject;
         getAsJsonPrimitive(arg0: string): $JsonPrimitive;
         getAsJsonArray(arg0: string): $JsonArray;
-        getAsJsonObject(arg0: string): $JsonObject;
+        addProperty(arg0: string, arg1: string): void;
+        addProperty(arg0: string, arg1: $Number): void;
+        addProperty(arg0: string, arg1: string): void;
+        addProperty(arg0: string, arg1: boolean): void;
+        deepCopy(): $JsonObject;
         constructor();
         get empty(): boolean;
     }
@@ -185,17 +185,17 @@ declare module "@package/com/google/gson" {
         constructor();
     }
     export class $JsonPrimitive extends $JsonElement {
-        isString(): boolean;
-        isBoolean(): boolean;
-        isNumber(): boolean;
         deepCopy(): $JsonPrimitive;
+        isString(): boolean;
+        isNumber(): boolean;
+        isBoolean(): boolean;
         constructor(arg0: string);
         constructor(arg0: string);
         constructor(arg0: $Number);
         constructor(arg0: boolean);
         get string(): boolean;
-        get boolean(): boolean;
         get number(): boolean;
+        get boolean(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $JsonPrimitive}.
@@ -218,8 +218,8 @@ declare module "@package/com/google/gson" {
         size(): number;
         get(arg0: number): $JsonElement;
         isEmpty(): boolean;
-        add(arg0: $Number): void;
         add(arg0: string): void;
+        add(arg0: $Number): void;
         add(arg0: string): void;
         add(arg0: boolean): void;
         add(arg0: $JsonElement_): void;
@@ -243,8 +243,8 @@ declare module "@package/com/google/gson" {
     export class $ExclusionStrategy {
     }
     export interface $ExclusionStrategy {
-        shouldSkipClass(arg0: $Class<never>): boolean;
         shouldSkipField(arg0: $FieldAttributes): boolean;
+        shouldSkipClass(arg0: $Class<never>): boolean;
     }
     export class $TypeAdapterFactory {
     }
@@ -257,51 +257,51 @@ declare module "@package/com/google/gson" {
     export type $TypeAdapterFactory_ = ((arg0: $Gson, arg1: $TypeToken<any>) => $TypeAdapter<any>);
     export class $Gson {
         newBuilder(): $GsonBuilder;
-        getAdapter<T>(arg0: $TypeToken<T>): $TypeAdapter<T>;
         getAdapter<T>(arg0: $Class<T>): $TypeAdapter<T>;
-        htmlSafe(): boolean;
-        toJsonTree(arg0: $Object): $JsonElement;
-        toJsonTree(arg0: $Object, arg1: $Type): $JsonElement;
-        toJson(arg0: $JsonElement_): string;
-        toJson(arg0: $JsonElement_, arg1: $Appendable): void;
-        toJson(arg0: $JsonElement_, arg1: $JsonWriter): void;
-        toJson(arg0: $Object, arg1: $Appendable): void;
-        toJson(arg0: $Object): string;
-        toJson(arg0: $Object, arg1: $Type): string;
-        toJson(arg0: $Object, arg1: $Type, arg2: $Appendable): void;
-        toJson(arg0: $Object, arg1: $Type, arg2: $JsonWriter): void;
+        getAdapter<T>(arg0: $TypeToken<T>): $TypeAdapter<T>;
+        serializeNulls(): boolean;
+        getDelegateAdapter<T>(arg0: $TypeAdapterFactory_, arg1: $TypeToken<T>): $TypeAdapter<T>;
+        newJsonReader(arg0: $Reader): $JsonReader;
+        newJsonWriter(arg0: $Writer): $JsonWriter;
         fromJson<T>(arg0: $Reader, arg1: $Type): T;
+        fromJson<T>(arg0: string, arg1: $Type): T;
         fromJson<T>(arg0: $Reader, arg1: $TypeToken<T>): T;
-        fromJson<T>(arg0: $JsonReader, arg1: $Type): T;
         fromJson<T>(arg0: $Reader, arg1: $Class<T>): T;
         fromJson<T>(arg0: string, arg1: $TypeToken<T>): T;
         fromJson<T>(arg0: string, arg1: $Class<T>): T;
-        fromJson<T>(arg0: string, arg1: $Type): T;
-        fromJson<T>(arg0: $JsonElement_, arg1: $TypeToken<T>): T;
-        fromJson<T>(arg0: $JsonElement_, arg1: $Type): T;
         fromJson<T>(arg0: $JsonElement_, arg1: $Class<T>): T;
+        fromJson<T>(arg0: $JsonElement_, arg1: $Type): T;
+        fromJson<T>(arg0: $JsonElement_, arg1: $TypeToken<T>): T;
+        fromJson<T>(arg0: $JsonReader, arg1: $Type): T;
         fromJson<T>(arg0: $JsonReader, arg1: $TypeToken<T>): T;
+        htmlSafe(): boolean;
+        toJsonTree(arg0: $Object): $JsonElement;
+        toJsonTree(arg0: $Object, arg1: $Type): $JsonElement;
+        toJson(arg0: $Object, arg1: $Appendable): void;
+        toJson(arg0: $Object, arg1: $Type): string;
+        toJson(arg0: $Object): string;
+        toJson(arg0: $Object, arg1: $Type, arg2: $JsonWriter): void;
+        toJson(arg0: $JsonElement_, arg1: $Appendable): void;
+        toJson(arg0: $JsonElement_): string;
+        toJson(arg0: $JsonElement_, arg1: $JsonWriter): void;
+        toJson(arg0: $Object, arg1: $Type, arg2: $Appendable): void;
         /**
          * @deprecated
          */
         excluder(): $Excluder;
         fieldNamingStrategy(): $FieldNamingStrategy;
-        serializeNulls(): boolean;
-        getDelegateAdapter<T>(arg0: $TypeAdapterFactory_, arg1: $TypeToken<T>): $TypeAdapter<T>;
-        newJsonReader(arg0: $Reader): $JsonReader;
-        newJsonWriter(arg0: $Writer): $JsonWriter;
         constructor();
     }
     export class $TypeAdapter<T> {
         write(arg0: $JsonWriter, arg1: T): void;
         read(arg0: $JsonReader): T;
-        nullSafe(): $TypeAdapter<T>;
-        toJsonTree(arg0: T): $JsonElement;
-        toJson(arg0: T): string;
-        toJson(arg0: $Writer, arg1: T): void;
+        fromJsonTree(arg0: $JsonElement_): T;
         fromJson(arg0: string): T;
         fromJson(arg0: $Reader): T;
-        fromJsonTree(arg0: $JsonElement_): T;
+        nullSafe(): $TypeAdapter<T>;
+        toJsonTree(arg0: T): $JsonElement;
+        toJson(arg0: $Writer, arg1: T): void;
+        toJson(arg0: T): string;
         constructor();
     }
     export class $JsonSerializationContext {

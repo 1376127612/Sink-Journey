@@ -14,8 +14,8 @@ declare module "@package/cn/dancingsnow/neoecoae/api" {
     export class $ECOCpuTierGlyph extends $Record {
         v(): number;
         u(): number;
-        textureWidth(): number;
         textureHeight(): number;
+        textureWidth(): number;
         texture(): $ResourceLocation;
         static WIDTH: number;
         static HEIGHT: number;
@@ -25,46 +25,46 @@ declare module "@package/cn/dancingsnow/neoecoae/api" {
     /**
      * Values that may be interpreted as {@link $ECOCpuTierGlyph}.
      */
-    export type $ECOCpuTierGlyph_ = { textureHeight?: number, v?: number, u?: number, textureWidth?: number, texture?: $ResourceLocation_,  } | [textureHeight?: number, v?: number, u?: number, textureWidth?: number, texture?: $ResourceLocation_, ];
+    export type $ECOCpuTierGlyph_ = { texture?: $ResourceLocation_, textureHeight?: number, v?: number, u?: number, textureWidth?: number,  } | [texture?: $ResourceLocation_, textureHeight?: number, v?: number, u?: number, textureWidth?: number, ];
     export class $IECOTier {
     }
     export interface $IECOTier {
-        compareTo(arg0: $IECOTier_): number;
-        getTier(): number;
-        getOverclockedCrafterQueueMultiply(): number;
-        getOverclockedCrafterParallel(): number;
         getOverclockedCrafterPowerMultiply(): number;
+        getOverclockedCrafterParallel(): number;
         getCraftConfirmCpuTierGlyph(): $ECOCpuTierGlyph;
-        getStorageTotalBytes(): number;
+        getOverclockedCrafterQueueMultiply(): number;
+        getCPUOverlayTexture(): $ResourceLocation;
         getComponentIdlePower(): number;
         getHostMarkerTexture(): $ResourceLocation;
-        getPowerStorageSize(): number;
         supportsComponentTier(arg0: $IECOTier_): boolean;
-        getCPUOverlayTexture(): $ResourceLocation;
-        getBuildDefinition(arg0: $ECOMachineKind_): $MultiBlockDefinition;
-        getBuildDefinition(): $MultiBlockDefinition;
-        getCPUTotalBytes(): number;
-        supportsFeature(arg0: $ECOFeature_): boolean;
+        getPowerStorageSize(): number;
+        getStorageTotalBytes(): number;
+        getTier(): number;
         getPanelTierName(): $Component;
         getCrafterParallel(): number;
         getPanelAtlas(arg0: string): $ResourceLocation;
         getCPUAccelerators(): number;
+        supportsFeature(arg0: $ECOFeature_): boolean;
         getCPUThreads(): number;
-        get tier(): number;
-        get overclockedCrafterQueueMultiply(): number;
-        get overclockedCrafterParallel(): number;
+        getBuildDefinition(): $MultiBlockDefinition;
+        getBuildDefinition(arg0: $ECOMachineKind_): $MultiBlockDefinition;
+        getCPUTotalBytes(): number;
+        compareTo(arg0: $IECOTier_): number;
         get overclockedCrafterPowerMultiply(): number;
+        get overclockedCrafterParallel(): number;
         get craftConfirmCpuTierGlyph(): $ECOCpuTierGlyph;
-        get storageTotalBytes(): number;
+        get overclockedCrafterQueueMultiply(): number;
+        get CPUOverlayTexture(): $ResourceLocation;
         get componentIdlePower(): number;
         get hostMarkerTexture(): $ResourceLocation;
         get powerStorageSize(): number;
-        get CPUOverlayTexture(): $ResourceLocation;
-        get CPUTotalBytes(): number;
+        get storageTotalBytes(): number;
+        get tier(): number;
         get panelTierName(): $Component;
         get crafterParallel(): number;
         get CPUAccelerators(): number;
         get CPUThreads(): number;
+        get CPUTotalBytes(): number;
     }
     /**
      * Values that may be interpreted as {@link $IECOTier}.

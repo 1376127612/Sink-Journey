@@ -26,9 +26,9 @@ declare module "@package/hellfirepvp/astralsorcery/common/research/condition" {
         get reasons(): $List<$Component>;
     }
     export class $ResearchNodeVisibility$Type extends $Enum<$ResearchNodeVisibility$Type> {
+        shouldRender(): boolean;
         static values(): $ResearchNodeVisibility$Type[];
         static valueOf(arg0: string): $ResearchNodeVisibility$Type;
-        shouldRender(): boolean;
         static LOCKED: $ResearchNodeVisibility$Type;
         static HIDDEN: $ResearchNodeVisibility$Type;
         static VISIBLE: $ResearchNodeVisibility$Type;
@@ -43,10 +43,10 @@ declare module "@package/hellfirepvp/astralsorcery/common/research/condition" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ResearchNodeCondition>;
     }
     export interface $ResearchNodeCondition {
-        getType(): $ResearchNodeCondition$Type<never>;
         canSee(arg0: $ResearchNode, arg1: $PlayerProgress): boolean;
-        getConditionDescription(arg0: $ResearchNode, arg1: $PlayerProgress): $List<$Component>;
         getSuggestedVisibility(arg0: $ResearchNode, arg1: $PlayerProgress): $ResearchNodeVisibility$Type;
+        getConditionDescription(arg0: $ResearchNode, arg1: $PlayerProgress): $List<$Component>;
+        getType(): $ResearchNodeCondition$Type<never>;
         get type(): $ResearchNodeCondition$Type<never>;
     }
 }

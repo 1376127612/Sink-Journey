@@ -12,7 +12,7 @@ import { $SoundEvent } from "@package/net/minecraft/sounds";
 import { $TickDuration_, $Lazy } from "@package/dev/latvian/mods/kubejs/util";
 import { DataComponentTypes } from "@special/types";
 import { $GameProfile } from "@package/com/mojang/authlib";
-import { $DataComponentType_, $DataComponentMap, $DataComponentMap_, $DataComponentPatch_, $DataComponentPatch } from "@package/net/minecraft/core/component";
+import { $DataComponentType_, $DataComponentMap, $DataComponentMap_, $DataComponentPatch_, $DataComponentPatch, $DataComponentMap$Builder } from "@package/net/minecraft/core/component";
 import { $ItemAbility } from "@package/net/neoforged/neoforge/common";
 import { $SourceLine } from "@package/dev/latvian/mods/kubejs/script";
 import { $Item_, $Item, $UseAnim_, $Item$Properties, $Rarity_, $JukeboxSong, $TooltipFlag, $ArmorMaterial, $DyeColor_, $Tier_, $ItemStack_, $ItemStack, $Instrument, $ArmorItem$Type_, $Tier, $ArmorMaterial$Layer } from "@package/net/minecraft/world/item";
@@ -54,6 +54,10 @@ export * as creativetab from "@package/dev/latvian/mods/kubejs/item/creativetab"
 declare module "@package/dev/latvian/mods/kubejs/item" {
     export class $ItemClickedKubeEvent implements $KubePlayerEvent {
         /**
+         * The hand that the item was clicked with.
+         */
+        getHand(): $InteractionHand;
+        /**
          * The ray trace result of the click.
          */
         getTarget(): $KubeRayTraceResult;
@@ -65,20 +69,10 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * The player that clicked with the item.
          */
         getEntity(): $Player;
-        /**
-         * The hand that the item was clicked with.
-         */
-        getHand(): $InteractionHand;
         getPlayer(): $Player;
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -86,17 +80,23 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -110,21 +110,33 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         success(value: $Object): $Object;
         constructor(player: $Player, hand: $InteractionHand_, item: $ItemStack_);
+        get hand(): $InteractionHand;
         get target(): $KubeRayTraceResult;
         get item(): $ItemStack;
         get entity(): $Player;
-        get hand(): $InteractionHand;
         get player(): $Player;
         get level(): $Level;
         get registries(): $RegistryAccess;
         get server(): $MinecraftServer;
     }
     export class $FoodBuilder {
-        build(): $FoodProperties;
+        usingConvertsTo(stack: $ItemStack_): $FoodBuilder;
         /**
-         * Sets the saturation modifier. Note that the saturation restored is hunger * saturation.
+         * Removes an effect from the food.
          */
-        saturation(s: number): $FoodBuilder;
+        removeEffect(mobEffect: $MobEffect_): $FoodBuilder;
+        /**
+         * Sets the food is always edible.
+         */
+        alwaysEdible(): $FoodBuilder;
+        /**
+         * Sets whether the food is always edible.
+         */
+        alwaysEdible(flag: boolean): $FoodBuilder;
+        /**
+         * Sets seconds it takes to eat the food.
+         */
+        eatSeconds(seconds: number): $FoodBuilder;
         /**
          * Sets a callback that is called when the food is eaten.
          * 
@@ -133,9 +145,10 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         eaten(e: $Consumer_<$FoodEatenKubeEvent>): $FoodBuilder;
         /**
-         * Removes an effect from the food.
+         * Sets the food is fast to eat (having half of the eating time).
          */
-        removeEffect(mobEffect: $MobEffect_): $FoodBuilder;
+        fastToEat(): $FoodBuilder;
+        build(): $FoodProperties;
         /**
          * Adds an effect to the food. Note that the effect duration is in ticks (20 ticks = 1 second).
          * 
@@ -145,27 +158,14 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * @param probability The probability of the effect being applied. 1 = 100%.
          */
         effect(mobEffectId: $ResourceLocation_, duration: number, amplifier: number, probability: number): $FoodBuilder;
-        usingConvertsTo(stack: $ItemStack_): $FoodBuilder;
+        /**
+         * Sets the saturation modifier. Note that the saturation restored is hunger * saturation.
+         */
+        saturation(s: number): $FoodBuilder;
         /**
          * Sets the hunger restored.
          */
         nutrition(h: number): $FoodBuilder;
-        /**
-         * Sets seconds it takes to eat the food.
-         */
-        eatSeconds(seconds: number): $FoodBuilder;
-        /**
-         * Sets whether the food is always edible.
-         */
-        alwaysEdible(flag: boolean): $FoodBuilder;
-        /**
-         * Sets the food is always edible.
-         */
-        alwaysEdible(): $FoodBuilder;
-        /**
-         * Sets the food is fast to eat (having half of the eating time).
-         */
-        fastToEat(): $FoodBuilder;
         constructor();
         constructor(properties: $FoodProperties_);
     }
@@ -196,29 +196,29 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -243,6 +243,87 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
     export class $ItemBehaviorFunctions {
     }
     export interface $ItemBehaviorFunctions {
+        isEnderMask(isEnderMask: boolean): this;
+        /**
+         * Whether this item can be used to hide player head for enderman
+         */
+        isEnderMask(isEnderMask: $ItemBehavior$EndermanMaskTest_): this;
+        /**
+         * Determines if the item entity will be destroyed by the damage source.
+         * 
+         * For example, netherite items will not be destroyed by lava.
+         */
+        canBeHurtBy(canBeHurtBy: $BiPredicate_<$ItemStack, $DamageSource>): this;
+        /**
+         * Determines if piglins will give an item or something in exchange for the item.
+         */
+        isPiglinCurrency(isPiglinCurrency: $Predicate_<$ItemStack>): this;
+        isPiglinCurrency(isPiglinCurrency: boolean): this;
+        /**
+         * When players finish using the item.
+         * 
+         * This is called only when `useDuration` ticks have passed.
+         * 
+         * For example, when eating food, this is called when the player has finished eating the food, so hunger is restored.
+         */
+        finishUsing(finishUsing: $ItemBehavior$FinishUsingCallback_): this;
+        /**
+         * Determines the lifespan in ticks of the item when it's dropped on the ground as an entity.
+         * 
+         * Used for items like Fluix Seeds to prevent them from despawning.
+         */
+        getEntityLifespan(getEntityLifespan: $ToIntBiFunction_<$ItemStack, $Level>): this;
+        getEntityLifespan(lifespan: number): this;
+        /**
+         * Returns the enchanted item stack after applying enchantments to the item.
+         * 
+         * For example, books will be transformed into enchanted books by using this.
+         */
+        applyEnchantments(applyEnchantments: $BiFunction_<$ItemStack, $List<$EnchantmentInstance>, $ItemStack>): this;
+        /**
+         * Gets called when the item is used to hurt an entity.
+         * 
+         * For example, when using a sword to hit a mob, this is called.
+         */
+        hurtEnemy(hurtEnemy: $Predicate_<$ItemBehavior$HurtEnemyContext>): this;
+        /**
+         * Determines if the item can perform corresponding action. E.g. shearing sheep, stripping logs, etc.
+         */
+        canPerformAction(canPerformAction: $BiPredicate_<$ItemStack, $ItemAbility>): this;
+        /**
+         * When players did not finish using the item but released the right mouse button halfway through.
+         * 
+         * An example is the bow, where the arrow is shot when the player releases the right mouse button.
+         * 
+         * To ensure the bow won't finish using, Minecraft sets the `useDuration` to a very high number (1h).
+         */
+        releaseUsing(releaseUsing: $ItemBehavior$ReleaseUsingCallback_): this;
+        canDisableShield(canDisableShield: boolean): this;
+        /**
+         * Determines if the item can disable shield when attacking like axe does.
+         */
+        canDisableShield(canDisableShield: $ItemBehavior$DisableShieldTest_): this;
+        /**
+         * Called every tick when the player is flying with elytra with this item equipped in the chest slot.
+         * 
+         * Returning false will stop the player from flying.
+         */
+        elytraFlightTick(elytraFlightTick: $ItemBehavior$ElytraFlightTickCallback_): this;
+        canElytraFly(canElytraFly: boolean): this;
+        /**
+         * Determines if the item allows player to do elytra flying when equipped in the chest slot.
+         */
+        canElytraFly(canElytraFly: $BiPredicate_<$ItemStack, $LivingEntity>): this;
+        /**
+         * Determines the animation of the item when used, e.g. eating food.
+         */
+        useAnimation(anim: $UseAnim_): this;
+        /**
+         * Determines if the item entity will be destroyed by listed damages types.
+         * 
+         * All other damages will be treated as normal. Passing [] will make the item immune to all damage.
+         */
+        onlyHurtBy(damageTypes: $List_<$ResourceKey_<$DamageType>>): this;
         /**
          * Sets the item's name dynamically.
          */
@@ -253,29 +334,6 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * For example, when eating food, returning true will make the player start eating the food.
          */
         use(use: $ItemBehavior$UseCallback_): this;
-        canWalkOnPowderedSnow(canWalkOnPowderedSnow: boolean): this;
-        /**
-         * Determines if the player can walk on powdered snow with this item worn in the feet slot.
-         */
-        canWalkOnPowderedSnow(canWalkOnPowderedSnow: $BiPredicate_<$ItemStack, $LivingEntity>): this;
-        /**
-         * Determines if piglins will be neutral to the wearer of the item and will not attack on sight.
-         * 
-         * However, this does not prevent piglins from being hostile due to other actions, or make piglins
-         * stop being hostile if they are already hostile.
-         */
-        makesPiglinsNeutral(makesPiglinsNeutral: $BiPredicate_<$ItemStack, $LivingEntity>): this;
-        makesPiglinsNeutral(makesPiglinsNeutral: boolean): this;
-        /**
-         * Determines if the item entity will be destroyed by listed damages types.
-         * 
-         * All other damages will be treated as normal. Passing [] will make the item immune to all damage.
-         */
-        onlyHurtBy(damageTypes: $List_<$ResourceKey_<$DamageType>>): this;
-        /**
-         * Adds a tooltip to the item.
-         */
-        tooltip(component: $Component_): this;
         /**
          * Returns the item that remains in the crafting grid (or furnace fuel) after crafting with this item programatically.
          * 
@@ -284,83 +342,12 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * An example would be durability-consuming items, e.g. hammers or wrenches.
          */
         craftingRemainingItem(craftingRemainingItem: $UnaryOperator_<$ItemStack>): this;
-        isPiglinCurrency(isPiglinCurrency: boolean): this;
-        /**
-         * Determines if piglins will give an item or something in exchange for the item.
-         */
-        isPiglinCurrency(isPiglinCurrency: $Predicate_<$ItemStack>): this;
-        /**
-         * When players finish using the item.
-         * 
-         * This is called only when `useDuration` ticks have passed.
-         * 
-         * For example, when eating food, this is called when the player has finished eating the food, so hunger is restored.
-         */
-        finishUsing(finishUsing: $ItemBehavior$FinishUsingCallback_): this;
-        isEnderMask(isEnderMask: boolean): this;
-        /**
-         * Whether this item can be used to hide player head for enderman
-         */
-        isEnderMask(isEnderMask: $ItemBehavior$EndermanMaskTest_): this;
-        /**
-         * Returns the enchanted item stack after applying enchantments to the item.
-         * 
-         * For example, books will be transformed into enchanted books by using this.
-         */
-        applyEnchantments(applyEnchantments: $BiFunction_<$ItemStack, $List<$EnchantmentInstance>, $ItemStack>): this;
-        /**
-         * Determines if the item entity will be destroyed by the damage source.
-         * 
-         * For example, netherite items will not be destroyed by lava.
-         */
-        canBeHurtBy(canBeHurtBy: $BiPredicate_<$ItemStack, $DamageSource>): this;
-        getEntityLifespan(lifespan: number): this;
-        /**
-         * Determines the lifespan in ticks of the item when it's dropped on the ground as an entity.
-         * 
-         * Used for items like Fluix Seeds to prevent them from despawning.
-         */
-        getEntityLifespan(getEntityLifespan: $ToIntBiFunction_<$ItemStack, $Level>): this;
-        /**
-         * When players did not finish using the item but released the right mouse button halfway through.
-         * 
-         * An example is the bow, where the arrow is shot when the player releases the right mouse button.
-         * 
-         * To ensure the bow won't finish using, Minecraft sets the `useDuration` to a very high number (1h).
-         */
-        releaseUsing(releaseUsing: $ItemBehavior$ReleaseUsingCallback_): this;
-        /**
-         * Determines if the item allows player to do elytra flying when equipped in the chest slot.
-         */
-        canElytraFly(canElytraFly: $BiPredicate_<$ItemStack, $LivingEntity>): this;
-        canElytraFly(canElytraFly: boolean): this;
-        /**
-         * Called every tick when the player is flying with elytra with this item equipped in the chest slot.
-         * 
-         * Returning false will stop the player from flying.
-         */
-        elytraFlightTick(elytraFlightTick: $ItemBehavior$ElytraFlightTickCallback_): this;
-        /**
-         * Determines if the item can perform corresponding action. E.g. shearing sheep, stripping logs, etc.
-         */
-        canPerformAction(canPerformAction: $BiPredicate_<$ItemStack, $ItemAbility>): this;
-        /**
-         * Determines if the item can disable shield when attacking like axe does.
-         */
-        canDisableShield(canDisableShield: $ItemBehavior$DisableShieldTest_): this;
-        canDisableShield(canDisableShield: boolean): this;
         /**
          * Determines if the item entity will be immune to listed damages types.
          * 
          * All other damages will be treated as normal. Passing [] will have no effect.
          */
         immuneTo(damageTypes: $List_<$ResourceKey_<$DamageType>>): this;
-        /**
-         * Determines the width of the item's durability bar. Defaulted to vanilla behavior.
-         * 
-         * The function should return a value between 0 and 13 (max width of the bar).
-         */
-        barWidth(barWidth: $ToIntFunction_<$ItemStack>): this;
         /**
          * Makes the item glow like enchanted, even if it's not enchanted.
          */
@@ -370,11 +357,24 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         barColor(barColor: $Function_<$ItemStack, $KubeColor>): this;
         /**
-         * Gets called when the item is used to hurt an entity.
+         * Determines the width of the item's durability bar. Defaulted to vanilla behavior.
          * 
-         * For example, when using a sword to hit a mob, this is called.
+         * The function should return a value between 0 and 13 (max width of the bar).
          */
-        hurtEnemy(hurtEnemy: $Predicate_<$ItemBehavior$HurtEnemyContext>): this;
+        barWidth(barWidth: $ToIntFunction_<$ItemStack>): this;
+        /**
+         * Determines if the player can walk on powdered snow with this item worn in the feet slot.
+         */
+        canWalkOnPowderedSnow(canWalkOnPowderedSnow: $BiPredicate_<$ItemStack, $LivingEntity>): this;
+        canWalkOnPowderedSnow(canWalkOnPowderedSnow: boolean): this;
+        makesPiglinsNeutral(makesPiglinsNeutral: boolean): this;
+        /**
+         * Determines if piglins will be neutral to the wearer of the item and will not attack on sight.
+         * 
+         * However, this does not prevent piglins from being hostile due to other actions, or make piglins
+         * stop being hostile if they are already hostile.
+         */
+        makesPiglinsNeutral(makesPiglinsNeutral: $BiPredicate_<$ItemStack, $LivingEntity>): this;
         /**
          * The duration when the item is used.
          * 
@@ -383,40 +383,34 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         useDuration(useDuration: $ToIntBiFunction_<$ItemStack, $LivingEntity>): this;
         /**
-         * Determines the animation of the item when used, e.g. eating food.
+         * Adds a tooltip to the item.
          */
-        useAnimation(anim: $UseAnim_): this;
+        tooltip(component: $Component_): this;
     }
     /**
      * Values that may be interpreted as {@link $ItemBehaviorFunctions}.
      */
     export type $ItemBehaviorFunctions_ = (() => void);
     export class $ItemBehavior$HurtEnemyContext extends $Record {
-        getAttacker(): $LivingEntity;
         getTarget(): $LivingEntity;
         getItem(): $ItemStack;
+        getAttacker(): $LivingEntity;
         constructor(getItem: $ItemStack_, getTarget: $LivingEntity, getAttacker: $LivingEntity);
-        get attacker(): $LivingEntity;
         get target(): $LivingEntity;
         get item(): $ItemStack;
+        get attacker(): $LivingEntity;
     }
     /**
      * Values that may be interpreted as {@link $ItemBehavior$HurtEnemyContext}.
      */
-    export type $ItemBehavior$HurtEnemyContext_ = { getAttacker?: $LivingEntity, getTarget?: $LivingEntity, getItem?: $ItemStack_,  } | [getAttacker?: $LivingEntity, getTarget?: $LivingEntity, getItem?: $ItemStack_, ];
+    export type $ItemBehavior$HurtEnemyContext_ = { getTarget?: $LivingEntity, getItem?: $ItemStack_, getAttacker?: $LivingEntity,  } | [getTarget?: $LivingEntity, getItem?: $ItemStack_, getAttacker?: $LivingEntity, ];
     export class $ModifyItemTooltipsKubeEvent implements $KubeEvent {
+        modifyAll(consumer: $Consumer_<$TextActionBuilder>): void;
+        modifyAll(requirements: $TooltipRequirements_, consumer: $Consumer_<$TextActionBuilder>): void;
         add(filter: $Ingredient_, text: $List_<$Component_>): void;
         add(filter: $Ingredient_, requirements: $TooltipRequirements_, text: $List_<$Component_>): void;
         modify(filter: $Ingredient_, consumer: $Consumer_<$TextActionBuilder>): void;
         modify(filter: $Ingredient_, requirements: $TooltipRequirements_, consumer: $Consumer_<$TextActionBuilder>): void;
-        modifyAll(consumer: $Consumer_<$TextActionBuilder>): void;
-        modifyAll(requirements: $TooltipRequirements_, consumer: $Consumer_<$TextActionBuilder>): void;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -424,17 +418,23 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -451,6 +451,10 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
     }
     export class $ItemEntityInteractedKubeEvent implements $KubePlayerEvent {
         /**
+         * The hand that was used to interact with the entity.
+         */
+        getHand(): $InteractionHand;
+        /**
          * The entity that was interacted with.
          */
         getTarget(): $Entity;
@@ -462,20 +466,10 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * The player that interacted with the entity.
          */
         getEntity(): $Player;
-        /**
-         * The hand that was used to interact with the entity.
-         */
-        getHand(): $InteractionHand;
         getPlayer(): $Player;
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -483,17 +477,23 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -507,10 +507,10 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         success(value: $Object): $Object;
         constructor(player: $Player, entity: $Entity, hand: $InteractionHand_, item: $ItemStack_);
+        get hand(): $InteractionHand;
         get target(): $Entity;
         get item(): $ItemStack;
         get entity(): $Player;
-        get hand(): $InteractionHand;
         get player(): $Player;
         get level(): $Level;
         get registries(): $RegistryAccess;
@@ -525,21 +525,15 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
     }
     export class $ItemModelPropertiesKubeEvent implements $KubeStartupEvent {
         /**
+         * Register a model property for all items.
+         */
+        registerAll(overwriteId: $ResourceLocation_, callback: $ClampedItemPropertyFunction_): void;
+        /**
          * Register a model property for an item. Model properties are used to change the appearance of an item in the world.
          * 
          * More about model properties: https://minecraft.wiki/w/Tutorials/Models#Item_predicates
          */
         register(ingredient: $Ingredient_, overwriteId: $ResourceLocation_, callback: $ClampedItemPropertyFunction_): void;
-        /**
-         * Register a model property for all items.
-         */
-        registerAll(overwriteId: $ResourceLocation_, callback: $ClampedItemPropertyFunction_): void;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -547,17 +541,23 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -595,29 +595,29 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -653,29 +653,29 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -697,13 +697,13 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         get server(): $MinecraftServer;
     }
     export class $ArmorMaterialBuilder extends $BuilderBase<$ArmorMaterial> {
-        layers(v: $ArmorMaterial$Layer[]): this;
-        enchantmentValue(v: number): this;
-        repairIngredient(v: $Supplier_<$Ingredient>): this;
         knockbackResistance(v: number): this;
         equipSound(sound: $Holder_<$SoundEvent>): this;
-        toughness(v: number): this;
+        enchantmentValue(v: number): this;
+        repairIngredient(v: $Supplier_<$Ingredient>): this;
+        layers(v: $ArmorMaterial$Layer[]): this;
         defense(v: $Map_<$ArmorItem$Type_, number>): this;
+        toughness(v: number): this;
         registryKey: $ResourceKey<$Registry<$ArmorMaterial>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -714,31 +714,31 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         kjs$setStackInSlot(slot: number, stack: $ItemStack_): void;
         kjs$getSlots(): number;
         kjs$getStackInSlot(slot: number): $ItemStack;
-        kjs$insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
-        kjs$extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
         kjs$getSlotLimit(slot: number): number;
+        kjs$insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
         kjs$isItemValid(slot: number, stack: $ItemStack_): boolean;
+        kjs$extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
+        find(): number;
+        find(match: $ItemPredicate_): number;
+        count(match: $ItemPredicate_): number;
+        count(): number;
+        clear(): void;
+        clear(match: $ItemPredicate_): void;
+        isEmpty(): boolean;
+        getHeight(): number;
+        getWidth(): number;
+        setChanged(): void;
+        asContainer(): $Container;
+        getAllItems(): $List<$ItemStack>;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
-        getWidth(): number;
-        getHeight(): number;
-        asContainer(): $Container;
-        getAllItems(): $List<$ItemStack>;
-        setChanged(): void;
-        isEmpty(): boolean;
         getBlock(level: $Level_): $LevelBlock;
-        clear(match: $ItemPredicate_): void;
-        clear(): void;
-        count(match: $ItemPredicate_): number;
-        count(): number;
-        find(): number;
-        find(match: $ItemPredicate_): number;
         constructor(compose: $InventoryKJS, minSlot: number, maxSlotExclusive: number);
-        get width(): number;
-        get height(): number;
-        get allItems(): $List<$ItemStack>;
         get empty(): boolean;
+        get height(): number;
+        get width(): number;
+        get allItems(): $List<$ItemStack>;
     }
     export class $ItemBehavior$DisableShieldTest {
     }
@@ -828,29 +828,29 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -886,24 +886,24 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         constructor();
     }
     export class $MutableToolTier implements $Tier {
-        getIncorrectBlocksForDropsTag(): $ResourceLocation;
-        setIncorrectBlocksForDropsTag(tag: $ResourceLocation_): void;
-        getAttackDamageBonus(): number;
-        getEnchantmentValue(): number;
-        setSpeed(f: number): void;
-        getSpeed(): number;
-        getVanillaRepairIngredient(): $Ingredient;
         getIncorrectBlocksForDrops(): $TagKey<$Block>;
+        getVanillaRepairIngredient(): $Ingredient;
+        getAttackDamageBonus(): number;
         getUses(): number;
+        getIncorrectBlocksForDropsTag(): $ResourceLocation;
         setAttackDamageBonus(f: number): void;
+        setIncorrectBlocksForDropsTag(tag: $ResourceLocation_): void;
+        setSpeed(f: number): void;
+        getEnchantmentValue(): number;
+        getSpeed(): number;
         setUses(i: number): void;
         setEnchantmentValue(i: number): void;
         setRepairIngredient(arg0: $Ingredient_): void;
         createToolProperties(arg0: $TagKey_<$Block>): $Tool;
         parent: $Tier;
         constructor(p: $Tier_);
-        get vanillaRepairIngredient(): $Ingredient;
         get incorrectBlocksForDrops(): $TagKey<$Block>;
+        get vanillaRepairIngredient(): $Ingredient;
         set repairIngredient(value: $Ingredient_);
     }
     export class $ItemModificationKubeEvent implements $KubeEvent {
@@ -914,29 +914,29 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         modify(arg0: $ItemPredicate_, c: $Consumer_<$ItemModificationKubeEvent$ItemModifications>): void;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -952,8 +952,8 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         constructor();
     }
     export class $ItemHandlerUtils {
-        static giveItemToPlayer(player: $Player, stack: $ItemStack_, preferredSlot: number): void;
         static insertItem(dest: $InventoryKJS, stack: $ItemStack_, simulate: boolean): $ItemStack;
+        static giveItemToPlayer(player: $Player, stack: $ItemStack_, preferredSlot: number): void;
         static insertItemStacked(inventory: $InventoryKJS, stack: $ItemStack_, simulate: boolean): $ItemStack;
         constructor();
     }
@@ -962,28 +962,22 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         constructor();
     }
     export class $JukeboxSongBuilder extends $BuilderBase<$JukeboxSong> {
-        description(description: $Component_): this;
-        comparatorOutput(comparatorOutput: number): this;
         song(sound: $Holder_<$SoundEvent>, length: number): this;
+        comparatorOutput(comparatorOutput: number): this;
+        description(description: $Component_): this;
         registryKey: $ResourceKey<$Registry<$JukeboxSong>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         constructor(id: $ResourceLocation_);
     }
     export class $ItemDestroyedKubeEvent implements $KubePlayerEvent {
+        getHand(): $InteractionHand;
         getItem(): $ItemStack;
         getEntity(): $Player;
-        getHand(): $InteractionHand;
         getPlayer(): $Player;
         getLevel(): $Level;
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -991,17 +985,23 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -1015,9 +1015,9 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         success(value: $Object): $Object;
         constructor(e: $PlayerDestroyItemEvent);
+        get hand(): $InteractionHand;
         get item(): $ItemStack;
         get entity(): $Player;
-        get hand(): $InteractionHand;
         get player(): $Player;
         get level(): $Level;
         get registries(): $RegistryAccess;
@@ -1026,29 +1026,29 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
     export class $DynamicItemTooltipsKubeEvent implements $KubeEvent {
         add(text: $List_<$Component_>): void;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -1073,17 +1073,44 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
     }
     export class $ItemBuilder extends $ModelledBuilderBase<$Item> implements $ItemBehaviorFunctions {
         /**
+         * Set the food properties of the item.
+         */
+        food(b: $Consumer_<$FoodBuilder>): this;
+        /**
+         * Set the food nutrition and saturation of the item.
+         */
+        food(nutrition: number, saturation: number): this;
+        jukeboxPlayable(song: $ResourceKey_<$JukeboxSong>, showInTooltip: boolean): this;
+        jukeboxPlayable(song: $ResourceKey_<$JukeboxSong>): this;
+        /**
+         * Adds subtypes to the item. The function should return a collection of item stacks, each with a different subtype.
+         * 
+         * Each subtype will appear as a separate item in JEI and the creative inventory.
+         */
+        subtypes(fn: $Function_<$ItemStack, $Collection<$ItemStack>>): this;
+        /**
+         * Sets the item's container item, e.g. a bucket for a milk bucket.
+         */
+        containerItem(id: $ResourceLocation_): this;
+        transformObject(obj: $Item_): $Item;
+        /**
+         * Makes the item not stackable, equivalent to setting the item's max stack size to 1.
+         */
+        unstackable(): this;
+        disableRepair(): this;
+        createItemProperties(): $Item$Properties;
+        /**
          * @deprecated
          */
         group(g: string): this;
         /**
-         * Colorizes item's texture of the given index. Useful for coloring items, like GT ores ore dusts.
-         */
-        color(callback: $ItemTintFunction_): this;
-        /**
          * Colorizes item's texture of the given index. Index is used when you have multiple layers, e.g. a crushed ore (of rock + ore).
          */
         color(index: number, color: $ItemTintFunction_): this;
+        /**
+         * Colorizes item's texture of the given index. Useful for coloring items, like GT ores ore dusts.
+         */
+        color(callback: $ItemTintFunction_): this;
         /**
          * Sets the item's max stack size. Default is 64.
          */
@@ -1092,19 +1119,6 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * Sets the item's rarity.
          */
         rarity(v: $Rarity_): this;
-        createItemProperties(): $Item$Properties;
-        /**
-         * Set the food nutrition and saturation of the item.
-         */
-        food(nutrition: number, saturation: number): this;
-        /**
-         * Set the food properties of the item.
-         */
-        food(b: $Consumer_<$FoodBuilder>): this;
-        /**
-         * Sets the item's burn time. Default is 0 (Not a fuel).
-         */
-        burnTime(v: $TickDuration_): this;
         /**
          * Makes the item fire resistant like netherite tools (or not).
          */
@@ -1113,28 +1127,95 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * Makes the item fire resistant like netherite tools.
          */
         fireResistant(): this;
-        jukeboxPlayable(song: $ResourceKey_<$JukeboxSong>, showInTooltip: boolean): this;
-        jukeboxPlayable(song: $ResourceKey_<$JukeboxSong>): this;
+        /**
+         * Sets the item's burn time. Default is 0 (Not a fuel).
+         */
+        burnTime(v: $TickDuration_): this;
         /**
          * Sets the item's max damage. Default is 0 (No durability).
          */
         maxDamage(v: number): this;
+        isEnderMask(isEnderMask: boolean): $ItemBehaviorFunctions;
         /**
-         * Sets the item's container item, e.g. a bucket for a milk bucket.
+         * Whether this item can be used to hide player head for enderman
          */
-        containerItem(id: $ResourceLocation_): this;
+        isEnderMask(isEnderMask: $ItemBehavior$EndermanMaskTest_): $ItemBehaviorFunctions;
         /**
-         * Makes the item not stackable, equivalent to setting the item's max stack size to 1.
-         */
-        unstackable(): this;
-        disableRepair(): this;
-        /**
-         * Adds subtypes to the item. The function should return a collection of item stacks, each with a different subtype.
+         * Determines if the item entity will be destroyed by the damage source.
          * 
-         * Each subtype will appear as a separate item in JEI and the creative inventory.
+         * For example, netherite items will not be destroyed by lava.
          */
-        subtypes(fn: $Function_<$ItemStack, $Collection<$ItemStack>>): this;
-        transformObject(obj: $Item_): $Item;
+        canBeHurtBy(canBeHurtBy: $BiPredicate_<$ItemStack, $DamageSource>): $ItemBehaviorFunctions;
+        /**
+         * Determines if piglins will give an item or something in exchange for the item.
+         */
+        isPiglinCurrency(isPiglinCurrency: $Predicate_<$ItemStack>): $ItemBehaviorFunctions;
+        isPiglinCurrency(isPiglinCurrency: boolean): $ItemBehaviorFunctions;
+        /**
+         * When players finish using the item.
+         * 
+         * This is called only when `useDuration` ticks have passed.
+         * 
+         * For example, when eating food, this is called when the player has finished eating the food, so hunger is restored.
+         */
+        finishUsing(finishUsing: $ItemBehavior$FinishUsingCallback_): $ItemBehaviorFunctions;
+        /**
+         * Determines the lifespan in ticks of the item when it's dropped on the ground as an entity.
+         * 
+         * Used for items like Fluix Seeds to prevent them from despawning.
+         */
+        getEntityLifespan(getEntityLifespan: $ToIntBiFunction_<$ItemStack, $Level>): $ItemBehaviorFunctions;
+        getEntityLifespan(lifespan: number): $ItemBehaviorFunctions;
+        /**
+         * Returns the enchanted item stack after applying enchantments to the item.
+         * 
+         * For example, books will be transformed into enchanted books by using this.
+         */
+        applyEnchantments(applyEnchantments: $BiFunction_<$ItemStack, $List<$EnchantmentInstance>, $ItemStack>): $ItemBehaviorFunctions;
+        /**
+         * Gets called when the item is used to hurt an entity.
+         * 
+         * For example, when using a sword to hit a mob, this is called.
+         */
+        hurtEnemy(hurtEnemy: $Predicate_<$ItemBehavior$HurtEnemyContext>): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item can perform corresponding action. E.g. shearing sheep, stripping logs, etc.
+         */
+        canPerformAction(canPerformAction: $BiPredicate_<$ItemStack, $ItemAbility>): $ItemBehaviorFunctions;
+        /**
+         * When players did not finish using the item but released the right mouse button halfway through.
+         * 
+         * An example is the bow, where the arrow is shot when the player releases the right mouse button.
+         * 
+         * To ensure the bow won't finish using, Minecraft sets the `useDuration` to a very high number (1h).
+         */
+        releaseUsing(releaseUsing: $ItemBehavior$ReleaseUsingCallback_): $ItemBehaviorFunctions;
+        canDisableShield(canDisableShield: boolean): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item can disable shield when attacking like axe does.
+         */
+        canDisableShield(canDisableShield: $ItemBehavior$DisableShieldTest_): $ItemBehaviorFunctions;
+        /**
+         * Called every tick when the player is flying with elytra with this item equipped in the chest slot.
+         * 
+         * Returning false will stop the player from flying.
+         */
+        elytraFlightTick(elytraFlightTick: $ItemBehavior$ElytraFlightTickCallback_): $ItemBehaviorFunctions;
+        canElytraFly(canElytraFly: boolean): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item allows player to do elytra flying when equipped in the chest slot.
+         */
+        canElytraFly(canElytraFly: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
+        /**
+         * Determines the animation of the item when used, e.g. eating food.
+         */
+        useAnimation(anim: $UseAnim_): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item entity will be destroyed by listed damages types.
+         * 
+         * All other damages will be treated as normal. Passing [] will make the item immune to all damage.
+         */
+        onlyHurtBy(damageTypes: $List_<$ResourceKey_<$DamageType>>): $ItemBehaviorFunctions;
         /**
          * Sets the item's name dynamically.
          */
@@ -1145,29 +1226,6 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * For example, when eating food, returning true will make the player start eating the food.
          */
         use(use: $ItemBehavior$UseCallback_): $ItemBehaviorFunctions;
-        canWalkOnPowderedSnow(canWalkOnPowderedSnow: boolean): $ItemBehaviorFunctions;
-        /**
-         * Determines if the player can walk on powdered snow with this item worn in the feet slot.
-         */
-        canWalkOnPowderedSnow(canWalkOnPowderedSnow: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
-        /**
-         * Determines if piglins will be neutral to the wearer of the item and will not attack on sight.
-         * 
-         * However, this does not prevent piglins from being hostile due to other actions, or make piglins
-         * stop being hostile if they are already hostile.
-         */
-        makesPiglinsNeutral(makesPiglinsNeutral: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
-        makesPiglinsNeutral(makesPiglinsNeutral: boolean): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item entity will be destroyed by listed damages types.
-         * 
-         * All other damages will be treated as normal. Passing [] will make the item immune to all damage.
-         */
-        onlyHurtBy(damageTypes: $List_<$ResourceKey_<$DamageType>>): $ItemBehaviorFunctions;
-        /**
-         * Adds a tooltip to the item.
-         */
-        tooltip(component: $Component_): $ItemBehaviorFunctions;
         /**
          * Returns the item that remains in the crafting grid (or furnace fuel) after crafting with this item programatically.
          * 
@@ -1176,83 +1234,12 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * An example would be durability-consuming items, e.g. hammers or wrenches.
          */
         craftingRemainingItem(craftingRemainingItem: $UnaryOperator_<$ItemStack>): $ItemBehaviorFunctions;
-        isPiglinCurrency(isPiglinCurrency: boolean): $ItemBehaviorFunctions;
-        /**
-         * Determines if piglins will give an item or something in exchange for the item.
-         */
-        isPiglinCurrency(isPiglinCurrency: $Predicate_<$ItemStack>): $ItemBehaviorFunctions;
-        /**
-         * When players finish using the item.
-         * 
-         * This is called only when `useDuration` ticks have passed.
-         * 
-         * For example, when eating food, this is called when the player has finished eating the food, so hunger is restored.
-         */
-        finishUsing(finishUsing: $ItemBehavior$FinishUsingCallback_): $ItemBehaviorFunctions;
-        isEnderMask(isEnderMask: boolean): $ItemBehaviorFunctions;
-        /**
-         * Whether this item can be used to hide player head for enderman
-         */
-        isEnderMask(isEnderMask: $ItemBehavior$EndermanMaskTest_): $ItemBehaviorFunctions;
-        /**
-         * Returns the enchanted item stack after applying enchantments to the item.
-         * 
-         * For example, books will be transformed into enchanted books by using this.
-         */
-        applyEnchantments(applyEnchantments: $BiFunction_<$ItemStack, $List<$EnchantmentInstance>, $ItemStack>): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item entity will be destroyed by the damage source.
-         * 
-         * For example, netherite items will not be destroyed by lava.
-         */
-        canBeHurtBy(canBeHurtBy: $BiPredicate_<$ItemStack, $DamageSource>): $ItemBehaviorFunctions;
-        getEntityLifespan(lifespan: number): $ItemBehaviorFunctions;
-        /**
-         * Determines the lifespan in ticks of the item when it's dropped on the ground as an entity.
-         * 
-         * Used for items like Fluix Seeds to prevent them from despawning.
-         */
-        getEntityLifespan(getEntityLifespan: $ToIntBiFunction_<$ItemStack, $Level>): $ItemBehaviorFunctions;
-        /**
-         * When players did not finish using the item but released the right mouse button halfway through.
-         * 
-         * An example is the bow, where the arrow is shot when the player releases the right mouse button.
-         * 
-         * To ensure the bow won't finish using, Minecraft sets the `useDuration` to a very high number (1h).
-         */
-        releaseUsing(releaseUsing: $ItemBehavior$ReleaseUsingCallback_): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item allows player to do elytra flying when equipped in the chest slot.
-         */
-        canElytraFly(canElytraFly: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
-        canElytraFly(canElytraFly: boolean): $ItemBehaviorFunctions;
-        /**
-         * Called every tick when the player is flying with elytra with this item equipped in the chest slot.
-         * 
-         * Returning false will stop the player from flying.
-         */
-        elytraFlightTick(elytraFlightTick: $ItemBehavior$ElytraFlightTickCallback_): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item can perform corresponding action. E.g. shearing sheep, stripping logs, etc.
-         */
-        canPerformAction(canPerformAction: $BiPredicate_<$ItemStack, $ItemAbility>): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item can disable shield when attacking like axe does.
-         */
-        canDisableShield(canDisableShield: $ItemBehavior$DisableShieldTest_): $ItemBehaviorFunctions;
-        canDisableShield(canDisableShield: boolean): $ItemBehaviorFunctions;
         /**
          * Determines if the item entity will be immune to listed damages types.
          * 
          * All other damages will be treated as normal. Passing [] will have no effect.
          */
         immuneTo(damageTypes: $List_<$ResourceKey_<$DamageType>>): $ItemBehaviorFunctions;
-        /**
-         * Determines the width of the item's durability bar. Defaulted to vanilla behavior.
-         * 
-         * The function should return a value between 0 and 13 (max width of the bar).
-         */
-        barWidth(barWidth: $ToIntFunction_<$ItemStack>): $ItemBehaviorFunctions;
         /**
          * Makes the item glow like enchanted, even if it's not enchanted.
          */
@@ -1262,11 +1249,24 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         barColor(barColor: $Function_<$ItemStack, $KubeColor>): $ItemBehaviorFunctions;
         /**
-         * Gets called when the item is used to hurt an entity.
+         * Determines the width of the item's durability bar. Defaulted to vanilla behavior.
          * 
-         * For example, when using a sword to hit a mob, this is called.
+         * The function should return a value between 0 and 13 (max width of the bar).
          */
-        hurtEnemy(hurtEnemy: $Predicate_<$ItemBehavior$HurtEnemyContext>): $ItemBehaviorFunctions;
+        barWidth(barWidth: $ToIntFunction_<$ItemStack>): $ItemBehaviorFunctions;
+        /**
+         * Determines if the player can walk on powdered snow with this item worn in the feet slot.
+         */
+        canWalkOnPowderedSnow(canWalkOnPowderedSnow: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
+        canWalkOnPowderedSnow(canWalkOnPowderedSnow: boolean): $ItemBehaviorFunctions;
+        makesPiglinsNeutral(makesPiglinsNeutral: boolean): $ItemBehaviorFunctions;
+        /**
+         * Determines if piglins will be neutral to the wearer of the item and will not attack on sight.
+         * 
+         * However, this does not prevent piglins from being hostile due to other actions, or make piglins
+         * stop being hostile if they are already hostile.
+         */
+        makesPiglinsNeutral(makesPiglinsNeutral: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
         /**
          * The duration when the item is used.
          * 
@@ -1275,9 +1275,9 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         useDuration(useDuration: $ToIntBiFunction_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
         /**
-         * Determines the animation of the item when used, e.g. eating food.
+         * Adds a tooltip to the item.
          */
-        useAnimation(anim: $UseAnim_): $ItemBehaviorFunctions;
+        tooltip(component: $Component_): $ItemBehaviorFunctions;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
         registryKey: $ResourceKey<$Registry<$Item>>;
@@ -1305,29 +1305,29 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         getRegistries(): $RegistryAccess;
         getServer(): $MinecraftServer;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -1355,35 +1355,116 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         get inventoryPlayer(): $Inventory;
     }
     export class $ItemModificationKubeEvent$ItemModifications extends $Record implements $ItemComponentFunctions, $ItemBehaviorFunctions {
-        item(): $Item;
-        setNameKey(key: string): void;
         setBurnTime(i: $TickDuration_): void;
-        getComponentMap(): $DataComponentMap;
+        setNameKey(key: string): void;
         setTier(builder: $Consumer_<$MutableToolTier>): void;
         disableRepair(): void;
         setCraftingRemainder(item: $Item_): void;
-        setDamage(damage: number): void;
-        setUnbreakable(): void;
-        setInstrument(instrument: $Holder_<$Instrument>): void;
-        setTool(tool: $Tool_): void;
-        setFood(nutrition: number, saturation: number): void;
-        setFood(foodProperties: $FoodProperties_): void;
-        setItemName(component: $Component_): void;
-        setMaxDamage(maxDamage: number): void;
-        setRepairCost(repairCost: number): void;
-        setFireworks(fireworks: $Fireworks_): void;
-        modifyFood(foodBuilder: $Consumer_<$FoodBuilder>): void;
-        setNoteBlockSound(id: $ResourceLocation_): void;
-        setMapItemColor(color: $KubeColor_): void;
-        setBucketEntityData(tag: $CompoundTag_): void;
-        setFireworkExplosion(explosion: $FireworkExplosion_): void;
-        setMaxStackSize(size: number): void;
-        setBlockEntityData(tag: $CompoundTag_): void;
-        setBundleContents(items: $List_<$ItemStack_>): void;
-        getAttributeModifiers(): $ItemAttributeModifiers;
-        setChargedProjectiles(items: $List_<$ItemStack_>): void;
-        setFireResistant(): void;
+        item(): $Item;
+        getComponentMap(): $DataComponentMap;
         setUnbreakableWithTooltip(): void;
+        setTool(tool: $Tool_): void;
+        setInstrument(instrument: $Holder_<$Instrument>): void;
+        setFireworks(fireworks: $Fireworks_): void;
+        setRepairCost(repairCost: number): void;
+        modifyFood(foodBuilder: $Consumer_<$FoodBuilder>): void;
+        setItemName(component: $Component_): void;
+        setDamage(damage: number): void;
+        setFood(foodProperties: $FoodProperties_): void;
+        setFood(nutrition: number, saturation: number): void;
+        setMaxDamage(maxDamage: number): void;
+        setUnbreakable(): void;
+        setFireResistant(): void;
+        setMapItemColor(color: $KubeColor_): void;
+        setNoteBlockSound(id: $ResourceLocation_): void;
+        setFireworkExplosion(explosion: $FireworkExplosion_): void;
+        setChargedProjectiles(items: $List_<$ItemStack_>): void;
+        setBucketEntityData(tag: $CompoundTag_): void;
+        getAttributeModifiers(): $ItemAttributeModifiers;
+        setBundleContents(items: $List_<$ItemStack_>): void;
+        setBlockEntityData(tag: $CompoundTag_): void;
+        setMaxStackSize(size: number): void;
+        isEnderMask(isEnderMask: boolean): $ItemBehaviorFunctions;
+        /**
+         * Whether this item can be used to hide player head for enderman
+         */
+        isEnderMask(isEnderMask: $ItemBehavior$EndermanMaskTest_): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item entity will be destroyed by the damage source.
+         * 
+         * For example, netherite items will not be destroyed by lava.
+         */
+        canBeHurtBy(canBeHurtBy: $BiPredicate_<$ItemStack, $DamageSource>): $ItemBehaviorFunctions;
+        /**
+         * Determines if piglins will give an item or something in exchange for the item.
+         */
+        isPiglinCurrency(isPiglinCurrency: $Predicate_<$ItemStack>): $ItemBehaviorFunctions;
+        isPiglinCurrency(isPiglinCurrency: boolean): $ItemBehaviorFunctions;
+        /**
+         * When players finish using the item.
+         * 
+         * This is called only when `useDuration` ticks have passed.
+         * 
+         * For example, when eating food, this is called when the player has finished eating the food, so hunger is restored.
+         */
+        finishUsing(finishUsing: $ItemBehavior$FinishUsingCallback_): $ItemBehaviorFunctions;
+        /**
+         * Determines the lifespan in ticks of the item when it's dropped on the ground as an entity.
+         * 
+         * Used for items like Fluix Seeds to prevent them from despawning.
+         */
+        getEntityLifespan(getEntityLifespan: $ToIntBiFunction_<$ItemStack, $Level>): $ItemBehaviorFunctions;
+        getEntityLifespan(lifespan: number): $ItemBehaviorFunctions;
+        /**
+         * Returns the enchanted item stack after applying enchantments to the item.
+         * 
+         * For example, books will be transformed into enchanted books by using this.
+         */
+        applyEnchantments(applyEnchantments: $BiFunction_<$ItemStack, $List<$EnchantmentInstance>, $ItemStack>): $ItemBehaviorFunctions;
+        /**
+         * Gets called when the item is used to hurt an entity.
+         * 
+         * For example, when using a sword to hit a mob, this is called.
+         */
+        hurtEnemy(hurtEnemy: $Predicate_<$ItemBehavior$HurtEnemyContext>): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item can perform corresponding action. E.g. shearing sheep, stripping logs, etc.
+         */
+        canPerformAction(canPerformAction: $BiPredicate_<$ItemStack, $ItemAbility>): $ItemBehaviorFunctions;
+        /**
+         * When players did not finish using the item but released the right mouse button halfway through.
+         * 
+         * An example is the bow, where the arrow is shot when the player releases the right mouse button.
+         * 
+         * To ensure the bow won't finish using, Minecraft sets the `useDuration` to a very high number (1h).
+         */
+        releaseUsing(releaseUsing: $ItemBehavior$ReleaseUsingCallback_): $ItemBehaviorFunctions;
+        canDisableShield(canDisableShield: boolean): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item can disable shield when attacking like axe does.
+         */
+        canDisableShield(canDisableShield: $ItemBehavior$DisableShieldTest_): $ItemBehaviorFunctions;
+        /**
+         * Called every tick when the player is flying with elytra with this item equipped in the chest slot.
+         * 
+         * Returning false will stop the player from flying.
+         */
+        elytraFlightTick(elytraFlightTick: $ItemBehavior$ElytraFlightTickCallback_): $ItemBehaviorFunctions;
+        canElytraFly(canElytraFly: boolean): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item allows player to do elytra flying when equipped in the chest slot.
+         */
+        canElytraFly(canElytraFly: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
+        /**
+         * Determines the animation of the item when used, e.g. eating food.
+         */
+        useAnimation(anim: $UseAnim_): $ItemBehaviorFunctions;
+        /**
+         * Determines if the item entity will be destroyed by listed damages types.
+         * 
+         * All other damages will be treated as normal. Passing [] will make the item immune to all damage.
+         */
+        onlyHurtBy(damageTypes: $List_<$ResourceKey_<$DamageType>>): $ItemBehaviorFunctions;
         /**
          * Sets the item's name dynamically.
          */
@@ -1394,29 +1475,6 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * For example, when eating food, returning true will make the player start eating the food.
          */
         use(use: $ItemBehavior$UseCallback_): $ItemBehaviorFunctions;
-        canWalkOnPowderedSnow(canWalkOnPowderedSnow: boolean): $ItemBehaviorFunctions;
-        /**
-         * Determines if the player can walk on powdered snow with this item worn in the feet slot.
-         */
-        canWalkOnPowderedSnow(canWalkOnPowderedSnow: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
-        /**
-         * Determines if piglins will be neutral to the wearer of the item and will not attack on sight.
-         * 
-         * However, this does not prevent piglins from being hostile due to other actions, or make piglins
-         * stop being hostile if they are already hostile.
-         */
-        makesPiglinsNeutral(makesPiglinsNeutral: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
-        makesPiglinsNeutral(makesPiglinsNeutral: boolean): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item entity will be destroyed by listed damages types.
-         * 
-         * All other damages will be treated as normal. Passing [] will make the item immune to all damage.
-         */
-        onlyHurtBy(damageTypes: $List_<$ResourceKey_<$DamageType>>): $ItemBehaviorFunctions;
-        /**
-         * Adds a tooltip to the item.
-         */
-        tooltip(component: $Component_): $ItemBehaviorFunctions;
         /**
          * Returns the item that remains in the crafting grid (or furnace fuel) after crafting with this item programatically.
          * 
@@ -1425,83 +1483,12 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          * An example would be durability-consuming items, e.g. hammers or wrenches.
          */
         craftingRemainingItem(craftingRemainingItem: $UnaryOperator_<$ItemStack>): $ItemBehaviorFunctions;
-        isPiglinCurrency(isPiglinCurrency: boolean): $ItemBehaviorFunctions;
-        /**
-         * Determines if piglins will give an item or something in exchange for the item.
-         */
-        isPiglinCurrency(isPiglinCurrency: $Predicate_<$ItemStack>): $ItemBehaviorFunctions;
-        /**
-         * When players finish using the item.
-         * 
-         * This is called only when `useDuration` ticks have passed.
-         * 
-         * For example, when eating food, this is called when the player has finished eating the food, so hunger is restored.
-         */
-        finishUsing(finishUsing: $ItemBehavior$FinishUsingCallback_): $ItemBehaviorFunctions;
-        isEnderMask(isEnderMask: boolean): $ItemBehaviorFunctions;
-        /**
-         * Whether this item can be used to hide player head for enderman
-         */
-        isEnderMask(isEnderMask: $ItemBehavior$EndermanMaskTest_): $ItemBehaviorFunctions;
-        /**
-         * Returns the enchanted item stack after applying enchantments to the item.
-         * 
-         * For example, books will be transformed into enchanted books by using this.
-         */
-        applyEnchantments(applyEnchantments: $BiFunction_<$ItemStack, $List<$EnchantmentInstance>, $ItemStack>): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item entity will be destroyed by the damage source.
-         * 
-         * For example, netherite items will not be destroyed by lava.
-         */
-        canBeHurtBy(canBeHurtBy: $BiPredicate_<$ItemStack, $DamageSource>): $ItemBehaviorFunctions;
-        getEntityLifespan(lifespan: number): $ItemBehaviorFunctions;
-        /**
-         * Determines the lifespan in ticks of the item when it's dropped on the ground as an entity.
-         * 
-         * Used for items like Fluix Seeds to prevent them from despawning.
-         */
-        getEntityLifespan(getEntityLifespan: $ToIntBiFunction_<$ItemStack, $Level>): $ItemBehaviorFunctions;
-        /**
-         * When players did not finish using the item but released the right mouse button halfway through.
-         * 
-         * An example is the bow, where the arrow is shot when the player releases the right mouse button.
-         * 
-         * To ensure the bow won't finish using, Minecraft sets the `useDuration` to a very high number (1h).
-         */
-        releaseUsing(releaseUsing: $ItemBehavior$ReleaseUsingCallback_): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item allows player to do elytra flying when equipped in the chest slot.
-         */
-        canElytraFly(canElytraFly: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
-        canElytraFly(canElytraFly: boolean): $ItemBehaviorFunctions;
-        /**
-         * Called every tick when the player is flying with elytra with this item equipped in the chest slot.
-         * 
-         * Returning false will stop the player from flying.
-         */
-        elytraFlightTick(elytraFlightTick: $ItemBehavior$ElytraFlightTickCallback_): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item can perform corresponding action. E.g. shearing sheep, stripping logs, etc.
-         */
-        canPerformAction(canPerformAction: $BiPredicate_<$ItemStack, $ItemAbility>): $ItemBehaviorFunctions;
-        /**
-         * Determines if the item can disable shield when attacking like axe does.
-         */
-        canDisableShield(canDisableShield: $ItemBehavior$DisableShieldTest_): $ItemBehaviorFunctions;
-        canDisableShield(canDisableShield: boolean): $ItemBehaviorFunctions;
         /**
          * Determines if the item entity will be immune to listed damages types.
          * 
          * All other damages will be treated as normal. Passing [] will have no effect.
          */
         immuneTo(damageTypes: $List_<$ResourceKey_<$DamageType>>): $ItemBehaviorFunctions;
-        /**
-         * Determines the width of the item's durability bar. Defaulted to vanilla behavior.
-         * 
-         * The function should return a value between 0 and 13 (max width of the bar).
-         */
-        barWidth(barWidth: $ToIntFunction_<$ItemStack>): $ItemBehaviorFunctions;
         /**
          * Makes the item glow like enchanted, even if it's not enchanted.
          */
@@ -1511,11 +1498,24 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         barColor(barColor: $Function_<$ItemStack, $KubeColor>): $ItemBehaviorFunctions;
         /**
-         * Gets called when the item is used to hurt an entity.
+         * Determines the width of the item's durability bar. Defaulted to vanilla behavior.
          * 
-         * For example, when using a sword to hit a mob, this is called.
+         * The function should return a value between 0 and 13 (max width of the bar).
          */
-        hurtEnemy(hurtEnemy: $Predicate_<$ItemBehavior$HurtEnemyContext>): $ItemBehaviorFunctions;
+        barWidth(barWidth: $ToIntFunction_<$ItemStack>): $ItemBehaviorFunctions;
+        /**
+         * Determines if the player can walk on powdered snow with this item worn in the feet slot.
+         */
+        canWalkOnPowderedSnow(canWalkOnPowderedSnow: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
+        canWalkOnPowderedSnow(canWalkOnPowderedSnow: boolean): $ItemBehaviorFunctions;
+        makesPiglinsNeutral(makesPiglinsNeutral: boolean): $ItemBehaviorFunctions;
+        /**
+         * Determines if piglins will be neutral to the wearer of the item and will not attack on sight.
+         * 
+         * However, this does not prevent piglins from being hostile due to other actions, or make piglins
+         * stop being hostile if they are already hostile.
+         */
+        makesPiglinsNeutral(makesPiglinsNeutral: $BiPredicate_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
         /**
          * The duration when the item is used.
          * 
@@ -1524,38 +1524,37 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         useDuration(useDuration: $ToIntBiFunction_<$ItemStack, $LivingEntity>): $ItemBehaviorFunctions;
         /**
-         * Determines the animation of the item when used, e.g. eating food.
+         * Adds a tooltip to the item.
          */
-        useAnimation(anim: $UseAnim_): $ItemBehaviorFunctions;
-        getCustomData(): $CompoundTag;
-        setUnit(component: $DataComponentType_<$Unit_>): $ComponentFunctions;
-        setPotionId(potion: $Holder_<$Potion>): void;
+        tooltip(component: $Component_): $ItemBehaviorFunctions;
+        setAdditionalTooltipHidden(): void;
+        setDyedColorWithTooltip(color: $KubeColor_): void;
+        setBlockStateProperties(properties: $Map_<string, string>): void;
         setRarity(rarity: $Rarity_): void;
-        setBaseColor(color: $DyeColor_): void;
-        setLore(lines: $List_<$Component_>, styledLines: $List_<$Component_>): void;
-        setLore(lines: $List_<$Component_>): void;
-        setCustomData(tag: $CompoundTag_): void;
-        setDyedColor(color: $KubeColor_): void;
+        setUnit(component: $DataComponentType_<$Unit_>): $ComponentFunctions;
         setEntityData(tag: $CompoundTag_): void;
+        setCustomData(tag: $CompoundTag_): void;
+        setBaseColor(color: $DyeColor_): void;
+        setPotionId(potion: $Holder_<$Potion>): void;
+        setDyedColor(color: $KubeColor_): void;
+        getCustomData(): $CompoundTag;
         setLockCode(lock: string): void;
-        getCustomName(): $Component;
         setProfile(name: string, uuid: $UUID_): void;
         setProfile(profile: $GameProfile): void;
         setCustomName(name: $Component_): void;
-        getComponentString(): string;
-        resetComponents(): $ComponentFunctions;
+        getCustomName(): $Component;
+        setLore(lines: $List_<$Component_>): void;
+        setLore(lines: $List_<$Component_>, styledLines: $List_<$Component_>): void;
         setCustomModelData(data: number): void;
         setPotionContents(contents: $PotionContents_): void;
         setContainerLootTable(lootTable: $ResourceKey_<$LootTable>): void;
         setContainerLootTable(lootTable: $ResourceKey_<$LootTable>, seed: number): void;
+        resetComponents(): $ComponentFunctions;
         setTooltipHidden(): void;
         setGlintOverride(override: boolean): void;
-        setAdditionalTooltipHidden(): void;
-        setDyedColorWithTooltip(color: $KubeColor_): void;
-        setBlockStateProperties(properties: $Map_<string, string>): void;
+        getComponentString(): string;
         patch(components: $DataComponentPatch_): $ComponentFunctions;
         remove(type: $DataComponentType_<never>): $ComponentFunctions;
-        setAttributeModifiersWithTooltip(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
         /**
          * Sets the attack speed of this item to the given value, **removing** all other modifiers to attack speed.
          * Note that players have a default attack speed of 4.0, so this modifier is added on top of that.
@@ -1563,67 +1562,68 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
          */
         setAttackSpeed(speed: number): void;
         getAttackSpeed(): number;
-        setAttributeModifiers(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
+        setAttributeModifiersWithTooltip(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
+        hasAttributeModifier(attribute: $Holder_<$Attribute>, id: $ResourceLocation_): boolean;
+        addAttributeModifier(attribute: $Holder_<$Attribute>, mod: $AttributeModifier_, slot: $EquipmentSlotGroup_): void;
+        /**
+         * Overrides the *base* attack damage of this item to be the given value, keeping other modifiers intact.
+         * Note that since players have a default attack damage of 1.0, total damage will be (dmg + 1.0) before other modifiers.
+         */
+        setBaseAttackDamage(dmg: number): void;
         /**
          * Sets the attack damage of this item to the given value, **removing** all other modifiers to attack damage.
          * Note that since players have a default attack damage of 1.0, total damage will be (dmg + 1.0) before other modifiers.
          * (In practice, this simply means that most weapons have this value set to 1 less than what you might think.)
          */
         setAttackDamage(dmg: number): void;
-        getAttackDamage(): number;
-        /**
-         * Overrides the *base* attack damage of this item to be the given value, keeping other modifiers intact.
-         * Note that since players have a default attack damage of 1.0, total damage will be (dmg + 1.0) before other modifiers.
-         */
-        setBaseAttackDamage(dmg: number): void;
-        getBaseAttackSpeed(): number;
-        hasAttributeModifier(attribute: $Holder_<$Attribute>, id: $ResourceLocation_): boolean;
-        getBaseAttackDamage(): number;
-        getAttributeModifier(attribute: $Holder_<$Attribute>, id: $ResourceLocation_): $AttributeModifier;
         /**
          * Overrides the *base* attack speed of this item to be the given value, keeping other modifiers intact.
          * Note that players have a default attack speed of 4.0, so this modifier is added on top of that.
          */
         setBaseAttackSpeed(speed: number): void;
-        addAttributeModifier(attribute: $Holder_<$Attribute>, mod: $AttributeModifier_, slot: $EquipmentSlotGroup_): void;
+        setAttributeModifiers(modifiers: $List_<$ItemAttributeModifiers$Entry_>): void;
+        getAttackDamage(): number;
+        getBaseAttackDamage(): number;
+        getAttributeModifier(attribute: $Holder_<$Attribute>, id: $ResourceLocation_): $AttributeModifier;
+        getBaseAttackSpeed(): number;
         constructor(item: $Item_);
         get<T extends keyof DataComponentTypes.OutputMap>(type: T): DataComponentTypes.OutputMap[T] | null;
         getOrDefault<T extends keyof DataComponentTypes.OutputMap>(type: T, _default: DataComponentTypes.OutputMap[T]): DataComponentTypes.OutputMap[T];
         set(components: $DataComponentMap_): this;
         set<T extends keyof DataComponentTypes.InputMap>(type: T, data: DataComponentTypes.InputMap[T]): this;
-        set nameKey(value: string);
         set burnTime(value: $TickDuration_);
-        get componentMap(): $DataComponentMap;
+        set nameKey(value: string);
         set tier(value: $Consumer_<$MutableToolTier>);
         set craftingRemainder(value: $Item_);
-        set damage(value: number);
-        set instrument(value: $Holder_<$Instrument>);
+        get componentMap(): $DataComponentMap;
         set tool(value: $Tool_);
-        set itemName(value: $Component_);
-        set maxDamage(value: number);
-        set repairCost(value: number);
+        set instrument(value: $Holder_<$Instrument>);
         set fireworks(value: $Fireworks_);
-        set noteBlockSound(value: $ResourceLocation_);
+        set repairCost(value: number);
+        set itemName(value: $Component_);
+        set damage(value: number);
+        set maxDamage(value: number);
         set mapItemColor(value: $KubeColor_);
-        set bucketEntityData(value: $CompoundTag_);
+        set noteBlockSound(value: $ResourceLocation_);
         set fireworkExplosion(value: $FireworkExplosion_);
-        set maxStackSize(value: number);
-        set blockEntityData(value: $CompoundTag_);
-        set bundleContents(value: $List_<$ItemStack_>);
         set chargedProjectiles(value: $List_<$ItemStack_>);
-        set unit(value: $DataComponentType_<$Unit_>);
-        set potionId(value: $Holder_<$Potion>);
+        set bucketEntityData(value: $CompoundTag_);
+        set bundleContents(value: $List_<$ItemStack_>);
+        set blockEntityData(value: $CompoundTag_);
+        set maxStackSize(value: number);
+        set dyedColorWithTooltip(value: $KubeColor_);
+        set blockStateProperties(value: $Map_<string, string>);
         set rarity(value: $Rarity_);
-        set baseColor(value: $DyeColor_);
-        set dyedColor(value: $KubeColor_);
+        set unit(value: $DataComponentType_<$Unit_>);
         set entityData(value: $CompoundTag_);
+        set baseColor(value: $DyeColor_);
+        set potionId(value: $Holder_<$Potion>);
+        set dyedColor(value: $KubeColor_);
         set lockCode(value: string);
-        get componentString(): string;
         set customModelData(value: number);
         set potionContents(value: $PotionContents_);
         set glintOverride(value: boolean);
-        set dyedColorWithTooltip(value: $KubeColor_);
-        set blockStateProperties(value: $Map_<string, string>);
+        get componentString(): string;
         set attributeModifiersWithTooltip(value: $List_<$ItemAttributeModifiers$Entry_>);
     }
     /**
@@ -1637,32 +1637,33 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
         static NONE: $ItemPredicate;
     }
     export interface $ItemPredicate extends $Predicate<$ItemStack>, $IngredientSupplierKJS {
-        test(itemStack: $ItemStack_): boolean;
-        isWildcard(): boolean;
-        asIngredient(): $Ingredient;
         canBeUsedForMatching(): boolean;
         getDisplayStacks(): $ItemStackSet;
+        asIngredient(): $Ingredient;
+        isWildcard(): boolean;
         testItem(item: $Item_): boolean;
-        getItemTypes(): $Set<$Item>;
         getItemIds(): $Set<string>;
         getFirst(): $ItemStack;
         getStacks(): $ItemStackSet;
         getStackArray(): $ItemStack[];
         getItemStream(): $Stream<$Item>;
-        get wildcard(): boolean;
+        getItemTypes(): $Set<$Item>;
+        test(itemStack: $ItemStack_): boolean;
         get displayStacks(): $ItemStackSet;
-        get itemTypes(): $Set<$Item>;
+        get wildcard(): boolean;
         get itemIds(): $Set<string>;
         get first(): $ItemStack;
         get stacks(): $ItemStackSet;
         get stackArray(): $ItemStack[];
         get itemStream(): $Stream<$Item>;
+        get itemTypes(): $Set<$Item>;
     }
     /**
      * Values that may be interpreted as {@link $ItemPredicate}.
      */
     export type $ItemPredicate_ = $Ingredient_ | "*" | "-" | ((item: $Item) => boolean) | ((itemStack: $ItemStack) => boolean);
     export class $KubeJSItemProperties extends $Item$Properties {
+        components: $DataComponentMap$Builder;
         itemBuilder: $ItemBuilder;
         static COMPONENT_INTERNER: $Interner<$DataComponentMap>;
         constructor(itemBuilder: $ItemBuilder);
@@ -1696,15 +1697,15 @@ declare module "@package/dev/latvian/mods/kubejs/item" {
     export class $FoodBuilder$EffectSupplier implements $Supplier<$MobEffectInstance> {
     }
     export class $KubeJSItemEventHandler {
-        static itemPickupPost(event: $ItemEntityPickupEvent$Post): void;
-        static itemPickupPre(event: $ItemEntityPickupEvent$Pre): void;
-        static leftClickEmpty(event: $PlayerInteractEvent$LeftClickEmpty): void;
-        static itemDestroyed(event: $PlayerDestroyItemEvent): void;
         static rightClick(event: $PlayerInteractEvent$RightClickItem): void;
         static smelted(event: $PlayerEvent$ItemSmeltedEvent): void;
-        static crafted(event: $PlayerEvent$ItemCraftedEvent): void;
-        static itemDrop(event: $ItemTossEvent): void;
+        static leftClickEmpty(event: $PlayerInteractEvent$LeftClickEmpty): void;
         static entityInteract(event: $PlayerInteractEvent$EntityInteract): void;
+        static itemDrop(event: $ItemTossEvent): void;
+        static itemPickupPost(event: $ItemEntityPickupEvent$Post): void;
+        static itemDestroyed(event: $PlayerDestroyItemEvent): void;
+        static itemPickupPre(event: $ItemEntityPickupEvent$Pre): void;
+        static crafted(event: $PlayerEvent$ItemCraftedEvent): void;
         constructor();
     }
 }

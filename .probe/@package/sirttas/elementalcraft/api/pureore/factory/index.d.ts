@@ -18,11 +18,11 @@ declare module "@package/sirttas/elementalcraft/api/pureore/factory" {
     export class $IPureOreRecipeFactory<C extends $RecipeInput, T extends $Recipe<C>> {
     }
     export interface $IPureOreRecipeFactory<C extends $RecipeInput, T extends $Recipe<C>> {
+        getRecipeOutput(arg0: $RegistryAccess, arg1: T): $ItemStack;
+        getRecipeType(): $RecipeType<T>;
         filter(arg0: $RecipeHolder_<T>, arg1: $ItemStack_): boolean;
         create(arg0: $RegistryAccess, arg1: T, arg2: $Ingredient_): T;
         getRecipes(arg0: $Collection_<$Holder_<$Item>>): $List<$RecipeHolder<T>>;
-        getRecipeOutput(arg0: $RegistryAccess, arg1: T): $ItemStack;
-        getRecipeType(): $RecipeType<T>;
         get recipeType(): $RecipeType<T>;
     }
 }

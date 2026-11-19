@@ -1,5 +1,5 @@
-import { $Instant } from "@package/org/apache/logging/log4j/core/time";
 import { $Duration } from "@package/java/time";
+import { $Instant } from "@package/org/apache/logging/log4j/core/time";
 import { $FriendlyByteBuf } from "@package/net/minecraft/network";
 import { $Comparable, $Record } from "@package/java/lang";
 

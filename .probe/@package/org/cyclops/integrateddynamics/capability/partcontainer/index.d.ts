@@ -13,21 +13,21 @@ declare module "@package/org/cyclops/integrateddynamics/capability/partcontainer
         constructor(arg0: $BlockEntityMultipartTicking);
     }
     export class $PartContainerDefault implements $IPartContainer {
-        hasParts(): boolean;
-        setPart<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: $Direction_, arg1: $IPartType<P, S>, arg2: $IPartState<P>): void;
-        update(): void;
-        hasPart(arg0: $Direction_): boolean;
-        setPartState(arg0: $Direction_, arg1: $IPartState<any>): void;
-        getCapability<T>(arg0: $PartCapability<T>, arg1: $INetwork, arg2: $IPartNetwork, arg3: $PartTarget): (T) | undefined;
-        getPosition(): $DimPos;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
-        getParts(): $Map<$Direction, $IPartType<never, never>>;
-        getPart(arg0: $Direction_): $IPartType<any, any>;
-        canAddPart<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: $Direction_, arg1: $IPartType<P, S>): boolean;
-        removePart(arg0: $Direction_, arg1: $Player, arg2: boolean, arg3: boolean): $IPartType<any, any>;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         getPartState(arg0: $Direction_): $IPartState<any>;
         getPartData(): $EnumFacingMap<$PartHelpers$PartStateHolder<never, never>>;
+        hasPart(arg0: $Direction_): boolean;
+        removePart(arg0: $Direction_, arg1: $Player, arg2: boolean, arg3: boolean): $IPartType<any, any>;
+        setPart<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: $Direction_, arg1: $IPartType<P, S>, arg2: $IPartState<P>): void;
+        hasParts(): boolean;
+        setPartState(arg0: $Direction_, arg1: $IPartState<any>): void;
+        update(): void;
+        getPosition(): $DimPos;
+        getPart(arg0: $Direction_): $IPartType<any, any>;
+        canAddPart<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: $Direction_, arg1: $IPartType<P, S>): boolean;
+        getCapability<T>(arg0: $PartCapability<T>, arg1: $INetwork, arg2: $IPartNetwork, arg3: $PartTarget): (T) | undefined;
+        getParts(): $Map<$Direction, $IPartType<never, never>>;
         silentResetPartData(): void;
         setPartData(arg0: $Map_<$Direction_, $PartHelpers$PartStateHolder<never, never>>): void;
         constructor();

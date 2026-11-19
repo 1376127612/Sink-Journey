@@ -9,8 +9,8 @@ declare module "@package/net/caffeinemc/mods/lithium/common/world/interests" {
     export class $RegionBasedStorageSectionExtended<R> {
     }
     export interface $RegionBasedStorageSectionExtended<R> {
-        lithium$getWithinChunkColumn(arg0: number, arg1: number): $Stream<R>;
         lithium$getInChunkColumn(arg0: number, arg1: number): $Iterable<R>;
+        lithium$getWithinChunkColumn(arg0: number, arg1: number): $Stream<R>;
     }
     export class $PointOfInterestSetExtended {
     }

@@ -6,12 +6,12 @@ import { $BlockEntityMultipartTicking } from "@package/org/cyclops/integrateddyn
 
 declare module "@package/org/cyclops/integrateddynamics/capability/cable" {
     export class $CableDefault implements $ICable {
+        updateConnections(arg0: boolean): void;
+        canConnect(arg0: $ICable, arg1: $Direction_): boolean;
         reconnect(arg0: $Direction_): void;
         isConnected(arg0: $Direction_): boolean;
-        getItemStack(): $ItemStack;
         disconnect(arg0: $Direction_): void;
-        canConnect(arg0: $ICable, arg1: $Direction_): boolean;
-        updateConnections(arg0: boolean): void;
+        getItemStack(): $ItemStack;
         updateConnections(): void;
         constructor();
         get itemStack(): $ItemStack;

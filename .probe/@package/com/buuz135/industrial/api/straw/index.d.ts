@@ -7,9 +7,9 @@ import { $Player } from "@package/net/minecraft/world/entity/player";
 declare module "@package/com/buuz135/industrial/api/straw" {
     export interface $StrawHandler extends RegistryMarked<RegistryTypes.IndustrialforegoingStrawTag, RegistryTypes.IndustrialforegoingStraw> {}
     export class $StrawHandler {
-        getPriority(): number;
         onDrink(arg0: $Level_, arg1: $BlockPos_, arg2: $Fluid_, arg3: $Player, arg4: boolean): void;
         validFluid(arg0: $Fluid_): boolean;
+        getPriority(): number;
         constructor();
         get priority(): number;
     }

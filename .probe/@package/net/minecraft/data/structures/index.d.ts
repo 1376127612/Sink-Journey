@@ -12,13 +12,13 @@ declare module "@package/net/minecraft/data/structures" {
         constructor();
     }
     export class $NbtToSnbt implements $DataProvider {
-        static convertStructure(output: $CachedOutput_, nbtPath: $Path_, name: string, directoryPath: $Path_): $Path;
         /**
          * Gets a name for this provider, to use in logging.
          */
         getName(): string;
         run(output: $CachedOutput_): $CompletableFuture<never>;
         static writeSnbt(output: $CachedOutput_, path: $Path_, contents: string): void;
+        static convertStructure(output: $CachedOutput_, nbtPath: $Path_, name: string, directoryPath: $Path_): $Path;
         constructor(output: $PackOutput, inputFolders: $Collection_<$Path_>);
         get name(): string;
     }

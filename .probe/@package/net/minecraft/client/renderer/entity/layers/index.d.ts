@@ -84,8 +84,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(arg0: $RenderLayerParent<T, M>);
     }
     export class $SpinAttackEffectLayer<T extends $LivingEntity> extends $RenderLayer<T, $PlayerModel<T>> {
-        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
         static createLayer(): $LayerDefinition;
+        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
         static TEXTURE: $ResourceLocation;
         static BOX: string;
         constructor(renderer: $RenderLayerParent<T, $PlayerModel<T>>, modelSet: $EntityModelSet);
@@ -107,28 +107,31 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(renderer: $RenderLayerParent<T, M>, itemInHandRenderer: $ItemInHandRenderer);
     }
     export class $HumanoidArmorLayer<T extends $LivingEntity, M extends $HumanoidModel<T>, A extends $HumanoidModel<T>> extends $RenderLayer<T, M> implements $HumanoidArmorLayerAccessor {
+        wrapWithCondition$edi000$geckolib$wrapArmorPieceRender(arg0: $HumanoidArmorLayer<any, any, any>, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: $LivingEntity, arg4: $EquipmentSlot_, arg5: number, arg6: $HumanoidModel<any>, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): boolean;
+        static getArmorLocationCache$create_$md$e03d8d$0(): $Map<any, any>;
         render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        wrapWithCondition$zen000$geckolib$wrapArmorPieceRender(arg0: $HumanoidArmorLayer<any, any, any>, arg1: $PoseStack, arg2: $MultiBufferSource_, arg3: $LivingEntity, arg4: $EquipmentSlot_, arg5: number, arg6: $HumanoidModel<any>, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): boolean;
-        static getArmorLocationCache$create_$md$796745$0(): $Map<any, any>;
+        create$callSetPartVisibility(model: $HumanoidModel<never>, slot: $EquipmentSlot_): void;
         create$getInnerModel(): $HumanoidModel<never>;
         create$getOuterModel(): $HumanoidModel<never>;
-        create$callSetPartVisibility(model: $HumanoidModel<never>, slot: $EquipmentSlot_): void;
         innerModel: A;
         outerModel: A;
         constructor(renderer: $RenderLayerParent<T, M>, innerModel: A, outerModel: A, modelManager: $ModelManager);
-        static get armorLocationCache$create_$md$796745$0(): $Map<any, any>;
+        static get armorLocationCache$create_$md$e03d8d$0(): $Map<any, any>;
     }
     export class $EnderEyesLayer<T extends $LivingEntity> extends $EyesLayer<T, $EndermanModel<T>> {
         constructor(arg0: $RenderLayerParent<T, $EndermanModel<T>>);
     }
     export class $PlayerItemInHandLayer<T extends $Player, M extends $EntityModel<T>> extends $ItemInHandLayer<T, M> {
-        handler$zbm000$astralsorcery$alsoRenderAstrolabeHandLayer(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
+        handler$dpp000$astralsorcery$alsoRenderAstrolabeHandLayer(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
+        handler$ggp000$moonlight$poseRightArm(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: $HumanoidArm_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
         constructor(renderer: $RenderLayerParent<T, M>, itemInHandRenderer: $ItemInHandRenderer);
     }
     export class $ElytraLayer<T extends $LivingEntity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
-        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
-        getElytraTexture(arg0: $ItemStack_, arg1: T): $ResourceLocation;
         shouldRender(arg0: $ItemStack_, arg1: T): boolean;
+        getElytraTexture(arg0: $ItemStack_, arg1: T): $ResourceLocation;
+        handler$ejd000$spectrum$isElytraRendered(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $LivingEntity, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
+        handler$ejd000$spectrum$clearElytraRender(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $LivingEntity, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
+        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
         constructor(renderer: $RenderLayerParent<T, M>, modelSet: $EntityModelSet);
     }
     export class $CreeperPowerLayer extends $EnergySwirlLayer<$Creeper, $CreeperModel<$Creeper>> {
@@ -174,6 +177,7 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
     }
     export class $CapeLayer extends $RenderLayer<$AbstractClientPlayer, $PlayerModel<$AbstractClientPlayer>> {
         render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: $AbstractClientPlayer, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
+        handler$dlp000$betterend$be_checkCustomElytra(arg0: $PoseStack, arg1: $MultiBufferSource_, arg2: number, arg3: $AbstractClientPlayer, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: $CallbackInfo): void;
         constructor(renderer: $RenderLayerParent<$AbstractClientPlayer, $PlayerModel<$AbstractClientPlayer>>);
     }
     export class $SkeletonClothingLayer<T extends $Mob, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
@@ -190,8 +194,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
      */
     export type $WardenEmissiveLayer$DrawSelector_<T, M> = ((arg0: M) => $List_<$ModelPart>);
     export class $CustomHeadLayer<T extends $LivingEntity, M extends $EntityModel<T>> extends $RenderLayer<T, M> {
-        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
         static translateToHead(poseStack: $PoseStack, isVillager: boolean): void;
+        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTicks: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
         constructor(renderer: $RenderLayerParent<T, M>, modelSet: $EntityModelSet, itemInHandRenderer: $ItemInHandRenderer);
         constructor(renderer: $RenderLayerParent<T, M>, modelSet: $EntityModelSet, scaleX: number, scaleY: number, scaleZ: number, itemInHandRenderer: $ItemInHandRenderer);
     }
@@ -213,8 +217,8 @@ declare module "@package/net/minecraft/client/renderer/entity/layers" {
         constructor(renderer: $RenderLayerParent<$Sheep, $SheepModel<$Sheep>>, modelSet: $EntityModelSet);
     }
     export class $RenderLayer<T extends $Entity, M extends $EntityModel<T>> {
-        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTick: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
         getParentModel(): M;
+        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, packedLight: number, livingEntity: T, limbSwing: number, limbSwingAmount: number, partialTick: number, ageInTicks: number, netHeadYaw: number, headPitch: number): void;
         constructor(renderer: $RenderLayerParent<T, M>);
         get parentModel(): M;
     }

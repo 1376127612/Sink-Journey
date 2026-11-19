@@ -7,28 +7,28 @@ declare module "@package/malte0811/ferritecore/mixin/accessors" {
     export class $BitSetDVSAccess {
     }
     export interface $BitSetDVSAccess extends $DiscreteVSAccess {
-        getZMin(): number;
         getXMin(): number;
+        getZMin(): number;
+        getYMax(): number;
         getXMax(): number;
         getYMin(): number;
-        getYMax(): number;
         getStorage(): $BitSet;
         getZMax(): number;
-        get ZMin(): number;
         get XMin(): number;
+        get ZMin(): number;
+        get YMax(): number;
         get XMax(): number;
         get YMin(): number;
-        get YMax(): number;
         get storage(): $BitSet;
         get ZMax(): number;
     }
     export class $SliceShapeAccess {
     }
     export interface $SliceShapeAccess extends $VoxelShapeAccess {
-        getDelegate(): $VoxelShape;
         getAxis(): $Direction$Axis;
-        get delegate(): $VoxelShape;
+        getDelegate(): $VoxelShape;
         get axis(): $Direction$Axis;
+        get delegate(): $VoxelShape;
     }
     export class $DiscreteVSAccess {
     }
@@ -44,11 +44,11 @@ declare module "@package/malte0811/ferritecore/mixin/accessors" {
     }
     export interface $ArrayVSAccess extends $VoxelShapeAccess {
         getYPoints(): $DoubleList;
-        setXPoints(arg0: $DoubleList): void;
-        getXPoints(): $DoubleList;
         setYPoints(arg0: $DoubleList): void;
-        setZPoints(arg0: $DoubleList): void;
         getZPoints(): $DoubleList;
+        setXPoints(arg0: $DoubleList): void;
+        setZPoints(arg0: $DoubleList): void;
+        getXPoints(): $DoubleList;
     }
     export class $BakedQuadAccess {
     }
@@ -63,27 +63,27 @@ declare module "@package/malte0811/ferritecore/mixin/accessors" {
     export class $SubShapeAccess {
     }
     export interface $SubShapeAccess extends $DiscreteVSAccess {
-        getParent(): $DiscreteVoxelShape;
-        getStartY(): number;
-        getStartX(): number;
-        getStartZ(): number;
         getEndZ(): number;
-        getEndY(): number;
+        getStartZ(): number;
+        getStartX(): number;
         getEndX(): number;
-        get parent(): $DiscreteVoxelShape;
-        get startY(): number;
-        get startX(): number;
-        get startZ(): number;
+        getStartY(): number;
+        getParent(): $DiscreteVoxelShape;
+        getEndY(): number;
         get endZ(): number;
-        get endY(): number;
+        get startZ(): number;
+        get startX(): number;
         get endX(): number;
+        get startY(): number;
+        get parent(): $DiscreteVoxelShape;
+        get endY(): number;
     }
     export class $VoxelShapeAccess {
     }
     export interface $VoxelShapeAccess {
         getShape(): $DiscreteVoxelShape;
-        getFaces(): $VoxelShape[];
-        setShape(arg0: $DiscreteVoxelShape): void;
         setFaces(arg0: $VoxelShape[]): void;
+        setShape(arg0: $DiscreteVoxelShape): void;
+        getFaces(): $VoxelShape[];
     }
 }

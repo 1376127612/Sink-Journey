@@ -13,16 +13,16 @@ declare module "@package/com/george_vi/electroenergetics/content/railway_electri
         constructor(arg0: $Block_, arg1: number, arg2: $ElectricTrainSoundType_);
     }
     export class $ElectricTrainSoundInstance extends $AbstractTickableSoundInstance {
-        keepAlive(): void;
-        setPitchImmediately(arg0: number): void;
         fadeOut(): void;
-        setPos(arg0: $Vec3_): void;
+        setPitchImmediately(arg0: number): void;
         setVolumeImmediately(arg0: number): void;
+        keepAlive(): void;
+        setPos(arg0: $Vec3_): void;
         targetVolume: number;
         targetPitch: number;
         constructor(arg0: $Vec3_, arg1: $SoundEvent_);
         set pitchImmediately(value: number);
-        set pos(value: $Vec3_);
         set volumeImmediately(value: number);
+        set pos(value: $Vec3_);
     }
 }

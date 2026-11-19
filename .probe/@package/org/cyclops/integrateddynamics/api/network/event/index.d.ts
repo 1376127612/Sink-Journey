@@ -5,11 +5,11 @@ declare module "@package/org/cyclops/integrateddynamics/api/network/event" {
     export class $INetworkEventBus {
     }
     export interface $INetworkEventBus {
-        register(arg0: $IEventListenableNetworkElement<never>, arg1: $Class<$INetworkEvent_>): void;
-        unregister(arg0: $IEventListenableNetworkElement<never>): void;
-        unregister(arg0: $IEventListenableNetworkElement<never>, arg1: $Class<$INetworkEvent_>): void;
-        post(arg0: $INetworkEvent_): void;
         postCancelable(arg0: $ICancelableNetworkEvent): boolean;
+        register(arg0: $IEventListenableNetworkElement<never>, arg1: $Class<$INetworkEvent_>): void;
+        unregister(arg0: $IEventListenableNetworkElement<never>, arg1: $Class<$INetworkEvent_>): void;
+        unregister(arg0: $IEventListenableNetworkElement<never>): void;
+        post(arg0: $INetworkEvent_): void;
     }
     export class $ICancelableNetworkEvent {
     }

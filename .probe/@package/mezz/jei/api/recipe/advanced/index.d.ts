@@ -9,11 +9,11 @@ declare module "@package/mezz/jei/api/recipe/advanced" {
     export class $ISimpleRecipeManagerPlugin<T> {
     }
     export interface $ISimpleRecipeManagerPlugin<T> {
-        getAllRecipes(): $List<T>;
         getRecipesForOutput(arg0: $ITypedIngredient<never>): $List<T>;
         isHandledInput(arg0: $ITypedIngredient<never>): boolean;
-        isHandledOutput(arg0: $ITypedIngredient<never>): boolean;
         getRecipesForInput(arg0: $ITypedIngredient<never>): $List<T>;
+        isHandledOutput(arg0: $ITypedIngredient<never>): boolean;
+        getAllRecipes(): $List<T>;
         get allRecipes(): $List<T>;
     }
     export class $IRecipeButtonControllerFactory {
@@ -37,8 +37,8 @@ declare module "@package/mezz/jei/api/recipe/advanced" {
     export class $IRecipeManagerPlugin {
     }
     export interface $IRecipeManagerPlugin {
+        getRecipeTypes<V>(arg0: $IFocus<V>): $List<$RecipeType<never>>;
         getRecipes<T, V>(arg0: $IRecipeCategory<T>, arg1: $IFocus<V>): $List<T>;
         getRecipes<T>(arg0: $IRecipeCategory<T>): $List<T>;
-        getRecipeTypes<V>(arg0: $IFocus<V>): $List<$RecipeType<never>>;
     }
 }

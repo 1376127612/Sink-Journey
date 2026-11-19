@@ -4,6 +4,7 @@ import { $CompletableFuture } from "@package/java/util/concurrent";
 import { $BiomeManager } from "@package/net/minecraft/world/level/biome";
 import { $LocalPlayer } from "@package/net/minecraft/client/player";
 import { $Entity } from "@package/net/minecraft/world/entity";
+import { $AbstractSoundInstanceAccessor } from "@package/org/betterx/betterend/mixin/client";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $List, $List_ } from "@package/java/util";
 import { $RandomSource } from "@package/net/minecraft/util";
@@ -24,8 +25,8 @@ declare module "@package/net/minecraft/client/resources/sounds" {
     export class $TickableSoundInstance {
     }
     export interface $TickableSoundInstance extends $SoundInstance {
-        isStopped(): boolean;
         tick(): void;
+        isStopped(): boolean;
         get stopped(): boolean;
     }
     export class $SoundEventRegistrationSerializer implements $JsonDeserializer<$SoundEventRegistration> {
@@ -33,13 +34,20 @@ declare module "@package/net/minecraft/client/resources/sounds" {
         constructor();
     }
     export class $Sound implements $Weighted<$Sound> {
-        getLocation(): $ResourceLocation;
-        getType(): $Sound$Type;
-        getPath(): $ResourceLocation;
         /**
          * @return The weight of the element
          */
         getAttenuationDistance(): number;
+        shouldStream(): boolean;
+        shouldPreload(): boolean;
+        /**
+         * Preloads the sound if required by the sound engine.
+         * This method is called to preload the sound associated with the element into the sound engine, ensuring it is ready for playback.
+         */
+        preloadIfRequired(engine: $SoundEngine): void;
+        getLocation(): $ResourceLocation;
+        getType(): $Sound$Type;
+        getPath(): $ResourceLocation;
         /**
          * @return The weight of the element
          */
@@ -53,24 +61,22 @@ declare module "@package/net/minecraft/client/resources/sounds" {
          * @return The sound associated with the element
          */
         getSound(randomSource: $RandomSource): $Sound;
-        /**
-         * Preloads the sound if required by the sound engine.
-         * This method is called to preload the sound associated with the element into the sound engine, ensuring it is ready for playback.
-         */
-        preloadIfRequired(engine: $SoundEngine): void;
-        shouldPreload(): boolean;
-        shouldStream(): boolean;
         static SOUND_LISTER: $FileToIdConverter;
         constructor(location: $ResourceLocation_, volume: $SampledFloat_, pitch: $SampledFloat_, weight: number, type: $Sound$Type_, stream: boolean, preload: boolean, attenuationDistance: number);
+        get attenuationDistance(): number;
         get location(): $ResourceLocation;
         get type(): $Sound$Type;
         get path(): $ResourceLocation;
-        get attenuationDistance(): number;
         get weight(): number;
         get pitch(): $SampledFloat;
         get volume(): $SampledFloat;
     }
-    export class $AbstractSoundInstance implements $SoundInstance {
+    export class $AbstractSoundInstance implements $SoundInstance, $AbstractSoundInstanceAccessor {
+        getZ(): number;
+        /**
+         * True if the sound is not tied to a particular position in world (e.g. BGM)
+         */
+        isLooping(): boolean;
         getLocation(): $ResourceLocation;
         resolve(handler: $SoundManager): $WeighedSoundEvents;
         /**
@@ -78,17 +84,12 @@ declare module "@package/net/minecraft/client/resources/sounds" {
          */
         isRelative(): boolean;
         getSource(): $SoundSource;
+        getX(): number;
         getY(): number;
         getDelay(): number;
-        getX(): number;
-        getZ(): number;
         getPitch(): number;
         getVolume(): number;
         getSound(): $Sound;
-        /**
-         * True if the sound is not tied to a particular position in world (e.g. BGM)
-         */
-        isLooping(): boolean;
         getAttenuation(): $SoundInstance$Attenuation;
         getStream(arg0: $SoundBufferLibrary, arg1: $Sound, arg2: boolean): $CompletableFuture<$AudioStream>;
         /**
@@ -99,41 +100,41 @@ declare module "@package/net/minecraft/client/resources/sounds" {
          * True if the sound is not tied to a particular position in world (e.g. BGM)
          */
         canPlaySound(): boolean;
+        setVolume(arg0: number): void;
+        get z(): number;
+        get looping(): boolean;
         get location(): $ResourceLocation;
         get relative(): boolean;
         get source(): $SoundSource;
+        get x(): number;
         get y(): number;
         get delay(): number;
-        get x(): number;
-        get z(): number;
         get pitch(): number;
-        get volume(): number;
         get sound(): $Sound;
-        get looping(): boolean;
         get attenuation(): $SoundInstance$Attenuation;
     }
     export class $EntityBoundSoundInstance extends $AbstractTickableSoundInstance {
         constructor(soundEvent: $SoundEvent_, source: $SoundSource_, volume: number, pitch: number, entity: $Entity, seed: number);
     }
     export class $BiomeAmbientSoundsHandler implements $AmbientSoundHandler, $BiomeAmbienceInterface {
-        tick(): void;
-        getConstantMood(): number;
         getMoodiness(): number;
+        getConstantMood(): number;
+        tick(): void;
         constructor(player: $LocalPlayer, soundManager: $SoundManager, biomeManager: $BiomeManager);
-        get constantMood(): number;
         get moodiness(): number;
+        get constantMood(): number;
     }
     export class $SimpleSoundInstance extends $AbstractSoundInstance {
-        static forAmbientMood(soundEvent: $SoundEvent_, random: $RandomSource, x: number, arg3: number, y: number): $SimpleSoundInstance;
-        static forAmbientAddition(sound: $SoundEvent_): $SimpleSoundInstance;
         static forJukeboxSong(sound: $SoundEvent_, pos: $Vec3_): $SimpleSoundInstance;
         static forLocalAmbience(sound: $SoundEvent_, volume: number, pitch: number): $SimpleSoundInstance;
-        static forUI(soundHolder: $Holder_<$SoundEvent>, pitch: number): $SimpleSoundInstance;
         static forUI(sound: $SoundEvent_, pitch: number): $SimpleSoundInstance;
         static forUI(sound: $SoundEvent_, volume: number, pitch: number): $SimpleSoundInstance;
+        static forUI(soundHolder: $Holder_<$SoundEvent>, pitch: number): $SimpleSoundInstance;
         static forMusic(sound: $SoundEvent_): $SimpleSoundInstance;
-        constructor(location: $ResourceLocation_, source: $SoundSource_, volume: number, pitch: number, random: $RandomSource, looping: boolean, delay: number, attenuation: $SoundInstance$Attenuation_, x: number, arg9: number, y: number, arg11: boolean);
+        static forAmbientAddition(sound: $SoundEvent_): $SimpleSoundInstance;
+        static forAmbientMood(soundEvent: $SoundEvent_, random: $RandomSource, x: number, arg3: number, y: number): $SimpleSoundInstance;
         constructor(soundEvent: $SoundEvent_, source: $SoundSource_, volume: number, pitch: number, random: $RandomSource, x: number, arg6: number, y: number);
+        constructor(location: $ResourceLocation_, source: $SoundSource_, volume: number, pitch: number, random: $RandomSource, looping: boolean, delay: number, attenuation: $SoundInstance$Attenuation_, x: number, arg9: number, y: number, arg11: boolean);
         constructor(soundEvent: $SoundEvent_, source: $SoundSource_, volume: number, pitch: number, random: $RandomSource, entity: $BlockPos_);
     }
     export class $UnderwaterAmbientSoundInstances {
@@ -157,13 +158,13 @@ declare module "@package/net/minecraft/client/resources/sounds" {
         constructor(minecart: $AbstractMinecart);
     }
     export class $SoundEventRegistration {
+        getSounds(): $List<$Sound>;
         isReplace(): boolean;
         getSubtitle(): string;
-        getSounds(): $List<$Sound>;
         constructor(sounds: $List_<$Sound>, replace: boolean, subtitle: string | null);
+        get sounds(): $List<$Sound>;
         get replace(): boolean;
         get subtitle(): string;
-        get sounds(): $List<$Sound>;
     }
     export class $UnderwaterAmbientSoundInstances$UnderwaterAmbientSoundInstance extends $AbstractTickableSoundInstance {
         static FADE_DURATION: number;
@@ -208,6 +209,11 @@ declare module "@package/net/minecraft/client/resources/sounds" {
         static createUnseededRandom(): $RandomSource;
     }
     export interface $SoundInstance {
+        getZ(): number;
+        /**
+         * True if the sound is not tied to a particular position in world (e.g. BGM)
+         */
+        isLooping(): boolean;
         getLocation(): $ResourceLocation;
         resolve(manager: $SoundManager): $WeighedSoundEvents;
         /**
@@ -215,38 +221,33 @@ declare module "@package/net/minecraft/client/resources/sounds" {
          */
         isRelative(): boolean;
         getSource(): $SoundSource;
-        getY(): number;
         getStream(arg0: $SoundBufferLibrary, arg1: $Sound, arg2: boolean): $CompletableFuture<$AudioStream>;
-        getDelay(): number;
         getX(): number;
-        getZ(): number;
+        getY(): number;
+        getDelay(): number;
         getPitch(): number;
         getVolume(): number;
         getSound(): $Sound;
         /**
          * True if the sound is not tied to a particular position in world (e.g. BGM)
          */
-        isLooping(): boolean;
-        /**
-         * True if the sound is not tied to a particular position in world (e.g. BGM)
-         */
         canStartSilent(): boolean;
-        getAttenuation(): $SoundInstance$Attenuation;
         /**
          * True if the sound is not tied to a particular position in world (e.g. BGM)
          */
         canPlaySound(): boolean;
+        getAttenuation(): $SoundInstance$Attenuation;
+        get z(): number;
+        get looping(): boolean;
         get location(): $ResourceLocation;
         get relative(): boolean;
         get source(): $SoundSource;
+        get x(): number;
         get y(): number;
         get delay(): number;
-        get x(): number;
-        get z(): number;
         get pitch(): number;
         get volume(): number;
         get sound(): $Sound;
-        get looping(): boolean;
         get attenuation(): $SoundInstance$Attenuation;
     }
     export class $BeeFlyingSoundInstance extends $BeeSoundInstance {

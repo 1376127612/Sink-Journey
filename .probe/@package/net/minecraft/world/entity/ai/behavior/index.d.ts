@@ -41,8 +41,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $StartAttacking {
-        static create<E extends $Mob>(canAttack: $Predicate_<E>, targetFinder: $Function_<E, ($LivingEntity) | undefined>): $BehaviorControl<E>;
         static create<E extends $Mob>(targetFinder: $Function_<E, ($LivingEntity) | undefined>): $BehaviorControl<E>;
+        static create<E extends $Mob>(canAttack: $Predicate_<E>, targetFinder: $Function_<E, ($LivingEntity) | undefined>): $BehaviorControl<E>;
         constructor();
     }
     export class $CopyMemoryWithExpiry {
@@ -74,13 +74,13 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(cooldownTicks: $MemoryModuleType_<number>);
     }
     export class $PrepareRamNearestTarget$RamCandidate {
-        getTarget(): $LivingEntity;
-        getTargetPosition(): $BlockPos;
         getStartPosition(): $BlockPos;
+        getTargetPosition(): $BlockPos;
+        getTarget(): $LivingEntity;
         constructor(startPosition: $BlockPos_, targetPosition: $BlockPos_, target: $LivingEntity);
-        get target(): $LivingEntity;
-        get targetPosition(): $BlockPos;
         get startPosition(): $BlockPos;
+        get targetPosition(): $BlockPos;
+        get target(): $LivingEntity;
     }
     export class $SetWalkTargetAwayFrom {
         static pos(walkTargetAwayFromMemory: $MemoryModuleType_<$BlockPos_>, speedModifier: number, desiredDistance: number, hasTarget: boolean): $BehaviorControl<$PathfinderMob>;
@@ -88,10 +88,10 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $ShowTradesToPlayer extends $Behavior<$Villager> {
-        canStillUse(level: $ServerLevel, entity: $Villager, gameTime: number): boolean;
         start(level: $ServerLevel, entity: $Villager, gameTime: number): void;
         stop(level: $ServerLevel, entity: $Villager, gameTime: number): void;
         tick(level: $ServerLevel, entity: $Villager, gameTime: number): void;
+        canStillUse(level: $ServerLevel, entity: $Villager, gameTime: number): boolean;
         checkExtraStartConditions(level: $ServerLevel, owner: $Villager): boolean;
         static DEFAULT_DURATION: number;
         constructor(minDuration: number, maxDuration: number);
@@ -101,16 +101,16 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $VillagerGoalPackages {
-        static getPlayPackage(speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
-        static getIdlePackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
+        static getPreRaidPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
         static getCorePackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
-        static getWorkPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
+        static getPlayPackage(speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
         static getRestPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
         static getPanicPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
-        static getHidePackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
+        static getIdlePackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
         static getMeetPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
-        static getPreRaidPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
         static getRaidPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
+        static getWorkPackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
+        static getHidePackage(profession: $VillagerProfession_, speedModifier: number): $ImmutableList<$Pair<number, $BehaviorControl<$Villager>>>;
         static INTERACT_SPEED_MODIFIER: number;
         static INTERACT_WALKUP_DIST: number;
         static INTERACT_DIST_SQR: number;
@@ -155,8 +155,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $BabyFollowAdult {
-        static create(followRange: $UniformInt, speedModifier: $Function_<$LivingEntity, number>): $OneShot<$AgeableMob>;
         static create(followRange: $UniformInt, speedModifier: number): $OneShot<$AgeableMob>;
+        static create(followRange: $UniformInt, speedModifier: $Function_<$LivingEntity, number>): $OneShot<$AgeableMob>;
         constructor();
     }
     export class $StayCloseToTarget {
@@ -182,18 +182,18 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $DoNothing implements $BehaviorControl<$LivingEntity> {
-        debugString(): string;
-        getStatus(): $Behavior$Status;
         tryStart(level: $ServerLevel, entity: $LivingEntity, gameTime: number): boolean;
         doStop(level: $ServerLevel, entity: $LivingEntity, gameTime: number): void;
         tickOrStop(level: $ServerLevel, entity: $LivingEntity, gameTime: number): void;
+        debugString(): string;
+        getStatus(): $Behavior$Status;
         constructor(minDuration: number, maxDuration: number);
         get status(): $Behavior$Status;
     }
     export class $BlockPosTracker implements $PositionTracker {
-        isVisibleBy(entity: $LivingEntity): boolean;
-        currentPosition(): $Vec3;
         currentBlockPosition(): $BlockPos;
+        currentPosition(): $Vec3;
+        isVisibleBy(entity: $LivingEntity): boolean;
         constructor(blockPos: $BlockPos_);
         constructor(centerPosition: $Vec3_);
     }
@@ -210,11 +210,11 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $Behavior<E extends $LivingEntity> implements $BehaviorControl<E> {
-        debugString(): string;
-        getStatus(): $Behavior$Status;
         tryStart(level: $ServerLevel, entity: E, gameTime: number): boolean;
         doStop(level: $ServerLevel, entity: E, gameTime: number): void;
         tickOrStop(level: $ServerLevel, entity: E, gameTime: number): void;
+        debugString(): string;
+        getStatus(): $Behavior$Status;
         hasRequiredMemories(owner: $LivingEntity): boolean;
         static DEFAULT_DURATION: number;
         constructor(entryCondition: $Map_<$MemoryModuleType_<never>, $MemoryStatus_>);
@@ -260,8 +260,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $GoToWantedItem {
-        static create<E extends $LivingEntity>(canWalkToItem: $Predicate_<E>, speedModifier: number, hasTarget: boolean, maxDistToWalk: number): $BehaviorControl<E>;
         static create(speedModifier: number, hasTarget: boolean, maxDistToWalk: number): $BehaviorControl<$LivingEntity>;
+        static create<E extends $LivingEntity>(canWalkToItem: $Predicate_<E>, speedModifier: number, hasTarget: boolean, maxDistToWalk: number): $BehaviorControl<E>;
         constructor();
     }
     export class $WorkAtPoi extends $Behavior<$Villager> {
@@ -311,42 +311,42 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(timeBetweenLongJumps: $UniformInt, maxLongJumpHeight: number, maxLongJumpWidth: number, maxJumpVelocity: number, getJumpSound: $Function_<E, $SoundEvent>, preferredBlockTag: $TagKey_<$Block>, preferredBlocksChance: number, acceptableLandingSpot: $BiPredicate_<E, $BlockPos>);
     }
     export class $ShufflingList<U> implements $Iterable<U>, $WeightedListIterable<any> {
+        static codec<U>(codec: $Codec<U>): $Codec<$ShufflingList<U>>;
         add(data: $Object, weight: number): $ShufflingList<$Object>;
         iterator(): $Iterator<any>;
         stream(): $Stream<$Object>;
         shuffle(): $ShufflingList<$Object>;
-        static codec<U>(codec: $Codec<U>): $Codec<$ShufflingList<U>>;
         spliterator(): $Spliterator<U>;
         forEach(arg0: $Consumer_<U>): void;
         constructor();
         [Symbol.iterator](): Iterator<any>
     }
     export class $SetWalkTargetFromAttackTargetIfTargetOutOfReach {
-        static create(speedModifier: $Function_<$LivingEntity, number>): $BehaviorControl<$Mob>;
         static create(speedModifier: number): $BehaviorControl<$Mob>;
+        static create(speedModifier: $Function_<$LivingEntity, number>): $BehaviorControl<$Mob>;
         constructor();
     }
     export class $OneShot<E extends $LivingEntity> implements $BehaviorControl<E>, $Trigger<E> {
-        debugString(): string;
-        getStatus(): $Behavior$Status;
         tryStart(arg0: $ServerLevel, arg1: E, arg2: number): boolean;
         doStop(arg0: $ServerLevel, arg1: E, arg2: number): void;
         tickOrStop(arg0: $ServerLevel, arg1: E, arg2: number): void;
+        debugString(): string;
+        getStatus(): $Behavior$Status;
         constructor();
         get status(): $Behavior$Status;
     }
     export class $EntityTracker implements $PositionTracker {
-        isVisibleBy(entity: $LivingEntity): boolean;
-        getEntity(): $Entity;
-        currentPosition(): $Vec3;
         currentBlockPosition(): $BlockPos;
+        currentPosition(): $Vec3;
+        getEntity(): $Entity;
+        isVisibleBy(entity: $LivingEntity): boolean;
         constructor(entity: $Entity, trackEyeHeight: boolean);
         get entity(): $Entity;
     }
     export class $AcquirePoi {
+        static findPathToPois(mob: $Mob, poiPositions: $Set_<$Pair<$Holder_<$PoiType>, $BlockPos_>>): $Path;
         static create(acquirablePois: $Predicate_<$Holder<$PoiType>>, existingAbsentMemory: $MemoryModuleType_<$GlobalPos_>, acquiringMemory: $MemoryModuleType_<$GlobalPos_>, onlyIfAdult: boolean, entityEventId: (number) | undefined): $BehaviorControl<$PathfinderMob>;
         static create(acquirablePois: $Predicate_<$Holder<$PoiType>>, acquiringMemory: $MemoryModuleType_<$GlobalPos_>, onlyIfAdult: boolean, entityEventId: (number) | undefined): $BehaviorControl<$PathfinderMob>;
-        static findPathToPois(mob: $Mob, poiPositions: $Set_<$Pair<$Holder_<$PoiType>, $BlockPos_>>): $Path;
         static SCAN_RANGE: number;
         constructor();
     }
@@ -367,9 +367,9 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(speedModifier: $Function_<$LivingEntity, number>, closeEnoughDistance: $Function_<$LivingEntity, number>);
     }
     export class $ShufflingList$WeightedEntry<T> {
+        static codec<E>(codec: $Codec<E>): $Codec<$ShufflingList$WeightedEntry<E>>;
         getData(): T;
         getWeight(): number;
-        static codec<E>(codec: $Codec<E>): $Codec<$ShufflingList$WeightedEntry<E>>;
         get data(): T;
         get weight(): number;
     }
@@ -382,8 +382,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $VillageBoundRandomStroll {
-        static create(speedModifier: number, maxHorizontalDist: number, maxVerticalDist: number): $OneShot<$PathfinderMob>;
         static create(speedModifier: number): $OneShot<$PathfinderMob>;
+        static create(speedModifier: number, maxHorizontalDist: number, maxVerticalDist: number): $OneShot<$PathfinderMob>;
         constructor();
     }
     export class $StrollAroundPoi {
@@ -399,11 +399,11 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $GateBehavior<E extends $LivingEntity> implements $BehaviorControl<E> {
-        debugString(): string;
-        getStatus(): $Behavior$Status;
         tryStart(level: $ServerLevel, entity: E, gameTime: number): boolean;
         doStop(level: $ServerLevel, entity: $LivingEntity, gameTime: number): void;
         tickOrStop(level: $ServerLevel, entity: $LivingEntity, gameTime: number): void;
+        debugString(): string;
+        getStatus(): $Behavior$Status;
         constructor(entryCondition: $Map_<$MemoryModuleType_<never>, $MemoryStatus_>, exitErasedMemories: $Set_<$MemoryModuleType_<never>>, orderPolicy: $GateBehavior$OrderPolicy_, runningPolicy: $GateBehavior$RunningPolicy_, durations: $List_<$Pair<$BehaviorControl<E>, number>>);
         get status(): $Behavior$Status;
     }
@@ -415,11 +415,11 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
     export class $BehaviorControl<E extends $LivingEntity> {
     }
     export interface $BehaviorControl<E extends $LivingEntity> {
-        debugString(): string;
-        getStatus(): $Behavior$Status;
         tryStart(level: $ServerLevel, entity: E, gameTime: number): boolean;
         doStop(level: $ServerLevel, entity: E, gameTime: number): void;
         tickOrStop(level: $ServerLevel, entity: E, gameTime: number): void;
+        debugString(): string;
+        getStatus(): $Behavior$Status;
         get status(): $Behavior$Status;
     }
     export class $TryFindWater {
@@ -443,31 +443,31 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
      */
     export type $GateBehavior$RunningPolicy_ = "run_one" | "try_all";
     export class $BehaviorUtils {
-        static getLivingEntityFromUUIDMemory(livingEntity: $LivingEntity, targetMemory: $MemoryModuleType_<$UUID_>): ($LivingEntity) | undefined;
-        static targetIsValid(brains: $Brain<never>, memorymodule: $MemoryModuleType_<$LivingEntity>, entityType: $EntityType_<never>): boolean;
-        static lookAtEntity(firstEntity: $LivingEntity, secondEntity: $LivingEntity): void;
-        static findSectionClosestToVillage(serverLevel: $ServerLevel, sectionPos: $SectionPos, radius: number): $SectionPos;
-        static throwItem(entity: $LivingEntity, stack: $ItemStack_, offset: $Vec3_, speedMultiplier: $Vec3_, yOffset: number): void;
         static throwItem(livingEntity: $LivingEntity, stack: $ItemStack_, offset: $Vec3_): void;
-        static canSee(livingEntity: $LivingEntity, target: $LivingEntity): boolean;
+        static throwItem(entity: $LivingEntity, stack: $ItemStack_, offset: $Vec3_, speedMultiplier: $Vec3_, yOffset: number): void;
         static isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(livingEntity: $LivingEntity, target: $LivingEntity, distance: number): boolean;
+        static canSee(livingEntity: $LivingEntity, target: $LivingEntity): boolean;
         static getRandomSwimmablePos(pathfinder: $PathfinderMob, radius: number, verticalDistance: number): $Vec3;
+        static isBreeding(entity: $LivingEntity): boolean;
+        static findSectionClosestToVillage(serverLevel: $ServerLevel, sectionPos: $SectionPos, radius: number): $SectionPos;
+        static lookAtEntity(firstEntity: $LivingEntity, secondEntity: $LivingEntity): void;
+        static targetIsValid(brains: $Brain<never>, memorymodule: $MemoryModuleType_<$LivingEntity>, entityType: $EntityType_<never>): boolean;
+        static getLivingEntityFromUUIDMemory(livingEntity: $LivingEntity, targetMemory: $MemoryModuleType_<$UUID_>): ($LivingEntity) | undefined;
+        static lockGazeAndWalkToEachOther(firstEntity: $LivingEntity, secondEntity: $LivingEntity, speed: number, distance: number): void;
+        static entityIsVisible(brain: $Brain<never>, target: $LivingEntity): boolean;
+        static getNearestTarget(centerEntity: $LivingEntity, optionalEntity: ($LivingEntity) | undefined, livingEntity: $LivingEntity): $LivingEntity;
+        static getTargetNearestMe(centerEntity: $LivingEntity, livingEntity1: $LivingEntity, livingEntity2: $LivingEntity): $LivingEntity;
         static setWalkAndLookTargetMemories(livingEntity: $LivingEntity, pos: $BlockPos_, speed: number, distance: number): void;
         static setWalkAndLookTargetMemories(livingEntity: $LivingEntity, target: $Entity, speed: number, distance: number): void;
         static setWalkAndLookTargetMemories(entity: $LivingEntity, positionTracker: $PositionTracker, speedModifier: number, closeEnoughDist: number): void;
         static isWithinAttackRange(mob: $Mob, target: $LivingEntity, cooldown: number): boolean;
-        static isBreeding(entity: $LivingEntity): boolean;
-        static entityIsVisible(brain: $Brain<never>, target: $LivingEntity): boolean;
-        static getNearestTarget(centerEntity: $LivingEntity, optionalEntity: ($LivingEntity) | undefined, livingEntity: $LivingEntity): $LivingEntity;
-        static getTargetNearestMe(centerEntity: $LivingEntity, livingEntity1: $LivingEntity, livingEntity2: $LivingEntity): $LivingEntity;
-        static lockGazeAndWalkToEachOther(firstEntity: $LivingEntity, secondEntity: $LivingEntity, speed: number, distance: number): void;
     }
     export class $PositionTracker {
     }
     export interface $PositionTracker {
-        isVisibleBy(entity: $LivingEntity): boolean;
-        currentPosition(): $Vec3;
         currentBlockPosition(): $BlockPos;
+        currentPosition(): $Vec3;
+        isVisibleBy(entity: $LivingEntity): boolean;
     }
     export class $PoiCompetitorScan {
         static create(): $BehaviorControl<$Villager>;
@@ -495,8 +495,8 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
     }
     export class $RandomStroll {
         static swim(speedModifier: number): $BehaviorControl<$PathfinderMob>;
-        static stroll(speedModifier: number): $OneShot<$PathfinderMob>;
         static stroll(speedModifier: number, mayStrollFromWater: boolean): $OneShot<$PathfinderMob>;
+        static stroll(speedModifier: number): $OneShot<$PathfinderMob>;
         static stroll(speedModifier: number, maxHorizontalDistance: number, maxVerticalDistance: number): $BehaviorControl<$PathfinderMob>;
         static fly(speedModifier: number): $BehaviorControl<$PathfinderMob>;
         constructor();
@@ -561,10 +561,10 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor(interval: $UniformInt);
     }
     export class $SetEntityLookTarget {
-        static create(canLootAtTarget: $Predicate_<$LivingEntity>, maxDist: number): $OneShot<$LivingEntity>;
-        static create(maxDist: number): $OneShot<$LivingEntity>;
         static create(entityType: $EntityType_<never>, maxDist: number): $OneShot<$LivingEntity>;
         static create(category: $MobCategory_, makDist: number): $BehaviorControl<$LivingEntity>;
+        static create(canLootAtTarget: $Predicate_<$LivingEntity>, maxDist: number): $OneShot<$LivingEntity>;
+        static create(maxDist: number): $OneShot<$LivingEntity>;
         constructor();
     }
     export class $ReactToBell {
@@ -606,15 +606,15 @@ declare module "@package/net/minecraft/world/entity/ai/behavior" {
         constructor();
     }
     export class $StopAttackingIfTargetInvalid {
-        static create<E extends $Mob>(): $BehaviorControl<E>;
-        static create<E extends $Mob>(canStopAttacking: $Predicate_<$LivingEntity>, onStopAttacking: $BiConsumer_<E, $LivingEntity>, canGrowTiredOfTryingToReachTarget: boolean): $BehaviorControl<E>;
         static create<E extends $Mob>(canStopAttacking: $Predicate_<$LivingEntity>): $BehaviorControl<E>;
         static create<E extends $Mob>(onStopAttacking: $BiConsumer_<E, $LivingEntity>): $BehaviorControl<E>;
+        static create<E extends $Mob>(canStopAttacking: $Predicate_<$LivingEntity>, onStopAttacking: $BiConsumer_<E, $LivingEntity>, canGrowTiredOfTryingToReachTarget: boolean): $BehaviorControl<E>;
+        static create<E extends $Mob>(): $BehaviorControl<E>;
         constructor();
     }
     export class $MoveToSkySeeingSpot {
-        static hasNoBlocksAbove(level: $ServerLevel, entity: $LivingEntity, pos: $BlockPos_): boolean;
         static create(speedModifier: number): $OneShot<$LivingEntity>;
+        static hasNoBlocksAbove(level: $ServerLevel, entity: $LivingEntity, pos: $BlockPos_): boolean;
         constructor();
     }
 }

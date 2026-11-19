@@ -16,10 +16,10 @@ export * as part from "@package/codechicken/multipart/api/part";
 
 declare module "@package/codechicken/multipart/api" {
     export class $PartConverter {
-        convert(arg0: $MultipartPlaceContext): $PartConverter$ConversionResult<$MultiPart>;
-        convert(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockState_): $PartConverter$ConversionResult<$Collection<$MultiPart>>;
         static emptyResultList(): $PartConverter$ConversionResult<$Collection<$MultiPart>>;
         static emptyResult(): $PartConverter$ConversionResult<$MultiPart>;
+        convert(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockState_): $PartConverter$ConversionResult<$Collection<$MultiPart>>;
+        convert(arg0: $MultipartPlaceContext): $PartConverter$ConversionResult<$MultiPart>;
         static PART_CONVERTERS: $ResourceKey<$Registry<$PartConverter>>;
         constructor();
     }
@@ -28,9 +28,9 @@ declare module "@package/codechicken/multipart/api" {
      */
     export type $PartConverter_ = RegistryTypes.CbMultipartPartConverters;
     export class $MultipartType<T extends $MultiPart> {
+        getRegistryName(): $ResourceLocation;
         createPartClient(arg0: $MCDataInput): T;
         createPartServer(arg0: $CompoundTag_): T;
-        getRegistryName(): $ResourceLocation;
         static MULTIPART_TYPES: $ResourceKey<$Registry<$MultipartType<never>>>;
         constructor();
         get registryName(): $ResourceLocation;
@@ -41,12 +41,12 @@ declare module "@package/codechicken/multipart/api" {
     export type $MultipartType_<T> = RegistryTypes.CbMultipartMultipartTypes;
     export interface $MultipartType<T> extends RegistryMarked<RegistryTypes.CbMultipartMultipartTypesTag, RegistryTypes.CbMultipartMultipartTypes> {}
     export class $RegisterMultipartTraitsEvent extends $Event implements $IModBusEvent {
-        registerClientPassthroughInterface(arg0: $Class<never>): void;
-        registerServerPassthroughInterface(arg0: $Class<never>): void;
-        registerPassthroughInterface(arg0: $Class<never>): void;
-        registerTrait(arg0: $Class<never>, arg1: $Class<$TileMultipart>): void;
-        registerClientTrait(arg0: $Class<never>, arg1: $Class<$TileMultipart>): void;
         registerServerTrait(arg0: $Class<never>, arg1: $Class<$TileMultipart>): void;
+        registerClientTrait(arg0: $Class<never>, arg1: $Class<$TileMultipart>): void;
+        registerClientPassthroughInterface(arg0: $Class<never>): void;
+        registerPassthroughInterface(arg0: $Class<never>): void;
+        registerServerPassthroughInterface(arg0: $Class<never>): void;
+        registerTrait(arg0: $Class<never>, arg1: $Class<$TileMultipart>): void;
         constructor(arg0: $MultipartGenerator);
     }
     export interface $PartConverter extends RegistryMarked<RegistryTypes.CbMultipartPartConvertersTag, RegistryTypes.CbMultipartPartConverters> {}
@@ -59,5 +59,5 @@ declare module "@package/codechicken/multipart/api" {
     /**
      * Values that may be interpreted as {@link $PartConverter$ConversionResult}.
      */
-    export type $PartConverter$ConversionResult_<T> = { success?: boolean, result?: any,  } | [success?: boolean, result?: any, ];
+    export type $PartConverter$ConversionResult_<T> = { result?: any, success?: boolean,  } | [result?: any, success?: boolean, ];
 }

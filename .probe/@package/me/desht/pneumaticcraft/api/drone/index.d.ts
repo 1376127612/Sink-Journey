@@ -33,74 +33,74 @@ declare module "@package/me/desht/pneumaticcraft/api/drone" {
         static getLabelAsComponent(arg0: string): $Component;
     }
     export interface $IDrone {
-        setName(arg0: $Component_): void;
-        getOwner(): $Player;
-        getLabel(): string;
         getEnergyStorage(): $IEnergyStorage;
-        getUpgrades(arg0: $PNCUpgrade): number;
-        dropItem(arg0: $ItemStack_): void;
-        playSound(arg0: $SoundEvent_, arg1: $SoundSource_, arg2: number, arg3: number): void;
-        getOwnerUUID(): $UUID;
-        getInv(): $IItemHandlerModifiable;
-        overload(arg0: string, ...arg1: $Object[]): void;
-        getFakePlayer(): $FakePlayer;
         setEmittingRedstone(arg0: $Direction_, arg1: number): void;
-        getControllerPos(): $BlockPos;
-        getFluidTank(): $FluidTank;
-        getEmittingRedstone(arg0: $Direction_): number;
-        isProgramApplicable(arg0: $ProgWidgetType_<never>): boolean;
-        getActiveWidgetIndex(): number;
-        sendWireframeToClient(arg0: $BlockPos_): void;
-        isBlockValidPathfindBlock(arg0: $BlockPos_): boolean;
-        getCarryingEntities(): $List<$Entity>;
-        isDroneStillValid(): boolean;
-        getDebugger(): $IDroneDebugger;
-        onVariableChanged(arg0: string, arg1: boolean): void;
-        getDeployPos(): $BlockPos;
-        addAirToDrone(arg0: number): void;
-        getActiveWidget(): $IProgWidget;
-        getDroneName(): $Component;
+        getTargetAI(): $GoalSelector;
         setCarryingEntity(arg0: $Entity): void;
+        isAIOverridden(): boolean;
+        onItemPickupEvent(arg0: $ItemEntity, arg1: number): void;
         updateLabel(): void;
         getDronePressure(): number;
+        addAirToDrone(arg0: number): void;
         resetAttackCount(): void;
-        isAIOverridden(): boolean;
+        getDroneName(): $Component;
+        getActiveWidget(): $IProgWidget;
         canMoveIntoFluid(arg0: $Fluid_): boolean;
-        getTargetAI(): $GoalSelector;
-        setActiveProgram(arg0: $IProgWidget): void;
-        getDronePos(): $Vec3;
         storeTrackerData(arg0: $ItemStack_): void;
+        dropItem(arg0: $ItemStack_): void;
+        isBlockValidPathfindBlock(arg0: $BlockPos_): boolean;
+        isProgramApplicable(arg0: $ProgWidgetType_<never>): boolean;
+        sendWireframeToClient(arg0: $BlockPos_): void;
+        getUpgrades(arg0: $PNCUpgrade): number;
+        getControllerPos(): $BlockPos;
+        getOwnerUUID(): $UUID;
+        getInv(): $IItemHandlerModifiable;
+        getEmittingRedstone(arg0: $Direction_): number;
+        getActiveWidgetIndex(): number;
+        getCarryingEntities(): $List<$Entity>;
+        getDeployPos(): $BlockPos;
+        setActiveProgram(arg0: $IProgWidget): void;
+        onVariableChanged(arg0: string, arg1: boolean): void;
+        getDebugger(): $IDroneDebugger;
+        getDronePos(): $Vec3;
         getDroneLevel(): $Level;
         getProgWidgets(): $List<$IProgWidget>;
-        getPathNavigator(): $IPathNavigator;
-        onItemPickupEvent(arg0: $ItemEntity, arg1: number): void;
-        setDugBlock(arg0: $BlockPos_): void;
         setDugBlock(arg0: $BlockPos_, arg1: $Direction_): void;
-        set name(value: $Component_);
-        get owner(): $Player;
-        get label(): string;
+        setDugBlock(arg0: $BlockPos_): void;
+        getPathNavigator(): $IPathNavigator;
+        isDroneStillValid(): boolean;
+        setName(arg0: $Component_): void;
+        getOwner(): $Player;
+        overload(arg0: string, ...arg1: $Object[]): void;
+        playSound(arg0: $SoundEvent_, arg1: $SoundSource_, arg2: number, arg3: number): void;
+        getFakePlayer(): $FakePlayer;
+        getLabel(): string;
+        getFluidTank(): $FluidTank;
         get energyStorage(): $IEnergyStorage;
+        get targetAI(): $GoalSelector;
+        set carryingEntity(value: $Entity);
+        get AIOverridden(): boolean;
+        get dronePressure(): number;
+        get droneName(): $Component;
+        get activeWidget(): $IProgWidget;
+        get controllerPos(): $BlockPos;
         get ownerUUID(): $UUID;
         get inv(): $IItemHandlerModifiable;
-        get fakePlayer(): $FakePlayer;
-        get controllerPos(): $BlockPos;
-        get fluidTank(): $FluidTank;
         get activeWidgetIndex(): number;
         get carryingEntities(): $List<$Entity>;
-        get droneStillValid(): boolean;
-        get debugger(): $IDroneDebugger;
         get deployPos(): $BlockPos;
-        get activeWidget(): $IProgWidget;
-        get droneName(): $Component;
-        set carryingEntity(value: $Entity);
-        get dronePressure(): number;
-        get AIOverridden(): boolean;
-        get targetAI(): $GoalSelector;
         set activeProgram(value: $IProgWidget);
+        get debugger(): $IDroneDebugger;
         get dronePos(): $Vec3;
         get droneLevel(): $Level;
         get progWidgets(): $List<$IProgWidget>;
         get pathNavigator(): $IPathNavigator;
+        get droneStillValid(): boolean;
+        set name(value: $Component_);
+        get owner(): $Player;
+        get fakePlayer(): $FakePlayer;
+        get label(): string;
+        get fluidTank(): $FluidTank;
     }
     export interface $ProgWidgetType<P> extends RegistryMarked<RegistryTypes.PneumaticcraftProgWidgetsTag, RegistryTypes.PneumaticcraftProgWidgets> {}
     export class $SpecialVariableRetrievalEvent$ItemVariable$Drone extends $SpecialVariableRetrievalEvent$ItemVariable {
@@ -109,8 +109,8 @@ declare module "@package/me/desht/pneumaticcraft/api/drone" {
         constructor(arg0: $IDrone, arg1: string);
     }
     export class $SpecialVariableRetrievalEvent$CoordinateVariable extends $SpecialVariableRetrievalEvent {
-        setCoordinate(arg0: $BlockPos_ | null): void;
         getCoordinate(): $BlockPos;
+        setCoordinate(arg0: $BlockPos_ | null): void;
         specialVarName: string;
     }
     export class $AmadronRetrievalEvent extends $Event {
@@ -118,12 +118,12 @@ declare module "@package/me/desht/pneumaticcraft/api/drone" {
         constructor(arg0: $IDrone);
     }
     export class $ProgWidgetType<P extends $IProgWidget> {
-        cast(arg0: $IProgWidget): P;
-        create(): P;
-        getTranslationKey(): string;
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $IProgWidget>;
         codec(): $MapCodec<$IProgWidget>;
         static createType<P extends $IProgWidget>(arg0: $Supplier_<P>, arg1: $MapCodec_<P>, arg2: $StreamCodec<$RegistryFriendlyByteBuf, P>): $ProgWidgetType<P>;
+        getTranslationKey(): string;
+        cast(arg0: $IProgWidget): P;
+        create(): P;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $IProgWidget>;
         get translationKey(): string;
     }
     /**
@@ -133,10 +133,10 @@ declare module "@package/me/desht/pneumaticcraft/api/drone" {
     export class $IPathNavigator {
     }
     export interface $IPathNavigator {
-        hasNoPath(): boolean;
-        moveToXYZ(arg0: number, arg1: number, arg2: number): boolean;
-        moveToEntity(arg0: $Entity): boolean;
         isGoingToTeleport(): boolean;
+        moveToEntity(arg0: $Entity): boolean;
+        moveToXYZ(arg0: number, arg1: number, arg2: number): boolean;
+        hasNoPath(): boolean;
         get goingToTeleport(): boolean;
     }
     export class $SpecialVariableRetrievalEvent$ItemVariable extends $SpecialVariableRetrievalEvent {
@@ -164,63 +164,63 @@ declare module "@package/me/desht/pneumaticcraft/api/drone" {
         static create(arg0: $ProgWidgetType_<never>): $IProgWidget;
     }
     export interface $IProgWidget {
+        getHeight(): number;
+        getTranslationKey(): string;
+        getDifficulty(): $IProgWidget$WidgetDifficulty;
+        freeToUse(): boolean;
+        getTypeID(): $ResourceLocation;
+        canBeRunByComputers(arg0: $IDrone, arg1: $IProgWidget): boolean;
+        getConnectedParameters(): $IProgWidget[];
+        addErrors(arg0: $List_<$Component_>, arg1: $List_<$IProgWidget>): void;
+        getMaxUV(): $Pair<number, number>;
+        copyWidget(): $IProgWidget;
+        getWidgetTargetAI(arg0: $IDrone, arg1: $IProgWidget): $Goal;
+        hasStepOutput(): boolean;
+        canSetParameter(arg0: number): boolean;
+        hasStepInput(): boolean;
+        getWidgetAI(arg0: $IDrone, arg1: $IProgWidget): $Goal;
+        getExtraStringInfo(): $List<$Component>;
+        addWarnings(arg0: $List_<$Component_>, arg1: $List_<$IProgWidget>): void;
+        setOutputWidget(arg0: $IProgWidget): void;
+        getOutputWidget(): $IProgWidget;
+        getOutputWidget(arg0: $IDrone, arg1: $List_<$IProgWidget>): $IProgWidget;
+        isDifficultyOK(arg0: $IProgWidget$WidgetDifficulty_): boolean;
         getParameters(): $List<$ProgWidgetType<never>>;
         returnType(): $ProgWidgetType<never>;
         getParent(): $IProgWidget;
         getType(): $ProgWidgetType<never>;
-        setParameter(arg0: number, arg1: $IProgWidget): void;
-        setPosition(arg0: number, arg1: number): void;
-        getY(): number;
         isAvailable(): boolean;
         setParent(arg0: $IProgWidget): void;
-        getTexture(): $ResourceLocation;
-        getWidth(): number;
-        hasStepInput(): boolean;
-        hasStepOutput(): boolean;
-        isDifficultyOK(arg0: $IProgWidget$WidgetDifficulty_): boolean;
-        getWidgetAI(arg0: $IDrone, arg1: $IProgWidget): $Goal;
-        getWidgetTargetAI(arg0: $IDrone, arg1: $IProgWidget): $Goal;
-        getExtraStringInfo(): $List<$Component>;
-        canSetParameter(arg0: number): boolean;
-        setOutputWidget(arg0: $IProgWidget): void;
-        addWarnings(arg0: $List_<$Component_>, arg1: $List_<$IProgWidget>): void;
-        getOutputWidget(arg0: $IDrone, arg1: $List_<$IProgWidget>): $IProgWidget;
-        getOutputWidget(): $IProgWidget;
-        getX(): number;
-        getTranslationKey(): string;
-        getConnectedParameters(): $IProgWidget[];
-        canBeRunByComputers(arg0: $IDrone, arg1: $IProgWidget): boolean;
-        getTooltip(arg0: $List_<$Component_>): void;
-        setY(arg0: number): void;
-        setX(arg0: number): void;
+        setPosition(arg0: number, arg1: number): void;
         getColor(): $DyeColor;
-        getTypeID(): $ResourceLocation;
-        getDifficulty(): $IProgWidget$WidgetDifficulty;
-        getHeight(): number;
-        copyWidget(): $IProgWidget;
-        getMaxUV(): $Pair<number, number>;
-        freeToUse(): boolean;
-        addErrors(arg0: $List_<$Component_>, arg1: $List_<$IProgWidget>): void;
+        getWidth(): number;
+        setParameter(arg0: number, arg1: $IProgWidget): void;
+        setY(arg0: number): void;
+        getX(): number;
+        setX(arg0: number): void;
+        getY(): number;
+        getTexture(): $ResourceLocation;
+        getTooltip(arg0: $List_<$Component_>): void;
+        get height(): number;
+        get translationKey(): string;
+        get difficulty(): $IProgWidget$WidgetDifficulty;
+        get typeID(): $ResourceLocation;
+        get connectedParameters(): $IProgWidget[];
+        get maxUV(): $Pair<number, number>;
+        get extraStringInfo(): $List<$Component>;
         get parameters(): $List<$ProgWidgetType<never>>;
         get type(): $ProgWidgetType<never>;
         get available(): boolean;
-        get texture(): $ResourceLocation;
-        get width(): number;
-        get extraStringInfo(): $List<$Component>;
-        get translationKey(): string;
-        get connectedParameters(): $IProgWidget[];
         get color(): $DyeColor;
-        get typeID(): $ResourceLocation;
-        get difficulty(): $IProgWidget$WidgetDifficulty;
-        get height(): number;
-        get maxUV(): $Pair<number, number>;
+        get width(): number;
+        get texture(): $ResourceLocation;
     }
     export class $IProgWidget$WidgetDifficulty extends $Enum<$IProgWidget$WidgetDifficulty> {
-        static values(): $IProgWidget$WidgetDifficulty[];
-        static valueOf(arg0: string): $IProgWidget$WidgetDifficulty;
         getTranslationKey(): string;
         getTooltipTranslationKey(): string;
         isNotMoreDifficult(arg0: $IProgWidget$WidgetDifficulty_): boolean;
+        static values(): $IProgWidget$WidgetDifficulty[];
+        static valueOf(arg0: string): $IProgWidget$WidgetDifficulty;
         static EASY: $IProgWidget$WidgetDifficulty;
         static MEDIUM: $IProgWidget$WidgetDifficulty;
         static ADVANCED: $IProgWidget$WidgetDifficulty;

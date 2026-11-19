@@ -13,25 +13,25 @@ export * as reader from "@package/hellfirepvp/astralsorcery/common/perk/reader";
 
 declare module "@package/hellfirepvp/astralsorcery/common/perk" {
     export class $PerkAttributeMap {
+        modifyValue(arg0: $Player, arg1: $PlayerProgress, arg2: $Supplier_<$PerkAttributeType>, arg3: number): number;
+        modifyValue(arg0: $Player, arg1: $PlayerProgress, arg2: $PerkAttributeType_, arg3: number): number;
         hasModifiers(arg0: $PerkAttributeType_): boolean;
         getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $PerkAttributeType_, arg3: $ModifierType_): number;
+        getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $Supplier_<$PerkAttributeType>): number;
+        getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $PerkAttributeType_): number;
         getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $Supplier_<$PerkAttributeType>, arg3: $ModifierType_): number;
         getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $Supplier_<$PerkAttributeType>, arg3: $Collection_<$ModifierType_>): number;
         getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $PerkAttributeType_, arg3: $Collection_<$ModifierType_>): number;
-        getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $Supplier_<$PerkAttributeType>): number;
-        getModifier(arg0: $Player, arg1: $PlayerProgress, arg2: $PerkAttributeType_): number;
-        modifyValue(arg0: $Player, arg1: $PlayerProgress, arg2: $PerkAttributeType_, arg3: number): number;
-        modifyValue(arg0: $Player, arg1: $PlayerProgress, arg2: $Supplier_<$PerkAttributeType>, arg3: number): number;
     }
     export class $PerkAttributeLimiter$Limit {
         getType(): $PerkAttributeType;
-        getMax(): $Supplier<number>;
-        getMin(): $Supplier<number>;
         limitValue(arg0: number): number;
+        getMin(): $Supplier<number>;
+        getMax(): $Supplier<number>;
         constructor(arg0: $Supplier_<$PerkAttributeType>, arg1: $Supplier_<number>, arg2: $Supplier_<number>);
         get type(): $PerkAttributeType;
-        get max(): $Supplier<number>;
         get min(): $Supplier<number>;
+        get max(): $Supplier<number>;
     }
     /**
      * Values that may be interpreted as {@link $PerkAttributeLimiter$Limit}.

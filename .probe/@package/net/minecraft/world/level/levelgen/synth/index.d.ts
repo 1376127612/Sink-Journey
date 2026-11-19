@@ -14,38 +14,38 @@ declare module "@package/net/minecraft/world/level/levelgen/synth" {
      * The input coordinates are scaled by `#INPUT_FACTOR`, and the result is scaled by `#valueFactor`.
      */
     export class $NormalNoise {
+        parityConfigString(builder: $StringBuilder): void;
+        /**
+         * @deprecated
+         */
+        static createLegacyNetherBiome(random: $RandomSource, parameters: $NormalNoise$NoiseParameters_): $NormalNoise;
         parameters(): $NormalNoise$NoiseParameters;
         getValue(x: number, arg1: number, y: number): number;
         static create(random: $RandomSource, parameters: $NormalNoise$NoiseParameters_): $NormalNoise;
         static create(random: $RandomSource, firstOctave: number, ...amplitudes: number[]): $NormalNoise;
         maxValue(): number;
-        /**
-         * @deprecated
-         */
-        static createLegacyNetherBiome(random: $RandomSource, parameters: $NormalNoise$NoiseParameters_): $NormalNoise;
-        parityConfigString(builder: $StringBuilder): void;
     }
     /**
      * This class wraps three individual perlin noise octaves samplers.
      * It computes the octaves of the main noise, and then uses that as a linear interpolation value between the minimum and maximum limit noises.
      */
     export class $BlendedNoise implements $DensityFunction$SimpleFunction {
+        codec(): $KeyDispatchDataCodec<$DensityFunction>;
+        parityConfigString(builder: $StringBuilder): void;
         compute(context: $DensityFunction$FunctionContext): number;
         maxValue(): number;
-        minValue(): number;
-        parityConfigString(builder: $StringBuilder): void;
-        codec(): $KeyDispatchDataCodec<$DensityFunction>;
-        withNewRandom(random: $RandomSource): $BlendedNoise;
         static createUnseeded(xzScale: number, arg1: number, yScale: number, arg3: number, xzFactor: number): $BlendedNoise;
-        fillArray(array: number[], contextProvider: $DensityFunction$ContextProvider): void;
-        mapAll(visitor: $DensityFunction$Visitor_): $DensityFunction;
+        minValue(): number;
+        withNewRandom(random: $RandomSource): $BlendedNoise;
+        mapAll(arg0: $DensityFunction$Visitor_): $DensityFunction;
+        fillArray(arg0: number[], arg1: $DensityFunction$ContextProvider): void;
+        halfNegative(): $DensityFunction;
+        quarterNegative(): $DensityFunction;
         abs(): $DensityFunction;
-        clamp(minValue: number, arg1: number): $DensityFunction;
+        clamp(arg0: number, arg1: number): $DensityFunction;
         square(): $DensityFunction;
         cube(): $DensityFunction;
         squeeze(): $DensityFunction;
-        quarterNegative(): $DensityFunction;
-        halfNegative(): $DensityFunction;
         static CODEC: $KeyDispatchDataCodec<$BlendedNoise>;
         constructor(random: $RandomSource, xzScale: number, arg2: number, yScale: number, arg4: number, xzFactor: number);
     }
@@ -54,6 +54,11 @@ declare module "@package/net/minecraft/world/level/levelgen/synth" {
      * Mojang uses the term 'Perlin' to describe octaves or fBm (Fractal Brownian Motion) noise.
      */
     export class $PerlinNoise {
+        parityConfigString(builder: $StringBuilder): void;
+        /**
+         * @deprecated
+         */
+        static createLegacyForLegacyNetherBiome(random: $RandomSource, firstOctave: number, amplitudes: $DoubleList): $PerlinNoise;
         static wrap(multiplier: number): number;
         /**
          * @deprecated
@@ -64,11 +69,6 @@ declare module "@package/net/minecraft/world/level/levelgen/synth" {
         static create(random: $RandomSource, octaves: $IntStream): $PerlinNoise;
         static create(random: $RandomSource, octaves: $List_<number>): $PerlinNoise;
         static create(random: $RandomSource, firstOctave: number, firstAmplitude: number, ...arg3: number[]): $PerlinNoise;
-        parityConfigString(builder: $StringBuilder): void;
-        /**
-         * @deprecated
-         */
-        static createLegacyForLegacyNetherBiome(random: $RandomSource, firstOctave: number, amplitudes: $DoubleList): $PerlinNoise;
         /**
          * @return A single octave of Perlin noise.
          */
@@ -84,12 +84,12 @@ declare module "@package/net/minecraft/world/level/levelgen/synth" {
      * Generates a single octave of Perlin noise.
      */
     export class $ImprovedNoise {
-        parityConfigString(builder: $StringBuilder): void;
-        noise(x: number, arg1: number, y: number): number;
         /**
          * @deprecated
          */
         noise(x: number, arg1: number, y: number, arg3: number, z: number): number;
+        noise(x: number, arg1: number, y: number): number;
+        parityConfigString(builder: $StringBuilder): void;
         noiseWithDerivative(x: number, arg1: number, y: number, arg3: number[]): number;
         zo: number;
         yo: number;
@@ -105,8 +105,8 @@ declare module "@package/net/minecraft/world/level/levelgen/synth" {
         constructor(random: $RandomSource, octaves: $List_<number>);
     }
     export class $NormalNoise$NoiseParameters extends $Record {
-        firstOctave(): number;
         amplitudes(): $DoubleList;
+        firstOctave(): number;
         static CODEC: $Codec<$Holder<$NormalNoise$NoiseParameters>>;
         static DIRECT_CODEC: $Codec<$NormalNoise$NoiseParameters>;
         constructor(arg0: number, arg1: $DoubleList);
@@ -118,12 +118,12 @@ declare module "@package/net/minecraft/world/level/levelgen/synth" {
      */
     export type $NormalNoise$NoiseParameters_ = RegistryTypes.WorldgenNoise | { firstOctave?: number, amplitudes?: $DoubleList,  } | [firstOctave?: number, amplitudes?: $DoubleList, ];
     export class $NoiseUtils {
-        static parityNoiseOctaveConfigString(builder: $StringBuilder, xo: number, arg2: number, yo: number, arg4: number[]): void;
-        static parityNoiseOctaveConfigString(builder: $StringBuilder, xo: number, arg2: number, yo: number, arg4: number[]): void;
         /**
          * Takes an input value and biases it using a sine function towards two larger magnitude values.
          */
         static biasTowardsExtreme(value: number, arg1: number): number;
+        static parityNoiseOctaveConfigString(builder: $StringBuilder, xo: number, arg2: number, yo: number, arg4: number[]): void;
+        static parityNoiseOctaveConfigString(builder: $StringBuilder, xo: number, arg2: number, yo: number, arg4: number[]): void;
         constructor();
     }
     /**

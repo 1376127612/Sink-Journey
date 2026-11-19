@@ -9,13 +9,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/syncdata/accessor" {
     export class $IAccessor<TYPE> {
     }
     export interface $IAccessor<TYPE> extends $Predicate<$Class<never>> {
+        readFieldToStream(arg0: $RegistryFriendlyByteBuf, arg1: $IRef<TYPE>): void;
+        writeField<T>(arg0: $DynamicOps<T>, arg1: $IRef<TYPE>, arg2: T): void;
+        createRef(arg0: $ManagedKey, arg1: $Object): $IRef<TYPE>;
+        writeFieldFromStream(arg0: $RegistryFriendlyByteBuf, arg1: $IRef<TYPE>): void;
         test(arg0: $Class<never>): boolean;
         isReadOnly(): boolean;
         readField<T>(arg0: $DynamicOps<T>, arg1: $IRef<TYPE>): T;
-        writeField<T>(arg0: $DynamicOps<T>, arg1: $IRef<TYPE>, arg2: T): void;
-        createRef(arg0: $ManagedKey, arg1: $Object): $IRef<TYPE>;
-        readFieldToStream(arg0: $RegistryFriendlyByteBuf, arg1: $IRef<TYPE>): void;
-        writeFieldFromStream(arg0: $RegistryFriendlyByteBuf, arg1: $IRef<TYPE>): void;
         get readOnly(): boolean;
     }
 }

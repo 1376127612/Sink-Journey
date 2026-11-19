@@ -7,16 +7,16 @@ import { $CommandContext } from "@package/com/mojang/brigadier/context";
 
 declare module "@package/com/mojang/brigadier/arguments" {
     export class $StringArgumentType implements $ArgumentType<string> {
+        static greedyString(): $StringArgumentType;
+        static escapeIfRequired(arg0: string): string;
         parse(arg0: $StringReader): string;
         getType(): $StringArgumentType$StringType;
         static string(): $StringArgumentType;
         static getString(arg0: $CommandContext<never>, arg1: string): string;
-        getExamples(): $Collection<string>;
         static word(): $StringArgumentType;
-        static escapeIfRequired(arg0: string): string;
-        static greedyString(): $StringArgumentType;
-        parse<S>(arg0: $StringReader, arg1: S): string;
+        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): string;
         get type(): $StringArgumentType$StringType;
         get examples(): $Collection<string>;
     }
@@ -29,8 +29,8 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static floatArg(arg0: number): $FloatArgumentType;
         static floatArg(arg0: number, arg1: number): $FloatArgumentType;
         static floatArg(): $FloatArgumentType;
-        parse<S>(arg0: $StringReader, arg1: S): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): number;
         get minimum(): number;
         get maximum(): number;
         get examples(): $Collection<string>;
@@ -38,10 +38,10 @@ declare module "@package/com/mojang/brigadier/arguments" {
     export class $ArgumentType<T> {
     }
     export interface $ArgumentType<T> {
+        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         parse(arg0: $StringReader): T;
         parse<S>(arg0: $StringReader, arg1: S): T;
         getExamples(): $Collection<string>;
-        listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         get examples(): $Collection<string>;
     }
     /**
@@ -70,8 +70,8 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static doubleArg(arg0: number): $DoubleArgumentType;
         static doubleArg(arg0: number, arg1: number): $DoubleArgumentType;
         static doubleArg(): $DoubleArgumentType;
-        parse<S>(arg0: $StringReader, arg1: S): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): number;
         get minimum(): number;
         get maximum(): number;
         get examples(): $Collection<string>;
@@ -85,8 +85,8 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static longArg(arg0: number): $LongArgumentType;
         static longArg(arg0: number, arg1: number): $LongArgumentType;
         static longArg(): $LongArgumentType;
-        parse<S>(arg0: $StringReader, arg1: S): number;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): number;
         get minimum(): number;
         get maximum(): number;
         get examples(): $Collection<string>;
@@ -96,12 +96,12 @@ declare module "@package/com/mojang/brigadier/arguments" {
         static getInteger(arg0: $CommandContext<never>, arg1: string): number;
         getMinimum(): number;
         getMaximum(): number;
-        static integer(arg0: number): $IntegerArgumentType;
-        static integer(arg0: number, arg1: number): $IntegerArgumentType;
-        static integer(): $IntegerArgumentType;
         getExamples(): $Collection<string>;
-        parse<S>(arg0: $StringReader, arg1: S): number;
+        static integer(arg0: number, arg1: number): $IntegerArgumentType;
+        static integer(arg0: number): $IntegerArgumentType;
+        static integer(): $IntegerArgumentType;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse<S>(arg0: $StringReader, arg1: S): number;
         get minimum(): number;
         get maximum(): number;
         get examples(): $Collection<string>;

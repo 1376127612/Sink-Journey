@@ -12,8 +12,8 @@ declare module "@package/com/euphony/neo_language_reload/access" {
     export class $ILanguage {
     }
     export interface $ILanguage {
-        languagereload_getTranslationStorage(): $ClientLanguage;
         languagereload_setTranslationStorage(arg0: $ClientLanguage): void;
+        languagereload_getTranslationStorage(): $ClientLanguage;
     }
     export class $IAdvancementsScreen {
     }

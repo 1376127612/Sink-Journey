@@ -18,99 +18,99 @@ declare module "@package/cn/howxu/mmcr/publicapi/recipe" {
     export class $ItemInputSpec {
     }
     export interface $ItemInputSpec {
+        consumeChance(): number;
         count(): number;
         components(): $ComponentConstraints;
         ingredient(): $Ingredient;
-        consumeChance(): number;
     }
     export class $RecipeSpec {
     }
     export interface $RecipeSpec {
-        cancelRecipeOnPerTickFailure(): boolean;
-        customOutputs(): $List<$CustomIoSpec>;
-        requiredHosts(): $Set<$HostConstraint>;
-        priority(): number;
-        id(): $ResourceLocation;
-        maxThreads(): number;
         itemInputs(): $List<$ItemInputSpec>;
+        requirements(): $List<$RequirementSpec>;
         fluidInputs(): $List<$FluidInputSpec>;
         itemOutputs(): $List<$ItemOutputSpec>;
         fluidOutputs(): $List<$FluidOutputSpec>;
-        tickTime(): number;
-        requirements(): $List<$RequirementSpec>;
-        allowPartialOutputs(): boolean;
         recipePoolId(): $ResourceLocation;
         modifierIds(): $List<$ResourceLocation>;
         parallelized(): boolean;
         requiredHostIds(): $Set<$ResourceLocation>;
         energyInputs(): $List<$EnergyRateSpec>;
         energyOutputs(): $List<$EnergyRateSpec>;
+        allowPartialOutputs(): boolean;
+        cancelRecipeOnPerTickFailure(): boolean;
+        priority(): number;
+        id(): $ResourceLocation;
+        tickTime(): number;
+        maxThreads(): number;
+        requiredHosts(): $Set<$HostConstraint>;
+        customOutputs(): $List<$CustomIoSpec>;
     }
     export class $RecipeDraft {
     }
     export interface $RecipeDraft {
+        outputFluid(fluid: $Fluid_, amount: number): $RecipeDraft;
+        inputChemical(id: $ResourceLocation_, amount: number): $RecipeDraft;
+        inputChemical(id: $ResourceLocation_, amount: number, consumeChance: number): $RecipeDraft;
+        outputChemical(id: $ResourceLocation_, amount: number, chance: number): $RecipeDraft;
+        inputItem(item: $Ingredient_, count: number, components: $ComponentConstraints, consumeChance: number): $RecipeDraft;
+        inputItem(item: $Item_, count: number): $RecipeDraft;
+        inputItem(item: $Ingredient_, count: number): $RecipeDraft;
+        inputItem(tag: $TagKey_<$Item>, count: number): $RecipeDraft;
+        outputEnergy(fePerTick: number): $RecipeDraft;
+        inputEnergy(fePerTick: number): $RecipeDraft;
+        levelRequirement(typeId: $ResourceLocation_, levelId: $ResourceLocation_): $RecipeDraft;
+        stageRequirement(minStage: number): $RecipeDraft;
+        parallelized(value: boolean): $RecipeDraft;
+        smartInterface(value: $SmartInterfaceRequirementSpec): $RecipeDraft;
+        recipePool(id: $ResourceLocation_): $RecipeDraft;
+        outputHeat(heat: number): $RecipeDraft;
+        allowPartialOutputs(value: boolean): $RecipeDraft;
+        cancelIfPerTickFails(value: boolean): $RecipeDraft;
         priority(priority: number): $RecipeDraft;
         duration(ticks: number): $RecipeDraft;
         build(): $RecipeSpec;
         modifier(id: $ResourceLocation_): $RecipeDraft;
-        maxThreads(threads: number): $RecipeDraft;
         custom(value: $CustomIoSpec): $RecipeDraft;
-        inputSource(amount: number, consumeChance: number): $RecipeDraft;
         inputSource(amount: number): $RecipeDraft;
-        outputChemical(id: $ResourceLocation_, amount: number, chance: number): $RecipeDraft;
-        outputItem(item: $Item_, count: number): $RecipeDraft;
-        outputItem(stack: $ItemStack_): $RecipeDraft;
-        outputItem(stack: $ItemStack_, components: $ComponentConstraints): $RecipeDraft;
-        outputHeat(heat: number): $RecipeDraft;
-        outputEnergy(fePerTick: number): $RecipeDraft;
+        inputSource(amount: number, consumeChance: number): $RecipeDraft;
+        maxThreads(threads: number): $RecipeDraft;
         requirement(value: $RequirementSpec): $RecipeDraft;
-        inputChemical(id: $ResourceLocation_, amount: number, consumeChance: number): $RecipeDraft;
-        inputChemical(id: $ResourceLocation_, amount: number): $RecipeDraft;
-        inputItem(item: $Item_, count: number): $RecipeDraft;
-        inputItem(tag: $TagKey_<$Item>, count: number): $RecipeDraft;
-        inputItem(item: $Ingredient_, count: number, components: $ComponentConstraints, consumeChance: number): $RecipeDraft;
-        inputItem(item: $Ingredient_, count: number): $RecipeDraft;
-        allowPartialOutputs(value: boolean): $RecipeDraft;
-        inputEnergy(fePerTick: number): $RecipeDraft;
+        outputItem(stack: $ItemStack_, components: $ComponentConstraints): $RecipeDraft;
+        outputItem(stack: $ItemStack_): $RecipeDraft;
+        outputItem(item: $Item_, count: number): $RecipeDraft;
         inputFluid(fluid: $Fluid_, amount: number, consumeChance: number): $RecipeDraft;
         inputFluid(fluid: $Fluid_, amount: number): $RecipeDraft;
-        outputFluid(fluid: $Fluid_, amount: number): $RecipeDraft;
-        smartInterface(value: $SmartInterfaceRequirementSpec): $RecipeDraft;
-        parallelized(value: boolean): $RecipeDraft;
-        levelRequirement(typeId: $ResourceLocation_, levelId: $ResourceLocation_): $RecipeDraft;
-        stageRequirement(minStage: number): $RecipeDraft;
-        recipePool(id: $ResourceLocation_): $RecipeDraft;
-        inputAir(airPerTick: number, minPressure: number, consumeChance: number, tags: $List_<string>): $RecipeDraft;
-        inputAir(airPerTick: number, minPressure: number, consumeChance: number): $RecipeDraft;
-        inputAir(airPerTick: number, minPressure: number): $RecipeDraft;
-        inputAir(airPerTick: number, minPressure: number, tags: $List_<string>): $RecipeDraft;
-        outputAir(airPerTick: number, tags: $List_<string>): $RecipeDraft;
-        outputAir(airPerTick: number): $RecipeDraft;
-        outputAir(airPerTick: number, chance: number): $RecipeDraft;
-        outputAir(airPerTick: number, chance: number, tags: $List_<string>): $RecipeDraft;
-        inputMana(amount: number): $RecipeDraft;
-        inputMana(amount: number, consumeChance: number): $RecipeDraft;
-        outputMana(amount: number): $RecipeDraft;
-        outputMana(amount: number, chance: number): $RecipeDraft;
-        cancelIfPerTickFails(value: boolean): $RecipeDraft;
-        lightningInput(tier: $LightningTier_, amount: number): $RecipeDraft;
-        lightningOutput(tier: $LightningTier_, amount: number, chance: number): $RecipeDraft;
-        lightningOutput(tier: $LightningTier_, amount: number): $RecipeDraft;
-        outputSource(amount: number): $RecipeDraft;
-        outputSource(amount: number, chance: number): $RecipeDraft;
-        requiredHost(id: $ResourceLocation_): $RecipeDraft;
-        inputHeatTemperature(temperature: number): $RecipeDraft;
         outputStress(stress: number, rpm: number): $RecipeDraft;
         outputStress(stress: number, rpm: number, tags: $List_<string>): $RecipeDraft;
-        inputItemTag(tag: $TagKey_<$Item>, count: number): $RecipeDraft;
-        inputStress(stress: number, minRpm: number, tags: $List_<string>): $RecipeDraft;
         inputStress(stress: number, minRpm: number): $RecipeDraft;
-        outputChance(stack: $ItemStack_, chance: number): $RecipeDraft;
+        inputStress(stress: number, minRpm: number, tags: $List_<string>): $RecipeDraft;
+        lightningInput(tier: $LightningTier_, amount: number): $RecipeDraft;
+        outputSource(amount: number, chance: number): $RecipeDraft;
+        outputSource(amount: number): $RecipeDraft;
+        requiredHost(id: $ResourceLocation_): $RecipeDraft;
+        lightningOutput(tier: $LightningTier_, amount: number, chance: number): $RecipeDraft;
+        lightningOutput(tier: $LightningTier_, amount: number): $RecipeDraft;
+        inputMana(amount: number): $RecipeDraft;
+        inputMana(amount: number, consumeChance: number): $RecipeDraft;
+        outputMana(amount: number, chance: number): $RecipeDraft;
+        outputMana(amount: number): $RecipeDraft;
+        inputAir(airPerTick: number, minPressure: number, tags: $List_<string>): $RecipeDraft;
+        inputAir(airPerTick: number, minPressure: number, consumeChance: number): $RecipeDraft;
+        inputAir(airPerTick: number, minPressure: number): $RecipeDraft;
+        inputAir(airPerTick: number, minPressure: number, consumeChance: number, tags: $List_<string>): $RecipeDraft;
+        outputAir(airPerTick: number, chance: number, tags: $List_<string>): $RecipeDraft;
+        outputAir(airPerTick: number, tags: $List_<string>): $RecipeDraft;
+        outputAir(airPerTick: number, chance: number): $RecipeDraft;
+        outputAir(airPerTick: number): $RecipeDraft;
+        inputItemTag(tag: $TagKey_<$Item>, count: number): $RecipeDraft;
         outputChance(stack: $ItemStack_, chance: number, components: $ComponentConstraints): $RecipeDraft;
+        outputChance(stack: $ItemStack_, chance: number): $RecipeDraft;
         inputChemicalTag(id: $ResourceLocation_, amount: number, consumeChance: number): $RecipeDraft;
         inputChemicalTag(id: $ResourceLocation_, amount: number): $RecipeDraft;
-        oFEt(fePerTick: number): $RecipeDraft;
+        inputHeatTemperature(temperature: number): $RecipeDraft;
         iFEt(fePerTick: number): $RecipeDraft;
+        oFEt(fePerTick: number): $RecipeDraft;
     }
     export class $EnergyRateSpec {
     }
@@ -124,15 +124,15 @@ declare module "@package/cn/howxu/mmcr/publicapi/recipe" {
     export class $FluidOutputSpec {
     }
     export interface $FluidOutputSpec {
-        stack(): $FluidStack;
         chance(): number;
+        stack(): $FluidStack;
     }
     export class $ItemOutputSpec {
     }
     export interface $ItemOutputSpec {
+        chance(): number;
         stack(): $ItemStack;
         components(): $ComponentConstraints;
-        chance(): number;
     }
     export class $IoDirection extends $Enum<$IoDirection> {
         static values(): $IoDirection[];
@@ -166,16 +166,16 @@ declare module "@package/cn/howxu/mmcr/publicapi/recipe" {
     export class $CustomIoSpec {
     }
     export interface $CustomIoSpec {
+        ioType(): $IoDirection;
         payload(): $JsonElement;
         io(): $IoDirection;
-        ioType(): $IoDirection;
         typeId(): $ResourceLocation;
     }
     export class $FluidInputSpec {
     }
     export interface $FluidInputSpec {
+        consumeChance(): number;
         amount(): number;
         ingredient(): $FluidIngredient;
-        consumeChance(): number;
     }
 }

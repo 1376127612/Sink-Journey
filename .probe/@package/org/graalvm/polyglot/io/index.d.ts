@@ -14,11 +14,11 @@ declare module "@package/org/graalvm/polyglot/io" {
         static create(buffer: number[]): $ByteSequence;
     }
     export interface $ByteSequence {
+        byteAt(index: number): number;
         length(): number;
         bytes(): $IntStream;
         subSequence(startIndex: number, endIndex: number): $ByteSequence;
         toByteArray(): number[];
-        byteAt(index: number): number;
     }
     export class $MessageTransport {
     }
@@ -36,22 +36,30 @@ declare module "@package/org/graalvm/polyglot/io" {
         static NONE: $IOAccess;
     }
     export class $FileSystem {
-        static newFileSystem(fileSystem: $FileSystem$1): $FileSystem;
         static allowInternalResources(fileSystem: $FileSystem): $FileSystem;
         /**
          * @deprecated
          */
         static allowLanguageHomeAccess(fileSystem: $FileSystem): $FileSystem;
+        static newFileSystem(fileSystem: $FileSystem$1): $FileSystem;
         /**
          * @deprecated
          */
         static allowInternalResourceAccess(fileSystem: $FileSystem): $FileSystem;
-        static newReadOnlyFileSystem(fileSystem: $FileSystem): $FileSystem;
-        static newDefaultFileSystem(): $FileSystem;
         static newCompositeFileSystem(fallbackFileSystem: $FileSystem, ...delegates: $FileSystem$Selector[]): $FileSystem;
         static newDenyIOFileSystem(): $FileSystem;
+        static newDefaultFileSystem(): $FileSystem;
+        static newReadOnlyFileSystem(fileSystem: $FileSystem): $FileSystem;
     }
     export interface $FileSystem {
+        getFileStoreUnallocatedSpace(path: $Path_): number;
+        getMimeType(path: $Path_): string;
+        getTempDirectory(): $Path;
+        setCurrentWorkingDirectory(currentWorkingDirectory: $Path_): void;
+        isFileStoreReadOnly(path: $Path_): boolean;
+        getFileStoreUsableSpace(path: $Path_): number;
+        getFileStoreBlockSize(path: $Path_): number;
+        getFileStoreTotalSpace(path: $Path_): number;
         "delete"(path: $Path_): void;
         checkAccess(path: $Path_, modes: $Set_<$AccessMode_>, ...linkOptions: $LinkOption_[]): void;
         copy(source: $Path_, target: $Path_, ...options: $CopyOption[]): void;
@@ -72,25 +80,17 @@ declare module "@package/org/graalvm/polyglot/io" {
         getPathSeparator(): string;
         parsePath(path: string): $Path;
         parsePath(uri: $URI): $Path;
-        getTempDirectory(): $Path;
-        isFileStoreReadOnly(path: $Path_): boolean;
-        getFileStoreTotalSpace(path: $Path_): number;
-        getFileStoreUsableSpace(path: $Path_): number;
-        getFileStoreBlockSize(path: $Path_): number;
-        setCurrentWorkingDirectory(currentWorkingDirectory: $Path_): void;
-        getMimeType(path: $Path_): string;
-        getFileStoreUnallocatedSpace(path: $Path_): number;
-        get separator(): string;
-        get pathSeparator(): string;
         get tempDirectory(): $Path;
         set currentWorkingDirectory(value: $Path_);
+        get separator(): string;
+        get pathSeparator(): string;
     }
     export class $MessageEndpoint {
     }
     export interface $MessageEndpoint {
+        sendText(text: string): void;
         sendBinary(data: $ByteBuffer): void;
         sendPing(data: $ByteBuffer): void;
-        sendText(text: string): void;
         sendPong(data: $ByteBuffer): void;
         sendClose(): void;
     }
@@ -104,27 +104,27 @@ declare module "@package/org/graalvm/polyglot/io" {
         get fileSystem(): $FileSystem;
     }
     export class $IOAccess$Builder {
-        build(): $IOAccess;
-        fileSystem(fileSystem: $FileSystem): $IOAccess$Builder;
         allowHostSocketAccess(allow: boolean): $IOAccess$Builder;
         allowHostFileAccess(allow: boolean): $IOAccess$Builder;
+        build(): $IOAccess;
+        fileSystem(fileSystem: $FileSystem): $IOAccess$Builder;
     }
     export class $ProcessHandler$ProcessCommand {
-        static create(cmd: $List_<string>, cwd: string, environment: $Map_<string, string>, redirectErrorStream: boolean, inputRedirect: $ProcessHandler$Redirect, outputRedirect: $ProcessHandler$Redirect, errorRedirect: $ProcessHandler$Redirect): $ProcessHandler$ProcessCommand;
-        getDirectory(): string;
-        getEnvironment(): $Map<string, string>;
         getCommand(): $List<string>;
+        static create(cmd: $List_<string>, cwd: string, environment: $Map_<string, string>, redirectErrorStream: boolean, inputRedirect: $ProcessHandler$Redirect, outputRedirect: $ProcessHandler$Redirect, errorRedirect: $ProcessHandler$Redirect): $ProcessHandler$ProcessCommand;
+        getEnvironment(): $Map<string, string>;
         isRedirectErrorStream(): boolean;
-        getInputRedirect(): $ProcessHandler$Redirect;
+        getDirectory(): string;
         getErrorRedirect(): $ProcessHandler$Redirect;
         getOutputRedirect(): $ProcessHandler$Redirect;
-        get directory(): string;
-        get environment(): $Map<string, string>;
+        getInputRedirect(): $ProcessHandler$Redirect;
         get command(): $List<string>;
+        get environment(): $Map<string, string>;
         get redirectErrorStream(): boolean;
-        get inputRedirect(): $ProcessHandler$Redirect;
+        get directory(): string;
         get errorRedirect(): $ProcessHandler$Redirect;
         get outputRedirect(): $ProcessHandler$Redirect;
+        get inputRedirect(): $ProcessHandler$Redirect;
     }
     export class $ProcessHandler {
     }

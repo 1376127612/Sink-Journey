@@ -7,9 +7,9 @@ declare module "@package/com/ccr4ft3r/lightspeed/cache/resource" {
     export class $ResourcePackEntry {
     }
     export interface $ResourcePackEntry {
-        lightspeed$resources(): $PackResources;
         lightspeed$name(): string;
         lightspeed$filter(): $Predicate<never>;
+        lightspeed$resources(): $PackResources;
     }
     export class $ResourcePackLookup$GroupedAccess<L> {
     }
@@ -20,8 +20,8 @@ declare module "@package/com/ccr4ft3r/lightspeed/cache/resource" {
     }
     export interface $ResourcePackLookup$Access<L> {
         lightspeed$lookupRead(arg0: $PackResources, arg1: L): $IoSupplier<$InputStream>;
+        lightspeed$lookupResource(arg0: $PackResources, arg1: L, arg2: $IoSupplier_<$InputStream>, arg3: number): $Resource;
         lightspeed$lookupContains(arg0: $PackResources, arg1: L): boolean;
         lightspeed$lookupFiltered(arg0: $ResourcePackEntry, arg1: L): boolean;
-        lightspeed$lookupResource(arg0: $PackResources, arg1: L, arg2: $IoSupplier_<$InputStream>, arg3: number): $Resource;
     }
 }

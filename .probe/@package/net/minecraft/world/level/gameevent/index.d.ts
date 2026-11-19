@@ -22,10 +22,10 @@ declare module "@package/net/minecraft/world/level/gameevent" {
         get listener(): T;
     }
     export class $EuclideanGameEventListenerRegistry implements $GameEventListenerRegistry {
+        visitInRangeListeners(gameEvent: $Holder_<$GameEvent>, pos: $Vec3_, context: $GameEvent$Context_, visitor: $GameEventListenerRegistry$ListenerVisitor_): boolean;
         isEmpty(): boolean;
         register(listener: $GameEventListener): void;
         unregister(listener: $GameEventListener): void;
-        visitInRangeListeners(gameEvent: $Holder_<$GameEvent>, pos: $Vec3_, context: $GameEvent$Context_, visitor: $GameEventListenerRegistry$ListenerVisitor_): boolean;
         constructor(level: $ServerLevel, sectionY: number, onEmptyAction: $EuclideanGameEventListenerRegistry$OnEmptyAction_);
         get empty(): boolean;
     }
@@ -38,30 +38,30 @@ declare module "@package/net/minecraft/world/level/gameevent" {
         get type(): $PositionSourceType<$EntityPositionSource>;
     }
     export class $BlockPositionSource$Type implements $PositionSourceType<$BlockPositionSource> {
-        streamCodec(): $StreamCodec<$ByteBuf, $BlockPositionSource>;
         codec(): $MapCodec<$BlockPositionSource>;
+        streamCodec(): $StreamCodec<$ByteBuf, $BlockPositionSource>;
         constructor();
     }
     export class $GameEventListener {
     }
     export interface $GameEventListener {
-        getDeliveryMode(): $GameEventListener$DeliveryMode;
-        /**
-         * Gets the position of the listener itself.
-         */
-        getListenerSource(): $PositionSource;
-        handleGameEvent(level: $ServerLevel, gameEvent: $Holder_<$GameEvent>, context: $GameEvent$Context_, pos: $Vec3_): boolean;
         /**
          * Gets the listening radius of the listener. Events within this radius will notify the listener when broadcasted.
          */
         getListenerRadius(): number;
+        getDeliveryMode(): $GameEventListener$DeliveryMode;
+        handleGameEvent(level: $ServerLevel, gameEvent: $Holder_<$GameEvent>, context: $GameEvent$Context_, pos: $Vec3_): boolean;
+        /**
+         * Gets the position of the listener itself.
+         */
+        getListenerSource(): $PositionSource;
+        get listenerRadius(): number;
         get deliveryMode(): $GameEventListener$DeliveryMode;
         get listenerSource(): $PositionSource;
-        get listenerRadius(): number;
     }
     export class $EntityPositionSource$Type implements $PositionSourceType<$EntityPositionSource> {
-        streamCodec(): $StreamCodec<$ByteBuf, $EntityPositionSource>;
         codec(): $MapCodec<$EntityPositionSource>;
+        streamCodec(): $StreamCodec<$ByteBuf, $EntityPositionSource>;
         constructor();
     }
     export class $GameEventListener$Provider<T extends $GameEventListener> {
@@ -95,10 +95,10 @@ declare module "@package/net/minecraft/world/level/gameevent" {
         static NOOP: $GameEventListenerRegistry;
     }
     export interface $GameEventListenerRegistry {
+        visitInRangeListeners(gameEvent: $Holder_<$GameEvent>, pos: $Vec3_, context: $GameEvent$Context_, visitor: $GameEventListenerRegistry$ListenerVisitor_): boolean;
         isEmpty(): boolean;
         register(listener: $GameEventListener): void;
         unregister(listener: $GameEventListener): void;
-        visitInRangeListeners(gameEvent: $Holder_<$GameEvent>, pos: $Vec3_, context: $GameEvent$Context_, visitor: $GameEventListenerRegistry$ListenerVisitor_): boolean;
         get empty(): boolean;
     }
     export class $GameEventListener$DeliveryMode extends $Enum<$GameEventListener$DeliveryMode> {
@@ -112,17 +112,17 @@ declare module "@package/net/minecraft/world/level/gameevent" {
      */
     export type $GameEventListener$DeliveryMode_ = "unspecified" | "by_distance";
     export class $GameEvent$Context extends $Record {
-        static of(sourceEntity: $Entity | null): $GameEvent$Context;
-        static of(affectedState: $BlockState_ | null): $GameEvent$Context;
-        static of(sourceEntity: $Entity | null, affectedState: $BlockState_ | null): $GameEvent$Context;
         sourceEntity(): $Entity;
         affectedState(): $BlockState;
+        static of(sourceEntity: $Entity | null, affectedState: $BlockState_ | null): $GameEvent$Context;
+        static of(sourceEntity: $Entity | null): $GameEvent$Context;
+        static of(affectedState: $BlockState_ | null): $GameEvent$Context;
         constructor(arg0: $Entity | null, arg1: $BlockState_ | null);
     }
     /**
      * Values that may be interpreted as {@link $GameEvent$Context}.
      */
-    export type $GameEvent$Context_ = { sourceEntity?: $Entity, affectedState?: $BlockState_,  } | [sourceEntity?: $Entity, affectedState?: $BlockState_, ];
+    export type $GameEvent$Context_ = { affectedState?: $BlockState_, sourceEntity?: $Entity,  } | [affectedState?: $BlockState_, sourceEntity?: $Entity, ];
     export class $EuclideanGameEventListenerRegistry$OnEmptyAction {
     }
     export interface $EuclideanGameEventListenerRegistry$OnEmptyAction {
@@ -145,19 +145,19 @@ declare module "@package/net/minecraft/world/level/gameevent" {
         static BLOCK: $PositionSourceType<$BlockPositionSource>;
     }
     export interface $PositionSourceType<T extends $PositionSource> {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         codec(): $MapCodec<T>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
     }
     /**
      * Values that may be interpreted as {@link $PositionSourceType}.
      */
     export type $PositionSourceType_<T> = RegistryTypes.PositionSourceType;
     export class $GameEvent$ListenerInfo implements $Comparable<$GameEvent$ListenerInfo> {
+        recipient(): $GameEventListener;
         context(): $GameEvent$Context;
         compareTo(other: $GameEvent$ListenerInfo): number;
         source(): $Vec3;
         gameEvent(): $Holder<$GameEvent>;
-        recipient(): $GameEventListener;
         constructor(gameEvent: $Holder_<$GameEvent>, source: $Vec3_, context: $GameEvent$Context_, recipient: $GameEventListener, pos: $Vec3_);
     }
     export class $PositionSource {

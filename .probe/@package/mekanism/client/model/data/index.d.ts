@@ -4,12 +4,12 @@ import { $Map } from "@package/java/util";
 
 declare module "@package/mekanism/client/model/data" {
     export class $TransmitterModelData {
-        check(...types: $ConnectionType_[]): boolean;
-        getHasColor(): boolean;
-        setHasColor(hasColor: boolean): void;
-        getConnectionsMap(): $Map<$Direction, $ConnectionType>;
-        getConnectionType(side: $Direction_): $ConnectionType;
         setConnectionData(direction: $Direction_, connectionType: $ConnectionType_): void;
+        getConnectionsMap(): $Map<$Direction, $ConnectionType>;
+        setHasColor(hasColor: boolean): void;
+        getHasColor(): boolean;
+        check(...types: $ConnectionType_[]): boolean;
+        getConnectionType(side: $Direction_): $ConnectionType;
         constructor();
         get connectionsMap(): $Map<$Direction, $ConnectionType>;
     }

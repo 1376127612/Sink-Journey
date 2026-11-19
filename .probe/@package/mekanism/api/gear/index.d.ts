@@ -30,43 +30,43 @@ export * as config from "@package/mekanism/api/gear/config";
 
 declare module "@package/mekanism/api/gear" {
     export class $ModuleData$ModuleDataBuilder<MODULE extends $ICustomModule<MODULE>> {
-        maxStackSize(arg0: number): $ModuleData$ModuleDataBuilder<MODULE>;
-        addConfig(arg0: $ModuleBooleanConfig): $ModuleData$ModuleDataBuilder<MODULE>;
-        addConfig<TYPE, CONFIG extends $ModuleConfig<TYPE>>(arg0: CONFIG, arg1: $Codec<CONFIG>, arg2: $StreamCodec<$RegistryFriendlyByteBuf, CONFIG>): $ModuleData$ModuleDataBuilder<MODULE>;
-        static custom<MODULE extends $ICustomModule<MODULE>>(arg0: $Function_<$IModule<MODULE>, MODULE>, arg1: $Holder_<$Item>): $ModuleData$ModuleDataBuilder<MODULE>;
-        /**
-         * @deprecated
-         */
-        static custom<MODULE extends $ICustomModule<MODULE>>(arg0: $Function_<$IModule<MODULE>, MODULE>, arg1: $IItemProvider_): $ModuleData$ModuleDataBuilder<MODULE>;
-        /**
-         * @deprecated
-         */
-        static marker(arg0: $IItemProvider_): $ModuleData$ModuleDataBuilder<never>;
-        static marker(arg0: $Holder_<$Item>): $ModuleData$ModuleDataBuilder<never>;
-        exclusive(...arg0: $ModuleData$ExclusiveFlag_[]): $ModuleData$ModuleDataBuilder<MODULE>;
-        exclusive(arg0: number): $ModuleData$ModuleDataBuilder<MODULE>;
         noDisable(): $ModuleData$ModuleDataBuilder<MODULE>;
-        disabledByDefault(): $ModuleData$ModuleDataBuilder<MODULE>;
+        rendersHUD(): $ModuleData$ModuleDataBuilder<MODULE>;
         addMaxInstalledConfig<TYPE, CONFIG extends $ModuleConfig<TYPE>>(arg0: $IntFunction_<CONFIG>, arg1: $IntFunction_<$Codec<CONFIG>>, arg2: $IntFunction_<$StreamCodec<$RegistryFriendlyByteBuf, CONFIG>>): $ModuleData$ModuleDataBuilder<MODULE>;
         modeChangeDisabledByDefault(): $ModuleData$ModuleDataBuilder<MODULE>;
-        handlesModeChange(): $ModuleData$ModuleDataBuilder<MODULE>;
-        addInstalledCountConfig<TYPE, CONFIG extends $ModuleConfig<TYPE>>(arg0: $IntFunction_<CONFIG>, arg1: $IntFunction_<$Codec<CONFIG>>, arg2: $IntFunction_<$StreamCodec<$RegistryFriendlyByteBuf, CONFIG>>): $ModuleData$ModuleDataBuilder<MODULE>;
         addInstalledCountConfig<TYPE, CONFIG extends $ModuleConfig<TYPE>>(arg0: $IntPredicate_, arg1: $IntFunction_<CONFIG>, arg2: $IntFunction_<$Codec<CONFIG>>, arg3: $IntFunction_<$StreamCodec<$RegistryFriendlyByteBuf, CONFIG>>): $ModuleData$ModuleDataBuilder<MODULE>;
+        addInstalledCountConfig<TYPE, CONFIG extends $ModuleConfig<TYPE>>(arg0: $IntFunction_<CONFIG>, arg1: $IntFunction_<$Codec<CONFIG>>, arg2: $IntFunction_<$StreamCodec<$RegistryFriendlyByteBuf, CONFIG>>): $ModuleData$ModuleDataBuilder<MODULE>;
+        handlesModeChange(): $ModuleData$ModuleDataBuilder<MODULE>;
         static customInstanced<MODULE extends $ICustomModule<MODULE>>(arg0: $Supplier_<MODULE>, arg1: $Holder_<$Item>): $ModuleData$ModuleDataBuilder<MODULE>;
         /**
          * @deprecated
          */
         static customInstanced<MODULE extends $ICustomModule<MODULE>>(arg0: $Supplier_<MODULE>, arg1: $IItemProvider_): $ModuleData$ModuleDataBuilder<MODULE>;
-        rendersHUD(): $ModuleData$ModuleDataBuilder<MODULE>;
+        disabledByDefault(): $ModuleData$ModuleDataBuilder<MODULE>;
+        maxStackSize(arg0: number): $ModuleData$ModuleDataBuilder<MODULE>;
+        static marker(arg0: $Holder_<$Item>): $ModuleData$ModuleDataBuilder<never>;
+        /**
+         * @deprecated
+         */
+        static marker(arg0: $IItemProvider_): $ModuleData$ModuleDataBuilder<never>;
+        static custom<MODULE extends $ICustomModule<MODULE>>(arg0: $Function_<$IModule<MODULE>, MODULE>, arg1: $Holder_<$Item>): $ModuleData$ModuleDataBuilder<MODULE>;
+        /**
+         * @deprecated
+         */
+        static custom<MODULE extends $ICustomModule<MODULE>>(arg0: $Function_<$IModule<MODULE>, MODULE>, arg1: $IItemProvider_): $ModuleData$ModuleDataBuilder<MODULE>;
+        exclusive(...arg0: $ModuleData$ExclusiveFlag_[]): $ModuleData$ModuleDataBuilder<MODULE>;
+        exclusive(arg0: number): $ModuleData$ModuleDataBuilder<MODULE>;
+        addConfig(arg0: $ModuleBooleanConfig): $ModuleData$ModuleDataBuilder<MODULE>;
+        addConfig<TYPE, CONFIG extends $ModuleConfig<TYPE>>(arg0: CONFIG, arg1: $Codec<CONFIG>, arg2: $StreamCodec<$RegistryFriendlyByteBuf, CONFIG>): $ModuleData$ModuleDataBuilder<MODULE>;
     }
     export class $IHUDElement {
     }
     export interface $IHUDElement {
-        getText(): $Component;
         getIcon(): $ResourceLocation;
+        getText(): $Component;
         getColor(): number;
-        get text(): $Component;
         get icon(): $ResourceLocation;
+        get text(): $Component;
         get color(): number;
     }
     export class $ICustomModule$ModuleDispenseResult extends $Enum<$ICustomModule$ModuleDispenseResult> {
@@ -83,63 +83,63 @@ declare module "@package/mekanism/api/gear" {
     export class $IModule<MODULE extends $ICustomModule<MODULE>> {
     }
     export interface $IModule<MODULE extends $ICustomModule<MODULE>> {
+        useEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number): number;
+        useEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number, arg3: boolean): number;
+        useEnergy(arg0: $LivingEntity, arg1: $IEnergyContainer, arg2: number, arg3: boolean): number;
+        handlesRadialModeChange(): boolean;
+        getBooleanConfigOrFalse(arg0: $ResourceLocation_): boolean;
+        handlesAnyModeChange(): boolean;
+        handlesModeChange(): boolean;
+        getConfigOrThrow<TYPE>(arg0: $ResourceLocation_): $ModuleConfig<TYPE>;
+        toggleEnabled(arg0: $IModuleContainer, arg1: $ItemStack_, arg2: $Player, arg3: $Component_): void;
+        getContainerEnergy(arg0: $ItemStack_): number;
+        canUseEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number): boolean;
+        canUseEnergy(arg0: $LivingEntity, arg1: $IEnergyContainer, arg2: number, arg3: boolean): boolean;
+        canUseEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number, arg3: boolean): boolean;
+        getUntypedData(): $ModuleData<never>;
+        getInstalledCount(): number;
+        hasEnoughEnergy(arg0: $ItemStack_, arg1: $LongSupplier_): boolean;
+        hasEnoughEnergy(arg0: $ItemStack_, arg1: number): boolean;
+        displayModeChange(arg0: $Player, arg1: $Component_, arg2: $IHasTextComponent_): void;
+        getCustomInstance(): MODULE;
         isEnabled(): boolean;
         getData(): $ModuleData<MODULE>;
         getConfig<TYPE>(arg0: $ResourceLocation_): $ModuleConfig<TYPE>;
         getDataHolder(): $Holder<$ModuleData<never>>;
-        useEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number, arg3: boolean): number;
-        useEnergy(arg0: $LivingEntity, arg1: $IEnergyContainer, arg2: number, arg3: boolean): number;
-        useEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number): number;
-        canUseEnergy(arg0: $LivingEntity, arg1: $IEnergyContainer, arg2: number, arg3: boolean): boolean;
-        canUseEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number, arg3: boolean): boolean;
-        canUseEnergy(arg0: $LivingEntity, arg1: $ItemStack_, arg2: number): boolean;
         getEnergyContainer(arg0: $ItemStack_): $IEnergyContainer;
-        getBooleanConfigOrFalse(arg0: $ResourceLocation_): boolean;
-        getInstalledCount(): number;
-        handlesModeChange(): boolean;
-        getUntypedData(): $ModuleData<never>;
-        getCustomInstance(): MODULE;
-        displayModeChange(arg0: $Player, arg1: $Component_, arg2: $IHasTextComponent_): void;
-        getConfigOrThrow<TYPE>(arg0: $ResourceLocation_): $ModuleConfig<TYPE>;
-        toggleEnabled(arg0: $IModuleContainer, arg1: $ItemStack_, arg2: $Player, arg3: $Component_): void;
-        hasEnoughEnergy(arg0: $ItemStack_, arg1: $LongSupplier_): boolean;
-        hasEnoughEnergy(arg0: $ItemStack_, arg1: number): boolean;
-        getContainerEnergy(arg0: $ItemStack_): number;
-        handlesAnyModeChange(): boolean;
-        handlesRadialModeChange(): boolean;
+        get untypedData(): $ModuleData<never>;
+        get installedCount(): number;
+        get customInstance(): MODULE;
         get enabled(): boolean;
         get data(): $ModuleData<MODULE>;
         get dataHolder(): $Holder<$ModuleData<never>>;
-        get installedCount(): number;
-        get untypedData(): $ModuleData<never>;
-        get customInstance(): MODULE;
     }
     export class $ICustomModule<MODULE extends $ICustomModule<MODULE>> {
     }
     export interface $ICustomModule<MODULE extends $ICustomModule<MODULE>> {
-        setMode<MODE extends $IRadialMode>(arg0: $IModule<MODULE>, arg1: $Player, arg2: $IModuleContainer, arg3: $ItemStack_, arg4: $RadialData<MODE>, arg5: MODE): boolean;
-        getMode<MODE extends $IRadialMode>(arg0: $IModule<MODULE>, arg1: $ItemStack_, arg2: $RadialData<MODE>): MODE;
-        getDamageAbsorbInfo(arg0: $IModule<MODULE>, arg1: $DamageSource_): $ICustomModule$ModuleDamageAbsorbInfo;
-        onRemoved(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: boolean): void;
-        tickServer(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player): void;
-        tickClient(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player): void;
-        onDispense(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $BlockSource_): $ICustomModule$ModuleDispenseResult;
         canPerformAction(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $ItemAbility_): boolean;
-        onItemUse(arg0: $IModule<MODULE>, arg1: $UseOnContext): $InteractionResult;
-        adjustAttributes(arg0: $IModule<MODULE>, arg1: $ItemAttributeModifierEvent): void;
+        addHUDElements(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player, arg4: $Consumer_<$IHUDElement>): void;
+        addRadialModes(arg0: $IModule<MODULE>, arg1: $ItemStack_, arg2: $Consumer_<$NestedRadialMode>): void;
+        addHUDStrings(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player, arg4: $Consumer_<$Component>): void;
+        tickClient(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player): void;
+        tickServer(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player): void;
+        onInteract(arg0: $IModule<MODULE>, arg1: $Player, arg2: $LivingEntity, arg3: $InteractionHand_, arg4: $IModuleContainer, arg5: $ItemStack_): $InteractionResult;
+        onDispense(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $BlockSource_): $ICustomModule$ModuleDispenseResult;
         onAdded(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: boolean): void;
         canChangeModeWhenDisabled(arg0: $IModule<MODULE>): boolean;
-        changeMode(arg0: $IModule<MODULE>, arg1: $Player, arg2: $IModuleContainer, arg3: $ItemStack_, arg4: number, arg5: boolean): void;
-        onInteract(arg0: $IModule<MODULE>, arg1: $Player, arg2: $LivingEntity, arg3: $InteractionHand_, arg4: $IModuleContainer, arg5: $ItemStack_): $InteractionResult;
-        addHUDStrings(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player, arg4: $Consumer_<$Component>): void;
-        addRadialModes(arg0: $IModule<MODULE>, arg1: $ItemStack_, arg2: $Consumer_<$NestedRadialMode>): void;
-        canChangeRadialModeWhenDisabled(arg0: $IModule<MODULE>): boolean;
-        addHUDElements(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: $Player, arg4: $Consumer_<$IHUDElement>): void;
+        getDamageAbsorbInfo(arg0: $IModule<MODULE>, arg1: $DamageSource_): $ICustomModule$ModuleDamageAbsorbInfo;
         getModeScrollComponent(arg0: $IModule<MODULE>, arg1: $ItemStack_): $Component;
+        canChangeRadialModeWhenDisabled(arg0: $IModule<MODULE>): boolean;
+        adjustAttributes(arg0: $IModule<MODULE>, arg1: $ItemAttributeModifierEvent): void;
+        setMode<MODE extends $IRadialMode>(arg0: $IModule<MODULE>, arg1: $Player, arg2: $IModuleContainer, arg3: $ItemStack_, arg4: $RadialData<MODE>, arg5: MODE): boolean;
+        getMode<MODE extends $IRadialMode>(arg0: $IModule<MODULE>, arg1: $ItemStack_, arg2: $RadialData<MODE>): MODE;
+        changeMode(arg0: $IModule<MODULE>, arg1: $Player, arg2: $IModuleContainer, arg3: $ItemStack_, arg4: number, arg5: boolean): void;
+        onItemUse(arg0: $IModule<MODULE>, arg1: $UseOnContext): $InteractionResult;
+        onRemoved(arg0: $IModule<MODULE>, arg1: $IModuleContainer, arg2: $ItemStack_, arg3: boolean): void;
     }
     export class $ICustomModule$ModuleDamageAbsorbInfo extends $Record {
-        energyCost(): $LongSupplier;
         absorptionRatio(): $FloatSupplier;
+        energyCost(): $LongSupplier;
         constructor(absorptionRatio: $FloatSupplier_, energyCost: $LongSupplier_);
     }
     /**
@@ -147,10 +147,10 @@ declare module "@package/mekanism/api/gear" {
      */
     export type $ICustomModule$ModuleDamageAbsorbInfo_ = { energyCost?: $LongSupplier_, absorptionRatio?: $FloatSupplier_,  } | [energyCost?: $LongSupplier_, absorptionRatio?: $FloatSupplier_, ];
     export class $ModuleData$ExclusiveFlag extends $Enum<$ModuleData$ExclusiveFlag> {
+        static getCompoundMask(...arg0: $ModuleData$ExclusiveFlag_[]): number;
         static values(): $ModuleData$ExclusiveFlag[];
         static valueOf(arg0: string): $ModuleData$ExclusiveFlag;
         getMask(): number;
-        static getCompoundMask(...arg0: $ModuleData$ExclusiveFlag_[]): number;
         static OVERRIDE_DROPS: $ModuleData$ExclusiveFlag;
         static INTERACT_EMPTY: $ModuleData$ExclusiveFlag;
         static INTERACT_ENTITY: $ModuleData$ExclusiveFlag;
@@ -168,6 +168,34 @@ declare module "@package/mekanism/api/gear" {
     export class $IModuleContainer {
     }
     export interface $IModuleContainer {
+        getIfEnabled(arg0: $Holder_<$ModuleData<never>>): $IModule<never>;
+        /**
+         * @deprecated
+         */
+        getIfEnabled<MODULE extends $ICustomModule<MODULE>>(arg0: $IModuleDataProvider_<MODULE>): $IModule<MODULE>;
+        getIfEnabled<MODULE extends $ICustomModule<MODULE>>(arg0: $DeferredHolder<$ModuleData_<never>, $ModuleData_<MODULE>>): $IModule<MODULE>;
+        installedCount(): number;
+        /**
+         * @deprecated
+         */
+        installedCount(arg0: $IModuleDataProvider_<never>): number;
+        installedCount(arg0: $Holder_<$ModuleData<never>>): number;
+        getHUDStrings(arg0: $Player, arg1: $ItemStack_): $List<$Component>;
+        hasEnabled(arg0: $Holder_<$ModuleData<never>>): boolean;
+        /**
+         * @deprecated
+         */
+        hasEnabled(arg0: $IModuleDataProvider_<never>): boolean;
+        getModuleEnchantmentLevel(arg0: $Holder_<$Enchantment>): number;
+        moduleBasedEnchantments(): $ItemEnchantments;
+        /**
+         * @deprecated
+         */
+        replaceModuleConfig<MODULE extends $ICustomModule<MODULE>>(arg0: $HolderLookup$Provider, arg1: $ItemStack_, arg2: $IModuleDataProvider_<MODULE>, arg3: $ModuleConfig<never>): $IModuleContainer;
+        replaceModuleConfig(arg0: $HolderLookup$Provider, arg1: $ItemStack_, arg2: $Holder_<$ModuleData<never>>, arg3: $ModuleConfig<never>): $IModuleContainer;
+        getHUDElements(arg0: $Player, arg1: $ItemStack_): $List<$IHUDElement>;
+        moduleTypes(): $Set<$ModuleData<never>>;
+        typedModules(): $Map<$ModuleData<never>, $IModule<never>>;
         get<MODULE extends $ICustomModule<MODULE>>(arg0: $DeferredHolder<$ModuleData_<never>, $ModuleData_<MODULE>>): $IModule<MODULE>;
         /**
          * @deprecated
@@ -176,73 +204,45 @@ declare module "@package/mekanism/api/gear" {
         get(arg0: $Holder_<$ModuleData<never>>): $IModule<never>;
         modules(): $Collection<$IModule<never>>;
         getUnchecked<MODULE extends $ICustomModule<MODULE>>(arg0: $Holder_<$ModuleData<never>>): $IModule<MODULE>;
-        has(arg0: $Holder_<$ModuleData<never>>): boolean;
         /**
          * @deprecated
          */
         has(arg0: $IModuleDataProvider_<never>): boolean;
-        typedModules(): $Map<$ModuleData<never>, $IModule<never>>;
-        getHUDElements(arg0: $Player, arg1: $ItemStack_): $List<$IHUDElement>;
-        moduleTypes(): $Set<$ModuleData<never>>;
-        replaceModuleConfig(arg0: $HolderLookup$Provider, arg1: $ItemStack_, arg2: $Holder_<$ModuleData<never>>, arg3: $ModuleConfig<never>): $IModuleContainer;
-        /**
-         * @deprecated
-         */
-        replaceModuleConfig<MODULE extends $ICustomModule<MODULE>>(arg0: $HolderLookup$Provider, arg1: $ItemStack_, arg2: $IModuleDataProvider_<MODULE>, arg3: $ModuleConfig<never>): $IModuleContainer;
-        hasEnabled(arg0: $Holder_<$ModuleData<never>>): boolean;
-        /**
-         * @deprecated
-         */
-        hasEnabled(arg0: $IModuleDataProvider_<never>): boolean;
-        /**
-         * @deprecated
-         */
-        installedCount(arg0: $IModuleDataProvider_<never>): number;
-        installedCount(): number;
-        installedCount(arg0: $Holder_<$ModuleData<never>>): number;
-        getHUDStrings(arg0: $Player, arg1: $ItemStack_): $List<$Component>;
-        getIfEnabled(arg0: $Holder_<$ModuleData<never>>): $IModule<never>;
-        getIfEnabled<MODULE extends $ICustomModule<MODULE>>(arg0: $DeferredHolder<$ModuleData_<never>, $ModuleData_<MODULE>>): $IModule<MODULE>;
-        /**
-         * @deprecated
-         */
-        getIfEnabled<MODULE extends $ICustomModule<MODULE>>(arg0: $IModuleDataProvider_<MODULE>): $IModule<MODULE>;
-        getModuleEnchantmentLevel(arg0: $Holder_<$Enchantment>): number;
-        moduleBasedEnchantments(): $ItemEnchantments;
+        has(arg0: $Holder_<$ModuleData<never>>): boolean;
     }
     export class $ModuleData<MODULE extends $ICustomModule<MODULE>> implements $IModuleDataProvider<MODULE> {
-        create(arg0: $IModule<MODULE>): MODULE;
-        getMaxStackSize(): number;
         getTranslationKey(): string;
-        getItemHolder(): $Holder<$Item>;
-        getModuleData(): $ModuleData<MODULE>;
+        getNamedConfig(arg0: number, arg1: $ResourceLocation_): $ModuleConfig<never>;
+        configCodecs(arg0: number): $Codec<$List<$ModuleConfig<never>>>;
         isExclusive(arg0: number): boolean;
         getExclusiveFlags(): number;
-        configStreamCodecs(arg0: number): $StreamCodec<$RegistryFriendlyByteBuf, $List<$ModuleConfig<never>>>;
         defaultConfigs(arg0: number): $List<$ModuleConfig<never>>;
+        configStreamCodecs(arg0: number): $StreamCodec<$RegistryFriendlyByteBuf, $List<$ModuleConfig<never>>>;
+        isNoDisable(): boolean;
         /**
          * @deprecated
          */
         getItemProvider(): $IItemProvider;
-        configCodecs(arg0: number): $Codec<$List<$ModuleConfig<never>>>;
-        getNamedConfig(arg0: number, arg1: $ResourceLocation_): $ModuleConfig<never>;
-        isNoDisable(): boolean;
+        create(arg0: $IModule<MODULE>): MODULE;
+        getMaxStackSize(): number;
         getDescriptionTranslationKey(): string;
+        getItemHolder(): $Holder<$Item>;
+        getModuleData(): $ModuleData<MODULE>;
         getRegistryName(): $ResourceLocation;
-        getName(): string;
         getTextComponent(): $Component;
+        getName(): string;
         constructor(arg0: $ModuleData$ModuleDataBuilder<MODULE>);
-        get maxStackSize(): number;
         get translationKey(): string;
+        get exclusiveFlags(): number;
+        get noDisable(): boolean;
+        get itemProvider(): $IItemProvider;
+        get maxStackSize(): number;
+        get descriptionTranslationKey(): string;
         get itemHolder(): $Holder<$Item>;
         get moduleData(): $ModuleData<MODULE>;
-        get exclusiveFlags(): number;
-        get itemProvider(): $IItemProvider;
-        get noDisable(): boolean;
-        get descriptionTranslationKey(): string;
         get registryName(): $ResourceLocation;
-        get name(): string;
         get textComponent(): $Component;
+        get name(): string;
     }
     /**
      * Values that may be interpreted as {@link $ModuleData}.

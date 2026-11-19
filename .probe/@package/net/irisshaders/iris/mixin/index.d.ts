@@ -3,7 +3,7 @@ import { $EntityRenderDispatcher } from "@package/net/minecraft/client/renderer/
 import { $RenderType, $RenderBuffers, $MultiBufferSource_, $PostChain } from "@package/net/minecraft/client/renderer";
 import { $Entity } from "@package/net/minecraft/world/entity";
 import { $Camera } from "@package/net/minecraft/client";
-import { $GlStateManager$DepthState, $GlStateManager$BlendState, $GlStateManager$ColorMask, $GlStateManager$TextureState } from "@package/com/mojang/blaze3d/platform";
+import { $GlStateManager$BlendState, $GlStateManager$DepthState, $GlStateManager$ColorMask, $GlStateManager$TextureState } from "@package/com/mojang/blaze3d/platform";
 import { $SortedSet, $OptionalLong } from "@package/java/util";
 import { $Frustum } from "@package/net/minecraft/client/renderer/culling";
 import { $ClientLevel } from "@package/net/minecraft/client/multiplayer";
@@ -20,29 +20,29 @@ declare module "@package/net/irisshaders/iris/mixin" {
     export class $LevelRendererAccessor {
     }
     export interface $LevelRendererAccessor {
-        getLevel(): $ClientLevel;
-        invokeDoesMobEffectBlockSky(arg0: $Camera): boolean;
         getEntityRenderDispatcher(): $EntityRenderDispatcher;
-        setRenderBuffers(arg0: $RenderBuffers): void;
-        getRenderBuffers(): $RenderBuffers;
-        invokeSetupRender(arg0: $Camera, arg1: $Frustum, arg2: boolean, arg3: boolean): void;
-        invokeRenderEntity(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $PoseStack, arg6: $MultiBufferSource_): void;
-        invokeRenderSectionLayer(arg0: $RenderType, arg1: number, arg2: number, arg3: number, arg4: $Matrix4f, arg5: $Matrix4f): void;
+        getLevel(): $ClientLevel;
         shouldRegenerateClouds(): boolean;
-        getDestructionProgress(): $Long2ObjectMap<$SortedSet<$BlockDestructionProgress>>;
+        invokeRenderSectionLayer(arg0: $RenderType, arg1: number, arg2: number, arg3: number, arg4: $Matrix4f, arg5: $Matrix4f): void;
         setShouldRegenerateClouds(arg0: boolean): void;
-        get level(): $ClientLevel;
+        getDestructionProgress(): $Long2ObjectMap<$SortedSet<$BlockDestructionProgress>>;
+        invokeDoesMobEffectBlockSky(arg0: $Camera): boolean;
+        invokeRenderEntity(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $PoseStack, arg6: $MultiBufferSource_): void;
+        setRenderBuffers(arg0: $RenderBuffers): void;
+        invokeSetupRender(arg0: $Camera, arg1: $Frustum, arg2: boolean, arg3: boolean): void;
+        getRenderBuffers(): $RenderBuffers;
         get entityRenderDispatcher(): $EntityRenderDispatcher;
+        get level(): $ClientLevel;
         get destructionProgress(): $Long2ObjectMap<$SortedSet<$BlockDestructionProgress>>;
     }
     export class $GlStateManagerAccessor {
-        static getCOLOR_MASK(): $GlStateManager$ColorMask;
         static getActiveTexture(): number;
+        static getCOLOR_MASK(): $GlStateManager$ColorMask;
         static getTEXTURES(): $GlStateManager$TextureState[];
         static getDEPTH(): $GlStateManager$DepthState;
         static getBLEND(): $GlStateManager$BlendState;
-        static get COLOR_MASK(): $GlStateManager$ColorMask;
         static get activeTexture(): number;
+        static get COLOR_MASK(): $GlStateManager$ColorMask;
         static get TEXTURES(): $GlStateManager$TextureState[];
         static get DEPTH(): $GlStateManager$DepthState;
         static get BLEND(): $GlStateManager$BlendState;
@@ -52,10 +52,10 @@ declare module "@package/net/irisshaders/iris/mixin" {
     export class $DimensionTypeAccessor {
     }
     export interface $DimensionTypeAccessor {
-        getFixedTime(): $OptionalLong;
         getAmbientLight(): number;
-        get fixedTime(): $OptionalLong;
+        getFixedTime(): $OptionalLong;
         get ambientLight(): number;
+        get fixedTime(): $OptionalLong;
     }
     export class $LightTextureAccessor {
     }
@@ -75,15 +75,15 @@ declare module "@package/net/irisshaders/iris/mixin" {
     export class $GameRendererAccessor {
     }
     export interface $GameRendererAccessor {
-        invokeBobView(arg0: $PoseStack, arg1: number): void;
-        getRenderHand(): boolean;
-        invokeBobHurt(arg0: $PoseStack, arg1: number): void;
-        invokeGetFov(arg0: $Camera, arg1: number, arg2: boolean): number;
-        getPanoramicMode(): boolean;
         getBlurEffect(): $PostChain;
+        invokeGetFov(arg0: $Camera, arg1: number, arg2: boolean): number;
+        invokeBobView(arg0: $PoseStack, arg1: number): void;
+        invokeBobHurt(arg0: $PoseStack, arg1: number): void;
+        getRenderHand(): boolean;
+        getPanoramicMode(): boolean;
         shouldRenderBlockOutlineA(): boolean;
+        get blurEffect(): $PostChain;
         get renderHand(): boolean;
         get panoramicMode(): boolean;
-        get blurEffect(): $PostChain;
     }
 }

@@ -13,7 +13,7 @@ declare module "@package/dev/worldgen/lithostitched/duck/mnbs" {
     }
     export interface $MNBSPLDuck {
         lithostitched$getMigrationBiome(): ($Holder<$Biome>) | undefined;
-        lithostitched$setMigrationBiome(arg0: ($Holder_<$Biome>) | undefined): void;
         lithostitched$setParameters(arg0: $Climate$ParameterList<$Holder_<$Biome>>): void;
+        lithostitched$setMigrationBiome(arg0: ($Holder_<$Biome>) | undefined): void;
     }
 }

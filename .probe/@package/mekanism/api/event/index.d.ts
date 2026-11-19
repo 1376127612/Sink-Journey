@@ -21,20 +21,20 @@ declare module "@package/mekanism/api/event" {
     export class $MekanismTeleportEvent extends $EntityTeleportEvent {
     }
     export class $MekanismTeleportEvent$MekaTool extends $MekanismTeleportEvent {
-        getEntity(): $Player;
         getTargetBlock(): $BlockHitResult;
         getMekaTool(): $ItemStack;
+        getEntity(): $Player;
         constructor(arg0: $Player, arg1: number, arg2: number, arg3: number, arg4: $ItemStack_, arg5: $BlockHitResult);
-        get entity(): $Player;
         get targetBlock(): $BlockHitResult;
         get mekaTool(): $ItemStack;
+        get entity(): $Player;
     }
     export class $MekanismTeleportEvent$GlobalTeleport extends $MekanismTeleportEvent {
-        isTransDimensional(): boolean;
         getTargetDimension(): $ResourceKey<$Level>;
+        isTransDimensional(): boolean;
         constructor(arg0: $Entity, arg1: number, arg2: number, arg3: number, arg4: $ResourceKey_<$Level>);
-        get transDimensional(): boolean;
         get targetDimension(): $ResourceKey<$Level>;
+        get transDimensional(): boolean;
     }
     export class $MekanismTeleportEvent$Teleporter extends $MekanismTeleportEvent$GlobalTeleport {
         getEnergyCost(): number;

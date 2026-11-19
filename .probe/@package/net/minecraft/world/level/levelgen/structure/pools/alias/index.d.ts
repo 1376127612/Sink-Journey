@@ -16,19 +16,19 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools/alia
     /**
      * Values that may be interpreted as {@link $Random}.
      */
-    export type $Random_ = { targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>,  } | [targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, alias?: $ResourceKey_<$StructureTemplatePool>, ];
+    export type $Random_ = { alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>,  } | [alias?: $ResourceKey_<$StructureTemplatePool>, targets?: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>, ];
     export class $PoolAliasBinding {
+        static randomGroup(groups: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>): $RandomGroup;
         static random(alias: $ResourceKey_<$StructureTemplatePool>, targets: $SimpleWeightedRandomList<$ResourceKey_<$StructureTemplatePool>>): $Random;
         static random(alias: string, targets: $SimpleWeightedRandomList<string>): $Random;
-        static direct(alias: $ResourceKey_<$StructureTemplatePool>, target: $ResourceKey_<$StructureTemplatePool>): $Direct;
         static direct(alias: string, target: string): $Direct;
-        static randomGroup(groups: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>): $RandomGroup;
+        static direct(alias: $ResourceKey_<$StructureTemplatePool>, target: $ResourceKey_<$StructureTemplatePool>): $Direct;
         static CODEC: $Codec<$PoolAliasBinding>;
     }
     export interface $PoolAliasBinding {
-        allTargets(): $Stream<$ResourceKey<$StructureTemplatePool>>;
         codec(): $MapCodec<$PoolAliasBinding>;
         forEachResolved(random: $RandomSource, stucturePoolKey: $BiConsumer_<$ResourceKey<$StructureTemplatePool>, $ResourceKey<$StructureTemplatePool>>): void;
+        allTargets(): $Stream<$ResourceKey<$StructureTemplatePool>>;
     }
     export class $RandomGroup extends $Record implements $PoolAliasBinding {
     }
@@ -37,8 +37,8 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/pools/alia
      */
     export type $RandomGroup_ = { groups?: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>,  } | [groups?: $SimpleWeightedRandomList<$List_<$PoolAliasBinding>>, ];
     export class $PoolAliasBindings {
-        static bootstrap(registry: $Registry<$MapCodec_<$PoolAliasBinding>>): $MapCodec<$PoolAliasBinding>;
         static registerTargetsAsPools(context: $BootstrapContext<$StructureTemplatePool_>, pool: $Holder_<$StructureTemplatePool>, poolAliasBindings: $List_<$PoolAliasBinding>): void;
+        static bootstrap(registry: $Registry<$MapCodec_<$PoolAliasBinding>>): $MapCodec<$PoolAliasBinding>;
         constructor();
     }
     export class $Direct extends $Record implements $PoolAliasBinding {

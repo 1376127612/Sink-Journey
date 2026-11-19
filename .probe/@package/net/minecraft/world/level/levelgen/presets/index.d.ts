@@ -3,16 +3,17 @@ import { $Holder, $RegistryAccess } from "@package/net/minecraft/core";
 import { $Codec } from "@package/com/mojang/serialization";
 import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $ResourceKey_, $ResourceKey } from "@package/net/minecraft/resources";
-import { $Map_ } from "@package/java/util";
+import { $Map_, $Map } from "@package/java/util";
+import { $WorldPresetAccessor } from "@package/org/betterx/wover/preset/mixin";
 import { $WorldDimensions, $WorldDimensions_ } from "@package/net/minecraft/world/level/levelgen";
 import { $LevelStem_, $LevelStem } from "@package/net/minecraft/world/level/dimension";
 
 declare module "@package/net/minecraft/world/level/levelgen/presets" {
     export class $WorldPresets {
-        static bootstrap(context: $BootstrapContext<$WorldPreset_>): void;
-        static createNormalWorldDimensions(registry: $RegistryAccess): $WorldDimensions;
         static getNormalOverworld(registry: $RegistryAccess): $LevelStem;
         static fromSettings(worldDimensions: $WorldDimensions_): ($ResourceKey<$WorldPreset>) | undefined;
+        static bootstrap(context: $BootstrapContext<$WorldPreset_>): void;
+        static createNormalWorldDimensions(registry: $RegistryAccess): $WorldDimensions;
         static AMPLIFIED: $ResourceKey<$WorldPreset>;
         static FLAT: $ResourceKey<$WorldPreset>;
         static SINGLE_BIOME_SURFACE: $ResourceKey<$WorldPreset>;
@@ -22,10 +23,13 @@ declare module "@package/net/minecraft/world/level/levelgen/presets" {
         constructor();
     }
     export class $WorldPresets$Bootstrap {
+        bootstrap(): void;
     }
-    export class $WorldPreset {
+    export class $WorldPreset implements $WorldPresetAccessor {
         overworld(): ($LevelStem) | undefined;
         createWorldDimensions(): $WorldDimensions;
+        wover_getDimensions(): $Map<$ResourceKey<$LevelStem>, $LevelStem>;
+        wover_setDimensions(dimensions: $Map_<$ResourceKey_<$LevelStem>, $LevelStem_>): void;
         static CODEC: $Codec<$Holder<$WorldPreset>>;
         static DIRECT_CODEC: $Codec<$WorldPreset>;
         constructor(dimensions: $Map_<$ResourceKey_<$LevelStem>, $LevelStem_>);

@@ -8,8 +8,8 @@ declare module "@package/org/cyclops/integratedterminals/api/terminalstorage/loc
     export class $ITerminalStorageLocation<L> {
     }
     export interface $ITerminalStorageLocation<L> {
-        getName(): $ResourceLocation;
         openContainerCraftingOptionAmount<T, M>(arg0: $CraftingOptionGuiData<T, M, L>, arg1: $Level_, arg2: $ServerPlayer): void;
+        getName(): $ResourceLocation;
         writeToPacketBuffer(arg0: $RegistryFriendlyByteBuf, arg1: L): void;
         readFromPacketBuffer(arg0: $RegistryFriendlyByteBuf): L;
         openContainerFromClient<T, M>(arg0: $CraftingOptionGuiData<T, M, L>): void;

@@ -14,11 +14,11 @@ declare module "@package/cn/howxu/mmcr/publicapi/structure/level" {
     export class $MachineLevelSpec {
     }
     export interface $MachineLevelSpec {
+        statePredicate(): $BlockCondition;
+        representative(): $ItemStack;
         priority(): number;
         id(): $ResourceLocation;
         modifier(): $ModifierBundle;
         typeId(): $ResourceLocation;
-        representative(): $ItemStack;
-        statePredicate(): $BlockCondition;
     }
 }

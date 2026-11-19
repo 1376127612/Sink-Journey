@@ -4,8 +4,8 @@ import { $CapabilityBinding_, $CapabilityBinding } from "@package/cn/howxu/mmcr/
 
 declare module "@package/cn/howxu/mmcr/api/port" {
     export class $PortTierPolicy {
-        static atLeast(minimumTier: number): $PortTierPolicy;
         static always(): $PortTierPolicy;
+        static atLeast(minimumTier: number): $PortTierPolicy;
     }
     export interface $PortTierPolicy {
         supports(binding: $CapabilityBinding_, tier: number): boolean;

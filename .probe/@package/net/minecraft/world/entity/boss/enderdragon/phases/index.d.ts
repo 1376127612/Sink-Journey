@@ -9,6 +9,12 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
     export class $DragonPhaseInstance {
     }
     export interface $DragonPhaseInstance {
+        onHurt(damageSource: $DamageSource_, amount: number): number;
+        isSitting(): boolean;
+        /**
+         * Returns the location the dragon is flying toward
+         */
+        getFlyTargetLocation(): $Vec3;
         /**
          * Called when this phase is set to active
          */
@@ -17,22 +23,15 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
          * Called when this phase is set to active
          */
         end(): void;
-        getPhase(): $EnderDragonPhase<$DragonPhaseInstance>;
-        isSitting(): boolean;
-        onHurt(damageSource: $DamageSource_, amount: number): number;
         /**
-         * Returns the location the dragon is flying toward
+         * Returns the maximum amount dragon may rise or fall during this phase
          */
-        getFlyTargetLocation(): $Vec3;
+        getTurnSpeed(): number;
         onCrystalDestroyed(crystal: $EndCrystal, pos: $BlockPos_, damageSource: $DamageSource_, player: $Player | null): void;
         /**
          * Returns the maximum amount dragon may rise or fall during this phase
          */
         getFlySpeed(): number;
-        /**
-         * Returns the maximum amount dragon may rise or fall during this phase
-         */
-        getTurnSpeed(): number;
         /**
          * Called when this phase is set to active
          */
@@ -41,11 +40,12 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
          * Called when this phase is set to active
          */
         doClientTick(): void;
-        get phase(): $EnderDragonPhase<$DragonPhaseInstance>;
+        getPhase(): $EnderDragonPhase<$DragonPhaseInstance>;
         get sitting(): boolean;
         get flyTargetLocation(): $Vec3;
-        get flySpeed(): number;
         get turnSpeed(): number;
+        get flySpeed(): number;
+        get phase(): $EnderDragonPhase<$DragonPhaseInstance>;
     }
     export class $DragonLandingPhase extends $AbstractDragonPhaseInstance {
         constructor(dragon: $EnderDragon);
@@ -69,20 +69,20 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         constructor(dragon: $EnderDragon);
     }
     export class $EnderDragonPhaseManager {
-        getPhase<T extends $DragonPhaseInstance>(phase: $EnderDragonPhase<T>): T;
         getCurrentPhase(): $DragonPhaseInstance;
+        getPhase<T extends $DragonPhaseInstance>(phase: $EnderDragonPhase<T>): T;
         setPhase(phase: $EnderDragonPhase<never>): void;
         constructor(dragon: $EnderDragon);
         get currentPhase(): $DragonPhaseInstance;
     }
     export class $EnderDragonPhase<T extends $DragonPhaseInstance> {
-        getId(): number;
-        static getCount(): number;
-        createInstance(dragon: $EnderDragon): $DragonPhaseInstance;
         /**
          * Gets a phase by its ID. If the phase is out of bounds (negative or beyond the end of the phase array), returns `#HOLDING_PATTERN`.
          */
         static getById(id: number): $EnderDragonPhase<never>;
+        getId(): number;
+        static getCount(): number;
+        createInstance(dragon: $EnderDragon): $DragonPhaseInstance;
         static HOVERING: $EnderDragonPhase<$DragonHoverPhase>;
         static STRAFE_PLAYER: $EnderDragonPhase<$DragonStrafePlayerPhase>;
         static SITTING_FLAMING: $EnderDragonPhase<$DragonSittingFlamingPhase>;
@@ -121,6 +121,12 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         constructor(dragon: $EnderDragon);
     }
     export class $AbstractDragonPhaseInstance implements $DragonPhaseInstance {
+        onHurt(damageSource: $DamageSource_, amount: number): number;
+        isSitting(): boolean;
+        /**
+         * Returns the location the dragon is flying toward
+         */
+        getFlyTargetLocation(): $Vec3;
         /**
          * Called when this phase is set to active
          */
@@ -129,21 +135,15 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
          * Called when this phase is set to active
          */
         end(): void;
-        isSitting(): boolean;
-        onHurt(damageSource: $DamageSource_, amount: number): number;
         /**
-         * Returns the location the dragon is flying toward
+         * Returns the maximum amount dragon may rise or fall during this phase
          */
-        getFlyTargetLocation(): $Vec3;
+        getTurnSpeed(): number;
         onCrystalDestroyed(crystal: $EndCrystal, pos: $BlockPos_, dmgSrc: $DamageSource_, plyr: $Player | null): void;
         /**
          * Returns the maximum amount dragon may rise or fall during this phase
          */
         getFlySpeed(): number;
-        /**
-         * Returns the maximum amount dragon may rise or fall during this phase
-         */
-        getTurnSpeed(): number;
         /**
          * Called when this phase is set to active
          */
@@ -155,7 +155,7 @@ declare module "@package/net/minecraft/world/entity/boss/enderdragon/phases" {
         constructor(dragon: $EnderDragon);
         get sitting(): boolean;
         get flyTargetLocation(): $Vec3;
-        get flySpeed(): number;
         get turnSpeed(): number;
+        get flySpeed(): number;
     }
 }

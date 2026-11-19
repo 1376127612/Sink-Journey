@@ -14,13 +14,13 @@ declare module "@package/hellfirepvp/astralsorcery/common/research/tome" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $TomePage>;
     }
     export interface $TomePage {
-        getType(): $TomePage$TomePageType<never>;
         createPage(arg0: $ResearchNode | null, arg1: number): $RenderPage;
+        getType(): $TomePage$TomePageType<never>;
         get type(): $TomePage$TomePageType<never>;
     }
     export class $TomePage$TomePageType<T extends $TomePage> extends $Record {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         codec(): $MapCodec<T>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         constructor(codec: $MapCodec_<T>, streamCodec: $StreamCodec<$RegistryFriendlyByteBuf, T>);
     }
     /**

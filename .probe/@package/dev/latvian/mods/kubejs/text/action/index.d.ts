@@ -6,13 +6,13 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dev/latvian/mods/kubejs/text/action" {
     export class $TextActionBuilder {
+        removeLine(line: number): void;
+        removeExactText(match: $Component_): void;
         insert(line: number, text: $List_<$Component_>): void;
         clear(): void;
         add(text: $List_<$Component_>): void;
         dynamic(id: string): void;
-        removeLine(line: number): void;
         removeText(match: $Component_): void;
-        removeExactText(match: $Component_): void;
         constructor();
     }
     export class $DynamicTextAction extends $Record implements $TextAction {
@@ -67,7 +67,7 @@ declare module "@package/dev/latvian/mods/kubejs/text/action" {
     /**
      * Values that may be interpreted as {@link $InsertTextAction}.
      */
-    export type $InsertTextAction_ = { lines?: $List_<$Component_>, line?: number,  } | [lines?: $List_<$Component_>, line?: number, ];
+    export type $InsertTextAction_ = { line?: number, lines?: $List_<$Component_>,  } | [line?: number, lines?: $List_<$Component_>, ];
     export class $RemoveExactTextTextAction extends $Record implements $TextAction {
         type(): $TooltipActionType<never>;
         apply(lines: $List_<$Component_>): void;

@@ -4,15 +4,15 @@ declare module "@package/it/zerono/mods/zerocore/lib/multiblock/variant" {
     export class $IMultiblockVariant {
     }
     export interface $IMultiblockVariant {
-        getName(): string;
-        getId(): number;
+        getBlockProperties(): $BlockBehaviour$Properties;
         getTranslationKey(): string;
         getDefaultBlockProperties(): $BlockBehaviour$Properties;
-        getBlockProperties(): $BlockBehaviour$Properties;
-        get name(): string;
-        get id(): number;
+        getName(): string;
+        getId(): number;
+        get blockProperties(): $BlockBehaviour$Properties;
         get translationKey(): string;
         get defaultBlockProperties(): $BlockBehaviour$Properties;
-        get blockProperties(): $BlockBehaviour$Properties;
+        get name(): string;
+        get id(): number;
     }
 }

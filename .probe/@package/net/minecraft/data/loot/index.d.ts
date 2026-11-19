@@ -7,6 +7,7 @@ import { $List, $Set, $Set_, $List_ } from "@package/java/util";
 import { $CachedOutput_, $DataProvider, $PackOutput } from "@package/net/minecraft/data";
 import { $BiConsumer, $BiConsumer_, $Function_, $Function } from "@package/java/util/function";
 import { $HolderLookup$Provider } from "@package/net/minecraft/core";
+import { $AccessorMixinBlockLootSubProvider } from "@package/mysticmods/roots/mixin/accessor";
 import { $ResourceKey_, $ResourceKey } from "@package/net/minecraft/resources";
 import { $LootItemCondition$Builder } from "@package/net/minecraft/world/level/storage/loot/predicates";
 import { $Block_ } from "@package/net/minecraft/world/level/block";
@@ -28,12 +29,14 @@ declare module "@package/net/minecraft/data/loot" {
         get name(): string;
         get tables(): $List<$LootTableProvider$SubProviderEntry>;
     }
-    export class $BlockLootSubProvider implements $LootTableSubProvider, $BlockLootSubProviderAccessor {
-        generate(output: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
+    export class $BlockLootSubProvider implements $LootTableSubProvider, $BlockLootSubProviderAccessor, $AccessorMixinBlockLootSubProvider {
         createSingleItemTable(item: $ItemLike_): $LootTable$Builder;
-        createAttachedStemDrops(block: $Block_, item: $Item_): $LootTable$Builder;
-        createStemDrops(block: $Block_, item: $Item_): $LootTable$Builder;
         static noDrop(): $LootTable$Builder;
+        createAttachedStemDrops(block: $Block_, item: $Item_): $LootTable$Builder;
+        generate(output: $BiConsumer_<$ResourceKey<$LootTable>, $LootTable$Builder>): void;
+        createStemDrops(block: $Block_, item: $Item_): $LootTable$Builder;
+        roots$GetNORMAL_LEAVES_STICK_CHANCES(): number[];
+        roots$CallDoesNotHaveShearsOrSilkTouch(): $LootItemCondition$Builder;
         create$hasSilkTouch(): $LootItemCondition$Builder;
     }
     export class $LootTableProvider$SubProviderEntry extends $Record {
@@ -44,7 +47,7 @@ declare module "@package/net/minecraft/data/loot" {
     /**
      * Values that may be interpreted as {@link $LootTableProvider$SubProviderEntry}.
      */
-    export type $LootTableProvider$SubProviderEntry_ = { paramSet?: $LootContextParamSet, provider?: $Function_<$HolderLookup$Provider, $LootTableSubProvider>,  } | [paramSet?: $LootContextParamSet, provider?: $Function_<$HolderLookup$Provider, $LootTableSubProvider>, ];
+    export type $LootTableProvider$SubProviderEntry_ = { provider?: $Function_<$HolderLookup$Provider, $LootTableSubProvider>, paramSet?: $LootContextParamSet,  } | [provider?: $Function_<$HolderLookup$Provider, $LootTableSubProvider>, paramSet?: $LootContextParamSet, ];
     export class $LootTableSubProvider {
     }
     export interface $LootTableSubProvider {

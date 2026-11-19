@@ -41,6 +41,7 @@ declare module "@package/net/minecraft/client/renderer/item" {
     export type $ClampedItemPropertyFunction_ = ((arg0: $ItemStack, arg1: $ClientLevel, arg2: $LivingEntity, arg3: number) => number);
     export class $ItemProperties {
         static getProperty(stack: $ItemStack_, location: $ResourceLocation_): $ItemPropertyFunction;
+        static register(item: $Item_, name: $ResourceLocation_, property: $ClampedItemPropertyFunction_): void;
         static register(arg0: $Item_, arg1: $ResourceLocation_, arg2: $ItemPropertyFunction_): void;
         static registerGeneric(arg0: $ResourceLocation_, arg1: $ItemPropertyFunction_): $ItemPropertyFunction;
         constructor();

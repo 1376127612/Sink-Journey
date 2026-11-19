@@ -15,24 +15,24 @@ import { $RegisterCapabilitiesEvent, $BlockCapability } from "@package/net/neofo
 
 declare module "@package/org/cyclops/integrateddynamics/core/part/event" {
     export class $PartEvent<P extends $IPartType<any, any>, S extends $IPartState<P>> extends $Event {
-        getTarget(): $PartTarget;
-        getNetwork(): $INetwork;
         getPartType(): P;
         getPartState(): S;
         getPartNetwork(): $IPartNetwork;
+        getTarget(): $PartTarget;
+        getNetwork(): $INetwork;
         constructor(arg0: $INetwork, arg1: $IPartNetwork, arg2: $PartTarget, arg3: P, arg4: S);
-        get target(): $PartTarget;
-        get network(): $INetwork;
         get partType(): P;
         get partState(): S;
         get partNetwork(): $IPartNetwork;
+        get target(): $PartTarget;
+        get network(): $INetwork;
     }
     export class $PartAspectEvent<P extends $IPartType<P, S>, S extends $IPartState<P>, A extends $IAspect<any, any>> extends $PartEvent<P, S> {
-        getEntityPlayer(): $Player;
         getAspect(): A;
+        getEntityPlayer(): $Player;
         constructor(arg0: $INetwork, arg1: $IPartNetwork, arg2: $PartTarget, arg3: P, arg4: S, arg5: $Player | null, arg6: A);
-        get entityPlayer(): $Player;
         get aspect(): A;
+        get entityPlayer(): $Player;
     }
     export class $RegisterPartCapabilitiesEvent extends $Event implements $IModBusEvent {
         register<T>(arg0: $BlockCapability<T, $Direction_>, arg1: $PartCapability<T>): void;
@@ -49,12 +49,12 @@ declare module "@package/org/cyclops/integrateddynamics/core/part/event" {
         get itemStack(): $ItemStack;
     }
     export class $PartVariableDrivenVariableContentsUpdatedEvent<P extends $IPartType<P, S>, S extends $IPartState<P>> extends $PartEvent<P, S> {
-        getValue(): $IValue;
-        getEntityPlayer(): $Player;
         getVariable(): $IVariable<any>;
+        getEntityPlayer(): $Player;
+        getValue(): $IValue;
         constructor(arg0: $INetwork, arg1: $IPartNetwork, arg2: $PartTarget, arg3: P, arg4: S, arg5: $Player | null, arg6: $IVariable<any>, arg7: $IValue);
-        get value(): $IValue;
-        get entityPlayer(): $Player;
         get variable(): $IVariable<any>;
+        get entityPlayer(): $Player;
+        get value(): $IValue;
     }
 }

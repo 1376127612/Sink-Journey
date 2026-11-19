@@ -31,8 +31,8 @@ declare module "@package/net/caffeinemc/mods/lithium/common/entity" {
     }
     export class $EntityClassGroup {
         clear(): void;
-        contains(arg0: $Entity): boolean;
         contains(arg0: $Class<never>, arg1: $EntityType_<never>): boolean;
+        contains(arg0: $Entity): boolean;
         static CUSTOM_COLLIDE_LIKE_MINECART_BOAT_WINDCHARGE: $EntityClassGroup;
         constructor(arg0: $BiPredicate_<$Class<never>, $Supplier<$EntityType<never>>>);
     }
@@ -40,15 +40,15 @@ declare module "@package/net/caffeinemc/mods/lithium/common/entity" {
     }
     export interface $NavigatingEntity {
         lithium$updateNavigationRegistration(): void;
+        lithium$setRegisteredToWorld(arg0: $PathNavigation): void;
         lithium$getRegisteredNavigation(): $PathNavigation;
         lithium$isRegisteredToWorld(): boolean;
-        lithium$setRegisteredToWorld(arg0: $PathNavigation): void;
     }
     export class $PositionedEntityTrackingSection {
     }
     export interface $PositionedEntityTrackingSection {
-        lithium$setPos(arg0: number): void;
         lithium$getPos(): number;
+        lithium$setPos(arg0: number): void;
     }
     export class $EquipmentEntity {
     }

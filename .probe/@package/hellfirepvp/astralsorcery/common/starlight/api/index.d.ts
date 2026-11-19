@@ -14,14 +14,14 @@ declare module "@package/hellfirepvp/astralsorcery/common/starlight/api" {
         static CODEC: $Codec<$TransmissionNode>;
     }
     export interface $TransmissionNode {
-        getProvider(): $TransmissionNodeProvider<never>;
         getNodePos(): $BlockPos;
+        getTransmissionLossMultiplier(): number;
         markDirty(arg0: $Level_): void;
         updateFromTileEntity<T extends $BlockEntity>(arg0: T): boolean;
-        getTransmissionLossMultiplier(): number;
-        get provider(): $TransmissionNodeProvider<never>;
+        getProvider(): $TransmissionNodeProvider<never>;
         get nodePos(): $BlockPos;
         get transmissionLossMultiplier(): number;
+        get provider(): $TransmissionNodeProvider<never>;
     }
     export class $TransmissionReceiverNode {
     }

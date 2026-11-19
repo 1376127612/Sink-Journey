@@ -22,11 +22,11 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $ChunkPalettedStorageFix extends $DataFix {
-        static getName(data: $Dynamic<never>): string;
-        static getProperty(data: $Dynamic<never>, key: string): string;
-        makeRule(): $TypeRewriteRule;
         static idFor(palette: $CrudeIncrementalIntIdentityHashBiMap<$Dynamic<never>>, data: $Dynamic<never>): number;
         static getSideMask(west: boolean, east: boolean, north: boolean, south: boolean): number;
+        makeRule(): $TypeRewriteRule;
+        static getName(data: $Dynamic<never>): string;
+        static getProperty(data: $Dynamic<never>, key: string): string;
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $OptionsForceVBOFix extends $DataFix {
@@ -84,8 +84,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $VillagerRebuildLevelAndXpFix extends $DataFix {
-        static getMinXpPerLevel(level: number): number;
         makeRule(): $TypeRewriteRule;
+        static getMinXpPerLevel(level: number): number;
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $EntityShulkerRotationFix extends $NamedEntityFix {
@@ -97,8 +97,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $ItemStackTagFix extends $DataFix {
-        static createFixer(type: $Type<never>, filter: $Predicate_<string>, fixer: $UnaryOperator_<$Dynamic<never>>): $UnaryOperator<$Typed<never>>;
         makeRule(): $TypeRewriteRule;
+        static createFixer(type: $Type<never>, filter: $Predicate_<string>, fixer: $UnaryOperator_<$Dynamic<never>>): $UnaryOperator<$Typed<never>>;
         constructor(outputSchema: $Schema, name: string, idFilter: $Predicate_<string>);
     }
     export class $ForcePoiRebuild extends $DataFix {
@@ -190,8 +190,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, entityName: string, previousBodyArmorTag: string, clearArmorItems: boolean);
     }
     export class $BlockEntityRenameFix extends $DataFix {
-        static create(outputSchema: $Schema, name: string, nameChangeLookup: $UnaryOperator_<string>): $DataFix;
         makeRule(): $TypeRewriteRule;
+        static create(outputSchema: $Schema, name: string, nameChangeLookup: $UnaryOperator_<string>): $DataFix;
     }
     export class $PlayerUUIDFix extends $AbstractUUIDFix {
         constructor(outputSchema: $Schema);
@@ -272,26 +272,26 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $ItemStackTheFlatteningFix extends $DataFix {
-        makeRule(): $TypeRewriteRule;
         static updateItem(item: string | null, dataValue: number): string;
+        makeRule(): $TypeRewriteRule;
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $StructureSettingsFlattenFix extends $DataFix {
         constructor(outputSchema: $Schema);
     }
     export class $ChunkPalettedStorageFix$Direction extends $Enum<$ChunkPalettedStorageFix$Direction> {
+        getAxis(): $ChunkPalettedStorageFix$Direction$Axis;
+        getAxisDirection(): $ChunkPalettedStorageFix$Direction$AxisDirection;
         static values(): $ChunkPalettedStorageFix$Direction[];
         static valueOf(arg0: string): $ChunkPalettedStorageFix$Direction;
-        getAxisDirection(): $ChunkPalettedStorageFix$Direction$AxisDirection;
-        getAxis(): $ChunkPalettedStorageFix$Direction$Axis;
         static DOWN: $ChunkPalettedStorageFix$Direction;
         static NORTH: $ChunkPalettedStorageFix$Direction;
         static WEST: $ChunkPalettedStorageFix$Direction;
         static UP: $ChunkPalettedStorageFix$Direction;
         static SOUTH: $ChunkPalettedStorageFix$Direction;
         static EAST: $ChunkPalettedStorageFix$Direction;
-        get axisDirection(): $ChunkPalettedStorageFix$Direction$AxisDirection;
         get axis(): $ChunkPalettedStorageFix$Direction$Axis;
+        get axisDirection(): $ChunkPalettedStorageFix$Direction$AxisDirection;
     }
     /**
      * Values that may be interpreted as {@link $ChunkPalettedStorageFix$Direction}.
@@ -302,8 +302,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $BlockRenameFix extends $DataFix {
-        static create(outputSchema: $Schema, name: string, renamer: $Function_<string, string>): $DataFix;
         makeRule(): $TypeRewriteRule;
+        static create(outputSchema: $Schema, name: string, renamer: $Function_<string, string>): $DataFix;
         constructor(outputSchema: $Schema, name: string);
     }
     export class $WriteAndReadFix extends $DataFix {
@@ -391,8 +391,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $EntityUUIDFix extends $AbstractUUIDFix {
-        static updateEntityUUID(animalTag: $Dynamic<never>): $Dynamic<never>;
         static updateLivingEntity(animalTag: $Dynamic<never>): $Dynamic<never>;
+        static updateEntityUUID(animalTag: $Dynamic<never>): $Dynamic<never>;
         constructor(outputSchema: $Schema);
     }
     export class $EntityBrushableBlockFieldsRenameFix extends $NamedEntityFix {
@@ -431,18 +431,18 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $ItemStackComponentizationFix$ItemStackData {
+        fixSubTag(key: string, skipIfEmpty: boolean, fixer: $UnaryOperator_<$Dynamic<never>>): void;
+        removeTag(key: string): $OptionalDynamic<never>;
+        moveTagToComponent(key: string, component: string, tag: $Dynamic<never>): void;
+        moveTagToComponent(key: string, component: string): void;
+        moveTagInto(oldKey: string, tag: $Dynamic<never>, newKey: string): $Dynamic<never>;
+        hasComponent(component: string): boolean;
+        setComponent(component: string, value: $OptionalDynamic<never>): void;
+        setComponent(component: string, value: $Dynamic<never>): void;
         write(): $Dynamic<never>;
         static read(tag: $Dynamic<never>): ($ItemStackComponentizationFix$ItemStackData) | undefined;
         is(items: $Set_<string>): boolean;
         is(component: string): boolean;
-        moveTagToComponent(key: string, component: string): void;
-        moveTagToComponent(key: string, component: string, tag: $Dynamic<never>): void;
-        moveTagInto(oldKey: string, tag: $Dynamic<never>, newKey: string): $Dynamic<never>;
-        setComponent(component: string, value: $Dynamic<never>): void;
-        setComponent(component: string, value: $OptionalDynamic<never>): void;
-        hasComponent(component: string): boolean;
-        fixSubTag(key: string, skipIfEmpty: boolean, fixer: $UnaryOperator_<$Dynamic<never>>): void;
-        removeTag(key: string): $OptionalDynamic<never>;
         tag: $Dynamic<never>;
     }
     export class $EntityRavagerRenameFix extends $SimplestEntityRenameFix {
@@ -495,10 +495,10 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema);
     }
     export class $BlockStateData {
+        static upgradeBlock(name: string): string;
+        static upgradeBlock(id: number): string;
         static parse(nbt: string): $Dynamic<never>;
         static getTag(id: number): $Dynamic<never>;
-        static upgradeBlock(id: number): string;
-        static upgradeBlock(name: string): string;
         static upgradeBlockStateTag(nbt: $Dynamic<never>): $Dynamic<never>;
         constructor();
     }
@@ -527,8 +527,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $LeavesFix$Section {
-        write(data: $Typed<never>): $Typed<never>;
         isSkippable(): boolean;
+        write(data: $Typed<never>): $Typed<never>;
         getBlock(index: number): number;
         constructor(data: $Typed<never>, schema: $Schema);
         get skippable(): boolean;
@@ -541,8 +541,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $EntityBlockStateFix extends $DataFix {
-        makeRule(): $TypeRewriteRule;
         static getBlockId(name: string): number;
+        makeRule(): $TypeRewriteRule;
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $EntityZombifiedPiglinRenameFix extends $SimplestEntityRenameFix {
@@ -609,7 +609,7 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     /**
      * Values that may be interpreted as {@link $StatsCounterFix$StatType}.
      */
-    export type $StatsCounterFix$StatType_ = { type?: string, typeKey?: string,  } | [type?: string, typeKey?: string, ];
+    export type $StatsCounterFix$StatType_ = { typeKey?: string, type?: string,  } | [typeKey?: string, type?: string, ];
     export class $ColorlessShulkerEntityFix extends $NamedEntityFix {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
@@ -644,8 +644,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $LeavesFix extends $DataFix {
-        static getIndex(x: number, y: number, z: number): number;
         static getSideMask(west: boolean, east: boolean, north: boolean, south: boolean): number;
+        static getIndex(x: number, y: number, z: number): number;
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $EmptyItemInVillagerTradeFix extends $DataFix {
@@ -654,8 +654,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
     }
     export class $ItemStackComponentRemainderFix extends $DataFix {
         makeRule(): $TypeRewriteRule;
-        constructor(outputSchema: $Schema, name: string, componentId: string);
         constructor(outputSchema: $Schema, name: string, componentId: string, newComponentId: string);
+        constructor(outputSchema: $Schema, name: string, componentId: string);
     }
     export class $ChunkStatusFix2 extends $DataFix {
         constructor(outputSchema: $Schema, changesType: boolean);
@@ -679,8 +679,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $LeavesFix$LeavesSection extends $LeavesFix$Section {
-        isLeaf(id: number): boolean;
         isLog(id: number): boolean;
+        isLeaf(id: number): boolean;
         constructor(data: $Typed<never>, schema: $Schema);
     }
     export class $FilteredSignsFix extends $NamedEntityFix {
@@ -768,9 +768,9 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $ChunkProtoTickListFix$PoorMansPalettedContainer {
+        palette(): $List<$Dynamic<never>>;
         get(x: number, y: number, z: number): $Dynamic<never>;
         data(): number[];
-        palette(): $List<$Dynamic<never>>;
         constructor(palette: $List_<$Dynamic<never>>, data: number[]);
     }
     export class $BannerEntityCustomNameToOverrideComponentFix extends $DataFix {
@@ -778,8 +778,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema);
     }
     export class $ItemRenameFix extends $DataFix {
-        static create(outputSchema: $Schema, name: string, fixer: $Function_<string, string>): $DataFix;
         makeRule(): $TypeRewriteRule;
+        static create(outputSchema: $Schema, name: string, fixer: $Function_<string, string>): $DataFix;
         constructor(outputSchema: $Schema, name: string);
     }
     export class $VariantRenameFix extends $NamedEntityFix {
@@ -790,8 +790,8 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         constructor(outputSchema: $Schema);
     }
     export class $ItemIdFix extends $DataFix {
-        static getItem(id: number): string;
         makeRule(): $TypeRewriteRule;
+        static getItem(id: number): string;
         constructor(outputSchema: $Schema, changesType: boolean);
     }
     export class $CatTypeFix extends $NamedEntityFix {
@@ -876,9 +876,9 @@ declare module "@package/net/minecraft/util/datafix/fixes" {
         static RENAMES: $ImmutableMap<string, string>;
     }
     export class $StructuresBecomeConfiguredFix$Conversion extends $Record {
-        fallback(): string;
-        static biomeMapped(biomeMapping: $Map_<$List_<string>, string>, fallback: string): $StructuresBecomeConfiguredFix$Conversion;
         biomeMapping(): $Map<string, string>;
+        static biomeMapped(biomeMapping: $Map_<$List_<string>, string>, fallback: string): $StructuresBecomeConfiguredFix$Conversion;
+        fallback(): string;
         static trivial(fallback: string): $StructuresBecomeConfiguredFix$Conversion;
         constructor(biomeMapping: $Map_<string, string>, fallback: string);
     }

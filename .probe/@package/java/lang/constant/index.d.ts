@@ -30,12 +30,12 @@ declare module "@package/java/lang/constant" {
     export class $DirectMethodHandleDesc {
     }
     export interface $DirectMethodHandleDesc extends $MethodHandleDesc {
+        lookupDescriptor(): string;
+        isOwnerInterface(): boolean;
         methodName(): string;
         kind(): $DirectMethodHandleDesc$Kind;
         owner(): $ClassDesc;
         refKind(): number;
-        lookupDescriptor(): string;
-        isOwnerInterface(): boolean;
         get ownerInterface(): boolean;
     }
     export class $DirectMethodHandleDesc$Kind extends $Enum<$DirectMethodHandleDesc$Kind> {
@@ -71,10 +71,10 @@ declare module "@package/java/lang/constant" {
      */
     export type $Constable_ = (() => ($ConstantDesc) | undefined);
     export class $MethodHandleDesc {
+        static ofConstructor(arg0: $ClassDesc, ...arg1: $ClassDesc[]): $DirectMethodHandleDesc;
         static of(arg0: $DirectMethodHandleDesc$Kind_, arg1: $ClassDesc, arg2: string, arg3: string): $DirectMethodHandleDesc;
         static ofField(arg0: $DirectMethodHandleDesc$Kind_, arg1: $ClassDesc, arg2: string, arg3: $ClassDesc): $DirectMethodHandleDesc;
         static ofMethod(arg0: $DirectMethodHandleDesc$Kind_, arg1: $ClassDesc, arg2: string, arg3: $MethodTypeDesc): $DirectMethodHandleDesc;
-        static ofConstructor(arg0: $ClassDesc, ...arg1: $ClassDesc[]): $DirectMethodHandleDesc;
     }
     export interface $MethodHandleDesc extends $ConstantDesc {
         equals(arg0: $Object): boolean;
@@ -98,6 +98,7 @@ declare module "@package/java/lang/constant" {
         static ofDescriptor(arg0: string): $MethodTypeDesc;
     }
     export interface $MethodTypeDesc extends $ConstantDesc, $TypeDescriptor$OfMethod<$ClassDesc, $MethodTypeDesc> {
+        displayDescriptor(): string;
         parameterType(arg0: number): $ClassDesc;
         returnType(): $ClassDesc;
         equals(arg0: $Object): boolean;
@@ -110,7 +111,6 @@ declare module "@package/java/lang/constant" {
         parameterArray(): $ClassDesc[];
         changeParameterType(arg0: number, arg1: $ClassDesc): $MethodTypeDesc;
         parameterList(): $List<$ClassDesc>;
-        displayDescriptor(): string;
     }
     export class $DynamicConstantDesc<T> implements $ConstantDesc {
         static of<T>(arg0: $DirectMethodHandleDesc, ...arg1: $ConstantDesc_[]): $DynamicConstantDesc<T>;

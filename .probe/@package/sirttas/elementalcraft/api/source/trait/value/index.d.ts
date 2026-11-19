@@ -22,6 +22,8 @@ declare module "@package/sirttas/elementalcraft/api/source/trait/value" {
         static CODEC: $Codec<$ISourceTraitValueProvider>;
     }
     export interface $ISourceTraitValueProvider {
+        breed(arg0: $SourceTraitRollContext_, arg1: $ISourceTraitValue | null, arg2: $ISourceTraitValue | null): $ISourceTraitValue;
+        valueStreamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ISourceTraitValue>;
         /**
          * @deprecated
          */
@@ -32,9 +34,7 @@ declare module "@package/sirttas/elementalcraft/api/source/trait/value" {
         save(arg0: $ISourceTraitValue): $Tag;
         getType(): $SourceTraitValueProviderType<never>;
         roll(arg0: $SourceTraitRollContext_, arg1: $Level_, arg2: $BlockPos_): $ISourceTraitValue;
-        breed(arg0: $SourceTraitRollContext_, arg1: $ISourceTraitValue | null, arg2: $ISourceTraitValue | null): $ISourceTraitValue;
         valueCodec(): $Codec<$ISourceTraitValue>;
-        valueStreamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ISourceTraitValue>;
         get type(): $SourceTraitValueProviderType<never>;
     }
     export class $SourceTraitValueProviderType<T extends $ISourceTraitValueProvider> extends $Record {

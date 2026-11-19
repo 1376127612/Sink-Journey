@@ -23,18 +23,12 @@ declare module "@package/net/minecraft/network/protocol/cookie" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ClientCookiePacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundCookieRequestPacket>;
         constructor(arg0: $ResourceLocation_);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundCookieRequestPacket}.
@@ -51,15 +45,15 @@ declare module "@package/net/minecraft/network/protocol/cookie" {
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isTerminal(): boolean;
+        isSkippable(): boolean;
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundCookieResponsePacket>;
         constructor(arg0: $ResourceLocation_, arg1: number[] | null);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ServerboundCookieResponsePacket}.

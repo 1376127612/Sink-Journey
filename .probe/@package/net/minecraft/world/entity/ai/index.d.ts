@@ -1,10 +1,12 @@
-import { $BehaviorControl } from "@package/net/minecraft/world/entity/ai/behavior";
+import { $Behavior, $BehaviorControl } from "@package/net/minecraft/world/entity/ai/behavior";
 import { $SensorType, $SensorType_, $Sensor } from "@package/net/minecraft/world/entity/ai/sensing";
 import { $Dynamic, $DataResult, $DynamicOps, $Codec } from "@package/com/mojang/serialization";
+import { $BrainAccessor as $BrainAccessor$1 } from "@package/net/mehvahdjukaar/moonlight/core/mixins/accessor";
 import { $Pair } from "@package/com/mojang/datafixers/util";
 import { $LivingEntity } from "@package/net/minecraft/world/entity";
 import { $MemoryModificationCounter } from "@package/net/caffeinemc/mods/lithium/common/ai";
 import { $ImmutableList } from "@package/com/google/common/collect";
+import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $BrainAccessor } from "@package/net/caffeinemc/mods/lithium/mixin/ai/useless_sensors";
 import { $Schedule, $Activity_, $Activity, $Schedule_ } from "@package/net/minecraft/world/entity/schedule";
 import { $List, $Map, $Set, $Set_, $Collection_, $List_ } from "@package/java/util";
@@ -27,64 +29,67 @@ export * as targeting from "@package/net/minecraft/world/entity/ai/targeting";
 declare module "@package/net/minecraft/world/entity/ai" {
     export class $Brain$MemoryValue<U> {
     }
-    export class $Brain<E extends $LivingEntity> implements $MemoryModificationCounter, $BrainAccessor<any> {
-        static provider<E extends $LivingEntity>(memoryTypes: $Collection_<$MemoryModuleType_<never>>, sensorTypes: $Collection_<$SensorType_<$Sensor<E>>>): $Brain$Provider<E>;
-        setMemory<U>(memoryType: $MemoryModuleType_<U>, memory: (U) | undefined): void;
-        setMemory<U>(memoryType: $MemoryModuleType_<U>, memory: U | null): void;
-        isActive(activity: $Activity_): boolean;
-        setActiveActivityToFirstValid(activities: $List_<$Activity_>): void;
-        setActiveActivityIfPossible(activity: $Activity_): void;
-        tick(level: $ServerLevel, entity: $Object): void;
-        getSchedule(): $Schedule;
-        addActivityAndRemoveMemoryWhenStopped(activity: $Activity_, priorityStart: number, tasks: $ImmutableList<$BehaviorControl<$Object>>, memoryType: $MemoryModuleType_<never>): void;
-        getMemory<U>(type: $MemoryModuleType_<U>): (U) | undefined;
-        serializeStart<T>(ops: $DynamicOps<T>): $DataResult<T>;
-        clearMemories(): void;
+    export class $Brain<E extends $LivingEntity> implements $MemoryModificationCounter, $BrainAccessor<any>, $BrainAccessor$1<any> {
         static codec<E extends $LivingEntity>(memoryTypes: $Collection_<$MemoryModuleType_<never>>, sensorTypes: $Collection_<$SensorType_<$Sensor<E>>>): $Codec<$Brain<E>>;
         stopAll(level: $ServerLevel, entity: $Object): void;
-        hasMemoryValue(type: $MemoryModuleType_<never>): boolean;
+        getMemory<U>(type: $MemoryModuleType_<U>): (U) | undefined;
         removeAllBehaviors(): void;
+        hasMemoryValue(type: $MemoryModuleType_<never>): boolean;
+        serializeStart<T>(ops: $DynamicOps<T>): $DataResult<T>;
+        updateActivityFromSchedule(dayTime: number, arg1: number): void;
+        addActivityWithConditions(activity: $Activity_, tasks: $ImmutableList<$Pair<number, $BehaviorControl<$Object>>>, memoryStatuses: $Set_<$Pair<$MemoryModuleType_<never>, $MemoryStatus_>>): void;
+        copyWithoutBehaviors(): $Brain<$Object>;
         setMemoryWithExpiry<U>(memoryType: $MemoryModuleType_<U>, memory: U, timeToLive: number): void;
         getActiveNonCoreActivity(): ($Activity) | undefined;
-        copyWithoutBehaviors(): $Brain<$Object>;
-        addActivityWithConditions(activity: $Activity_, tasks: $ImmutableList<$Pair<number, $BehaviorControl<$Object>>>, memoryStatuses: $Set_<$Pair<$MemoryModuleType_<never>, $MemoryStatus_>>): void;
-        updateActivityFromSchedule(dayTime: number, arg1: number): void;
+        isMemoryValue<U>(memoryType: $MemoryModuleType_<U>, memory: U): boolean;
         checkMemory(memoryType: $MemoryModuleType_<never>, memoryStatus: $MemoryStatus_): boolean;
         eraseMemory<U>(type: $MemoryModuleType_<U>): void;
         getTimeUntilExpiry<U>(memoryType: $MemoryModuleType_<U>): number;
-        useDefaultActivity(): void;
-        setCoreActivities(newActivities: $Set_<$Activity_>): void;
-        setDefaultActivity(activity: $Activity_): void;
-        addActivity(activity: $Activity_, tasks: $ImmutableList<$Pair<number, $BehaviorControl<$Object>>>): void;
-        addActivity(activity: $Activity_, priorityStart: number, tasks: $ImmutableList<$BehaviorControl<$Object>>): void;
-        setSchedule(newSchedule: $Schedule_): void;
-        isMemoryValue<U>(memoryType: $MemoryModuleType_<U>, memory: U): boolean;
-        getMemoryInternal<U>(type: $MemoryModuleType_<U>): (U) | undefined;
         /**
          * @deprecated
          */
         getMemories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
-        addActivityAndRemoveMemoriesWhenStopped(activity: $Activity_, tasks: $ImmutableList<$Pair<number, $BehaviorControl<$Object>>>, memorieStatuses: $Set_<$Pair<$MemoryModuleType_<never>, $MemoryStatus_>>, memoryTypes: $Set_<$MemoryModuleType_<never>>): void;
-        /**
-         * @deprecated
-         */
-        getRunningBehaviors(): $List<any>;
         lithium$getModCount(): number;
         /**
          * @deprecated
          */
         getActiveActivities(): $Set<$Activity>;
+        /**
+         * @deprecated
+         */
+        getRunningBehaviors(): $List<any>;
+        getMemoryInternal<U>(type: $MemoryModuleType_<U>): (U) | undefined;
+        addActivityAndRemoveMemoriesWhenStopped(activity: $Activity_, tasks: $ImmutableList<$Pair<number, $BehaviorControl<$Object>>>, memorieStatuses: $Set_<$Pair<$MemoryModuleType_<never>, $MemoryStatus_>>, memoryTypes: $Set_<$MemoryModuleType_<never>>): void;
+        handler$efo000$spectrum$slowDownBrainTicks(arg0: $ServerLevel, arg1: $LivingEntity, arg2: $CallbackInfo): void;
+        static provider<E extends $LivingEntity>(memoryTypes: $Collection_<$MemoryModuleType_<never>>, sensorTypes: $Collection_<$SensorType_<$Sensor<E>>>): $Brain$Provider<E>;
+        setMemory<U>(memoryType: $MemoryModuleType_<U>, memory: (U) | undefined): void;
+        setMemory<U>(memoryType: $MemoryModuleType_<U>, memory: U | null): void;
+        isActive(activity: $Activity_): boolean;
+        tick(level: $ServerLevel, entity: $Object): void;
+        setActiveActivityIfPossible(activity: $Activity_): void;
+        setActiveActivityToFirstValid(activities: $List_<$Activity_>): void;
+        getSchedule(): $Schedule;
+        setCoreActivities(newActivities: $Set_<$Activity_>): void;
+        useDefaultActivity(): void;
+        addActivity(activity: $Activity_, tasks: $ImmutableList<$Pair<number, $BehaviorControl<$Object>>>): void;
+        addActivity(activity: $Activity_, priorityStart: number, tasks: $ImmutableList<$BehaviorControl<$Object>>): void;
+        setDefaultActivity(activity: $Activity_): void;
+        setSchedule(newSchedule: $Schedule_): void;
+        clearMemories(): void;
+        addActivityAndRemoveMemoryWhenStopped(activity: $Activity_, priorityStart: number, tasks: $ImmutableList<$BehaviorControl<$Object>>, memoryType: $MemoryModuleType_<never>): void;
         getSensors(): $Map<$SensorType<$Sensor<$Object>>, $Sensor<$Object>>;
+        getAvailableBehaviorsByPriority(): $Map<number, $Map<$Activity, $Set<$Behavior<$Object>>>>;
         constructor(memoryModuleTypes: $Collection_<$MemoryModuleType_<never>>, sensorTypes: $Collection_<$SensorType_<$Sensor<$Object>>>, memoryValues: $ImmutableList<$Brain$MemoryValue<never>>, codec: $Supplier_<$Codec<$Brain<$Object>>>);
-        set activeActivityToFirstValid(value: $List_<$Activity_>);
-        set activeActivityIfPossible(value: $Activity_);
         get activeNonCoreActivity(): ($Activity) | undefined;
+        get memories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
+        get activeActivities(): $Set<$Activity>;
+        get runningBehaviors(): $List<any>;
+        set activeActivityIfPossible(value: $Activity_);
+        set activeActivityToFirstValid(value: $List_<$Activity_>);
         set coreActivities(value: $Set_<$Activity_>);
         set defaultActivity(value: $Activity_);
-        get memories(): $Map<$MemoryModuleType<never>, ($ExpirableValue<never>) | undefined>;
-        get runningBehaviors(): $List<any>;
-        get activeActivities(): $Set<$Activity>;
         get sensors(): $Map<$SensorType<$Sensor<$Object>>, $Sensor<$Object>>;
+        get availableBehaviorsByPriority(): $Map<number, $Map<$Activity, $Set<$Behavior<$Object>>>>;
     }
     export class $Brain$Provider<E extends $LivingEntity> {
         makeBrain(ops: $Dynamic<never>): $Brain<E>;

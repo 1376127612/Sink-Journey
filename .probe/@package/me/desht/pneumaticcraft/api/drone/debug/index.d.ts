@@ -7,29 +7,29 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/me/desht/pneumaticcraft/api/drone/debug" {
     export class $DroneDebugEntry extends $Record {
+        getPos(): $BlockPos;
         hasPos(): boolean;
-        receivedTime(): number;
-        progWidgetIndex(): number;
         message(): string;
         static create(arg0: string, arg1: $BlockPos_, arg2: number): $DroneDebugEntry;
         pos(): ($BlockPos) | undefined;
-        getPos(): $BlockPos;
+        progWidgetIndex(): number;
+        receivedTime(): number;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $DroneDebugEntry>;
         constructor(progWidgetIndex: number, message: string, pos: ($BlockPos_) | undefined, receivedTime: number);
     }
     /**
      * Values that may be interpreted as {@link $DroneDebugEntry}.
      */
-    export type $DroneDebugEntry_ = { message?: string, receivedTime?: number, pos?: ($BlockPos_) | undefined, progWidgetIndex?: number,  } | [message?: string, receivedTime?: number, pos?: ($BlockPos_) | undefined, progWidgetIndex?: number, ];
+    export type $DroneDebugEntry_ = { progWidgetIndex?: number, message?: string, receivedTime?: number, pos?: ($BlockPos_) | undefined,  } | [progWidgetIndex?: number, message?: string, receivedTime?: number, pos?: ($BlockPos_) | undefined, ];
     export class $IDroneDebugger {
     }
     export interface $IDroneDebugger {
+        getDebugEntry(arg0: number): $DroneDebugEntry;
+        trackAsDebugged(arg0: $ServerPlayer): void;
+        getDebuggingPlayers(): $Collection<$ServerPlayer>;
         addEntry(arg0: $DroneDebugEntry_): void;
         addEntry(arg0: string, arg1: $BlockPos_): void;
         addEntry(arg0: string): void;
-        getDebuggingPlayers(): $Collection<$ServerPlayer>;
-        getDebugEntry(arg0: number): $DroneDebugEntry;
-        trackAsDebugged(arg0: $ServerPlayer): void;
         get debuggingPlayers(): $Collection<$ServerPlayer>;
     }
 }

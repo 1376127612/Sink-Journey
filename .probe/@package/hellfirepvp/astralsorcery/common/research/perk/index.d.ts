@@ -5,37 +5,37 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/hellfirepvp/astralsorcery/common/research/perk" {
     export class $PerkAllocation {
-        static unlock(): $PerkAllocation;
-        getType(): $PerkAllocationType;
-        getLockUUID(): $UUID;
         static grantedConnections(arg0: $UUID_): $PerkAllocation;
         static granted(arg0: $UUID_): $PerkAllocation;
+        getLockUUID(): $UUID;
+        static unlock(): $PerkAllocation;
+        getType(): $PerkAllocationType;
         static unlockNoConnections(): $PerkAllocation;
-        get type(): $PerkAllocationType;
         get lockUUID(): $UUID;
+        get type(): $PerkAllocationType;
     }
     export class $PerkAllocationStatus extends $Enum<$PerkAllocationStatus> {
+        getPerkTreeConnectionColor(): $ColorWrapper;
+        isAllocated(): boolean;
         static values(): $PerkAllocationStatus[];
         static valueOf(arg0: string): $PerkAllocationStatus;
-        isAllocated(): boolean;
-        getPerkTreeConnectionColor(): $ColorWrapper;
         static ALLOCATED: $PerkAllocationStatus;
         static UNLOCKABLE: $PerkAllocationStatus;
         static GRANTED: $PerkAllocationStatus;
         static UNALLOCATED: $PerkAllocationStatus;
-        get allocated(): boolean;
         get perkTreeConnectionColor(): $ColorWrapper;
+        get allocated(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $PerkAllocationStatus}.
      */
     export type $PerkAllocationStatus_ = "unallocated" | "allocated" | "granted" | "unlockable";
     export class $PerkRemovalResult extends $Enum<$PerkRemovalResult> {
+        isFailure(): boolean;
         static values(): $PerkRemovalResult[];
         static valueOf(arg0: string): $PerkRemovalResult;
-        isFailure(): boolean;
-        removesAllocationType(): boolean;
         removesPerk(): boolean;
+        removesAllocationType(): boolean;
         static REMOVE_ALLOCATION: $PerkRemovalResult;
         static REMOVE_ALLOCATION_TYPE: $PerkRemovalResult;
         static REMOVE_PERK: $PerkRemovalResult;
@@ -47,11 +47,11 @@ declare module "@package/hellfirepvp/astralsorcery/common/research/perk" {
      */
     export type $PerkRemovalResult_ = "failure" | "remove_allocation" | "remove_allocation_type" | "remove_perk";
     export class $PerkAllocationType extends $Enum<$PerkAllocationType> implements $StringRepresentable {
-        static values(): $PerkAllocationType[];
-        static valueOf(arg0: string): $PerkAllocationType;
-        hasConnectivity(): boolean;
         getSerializedName(): string;
         isUnlock(): boolean;
+        hasConnectivity(): boolean;
+        static values(): $PerkAllocationType[];
+        static valueOf(arg0: string): $PerkAllocationType;
         getRemappedEnumConstantName(): string;
         static UNLOCKED: $PerkAllocationType;
         static UNLOCKED_NON_CONNECT: $PerkAllocationType;

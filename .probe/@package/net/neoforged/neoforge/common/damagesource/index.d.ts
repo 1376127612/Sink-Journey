@@ -28,22 +28,22 @@ declare module "@package/net/neoforged/neoforge/common/damagesource" {
      */
     export type $IScalingFunction_ = ((arg0: $DamageSource, arg1: $Player, arg2: number, arg3: $Difficulty) => number);
     export class $DamageContainer {
-        getSource(): $DamageSource;
         getPostAttackInvulnerabilityTicks(): number;
         setBlockedDamage(arg0: $LivingShieldBlockEvent): void;
-        getBlockedDamage(): number;
         getNewDamage(): number;
-        setNewDamage(arg0: number): void;
+        getBlockedDamage(): number;
         setReduction(arg0: $DamageContainer$Reduction_, arg1: number): void;
+        setNewDamage(arg0: number): void;
         getReduction(arg0: $DamageContainer$Reduction_): number;
-        setPostAttackInvulnerabilityTicks(arg0: number): void;
+        getShieldDamage(): number;
         getOriginalDamage(): number;
         addModifier(arg0: $DamageContainer$Reduction_, arg1: $IReductionFunction_): void;
-        getShieldDamage(): number;
+        getSource(): $DamageSource;
+        setPostAttackInvulnerabilityTicks(arg0: number): void;
         constructor(arg0: $DamageSource_, arg1: number);
-        get source(): $DamageSource;
-        get originalDamage(): number;
         get shieldDamage(): number;
+        get originalDamage(): number;
+        get source(): $DamageSource;
     }
     export class $IReductionFunction {
     }

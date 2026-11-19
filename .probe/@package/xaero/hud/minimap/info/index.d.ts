@@ -7,34 +7,34 @@ export * as render from "@package/xaero/hud/minimap/info/render";
 
 declare module "@package/xaero/hud/minimap/info" {
     export class $InfoDisplays {
-        getManager(): $InfoDisplayManager;
         getRenderer(): $InfoDisplayRenderer;
-        getIo(): $InfoDisplayIO;
         clearStateCache(): void;
+        getManager(): $InfoDisplayManager;
+        getIo(): $InfoDisplayIO;
         constructor(arg0: $InfoDisplayIO);
-        get manager(): $InfoDisplayManager;
         get renderer(): $InfoDisplayRenderer;
+        get manager(): $InfoDisplayManager;
         get io(): $InfoDisplayIO;
     }
     export class $InfoDisplayManager {
+        applyLocalConfig(): void;
+        adaptOrder(arg0: $Stream<string>): $List<string>;
+        getEnforcedConfig(): $InfoDisplayManagerConfigData;
+        clearStateCache(): void;
+        getDefaultOrder(): $List<string>;
+        getOrderedStream(): $Stream<$InfoDisplay<never>>;
+        getLocalConfig(): $InfoDisplayManagerConfigData;
         get(arg0: string): $InfoDisplay<never>;
         add(arg0: $InfoDisplay<never>): void;
         getCount(): number;
         getStream(): $Stream<$InfoDisplay<never>>;
-        getOrderedStream(): $Stream<$InfoDisplay<never>>;
-        getDefaultOrder(): $List<string>;
-        getLocalConfig(): $InfoDisplayManagerConfigData;
-        applyLocalConfig(): void;
-        clearStateCache(): void;
-        getEnforcedConfig(): $InfoDisplayManagerConfigData;
-        adaptOrder(arg0: $Stream<string>): $List<string>;
         constructor(arg0: $Map_<string, $InfoDisplay<never>>, arg1: $List_<string>, arg2: $List_<string>, arg3: $Supplier_<$InfoDisplayManagerConfigData>, arg4: $Consumer_<$InfoDisplayManagerConfigData>, arg5: $Supplier_<$InfoDisplayManagerConfigData>);
+        get enforcedConfig(): $InfoDisplayManagerConfigData;
+        get defaultOrder(): $List<string>;
+        get orderedStream(): $Stream<$InfoDisplay<never>>;
+        get localConfig(): $InfoDisplayManagerConfigData;
         get count(): number;
         get stream(): $Stream<$InfoDisplay<never>>;
-        get orderedStream(): $Stream<$InfoDisplay<never>>;
-        get defaultOrder(): $List<string>;
-        get localConfig(): $InfoDisplayManagerConfigData;
-        get enforcedConfig(): $InfoDisplayManagerConfigData;
     }
     export class $InfoDisplayIO {
         decode(arg0: string): $InfoDisplayManagerConfigData;

@@ -1,8 +1,8 @@
 
 declare module "@package/com/george_vi/electroenergetics/simulation/electrical_properties" {
     export class $MicroTickingElectricalProperties extends $ElectricalProperties {
-        tick(arg0: number[], arg1: number, arg2: number, arg3: number, arg4: number): void;
         afterTick(arg0: number[], arg1: number, arg2: number, arg3: number, arg4: number): void;
+        tick(arg0: number[], arg1: number, arg2: number, arg3: number, arg4: number): void;
         static MILlI: $ElectricalProperties;
         static INFINITE_CONDUCTANCE: $ElectricalProperties;
         static ZERO_CONDUCTANCE: $ElectricalProperties;
@@ -12,16 +12,16 @@ declare module "@package/com/george_vi/electroenergetics/simulation/electrical_p
         constructor();
     }
     export class $ElectricalProperties {
-        invert(): $ElectricalProperties;
-        resistance(): number;
         currentSource(): number;
         static resistor(arg0: number): $ElectricalProperties;
+        resistance(): number;
+        invert(): $ElectricalProperties;
         isSimpleResistor(): boolean;
-        isVoltageSource(): boolean;
         voltageSource(): number;
-        conductance(): number;
-        static fromThevenin(arg0: number, arg1: number): $ElectricalProperties;
         isCurrentSource(): boolean;
+        isVoltageSource(): boolean;
+        static fromThevenin(arg0: number, arg1: number): $ElectricalProperties;
+        conductance(): number;
         static MILlI: $ElectricalProperties;
         static INFINITE_CONDUCTANCE: $ElectricalProperties;
         static ZERO_CONDUCTANCE: $ElectricalProperties;

@@ -12,32 +12,32 @@ declare module "@package/net/minecraft/util/profiling/metrics/profiling" {
     export class $InactiveMetricsRecorder implements $MetricsRecorder {
         end(): void;
         cancel(): void;
-        getProfiler(): $ProfilerFiller;
-        isRecording(): boolean;
         startTick(): void;
         endTick(): void;
+        isRecording(): boolean;
+        getProfiler(): $ProfilerFiller;
         static INSTANCE: $MetricsRecorder;
         constructor();
-        get profiler(): $ProfilerFiller;
         get recording(): boolean;
+        get profiler(): $ProfilerFiller;
     }
     export class $ActiveMetricsRecorder implements $MetricsRecorder {
         end(): void;
         cancel(): void;
-        getProfiler(): $ProfilerFiller;
-        isRecording(): boolean;
-        static createStarted(metricsSamplerProvider: $MetricsSamplerProvider_, wallTimeSource: $LongSupplier_, ioExecutor: $Executor_, metricsPersister: $MetricsPersister, onProfilerEnd: $Consumer_<$ProfileResults>, onReportFinished: $Consumer_<$Path>): $ActiveMetricsRecorder;
         startTick(): void;
         endTick(): void;
+        isRecording(): boolean;
+        static createStarted(metricsSamplerProvider: $MetricsSamplerProvider_, wallTimeSource: $LongSupplier_, ioExecutor: $Executor_, metricsPersister: $MetricsPersister, onProfilerEnd: $Consumer_<$ProfileResults>, onReportFinished: $Consumer_<$Path>): $ActiveMetricsRecorder;
+        getProfiler(): $ProfilerFiller;
         static registerGlobalCompletionCallback(globalOnReportFinished: $Consumer_<$Path>): void;
         static PROFILING_MAX_DURATION_SECONDS: number;
-        get profiler(): $ProfilerFiller;
         get recording(): boolean;
+        get profiler(): $ProfilerFiller;
     }
     export class $ServerMetricsSamplersProvider implements $MetricsSamplerProvider {
+        samplers(profiles: $Supplier_<$ProfileCollector>): $Set<$MetricSampler>;
         static runtimeIndependentSamplers(): $Set<$MetricSampler>;
         static tickTimeSampler(timeSource: $LongSupplier_): $MetricSampler;
-        samplers(profiles: $Supplier_<$ProfileCollector>): $Set<$MetricSampler>;
         constructor(timeSource: $LongSupplier_, dedicatedServer: boolean);
     }
     export class $ProfilerSamplerAdapter {
@@ -49,11 +49,11 @@ declare module "@package/net/minecraft/util/profiling/metrics/profiling" {
     export interface $MetricsRecorder {
         end(): void;
         cancel(): void;
-        getProfiler(): $ProfilerFiller;
-        isRecording(): boolean;
         startTick(): void;
         endTick(): void;
-        get profiler(): $ProfilerFiller;
+        isRecording(): boolean;
+        getProfiler(): $ProfilerFiller;
         get recording(): boolean;
+        get profiler(): $ProfilerFiller;
     }
 }

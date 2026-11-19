@@ -17,18 +17,18 @@ declare module "@package/net/neoforged/fml/config" {
      */
     export type $ModConfig$Type_ = "common" | "client" | "server" | "startup";
     export class $ModConfig {
+        getLoadedConfig(): $IConfigSpec$ILoadedConfig;
         getType(): $ModConfig$Type;
         getFileName(): string;
-        getFullPath(): $Path;
         getModId(): string;
         getSpec(): $IConfigSpec;
-        getLoadedConfig(): $IConfigSpec$ILoadedConfig;
+        getFullPath(): $Path;
+        get loadedConfig(): $IConfigSpec$ILoadedConfig;
         get type(): $ModConfig$Type;
         get fileName(): string;
-        get fullPath(): $Path;
         get modId(): string;
         get spec(): $IConfigSpec;
-        get loadedConfig(): $IConfigSpec$ILoadedConfig;
+        get fullPath(): $Path;
     }
     export class $IConfigSpec$ILoadedConfig {
     }
@@ -39,11 +39,11 @@ declare module "@package/net/neoforged/fml/config" {
     export class $IConfigSpec {
     }
     export interface $IConfigSpec {
+        validateSpec(arg0: $ModConfig): void;
+        acceptConfig(arg0: $IConfigSpec$ILoadedConfig): void;
         isEmpty(): boolean;
         isCorrect(arg0: $UnmodifiableCommentedConfig): boolean;
         correct(arg0: $CommentedConfig): void;
-        validateSpec(arg0: $ModConfig): void;
-        acceptConfig(arg0: $IConfigSpec$ILoadedConfig): void;
         get empty(): boolean;
     }
 }

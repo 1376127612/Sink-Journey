@@ -1,8 +1,9 @@
-import { $Level_, $LevelAccessor } from "@package/net/minecraft/world/level";
+import { $LevelAccessor, $Level_ } from "@package/net/minecraft/world/level";
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
-import { $WalkAnimationState, $EntityDimensions, $EntityType_, $Entity$RemovalReason, $MobSpawnType_, $PortalProcessor, $Pose_, $AgeableMob } from "@package/net/minecraft/world/entity";
+import { $EntityDimensions, $EntityType_, $Entity$RemovalReason, $PortalProcessor, $Pose_, $AgeableMob, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $RandomSource } from "@package/net/minecraft/util";
@@ -11,11 +12,12 @@ import { $InteractionHand } from "@package/net/minecraft/world";
 import { $Predicate } from "@package/java/util/function";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $AccessorMixinGoat } from "@package/mysticmods/roots/mixin/accessor";
 
 declare module "@package/net/minecraft/world/entity/animal/goat" {
     export class $GoatAi {
-        static updateActivity(brain: $Goat): void;
         static getTemptations(): $Predicate<$ItemStack>;
+        static updateActivity(brain: $Goat): void;
         static MAX_LONG_JUMP_WIDTH: number;
         static RAM_PREPARE_TIME: number;
         static ADULT_RAM_KNOCKBACK_FORCE: number;
@@ -27,41 +29,29 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }
-    export class $Goat extends $Animal {
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
-        static createAttributes(): $AttributeSupplier$Builder;
-        getBreedOffspring(level: $ServerLevel, otherParent: $AgeableMob): $Goat;
-        static checkGoatSpawnRules(goat: $EntityType_<$Animal>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        hasRightHorn(): boolean;
-        /**
-         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
-         */
-        removeHorns(): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isScreamingGoat(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        hasLeftHorn(): boolean;
-        setScreamingGoat(isScreamingGoat: boolean): void;
-        /**
-         * Returns the amount of health added by the Absorption effect.
-         */
-        getRammingXHeadRot(): number;
+    export class $Goat extends $Animal implements $AccessorMixinGoat {
+        createHorn(): $ItemStack;
         /**
          * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
          */
         addHorns(): void;
-        createHorn(): $ItemStack;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         dropHorn(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
+        static checkGoatSpawnRules(goat: $EntityType_<$Animal>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        getBreedOffspring(level: $ServerLevel, otherParent: $AgeableMob): $Goat;
+        /**
+         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
+         */
+        removeHorns(): void;
+        hasLeftHorn(): boolean;
+        isScreamingGoat(): boolean;
+        setScreamingGoat(isScreamingGoat: boolean): void;
+        hasRightHorn(): boolean;
+        getRammingXHeadRot(): number;
+        static getDataIsScreamingGoat$roots_$md$e03d8d$0(): $EntityDataAccessor<any>;
+        static getDataHasRightHorn$roots_$md$e03d8d$2(): $EntityDataAccessor<any>;
+        static getDataHasLeftHorn$roots_$md$e03d8d$1(): $EntityDataAccessor<any>;
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -112,6 +102,7 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -122,6 +113,7 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -175,5 +167,8 @@ declare module "@package/net/minecraft/world/entity/animal/goat" {
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Goat>, level: $Level_);
         get rammingXHeadRot(): number;
+        static get dataIsScreamingGoat$roots_$md$e03d8d$0(): $EntityDataAccessor<any>;
+        static get dataHasRightHorn$roots_$md$e03d8d$2(): $EntityDataAccessor<any>;
+        static get dataHasLeftHorn$roots_$md$e03d8d$1(): $EntityDataAccessor<any>;
     }
 }

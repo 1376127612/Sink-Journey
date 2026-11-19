@@ -7,14 +7,14 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/hellfirepvp/astralsorcery/common/data/sync" {
     export class $ClientSyncData<C extends $ClientData> {
-        type(): $SyncData$Type<never, never, never, C>;
         updateClientData(arg0: C): void;
+        type(): $SyncData$Type<never, never, never, C>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncData<never>>;
         constructor();
     }
     export class $ClientSyncDiffData<C extends $ClientData> {
-        type(): $SyncData$Type<never, never, never, C>;
         updateClientData(arg0: C): void;
+        type(): $SyncData$Type<never, never, never, C>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncDiffData<never>>;
         constructor();
     }
@@ -24,24 +24,24 @@ declare module "@package/hellfirepvp/astralsorcery/common/data/sync" {
     }
     export interface $SyncData$Type<D, SA, SD, C> extends RegistryMarked<RegistryTypes.AstralsorcerySyncDataTypesTag, RegistryTypes.AstralsorcerySyncDataTypes> {}
     export class $SyncData<SA extends $ClientSyncData<C>, SD extends $ClientSyncDiffData<C>, C extends $ClientData> {
-        getType(): $SyncData$Type<never, SA, SD, C>;
-        clearAll(): void;
-        clearLevel(arg0: $ServerLevel): void;
         markDirty(): void;
-        syncDiffData(): SD;
         syncAllData(): SA;
+        syncDiffData(): SD;
+        getType(): $SyncData$Type<never, SA, SD, C>;
+        clearLevel(arg0: $ServerLevel): void;
+        clearAll(): void;
         constructor();
         get type(): $SyncData$Type<never, SA, SD, C>;
     }
     export class $SyncData$Type<D extends $SyncData<SA, SD, C>, SA extends $ClientSyncData<C>, SD extends $ClientSyncDiffData<C>, C extends $ClientData> extends $Record {
-        dataProvider(): $Supplier<D>;
         syncCodec(): $StreamCodec<$RegistryFriendlyByteBuf, SA>;
-        syncDiffCodec(): $StreamCodec<$RegistryFriendlyByteBuf, SD>;
         clientDataProvider(): $Supplier<C>;
+        syncDiffCodec(): $StreamCodec<$RegistryFriendlyByteBuf, SD>;
+        dataProvider(): $Supplier<D>;
         constructor(dataProvider: $Supplier_<D>, clientDataProvider: $Supplier_<C>, syncCodec: $StreamCodec<$RegistryFriendlyByteBuf, SA>, syncDiffCodec: $StreamCodec<$RegistryFriendlyByteBuf, SD>);
     }
     /**
      * Values that may be interpreted as {@link $SyncData$Type}.
      */
-    export type $SyncData$Type_<D, SA, SD, C> = RegistryTypes.AstralsorcerySyncDataTypes | { clientDataProvider?: $Supplier_<$ClientData>, syncDiffCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncDiffData<C>>, dataProvider?: $Supplier_<$SyncData<SA, SD, C>>, syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncData<C>>,  } | [clientDataProvider?: $Supplier_<$ClientData>, syncDiffCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncDiffData<C>>, dataProvider?: $Supplier_<$SyncData<SA, SD, C>>, syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncData<C>>, ];
+    export type $SyncData$Type_<D, SA, SD, C> = RegistryTypes.AstralsorcerySyncDataTypes | { dataProvider?: $Supplier_<$SyncData<SA, SD, C>>, syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncData<C>>, clientDataProvider?: $Supplier_<$ClientData>, syncDiffCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncDiffData<C>>,  } | [dataProvider?: $Supplier_<$SyncData<SA, SD, C>>, syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncData<C>>, clientDataProvider?: $Supplier_<$ClientData>, syncDiffCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ClientSyncDiffData<C>>, ];
 }

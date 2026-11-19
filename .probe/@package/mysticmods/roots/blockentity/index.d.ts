@@ -1,0 +1,142 @@
+import { $Level, $Level_ } from "@package/net/minecraft/world/level";
+import { $ItemStack } from "@package/net/minecraft/world/item";
+import { $Logger } from "@package/org/slf4j";
+import { $Recipe, $RecipeHolder } from "@package/net/minecraft/world/item/crafting";
+import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
+import { $Component } from "@package/net/minecraft/network/chat";
+import { $BindableBlockEntity, $ClientTickBlockEntity, $ClearableBlockEntity, $ServerTickBlockEntity, $FakeMenuBlockEntity, $RefillProvider, $InventoryBlockEntity } from "@package/mysticmods/roots/api/blockentity";
+import { $IItemHandler, $ItemStackHandler } from "@package/net/neoforged/neoforge/items";
+import { $Player, $Inventory } from "@package/net/minecraft/world/entity/player";
+import { $List } from "@package/java/util";
+import { $Ritual } from "@package/mysticmods/roots/api/ritual";
+import { $InteractionResult } from "@package/net/minecraft/world";
+import { $ServerLevel } from "@package/net/minecraft/server/level";
+import { $HolderLookup$Provider, $BlockPos, $BlockPos_, $Direction_, $NonNullList, $Direction } from "@package/net/minecraft/core";
+import { $RecipeInventory } from "@package/mysticmods/roots/api/recipe/inventory";
+import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
+import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
+import { $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
+import { $PositionCache } from "@package/mysticmods/roots/util";
+import { $PyreInventory, $PyreRecipe, $PyrePedestalCrafting } from "@package/mysticmods/roots/recipe/pyre";
+import { $BoundingBox } from "@package/net/minecraft/world/level/levelgen/structure";
+import { $UseDelegatedBlockEntity } from "@package/mysticmods/roots/blockentity/template";
+import { $BlockEntityType, $BlockEntityType_ } from "@package/net/minecraft/world/level/block/entity";
+import { $BlockCapabilityCache } from "@package/net/neoforged/neoforge/capabilities";
+export * as template from "@package/mysticmods/roots/blockentity/template";
+
+declare module "@package/mysticmods/roots/blockentity" {
+    export class $PedestalBlockEntity extends $UseDelegatedBlockEntity implements $InventoryBlockEntity, $ServerTickBlockEntity, $ClientTickBlockEntity {
+        serverTick(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $BlockState_): void;
+        getHeldItem(): $ItemStack;
+        getHeldBlockState(): $BlockState;
+        getAnimateTick(): number;
+        offset(): number;
+        getLimit(): number;
+        clientTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
+        getInventory(): $ItemStackHandler;
+        isAnimating(): boolean;
+        loadAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        animate(): void;
+        dropContents(): void;
+        getItems(): $NonNullList<$ItemStack>;
+        popOne(): $ItemStack;
+        getNonEmptyItems(): $List<$ItemStack>;
+        getOne(): $ItemStack;
+        worldPosition: $BlockPos;
+        blockState: $BlockState;
+        visualAnimationTicks: number;
+        level: $Level;
+        static ATTACHMENTS_NBT_KEY: string;
+        static LOGGER: $Logger;
+        /**
+         * @deprecated
+         */
+        type: $BlockEntityType<never>;
+        remove: boolean;
+        customPersistentData: $CompoundTag;
+        constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_, arg3: number);
+        constructor(arg0: $BlockPos_, arg1: $BlockState_, arg2: number);
+        constructor(arg0: $BlockPos_, arg1: $BlockState_);
+        constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
+        get heldItem(): $ItemStack;
+        get heldBlockState(): $BlockState;
+        get animateTick(): number;
+        get limit(): number;
+        get inventory(): $ItemStackHandler;
+        get animating(): boolean;
+        get items(): $NonNullList<$ItemStack>;
+        get nonEmptyItems(): $List<$ItemStack>;
+        get one(): $ItemStack;
+    }
+    export class $PyreBlockEntity extends $UseDelegatedBlockEntity implements $ClientTickBlockEntity, $ServerTickBlockEntity, $InventoryBlockEntity, $RefillProvider, $BindableBlockEntity, $FakeMenuBlockEntity, $ClearableBlockEntity {
+        stopRitual(arg0: boolean): void;
+        stopRitual(): void;
+        light(arg0: $Player): $InteractionResult;
+        createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
+        serverTick(arg0: $ServerLevel, arg1: $BlockPos_, arg2: $BlockState_): void;
+        getoSpin(): number;
+        getLifetime(): number;
+        getCachedRecipe(): $RecipeHolder<$PyreRecipe>;
+        clearContents(): void;
+        canClear(): boolean;
+        getRefillRecipe(): $Recipe<never>;
+        shouldShowInsert(): boolean;
+        getLastPlayer(): $Player;
+        getRefillInventory(): $RecipeInventory;
+        getCurrentRitual(): $Ritual;
+        startRitual(arg0: $Player): void;
+        getBoundPosition(): $BlockPos;
+        getLastRecipe(): $RecipeHolder<$PyreRecipe>;
+        getPedestalCrafting(): $PyrePedestalCrafting;
+        getBlockCapabilityCache(): $BlockCapabilityCache<$IItemHandler, $Direction>;
+        clearPedestalCrafting(): void;
+        setBlockCapabilityCache(arg0: $BlockCapabilityCache<$IItemHandler, $Direction_>): void;
+        setBoundPosition(arg0: $BlockPos_): void;
+        popStoredItems(): $List<$ItemStack>;
+        static getPyreBoundingBox(): $BoundingBox;
+        removed(): void;
+        getCache(): $PositionCache;
+        clientTick(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): void;
+        getSpin(): number;
+        getInventory(): $PyreInventory;
+        loadAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        writeClientSideData(arg0: $AbstractContainerMenu, arg1: $RegistryFriendlyByteBuf): void;
+        getItems(): $NonNullList<$ItemStack>;
+        popOne(): $ItemStack;
+        getNonEmptyItems(): $List<$ItemStack>;
+        getOne(): $ItemStack;
+        tryRefill(arg0: $ServerLevel, arg1: $BlockPos_): boolean;
+        getDisplayName(): $Component;
+        shouldTriggerClientSideContainerClosingOnOpen(): boolean;
+        worldPosition: $BlockPos;
+        blockState: $BlockState;
+        level: $Level;
+        static ATTACHMENTS_NBT_KEY: string;
+        static LOGGER: $Logger;
+        /**
+         * @deprecated
+         */
+        type: $BlockEntityType<never>;
+        remove: boolean;
+        customPersistentData: $CompoundTag;
+        constructor(arg0: $BlockPos_, arg1: $BlockState_);
+        constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
+        get oSpin(): number;
+        get lifetime(): number;
+        get cachedRecipe(): $RecipeHolder<$PyreRecipe>;
+        get refillRecipe(): $Recipe<never>;
+        get lastPlayer(): $Player;
+        get refillInventory(): $RecipeInventory;
+        get currentRitual(): $Ritual;
+        get lastRecipe(): $RecipeHolder<$PyreRecipe>;
+        get pedestalCrafting(): $PyrePedestalCrafting;
+        static get pyreBoundingBox(): $BoundingBox;
+        get cache(): $PositionCache;
+        get spin(): number;
+        get inventory(): $PyreInventory;
+        get items(): $NonNullList<$ItemStack>;
+        get nonEmptyItems(): $List<$ItemStack>;
+        get one(): $ItemStack;
+        get displayName(): $Component;
+    }
+}

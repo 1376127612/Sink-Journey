@@ -3,9 +3,9 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/com/denfop/items" {
     export class $EnumInfoUpgradeModules extends $Enum<$EnumInfoUpgradeModules> {
+        static getFromID(arg0: number): $EnumInfoUpgradeModules;
         static values(): $EnumInfoUpgradeModules[];
         static valueOf(arg0: string): $EnumInfoUpgradeModules;
-        static getFromID(arg0: number): $EnumInfoUpgradeModules;
         static INVISIBILITY: $EnumInfoUpgradeModules;
         static GENERATOR: $EnumInfoUpgradeModules;
         static REPAIRED: $EnumInfoUpgradeModules;

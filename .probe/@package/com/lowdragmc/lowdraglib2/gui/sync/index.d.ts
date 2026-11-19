@@ -14,9 +14,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
     export class $IUISyncManagerHolder {
     }
     export interface $IUISyncManagerHolder {
-        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
-        getSyncManager(): $UISyncManager;
         readInitialData(arg0: $RegistryFriendlyByteBuf): void;
+        getSyncManager(): $UISyncManager;
+        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
         get syncManager(): $UISyncManager;
     }
     /**
@@ -24,42 +24,42 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync" {
      */
     export type $IUISyncManagerHolder_ = (() => $UISyncManager);
     export class $UISyncManager {
-        tick(): void;
-        handEvent(arg0: $RegistryFriendlyByteBuf): void;
-        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
+        unregisterSyncValue(arg0: $SyncValue<never>): $UISyncManager;
         readInitialData(arg0: $RegistryFriendlyByteBuf): void;
-        registerSyncValue(arg0: $SyncValue<never>): $UISyncManager;
+        handEventReturn(arg0: $RegistryFriendlyByteBuf): void;
+        getReturnCallbacks(): $Map<number, $Consumer<never>>;
+        handleSyncPacket(arg0: $RegistryFriendlyByteBuf): void;
+        sendEvent(arg0: $RPCEvent_, ...arg1: $Object[]): void;
+        sendEvent<T>(arg0: $RPCEvent_, arg1: $Consumer_<T>, ...arg2: $Object[]): void;
+        tick(): void;
         unregisterRPCEvent(arg0: $RPCEvent_): $UISyncManager;
         registerRPCEvent(arg0: $RPCEvent_): $UISyncManager;
-        unregisterSyncValue(arg0: $SyncValue<never>): $UISyncManager;
-        sendEvent<T>(arg0: $RPCEvent_, arg1: $Consumer_<T>, ...arg2: $Object[]): void;
-        sendEvent(arg0: $RPCEvent_, ...arg1: $Object[]): void;
-        handleSyncPacket(arg0: $RegistryFriendlyByteBuf): void;
-        getReturnCallbacks(): $Map<number, $Consumer<never>>;
-        handEventReturn(arg0: $RegistryFriendlyByteBuf): void;
+        registerSyncValue(arg0: $SyncValue<never>): $UISyncManager;
+        writeInitialData(arg0: $RegistryFriendlyByteBuf): void;
+        handEvent(arg0: $RegistryFriendlyByteBuf): void;
         modularUI: $ModularUI;
         constructor(arg0: $ModularUI);
         get returnCallbacks(): $Map<number, $Consumer<never>>;
     }
     export class $SyncValue<T> {
+        writeSyncData(arg0: $RegistryFriendlyByteBuf): void;
+        readSyncData(arg0: $RegistryFriendlyByteBuf): void;
+        clearChanged(): void;
+        setToSync(arg0: boolean): void;
+        setAcceptSync(arg0: boolean): void;
+        setValueProvider(arg0: $Supplier_<T>): void;
+        getSyncStrategy(): $SyncStrategy;
+        addPreSyncListener(arg0: $Consumer_<T>): $ISubscription;
+        isAcceptSync(): boolean;
+        markAsChanged(): void;
+        setSyncStrategy(arg0: $SyncStrategy_): void;
+        addPostSyncListener(arg0: $Consumer_<T>): $ISubscription;
         update(): void;
         getValue(): T;
         setValue(arg0: T): void;
         addListener(arg0: $Consumer_<T>): $ISubscription;
-        hasChanged(): boolean;
-        addPostSyncListener(arg0: $Consumer_<T>): $ISubscription;
         isToSync(): boolean;
-        setToSync(arg0: boolean): void;
-        writeSyncData(arg0: $RegistryFriendlyByteBuf): void;
-        readSyncData(arg0: $RegistryFriendlyByteBuf): void;
-        clearChanged(): void;
-        setValueProvider(arg0: $Supplier_<T>): void;
-        isAcceptSync(): boolean;
-        getSyncStrategy(): $SyncStrategy;
-        addPreSyncListener(arg0: $Consumer_<T>): $ISubscription;
-        setAcceptSync(arg0: boolean): void;
-        setSyncStrategy(arg0: $SyncStrategy_): void;
-        markAsChanged(): void;
+        hasChanged(): boolean;
         toSync: boolean;
         syncValueHolder: $SyncValueHolder<T>;
         listeners: $List<$Consumer<T>>;

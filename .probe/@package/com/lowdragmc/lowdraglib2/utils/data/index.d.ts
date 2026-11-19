@@ -15,62 +15,62 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/com/lowdragmc/lowdraglib2/utils/data" {
     export class $EntityInfo {
-        static of(arg0: number): $EntityInfo;
-        static of(arg0: number, arg1: $EntityType_<never>): $EntityInfo;
-        static of(arg0: number, arg1: $EntityType_<never>, arg2: $CompoundTag_): $EntityInfo;
-        getId(): number;
-        getTag(): $CompoundTag;
-        setId(arg0: number): void;
-        setTag(arg0: $CompoundTag_): void;
         getEntityType(): $EntityType<never>;
         setEntityType(arg0: $EntityType_<never>): void;
+        static of(arg0: number): $EntityInfo;
+        static of(arg0: number, arg1: $EntityType_<never>, arg2: $CompoundTag_): $EntityInfo;
+        static of(arg0: number, arg1: $EntityType_<never>): $EntityInfo;
+        getId(): number;
+        getTag(): $CompoundTag;
+        setTag(arg0: $CompoundTag_): void;
+        setId(arg0: number): void;
     }
     export class $BlockInfo implements $IPersistedSerializable, $IConfigurable {
-        setTag(arg0: $CompoundTag_): void;
+        static fromBlock(arg0: $Block_): $BlockInfo;
+        setBlockState(arg0: $BlockState_): void;
+        setHasBlockEntity(arg0: boolean): void;
+        setPostCreate(arg0: $Consumer_<$BlockEntity>): void;
+        postEntity(arg0: $BlockEntity): void;
         getBlockState(): $BlockState;
         hasBlockEntity(): boolean;
-        setBlockState(arg0: $BlockState_): void;
-        static fromBlock(arg0: $Block_): $BlockInfo;
+        setTag(arg0: $CompoundTag_): void;
         setItemStack(arg0: $ItemStack_): void;
-        postEntity(arg0: $BlockEntity): void;
         getItemStackForm(arg0: $LevelReader, arg1: $BlockPos_): $ItemStack;
         getItemStackForm(): $ItemStack;
-        setHasBlockEntity(arg0: boolean): void;
         static fromBlockState(arg0: $BlockState_): $BlockInfo;
-        setPostCreate(arg0: $Consumer_<$BlockEntity>): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         afterSerialize(): void;
+        beforeDeserialize(): void;
+        writeToBuff(arg0: $ByteBuf): void;
         afterDeserialize(): void;
         readFromBuff(arg0: $ByteBuf): void;
         beforeSerialize(): void;
-        writeToBuff(arg0: $ByteBuf): void;
-        beforeDeserialize(): void;
-        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         deserializeAdditionalNBT(arg0: $Tag_, arg1: $HolderLookup$Provider): void;
+        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
         static EMPTY: $BlockInfo;
         constructor();
-        constructor(arg0: $BlockState_, arg1: boolean, arg2: $ItemStack_, arg3: $Consumer_<$BlockEntity>);
-        constructor(arg0: $BlockState_, arg1: $Consumer_<$BlockEntity>);
         constructor(arg0: $Block_);
         constructor(arg0: $BlockState_);
         constructor(arg0: $BlockState_, arg1: boolean);
+        constructor(arg0: $BlockState_, arg1: $Consumer_<$BlockEntity>);
+        constructor(arg0: $BlockState_, arg1: boolean, arg2: $ItemStack_, arg3: $Consumer_<$BlockEntity>);
+        set postCreate(value: $Consumer_<$BlockEntity>);
         set tag(value: $CompoundTag_);
         set itemStack(value: $ItemStack_);
-        set postCreate(value: $Consumer_<$BlockEntity>);
         get configurableName(): string;
     }
     export class $BlockPosFace extends $Record {
-        pos(): $BlockPos;
         facing(): $Direction;
+        pos(): $BlockPos;
         constructor(pos: $BlockPos_, facing: $Direction_);
     }
     /**
      * Values that may be interpreted as {@link $BlockPosFace}.
      */
-    export type $BlockPosFace_ = { facing?: $Direction_, pos?: $BlockPos_,  } | [facing?: $Direction_, pos?: $BlockPos_, ];
+    export type $BlockPosFace_ = { pos?: $BlockPos_, facing?: $Direction_,  } | [pos?: $BlockPos_, facing?: $Direction_, ];
 }

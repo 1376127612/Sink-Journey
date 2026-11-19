@@ -11,8 +11,8 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 declare module "@package/me/desht/pneumaticcraft/api/misc" {
     export interface $IPlayerMatcher$MatcherType<P> extends RegistryMarked<RegistryTypes.PneumaticcraftPlayerMatchersTag, RegistryTypes.PneumaticcraftPlayerMatchers> {}
     export class $IPlayerMatcher$MatcherType<P extends $IPlayerMatcher> extends $Record {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, P>;
         codec(): $MapCodec<P>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, P>;
         constructor(codec: $MapCodec_<P>, streamCodec: $StreamCodec<$RegistryFriendlyByteBuf, P>);
     }
     /**
@@ -24,8 +24,8 @@ declare module "@package/me/desht/pneumaticcraft/api/misc" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $IPlayerMatcher>;
     }
     export interface $IPlayerMatcher extends $Predicate<$Player> {
-        type(): $IPlayerMatcher$MatcherType<$IPlayerMatcher>;
-        addDescription(arg0: $Player, arg1: $List_<$Component_>): void;
         standardTooltip(arg0: $Player, arg1: $List_<$Component_>, arg2: $Component_, arg3: $List_<$Component_>): void;
+        addDescription(arg0: $Player, arg1: $List_<$Component_>): void;
+        type(): $IPlayerMatcher$MatcherType<$IPlayerMatcher>;
     }
 }

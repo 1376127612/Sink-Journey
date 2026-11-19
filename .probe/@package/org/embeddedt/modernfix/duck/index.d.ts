@@ -25,8 +25,8 @@ declare module "@package/org/embeddedt/modernfix/duck" {
     export class $IBlockState {
     }
     export interface $IBlockState {
-        clearCache(): void;
         isCacheInvalid(): boolean;
+        clearCache(): void;
         get cacheInvalid(): boolean;
     }
     export class $ITimeTrackingServer {

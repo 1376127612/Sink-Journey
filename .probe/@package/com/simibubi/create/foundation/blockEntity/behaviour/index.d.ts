@@ -11,6 +11,11 @@ export * as scrollValue from "@package/com/simibubi/create/foundation/blockEntit
 
 declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour" {
     export class $BlockEntityBehaviour {
+        setLazyTickRate(arg0: number): void;
+        getPos(): $BlockPos;
+        onNeighborChanged(arg0: $BlockPos_): void;
+        getRequiredItems(): $ItemRequirement;
+        onBlockChanged(arg0: $BlockState_): void;
         static get<T extends $BlockEntityBehaviour>(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BehaviourType<T>): T;
         static get<T extends $BlockEntityBehaviour>(arg0: $BlockEntity, arg1: $BehaviourType<T>): T;
         initialize(): void;
@@ -20,23 +25,18 @@ declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour" {
         getType(): $BehaviourType<never>;
         unload(): void;
         tick(): void;
-        getPos(): $BlockPos;
         getWorld(): $Level;
-        onBlockChanged(arg0: $BlockState_): void;
-        onNeighborChanged(arg0: $BlockPos_): void;
-        writeSafe(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         lazyTick(): void;
+        writeSafe(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         isSafeNBT(): boolean;
-        getRequiredItems(): $ItemRequirement;
-        setLazyTickRate(arg0: number): void;
         blockEntity: $SmartBlockEntity;
         constructor(arg0: $SmartBlockEntity);
-        get type(): $BehaviourType<never>;
+        set lazyTickRate(value: number);
         get pos(): $BlockPos;
+        get requiredItems(): $ItemRequirement;
+        get type(): $BehaviourType<never>;
         get world(): $Level;
         get safeNBT(): boolean;
-        get requiredItems(): $ItemRequirement;
-        set lazyTickRate(value: number);
     }
     export class $BehaviourType<T extends $BlockEntityBehaviour> {
         getName(): string;

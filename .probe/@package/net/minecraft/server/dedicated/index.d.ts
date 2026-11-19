@@ -1,5 +1,5 @@
 import { $File } from "@package/java/io";
-import { $JsonObject_ } from "@package/com/google/gson";
+import { $JsonObject_, $JsonObject } from "@package/com/google/gson";
 import { $DataPackConfig, $LevelSettings, $GameType } from "@package/net/minecraft/world/level";
 import { $MinecraftServer$ServerResourcePackInfo, $ServerInterface, $WorldStem_, $MinecraftServer$ReloadableResources, $RegistryLayer_, $MinecraftServer, $Services_ } from "@package/net/minecraft/server";
 import { $Component } from "@package/net/minecraft/network/chat";
@@ -22,8 +22,8 @@ import { $WorldDimensions, $WorldOptions } from "@package/net/minecraft/world/le
 
 declare module "@package/net/minecraft/server/dedicated" {
     export class $Settings<T extends $Settings<T>> implements $SettingsAccessor {
-        store(path: $Path_): void;
         static loadFromFile(path: $Path_): $Properties;
+        store(path: $Path_): void;
         invokeCloneProperties(): $Properties;
         invokeGetStringRaw(key: string): string;
         constructor(properties: $Properties);
@@ -36,6 +36,9 @@ declare module "@package/net/minecraft/server/dedicated" {
         get properties(): $DedicatedServerProperties;
     }
     export class $DedicatedServerProperties$WorldDimensionData extends $Record {
+        generatorSettings(): $JsonObject;
+        levelType(): string;
+        create(registryAccess: $RegistryAccess): $WorldDimensions;
     }
     /**
      * Values that may be interpreted as {@link $DedicatedServerProperties$WorldDimensionData}.
@@ -61,15 +64,34 @@ declare module "@package/net/minecraft/server/dedicated" {
         update(registryAccess: $RegistryAccess, newValue: V): V;
     }
     export class $DedicatedServer extends $MinecraftServer implements $ServerInterface, $DedicatedServerAccessor {
-        storeUsingWhiteList(isStoreUsingWhiteList: boolean): void;
+        /**
+         * Initialises the server and starts it.
+         */
+        initServer(): boolean;
+        getPlayerList(): $DedicatedPlayerList;
+        getTickTimeLogger(): $SampleLogger;
+        /**
+         * Handle a command received by an RCon instance
+         */
+        runCommand(command: string): string;
+        /**
+         * Used by RCon's Query in the form of "MajorServerMod 1.2.3: MyPlugin 1.3" AnotherPlugin 2.1" AndSoForth 1.0".
+         */
+        getServerName(): string;
+        /**
+         * Directly calls System.exit(0), instantly killing the program.
+         */
+        forceDifficulty(): void;
+        /**
+         * The compression threshold. If the packet is larger than the specified amount of bytes, it will be compressed
+         */
+        getServerPort(): number;
         /**
          * Directly calls System.exit(0), instantly killing the program.
          */
         handleConsoleInputs(): void;
-        /**
-         * Used by RCon's Query in the form of "MajorServerMod 1.2.3: MyPlugin 1.3" AnotherPlugin 2.1" AndSoForth 1.0".
-         */
-        getLevelIdName(): string;
+        storeUsingWhiteList(isStoreUsingWhiteList: boolean): void;
+        getProperties(): $DedicatedServerProperties;
         /**
          * Used by RCon's Query in the form of "MajorServerMod 1.2.3: MyPlugin 1.3" AnotherPlugin 2.1" AndSoForth 1.0".
          */
@@ -77,32 +99,13 @@ declare module "@package/net/minecraft/server/dedicated" {
         /**
          * Used by RCon's Query in the form of "MajorServerMod 1.2.3: MyPlugin 1.3" AnotherPlugin 2.1" AndSoForth 1.0".
          */
-        getPluginNames(): string;
-        getMaxTickLength(): number;
-        handleConsoleInput(msg: string, source: $CommandSourceStack): void;
-        getProperties(): $DedicatedServerProperties;
-        /**
-         * The compression threshold. If the packet is larger than the specified amount of bytes, it will be compressed
-         */
-        getServerPort(): number;
-        /**
-         * Initialises the server and starts it.
-         */
-        initServer(): boolean;
-        /**
-         * Handle a command received by an RCon instance
-         */
-        runCommand(command: string): string;
-        getPlayerList(): $DedicatedPlayerList;
-        /**
-         * Directly calls System.exit(0), instantly killing the program.
-         */
-        forceDifficulty(): void;
-        getTickTimeLogger(): $SampleLogger;
+        getLevelIdName(): string;
         /**
          * Used by RCon's Query in the form of "MajorServerMod 1.2.3: MyPlugin 1.3" AnotherPlugin 2.1" AndSoForth 1.0".
          */
-        getServerName(): string;
+        getPluginNames(): string;
+        handleConsoleInput(msg: string, source: $CommandSourceStack): void;
+        getMaxTickLength(): number;
         /**
          * Directly calls System.exit(0), instantly killing the program.
          */
@@ -115,15 +118,15 @@ declare module "@package/net/minecraft/server/dedicated" {
         static ABSOLUTE_MAX_WORLD_SIZE: number;
         static DEMO_SETTINGS: $LevelSettings;
         constructor(serverThread: $Thread, storageSource: $LevelStorageSource$LevelStorageAccess, packRepository: $PackRepository, worldStem: $WorldStem_, settings: $DedicatedServerSettings, fixerUpper: $DataFixer, services: $Services_, progressListenerFactory: $ChunkProgressListenerFactory_);
-        get levelIdName(): string;
-        get serverIp(): string;
-        get pluginNames(): string;
-        get maxTickLength(): number;
-        get properties(): $DedicatedServerProperties;
-        get serverPort(): number;
         get playerList(): $DedicatedPlayerList;
         get tickTimeLogger(): $SampleLogger;
         get serverName(): string;
+        get serverPort(): number;
+        get properties(): $DedicatedServerProperties;
+        get serverIp(): string;
+        get levelIdName(): string;
+        get pluginNames(): string;
+        get maxTickLength(): number;
         get settings(): $DedicatedServerSettings;
     }
     export class $DedicatedServerProperties extends $Settings<$DedicatedServerProperties> {

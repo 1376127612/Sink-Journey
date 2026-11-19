@@ -70,8 +70,8 @@ declare module "@package/net/minecraft/client/gui/screens/reporting" {
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
         font: $Font;
-        constructor(lastScreen: $Screen, reportingContext: $ReportingContext, report: $SkinReport);
         constructor(lastScreen: $Screen, reportingContext: $ReportingContext, reportId: $UUID_, skinGetter: $Supplier_<$PlayerSkin>);
+        constructor(lastScreen: $Screen, reportingContext: $ReportingContext, report: $SkinReport);
     }
     export class $ChatSelectionScreen$ChatSelectionList$PaddingEntry extends $ChatSelectionScreen$ChatSelectionList$Entry {
         constructor(arg0: $ChatSelectionScreen$ChatSelectionList);
@@ -112,15 +112,15 @@ declare module "@package/net/minecraft/client/gui/screens/reporting" {
     export class $ChatSelectionLogFiller$Output {
     }
     export interface $ChatSelectionLogFiller$Output {
-        acceptMessage(chatId: number, playerMessage: $LoggedChatMessage$Player_): void;
         acceptDivider(text: $Component_): void;
+        acceptMessage(chatId: number, playerMessage: $LoggedChatMessage$Player_): void;
     }
     export class $ChatSelectionScreen$ChatSelectionList$Heading extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $ChatSelectionScreen$ChatSelectionList$Heading}.
      */
-    export type $ChatSelectionScreen$ChatSelectionList$Heading_ = { entry?: $ChatSelectionScreen$ChatSelectionList$Entry, sender?: $UUID_,  } | [entry?: $ChatSelectionScreen$ChatSelectionList$Entry, sender?: $UUID_, ];
+    export type $ChatSelectionScreen$ChatSelectionList$Heading_ = { sender?: $UUID_, entry?: $ChatSelectionScreen$ChatSelectionList$Entry,  } | [sender?: $UUID_, entry?: $ChatSelectionScreen$ChatSelectionList$Entry, ];
     export class $ChatSelectionScreen$ChatSelectionList$MessageHeadingEntry extends $ChatSelectionScreen$ChatSelectionList$Entry {
         constructor(profile: $ChatSelectionScreen$ChatSelectionList, heading: $GameProfile, canReport: $Component_, arg3: boolean);
     }
@@ -131,21 +131,27 @@ declare module "@package/net/minecraft/client/gui/screens/reporting" {
     export class $ReportReasonSelectionScreen$ReasonSelectionList extends $ObjectSelectionList<$ReportReasonSelectionScreen$ReasonSelectionList$Entry> {
         setSelected(selected: $ReportReasonSelectionScreen$ReasonSelectionList$Entry | null): void;
         findEntry(reason: $ReportReason_): $ReportReasonSelectionScreen$ReasonSelectionList$Entry;
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $ReportReasonSelectionScreen$ReasonSelectionList$Entry;
+        height: number;
         constructor(minecraft: $ReportReasonSelectionScreen, arg1: $Minecraft);
         set selected(value: $ReportReasonSelectionScreen$ReasonSelectionList$Entry | null);
     }
     export class $ChatSelectionScreen$ChatSelectionList$Entry extends $ObjectSelectionList$Entry<$ChatSelectionScreen$ChatSelectionList$Entry> {
         isSelected(): boolean;
-        canReport(): boolean;
         canSelect(): boolean;
+        canReport(): boolean;
         constructor(arg0: $ChatSelectionScreen$ChatSelectionList);
         get selected(): boolean;
     }
@@ -167,31 +173,25 @@ declare module "@package/net/minecraft/client/gui/screens/reporting" {
         font: $Font;
     }
     export class $ChatSelectionScreen$ChatSelectionList extends $ObjectSelectionList<$ChatSelectionScreen$ChatSelectionList$Entry> implements $ChatSelectionLogFiller$Output {
-        setSelected(selected: $ChatSelectionScreen$ChatSelectionList$Entry | null): void;
-        acceptMessage(chatId: number, playerMessage: $LoggedChatMessage$Player_): void;
         acceptDivider(text: $Component_): void;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
+        acceptMessage(chatId: number, playerMessage: $LoggedChatMessage$Player_): void;
+        setSelected(selected: $ChatSelectionScreen$ChatSelectionList$Entry | null): void;
         getMaxVisibleEntries(): number;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
         getFooterTop(): number;
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $ChatSelectionScreen$ChatSelectionList$Entry;
+        height: number;
         constructor(minecraft: $ChatSelectionScreen, height: $Minecraft, arg2: number);
         set selected(value: $ChatSelectionScreen$ChatSelectionList$Entry | null);
         get maxVisibleEntries(): number;

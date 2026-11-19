@@ -3,10 +3,10 @@ import { $ClientboundRulesPacket } from "@package/xaero/hud/packet/basic";
 
 declare module "@package/xaero/common/minimap/mcworld" {
     export class $MinimapClientWorldData {
-        getServerModNetworkVersion(): number;
         setSyncedRules(arg0: $ClientboundRulesPacket): void;
         setServerModNetworkVersion(arg0: number): void;
         getSyncedRules(): $ClientboundRulesPacket;
+        getServerModNetworkVersion(): number;
         serverLevelId: number;
         shadowR: number;
         shadowB: number;
@@ -16,7 +16,7 @@ declare module "@package/xaero/common/minimap/mcworld" {
     export class $IXaeroMinimapClientWorld {
     }
     export interface $IXaeroMinimapClientWorld {
-        getXaero_minimapData(): $MinimapClientWorldData;
         setXaero_minimapData(arg0: $MinimapClientWorldData): void;
+        getXaero_minimapData(): $MinimapClientWorldData;
     }
 }

@@ -10,13 +10,13 @@ export * as processor from "@package/com/nred/nuclearcraft/payload/processor";
 
 declare module "@package/com/nred/nuclearcraft/payload" {
     export class $NCPacket implements $CustomPacketPayload {
-        toBytes(arg0: $RegistryFriendlyByteBuf): void;
-        sendToServer(): void;
-        sendToAll(): void;
         sendTo<T extends $Player>(arg0: $Iterable_<T>): void;
         sendTo(arg0: $Player): void;
-        sendToAllTracking(arg0: $Entity): void;
+        sendToAll(): void;
         sendToDimension(arg0: $ServerLevel): void;
+        toBytes(arg0: $RegistryFriendlyByteBuf): void;
+        sendToServer(): void;
+        sendToAllTracking(arg0: $Entity): void;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         constructor();

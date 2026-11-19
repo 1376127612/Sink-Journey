@@ -212,53 +212,53 @@ declare module "@package/dev/latvian/mods/kubejs/client/highlight" {
     }
     export class $KubedexPayloadHandler {
         static block(player: $ServerPlayer, pos: $BlockPos_, flags: number): void;
-        static entity(player: $ServerPlayer, entityId: number, flags: number): void;
         static inventory(player: $ServerPlayer, slots: $List_<number>, stacks: $List_<$ItemStack_>, flags: number): void;
+        static entity(player: $ServerPlayer, entityId: number, flags: number): void;
         static itemStacks(player: $ServerPlayer, stacks: $Collection_<$KubedexPayloadHandler$SlotItem_>, flags: number): void;
         constructor();
     }
     export class $HighlightRenderer$ShaderChain extends $Record {
+        clearDepth(mc: $Minecraft, copy: boolean): void;
+        renderOutput(): $RenderTarget;
+        renderInput(): $RenderTarget;
+        clearInput(mc: $Minecraft): void;
+        renderAnything(): $MutableBoolean;
+        mcDepthInput(): $RenderTarget;
         static load(mc: $Minecraft, id: $ResourceLocation_): $HighlightRenderer$ShaderChain;
         close(): void;
         postChain(): $PostChain;
         draw(mc: $Minecraft, delta: number): void;
-        clearDepth(mc: $Minecraft, copy: boolean): void;
-        renderInput(): $RenderTarget;
-        renderOutput(): $RenderTarget;
-        mcDepthInput(): $RenderTarget;
-        renderAnything(): $MutableBoolean;
-        clearInput(mc: $Minecraft): void;
         constructor(postChain: $PostChain, renderInput: $RenderTarget, mcDepthInput: $RenderTarget, renderOutput: $RenderTarget, renderAnything: $MutableBoolean);
     }
     /**
      * Values that may be interpreted as {@link $HighlightRenderer$ShaderChain}.
      */
-    export type $HighlightRenderer$ShaderChain_ = { renderOutput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderInput?: $RenderTarget, renderAnything?: $MutableBoolean, postChain?: $PostChain,  } | [renderOutput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderInput?: $RenderTarget, renderAnything?: $MutableBoolean, postChain?: $PostChain, ];
+    export type $HighlightRenderer$ShaderChain_ = { renderAnything?: $MutableBoolean, postChain?: $PostChain, renderOutput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderInput?: $RenderTarget,  } | [renderAnything?: $MutableBoolean, postChain?: $PostChain, renderOutput?: $RenderTarget, mcDepthInput?: $RenderTarget, renderInput?: $RenderTarget, ];
     export class $HighlightKubeEvent extends $ClientPlayerKubeEvent {
-        addTargetEntity(color: $KubeColor_): void;
-        getTargetEntity(): $Entity;
-        addTargetBlock(color: $KubeColor_): void;
-        addEntitiesByType(type: $EntityType_<never>, color: $KubeColor_): void;
+        getTargetBlock(): $LevelBlock;
+        addEntities(selector: $EntitySelector, color: $KubeColor_): void;
+        addTarget(color: $KubeColor_): void;
+        addBlocks(from: $BlockPos_, to: $BlockPos_, color: $KubeColor_): void;
         addEntity(entity: $Entity, color: $KubeColor_): void;
         addBlock(pos: $BlockPos_, color: $KubeColor_): void;
-        addEntities(selector: $EntitySelector, color: $KubeColor_): void;
-        addBlocks(from: $BlockPos_, to: $BlockPos_, color: $KubeColor_): void;
-        getTargetBlock(): $LevelBlock;
-        addTarget(color: $KubeColor_): void;
+        getTargetEntity(): $Entity;
+        addEntitiesByType(type: $EntityType_<never>, color: $KubeColor_): void;
+        addTargetEntity(color: $KubeColor_): void;
+        addTargetBlock(color: $KubeColor_): void;
         constructor(mc: $Minecraft, renderer: $HighlightRenderer);
-        get targetEntity(): $Entity;
         get targetBlock(): $LevelBlock;
+        get targetEntity(): $Entity;
     }
     export class $HighlightRenderer {
+        renderAfterEntities(mc: $Minecraft, event: $RenderLevelStageEvent): void;
+        tickPre(mc: $Minecraft): void;
+        renderAfterLevel(mc: $Minecraft, event: $RenderLevelStageEvent): void;
+        hudPostDraw(mc: $Minecraft, graphics: $GuiGraphics, delta: number): void;
+        clearBuffers(mc: $Minecraft): void;
+        updateDepth(mc: $Minecraft): void;
         screen(mc: $Minecraft, graphics: $GuiGraphics, screen: $AbstractContainerScreen<never>, mx: number, my: number, delta: number): void;
         resizePostChains(width: number, height: number): void;
         loadPostChains(mc: $Minecraft): void;
-        hudPostDraw(mc: $Minecraft, graphics: $GuiGraphics, delta: number): void;
-        renderAfterLevel(mc: $Minecraft, event: $RenderLevelStageEvent): void;
-        clearBuffers(mc: $Minecraft): void;
-        renderAfterEntities(mc: $Minecraft, event: $RenderLevelStageEvent): void;
-        tickPre(mc: $Minecraft): void;
-        updateDepth(mc: $Minecraft): void;
         highlightedEntities: $Reference2IntMap<$Entity>;
         color: $KubeColor;
         static INSTANCE: $HighlightRenderer;
@@ -275,37 +275,37 @@ declare module "@package/dev/latvian/mods/kubejs/client/highlight" {
         constructor();
     }
     export class $HighlightRenderer$WrappedVertexConsumer extends $Record implements $VertexConsumer {
-        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        wrapMethod$cmb000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
+        wrapMethod$cmb000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean, arg10: $Operation_<any>): void;
         setColor(arg0: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        setWhiteAlpha(arg0: number): $VertexConsumer;
-        wrapMethod$dbh000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
-        wrapMethod$dbh000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean, arg10: $Operation_<any>): void;
-        addVertex(arg0: $Vector3f): $VertexConsumer;
+        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $Vector3f): $VertexConsumer;
         addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
         addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
         setOverlay(arg0: number): $VertexConsumer;
         setLight(arg0: number): $VertexConsumer;
         setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
-        set whiteAlpha(value: number);
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         set overlay(value: number);
         set light(value: number);
+        set whiteAlpha(value: number);
     }
     /**
      * Values that may be interpreted as {@link $HighlightRenderer$WrappedVertexConsumer}.
      */
-    export type $HighlightRenderer$WrappedVertexConsumer_ = { delegate?: $VertexConsumer, green?: number, blue?: number, red?: number,  } | [delegate?: $VertexConsumer, green?: number, blue?: number, red?: number, ];
+    export type $HighlightRenderer$WrappedVertexConsumer_ = { green?: number, blue?: number, red?: number, delegate?: $VertexConsumer,  } | [green?: number, blue?: number, red?: number, delegate?: $VertexConsumer, ];
     export class $HighlightRenderer$WrappedMultiBufferSource extends $Record implements $MultiBufferSource {
     }
     /**
      * Values that may be interpreted as {@link $HighlightRenderer$WrappedMultiBufferSource}.
      */
-    export type $HighlightRenderer$WrappedMultiBufferSource_ = { delegate?: $MultiBufferSource_, green?: number, blue?: number, red?: number,  } | [delegate?: $MultiBufferSource_, green?: number, blue?: number, red?: number, ];
+    export type $HighlightRenderer$WrappedMultiBufferSource_ = { green?: number, blue?: number, red?: number, delegate?: $MultiBufferSource_,  } | [green?: number, blue?: number, red?: number, delegate?: $MultiBufferSource_, ];
 }

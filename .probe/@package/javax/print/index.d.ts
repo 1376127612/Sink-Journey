@@ -7,8 +7,8 @@ export * as event from "@package/javax/print/event";
 
 declare module "@package/javax/print" {
     export class $DocFlavor implements $Serializable, $Cloneable {
-        getParameter(arg0: string): string;
         getMimeType(): string;
+        getParameter(arg0: string): string;
         getMediaType(): string;
         getMediaSubtype(): string;
         getRepresentationClassName(): string;
@@ -61,20 +61,20 @@ declare module "@package/javax/print" {
     export class $Doc {
     }
     export interface $Doc {
+        getReaderForText(): $Reader;
         getAttributes(): $DocAttributeSet;
         getDocFlavor(): $DocFlavor;
         getPrintData(): $Object;
         getStreamForBytes(): $InputStream;
-        getReaderForText(): $Reader;
+        get readerForText(): $Reader;
         get attributes(): $DocAttributeSet;
         get docFlavor(): $DocFlavor;
         get printData(): $Object;
         get streamForBytes(): $InputStream;
-        get readerForText(): $Reader;
     }
     export class $ServiceUIFactory {
-        getUIClassNamesForRole(arg0: number): string[];
         getUI(arg0: number, arg1: string): $Object;
+        getUIClassNamesForRole(arg0: number): string[];
         static ABOUT_UIROLE: number;
         static PANEL_UI: string;
         static RESERVED_UIROLE: number;

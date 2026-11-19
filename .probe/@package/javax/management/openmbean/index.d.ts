@@ -41,8 +41,8 @@ declare module "@package/javax/management/openmbean" {
         hashCode(): number;
         containsKey(arg0: string): boolean;
         containsValue(arg0: $Object): boolean;
-        getCompositeType(): $CompositeType;
         getAll(arg0: string[]): $Object[];
+        getCompositeType(): $CompositeType;
         get compositeType(): $CompositeType;
     }
 }

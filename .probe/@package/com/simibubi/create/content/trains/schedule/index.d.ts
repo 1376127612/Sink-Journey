@@ -31,9 +31,9 @@ declare module "@package/com/simibubi/create/content/trains/schedule" {
      */
     export type $ScheduleRuntime$State_ = "pre_transit" | "in_transit" | "post_transit";
     export class $ScheduleEntry {
+        static fromTag(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $ScheduleEntry;
         clone(arg0: $HolderLookup$Provider): $ScheduleEntry;
         write(arg0: $HolderLookup$Provider): $CompoundTag;
-        static fromTag(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $ScheduleEntry;
         instruction: $ScheduleInstruction;
         conditions: $List<$List<$ScheduleWaitCondition>>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ScheduleEntry>;
@@ -41,9 +41,9 @@ declare module "@package/com/simibubi/create/content/trains/schedule" {
         constructor(arg0: $ScheduleInstruction, arg1: $List_<$List_<$ScheduleWaitCondition>>);
     }
     export class $Schedule {
-        write(arg0: $HolderLookup$Provider): $CompoundTag;
         static fromTag(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $Schedule;
         static getTypeOptions<T>(arg0: $List_<$Pair<$ResourceLocation_, T>>): $List<$Component>;
+        write(arg0: $HolderLookup$Provider): $CompoundTag;
         entries: $List<$ScheduleEntry>;
         static CONDITION_TYPES: $List<$Pair<$ResourceLocation, $Supplier<$ScheduleWaitCondition>>>;
         static INSTRUCTION_TYPES: $List<$Pair<$ResourceLocation, $Supplier<$ScheduleInstruction>>>;
@@ -54,21 +54,21 @@ declare module "@package/com/simibubi/create/content/trains/schedule" {
         constructor(arg0: $List_<$ScheduleEntry>, arg1: boolean, arg2: number);
     }
     export class $ScheduleRuntime {
+        startCooldown(): void;
+        getWaitingStatus(arg0: $Level_): $MutableComponent;
+        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
+        startCurrentInstruction(arg0: $Level_): $DiscoveredPath;
+        destinationReached(): void;
         write(arg0: $HolderLookup$Provider): $CompoundTag;
         read(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         tick(arg0: $Level_): void;
         getSchedule(): $Schedule;
         submitPredictions(): $Collection<$GlobalTrainDisplayData$TrainDeparturePrediction>;
-        startCooldown(): void;
         setSchedule(arg0: $Schedule, arg1: boolean): void;
-        getWaitingStatus(arg0: $Level_): $MutableComponent;
-        returnSchedule(arg0: $HolderLookup$Provider): $ItemStack;
-        startCurrentInstruction(arg0: $Level_): $DiscoveredPath;
-        destinationReached(): void;
-        setSchedulePresentClientside(arg0: boolean): void;
-        tickConditions(arg0: $Level_): void;
         discardSchedule(): void;
+        tickConditions(arg0: $Level_): void;
         transitInterrupted(): void;
+        setSchedulePresentClientside(arg0: boolean): void;
         paused: boolean;
         predictionTicks: $List<number>;
         currentEntry: number;

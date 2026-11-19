@@ -16,20 +16,20 @@ declare module "@package/appeng/api/networking/energy" {
     }
     export interface $IEnergyService extends $IGridService, $IEnergySource {
         getEnergyDemand(arg0: number): number;
-        getAvgPowerInjection(): number;
-        getChannelPowerUsage(): number;
+        getStoredPower(): number;
         getIdlePowerUsage(): number;
+        injectPower(arg0: number, arg1: $Actionable_): number;
+        getAvgPowerUsage(): number;
         isNetworkPowered(): boolean;
         getMaxStoredPower(): number;
-        injectPower(arg0: number, arg1: $Actionable_): number;
-        getStoredPower(): number;
-        getAvgPowerUsage(): number;
-        get avgPowerInjection(): number;
-        get channelPowerUsage(): number;
+        getAvgPowerInjection(): number;
+        getChannelPowerUsage(): number;
+        get storedPower(): number;
         get idlePowerUsage(): number;
+        get avgPowerUsage(): number;
         get networkPowered(): boolean;
         get maxStoredPower(): number;
-        get storedPower(): number;
-        get avgPowerUsage(): number;
+        get avgPowerInjection(): number;
+        get channelPowerUsage(): number;
     }
 }

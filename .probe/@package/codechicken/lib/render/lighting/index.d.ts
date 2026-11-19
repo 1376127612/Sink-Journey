@@ -7,16 +7,16 @@ import { $CCRenderState } from "@package/codechicken/lib/render";
 
 declare module "@package/codechicken/lib/render/lighting" {
     export class $LightMatrix implements $IVertexOperation {
+        operationID(): number;
+        sample(arg0: number): void;
+        operate(arg0: $CCRenderState): void;
         load(arg0: $CCRenderState): boolean;
         ao(arg0: number): number[];
-        sample(arg0: number): void;
         brightness(arg0: number): number[];
         locate(arg0: $BlockAndTintGetter, arg1: $BlockPos_): void;
-        operate(arg0: $CCRenderState): void;
-        operationID(): number;
-        static interpBrightness(arg0: number, arg1: number, arg2: number, arg3: number): number;
         sideSample(arg0: number): void;
         static interpAO(arg0: number, arg1: number, arg2: number, arg3: number): number;
+        static interpBrightness(arg0: number, arg1: number, arg2: number, arg3: number): number;
         access: $BlockAndTintGetter;
         computed: number;
         pos: $BlockPos;

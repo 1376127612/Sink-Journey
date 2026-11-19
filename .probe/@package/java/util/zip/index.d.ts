@@ -14,9 +14,9 @@ declare module "@package/java/util/zip" {
         getMethod(): number;
         isDirectory(): boolean;
         getTime(): number;
+        getComment(): string;
         getLastModifiedTime(): $FileTime;
         setLastModifiedTime(arg0: $FileTime): $ZipEntry;
-        getComment(): string;
         setTime(arg0: number): void;
         setTimeLocal(arg0: $LocalDateTime): void;
         getTimeLocal(): $LocalDateTime;

@@ -17,27 +17,27 @@ declare module "@package/net/minecraft/util/eventlog" {
         constructor(codec: $Codec<T>, channel: $FileChannel);
     }
     export class $EventLogDirectory$RawFile extends $Record implements $EventLogDirectory$File {
+        openChannel(): $FileChannel;
         compress(): $EventLogDirectory$CompressedFile;
         id(): $EventLogDirectory$FileId;
         path(): $Path;
-        openChannel(): $FileChannel;
         openReader(): $Reader;
         constructor(arg0: $Path_, arg1: $EventLogDirectory$FileId_);
     }
     /**
      * Values that may be interpreted as {@link $EventLogDirectory$RawFile}.
      */
-    export type $EventLogDirectory$RawFile_ = { id?: $EventLogDirectory$FileId_, path?: $Path_,  } | [id?: $EventLogDirectory$FileId_, path?: $Path_, ];
+    export type $EventLogDirectory$RawFile_ = { path?: $Path_, id?: $EventLogDirectory$FileId_,  } | [path?: $Path_, id?: $EventLogDirectory$FileId_, ];
     export class $EventLogDirectory {
         static open(root: $Path_, extension: string): $EventLogDirectory;
         createNewFile(date: $LocalDate): $EventLogDirectory$RawFile;
         listFiles(): $EventLogDirectory$FileList;
     }
     export class $EventLogDirectory$FileId extends $Record {
+        toFileName(extension: string): string;
         index(): number;
         static parse(fileName: string): $EventLogDirectory$FileId;
         date(): $LocalDate;
-        toFileName(extension: string): string;
         constructor(arg0: $LocalDate, arg1: number);
     }
     /**
@@ -51,11 +51,11 @@ declare module "@package/net/minecraft/util/eventlog" {
         next(): T;
     }
     export class $EventLogDirectory$FileList implements $Iterable<$EventLogDirectory$File> {
+        compressAll(): $EventLogDirectory$FileList;
         iterator(): $Iterator<$EventLogDirectory$File>;
         stream(): $Stream<$EventLogDirectory$File>;
         ids(): $Set<$EventLogDirectory$FileId>;
         prune(date: $LocalDate, daysToKeep: number): $EventLogDirectory$FileList;
-        compressAll(): $EventLogDirectory$FileList;
         spliterator(): $Spliterator<$EventLogDirectory$File>;
         forEach(arg0: $Consumer_<$EventLogDirectory$File>): void;
         [Symbol.iterator](): Iterator<$EventLogDirectory$File>
@@ -78,5 +78,5 @@ declare module "@package/net/minecraft/util/eventlog" {
     /**
      * Values that may be interpreted as {@link $EventLogDirectory$CompressedFile}.
      */
-    export type $EventLogDirectory$CompressedFile_ = { id?: $EventLogDirectory$FileId_, path?: $Path_,  } | [id?: $EventLogDirectory$FileId_, path?: $Path_, ];
+    export type $EventLogDirectory$CompressedFile_ = { path?: $Path_, id?: $EventLogDirectory$FileId_,  } | [path?: $Path_, id?: $EventLogDirectory$FileId_, ];
 }

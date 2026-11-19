@@ -18,8 +18,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/postprocessing" {
      */
     export type $RecipePostProcessorTypeRegistry_ = ((type: $RecipePostProcessorType<never>) => void);
     export class $RecipePostProcessorType<T extends $RecipePostProcessor> extends $Record {
-        id(): $ResourceLocation;
         mapCodec(): $Function<$RecipeTypeRegistryContext, $MapCodec<T>>;
+        id(): $ResourceLocation;
         static CODEC: $Codec<$RecipePostProcessorType<never>>;
         static MAP: $Lazy<$Map<$ResourceLocation, $RecipePostProcessorType<never>>>;
         constructor(id: $ResourceLocation_, mapCodec: $Function_<$RecipeTypeRegistryContext, $MapCodec<T>>);
@@ -46,5 +46,5 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/schema/postprocessing" {
     /**
      * Values that may be interpreted as {@link $KeyPatternCleanupPostProcessor}.
      */
-    export type $KeyPatternCleanupPostProcessor_ = { patternName?: string, keyName?: string, component?: $RecipeComponent<never>,  } | [patternName?: string, keyName?: string, component?: $RecipeComponent<never>, ];
+    export type $KeyPatternCleanupPostProcessor_ = { component?: $RecipeComponent<never>, patternName?: string, keyName?: string,  } | [component?: $RecipeComponent<never>, patternName?: string, keyName?: string, ];
 }

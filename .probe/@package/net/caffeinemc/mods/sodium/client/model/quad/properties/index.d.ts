@@ -4,20 +4,20 @@ import { $Vector3fc } from "@package/org/joml";
 
 declare module "@package/net/caffeinemc/mods/sodium/client/model/quad/properties" {
     export class $ModelQuadFacing extends $Enum<$ModelQuadFacing> {
-        isAligned(): boolean;
-        static fromNormal(arg0: $Vector3fc): $ModelQuadFacing;
-        static fromNormal(arg0: number, arg1: number, arg2: number): $ModelQuadFacing;
-        static values(): $ModelQuadFacing[];
-        static valueOf(arg0: string): $ModelQuadFacing;
-        getSign(): number;
-        getOpposite(): $ModelQuadFacing;
         getAxis(): number;
         static fromDirection(arg0: $Direction_): $ModelQuadFacing;
+        getOpposite(): $ModelQuadFacing;
+        getSign(): number;
         static fromPackedNormal(arg0: number): $ModelQuadFacing;
+        static values(): $ModelQuadFacing[];
+        static valueOf(arg0: string): $ModelQuadFacing;
+        isAligned(): boolean;
+        static fromNormal(arg0: number, arg1: number, arg2: number): $ModelQuadFacing;
+        static fromNormal(arg0: $Vector3fc): $ModelQuadFacing;
         getAlignedNormal(): $Vector3fc;
+        static bitmapHasUnassigned(arg0: number): boolean;
         static bitmapIsOpposingAligned(arg0: number): boolean;
         getPackedAlignedNormal(): number;
-        static bitmapHasUnassigned(arg0: number): boolean;
         static NEG_Z: $ModelQuadFacing;
         static UNASSIGNED_ORDINAL: number;
         static POS_X: $ModelQuadFacing;
@@ -37,10 +37,10 @@ declare module "@package/net/caffeinemc/mods/sodium/client/model/quad/properties
         static COUNT: number;
         static NONE: number;
         static DIRECTIONS: number;
-        get aligned(): boolean;
-        get sign(): number;
-        get opposite(): $ModelQuadFacing;
         get axis(): number;
+        get opposite(): $ModelQuadFacing;
+        get sign(): number;
+        get aligned(): boolean;
         get alignedNormal(): $Vector3fc;
         get packedAlignedNormal(): number;
     }

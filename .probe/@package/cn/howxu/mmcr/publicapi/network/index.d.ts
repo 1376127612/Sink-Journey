@@ -23,8 +23,8 @@ declare module "@package/cn/howxu/mmcr/publicapi/network" {
     export class $RequestDetails {
     }
     export interface $RequestDetails {
-        peer(): $NodeView;
         requestId(): $ResourceLocation;
+        peer(): $NodeView;
     }
     export class $RequestPayload {
         static of(values: $Map_<string, $DataKey>): $RequestPayload;
@@ -38,10 +38,10 @@ declare module "@package/cn/howxu/mmcr/publicapi/network" {
         static disabled(): $NetworkSettings;
     }
     export interface $NetworkSettings {
-        maxCount(): number;
-        maxConnections(): number;
         allowedMachineIds(): $Set<$ResourceLocation>;
+        maxConnections(): number;
         withAllowedMachine(machineId: $ResourceLocation_): $NetworkSettings;
+        maxCount(): number;
     }
     export class $FailureHandler {
     }

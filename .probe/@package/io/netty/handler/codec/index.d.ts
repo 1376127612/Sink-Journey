@@ -7,14 +7,14 @@ declare module "@package/io/netty/handler/codec" {
         acceptInboundMessage(arg0: $Object): boolean;
     }
     export class $ByteToMessageDecoder extends $ChannelInboundHandlerAdapter {
-        setDiscardAfterReads(arg0: number): void;
         setSingleDecode(arg0: boolean): void;
-        isSingleDecode(): boolean;
         setCumulator(arg0: $ByteToMessageDecoder$Cumulator_): void;
+        isSingleDecode(): boolean;
+        setDiscardAfterReads(arg0: number): void;
         static COMPOSITE_CUMULATOR: $ByteToMessageDecoder$Cumulator;
         static MERGE_CUMULATOR: $ByteToMessageDecoder$Cumulator;
-        set discardAfterReads(value: number);
         set cumulator(value: $ByteToMessageDecoder$Cumulator_);
+        set discardAfterReads(value: number);
     }
     export class $MessageToByteEncoder<I> extends $ChannelOutboundHandlerAdapter {
         acceptOutboundMessage(arg0: $Object): boolean;

@@ -2,7 +2,9 @@ import { $ShulkerAccess, $WitchAccess } from "@package/me/desht/pneumaticcraft/m
 import { $ZombieAttackGoal, $MeleeAttackGoal, $GoalSelector, $RandomStrollGoal, $RangedAttackGoal, $MoveToBlockGoal, $OpenDoorGoal, $RemoveBlockGoal, $BreakDoorGoal, $Goal } from "@package/net/minecraft/world/entity/ai/goal";
 import { $BodyRotationControl, $MoveControl, $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $Tag_, $CompoundTag_ } from "@package/net/minecraft/nbt";
-import { $EntityType_, $VariantHolder, $Pose_, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $Saddleable, $FlyingMob, $AgeableMob, $WalkAnimationState, $Mob, $PowerableMob, $ItemSteerable, $PortalProcessor, $SpawnGroupData, $PathfinderMob, $Shearable, $MobSpawnType_, $NeutralMob, $TraceableEntity } from "@package/net/minecraft/world/entity";
+import { $EntityType_, $VariantHolder, $Pose_, $EntityDimensions, $Entity$RemovalReason, $LivingEntity, $Saddleable, $FlyingMob, $AgeableMob, $WalkAnimationState, $Mob, $PowerableMob, $ItemSteerable, $PortalProcessor, $SpawnGroupData, $PathfinderMob, $Entity$RemovalReason_, $Shearable, $MobSpawnType_, $NeutralMob, $TraceableEntity } from "@package/net/minecraft/world/entity";
+import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
+import { $ParticleOptions } from "@package/net/minecraft/core/particles";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $UUID_, $UUID, $List } from "@package/java/util";
 import { $AbstractGolem, $Animal } from "@package/net/minecraft/world/entity/animal";
@@ -12,19 +14,22 @@ import { $Predicate_, $Predicate } from "@package/java/util/function";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SoundEvent, $SoundSource_ } from "@package/net/minecraft/sounds";
 import { $BlockPos, $BlockPos_, $HolderLookup$Provider, $Holder, $Direction_, $Direction } from "@package/net/minecraft/core";
+import { $AccessorMixinZombieVillager } from "@package/mysticmods/roots/mixin/accessor";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
 import { $GroundPathNavigation } from "@package/net/minecraft/world/entity/ai/navigation";
 import { $HoglinBase } from "@package/net/minecraft/world/entity/monster/hoglin";
-import { $Enum } from "@package/java/lang";
+import { $Enum, $Class } from "@package/java/lang";
 import { $MerchantOffers } from "@package/net/minecraft/world/item/trading";
 import { $ServerLevelAccessor, $LevelAccessor, $Level_ } from "@package/net/minecraft/world/level";
 import { $DyeColor, $DyeColor_, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
+import { $SlimeEntityAccessor } from "@package/de/dafuqs/spectrum/mixin/accessors";
 import { $MobEffect } from "@package/net/minecraft/world/effect";
 import { $NearestAttackableTargetGoal, $TargetGoal } from "@package/net/minecraft/world/entity/ai/goal/target";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $Raider } from "@package/net/minecraft/world/entity/raid";
 import { $VillagerType_, $InventoryCarrier, $VillagerData, $VillagerType, $VillagerDataHolder } from "@package/net/minecraft/world/entity/npc";
 import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
+import { $ISlime } from "@package/org/betterx/betterend/interfaces";
 import { $Vec3, $AABB } from "@package/net/minecraft/world/phys";
 export * as piglin from "@package/net/minecraft/world/entity/monster/piglin";
 export * as breeze from "@package/net/minecraft/world/entity/monster/breeze";
@@ -33,13 +38,13 @@ export * as hoglin from "@package/net/minecraft/world/entity/monster/hoglin";
 
 declare module "@package/net/minecraft/world/entity/monster" {
     export class $Drowned extends $Zombie implements $RangedAttackMob {
+        okTarget(target: $LivingEntity | null): boolean;
+        setSearchingForLand(searchingForLand: boolean): void;
+        static checkDrownedSpawnRules(drowned: $EntityType_<$Drowned>, serverLevel: $ServerLevelAccessor, mobSpawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         /**
          * Attack the specified entity using a ranged attack.
          */
         performRangedAttack(target: $LivingEntity, distanceFactor: number): void;
-        okTarget(target: $LivingEntity | null): boolean;
-        static checkDrownedSpawnRules(drowned: $EntityType_<$Drowned>, serverLevel: $ServerLevelAccessor, mobSpawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
-        setSearchingForLand(searchingForLand: boolean): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -90,6 +95,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         zOld: number;
         static REINFORCEMENT_RANGE_MAX: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -101,6 +107,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -203,6 +210,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -213,6 +221,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -313,6 +322,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -323,6 +333,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -381,18 +392,27 @@ declare module "@package/net/minecraft/world/entity/monster" {
         constructor();
         set randomEffect(value: $RandomSource);
     }
-    export class $Slime extends $Mob implements $Enemy {
+    export class $Slime extends $Mob implements $Enemy, $ISlime, $SlimeEntityAccessor {
+        be_setSlimeSize(size: number, resetHealth: boolean): void;
+        entityRemove(reason: $Entity$RemovalReason_): void;
+        static checkSlimeSpawnRules(slime: $EntityType_<$Slime>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         /**
          * Gets the amount of time the slime needs to wait between jumps.
          */
         getSize(): number;
         setSize(size: number, resetHealth: boolean): void;
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         /**
          * Returns `true` if the slime makes a sound when it jumps (based upon the slime's size)
          */
         isTiny(): boolean;
-        static checkSlimeSpawnRules(slime: $EntityType_<$Slime>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
+        invokeSetSize(size: number, resetHealth: boolean): void;
+        /**
+         * Returns the volume for the sounds this mob makes.
+         */
+        invokeGetSoundVolume(): number;
+        invokeGetSquishSound(): $SoundEvent;
+        invokeGetParticleType(): $ParticleOptions;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -441,6 +461,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -452,6 +473,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -509,17 +531,14 @@ declare module "@package/net/minecraft/world/entity/monster" {
         get tiny(): boolean;
     }
     export class $Shulker extends $AbstractGolem implements $VariantHolder<($DyeColor) | undefined>, $Enemy, $ShulkerAccess {
+        static createAttributes(): $AttributeSupplier$Builder;
+        static getProgressDeltaAabb(scale: number, expansionDirection: $Direction_, currentPeek: number, oldPeek: number): $AABB;
+        getClientPeekAmount(partialTick: number): number;
         getVariant(): ($DyeColor) | undefined;
         setVariant(variant: ($DyeColor_) | undefined): void;
-        static getProgressDeltaAabb(scale: number, expansionDirection: $Direction_, currentPeek: number, oldPeek: number): $AABB;
         getColor(): $DyeColor;
-        static createAttributes(): $AttributeSupplier$Builder;
         static getProgressAabb(scale: number, expansionDirection: $Direction_, peek: number): $AABB;
-        getClientPeekAmount(partialTick: number): number;
         getRenderPosition(partial: number): ($Vec3) | undefined;
-        /**
-         * Gets the horizontal facing direction of this Entity, adjusted to take specially-treated entity types into account.
-         */
         getAttachFace(): $Direction;
         /**
          * Applies or removes armor modifier
@@ -571,6 +590,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -581,6 +601,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -683,6 +704,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -693,6 +715,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -749,14 +772,11 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Zoglin extends $Monster implements $Enemy, $HoglinBase {
         /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
-        getAttackAnimationRemainingTicks(): number;
-        static createAttributes(): $AttributeSupplier$Builder;
-        /**
          * If Animal, checks if the age timer is negative
          */
         isAdult(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
+        getAttackAnimationRemainingTicks(): number;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -803,6 +823,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -813,6 +834,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -864,8 +886,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Zoglin>, level: $Level_);
-        get attackAnimationRemainingTicks(): number;
         get adult(): boolean;
+        get attackAnimationRemainingTicks(): number;
     }
     export class $Zombie$ZombieAttackTurtleEggGoal extends $RemoveBlockGoal {
         speedModifier: number;
@@ -919,6 +941,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -929,6 +952,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -981,20 +1005,28 @@ declare module "@package/net/minecraft/world/entity/monster" {
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$WitherSkeleton>, level: $Level_);
     }
-    export class $AbstractSkeleton extends $Monster implements $RangedAttackMob {
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
+    export class $AbstractSkeleton extends $Monster implements $RangedAttackMob, $CrossbowAttackMob {
         isShaking(): boolean;
+        handler$ghd000$apotheosis$apoth_performRangedCrossbowAttack(arg0: $LivingEntity, arg1: number, arg2: $CallbackInfo): void;
         static createAttributes(): $AttributeSupplier$Builder;
+        /**
+         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
+         */
+        onCrossbowAttackPerformed(): void;
+        setChargingCrossbow(arg0: boolean): void;
         /**
          * Attack the specified entity using a ranged attack.
          */
         performRangedAttack(target: $LivingEntity, distanceFactor: number): void;
+        handler$ghd000$apotheosis$apoth_pickCrossbowIfAvailable(arg0: $CallbackInfo): void;
         /**
          * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
          */
         reassessWeaponGoal(): void;
+        /**
+         * Attack the specified entity using a ranged attack.
+         */
+        performCrossbowAttack(target: $LivingEntity, distanceFactor: number): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -1041,6 +1073,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1051,6 +1084,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -1102,17 +1136,15 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         get shaking(): boolean;
+        set chargingCrossbow(value: boolean);
     }
     export class $Drowned$DrownedMoveControl extends $MoveControl {
         static MIN_SPEED_SQR: number;
         static MIN_SPEED: number;
     }
     export class $SpellcasterIllager extends $AbstractIllager {
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isCastingSpell(): boolean;
         setIsCastingSpell(currentSpell: $SpellcasterIllager$IllagerSpell_): void;
+        isCastingSpell(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -1159,6 +1191,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1169,6 +1202,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -1230,10 +1264,13 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Phantom$PhantomMoveTargetGoal extends $Goal {
     }
     export class $EnderMan$EndermanLookForPlayerGoal extends $NearestAttackableTargetGoal<$Player> {
+        targetType: $Class<$Player>;
     }
     export class $Shulker$ShulkerNearestAttackGoal extends $NearestAttackableTargetGoal<$Player> {
+        targetType: $Class<$Player>;
     }
     export class $Shulker$ShulkerDefenseAttackGoal extends $NearestAttackableTargetGoal<$LivingEntity> {
+        targetType: $Class<$LivingEntity>;
     }
     export class $Ghast$GhastLookGoal extends $Goal {
     }
@@ -1241,36 +1278,21 @@ declare module "@package/net/minecraft/world/entity/monster" {
         speedModifier: number;
     }
     export class $ZombifiedPiglin extends $Zombie implements $NeutralMob {
-        static checkZombifiedPiglinSpawnRules(zombifiedPiglin: $EntityType_<$ZombifiedPiglin>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
-        /**
-         * Dismounts this entity from the entity it is riding.
-         */
-        startPersistentAngerTimer(): void;
-        setPersistentAngerTarget(target: $UUID_ | null): void;
-        getPersistentAngerTarget(): $UUID;
-        setRemainingPersistentAngerTime(time: number): void;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
         getRemainingPersistentAngerTime(): number;
-        playerDied(player: $Player): void;
-        /**
-         * Dismounts this entity from the entity it is riding.
-         */
-        stopBeingAngry(): void;
-        addPersistentAngerSaveData(compound: $CompoundTag_): void;
-        isAngryAtAllPlayers(level: $Level_): boolean;
-        updatePersistentAnger(serverLevel: $ServerLevel, updateAnger: boolean): void;
-        /**
-         * Dismounts this entity from the entity it is riding.
-         */
-        forgetCurrentTargetAndRefreshUniversalAnger(): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
+        setRemainingPersistentAngerTime(time: number): void;
+        startPersistentAngerTimer(): void;
+        getPersistentAngerTarget(): $UUID;
+        setPersistentAngerTarget(target: $UUID_ | null): void;
+        static checkZombifiedPiglinSpawnRules(zombifiedPiglin: $EntityType_<$ZombifiedPiglin>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        playerDied(arg0: $Player): void;
+        readPersistentAngerSaveData(arg0: $Level_, arg1: $CompoundTag_): void;
+        isAngryAt(arg0: $LivingEntity): boolean;
         isAngry(): boolean;
-        isAngryAt(target: $LivingEntity): boolean;
-        readPersistentAngerSaveData(level: $Level_, tag: $CompoundTag_): void;
+        addPersistentAngerSaveData(compound: $CompoundTag_): void;
+        updatePersistentAnger(arg0: $ServerLevel, arg1: boolean): void;
+        isAngryAtAllPlayers(arg0: $Level_): boolean;
+        stopBeingAngry(): void;
+        forgetCurrentTargetAndRefreshUniversalAnger(): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -1321,6 +1343,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         zOld: number;
         static REINFORCEMENT_RANGE_MAX: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1331,6 +1354,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -1391,11 +1415,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static MIN_SPEED: number;
     }
     export class $Ghast extends $FlyingMob implements $Enemy {
-        static createAttributes(): $AttributeSupplier$Builder;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isCharging(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
         static checkGhastSpawnRules(ghast: $EntityType_<$Ghast>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         /**
          * Will return how many at most can spawn in a chunk at once.
@@ -1448,6 +1469,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1458,6 +1480,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -1525,27 +1548,21 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Vex$VexChargeAttackGoal extends $Goal {
     }
     export class $Pillager extends $AbstractIllager implements $CrossbowAttackMob, $InventoryCarrier {
-        getInventory(): $SimpleContainer;
         static createAttributes(): $AttributeSupplier$Builder;
+        onCrossbowAttackPerformed(): void;
+        setChargingCrossbow(isCharging: boolean): void;
         /**
          * Attack the specified entity using a ranged attack.
          */
         performRangedAttack(target: $LivingEntity, distanceFactor: number): void;
-        /**
-         * Dismounts this entity from the entity it is riding.
-         */
-        onCrossbowAttackPerformed(): void;
-        setChargingCrossbow(isCharging: boolean): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
+        getInventory(): $SimpleContainer;
         isChargingCrossbow(): boolean;
         /**
          * Attack the specified entity using a ranged attack.
          */
         performCrossbowAttack(target: $LivingEntity, distanceFactor: number): void;
-        readInventoryFromTag(tag: $CompoundTag_, levelRegistry: $HolderLookup$Provider): void;
-        writeInventoryToTag(tag: $CompoundTag_, levelRegistry: $HolderLookup$Provider): void;
+        readInventoryFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        writeInventoryToTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -1592,6 +1609,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1602,6 +1620,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -1657,18 +1676,9 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Ravager extends $Raider {
         static createAttributes(): $AttributeSupplier$Builder;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
-        getAttackTick(): number;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
-        getStunnedTick(): number;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
         getRoarTick(): number;
+        getAttackTick(): number;
+        getStunnedTick(): number;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -1716,6 +1726,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1726,6 +1737,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -1777,9 +1789,9 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Ravager>, level: $Level_);
+        get roarTick(): number;
         get attackTick(): number;
         get stunnedTick(): number;
-        get roarTick(): number;
     }
     export class $Guardian$GuardianAttackGoal extends $Goal {
     }
@@ -1831,6 +1843,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1841,6 +1854,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -1903,14 +1917,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
          * Set whether this witch is aggressive at an entity.
          */
         setUsingItem(usingItem: boolean): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isDrinkingPotion(): boolean;
-        /**
-         * Sets the amount of arrows stuck in the entity. Used for rendering those.
-         */
-        setUsingTime(count: number): void;
+        setUsingTime(arg0: number): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -1957,6 +1965,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -1967,6 +1976,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2023,21 +2033,15 @@ declare module "@package/net/minecraft/world/entity/monster" {
         set usingTime(value: number);
     }
     export class $Vex extends $Monster implements $TraceableEntity {
+        isCharging(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
         getOwner(): $Mob;
         setOwner(owner: $Mob): void;
-        static createAttributes(): $AttributeSupplier$Builder;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isFlapping(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isCharging(): boolean;
-        setLimitedLife(limitedLifeTicks: number): void;
         setBoundOrigin(boundOrigin: $BlockPos_ | null): void;
+        setLimitedLife(limitedLifeTicks: number): void;
         getBoundOrigin(): $BlockPos;
         setIsCharging(charging: boolean): void;
+        isFlapping(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -2084,6 +2088,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -2094,6 +2099,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2147,11 +2153,12 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Vex>, level: $Level_);
-        get flapping(): boolean;
         get charging(): boolean;
         set limitedLife(value: number);
+        get flapping(): boolean;
     }
     export class $Spider$SpiderTargetGoal<T extends $LivingEntity> extends $NearestAttackableTargetGoal<T> {
+        targetType: $Class<T>;
     }
     export class $Phantom$PhantomMoveControl extends $MoveControl {
         static MIN_SPEED_SQR: number;
@@ -2159,18 +2166,14 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Bogged extends $AbstractSkeleton implements $Shearable {
         setSheared(sheared: boolean): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        readyForShearing(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isSheared(): boolean;
         shear(source: $SoundSource_): void;
+        isSheared(): boolean;
+        readyForShearing(): boolean;
+        handler$bkm000$apothic_enchanting$apoth_handleShearEnchantments(arg0: $Player | null, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_, arg4: $CallbackInfoReturnable<any>): void;
+        onSheared(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): $List<$ItemStack>;
+        handler$bkm000$apothic_enchanting$apoth_handleShearFortune(arg0: $Player | null, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_, arg4: $CallbackInfoReturnable<any>): void;
         isShearable(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): boolean;
         spawnShearedDrop(arg0: $Level_, arg1: $BlockPos_, arg2: $ItemStack_): void;
-        onSheared(arg0: $Player, arg1: $ItemStack_, arg2: $Level_, arg3: $BlockPos_): $List<$ItemStack>;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -2218,6 +2221,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -2228,6 +2232,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2286,29 +2291,14 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $PatrollingMonster extends $Monster {
         static checkPatrollingMonsterSpawnRules(patrollingMonster: $EntityType_<$PatrollingMonster>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        canJoinPatrol(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         canBeLeader(): boolean;
         setPatrolTarget(patrolTarget: $BlockPos_): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isPatrolLeader(): boolean;
-        getPatrolTarget(): $BlockPos;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         hasPatrolTarget(): boolean;
-        /**
-         * Dismounts this entity from the entity it is riding.
-         */
+        getPatrolTarget(): $BlockPos;
         findPatrolTarget(): void;
         setPatrolLeader(patrolLeader: boolean): void;
+        isPatrolLeader(): boolean;
+        canJoinPatrol(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -2355,6 +2345,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -2365,6 +2356,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2445,11 +2437,11 @@ declare module "@package/net/minecraft/world/entity/monster" {
         constructor(mob: T, speedModifier: number, arg2: number);
     }
     export class $Spider extends $Monster {
-        static createAttributes(): $AttributeSupplier$Builder;
         /**
          * Returns `true` if the WatchableObject (Byte) is 0x01 otherwise returns `false`. The WatchableObject is updated using setBesideClimbableBlock.
          */
         isClimbing(): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
         /**
          * Updates the WatchableObject (Byte) created in entityInit(), setting it to 0x01 if par1 is true or 0x00 if it is false.
          */
@@ -2500,6 +2492,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -2510,6 +2503,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2570,53 +2564,54 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $EnderMan extends $Monster implements $NeutralMob {
         /**
+         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
+         */
+        getRemainingPersistentAngerTime(): number;
+        setRemainingPersistentAngerTime(time: number): void;
+        static createAttributes(): $AttributeSupplier$Builder;
+        /**
          * Teleport the enderman to a random nearby position
          */
         isCreepy(): boolean;
         /**
          * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
          */
-        setBeingStaredAt(): void;
+        startPersistentAngerTimer(): void;
+        getPersistentAngerTarget(): $UUID;
+        setPersistentAngerTarget(target: $UUID_ | null): void;
         /**
          * Teleport the enderman to a random nearby position
          */
         hasBeenStaredAt(): boolean;
-        getCarriedBlock(): $BlockState;
         /**
          * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
          */
         playStareSound(): void;
+        getCarriedBlock(): $BlockState;
+        /**
+         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
+         */
+        setBeingStaredAt(): void;
         setCarriedBlock(state: $BlockState_ | null): void;
-        static createAttributes(): $AttributeSupplier$Builder;
-        /**
-         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
-         */
-        startPersistentAngerTimer(): void;
-        setPersistentAngerTarget(target: $UUID_ | null): void;
-        getPersistentAngerTarget(): $UUID;
-        setRemainingPersistentAngerTime(time: number): void;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
-        getRemainingPersistentAngerTime(): number;
+        handler$egg000$spectrum$cannotDespawn(arg0: $CallbackInfoReturnable<any>): void;
         playerDied(player: $Player): void;
-        /**
-         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
-         */
-        stopBeingAngry(): void;
-        addPersistentAngerSaveData(compound: $CompoundTag_): void;
-        isAngryAtAllPlayers(level: $Level_): boolean;
-        updatePersistentAnger(serverLevel: $ServerLevel, updateAnger: boolean): void;
-        /**
-         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
-         */
-        forgetCurrentTargetAndRefreshUniversalAnger(): void;
+        readPersistentAngerSaveData(level: $Level_, tag: $CompoundTag_): void;
+        isAngryAt(target: $LivingEntity): boolean;
         /**
          * Teleport the enderman to a random nearby position
          */
         isAngry(): boolean;
-        isAngryAt(target: $LivingEntity): boolean;
-        readPersistentAngerSaveData(level: $Level_, tag: $CompoundTag_): void;
+        addPersistentAngerSaveData(compound: $CompoundTag_): void;
+        updatePersistentAnger(serverLevel: $ServerLevel, updateAnger: boolean): void;
+        isAngryAtAllPlayers(level: $Level_): boolean;
+        /**
+         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
+         */
+        stopBeingAngry(): void;
+        /**
+         * Called every tick so the entity can update its state as required. For example, zombies and skeletons use this to react to sunlight and start to burn.
+         */
+        forgetCurrentTargetAndRefreshUniversalAnger(): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -2663,6 +2658,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -2673,6 +2669,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2775,6 +2772,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -2785,6 +2783,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2893,6 +2892,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         zOld: number;
         static REINFORCEMENT_RANGE_MAX: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -2903,6 +2903,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -2974,31 +2975,19 @@ declare module "@package/net/minecraft/world/entity/monster" {
      */
     export type $RangedAttackMob_ = ((arg0: $LivingEntity, arg1: number) => void);
     export class $Guardian extends $Monster {
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isMoving(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        getAttackAnimationScale(partialTick: number): number;
-        /**
-         * Gets the active target the Goal system uses for tracking
-         */
-        getActiveAttackTarget(): $LivingEntity;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        hasActiveAttackTarget(): boolean;
-        /**
-         * Returns the amount of health added by the Absorption effect.
-         */
         getClientSideAttackTime(): number;
+        hasActiveAttackTarget(): boolean;
+        getAttackAnimationScale(partialTick: number): number;
         static checkGuardianSpawnRules(guardian: $EntityType_<$Guardian>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        getActiveAttackTarget(): $LivingEntity;
+        getSpikesAnimation(partialTick: number): number;
         /**
          * Get number of ticks, at least during which the living entity will be silent.
          */
         getAttackDuration(): number;
         getTailAnimation(partialTick: number): number;
-        getSpikesAnimation(partialTick: number): number;
+        isMoving(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -3048,6 +3037,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -3058,6 +3048,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -3110,14 +3101,15 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Guardian>, level: $Level_);
-        get moving(): boolean;
-        get activeAttackTarget(): $LivingEntity;
         get clientSideAttackTime(): number;
+        get activeAttackTarget(): $LivingEntity;
         get attackDuration(): number;
+        get moving(): boolean;
     }
     export class $Vex$VexCopyOwnerTargetGoal extends $TargetGoal {
     }
     export class $Vindicator$VindicatorJohnnyAttackGoal extends $NearestAttackableTargetGoal<$LivingEntity> {
+        targetType: $Class<$LivingEntity>;
     }
     export class $Shulker$ShulkerLookControl extends $LookControl {
         xMaxRotAngle: number;
@@ -3126,20 +3118,12 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Strider extends $Animal implements $ItemSteerable, $Saddleable {
         /**
-         * Returns a (normalized) vector of where this entity is looking.
-         */
-        getLeashOffset(): $Vec3;
-        /**
          * Returns `true` if the entity is on fire. Used by render to add the fire effect on rendering.
          */
         isSuffocating(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        getBreedOffspring(level: $ServerLevel, otherParent: $AgeableMob): $Strider;
-        /**
-         * Returns `true` if the entity is on fire. Used by render to add the fire effect on rendering.
-         */
-        isSaddleable(): boolean;
-        equipSaddle(stack: $ItemStack_, soundSource: $SoundSource_ | null): void;
+        getLeashOffset(): $Vec3;
+        static checkStriderSpawnRules(strider: $EntityType_<$Strider>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         /**
          * Returns `true` if the entity is on fire. Used by render to add the fire effect on rendering.
          */
@@ -3148,7 +3132,12 @@ declare module "@package/net/minecraft/world/entity/monster" {
          * Returns `true` if the entity is on fire. Used by render to add the fire effect on rendering.
          */
         boost(): boolean;
-        static checkStriderSpawnRules(strider: $EntityType_<$Strider>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        equipSaddle(stack: $ItemStack_, soundSource: $SoundSource_ | null): void;
+        /**
+         * Returns `true` if the entity is on fire. Used by render to add the fire effect on rendering.
+         */
+        isSaddleable(): boolean;
+        getBreedOffspring(level: $ServerLevel, otherParent: $AgeableMob): $Strider;
         setSuffocating(suffocating: boolean): void;
         getSaddleSoundEvent(): $SoundEvent;
         static MAX_WEARING_ARMOR_CHANCE: number;
@@ -3198,6 +3187,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -3208,6 +3198,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -3260,8 +3251,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Strider>, level: $Level_);
         get leashOffset(): $Vec3;
-        get saddleable(): boolean;
         get saddled(): boolean;
+        get saddleable(): boolean;
         get saddleSoundEvent(): $SoundEvent;
     }
     export class $Phantom$PhantomLookControl extends $LookControl {
@@ -3272,29 +3263,28 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Evoker$EvokerWololoSpellGoal extends $SpellcasterIllager$SpellcasterUseSpellGoal {
         constructor(arg0: $Evoker);
     }
-    export class $ZombieVillager extends $Zombie implements $VillagerDataHolder {
-        getStepSound(): $SoundEvent;
-        getAmbientSound(): $SoundEvent;
-        mobInteract(player: $Player, hand: $InteractionHand_): $InteractionResult;
+    export class $ZombieVillager extends $Zombie implements $VillagerDataHolder, $AccessorMixinZombieVillager {
         setGossips(gossips: $Tag_): void;
-        setTradeOffers(tradeOffers: $MerchantOffers): void;
+        getStepSound(): $SoundEvent;
+        mobInteract(player: $Player, hand: $InteractionHand_): $InteractionResult;
+        getAmbientSound(): $SoundEvent;
         setVillagerData(data: $VillagerData): void;
-        setVillagerXp(villagerXp: number): void;
+        getVillagerXp(): number;
+        setTradeOffers(tradeOffers: $MerchantOffers): void;
         /**
          * Returns whether this zombie is in the process of converting to a villager
          */
         isConverting(): boolean;
+        getVillagerData(): $VillagerData;
+        setVillagerXp(villagerXp: number): void;
         /**
          * Starts conversion of this zombie villager to a villager
          */
         startConverting(conversionStarter: $UUID_ | null, villagerConversionTime: number): void;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
-        getVillagerXp(): number;
-        getVillagerData(): $VillagerData;
         getVariant(): $VillagerType;
-        setVariant(variant: $VillagerType_): void;
+        setVariant(arg0: $VillagerType_): void;
+        roots$GetVillagerConversionTime(): number;
+        roots$SetVillagerConversionTime(villagerXp: number): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -3324,6 +3314,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         oAttackAnim: number;
         yHeadRotO: number;
         static UUID_TAG: string;
+        villagerConversionTime: number;
         hurtDuration: number;
         static DEATH_DURATION: number;
         portalProcess: $PortalProcessor;
@@ -3345,6 +3336,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         zOld: number;
         static REINFORCEMENT_RANGE_MAX: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -3355,6 +3347,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -3406,24 +3399,24 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$ZombieVillager>, level: $Level_);
+        set gossips(value: $Tag_);
         get stepSound(): $SoundEvent;
         get ambientSound(): $SoundEvent;
-        set gossips(value: $Tag_);
         set tradeOffers(value: $MerchantOffers);
         get converting(): boolean;
     }
     export class $CrossbowAttackMob {
     }
     export interface $CrossbowAttackMob extends $RangedAttackMob {
+        onCrossbowAttackPerformed(): void;
+        setChargingCrossbow(chargingCrossbow: boolean): void;
+        performCrossbowAttack(user: $LivingEntity, velocity: number): void;
         /**
          * Gets the active target the Task system uses for tracking
          */
         getTarget(): $LivingEntity;
-        performCrossbowAttack(user: $LivingEntity, velocity: number): void;
-        onCrossbowAttackPerformed(): void;
-        setChargingCrossbow(chargingCrossbow: boolean): void;
-        get target(): $LivingEntity;
         set chargingCrossbow(value: boolean);
+        get target(): $LivingEntity;
     }
     export class $SpellcasterIllager$SpellcasterUseSpellGoal extends $Goal {
     }
@@ -3477,6 +3470,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -3487,6 +3481,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -3618,6 +3613,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -3628,6 +3624,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -3738,6 +3735,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -3749,6 +3747,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -3805,21 +3804,21 @@ declare module "@package/net/minecraft/world/entity/monster" {
         constructor(entityType: $EntityType_<$MagmaCube>, level: $Level_);
     }
     export class $Zombie extends $Monster {
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         static createAttributes(): $AttributeSupplier$Builder;
         /**
          * If Animal, checks if the age timer is negative
          */
         isUnderWaterConverting(): boolean;
-        static getSpawnAsBabyOdds(random: $RandomSource): boolean;
         /**
          * Set whether this zombie is a child.
          */
         setCanBreakDoors(childZombie: boolean): void;
+        static getSpawnAsBabyOdds(random: $RandomSource): boolean;
         /**
          * If Animal, checks if the age timer is negative
          */
         canBreakDoors(): boolean;
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -3870,6 +3869,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         zOld: number;
         static REINFORCEMENT_RANGE_MAX: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -3880,6 +3880,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -3930,12 +3931,11 @@ declare module "@package/net/minecraft/world/entity/monster" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
-        constructor(entityType: $EntityType_<$Zombie>, level: $Level_);
         constructor(level: $Level_);
+        constructor(entityType: $EntityType_<$Zombie>, level: $Level_);
         get underWaterConverting(): boolean;
     }
     export class $Monster extends $PathfinderMob implements $Enemy {
-        isPreventingPlayerRest(player: $Player): boolean;
         /**
          * Static predicate for determining whether a monster can spawn at the provided location.
          */
@@ -3949,6 +3949,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
          * Static predicate for determining whether a monster can spawn at the provided location, incorporating a check of the current light level at the location.
          */
         static checkMonsterSpawnRules(type: $EntityType_<$Monster>, level: $ServerLevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        isPreventingPlayerRest(player: $Player): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -3995,6 +3996,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4005,6 +4007,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4068,9 +4071,11 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Creeper extends $Monster implements $PowerableMob {
         /**
-         * Creates an explosion as determined by this creeper's power and explosion radius.
+         * Returns `true` if an entity is able to drop its skull due to being blown up by this creeper.
+         * 
+         * Does not test if this creeper is charged, the caller must do that. However, does test the doMobLoot gamerule.
          */
-        ignite(): void;
+        isIgnited(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
         /**
          * Returns `true` if an entity is able to drop its skull due to being blown up by this creeper.
@@ -4078,12 +4083,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
          * Does not test if this creeper is charged, the caller must do that. However, does test the doMobLoot gamerule.
          */
         isPowered(): boolean;
-        /**
-         * Returns `true` if an entity is able to drop its skull due to being blown up by this creeper.
-         * 
-         * Does not test if this creeper is charged, the caller must do that. However, does test the doMobLoot gamerule.
-         */
-        isIgnited(): boolean;
         /**
          * Creates an explosion as determined by this creeper's power and explosion radius.
          */
@@ -4095,10 +4094,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
          */
         canDropMobsSkull(): boolean;
         /**
-         * Params: (Float)Render tick. Returns the intensity of the creeper's flash when it is ignited.
-         */
-        getSwelling(partialTicks: number): number;
-        /**
          * Sets the state of creeper, -1 to idle and 1 to be 'in fuse'
          */
         setSwellDir(state: number): void;
@@ -4106,6 +4101,14 @@ declare module "@package/net/minecraft/world/entity/monster" {
          * The maximum height from where the entity is allowed to jump (used in pathfinder)
          */
         getSwellDir(): number;
+        /**
+         * Params: (Float)Render tick. Returns the intensity of the creeper's flash when it is ignited.
+         */
+        getSwelling(partialTicks: number): number;
+        /**
+         * Creates an explosion as determined by this creeper's power and explosion radius.
+         */
+        ignite(): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -4152,6 +4155,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4162,6 +4166,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4213,8 +4218,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Creeper>, level: $Level_);
-        get powered(): boolean;
         get ignited(): boolean;
+        get powered(): boolean;
     }
     export class $Blaze$BlazeAttackGoal extends $Goal {
     }
@@ -4266,6 +4271,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4276,6 +4282,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4330,9 +4337,6 @@ declare module "@package/net/minecraft/world/entity/monster" {
     }
     export class $Skeleton extends $AbstractSkeleton {
         setFreezeConverting(isFrozen: boolean): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isFreezeConverting(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
@@ -4380,6 +4384,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4390,6 +4395,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4502,6 +4508,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4512,6 +4519,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4617,6 +4625,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4627,6 +4636,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4730,6 +4740,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4740,6 +4751,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4796,20 +4808,11 @@ declare module "@package/net/minecraft/world/entity/monster" {
     export class $Phantom$PhantomAttackPlayerTargetGoal extends $Goal {
     }
     export class $Phantom extends $FlyingMob implements $Enemy {
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isFlapping(): boolean;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
         getUniqueFlapTickOffset(): number;
-        /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
-         */
-        getPhantomSize(): number;
         setPhantomSize(phantomSize: number): void;
+        getPhantomSize(): number;
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
+        isFlapping(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -4856,6 +4859,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -4866,6 +4870,7 @@ declare module "@package/net/minecraft/world/entity/monster" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -4919,8 +4924,8 @@ declare module "@package/net/minecraft/world/entity/monster" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Phantom>, level: $Level_);
-        get flapping(): boolean;
         get uniqueFlapTickOffset(): number;
+        get flapping(): boolean;
     }
     export class $Vex$VexRandomMoveGoal extends $Goal {
     }

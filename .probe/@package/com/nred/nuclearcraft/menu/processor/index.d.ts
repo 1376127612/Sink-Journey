@@ -3,8 +3,8 @@ import { $BasicRecipe } from "@package/com/nred/nuclearcraft/recipe";
 import { $ItemStack, $ItemStack_ } from "@package/net/minecraft/world/item";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $Player, $Inventory } from "@package/net/minecraft/world/entity/player";
-import { $Slot, $MenuType_ } from "@package/net/minecraft/world/inventory";
-import { $Map } from "@package/java/util";
+import { $ContainerListener, $Slot, $MenuType_ } from "@package/net/minecraft/world/inventory";
+import { $List, $Map } from "@package/java/util";
 import { $ProcessorUpdatePacket } from "@package/com/nred/nuclearcraft/payload/processor";
 import { $ProcessorMenuInfo } from "@package/com/nred/nuclearcraft/block_entity/processor/info";
 import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
@@ -28,6 +28,7 @@ declare module "@package/com/nred/nuclearcraft/menu/processor" {
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
         tile: $BlockEntity;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         info: INFO;

@@ -10,7 +10,7 @@ import { $Attribute, $AttributeModifier$Operation_ } from "@package/net/minecraf
 import { $PaintingVariant } from "@package/net/minecraft/world/entity/decoration";
 import { $Map, $List_ } from "@package/java/util";
 import { $VillagerType, $VillagerProfession } from "@package/net/minecraft/world/entity/npc";
-import { $Consumer_ } from "@package/java/util/function";
+import { $Consumer_, $Function } from "@package/java/util/function";
 import { $Holder_, $Registry, $Holder } from "@package/net/minecraft/core";
 import { $SoundEvent_, $SoundEvent } from "@package/net/minecraft/sounds";
 import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
@@ -37,11 +37,11 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
         constructor(i: $ResourceLocation_);
     }
     export class $ParticleTypeBuilder extends $BuilderBase<$ParticleType<never>> {
+        codec(c: $MapCodec_<$ParticleOptions_>): this;
         textures(textures: $List_<string>): this;
         texture(texture: string): this;
-        streamCodec(s: $StreamCodec<$RegistryFriendlyByteBuf, $ParticleOptions_>): this;
-        codec(c: $MapCodec_<$ParticleOptions_>): this;
         overrideLimiter(o: boolean): this;
+        streamCodec(s: $StreamCodec<$RegistryFriendlyByteBuf, $ParticleOptions_>): this;
         registryKey: $ResourceKey<$Registry<$ParticleType<never>>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -61,15 +61,16 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
     export type $MobEffectBuilder$EffectEntityCallback_ = ((entity: $LivingEntity, level: number) => void);
     export class $BasicMobEffect extends $MobEffect {
         static CODEC: $Codec<$Holder<$MobEffect>>;
+        particleFactory: $Function<$MobEffectInstance, $ParticleOptions>;
         attributeModifiers: $Map<$Holder<$Attribute>, $MobEffect$AttributeTemplate>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $Holder<$MobEffect>>;
         constructor(builder: $MobEffectBuilder);
     }
     export class $VillagerProfessionBuilder extends $BuilderBase<$VillagerProfession> {
-        poiTypeTag(t: $ResourceLocation_): this;
         workSound(t: $SoundEvent_): this;
-        requestedItems(t: $Item_[]): this;
+        poiTypeTag(t: $ResourceLocation_): this;
         secondaryPoi(t: $Block_[]): this;
+        requestedItems(t: $Item_[]): this;
         poiType(t: $ResourceLocation_): this;
         registryKey: $ResourceKey<$Registry<$VillagerProfession>>;
         sourceLine: $SourceLine;
@@ -77,10 +78,10 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
         constructor(i: $ResourceLocation_);
     }
     export class $PoiTypeBuilder extends $BuilderBase<$PoiType> {
+        maxTickets(i: number): this;
+        validRange(i: number): this;
         block(r: $Block_): this;
         blocks(r: $BlockState_[]): this;
-        validRange(i: number): this;
-        maxTickets(i: number): this;
         registryKey: $ResourceKey<$Registry<$PoiType>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;
@@ -104,14 +105,14 @@ declare module "@package/dev/latvian/mods/kubejs/misc" {
         constructor(i: $ResourceLocation_);
     }
     export class $MobEffectBuilder extends $BuilderBase<$MobEffect> {
+        beneficial(): this;
+        effectTick(effectTick: $MobEffectBuilder$EffectEntityCallback_): this;
+        harmful(): this;
+        modifyAttribute(attribute: $ResourceLocation_, id: $ResourceLocation_, amount: number, operation: $AttributeModifier$Operation_): this;
         color(col: $KubeColor_): this;
         instant(): this;
         instant(instant: boolean): this;
         category(c: $MobEffectCategory_): this;
-        modifyAttribute(attribute: $ResourceLocation_, id: $ResourceLocation_, amount: number, operation: $AttributeModifier$Operation_): this;
-        beneficial(): this;
-        harmful(): this;
-        effectTick(effectTick: $MobEffectBuilder$EffectEntityCallback_): this;
         registryKey: $ResourceKey<$Registry<$MobEffect>>;
         sourceLine: $SourceLine;
         id: $ResourceLocation;

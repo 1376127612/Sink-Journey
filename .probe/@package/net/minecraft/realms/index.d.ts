@@ -7,43 +7,36 @@ import { $Component, $Component_ } from "@package/net/minecraft/network/chat";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 import { $ObjectSelectionList$Entry, $WidgetTooltipHolder, $ObjectSelectionList, $Renderable } from "@package/net/minecraft/client/gui/components";
 import { $Minecraft, $GameNarrator } from "@package/net/minecraft/client";
-import { $Collection_, $List } from "@package/java/util";
+import { $List } from "@package/java/util";
 import { $Font, $GuiGraphics } from "@package/net/minecraft/client/gui";
 import { $RealmsServer } from "@package/com/mojang/realmsclient/dto";
 
 declare module "@package/net/minecraft/realms" {
     export class $RealmsObjectSelectionList<E extends $ObjectSelectionList$Entry<E>> extends $ObjectSelectionList<E> {
-        replaceEntries(entries: $Collection_<E>): void;
+        getMaxPosition(): number;
         getRowTop(index: number): number;
         setSelectedItem(index: number): void;
         clear(): void;
         addEntry(entry: E): number;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
         getItemCount(): number;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getMaxPosition(): number;
         selectItem(index: number): void;
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: E;
+        height: number;
+        get maxPosition(): number;
         set selectedItem(value: number);
         get itemCount(): number;
-        get maxPosition(): number;
     }
     export class $RepeatedNarrator$Params {
     }

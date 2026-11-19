@@ -13,11 +13,11 @@ export * as schemas from "@package/net/minecraft/util/datafix/schemas";
 
 declare module "@package/net/minecraft/util/datafix" {
     export class $DataFixTypes extends $Enum<$DataFixTypes> {
+        wrapCodec<A>(codec: $Codec<A>, dataFixer: $DataFixer, dataVersion: number): $Codec<A>;
         static values(): $DataFixTypes[];
         update(fixer: $DataFixer, tag: $CompoundTag_, version: number, newVersion: number): $CompoundTag;
         update<T>(fixer: $DataFixer, input: $Dynamic<T>, version: number, newVersion: number): $Dynamic<T>;
         static valueOf(arg0: string): $DataFixTypes;
-        wrapCodec<A>(codec: $Codec<A>, dataFixer: $DataFixer, dataVersion: number): $Codec<A>;
         updateToCurrentVersion(fixer: $DataFixer, tag: $CompoundTag_, version: number): $CompoundTag;
         updateToCurrentVersion<T>(fixer: $DataFixer, input: $Dynamic<T>, version: number): $Dynamic<T>;
         static SAVED_DATA_MAP_DATA: $DataFixTypes;
@@ -52,18 +52,18 @@ declare module "@package/net/minecraft/util/datafix" {
         static get dataFixer(): $DataFixer;
     }
     export class $ComponentDataFixUtils {
-        static rewriteFromLenient(dynamic: $Dynamic<never>): $Dynamic<never>;
-        static extractTranslationString(data: string): (string) | undefined;
-        static createPlainTextComponent<T>(ops: $DynamicOps<T>, text: string): $Dynamic<T>;
         static createEmptyComponent<T>(ops: $DynamicOps<T>): $Dynamic<T>;
-        static wrapLiteralStringAsComponent<T>(dynamic: $Dynamic<T>): $Dynamic<T>;
+        static extractTranslationString(data: string): (string) | undefined;
+        static rewriteFromLenient(dynamic: $Dynamic<never>): $Dynamic<never>;
+        static createPlainTextComponent<T>(ops: $DynamicOps<T>, text: string): $Dynamic<T>;
         static createTranslatableComponent<T>(ops: $DynamicOps<T>, text: string): $Dynamic<T>;
+        static wrapLiteralStringAsComponent<T>(dynamic: $Dynamic<T>): $Dynamic<T>;
         constructor();
     }
     export class $ExtraDataFixUtils {
-        static cast<T, R>(type: $Type<R>, data: $Typed<T>): $Typed<R>;
         static chainAllFilters<T>(...filters: $Function_<$Typed<never>, $Typed<never>>[]): $Function<$Typed<never>, $Typed<never>>;
         static fixBlockPos(data: $Dynamic<never>): $Dynamic<never>;
+        static cast<T, R>(type: $Type<R>, data: $Typed<T>): $Typed<R>;
         constructor();
     }
     export class $FixWolfHealth extends $NamedEntityFix {
@@ -72,11 +72,11 @@ declare module "@package/net/minecraft/util/datafix" {
     export class $PackedBitStorage {
         get(index: number): number;
         set(bits: number, size: number): void;
-        getBits(): number;
         getRaw(): number[];
+        getBits(): number;
         constructor(bits: number, size: number);
         constructor(bits: number, size: number, data: number[]);
-        get bits(): number;
         get raw(): number[];
+        get bits(): number;
     }
 }

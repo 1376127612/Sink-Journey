@@ -5,13 +5,13 @@ import { $EntitySectionStorage, $EntityAccess } from "@package/net/minecraft/wor
 
 declare module "@package/net/caffeinemc/mods/lithium/common/tracking/entity" {
     export class $SectionedEntityMovementTracker<E extends $EntityAccess, S> {
+        onSectionEnteredRange(arg0: $EntityMovementTrackerSection): void;
         register(arg0: $ServerLevel): void;
         isUnchangedSince(arg0: number): boolean;
         listenToEntityMovementOnce(arg0: $SectionedEntityMovementListener_): void;
         unRegister(arg0: $ServerLevel): void;
-        onSectionEnteredRange(arg0: $EntityMovementTrackerSection): void;
-        onSectionLeftRange(arg0: $EntityMovementTrackerSection): void;
         emitEntityMovement(arg0: number, arg1: $EntityMovementTrackerSection): void;
+        onSectionLeftRange(arg0: $EntityMovementTrackerSection): void;
         constructor(arg0: $WorldSectionBox_, arg1: $Class<S>);
     }
     export class $ToggleableMovementTracker {
@@ -27,11 +27,11 @@ declare module "@package/net/caffeinemc/mods/lithium/common/tracking/entity" {
     }
     export interface $EntityMovementTrackerSection {
         lithium$removeListenToMovementOnce<S, E extends $EntityAccess>(arg0: $SectionedEntityMovementTracker<E, S>, arg1: number): void;
-        lithium$listenToMovementOnce<S, E extends $EntityAccess>(arg0: $SectionedEntityMovementTracker<E, S>, arg1: number): void;
         lithium$trackEntityMovement(arg0: number, arg1: number): void;
-        lithium$getChangeTime(arg0: number): number;
+        lithium$listenToMovementOnce<S, E extends $EntityAccess>(arg0: $SectionedEntityMovementTracker<E, S>, arg1: number): void;
         lithium$addListener(arg0: $SectionedEntityMovementTracker<never, never>): void;
         lithium$removeListener(arg0: $EntitySectionStorage<never>, arg1: $SectionedEntityMovementTracker<never, never>): void;
+        lithium$getChangeTime(arg0: number): number;
     }
     export class $SectionedEntityMovementListener {
     }

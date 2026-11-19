@@ -19,8 +19,10 @@ import { $Enum, $Iterable, $Record, $Class, $Object } from "@package/java/lang";
 import { $HolderSetType } from "@package/net/neoforged/neoforge/registries/holdersets";
 import { $IModBusEvent } from "@package/net/neoforged/fml/event";
 import { $AddCallback, $RegistryCallback, $BakeCallback_, $AddCallback_, $ClearCallback, $ClearCallback_, $BakeCallback } from "@package/net/neoforged/neoforge/registries/callback";
+import { $AccessDataMapLoader, $AccessDataMapLoaderResult } from "@package/com/blamejared/crafttweaker/mixin/common/access/neoforge";
 import { $IngredientType } from "@package/net/neoforged/neoforge/common/crafting";
 import { $Int2ObjectSortedMap } from "@package/it/unimi/dsi/fastutil/ints";
+import { $LoadResultGetter } from "@package/com/blamejared/crafttweaker/impl/datamap";
 import { $DataMapFile_, $DataMapType } from "@package/net/neoforged/neoforge/registries/datamaps";
 import { $ItemLike } from "@package/net/minecraft/world/level";
 import { $AttributeKey } from "@package/io/netty/util";
@@ -46,22 +48,23 @@ declare module "@package/net/neoforged/neoforge/registries" {
      * @deprecated
      */
     export class $IdMappingEvent extends $Event {
-        isFrozen(): boolean;
         getRegistries(): $ImmutableSet<$ResourceLocation>;
+        isFrozen(): boolean;
         getRemaps(arg0: $ResourceLocation_): $ImmutableList<$IdMappingEvent$ModRemapping>;
         constructor(arg0: $Map_<$ResourceLocation_, $Map_<$ResourceLocation_, $IdMappingEvent$IdRemapping_>>, arg1: boolean);
-        get frozen(): boolean;
         get registries(): $ImmutableSet<$ResourceLocation>;
+        get frozen(): boolean;
     }
-    export class $DataMapLoader extends $ContextAwareReloadListener {
+    export class $DataMapLoader extends $ContextAwareReloadListener implements $AccessDataMapLoader {
         apply(): void;
         static getFolderLocation(arg0: $ResourceLocation_): string;
+        results(): $Map<$ResourceKey<$Registry<never>>, $LoadResultGetter>;
         static PATH: string;
-        constructor(arg0: $RegistryAccess);
         /**
          * @deprecated
          */
         constructor(arg0: $ICondition$IContext_, arg1: $RegistryAccess);
+        constructor(arg0: $RegistryAccess);
     }
     export class $DataPackRegistryEvent$NewRegistry extends $DataPackRegistryEvent {
         dataPackRegistry<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Codec<T>): void;
@@ -85,19 +88,19 @@ declare module "@package/net/neoforged/neoforge/registries" {
         getKey(): $ResourceKey<R>;
         kind(): $Holder$Kind;
         getId(): $ResourceLocation;
-        is(arg0: $ResourceLocation_): boolean;
-        is(arg0: $Predicate_<$ResourceKey<R>>): boolean;
-        static create<R, T extends R>(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $DeferredHolder<R, T>;
         static create<R, T extends R>(arg0: $ResourceKey_<$Registry<R>>, arg1: $ResourceLocation_): $DeferredHolder<R, T>;
         static create<R, T extends R>(arg0: $ResourceKey_<R>): $DeferredHolder<R, T>;
+        static create<R, T extends R>(arg0: $ResourceLocation_, arg1: $ResourceLocation_): $DeferredHolder<R, T>;
         unwrap(): $Either<$ResourceKey<R>, R>;
+        is(arg0: $ResourceLocation_): boolean;
+        is(arg0: $Predicate_<$ResourceKey<R>>): boolean;
         tags(): $Stream<$TagKey<R>>;
         getData<Z>(arg0: $DataMapType<R, Z>): Z;
         getDelegate(): $Holder<R>;
-        isBound(): boolean;
-        unwrapKey(): ($ResourceKey<R>) | undefined;
         asOptional(): (R) | undefined;
+        unwrapKey(): ($ResourceKey<R>) | undefined;
         canSerializeIn(arg0: $HolderOwner<R>): boolean;
+        isBound(): boolean;
         getRegisteredName(): string;
         /**
          * Test if a tag matches the object this holder holds.
@@ -113,29 +116,29 @@ declare module "@package/net/neoforged/neoforge/registries" {
     export class $NeoForgeRegistryCallbacks$ItemCallbacks implements $AddCallback<$Item>, $ClearCallback<$Item> {
     }
     export class $DeferredRegister$Items extends $DeferredRegister<$Item> {
-        register<I extends $Item>(arg0: string, arg1: $Function_<$ResourceLocation, I>): $DeferredItem<I>;
-        register<I extends $Item>(arg0: string, arg1: $Supplier_<I>): $DeferredItem<I>;
-        registerItem<I extends $Item>(arg0: string, arg1: $Function_<$Item$Properties, I>): $DeferredItem<I>;
-        registerItem<I extends $Item>(arg0: string, arg1: $Function_<$Item$Properties, I>, arg2: $Item$Properties): $DeferredItem<I>;
-        registerSimpleItem(arg0: string, arg1: $Item$Properties): $DeferredItem<$Item>;
         registerSimpleItem(arg0: string): $DeferredItem<$Item>;
+        registerSimpleItem(arg0: string, arg1: $Item$Properties): $DeferredItem<$Item>;
         registerSimpleBlockItem(arg0: $Holder_<$Block>): $DeferredItem<$BlockItem>;
         registerSimpleBlockItem(arg0: string, arg1: $Supplier_<$Block>, arg2: $Item$Properties): $DeferredItem<$BlockItem>;
-        registerSimpleBlockItem(arg0: $Holder_<$Block>, arg1: $Item$Properties): $DeferredItem<$BlockItem>;
         registerSimpleBlockItem(arg0: string, arg1: $Supplier_<$Block>): $DeferredItem<$BlockItem>;
+        registerSimpleBlockItem(arg0: $Holder_<$Block>, arg1: $Item$Properties): $DeferredItem<$BlockItem>;
+        register<I extends $Item>(arg0: string, arg1: $Function_<$ResourceLocation, I>): $DeferredItem<I>;
+        register<I extends $Item>(arg0: string, arg1: $Supplier_<I>): $DeferredItem<I>;
+        registerItem<I extends $Item>(arg0: string, arg1: $Function_<$Item$Properties, I>, arg2: $Item$Properties): $DeferredItem<I>;
+        registerItem<I extends $Item>(arg0: string, arg1: $Function_<$Item$Properties, I>): $DeferredItem<I>;
     }
     export class $DeferredRegister$Blocks extends $DeferredRegister<$Block> {
+        registerSimpleBlock(arg0: string, arg1: $BlockBehaviour$Properties): $DeferredBlock<$Block>;
+        registerSimpleBlock(arg0: string): $DeferredBlock<$Block>;
+        registerBlock<B extends $Block>(arg0: string, arg1: $Function_<$BlockBehaviour$Properties, B>): $DeferredBlock<B>;
+        registerBlock<B extends $Block>(arg0: string, arg1: $Function_<$BlockBehaviour$Properties, B>, arg2: $BlockBehaviour$Properties): $DeferredBlock<B>;
         register<B extends $Block>(arg0: string, arg1: $Function_<$ResourceLocation, B>): $DeferredBlock<B>;
         register<B extends $Block>(arg0: string, arg1: $Supplier_<B>): $DeferredBlock<B>;
-        registerBlock<B extends $Block>(arg0: string, arg1: $Function_<$BlockBehaviour$Properties, B>, arg2: $BlockBehaviour$Properties): $DeferredBlock<B>;
-        registerBlock<B extends $Block>(arg0: string, arg1: $Function_<$BlockBehaviour$Properties, B>): $DeferredBlock<B>;
-        registerSimpleBlock(arg0: string): $DeferredBlock<$Block>;
-        registerSimpleBlock(arg0: string, arg1: $BlockBehaviour$Properties): $DeferredBlock<$Block>;
     }
     export class $RegisterEvent extends $Event implements $IModBusEvent {
+        getRegistryKey(): $ResourceKey<$Registry<never>>;
         register<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $Consumer_<$RegisterEvent$RegisterHelper<T>>): void;
         register<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: $ResourceLocation_, arg2: $Supplier_<T>): void;
-        getRegistryKey(): $ResourceKey<$Registry<never>>;
         getRegistry<T>(arg0: $ResourceKey_<$Registry<T>>): $Registry<T>;
         getRegistry(): $Registry<never>;
         get registryKey(): $ResourceKey<$Registry<never>>;
@@ -156,36 +159,36 @@ declare module "@package/net/neoforged/neoforge/registries" {
      */
     export type $RegisterEvent$RegisterHelper_<T> = ((arg0: $ResourceLocation, arg1: T) => void);
     export class $DataPackRegistriesHooks {
-        static getSyncedRegistry<T>(arg0: $ResourceKey_<$Registry<T>>): $RegistryDataLoader$RegistryData<T>;
-        static getDataPackRegistries(): $List<$RegistryDataLoader$RegistryData<never>>;
         static getDataPackRegistriesWithDimensions(): $Stream<$RegistryDataLoader$RegistryData<never>>;
         static grabNetworkableRegistries(arg0: $List_<$RegistryDataLoader$RegistryData_<never>>): $List<$RegistryDataLoader$RegistryData<never>>;
         static getSyncedCustomRegistries(): $Set<$ResourceKey<$Registry<never>>>;
-        static get dataPackRegistries(): $List<$RegistryDataLoader$RegistryData<never>>;
+        static getSyncedRegistry<T>(arg0: $ResourceKey_<$Registry<T>>): $RegistryDataLoader$RegistryData<T>;
+        static getDataPackRegistries(): $List<$RegistryDataLoader$RegistryData<never>>;
         static get dataPackRegistriesWithDimensions(): $Stream<$RegistryDataLoader$RegistryData<never>>;
         static get syncedCustomRegistries(): $Set<$ResourceKey<$Registry<never>>>;
+        static get dataPackRegistries(): $List<$RegistryDataLoader$RegistryData<never>>;
     }
     export class $GameData {
-        static getBlockStatePointOfInterestTypeMap(): $Map<$BlockState, $Holder<$PoiType>>;
-        static vanillaSnapshot(): void;
-        static unfreezeData(): void;
-        static postRegisterEvents(): void;
-        static freezeData(): void;
-        static getRegistrationOrder(): $Set<$ResourceLocation>;
-        static getBlockStateIDMap(): $IdMapper<$BlockState>;
         static getBlockItemMap(): $Map<$Block, $Item>;
+        static getRegistrationOrder(): $Set<$ResourceLocation>;
+        static getBlockStatePointOfInterestTypeMap(): $Map<$BlockState, $Holder<$PoiType>>;
+        static postRegisterEvents(): void;
+        static unfreezeData(): void;
+        static freezeData(): void;
+        static getBlockStateIDMap(): $IdMapper<$BlockState>;
+        static vanillaSnapshot(): void;
         constructor();
-        static get blockStatePointOfInterestTypeMap(): $Map<$BlockState, $Holder<$PoiType>>;
-        static get registrationOrder(): $Set<$ResourceLocation>;
-        static get blockStateIDMap(): $IdMapper<$BlockState>;
         static get blockItemMap(): $Map<$Block, $Item>;
+        static get registrationOrder(): $Set<$ResourceLocation>;
+        static get blockStatePointOfInterestTypeMap(): $Map<$BlockState, $Holder<$PoiType>>;
+        static get blockStateIDMap(): $IdMapper<$BlockState>;
     }
     export class $DeferredItem<T extends $Item> extends $DeferredHolder<$Item, T> implements $ItemLike {
         asItem(): $Item;
-        toStack(): $ItemStack;
-        toStack(arg0: number): $ItemStack;
-        static createItem<T extends $Item>(arg0: $ResourceLocation_): $DeferredItem<T>;
         static createItem<T extends $Item>(arg0: $ResourceKey_<$Item>): $DeferredItem<T>;
+        static createItem<T extends $Item>(arg0: $ResourceLocation_): $DeferredItem<T>;
+        toStack(arg0: number): $ItemStack;
+        toStack(): $ItemStack;
     }
     export class $NeoForgeRegistriesSetup {
         static setup(arg0: $IEventBus): void;
@@ -201,41 +204,41 @@ declare module "@package/net/neoforged/neoforge/registries" {
     export class $IRegistryExtension<T> {
     }
     export interface $IRegistryExtension<T> {
-        resolve(arg0: $ResourceLocation_): $ResourceLocation;
+        addCallback<C extends $RegistryCallback<T>>(arg0: $Class<C>, arg1: C): void;
+        addCallback(arg0: $RegistryCallback<T>): void;
+        getKeyOrNull(arg0: T): $ResourceLocation;
         resolve(arg0: $ResourceKey_<T>): $ResourceKey<T>;
+        resolve(arg0: $ResourceLocation_): $ResourceLocation;
         getId(arg0: $ResourceKey_<T>): number;
         getId(arg0: $ResourceLocation_): number;
         containsValue(arg0: T): boolean;
         getData<A>(arg0: $DataMapType<T, A>, arg1: $ResourceKey_<T>): A;
         addAlias(arg0: $ResourceLocation_, arg1: $ResourceLocation_): void;
-        addCallback(arg0: $RegistryCallback<T>): void;
-        addCallback<C extends $RegistryCallback<T>>(arg0: $Class<C>, arg1: C): void;
-        getKeyOrNull(arg0: T): $ResourceLocation;
-        doesSync(): boolean;
         getMaxId(): number;
         getDataMap<A>(arg0: $DataMapType<T, A>): $Map<$ResourceKey<T>, A>;
+        doesSync(): boolean;
         get maxId(): number;
     }
-    export class $DataMapLoader$LoadResult<T> extends $Record {
+    export class $DataMapLoader$LoadResult<T> extends $Record implements $AccessDataMapLoaderResult, $LoadResultGetter {
     }
     /**
      * Values that may be interpreted as {@link $DataMapLoader$LoadResult}.
      */
     export type $DataMapLoader$LoadResult_<T> = { results?: $Map_<$DataMapType<any, never>, $List_<$DataMapFile_<never, any>>>,  } | [results?: $Map_<$DataMapType<any, never>, $List_<$DataMapFile_<never, any>>>, ];
     export class $RegistryManager {
-        static getDataMaps(): $Map<$ResourceKey<$Registry<never>>, $Map<$ResourceLocation, $DataMapType<never, never>>>;
-        static revertToVanilla(): void;
-        static applySnapshot(arg0: $Map_<$ResourceLocation_, $RegistrySnapshot>, arg1: boolean): $Set<$ResourceKey<never>>;
-        static initDataMaps(): void;
         static takeSnapshot(arg0: $RegistryManager$SnapshotType_): $Map<$ResourceLocation, $RegistrySnapshot>;
         static postNewRegistryEvent(): void;
         static revertToFrozen(): void;
+        static initDataMaps(): void;
+        static revertToVanilla(): void;
+        static applySnapshot(arg0: $Map_<$ResourceLocation_, $RegistrySnapshot>, arg1: boolean): $Set<$ResourceKey<never>>;
+        static getDataMaps(): $Map<$ResourceKey<$Registry<never>>, $Map<$ResourceLocation, $DataMapType<never, never>>>;
         static getRegistryNamesForSyncToClient(): $List<$ResourceLocation>;
+        static getDataMap<R>(arg0: $ResourceKey_<$Registry<R>>, arg1: $ResourceLocation_): $DataMapType<R, never>;
         static handleKnownDataMapsReply(arg0: $KnownRegistryDataMapsReplyPayload_, arg1: $IPayloadContext): void;
-        static isNonSyncedBuiltInRegistry(arg0: $Registry<never>): boolean;
         static generateRegistryPackets(arg0: boolean): $List<$FrozenRegistryPayload>;
         static getVanillaRegistryKeys(): $Set<$ResourceLocation>;
-        static getDataMap<R>(arg0: $ResourceKey_<$Registry<R>>, arg1: $ResourceLocation_): $DataMapType<R, never>;
+        static isNonSyncedBuiltInRegistry(arg0: $Registry<never>): boolean;
         static ATTRIBUTE_KNOWN_DATA_MAPS: $AttributeKey<$Map<$ResourceKey<$Registry<never>>, $Collection<$ResourceLocation>>>;
         constructor();
         static get dataMaps(): $Map<$ResourceKey<$Registry<never>>, $Map<$ResourceLocation, $DataMapType<never, never>>>;
@@ -243,30 +246,30 @@ declare module "@package/net/neoforged/neoforge/registries" {
         static get vanillaRegistryKeys(): $Set<$ResourceLocation>;
     }
     export class $BaseMappedRegistry<T> implements $Registry<T> {
-        resolve(arg0: $ResourceLocation_): $ResourceLocation;
+        addCallback(arg0: $RegistryCallback<T>): void;
         resolve(arg0: $ResourceKey_<T>): $ResourceKey<T>;
+        resolve(arg0: $ResourceLocation_): $ResourceLocation;
         getId(arg0: $ResourceLocation_): number;
         getId(arg0: $ResourceKey_<T>): number;
         getData<A>(arg0: $DataMapType<T, A>, arg1: $ResourceKey_<T>): A;
         addAlias(arg0: $ResourceLocation_, arg1: $ResourceLocation_): void;
-        addCallback(arg0: $RegistryCallback<T>): void;
-        doesSync(): boolean;
         getMaxId(): number;
         getDataMap<A>(arg0: $DataMapType<T, A>): $Map<$ResourceKey<T>, A>;
+        doesSync(): boolean;
+        asHolderIdMap(): $IdMap<$Holder<T>>;
+        holderByNameCodec(): $Codec<$Holder<T>>;
+        asTagAddingLookup(): $HolderLookup$RegistryLookup<T>;
+        getTagOrEmpty(arg0: $TagKey_<T>): $Iterable<$Holder<T>>;
+        byNameCodec(): $Codec<T>;
+        getRandomElementOf(arg0: $TagKey_<T>, arg1: $RandomSource): ($Holder<T>) | undefined;
+        getOrThrow(arg0: $ResourceKey_<T>): T;
+        getHolderOrThrow(arg0: $ResourceKey_<T>): $Holder$Reference<T>;
         stream(): $Stream<T>;
         keys<U>(arg0: $DynamicOps<U>): $Stream<U>;
         getOptional(arg0: $ResourceKey_<T> | null): (T) | undefined;
         getOptional(arg0: $ResourceLocation_ | null): (T) | undefined;
-        getOrThrow(arg0: $ResourceKey_<T>): T;
-        asHolderIdMap(): $IdMap<$Holder<T>>;
-        byNameCodec(): $Codec<T>;
-        holderByNameCodec(): $Codec<$Holder<T>>;
-        getTagOrEmpty(arg0: $TagKey_<T>): $Iterable<$Holder<T>>;
-        getRandomElementOf(arg0: $TagKey_<T>, arg1: $RandomSource): ($Holder<T>) | undefined;
-        asTagAddingLookup(): $HolderLookup$RegistryLookup<T>;
-        getHolderOrThrow(arg0: $ResourceKey_<T>): $Holder$Reference<T>;
-        byIdOrThrow(arg0: number): T;
         getIdOrThrow(arg0: T): number;
+        byIdOrThrow(arg0: number): T;
         addCallback<C extends $RegistryCallback<T>>(arg0: $Class<C>, arg1: C): void;
         getKeyOrNull(arg0: T): $ResourceLocation;
         spliterator(): $Spliterator<T>;
@@ -275,49 +278,49 @@ declare module "@package/net/neoforged/neoforge/registries" {
         get maxId(): number;
     }
     export class $RegistryBuilder<T> {
+        onAdd(arg0: $AddCallback_<T>): $RegistryBuilder<T>;
+        maxId(arg0: number): $RegistryBuilder<T>;
+        defaultKey(arg0: $ResourceKey_<T>): $RegistryBuilder<T>;
+        defaultKey(arg0: $ResourceLocation_): $RegistryBuilder<T>;
         create(): $Registry<T>;
         sync(arg0: boolean): $RegistryBuilder<T>;
         callback(arg0: $RegistryCallback<T>): $RegistryBuilder<T>;
-        disableRegistrationCheck(): $RegistryBuilder<T>;
         onBake(arg0: $BakeCallback_<T>): $RegistryBuilder<T>;
-        maxId(arg0: number): $RegistryBuilder<T>;
-        onAdd(arg0: $AddCallback_<T>): $RegistryBuilder<T>;
         onClear(arg0: $ClearCallback_<T>): $RegistryBuilder<T>;
-        defaultKey(arg0: $ResourceKey_<T>): $RegistryBuilder<T>;
-        defaultKey(arg0: $ResourceLocation_): $RegistryBuilder<T>;
         /**
          * @deprecated
          */
         withIntrusiveHolders(): $RegistryBuilder<T>;
+        disableRegistrationCheck(): $RegistryBuilder<T>;
         constructor(arg0: $ResourceKey_<$Registry<T>>);
     }
     export class $DeferredRegister<T> implements $DeferredRegisterAccessor<any> {
-        register<I extends T>(arg0: string, arg1: $Function_<$ResourceLocation, I>): $DeferredHolder<$Object, I>;
-        register(arg0: $IEventBus): void;
-        register<I extends T>(arg0: string, arg1: $Supplier_<I>): $DeferredHolder<$Object, I>;
-        static create<T>(arg0: $Registry<T>, arg1: string): $DeferredRegister<T>;
-        static create<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: string): $DeferredRegister<T>;
-        static create<B>(arg0: $ResourceLocation_, arg1: string): $DeferredRegister<B>;
-        getNamespace(): string;
-        addAlias(arg0: $ResourceLocation_, arg1: $ResourceLocation_): void;
-        getRegistryKey(): $ResourceKey<$Registry<$Object>>;
-        getRegistry(): $Supplier<$Registry<$Object>>;
-        makeRegistry(arg0: $Consumer_<$RegistryBuilder<$Object>>): $Registry<$Object>;
-        static createItems(arg0: string): $DeferredRegister$Items;
         static createBlocks(arg0: string): $DeferredRegister$Blocks;
+        static createItems(arg0: string): $DeferredRegister$Items;
+        getRegistryName(): $ResourceLocation;
         createTagKey(arg0: string): $TagKey<$Object>;
         createTagKey(arg0: $ResourceLocation_): $TagKey<$Object>;
-        getRegistryName(): $ResourceLocation;
-        static createDataComponents(arg0: $ResourceKey_<$Registry<$DataComponentType<never>>>, arg1: string): $DeferredRegister$DataComponents;
         /**
          * @deprecated
          */
         static createDataComponents(arg0: string): $DeferredRegister$DataComponents;
+        static createDataComponents(arg0: $ResourceKey_<$Registry<$DataComponentType<never>>>, arg1: string): $DeferredRegister$DataComponents;
+        getRegistryKey(): $ResourceKey<$Registry<$Object>>;
+        register(arg0: $IEventBus): void;
+        register<I extends T>(arg0: string, arg1: $Function_<$ResourceLocation, I>): $DeferredHolder<$Object, I>;
+        register<I extends T>(arg0: string, arg1: $Supplier_<I>): $DeferredHolder<$Object, I>;
+        static create<T>(arg0: $Registry<T>, arg1: string): $DeferredRegister<T>;
+        static create<B>(arg0: $ResourceLocation_, arg1: string): $DeferredRegister<B>;
+        static create<T>(arg0: $ResourceKey_<$Registry<T>>, arg1: string): $DeferredRegister<T>;
+        getNamespace(): string;
+        makeRegistry(arg0: $Consumer_<$RegistryBuilder<$Object>>): $Registry<$Object>;
+        getRegistry(): $Supplier<$Registry<$Object>>;
+        addAlias(arg0: $ResourceLocation_, arg1: $ResourceLocation_): void;
         getEntries(): $Map<$DeferredHolder<$Object, $Object>, $Supplier<$Object>>;
-        get namespace(): string;
-        get registryKey(): $ResourceKey<$Registry<$Object>>;
-        get registry(): $Supplier<$Registry<$Object>>;
         get registryName(): $ResourceLocation;
+        get registryKey(): $ResourceKey<$Registry<$Object>>;
+        get namespace(): string;
+        get registry(): $Supplier<$Registry<$Object>>;
         get entries(): $Map<$DeferredHolder<$Object, $Object>, $Supplier<$Object>>;
     }
     export class $DataMapLoader$1WithSource<T, R> extends $Record {
@@ -325,7 +328,7 @@ declare module "@package/net/neoforged/neoforge/registries" {
     /**
      * Values that may be interpreted as {@link $DataMapLoader$1WithSource}.
      */
-    export type $DataMapLoader$1WithSource_<T, R> = { attachment?: any, source?: $Either<$TagKey_<any>, $ResourceKey_<any>>,  } | [attachment?: any, source?: $Either<$TagKey_<any>, $ResourceKey_<any>>, ];
+    export type $DataMapLoader$1WithSource_<T, R> = { source?: $Either<$TagKey_<any>, $ResourceKey_<any>>, attachment?: any,  } | [source?: $Either<$TagKey_<any>, $ResourceKey_<any>>, attachment?: any, ];
     export class $NeoForgeRegistryCallbacks$BlockCallbacks implements $AddCallback<$Block>, $ClearCallback<$Block>, $BakeCallback<$Block> {
     }
     export class $IdMappingEvent$IdRemapping extends $Record {
@@ -336,7 +339,7 @@ declare module "@package/net/neoforged/neoforge/registries" {
     /**
      * Values that may be interpreted as {@link $IdMappingEvent$IdRemapping}.
      */
-    export type $IdMappingEvent$IdRemapping_ = { newId?: number, currId?: number,  } | [newId?: number, currId?: number, ];
+    export type $IdMappingEvent$IdRemapping_ = { currId?: number, newId?: number,  } | [currId?: number, newId?: number, ];
     export class $NeoForgeRegistries$Keys {
         static GLOBAL_LOOT_MODIFIER_SERIALIZERS: $ResourceKey<$Registry<$MapCodec<$IGlobalLootModifier>>>;
         static BIOME_MODIFIER_SERIALIZERS: $ResourceKey<$Registry<$MapCodec<$BiomeModifier>>>;
@@ -374,8 +377,8 @@ declare module "@package/net/neoforged/neoforge/registries" {
     export class $NeoForgeRegistryCallbacks {
     }
     export class $ModifyRegistriesEvent extends $Event implements $IModBusEvent {
-        getRegistry<T>(arg0: $ResourceKey_<$Registry<T>>): $Registry<T>;
         getRegistries(): $Iterable<$Registry<never>>;
+        getRegistry<T>(arg0: $ResourceKey_<$Registry<T>>): $Registry<T>;
         get registries(): $Iterable<$Registry<never>>;
     }
     export class $DeferredBlock<T extends $Block> extends $DeferredHolder<$Block, T> implements $ItemLike {
@@ -386,14 +389,14 @@ declare module "@package/net/neoforged/neoforge/registries" {
         toStack(): $ItemStack;
     }
     export class $RegistrySnapshot {
-        getFullBackup<T>(): $Registry<T>;
         getIds(): $Int2ObjectSortedMap<$ResourceLocation>;
         getAliases(): $Map<$ResourceLocation, $ResourceLocation>;
+        getFullBackup<T>(): $Registry<T>;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $RegistrySnapshot>;
         constructor<T>(arg0: $Registry<T>, arg1: boolean);
-        get fullBackup(): $Registry<T>;
         get ids(): $Int2ObjectSortedMap<$ResourceLocation>;
         get aliases(): $Map<$ResourceLocation, $ResourceLocation>;
+        get fullBackup(): $Registry<T>;
     }
     export class $DeferredRegister$DataComponents extends $DeferredRegister<$DataComponentType<never>> {
         registerComponentType<D>(arg0: string, arg1: $UnaryOperator_<$DataComponentType$Builder<D>>): $DeferredHolder<$DataComponentType<never>, $DataComponentType<D>>;
@@ -405,7 +408,7 @@ declare module "@package/net/neoforged/neoforge/registries" {
     /**
      * Values that may be interpreted as {@link $ClientRegistryManager$1MandatoryEntry}.
      */
-    export type $ClientRegistryManager$1MandatoryEntry_ = { id?: $ResourceLocation_, registry?: $ResourceKey_<$Registry<never>>,  } | [id?: $ResourceLocation_, registry?: $ResourceKey_<$Registry<never>>, ];
+    export type $ClientRegistryManager$1MandatoryEntry_ = { registry?: $ResourceKey_<$Registry<never>>, id?: $ResourceLocation_,  } | [registry?: $ResourceKey_<$Registry<never>>, id?: $ResourceLocation_, ];
     export class $IdMappingEvent$ModRemapping {
         registry: $ResourceLocation;
         newId: number;
@@ -413,8 +416,8 @@ declare module "@package/net/neoforged/neoforge/registries" {
         key: $ResourceLocation;
     }
     export class $ClientRegistryManager {
-        static handleDataMapSync<R>(arg0: $RegistryDataMapSyncPayload_<R>, arg1: $IPayloadContext): void;
         static handleKnownDataMaps(arg0: $KnownRegistryDataMapsPayload_, arg1: $IPayloadContext): void;
+        static handleDataMapSync<R>(arg0: $RegistryDataMapSyncPayload_<R>, arg1: $IPayloadContext): void;
         constructor();
     }
     export class $NeoForgeRegistryCallbacks$AttributeCallbacks implements $BakeCallback<$Attribute> {

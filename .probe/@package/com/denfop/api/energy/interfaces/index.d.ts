@@ -6,28 +6,28 @@ declare module "@package/com/denfop/api/energy/interfaces" {
     export class $EnergyTile {
     }
     export interface $EnergyTile {
-        setId(arg0: number): void;
-        getValidReceivers(): $List<$InfoTile<$EnergyTile>>;
-        setHashCodeSource(arg0: number): void;
-        getHashCodeSource(): number;
-        getIdNetwork(): number;
-        isRemovedTile(): boolean;
         getPos(): $BlockPos;
         getTiles(): $Map<$Direction, $EnergyTile>;
-        AddTile(arg0: $EnergyTile, arg1: $Direction_): void;
+        getValidReceivers(): $List<$InfoTile<$EnergyTile>>;
+        getHashCodeSource(): number;
+        getIdNetwork(): number;
         RemoveTile(arg0: $EnergyTile, arg1: $Direction_): void;
-        set id(value: number);
+        AddTile(arg0: $EnergyTile, arg1: $Direction_): void;
+        isRemovedTile(): boolean;
+        setHashCodeSource(arg0: number): void;
+        setId(arg0: number): void;
+        get pos(): $BlockPos;
+        get tiles(): $Map<$Direction, $EnergyTile>;
         get validReceivers(): $List<$InfoTile<$EnergyTile>>;
         get idNetwork(): number;
         get removedTile(): boolean;
-        get pos(): $BlockPos;
-        get tiles(): $Map<$Direction, $EnergyTile>;
+        set id(value: number);
     }
     export class $EnergyController {
     }
     export interface $EnergyController extends $EnergyTile {
+        getWork(): boolean;
         unload(): void;
         work(): void;
-        getWork(): boolean;
     }
 }

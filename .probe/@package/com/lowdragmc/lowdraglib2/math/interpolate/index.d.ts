@@ -4,13 +4,13 @@ import { $Number, $Runnable_, $Runnable } from "@package/java/lang";
 
 declare module "@package/com/lowdragmc/lowdraglib2/math/interpolate" {
     export class $Interpolator {
+        isFinished(): boolean;
+        getNormalizedTime(): number;
+        shiftClock(arg0: number): void;
         reset(): void;
         update(arg0: number): void;
         getTime(): number;
         getStartTime(): number;
-        shiftClock(arg0: number): void;
-        isFinished(): boolean;
-        getNormalizedTime(): number;
         duration: number;
         ease: $IEase;
         onFinished: $Runnable;
@@ -20,10 +20,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/math/interpolate" {
         to: number;
         constructor(arg0: number, arg1: number, arg2: number, arg3: $IEase_, arg4: $Consumer_<$Number>);
         constructor(arg0: number, arg1: number, arg2: number, arg3: $IEase_, arg4: $Consumer_<$Number>, arg5: $Runnable_);
-        get time(): number;
-        get startTime(): number;
         get finished(): boolean;
         get normalizedTime(): number;
+        get time(): number;
+        get startTime(): number;
     }
     export class $IEase {
         static CODEC: $Codec<$IEase>;

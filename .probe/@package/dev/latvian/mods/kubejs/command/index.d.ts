@@ -17,21 +17,21 @@ import { $ArgumentType } from "@package/com/mojang/brigadier/arguments";
 
 declare module "@package/dev/latvian/mods/kubejs/command" {
     export class $StageCommands {
-        static clearStages(source: $CommandSourceStack, players: $Collection_<$ServerPlayer>): number;
+        static addStage(source: $CommandSourceStack, players: $Collection_<$ServerPlayer>, stage: string): number;
         static removeStage(source: $CommandSourceStack, players: $Collection_<$ServerPlayer>, stage: string): number;
         static listStages(source: $CommandSourceStack, players: $Collection_<$ServerPlayer>): number;
-        static addStage(source: $CommandSourceStack, players: $Collection_<$ServerPlayer>, stage: string): number;
+        static clearStages(source: $CommandSourceStack, players: $Collection_<$ServerPlayer>): number;
         constructor();
     }
     export class $ArgumentTypeWrappers extends $Enum<$ArgumentTypeWrappers> implements $ArgumentTypeWrapper {
+        static printAll(): void;
         static values(): $ArgumentTypeWrappers[];
         static valueOf(name: string): $ArgumentTypeWrappers;
         time(minRequired: number): $ArgumentTypeWrapper;
         create(event: $CommandRegistryKubeEvent): $ArgumentType<never>;
         getResult(context: $CommandContext<$CommandSourceStack>, input: string): $Object;
-        static byName(name: $ResourceLocation_): typeof never;
         static registry<T>(event: $CommandRegistryKubeEvent, reg: $ResourceLocation_): $ArgumentTypeWrapper;
-        static printAll(): void;
+        static byName(name: $ResourceLocation_): typeof never;
         static ROTATION: $ArgumentTypeWrappers;
         static VEC2_CENTERED: $ArgumentTypeWrappers;
         static FLOAT: $ArgumentTypeWrappers;
@@ -104,19 +104,13 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         constructor();
     }
     export class $CommandRegistryKubeEvent implements $KubeEvent {
+        getCommands(): typeof $Commands;
         register(command: $LiteralArgumentBuilder<$CommandSourceStack>): $LiteralCommandNode<$CommandSourceStack>;
         getArguments(): typeof $ArgumentTypeWrappers;
         getRegistry(): $CommandBuildContext;
-        getCommands(): typeof $Commands;
         getBuiltinSuggestions(): typeof $SharedSuggestionProvider;
-        isForMultiPlayer(): boolean;
         isForSinglePlayer(): boolean;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
+        isForMultiPlayer(): boolean;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -124,17 +118,23 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -151,18 +151,18 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         context: $CommandBuildContext;
         dispatcher: $CommandDispatcher<$CommandSourceStack>;
         constructor(dispatcher: $CommandDispatcher<$CommandSourceStack>, context: $CommandBuildContext, selection: $Commands$CommandSelection_);
+        get commands(): typeof $Commands;
         get arguments(): typeof $ArgumentTypeWrappers;
         get registry(): $CommandBuildContext;
-        get commands(): typeof $Commands;
         get builtinSuggestions(): typeof $SharedSuggestionProvider;
-        get forMultiPlayer(): boolean;
         get forSinglePlayer(): boolean;
+        get forMultiPlayer(): boolean;
     }
     export class $InformationCommands {
-        static dump(stacks: $List_<$ItemStack_>, player: $ServerPlayer, name: string): number;
-        static hotbar(player: $ServerPlayer): number;
-        static inventory(player: $ServerPlayer): number;
         static hand(player: $ServerPlayer, hand: $InteractionHand_): number;
+        static hotbar(player: $ServerPlayer): number;
+        static dump(stacks: $List_<$ItemStack_>, player: $ServerPlayer, name: string): number;
+        static inventory(player: $ServerPlayer): number;
         constructor();
     }
     export class $ArgumentFunction<U> {
@@ -177,9 +177,9 @@ declare module "@package/dev/latvian/mods/kubejs/command" {
         static EMPTY_LIST: $SimpleCommandExceptionType;
     }
     export interface $PersistentDataCommands$PersistentDataFactory {
+        getOne(ctx: $CommandContext<$CommandSourceStack>): $WithPersistentData;
         apply(ctx: $CommandContext<$CommandSourceStack>): $Collection<$WithPersistentData>;
         getAll(ctx: $CommandContext<$CommandSourceStack>): $Collection<$WithPersistentData>;
-        getOne(ctx: $CommandContext<$CommandSourceStack>): $WithPersistentData;
     }
     /**
      * Values that may be interpreted as {@link $PersistentDataCommands$PersistentDataFactory}.

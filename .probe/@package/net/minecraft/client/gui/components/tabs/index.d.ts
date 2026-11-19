@@ -16,21 +16,21 @@ declare module "@package/net/minecraft/client/gui/components/tabs" {
      */
     export class $TabNavigationBar$Builder {
         /**
-         * Builds and returns a new TabNavigationBar instance.
-         * 
-         * @return a new TabNavigationBar instance.
-         */
-        build(): $TabNavigationBar;
-        /**
          * Adds multiple tabs to the TabNavigationBar.
          * 
          * @return the `Builder` instance.
          */
         addTabs(...tabs: $Tab[]): $TabNavigationBar$Builder;
+        /**
+         * Builds and returns a new TabNavigationBar instance.
+         * 
+         * @return a new TabNavigationBar instance.
+         */
+        build(): $TabNavigationBar;
     }
     export class $TabManager {
-        getCurrentTab(): $Tab;
         setTabArea(tabArea: $ScreenRectangle_): void;
+        getCurrentTab(): $Tab;
         setCurrentTab(tab: $Tab, playClickSound: boolean): void;
         constructor(addWidget: $Consumer_<$AbstractWidget>, removeWidget: $Consumer_<$AbstractWidget>);
         set tabArea(value: $ScreenRectangle_);
@@ -38,20 +38,37 @@ declare module "@package/net/minecraft/client/gui/components/tabs" {
     export class $Tab {
     }
     export interface $Tab {
+        doLayout(rectangle: $ScreenRectangle_): void;
         getTabTitle(): $Component;
         visitChildren(consumer: $Consumer_<$AbstractWidget>): void;
-        doLayout(rectangle: $ScreenRectangle_): void;
         get tabTitle(): $Component;
     }
     export class $GridLayoutTab implements $Tab {
+        doLayout(rectangle: $ScreenRectangle_): void;
         getTabTitle(): $Component;
         visitChildren(consumer: $Consumer_<$AbstractWidget>): void;
-        doLayout(rectangle: $ScreenRectangle_): void;
         constructor(title: $Component_);
         get tabTitle(): $Component;
     }
     export class $TabNavigationBar extends $AbstractContainerEventHandler implements $Renderable, $NarratableEntry, $TabNavigationBarAccessor {
+        /**
+         * @return the narration priority
+         */
+        narrationPriority(): $NarratableEntry$NarrationPriority;
+        /**
+         * Updates the narration output with the current narration information.
+         */
+        updateNarration(narrationElementOutput: $NarrationElementOutput): void;
+        /**
+         * Arranges the elements within the tabbed layout.
+         */
+        arrangeElements(): void;
+        /**
+         * Selects the tab at the specified index.
+         */
+        selectTab(index: number, playClickSound: boolean): void;
         static builder(tabManager: $TabManager, width: number): $TabNavigationBar$Builder;
+        setWidth(width: number): void;
         /**
          * Renders the graphical user interface (GUI) element.
          */
@@ -62,27 +79,8 @@ declare module "@package/net/minecraft/client/gui/components/tabs" {
          * @return `true` if the key press was handled, `false` otherwise.
          */
         keyPressed(keycode: number): boolean;
-        setWidth(width: number): void;
-        /**
-         * Updates the narration output with the current narration information.
-         */
-        updateNarration(narrationElementOutput: $NarrationElementOutput): void;
-        /**
-         * @return the narration priority
-         */
-        narrationPriority(): $NarratableEntry$NarrationPriority;
-        /**
-         * Arranges the elements within the tabbed layout.
-         */
-        arrangeElements(): void;
-        /**
-         * Selects the tab at the specified index.
-         */
-        selectTab(index: number, playClickSound: boolean): void;
-        /**
-         * @return `true` if the GUI element is dragging, `false` otherwise
-         */
         isActive(): boolean;
+        yacl$getLayout(): $LinearLayout;
         /**
          * Returns the index of the current tab.
          * 
@@ -92,7 +90,6 @@ declare module "@package/net/minecraft/client/gui/components/tabs" {
         yacl$getTabManager(): $TabManager;
         yacl$getTabs(): $ImmutableList<$Tab>;
         yacl$getTabButtons(): $ImmutableList<$TabButton>;
-        yacl$getLayout(): $LinearLayout;
         constructor(width: number, tabManager: $TabManager, tabs: $Iterable_<$Tab>);
         set width(value: number);
         get active(): boolean;

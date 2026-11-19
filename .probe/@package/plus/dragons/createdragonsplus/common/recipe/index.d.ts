@@ -1,16 +1,16 @@
 import { $Event } from "@package/net/neoforged/bus/api";
-import { $RecipeHolder, $RecipeHolder_, $RecipeManager, $RecipeType_ } from "@package/net/minecraft/world/item/crafting";
+import { $RecipeHolder, $RecipeManager, $RecipeHolder_, $RecipeType_ } from "@package/net/minecraft/world/item/crafting";
 import { $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $Multimap } from "@package/com/google/common/collect";
 import { $Map_ } from "@package/java/util";
 
 declare module "@package/plus/dragons/createdragonsplus/common/recipe" {
     export class $UpdateRecipesEvent extends $Event {
-        apply(): void;
-        removeRecipe(arg0: $RecipeHolder_<never>): void;
         addRecipe(arg0: $RecipeHolder_<never>): void;
-        getRecipeManager(): $RecipeManager;
         getRecipe(arg0: $ResourceLocation_): ($RecipeHolder<never>) | undefined;
+        getRecipeManager(): $RecipeManager;
+        removeRecipe(arg0: $RecipeHolder_<never>): void;
+        apply(): void;
         constructor(arg0: $RecipeManager, arg1: $Multimap<$RecipeType_<never>, $RecipeHolder_<never>>, arg2: $Map_<$ResourceLocation_, $RecipeHolder_<never>>);
         get recipeManager(): $RecipeManager;
     }

@@ -16,42 +16,42 @@ declare module "@package/mezz/jei/api/recipe/category" {
     export class $IRecipeCategory<T> {
     }
     export interface $IRecipeCategory<T> {
-        /**
-         * @deprecated
-         */
-        getBackground(): $IDrawable;
-        getTitle(): $Component;
-        draw(arg0: T, arg1: $IRecipeSlotsView_, arg2: $GuiGraphics, arg3: number, arg4: number): void;
-        getWidth(): number;
-        getCodec(arg0: $ICodecHelper, arg1: $IRecipeManager): $Codec<T>;
         getIcon(): $IDrawable;
-        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: number, arg4: number): void;
-        getHeight(): number;
         getRegistryName(arg0: T): $ResourceLocation;
-        setRecipe(arg0: $IRecipeLayoutBuilder, arg1: T, arg2: $IFocusGroup): void;
-        getRecipeType(): $RecipeType<T>;
+        getHeight(): number;
+        getCodec(arg0: $ICodecHelper, arg1: $IRecipeManager): $Codec<T>;
         onDisplayedIngredientsUpdate(arg0: T, arg1: $List_<$IRecipeSlotDrawable>, arg2: $IFocusGroup): void;
-        /**
-         * @deprecated
-         */
-        createRecipeExtras(arg0: $IRecipeExtrasBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: $IFocusGroup): void;
-        createRecipeExtras(arg0: $IRecipeExtrasBuilder, arg1: T, arg2: $IFocusGroup): void;
-        needsRecipeBorder(): boolean;
-        /**
-         * @deprecated
-         */
-        handleInput(arg0: T, arg1: number, arg2: number, arg3: $InputConstants$Key): boolean;
+        getRecipeType(): $RecipeType<T>;
         /**
          * @deprecated
          */
         getTooltipStrings(arg0: T, arg1: $IRecipeSlotsView_, arg2: number, arg3: number): $List<$Component>;
+        createRecipeExtras(arg0: $IRecipeExtrasBuilder, arg1: T, arg2: $IFocusGroup): void;
+        /**
+         * @deprecated
+         */
+        createRecipeExtras(arg0: $IRecipeExtrasBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: $IFocusGroup): void;
+        /**
+         * @deprecated
+         */
+        handleInput(arg0: T, arg1: number, arg2: number, arg3: $InputConstants$Key): boolean;
         getSourceRecipeIds(arg0: T): $List<$ResourceLocation>;
+        getTitle(): $Component;
+        /**
+         * @deprecated
+         */
+        getBackground(): $IDrawable;
+        getWidth(): number;
+        setRecipe(arg0: $IRecipeLayoutBuilder, arg1: T, arg2: $IFocusGroup): void;
+        draw(arg0: T, arg1: $IRecipeSlotsView_, arg2: $GuiGraphics, arg3: number, arg4: number): void;
+        needsRecipeBorder(): boolean;
         isHandled(arg0: T): boolean;
-        get background(): $IDrawable;
-        get title(): $Component;
-        get width(): number;
+        getTooltip(arg0: $ITooltipBuilder, arg1: T, arg2: $IRecipeSlotsView_, arg3: number, arg4: number): void;
         get icon(): $IDrawable;
         get height(): number;
         get recipeType(): $RecipeType<T>;
+        get title(): $Component;
+        get background(): $IDrawable;
+        get width(): number;
     }
 }

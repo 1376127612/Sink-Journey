@@ -1,16 +1,17 @@
 import { $ClientLevel } from "@package/net/minecraft/client/multiplayer";
+export * as block from "@package/xaero/lib/client/level/block";
 
 declare module "@package/xaero/lib/client/level" {
     export class $IClientLevel {
     }
     export interface $IClientLevel {
-        xaerolib_setData(arg0: $ClientLevelData): void;
         xaerolib_getData(): $ClientLevelData;
+        xaerolib_setData(arg0: $ClientLevelData): void;
     }
     export class $ClientLevelData {
-        static get(arg0: $ClientLevel): $ClientLevelData;
         serverHasMod(): boolean;
         setServerHasMod(): void;
+        static get(arg0: $ClientLevel): $ClientLevelData;
         constructor();
     }
 }

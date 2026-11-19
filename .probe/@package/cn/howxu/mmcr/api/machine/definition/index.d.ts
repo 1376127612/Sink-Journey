@@ -37,7 +37,7 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
     /**
      * Values that may be interpreted as {@link $MachineIoView$HeatState}.
      */
-    export type $MachineIoView$HeatState_ = { temperature?: number, heat?: number, heatCapacity?: number,  } | [temperature?: number, heat?: number, heatCapacity?: number, ];
+    export type $MachineIoView$HeatState_ = { heatCapacity?: number, temperature?: number, heat?: number,  } | [heatCapacity?: number, temperature?: number, heat?: number, ];
     export class $DisplayStack extends $Record {
         stack(): $ItemStack;
         static of(stack: $ItemStack_): $DisplayStack;
@@ -49,77 +49,77 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
      */
     export type $DisplayStack_ = { stack?: $ItemStack_,  } | [stack?: $ItemStack_, ];
     export class $MachineLevel extends $Record {
+        statePredicate(): $BlockPredicate;
+        representative(): $DisplayStack;
         priority(): number;
         id(): $ResourceLocation;
         modifier(): $ModifierDefinition;
         typeId(): $ResourceLocation;
-        representative(): $DisplayStack;
-        statePredicate(): $BlockPredicate;
         constructor(id: $ResourceLocation_, typeId: $ResourceLocation_, priority: number, statePredicate: $BlockPredicate, representative: $DisplayStack_, modifier: $ModifierDefinition_);
     }
     /**
      * Values that may be interpreted as {@link $MachineLevel}.
      */
-    export type $MachineLevel_ = { priority?: number, modifier?: $ModifierDefinition_, id?: $ResourceLocation_, statePredicate?: $BlockPredicate, representative?: $DisplayStack_, typeId?: $ResourceLocation_,  } | [priority?: number, modifier?: $ModifierDefinition_, id?: $ResourceLocation_, statePredicate?: $BlockPredicate, representative?: $DisplayStack_, typeId?: $ResourceLocation_, ];
+    export type $MachineLevel_ = { id?: $ResourceLocation_, statePredicate?: $BlockPredicate, representative?: $DisplayStack_, typeId?: $ResourceLocation_, priority?: number, modifier?: $ModifierDefinition_,  } | [id?: $ResourceLocation_, statePredicate?: $BlockPredicate, representative?: $DisplayStack_, typeId?: $ResourceLocation_, priority?: number, modifier?: $ModifierDefinition_, ];
     export class $RecipeTickContext extends $Record {
-        parallelism(): number;
-        recipe(): $MachineRecipe;
-        capabilitySnapshot(): $CapabilitySnapshot;
-        outputs(): $List<$MachineOutput>;
         requirements(): $List<$MachineRequirement>;
         totalTick(): number;
-        currentTick(): number;
         machineContext(): $MachineBehaviorContext;
+        capabilitySnapshot(): $CapabilitySnapshot;
+        parallelism(): number;
+        recipe(): $MachineRecipe;
+        currentTick(): number;
+        outputs(): $List<$MachineOutput>;
+        constructor(recipe: $MachineRecipe, currentTick: number, totalTick: number, parallelism: number);
         constructor(machineContext: $MachineBehaviorContext, recipe: $MachineRecipe, currentTick: number, totalTick: number, parallelism: number, requirements: $List_<$MachineRequirement>, outputs: $List_<$MachineOutput>, capabilitySnapshot: $CapabilitySnapshot_);
         constructor(machineContext: $MachineBehaviorContext, recipe: $MachineRecipe, currentTick: number, totalTick: number, parallelism: number, requirements: $List_<$MachineRequirement>, outputs: $List_<$MachineOutput>);
-        constructor(recipe: $MachineRecipe, currentTick: number, totalTick: number, parallelism: number);
     }
     /**
      * Values that may be interpreted as {@link $RecipeTickContext}.
      */
-    export type $RecipeTickContext_ = { requirements?: $List_<$MachineRequirement>, recipe?: $MachineRecipe, capabilitySnapshot?: $CapabilitySnapshot_, parallelism?: number, machineContext?: $MachineBehaviorContext, currentTick?: number, outputs?: $List_<$MachineOutput>, totalTick?: number,  } | [requirements?: $List_<$MachineRequirement>, recipe?: $MachineRecipe, capabilitySnapshot?: $CapabilitySnapshot_, parallelism?: number, machineContext?: $MachineBehaviorContext, currentTick?: number, outputs?: $List_<$MachineOutput>, totalTick?: number, ];
+    export type $RecipeTickContext_ = { machineContext?: $MachineBehaviorContext, currentTick?: number, outputs?: $List_<$MachineOutput>, totalTick?: number, requirements?: $List_<$MachineRequirement>, recipe?: $MachineRecipe, capabilitySnapshot?: $CapabilitySnapshot_, parallelism?: number,  } | [machineContext?: $MachineBehaviorContext, currentTick?: number, outputs?: $List_<$MachineOutput>, totalTick?: number, requirements?: $List_<$MachineRequirement>, recipe?: $MachineRecipe, capabilitySnapshot?: $CapabilitySnapshot_, parallelism?: number, ];
     export class $MachineIoPlan {
-        commit(): $MachineIoPlan$CommitResult;
-        commit(transactionWrites: $Consumer_<$DataStorage$Transaction>): $MachineIoPlan$CommitResult;
-        add(io: $RecipeIoDeclaration_): $MachineIoPlan;
-        view(): $MachineIoView;
         simulate(): $MachineIoPlan$Simulation;
-        requirements(): $List<$MachineRequirement>;
         addOutput(io: $RecipeIoDeclaration_): $MachineIoPlan;
         addOutput(io: $RecipeIoDeclaration_, policy: $OutputPolicy_): $MachineIoPlan;
         addInput(io: $RecipeIoDeclaration_): $MachineIoPlan;
-        commitData(transactionWrites: $Consumer_<$DataStorage$Transaction$1>): $MachineIoPlan$CommitResult;
+        requirements(): $List<$MachineRequirement>;
+        commit(transactionWrites: $Consumer_<$DataStorage$Transaction>): $MachineIoPlan$CommitResult;
+        commit(): $MachineIoPlan$CommitResult;
+        add(io: $RecipeIoDeclaration_): $MachineIoPlan;
+        view(): $MachineIoView;
         outputSimulations(): $List<$OutputSimulation>;
-        energySatisfied(): boolean;
         inputsSatisfied(): boolean;
+        energySatisfied(): boolean;
+        commitData(transactionWrites: $Consumer_<$DataStorage$Transaction$1>): $MachineIoPlan$CommitResult;
         constructor(capabilitySnapshot: $CapabilitySnapshot_);
     }
     export class $TickBehaviorContext extends $MachineBehaviorContext {
-        parallelism(): number;
-        factoryThreadCount(): number;
         capabilityTickContext(phase: $CapabilityTickPhase_): $CapabilityTickContext;
-        smartInterfaceValues(): $Map<string, number>;
+        factoryThreadCount(): number;
+        parallelism(): number;
         smartInterfaceValue(name: string): (number) | undefined;
+        smartInterfaceValues(): $Map<string, number>;
         ioPlan(): $MachineIoPlan;
         constructor(base: $MachineBehaviorContext, snapshot: $CapabilitySnapshot_);
         constructor(base: $MachineBehaviorContext, snapshot: $CapabilitySnapshot_, factoryThreadCount: number, parallelism: number);
     }
     export class $MachineBehaviorContext {
-        level(): $ServerLevel;
-        screenText(): $ControllerScreenText;
-        upgradeItems(): $List<$ItemStack>;
-        dataStorage(): $DataStorage;
-        controller(): $MachineControllerBlockEntity;
-        machineId(): $ResourceLocation;
         gameTime(): number;
+        dataStorage(): $DataStorage;
         controllerPos(): $BlockPos;
+        jadeText(): $JadeText;
+        ioView(): $MachineIoView;
+        screenText(): $ControllerScreenText;
+        isDue(period: number): boolean;
         dataStorageForRuntime(): $Object;
         countStructureBlocks(blockId: string): number;
         countStructureBlocks(blockId: $ResourceLocation_): number;
         countStructureBlocks(block: $Block_): number;
-        jadeText(): $JadeText;
-        isDue(period: number): boolean;
-        ioView(): $MachineIoView;
+        upgradeItems(): $List<$ItemStack>;
+        level(): $ServerLevel;
+        controller(): $MachineControllerBlockEntity;
+        machineId(): $ResourceLocation;
         constructor(controller: $MachineControllerBlockEntity, level: $ServerLevel, controllerPos: $BlockPos_, machineId: $ResourceLocation_, gameTime: number, screenText: $ControllerScreenText, dataStorage: $DataStorage$1, ioView: $MachineIoView, upgradeItems: $List_<$ItemStack_>, jadeText: $JadeText);
         constructor(controller: $MachineControllerBlockEntity, level: $ServerLevel, controllerPos: $BlockPos_, machineId: $ResourceLocation_, gameTime: number, screenText: $ControllerScreenText, dataStorage: $DataStorage$1, ioView: $MachineIoView, upgradeItems: $List_<$ItemStack_>);
         constructor(controller: $MachineControllerBlockEntity, level: $ServerLevel, controllerPos: $BlockPos_, machineId: $ResourceLocation_, gameTime: number, screenText: $ControllerScreenText, dataStorage: $DataStorage$1, ioView: $MachineIoView);
@@ -127,8 +127,8 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
         constructor(controller: $MachineControllerBlockEntity, level: $ServerLevel, controllerPos: $BlockPos_, machineId: $ResourceLocation_, gameTime: number, screenText: $ControllerScreenText);
     }
     export class $MachineIoPlan$CommitResult extends $Record {
-        failure(): $ExecutionStatus;
         successful(): boolean;
+        failure(): $ExecutionStatus;
         constructor(successful: boolean, failure: $ExecutionStatus_);
     }
     /**
@@ -136,9 +136,9 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
      */
     export type $MachineIoPlan$CommitResult_ = { successful?: boolean, failure?: $ExecutionStatus_,  } | [successful?: boolean, failure?: $ExecutionStatus_, ];
     export class $RecipeStartContext$ExecutionSnapshot extends $Record {
+        requirements(): $List<$MachineRequirement>;
         duration(): number;
         outputs(): $List<$MachineOutput>;
-        requirements(): $List<$MachineRequirement>;
         constructor(duration: number, requirements: $List_<$MachineRequirement>, outputs: $List_<$MachineOutput>);
     }
     /**
@@ -157,10 +157,10 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
      */
     export type $ModifierDefinition_ = { modifiers?: $List_<$MachineModifier>,  } | [modifiers?: $List_<$MachineModifier>, ];
     export class $PortTiers extends $Record {
+        requirements(): $List<$PortTiers$Requirement>;
         static builder(): $PortTiers$Builder;
         static combine(...declarations: $PortTiers_[]): $PortTiers;
         static none(): $PortTiers;
-        requirements(): $List<$PortTiers$Requirement>;
         constructor(requirements: $List_<$PortTiers$Requirement_>);
     }
     /**
@@ -204,30 +204,30 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
      */
     export type $PortTiers$FluidTier_ = "tiny" | "small" | "normal" | "reinforced" | "big" | "huge" | "ludicrous" | "vacuum";
     export class $BlockPredicate {
-        static state(id: $ResourceLocation_): $BlockPredicate;
+        alternatives(): $List<$BlockPredicate>;
+        static machineCoupler(): $BlockPredicate;
+        static coupler(): $BlockPredicate;
+        isMachineCoupler(): boolean;
+        static deferredBlock(blockSupplier: $Supplier_<$Block>): $BlockPredicate;
         static state(id: string): $BlockPredicate;
+        static state(id: $ResourceLocation_): $BlockPredicate;
+        static block(id: $ResourceLocation_): $BlockPredicate;
+        static block(id: string): $BlockPredicate;
         block(): ($Block) | undefined;
         static block(block: $Block_): $BlockPredicate;
-        static block(id: string): $BlockPredicate;
-        static block(id: $ResourceLocation_): $BlockPredicate;
-        static tag(tag: $TagKey_<$Block>): $BlockPredicate;
         tag(): ($TagKey<$Block>) | undefined;
-        static any(...predicates: $BlockPredicate[]): $BlockPredicate;
-        static coupler(): $BlockPredicate;
+        static tag(tag: $TagKey_<$Block>): $BlockPredicate;
         static anyOf(predicates: $Collection_<$BlockPredicate>): $BlockPredicate;
-        static blockState(state: $BlockState_): $BlockPredicate;
+        static any(...predicates: $BlockPredicate[]): $BlockPredicate;
         blockState(): ($BlockState) | undefined;
+        static blockState(state: $BlockState_): $BlockPredicate;
         blockSupplier(): ($Supplier<$Block>) | undefined;
-        alternatives(): $List<$BlockPredicate>;
-        static deferredBlock(blockSupplier: $Supplier_<$Block>): $BlockPredicate;
-        static machineCoupler(): $BlockPredicate;
-        isMachineCoupler(): boolean;
     }
     export class $PortTiers$ChemicalTier extends $Enum<$PortTiers$ChemicalTier> {
+        detectionTier(): number;
         static values(): $PortTiers$ChemicalTier[];
         static valueOf(name: string): $PortTiers$ChemicalTier;
         id(): string;
-        detectionTier(): number;
         static ELITE: $PortTiers$ChemicalTier;
         static ULTIMATE: $PortTiers$ChemicalTier;
         static BASIC: $PortTiers$ChemicalTier;
@@ -255,35 +255,35 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
      */
     export type $PortTiers$EnergyTier_ = "tiny" | "small" | "normal" | "reinforced" | "big" | "huge" | "ludicrous" | "ultimate";
     export class $PortTiers$Builder {
-        build(): $PortTiers;
         anyManaOutput(): $PortTiers$Builder;
-        anyManaInput(): $PortTiers$Builder;
-        anyAirInput(): $PortTiers$Builder;
-        anySourceOutput(): $PortTiers$Builder;
-        anyStressInput(): $PortTiers$Builder;
-        anySourceInput(): $PortTiers$Builder;
-        anyStressOutput(): $PortTiers$Builder;
         anyAirOutput(): $PortTiers$Builder;
-        anyChemicalInput(): $PortTiers$Builder;
-        anyHeatInput(): $PortTiers$Builder;
-        minItemInput(size: $PortTiers$ItemTier_): $PortTiers$Builder;
-        minFluidInput(size: $PortTiers$FluidTier_): $PortTiers$Builder;
+        anySourceOutput(): $PortTiers$Builder;
+        anyManaInput(): $PortTiers$Builder;
+        anyStressOutput(): $PortTiers$Builder;
+        anySourceInput(): $PortTiers$Builder;
+        anyAirInput(): $PortTiers$Builder;
+        anyStressInput(): $PortTiers$Builder;
+        build(): $PortTiers;
         anyItemInput(): $PortTiers$Builder;
         anyItemOutput(): $PortTiers$Builder;
-        anyFluidInput(): $PortTiers$Builder;
         anyEnergyOutput(): $PortTiers$Builder;
+        anyHeatInput(): $PortTiers$Builder;
+        anyChemicalInput(): $PortTiers$Builder;
         anyChemicalOutput(): $PortTiers$Builder;
-        anyHeatOutput(): $PortTiers$Builder;
-        minEnergyInput(size: $PortTiers$EnergyTier_): $PortTiers$Builder;
-        minEnergyOutput(size: $PortTiers$EnergyTier_): $PortTiers$Builder;
-        minFluidOutput(size: $PortTiers$FluidTier_): $PortTiers$Builder;
-        minChemicalOutput(size: $PortTiers$ChemicalTier_): $PortTiers$Builder;
-        minItemOutput(size: $PortTiers$ItemTier_): $PortTiers$Builder;
-        anyFluidOutput(): $PortTiers$Builder;
         anyEnergyInput(): $PortTiers$Builder;
-        minChemicalInput(size: $PortTiers$ChemicalTier_): $PortTiers$Builder;
+        anyFluidOutput(): $PortTiers$Builder;
+        anyFluidInput(): $PortTiers$Builder;
+        anyHeatOutput(): $PortTiers$Builder;
         anyRadioactiveChemicalInput(): $PortTiers$Builder;
         anyRadioactiveChemicalOutput(): $PortTiers$Builder;
+        minItemOutput(size: $PortTiers$ItemTier_): $PortTiers$Builder;
+        minFluidInput(size: $PortTiers$FluidTier_): $PortTiers$Builder;
+        minFluidOutput(size: $PortTiers$FluidTier_): $PortTiers$Builder;
+        minEnergyInput(size: $PortTiers$EnergyTier_): $PortTiers$Builder;
+        minEnergyOutput(size: $PortTiers$EnergyTier_): $PortTiers$Builder;
+        minChemicalInput(size: $PortTiers$ChemicalTier_): $PortTiers$Builder;
+        minChemicalOutput(size: $PortTiers$ChemicalTier_): $PortTiers$Builder;
+        minItemInput(size: $PortTiers$ItemTier_): $PortTiers$Builder;
         constructor();
     }
     export class $PortTiers$PortCategory extends $Enum<$PortTiers$PortCategory> {
@@ -321,21 +321,21 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
      */
     export type $PortTiers$ItemTier_ = "tiny" | "small" | "normal" | "reinforced" | "big" | "huge" | "ludicrous";
     export class $RecipeStartContext {
+        requirements(): $List<$MachineRequirement>;
+        requestedParallelism(): number;
+        effectiveParallelism(): number;
+        replaceExactItemInputCount(item: $Item_, expectedCount: number, replacementCount: number): boolean;
+        machineContext(): $MachineBehaviorContext;
+        setRequirements(requirements: $List_<$MachineRequirement>): void;
         snapshot(): $RecipeStartContext$ExecutionSnapshot;
         duration(): number;
         cancel(): void;
         cancelled(): boolean;
         recipe(): $MachineRecipe;
         setDuration(duration: number): void;
+        setOutputs(outputs: $List_<$MachineOutput>): void;
         recipeId(): $ResourceLocation;
         outputs(): $List<$MachineOutput>;
-        requirements(): $List<$MachineRequirement>;
-        requestedParallelism(): number;
-        setOutputs(outputs: $List_<$MachineOutput>): void;
-        effectiveParallelism(): number;
-        replaceExactItemInputCount(item: $Item_, expectedCount: number, replacementCount: number): boolean;
-        machineContext(): $MachineBehaviorContext;
-        setRequirements(requirements: $List_<$MachineRequirement>): void;
         constructor(recipe: $MachineRecipe, requestedParallelism: number, effectiveParallelism: number);
         constructor(machineContext: $MachineBehaviorContext, recipe: $MachineRecipe, requestedParallelism: number, effectiveParallelism: number, duration: number, requirements: $List_<$MachineRequirement>, outputs: $List_<$MachineOutput>);
     }
@@ -347,54 +347,54 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
     /**
      * Values that may be interpreted as {@link $MachineIoView$ResourceAmount}.
      */
-    export type $MachineIoView$ResourceAmount_<R> = { resource?: any, amount?: number,  } | [resource?: any, amount?: number, ];
+    export type $MachineIoView$ResourceAmount_<R> = { amount?: number, resource?: any,  } | [amount?: number, resource?: any, ];
     export class $MachineIoView {
-        manaInput(): number;
+        fluidAmount(ingredient: $FluidIngredient_): number;
         itemInputs(): $List<$MachineIoView$ResourceAmount<$ItemStack>>;
         fluidInputs(): $List<$MachineIoView$ResourceAmount<$FluidStack>>;
-        itemAmount(ingredient: $Ingredient_): number;
-        fluidAmount(ingredient: $FluidIngredient_): number;
+        displays(): $List<$CapabilityDisplay>;
         chemicalAmount(chemicalId: $ResourceLocation_): number;
         chemicalAmount(chemicalId: string): number;
-        displays(): $List<$CapabilityDisplay>;
-        sourceInput(): number;
         energyInput(): number;
-        airInputs(): $List<$AirState>;
-        airOutputs(): $List<$AirState>;
+        sourceInput(): number;
+        manaInput(): number;
+        itemAmount(ingredient: $Ingredient_): number;
         stressInputs(): $List<$StressState>;
         stressOutputs(): $List<$StressState>;
         chemicalInputs(): $List<$MachineIoView$ResourceAmount<$ResourceLocation>>;
-        smartInterfaceValues(): $Map<string, number>;
+        airInputs(): $List<$AirState>;
+        airOutputs(): $List<$AirState>;
+        manaOutputCapacity(): number;
+        heatOutputs(): $List<$MachineIoView$HeatState>;
+        itemOutputCapacity(stack: $ItemStack_): number;
+        chemicalTagAmount(tagId: string): number;
+        chemicalTagAmount(tagId: $ResourceLocation_): number;
         chemicalOutputCapacity(chemicalId: string): number;
         chemicalOutputCapacity(chemicalId: $ResourceLocation_): number;
         sourceOutputCapacity(): number;
-        energyOutputCapacity(): number;
-        smartInterfaceValue(name: string): (number) | undefined;
         fluidOutputCapacity(stack: $FluidStack_): number;
-        heatOutputs(): $List<$MachineIoView$HeatState>;
-        itemOutputCapacity(stack: $ItemStack_): number;
-        manaOutputCapacity(): number;
-        chemicalTagAmount(tagId: string): number;
-        chemicalTagAmount(tagId: $ResourceLocation_): number;
+        smartInterfaceValue(name: string): (number) | undefined;
+        smartInterfaceValues(): $Map<string, number>;
+        energyOutputCapacity(): number;
         heatInputs(): $List<$MachineIoView$HeatState>;
         forTags(requiredTags: $Set_<string>): $MachineIoView;
         constructor(snapshot: $CapabilitySnapshot_);
     }
     export class $PortTiers$Requirement extends $Record {
-        category(): $PortTiers$PortCategory;
-        minTierId(): string;
         ioType(): $IOType;
+        minTierId(): string;
+        category(): $PortTiers$PortCategory;
         minTier(): number;
         constructor(category: $PortTiers$PortCategory_, ioType: $IOType_, minTier: number, minTierId: string);
     }
     /**
      * Values that may be interpreted as {@link $PortTiers$Requirement}.
      */
-    export type $PortTiers$Requirement_ = { minTierId?: string, category?: $PortTiers$PortCategory_, minTier?: number, ioType?: $IOType_,  } | [minTierId?: string, category?: $PortTiers$PortCategory_, minTier?: number, ioType?: $IOType_, ];
+    export type $PortTiers$Requirement_ = { minTier?: number, ioType?: $IOType_, minTierId?: string, category?: $PortTiers$PortCategory_,  } | [minTier?: number, ioType?: $IOType_, minTierId?: string, category?: $PortTiers$PortCategory_, ];
     export class $ModifierUse extends $Record {
+        modifierId(): $ResourceLocation;
         static of(modifierId: $ResourceLocation_, replacement: $BlockPredicate): $ModifierUse;
         replacement(): $BlockPredicate;
-        modifierId(): $ResourceLocation;
         constructor(modifierId: $ResourceLocation_, replacement: $BlockPredicate);
     }
     /**
@@ -404,8 +404,8 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
     export class $MachineIoPlan$Simulation extends $Record {
         failure(): $ExecutionStatus;
         outputs(): $List<$OutputSimulation>;
-        energySatisfied(): boolean;
         inputsSatisfied(): boolean;
+        energySatisfied(): boolean;
         constructor(inputsSatisfied: boolean, energySatisfied: boolean, outputs: $List_<$OutputSimulation_>, failure: $ExecutionStatus_);
     }
     /**
@@ -413,17 +413,17 @@ declare module "@package/cn/howxu/mmcr/api/machine/definition" {
      */
     export type $MachineIoPlan$Simulation_ = { failure?: $ExecutionStatus_, energySatisfied?: boolean, outputs?: $List_<$OutputSimulation_>, inputsSatisfied?: boolean,  } | [failure?: $ExecutionStatus_, energySatisfied?: boolean, outputs?: $List_<$OutputSimulation_>, inputsSatisfied?: boolean, ];
     export class $RecipeFinishContext {
+        requestedParallelism(): number;
+        effectiveParallelism(): number;
+        machineContext(): $MachineBehaviorContext;
+        outputsDiscarded(): boolean;
+        discardOutputs(): void;
         cancel(): void;
         cancelled(): boolean;
         recipe(): $MachineRecipe;
+        setOutputs(outputs: $List_<$MachineOutput>): void;
         recipeId(): $ResourceLocation;
         outputs(): $List<$MachineOutput>;
-        requestedParallelism(): number;
-        setOutputs(outputs: $List_<$MachineOutput>): void;
-        effectiveParallelism(): number;
-        machineContext(): $MachineBehaviorContext;
-        discardOutputs(): void;
-        outputsDiscarded(): boolean;
         constructor(recipe: $MachineRecipe, requestedParallelism: number, effectiveParallelism: number, outputs: $List_<$MachineOutput>);
         constructor(machineContext: $MachineBehaviorContext, recipe: $MachineRecipe, requestedParallelism: number, effectiveParallelism: number, outputs: $List_<$MachineOutput>);
     }

@@ -6,45 +6,45 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/cn/howxu/mmcr/api/recipe/helper" {
     export class $ProcessingComponent {
+        getPos(): $BlockPos;
+        matchesTag(requirementTag: string): boolean;
+        getRelativePos(): $BlockPos;
         getType(): $ComponentType;
         tag(): string;
         getTag(): string;
         tags(): $List<string>;
-        getContainer(): $BlockEntity;
         getComponent(): $MachineComponent;
-        matchesTag(requirementTag: string): boolean;
-        getPos(): $BlockPos;
+        getContainer(): $BlockEntity;
         getTags(): $List<string>;
-        getRelativePos(): $BlockPos;
-        constructor(type: $ComponentType, tags: $List_<string>, pos: $BlockPos_);
-        constructor(type: $ComponentType, tag: string, pos: $BlockPos_);
-        constructor(component: $MachineComponent_, container: $BlockEntity, pos: $BlockPos_, relativePos: $BlockPos_, tags: $List_<string>, type: $ComponentType);
         constructor(component: $MachineComponent_, container: $BlockEntity, pos: $BlockPos_, relativePos: $BlockPos_, tags: $List_<string>);
         constructor(component: $MachineComponent_, container: $BlockEntity, pos: $BlockPos_, relativePos: $BlockPos_, tag: string);
-        get type(): $ComponentType;
-        get container(): $BlockEntity;
-        get component(): $MachineComponent;
+        constructor(component: $MachineComponent_, container: $BlockEntity, pos: $BlockPos_, relativePos: $BlockPos_, tags: $List_<string>, type: $ComponentType);
+        constructor(type: $ComponentType, tag: string, pos: $BlockPos_);
+        constructor(type: $ComponentType, tags: $List_<string>, pos: $BlockPos_);
         get pos(): $BlockPos;
         get relativePos(): $BlockPos;
+        get type(): $ComponentType;
+        get component(): $MachineComponent;
+        get container(): $BlockEntity;
     }
     export class $CraftingStatus {
-        static failure(unlocMessage: string): $CraftingStatus;
         isCrafting(): boolean;
-        getStatus(): $CraftingStatus$Status;
-        static working(unlocMessage: string): $CraftingStatus;
-        static working(): $CraftingStatus;
         isFailure(): boolean;
-        isPaused(): boolean;
         static paused(): $CraftingStatus;
         getUnlocMessage(): string;
+        static failure(unlocMessage: string): $CraftingStatus;
+        isPaused(): boolean;
+        static working(unlocMessage: string): $CraftingStatus;
+        static working(): $CraftingStatus;
+        getStatus(): $CraftingStatus$Status;
         overrideStatusMessage(unlocalizedMessage: string): void;
         static IDLE: $CraftingStatus;
         static MISSING_STRUCTURE: $CraftingStatus;
         static CHUNK_UNLOADED: $CraftingStatus;
         constructor(status: $CraftingStatus$Status_, unlocalizedMessage: string);
         get crafting(): boolean;
-        get status(): $CraftingStatus$Status;
         get unlocMessage(): string;
+        get status(): $CraftingStatus$Status;
     }
     export class $CraftingStatus$Status extends $Enum<$CraftingStatus$Status> {
         static values(): $CraftingStatus$Status[];

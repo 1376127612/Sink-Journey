@@ -9,20 +9,20 @@ declare module "@package/sirttas/elementalcraft/api/element/storage" {
         static empty(): $IElementStorage;
     }
     export interface $IElementStorage {
+        extractElement(arg0: number, arg1: $ElementType_, arg2: boolean): number;
+        insertElement(arg0: number, arg1: $ElementType_, arg2: boolean): number;
+        getElementCapacity(arg0: $ElementType_): number;
+        getElementAmount(arg0: $ElementType_): number;
+        canPipeInsert(arg0: $ElementType_, arg1: $Direction_ | null): boolean;
+        usableInInventory(): boolean;
+        transferAll(arg0: $IElementStorage): number;
+        canPipeExtract(arg0: $ElementType_, arg1: $Direction_ | null): boolean;
+        doesRenderGauge(arg0: $Player): boolean;
+        forElement(arg0: $ElementType_): $ISingleElementStorage;
         isEmpty(): boolean;
         fill(arg0: $ElementType_): void;
         fill(): void;
-        transferTo(arg0: $IElementStorage, arg1: $ElementType_, arg2: number, arg3: number): number;
         transferTo(arg0: $IElementStorage, arg1: $ElementType_, arg2: number): number;
-        getElementCapacity(arg0: $ElementType_): number;
-        getElementAmount(arg0: $ElementType_): number;
-        insertElement(arg0: number, arg1: $ElementType_, arg2: boolean): number;
-        forElement(arg0: $ElementType_): $ISingleElementStorage;
-        extractElement(arg0: number, arg1: $ElementType_, arg2: boolean): number;
-        usableInInventory(): boolean;
-        doesRenderGauge(arg0: $Player): boolean;
-        transferAll(arg0: $IElementStorage): number;
-        canPipeExtract(arg0: $ElementType_, arg1: $Direction_ | null): boolean;
-        canPipeInsert(arg0: $ElementType_, arg1: $Direction_ | null): boolean;
+        transferTo(arg0: $IElementStorage, arg1: $ElementType_, arg2: number, arg3: number): number;
     }
 }

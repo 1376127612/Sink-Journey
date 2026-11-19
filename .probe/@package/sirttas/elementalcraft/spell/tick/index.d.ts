@@ -5,19 +5,19 @@ import { $Runnable_ } from "@package/java/lang";
 
 declare module "@package/sirttas/elementalcraft/spell/tick" {
     export class $AbstractSpellInstance {
+        isFinished(): boolean;
+        getSpell(): $Spell;
+        getCaster(): $Entity;
         stop(): void;
         static delay(arg0: $Entity, arg1: $Spell_, arg2: number, arg3: $Runnable_): $AbstractSpellInstance;
         getDuration(): number;
         tick(): void;
-        getCaster(): $Entity;
-        static effect(arg0: $Entity, arg1: $Spell_, arg2: number, arg3: $Consumer_<$AbstractSpellInstance>): $AbstractSpellInstance;
         getTicks(): number;
-        getSpell(): $Spell;
-        isFinished(): boolean;
-        get duration(): number;
-        get caster(): $Entity;
-        get ticks(): number;
-        get spell(): $Spell;
+        static effect(arg0: $Entity, arg1: $Spell_, arg2: number, arg3: $Consumer_<$AbstractSpellInstance>): $AbstractSpellInstance;
         get finished(): boolean;
+        get spell(): $Spell;
+        get caster(): $Entity;
+        get duration(): number;
+        get ticks(): number;
     }
 }

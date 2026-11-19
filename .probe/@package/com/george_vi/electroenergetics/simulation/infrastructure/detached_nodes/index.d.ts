@@ -3,10 +3,10 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/com/george_vi/electroenergetics/simulation/infrastructure/detached_nodes" {
     export class $DetachedNodeType extends $Enum<$DetachedNodeType> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $DetachedNodeType[];
         static valueOf(arg0: string): $DetachedNodeType;
         static byName(arg0: string): $DetachedNodeType;
-        getSerializedName(): string;
         isPhysics(): boolean;
         getRemappedEnumConstantName(): string;
         static FIXED: $DetachedNodeType;

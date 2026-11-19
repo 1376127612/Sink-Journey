@@ -1,6 +1,6 @@
 import { $IRecipeLayoutBuilder, $IRecipeSlotBuilder } from "@package/mezz/jei/api/gui/builder";
 import { $ItemStack, $ItemStack_ } from "@package/net/minecraft/world/item";
-import { $Ingredient_, $Ingredient } from "@package/net/minecraft/world/item/crafting";
+import { $Ingredient, $Ingredient_ } from "@package/net/minecraft/world/item/crafting";
 import { $IFocusGroup } from "@package/mezz/jei/api/recipe";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 import { $IRecipeSlotDrawable } from "@package/mezz/jei/api/gui/ingredient";
@@ -12,15 +12,15 @@ declare module "@package/mezz/jei/api/recipe/category/extensions/vanilla/cooking
     export class $ICookingCategoryExtension<R> {
     }
     export interface $ICookingCategoryExtension<R> {
-        getCookingTime(arg0: R, arg1: number): number;
-        getExperience(arg0: R, arg1: number): number;
         getFuel(arg0: R, arg1: $Ingredient_): $Ingredient;
-        setRecipe(arg0: R, arg1: $IRecipeLayoutBuilder, arg2: $IRecipeSlotBuilder, arg3: $IRecipeSlotBuilder, arg4: $IFocusGroup): void;
+        getExperience(arg0: R, arg1: number): number;
         onDisplayedIngredientsUpdate(arg0: R, arg1: $List_<$IRecipeSlotDrawable>, arg2: $IFocusGroup): void;
         createRecipeExtras(arg0: R, arg1: $IRecipeExtrasBuilder, arg2: $IFocusGroup): void;
         getSourceRecipeIds(arg0: R): $List<$ResourceLocation>;
-        isHandled(arg0: R): boolean;
+        setRecipe(arg0: R, arg1: $IRecipeLayoutBuilder, arg2: $IRecipeSlotBuilder, arg3: $IRecipeSlotBuilder, arg4: $IFocusGroup): void;
+        getCookingTime(arg0: R, arg1: number): number;
         getFuelOutput(arg0: R, arg1: $ItemStack_): $ItemStack;
+        isHandled(arg0: R): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ICookingCategoryExtension}.

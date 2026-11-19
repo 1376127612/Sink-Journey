@@ -3,19 +3,19 @@ import { $Holder_, $Direction_, $Holder } from "@package/net/minecraft/core";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $ResourceLocation_, $ResourceKey_ } from "@package/net/minecraft/resources";
 import { $JsonMerger } from "@package/sirttas/dpanvil/api/json/merger";
-import { $Map_, $Map, $Map$Entry, $Collection, $Set } from "@package/java/util";
+import { $Map_, $Map, $Collection, $Map$Entry, $Set } from "@package/java/util";
 import { $Object, $Record } from "@package/java/lang";
 import { $AABB, $AABB_ } from "@package/net/minecraft/world/phys";
 
 declare module "@package/sirttas/elementalcraft/api/range" {
     export class $Range extends $Record {
-        static builder(): $Range$Builder;
-        box(): $AABB;
-        static withParent(arg0: $ResourceKey_<$Range>): $Range$Builder;
-        static withParent(arg0: $ResourceLocation_): $Range$Builder;
         stitch(): boolean;
         scaleBox(arg0: number): $AABB;
         growthRatio(): $GrowthRatio;
+        static builder(): $Range$Builder;
+        box(): $AABB;
+        static withParent(arg0: $ResourceLocation_): $Range$Builder;
+        static withParent(arg0: $ResourceKey_<$Range>): $Range$Builder;
         static CODEC: $Codec<$Range>;
         static DEFAULT_HOLDER: $Holder<$Range>;
         static HOLDER_CODEC: $Codec<$Holder<$Range>>;
@@ -26,15 +26,15 @@ declare module "@package/sirttas/elementalcraft/api/range" {
     /**
      * Values that may be interpreted as {@link $Range}.
      */
-    export type $Range_ = { box?: $AABB_, growthRatio?: $GrowthRatio_, stitch?: boolean,  } | [box?: $AABB_, growthRatio?: $GrowthRatio_, stitch?: boolean, ];
+    export type $Range_ = { stitch?: boolean, box?: $AABB_, growthRatio?: $GrowthRatio_,  } | [stitch?: boolean, box?: $AABB_, growthRatio?: $GrowthRatio_, ];
     export class $GrowthRatio extends $Record {
+        south(): number;
+        west(): number;
+        east(): number;
+        north(): number;
         apply(arg0: $AABB_, arg1: number): $AABB;
         up(): number;
         down(): number;
-        north(): number;
-        east(): number;
-        south(): number;
-        west(): number;
         static towards(arg0: $Direction_): $GrowthRatio;
         static ALIGNED_EAST: $GrowthRatio;
         static CODEC: $Codec<$GrowthRatio>;
@@ -52,7 +52,7 @@ declare module "@package/sirttas/elementalcraft/api/range" {
     /**
      * Values that may be interpreted as {@link $GrowthRatio}.
      */
-    export type $GrowthRatio_ = { north?: number, east?: number, up?: number, west?: number, south?: number, down?: number,  } | [north?: number, east?: number, up?: number, west?: number, south?: number, down?: number, ];
+    export type $GrowthRatio_ = { west?: number, south?: number, down?: number, north?: number, east?: number, up?: number,  } | [west?: number, south?: number, down?: number, north?: number, east?: number, up?: number, ];
     export class $RangeVariants extends $Record implements $Map<string, $Holder<$Range>> {
         remove(arg0: $Object): $Holder<$Range>;
         size(): number;
@@ -90,19 +90,19 @@ declare module "@package/sirttas/elementalcraft/api/range" {
      */
     export type $RangeVariants_ = { delegate?: $Map_<string, $Holder_<$Range>>,  } | [delegate?: $Map_<string, $Holder_<$Range>>, ];
     export class $Range$Builder {
-        box(arg0: $AABB_): $Range$Builder;
-        box(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $Range$Builder;
-        box(arg0: number, arg1: number, arg2: number): $Range$Builder;
-        box(arg0: number, arg1: number): $Range$Builder;
-        box(arg0: number): $Range$Builder;
-        move(arg0: number, arg1: number, arg2: number): $Range$Builder;
-        fixedWidth(): $Range$Builder;
-        fixedHeight(): $Range$Builder;
-        expendingUp(arg0: number, arg1: number): $Range$Builder;
-        expendingDown(arg0: number, arg1: number): $Range$Builder;
         stitch(): $Range$Builder;
         growthRatio(arg0: $GrowthRatio_): $Range$Builder;
+        fixedHeight(): $Range$Builder;
+        box(arg0: number, arg1: number): $Range$Builder;
+        box(arg0: number, arg1: number, arg2: number): $Range$Builder;
+        box(arg0: number): $Range$Builder;
+        box(arg0: $AABB_): $Range$Builder;
+        box(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): $Range$Builder;
+        move(arg0: number, arg1: number, arg2: number): $Range$Builder;
+        fixedWidth(): $Range$Builder;
         boxTowards(arg0: $Direction_, arg1: number): $Range$Builder;
+        expendingUp(arg0: number, arg1: number): $Range$Builder;
+        expendingDown(arg0: number, arg1: number): $Range$Builder;
         static CODEC: $Codec<$Range$Builder>;
     }
 }

@@ -20,18 +20,18 @@ import { $BlockInfo } from "@package/com/lowdragmc/lowdraglib2/utils/data";
 
 declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
     export class $DummyWorld extends $Level {
-        getBounds(): $AABB;
         createParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
-        tickEntities(): void;
-        addEntity(arg0: $Entity): void;
-        removeEntity(arg0: number, arg1: $Entity$RemovalReason_): void;
-        getParticleManager(): $ParticleManager;
-        setParticleManager(arg0: $ParticleManager): void;
-        isFilledBlock(arg0: $BlockPos_): boolean;
-        getFilledBlocks(): $LongSet;
-        prepareLighting(arg0: $BlockPos_): void;
-        getAsClientWorld(): $Supplier<$ClientLevel>;
         tickWorld(): void;
+        setParticleManager(arg0: $ParticleManager): void;
+        getParticleManager(): $ParticleManager;
+        isFilledBlock(arg0: $BlockPos_): boolean;
+        prepareLighting(arg0: $BlockPos_): void;
+        getFilledBlocks(): $LongSet;
+        getAsClientWorld(): $Supplier<$ClientLevel>;
+        getBounds(): $AABB;
+        addEntity(arg0: $Entity): void;
+        tickEntities(): void;
+        removeEntity(arg0: number, arg1: $Entity$RemovalReason_): void;
         restoringBlockSnapshots: boolean;
         oThunderLevel: number;
         static LONG_PARTICLE_CLIP_RANGE: number;
@@ -55,19 +55,19 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
         blockEntityTickers: $List<$TickingBlockEntity>;
         rainLevel: number;
         captureBlockSnapshots: boolean;
-        constructor();
         constructor(arg0: $RegistryAccess);
-        get bounds(): $AABB;
+        constructor();
         get filledBlocks(): $LongSet;
         get asClientWorld(): $Supplier<$ClientLevel>;
+        get bounds(): $AABB;
     }
     export class $TrackedDummyWorld extends $DummyWorld {
-        clear(): void;
-        removeBlock(arg0: $BlockPos_): void;
-        addBlock(arg0: $BlockPos_, arg1: $BlockInfo): void;
-        setBlockFilter(arg0: $Predicate_<$BlockPos>): void;
-        addBlocks(arg0: $Map_<$BlockPos_, $BlockInfo>): void;
         getAllRenderedEntities(): $Iterable<$Entity>;
+        removeBlock(arg0: $BlockPos_): void;
+        setBlockFilter(arg0: $Predicate_<$BlockPos>): void;
+        clear(): void;
+        addBlocks(arg0: $Map_<$BlockPos_, $BlockInfo>): void;
+        addBlock(arg0: $BlockPos_, arg1: $BlockInfo): void;
         restoringBlockSnapshots: boolean;
         static LONG_PARTICLE_CLIP_RANGE: number;
         thunderLevel: number;
@@ -94,7 +94,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/virtuallevel" {
         captureBlockSnapshots: boolean;
         constructor();
         constructor(arg0: $Level_);
-        set blockFilter(value: $Predicate_<$BlockPos>);
         get allRenderedEntities(): $Iterable<$Entity>;
+        set blockFilter(value: $Predicate_<$BlockPos>);
     }
 }

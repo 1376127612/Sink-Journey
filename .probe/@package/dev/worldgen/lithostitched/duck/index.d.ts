@@ -11,8 +11,8 @@ declare module "@package/dev/worldgen/lithostitched/duck" {
     export class $MansionRoomDuck {
     }
     export interface $MansionRoomDuck extends $RegistryHolder {
-        lithostitched$floorNumber(): number;
         lithostitched$getRandom(arg0: string, arg1: $RandomSource): string;
+        lithostitched$floorNumber(): number;
     }
     export class $ContextBiomeAccessor {
     }
@@ -26,10 +26,10 @@ declare module "@package/dev/worldgen/lithostitched/duck" {
     export class $SurfaceSystemAccessor {
     }
     export interface $SurfaceSystemAccessor {
-        getNoiseRandom(): $PositionalRandomFactory;
         getBandOffsetNoise(): $NormalNoise;
-        get noiseRandom(): $PositionalRandomFactory;
+        getNoiseRandom(): $PositionalRandomFactory;
         get bandOffsetNoise(): $NormalNoise;
+        get noiseRandom(): $PositionalRandomFactory;
     }
     export class $RegistryHolder {
     }
@@ -40,8 +40,8 @@ declare module "@package/dev/worldgen/lithostitched/duck" {
     export class $StructurePoolAccess {
     }
     export interface $StructurePoolAccess {
-        getLithostitchedTemplates(): $LithostitchedTemplates;
         compileRawTemplates(): void;
+        getLithostitchedTemplates(): $LithostitchedTemplates;
         get lithostitchedTemplates(): $LithostitchedTemplates;
     }
     export class $ReferencePosDuck {
@@ -63,15 +63,15 @@ declare module "@package/dev/worldgen/lithostitched/duck" {
     export class $ContextAccessor {
     }
     export interface $ContextAccessor {
-        getPos(): $Vec3i;
         lithostitched$getRandomState(): $RandomState;
         lithostitched$getNoiseChunk(): $NoiseChunk;
+        getPos(): $Vec3i;
         lithostitched$getSystem(): $SurfaceSystem;
         lithostitched$getStoneDepthBelow(): number;
-        lithostitched$getChunk(): $ChunkAccess;
-        lithostitched$getX(): number;
         lithostitched$getY(): number;
+        lithostitched$getX(): number;
         lithostitched$getZ(): number;
+        lithostitched$getChunk(): $ChunkAccess;
         get pos(): $Vec3i;
     }
 }

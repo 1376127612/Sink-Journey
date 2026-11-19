@@ -11,41 +11,41 @@ import { $BehaviourType, $BlockEntityBehaviour } from "@package/com/simibubi/cre
 
 declare module "@package/com/simibubi/create/foundation/blockEntity/behaviour/fluid" {
     export class $SmartFluidTankBehaviour$TankSegment {
-        isEmpty(arg0: number): boolean;
-        onFluidStackChanged(): void;
-        getFluidLevel(): $LerpedFloat;
         readNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
         writeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         getRenderedFluid(): $FluidStack;
         getTotalUnits(arg0: number): number;
+        onFluidStackChanged(): void;
+        getFluidLevel(): $LerpedFloat;
+        isEmpty(arg0: number): boolean;
         constructor(arg0: $SmartFluidTankBehaviour, arg1: number);
-        get fluidLevel(): $LerpedFloat;
         get renderedFluid(): $FluidStack;
+        get fluidLevel(): $LerpedFloat;
     }
     export class $SmartFluidTankBehaviour extends $BlockEntityBehaviour {
+        getTanks(): $SmartFluidTankBehaviour$TankSegment[];
+        forbidInsertion(): $SmartFluidTankBehaviour;
+        whenFluidUpdates(arg0: $Runnable_): $SmartFluidTankBehaviour;
+        allowInsertion(): $SmartFluidTankBehaviour;
+        sendDataImmediately(): void;
+        allowExtraction(): $SmartFluidTankBehaviour;
+        getPrimaryHandler(): $SmartFluidTank;
+        getPrimaryTank(): $SmartFluidTankBehaviour$TankSegment;
+        forbidExtraction(): $SmartFluidTankBehaviour;
+        sendDataLazily(): void;
         isEmpty(): boolean;
         static single(arg0: $SmartBlockEntity, arg1: number): $SmartFluidTankBehaviour;
         forEach(arg0: $Consumer_<$SmartFluidTankBehaviour$TankSegment>): void;
         getCapability(): $IFluidHandler;
-        getPrimaryHandler(): $SmartFluidTank;
-        getTanks(): $SmartFluidTankBehaviour$TankSegment[];
-        forbidExtraction(): $SmartFluidTankBehaviour;
-        sendDataImmediately(): void;
-        allowExtraction(): $SmartFluidTankBehaviour;
-        allowInsertion(): $SmartFluidTankBehaviour;
-        sendDataLazily(): void;
-        getPrimaryTank(): $SmartFluidTankBehaviour$TankSegment;
-        whenFluidUpdates(arg0: $Runnable_): $SmartFluidTankBehaviour;
-        forbidInsertion(): $SmartFluidTankBehaviour;
         static INPUT: $BehaviourType<$SmartFluidTankBehaviour>;
         static OUTPUT: $BehaviourType<$SmartFluidTankBehaviour>;
         blockEntity: $SmartBlockEntity;
         static TYPE: $BehaviourType<$SmartFluidTankBehaviour>;
         constructor(arg0: $BehaviourType<$SmartFluidTankBehaviour>, arg1: $SmartBlockEntity, arg2: number, arg3: number, arg4: boolean);
+        get tanks(): $SmartFluidTankBehaviour$TankSegment[];
+        get primaryHandler(): $SmartFluidTank;
+        get primaryTank(): $SmartFluidTankBehaviour$TankSegment;
         get empty(): boolean;
         get capability(): $IFluidHandler;
-        get primaryHandler(): $SmartFluidTank;
-        get tanks(): $SmartFluidTankBehaviour$TankSegment[];
-        get primaryTank(): $SmartFluidTankBehaviour$TankSegment;
     }
 }

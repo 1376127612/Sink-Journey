@@ -8,6 +8,9 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
     export class $Stages {
     }
     export interface $Stages {
+        toggle(stage: string): boolean;
+        removeNoUpdate(stage: string): boolean;
+        addNoUpdate(stage: string): boolean;
         remove(stage: string): boolean;
         clear(): boolean;
         replace(stages: $Collection_<string>): void;
@@ -17,26 +20,23 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
         has(stage: string): boolean;
         getAll(): $Collection<string>;
         getPlayer(): $Player;
-        toggle(stage: string): boolean;
-        addNoUpdate(stage: string): boolean;
-        removeNoUpdate(stage: string): boolean;
         get all(): $Collection<string>;
         get player(): $Player;
     }
     export class $TagWrapperStages extends $Record implements $Stages {
+        player(): $Player;
+        removeNoUpdate(stage: string): boolean;
+        addNoUpdate(stage: string): boolean;
         clear(): boolean;
         replace(stages: $Collection_<string>): void;
         getAll(): $Collection<string>;
         getPlayer(): $Player;
-        player(): $Player;
-        addNoUpdate(stage: string): boolean;
-        removeNoUpdate(stage: string): boolean;
+        toggle(stage: string): boolean;
         remove(stage: string): boolean;
         add(stage: string): boolean;
         set(stage: string, enabled: boolean): boolean;
         sync(): void;
         has(stage: string): boolean;
-        toggle(stage: string): boolean;
         constructor(player: $Player);
         get all(): $Collection<string>;
     }
@@ -47,8 +47,8 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
     export class $StageCreationEvent extends $PlayerEvent implements $ICancellableEvent {
         getPlayerStages(): $Stages;
         setPlayerStages(s: $Stages): void;
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
     }
     export class $StageEvents {
         static get(player: $Player): $Stages;
@@ -57,19 +57,19 @@ declare module "@package/dev/latvian/mods/kubejs/stages" {
     export interface $StageEvents {
     }
     export class $NoStages extends $Record implements $Stages {
+        player(): $Player;
+        removeNoUpdate(stage: string): boolean;
+        addNoUpdate(stage: string): boolean;
         clear(): boolean;
         replace(stages: $Collection_<string>): void;
         sync(): void;
         has(stage: string): boolean;
         getAll(): $Collection<string>;
         getPlayer(): $Player;
-        player(): $Player;
-        addNoUpdate(stage: string): boolean;
-        removeNoUpdate(stage: string): boolean;
+        toggle(stage: string): boolean;
         remove(stage: string): boolean;
         add(stage: string): boolean;
         set(stage: string, enabled: boolean): boolean;
-        toggle(stage: string): boolean;
         static NULL_INSTANCE: $NoStages;
         constructor(player: $Player);
         get all(): $Collection<string>;

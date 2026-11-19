@@ -10,11 +10,11 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/me/desht/pneumaticcraft/api/drone/area" {
     export class $AreaTypeWidget {
-        getDisplayName(): $Component;
         getTranslationKey(): string;
+        getDisplayName(): $Component;
         constructor(arg0: string);
-        get displayName(): $Component;
         get translationKey(): string;
+        get displayName(): $Component;
     }
     export interface $AreaTypeSerializer<A> extends RegistryMarked<RegistryTypes.PneumaticcraftProgWidgetAreaTypesTag, RegistryTypes.PneumaticcraftProgWidgetAreaTypes> {}
     export class $EnumOldAreaType extends $Enum<$EnumOldAreaType> {
@@ -44,27 +44,27 @@ declare module "@package/me/desht/pneumaticcraft/api/drone/area" {
      */
     export type $EnumOldAreaType_ = "fill" | "frame" | "wall" | "sphere" | "line" | "x_wall" | "y_wall" | "z_wall" | "x_cylinder" | "y_cylinder" | "z_cylinder" | "x_pyramid" | "y_pyramid" | "z_pyramid" | "grid" | "random";
     export class $AreaType {
+        addArea(arg0: $Consumer_<$BlockPos>, arg1: $BlockPos_, arg2: $BlockPos_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
+        getTranslationKey(): string;
+        getSerializer(): $AreaTypeSerializer<$AreaType>;
+        convertFromLegacy(arg0: $EnumOldAreaType_, arg1: number): void;
+        isDeterministic(): boolean;
+        addUIWidgets(arg0: $List_<$AreaTypeWidget>): void;
         getName(): string;
         copy(): $AreaType;
-        getTranslationKey(): string;
-        isDeterministic(): boolean;
-        convertFromLegacy(arg0: $EnumOldAreaType_, arg1: number): void;
-        getSerializer(): $AreaTypeSerializer<$AreaType>;
-        addUIWidgets(arg0: $List_<$AreaTypeWidget>): void;
-        addArea(arg0: $Consumer_<$BlockPos>, arg1: $BlockPos_, arg2: $BlockPos_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number): void;
         static CODEC: $Codec<$AreaType>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $AreaType>;
         constructor(arg0: string);
-        get name(): string;
         get translationKey(): string;
-        get deterministic(): boolean;
         get serializer(): $AreaTypeSerializer<$AreaType>;
+        get deterministic(): boolean;
+        get name(): string;
     }
     export class $AreaTypeSerializer<A extends $AreaType> {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, A>;
         codec(): $MapCodec<A>;
         static createType<A extends $AreaType>(arg0: $Supplier_<A>, arg1: $MapCodec_<A>, arg2: $StreamCodec<$RegistryFriendlyByteBuf, A>): $AreaTypeSerializer<A>;
         createDefaultInstance(): A;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, A>;
         constructor(arg0: $Supplier_<A>, arg1: $MapCodec_<A>, arg2: $StreamCodec<$RegistryFriendlyByteBuf, A>);
     }
     /**

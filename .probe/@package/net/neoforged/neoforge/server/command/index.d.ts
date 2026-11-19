@@ -19,10 +19,10 @@ export * as generation from "@package/net/neoforged/neoforge/server/command/gene
 
 declare module "@package/net/neoforged/neoforge/server/command" {
     export class $EnumArgument$Info<T extends $Enum<T>> implements $ArgumentTypeInfo<$EnumArgument<T>, $EnumArgument$Info$Template> {
-        unpack(arg0: $EnumArgument<$EnumArgument$Info$Template>): $EnumArgument$Info$Template;
-        serializeToNetwork(arg0: $EnumArgument$Info$Template, arg1: $FriendlyByteBuf): void;
         serializeToJson(arg0: $EnumArgument$Info$Template, arg1: $JsonObject_): void;
+        serializeToNetwork(arg0: $EnumArgument$Info$Template, arg1: $FriendlyByteBuf): void;
         deserializeFromNetwork(arg0: $FriendlyByteBuf): $EnumArgument$Info$Template;
+        unpack(arg0: $EnumArgument<$EnumArgument$Info$Template>): $EnumArgument$Info$Template;
         constructor();
     }
     export class $TrackCommand$ResetTrackingCommand {
@@ -43,11 +43,11 @@ declare module "@package/net/neoforged/neoforge/server/command" {
         constructor();
     }
     export class $CommandUtils {
+        static getResourceKey<T>(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $ResourceKey_<$Registry<T>>): ($ResourceKey<T>) | undefined;
+        static makeTranslatableWithFallback(arg0: string, ...arg1: $Object[]): $MutableComponent;
+        static makeTranslatableWithFallback(arg0: string): $MutableComponent;
         static suggestFromRegistry<T extends $Registry<never>>(arg0: $Function_<$Registry<never>, $Iterable<$ResourceLocation>>, arg1: string, arg2: $ResourceKey_<$Registry<T>>): $SuggestionProvider<$CommandSourceStack>;
         static suggestRegistries(arg0: $CommandContext<$CommandSourceStack>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
-        static makeTranslatableWithFallback(arg0: string): $MutableComponent;
-        static makeTranslatableWithFallback(arg0: string, ...arg1: $Object[]): $MutableComponent;
-        static getResourceKey<T>(arg0: $CommandContext<$CommandSourceStack>, arg1: string, arg2: $ResourceKey_<$Registry<T>>): ($ResourceKey<T>) | undefined;
     }
     export class $CommandHelper {
         static mergeCommandNode<S, T>(arg0: $CommandNode<S>, arg1: $CommandNode<T>, arg2: $Map_<$CommandNode<S>, $CommandNode<T>>, arg3: S, arg4: $Command_<T>, arg5: $Function_<$SuggestionProvider<S>, $SuggestionProvider<T>>): void;
@@ -59,20 +59,20 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     export class $TimeSpeedCommand {
     }
     export class $EnumArgument<T extends $Enum<T>> implements $ArgumentType<T> {
-        parse(arg0: $StringReader): T;
-        getExamples(): $Collection<string>;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static enumArgument<R extends $Enum<R>>(arg0: $Class<R>): $EnumArgument<R>;
+        parse(arg0: $StringReader): T;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): T;
         get examples(): $Collection<string>;
     }
     export class $TagsCommand {
     }
     export class $ModIdArgument implements $ArgumentType<string> {
-        parse(arg0: $StringReader): string;
-        getExamples(): $Collection<string>;
-        static modIdArgument(): $ModIdArgument;
         listSuggestions<S>(arg0: $CommandContext<S>, arg1: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
+        parse(arg0: $StringReader): string;
+        static modIdArgument(): $ModIdArgument;
+        getExamples(): $Collection<string>;
         parse<S>(arg0: $StringReader, arg1: S): string;
         constructor();
         get examples(): $Collection<string>;
@@ -82,8 +82,8 @@ declare module "@package/net/neoforged/neoforge/server/command" {
     export class $DataComponentCommand {
     }
     export class $ConfigCommand {
-        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         static onClientCommandsRegister(arg0: $RegisterClientCommandsEvent): void;
+        static register(arg0: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
     }
     export class $TrackCommand$StartTrackingCommand {

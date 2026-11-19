@@ -11,18 +11,18 @@ import { $PipeUpgrade } from "@package/sirttas/elementalcraft/block/pipe/upgrade
 declare module "@package/sirttas/elementalcraft/block/pipe/upgrade/type" {
     export interface $PipeUpgradeType<T> extends RegistryMarked<RegistryTypes.ElementalcraftPipeUpgradeTypeTag, RegistryTypes.ElementalcraftPipeUpgradeType> {}
     export class $PipeUpgradeType<T extends $PipeUpgrade> implements $ItemLike {
+        asItem(): $Item;
+        getLootTable(): $ResourceKey<$LootTable>;
         getKey(): $ResourceLocation;
         create(arg0: $ElementPipeBlockEntity, arg1: $Direction_): T;
-        getDescriptionId(): string;
         getModel(): $BakedModel;
-        getLootTable(): $ResourceKey<$LootTable>;
-        asItem(): $Item;
+        getDescriptionId(): string;
         factory: $PipeUpgradeType$Factory<T>;
         constructor(arg0: $PipeUpgradeType$Factory_<T>);
-        get key(): $ResourceLocation;
-        get descriptionId(): string;
-        get model(): $BakedModel;
         get lootTable(): $ResourceKey<$LootTable>;
+        get key(): $ResourceLocation;
+        get model(): $BakedModel;
+        get descriptionId(): string;
     }
     /**
      * Values that may be interpreted as {@link $PipeUpgradeType}.

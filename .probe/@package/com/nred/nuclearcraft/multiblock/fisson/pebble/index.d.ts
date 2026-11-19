@@ -6,13 +6,13 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/com/nred/nuclearcraft/multiblock/fisson/pebble" {
     export class $FissionCoolerPortType implements $StringRepresentable, $IMultiblockVariant {
-        getName(): string;
-        getId(): number;
-        getSerializedName(): string;
+        getBlockProperties(): $BlockBehaviour$Properties;
         getTranslationKey(): string;
+        getSerializedName(): string;
         validFluids(): $Set<$ResourceLocation>;
         static default_values(): $List<$FissionCoolerPortType>;
-        getBlockProperties(): $BlockBehaviour$Properties;
+        getName(): string;
+        getId(): number;
         getRemappedEnumConstantName(): string;
         getDefaultBlockProperties(): $BlockBehaviour$Properties;
         static AMMONIA: $FissionCoolerPortType;
@@ -32,11 +32,11 @@ declare module "@package/com/nred/nuclearcraft/multiblock/fisson/pebble" {
         static HELIUM: $FissionCoolerPortType;
         static SULFUR_DIOXIDE: $FissionCoolerPortType;
         constructor(arg0: string, arg1: $ResourceLocation_);
+        get blockProperties(): $BlockBehaviour$Properties;
+        get translationKey(): string;
+        get serializedName(): string;
         get name(): string;
         get id(): number;
-        get serializedName(): string;
-        get translationKey(): string;
-        get blockProperties(): $BlockBehaviour$Properties;
         get remappedEnumConstantName(): string;
         get defaultBlockProperties(): $BlockBehaviour$Properties;
     }

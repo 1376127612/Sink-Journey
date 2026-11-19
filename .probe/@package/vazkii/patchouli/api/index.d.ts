@@ -10,18 +10,18 @@ declare module "@package/vazkii/patchouli/api" {
         get book(): $ResourceLocation;
     }
     export class $BookDrawScreenEvent extends $Event {
+        getMouseX(): number;
+        getMouseY(): number;
+        getGraphics(): $GuiGraphics;
         getScreen(): $Screen;
         getBook(): $ResourceLocation;
         getPartialTicks(): number;
-        getMouseY(): number;
-        getMouseX(): number;
-        getGraphics(): $GuiGraphics;
         constructor(arg0: $ResourceLocation_, arg1: $Screen, arg2: number, arg3: number, arg4: number, arg5: $GuiGraphics);
+        get mouseX(): number;
+        get mouseY(): number;
+        get graphics(): $GuiGraphics;
         get screen(): $Screen;
         get book(): $ResourceLocation;
         get partialTicks(): number;
-        get mouseY(): number;
-        get mouseX(): number;
-        get graphics(): $GuiGraphics;
     }
 }

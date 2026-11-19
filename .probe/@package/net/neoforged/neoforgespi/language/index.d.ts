@@ -15,8 +15,8 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         getClasses(): $Set<$ModFileScanData$ClassData>;
         getAnnotations(): $Set<$ModFileScanData$AnnotationData>;
         getAnnotatedBy(arg0: $Class<$Annotation>, arg1: $ElementType_): $Stream<$ModFileScanData$AnnotationData>;
-        getIModInfoData(): $List<$IModFileInfo>;
         addModFileInfo(arg0: $IModFileInfo): void;
+        getIModInfoData(): $List<$IModFileInfo>;
         constructor();
         get classes(): $Set<$ModFileScanData$ClassData>;
         get annotations(): $Set<$ModFileScanData$AnnotationData>;
@@ -31,12 +31,12 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$ClassData}.
      */
-    export type $ModFileScanData$ClassData_ = { parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>,  } | [parent?: $Type, clazz?: $Type, interfaces?: $Set_<$Type>, ];
+    export type $ModFileScanData$ClassData_ = { clazz?: $Type, interfaces?: $Set_<$Type>, parent?: $Type,  } | [clazz?: $Type, interfaces?: $Set_<$Type>, parent?: $Type, ];
     export class $IModInfo$DependencySide extends $Enum<$IModInfo$DependencySide> {
         static values(): $IModInfo$DependencySide[];
         static valueOf(arg0: string): $IModInfo$DependencySide;
-        isContained(arg0: $Dist_): boolean;
         isCorrectSide(): boolean;
+        isContained(arg0: $Dist_): boolean;
         static SERVER: $IModInfo$DependencySide;
         static CLIENT: $IModInfo$DependencySide;
         static BOTH: $IModInfo$DependencySide;
@@ -57,7 +57,7 @@ declare module "@package/net/neoforged/neoforgespi/language" {
     /**
      * Values that may be interpreted as {@link $ModFileScanData$AnnotationData}.
      */
-    export type $ModFileScanData$AnnotationData_ = { clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>,  } | [clazz?: $Type, memberName?: string, targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>, ];
+    export type $ModFileScanData$AnnotationData_ = { targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>, clazz?: $Type, memberName?: string,  } | [targetType?: $ElementType_, annotationType?: $Type, annotationData?: $Map_<string, $Object>, clazz?: $Type, memberName?: string, ];
     export class $IModInfo$ModVersion {
     }
     export interface $IModInfo$ModVersion {
@@ -65,18 +65,18 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         getOwner(): $IModInfo;
         setOwner(arg0: $IModInfo): void;
         getReason(): (string) | undefined;
-        getSide(): $IModInfo$DependencySide;
-        getModId(): string;
         getVersionRange(): $VersionRange;
         getOrdering(): $IModInfo$Ordering;
         getReferralURL(): ($URL) | undefined;
+        getModId(): string;
+        getSide(): $IModInfo$DependencySide;
         get type(): $IModInfo$DependencyType;
         get reason(): (string) | undefined;
-        get side(): $IModInfo$DependencySide;
-        get modId(): string;
         get versionRange(): $VersionRange;
         get ordering(): $IModInfo$Ordering;
         get referralURL(): ($URL) | undefined;
+        get modId(): string;
+        get side(): $IModInfo$DependencySide;
     }
     export class $IModInfo$DependencyType extends $Enum<$IModInfo$DependencyType> {
         static values(): $IModInfo$DependencyType[];
@@ -109,52 +109,52 @@ declare module "@package/net/neoforged/neoforgespi/language" {
         getLoader(): $IModLanguageLoader;
         getDisplayName(): string;
         getDescription(): string;
-        getConfig(): $IConfigurable;
         getNamespace(): string;
-        getModId(): string;
-        getModURL(): ($URL) | undefined;
-        getForgeFeatures(): $List<$ForgeFeature$Bound>;
-        getUpdateURL(): ($URL) | undefined;
-        getLogoFile(): (string) | undefined;
-        getLogoBlur(): boolean;
         getModProperties(): $Map<string, $Object>;
         getOwningFile(): $IModFileInfo;
         getDependencies(): $List<$IModInfo$ModVersion>;
+        getLogoFile(): (string) | undefined;
+        getUpdateURL(): ($URL) | undefined;
+        getLogoBlur(): boolean;
+        getForgeFeatures(): $List<$ForgeFeature$Bound>;
+        getConfig(): $IConfigurable;
+        getModId(): string;
+        getModURL(): ($URL) | undefined;
         get version(): $ArtifactVersion;
         get loader(): $IModLanguageLoader;
         get displayName(): string;
         get description(): string;
-        get config(): $IConfigurable;
         get namespace(): string;
-        get modId(): string;
-        get modURL(): ($URL) | undefined;
-        get forgeFeatures(): $List<$ForgeFeature$Bound>;
-        get updateURL(): ($URL) | undefined;
-        get logoFile(): (string) | undefined;
-        get logoBlur(): boolean;
         get modProperties(): $Map<string, $Object>;
         get owningFile(): $IModFileInfo;
         get dependencies(): $List<$IModInfo$ModVersion>;
+        get logoFile(): (string) | undefined;
+        get updateURL(): ($URL) | undefined;
+        get logoBlur(): boolean;
+        get forgeFeatures(): $List<$ForgeFeature$Bound>;
+        get config(): $IConfigurable;
+        get modId(): string;
+        get modURL(): ($URL) | undefined;
     }
     export class $IModFileInfo {
     }
     export interface $IModFileInfo {
         moduleName(): string;
         getFile(): $IModFile;
-        getConfig(): $IConfigurable;
-        versionString(): string;
         requiredLanguageLoaders(): $List<$IModFileInfo$LanguageSpec>;
-        getMods(): $List<$IModInfo>;
-        getLicense(): string;
-        getFileProperties(): $Map<string, $Object>;
         showAsDataPack(): boolean;
-        showAsResourcePack(): boolean;
         usesServices(): $List<string>;
+        getFileProperties(): $Map<string, $Object>;
+        showAsResourcePack(): boolean;
+        getConfig(): $IConfigurable;
+        getMods(): $List<$IModInfo>;
+        versionString(): string;
+        getLicense(): string;
         get file(): $IModFile;
+        get fileProperties(): $Map<string, $Object>;
         get config(): $IConfigurable;
         get mods(): $List<$IModInfo>;
         get license(): string;
-        get fileProperties(): $Map<string, $Object>;
     }
     export class $IModLanguageLoader {
     }

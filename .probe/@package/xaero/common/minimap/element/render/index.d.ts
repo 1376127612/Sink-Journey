@@ -17,23 +17,7 @@ declare module "@package/xaero/common/minimap/element/render" {
         /**
          * @deprecated
          */
-        preRender(arg0: number, arg1: $Entity, arg2: $Player, arg3: number, arg4: number, arg5: number, arg6: $IXaeroMinimap, arg7: $MultiBufferSource$BufferSource, arg8: $MultiTextureRenderTypeRendererProvider): void;
-        /**
-         * @deprecated
-         */
-        postRender(arg0: number, arg1: $Entity, arg2: $Player, arg3: number, arg4: number, arg5: number, arg6: $IXaeroMinimap, arg7: $MultiBufferSource$BufferSource, arg8: $MultiTextureRenderTypeRendererProvider): void;
-        /**
-         * @deprecated
-         */
-        getProvider(): $MinimapElementRenderProvider<E, RC>;
-        /**
-         * @deprecated
-         */
         shouldRender(arg0: number): boolean;
-        /**
-         * @deprecated
-         */
-        getElementReader(): $MinimapElementReader<E, RC>;
         /**
          * @deprecated
          */
@@ -41,9 +25,25 @@ declare module "@package/xaero/common/minimap/element/render" {
         /**
          * @deprecated
          */
+        getElementReader(): $MinimapElementReader<E, RC>;
+        /**
+         * @deprecated
+         */
+        preRender(arg0: number, arg1: $Entity, arg2: $Player, arg3: number, arg4: number, arg5: number, arg6: $IXaeroMinimap, arg7: $MultiBufferSource$BufferSource, arg8: $MultiTextureRenderTypeRendererProvider): void;
+        /**
+         * @deprecated
+         */
+        getProvider(): $MinimapElementRenderProvider<E, RC>;
+        /**
+         * @deprecated
+         */
+        postRender(arg0: number, arg1: $Entity, arg2: $Player, arg3: number, arg4: number, arg5: number, arg6: $IXaeroMinimap, arg7: $MultiBufferSource$BufferSource, arg8: $MultiTextureRenderTypeRendererProvider): void;
+        /**
+         * @deprecated
+         */
         constructor(arg0: $MinimapElementReader<E, RC>, arg1: $MinimapElementRenderProvider<E, RC>, arg2: RC);
-        get provider(): $MinimapElementRenderProvider<E, RC>;
         get elementReader(): $MinimapElementReader<E, RC>;
+        get provider(): $MinimapElementRenderProvider<E, RC>;
     }
     /**
      * @deprecated

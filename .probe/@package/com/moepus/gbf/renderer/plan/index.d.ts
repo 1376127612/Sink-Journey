@@ -22,8 +22,8 @@ declare module "@package/com/moepus/gbf/renderer/plan" {
         static FULL: $BoneRenderPlan;
     }
     export interface $BoneRenderPlan {
-        prepare(arg0: $BakedGeoModel_, arg1: boolean): void;
         classify(arg0: $GeoBone): $BoneVisit;
+        prepare(arg0: $BakedGeoModel_, arg1: boolean): void;
     }
     /**
      * Values that may be interpreted as {@link $BoneRenderPlan}.

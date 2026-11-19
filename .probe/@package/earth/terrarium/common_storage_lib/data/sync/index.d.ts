@@ -8,13 +8,13 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/earth/terrarium/common_storage_lib/data/sync" {
     export class $AttachmentData<T> extends $Record {
+        updateTarget(target: $AttachmentHolder): void;
         static getAllSyncData(target: $AttachmentHolder): $List<$AttachmentData<never>>;
         encode(buf: $RegistryFriendlyByteBuf): void;
-        static of<T>(target: $AttachmentHolder, serializer: $DataSyncSerializer_<T>): $AttachmentData<T>;
         static of<T>(serializer: $DataSyncSerializer_<T>, data: T): $AttachmentData<T>;
+        static of<T>(target: $AttachmentHolder, serializer: $DataSyncSerializer_<T>): $AttachmentData<T>;
         data(): T;
         serializer(): $DataSyncSerializer<T>;
-        updateTarget(target: $AttachmentHolder): void;
         constructor(serializer: $DataSyncSerializer_<T>, data: T);
     }
     /**
@@ -25,9 +25,9 @@ declare module "@package/earth/terrarium/common_storage_lib/data/sync" {
         static create<T>(attachmentType: $Supplier_<$AttachmentType<T>>, codec: $StreamCodec<$RegistryFriendlyByteBuf, T>): $DataSyncSerializer<T>;
     }
     export interface $DataSyncSerializer<T> {
-        decode(arg0: $RegistryFriendlyByteBuf): $AttachmentData<T>;
         getCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         getAttachmentType(): $AttachmentType<T>;
+        decode(arg0: $RegistryFriendlyByteBuf): $AttachmentData<T>;
         get codec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         get attachmentType(): $AttachmentType<T>;
     }

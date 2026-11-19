@@ -16,14 +16,14 @@ declare module "@package/dev/worldgen/lithostitched/api/worldgen/modifier/target
      */
     export type $HolderTarget$Type_ = RegistryTypes.LithostitchedHolderTargetType | ((arg0: $ResourceKey<$Registry<any>>) => $DataResult<$MapCodec_<$HolderTarget<any>>>);
     export class $HolderTarget<T> {
+        static createCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $Codec<$HolderTarget<T>>;
         static of<T>(arg0: $Holder_<T>): $HolderTarget<T>;
         static of<T>(arg0: $HolderSet_<T>): $HolderTarget<T>;
-        static createCodec<T>(arg0: $ResourceKey_<$Registry<T>>): $Codec<$HolderTarget<T>>;
         static BIOMES: $Codec<$HolderTarget<$Biome>>;
     }
     export interface $HolderTarget<T> {
-        getType(): $HolderTarget$Type;
         getHoldersAsSet(arg0: $RegistryAccess): $HolderSet<T>;
+        getType(): $HolderTarget$Type;
         getHolders(arg0: $RegistryAccess): $Iterable<$Holder<T>>;
         get type(): $HolderTarget$Type;
     }

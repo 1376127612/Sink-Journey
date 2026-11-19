@@ -5,8 +5,8 @@ export * as json from "@package/net/neoforged/neoforge/client/entity/animation/j
 
 declare module "@package/net/neoforged/neoforge/client/entity/animation" {
     export class $AnimationTarget extends $Record {
-        keyframeTarget(): $AnimationKeyframeTarget;
         channelTarget(): $AnimationChannel$Target;
+        keyframeTarget(): $AnimationKeyframeTarget;
         inverseKeyframeTarget(): $AnimationKeyframeTarget;
         static ROTATION: $AnimationTarget;
         static POSITION: $AnimationTarget;

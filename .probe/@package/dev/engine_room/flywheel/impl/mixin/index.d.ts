@@ -6,8 +6,8 @@ declare module "@package/dev/engine_room/flywheel/impl/mixin" {
     export class $ModelPartAccessor {
     }
     export interface $ModelPartAccessor {
-        flywheel$children(): $Map<string, $ModelPart>;
         flywheel$compile(arg0: $PoseStack$Pose, arg1: $VertexConsumer, arg2: number, arg3: number, arg4: number): void;
+        flywheel$children(): $Map<string, $ModelPart>;
     }
     export class $PoseStackAccessor {
     }

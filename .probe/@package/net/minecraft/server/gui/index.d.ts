@@ -22,10 +22,10 @@ declare module "@package/net/minecraft/server/gui" {
         constructor(server: $MinecraftServer);
     }
     export class $MinecraftServerGui extends $JComponent {
-        static showFrameFor(server: $DedicatedServer): $MinecraftServerGui;
         start(): void;
         print(textArea: $JTextArea, scrollPane: $JScrollPane, line: string): void;
         close(): void;
+        static showFrameFor(server: $DedicatedServer): $MinecraftServerGui;
         addFinalizer(finalizer: $Runnable_): void;
         static WHEN_FOCUSED: number;
         static WHEN_ANCESTOR_OF_FOCUSED_COMPONENT: number;

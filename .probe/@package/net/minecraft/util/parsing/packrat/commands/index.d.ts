@@ -38,25 +38,25 @@ declare module "@package/net/minecraft/util/parsing/packrat/commands" {
     export class $ResourceSuggestion {
     }
     export interface $ResourceSuggestion extends $SuggestionSupplier<$StringReader> {
-        possibleValues(arg0: $ParseState<$StringReader>): $Stream<string>;
         possibleResources(): $Stream<$ResourceLocation>;
+        possibleValues(arg0: $ParseState<$StringReader>): $Stream<string>;
     }
     /**
      * Values that may be interpreted as {@link $ResourceSuggestion}.
      */
     export type $ResourceSuggestion_ = (() => $Stream<$ResourceLocation_>);
     export class $Grammar<T> extends $Record {
+        parseForCommands(reader: $StringReader): T;
         parse(parseState: $ParseState<$StringReader>): (T) | undefined;
         top(): $Atom<T>;
         rules(): $Dictionary<$StringReader>;
         parseForSuggestions(builder: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
-        parseForCommands(reader: $StringReader): T;
         constructor(arg0: $Dictionary<$StringReader>, arg1: $Atom_<T>);
     }
     /**
      * Values that may be interpreted as {@link $Grammar}.
      */
-    export type $Grammar_<T> = { rules?: $Dictionary<$StringReader>, top?: $Atom_<any>,  } | [rules?: $Dictionary<$StringReader>, top?: $Atom_<any>, ];
+    export type $Grammar_<T> = { top?: $Atom_<any>, rules?: $Dictionary<$StringReader>,  } | [top?: $Atom_<any>, rules?: $Dictionary<$StringReader>, ];
     export class $StringReaderTerms$TerminalWord extends $Record implements $Term<$StringReader> {
         value(): string;
         parse(arg0: $ParseState<$StringReader>, arg1: $Scope, arg2: $Control_): boolean;
@@ -68,6 +68,6 @@ declare module "@package/net/minecraft/util/parsing/packrat/commands" {
     export type $StringReaderTerms$TerminalWord_ = { value?: string,  } | [value?: string, ];
     export class $ResourceLookupRule<C, V> implements $Rule<$StringReader, V>, $ResourceSuggestion {
         parse(parseState: $ParseState<$StringReader>): (V) | undefined;
-        possibleValues(parseState: $ParseState<$StringReader>): $Stream<string>;
+        possibleValues(arg0: $ParseState<$StringReader>): $Stream<string>;
     }
 }

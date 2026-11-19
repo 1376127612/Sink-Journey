@@ -6,17 +6,17 @@ import { $Comparable, $Object } from "@package/java/lang";
 
 declare module "@package/net/minecraft/world/level/block/state/predicate" {
     export class $BlockPredicate implements $Predicate<$BlockState> {
-        test(state: $BlockState_ | null): boolean;
         static forBlock(block: $Block_): $BlockPredicate;
+        test(state: $BlockState_ | null): boolean;
         or(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
         negate(): $Predicate<$BlockState>;
         and(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
         constructor(block: $Block_);
     }
     export class $BlockStatePredicate implements $Predicate<$BlockState> {
+        static forBlock(block: $Block_): $BlockStatePredicate;
         test(state: $BlockState_ | null): boolean;
         where<V extends $Comparable<V>>(property: $Property<V>, valuePredicate: $Predicate_<$Object>): $BlockStatePredicate;
-        static forBlock(block: $Block_): $BlockStatePredicate;
         or(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;
         negate(): $Predicate<$BlockState>;
         and(arg0: $Predicate_<$BlockState>): $Predicate<$BlockState>;

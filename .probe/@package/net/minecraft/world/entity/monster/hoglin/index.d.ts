@@ -1,16 +1,17 @@
 import { $Level_, $LevelAccessor } from "@package/net/minecraft/world/level";
-import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
-import { $InteractionHand } from "@package/net/minecraft/world";
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $LookControl } from "@package/net/minecraft/world/entity/ai/control";
-import { $SoundEvent } from "@package/net/minecraft/sounds";
-import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $WalkAnimationState, $EntityType_, $Entity$RemovalReason, $LivingEntity, $MobSpawnType_, $PortalProcessor } from "@package/net/minecraft/world/entity";
-import { $Enemy } from "@package/net/minecraft/world/entity/monster";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $RandomSource } from "@package/net/minecraft/util";
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
+import { $InteractionHand } from "@package/net/minecraft/world";
+import { $SoundEvent } from "@package/net/minecraft/sounds";
+import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
+import { $Enemy } from "@package/net/minecraft/world/entity/monster";
 
 declare module "@package/net/minecraft/world/entity/monster/hoglin" {
     export class $HoglinBase {
@@ -28,12 +29,13 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
     export type $HoglinBase_ = (() => number);
     export class $Hoglin extends $Animal implements $Enemy, $HoglinBase {
         /**
-         * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
+         * Entity won't drop items or experience points if this returns false
          */
-        getAttackAnimationRemainingTicks(): number;
+        isAdult(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        setImmuneToZombification(cannotBeHunted: boolean): void;
         static checkHoglinSpawnRules(hoglin: $EntityType_<$Hoglin>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
+        setImmuneToZombification(cannotBeHunted: boolean): void;
+        getAttackAnimationRemainingTicks(): number;
         /**
          * Entity won't drop items or experience points if this returns false
          */
@@ -42,10 +44,6 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
          * Entity won't drop items or experience points if this returns false
          */
         canBeHunted(): boolean;
-        /**
-         * Entity won't drop items or experience points if this returns false
-         */
-        isAdult(): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -93,6 +91,7 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -103,6 +102,7 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -154,10 +154,10 @@ declare module "@package/net/minecraft/world/entity/monster/hoglin" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Hoglin>, level: $Level_);
-        get attackAnimationRemainingTicks(): number;
-        set immuneToZombification(value: boolean);
-        get converting(): boolean;
         get adult(): boolean;
+        set immuneToZombification(value: boolean);
+        get attackAnimationRemainingTicks(): number;
+        get converting(): boolean;
     }
     export class $HoglinAi {
         static getSoundForCurrentActivity(hoglin: $Hoglin): ($SoundEvent) | undefined;

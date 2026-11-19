@@ -6,19 +6,19 @@ import { $Comparable } from "@package/java/lang";
 
 declare module "@package/com/mojang/brigadier/suggestion" {
     export class $SuggestionsBuilder {
+        restart(): $SuggestionsBuilder;
+        buildFuture(): $CompletableFuture<$Suggestions>;
+        createOffset(arg0: number): $SuggestionsBuilder;
+        suggest(arg0: string, arg1: $Message_): $SuggestionsBuilder;
+        suggest(arg0: number): $SuggestionsBuilder;
+        suggest(arg0: number, arg1: $Message_): $SuggestionsBuilder;
+        suggest(arg0: string): $SuggestionsBuilder;
         add(arg0: $SuggestionsBuilder): $SuggestionsBuilder;
         build(): $Suggestions;
         getRemaining(): string;
         getInput(): string;
         getStart(): number;
-        suggest(arg0: number): $SuggestionsBuilder;
-        suggest(arg0: string, arg1: $Message_): $SuggestionsBuilder;
-        suggest(arg0: string): $SuggestionsBuilder;
-        suggest(arg0: number, arg1: $Message_): $SuggestionsBuilder;
-        restart(): $SuggestionsBuilder;
         getRemainingLowerCase(): string;
-        buildFuture(): $CompletableFuture<$Suggestions>;
-        createOffset(arg0: number): $SuggestionsBuilder;
         constructor(arg0: string, arg1: string, arg2: number);
         constructor(arg0: string, arg1: number);
         get remaining(): string;
@@ -51,13 +51,13 @@ declare module "@package/com/mojang/brigadier/suggestion" {
         compareTo(arg0: $Suggestion): number;
         apply(arg0: string): string;
         compareToIgnoreCase(arg0: $Suggestion): number;
-        getRange(): $StringRange;
         getText(): string;
+        getRange(): $StringRange;
         getTooltip(): $Message;
         constructor(arg0: $StringRange, arg1: string);
         constructor(arg0: $StringRange, arg1: string, arg2: $Message_);
-        get range(): $StringRange;
         get text(): string;
+        get range(): $StringRange;
         get tooltip(): $Message;
     }
 }

@@ -15,13 +15,13 @@ declare module "@package/net/minecraft/world/level/timers" {
         sequentialId: $UnsignedLong;
     }
     export class $TimerCallback$Serializer<T, C extends $TimerCallback<T>> {
+        getCls(): $Class<never>;
         getId(): $ResourceLocation;
         deserialize(tag: $CompoundTag_): C;
         serialize(tag: $CompoundTag_, callback: C): void;
-        getCls(): $Class<never>;
         constructor(id: $ResourceLocation_, cls: $Class<never>);
-        get id(): $ResourceLocation;
         get cls(): $Class<never>;
+        get id(): $ResourceLocation;
     }
     export class $FunctionCallback implements $TimerCallback<$MinecraftServer> {
         handle(obj: $MinecraftServer, manager: $TimerQueue<$MinecraftServer>, gameTime: number): void;

@@ -21,21 +21,21 @@ declare module "@package/net/minecraft/network/chat/contents" {
         getData(source: $CommandSourceStack): $Stream<$CompoundTag>;
     }
     export class $NbtContents implements $ComponentContents {
+        isInterpreting(): boolean;
+        getNbtPath(): string;
+        getDataSource(): $DataSource;
         type(): $ComponentContents$Type<never>;
         resolve(nbtPathPattern: $CommandSourceStack | null, entity: $Entity | null, recursionDepth: number): $MutableComponent;
         getSeparator(): ($Component) | undefined;
-        getNbtPath(): string;
-        getDataSource(): $DataSource;
-        isInterpreting(): boolean;
-        visit<T>(contentConsumer: $FormattedText$ContentConsumer_<T>): (T) | undefined;
-        visit<T>(styledContentConsumer: $FormattedText$StyledContentConsumer_<T>, style: $Style): (T) | undefined;
+        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
+        visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
         static CODEC: $MapCodec<$NbtContents>;
         static TYPE: $ComponentContents$Type<$NbtContents>;
         constructor(nbtPathPattern: string, interpreting: boolean, separator: ($Component_) | undefined, dataSource: $DataSource);
-        get separator(): ($Component) | undefined;
+        get interpreting(): boolean;
         get nbtPath(): string;
         get dataSource(): $DataSource;
-        get interpreting(): boolean;
+        get separator(): ($Component) | undefined;
     }
     export class $TranslatableFormatException extends $IllegalArgumentException {
         constructor(contents: $TranslatableContents, error: string);
@@ -43,20 +43,20 @@ declare module "@package/net/minecraft/network/chat/contents" {
         constructor(contents: $TranslatableContents, cause: $Throwable);
     }
     export class $ScoreContents implements $ComponentContents {
+        getObjective(): string;
         getName(): string;
         type(): $ComponentContents$Type<never>;
         resolve(nbtPathPattern: $CommandSourceStack | null, entity: $Entity | null, recursionDepth: number): $MutableComponent;
         getSelector(): $EntitySelector;
-        getObjective(): string;
-        visit<T>(contentConsumer: $FormattedText$ContentConsumer_<T>): (T) | undefined;
-        visit<T>(styledContentConsumer: $FormattedText$StyledContentConsumer_<T>, style: $Style): (T) | undefined;
+        visit<T>(arg0: $FormattedText$ContentConsumer_<T>): (T) | undefined;
+        visit<T>(arg0: $FormattedText$StyledContentConsumer_<T>, arg1: $Style): (T) | undefined;
         static CODEC: $MapCodec<$ScoreContents>;
         static TYPE: $ComponentContents$Type<$ScoreContents>;
         static INNER_CODEC: $MapCodec<$ScoreContents>;
         constructor(name: string, objective: string);
+        get objective(): string;
         get name(): string;
         get selector(): $EntitySelector;
-        get objective(): string;
     }
     export class $PlainTextContents$LiteralContents extends $Record implements $PlainTextContents {
         text(): string;
@@ -71,22 +71,22 @@ declare module "@package/net/minecraft/network/chat/contents" {
      */
     export type $PlainTextContents$LiteralContents_ = { text?: string,  } | [text?: string, ];
     export class $TranslatableContents implements $ComponentContents {
+        getFallback(): string;
+        handler$fof000$nuclearcraftneohaul$resolve(arg0: number, arg1: $CallbackInfoReturnable<any>): void;
         type(): $ComponentContents$Type<never>;
         getKey(): string;
         resolve(nbtPathPattern: $CommandSourceStack | null, entity: $Entity | null, recursionDepth: number): $MutableComponent;
+        getArgs(): $Object[];
         visit<T>(styledContentConsumer: $FormattedText$StyledContentConsumer_<T>, style: $Style): (T) | undefined;
         visit<T>(contentConsumer: $FormattedText$ContentConsumer_<T>): (T) | undefined;
-        getArgs(): $Object[];
-        handler$dpp000$nuclearcraftneohaul$resolve(arg0: number, arg1: $CallbackInfoReturnable<any>): void;
-        getFallback(): string;
         static isAllowedPrimitiveArgument(other: $Object | null): boolean;
         args: $Object[];
         static CODEC: $MapCodec<$TranslatableContents>;
         static NO_ARGS: $Object[];
         static TYPE: $ComponentContents$Type<$TranslatableContents>;
         constructor(key: string, fallback: string | null, args: $Object[]);
-        get key(): string;
         get fallback(): string;
+        get key(): string;
     }
     export class $KeybindResolver {
         static setKeyResolver(keyResolver: $Function_<string, $Supplier<$Component>>): void;
@@ -97,8 +97,8 @@ declare module "@package/net/minecraft/network/chat/contents" {
         type(): $ComponentContents$Type<never>;
         resolve(nbtPathPattern: $CommandSourceStack | null, entity: $Entity | null, recursionDepth: number): $MutableComponent;
         getSeparator(): ($Component) | undefined;
-        visit<T>(styledContentConsumer: $FormattedText$StyledContentConsumer_<T>, style: $Style): (T) | undefined;
         visit<T>(contentConsumer: $FormattedText$ContentConsumer_<T>): (T) | undefined;
+        visit<T>(styledContentConsumer: $FormattedText$StyledContentConsumer_<T>, style: $Style): (T) | undefined;
         getPattern(): string;
         getSelector(): $EntitySelector;
         static CODEC: $MapCodec<$SelectorContents>;
@@ -109,10 +109,10 @@ declare module "@package/net/minecraft/network/chat/contents" {
         get selector(): $EntitySelector;
     }
     export class $EntityDataSource extends $Record implements $DataSource {
+        compiledSelector(): $EntitySelector;
+        selectorPattern(): string;
         type(): $DataSource$Type<never>;
         getData(source: $CommandSourceStack): $Stream<$CompoundTag>;
-        selectorPattern(): string;
-        compiledSelector(): $EntitySelector;
         static SUB_CODEC: $MapCodec<$EntityDataSource>;
         static TYPE: $DataSource$Type<$EntityDataSource>;
         constructor(selectorPattern: string);
@@ -123,9 +123,9 @@ declare module "@package/net/minecraft/network/chat/contents" {
      */
     export type $EntityDataSource_ = { selectorPattern?: string, compiledSelector?: $EntitySelector,  } | [selectorPattern?: string, compiledSelector?: $EntitySelector, ];
     export class $DataSource$Type<T extends $DataSource> extends $Record implements $StringRepresentable {
-        id(): string;
-        getSerializedName(): string;
         codec(): $MapCodec<T>;
+        getSerializedName(): string;
+        id(): string;
         getRemappedEnumConstantName(): string;
         constructor(arg0: $MapCodec_<T>, arg1: string);
         get serializedName(): string;
@@ -154,17 +154,17 @@ declare module "@package/net/minecraft/network/chat/contents" {
         type(): $ComponentContents$Type<never>;
         visit<T>(styledContentConsumer: $FormattedText$StyledContentConsumer_<T>, style: $Style): (T) | undefined;
         visit<T>(contentConsumer: $FormattedText$ContentConsumer_<T>): (T) | undefined;
-        resolve(nbtPathPattern: $CommandSourceStack | null, entity: $Entity | null, recursionDepth: number): $MutableComponent;
+        resolve(arg0: $CommandSourceStack | null, arg1: $Entity | null, arg2: number): $MutableComponent;
         static CODEC: $MapCodec<$KeybindContents>;
         static TYPE: $ComponentContents$Type<$KeybindContents>;
         constructor(name: string);
         get name(): string;
     }
     export class $BlockDataSource extends $Record implements $DataSource {
-        type(): $DataSource$Type<never>;
-        getData(source: $CommandSourceStack): $Stream<$CompoundTag>;
         posPattern(): string;
         compiledPos(): $Coordinates;
+        type(): $DataSource$Type<never>;
+        getData(source: $CommandSourceStack): $Stream<$CompoundTag>;
         static SUB_CODEC: $MapCodec<$BlockDataSource>;
         static TYPE: $DataSource$Type<$BlockDataSource>;
         constructor(posPattern: string);
@@ -173,7 +173,7 @@ declare module "@package/net/minecraft/network/chat/contents" {
     /**
      * Values that may be interpreted as {@link $BlockDataSource}.
      */
-    export type $BlockDataSource_ = { compiledPos?: $Coordinates, posPattern?: string,  } | [compiledPos?: $Coordinates, posPattern?: string, ];
+    export type $BlockDataSource_ = { posPattern?: string, compiledPos?: $Coordinates,  } | [posPattern?: string, compiledPos?: $Coordinates, ];
     export class $StorageDataSource extends $Record implements $DataSource {
         type(): $DataSource$Type<never>;
         id(): $ResourceLocation;

@@ -1,6 +1,6 @@
 import { $Level } from "@package/net/minecraft/world/level";
-import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $SimulationResults } from "@package/com/george_vi/electroenergetics/simulation";
+import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $Future } from "@package/java/util/concurrent";
 import { $InfrastructureSavedData } from "@package/com/george_vi/electroenergetics/simulation/infrastructure";
 import { $Map, $List } from "@package/java/util";
@@ -16,10 +16,10 @@ declare module "@package/com/george_vi/electroenergetics/simulation/simulator" {
         constructor();
     }
     export class $SimulationTicker {
+        static runServer(): void;
         tick(): void;
         endTick(): void;
         static stopServer(): void;
-        static runServer(): void;
         sd: $InfrastructureSavedData;
         level: $ServerLevel;
         future: $Future<$SimulationResults>;

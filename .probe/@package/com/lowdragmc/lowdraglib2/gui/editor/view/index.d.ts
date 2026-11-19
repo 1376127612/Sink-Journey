@@ -14,10 +14,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/editor/view" {
         getContent(): void;
         getChildren(): $List<$UITreeNode>;
         getDimension(): number;
+        getSiblingIndex(): number;
         flatten(): $List<$ITreeNode<$UIElement, void>>;
         getChild(arg0: $UIElement): $ITreeNode<$UIElement, void>;
         isLeaf(): boolean;
-        getSiblingIndex(): number;
         isBranch(): boolean;
         parent: $UITreeNode;
         dimension: number;
@@ -25,34 +25,34 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/editor/view" {
         constructor(arg0: $UIElement);
         get content(): void;
         get children(): $List<$UITreeNode>;
-        get leaf(): boolean;
         get siblingIndex(): number;
+        get leaf(): boolean;
         get branch(): boolean;
     }
     export class $UIHierarchy extends $UIElement {
-        getRootNode(): $UITreeNode;
-        loadUI(arg0: $UI): void;
-        setHistoryStack(arg0: $IHistoryStack): void;
-        setOnSelectedChanged(arg0: $Consumer_<$Set<$UITreeNode>>): void;
-        removeSelected(): void;
         openMenu(arg0: number, arg1: number, arg2: $TreeBuilder$Menu): void;
+        removeSelected(): void;
+        setOnSelectedChanged(arg0: $Consumer_<$Set<$UITreeNode>>): void;
+        setHistoryStack(arg0: $IHistoryStack): void;
+        loadUI(arg0: $UI): void;
         getSelectedOne(): ($UIElement) | undefined;
+        getRootNode(): $UITreeNode;
+        getUi(): $UI;
+        clearUI(): void;
+        focusNode(arg0: $UITreeNode): void;
         copySelected(): void;
         getSelectedNodes(): $UIElement[];
         pasteToSelected(): void;
-        focusNode(arg0: $UITreeNode): void;
-        clearUI(): void;
-        getUi(): $UI;
         static CODEC: $Codec<$UIElement>;
         static EMPTY_LAYOUT: $Layout;
         treeList: $TreeList<$UITreeNode>;
         scrollerView: $ScrollerView;
         constructor();
-        get rootNode(): $UITreeNode;
-        set historyStack(value: $IHistoryStack);
         set onSelectedChanged(value: $Consumer_<$Set<$UITreeNode>>);
+        set historyStack(value: $IHistoryStack);
         get selectedOne(): ($UIElement) | undefined;
-        get selectedNodes(): $UIElement[];
+        get rootNode(): $UITreeNode;
         get ui(): $UI;
+        get selectedNodes(): $UIElement[];
     }
 }

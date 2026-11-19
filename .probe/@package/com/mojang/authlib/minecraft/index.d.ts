@@ -17,11 +17,11 @@ declare module "@package/com/mojang/authlib/minecraft" {
         static forJsonObject(arg0: $JsonObject_): $TelemetryPropertyContainer;
     }
     export interface $TelemetryPropertyContainer {
+        addNullProperty(arg0: string): void;
+        addProperty(arg0: string, arg1: string): void;
         addProperty(arg0: string, arg1: boolean): void;
         addProperty(arg0: string, arg1: number): void;
         addProperty(arg0: string, arg1: number): void;
-        addProperty(arg0: string, arg1: string): void;
-        addNullProperty(arg0: string): void;
     }
     export class $TelemetryEvent {
         static EMPTY: $TelemetryEvent;
@@ -30,13 +30,13 @@ declare module "@package/com/mojang/authlib/minecraft" {
         send(): void;
     }
     export class $MinecraftProfileTexture {
-        getUrl(): string;
         getHash(): string;
         getMetadata(arg0: string): string;
+        getUrl(): string;
         static PROFILE_TEXTURE_COUNT: number;
         constructor(arg0: string, arg1: $Map_<string, string>);
-        get url(): string;
         get hash(): string;
+        get url(): string;
     }
     export class $TelemetrySession {
         static DISABLED: $TelemetrySession;
@@ -55,22 +55,22 @@ declare module "@package/com/mojang/authlib/minecraft" {
     /**
      * Values that may be interpreted as {@link $UserApiService$UserProperties}.
      */
-    export type $UserApiService$UserProperties_ = { flags?: $Set_<$UserApiService$UserFlag_>, bannedScopes?: $Map_<string, $BanDetails_>,  } | [flags?: $Set_<$UserApiService$UserFlag_>, bannedScopes?: $Map_<string, $BanDetails_>, ];
+    export type $UserApiService$UserProperties_ = { bannedScopes?: $Map_<string, $BanDetails_>, flags?: $Set_<$UserApiService$UserFlag_>,  } | [bannedScopes?: $Map_<string, $BanDetails_>, flags?: $Set_<$UserApiService$UserFlag_>, ];
     export class $MinecraftSessionService {
     }
     export interface $MinecraftSessionService {
         fetchProfile(arg0: $UUID_, arg1: boolean): $ProfileResult;
-        getTextures(arg0: $GameProfile): $MinecraftProfileTextures;
-        unpackTextures(arg0: $Property_): $MinecraftProfileTextures;
-        joinServer(arg0: $UUID_, arg1: string, arg2: string): void;
         hasJoinedServer(arg0: string, arg1: string, arg2: $InetAddress | null): $ProfileResult;
         getPackedTextures(arg0: $GameProfile): $Property;
+        getTextures(arg0: $GameProfile): $MinecraftProfileTextures;
+        unpackTextures(arg0: $Property_): $MinecraftProfileTextures;
         getSecurePropertyValue(arg0: $Property_): string;
+        joinServer(arg0: $UUID_, arg1: string, arg2: string): void;
     }
     export class $MinecraftProfileTextures extends $Record {
         skin(): $MinecraftProfileTexture;
-        signatureState(): $SignatureState;
         cape(): $MinecraftProfileTexture;
+        signatureState(): $SignatureState;
         elytra(): $MinecraftProfileTexture;
         static EMPTY: $MinecraftProfileTextures;
         constructor(skin: $MinecraftProfileTexture | null, cape: $MinecraftProfileTexture | null, elytra: $MinecraftProfileTexture | null, signatureState: $SignatureState_);
@@ -78,7 +78,7 @@ declare module "@package/com/mojang/authlib/minecraft" {
     /**
      * Values that may be interpreted as {@link $MinecraftProfileTextures}.
      */
-    export type $MinecraftProfileTextures_ = { skin?: $MinecraftProfileTexture, cape?: $MinecraftProfileTexture, signatureState?: $SignatureState_, elytra?: $MinecraftProfileTexture,  } | [skin?: $MinecraftProfileTexture, cape?: $MinecraftProfileTexture, signatureState?: $SignatureState_, elytra?: $MinecraftProfileTexture, ];
+    export type $MinecraftProfileTextures_ = { cape?: $MinecraftProfileTexture, signatureState?: $SignatureState_, elytra?: $MinecraftProfileTexture, skin?: $MinecraftProfileTexture,  } | [cape?: $MinecraftProfileTexture, signatureState?: $SignatureState_, elytra?: $MinecraftProfileTexture, skin?: $MinecraftProfileTexture, ];
     export class $UserApiService$UserFlag extends $Enum<$UserApiService$UserFlag> {
         static values(): $UserApiService$UserFlag[];
         static valueOf(arg0: string): $UserApiService$UserFlag;
@@ -98,16 +98,16 @@ declare module "@package/com/mojang/authlib/minecraft" {
         static OFFLINE: $UserApiService;
     }
     export interface $UserApiService {
-        getKeyPair(): $KeyPairResponse;
         fetchProperties(): $UserApiService$UserProperties;
+        isBlockedPlayer(arg0: $UUID_): boolean;
         refreshBlockList(): void;
         canSendReports(): boolean;
-        isBlockedPlayer(arg0: $UUID_): boolean;
         reportAbuse(arg0: $AbuseReportRequest_): void;
         newTelemetrySession(arg0: $Executor_): $TelemetrySession;
         getAbuseReportLimits(): $AbuseReportLimits;
-        get keyPair(): $KeyPairResponse;
+        getKeyPair(): $KeyPairResponse;
         get abuseReportLimits(): $AbuseReportLimits;
+        get keyPair(): $KeyPairResponse;
     }
     export class $BanDetails extends $Record {
         reason(): string;
@@ -120,5 +120,5 @@ declare module "@package/com/mojang/authlib/minecraft" {
     /**
      * Values that may be interpreted as {@link $BanDetails}.
      */
-    export type $BanDetails_ = { id?: $UUID_, expires?: $Instant, reason?: string, reasonMessage?: string,  } | [id?: $UUID_, expires?: $Instant, reason?: string, reasonMessage?: string, ];
+    export type $BanDetails_ = { reason?: string, reasonMessage?: string, id?: $UUID_, expires?: $Instant,  } | [reason?: string, reasonMessage?: string, id?: $UUID_, expires?: $Instant, ];
 }

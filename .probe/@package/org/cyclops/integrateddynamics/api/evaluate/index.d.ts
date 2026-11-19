@@ -6,11 +6,11 @@ export * as expression from "@package/org/cyclops/integrateddynamics/api/evaluat
 
 declare module "@package/org/cyclops/integrateddynamics/api/evaluate" {
     export class $EvaluationException extends $Exception {
-        resolve(): void;
-        getErrorMessage(): $MutableComponent;
-        addResolutionListeners(arg0: $Runnable_): void;
         isRetryEvaluation(): boolean;
         setRetryEvaluation(arg0: boolean): void;
+        addResolutionListeners(arg0: $Runnable_): void;
+        resolve(): void;
+        getErrorMessage(): $MutableComponent;
         constructor(arg0: $MutableComponent_);
         get errorMessage(): $MutableComponent;
     }

@@ -18,12 +18,12 @@ export * as effect from "@package/hellfirepvp/astralsorcery/common/lumen/binding
 declare module "@package/hellfirepvp/astralsorcery/common/lumen/binding" {
     export class $LumenBindingType$SlotType extends $Enum<$LumenBindingType$SlotType> implements $StringRepresentable, $IExtensibleEnum {
         getStackFromEntity(arg0: $LivingEntity): $ItemStack;
+        getDisplayStack(): $ItemStack;
+        getSerializedName(): string;
+        isSlotTypeFor(arg0: $ItemStack_): boolean;
         static values(): $LumenBindingType$SlotType[];
         static valueOf(arg0: string): $LumenBindingType$SlotType;
         static getExtensionInfo(): $ExtensionInfo;
-        getSerializedName(): string;
-        getDisplayStack(): $ItemStack;
-        isSlotTypeFor(arg0: $ItemStack_): boolean;
         getRemappedEnumConstantName(): string;
         static LEGGINGS: $LumenBindingType$SlotType;
         static HELMET: $LumenBindingType$SlotType;
@@ -32,9 +32,9 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen/binding" {
         static BOOTS: $LumenBindingType$SlotType;
         static RANGED_WEAPON: $LumenBindingType$SlotType;
         static TOOL: $LumenBindingType$SlotType;
-        static get extensionInfo(): $ExtensionInfo;
-        get serializedName(): string;
         get displayStack(): $ItemStack;
+        get serializedName(): string;
+        static get extensionInfo(): $ExtensionInfo;
         get remappedEnumConstantName(): string;
     }
     /**
@@ -43,22 +43,22 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen/binding" {
     export type $LumenBindingType$SlotType_ = "helmet" | "chestplate" | "leggings" | "boots" | "melee_weapon" | "ranged_weapon" | "tool";
     export class $LumenBindingType {
         getPotionEffect(): ($MobEffectInstance) | undefined;
-        static of(arg0: $Map_<$LumenBindingType$SlotType_, $LumenBinding>, arg1: $RandomMobEffectInstance | null): $LumenBindingType;
-        static applyBinding(arg0: $Lumen_, arg1: $ResourceLocation_, arg2: $ItemStack_): void;
+        getActiveBinding(arg0: $ItemStack_, arg1: $LivingEntity): ($LumenBinding) | undefined;
         getBinding(arg0: $LumenBindingType$SlotType_): ($LumenBinding) | undefined;
         getBinding(arg0: $ItemStack_): ($LumenBinding) | undefined;
-        getActiveBinding(arg0: $ItemStack_, arg1: $LivingEntity): ($LumenBinding) | undefined;
+        static applyBinding(arg0: $Lumen_, arg1: $ResourceLocation_, arg2: $ItemStack_): void;
+        static of(arg0: $Map_<$LumenBindingType$SlotType_, $LumenBinding>, arg1: $RandomMobEffectInstance | null): $LumenBindingType;
         static CODEC: $Codec<$LumenBindingType>;
         get potionEffect(): ($MobEffectInstance) | undefined;
     }
     export class $LumenBinding {
-        static of(arg0: $LumenBindingUsage, arg1: $List_<$Component_>, arg2: $LumenBindingEffect): $LumenBinding;
-        getEffect(): $LumenBindingEffect;
         getDisplayText(): $List<$Component>;
         getLumenUsage(): $LumenBindingUsage;
+        static of(arg0: $LumenBindingUsage, arg1: $List_<$Component_>, arg2: $LumenBindingEffect): $LumenBinding;
+        getEffect(): $LumenBindingEffect;
         static CODEC: $Codec<$LumenBinding>;
-        get effect(): $LumenBindingEffect;
         get displayText(): $List<$Component>;
         get lumenUsage(): $LumenBindingUsage;
+        get effect(): $LumenBindingEffect;
     }
 }

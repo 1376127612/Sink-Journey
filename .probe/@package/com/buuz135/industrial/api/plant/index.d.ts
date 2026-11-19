@@ -20,18 +20,18 @@ declare module "@package/com/buuz135/industrial/api/plant" {
      */
     export type $PlantRecollectable$Type_ = "tree" | "plant" | "any";
     export class $PlantRecollectable {
-        getPriority(): number;
-        doHarvestOperation(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, ...arg3: $Object[]): $List<$ItemStack>;
-        doHarvestOperation(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $List<$ItemStack>;
-        canBeHarvested(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
-        getSeedDrop(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $ItemStack;
-        getRecollectablesNames(): $List<string>;
         getRecollectableType(): $PlantRecollectable$Type;
         shouldCheckNextPlant(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
+        getRecollectablesNames(): $List<string>;
+        canBeHarvested(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): boolean;
+        getSeedDrop(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $ItemStack;
+        doHarvestOperation(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_): $List<$ItemStack>;
+        doHarvestOperation(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, ...arg3: $Object[]): $List<$ItemStack>;
+        getPriority(): number;
         constructor(arg0: string);
-        get priority(): number;
-        get recollectablesNames(): $List<string>;
         get recollectableType(): $PlantRecollectable$Type;
+        get recollectablesNames(): $List<string>;
+        get priority(): number;
     }
     /**
      * Values that may be interpreted as {@link $PlantRecollectable}.

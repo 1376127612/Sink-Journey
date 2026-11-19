@@ -16,9 +16,9 @@ declare module "@package/net/neoforged/neoforge/server/permission/events" {
         constructor();
     }
     export class $PermissionGatherEvent$Nodes extends $PermissionGatherEvent {
+        getNodes(): $Collection<$PermissionNode<never>>;
         addNodes(arg0: $Iterable_<$PermissionNode<never>>): void;
         addNodes(...arg0: $PermissionNode<never>[]): void;
-        getNodes(): $Collection<$PermissionNode<never>>;
         constructor();
         get nodes(): $Collection<$PermissionNode<never>>;
     }

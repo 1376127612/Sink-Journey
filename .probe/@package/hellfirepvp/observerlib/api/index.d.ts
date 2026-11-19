@@ -23,28 +23,28 @@ declare module "@package/hellfirepvp/observerlib/api" {
     export class $ChangeSubscriber<T extends $ChangeObserver<T>> {
     }
     export interface $ChangeSubscriber<T extends $ChangeObserver<T>> {
-        isValid(arg0: $Level_): boolean;
         getCurrentChangeSet(): $BlockChangeSet;
         getObserver(): T;
+        isValid(arg0: $Level_): boolean;
         get currentChangeSet(): $BlockChangeSet;
         get observer(): T;
     }
     export class $ChangeObserver<T extends $ChangeObserver<T>> {
+        getObservableArea(): $ObservableArea;
+        notifyChange(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockChangeSet): boolean;
         initialize(arg0: $LevelAccessor, arg1: $BlockPos_): void;
         getProvider(): $ObserverProvider<T>;
-        notifyChange(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockChangeSet): boolean;
-        getObservableArea(): $ObservableArea;
         static CODEC: $Codec<$ChangeObserver<never>>;
         constructor();
-        get provider(): $ObserverProvider<T>;
         get observableArea(): $ObservableArea;
+        get provider(): $ObserverProvider<T>;
     }
     export class $ObservableArea {
     }
     export interface $ObservableArea {
+        getAffectedChunks(arg0: $Vec3i): $Collection<$ChunkPos>;
+        observes(arg0: $Vec3i): boolean;
         calculateAffectedChunks(arg0: $Vec3i, arg1: $Vec3i): $Collection<$ChunkPos>;
         calculateAffectedChunks(arg0: $AABB_, arg1: $Vec3i): $Collection<$ChunkPos>;
-        observes(arg0: $Vec3i): boolean;
-        getAffectedChunks(arg0: $Vec3i): $Collection<$ChunkPos>;
     }
 }

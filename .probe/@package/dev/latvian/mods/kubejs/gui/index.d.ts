@@ -17,7 +17,7 @@ import { $MenuAccess, $AbstractContainerScreen } from "@package/net/minecraft/cl
 import { $FriendlyByteBuf } from "@package/net/minecraft/network";
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
-import { $Slot, $MenuType, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
+import { $Slot, $MenuType, $ContainerListener, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
 import { $InventoryKJS } from "@package/dev/latvian/mods/kubejs/core";
 import { $Font } from "@package/net/minecraft/client/gui";
 export * as chest from "@package/dev/latvian/mods/kubejs/gui/chest";
@@ -49,6 +49,7 @@ declare module "@package/dev/latvian/mods/kubejs/gui" {
         static SLOT_CLICKED_OUTSIDE: number;
         guiData: $KubeJSGUI;
         ldlib2$modularUI: $ModularUI;
+        containerListeners: $List<$ContainerListener>;
         static FACTORY: $IContainerFactory<$KubeJSMenu>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
@@ -75,6 +76,7 @@ declare module "@package/dev/latvian/mods/kubejs/gui" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         containerColumns: number;
         draggingItem: $ItemStack;

@@ -4,6 +4,7 @@ declare module "@package/de/maxhenkel/voicechat/configbuilder/entry" {
     export class $ConfigEntry<T> {
     }
     export interface $ConfigEntry<T> {
+        saveSync(): $ConfigEntry<T>;
         reset(): $ConfigEntry<T>;
         get(): T;
         getDefault(): T;
@@ -11,12 +12,11 @@ declare module "@package/de/maxhenkel/voicechat/configbuilder/entry" {
         set(arg0: T): $ConfigEntry<T>;
         save(): $ConfigEntry<T>;
         comment(...arg0: string[]): $ConfigEntry<T>;
-        getConfig(): $Config;
         getComments(): string[];
-        saveSync(): $ConfigEntry<T>;
+        getConfig(): $Config;
         get default(): T;
         get key(): string;
-        get config(): $Config;
         get comments(): string[];
+        get config(): $Config;
     }
 }

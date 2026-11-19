@@ -8,8 +8,8 @@ declare module "@package/mekanism/api/datamaps/chemical/attribute" {
     }
     export interface $IChemicalAttribute {
         toLegacyAttribute(): $ChemicalAttribute;
-        collectTooltips(arg0: $Item$TooltipContext, arg1: $List_<$Component_>, arg2: $TooltipFlag): void;
         needsValidation(): boolean;
+        collectTooltips(arg0: $Item$TooltipContext, arg1: $List_<$Component_>, arg2: $TooltipFlag): void;
     }
     /**
      * Values that may be interpreted as {@link $IChemicalAttribute}.

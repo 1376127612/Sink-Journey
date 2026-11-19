@@ -20,10 +20,6 @@ declare module "@package/net/minecraft/world/entity/ai/util" {
          * @return if a mob is restricted. The first parameter short circuits the operation.
          */
         static isRestricted(shortCircuit: boolean, mob: $PathfinderMob, pos: $BlockPos_): boolean;
-        /**
-         * @return if the pathfinding malus exists
-         */
-        static isSolid(mob: $PathfinderMob, pos: $BlockPos_): boolean;
         static hasGroundPathNavigation(mob: $Mob): boolean;
         /**
          * @return if the pathfinding malus exists
@@ -32,19 +28,23 @@ declare module "@package/net/minecraft/world/entity/ai/util" {
         /**
          * @return if the pathfinding malus exists
          */
-        static hasMalus(mob: $PathfinderMob, pos: $BlockPos_): boolean;
+        static isSolid(mob: $PathfinderMob, pos: $BlockPos_): boolean;
         /**
          * @return if a mob is above or below the map
          */
         static isOutsideLimits(pos: $BlockPos_, mob: $PathfinderMob): boolean;
         /**
+         * @return if a mob is stuck, within a certain radius beyond it's restriction radius
+         */
+        static mobRestricted(mob: $PathfinderMob, radius: number): boolean;
+        /**
          * @return if the destination can't be pathfinded to
          */
         static isNotStable(navigation: $PathNavigation, pos: $BlockPos_): boolean;
         /**
-         * @return if a mob is stuck, within a certain radius beyond it's restriction radius
+         * @return if the pathfinding malus exists
          */
-        static mobRestricted(mob: $PathfinderMob, radius: number): boolean;
+        static hasMalus(mob: $PathfinderMob, pos: $BlockPos_): boolean;
         constructor();
     }
     export class $DefaultRandomPos {
@@ -55,26 +55,31 @@ declare module "@package/net/minecraft/world/entity/ai/util" {
     }
     export class $LandRandomPos {
         static getPosAway(mob: $PathfinderMob, radius: number, yRange: number, vectorPosition: $Vec3_): $Vec3;
-        static getPos(mob: $PathfinderMob, radius: number, verticalRange: number): $Vec3;
         static getPos(mob: $PathfinderMob, radius: number, yRange: number, toDoubleFunction: $ToDoubleFunction_<$BlockPos>): $Vec3;
+        static getPos(mob: $PathfinderMob, radius: number, verticalRange: number): $Vec3;
         static getPosTowards(mob: $PathfinderMob, radius: number, yRange: number, vectorPosition: $Vec3_): $Vec3;
-        static generateRandomPosTowardDirection(mob: $PathfinderMob, radius: number, shortCircuit: boolean, pos: $BlockPos_): $BlockPos;
         static movePosUpOutOfSolid(mob: $PathfinderMob, pos: $BlockPos_): $BlockPos;
+        static generateRandomPosTowardDirection(mob: $PathfinderMob, radius: number, shortCircuit: boolean, pos: $BlockPos_): $BlockPos;
         constructor();
     }
     export class $RandomPos {
         /**
-         * @return a random position within range, only if the mob is currently restricted
+         * @return a random (x, y, z) coordinate by picking a point (x, z), adding a random angle, up to a difference of `maxAngleDelta`. The y position is randomly chosen from the range `[y - yRange, y + yRange]`. Will be `null` if the chosen coordinate is outside a distance of `maxHorizontalDistance` from the origin.
          */
-        static generateRandomPosTowardDirection(mob: $PathfinderMob, range: number, random: $RandomSource, pos: $BlockPos_): $BlockPos;
+        static generateRandomDirectionWithinRadians(random: $RandomSource, maxHorizontalDifference: number, yRange: number, y: number, x: number, arg5: number, z: number): $BlockPos;
         /**
          * Gets a random position within a certain distance.
          */
         static generateRandomDirection(random: $RandomSource, horizontalDistance: number, verticalDistance: number): $BlockPos;
         /**
-         * @return a random (x, y, z) coordinate by picking a point (x, z), adding a random angle, up to a difference of `maxAngleDelta`. The y position is randomly chosen from the range `[y - yRange, y + yRange]`. Will be `null` if the chosen coordinate is outside a distance of `maxHorizontalDistance` from the origin.
+         * Tries 10 times to maximize the return value of the position to double function based on the supplied position
          */
-        static generateRandomDirectionWithinRadians(random: $RandomSource, maxHorizontalDifference: number, yRange: number, y: number, x: number, arg5: number, z: number): $BlockPos;
+        static generateRandomPos(posSupplier: $Supplier_<$BlockPos>, toDoubleFunction: $ToDoubleFunction_<$BlockPos>): $Vec3;
+        static generateRandomPos(mob: $PathfinderMob, posSupplier: $Supplier_<$BlockPos>): $Vec3;
+        /**
+         * @return the highest above position that is within the provided conditions
+         */
+        static moveUpOutOfSolid(pos: $BlockPos_, maxY: number, posPredicate: $Predicate_<$BlockPos>): $BlockPos;
         /**
          * Finds a position above based on the conditions.
          * 
@@ -82,14 +87,9 @@ declare module "@package/net/minecraft/world/entity/ai/util" {
          */
         static moveUpToAboveSolid(pos: $BlockPos_, aboveSolidAmount: number, maxY: number, posPredicate: $Predicate_<$BlockPos>): $BlockPos;
         /**
-         * @return the highest above position that is within the provided conditions
+         * @return a random position within range, only if the mob is currently restricted
          */
-        static moveUpOutOfSolid(pos: $BlockPos_, maxY: number, posPredicate: $Predicate_<$BlockPos>): $BlockPos;
-        /**
-         * Tries 10 times to maximize the return value of the position to double function based on the supplied position
-         */
-        static generateRandomPos(posSupplier: $Supplier_<$BlockPos>, toDoubleFunction: $ToDoubleFunction_<$BlockPos>): $Vec3;
-        static generateRandomPos(mob: $PathfinderMob, posSupplier: $Supplier_<$BlockPos>): $Vec3;
+        static generateRandomPosTowardDirection(mob: $PathfinderMob, range: number, random: $RandomSource, pos: $BlockPos_): $BlockPos;
         constructor();
     }
     export class $HoverRandomPos {

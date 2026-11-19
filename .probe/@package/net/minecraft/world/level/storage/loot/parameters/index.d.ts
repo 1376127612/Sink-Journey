@@ -1,16 +1,18 @@
-import { $Consumer_ } from "@package/java/util/function";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $ItemStack } from "@package/net/minecraft/world/item";
-import { $BlockState } from "@package/net/minecraft/world/level/block/state";
-import { $ResourceLocation_, $ResourceLocation } from "@package/net/minecraft/resources";
 import { $Entity } from "@package/net/minecraft/world/entity";
 import { $Player } from "@package/net/minecraft/world/entity/player";
+import { $BiMap } from "@package/com/google/common/collect";
 import { $Set } from "@package/java/util";
+import { $ProblemReporter } from "@package/net/minecraft/util";
+import { $Consumer_ } from "@package/java/util/function";
+import { $BlockState } from "@package/net/minecraft/world/level/block/state";
+import { $ResourceLocation_, $ResourceLocation } from "@package/net/minecraft/resources";
+import { $AccessLootContextParamSets } from "@package/com/blamejared/crafttweaker/mixin";
 import { $Vec3 } from "@package/net/minecraft/world/phys";
 import { $LootContextUser, $ValidationContext } from "@package/net/minecraft/world/level/storage/loot";
 import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 import { $DamageSource } from "@package/net/minecraft/world/damagesource";
-import { $ProblemReporter } from "@package/net/minecraft/util";
 
 declare module "@package/net/minecraft/world/level/storage/loot/parameters" {
     /**
@@ -55,7 +57,6 @@ declare module "@package/net/minecraft/world/level/storage/loot/parameters" {
      * @see ValidationContext
      */
     export class $LootContextParamSet {
-        static builder(): $LootContextParamSet$Builder;
         /**
          * Whether the given parameter is allowed in this set.
          */
@@ -64,46 +65,50 @@ declare module "@package/net/minecraft/world/level/storage/loot/parameters" {
          * Gets the required and optional parameters
          */
         getAllowed(): $Set<$LootContextParam<never>>;
+        /**
+         * Gets the required and optional parameters
+         */
+        getRequired(): $Set<$LootContextParam<never>>;
         validateUser(problemReporter: $ProblemReporter, lootContextUser: $LootContextUser): void;
         /**
          * Validate that all parameters referenced by the given LootContextUser are present in this set.
          */
         validateUser(validationContext: $ValidationContext, lootContextUser: $LootContextUser): void;
-        /**
-         * Gets the required and optional parameters
-         */
-        getRequired(): $Set<$LootContextParam<never>>;
+        static builder(): $LootContextParamSet$Builder;
         get required(): $Set<$LootContextParam<never>>;
     }
     /**
      * Registry for `LootContextParamSet`s.
      */
-    export class $LootContextParamSets {
+    export class $LootContextParamSets implements $AccessLootContextParamSets {
         static register(registryName: string, builderConsumer: $Consumer_<$LootContextParamSet$Builder>): $LootContextParamSet;
+        static getREGISTRY$crafttweaker_$md$e03d8d$0(): $BiMap<any, any>;
         static ENCHANTED_ITEM: $LootContextParamSet;
         static ENCHANTED_LOCATION: $LootContextParamSet;
-        static CODEC: $Codec<$LootContextParamSet>;
         static HIT_BLOCK: $LootContextParamSet;
         static VAULT: $LootContextParamSet;
-        static BLOCK: $LootContextParamSet;
         static ADVANCEMENT_REWARD: $LootContextParamSet;
         static ARCHAEOLOGY: $LootContextParamSet;
-        static CHEST: $LootContextParamSet;
         static ADVANCEMENT_ENTITY: $LootContextParamSet;
         static ENCHANTED_DAMAGE: $LootContextParamSet;
         static EQUIPMENT: $LootContextParamSet;
         static GIFT: $LootContextParamSet;
         static FISHING: $LootContextParamSet;
         static ENTITY: $LootContextParamSet;
-        static SELECTOR: $LootContextParamSet;
         static PIGLIN_BARTER: $LootContextParamSet;
-        static BLOCK_USE: $LootContextParamSet;
-        static ALL_PARAMS: $LootContextParamSet;
         static COMMAND: $LootContextParamSet;
         static ADVANCEMENT_LOCATION: $LootContextParamSet;
         static SHEARING: $LootContextParamSet;
-        static ENCHANTED_ENTITY: $LootContextParamSet;
         static EMPTY: $LootContextParamSet;
+        static CODEC: $Codec<$LootContextParamSet>;
+        static BLOCK: $LootContextParamSet;
+        static CHEST: $LootContextParamSet;
+        static SELECTOR: $LootContextParamSet;
+        static BLOCK_USE: $LootContextParamSet;
+        static ALL_PARAMS: $LootContextParamSet;
+        static ENCHANTED_ENTITY: $LootContextParamSet;
+        static REGISTRY: $BiMap<$ResourceLocation, $LootContextParamSet>;
         constructor();
+        static get REGISTRY$crafttweaker_$md$e03d8d$0(): $BiMap<any, any>;
     }
 }

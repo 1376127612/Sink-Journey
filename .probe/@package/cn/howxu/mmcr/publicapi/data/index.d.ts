@@ -40,18 +40,25 @@ declare module "@package/cn/howxu/mmcr/publicapi/data" {
     export class $DataKey {
         static map(values: $Map_<string, $DataKey>): $DataKey;
         static of(value: boolean): $DataKey;
-        static of(value: string): $DataKey;
+        static of(value: $BigInteger): $DataKey;
         static of(value: number): $DataKey;
         static of(value: number): $DataKey;
         static of(value: number): $DataKey;
         static of(value: number): $DataKey;
         static of(value: number): $DataKey;
         static of(value: $BigDecimal): $DataKey;
-        static of(value: $BigInteger): $DataKey;
+        static of(value: string): $DataKey;
         static of(value: number): $DataKey;
         static list(values: $List_<$DataKey>): $DataKey;
     }
     export interface $DataKey {
+        asBoolean(): (boolean) | undefined;
+        asByte(): (number) | undefined;
+        asShort(): (number) | undefined;
+        asLong(): (number) | undefined;
+        asFloat(): (number) | undefined;
+        asBigDecimal(): ($BigDecimal) | undefined;
+        bigDecimalValue(): $BigDecimal;
         type(): $DataKind;
         booleanValue(): boolean;
         byteValue(): number;
@@ -62,18 +69,11 @@ declare module "@package/cn/howxu/mmcr/publicapi/data" {
         doubleValue(): number;
         asList(): ($List<$DataKey>) | undefined;
         stringValue(): string;
-        asString(): (string) | undefined;
+        asBigInteger(): ($BigInteger) | undefined;
+        asMap(): ($Map<string, $DataKey>) | undefined;
         asInt(): (number) | undefined;
+        asString(): (string) | undefined;
         bigIntegerValue(): $BigInteger;
         asDouble(): (number) | undefined;
-        asMap(): ($Map<string, $DataKey>) | undefined;
-        asBigInteger(): ($BigInteger) | undefined;
-        asByte(): (number) | undefined;
-        asShort(): (number) | undefined;
-        asFloat(): (number) | undefined;
-        asLong(): (number) | undefined;
-        asBoolean(): (boolean) | undefined;
-        bigDecimalValue(): $BigDecimal;
-        asBigDecimal(): ($BigDecimal) | undefined;
     }
 }

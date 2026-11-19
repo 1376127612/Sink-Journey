@@ -35,8 +35,8 @@ declare module "@package/javax/crypto" {
         init(arg0: number, arg1: $Key, arg2: $AlgorithmParameters, arg3: $SecureRandom): void;
         unwrap(arg0: number[], arg1: string, arg2: number): $Key;
         getAlgorithm(): string;
-        getBlockSize(): number;
         getProvider(): $Provider;
+        getBlockSize(): number;
         static getMaxAllowedKeyLength(arg0: string): number;
         getExemptionMechanism(): $ExemptionMechanism;
         updateAAD(arg0: number[]): void;
@@ -61,25 +61,25 @@ declare module "@package/javax/crypto" {
         static DECRYPT_MODE: number;
         get parameters(): $AlgorithmParameters;
         get algorithm(): string;
-        get blockSize(): number;
         get provider(): $Provider;
+        get blockSize(): number;
         get exemptionMechanism(): $ExemptionMechanism;
         get IV(): number[];
     }
     export class $ExemptionMechanism {
+        genExemptionBlob(): number[];
+        genExemptionBlob(arg0: number[]): number;
+        genExemptionBlob(arg0: number[], arg1: number): number;
         getName(): string;
         static getInstance(arg0: string, arg1: string): $ExemptionMechanism;
-        static getInstance(arg0: string, arg1: $Provider): $ExemptionMechanism;
         static getInstance(arg0: string): $ExemptionMechanism;
-        init(arg0: $Key): void;
+        static getInstance(arg0: string, arg1: $Provider): $ExemptionMechanism;
         init(arg0: $Key, arg1: $AlgorithmParameters): void;
+        init(arg0: $Key): void;
         init(arg0: $Key, arg1: $AlgorithmParameterSpec): void;
         getProvider(): $Provider;
         isCryptoAllowed(arg0: $Key): boolean;
         getOutputSize(arg0: number): number;
-        genExemptionBlob(arg0: number[], arg1: number): number;
-        genExemptionBlob(arg0: number[]): number;
-        genExemptionBlob(): number[];
         get name(): string;
         get provider(): $Provider;
     }

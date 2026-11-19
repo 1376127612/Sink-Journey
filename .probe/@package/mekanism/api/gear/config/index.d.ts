@@ -16,11 +16,11 @@ declare module "@package/mekanism/api/gear/config" {
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ModuleBooleanConfig>;
     }
     export class $ModuleConfig<DATA> {
+        isConfigDisabled(): boolean;
+        namedStreamCodec(arg0: $ResourceLocation_): $StreamCodec<$RegistryFriendlyByteBuf, $ModuleConfig<DATA>>;
         name(): $ResourceLocation;
         get(): DATA;
         "with"(arg0: DATA): $ModuleConfig<DATA>;
-        namedStreamCodec(arg0: $ResourceLocation_): $StreamCodec<$RegistryFriendlyByteBuf, $ModuleConfig<DATA>>;
-        isConfigDisabled(): boolean;
         static ENABLED_KEY: $ResourceLocation;
         static RENDER_HUD_KEY: $ResourceLocation;
         static HANDLES_MODE_CHANGE_KEY: $ResourceLocation;

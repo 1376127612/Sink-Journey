@@ -18,8 +18,8 @@ declare module "@package/net/minecraft/client/multiplayer/resolver" {
         static createFromService(): $AddressCheck;
     }
     export interface $AddressCheck {
-        isAllowed(serverAddress: $ServerAddress): boolean;
         isAllowed(resolvedServerAddress: $ResolvedServerAddress): boolean;
+        isAllowed(serverAddress: $ServerAddress): boolean;
     }
     export class $ServerNameResolver {
         resolveAddress(serverAddress: $ServerAddress): ($ResolvedServerAddress) | undefined;
@@ -49,10 +49,10 @@ declare module "@package/net/minecraft/client/multiplayer/resolver" {
      */
     export type $ServerAddressResolver_ = ((arg0: $ServerAddress) => ($ResolvedServerAddress) | undefined);
     export class $ServerAddress {
+        static isValidAddress(hostAndPort: string): boolean;
         getHost(): string;
         getPort(): number;
         static parseString(ip: string): $ServerAddress;
-        static isValidAddress(hostAndPort: string): boolean;
         constructor(host: string, port: number);
         get host(): string;
         get port(): number;

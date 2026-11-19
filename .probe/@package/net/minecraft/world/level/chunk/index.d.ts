@@ -8,9 +8,10 @@ import { $ChunkGeneratorAccessor } from "@package/dev/worldgen/lithostitched/mix
 import { $MobCategory_, $Entity } from "@package/net/minecraft/world/entity";
 import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $VoxelShape } from "@package/net/minecraft/world/phys/shapes";
+import { $ChunkGeneratorAccessor as $ChunkGeneratorAccessor$1 } from "@package/org/betterx/wover/biome/mixin";
 import { $WeakReference } from "@package/java/lang/ref";
 import { $BitStorage, $CrudeIncrementalIntIdentityHashBiMap } from "@package/net/minecraft/util";
-import { $AttachmentType, $AttachmentType_, $IAttachmentHolder, $AttachmentHolder$AsField } from "@package/net/neoforged/neoforge/attachment";
+import { $AttachmentType, $IAttachmentHolder, $AttachmentType_, $AttachmentHolder$AsField } from "@package/net/neoforged/neoforge/attachment";
 import { $WorldBorder } from "@package/net/minecraft/world/level/border";
 import { $WorldBorderListenerOnce } from "@package/net/caffeinemc/mods/lithium/common/world/listeners";
 import { $FriendlyByteBuf } from "@package/net/minecraft/network";
@@ -35,6 +36,7 @@ import { $Path_ } from "@package/java/nio/file";
 import { $WeightedRandomList } from "@package/net/minecraft/util/random";
 import { $ChunkStatus, $ChunkStatus_ } from "@package/net/minecraft/world/level/chunk/status";
 import { $Enum, $RuntimeException, $Record, $AutoCloseable, $Class, $Object } from "@package/java/lang";
+import { $ConfiguredChunkGenerator } from "@package/org/betterx/wover/generator/impl/chunkgenerator";
 import { $Heightmap$Types_, $BelowZeroRetrogen, $RandomState, $GenerationStep$Carving_, $NoiseChunk, $Heightmap$Types, $Heightmap } from "@package/net/minecraft/world/level/levelgen";
 import { $PalettedContainerROExtension } from "@package/net/caffeinemc/mods/sodium/client/world";
 import { $LevelAccessor, $LightLayer_, $ChunkPos, $BlockGetter, $ClipContext, $NoiseColumn, $ClipBlockStateContext, $WorldGenLevel, $LevelHeightAccessor, $Level, $StructureManager, $Level_ } from "@package/net/minecraft/world/level";
@@ -46,7 +48,7 @@ import { $ClientboundLevelChunkPacketData$BlockEntityTagOutput } from "@package/
 import { $Trackable } from "@package/dev/uncandango/alltheleaks/mixin";
 import { $IChunkGenerator } from "@package/org/embeddedt/modernfix/duck";
 import { $LongStream, $Stream } from "@package/java/util/stream";
-import { $ResourceKey } from "@package/net/minecraft/resources";
+import { $ResourceKey_, $ResourceKey } from "@package/net/minecraft/resources";
 import { $LevelChunkAuxiliaryLightManager, $AuxiliaryLightManager } from "@package/net/neoforged/neoforge/common/world";
 import { $BlockEntityType_, $BlockEntity, $TickingBlockEntity } from "@package/net/minecraft/world/level/block/entity";
 export * as storage from "@package/net/minecraft/world/level/chunk/storage";
@@ -66,7 +68,6 @@ declare module "@package/net/minecraft/world/level/chunk" {
      * A representation of a 16x16x16 cube of nibbles (half-bytes).
      */
     export class $DataLayer {
-        layerToString(unused: number): string;
         /**
          * Note all coordinates must be in the range [0, 16), they **are not checked**, and will either silently overrun the array or throw an exception.
          * @return The value of this data layer at the provided position.
@@ -83,57 +84,63 @@ declare module "@package/net/minecraft/world/level/chunk" {
         getData(): number[];
         isDefinitelyHomogenous(): boolean;
         isDefinitelyFilledWith(value: number): boolean;
+        layerToString(unused: number): string;
         static LAYER_COUNT: number;
         static SIZE: number;
         static LAYER_SIZE: number;
         constructor();
-        constructor(size: number);
         constructor(data: number[]);
+        constructor(size: number);
         get empty(): boolean;
         get data(): number[];
         get definitelyHomogenous(): boolean;
     }
-    export class $ChunkGenerator implements $ChunkGeneratorAccessor {
-        validate(): void;
-        getFirstOccupiedHeight(x: number, z: number, type: $Heightmap$Types_, level: $LevelHeightAccessor, random: $RandomState): number;
-        createState(structureSetLookup: $HolderLookup<$StructureSet_>, randomState: $RandomState, seed: number): $ChunkGeneratorStructureState;
-        findNearestMapStructure(level: $ServerLevel, structure: $HolderSet_<$Structure>, pos: $BlockPos_, searchRadius: number, skipKnownStructures: boolean): $Pair<$BlockPos, $Holder<$Structure>>;
-        getSeaLevel(): number;
-        addDebugScreenInfo(info: $List_<string>, random: $RandomState, pos: $BlockPos_): void;
-        getSpawnHeight(level: $LevelHeightAccessor): number;
-        buildSurface(level: $WorldGenRegion, structureManager: $StructureManager, random: $RandomState, chunk: $ChunkAccess): void;
-        applyCarvers(level: $WorldGenRegion, seed: number, arg2: $RandomState, random: $BiomeManager, biomeManager: $StructureManager, structureManager: $ChunkAccess, chunk: $GenerationStep$Carving_): void;
-        createBiomes(randomState: $RandomState, blender: $Blender, structureManager: $StructureManager, chunk: $ChunkAccess): $CompletableFuture<$ChunkAccess>;
-        fillFromNoise(blender: $Blender, randomState: $RandomState, structureManager: $StructureManager, chunk: $ChunkAccess): $CompletableFuture<$ChunkAccess>;
-        spawnOriginalMobs(level: $WorldGenRegion): void;
-        createReferences(level: $WorldGenLevel, structureManager: $StructureManager, chunk: $ChunkAccess): void;
-        createStructures(registryAccess: $RegistryAccess, structureState: $ChunkGeneratorStructureState, structureManager: $StructureManager, chunk: $ChunkAccess, structureTemplateManager: $StructureTemplateManager): void;
-        getFirstFreeHeight(x: number, z: number, type: $Heightmap$Types_, level: $LevelHeightAccessor, random: $RandomState): number;
-        refreshFeaturesPerStep(): void;
-        applyBiomeDecoration(level: $WorldGenLevel, chunk: $ChunkAccess, structureManager: $StructureManager): void;
-        getTypeNameForDataFixer(): ($ResourceKey<$MapCodec<$ChunkGenerator>>) | undefined;
-        getMinY(): number;
+    export class $ChunkGenerator implements $ChunkGeneratorAccessor, $ChunkGeneratorAccessor$1, $ConfiguredChunkGenerator {
         getMobsAt(biome: $Holder_<$Biome>, structureManager: $StructureManager, category: $MobCategory_, pos: $BlockPos_): $WeightedRandomList<$MobSpawnSettings$SpawnerData>;
+        getGenDepth(): number;
+        getBaseColumn(x: number, z: number, height: $LevelHeightAccessor, random: $RandomState): $NoiseColumn;
+        getBaseHeight(x: number, z: number, type: $Heightmap$Types_, level: $LevelHeightAccessor, random: $RandomState): number;
+        findNearestMapStructure(level: $ServerLevel, structure: $HolderSet_<$Structure>, pos: $BlockPos_, searchRadius: number, skipKnownStructures: boolean): $Pair<$BlockPos, $Holder<$Structure>>;
+        refreshFeaturesPerStep(): void;
+        getTypeNameForDataFixer(): ($ResourceKey<$MapCodec<$ChunkGenerator>>) | undefined;
+        applyBiomeDecoration(level: $WorldGenLevel, chunk: $ChunkAccess, structureManager: $StructureManager): void;
+        getSeaLevel(): number;
         /**
          * @deprecated
          */
         getBiomeGenerationSettings(biome: $Holder_<$Biome>): $BiomeGenerationSettings;
-        handler$dfm000$terrablender$validate(arg0: $CallbackInfo): void;
-        getBaseHeight(x: number, z: number, type: $Heightmap$Types_, level: $LevelHeightAccessor, random: $RandomState): number;
-        getBaseColumn(x: number, z: number, height: $LevelHeightAccessor, random: $RandomState): $NoiseColumn;
-        getGenDepth(): number;
+        validate(): void;
+        createState(structureSetLookup: $HolderLookup<$StructureSet_>, randomState: $RandomState, seed: number): $ChunkGeneratorStructureState;
+        handler$coe000$terrablender$validate(arg0: $CallbackInfo): void;
+        getMinY(): number;
+        createBiomes(randomState: $RandomState, blender: $Blender, structureManager: $StructureManager, chunk: $ChunkAccess): $CompletableFuture<$ChunkAccess>;
+        getSpawnHeight(level: $LevelHeightAccessor): number;
+        addDebugScreenInfo(info: $List_<string>, random: $RandomState, pos: $BlockPos_): void;
+        spawnOriginalMobs(level: $WorldGenRegion): void;
+        applyCarvers(level: $WorldGenRegion, seed: number, arg2: $RandomState, random: $BiomeManager, biomeManager: $StructureManager, structureManager: $ChunkAccess, chunk: $GenerationStep$Carving_): void;
+        fillFromNoise(blender: $Blender, randomState: $RandomState, structureManager: $StructureManager, chunk: $ChunkAccess): $CompletableFuture<$ChunkAccess>;
+        createStructures(registryAccess: $RegistryAccess, structureState: $ChunkGeneratorStructureState, structureManager: $StructureManager, chunk: $ChunkAccess, structureTemplateManager: $StructureTemplateManager): void;
+        createReferences(level: $WorldGenLevel, structureManager: $StructureManager, chunk: $ChunkAccess): void;
+        getFirstFreeHeight(x: number, z: number, type: $Heightmap$Types_, level: $LevelHeightAccessor, random: $RandomState): number;
+        buildSurface(level: $WorldGenRegion, structureManager: $StructureManager, random: $RandomState, chunk: $ChunkAccess): void;
+        wover_setConfiguredWorldPreset(arg0: $ResourceKey_<any>): void;
+        wover_getConfiguredWorldPreset(): $ResourceKey<any>;
+        getFirstOccupiedHeight(x: number, z: number, type: $Heightmap$Types_, level: $LevelHeightAccessor, random: $RandomState): number;
+        wover_setFeaturesPerStep(arg0: $Supplier_<$List<$FeatureSorter$StepFeatureData>>): void;
+        wover_setBiomeSource(biomeSource: $BiomeSource): void;
+        wover_getFeaturesPerStep(): $Supplier<$List<$FeatureSorter$StepFeatureData>>;
+        getBiomeSource(): $BiomeSource;
         getGetter(): $Function<$Holder<$Biome>, $BiomeGenerationSettings>;
         setBiomeSource(biomeSource: $BiomeSource): void;
         setFeaturesPerStep(arg0: $Supplier_<$List<$FeatureSorter$StepFeatureData>>): void;
-        getBiomeSource(): $BiomeSource;
         featuresPerStep: $Supplier<$List<$FeatureSorter$StepFeatureData>>;
         static CODEC: $Codec<$ChunkGenerator>;
         constructor(biomeSource: $BiomeSource);
         constructor(biomeSource: $BiomeSource, generationSettingsGetter: $Function_<$Holder<$Biome>, $BiomeGenerationSettings>);
-        get seaLevel(): number;
-        get typeNameForDataFixer(): ($ResourceKey<$MapCodec<$ChunkGenerator>>) | undefined;
-        get minY(): number;
         get genDepth(): number;
+        get typeNameForDataFixer(): ($ResourceKey<$MapCodec<$ChunkGenerator>>) | undefined;
+        get seaLevel(): number;
+        get minY(): number;
         get getter(): $Function<$Holder<$Biome>, $BiomeGenerationSettings>;
     }
     export class $PalettedContainerRO$Unpacker<T, C extends $PalettedContainerRO<T>> {
@@ -161,8 +168,8 @@ declare module "@package/net/minecraft/world/level/chunk" {
     export class $BlockColumn {
     }
     export interface $BlockColumn {
-        getBlock(pos: number): $BlockState;
         setBlock(pos: number, state: $BlockState_): void;
+        getBlock(pos: number): $BlockState;
     }
     export class $CarvingMask$Mask {
     }
@@ -183,40 +190,40 @@ declare module "@package/net/minecraft/world/level/chunk" {
      */
     export type $Palette$Factory_ = ((arg0: number, arg1: $IdMap<any>, arg2: $PaletteResize<any>, arg3: $List<any>) => $Palette<any>);
     export class $LinearPalette<T> implements $Palette<T> {
+        maybeHas(filter: $Predicate_<T>): boolean;
+        idFor(state: T): number;
+        valueFor(id: number): T;
+        getSerializedSize(): number;
         getSize(): number;
         write(buffer: $FriendlyByteBuf): void;
         read(buffer: $FriendlyByteBuf): void;
         copy(): $Palette<T>;
         static create<A>(bits: number, registry: $IdMap<A>, resizeHandler: $PaletteResize_<A>, values: $List_<A>): $Palette<A>;
-        idFor(state: T): number;
-        valueFor(id: number): T;
-        maybeHas(filter: $Predicate_<T>): boolean;
-        getSerializedSize(): number;
-        get size(): number;
         get serializedSize(): number;
+        get size(): number;
     }
     export class $ChunkGeneratorStructureState implements $IChunkGenerator {
-        hasStructureChunkInRange(structureSet: $Holder_<$StructureSet>, x: number, z: number, range: number): boolean;
-        mfix$setStrongholdCachePath(arg0: $Path_, arg1: $MinecraftServer): void;
-        ensureStructuresGenerated(): void;
-        static createForNormal(randomState: $RandomState, seed: number, arg2: $BiomeSource, biomeSource: $HolderLookup<$StructureSet_>): $ChunkGeneratorStructureState;
-        static createForFlat(randomState: $RandomState, levelSeed: number, arg2: $BiomeSource, biomeSource: $Stream<$Holder_<$StructureSet>>): $ChunkGeneratorStructureState;
-        randomState(): $RandomState;
-        getRingPositionsFor(placement: $ConcentricRingsStructurePlacement): $List<$ChunkPos>;
-        possibleStructureSets(): $List<$Holder<$StructureSet>>;
-        getPlacementsForStructure(structure: $Holder_<$Structure>): $List<$StructurePlacement>;
         getLevelSeed(): number;
+        ensureStructuresGenerated(): void;
+        getPlacementsForStructure(structure: $Holder_<$Structure>): $List<$StructurePlacement>;
+        possibleStructureSets(): $List<$Holder<$StructureSet>>;
+        randomState(): $RandomState;
+        static createForFlat(randomState: $RandomState, levelSeed: number, arg2: $BiomeSource, biomeSource: $Stream<$Holder_<$StructureSet>>): $ChunkGeneratorStructureState;
+        static createForNormal(randomState: $RandomState, seed: number, arg2: $BiomeSource, biomeSource: $HolderLookup<$StructureSet_>): $ChunkGeneratorStructureState;
+        mfix$setStrongholdCachePath(arg0: $Path_, arg1: $MinecraftServer): void;
+        hasStructureChunkInRange(structureSet: $Holder_<$StructureSet>, x: number, z: number, range: number): boolean;
+        getRingPositionsFor(placement: $ConcentricRingsStructurePlacement): $List<$ChunkPos>;
         get levelSeed(): number;
     }
     export class $StructureAccess {
     }
     export interface $StructureAccess {
+        getStartForStructure(structure: $Structure_): $StructureStart;
         setStartForStructure(structure: $Structure_, structureStart: $StructureStart): void;
         getReferencesForStructure(structure: $Structure_): $LongSet;
         addReferenceForStructure(structure: $Structure_, reference: number): void;
-        getStartForStructure(structure: $Structure_): $StructureStart;
-        getAllReferences(): $Map<$Structure, $LongSet>;
         setAllReferences(structureReferencesMap: $Map_<$Structure_, $LongSet>): void;
+        getAllReferences(): $Map<$Structure, $LongSet>;
     }
     export class $PalettedContainerRO$PackedData<T> extends $Record {
         storage(): ($LongStream) | undefined;
@@ -226,7 +233,7 @@ declare module "@package/net/minecraft/world/level/chunk" {
     /**
      * Values that may be interpreted as {@link $PalettedContainerRO$PackedData}.
      */
-    export type $PalettedContainerRO$PackedData_<T> = { storage?: ($LongStream) | undefined, paletteEntries?: $List_<any>,  } | [storage?: ($LongStream) | undefined, paletteEntries?: $List_<any>, ];
+    export type $PalettedContainerRO$PackedData_<T> = { paletteEntries?: $List_<any>, storage?: ($LongStream) | undefined,  } | [paletteEntries?: $List_<any>, storage?: ($LongStream) | undefined, ];
     /**
      * During world generation, adjacent chunks may be fully generated (and thus be level chunks), but are often needed in proto chunk form. This wraps a completely generated chunk as a proto chunk.
      */
@@ -258,16 +265,16 @@ declare module "@package/net/minecraft/world/level/chunk" {
     /**
      * Values that may be interpreted as {@link $ChunkAccess$TicksToSave}.
      */
-    export type $ChunkAccess$TicksToSave_ = { blocks?: $SerializableTickContainer_<$Block>, fluids?: $SerializableTickContainer_<$Fluid>,  } | [blocks?: $SerializableTickContainer_<$Block>, fluids?: $SerializableTickContainer_<$Fluid>, ];
+    export type $ChunkAccess$TicksToSave_ = { fluids?: $SerializableTickContainer_<$Fluid>, blocks?: $SerializableTickContainer_<$Block>,  } | [fluids?: $SerializableTickContainer_<$Fluid>, blocks?: $SerializableTickContainer_<$Block>, ];
     export class $LevelChunk$BoundTickingBlockEntity<T extends $BlockEntity> implements $TickingBlockEntity, $WorldBorderListenerOnce {
-        onBorderSetWarningBlocks(border: $WorldBorder, warningBlocks: number): void;
-        onBorderSetDamageSafeZOne(border: $WorldBorder, size: number): void;
-        onBorderSetWarningTime(border: $WorldBorder, warningBlocks: number): void;
-        onBorderSizeLerping(border: $WorldBorder, oldSize: number, arg2: number, newSize: number): void;
-        onBorderSetDamagePerBlock(border: $WorldBorder, size: number): void;
-        onBorderCenterSet(border: $WorldBorder, x: number, arg2: number): void;
-        onBorderSizeSet(border: $WorldBorder, size: number): void;
+        onBorderSizeLerping(arg0: $WorldBorder, arg1: number, arg2: number, arg3: number): void;
+        onBorderSetDamagePerBlock(arg0: $WorldBorder, arg1: number): void;
+        onBorderSetWarningTime(arg0: $WorldBorder, arg1: number): void;
+        onBorderSetWarningBlocks(arg0: $WorldBorder, arg1: number): void;
+        onBorderSetDamageSafeZOne(arg0: $WorldBorder, arg1: number): void;
         onAreaReplaced(arg0: $WorldBorder): void;
+        onBorderSizeSet(arg0: $WorldBorder, arg1: number): void;
+        onBorderCenterSet(arg0: $WorldBorder, arg1: number, arg2: number): void;
     }
     export class $LightChunk {
     }
@@ -277,153 +284,153 @@ declare module "@package/net/minecraft/world/level/chunk" {
         get skyLightSources(): $ChunkSkyLightSources;
     }
     export class $ChunkAccess implements $BlockGetter, $BiomeManager$NoiseBiomeSource, $LightChunk, $StructureAccess, $IAttachmentHolder, $Trackable {
-        getData<T>(arg0: $AttachmentType_<T>): T;
-        getLevel(): $Level;
-        removeData<T>(arg0: $AttachmentType_<T>): T;
-        setData<T>(arg0: $AttachmentType_<T>, arg1: T): T;
-        getSections(): $LevelChunkSection[];
-        getPos(): $ChunkPos;
-        getExistingDataOrNull<T>(arg0: $AttachmentType_<T>): T;
-        findBlockLightSources(output: $BiConsumer_<$BlockPos, $BlockState>): void;
-        getBlockEntityNbtForSaving(pos: $BlockPos_, registries: $HolderLookup$Provider): $CompoundTag;
-        hasData(arg0: $AttachmentType_<never>): boolean;
-        setUnsaved(lightCorrect: boolean): void;
-        addEntity(entity: $Entity): void;
-        getMinBuildHeight(): number;
-        getSection(index: number): $LevelChunkSection;
-        getHeight(type: $Heightmap$Types_, x: number, z: number): number;
+        findBlocks(arg0: $Predicate_<$BlockState>, arg1: $BiPredicate_<$BlockState, $BlockPos>, arg2: $BiConsumer_<$BlockPos, $BlockState>): void;
+        findBlocks(predicate: $Predicate_<$BlockState>, output: $BiConsumer_<$BlockPos, $BlockState>): void;
+        /**
+         * @deprecated
+         */
+        findBlocks(arg0: $BiPredicate_<$BlockState, $BlockPos>, arg1: $BiConsumer_<$BlockPos, $BlockState>): void;
+        isUnsaved(): boolean;
         getHeight(): number;
-        getBlockTicks(): $TickContainerAccess<$Block>;
+        getHeight(type: $Heightmap$Types_, x: number, z: number): number;
+        atl$getBaseClass(): $Class<any>;
+        hasAttachments(): boolean;
+        getMinBuildHeight(): number;
+        getListenerRegistry(sectionY: number): $GameEventListenerRegistry;
+        getStartForStructure(structure: $Structure_): $StructureStart;
+        setStartForStructure(structure: $Structure_, structureStart: $StructureStart): void;
+        getReferencesForStructure(structure: $Structure_): $LongSet;
+        addReferenceForStructure(structure: $Structure_, reference: number): void;
+        getHighestGeneratedStatus(): $ChunkStatus;
+        getBelowZeroRetrogen(): $BelowZeroRetrogen;
+        getBlockEntitiesPos(): $Set<$BlockPos>;
+        getBlockEntityNbtForSaving(pos: $BlockPos_, registries: $HolderLookup$Provider): $CompoundTag;
+        writeAttachmentsToNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        getOrCreateNoiseChunk(noiseChunkCreator: $Function_<$ChunkAccess, $NoiseChunk>): $NoiseChunk;
+        addPackedPostProcess(packedPosition: number, index: number): void;
+        initializeLightSources(): void;
+        fillBiomesFromNoise(resolver: $BiomeResolver_, sampler: $Climate$Sampler_): void;
+        findBlockLightSources(output: $BiConsumer_<$BlockPos, $BlockState>): void;
+        hasAnyStructureReferences(): boolean;
+        getAttachmentHolder(): $AttachmentHolder$AsField;
+        getTicksForSerialization(): $ChunkAccess$TicksToSave;
+        readAttachmentsFromNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        static getOrCreateOffsetList(packedPositions: $ShortList[], index: number): $ShortList;
+        isOldNoiseGeneration(): boolean;
+        incrementInhabitedTime(amount: number): void;
+        getPos(): $ChunkPos;
+        setUnsaved(lightCorrect: boolean): void;
+        getAllStarts(): $Map<$Structure, $StructureStart>;
         /**
          * Gets the biome at the given quart positions.
          * Note that the coordinates passed into this method are 1/4 the scale of block coordinates.
          */
         getNoiseBiome(x: number, y: number, z: number): $Holder<$Biome>;
         getFluidTicks(): $TickContainerAccess<$Fluid>;
+        getBlockTicks(): $TickContainerAccess<$Block>;
         setBlockState(pos: $BlockPos_, state: $BlockState_, isMoving: boolean): $BlockState;
-        removeBlockEntity(pos: $BlockPos_): void;
         setBlockEntity(blockEntity: $BlockEntity): void;
         getInhabitedTime(): number;
-        hasAttachments(): boolean;
-        atl$getBaseClass(): $Class<any>;
+        removeBlockEntity(pos: $BlockPos_): void;
         markPosForPostprocessing(pos: $BlockPos_): void;
-        getOrCreateHeightmapUnprimed(type: $Heightmap$Types_): $Heightmap;
-        getHeightAccessorForGeneration(): $LevelHeightAccessor;
-        getAllStarts(): $Map<$Structure, $StructureStart>;
-        getBelowZeroRetrogen(): $BelowZeroRetrogen;
-        addPackedPostProcess(packedPosition: number, index: number): void;
-        static getOrCreateOffsetList(packedPositions: $ShortList[], index: number): $ShortList;
-        setStartForStructure(structure: $Structure_, structureStart: $StructureStart): void;
-        getReferencesForStructure(structure: $Structure_): $LongSet;
-        addReferenceForStructure(structure: $Structure_, reference: number): void;
-        getHighestGeneratedStatus(): $ChunkStatus;
-        getStartForStructure(structure: $Structure_): $StructureStart;
-        getListenerRegistry(sectionY: number): $GameEventListenerRegistry;
-        getBlockEntitiesPos(): $Set<$BlockPos>;
-        /**
-         * @deprecated
-         */
-        getHighestSectionPosition(): number;
-        getHighestFilledSectionIndex(): number;
-        getOrCreateNoiseChunk(noiseChunkCreator: $Function_<$ChunkAccess, $NoiseChunk>): $NoiseChunk;
-        writeAttachmentsToNBT(arg0: $HolderLookup$Provider): $CompoundTag;
-        hasAnyStructureReferences(): boolean;
-        initializeLightSources(): void;
-        readAttachmentsFromNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
-        isOldNoiseGeneration(): boolean;
-        incrementInhabitedTime(amount: number): void;
-        getAttachmentHolder(): $AttachmentHolder$AsField;
-        getTicksForSerialization(): $ChunkAccess$TicksToSave;
-        fillBiomesFromNoise(resolver: $BiomeResolver_, sampler: $Climate$Sampler_): void;
-        /**
-         * @deprecated
-         */
-        findBlocks(arg0: $BiPredicate_<$BlockState, $BlockPos>, arg1: $BiConsumer_<$BlockPos, $BlockState>): void;
-        findBlocks(predicate: $Predicate_<$BlockState>, output: $BiConsumer_<$BlockPos, $BlockState>): void;
-        findBlocks(arg0: $Predicate_<$BlockState>, arg1: $BiPredicate_<$BlockState, $BlockPos>, arg2: $BiConsumer_<$BlockPos, $BlockState>): void;
-        isUnsaved(): boolean;
+        getUpgradeData(): $UpgradeData;
+        getBlendingData(): $BlendingData;
+        setBlendingData(blendingData: $BlendingData): void;
         setInhabitedTime(amount: number): void;
+        isLightCorrect(): boolean;
+        setHeightmap(type: $Heightmap$Types_, data: number[]): void;
+        hasPrimedHeightmap(type: $Heightmap$Types_): boolean;
+        setAllReferences(structureReferencesMap: $Map_<$Structure_, $LongSet>): void;
+        getHeightmaps(): $Collection<$Map$Entry<$Heightmap$Types, $Heightmap>>;
+        setAllStarts(structureReferencesMap: $Map_<$Structure_, $StructureStart>): void;
+        isYSpaceEmpty(startY: number, endY: number): boolean;
+        isSectionEmpty(y: number): boolean;
+        getPostProcessing(): $ShortList[];
         getPersistedStatus(): $ChunkStatus;
+        setBlockEntityNbt(tag: $CompoundTag_): void;
+        getBlockEntityNbt(pos: $BlockPos_): $CompoundTag;
+        isUpgrading(): boolean;
+        setLightCorrect(lightCorrect: boolean): void;
+        getAllReferences(): $Map<any, any>;
+        getSkyLightSources(): $ChunkSkyLightSources;
         /**
          * @deprecated
          */
         carverBiome(caverBiomeSettingsSupplier: $Supplier_<$BiomeGenerationSettings>): $BiomeGenerationSettings;
-        setLightCorrect(lightCorrect: boolean): void;
-        getAllReferences(): $Map<any, any>;
-        getSkyLightSources(): $ChunkSkyLightSources;
-        setHeightmap(type: $Heightmap$Types_, data: number[]): void;
-        setAllStarts(structureReferencesMap: $Map_<$Structure_, $StructureStart>): void;
-        getPostProcessing(): $ShortList[];
-        getBlendingData(): $BlendingData;
-        setBlendingData(blendingData: $BlendingData): void;
-        isUpgrading(): boolean;
-        setAllReferences(structureReferencesMap: $Map_<$Structure_, $LongSet>): void;
-        setBlockEntityNbt(tag: $CompoundTag_): void;
-        isSectionEmpty(y: number): boolean;
-        getBlockEntityNbt(pos: $BlockPos_): $CompoundTag;
-        isLightCorrect(): boolean;
-        getUpgradeData(): $UpgradeData;
-        isYSpaceEmpty(startY: number, endY: number): boolean;
-        getHeightmaps(): $Collection<$Map$Entry<$Heightmap$Types, $Heightmap>>;
-        hasPrimedHeightmap(type: $Heightmap$Types_): boolean;
-        getBlockEntity<T extends $BlockEntity>(pos: $BlockPos_, blockEntityType: $BlockEntityType_<T>): (T) | undefined;
-        clip(failContext: $ClipContext): $BlockHitResult;
-        getBlockStates(area: $AABB_): $Stream<$BlockState>;
+        getData<T>(arg0: $AttachmentType_<T>): T;
+        getLevel(): $Level;
+        setData<T>(arg0: $AttachmentType_<T>, arg1: T): T;
+        getHighestFilledSectionIndex(): number;
+        getOrCreateHeightmapUnprimed(type: $Heightmap$Types_): $Heightmap;
+        getHeightAccessorForGeneration(): $LevelHeightAccessor;
+        removeData<T>(arg0: $AttachmentType_<T>): T;
+        addEntity(entity: $Entity): void;
+        /**
+         * @deprecated
+         */
+        getHighestSectionPosition(): number;
+        getSections(): $LevelChunkSection[];
+        hasData(arg0: $AttachmentType_<never>): boolean;
+        getExistingDataOrNull<T>(arg0: $AttachmentType_<T>): T;
+        getSection(index: number): $LevelChunkSection;
+        getBlockStates(arg0: $AABB_): $Stream<$BlockState>;
+        getLightEmission(arg0: $BlockPos_): number;
+        getBlockFloorHeight(arg0: $VoxelShape, arg1: $Supplier_<$VoxelShape>): number;
+        getBlockFloorHeight(arg0: $BlockPos_): number;
+        getBlockEntity<T extends $BlockEntity>(arg0: $BlockPos_, arg1: $BlockEntityType_<T>): (T) | undefined;
+        clip(arg0: $ClipContext): $BlockHitResult;
+        isBlockInLine(arg0: $ClipBlockStateContext): $BlockHitResult;
         getMaxLightLevel(): number;
-        getLightEmission(pos: $BlockPos_): number;
-        isBlockInLine(context: $ClipBlockStateContext): $BlockHitResult;
-        clipWithInteractionOverride(startVec: $Vec3_, endVec: $Vec3_, pos: $BlockPos_, shape: $VoxelShape, state: $BlockState_): $BlockHitResult;
-        getBlockFloorHeight(pos: $BlockPos_): number;
-        getBlockFloorHeight(shape: $VoxelShape, belowShapeSupplier: $Supplier_<$VoxelShape>): number;
-        getData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
-        removeData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
-        setData<T>(arg0: $Supplier_<$AttachmentType<T>>, arg1: T): T;
-        getExistingDataOrNull<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
-        hasData<T>(arg0: $Supplier_<$AttachmentType<T>>): boolean;
-        getExistingData<T>(arg0: $AttachmentType_<T>): (T) | undefined;
-        getExistingData<T>(arg0: $Supplier_<$AttachmentType<T>>): (T) | undefined;
-        syncData(arg0: $AttachmentType_<never>): void;
+        clipWithInteractionOverride(arg0: $Vec3_, arg1: $Vec3_, arg2: $BlockPos_, arg3: $VoxelShape, arg4: $BlockState_): $BlockHitResult;
         syncData(arg0: $Supplier_<$AttachmentType<never>>): void;
-        wrap(): $WeakReference<$Trackable>;
+        syncData(arg0: $AttachmentType_<never>): void;
+        getExistingData<T>(arg0: $Supplier_<$AttachmentType<T>>): (T) | undefined;
+        getExistingData<T>(arg0: $AttachmentType_<T>): (T) | undefined;
+        getData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
+        setData<T>(arg0: $Supplier_<$AttachmentType<T>>, arg1: T): T;
+        removeData<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
+        hasData<T>(arg0: $Supplier_<$AttachmentType<T>>): boolean;
+        getExistingDataOrNull<T>(arg0: $Supplier_<$AttachmentType<T>>): T;
         startTracking(): void;
+        wrap(): $WeakReference<$Trackable>;
         getMaxBuildHeight(): number;
+        getSectionIndex(arg0: number): number;
+        isOutsideBuildHeight(y: number): boolean;
+        isOutsideBuildHeight(arg0: $BlockPos_): boolean;
         getSectionsCount(): number;
         getMaxSection(): number;
-        getSectionIndex(sectionIndex: number): number;
         getMinSection(): number;
-        getSectionIndexFromSectionY(sectionIndex: number): number;
-        getSectionYFromSectionIndex(sectionIndex: number): number;
-        isOutsideBuildHeight(pos: $BlockPos_): boolean;
-        isOutsideBuildHeight(y: number): boolean;
+        getSectionYFromSectionIndex(arg0: number): number;
+        getSectionIndexFromSectionY(arg0: number): number;
         getAuxLightManager(arg0: $BlockPos_): $AuxiliaryLightManager;
         getAuxLightManager(arg0: $ChunkPos): $AuxiliaryLightManager;
         getModelData(arg0: $BlockPos_): $ModelData;
+        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         hasBiomes(): boolean;
         getBiomeFabric(arg0: $BlockPos_): $Holder<$Biome>;
-        getBlockEntityRenderData(arg0: $BlockPos_): $Object;
         static NO_FILLED_SECTION: number;
         constructor(chunkPos: $ChunkPos, upgradeData: $UpgradeData, levelHeightAccessor: $LevelHeightAccessor, biomeRegistry: $Registry<$Biome_>, inhabitedTime: number, arg5: $LevelChunkSection[] | null, sections: $BlendingData | null);
-        get level(): $Level;
-        get sections(): $LevelChunkSection[];
-        get pos(): $ChunkPos;
         get minBuildHeight(): number;
-        get blockTicks(): $TickContainerAccess<$Block>;
-        get fluidTicks(): $TickContainerAccess<$Fluid>;
-        get heightAccessorForGeneration(): $LevelHeightAccessor;
-        get belowZeroRetrogen(): $BelowZeroRetrogen;
         get highestGeneratedStatus(): $ChunkStatus;
+        get belowZeroRetrogen(): $BelowZeroRetrogen;
         get blockEntitiesPos(): $Set<$BlockPos>;
-        get highestSectionPosition(): number;
-        get highestFilledSectionIndex(): number;
-        get oldNoiseGeneration(): boolean;
         get attachmentHolder(): $AttachmentHolder$AsField;
         get ticksForSerialization(): $ChunkAccess$TicksToSave;
-        get persistedStatus(): $ChunkStatus;
-        get skyLightSources(): $ChunkSkyLightSources;
-        get postProcessing(): $ShortList[];
-        get upgrading(): boolean;
+        get oldNoiseGeneration(): boolean;
+        get pos(): $ChunkPos;
+        get fluidTicks(): $TickContainerAccess<$Fluid>;
+        get blockTicks(): $TickContainerAccess<$Block>;
         get upgradeData(): $UpgradeData;
         get heightmaps(): $Collection<$Map$Entry<$Heightmap$Types, $Heightmap>>;
+        get postProcessing(): $ShortList[];
+        get persistedStatus(): $ChunkStatus;
+        get upgrading(): boolean;
+        get skyLightSources(): $ChunkSkyLightSources;
+        get level(): $Level;
+        get highestFilledSectionIndex(): number;
+        get heightAccessorForGeneration(): $LevelHeightAccessor;
+        get highestSectionPosition(): number;
+        get sections(): $LevelChunkSection[];
         get maxLightLevel(): number;
         get maxBuildHeight(): number;
         get sectionsCount(): number;
@@ -444,13 +451,13 @@ declare module "@package/net/minecraft/world/level/chunk" {
      */
     export type $LevelChunk$EntityCreationType_ = "immediate" | "queued" | "check";
     export class $PalettedContainer$Data<T> extends $Record {
+        palette(): $Palette<T>;
+        getSerializedSize(): number;
         write(buffer: $FriendlyByteBuf): void;
         configuration(): $PalettedContainer$Configuration<T>;
         copy(): $PalettedContainer$Data<T>;
         copyFrom(palette: $Palette<T>, bitStorage: $BitStorage): void;
         storage(): $BitStorage;
-        palette(): $Palette<T>;
-        getSerializedSize(): number;
         get serializedSize(): number;
     }
     /**
@@ -458,10 +465,15 @@ declare module "@package/net/minecraft/world/level/chunk" {
      */
     export type $PalettedContainer$Data_<T> = { storage?: $BitStorage, palette?: $Palette<any>, configuration?: $PalettedContainer$Configuration_<any>,  } | [storage?: $BitStorage, palette?: $Palette<any>, configuration?: $PalettedContainer$Configuration_<any>, ];
     export class $PalettedContainer<T> implements $PaletteResize<T>, $PalettedContainerRO<T>, $ExtendedPalettedContainer<any>, $PalettedContainerROExtension<any> {
-        handler$cgb000$lithium$removeLockHelper(arg0: $CallbackInfo): void;
-        sodium$unpack(arg0: $Object[], arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
-        sodium$unpack(arg0: $Object[]): void;
-        handler$cge000$lithium$count(arg0: $PalettedContainer$CountConsumer_<any>, arg1: $CallbackInfo): void;
+        maybeHas(predicate: $Predicate_<T>): boolean;
+        /**
+         * Called when the underlying palette needs to resize itself to support additional objects.
+         * @return The new integer mapping for the object added.
+         */
+        onResize(bits: number, objectAdded: T): number;
+        getSerializedSize(): number;
+        recreate(): $PalettedContainer<T>;
+        handler$cbn000$lithium$count(arg0: $PalettedContainer$CountConsumer_<any>, arg1: $CallbackInfo): void;
         get(x: number, y: number, z: number): T;
         /**
          * Counts the number of instances of each state in the container.
@@ -472,24 +484,19 @@ declare module "@package/net/minecraft/world/level/chunk" {
         write(buffer: $FriendlyByteBuf): void;
         read(buffer: $FriendlyByteBuf): void;
         copy(): $PalettedContainer<T>;
-        release(): void;
         getAndSet(x: number, y: number, z: number, state: T): T;
+        release(): void;
         acquire(): void;
         pack(registry: $IdMap<any>, strategy: $PalettedContainer$Strategy): $PalettedContainerRO$PackedData<any>;
         getAll(consumer: $Consumer_<T>): void;
-        /**
-         * Called when the underlying palette needs to resize itself to support additional objects.
-         * @return The new integer mapping for the object added.
-         */
-        onResize(bits: number, objectAdded: T): number;
         mfix$getPalette(): $Palette<any>;
-        recreate(): $PalettedContainer<T>;
-        maybeHas(predicate: $Predicate_<T>): boolean;
-        getSerializedSize(): number;
-        static codecRO<T>(registry: $IdMap<T>, codec: $Codec<T>, strategy: $PalettedContainer$Strategy, value: T): $Codec<$PalettedContainerRO<T>>;
+        handler$cbk000$lithium$removeLockHelper(arg0: $CallbackInfo): void;
         static codecRW<T>(registry: $IdMap<T>, codec: $Codec<T>, strategy: $PalettedContainer$Strategy, value: T): $Codec<$PalettedContainer<T>>;
-        sodium$copy(): $PalettedContainerRO<any>;
+        static codecRO<T>(registry: $IdMap<T>, codec: $Codec<T>, strategy: $PalettedContainer$Strategy, value: T): $Codec<$PalettedContainerRO<T>>;
+        sodium$unpack(arg0: $Object[]): void;
+        sodium$unpack(arg0: $Object[], arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
         getAndSetUnchecked(x: number, y: number, z: number, state: T): T;
+        sodium$copy(): $PalettedContainerRO<any>;
         constructor(registry: $IdMap<T>, strategy: $PalettedContainer$Strategy, configuration: $PalettedContainer$Configuration_<T>, storage: $BitStorage, values: $List_<T>);
         constructor(registry: $IdMap<T>, palette: T, strategy: $PalettedContainer$Strategy);
         get serializedSize(): number;
@@ -514,14 +521,14 @@ declare module "@package/net/minecraft/world/level/chunk" {
     export class $PalettedContainerRO<T> {
     }
     export interface $PalettedContainerRO<T> {
+        maybeHas(filter: $Predicate_<T>): boolean;
+        getSerializedSize(): number;
+        recreate(): $PalettedContainer<T>;
         get(x: number, y: number, z: number): T;
         count(countConsumer: $PalettedContainer$CountConsumer_<T>): void;
         write(buffer: $FriendlyByteBuf): void;
         pack(registry: $IdMap<T>, strategy: $PalettedContainer$Strategy): $PalettedContainerRO$PackedData<T>;
         getAll(consumer: $Consumer_<T>): void;
-        recreate(): $PalettedContainer<T>;
-        maybeHas(filter: $Predicate_<T>): boolean;
-        getSerializedSize(): number;
         get serializedSize(): number;
     }
     export class $LevelChunk$PostLoadProcessor {
@@ -534,35 +541,56 @@ declare module "@package/net/minecraft/world/level/chunk" {
      */
     export type $LevelChunk$PostLoadProcessor_ = ((arg0: $LevelChunk) => void);
     export class $UpgradeData$BlockFixers extends $Enum<$UpgradeData$BlockFixers> implements $UpgradeData$BlockFixer {
-        processChunk(level: $LevelAccessor): void;
+        processChunk(arg0: $LevelAccessor): void;
     }
     /**
      * Values that may be interpreted as {@link $UpgradeData$BlockFixers}.
      */
     export type $UpgradeData$BlockFixers_ = "blacklist" | "default" | "chest" | "leaves" | "stem_block";
     export class $SingleValuePalette<T> implements $Palette<T> {
+        maybeHas(filter: $Predicate_<T>): boolean;
+        idFor(state: T): number;
+        valueFor(id: number): T;
+        getSerializedSize(): number;
         getSize(): number;
         write(buffer: $FriendlyByteBuf): void;
         read(buffer: $FriendlyByteBuf): void;
         copy(): $Palette<T>;
         static create<A>(bits: number, registry: $IdMap<A>, resizeHandler: $PaletteResize_<A>, value: $List_<A>): $Palette<A>;
-        idFor(state: T): number;
-        valueFor(id: number): T;
-        maybeHas(filter: $Predicate_<T>): boolean;
-        getSerializedSize(): number;
         constructor(registry: $IdMap<T>, resizeHandler: $PaletteResize_<T>, value: $List_<T>);
-        get size(): number;
         get serializedSize(): number;
+        get size(): number;
     }
     export class $MissingPaletteEntryException extends $RuntimeException {
         constructor(index: number);
     }
     export class $LevelChunkSection {
+        /**
+         * @return `true` if this section has any states matching the given predicate. As the internal representation uses a `Palette`, this is more efficient than looping through every position in the section, or indeed the chunk.
+         */
+        maybeHas(predicate: $Predicate_<$BlockState>): boolean;
+        readBiomes(buffer: $FriendlyByteBuf): void;
+        getBiomes(): $PalettedContainerRO<$Holder<$Biome>>;
+        getFluidState(x: number, y: number, z: number): $FluidState;
+        /**
+         * @return `true` if this section consists only of air-like blocks.
+         */
+        isRandomlyTicking(): boolean;
+        fillBiomesFromNoise(biomeResolver: $BiomeResolver_, climateSampler: $Climate$Sampler_, x: number, y: number, z: number): void;
+        /**
+         * @return `true` if this section consists only of air-like blocks.
+         */
+        hasOnlyAir(): boolean;
+        getNoiseBiome(x: number, y: number, z: number): $Holder<$Biome>;
+        setBlockState(x: number, y: number, z: number, state: $BlockState_, useLocks: boolean): $BlockState;
+        setBlockState(x: number, y: number, z: number, state: $BlockState_): $BlockState;
+        getSerializedSize(): number;
         write(buffer: $FriendlyByteBuf): void;
         read(buffer: $FriendlyByteBuf): void;
         release(): void;
         acquire(): void;
         getStates(): $PalettedContainer<$BlockState>;
+        getBlockState(x: number, y: number, z: number): $BlockState;
         /**
          * @return `true` if this section consists only of air-like blocks.
          */
@@ -571,144 +599,126 @@ declare module "@package/net/minecraft/world/level/chunk" {
          * @return `true` if this section consists only of air-like blocks.
          */
         isRandomlyTickingFluids(): boolean;
-        getFluidState(x: number, y: number, z: number): $FluidState;
-        getBlockState(x: number, y: number, z: number): $BlockState;
-        /**
-         * @return `true` if this section consists only of air-like blocks.
-         */
-        hasOnlyAir(): boolean;
-        /**
-         * @return `true` if this section consists only of air-like blocks.
-         */
-        isRandomlyTicking(): boolean;
-        getNoiseBiome(x: number, y: number, z: number): $Holder<$Biome>;
-        setBlockState(x: number, y: number, z: number, state: $BlockState_): $BlockState;
-        setBlockState(x: number, y: number, z: number, state: $BlockState_, useLocks: boolean): $BlockState;
-        getBiomes(): $PalettedContainerRO<$Holder<$Biome>>;
-        fillBiomesFromNoise(biomeResolver: $BiomeResolver_, climateSampler: $Climate$Sampler_, x: number, y: number, z: number): void;
-        /**
-         * @return `true` if this section has any states matching the given predicate. As the internal representation uses a `Palette`, this is more efficient than looping through every position in the section, or indeed the chunk.
-         */
-        maybeHas(predicate: $Predicate_<$BlockState>): boolean;
-        readBiomes(buffer: $FriendlyByteBuf): void;
-        getSerializedSize(): number;
+        modifyReturnValue$ded002$astages$getBlockState(original: $BlockState_): $BlockState;
         recalcBlockCounts(): void;
         static SECTION_WIDTH: number;
         static SECTION_HEIGHT: number;
         static BIOME_CONTAINER_BITS: number;
         static SECTION_SIZE: number;
-        constructor(states: $PalettedContainer<$BlockState_>, biomes: $PalettedContainerRO<$Holder_<$Biome>>);
         constructor(biomeRegistry: $Registry<$Biome_>);
+        constructor(states: $PalettedContainer<$BlockState_>, biomes: $PalettedContainerRO<$Holder_<$Biome>>);
+        get biomes(): $PalettedContainerRO<$Holder<$Biome>>;
+        get randomlyTicking(): boolean;
+        get serializedSize(): number;
         get states(): $PalettedContainer<$BlockState>;
         get randomlyTickingBlocks(): boolean;
         get randomlyTickingFluids(): boolean;
-        get randomlyTicking(): boolean;
-        get biomes(): $PalettedContainerRO<$Holder<$Biome>>;
-        get serializedSize(): number;
     }
     export class $LevelChunk extends $ChunkAccess implements $IAttachmentHolder {
-        isEmpty(): boolean;
+        setLoaded(loaded: boolean): void;
         getFluidState(x: number, y: number, z: number): $FluidState;
-        setGameEventListenerRegistrySections(arg0: $Int2ObjectMap<any>): void;
-        registerAllBlockEntitiesAfterLevelLoad(): void;
-        getBlockEntity(pos: $BlockPos_, creationType: $LevelChunk$EntityCreationType_): $BlockEntity;
-        unregisterTickContainerFromLevel(level: $ServerLevel): void;
-        getAuxLightManager(arg0: $ChunkPos): $LevelChunkAuxiliaryLightManager;
-        getFullStatus(): $FullChunkStatus;
-        handler$fmd000$electroenergetics$onPostProcessGeneration(arg0: $CallbackInfo): void;
-        registerTickContainerInLevel(level: $ServerLevel): void;
-        unpackTicks(pos: number): void;
-        clearAllBlockEntities(): void;
-        addAndRegisterBlockEntity(blockEntity: $BlockEntity): void;
+        handler$dpc000$astralsorcery$overwriteBlockEntityAdditionalRemoval(arg0: $BlockEntity, arg1: $CallbackInfo, arg2: $BlockEntity): void;
         postProcessGeneration(): void;
         updateBlockEntityTicker<T extends $BlockEntity>(blockEntity: T): void;
         replaceWithPacketData(buffer: $FriendlyByteBuf, tag: $CompoundTag_, outputTagConsumer: $Consumer_<$ClientboundLevelChunkPacketData$BlockEntityTagOutput>): void;
-        handler$zzp000$astralsorcery$additionalRemoval(arg0: $BlockPos_, arg1: $CallbackInfo, arg2: $BlockEntity): void;
-        handler$bkk000$observerlib$onBlockStateUpdate(arg0: $BlockPos_, arg1: $BlockState_, arg2: boolean, arg3: $CallbackInfoReturnable<any>, arg4: $BlockState_): void;
-        handler$fmd000$electroenergetics$setBlockState(arg0: $BlockPos_, arg1: $BlockState_, arg2: boolean, arg3: $CallbackInfoReturnable<any>): void;
-        setLoaded(loaded: boolean): void;
-        handler$zzp000$astralsorcery$overwriteBlockEntityAdditionalRemoval(arg0: $BlockEntity, arg1: $CallbackInfo, arg2: $BlockEntity): void;
-        getBlockEntities(): $Map<$BlockPos, $BlockEntity>;
+        unpackTicks(pos: number): void;
+        getFullStatus(): $FullChunkStatus;
+        addAndRegisterBlockEntity(blockEntity: $BlockEntity): void;
+        clearAllBlockEntities(): void;
+        handler$idp000$electroenergetics$onPostProcessGeneration(arg0: $CallbackInfo): void;
         runPostLoad(): void;
-        replaceBiomes(buffer: $FriendlyByteBuf): void;
         setFullStatus(fullStatus: $Supplier_<$FullChunkStatus>): void;
+        getBlockEntities(): $Map<$BlockPos, $BlockEntity>;
+        replaceBiomes(buffer: $FriendlyByteBuf): void;
+        isEmpty(): boolean;
+        registerTickContainerInLevel(level: $ServerLevel): void;
+        getBlockEntity(pos: $BlockPos_, creationType: $LevelChunk$EntityCreationType_): $BlockEntity;
+        unregisterTickContainerFromLevel(level: $ServerLevel): void;
+        handler$idp001$electroenergetics$setBlockState(arg0: $BlockPos_, arg1: $BlockState_, arg2: boolean, arg3: $CallbackInfoReturnable<any>): void;
+        modifyReturnValue$dec001$astages$getBlockState(original: $BlockState_): $BlockState;
+        handler$dpc000$astralsorcery$additionalRemoval(arg0: $BlockPos_, arg1: $CallbackInfo, arg2: $BlockEntity): void;
+        handler$bkh000$observerlib$onBlockStateUpdate(arg0: $BlockPos_, arg1: $BlockState_, arg2: boolean, arg3: $CallbackInfoReturnable<any>, arg4: $BlockState_): void;
+        getAuxLightManager(arg0: $ChunkPos): $LevelChunkAuxiliaryLightManager;
+        setGameEventListenerRegistrySections(arg0: $Int2ObjectMap<any>): void;
+        registerAllBlockEntitiesAfterLevelLoad(): void;
         loaded: boolean;
+        xaero_wm_chunkClean: boolean;
         xaero_chunkClean: boolean;
         tickersInLevel: $Map<$BlockPos, $LevelChunk$RebindableTickingBlockEntityWrapper>;
         static NO_FILLED_SECTION: number;
-        constructor(level: $ServerLevel, chunk: $ProtoChunk, postLoad: $LevelChunk$PostLoadProcessor_ | null);
-        constructor(level: $Level_, pos: $ChunkPos, data: $UpgradeData, blockTicks: $LevelChunkTicks<$Block_>, fluidTicks: $LevelChunkTicks<$Fluid_>, inhabitedTime: number, arg6: $LevelChunkSection[] | null, sections: $LevelChunk$PostLoadProcessor_ | null, postLoad: $BlendingData | null);
         constructor(level: $Level_, pos: $ChunkPos);
+        constructor(level: $Level_, pos: $ChunkPos, data: $UpgradeData, blockTicks: $LevelChunkTicks<$Block_>, fluidTicks: $LevelChunkTicks<$Fluid_>, inhabitedTime: number, arg6: $LevelChunkSection[] | null, sections: $LevelChunk$PostLoadProcessor_ | null, postLoad: $BlendingData | null);
+        constructor(level: $ServerLevel, chunk: $ProtoChunk, postLoad: $LevelChunk$PostLoadProcessor_ | null);
+        get blockEntities(): $Map<$BlockPos, $BlockEntity>;
         get empty(): boolean;
         set gameEventListenerRegistrySections(value: $Int2ObjectMap<any>);
-        get blockEntities(): $Map<$BlockPos, $BlockEntity>;
     }
     export class $ChunkSource implements $LightChunkGetter, $AutoCloseable {
+        getChunk(x: number, z: number, chunkStatus: $ChunkStatus_, requireChunk: boolean): $ChunkAccess;
+        getChunk(chunkX: number, chunkZ: number, load: boolean): $LevelChunk;
+        getChunkNow(chunkX: number, chunkZ: number): $LevelChunk;
+        updateChunkForced(pos: $ChunkPos, add: boolean): void;
+        /**
+         * @return A human-readable string representing data about this chunk source.
+         */
+        gatherStats(): string;
+        setSpawnSettings(hostile: boolean, peaceful: boolean): void;
+        getLightEngine(): $LevelLightEngine;
+        getChunkForLighting(chunkX: number, chunkZ: number): $LightChunk;
+        getLoadedChunksCount(): number;
         close(): void;
         tick(hasTimeLeft: $BooleanSupplier_, tickChunks: boolean): void;
         /**
          * @return `true` if a chunk is loaded at the provided position, without forcing a chunk load.
          */
         hasChunk(chunkX: number, chunkZ: number): boolean;
-        getLightEngine(): $LevelLightEngine;
-        /**
-         * @return A human-readable string representing data about this chunk source.
-         */
-        gatherStats(): string;
-        setSpawnSettings(hostile: boolean, peaceful: boolean): void;
-        getChunkNow(chunkX: number, chunkZ: number): $LevelChunk;
-        getChunk(x: number, z: number, chunkStatus: $ChunkStatus_, requireChunk: boolean): $ChunkAccess;
-        getChunk(chunkX: number, chunkZ: number, load: boolean): $LevelChunk;
-        updateChunkForced(pos: $ChunkPos, add: boolean): void;
-        getChunkForLighting(chunkX: number, chunkZ: number): $LightChunk;
-        getLoadedChunksCount(): number;
-        onLightUpdate(layer: $LightLayer_, pos: $SectionPos): void;
+        onLightUpdate(arg0: $LightLayer_, arg1: $SectionPos): void;
         constructor();
         get lightEngine(): $LevelLightEngine;
         get loadedChunksCount(): number;
     }
     export class $ProtoChunk extends $ChunkAccess {
-        setPersistedStatus(status: $ChunkStatus_): void;
-        setCarvingMask(step: $GenerationStep$Carving_, carvingMask: $CarvingMask): void;
-        setLightEngine(lightEngine: $LevelLightEngine): void;
+        static packOffsetCoordinates(pos: $BlockPos_): number;
+        static unpackOffsetCoordinates(packedPos: number, yOffset: number, chunkPos: $ChunkPos): $BlockPos;
+        getOrCreateCarvingMask(step: $GenerationStep$Carving_): $CarvingMask;
+        getBlockEntities(): $Map<$BlockPos, $BlockEntity>;
+        unpackFluidTicks(): $LevelChunkTicks<$Fluid>;
+        unpackBlockTicks(): $LevelChunkTicks<$Block>;
+        getBlockEntityNbts(): $Map<$BlockPos, $CompoundTag>;
         setBelowZeroRetrogen(belowZeroRetrogen: $BelowZeroRetrogen | null): void;
         getEntities(): $List<$CompoundTag>;
         addEntity(tag: $CompoundTag_): void;
-        static packOffsetCoordinates(pos: $BlockPos_): number;
         getCarvingMask(step: $GenerationStep$Carving_): $CarvingMask;
-        getOrCreateCarvingMask(step: $GenerationStep$Carving_): $CarvingMask;
-        static unpackOffsetCoordinates(packedPos: number, yOffset: number, chunkPos: $ChunkPos): $BlockPos;
-        unpackFluidTicks(): $LevelChunkTicks<$Fluid>;
-        getBlockEntities(): $Map<$BlockPos, $BlockEntity>;
-        unpackBlockTicks(): $LevelChunkTicks<$Block>;
-        getBlockEntityNbts(): $Map<$BlockPos, $CompoundTag>;
+        setLightEngine(lightEngine: $LevelLightEngine): void;
+        setCarvingMask(step: $GenerationStep$Carving_, carvingMask: $CarvingMask): void;
+        setPersistedStatus(status: $ChunkStatus_): void;
         static NO_FILLED_SECTION: number;
-        constructor(chunkPos: $ChunkPos, upgradeData: $UpgradeData, levelHeightAccessor: $LevelHeightAccessor, biomeRegistry: $Registry<$Biome_>, blendingData: $BlendingData | null);
         constructor(chunkPos: $ChunkPos, upgradeData: $UpgradeData, sections: $LevelChunkSection[] | null, blockTicks: $ProtoChunkTicks<$Block_>, liquidTicks: $ProtoChunkTicks<$Fluid_>, levelHeightAccessor: $LevelHeightAccessor, biomeRegistry: $Registry<$Biome_>, blendingData: $BlendingData | null);
-        set persistedStatus(value: $ChunkStatus_);
-        set lightEngine(value: $LevelLightEngine);
-        set belowZeroRetrogen(value: $BelowZeroRetrogen | null);
-        get entities(): $List<$CompoundTag>;
+        constructor(chunkPos: $ChunkPos, upgradeData: $UpgradeData, levelHeightAccessor: $LevelHeightAccessor, biomeRegistry: $Registry<$Biome_>, blendingData: $BlendingData | null);
         get blockEntities(): $Map<$BlockPos, $BlockEntity>;
         get blockEntityNbts(): $Map<$BlockPos, $CompoundTag>;
+        set belowZeroRetrogen(value: $BelowZeroRetrogen | null);
+        get entities(): $List<$CompoundTag>;
+        set lightEngine(value: $LevelLightEngine);
+        set persistedStatus(value: $ChunkStatus_);
     }
     export class $HashMapPalette<T> implements $Palette<T> {
+        maybeHas(filter: $Predicate_<T>): boolean;
+        idFor(state: T): number;
+        valueFor(id: number): T;
+        getSerializedSize(): number;
         getSize(): number;
         write(buffer: $FriendlyByteBuf): void;
         read(buffer: $FriendlyByteBuf): void;
         copy(): $Palette<T>;
-        getEntries(): $List<T>;
         static create<A>(bits: number, registry: $IdMap<A>, resizeHandler: $PaletteResize_<A>, values: $List_<A>): $Palette<A>;
-        idFor(state: T): number;
-        valueFor(id: number): T;
-        maybeHas(filter: $Predicate_<T>): boolean;
-        getSerializedSize(): number;
+        getEntries(): $List<T>;
         values: $CrudeIncrementalIntIdentityHashBiMap<T>;
         constructor(registry: $IdMap<T>, bits: number, resizeHandler: $PaletteResize_<T>, values: $List_<T>);
         constructor(registry: $IdMap<T>, bits: number, resizeHandler: $PaletteResize_<T>);
+        get serializedSize(): number;
         get size(): number;
         get entries(): $List<T>;
-        get serializedSize(): number;
     }
     export class $UpgradeData$BlockFixer {
     }
@@ -733,54 +743,55 @@ declare module "@package/net/minecraft/world/level/chunk" {
     export class $LightChunkGetter {
     }
     export interface $LightChunkGetter {
-        getLevel(): $BlockGetter;
         onLightUpdate(layer: $LightLayer_, pos: $SectionPos): void;
         getChunkForLighting(chunkX: number, chunkZ: number): $LightChunk;
+        getLevel(): $BlockGetter;
         get level(): $BlockGetter;
     }
     export class $GlobalPalette<T> implements $Palette<T> {
+        maybeHas(filter: $Predicate_<T>): boolean;
+        idFor(state: T): number;
+        valueFor(id: number): T;
+        getSerializedSize(): number;
         getSize(): number;
         write(buffer: $FriendlyByteBuf): void;
         read(buffer: $FriendlyByteBuf): void;
         copy(): $Palette<T>;
         static create<A>(bits: number, registry: $IdMap<A>, resizeHandler: $PaletteResize_<A>, values: $List_<A>): $Palette<A>;
-        idFor(state: T): number;
-        valueFor(id: number): T;
-        maybeHas(filter: $Predicate_<T>): boolean;
-        getSerializedSize(): number;
         constructor(registry: $IdMap<T>);
-        get size(): number;
         get serializedSize(): number;
+        get size(): number;
     }
     export class $Palette<T> {
     }
     export interface $Palette<T> {
+        maybeHas(filter: $Predicate_<T>): boolean;
+        idFor(state: T): number;
+        valueFor(id: number): T;
+        getSerializedSize(): number;
         getSize(): number;
         write(buffer: $FriendlyByteBuf): void;
         read(buffer: $FriendlyByteBuf): void;
         copy(): $Palette<T>;
-        idFor(state: T): number;
-        valueFor(id: number): T;
-        maybeHas(filter: $Predicate_<T>): boolean;
-        getSerializedSize(): number;
-        get size(): number;
         get serializedSize(): number;
+        get size(): number;
     }
     export class $EmptyLevelChunk extends $LevelChunk {
         loaded: boolean;
+        xaero_wm_chunkClean: boolean;
         xaero_chunkClean: boolean;
         tickersInLevel: $Map<$BlockPos, $LevelChunk$RebindableTickingBlockEntityWrapper>;
         static NO_FILLED_SECTION: number;
         constructor(level: $Level_, pos: $ChunkPos, biome: $Holder_<$Biome>);
     }
     export class $CarvingMask {
-        setAdditionalMask(additionalMask: $CarvingMask$Mask_): void;
         get(x: number, y: number, z: number): boolean;
         toArray(): number[];
         stream(pos: $ChunkPos): $Stream<$BlockPos>;
         set(x: number, y: number, z: number): void;
-        constructor(mask: number[], minY: number);
+        setAdditionalMask(additionalMask: $CarvingMask$Mask_): void;
         constructor(mask: number, minY: number);
+        constructor(mask: number[], minY: number);
         set additionalMask(value: $CarvingMask$Mask_);
     }
 }

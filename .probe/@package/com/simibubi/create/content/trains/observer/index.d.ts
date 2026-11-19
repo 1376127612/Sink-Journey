@@ -11,19 +11,19 @@ import { $Couple } from "@package/net/createmod/catnip/data";
 
 declare module "@package/com/simibubi/create/content/trains/observer" {
     export class $TrackObserver extends $SingleBlockEntityEdgePoint {
-        getFilter(): $FilterItemStack;
-        isActivated(): boolean;
-        keepAlive(arg0: $Train): void;
-        setFilterAndNotify(arg0: $Level_, arg1: $ItemStack_): void;
         getCurrentTrain(): $UUID;
+        setFilterAndNotify(arg0: $Level_, arg1: $ItemStack_): void;
+        getFilter(): $FilterItemStack;
+        keepAlive(arg0: $Train): void;
+        isActivated(): boolean;
         edgeLocation: $Couple<$TrackNodeLocation>;
         blockEntityPos: $BlockPos;
         blockEntityDimension: $ResourceKey<$Level>;
         id: $UUID;
         position: number;
         constructor();
+        get currentTrain(): $UUID;
         get filter(): $FilterItemStack;
         get activated(): boolean;
-        get currentTrain(): $UUID;
     }
 }

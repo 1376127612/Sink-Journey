@@ -3,10 +3,11 @@ import { $TextureAtlasSpriteExtension, $SpriteContentsExtension as $SpriteConten
 import { $TextureMetadataSection } from "@package/net/minecraft/client/resources/metadata/texture";
 import { $FrameSize_ } from "@package/net/minecraft/client/resources/metadata/animation";
 import { $Executor_, $CompletableFuture } from "@package/java/util/concurrent";
+import { $AccessorMixinTextureAtlas } from "@package/mysticmods/roots/mixin/client/accessor";
 import { $ITextureSize } from "@package/com/lowdragmc/lowdraglib2/gui/texture";
 import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $SpriteContentsFrameInfoAccessor, $AnimatedTextureAccessor } from "@package/net/caffeinemc/mods/sodium/mixin/features/textures/animations/tracking";
-import { $ResourceManager, $ResourceMetadata_, $PreparableReloadListener$PreparationBarrier_, $PreparableReloadListener, $ResourceMetadata } from "@package/net/minecraft/server/packs/resources";
+import { $ResourceManager, $ResourceMetadata_, $PreparableReloadListener, $PreparableReloadListener$PreparationBarrier_, $ResourceMetadata } from "@package/net/minecraft/server/packs/resources";
 import { $SpriteContentsInvoker } from "@package/net/caffeinemc/mods/sodium/mixin/features/textures";
 import { $List, $Map_, $Collection_, $List_, $Collection, $Map, $Set } from "@package/java/util";
 import { $SpriteResourceLoader, $SpriteResourceLoader_ } from "@package/net/minecraft/client/renderer/texture/atlas";
@@ -41,15 +42,15 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get allSprites(): $Collection<$Stitcher$Entry>;
     }
     export class $Stitcher<T extends $Stitcher$Entry> {
-        getWidth(): number;
-        getHeight(): number;
-        stitch(): void;
-        registerSprite(stitcherEntry: T): void;
         gatherSprites(loader: $Stitcher$SpriteLoader_<T>): void;
+        stitch(): void;
+        getHeight(): number;
+        registerSprite(stitcherEntry: T): void;
+        getWidth(): number;
         mipLevel: number;
         constructor(maxWidth: number, maxHeight: number, mipLevel: number);
-        get width(): number;
         get height(): number;
+        get width(): number;
     }
     export class $SpriteTicker {
     }
@@ -58,15 +59,15 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         tickAndUpload(x: number, y: number): void;
     }
     export class $AbstractTexture implements $AutoCloseable {
+        restoreLastBlurMipmap(): void;
         reset(textureManager: $TextureManager, resourceManager: $ResourceManager, path: $ResourceLocation_, executor: $Executor_): void;
         load(resourceManager: $ResourceManager): void;
         getId(): number;
         close(): void;
         bind(): void;
-        setBlurMipmap(blur: boolean, mipmap: boolean): void;
         setFilter(blur: boolean, mipmap: boolean): void;
         releaseId(): void;
-        restoreLastBlurMipmap(): void;
+        setBlurMipmap(blur: boolean, mipmap: boolean): void;
         static NOT_ASSIGNED: number;
         mipmap: boolean;
         blur: boolean;
@@ -97,8 +98,8 @@ declare module "@package/net/minecraft/client/renderer/texture" {
      */
     export type $Dumpable_ = ((arg0: $ResourceLocation, arg1: $Path) => void);
     export class $HttpTexture extends $SimpleTexture implements $TextureLocationSettable {
-        chatheads$setTextureLocation(location: $ResourceLocation_): void;
-        handler$bcg000$chat_heads$chatheads$registerBlendedHeadTexture(image: $NativeImage, ci: $CallbackInfo): void;
+        chatheads$setTextureLocation(textureLocation: $ResourceLocation_): void;
+        handler$bem000$chat_heads$chatheads$registerBlendedHeadTexture(image: $NativeImage, ci: $CallbackInfo): void;
         ldlib2$imageWidth: number;
         static NOT_ASSIGNED: number;
         mipmap: boolean;
@@ -108,24 +109,24 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         constructor(file: $File_ | null, urlString: string, location: $ResourceLocation_, processLegacySkin: boolean, onDownloaded: $Runnable_ | null);
     }
     export class $SpriteContents$InterpolationData implements $AutoCloseable {
-        handler$dcf000$sodium$assignParent(arg0: $SpriteContents, arg1: $CallbackInfo): void;
+        handler$cmp000$sodium$assignParent(arg0: $SpriteContents, arg1: $CallbackInfo): void;
         close(): void;
         constructor(arg0: $SpriteContents);
     }
     export class $SpriteLoader$Preparations extends $Record {
-        regions(): $Map<$ResourceLocation, $TextureAtlasSprite>;
-        missing(): $TextureAtlasSprite;
-        width(): number;
-        height(): number;
-        mipLevel(): number;
         waitForUpload(): $CompletableFuture<$SpriteLoader$Preparations>;
         readyForUpload(): $CompletableFuture<void>;
+        width(): number;
+        regions(): $Map<$ResourceLocation, $TextureAtlasSprite>;
+        mipLevel(): number;
+        missing(): $TextureAtlasSprite;
+        height(): number;
         constructor(width: number, height: number, mipLevel: number, missing: $TextureAtlasSprite, regions: $Map_<$ResourceLocation_, $TextureAtlasSprite>, readyForUpload: $CompletableFuture<void>);
     }
     /**
      * Values that may be interpreted as {@link $SpriteLoader$Preparations}.
      */
-    export type $SpriteLoader$Preparations_ = { height?: number, missing?: $TextureAtlasSprite, width?: number, readyForUpload?: $CompletableFuture<void>, mipLevel?: number, regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>,  } | [height?: number, missing?: $TextureAtlasSprite, width?: number, readyForUpload?: $CompletableFuture<void>, mipLevel?: number, regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>, ];
+    export type $SpriteLoader$Preparations_ = { readyForUpload?: $CompletableFuture<void>, mipLevel?: number, regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>, height?: number, missing?: $TextureAtlasSprite, width?: number,  } | [readyForUpload?: $CompletableFuture<void>, mipLevel?: number, regions?: $Map_<$ResourceLocation_, $TextureAtlasSprite>, height?: number, missing?: $TextureAtlasSprite, width?: number, ];
     export class $Tickable {
     }
     export interface $Tickable {
@@ -144,13 +145,13 @@ declare module "@package/net/minecraft/client/renderer/texture" {
     /**
      * Values that may be interpreted as {@link $Stitcher$Holder}.
      */
-    export type $Stitcher$Holder_<T> = { width?: number, entry?: $Stitcher$Entry, height?: number,  } | [width?: number, entry?: $Stitcher$Entry, height?: number, ];
+    export type $Stitcher$Holder_<T> = { height?: number, width?: number, entry?: $Stitcher$Entry,  } | [height?: number, width?: number, entry?: $Stitcher$Entry, ];
     export class $SpriteLoader {
-        static create(atlas: $TextureAtlas): $SpriteLoader;
-        stitch(contents: $List_<$SpriteContents>, mipLevel: number, executor: $Executor_): $SpriteLoader$Preparations;
-        loadAndStitch(resourceManager: $ResourceManager, location: $ResourceLocation_, mipLevel: number, executor: $Executor_, sectionSerializers: $Collection_<$MetadataSectionSerializer<never>>): $CompletableFuture<$SpriteLoader$Preparations>;
-        loadAndStitch(resouceManager: $ResourceManager, location: $ResourceLocation_, mipLevel: number, executor: $Executor_): $CompletableFuture<$SpriteLoader$Preparations>;
         static runSpriteSuppliers(spriteResourceLoader: $SpriteResourceLoader_, factories: $List_<$Function_<$SpriteResourceLoader, $SpriteContents>>, executor: $Executor_): $CompletableFuture<$List<$SpriteContents>>;
+        stitch(contents: $List_<$SpriteContents>, mipLevel: number, executor: $Executor_): $SpriteLoader$Preparations;
+        loadAndStitch(resouceManager: $ResourceManager, location: $ResourceLocation_, mipLevel: number, executor: $Executor_): $CompletableFuture<$SpriteLoader$Preparations>;
+        loadAndStitch(resourceManager: $ResourceManager, location: $ResourceLocation_, mipLevel: number, executor: $Executor_, sectionSerializers: $Collection_<$MetadataSectionSerializer<never>>): $CompletableFuture<$SpriteLoader$Preparations>;
+        static create(atlas: $TextureAtlas): $SpriteLoader;
         static DEFAULT_METADATA_SECTIONS: $Set<$MetadataSectionSerializer<never>>;
         constructor(location: $ResourceLocation_, maxSupportedTextureSize: number, minWidth: number, minHeight: number);
     }
@@ -196,64 +197,66 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get future(): $CompletableFuture<void>;
     }
     export class $SpriteContents$Ticker implements $SpriteTicker, $SpriteContentsTickerAccessor$1, $SpriteContentsTickerAccessor {
-        handler$dcb000$sodium$assignParent(arg0: $SpriteContents, arg1: $SpriteContents$AnimatedTexture, arg2: $SpriteContents$InterpolationData, arg3: $CallbackInfo): void;
+        handler$cml000$sodium$assignParent(arg0: $SpriteContents, arg1: $SpriteContents$AnimatedTexture, arg2: $SpriteContents$InterpolationData, arg3: $CallbackInfo): void;
         close(): void;
         tickAndUpload(x: number, y: number): void;
-        getFrameIndex(): number;
         setFrame(arg0: number): void;
-        getFrame(): number;
         getSubFrame(): number;
         setSubFrame(arg0: number): void;
         getAnimationInfo(): $SpriteContents$AnimatedTexture;
         getFrameTicks(): number;
+        getFrameIndex(): number;
+        getFrame(): number;
         subFrame: number;
         frame: number;
         constructor(animationInfo: $SpriteContents, interpolationData: $SpriteContents$AnimatedTexture, arg2: $SpriteContents$InterpolationData | null);
-        get frameIndex(): number;
         get animationInfo(): $SpriteContents$AnimatedTexture;
         get frameTicks(): number;
+        get frameIndex(): number;
     }
     export class $SpriteContents implements $Stitcher$Entry, $AutoCloseable, $SpriteContentsExtension$2, $SpriteContentsAccessor$1, $SpriteContentsExtension, $SpriteContentsInvoker, $SpriteContentsExtension$1, $SpriteContentsAccessor, $SpriteContentsExtension$3 {
-        sodium$hasTransparentPixels(): boolean;
-        sodium$hasTranslucentPixels(): boolean;
+        increaseMipLevel(mipLevel: number): void;
+        getUniqueFrames(): $IntStream;
+        isTransparent(frame: number, x: number, y: number): boolean;
+        getOriginalImage(): $NativeImage;
+        createTicker(): $SpriteTicker;
+        getFrameCount(): number;
         sodium$hasAnimation(): boolean;
-        name(): $ResourceLocation;
-        close(): void;
-        metadata(): $ResourceMetadata;
-        width(): number;
-        getPBRHolder(): $PBRSpriteHolder;
-        uploadFirstFrame(x: number, y: number): void;
-        height(): number;
-        getCreatedTicker(): $SpriteContents$Ticker;
         sodium$setActive(arg0: boolean): void;
         sodium$isActive(): boolean;
-        createTicker(): $SpriteTicker;
+        getCreatedTicker(): $SpriteContents$Ticker;
+        sodium$hasTransparentPixels(): boolean;
+        sodium$hasTranslucentPixels(): boolean;
+        name(): $ResourceLocation;
+        close(): void;
+        width(): number;
+        metadata(): $ResourceMetadata;
+        uploadFirstFrame(x: number, y: number): void;
+        getPBRHolder(): $PBRSpriteHolder;
         getOrCreatePBRHolder(): $PBRSpriteHolder;
-        getFrameCount(): number;
-        getOriginalImage(): $NativeImage;
-        getUniqueFrames(): $IntStream;
-        increaseMipLevel(mipLevel: number): void;
-        isTransparent(frame: number, x: number, y: number): boolean;
+        height(): number;
+        getImages(): $NativeImage[];
         getAnimatedTexture(): $SpriteContents$AnimatedTexture;
         invokeUpload(x: number, y: number, frameX: number, frameY: number, atlasData: $NativeImage[]): void;
-        getImages(): $NativeImage[];
         animatedTexture: $SpriteContents$AnimatedTexture;
         byMipLevel: $NativeImage[];
         originalImage: $NativeImage;
         constructor(name: $ResourceLocation_, frameSize: $FrameSize_, originalImage: $NativeImage, metadata: $ResourceMetadata_);
-        get PBRHolder(): $PBRSpriteHolder;
-        get createdTicker(): $SpriteContents$Ticker;
-        get orCreatePBRHolder(): $PBRSpriteHolder;
-        get frameCount(): number;
         get uniqueFrames(): $IntStream;
+        get frameCount(): number;
+        get createdTicker(): $SpriteContents$Ticker;
+        get PBRHolder(): $PBRSpriteHolder;
+        get orCreatePBRHolder(): $PBRSpriteHolder;
         get images(): $NativeImage[];
     }
     export class $DynamicTexture extends $AbstractTexture implements $Dumpable, $Darkness$DynamicTextureHook {
-        upload(): void;
+        chloride$enableDarkness(): void;
+        wrapOperation$ggh000$moonlight$forceMipMap(arg0: $NativeImage, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: $Operation_<any>): void;
+        wrapOperation$ggh000$moonlight$forceMipMap(arg0: number, arg1: number, arg2: number, arg3: $Operation_<any>): void;
         getPixels(): $NativeImage;
         setPixels(pixels: $NativeImage): void;
+        upload(): void;
         dumpContents(resourceLocation: $ResourceLocation_, path: $Path_): void;
-        chloride$enableDarkness(): void;
         static NOT_ASSIGNED: number;
         mipmap: boolean;
         blur: boolean;
@@ -261,10 +264,12 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         constructor(width: number, height: number, useCalloc: boolean);
     }
     export class $SpriteContents$AnimatedTexture implements $SpriteContentsAnimatedTextureAccessor, $AnimatedTextureAccessor, $SpriteContentsAnimatedTextureAccessor$1 {
-        uploadFirstFrame(x: number, y: number): void;
-        uploadFrame(x: number, y: number, frameIndex: number): void;
-        createTicker(): $SpriteTicker;
         getUniqueFrames(): $IntStream;
+        createTicker(): $SpriteTicker;
+        uploadFrame(x: number, y: number, frameIndex: number): void;
+        uploadFirstFrame(x: number, y: number): void;
+        getFrameY(frameIndex: number): number;
+        getFrameX(frameIndex: number): number;
         getFrames(): $List<$SpriteContents$FrameInfo>;
         getFrameRowSize(): number;
         invokeUploadFrame(x: number, y: number, frameIndex: number): void;
@@ -273,29 +278,31 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         interpolateFrames: boolean;
         get uniqueFrames(): $IntStream;
     }
-    export class $TextureAtlas extends $AbstractTexture implements $Dumpable, $Tickable, $SpriteFinderImpl$SpriteFinderAccess, $TextureAtlasAccessor$1, $TextureAtlasExtension, $SpriteFinderImpl$SpriteFinderAccess$1, $TextureAtlasAccessor {
+    export class $TextureAtlas extends $AbstractTexture implements $Dumpable, $Tickable, $TextureAtlasAccessor$1, $TextureAtlasExtension, $TextureAtlasAccessor, $SpriteFinderImpl$SpriteFinderAccess, $AccessorMixinTextureAtlas, $SpriteFinderImpl$SpriteFinderAccess$1 {
+        getHeight(): number;
+        maxSupportedTextureSize(): number;
         location(): $ResourceLocation;
         tick(): void;
         updateFilter(preparations: $SpriteLoader$Preparations_): void;
         clearTextureData(): void;
         getPBRHolder(): $PBRAtlasHolder;
         getWidth(): number;
-        wrapOperation$zcc000$sodium_extra$sodiumExtra$tickAnimatedSprites(instance: $TextureAtlasSprite, original: $Operation_<any>): $TextureAtlasSprite$Ticker;
+        getTextures(): $Map<$ResourceLocation, $TextureAtlasSprite>;
         upload(preparations: $SpriteLoader$Preparations_): void;
         getSprite(name: $ResourceLocation_): $TextureAtlasSprite;
-        getTextures(): $Map<$ResourceLocation, $TextureAtlasSprite>;
-        getHeight(): number;
-        dumpContents(resourceLocation: $ResourceLocation_, path: $Path_): void;
-        maxSupportedTextureSize(): number;
         fabric_spriteFinder(): $SpriteFinderImpl;
-        cycleAnimationFrames(): void;
         getOrCreatePBRHolder(): $PBRAtlasHolder;
-        sodium$getHeight(): number;
+        cycleAnimationFrames(): void;
+        dumpContents(resourceLocation: $ResourceLocation_, path: $Path_): void;
+        wrapOperation$zzl000$sodium_extra$sodiumExtra$tickAnimatedSprites(instance: $TextureAtlasSprite, original: $Operation_<any>): $TextureAtlasSprite$Ticker;
         getTexturesByName(): $Map<$ResourceLocation, $TextureAtlasSprite>;
-        sodium$getWidth(): number;
-        callGetHeight(): number;
-        getMipLevel(): number;
         callGetWidth(): number;
+        roots$GetWidth(): number;
+        roots$GetHeight(): number;
+        getMipLevel(): number;
+        callGetHeight(): number;
+        sodium$getHeight(): number;
+        sodium$getWidth(): number;
         static NOT_ASSIGNED: number;
         /**
          * @deprecated
@@ -310,27 +317,27 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         blur: boolean;
         sprites: $List<$SpriteContents>;
         constructor(location: $ResourceLocation_);
+        get height(): number;
         get PBRHolder(): $PBRAtlasHolder;
         get width(): number;
         get textures(): $Map<$ResourceLocation, $TextureAtlasSprite>;
-        get height(): number;
         get orCreatePBRHolder(): $PBRAtlasHolder;
         get mipLevel(): number;
     }
     export class $Stitcher$Region<T extends $Stitcher$Entry> {
         walk(spriteLoader: $Stitcher$SpriteLoader_<T>): void;
         add(holder: $Stitcher$Holder_<T>): boolean;
-        getY(): number;
         getX(): number;
+        getY(): number;
         constructor(originX: number, originY: number, width: number, height: number);
-        get y(): number;
         get x(): number;
+        get y(): number;
     }
     export class $SimpleTexture extends $AbstractTexture implements $SimpleTextureAccessor, $ITextureSize {
         ldlib2$getImageWidth(): number;
         ldlib2$getImageHeight(): number;
-        getWidth(): number;
         getHeight(): number;
+        getWidth(): number;
         getLocation(): $ResourceLocation;
         ldlib2$imageWidth: number;
         static NOT_ASSIGNED: number;
@@ -338,13 +345,15 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         ldlib2$imageHeight: number;
         blur: boolean;
         constructor(location: $ResourceLocation_);
-        get width(): number;
         get height(): number;
+        get width(): number;
         get location(): $ResourceLocation;
     }
     export class $TextureManager implements $PreparableReloadListener, $Tickable, $AutoCloseable {
-        register(path: $ResourceLocation_, texture: $AbstractTexture): void;
+        preload(path: $ResourceLocation_, backgroundExecutor: $Executor_): $CompletableFuture<void>;
+        bindForSetup(path: $ResourceLocation_): void;
         register(name: string, texture: $DynamicTexture): $ResourceLocation;
+        register(path: $ResourceLocation_, texture: $AbstractTexture): void;
         close(): void;
         release(path: $ResourceLocation_): void;
         reload(stage: $PreparableReloadListener$PreparationBarrier_, resourceManager: $ResourceManager, preparationsProfiler: $ProfilerFiller, reloadProfiler: $ProfilerFiller, backgroundExecutor: $Executor_, gameExecutor: $Executor_): $CompletableFuture<void>;
@@ -352,8 +361,6 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         getTexture(path: $ResourceLocation_): $AbstractTexture;
         getTexture(path: $ResourceLocation_, defaultTexture: $AbstractTexture): $AbstractTexture;
         dumpAllSheets(path: $Path_): void;
-        preload(path: $ResourceLocation_, backgroundExecutor: $Executor_): $CompletableFuture<void>;
-        bindForSetup(path: $ResourceLocation_): void;
         getName(): string;
         byPath: $Map<$ResourceLocation, $AbstractTexture>;
         static INTENTIONAL_MISSING_TEXTURE: $ResourceLocation;
@@ -361,15 +368,20 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         get name(): string;
     }
     export class $TextureAtlasSprite implements $TextureAtlasSpriteExtension$1, $TextureAtlasSpriteExtension {
+        getFusionSpriteInstance(): $SpriteInstance;
+        setFusionSpriteInstance(instance: $SpriteInstance): void;
+        sodium$hasUnknownImageContents(): boolean;
+        /**
+         * @return the minimum U coordinate to use when rendering this sprite
+         */
+        uvShrinkRatio(): number;
+        createTicker(): $TextureAtlasSprite$Ticker;
         wrap(consumer: $VertexConsumer): $VertexConsumer;
-        getU(u: number): number;
         contents(): $SpriteContents;
-        getY(): number;
-        atlasLocation(): $ResourceLocation;
         uploadFirstFrame(): void;
-        getX(): number;
-        getVOffset(u: number): number;
-        getUOffset(u: number): number;
+        atlasLocation(): $ResourceLocation;
+        getV(u: number): number;
+        getU(u: number): number;
         /**
          * @return the minimum U coordinate to use when rendering this sprite
          */
@@ -377,43 +389,38 @@ declare module "@package/net/minecraft/client/renderer/texture" {
         /**
          * @return the minimum U coordinate to use when rendering this sprite
          */
-        getV0(): number;
-        /**
-         * @return the minimum U coordinate to use when rendering this sprite
-         */
         getU0(): number;
         /**
          * @return the minimum U coordinate to use when rendering this sprite
          */
-        getV1(): number;
-        getV(u: number): number;
-        getPixelRGBA(arg0: number, arg1: number, arg2: number): number;
-        setFusionSpriteInstance(instance: $SpriteInstance): void;
-        getFusionSpriteInstance(): $SpriteInstance;
-        createTicker(): $TextureAtlasSprite$Ticker;
+        getV0(): number;
         /**
          * @return the minimum U coordinate to use when rendering this sprite
          */
-        uvShrinkRatio(): number;
-        sodium$hasUnknownImageContents(): boolean;
+        getV1(): number;
+        getX(): number;
+        getY(): number;
+        getPixelRGBA(arg0: number, arg1: number, arg2: number): number;
+        getUOffset(u: number): number;
+        getVOffset(u: number): number;
         v0: number;
         u0: number;
         v1: number;
         u1: number;
         constructor(atlasLocation: $ResourceLocation_, contents: $SpriteContents, originX: number, originY: number, x: number, y: number);
-        get y(): number;
         get x(): number;
+        get y(): number;
     }
     export class $SimpleTexture$TextureImage implements $Closeable {
         static load(resourceManager: $ResourceManager, location: $ResourceLocation_): $SimpleTexture$TextureImage;
         close(): void;
-        throwIfError(): void;
-        getTextureMetadata(): $TextureMetadataSection;
         getImage(): $NativeImage;
+        getTextureMetadata(): $TextureMetadataSection;
+        throwIfError(): void;
         constructor(exception: $IOException);
         constructor(metadata: $TextureMetadataSection | null, image: $NativeImage);
-        get textureMetadata(): $TextureMetadataSection;
         get image(): $NativeImage;
+        get textureMetadata(): $TextureMetadataSection;
     }
     export class $MipmapGenerator {
         static generateMipLevels(images: $NativeImage[], mipLevel: number): $NativeImage[];

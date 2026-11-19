@@ -4,9 +4,9 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/dev/worldgen/lithostitched/api/util" {
     export class $InjectionType extends $Enum<$InjectionType> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $InjectionType[];
         static valueOf(arg0: string): $InjectionType;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$InjectionType>;
         static APPEND: $InjectionType;

@@ -9,8 +9,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/starlight/api/provider
         static NODE_CODEC: $Codec<$TransmissionNodeProvider<never>>;
     }
     export interface $TransmissionNodeProvider<T extends $TransmissionNode> {
-        nodeCodec(): $MapCodec<T>;
         provideNewNode(arg0: $BlockPos_): T;
+        nodeCodec(): $MapCodec<T>;
     }
     /**
      * Values that may be interpreted as {@link $TransmissionNodeProvider}.

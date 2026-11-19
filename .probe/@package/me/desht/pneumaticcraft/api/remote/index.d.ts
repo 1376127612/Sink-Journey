@@ -17,20 +17,20 @@ declare module "@package/me/desht/pneumaticcraft/api/remote" {
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $IRemoteWidget>;
     }
     export interface $IRemoteWidget {
-        isEnabled(arg0: $Player): boolean;
-        getType(): $RemoteWidgetType<$IRemoteWidget>;
-        copy(): $IRemoteWidget;
-        getTranslationKey(): string;
         copyToPos(arg0: number, arg1: number): $IRemoteWidget;
-        hasConfigurableText(): boolean;
+        getTranslationKey(): string;
         baseSettings(): $BaseSettings;
         widgetSettings(): $WidgetSettings;
         discoverVariables(arg0: $Set_<string>, arg1: $UUID_): void;
+        hasConfigurableText(): boolean;
+        isEnabled(arg0: $Player): boolean;
+        getType(): $RemoteWidgetType<$IRemoteWidget>;
+        copy(): $IRemoteWidget;
         get type(): $RemoteWidgetType<$IRemoteWidget>;
     }
     export class $RemoteWidgetType<R extends $IRemoteWidget> {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, R>;
         codec(): $MapCodec<R>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, R>;
         constructor(arg0: $MapCodec_<R>, arg1: $StreamCodec<$RegistryFriendlyByteBuf, R>);
     }
     /**
@@ -38,6 +38,8 @@ declare module "@package/me/desht/pneumaticcraft/api/remote" {
      */
     export type $RemoteWidgetType_<R> = RegistryTypes.PneumaticcraftRemoteWidgets;
     export class $WidgetSettings extends $Record {
+        copyToPos(arg0: number, arg1: number): $WidgetSettings;
+        withText(arg0: $Component_, arg1: $Component_): $WidgetSettings;
         x(): number;
         copy(): $WidgetSettings;
         resize(arg0: number, arg1: number): $WidgetSettings;
@@ -46,8 +48,6 @@ declare module "@package/me/desht/pneumaticcraft/api/remote" {
         title(): $Component;
         height(): number;
         tooltip(): $Component;
-        copyToPos(arg0: number, arg1: number): $WidgetSettings;
-        withText(arg0: $Component_, arg1: $Component_): $WidgetSettings;
         static CODEC: $Codec<$WidgetSettings>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $WidgetSettings>;
         constructor(x: number, y: number, width: number, height: number, title: $Component_, tooltip: $Component_);
@@ -55,12 +55,12 @@ declare module "@package/me/desht/pneumaticcraft/api/remote" {
     /**
      * Values that may be interpreted as {@link $WidgetSettings}.
      */
-    export type $WidgetSettings_ = { x?: number, height?: number, width?: number, tooltip?: $Component_, title?: $Component_, y?: number,  } | [x?: number, height?: number, width?: number, tooltip?: $Component_, title?: $Component_, y?: number, ];
+    export type $WidgetSettings_ = { tooltip?: $Component_, title?: $Component_, y?: number, x?: number, height?: number, width?: number,  } | [tooltip?: $Component_, title?: $Component_, y?: number, x?: number, height?: number, width?: number, ];
     export class $BaseSettings extends $Record {
-        withEnablingValue(arg0: $BlockPos_): $BaseSettings;
-        withVariable(arg0: string): $BaseSettings;
         enablingValue(): $BlockPos;
         enableVariable(): string;
+        withVariable(arg0: string): $BaseSettings;
+        withEnablingValue(arg0: $BlockPos_): $BaseSettings;
         static CODEC: $Codec<$BaseSettings>;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $BaseSettings>;
         static DEFAULT: $BaseSettings;
@@ -69,6 +69,6 @@ declare module "@package/me/desht/pneumaticcraft/api/remote" {
     /**
      * Values that may be interpreted as {@link $BaseSettings}.
      */
-    export type $BaseSettings_ = { enableVariable?: string, enablingValue?: $BlockPos_,  } | [enableVariable?: string, enablingValue?: $BlockPos_, ];
+    export type $BaseSettings_ = { enablingValue?: $BlockPos_, enableVariable?: string,  } | [enablingValue?: $BlockPos_, enableVariable?: string, ];
     export interface $RemoteWidgetType<R> extends RegistryMarked<RegistryTypes.PneumaticcraftRemoteWidgetsTag, RegistryTypes.PneumaticcraftRemoteWidgets> {}
 }

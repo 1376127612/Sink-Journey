@@ -13,10 +13,10 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
     export class $TagEventFilter$Namespace extends $Record implements $TagEventFilter {
         namespace(): string;
         testElementId(id: $ResourceLocation_): boolean;
+        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         remove(wrapper: $TagWrapper): number;
         add(wrapper: $TagWrapper): number;
         unwrap(): $Stream<$TagEventFilter>;
-        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         constructor(namespace: string);
     }
     /**
@@ -28,10 +28,10 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
         static unwrap(event: $TagKubeEvent, array: $Object[]): $TagEventFilter;
     }
     export interface $TagEventFilter {
+        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         remove(wrapper: $TagWrapper): number;
         add(wrapper: $TagWrapper): number;
         unwrap(): $Stream<$TagEventFilter>;
-        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         testElementId(id: $ResourceLocation_): boolean;
     }
     /**
@@ -49,9 +49,9 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
      */
     export type $PreTagKubeEvent$RemoveAllTagsFromAction_ = { ignored?: $Object[],  } | [ignored?: $Object[], ];
     export class $TagEventFilter$Empty implements $TagEventFilter {
+        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         remove(wrapper: $TagWrapper): number;
         add(wrapper: $TagWrapper): number;
-        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         testElementId(resourceLocation: $ResourceLocation_): boolean;
         unwrap(): $Stream<$TagEventFilter>;
         static INSTANCE: $TagEventFilter$Empty;
@@ -90,11 +90,11 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
         get objectIds(): $List<$ResourceLocation>;
     }
     export class $TagEventFilter$Or extends $Record implements $TagEventFilter {
+        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         remove(wrapper: $TagWrapper): number;
         add(wrapper: $TagWrapper): number;
         unwrap(): $Stream<$TagEventFilter>;
         filters(): $List<$TagEventFilter>;
-        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         testElementId(resourceLocation: $ResourceLocation_): boolean;
         constructor(filters: $List_<$TagEventFilter_>);
     }
@@ -106,9 +106,9 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
         add(wrapper: $TagWrapper): number;
         id(): $ResourceLocation;
         testElementId(id: $ResourceLocation_): boolean;
+        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         remove(wrapper: $TagWrapper): number;
         unwrap(): $Stream<$TagEventFilter>;
-        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         constructor(id: $ResourceLocation_);
     }
     /**
@@ -126,10 +126,10 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
      */
     export type $PreTagWrapper$RemoveAllAction_ = { tag?: $ResourceLocation_,  } | [tag?: $ResourceLocation_, ];
     export class $TagEventFilter$Tag extends $Record implements $TagEventFilter {
+        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         remove(wrapper: $TagWrapper): number;
         add(wrapper: $TagWrapper): number;
         tag(): $TagWrapper;
-        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         testElementId(id: $ResourceLocation_): boolean;
         unwrap(): $Stream<$TagEventFilter>;
         constructor(tag: $TagWrapper);
@@ -141,10 +141,10 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
     export class $TagEventFilter$RegEx extends $Record implements $TagEventFilter {
         pattern(): $Pattern;
         testElementId(id: $ResourceLocation_): boolean;
+        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         remove(wrapper: $TagWrapper): number;
         add(wrapper: $TagWrapper): number;
         unwrap(): $Stream<$TagEventFilter>;
-        testTagOrElementLocation(element: $ExtraCodecs$TagOrElementLocation_): boolean;
         constructor(pattern: $Pattern);
     }
     /**
@@ -152,14 +152,8 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
      */
     export type $TagEventFilter$RegEx_ = { pattern?: $Pattern,  } | [pattern?: $Pattern, ];
     export class $TagKubeEvent implements $KubeEvent {
-        getType(): $ResourceLocation;
         getElementIds(): $Set<$ResourceLocation>;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
+        getType(): $ResourceLocation;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -167,17 +161,23 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -198,8 +198,8 @@ declare module "@package/dev/latvian/mods/kubejs/server/tag" {
         static TAG_EVENT_HANDLER: $EventExceptionHandler;
         tags: $Map<$ResourceLocation, $TagWrapper>;
         constructor(registryKey: $ResourceKey_<never>, vr: $Registry<never>);
-        get type(): $ResourceLocation;
         get elementIds(): $Set<$ResourceLocation>;
+        get type(): $ResourceLocation;
     }
     export class $PreTagWrapper$RemoveAction extends $Record implements $Consumer<$TagKubeEvent> {
         accept(e: $TagKubeEvent): void;

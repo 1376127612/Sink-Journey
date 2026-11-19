@@ -6,14 +6,14 @@ declare module "@package/ca/teamdman/sfm/client/text_editor/action" {
     export interface $ITextEditAction extends RegistryMarked<RegistryTypes.SfmTextEditorActionTag, RegistryTypes.SfmTextEditorAction> {}
     export class $KeyboardImpulse extends $Record {
         modifiers(): number;
-        scanCode(): number;
         keyCode(): number;
+        scanCode(): number;
         constructor(keyCode: number, scanCode: number, modifiers: number);
     }
     /**
      * Values that may be interpreted as {@link $KeyboardImpulse}.
      */
-    export type $KeyboardImpulse_ = { modifiers?: number, keyCode?: number, scanCode?: number,  } | [modifiers?: number, keyCode?: number, scanCode?: number, ];
+    export type $KeyboardImpulse_ = { scanCode?: number, modifiers?: number, keyCode?: number,  } | [scanCode?: number, modifiers?: number, keyCode?: number, ];
     export class $ITextEditAction {
     }
     export interface $ITextEditAction {

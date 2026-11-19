@@ -5,21 +5,21 @@ declare module "@package/appeng/api/networking/pathing" {
     export class $IPathingService {
     }
     export interface $IPathingService extends $IGridService {
+        getChannelMode(): $ChannelMode;
         getUsedChannels(): number;
         getControllerState(): $ControllerState;
         isNetworkBooting(): boolean;
-        getChannelMode(): $ChannelMode;
         repath(): void;
+        get channelMode(): $ChannelMode;
         get usedChannels(): number;
         get controllerState(): $ControllerState;
         get networkBooting(): boolean;
-        get channelMode(): $ChannelMode;
     }
     export class $ChannelMode extends $Enum<$ChannelMode> {
-        static values(): $ChannelMode[];
-        static valueOf(arg0: string): $ChannelMode;
         getAdHocNetworkChannels(): number;
         getCableCapacityFactor(): number;
+        static values(): $ChannelMode[];
+        static valueOf(arg0: string): $ChannelMode;
         static X2: $ChannelMode;
         static X3: $ChannelMode;
         static INFINITE: $ChannelMode;

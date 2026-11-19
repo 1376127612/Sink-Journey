@@ -8,15 +8,15 @@ declare module "@package/com/denfop/recipe" {
     export class $IInputItemStack {
     }
     export interface $IInputItemStack {
+        getAmount(): number;
+        writeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        growAmount(arg0: number): void;
         matches(arg0: $ItemStack_): boolean;
         getTag(): $TagKey<$Item>;
         getInputs(): $List<$ItemStack>;
         hasTag(): boolean;
-        getAmount(): number;
-        writeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
-        growAmount(arg0: number): void;
+        get amount(): number;
         get tag(): $TagKey<$Item>;
         get inputs(): $List<$ItemStack>;
-        get amount(): number;
     }
 }

@@ -29,10 +29,10 @@ declare module "@package/ca/teamdman/sfm/common/capability" {
     export class $SFMBlockCapabilityProvider<CAP> {
     }
     export interface $SFMBlockCapabilityProvider<CAP> {
-        priority(): number;
-        getCapability(arg0: $SFMBlockCapabilityKind_<CAP>, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockEntity, arg5: $Direction_): $SFMBlockCapabilityResult<CAP>;
         specialize(arg0: $SFMBlockCapabilityKind_<CAP>): $IBlockCapabilityProvider<CAP, $Direction>;
         matchesCapabilityKind(arg0: $SFMBlockCapabilityKind_<never>): boolean;
+        priority(): number;
+        getCapability(arg0: $SFMBlockCapabilityKind_<CAP>, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BlockEntity, arg5: $Direction_): $SFMBlockCapabilityResult<CAP>;
     }
     /**
      * Values that may be interpreted as {@link $SFMBlockCapabilityProvider}.

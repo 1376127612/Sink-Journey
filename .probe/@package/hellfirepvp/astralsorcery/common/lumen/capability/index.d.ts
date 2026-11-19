@@ -18,27 +18,27 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen/capability" {
      */
     export type $LumenHandlerView$InputFilter_ = ((arg0: $LumenStack, arg1: $LumenStack) => boolean);
     export class $LumenStackList {
-        setLumenStack(arg0: $LumenStack): void;
+        getLumenStack(arg0: $Lumen_): ($LumenStack) | undefined;
+        getLumenStacks(): $List<$LumenStack>;
         getModifiableLumenStacks(): $List<$LumenStack>;
         clear(): void;
         isEmpty(): boolean;
         static create(): $LumenStackList;
-        getLumenStack(arg0: $Lumen_): ($LumenStack) | undefined;
-        getLumenStacks(): $List<$LumenStack>;
+        setLumenStack(arg0: $LumenStack): void;
         static CODEC: $Codec<$LumenStackList>;
+        get lumenStacks(): $List<$LumenStack>;
         get modifiableLumenStacks(): $List<$LumenStack>;
         get empty(): boolean;
-        get lumenStacks(): $List<$LumenStack>;
     }
     export class $LumenHandlerView implements $ILumenHandler {
-        clear(): void;
-        fill(arg0: $LumenStack, arg1: $ILumenHandler$Action_): number;
-        getCapacity(arg0: $LumenLike_): number;
-        drain(arg0: $LumenLike_, arg1: number, arg2: $ILumenHandler$Action_): $LumenStack;
         getContainedLumen(arg0: $LumenLike_): ($LumenStack) | undefined;
         getContainedLumen(): $List<$LumenStack>;
         bypassFilters(arg0: $Consumer_<$LumenHandlerView>): void;
         getLumenAccess(arg0: $Direction_ | null): $LumenHandlerView;
+        clear(): void;
+        fill(arg0: $LumenStack, arg1: $ILumenHandler$Action_): number;
+        drain(arg0: $LumenLike_, arg1: number, arg2: $ILumenHandler$Action_): $LumenStack;
+        getCapacity(arg0: $LumenLike_): number;
         isEmpty(): boolean;
         contains(arg0: $LumenLike_): boolean;
         drain(arg0: $LumenStack, arg1: $ILumenHandler$Action_): $LumenStack;
@@ -50,8 +50,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen/capability" {
         static NO_EXTRACT: $LumenHandlerView$ExtractFilter;
     }
     export interface $LumenHandlerView$ExtractFilter {
-        and(arg0: $LumenHandlerView$ExtractFilter_): $LumenHandlerView$ExtractFilter;
         canExtract(arg0: number, arg1: $LumenStack): boolean;
+        and(arg0: $LumenHandlerView$ExtractFilter_): $LumenHandlerView$ExtractFilter;
     }
     /**
      * Values that may be interpreted as {@link $LumenHandlerView$ExtractFilter}.

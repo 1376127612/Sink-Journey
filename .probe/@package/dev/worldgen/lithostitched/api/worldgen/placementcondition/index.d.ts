@@ -10,26 +10,26 @@ import { $PlacementContext } from "@package/net/minecraft/world/level/levelgen/p
 
 declare module "@package/dev/worldgen/lithostitched/api/worldgen/placementcondition" {
     export class $PlacementCondition$Context extends $Record {
+        biomeSource(): $BiomeSource;
+        heightAccessor(): $LevelHeightAccessor;
+        randomState(): $RandomState;
         seed(): number;
         generator(): $ChunkGenerator;
         registries(): $RegistryAccess;
-        randomState(): $RandomState;
-        heightAccessor(): $LevelHeightAccessor;
-        biomeSource(): $BiomeSource;
         constructor(registries: $RegistryAccess, generator: $ChunkGenerator, heightAccessor: $LevelHeightAccessor, randomState: $RandomState, biomeSource: $BiomeSource, seed: number);
     }
     /**
      * Values that may be interpreted as {@link $PlacementCondition$Context}.
      */
-    export type $PlacementCondition$Context_ = { registries?: $RegistryAccess, biomeSource?: $BiomeSource, randomState?: $RandomState, seed?: number, heightAccessor?: $LevelHeightAccessor, generator?: $ChunkGenerator,  } | [registries?: $RegistryAccess, biomeSource?: $BiomeSource, randomState?: $RandomState, seed?: number, heightAccessor?: $LevelHeightAccessor, generator?: $ChunkGenerator, ];
+    export type $PlacementCondition$Context_ = { heightAccessor?: $LevelHeightAccessor, generator?: $ChunkGenerator, registries?: $RegistryAccess, biomeSource?: $BiomeSource, randomState?: $RandomState, seed?: number,  } | [heightAccessor?: $LevelHeightAccessor, generator?: $ChunkGenerator, registries?: $RegistryAccess, biomeSource?: $BiomeSource, randomState?: $RandomState, seed?: number, ];
     export class $PlacementCondition {
         static CODEC: $Codec<$PlacementCondition>;
         static BASE_CODEC: $Codec<$PlacementCondition>;
     }
     export interface $PlacementCondition {
-        test(arg0: $PlacementCondition$Context_, arg1: $BlockPos_): boolean;
-        test(arg0: $PlacementContext, arg1: $BlockPos_): boolean;
-        test(arg0: $Structure$GenerationContext_, arg1: $BlockPos_): boolean;
         codec(): $MapCodec<$PlacementCondition>;
+        test(arg0: $PlacementCondition$Context_, arg1: $BlockPos_): boolean;
+        test(arg0: $Structure$GenerationContext_, arg1: $BlockPos_): boolean;
+        test(arg0: $PlacementContext, arg1: $BlockPos_): boolean;
     }
 }

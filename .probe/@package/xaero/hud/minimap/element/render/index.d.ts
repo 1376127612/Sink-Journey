@@ -14,11 +14,11 @@ export * as over from "@package/xaero/hud/minimap/element/render/over";
 
 declare module "@package/xaero/hud/minimap/element/render" {
     export class $MinimapElementRenderProvider<E, RC> {
+        setupContextAndGetNext(arg0: $MinimapElementRenderLocation, arg1: RC): E;
         begin(arg0: $MinimapElementRenderLocation, arg1: RC): void;
         end(arg0: $MinimapElementRenderLocation, arg1: RC): void;
         hasNext(arg0: $MinimapElementRenderLocation, arg1: RC): boolean;
         getNext(arg0: $MinimapElementRenderLocation, arg1: RC): E;
-        setupContextAndGetNext(arg0: $MinimapElementRenderLocation, arg1: RC): E;
         constructor();
     }
     export class $MinimapElementRendererHandler {
@@ -41,46 +41,46 @@ declare module "@package/xaero/hud/minimap/element/render" {
         constructor(arg0: $MinimapElementRenderLocation, arg1: $Entity, arg2: $Player, arg3: $Vec3_, arg4: boolean, arg5: number, arg6: $RenderTarget, arg7: number, arg8: $ResourceKey_<$Level>);
     }
     export class $MinimapElementReader<E, RC> {
-        getRightClickTitleBackgroundColor(arg0: E): number;
-        shouldScaleBoxWithOptionalScale(): boolean;
-        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
-        isHidden(arg0: E, arg1: RC): boolean;
-        isInteractable(arg0: $MinimapElementRenderLocation, arg1: E): boolean;
         getMenuName(arg0: E): string;
+        getRenderZ(arg0: E, arg1: RC, arg2: number): number;
+        getRenderX(arg0: E, arg1: RC, arg2: number): number;
+        getRightClickTitleBackgroundColor(arg0: E): number;
+        isInteractable(arg0: $MinimapElementRenderLocation, arg1: E): boolean;
+        getCoordinateScale(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): number;
+        isAlwaysHighlightedWhenHovered(arg0: E, arg1: RC): boolean;
+        shouldScalePartialCoordinates(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): boolean;
+        getRenderY(arg0: E, arg1: RC, arg2: number): number;
+        getInteractionBoxLeft(arg0: E, arg1: RC, arg2: number): number;
+        getInteractionBoxBottom(arg0: E, arg1: RC, arg2: number): number;
+        getInteractionBoxTop(arg0: E, arg1: RC, arg2: number): number;
+        getInteractionBoxRight(arg0: E, arg1: RC, arg2: number): number;
+        getMenuTextFillLeftPadding(arg0: E): number;
+        getRenderBoxTop(arg0: E, arg1: RC, arg2: number): number;
+        getFilterName(arg0: E): string;
         getRenderBoxLeft(arg0: E, arg1: RC, arg2: number): number;
         getRenderBoxRight(arg0: E, arg1: RC, arg2: number): number;
-        getRenderBoxBottom(arg0: E, arg1: RC, arg2: number): number;
-        getRenderBoxTop(arg0: E, arg1: RC, arg2: number): number;
-        getLeftSideLength(arg0: E, arg1: $Minecraft): number;
-        getFilterName(arg0: E): string;
         getBoxScale(arg0: $MinimapElementRenderLocation, arg1: E, arg2: RC): number;
-        shouldScalePartialCoordinates(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): boolean;
-        getRenderX(arg0: E, arg1: RC, arg2: number): number;
-        getRenderY(arg0: E, arg1: RC, arg2: number): number;
-        getRenderZ(arg0: E, arg1: RC, arg2: number): number;
-        getInteractionBoxRight(arg0: E, arg1: RC, arg2: number): number;
-        getInteractionBoxTop(arg0: E, arg1: RC, arg2: number): number;
-        getInteractionBoxLeft(arg0: E, arg1: RC, arg2: number): number;
-        getMenuTextFillLeftPadding(arg0: E): number;
-        getInteractionBoxBottom(arg0: E, arg1: RC, arg2: number): number;
-        getCoordinateScale(arg0: E, arg1: RC, arg2: $MinimapElementRenderInfo): number;
+        getRenderBoxBottom(arg0: E, arg1: RC, arg2: number): number;
+        getLeftSideLength(arg0: E, arg1: $Minecraft): number;
+        shouldScaleBoxWithOptionalScale(): boolean;
+        isHidden(arg0: E, arg1: RC): boolean;
         constructor();
     }
     export class $MinimapElementRenderer<E, RC> implements $Comparable<$MinimapElementRenderer<never, never>> {
+        shouldRender(arg0: $MinimapElementRenderLocation): boolean;
+        renderElement(arg0: E, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
+        getElementReader(): $MinimapElementReader<E, RC>;
+        preRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
         compareTo(arg0: $MinimapElementRenderer<never, never>): number;
         getContext(): RC;
-        preRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
-        postRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
         getProvider(): $MinimapElementRenderProvider<E, RC>;
         getOrder(): number;
-        shouldRender(arg0: $MinimapElementRenderLocation): boolean;
-        getElementReader(): $MinimapElementReader<E, RC>;
-        renderElement(arg0: E, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
+        postRender(arg0: $MinimapElementRenderInfo, arg1: $MultiBufferSource$BufferSource, arg2: $MultiTextureRenderTypeRendererProvider): void;
         constructor(arg0: $MinimapElementReader<E, RC>, arg1: $MinimapElementRenderProvider<E, RC>, arg2: RC);
+        get elementReader(): $MinimapElementReader<E, RC>;
         get context(): RC;
         get provider(): $MinimapElementRenderProvider<E, RC>;
         get order(): number;
-        get elementReader(): $MinimapElementReader<E, RC>;
     }
     export class $MinimapElementRenderLocation {
         static fromIndex(arg0: number): $MinimapElementRenderLocation;

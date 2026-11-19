@@ -15,33 +15,33 @@ export * as output from "@package/hellfirepvp/astralsorcery/common/recipe/liquid
 declare module "@package/hellfirepvp/astralsorcery/common/recipe/liquid" {
     export class $LiquidStarlightRecipeInput extends $CustomRecipeInput {
         getOtherEntities(): $List<$ItemEntity>;
-        static of(arg0: $ItemEntity): $LiquidStarlightRecipeInput;
-        getTriggerEntity(): $ItemEntity;
         getFilteredOtherEntitiesByOutput(arg0: $List_<$LiquidStarlightRecipeOutputModifier>): $List<$ItemEntity>;
+        getTriggerEntity(): $ItemEntity;
+        static of(arg0: $ItemEntity): $LiquidStarlightRecipeInput;
         get otherEntities(): $List<$ItemEntity>;
         get triggerEntity(): $ItemEntity;
     }
     export class $LiquidStarlightRecipe extends $CustomRecipe<$LiquidStarlightRecipe, $LiquidStarlightRecipeInput> {
-        matches(arg0: $LiquidStarlightRecipeInput, arg1: $Level_): boolean;
-        getDuration(): number;
-        getInput(): $SizedIngredient;
-        getColor(): $ColorWrapper;
-        consumeInputs(arg0: $LiquidStarlightRecipeInput, arg1: $HolderLookup$Provider): boolean;
-        createOutput(arg0: $LiquidStarlightRecipeInput, arg1: $HolderLookup$Provider): void;
-        getOutputModifiers(): $List<$LiquidStarlightRecipeOutputModifier>;
+        getRandomAdditionalDuration(): number;
         consumesInputs(): boolean;
         consumeItemInputs(arg0: $LiquidStarlightRecipeInput): void;
-        getOtherInputs(): $List<$SizedIngredient>;
         consumesLiquid(): boolean;
-        getRandomAdditionalDuration(): number;
+        getOtherInputs(): $List<$SizedIngredient>;
+        consumeInputs(arg0: $LiquidStarlightRecipeInput, arg1: $HolderLookup$Provider): boolean;
+        getOutputModifiers(): $List<$LiquidStarlightRecipeOutputModifier>;
+        createOutput(arg0: $LiquidStarlightRecipeInput, arg1: $HolderLookup$Provider): void;
+        matches(arg0: $LiquidStarlightRecipeInput, arg1: $Level_): boolean;
+        getInput(): $SizedIngredient;
+        getDuration(): number;
+        getColor(): $ColorWrapper;
         static CODEC: $MapCodec<$LiquidStarlightRecipe>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $LiquidStarlightRecipe>;
         constructor(arg0: $SizedIngredient_, arg1: $List_<$SizedIngredient_>, arg2: number, arg3: number, arg4: $ColorWrapper, arg5: $List_<$LiquidStarlightRecipeOutputModifier>, arg6: boolean, arg7: boolean);
-        get duration(): number;
-        get input(): $SizedIngredient;
-        get color(): $ColorWrapper;
-        get outputModifiers(): $List<$LiquidStarlightRecipeOutputModifier>;
-        get otherInputs(): $List<$SizedIngredient>;
         get randomAdditionalDuration(): number;
+        get otherInputs(): $List<$SizedIngredient>;
+        get outputModifiers(): $List<$LiquidStarlightRecipeOutputModifier>;
+        get input(): $SizedIngredient;
+        get duration(): number;
+        get color(): $ColorWrapper;
     }
 }

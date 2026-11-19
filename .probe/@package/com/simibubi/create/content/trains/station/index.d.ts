@@ -31,27 +31,27 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 
 declare module "@package/com/simibubi/create/content/trains/station" {
     export class $StationBlockEntity extends $SmartBlockEntity implements $TransformableBlockEntity {
-        transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
-        trackClicked(arg0: $Player, arg1: $InteractionHand_, arg2: $ITrackBlock, arg3: $BlockState_, arg4: $BlockPos_): boolean;
-        getAutoSchedule(): $ItemStack;
-        resolveFlagAngle(): boolean;
-        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
-        dropSchedule(arg0: $ServerPlayer, arg1: $Train): void;
+        getStation(): $GlobalStation;
         assemble(arg0: $UUID_): void;
-        enterAssemblyMode(arg0: $ServerPlayer): boolean;
-        exitAssemblyMode(): boolean;
-        updateMapColor(arg0: number): void;
-        isAssembling(): boolean;
-        removePackagePort(arg0: $PackagePortBlockEntity): void;
-        attachPackagePort(arg0: $PackagePortBlockEntity): void;
-        isValidBogeyOffset(arg0: number): boolean;
         getAssemblyDirection(): $Direction;
-        updateName(arg0: string): boolean;
-        tryDisassembleTrain(arg0: $ServerPlayer): boolean;
+        trackClicked(arg0: $Player, arg1: $InteractionHand_, arg2: $ITrackBlock, arg3: $BlockState_, arg4: $BlockPos_): boolean;
+        dropSchedule(arg0: $ServerPlayer, arg1: $Train): void;
+        resolveFlagAngle(): boolean;
+        getAutoSchedule(): $ItemStack;
+        cancelAssembly(): void;
         tryEnterAssemblyMode(): boolean;
         refreshAssemblyInfo(): void;
-        cancelAssembly(): void;
-        getStation(): $GlobalStation;
+        tryDisassembleTrain(arg0: $ServerPlayer): boolean;
+        updateName(arg0: string): boolean;
+        removePackagePort(arg0: $PackagePortBlockEntity): void;
+        isAssembling(): boolean;
+        enterAssemblyMode(arg0: $ServerPlayer): boolean;
+        isValidBogeyOffset(arg0: number): boolean;
+        updateMapColor(arg0: number): void;
+        exitAssemblyMode(): boolean;
+        attachPackagePort(arg0: $PackagePortBlockEntity): void;
+        transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
+        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         blockState: $BlockState;
         lastDisassembledTrainName: $Component;
         flag: $LerpedFloat;
@@ -70,20 +70,20 @@ declare module "@package/com/simibubi/create/content/trains/station" {
         customPersistentData: $CompoundTag;
         edgePoint: $TrackTargetingBehaviour<$GlobalStation>;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
+        get station(): $GlobalStation;
+        get assemblyDirection(): $Direction;
         get autoSchedule(): $ItemStack;
         get assembling(): boolean;
-        get assemblyDirection(): $Direction;
-        get station(): $GlobalStation;
     }
     export class $GlobalStation extends $SingleBlockEntityEdgePoint {
-        reserveFor(arg0: $Train): void;
-        runMailTransfer(): void;
-        getNearestTrain(): $Train;
-        trainDeparted(arg0: $Train): void;
-        getImminentTrain(): $Train;
-        canApproachFrom(arg0: $TrackNode): boolean;
-        cancelReservation(arg0: $Train): void;
         getPresentTrain(): $Train;
+        reserveFor(arg0: $Train): void;
+        getNearestTrain(): $Train;
+        canApproachFrom(arg0: $TrackNode): boolean;
+        getImminentTrain(): $Train;
+        runMailTransfer(): void;
+        trainDeparted(arg0: $Train): void;
+        cancelReservation(arg0: $Train): void;
         edgeLocation: $Couple<$TrackNodeLocation>;
         blockEntityPos: $BlockPos;
         connectedPorts: $Map<$BlockPos, $GlobalPackagePort>;
@@ -94,18 +94,19 @@ declare module "@package/com/simibubi/create/content/trains/station" {
         position: number;
         nearestTrain: $WeakReference<$Train>;
         constructor();
-        get imminentTrain(): $Train;
         get presentTrain(): $Train;
+        get imminentTrain(): $Train;
     }
     export class $GlobalPackagePort {
-        restoreOfflineBuffer(arg0: $IItemHandlerModifiable): void;
         saveOfflineBuffer(arg0: $IItemHandlerModifiable): void;
+        restoreOfflineBuffer(arg0: $IItemHandlerModifiable): void;
         address: string;
         primed: boolean;
         offlineBuffer: $ItemStackHandler;
         constructor();
     }
     export class $StationMarker {
+        static fromWorld(arg0: $BlockGetter, arg1: $BlockPos_): $StationMarker;
         static createStationDecoration(arg0: number, arg1: number, arg2: ($Component_) | undefined): $MapDecoration;
         getName(): $Component;
         static load(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $StationMarker;
@@ -113,7 +114,6 @@ declare module "@package/com/simibubi/create/content/trains/station" {
         save(arg0: $HolderLookup$Provider): $CompoundTag;
         getTarget(): $BlockPos;
         getSource(): $BlockPos;
-        static fromWorld(arg0: $BlockGetter, arg1: $BlockPos_): $StationMarker;
         constructor(arg0: $BlockPos_, arg1: $BlockPos_, arg2: $Component_);
         get name(): $Component;
         get id(): string;
@@ -123,7 +123,7 @@ declare module "@package/com/simibubi/create/content/trains/station" {
     export class $StationMapData {
     }
     export interface $StationMapData {
-        addStationMarker(arg0: $StationMarker): void;
         toggleStation(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $StationBlockEntity): boolean;
+        addStationMarker(arg0: $StationMarker): void;
     }
 }

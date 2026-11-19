@@ -4,10 +4,10 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/dev/worldgen/lithostitched/worldgen/feature/config" {
     export class $CompositeConfig$Type extends $Enum<$CompositeConfig$Type> implements $StringRepresentable {
-        static values(): $CompositeConfig$Type[];
-        static valueOf(arg0: string): $CompositeConfig$Type;
         getSerializedName(): string;
         shouldContinue(arg0: boolean): boolean;
+        static values(): $CompositeConfig$Type[];
+        static valueOf(arg0: string): $CompositeConfig$Type;
         getRemappedEnumConstantName(): string;
         static NEVER_CANCEL: $CompositeConfig$Type;
         static CODEC: $Codec<$CompositeConfig$Type>;

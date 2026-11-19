@@ -5,7 +5,7 @@ declare module "@package/net/caffeinemc/mods/lithium/common/shapes" {
     export class $OffsetVoxelShapeCache {
     }
     export interface $OffsetVoxelShapeCache {
-        lithium$getOffsetSimplifiedShape(arg0: number, arg1: $Direction_): $VoxelShape;
         lithium$setShape(arg0: number, arg1: $Direction_, arg2: $VoxelShape): void;
+        lithium$getOffsetSimplifiedShape(arg0: number, arg1: $Direction_): $VoxelShape;
     }
 }
