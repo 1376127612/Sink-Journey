@@ -249,12 +249,22 @@
 			y: 0.5d
 		}
 		{
+			can_repeat: false
+			dependencies: ["1057DBBF8DC8C7C0"]
+			hide_dependency_lines: true
+			hide_dependent_lines: true
+			hide_details_until_startable: false
+			hide_lock_icon: true
+			hide_text_until_complete: false
+			hide_until_deps_complete: false
+			hide_until_deps_visible: false
 			id: "1BD1136626335DA9"
 			rewards: [
 				{
 					auto: "enabled"
 					command: "/say Hi, @p!"
 					id: "6257C6120F44A8D0"
+					silent: true
 					type: "command"
 				}
 				{
@@ -265,6 +275,7 @@
 					type: "command"
 				}
 				{
+					auto: "enabled"
 					command: "/stage_say stage1"
 					id: "52E3C840B68E2B44"
 					permission_level: 2
@@ -272,12 +283,24 @@
 				}
 			]
 			tasks: [{
-				id: "781B453EA9B82071"
-				item: { count: 1, id: "minecraft:oak_log" }
+				id: "16EA5C55FECB1A30"
+				stat: "minecraft:total_world_time"
+				type: "stat"
+				value: 5
+			}]
+			x: 2.0d
+			y: -3.0d
+		}
+		{
+			dependencies: ["4D92FDC6EA6BDD71"]
+			id: "4E2996D1346A91DD"
+			tasks: [{
+				id: "730DB8459C4DC0F4"
+				item: { count: 1, id: "embers:caminite_blend" }
 				type: "item"
 			}]
-			x: 3.5d
-			y: -4.0d
+			x: 16.0d
+			y: -1.0d
 		}
 	]
 }
