@@ -83,8 +83,8 @@ declare module "@package/org/objectweb/asm/tree" {
         constructor(arg0: string, arg1: string, arg2: string, arg3: number);
     }
     export class $LabelNode extends $AbstractInsnNode {
-        getLabel(): $Label;
         resetLabel(): void;
+        getLabel(): $Label;
         static INT_INSN: number;
         visibleTypeAnnotations: $List<$TypeAnnotationNode>;
         static INSN: number;

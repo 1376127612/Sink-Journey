@@ -4,22 +4,22 @@ export * as ui from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 export * as texture from "@package/com/lowdragmc/lowdraglib2/gui/texture";
 export * as util from "@package/com/lowdragmc/lowdraglib2/gui/util";
 export * as sync from "@package/com/lowdragmc/lowdraglib2/gui/sync";
+export * as factory from "@package/com/lowdragmc/lowdraglib2/gui/factory";
 export * as editor from "@package/com/lowdragmc/lowdraglib2/gui/editor";
 export * as slot from "@package/com/lowdragmc/lowdraglib2/gui/slot";
 export * as holder from "@package/com/lowdragmc/lowdraglib2/gui/holder";
 export * as event from "@package/com/lowdragmc/lowdraglib2/gui/event";
-export * as factory from "@package/com/lowdragmc/lowdraglib2/gui/factory";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui" {
     export class $ColorPattern extends $Enum<$ColorPattern> {
-        static values(): $ColorPattern[];
-        static valueOf(arg0: string): $ColorPattern;
-        rectTexture(): $ColorRectTexture;
-        static rainbowRectTexture(arg0: number): $ColorBorderTexture;
-        static rainbowRectTexture(): $ColorRectTexture;
         borderTexture(arg0: number): $ColorBorderTexture;
+        static rainbowRectTexture(): $ColorRectTexture;
+        static rainbowRectTexture(arg0: number): $ColorBorderTexture;
         static generateRainbowColor(): number;
         static generateRainbowColor(arg0: number): number;
+        rectTexture(): $ColorRectTexture;
+        static values(): $ColorPattern[];
+        static valueOf(arg0: string): $ColorPattern;
         colorName: string;
         static GRAY: $ColorPattern;
         color: number;

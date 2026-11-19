@@ -16,27 +16,27 @@ declare module "@package/cn/howxu/mmcr/internal/multiblock" {
      */
     export type $ComponentClaimPolicy_ = "exclusive" | "shared_serialized" | "shared_capacity";
     export class $ModuleConnectionStatus extends $Record {
+        static disconnected(): $ModuleConnectionStatus;
+        canRunRecipe(requiredHostIds: $Set_<$ResourceLocation_>): boolean;
+        static notRequired(): $ModuleConnectionStatus;
+        connectedHostId(): $ResourceLocation;
         static connected(hostId: $ResourceLocation_): $ModuleConnectionStatus;
         connected(): boolean;
         required(): boolean;
-        static disconnected(): $ModuleConnectionStatus;
-        static notRequired(): $ModuleConnectionStatus;
-        canRunRecipe(requiredHostIds: $Set_<$ResourceLocation_>): boolean;
-        connectedHostId(): $ResourceLocation;
         constructor(required: boolean, connectedHostId: $ResourceLocation_);
     }
     /**
      * Values that may be interpreted as {@link $ModuleConnectionStatus}.
      */
-    export type $ModuleConnectionStatus_ = { required?: boolean, connectedHostId?: $ResourceLocation_,  } | [required?: boolean, connectedHostId?: $ResourceLocation_, ];
+    export type $ModuleConnectionStatus_ = { connectedHostId?: $ResourceLocation_, required?: boolean,  } | [connectedHostId?: $ResourceLocation_, required?: boolean, ];
     export class $StructureClaimRegistry$ResourceDomain extends $Record {
-        id(): number;
         generation(): number;
         controllers(): $Set<$BlockPos>;
+        id(): number;
         constructor(id: number, generation: number, controllers: $Set_<$BlockPos_>);
     }
     /**
      * Values that may be interpreted as {@link $StructureClaimRegistry$ResourceDomain}.
      */
-    export type $StructureClaimRegistry$ResourceDomain_ = { controllers?: $Set_<$BlockPos_>, id?: number, generation?: number,  } | [controllers?: $Set_<$BlockPos_>, id?: number, generation?: number, ];
+    export type $StructureClaimRegistry$ResourceDomain_ = { id?: number, generation?: number, controllers?: $Set_<$BlockPos_>,  } | [id?: number, generation?: number, controllers?: $Set_<$BlockPos_>, ];
 }

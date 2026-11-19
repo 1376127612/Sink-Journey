@@ -12,41 +12,41 @@ declare module "@package/com/denfop/api/tesseract" {
     export class $ITesseract {
     }
     export interface $ITesseract {
-        getChannel(arg0: number): $Channel;
+        getTank(): $Fluids$InternalFluidTank;
         getPos(): $BlockPos;
+        getSlotItem(): $Inventory;
+        getChannel(arg0: number): $Channel;
+        getChannels(): $List<$Channel>;
         getPlayer(): string;
         getWorld(): $Level;
-        getTank(): $Fluids$InternalFluidTank;
         getEnergy(): $Energy;
-        getChannels(): $List<$Channel>;
-        getSlotItem(): $Inventory;
+        get tank(): $Fluids$InternalFluidTank;
         get pos(): $BlockPos;
+        get slotItem(): $Inventory;
+        get channels(): $List<$Channel>;
         get player(): string;
         get world(): $Level;
-        get tank(): $Fluids$InternalFluidTank;
         get energy(): $Energy;
-        get channels(): $List<$Channel>;
-        get slotItem(): $Inventory;
     }
     export class $Channel {
+        getPos(): $BlockPos;
+        writeNBT(): $CompoundTag;
+        setPrivate(arg0: boolean): void;
+        getTypeChannel(): $TypeChannel;
+        setTypeChannel(arg0: $TypeChannel_): void;
+        setTesseract(arg0: $ITesseract): void;
+        getTesseract(): $ITesseract;
         isPrivate(): boolean;
         isActive(): boolean;
         getChannel(): number;
-        setActive(arg0: boolean): void;
+        setPos(arg0: $BlockPos_): void;
         setMode(arg0: $TypeMode_): void;
         getMode(): $TypeMode;
-        getPos(): $BlockPos;
-        setPos(arg0: $BlockPos_): void;
-        writeNBT(): $CompoundTag;
-        setTesseract(arg0: $ITesseract): void;
-        getTypeChannel(): $TypeChannel;
-        setTypeChannel(arg0: $TypeChannel_): void;
-        setPrivate(arg0: boolean): void;
-        getTesseract(): $ITesseract;
-        constructor(arg0: $CompoundTag_);
+        setActive(arg0: boolean): void;
         constructor(arg0: $CustomPacketBuffer);
-        constructor(arg0: number, arg1: $TypeMode_, arg2: $TypeChannel_, arg3: boolean);
         constructor(arg0: number, arg1: $ITesseract, arg2: $TypeMode_, arg3: $TypeChannel_, arg4: boolean);
+        constructor(arg0: number, arg1: $TypeMode_, arg2: $TypeChannel_, arg3: boolean);
+        constructor(arg0: $CompoundTag_);
         get channel(): number;
     }
     export class $TypeChannel extends $Enum<$TypeChannel> {

@@ -1,25 +1,29 @@
-import { $Level } from "@package/net/minecraft/world/level";
-import { $BlockEntityTickKubeEvent } from "@package/dev/latvian/mods/kubejs/block/entity";
-import { $BlockStoppedFallingKubeEvent, $BlockBrokenKubeEvent, $BlockLeftClickedKubeEvent, $BlockStartedFallingKubeEvent, $DetectorBlockKubeEvent, $BlockPlacedKubeEvent, $BlockRightClickedKubeEvent, $FarmlandTrampledKubeEvent, $BlockPickedKubeEvent } from "@package/dev/latvian/mods/kubejs/block";
-import { $Item, $ItemStack_ } from "@package/net/minecraft/world/item";
-import { $KubeAssetGenerator } from "@package/dev/latvian/mods/kubejs/generator";
-import { $ParticleProviderRegistryKubeEvent, $KubeJSKeybinds$TickingKeyEvent, $DebugInfoKubeEvent, $LangKubeEvent, $KubeJSKeybinds$KeyEvent, $AtlasSpriteRegistryKubeEvent, $ClientPlayerKubeEvent } from "@package/dev/latvian/mods/kubejs/client";
+import { $WailaClientRegistrationEventJS } from "@package/pie/ilikepiefoo/compat/jade";
 import { $EntityType } from "@package/net/minecraft/world/entity";
 import { $HighlightKubeEvent } from "@package/dev/latvian/mods/kubejs/client/highlight";
 import { $FluidStack_ } from "@package/net/neoforged/neoforge/fluids";
+import { $ProxyEventJS } from "@package/pie/ilikepiefoo/events";
 import { $ExplosionKubeEvent$After, $ExplosionKubeEvent$Before, $SimpleLevelKubeEvent } from "@package/dev/latvian/mods/kubejs/level";
 import { $NetworkKubeEvent } from "@package/dev/latvian/mods/kubejs/net";
 import { $InventoryChangedKubeEvent, $ChestKubeEvent, $StageChangedEvent, $SimplePlayerKubeEvent, $InventoryKubeEvent } from "@package/dev/latvian/mods/kubejs/player";
 import { $DynamicItemTooltipsKubeEvent, $ItemPredicate_, $ItemCraftedKubeEvent, $ItemDestroyedKubeEvent, $ModifyItemTooltipsKubeEvent, $ItemPickedUpKubeEvent, $FoodEatenKubeEvent, $ItemSmeltedKubeEvent, $ItemEntityInteractedKubeEvent, $ItemDroppedKubeEvent, $ItemClickedKubeEvent } from "@package/dev/latvian/mods/kubejs/item";
-import { $LivingEntityDropsKubeEvent, $EntitySpawnedKubeEvent, $AfterLivingEntityHurtKubeEvent, $LivingEntityDeathKubeEvent, $BeforeLivingEntityHurtKubeEvent, $CheckLivingEntitySpawnKubeEvent } from "@package/dev/latvian/mods/kubejs/entity";
-import { $GeneratedDataStage_ } from "@package/dev/latvian/mods/kubejs/script/data";
 import { $FluidIngredient_ } from "@package/net/neoforged/neoforge/fluids/crafting";
 import { $RecipeInformationEventJS } from "@package/cn/howxu/mmcr/compat/kubejs";
+import { $RegisterRecipesEventJS, $RegisterVanillaCategoryExtensionsEventJS, $RegisterFluidSubtypeEventJS, $RegisterRecipeTransferHandlersEventJS, $RegisterAdvancedEventJS, $RegisterItemSubtypeEventJS, $RegisterGUIHandlersEventJS, $RegisterRecipeCatalystsEventJS, $OnRuntimeAvailableEventJS, $RegisterIngredientsEventJS, $RegisterCategoriesEventJS } from "@package/pie/ilikepiefoo/compat/jei/events";
+import { $MenuType } from "@package/net/minecraft/world/inventory";
+import { $Level } from "@package/net/minecraft/world/level";
+import { $BlockEntityTickKubeEvent } from "@package/dev/latvian/mods/kubejs/block/entity";
+import { $BlockBrokenKubeEvent, $BlockLeftClickedKubeEvent, $BlockStoppedFallingKubeEvent, $BlockStartedFallingKubeEvent, $DetectorBlockKubeEvent, $BlockPlacedKubeEvent, $BlockRightClickedKubeEvent, $FarmlandTrampledKubeEvent, $BlockPickedKubeEvent } from "@package/dev/latvian/mods/kubejs/block";
+import { $Item, $ItemStack_ } from "@package/net/minecraft/world/item";
+import { $KubeAssetGenerator } from "@package/dev/latvian/mods/kubejs/generator";
+import { $ParticleProviderRegistryKubeEvent, $KubeJSKeybinds$TickingKeyEvent, $DebugInfoKubeEvent, $LangKubeEvent, $KubeJSKeybinds$KeyEvent, $AtlasSpriteRegistryKubeEvent, $ClientPlayerKubeEvent } from "@package/dev/latvian/mods/kubejs/client";
+import { $LivingEntityDropsKubeEvent, $EntitySpawnedKubeEvent, $AfterLivingEntityHurtKubeEvent, $LivingEntityDeathKubeEvent, $BeforeLivingEntityHurtKubeEvent, $CheckLivingEntitySpawnKubeEvent } from "@package/dev/latvian/mods/kubejs/entity";
+import { $GeneratedDataStage_ } from "@package/dev/latvian/mods/kubejs/script/data";
 import { $RemoveRecipesKubeEvent, $GroupEntriesKubeEvent, $RemoveEntriesKubeEvent, $AddEntriesKubeEvent, $AddInformationKubeEvent, $RegisterSubtypesKubeEvent } from "@package/dev/latvian/mods/kubejs/recipe/viewer";
 import { $ResourceLocation_, $ResourceKey_ } from "@package/net/minecraft/resources";
 import { $KJSHeldItemUIMenuType$ItemUIEventJS, $KJSPlayerUIMenuType$PlayerUIEventJS, $KJSBlockUIMenuType$BlockUIEventJS } from "@package/com/lowdragmc/lowdraglib2/integration/kjs/ui";
 import { $Block } from "@package/net/minecraft/world/level/block";
-import { $MenuType } from "@package/net/minecraft/world/inventory";
+import { $MBDMachineEvents$MachineClientTickEventJS, $MBDMachineEvents$MachineCustomKeyframeEventJS, $MBDRecipeTypeEvents$RecipeUIEventJS, $MBDMachineEvents$MachineCustomDataUpdateEventJS, $CustomRendererRegistryEventJS } from "@package/com/lowdragmc/mbd2/integration/kubejs/events";
 
 declare module "@side-only/client/events" {
 }
@@ -27,22 +31,6 @@ declare module "@side-only/client/events" {
 export {};
 
 declare global {
-    export namespace RecipeViewerEvents {
-        function addEntries(extra: "item", handler: ((event: $AddEntriesKubeEvent<$ItemStack_>) => void)): void;
-        function addInformation(extra: "item", handler: ((event: $AddInformationKubeEvent<$ItemPredicate_>) => void)): void;
-        function groupEntries(extra: "item", handler: ((event: $GroupEntriesKubeEvent<$ItemPredicate_>) => void)): void;
-        function registerSubtypes(extra: "item", handler: ((event: $RegisterSubtypesKubeEvent<$ItemPredicate_>) => void)): void;
-        function removeEntries(extra: "item", handler: ((event: $RemoveEntriesKubeEvent<$ItemPredicate_>) => void)): void;
-        function removeEntriesCompletely(extra: "item", handler: ((event: $RemoveEntriesKubeEvent<$ItemPredicate_>) => void)): void;
-        function removeRecipes(extra: "item", handler: ((event: $RemoveRecipesKubeEvent) => void)): void;
-        function addEntries(extra: "fluid", handler: ((event: $AddEntriesKubeEvent<$FluidStack_>) => void)): void;
-        function addInformation(extra: "fluid", handler: ((event: $AddInformationKubeEvent<$FluidIngredient_>) => void)): void;
-        function groupEntries(extra: "fluid", handler: ((event: $GroupEntriesKubeEvent<$FluidIngredient_>) => void)): void;
-        function registerSubtypes(extra: "fluid", handler: ((event: $RegisterSubtypesKubeEvent<$FluidIngredient_>) => void)): void;
-        function removeEntries(extra: "fluid", handler: ((event: $RemoveEntriesKubeEvent<$FluidIngredient_>) => void)): void;
-        function removeEntriesCompletely(extra: "fluid", handler: ((event: $RemoveEntriesKubeEvent<$FluidIngredient_>) => void)): void;
-        function removeRecipes(extra: "fluid", handler: ((event: $RemoveRecipesKubeEvent) => void)): void;
-    }
     namespace ItemEvents {
         /**
          * Invoked when a player right clicks with an item **without targeting anything**.
@@ -153,87 +141,8 @@ declare global {
          */
         function dataReceived(extra: string, handler: ((event: $NetworkKubeEvent) => void)): void;
     }
-    namespace EntityEvents {
-        /**
-         * Invoked after an entity is hurt by a damage source.
-         */
-        function afterHurt(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $AfterLivingEntityHurtKubeEvent) => void)): void;
-        /**
-         * Invoked after an entity is hurt by a damage source.
-         */
-        function afterHurt(handler: ((event: $AfterLivingEntityHurtKubeEvent) => void)): void;
-        /**
-         * Invoked when an entity is about to be added to the world.
-         * 
-         * This event also fires for existing entities when they are loaded from a save.
-         */
-        function spawned(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $EntitySpawnedKubeEvent) => void)): void;
-        /**
-         * Invoked when an entity is about to be added to the world.
-         * 
-         * This event also fires for existing entities when they are loaded from a save.
-         */
-        function spawned(handler: ((event: $EntitySpawnedKubeEvent) => void)): void;
-        function drops(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $LivingEntityDropsKubeEvent) => void)): void;
-        function drops(handler: ((event: $LivingEntityDropsKubeEvent) => void)): void;
-        /**
-         * Invoked before an entity is spawned into the world.
-         * 
-         * Only entities from a `BaseSpawner` or world generation will trigger this event.
-         */
-        function checkSpawn(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $CheckLivingEntitySpawnKubeEvent) => void)): void;
-        /**
-         * Invoked before an entity is spawned into the world.
-         * 
-         * Only entities from a `BaseSpawner` or world generation will trigger this event.
-         */
-        function checkSpawn(handler: ((event: $CheckLivingEntitySpawnKubeEvent) => void)): void;
-        /**
-         * Invoked before a living entity dies.
-         * 
-         * **NOTE**: You need to set hp to > 0 besides cancelling the event to prevent the entity from dying.
-         */
-        function death(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $LivingEntityDeathKubeEvent) => void)): void;
-        /**
-         * Invoked before a living entity dies.
-         * 
-         * **NOTE**: You need to set hp to > 0 besides cancelling the event to prevent the entity from dying.
-         */
-        function death(handler: ((event: $LivingEntityDeathKubeEvent) => void)): void;
-        /**
-         * Invoked before an entity is hurt by a damage source.
-         */
-        function beforeHurt(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $BeforeLivingEntityHurtKubeEvent) => void)): void;
-        /**
-         * Invoked before an entity is hurt by a damage source.
-         */
-        function beforeHurt(handler: ((event: $BeforeLivingEntityHurtKubeEvent) => void)): void;
-    }
-    namespace KeyBindEvents {
-        function pressed(extra: string, handler: ((event: $KubeJSKeybinds$KeyEvent) => void)): void;
-        function tick(extra: string, handler: ((event: $KubeJSKeybinds$TickingKeyEvent) => void)): void;
-        function released(extra: string, handler: ((event: $KubeJSKeybinds$TickingKeyEvent) => void)): void;
-    }
-    namespace ClientEvents {
-        /**
-         * Invoked when the debug info is rendered.
-         */
-        function rightDebugInfo(handler: ((event: $DebugInfoKubeEvent) => void)): void;
-        /**
-         * Invoked when the debug info is rendered.
-         */
-        function leftDebugInfo(handler: ((event: $DebugInfoKubeEvent) => void)): void;
-        function atlasSpriteRegistry(extra: $ResourceLocation_, handler: ((event: $AtlasSpriteRegistryKubeEvent) => void)): void;
-        function loggedOut(handler: ((event: $ClientPlayerKubeEvent) => void)): void;
-        function generateAssets(extra: $GeneratedDataStage_, handler: ((event: $KubeAssetGenerator) => void)): void;
-        function tick(handler: ((event: $ClientPlayerKubeEvent) => void)): void;
-        /**
-         * Invoked when block and entity highlight is rendered.
-         */
-        function highlight(handler: ((event: $HighlightKubeEvent) => void)): void;
-        function particleProviderRegistry(handler: ((event: $ParticleProviderRegistryKubeEvent) => void)): void;
-        function loggedIn(handler: ((event: $ClientPlayerKubeEvent) => void)): void;
-        function lang(extra: string, handler: ((event: $LangKubeEvent) => void)): void;
+    namespace ArchEvents {
+        function handleClient(extra: string, handler: ((event: $ProxyEventJS) => void)): void;
     }
     namespace BlockEvents {
         /**
@@ -338,6 +247,134 @@ declare global {
         function detectorChanged(handler: ((event: $DetectorBlockKubeEvent) => void)): void;
         function blockEntityTick(extra: $ResourceKey_<$Block>, handler: ((event: $BlockEntityTickKubeEvent) => void)): void;
     }
+    namespace MBDMachineEvents {
+        function onCustomKeyframe(extra: $ResourceLocation_, handler: ((event: $MBDMachineEvents$MachineCustomKeyframeEventJS) => void)): void;
+        function onClientTick(extra: $ResourceLocation_, handler: ((event: $MBDMachineEvents$MachineClientTickEventJS) => void)): void;
+        function onCustomDataUpdate(extra: $ResourceLocation_, handler: ((event: $MBDMachineEvents$MachineCustomDataUpdateEventJS) => void)): void;
+    }
+    namespace mmcr {
+        function client(handler: ((event: $RecipeInformationEventJS) => void)): void;
+    }
+    namespace JadeEvents {
+        function onClientRegistration(handler: ((event: $WailaClientRegistrationEventJS) => void)): void;
+    }
+    export namespace RecipeViewerEvents {
+        function addEntries(extra: "item", handler: ((event: $AddEntriesKubeEvent<$ItemStack_>) => void)): void;
+        function addInformation(extra: "item", handler: ((event: $AddInformationKubeEvent<$ItemPredicate_>) => void)): void;
+        function groupEntries(extra: "item", handler: ((event: $GroupEntriesKubeEvent<$ItemPredicate_>) => void)): void;
+        function registerSubtypes(extra: "item", handler: ((event: $RegisterSubtypesKubeEvent<$ItemPredicate_>) => void)): void;
+        function removeEntries(extra: "item", handler: ((event: $RemoveEntriesKubeEvent<$ItemPredicate_>) => void)): void;
+        function removeEntriesCompletely(extra: "item", handler: ((event: $RemoveEntriesKubeEvent<$ItemPredicate_>) => void)): void;
+        function removeRecipes(extra: "item", handler: ((event: $RemoveRecipesKubeEvent) => void)): void;
+        function addEntries(extra: "fluid", handler: ((event: $AddEntriesKubeEvent<$FluidStack_>) => void)): void;
+        function addInformation(extra: "fluid", handler: ((event: $AddInformationKubeEvent<$FluidIngredient_>) => void)): void;
+        function groupEntries(extra: "fluid", handler: ((event: $GroupEntriesKubeEvent<$FluidIngredient_>) => void)): void;
+        function registerSubtypes(extra: "fluid", handler: ((event: $RegisterSubtypesKubeEvent<$FluidIngredient_>) => void)): void;
+        function removeEntries(extra: "fluid", handler: ((event: $RemoveEntriesKubeEvent<$FluidIngredient_>) => void)): void;
+        function removeEntriesCompletely(extra: "fluid", handler: ((event: $RemoveEntriesKubeEvent<$FluidIngredient_>) => void)): void;
+        function removeRecipes(extra: "fluid", handler: ((event: $RemoveRecipesKubeEvent) => void)): void;
+    }
+    namespace JEIAddedEvents {
+        function registerRecipeCatalysts(handler: ((event: $RegisterRecipeCatalystsEventJS) => void)): void;
+        function registerRecipes(handler: ((event: $RegisterRecipesEventJS) => void)): void;
+        function registerVanillaCategoryExtensions(handler: ((event: $RegisterVanillaCategoryExtensionsEventJS) => void)): void;
+        function registerIngredients(handler: ((event: $RegisterIngredientsEventJS) => void)): void;
+        function onRuntimeAvailable(handler: ((event: $OnRuntimeAvailableEventJS) => void)): void;
+        function registerGUIHandlers(handler: ((event: $RegisterGUIHandlersEventJS) => void)): void;
+        function registerItemSubtypes(handler: ((event: $RegisterItemSubtypeEventJS) => void)): void;
+        function registerAdvanced(handler: ((event: $RegisterAdvancedEventJS) => void)): void;
+        function registerFluidSubtypes(handler: ((event: $RegisterFluidSubtypeEventJS) => void)): void;
+        function registerCategories(handler: ((event: $RegisterCategoriesEventJS) => void)): void;
+        function registerRecipeTransferHandlers(handler: ((event: $RegisterRecipeTransferHandlersEventJS) => void)): void;
+    }
+    namespace MBDRecipeTypeEvents {
+        function onRecipeUI(extra: $ResourceLocation_, handler: ((event: $MBDRecipeTypeEvents$RecipeUIEventJS) => void)): void;
+    }
+    namespace MBDClientEvents {
+        function registerCustomRenderers(handler: ((event: $CustomRendererRegistryEventJS) => void)): void;
+    }
+    namespace EntityEvents {
+        /**
+         * Invoked after an entity is hurt by a damage source.
+         */
+        function afterHurt(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $AfterLivingEntityHurtKubeEvent) => void)): void;
+        /**
+         * Invoked after an entity is hurt by a damage source.
+         */
+        function afterHurt(handler: ((event: $AfterLivingEntityHurtKubeEvent) => void)): void;
+        /**
+         * Invoked when an entity is about to be added to the world.
+         * 
+         * This event also fires for existing entities when they are loaded from a save.
+         */
+        function spawned(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $EntitySpawnedKubeEvent) => void)): void;
+        /**
+         * Invoked when an entity is about to be added to the world.
+         * 
+         * This event also fires for existing entities when they are loaded from a save.
+         */
+        function spawned(handler: ((event: $EntitySpawnedKubeEvent) => void)): void;
+        function drops(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $LivingEntityDropsKubeEvent) => void)): void;
+        function drops(handler: ((event: $LivingEntityDropsKubeEvent) => void)): void;
+        /**
+         * Invoked before an entity is spawned into the world.
+         * 
+         * Only entities from a `BaseSpawner` or world generation will trigger this event.
+         */
+        function checkSpawn(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $CheckLivingEntitySpawnKubeEvent) => void)): void;
+        /**
+         * Invoked before an entity is spawned into the world.
+         * 
+         * Only entities from a `BaseSpawner` or world generation will trigger this event.
+         */
+        function checkSpawn(handler: ((event: $CheckLivingEntitySpawnKubeEvent) => void)): void;
+        /**
+         * Invoked before a living entity dies.
+         * 
+         * **NOTE**: You need to set hp to > 0 besides cancelling the event to prevent the entity from dying.
+         */
+        function death(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $LivingEntityDeathKubeEvent) => void)): void;
+        /**
+         * Invoked before a living entity dies.
+         * 
+         * **NOTE**: You need to set hp to > 0 besides cancelling the event to prevent the entity from dying.
+         */
+        function death(handler: ((event: $LivingEntityDeathKubeEvent) => void)): void;
+        /**
+         * Invoked before an entity is hurt by a damage source.
+         */
+        function beforeHurt(extra: $ResourceKey_<$EntityType<any>>, handler: ((event: $BeforeLivingEntityHurtKubeEvent) => void)): void;
+        /**
+         * Invoked before an entity is hurt by a damage source.
+         */
+        function beforeHurt(handler: ((event: $BeforeLivingEntityHurtKubeEvent) => void)): void;
+    }
+    namespace KeyBindEvents {
+        function pressed(extra: string, handler: ((event: $KubeJSKeybinds$KeyEvent) => void)): void;
+        function tick(extra: string, handler: ((event: $KubeJSKeybinds$TickingKeyEvent) => void)): void;
+        function released(extra: string, handler: ((event: $KubeJSKeybinds$TickingKeyEvent) => void)): void;
+    }
+    namespace ClientEvents {
+        /**
+         * Invoked when the debug info is rendered.
+         */
+        function rightDebugInfo(handler: ((event: $DebugInfoKubeEvent) => void)): void;
+        /**
+         * Invoked when the debug info is rendered.
+         */
+        function leftDebugInfo(handler: ((event: $DebugInfoKubeEvent) => void)): void;
+        function atlasSpriteRegistry(extra: $ResourceLocation_, handler: ((event: $AtlasSpriteRegistryKubeEvent) => void)): void;
+        function loggedOut(handler: ((event: $ClientPlayerKubeEvent) => void)): void;
+        function generateAssets(extra: $GeneratedDataStage_, handler: ((event: $KubeAssetGenerator) => void)): void;
+        function tick(handler: ((event: $ClientPlayerKubeEvent) => void)): void;
+        /**
+         * Invoked when block and entity highlight is rendered.
+         */
+        function highlight(handler: ((event: $HighlightKubeEvent) => void)): void;
+        function particleProviderRegistry(handler: ((event: $ParticleProviderRegistryKubeEvent) => void)): void;
+        function loggedIn(handler: ((event: $ClientPlayerKubeEvent) => void)): void;
+        function lang(extra: string, handler: ((event: $LangKubeEvent) => void)): void;
+    }
     namespace LevelEvents {
         /**
          * Invoked right before an explosion happens.
@@ -362,9 +399,6 @@ declare global {
         function item(extra: string, handler: ((event: $KJSHeldItemUIMenuType$ItemUIEventJS) => void)): void;
         function block(extra: string, handler: ((event: $KJSBlockUIMenuType$BlockUIEventJS) => void)): void;
         function player(extra: string, handler: ((event: $KJSPlayerUIMenuType$PlayerUIEventJS) => void)): void;
-    }
-    namespace mmcr {
-        function client(handler: ((event: $RecipeInformationEventJS) => void)): void;
     }
     namespace PlayerEvents {
         /**

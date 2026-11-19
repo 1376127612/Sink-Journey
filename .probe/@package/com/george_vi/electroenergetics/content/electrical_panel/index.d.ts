@@ -20,10 +20,10 @@ export * as attachments from "@package/com/george_vi/electroenergetics/content/e
 
 declare module "@package/com/george_vi/electroenergetics/content/electrical_panel" {
     export class $PanelAttachmentMode extends $Enum<$PanelAttachmentMode> {
+        getNodesFor(arg0: $BlockPos_, arg1: $ElectricalPanelSlot_): $InWorldNode[];
         getSlot(arg0: $Direction_, arg1: $Vec3_, arg2: $PanelAttachment[]): $ElectricalPanelSlot;
         static values(): $PanelAttachmentMode[];
         static valueOf(arg0: string): $PanelAttachmentMode;
-        getNodesFor(arg0: $BlockPos_, arg1: $ElectricalPanelSlot_): $InWorldNode[];
         static THIRD: $PanelAttachmentMode;
         static FULL_SINGLE: $PanelAttachmentMode;
         static HALF_OR_THIRD_OR_SMOL: $PanelAttachmentMode;
@@ -49,10 +49,10 @@ declare module "@package/com/george_vi/electroenergetics/content/electrical_pane
      */
     export type $PanelAttachmentMode_ = "full_none" | "full_single" | "full_double" | "full_triple" | "full_quad" | "quarter_none" | "half_none" | "half" | "full_or_half_none" | "full_or_half" | "half_or_third" | "half_or_third_none" | "half_or_third_or_smol_none" | "half_or_third_or_smol" | "half_only_horizontal" | "half_only_vertical" | "third";
     export class $ElectricalPanelSlot extends $Enum<$ElectricalPanelSlot> implements $StringRepresentable {
+        static byId(arg0: string): $ElectricalPanelSlot;
+        getSerializedName(): string;
         static values(): $ElectricalPanelSlot[];
         static valueOf(arg0: string): $ElectricalPanelSlot;
-        getSerializedName(): string;
-        static byId(arg0: string): $ElectricalPanelSlot;
         isSixth(): boolean;
         getRemappedEnumConstantName(): string;
         static QUARTER_CENTER: $ElectricalPanelSlot;
@@ -90,13 +90,13 @@ declare module "@package/com/george_vi/electroenergetics/content/electrical_pane
      */
     export type $ElectricalPanelSlot_ = "full_slot" | "half_upper" | "half_lower" | "half_left" | "half_right" | "third_left" | "third_centered" | "third_right" | "third_left_top" | "third_centered_top" | "third_right_top" | "third_left_bottom" | "third_centered_bottom" | "third_right_bottom" | "quarter_center" | "quarter_left_upper" | "quarter_left_lower" | "quarter_right_upper" | "quarter_right_lower";
     export class $ElectricalPanelBlockEntity extends $SmartBlockEntity implements $IHaveGoggleInformation, $IHaveHoveringInformation, $SpecialBlockEntityItemRequirement {
-        getHoveringAttachmentIndex(arg0: $Vec3_): $ElectricalPanelSlot;
         getAttachments(): $PanelAttachment[];
-        addToTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
-        setAttachments(arg0: $PanelAttachment[]): void;
         addToGoggleTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
+        getHoveringAttachmentIndex(arg0: $Vec3_): $ElectricalPanelSlot;
         getNodePositions(): $Map<number, $Vec3>;
+        setAttachments(arg0: $PanelAttachment[]): void;
         attachmentUpdate(): void;
+        addToTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
         containedFluidTooltip(arg0: $List_<$Component_>, arg1: boolean, arg2: $IFluidHandler): boolean;
         getIcon(arg0: boolean): $ItemStack;
         worldPosition: $BlockPos;

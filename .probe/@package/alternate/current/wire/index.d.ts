@@ -19,21 +19,21 @@ declare module "@package/alternate/current/wire" {
         static forLevel(arg0: $ServerLevel, arg1: $LevelStorageSource$LevelStorageAccess): $Config;
     }
     export interface $Config {
-        getUpdateOrder(): $UpdateOrder;
-        setUpdateOrder(arg0: $UpdateOrder_): void;
-        load(): void;
-        save(arg0: boolean): void;
         setEnabled(arg0: boolean): void;
         getEnabled(): boolean;
+        getUpdateOrder(): $UpdateOrder;
+        load(): void;
+        save(arg0: boolean): void;
+        setUpdateOrder(arg0: $UpdateOrder_): void;
     }
     export class $UpdateOrder extends $Enum<$UpdateOrder> {
+        static byId(arg0: string): $UpdateOrder;
         directNeighbors(arg0: number): number[];
-        cardinalNeighbors(arg0: number): number[];
         forEachNeighbor(arg0: $WireHandler$NodeProvider_, arg1: $Node, arg2: number, arg3: $Consumer_<$Node>): void;
         static values(): $UpdateOrder[];
         static valueOf(arg0: string): $UpdateOrder;
         id(): string;
-        static byId(arg0: string): $UpdateOrder;
+        cardinalNeighbors(arg0: number): number[];
         static HORIZONTAL_FIRST_INWARD: $UpdateOrder;
         static VERTICAL_FIRST_OUTWARD: $UpdateOrder;
         static HORIZONTAL_FIRST_OUTWARD: $UpdateOrder;
@@ -48,18 +48,18 @@ declare module "@package/alternate/current/wire" {
     export class $WireHandler {
         getConfig(): $Config;
         onWireAdded(arg0: $BlockPos_): void;
-        onWireUpdated(arg0: $BlockPos_): boolean;
         onWireRemoved(arg0: $BlockPos_, arg1: $BlockState_): void;
+        onWireUpdated(arg0: $BlockPos_): boolean;
         constructor(arg0: $ServerLevel, arg1: $LevelStorageSource$LevelStorageAccess);
         get config(): $Config;
     }
     export class $Node {
-        isSignalSource(): boolean;
-        isConductor(): boolean;
         asWire(): $WireNode;
         isWire(): boolean;
-        get signalSource(): boolean;
-        get conductor(): boolean;
+        isConductor(): boolean;
+        isSignalSource(): boolean;
         get wire(): boolean;
+        get conductor(): boolean;
+        get signalSource(): boolean;
     }
 }

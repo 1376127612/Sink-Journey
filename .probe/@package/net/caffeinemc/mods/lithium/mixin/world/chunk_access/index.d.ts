@@ -8,7 +8,7 @@ declare module "@package/net/caffeinemc/mods/lithium/mixin/world/chunk_access" {
     export class $GenerationChunkHolderAccessor {
     }
     export interface $GenerationChunkHolderAccessor {
-        lithium$getChunkFuturesByStatus(): $AtomicReferenceArray<$CompletableFuture<$ChunkResult<$ChunkAccess>>>;
         invokeCannotBeLoaded(arg0: $ChunkStatus_): boolean;
+        lithium$getChunkFuturesByStatus(): $AtomicReferenceArray<$CompletableFuture<$ChunkResult<$ChunkAccess>>>;
     }
 }

@@ -3,11 +3,11 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/hellfirepvp/astralsorcery/common/constellation/star" {
     export class $StarLocation extends $Record {
+        asPoint(): $IntPoint;
+        asLevelVector(): $Vector3;
+        getDistanceToOrigin(): number;
         x(): number;
         y(): number;
-        asPoint(): $IntPoint;
-        getDistanceToOrigin(): number;
-        asLevelVector(): $Vector3;
         constructor(x: number, y: number);
         get distanceToOrigin(): number;
     }

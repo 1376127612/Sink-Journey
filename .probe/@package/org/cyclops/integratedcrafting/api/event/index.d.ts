@@ -4,13 +4,13 @@ import { $CraftingJob } from "@package/org/cyclops/integratedcrafting/api/crafti
 
 declare module "@package/org/cyclops/integratedcrafting/api/event" {
     export class $CraftingJobFinishedEvent extends $Event {
-        static post(arg0: $ICraftingNetwork, arg1: $CraftingJob): void;
-        isRootJob(): boolean;
         getCraftingNetwork(): $ICraftingNetwork;
         getCraftingJob(): $CraftingJob;
+        static post(arg0: $ICraftingNetwork, arg1: $CraftingJob): void;
+        isRootJob(): boolean;
         constructor(arg0: $ICraftingNetwork, arg1: $CraftingJob);
-        get rootJob(): boolean;
         get craftingNetwork(): $ICraftingNetwork;
         get craftingJob(): $CraftingJob;
+        get rootJob(): boolean;
     }
 }

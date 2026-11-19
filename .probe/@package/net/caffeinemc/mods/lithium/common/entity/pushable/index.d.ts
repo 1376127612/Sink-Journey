@@ -12,10 +12,10 @@ declare module "@package/net/caffeinemc/mods/lithium/common/entity/pushable" {
     export class $BlockCachingEntity {
     }
     export interface $BlockCachingEntity {
-        lithium$SetClimbingMobCachingSectionUpdateBehavior(arg0: boolean): void;
-        lithium$OnBlockCacheSet(arg0: $BlockState_): void;
         lithium$OnBlockCacheDeleted(): void;
         lithium$getCachedFeetBlockState(): $BlockState;
+        lithium$SetClimbingMobCachingSectionUpdateBehavior(arg0: boolean): void;
+        lithium$OnBlockCacheSet(arg0: $BlockState_): void;
     }
     /**
      * Values that may be interpreted as {@link $BlockCachingEntity}.

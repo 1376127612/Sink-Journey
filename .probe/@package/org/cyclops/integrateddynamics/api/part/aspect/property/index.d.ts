@@ -7,26 +7,26 @@ declare module "@package/org/cyclops/integrateddynamics/api/part/aspect/property
     export class $IAspectProperties {
     }
     export interface $IAspectProperties {
+        toNBT(arg0: $ValueDeseralizationContext_): $CompoundTag;
+        fromNBT(arg0: $ValueDeseralizationContext_, arg1: $CompoundTag_): void;
         clone(): $IAspectProperties;
         getValue<T extends $IValueType<V>, V extends $IValue>(arg0: $IAspectPropertyTypeInstance<T, V>): V;
         setValue<T extends $IValueType<V>, V extends $IValue>(arg0: $IAspectPropertyTypeInstance<T, V>, arg1: V): void;
         removeValue<T extends $IValueType<V>, V extends $IValue>(arg0: $IAspectPropertyTypeInstance<T, V>): void;
-        fromNBT(arg0: $ValueDeseralizationContext_, arg1: $CompoundTag_): void;
         /**
          * @deprecated
          */
         getTypes(): $Collection<$IAspectPropertyTypeInstance<any, any>>;
-        toNBT(arg0: $ValueDeseralizationContext_): $CompoundTag;
         get types(): $Collection<$IAspectPropertyTypeInstance<any, any>>;
     }
     export class $IAspectPropertyTypeInstance<T extends $IValueType<V>, V extends $IValue> {
     }
     export interface $IAspectPropertyTypeInstance<T extends $IValueType<V>, V extends $IValue> {
+        getTranslationKey(): string;
         getType(): T;
         getValidator(): $Predicate<V>;
-        getTranslationKey(): string;
+        get translationKey(): string;
         get type(): T;
         get validator(): $Predicate<V>;
-        get translationKey(): string;
     }
 }

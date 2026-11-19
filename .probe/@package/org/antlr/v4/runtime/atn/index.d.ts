@@ -5,14 +5,14 @@ import { $RuleContext, $Parser, $TokenStream, $ParserRuleContext, $NoViableAltEx
 
 declare module "@package/org/antlr/v4/runtime/atn" {
     export class $ATN {
-        getNumberOfDecisions(): number;
-        defineDecisionState(arg0: $DecisionState): number;
-        getDecisionState(arg0: number): $DecisionState;
-        getExpectedTokens(arg0: number, arg1: $RuleContext): $IntervalSet;
         addState(arg0: $ATNState): void;
+        defineDecisionState(arg0: $DecisionState): number;
         nextTokens(arg0: $ATNState, arg1: $RuleContext): $IntervalSet;
         nextTokens(arg0: $ATNState): $IntervalSet;
+        getExpectedTokens(arg0: number, arg1: $RuleContext): $IntervalSet;
         removeState(arg0: $ATNState): void;
+        getDecisionState(arg0: number): $DecisionState;
+        getNumberOfDecisions(): number;
         ruleToStartState: $RuleStartState[];
         grammarType: $ATNType;
         maxTokenType: number;
@@ -28,16 +28,16 @@ declare module "@package/org/antlr/v4/runtime/atn" {
         get numberOfDecisions(): number;
     }
     export class $ParserATNSimulator extends $ATNSimulator {
-        getTokenName(arg0: number): string;
-        adaptivePredict(arg0: $TokenStream, arg1: number, arg2: $ParserRuleContext): number;
         getPredictionMode(): $PredictionMode;
         setPredictionMode(arg0: $PredictionMode): void;
-        getLookaheadName(arg0: $TokenStream): string;
-        dumpDeadEndConfigs(arg0: $NoViableAltException): void;
-        getRuleName(arg0: number): string;
-        precedenceTransition(arg0: $ATNConfig, arg1: $PrecedencePredicateTransition, arg2: boolean, arg3: boolean, arg4: boolean): $ATNConfig;
+        adaptivePredict(arg0: $TokenStream, arg1: number, arg2: $ParserRuleContext): number;
         getParser(): $Parser;
         static getSafeEnv(arg0: string): string;
+        precedenceTransition(arg0: $ATNConfig, arg1: $PrecedencePredicateTransition, arg2: boolean, arg3: boolean, arg4: boolean): $ATNConfig;
+        getRuleName(arg0: number): string;
+        getLookaheadName(arg0: $TokenStream): string;
+        dumpDeadEndConfigs(arg0: $NoViableAltException): void;
+        getTokenName(arg0: number): string;
         decisionToDFA: $DFA[];
         static debug: boolean;
         static retry_debug: boolean;

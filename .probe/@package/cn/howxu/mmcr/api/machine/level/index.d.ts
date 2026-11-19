@@ -14,20 +14,20 @@ declare module "@package/cn/howxu/mmcr/api/machine/level" {
     /**
      * Values that may be interpreted as {@link $LevelType}.
      */
-    export type $LevelType_ = { id?: $ResourceLocation_, displayName?: $Component_,  } | [id?: $ResourceLocation_, displayName?: $Component_, ];
+    export type $LevelType_ = { displayName?: $Component_, id?: $ResourceLocation_,  } | [displayName?: $Component_, id?: $ResourceLocation_, ];
     export class $MachineLevel extends $Record {
+        statePredicate(): $BlockPredicate;
+        representative(): $ItemStack;
         priority(): number;
         id(): $ResourceLocation;
         modifier(): $ModifierDefinition;
         typeId(): $ResourceLocation;
-        representative(): $ItemStack;
-        statePredicate(): $BlockPredicate;
         constructor(id: $ResourceLocation_, typeId: $ResourceLocation_, priority: number, statePredicate: $BlockPredicate_, representative: $ItemStack_, modifier: $ModifierDefinition_);
     }
     /**
      * Values that may be interpreted as {@link $MachineLevel}.
      */
-    export type $MachineLevel_ = { priority?: number, modifier?: $ModifierDefinition_, id?: $ResourceLocation_, statePredicate?: $BlockPredicate_, representative?: $ItemStack_, typeId?: $ResourceLocation_,  } | [priority?: number, modifier?: $ModifierDefinition_, id?: $ResourceLocation_, statePredicate?: $BlockPredicate_, representative?: $ItemStack_, typeId?: $ResourceLocation_, ];
+    export type $MachineLevel_ = { id?: $ResourceLocation_, statePredicate?: $BlockPredicate_, representative?: $ItemStack_, typeId?: $ResourceLocation_, priority?: number, modifier?: $ModifierDefinition_,  } | [id?: $ResourceLocation_, statePredicate?: $BlockPredicate_, representative?: $ItemStack_, typeId?: $ResourceLocation_, priority?: number, modifier?: $ModifierDefinition_, ];
     export class $LevelSlot extends $Record {
         typeId(): $ResourceLocation;
         constructor(typeId: $ResourceLocation_);

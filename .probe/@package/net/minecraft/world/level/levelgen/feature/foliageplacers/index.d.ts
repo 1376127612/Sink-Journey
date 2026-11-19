@@ -10,16 +10,16 @@ import { $RandomSource } from "@package/net/minecraft/util";
 declare module "@package/net/minecraft/world/level/levelgen/feature/foliageplacers" {
     export interface $FoliagePlacerType<P> extends RegistryMarked<RegistryTypes.WorldgenFoliagePlacerTypeTag, RegistryTypes.WorldgenFoliagePlacerType> {}
     export class $FoliagePlacer {
-        createFoliage(level: $LevelSimulatedReader, blockSetter: $FoliagePlacer$FoliageSetter, random: $RandomSource, config: $TreeConfiguration, maxFreeTreeHeight: number, attachment: $FoliagePlacer$FoliageAttachment, foliageHeight: number, foliageRadius: number): void;
         foliageRadius(random: $RandomSource, radius: number): number;
+        createFoliage(level: $LevelSimulatedReader, blockSetter: $FoliagePlacer$FoliageSetter, random: $RandomSource, config: $TreeConfiguration, maxFreeTreeHeight: number, attachment: $FoliagePlacer$FoliageAttachment, foliageHeight: number, foliageRadius: number): void;
         foliageHeight(random: $RandomSource, height: number, config: $TreeConfiguration): number;
         static CODEC: $Codec<$FoliagePlacer>;
         constructor(radius: $IntProvider_, offset: $IntProvider_);
     }
     export class $FoliagePlacer$FoliageAttachment {
-        pos(): $BlockPos;
         doubleTrunk(): boolean;
         radiusOffset(): number;
+        pos(): $BlockPos;
         constructor(pos: $BlockPos_, radiusOffset: number, doubleTrunk: boolean);
     }
     export class $FancyFoliagePlacer extends $BlobFoliagePlacer {

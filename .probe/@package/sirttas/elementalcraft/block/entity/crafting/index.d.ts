@@ -6,14 +6,14 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/sirttas/elementalcraft/block/entity/crafting" {
     export class $CraftingBlockEntityProperties extends $Record implements $IConfigurableBlockEntityProperties {
-        getType(): $ConfigurableBlockEntityPropertiesType<$CraftingBlockEntityProperties>;
         outputSlot(): number;
-        transferSpeed(): number;
-        retrieveAll(): boolean;
-        recipeType(): ($Holder<$RecipeType<never>>) | undefined;
-        maxRunes(): number;
         getRecipeType<I extends $RecipeInput, R extends $Recipe<I>>(): $RecipeType<R>;
         lockable(): boolean;
+        transferSpeed(): number;
+        retrieveAll(): boolean;
+        maxRunes(): number;
+        getType(): $ConfigurableBlockEntityPropertiesType<$CraftingBlockEntityProperties>;
+        recipeType(): ($Holder<$RecipeType<never>>) | undefined;
         static CODEC: $MapCodec<$CraftingBlockEntityProperties>;
         static DEFAULT: $CraftingBlockEntityProperties;
         constructor(recipeType: ($Holder_<$RecipeType<never>>) | undefined, transferSpeed: number, maxRunes: number, outputSlot: number, retrieveAll: boolean, lockable: boolean);
@@ -22,5 +22,5 @@ declare module "@package/sirttas/elementalcraft/block/entity/crafting" {
     /**
      * Values that may be interpreted as {@link $CraftingBlockEntityProperties}.
      */
-    export type $CraftingBlockEntityProperties_ = { maxRunes?: number, lockable?: boolean, transferSpeed?: number, outputSlot?: number, retrieveAll?: boolean, recipeType?: ($Holder_<$RecipeType<never>>) | undefined,  } | [maxRunes?: number, lockable?: boolean, transferSpeed?: number, outputSlot?: number, retrieveAll?: boolean, recipeType?: ($Holder_<$RecipeType<never>>) | undefined, ];
+    export type $CraftingBlockEntityProperties_ = { outputSlot?: number, retrieveAll?: boolean, recipeType?: ($Holder_<$RecipeType<never>>) | undefined, maxRunes?: number, lockable?: boolean, transferSpeed?: number,  } | [outputSlot?: number, retrieveAll?: boolean, recipeType?: ($Holder_<$RecipeType<never>>) | undefined, maxRunes?: number, lockable?: boolean, transferSpeed?: number, ];
 }

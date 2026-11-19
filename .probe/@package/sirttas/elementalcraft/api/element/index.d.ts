@@ -16,16 +16,18 @@ declare module "@package/sirttas/elementalcraft/api/element" {
     export class $IElementTypeProvider {
     }
     export interface $IElementTypeProvider {
-        getElementType(): $ElementType;
         getElementTypeSupplier(): $Supplier<$ElementType>;
-        get elementType(): $ElementType;
+        getElementType(): $ElementType;
         get elementTypeSupplier(): $Supplier<$ElementType>;
+        get elementType(): $ElementType;
     }
     /**
      * Values that may be interpreted as {@link $IElementTypeProvider}.
      */
     export type $IElementTypeProvider_ = (() => $ElementType_);
     export class $ElementType extends $Enum<$ElementType> implements $StringRepresentable, $IElementTypeProvider {
+        static forGetter<T>(arg0: $Function_<T, $ElementType>): $RecordCodecBuilder<T, $ElementType>;
+        getSerializedName(): string;
         static values(): $ElementType[];
         static valueOf(arg0: string): $ElementType;
         static random(arg0: $RandomSource): $ElementType;
@@ -34,14 +36,12 @@ declare module "@package/sirttas/elementalcraft/api/element" {
         static getElementType(arg0: $BlockState_): $ElementType;
         static getElementType(arg0: $ItemStack_): $ElementType;
         getDisplayName(): $Component;
-        static byName(arg0: string): $ElementType;
-        static forGetter<T>(arg0: $Function_<T, $ElementType>): $RecordCodecBuilder<T, $ElementType>;
-        getSerializedName(): string;
         getRed(): number;
         getGreen(): number;
         getBlue(): number;
-        getDescriptionId(): string;
         getColor(): number;
+        getDescriptionId(): string;
+        static byName(arg0: string): $ElementType;
         getRemappedEnumConstantName(): string;
         getElementTypeSupplier(): $Supplier<$ElementType>;
         static EARTH: $ElementType;
@@ -52,13 +52,13 @@ declare module "@package/sirttas/elementalcraft/api/element" {
         static NONE: $ElementType;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ElementType>;
         static WATER: $ElementType;
-        get displayName(): $Component;
         get serializedName(): string;
+        get displayName(): $Component;
         get red(): number;
         get green(): number;
         get blue(): number;
-        get descriptionId(): string;
         get color(): number;
+        get descriptionId(): string;
         get remappedEnumConstantName(): string;
         get elementTypeSupplier(): $Supplier<$ElementType>;
     }

@@ -21,81 +21,81 @@ declare module "@package/mezz/jei/api/recipe" {
     export class $IFocusFactory {
     }
     export interface $IFocusFactory {
-        createFocus<V>(arg0: $RecipeIngredientRole_, arg1: $IIngredientType_<V>, arg2: V): $IFocus<V>;
-        createFocus<V>(arg0: $RecipeIngredientRole_, arg1: $ITypedIngredient<V>): $IFocus<V>;
-        createFocusGroup(arg0: $Collection_<$IFocus<never>>): $IFocusGroup;
         getEmptyFocusGroup(): $IFocusGroup;
+        createFocusGroup(arg0: $Collection_<$IFocus<never>>): $IFocusGroup;
+        createFocus<V>(arg0: $RecipeIngredientRole_, arg1: $ITypedIngredient<V>): $IFocus<V>;
+        createFocus<V>(arg0: $RecipeIngredientRole_, arg1: $IIngredientType_<V>, arg2: V): $IFocus<V>;
         get emptyFocusGroup(): $IFocusGroup;
     }
     export class $IRecipeCatalystLookup {
     }
     export interface $IRecipeCatalystLookup {
+        includeHidden(): $IRecipeCatalystLookup;
         get(): $Stream<$ITypedIngredient<never>>;
         get<S>(arg0: $IIngredientType_<S>): $Stream<S>;
-        getGroups(): $Stream<$Consumer<$IIngredientAcceptor<never>>>;
         getItemStack(): $Stream<$ItemStack>;
-        includeHidden(): $IRecipeCatalystLookup;
-        get groups(): $Stream<$Consumer<$IIngredientAcceptor<never>>>;
+        getGroups(): $Stream<$Consumer<$IIngredientAcceptor<never>>>;
         get itemStack(): $Stream<$ItemStack>;
+        get groups(): $Stream<$Consumer<$IIngredientAcceptor<never>>>;
     }
     export class $IRecipeLookup<R> {
     }
     export interface $IRecipeLookup<R> {
-        get(): $Stream<R>;
         includeHidden(): $IRecipeLookup<R>;
+        get(): $Stream<R>;
         limitFocus(arg0: $Collection_<$IFocus<never>>): $IRecipeLookup<R>;
     }
     export class $IRecipeManager {
     }
     export interface $IRecipeManager {
+        hideRecipeCategory(arg0: $RecipeType<never>): void;
+        getRecipeButtonControllerFactories(): $List<$IRecipeButtonControllerFactory>;
+        addRecipes<T>(arg0: $RecipeType<T>, arg1: $List_<T>): void;
+        getRecipeCategory<T>(arg0: $RecipeType<T>): $IRecipeCategory<T>;
+        unhideRecipeCategory(arg0: $RecipeType<never>): void;
+        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
+        getRecipeType(arg0: $ResourceLocation_): ($RecipeType<never>) | undefined;
+        unhideRecipes<T>(arg0: $RecipeType<T>, arg1: $Collection_<T>): void;
+        hideRecipes<T>(arg0: $RecipeType<T>, arg1: $Collection_<T>): void;
+        createRecipeLookup<R>(arg0: $RecipeType<R>): $IRecipeLookup<R>;
+        createRecipeLayoutDrawableOrShowError<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup): $IRecipeLayoutDrawable<T>;
+        getRecipeIngredients<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $Set_<$RecipeIngredientRole_>): $IIngredientSupplier;
+        getRecipeIngredients<T>(arg0: $IRecipeCategory<T>, arg1: T): $IIngredientSupplier;
+        createRecipeCatalystLookup(arg0: $RecipeType<never>): $IRecipeCatalystLookup;
         createRecipeLayoutDrawable<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup): ($IRecipeLayoutDrawable<T>) | undefined;
         createRecipeLayoutDrawable<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup, arg3: $IScalableDrawable_, arg4: number): ($IRecipeLayoutDrawable<T>) | undefined;
-        createRecipeCatalystLookup(arg0: $RecipeType<never>): $IRecipeCatalystLookup;
-        /**
-         * @deprecated
-         */
-        createRecipeSlotDrawable(arg0: $RecipeIngredientRole_, arg1: $List_<($ITypedIngredient<never>) | undefined>, arg2: $Set_<number>, arg3: number, arg4: number, arg5: number): $IRecipeSlotDrawable;
         /**
          * @deprecated
          */
         createRecipeSlotDrawable(arg0: $RecipeIngredientRole_, arg1: $List_<($ITypedIngredient<never>) | undefined>, arg2: $Set_<number>, arg3: number): $IRecipeSlotDrawable;
-        getRecipeButtonControllerFactories(): $List<$IRecipeButtonControllerFactory>;
-        addRecipes<T>(arg0: $RecipeType<T>, arg1: $List_<T>): void;
-        getRecipeIngredients<T>(arg0: $IRecipeCategory<T>, arg1: T): $IIngredientSupplier;
-        getRecipeIngredients<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $Set_<$RecipeIngredientRole_>): $IIngredientSupplier;
+        /**
+         * @deprecated
+         */
+        createRecipeSlotDrawable(arg0: $RecipeIngredientRole_, arg1: $List_<($ITypedIngredient<never>) | undefined>, arg2: $Set_<number>, arg3: number, arg4: number, arg5: number): $IRecipeSlotDrawable;
         createRecipeCategoryLookup(): $IRecipeCategoriesLookup;
-        getRecipeType(arg0: $ResourceLocation_): ($RecipeType<never>) | undefined;
-        getRecipeType<T>(arg0: $ResourceLocation_, arg1: $Class<T>): ($RecipeType<T>) | undefined;
-        unhideRecipes<T>(arg0: $RecipeType<T>, arg1: $Collection_<T>): void;
-        createRecipeLookup<R>(arg0: $RecipeType<R>): $IRecipeLookup<R>;
-        hideRecipes<T>(arg0: $RecipeType<T>, arg1: $Collection_<T>): void;
-        hideRecipeCategory(arg0: $RecipeType<never>): void;
-        unhideRecipeCategory(arg0: $RecipeType<never>): void;
-        createRecipeLayoutDrawableOrShowError<T>(arg0: $IRecipeCategory<T>, arg1: T, arg2: $IFocusGroup): $IRecipeLayoutDrawable<T>;
-        getRecipeCategory<T>(arg0: $RecipeType<T>): $IRecipeCategory<T>;
         get recipeButtonControllerFactories(): $List<$IRecipeButtonControllerFactory>;
     }
     export class $RecipeType<T> {
-        static create<T>(arg0: string, arg1: string, arg2: $Class<T>): $RecipeType<T>;
-        getUid(): $ResourceLocation;
+        static createRecipeHolderType<R extends $Recipe<never>>(arg0: $ResourceLocation_): $RecipeType<$RecipeHolder<R>>;
+        static createFromDeferredVanilla<R extends $Recipe<never>>(arg0: $Supplier_<$RecipeType$1<R>>): $Supplier<$RecipeType<$RecipeHolder<R>>>;
         getRecipeClass(): $Class<T>;
         static createFromVanilla<R extends $Recipe<never>>(arg0: $RecipeType_<R>): $RecipeType<$RecipeHolder<R>>;
-        static createFromDeferredVanilla<R extends $Recipe<never>>(arg0: $Supplier_<$RecipeType$1<R>>): $Supplier<$RecipeType<$RecipeHolder<R>>>;
-        static createRecipeHolderType<R extends $Recipe<never>>(arg0: $ResourceLocation_): $RecipeType<$RecipeHolder<R>>;
+        static create<T>(arg0: string, arg1: string, arg2: $Class<T>): $RecipeType<T>;
+        getUid(): $ResourceLocation;
         constructor(arg0: $ResourceLocation_, arg1: $Class<T>);
-        get uid(): $ResourceLocation;
         get recipeClass(): $Class<T>;
+        get uid(): $ResourceLocation;
     }
     export class $IFocusGroup {
     }
     export interface $IFocusGroup {
-        isEmpty(): boolean;
+        getFocuses(arg0: $RecipeIngredientRole_): $Stream<$IFocus<never>>;
         getFocuses<T>(arg0: $IIngredientType_<T>, arg1: $RecipeIngredientRole_): $Stream<$IFocus<T>>;
         getFocuses<T>(arg0: $IIngredientType_<T>): $Stream<$IFocus<T>>;
-        getFocuses(arg0: $RecipeIngredientRole_): $Stream<$IFocus<never>>;
-        getAllFocuses(): $List<$IFocus<never>>;
-        getItemStackFocuses(arg0: $RecipeIngredientRole_): $Stream<$IFocus<$ItemStack>>;
+        isEmpty(): boolean;
         getItemStackFocuses(): $Stream<$IFocus<$ItemStack>>;
+        getItemStackFocuses(arg0: $RecipeIngredientRole_): $Stream<$IFocus<$ItemStack>>;
+        getAllFocuses(): $List<$IFocus<never>>;
         get empty(): boolean;
         get allFocuses(): $List<$IFocus<never>>;
     }
@@ -123,9 +123,9 @@ declare module "@package/mezz/jei/api/recipe" {
     export class $IRecipeCategoriesLookup {
     }
     export interface $IRecipeCategoriesLookup {
-        get(): $Stream<$IRecipeCategory<never>>;
         includeHidden(): $IRecipeCategoriesLookup;
-        limitTypes(arg0: $Collection_<$RecipeType<never>>): $IRecipeCategoriesLookup;
+        get(): $Stream<$IRecipeCategory<never>>;
         limitFocus(arg0: $Collection_<$IFocus<never>>): $IRecipeCategoriesLookup;
+        limitTypes(arg0: $Collection_<$RecipeType<never>>): $IRecipeCategoriesLookup;
     }
 }

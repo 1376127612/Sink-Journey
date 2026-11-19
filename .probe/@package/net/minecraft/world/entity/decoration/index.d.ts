@@ -72,6 +72,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
@@ -82,36 +83,36 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         /**
          * Returns false if the entity is an armor stand. Returns `true` for all other entity living bases.
          */
+        isMarker(): boolean;
+        /**
+         * Returns false if the entity is an armor stand. Returns `true` for all other entity living bases.
+         */
         isShowArms(): boolean;
-        handler$dfa000$ftbchunks$onInteractAt(player: $Player, vec3: $Vec3_, interactionHand: $InteractionHand_, cir: $CallbackInfoReturnable<any>): void;
-        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
         /**
          * Returns false if the entity is an armor stand. Returns `true` for all other entity living bases.
          */
         isSmall(): boolean;
         static createAttributes(): $AttributeSupplier$Builder;
-        /**
-         * Returns false if the entity is an armor stand. Returns `true` for all other entity living bases.
-         */
-        isMarker(): boolean;
-        setHeadPose(bodyPose: $Rotations): void;
-        getHeadPose(): $Rotations;
+        setLeftArmPose(bodyPose: $Rotations): void;
         setShowArms(invisible: boolean): void;
+        setBodyPose(bodyPose: $Rotations): void;
+        getLeftArmPose(): $Rotations;
+        getHeadPose(): $Rotations;
+        getRightLegPose(): $Rotations;
+        setNoBasePlate(invisible: boolean): void;
+        setHeadPose(bodyPose: $Rotations): void;
+        getLeftLegPose(): $Rotations;
+        getBodyPose(): $Rotations;
         /**
          * Returns false if the entity is an armor stand. Returns `true` for all other entity living bases.
          */
         isNoBasePlate(): boolean;
-        setRightArmPose(bodyPose: $Rotations): void;
-        setLeftArmPose(bodyPose: $Rotations): void;
-        setRightLegPose(bodyPose: $Rotations): void;
-        getLeftArmPose(): $Rotations;
-        getRightLegPose(): $Rotations;
-        getBodyPose(): $Rotations;
-        getRightArmPose(): $Rotations;
-        setBodyPose(bodyPose: $Rotations): void;
-        setNoBasePlate(invisible: boolean): void;
         setLeftLegPose(bodyPose: $Rotations): void;
-        getLeftLegPose(): $Rotations;
+        setRightLegPose(bodyPose: $Rotations): void;
+        getRightArmPose(): $Rotations;
+        setRightArmPose(bodyPose: $Rotations): void;
+        getDefaultDimensions(pose: $Pose_): $EntityDimensions;
+        handler$gbm000$ftbchunks$onInteractAt(player: $Player, vec3: $Vec3_, interactionHand: $InteractionHand_, cir: $CallbackInfoReturnable<any>): void;
         static DEFAULT_BASE_GRAVITY: number;
         hasImpulse: boolean;
         static USE_ITEM_INTERVAL: number;
@@ -164,6 +165,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         static CLIENT_FLAG_MARKER: number;
         static DATA_CLIENT_FLAGS: $EntityDataAccessor<number>;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -171,6 +173,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         swingTime: number;
         static BODY_ARMOR_OFFSET: number;
         tickCount: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static DATA_HEAD_POSE: $EntityDataAccessor<$Rotations>;
         static SWING_DURATION: number;
@@ -220,17 +223,17 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         removeStingerTime: number;
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
-        constructor(entityType: $EntityType_<$ArmorStand>, level: $Level_);
         constructor(level: $Level_, x: number, arg2: number, y: number);
-        get small(): boolean;
+        constructor(entityType: $EntityType_<$ArmorStand>, level: $Level_);
         get marker(): boolean;
+        get small(): boolean;
     }
     export class $LeashFenceKnotEntity extends $BlockAttachedEntity {
+        static getOrCreateKnot(level: $Level_, pos: $BlockPos_): $LeashFenceKnotEntity;
         /**
          * Updates the entity bounding box based on current facing
          */
         playPlacementSound(): void;
-        static getOrCreateKnot(level: $Level_, pos: $BlockPos_): $LeashFenceKnotEntity;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
@@ -277,6 +280,7 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
@@ -342,60 +346,61 @@ declare module "@package/net/minecraft/world/entity/decoration" {
          * Updates the entity bounding box based on current facing
          */
         playPlacementSound(): void;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
     }
     export class $PaintingVariant extends $Record {
-        width(): number;
-        height(): number;
         area(): number;
+        width(): number;
         assetId(): $ResourceLocation;
+        height(): number;
         static CODEC: $Codec<$Holder<$PaintingVariant>>;
         static DIRECT_CODEC: $Codec<$PaintingVariant>;
         static DIRECT_STREAM_CODEC: $StreamCodec<$ByteBuf, $PaintingVariant>;
@@ -405,31 +410,31 @@ declare module "@package/net/minecraft/world/entity/decoration" {
     /**
      * Values that may be interpreted as {@link $PaintingVariant}.
      */
-    export type $PaintingVariant_ = RegistryTypes.PaintingVariant | { height?: number, width?: number, assetId?: $ResourceLocation_,  } | [height?: number, width?: number, assetId?: $ResourceLocation_, ];
+    export type $PaintingVariant_ = RegistryTypes.PaintingVariant | { assetId?: $ResourceLocation_, height?: number, width?: number,  } | [assetId?: $ResourceLocation_, height?: number, width?: number, ];
     export class $ItemFrame extends $HangingEntity implements $ItemFrameEntityKJS, $ItemFrameAccessor {
+        setItem(item: $ItemStack_): void;
+        setItem(stack: $ItemStack_, updateNeighbours: boolean): void;
         getItem(): $ItemStack;
-        handler$dfe000$ftbchunks$onHurt(damageSource: $DamageSource_, f: number, cir: $CallbackInfoReturnable<any>): void;
+        handler$gca000$ftbchunks$onHurt(damageSource: $DamageSource_, f: number, cir: $CallbackInfoReturnable<any>): void;
         /**
          * Return the rotation of the item currently on this frame.
          */
         getRotation(): number;
         setRotation(rotation: number): void;
-        /**
-         * Return the rotation of the item currently on this frame.
-         */
-        getAnalogOutput(): number;
-        setItem(stack: $ItemStack_, updateNeighbours: boolean): void;
-        setItem(item: $ItemStack_): void;
-        getPlaceSound(): $SoundEvent;
-        getBreakSound(): $SoundEvent;
+        getRemoveItemSound(): $SoundEvent;
         getAddItemSound(): $SoundEvent;
         getRotateItemSound(): $SoundEvent;
-        getRemoveItemSound(): $SoundEvent;
         getFramedMapId(stack: $ItemStack_): $MapId;
         /**
          * Checks to make sure the `HangingEntity` can be placed there.
          */
         hasFramedMap(): boolean;
+        /**
+         * Return the rotation of the item currently on this frame.
+         */
+        getAnalogOutput(): number;
+        getPlaceSound(): $SoundEvent;
+        getBreakSound(): $SoundEvent;
         create$getFrameItemStack(): $ItemStack;
         hasImpulse: boolean;
         tickCount: number;
@@ -477,18 +482,19 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         constructor(entityType: $EntityType_<$ItemFrame>, level: $Level_);
-        constructor(entityType: $EntityType_<$ItemFrame>, level: $Level_, pos: $BlockPos_, direction: $Direction_);
         constructor(level: $Level_, pos: $BlockPos_, facingDirection: $Direction_);
+        constructor(entityType: $EntityType_<$ItemFrame>, level: $Level_, pos: $BlockPos_, direction: $Direction_);
+        get removeItemSound(): $SoundEvent;
+        get addItemSound(): $SoundEvent;
+        get rotateItemSound(): $SoundEvent;
         get analogOutput(): number;
         get placeSound(): $SoundEvent;
         get breakSound(): $SoundEvent;
-        get addItemSound(): $SoundEvent;
-        get rotateItemSound(): $SoundEvent;
-        get removeItemSound(): $SoundEvent;
     }
     export class $Painting extends $HangingEntity implements $VariantHolder<$Holder<$PaintingVariant>> {
         static create(level: $Level_, pos: $BlockPos_, direction: $Direction_): ($Painting) | undefined;
@@ -541,69 +547,71 @@ declare module "@package/net/minecraft/world/entity/decoration" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         static DEPTH: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(level: $Level_, pos: $BlockPos_, direction: $Direction_, variant: $Holder_<$PaintingVariant>);
         constructor(entityType: $EntityType_<$Painting>, level: $Level_);
+        constructor(level: $Level_, pos: $BlockPos_, direction: $Direction_, variant: $Holder_<$PaintingVariant>);
     }
     export interface $PaintingVariant extends RegistryMarked<RegistryTypes.PaintingVariantTag, RegistryTypes.PaintingVariant> {}
     export class $BlockAttachedEntity extends $Entity {
-        readAdditionalSaveData(compound: $CompoundTag_): void;
         addAdditionalSaveData(compound: $CompoundTag_): void;
-        dropItem(entity: $Entity | null): void;
+        readAdditionalSaveData(compound: $CompoundTag_): void;
         getPos(): $BlockPos;
+        dropItem(entity: $Entity | null): void;
         /**
          * Returns `true` if other Entities should be prevented from moving through this Entity.
          */
         survives(): boolean;
+        hasImpulse: boolean;
+        tickCount: number;
+        noPhysics: boolean;
+        yo: number;
+        static BOARDING_COOLDOWN: number;
+        removalReason: $Entity$RemovalReason;
+        yRotO: number;
+        static CONTENTS_SLOT_INDEX: number;
+        moveDist: number;
+        static ID_TAG: string;
+        mainSupportingBlockPos: ($BlockPos) | undefined;
+        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
+        xRotO: number;
+        zo: number;
+        walkDist: number;
+        xOld: number;
+        noCulling: boolean;
+        wasInPowderSnow: boolean;
+        hurtMarked: boolean;
         invulnerableTime: number;
         static UUID_TAG: string;
         static BASE_TICKS_REQUIRED_TO_FREEZE: number;
         fallDistance: number;
-        hasImpulse: boolean;
         portalProcess: $PortalProcessor;
         verticalCollision: boolean;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_5: number;
         static MAX_ENTITY_TAG_COUNT: number;
         static DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2: number;
         verticalCollisionBelow: boolean;
-        tickCount: number;
-        noPhysics: boolean;
-        yo: number;
         yOld: number;
         static DEFAULT_BB_WIDTH: number;
         eyeHeight: number;
         minorHorizontalCollision: boolean;
-        static BOARDING_COOLDOWN: number;
         static DEFAULT_BB_HEIGHT: number;
-        removalReason: $Entity$RemovalReason;
-        yRotO: number;
-        static CONTENTS_SLOT_INDEX: number;
         walkDistO: number;
-        moveDist: number;
         static FREEZE_HURT_FREQUENCY: number;
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
-        static ID_TAG: string;
-        mainSupportingBlockPos: ($BlockPos) | undefined;
         static PASSENGERS_TAG: string;
-        static DELTA_AFFECTED_BY_BLOCKS_BELOW_1_0: number;
         blocksBuilding: boolean;
-        xRotO: number;
         wasOnFire: boolean;
-        zo: number;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
-        walkDist: number;
-        xOld: number;
-        noCulling: boolean;
-        wasInPowderSnow: boolean;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
-        hurtMarked: boolean;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
         get pos(): $BlockPos;

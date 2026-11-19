@@ -10,8 +10,8 @@ import { $RandomSource } from "@package/net/minecraft/util";
 
 declare module "@package/net/createmod/catnip/levelWrappers" {
     export class $WrappedLevel extends $Level {
-        getLevel(): $Level;
         setChunkSource(arg0: $ChunkSource): void;
+        getLevel(): $Level;
         restoringBlockSnapshots: boolean;
         oThunderLevel: number;
         static LONG_PARTICLE_CLIP_RANGE: number;
@@ -36,7 +36,7 @@ declare module "@package/net/createmod/catnip/levelWrappers" {
         rainLevel: number;
         captureBlockSnapshots: boolean;
         constructor(arg0: $Level_);
-        get level(): $Level;
         set chunkSource(value: $ChunkSource);
+        get level(): $Level;
     }
 }

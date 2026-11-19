@@ -44,7 +44,7 @@ declare module "@package/net/minecraft/server/packs/linkfs" {
     /**
      * Values that may be interpreted as {@link $LinkFileSystem$DirectoryEntry}.
      */
-    export type $LinkFileSystem$DirectoryEntry_ = { children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>, files?: $Map_<string, $Path_>,  } | [children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>, files?: $Map_<string, $Path_>, ];
+    export type $LinkFileSystem$DirectoryEntry_ = { files?: $Map_<string, $Path_>, children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>,  } | [files?: $Map_<string, $Path_>, children?: $Map_<string, $LinkFileSystem$DirectoryEntry_>, ];
     export class $LinkFileSystem$Builder {
         put(pathString: $List_<string>, filePath: $Path_): $LinkFileSystem$Builder;
         put(pathString: $List_<string>, fileName: string, filePath: $Path_): $LinkFileSystem$Builder;

@@ -5,12 +5,12 @@ declare module "@package/org/apache/logging/log4j/core/time" {
     }
     export interface $Instant extends $StringBuilderFormattable {
         getEpochSecond(): number;
-        getEpochMillisecond(): number;
-        getNanoOfMillisecond(): number;
         getNanoOfSecond(): number;
+        getNanoOfMillisecond(): number;
+        getEpochMillisecond(): number;
         get epochSecond(): number;
-        get epochMillisecond(): number;
-        get nanoOfMillisecond(): number;
         get nanoOfSecond(): number;
+        get nanoOfMillisecond(): number;
+        get epochMillisecond(): number;
     }
 }

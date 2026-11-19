@@ -18,35 +18,35 @@ export * as capability from "@package/sirttas/elementalcraft/block/pipe/upgrade/
 
 declare module "@package/sirttas/elementalcraft/block/pipe/upgrade" {
     export class $PipeUpgrade extends $AttachmentHolder implements $ItemLike {
+        asItem(): $Item;
+        dropAll(arg0: $Player): void;
+        canPlace(arg0: $ConnectionType_): boolean;
+        onAdded(): void;
+        canTransfer(arg0: $ElementType_, arg1: $ConnectionType_): boolean;
+        getPipe(): $ElementPipeBlockEntity;
+        replaceExtraction(): boolean;
+        replaceSection(): boolean;
+        alterPath(arg0: $IElementTransferPath): $IElementTransferPath;
         load(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         getKey(): $ResourceLocation;
         save(arg0: $HolderLookup$Provider): $CompoundTag;
         getType(): $PipeUpgradeType<never>;
         getShape(): $VoxelShape;
-        getCapability<T, C>(arg0: $PipeUpgradeCapability<T, C>, arg1: C): T;
-        getPipe(): $ElementPipeBlockEntity;
         getDirection(): $Direction;
-        getConnections(arg0: $ElementType_, arg1: $ConnectionType_): $List<$BlockPos>;
-        getRenderShape(): $RenderShape;
-        onRemoved(): void;
         getWeight(): number;
-        asItem(): $Item;
-        canTransfer(arg0: $ElementType_, arg1: $ConnectionType_): boolean;
-        dropAll(arg0: $Player): void;
-        canPlace(arg0: $ConnectionType_): boolean;
-        alterPath(arg0: $IElementTransferPath): $IElementTransferPath;
-        replaceSection(): boolean;
-        replaceExtraction(): boolean;
-        onAdded(): void;
+        getRenderShape(): $RenderShape;
         onTransfer(arg0: $ElementType_, arg1: number, arg2: $IElementTransferPathNode_, arg3: $IElementTransferPathNode_): void;
+        getConnections(arg0: $ElementType_, arg1: $ConnectionType_): $List<$BlockPos>;
+        getCapability<T, C>(arg0: $PipeUpgradeCapability<T, C>, arg1: C): T;
+        onRemoved(): void;
         static ATTACHMENTS_NBT_KEY: string;
         static FOLDER: string;
+        get pipe(): $ElementPipeBlockEntity;
         get key(): $ResourceLocation;
         get type(): $PipeUpgradeType<never>;
         get shape(): $VoxelShape;
-        get pipe(): $ElementPipeBlockEntity;
         get direction(): $Direction;
-        get renderShape(): $RenderShape;
         get weight(): number;
+        get renderShape(): $RenderShape;
     }
 }

@@ -17,7 +17,7 @@ declare module "@package/net/minecraft/recipebook" {
     export class $ServerPlaceRecipe<I extends $RecipeInput, R extends $Recipe<I>> implements $PlaceRecipe<number> {
         recipeClicked(player: $ServerPlayer, recipe: $RecipeHolder_<R> | null, placeAll: boolean): void;
         addItemToSlot(item: number, slot: number, maxAmount: number, x: number, y: number): void;
-        placeRecipe(width: number, height: number, outputSlot: number, recipe: $RecipeHolder_<never>, ingredients: $Iterator<number>, maxAmount: number): void;
+        placeRecipe(arg0: number, arg1: number, arg2: number, arg3: $RecipeHolder_<never>, arg4: $Iterator<number>, arg5: number): void;
         constructor(menu: $RecipeBookMenu<I, R>);
     }
 }

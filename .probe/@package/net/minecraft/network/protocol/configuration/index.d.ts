@@ -21,19 +21,19 @@ declare module "@package/net/minecraft/network/protocol/configuration" {
     export class $ServerConfigurationPacketListener {
     }
     export interface $ServerConfigurationPacketListener extends $ServerCommonPacketListener, $IServerConfigurationPacketListenerExtension {
+        handleSelectKnownPacks(packet: $ServerboundSelectKnownPacks_): void;
         protocol(): $ConnectionProtocol;
         handleConfigurationFinished(packet: $ServerboundFinishConfigurationPacket): void;
-        handleSelectKnownPacks(packet: $ServerboundSelectKnownPacks_): void;
     }
     export class $ClientboundResetChatPacket implements $Packet<$ClientConfigurationPacketListener> {
         type(): $PacketType<$ClientboundResetChatPacket>;
         handle(arg0: $ClientConfigurationPacketListener): void;
-        isTerminal(): boolean;
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static INSTANCE: $ClientboundResetChatPacket;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ClientboundResetChatPacket>;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $ServerboundFinishConfigurationPacket implements $Packet<$ServerConfigurationPacketListener> {
         type(): $PacketType<$ServerboundFinishConfigurationPacket>;
@@ -52,18 +52,12 @@ declare module "@package/net/minecraft/network/protocol/configuration" {
          */
         handle(handler: $ClientConfigurationPacketListener): void;
         features(): $Set<$ResourceLocation>;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundUpdateEnabledFeaturesPacket>;
         constructor(arg0: $Set_<$ResourceLocation_>);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundUpdateEnabledFeaturesPacket}.
@@ -74,12 +68,12 @@ declare module "@package/net/minecraft/network/protocol/configuration" {
         entries(): $List<$RegistrySynchronization$PackedRegistryEntry>;
         handle(arg0: $ClientConfigurationPacketListener): void;
         registry(): $ResourceKey<$Registry<never>>;
-        isTerminal(): boolean;
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundRegistryDataPacket>;
         constructor(arg0: $ResourceKey_<$Registry<never>>, arg1: $List_<$RegistrySynchronization$PackedRegistryEntry_>);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundRegistryDataPacket}.
@@ -106,15 +100,15 @@ declare module "@package/net/minecraft/network/protocol/configuration" {
         get skippable(): boolean;
     }
     export class $ServerboundSelectKnownPacks extends $Record implements $Packet<$ServerConfigurationPacketListener> {
-        knownPacks(): $List<$KnownPack>;
         type(): $PacketType<$ServerboundSelectKnownPacks>;
         handle(arg0: $ServerConfigurationPacketListener): void;
-        isTerminal(): boolean;
+        knownPacks(): $List<$KnownPack>;
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ServerboundSelectKnownPacks>;
         constructor(knownPacks: $List_<$KnownPack_>);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ServerboundSelectKnownPacks}.
@@ -123,23 +117,23 @@ declare module "@package/net/minecraft/network/protocol/configuration" {
     export class $ClientConfigurationPacketListener {
     }
     export interface $ClientConfigurationPacketListener extends $ClientCommonPacketListener {
-        handleResetChat(packet: $ClientboundResetChatPacket): void;
-        handleRegistryData(packet: $ClientboundRegistryDataPacket_): void;
-        protocol(): $ConnectionProtocol;
-        handleConfigurationFinished(packet: $ClientboundFinishConfigurationPacket): void;
         handleSelectKnownPacks(packet: $ClientboundSelectKnownPacks_): void;
         handleEnabledFeatures(packet: $ClientboundUpdateEnabledFeaturesPacket_): void;
+        handleRegistryData(packet: $ClientboundRegistryDataPacket_): void;
+        handleResetChat(packet: $ClientboundResetChatPacket): void;
+        protocol(): $ConnectionProtocol;
+        handleConfigurationFinished(packet: $ClientboundFinishConfigurationPacket): void;
     }
     export class $ClientboundSelectKnownPacks extends $Record implements $Packet<$ClientConfigurationPacketListener> {
-        knownPacks(): $List<$KnownPack>;
         type(): $PacketType<$ClientboundSelectKnownPacks>;
         handle(arg0: $ClientConfigurationPacketListener): void;
-        isTerminal(): boolean;
+        knownPacks(): $List<$KnownPack>;
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ClientboundSelectKnownPacks>;
         constructor(arg0: $List_<$KnownPack_>);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundSelectKnownPacks}.

@@ -18,37 +18,37 @@ export * as crafting from "@package/org/cyclops/integratedterminals/core/termina
 
 declare module "@package/org/cyclops/integratedterminals/core/terminalstorage" {
     export class $TerminalStorageTabIngredientComponentCommon<T, M> implements $ITerminalStorageTabCommon, $IVariableFacade$IValidator {
+        addError(arg0: $MutableComponent_): void;
+        getGlobalErrors(): $List<$Component>;
         loadSlots(arg0: $AbstractContainerMenu, arg1: number, arg2: $Player, arg3: ($ITerminalStorageTabCommon$IVariableInventory) | undefined, arg4: $ValueDeseralizationContext_): $List<$Pair<$Slot, $ITerminalStorageTabCommon$ISlotPositionCallback>>;
+        setLocalErrors(arg0: number, arg1: $List_<$MutableComponent_>): void;
+        getName(): $ResourceLocation;
+        onUpdate(arg0: $AbstractContainerMenu, arg1: $Player, arg2: ($ITerminalStorageTabCommon$IVariableInventory) | undefined): void;
+        hasErrors(): boolean;
         clearGlobalErrors(): void;
         getLocalErrors(arg0: number): $List<$Component>;
         getVariableSlotNumberStart(): number;
         getVariableSlotNumberEnd(): number;
-        getName(): $ResourceLocation;
-        hasErrors(): boolean;
-        getGlobalErrors(): $List<$Component>;
-        setLocalErrors(arg0: number, arg1: $List_<$MutableComponent_>): void;
-        addError(arg0: $MutableComponent_): void;
-        onUpdate(arg0: $AbstractContainerMenu, arg1: $Player, arg2: ($ITerminalStorageTabCommon$IVariableInventory) | undefined): void;
         handleQuickMove(arg0: $ContainerTerminalStorageBase<never>, arg1: $Player, arg2: number): ($ItemStack) | undefined;
         constructor(arg0: $ContainerTerminalStorageBase<any>, arg1: $ResourceLocation_, arg2: $IngredientComponent_<T, M>);
+        get globalErrors(): $List<$Component>;
+        get name(): $ResourceLocation;
         get variableSlotNumberStart(): number;
         get variableSlotNumberEnd(): number;
-        get name(): $ResourceLocation;
-        get globalErrors(): $List<$Component>;
     }
     export class $TerminalStorageTabIngredientComponentServer<T, M> implements $ITerminalStorageTabServer, $IIngredientComponentStorageObservable$IIndexChangeObserver<T, M> {
         deInit(): void;
-        getName(): $ResourceLocation;
-        init(): void;
-        onChange(arg0: $IIngredientComponentStorageObservable$StorageChangeEvent<T, M>): void;
-        updateFilter(arg0: $List_<$IVariable<$ValueTypeOperator$ValueOperator>>, arg1: $TerminalStorageTabIngredientComponentCommon<never, never>): void;
-        getNetwork(): $INetwork;
-        getIngredientNetwork(): $IPositionedAddonsNetworkIngredients<T, M>;
         handleStorageSlotClick(arg0: $AbstractContainerMenu, arg1: $ServerPlayer, arg2: $TerminalClickType_, arg3: number, arg4: T, arg5: number, arg6: number, arg7: T, arg8: boolean, arg9: $Map_<number, $ItemStack_>, arg10: number): void;
         updateActive(arg0: number): void;
+        getName(): $ResourceLocation;
+        init(): void;
+        updateFilter(arg0: $List_<$IVariable<$ValueTypeOperator$ValueOperator>>, arg1: $TerminalStorageTabIngredientComponentCommon<never, never>): void;
+        onChange(arg0: $IIngredientComponentStorageObservable$StorageChangeEvent<T, M>): void;
+        getIngredientNetwork(): $IPositionedAddonsNetworkIngredients<T, M>;
+        getNetwork(): $INetwork;
         constructor(arg0: $ResourceLocation_, arg1: $INetwork, arg2: $IngredientComponent_<T, M>, arg3: $IPositionedAddonsNetworkIngredients<T, M>, arg4: $ServerPlayer);
         get name(): $ResourceLocation;
-        get network(): $INetwork;
         get ingredientNetwork(): $IPositionedAddonsNetworkIngredients<T, M>;
+        get network(): $INetwork;
     }
 }

@@ -6,10 +6,10 @@ declare module "@package/mekanism/common/capabilities/heat" {
     }
     export interface $ITileHeatHandler extends $IMekanismHeatHandler {
         simulate(): $HeatAPI$HeatTransfer;
-        getAmbientTemperature(side: $Direction_): number;
-        updateHeatCapacitors(side: $Direction_): void;
         simulateEnvironment(): number;
         incrementAdjacentTransfer(currentAdjacentTransfer: number, tempToTransfer: number, side: $Direction_): number;
+        getAmbientTemperature(side: $Direction_): number;
+        updateHeatCapacitors(side: $Direction_): void;
         simulateAdjacent(): number;
         getAdjacent(side: $Direction_): $IHeatHandler;
     }

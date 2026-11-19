@@ -19,13 +19,13 @@ declare module "@package/net/minecraft/client/resources/language" {
         static exists(key: string): boolean;
     }
     export class $LanguageManager implements $ResourceManagerReloadListener {
+        getJavaLocale(): $Locale;
+        getLanguages(): $SortedMap<string, $LanguageInfo>;
         getLanguage(code: string): $LanguageInfo;
         setSelected(selected: string): void;
         getSelected(): string;
-        getJavaLocale(): $Locale;
         onResourceManagerReload(resourceManager: $ResourceManager): void;
-        getLanguages(): $SortedMap<string, $LanguageInfo>;
-        reload(preparationBarrier: $PreparableReloadListener$PreparationBarrier_, resourceManager: $ResourceManager, preparationsProfiler: $ProfilerFiller, reloadProfiler: $ProfilerFiller, backgroundExecutor: $Executor_, gameExecutor: $Executor_): $CompletableFuture<void>;
+        reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         getName(): string;
         constructor(currentCode: string, reloadFallback: $Consumer_<$ClientLanguage>);
         get javaLocale(): $Locale;
@@ -33,10 +33,10 @@ declare module "@package/net/minecraft/client/resources/language" {
         get name(): string;
     }
     export class $ClientLanguage extends $Language implements $ITranslationStorage {
-        static loadFrom(resourceManager: $ResourceManager, filenames: $List_<string>, defaultRightToLeft: boolean): $ClientLanguage;
         languagereload_getTargetLanguage(): string;
         languagereload_setTargetLanguage(arg0: string): void;
-        languagereload_get(id: string): string;
+        languagereload_get(arg0: string): string;
+        static loadFrom(resourceManager: $ResourceManager, filenames: $List_<string>, defaultRightToLeft: boolean): $ClientLanguage;
         storage: $Map<string, string>;
         static DEFAULT: string;
     }
@@ -45,15 +45,15 @@ declare module "@package/net/minecraft/client/resources/language" {
         constructor();
     }
     export class $LanguageInfo extends $Record {
-        name(): string;
-        region(): string;
         toComponent(): $Component;
         bidirectional(): boolean;
+        name(): string;
+        region(): string;
         static CODEC: $Codec<$LanguageInfo>;
         constructor(arg0: string, arg1: string, arg2: boolean);
     }
     /**
      * Values that may be interpreted as {@link $LanguageInfo}.
      */
-    export type $LanguageInfo_ = { region?: string, name?: string, bidirectional?: boolean,  } | [region?: string, name?: string, bidirectional?: boolean, ];
+    export type $LanguageInfo_ = { name?: string, bidirectional?: boolean, region?: string,  } | [name?: string, bidirectional?: boolean, region?: string, ];
 }

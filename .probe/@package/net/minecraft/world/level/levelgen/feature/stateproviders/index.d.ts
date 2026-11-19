@@ -45,15 +45,15 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/stateprovide
         constructor(seed: number, arg1: $NormalNoise$NoiseParameters_, parameters: number, scale: $List_<$BlockState_>);
     }
     export class $RuleBasedBlockStateProvider$Rule extends $Record {
-        then(): $BlockStateProvider;
         ifTrue(): $BlockPredicate;
+        then(): $BlockStateProvider;
         static CODEC: $Codec<$RuleBasedBlockStateProvider$Rule>;
         constructor(arg0: $BlockPredicate, arg1: $BlockStateProvider);
     }
     /**
      * Values that may be interpreted as {@link $RuleBasedBlockStateProvider$Rule}.
      */
-    export type $RuleBasedBlockStateProvider$Rule_ = { ifTrue?: $BlockPredicate, then?: $BlockStateProvider,  } | [ifTrue?: $BlockPredicate, then?: $BlockStateProvider, ];
+    export type $RuleBasedBlockStateProvider$Rule_ = { then?: $BlockStateProvider, ifTrue?: $BlockPredicate,  } | [then?: $BlockStateProvider, ifTrue?: $BlockPredicate, ];
     export class $NoiseBasedStateProvider extends $BlockStateProvider {
         static CODEC: $Codec<$BlockStateProvider>;
     }

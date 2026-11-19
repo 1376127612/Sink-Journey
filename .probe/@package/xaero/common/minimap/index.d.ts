@@ -24,82 +24,82 @@ export * as element from "@package/xaero/common/minimap/element";
 
 declare module "@package/xaero/common/minimap" {
     export class $MinimapProcessor {
+        getSession(): $MinimapSession;
+        onClientTick(): void;
+        getForcedFairPlay(): boolean;
+        onPlayerTick(): void;
+        getRadarSession(): $RadarSession;
+        isEnlargedMap(): boolean;
+        getMinimapWriter(): $MinimapWriter;
+        setToResetImage(arg0: boolean): void;
+        isToResetImage(): boolean;
+        isManualCaveMode(): boolean;
+        getMinimapZoom(): number;
+        serverHasMod(): boolean;
+        setFairPlayOnlyMessageReceived(arg0: boolean): void;
+        setNoMinimapMessageReceived(arg0: boolean): void;
+        setConsideringNetherFairPlayMessage(arg0: boolean): void;
+        updateMinimapItem(): void;
+        static hasMinimapItem(arg0: $Player): boolean;
+        getSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
+        isCaveModeDisplayed(): boolean;
+        getLastMapDimensionScale(): number;
+        getLastMapDimension(): $ResourceKey<$Level>;
+        setServerModNetworkVersion(arg0: number): void;
         updateZoom(): void;
+        /**
+         * @deprecated
+         */
+        getClientSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager;
+        setEnlargedMap(arg0: boolean): void;
+        instantZoom(): void;
+        canUseFrameBuffer(): boolean;
+        getFBOBufferSize(): number;
+        getNoMinimapMessageReceived(): boolean;
+        toggleManualCaveMode(): void;
+        getMinimapItem(): $Item;
+        getMinimapSize(): number;
+        /**
+         * @deprecated
+         */
+        setLastPlayerDimDiv(arg0: number): void;
+        setLastMapDimension(arg0: $ResourceKey_<$Level>): void;
+        getMinimapBufferSize(arg0: number): number;
+        setLastMapDimensionScale(arg0: number): void;
+        /**
+         * @deprecated
+         */
+        getLastPlayerDimDiv(): number;
+        cleanup(): void;
+        getMinimapInterface(): $MinimapInterface;
+        checkFBO(): void;
+        onRender(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $CustomVertexConsumers): void;
+        isConsideringNetherFairPlayMessage(): boolean;
         getTargetZoom(): number;
         /**
          * @deprecated
          */
         getEntityRadar(): $MinimapRadar;
-        cleanup(): void;
-        getSession(): $MinimapSession;
-        setNoMinimapMessageReceived(arg0: boolean): void;
-        setFairPlayOnlyMessageReceived(arg0: boolean): void;
-        isConsideringNetherFairPlayMessage(): boolean;
         getServerModNetworkVersion(): number;
-        canUseFrameBuffer(): boolean;
-        getFBOBufferSize(): number;
-        getNoMinimapMessageReceived(): boolean;
-        checkFBO(): void;
-        getMinimapInterface(): $MinimapInterface;
-        onClientTick(): void;
-        onPlayerTick(): void;
-        getForcedFairPlay(): boolean;
-        updateMinimapItem(): void;
-        onRender(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $CustomVertexConsumers): void;
-        setConsideringNetherFairPlayMessage(arg0: boolean): void;
-        serverHasMod(): boolean;
-        getSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
-        getMinimapItem(): $Item;
-        isEnlargedMap(): boolean;
-        getMinimapWriter(): $MinimapWriter;
-        getRadarSession(): $RadarSession;
-        setToResetImage(arg0: boolean): void;
-        isToResetImage(): boolean;
-        isManualCaveMode(): boolean;
-        getMinimapZoom(): number;
-        static hasMinimapItem(arg0: $Player): boolean;
-        getLastMapDimensionScale(): number;
-        getLastMapDimension(): $ResourceKey<$Level>;
-        setLastMapDimension(arg0: $ResourceKey_<$Level>): void;
-        setLastMapDimensionScale(arg0: number): void;
-        getMinimapBufferSize(arg0: number): number;
-        /**
-         * @deprecated
-         */
-        setLastPlayerDimDiv(arg0: number): void;
-        /**
-         * @deprecated
-         */
-        getLastPlayerDimDiv(): number;
-        setServerModNetworkVersion(arg0: number): void;
-        isCaveModeDisplayed(): boolean;
-        setEnlargedMap(arg0: boolean): void;
-        instantZoom(): void;
-        toggleManualCaveMode(): void;
-        getMinimapSize(): number;
-        /**
-         * @deprecated
-         */
-        getClientSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager;
         static DEBUG: boolean;
         static FRAME: number;
         constructor(arg0: $IXaeroMinimap, arg1: $MinimapSession, arg2: $MinimapWriter, arg3: $RadarSession, arg4: $ClientSyncedTrackedPlayerManager$1);
-        get targetZoom(): number;
-        get entityRadar(): $MinimapRadar;
         get session(): $MinimapSession;
-        set fairPlayOnlyMessageReceived(value: boolean);
-        get FBOBufferSize(): number;
-        get minimapInterface(): $MinimapInterface;
         get forcedFairPlay(): boolean;
-        get syncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
-        get minimapItem(): $Item;
-        get minimapWriter(): $MinimapWriter;
         get radarSession(): $RadarSession;
+        get minimapWriter(): $MinimapWriter;
         get manualCaveMode(): boolean;
         get minimapZoom(): number;
+        set fairPlayOnlyMessageReceived(value: boolean);
+        get syncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager$1;
         get caveModeDisplayed(): boolean;
-        get minimapSize(): number;
         get clientSyncedTrackedPlayerManager(): $ClientSyncedTrackedPlayerManager;
+        get FBOBufferSize(): number;
+        get minimapItem(): $Item;
+        get minimapSize(): number;
+        get minimapInterface(): $MinimapInterface;
+        get targetZoom(): number;
+        get entityRadar(): $MinimapRadar;
     }
     /**
      * @deprecated

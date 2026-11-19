@@ -17,9 +17,9 @@ declare module "@package/com/simibubi/create/foundation/block" {
         static WATERLOGGED: $BooleanProperty;
     }
     export interface $ProperWaterloggedBlock extends $SimpleWaterloggedBlock {
-        fluidState(arg0: $BlockState_): $FluidState;
-        withWater(arg0: $BlockState_, arg1: $BlockPlaceContext): $BlockState;
         updateWater(arg0: $LevelAccessor, arg1: $BlockState_, arg2: $BlockPos_): void;
+        withWater(arg0: $BlockState_, arg1: $BlockPlaceContext): $BlockState;
+        fluidState(arg0: $BlockState_): $FluidState;
     }
     export class $IHaveBigOutline {
     }
@@ -29,16 +29,16 @@ declare module "@package/com/simibubi/create/foundation/block" {
         static onRemove(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_): void;
     }
     export interface $IBE<T extends $BlockEntity> extends $EntityBlock {
-        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): T;
-        getTicker<S extends $BlockEntity>(arg0: $Level_, arg1: $BlockState_, arg2: $BlockEntityType_<S>): $BlockEntityTicker<S>;
-        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
-        getBlockEntityType(): $BlockEntityType<T>;
-        onBlockEntityUse(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $InteractionResult>): $InteractionResult;
-        withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<T>): void;
+        getBlockEntityOptional(arg0: $BlockGetter, arg1: $BlockPos_): (T) | undefined;
         getBlockEntityClass(): $Class<T>;
         onBlockEntityUseItemOn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $ItemInteractionResult>): $ItemInteractionResult;
-        getBlockEntityOptional(arg0: $BlockGetter, arg1: $BlockPos_): (T) | undefined;
-        get blockEntityType(): $BlockEntityType<T>;
+        getTicker<S extends $BlockEntity>(arg0: $Level_, arg1: $BlockState_, arg2: $BlockEntityType_<S>): $BlockEntityTicker<S>;
+        withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<T>): void;
+        getBlockEntityType(): $BlockEntityType<T>;
+        onBlockEntityUse(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<T, $InteractionResult>): $InteractionResult;
+        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): T;
+        newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
         get blockEntityClass(): $Class<T>;
+        get blockEntityType(): $BlockEntityType<T>;
     }
 }

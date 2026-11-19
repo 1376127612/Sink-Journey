@@ -13,11 +13,11 @@ declare module "@package/appeng/server/testplots" {
     }
     export class $SpawnExtraGridTestTools extends $Event {
         getPlotId(): $ResourceLocation;
-        getInventory(): $InternalInventory;
         getGrid(): $IGrid;
+        getInventory(): $InternalInventory;
         constructor(arg0: $ResourceLocation_, arg1: $InternalInventory, arg2: $IGrid);
         get plotId(): $ResourceLocation;
-        get inventory(): $InternalInventory;
         get grid(): $IGrid;
+        get inventory(): $InternalInventory;
     }
 }

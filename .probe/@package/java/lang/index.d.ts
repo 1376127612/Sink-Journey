@@ -476,6 +476,8 @@ declare module "@package/java/lang" {
         constructor();
     }
     export class $Process {
+        exitValue(): number;
+        destroyForcibly(): $Process;
         info(): $ProcessHandle$Info;
         onExit(): $CompletableFuture<$Process>;
         isAlive(): boolean;
@@ -485,19 +487,17 @@ declare module "@package/java/lang" {
         getErrorStream(): $InputStream;
         waitFor(): number;
         waitFor(arg0: number, arg1: $TimeUnit_): boolean;
-        getOutputStream(): $OutputStream;
         children(): $Stream<$ProcessHandle>;
-        destroyForcibly(): $Process;
+        getOutputStream(): $OutputStream;
         toHandle(): $ProcessHandle;
         supportsNormalTermination(): boolean;
         inputReader(arg0: $Charset): $BufferedReader;
         inputReader(): $BufferedReader;
         errorReader(arg0: $Charset): $BufferedReader;
         errorReader(): $BufferedReader;
-        outputWriter(): $BufferedWriter;
         outputWriter(arg0: $Charset): $BufferedWriter;
+        outputWriter(): $BufferedWriter;
         descendants(): $Stream<$ProcessHandle>;
-        exitValue(): number;
         constructor();
         get alive(): boolean;
         get inputStream(): $InputStream;
@@ -509,13 +509,13 @@ declare module "@package/java/lang" {
     export class $Thread$Builder {
     }
     export interface $Thread$Builder {
+        unstarted(arg0: $Runnable_): $Thread;
         name(arg0: string): $Thread$Builder;
         name(arg0: string, arg1: number): $Thread$Builder;
         factory(): $ThreadFactory;
         start(arg0: $Runnable_): $Thread;
         uncaughtExceptionHandler(arg0: $Thread$UncaughtExceptionHandler_): $Thread$Builder;
         inheritInheritableThreadLocals(arg0: boolean): $Thread$Builder;
-        unstarted(arg0: $Runnable_): $Thread;
     }
     export class $IllegalArgumentException extends $RuntimeException {
         constructor(arg0: $Throwable);

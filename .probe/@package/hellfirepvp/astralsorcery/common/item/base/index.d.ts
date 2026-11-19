@@ -9,9 +9,9 @@ declare module "@package/hellfirepvp/astralsorcery/common/item/base" {
         static getEquipmentReference<T extends $ItemStack>(arg0: $ItemStack_): $Pair<$UUID, $EquipmentSlot>;
     }
     export interface $ItemStackEquipmentReference {
-        getPlayerReference(): $UUID;
-        setPlayerReference(arg0: $UUID_ | null): void;
-        getEquippedSlot(): $EquipmentSlot;
         setEquippedSlot(arg0: $EquipmentSlot_ | null): void;
+        getPlayerReference(): $UUID;
+        getEquippedSlot(): $EquipmentSlot;
+        setPlayerReference(arg0: $UUID_ | null): void;
     }
 }

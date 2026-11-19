@@ -19,16 +19,16 @@ declare module "@package/net/neoforged/neoforge/client/model/renderable" {
         withContext(arg0: $CompositeRenderable$Transforms): $IRenderable<$Unit>;
     }
     export class $CompositeRenderable$PartBuilder<T> {
-        child(arg0: string): $CompositeRenderable$PartBuilder<$CompositeRenderable$PartBuilder<T>>;
         addMesh(arg0: $ResourceLocation_, arg1: $List_<$BakedQuad>): $CompositeRenderable$PartBuilder<T>;
+        child(arg0: string): $CompositeRenderable$PartBuilder<$CompositeRenderable$PartBuilder<T>>;
         end(): T;
     }
     export class $BakedModelRenderable$Context extends $Record {
+        tint(): $Vector4f;
+        randomSource(): $RandomSource;
         data(): $ModelData;
         state(): $BlockState;
         seed(): number;
-        tint(): $Vector4f;
-        randomSource(): $RandomSource;
         faces(): $Direction[];
         constructor(arg0: $ModelData);
         constructor(state: $BlockState_, faces: $Direction_[], randomSource: $RandomSource, seed: number, data: $ModelData, tint: $Vector4f);
@@ -36,7 +36,7 @@ declare module "@package/net/neoforged/neoforge/client/model/renderable" {
     /**
      * Values that may be interpreted as {@link $BakedModelRenderable$Context}.
      */
-    export type $BakedModelRenderable$Context_ = { faces?: $Direction_[], randomSource?: $RandomSource, seed?: number, state?: $BlockState_, tint?: $Vector4f, data?: $ModelData,  } | [faces?: $Direction_[], randomSource?: $RandomSource, seed?: number, state?: $BlockState_, tint?: $Vector4f, data?: $ModelData, ];
+    export type $BakedModelRenderable$Context_ = { state?: $BlockState_, tint?: $Vector4f, data?: $ModelData, faces?: $Direction_[], randomSource?: $RandomSource, seed?: number,  } | [state?: $BlockState_, tint?: $Vector4f, data?: $ModelData, faces?: $Direction_[], randomSource?: $RandomSource, seed?: number, ];
     export class $CompositeRenderable$Mesh {
     }
     export class $IRenderable<T> {

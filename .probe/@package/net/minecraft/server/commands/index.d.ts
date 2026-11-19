@@ -77,7 +77,7 @@ declare module "@package/net/minecraft/server/commands" {
     /**
      * Values that may be interpreted as {@link $CloneCommands$CloneBlockInfo}.
      */
-    export type $CloneCommands$CloneBlockInfo_ = { state?: $BlockState_, pos?: $BlockPos_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_,  } | [state?: $BlockState_, pos?: $BlockPos_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, ];
+    export type $CloneCommands$CloneBlockInfo_ = { pos?: $BlockPos_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, state?: $BlockState_,  } | [pos?: $BlockPos_, blockEntityInfo?: $CloneCommands$CloneBlockEntityInfo_, state?: $BlockState_, ];
     export class $WhitelistCommand {
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
@@ -132,8 +132,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $LocateCommand {
-        static showLocateResult(source: $CommandSourceStack, result: $ResourceOrTagArgument$Result<never>, sourcePosition: $BlockPos_, resultWithPosition: $Pair<$BlockPos_, $Holder_<never>>, translationKey: string, absoluteY: boolean, duration: $Duration_): number;
         static showLocateResult(source: $CommandSourceStack, result: $ResourceOrTagKeyArgument$Result<never>, sourcePosition: $BlockPos_, resultWithPosition: $Pair<$BlockPos_, $Holder_<never>>, translationKey: string, absoluteY: boolean, duration: $Duration_): number;
+        static showLocateResult(source: $CommandSourceStack, result: $ResourceOrTagArgument$Result<never>, sourcePosition: $BlockPos_, resultWithPosition: $Pair<$BlockPos_, $Holder_<never>>, translationKey: string, absoluteY: boolean, duration: $Duration_): number;
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>, context: $CommandBuildContext): void;
         constructor();
     }
@@ -150,7 +150,7 @@ declare module "@package/net/minecraft/server/commands" {
     /**
      * Values that may be interpreted as {@link $CloneCommands$DimensionAndPosition}.
      */
-    export type $CloneCommands$DimensionAndPosition_ = { dimension?: $ServerLevel, position?: $BlockPos_,  } | [dimension?: $ServerLevel, position?: $BlockPos_, ];
+    export type $CloneCommands$DimensionAndPosition_ = { position?: $BlockPos_, dimension?: $ServerLevel,  } | [position?: $BlockPos_, dimension?: $ServerLevel, ];
     export class $PlaySoundCommand {
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
         constructor();
@@ -193,8 +193,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $PublishCommand {
-        static getSuccessMessage(port: number): $MutableComponent;
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
+        static getSuccessMessage(port: number): $MutableComponent;
         constructor();
     }
     export class $ExecuteCommand$CommandNumericPredicate {
@@ -207,18 +207,18 @@ declare module "@package/net/minecraft/server/commands" {
     export type $ExecuteCommand$CommandNumericPredicate_ = (() => void);
     export class $FunctionCommand {
         static queueFunctions<T extends $ExecutionCommandSource<T>>(functions: $Collection_<$CommandFunction<T>>, _arguments: $CompoundTag_ | null, originalSource: T, source: T, executionControl: $ExecutionControl<T>, callbacks: $FunctionCommand$Callbacks_<T>, chainModifiers: $ChainModifiers_): void;
-        static modifySenderForExecution(source: $CommandSourceStack): $CommandSourceStack;
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
+        static modifySenderForExecution(source: $CommandSourceStack): $CommandSourceStack;
         static ERROR_FUNCTION_INSTANTATION_FAILURE: $Dynamic2CommandExceptionType;
         static SUGGEST_FUNCTION: $SuggestionProvider<$CommandSourceStack>;
         constructor();
     }
     export class $PlaceCommand {
-        static placeJigsaw(source: $CommandSourceStack, templatePool: $Holder_<$StructureTemplatePool>, target: $ResourceLocation_, maxDepth: number, pos: $BlockPos_): number;
+        static placeFeature(source: $CommandSourceStack, feature: $Holder$Reference<$ConfiguredFeature_<never, never>>, pos: $BlockPos_): number;
         static placeTemplate(source: $CommandSourceStack, template: $ResourceLocation_, pos: $BlockPos_, rotation: $Rotation_, mirror: $Mirror_, integrity: number, seed: number): number;
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
         static placeStructure(source: $CommandSourceStack, feature: $Holder$Reference<$Structure_>, pos: $BlockPos_): number;
-        static placeFeature(source: $CommandSourceStack, feature: $Holder$Reference<$ConfiguredFeature_<never, never>>, pos: $BlockPos_): number;
+        static placeJigsaw(source: $CommandSourceStack, templatePool: $Holder_<$StructureTemplatePool>, target: $ResourceLocation_, maxDepth: number, pos: $BlockPos_): number;
         constructor();
     }
     export class $DebugCommand$Tracer implements $CommandSource, $TraceCallbacks {
@@ -338,8 +338,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $TriggerCommand {
-        static suggestObjectives(source: $CommandSourceStack, builder: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
+        static suggestObjectives(source: $CommandSourceStack, builder: $SuggestionsBuilder): $CompletableFuture<$Suggestions>;
         constructor();
     }
     export class $ReturnCommand$ReturnFailCustomExecutor<T extends $ExecutionCommandSource<T>> implements $CustomCommandExecutor$CommandAdapter<T> {
@@ -356,7 +356,7 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $DebugCommand$TraceCustomExecutor extends $CustomCommandExecutor$WithErrorHandling<$CommandSourceStack> implements $CustomCommandExecutor$CommandAdapter<$CommandSourceStack> {
-        run(context: $CommandContext<$CommandSourceStack>): number;
+        run(arg0: $CommandContext<$CommandSourceStack>): number;
     }
     export class $TeleportCommand$LookAt {
     }
@@ -439,8 +439,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $ReloadCommand {
-        static reloadPacks(selectedIds: $Collection_<string>, source: $CommandSourceStack): void;
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
+        static reloadPacks(selectedIds: $Collection_<string>, source: $CommandSourceStack): void;
         constructor();
     }
     export class $FillCommand {
@@ -476,7 +476,7 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $ExecuteCommand$ExecuteIfFunctionCustomModifier implements $CustomModifierExecutor$ModifierAdapter<$CommandSourceStack> {
-        apply(context: $CommandContext<$CommandSourceStack>): $Collection<$CommandSourceStack>;
+        apply(arg0: $CommandContext<$CommandSourceStack>): $Collection<$CommandSourceStack>;
     }
     export class $SaveAllCommand {
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;
@@ -528,8 +528,8 @@ declare module "@package/net/minecraft/server/commands" {
         constructor();
     }
     export class $BossBarCommands {
-        static getBossBar(source: $CommandContext<$CommandSourceStack>): $CustomBossEvent;
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>, context: $CommandBuildContext): void;
+        static getBossBar(source: $CommandContext<$CommandSourceStack>): $CustomBossEvent;
         static SUGGEST_BOSS_BAR: $SuggestionProvider<$CommandSourceStack>;
         constructor();
     }
@@ -554,7 +554,7 @@ declare module "@package/net/minecraft/server/commands" {
     /**
      * Values that may be interpreted as {@link $TeleportCommand$LookAtEntity}.
      */
-    export type $TeleportCommand$LookAtEntity_ = { entity?: $Entity, anchor?: $EntityAnchorArgument$Anchor_,  } | [entity?: $Entity, anchor?: $EntityAnchorArgument$Anchor_, ];
+    export type $TeleportCommand$LookAtEntity_ = { anchor?: $EntityAnchorArgument$Anchor_, entity?: $Entity,  } | [anchor?: $EntityAnchorArgument$Anchor_, entity?: $Entity, ];
     export class $AttributeCommand {
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>, context: $CommandBuildContext): void;
         constructor();
@@ -586,7 +586,7 @@ declare module "@package/net/minecraft/server/commands" {
      */
     export type $CloneCommands$CloneBlockEntityInfo_ = { tag?: $CompoundTag_, components?: $DataComponentMap_,  } | [tag?: $CompoundTag_, components?: $DataComponentMap_, ];
     export class $FunctionCommand$FunctionCustomExecutor extends $CustomCommandExecutor$WithErrorHandling<$CommandSourceStack> implements $CustomCommandExecutor$CommandAdapter<$CommandSourceStack> {
-        run(context: $CommandContext<$CommandSourceStack>): number;
+        run(arg0: $CommandContext<$CommandSourceStack>): number;
     }
     export class $RecipeCommand {
         static register(dispatcher: $CommandDispatcher<$CommandSourceStack>): void;

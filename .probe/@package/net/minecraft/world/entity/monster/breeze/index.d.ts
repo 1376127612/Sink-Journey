@@ -4,6 +4,7 @@ import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $AnimationState, $WalkAnimationState, $EntityType_, $Entity$RemovalReason, $LivingEntity, $PortalProcessor } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
@@ -99,6 +100,7 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -111,6 +113,7 @@ declare module "@package/net/minecraft/world/entity/monster/breeze" {
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
         shoot: $AnimationState;
         longJump: $AnimationState;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;

@@ -8,37 +8,37 @@ import { $ClientboundCustomPayloadPacket, $ServerboundCustomPayloadPacket } from
 
 declare module "@package/de/maxhenkel/voicechat/net" {
     export class $SecretPacket implements $Packet<$SecretPacket> {
-        type(): $CustomPacketPayload$Type<$SecretPacket>;
-        toBytes(arg0: $FriendlyByteBuf): void;
+        getKeepAlive(): number;
+        getPlayerUUID(): $UUID;
         fromBytes(arg0: $FriendlyByteBuf): $SecretPacket;
         getCodec(): $ServerConfig$Codec;
-        getKeepAlive(): number;
-        getSecret(): $Secret;
-        getVoiceHost(): string;
-        getServerPort(): number;
-        getVoiceChatDistance(): number;
         groupsEnabled(): boolean;
         allowRecording(): boolean;
-        getPlayerUUID(): $UUID;
+        getServerPort(): number;
+        getVoiceHost(): string;
         getMtuSize(): number;
+        type(): $CustomPacketPayload$Type<$SecretPacket>;
+        toBytes(arg0: $FriendlyByteBuf): void;
+        getSecret(): $Secret;
+        getVoiceChatDistance(): number;
         toVanillaClientbound(): $ClientboundCustomPayloadPacket;
         toVanillaServerbound(): $ServerboundCustomPayloadPacket;
         static SECRET: $CustomPacketPayload$Type<$SecretPacket>;
         constructor();
         constructor(arg0: $ServerPlayer, arg1: $Secret, arg2: number, arg3: $ServerConfig, arg4: string);
         get keepAlive(): number;
-        get secret(): $Secret;
-        get voiceHost(): string;
-        get serverPort(): number;
-        get voiceChatDistance(): number;
         get playerUUID(): $UUID;
+        get serverPort(): number;
+        get voiceHost(): string;
         get mtuSize(): number;
+        get secret(): $Secret;
+        get voiceChatDistance(): number;
     }
     export class $Packet<T extends $Packet<T>> {
     }
     export interface $Packet<T extends $Packet<T>> extends $CustomPacketPayload {
+        fromBytes(arg0: $FriendlyByteBuf): T;
         type(): $CustomPacketPayload$Type<T>;
         toBytes(arg0: $FriendlyByteBuf): void;
-        fromBytes(arg0: $FriendlyByteBuf): T;
     }
 }

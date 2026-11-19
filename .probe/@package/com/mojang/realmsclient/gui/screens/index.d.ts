@@ -55,6 +55,7 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         focused: boolean;
         static BIG_WIDTH: number;
         static DEFAULT_SPACING: number;
+        height: number;
     }
     export class $RealmsSelectFileToUploadScreen extends $RealmsScreen {
         init(): void;
@@ -79,8 +80,8 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
     }
     export class $UploadResult$Builder {
         withErrorMessage(errorMessage: string | null): $UploadResult$Builder;
-        withStatusCode(statusCode: number): $UploadResult$Builder;
         build(): $UploadResult;
+        withStatusCode(statusCode: number): $UploadResult$Builder;
         constructor();
     }
     export class $RealmsGenericErrorScreen$ErrorMessage extends $Record {
@@ -182,20 +183,26 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         constructor(parent: $RealmsConfigureWorldScreen, options: $RealmsWorldOptions, worldType: $RealmsServer$WorldType_, activeSlot: number);
     }
     export class $RealmsSelectWorldTemplateScreen$WorldTemplateList extends $RealmsObjectSelectionList<$RealmsSelectWorldTemplateScreen$Entry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $RealmsSelectWorldTemplateScreen$Entry;
+        height: number;
     }
     export class $RealmsResetWorldScreen extends $RealmsScreen {
-        static forEmptySlot(lastScreen: $Screen, slot: number, serverData: $RealmsServer, resetWorldRunnable: $Runnable_): $RealmsResetWorldScreen;
         static forResetSlot(lastScreen: $Screen, serverData: $RealmsServer, resetWorldRunnable: $Runnable_): $RealmsResetWorldScreen;
-        init(): void;
+        static forEmptySlot(lastScreen: $Screen, slot: number, serverData: $RealmsServer, resetWorldRunnable: $Runnable_): $RealmsResetWorldScreen;
         static forNewRealm(lastScreen: $Screen, serverData: $RealmsServer, realmCreationTask: $RealmCreationTask, resetWorldRunnable: $Runnable_): $RealmsResetWorldScreen;
+        init(): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -271,8 +278,8 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         constructor(serviceException: $RealmsServiceException, nextScreen: $Screen);
     }
     export class $RealmsLongRunningMcoTaskScreen extends $RealmsScreen {
-        init(): void;
         setTitle(title: $Component_): void;
+        init(): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -291,14 +298,20 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         set title(value: $Component_);
     }
     export class $RealmsBackupInfoScreen$BackupInfoList extends $ObjectSelectionList<$RealmsBackupInfoScreen$BackupInfoListEntry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $RealmsBackupInfoScreen$BackupInfoListEntry;
+        height: number;
     }
     export class $RealmsSlotOptionsScreen$SettingsSlider extends $AbstractSliderButton {
         static PERIOD_PER_SCROLLED_PIXEL: number;
@@ -308,6 +321,7 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
     }
     export class $RealmsPendingInvitesScreen$Entry extends $ObjectSelectionList$Entry<$RealmsPendingInvitesScreen$Entry> {
     }
@@ -434,19 +448,25 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         height: number;
     }
     export class $RealmsBackupScreen$BackupObjectSelectionList extends $ContainerObjectSelectionList<$RealmsBackupScreen$Entry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $RealmsBackupScreen$Entry;
+        height: number;
     }
     export class $RealmsPopups {
-        static warningPopupScreen(backgroundScreen: $Screen, message: $Component_, onContinue: $Consumer_<$PopupScreen>): $PopupScreen;
         static infoPopupScreen(backgroundScreen: $Screen, message: $Component_, onContinue: $Consumer_<$PopupScreen>): $PopupScreen;
         static warningAcknowledgePopupScreen(backgroundScreen: $Screen, message: $Component_, onContinue: $Consumer_<$PopupScreen>): $PopupScreen;
+        static warningPopupScreen(backgroundScreen: $Screen, message: $Component_, onContinue: $Consumer_<$PopupScreen>): $PopupScreen;
         constructor();
     }
     export class $UploadResult {
@@ -458,14 +478,20 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
     export class $RealmsBackupScreen$Entry extends $ContainerObjectSelectionList$Entry<$RealmsBackupScreen$Entry> {
     }
     export class $RealmsPlayerScreen$InvitedObjectSelectionList extends $ContainerObjectSelectionList<$RealmsPlayerScreen$Entry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $RealmsPlayerScreen$Entry;
+        height: number;
     }
     export class $RealmsPendingInvitesScreen$Entry$RejectRowButton extends $RowButton {
         yOffset: number;
@@ -491,8 +517,8 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
         font: $Font;
-        constructor(lastScreen: $RealmsMainScreen, realmsServer: $RealmsServer);
         constructor(lastScreen: $RealmsMainScreen, parentId: number);
+        constructor(lastScreen: $RealmsMainScreen, realmsServer: $RealmsServer);
     }
     export class $RealmsPendingInvitesScreen extends $RealmsScreen {
         init(): void;
@@ -530,8 +556,8 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         constructor(lastScreen: $Screen, task: $LongRunningTask);
     }
     export class $RealmsBrokenWorldScreen extends $RealmsScreen {
-        init(): void;
         doSwitchOrReset(): void;
+        init(): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -567,27 +593,33 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         constructor(realmCreationTask: $RealmCreationTask | null, realmId: number, arg2: number, slotId: $RealmsResetWorldScreen, lastScreen: $LevelSummary);
     }
     export class $RealmsPendingInvitesScreen$PendingInvitationSelectionList extends $RealmsObjectSelectionList<$RealmsPendingInvitesScreen$Entry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $RealmsPendingInvitesScreen$Entry;
+        height: number;
     }
     export class $RealmsNotificationsScreen$DataFetcherConfiguration {
     }
     export interface $RealmsNotificationsScreen$DataFetcherConfiguration {
     }
     export class $RealmsConfigureWorldScreen extends $RealmsScreen {
-        closeTheWorld(): void;
-        saveSlotSettings(worldOptions: $RealmsWorldOptions): void;
-        openTheWorld(join: boolean): void;
-        init(): void;
-        getNewScreen(): $RealmsConfigureWorldScreen;
         stateChanged(): void;
         saveSettings(key: string, value: string): void;
+        openTheWorld(join: boolean): void;
+        saveSlotSettings(worldOptions: $RealmsWorldOptions): void;
+        closeTheWorld(): void;
+        init(): void;
+        getNewScreen(): $RealmsConfigureWorldScreen;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -606,8 +638,8 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         get newScreen(): $RealmsConfigureWorldScreen;
     }
     export class $RealmsSelectWorldTemplateScreen extends $RealmsScreen {
-        init(): void;
         setWarning(...warning: $Component_[]): void;
+        init(): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -646,13 +678,19 @@ declare module "@package/com/mojang/realmsclient/gui/screens" {
         constructor(callback: $Consumer_<$WorldGenerationInfo>, buttonTitle: $Component_);
     }
     export class $RealmsSelectFileToUploadScreen$WorldSelectionList extends $RealmsObjectSelectionList<$RealmsSelectFileToUploadScreen$Entry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $RealmsSelectFileToUploadScreen$Entry;
+        height: number;
     }
 }

@@ -12,8 +12,8 @@ declare module "@package/net/neoforged/neoforge/event/entity/item" {
     }
     export class $ItemTossEvent extends $ItemEvent implements $ICancellableEvent {
         getPlayer(): $Player;
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $ItemEntity, arg1: $Player);
         get player(): $Player;
     }

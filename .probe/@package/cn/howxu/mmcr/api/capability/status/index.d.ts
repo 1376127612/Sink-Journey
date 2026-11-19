@@ -34,7 +34,7 @@ declare module "@package/cn/howxu/mmcr/api/capability/status" {
     /**
      * Values that may be interpreted as {@link $FailureOccurrence}.
      */
-    export type $FailureOccurrence_ = { trace?: $FailureTrace_, details?: $Map_<string, string>, reason?: $FailureReason_,  } | [trace?: $FailureTrace_, details?: $Map_<string, string>, reason?: $FailureReason_, ];
+    export type $FailureOccurrence_ = { reason?: $FailureReason_, trace?: $FailureTrace_, details?: $Map_<string, string>,  } | [reason?: $FailureReason_, trace?: $FailureTrace_, details?: $Map_<string, string>, ];
     export class $FailureReport$Selection extends $Enum<$FailureReport$Selection> {
         static values(): $FailureReport$Selection[];
         static valueOf(name: string): $FailureReport$Selection;
@@ -83,8 +83,8 @@ declare module "@package/cn/howxu/mmcr/api/capability/status" {
         id(): $ResourceLocation;
         source(): $ResourceLocation;
         failure(): $FailureOccurrence;
-        details(): $Map<string, string>;
         severity(): $StatusSeverity;
+        details(): $Map<string, string>;
         static blocked(id: $ResourceLocation_, source: $ResourceLocation_, failure: $FailureOccurrence_): $ExecutionStatus;
         constructor(id: $ResourceLocation_, severity: $StatusSeverity_, source: $ResourceLocation_, details: $Map_<string, string>);
         constructor(id: $ResourceLocation_, severity: $StatusSeverity_, source: $ResourceLocation_, failure: $FailureOccurrence_);
@@ -92,7 +92,7 @@ declare module "@package/cn/howxu/mmcr/api/capability/status" {
     /**
      * Values that may be interpreted as {@link $ExecutionStatus}.
      */
-    export type $ExecutionStatus_ = { severity?: $StatusSeverity_, source?: $ResourceLocation_, id?: $ResourceLocation_, failure?: $FailureOccurrence_,  } | [severity?: $StatusSeverity_, source?: $ResourceLocation_, id?: $ResourceLocation_, failure?: $FailureOccurrence_, ];
+    export type $ExecutionStatus_ = { source?: $ResourceLocation_, id?: $ResourceLocation_, failure?: $FailureOccurrence_, severity?: $StatusSeverity_,  } | [source?: $ResourceLocation_, id?: $ResourceLocation_, failure?: $FailureOccurrence_, severity?: $StatusSeverity_, ];
     export class $StatusSeverity extends $Enum<$StatusSeverity> {
         static values(): $StatusSeverity[];
         static valueOf(name: string): $StatusSeverity;

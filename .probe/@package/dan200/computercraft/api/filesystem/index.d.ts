@@ -7,24 +7,24 @@ declare module "@package/dan200/computercraft/api/filesystem" {
     export class $WritableMount {
     }
     export interface $WritableMount extends $Mount {
+        getRemainingSpace(): number;
         "delete"(arg0: string): void;
         isReadOnly(arg0: string): boolean;
         rename(arg0: string, arg1: string): void;
-        makeDirectory(arg0: string): void;
         getCapacity(): number;
+        makeDirectory(arg0: string): void;
         openFile(arg0: string, arg1: $Set_<$OpenOption>): $SeekableByteChannel;
-        getRemainingSpace(): number;
-        get capacity(): number;
         get remainingSpace(): number;
+        get capacity(): number;
     }
     export class $Mount {
     }
     export interface $Mount {
+        openForRead(arg0: string): $SeekableByteChannel;
         getSize(arg0: string): number;
         list(arg0: string, arg1: $List_<string>): void;
         getAttributes(arg0: string): $BasicFileAttributes;
         exists(arg0: string): boolean;
         isDirectory(arg0: string): boolean;
-        openForRead(arg0: string): $SeekableByteChannel;
     }
 }

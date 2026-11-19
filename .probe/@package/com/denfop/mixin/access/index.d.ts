@@ -37,8 +37,8 @@ declare module "@package/com/denfop/mixin/access" {
     export class $StructureTemplatePoolAccessor {
     }
     export interface $StructureTemplatePoolAccessor {
-        getRawTemplates(): $List<$Pair<$StructurePoolElement, number>>;
         setRawTemplates(arg0: $List_<$Pair<$StructurePoolElement, number>>): void;
+        getRawTemplates(): $List<$Pair<$StructurePoolElement, number>>;
         getTemplates(): $ObjectArrayList<$StructurePoolElement>;
         get templates(): $ObjectArrayList<$StructurePoolElement>;
     }
@@ -75,30 +75,30 @@ declare module "@package/com/denfop/mixin/access" {
     export class $AbstractContainerScreenAccessor {
     }
     export interface $AbstractContainerScreenAccessor {
-        getSnapbackEnd(): $Slot;
-        getClickedSlot(): $Slot;
-        getSnapbackTime(): number;
-        setSnapbackItem(arg0: $ItemStack_): void;
-        getSnapbackStartX(): number;
-        getHoveredSlot(): $Slot;
-        getDraggingItem(): $ItemStack;
-        getQuickdropSlot(): $Slot;
-        getSnapbackItem(): $ItemStack;
-        getSnapbackStartY(): number;
-        getIsSplittingStack(): boolean;
-        getQuickCraftingType(): number;
         getQuickCraftingRemainder(): number;
         setQuickCraftingRemainder(arg0: number): void;
-        get snapbackEnd(): $Slot;
-        get clickedSlot(): $Slot;
-        get snapbackTime(): number;
-        get snapbackStartX(): number;
-        get hoveredSlot(): $Slot;
-        get draggingItem(): $ItemStack;
-        get quickdropSlot(): $Slot;
-        get snapbackStartY(): number;
+        getIsSplittingStack(): boolean;
+        getQuickCraftingType(): number;
+        getSnapbackStartY(): number;
+        getSnapbackTime(): number;
+        getClickedSlot(): $Slot;
+        getQuickdropSlot(): $Slot;
+        getHoveredSlot(): $Slot;
+        getSnapbackEnd(): $Slot;
+        setSnapbackItem(arg0: $ItemStack_): void;
+        getSnapbackItem(): $ItemStack;
+        getDraggingItem(): $ItemStack;
+        getSnapbackStartX(): number;
         get isSplittingStack(): boolean;
         get quickCraftingType(): number;
+        get snapbackStartY(): number;
+        get snapbackTime(): number;
+        get clickedSlot(): $Slot;
+        get quickdropSlot(): $Slot;
+        get hoveredSlot(): $Slot;
+        get snapbackEnd(): $Slot;
+        get draggingItem(): $ItemStack;
+        get snapbackStartX(): number;
     }
     export class $SoundEngineAccess {
     }

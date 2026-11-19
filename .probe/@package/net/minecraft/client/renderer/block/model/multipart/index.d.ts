@@ -19,13 +19,13 @@ declare module "@package/net/minecraft/client/renderer/block/model/multipart" {
         constructor();
     }
     export class $MultiPart implements $UnbakedModel {
+        resolveParents(resolver: $Function_<$ResourceLocation, $UnbakedModel>): void;
+        bake(baker: $ModelBaker, spriteGetter: $Function_<$Material, $TextureAtlasSprite>, state: $ModelState): $BakedModel;
         getSelectors(): $List<$Selector>;
         getMultiVariants(): $Set<$MultiVariant>;
+        handler$bjc000$lightspeed$getDependenciesReturnInjected(arg0: $CallbackInfoReturnable<any>): void;
+        handler$bjc000$lightspeed$getDependenciesHeadInjected(arg0: $CallbackInfoReturnable<any>): void;
         getDependencies(): $Collection<$ResourceLocation>;
-        bake(baker: $ModelBaker, spriteGetter: $Function_<$Material, $TextureAtlasSprite>, state: $ModelState): $BakedModel;
-        resolveParents(resolver: $Function_<$ResourceLocation, $UnbakedModel>): void;
-        handler$bgn000$lightspeed$getDependenciesReturnInjected(arg0: $CallbackInfoReturnable<any>): void;
-        handler$bgn000$lightspeed$getDependenciesHeadInjected(arg0: $CallbackInfoReturnable<any>): void;
         definition: $StateDefinition<$Block, $BlockState>;
         constructor(definition: $StateDefinition<$Block_, $BlockState_>, selectors: $List_<$Selector>);
         get selectors(): $List<$Selector>;
@@ -48,7 +48,7 @@ declare module "@package/net/minecraft/client/renderer/block/model/multipart" {
      */
     export type $Condition_ = ((arg0: $StateDefinition<$Block, $BlockState>) => $Predicate<$BlockState>);
     export class $KeyValueCondition implements $Condition {
-        redirect$bgj000$lightspeed$getPredicateSplitToListRedirected(arg0: $Splitter, arg1: $CharSequence): $List<any>;
+        redirect$bio000$lightspeed$getPredicateSplitToListRedirected(arg0: $Splitter, arg1: $CharSequence): $List<any>;
         getPredicate(definition: $StateDefinition<any, any>): $Predicate<any>;
         constructor(key: string, value: string);
     }
@@ -58,12 +58,12 @@ declare module "@package/net/minecraft/client/renderer/block/model/multipart" {
         constructor(conditions: $Iterable_<$Condition>);
     }
     export class $Selector implements $ICache {
+        lightspeed$persistAndClearCache(): void;
+        handler$bja000$lightspeed$getPredicateHeadInjected(arg0: $StateDefinition<any, any>, arg1: $CallbackInfoReturnable<any>): void;
+        handler$bja000$lightspeed$initReturnInjected(arg0: $Condition_, arg1: $MultiVariant, arg2: $CallbackInfo): void;
+        handler$bja000$lightspeed$getPredicateReturnInjected(arg0: $StateDefinition<any, any>, arg1: $CallbackInfoReturnable<any>): void;
         getVariant(): $MultiVariant;
         getPredicate(definition: $StateDefinition<$Block_, $BlockState_>): $Predicate<$BlockState>;
-        lightspeed$persistAndClearCache(): void;
-        handler$bgl000$lightspeed$initReturnInjected(arg0: $Condition_, arg1: $MultiVariant, arg2: $CallbackInfo): void;
-        handler$bgl000$lightspeed$getPredicateHeadInjected(arg0: $StateDefinition<any, any>, arg1: $CallbackInfoReturnable<any>): void;
-        handler$bgl000$lightspeed$getPredicateReturnInjected(arg0: $StateDefinition<any, any>, arg1: $CallbackInfoReturnable<any>): void;
         constructor(condition: $Condition_, variant: $MultiVariant);
         get variant(): $MultiVariant;
     }

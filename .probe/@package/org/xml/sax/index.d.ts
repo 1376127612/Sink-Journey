@@ -13,18 +13,17 @@ declare module "@package/org/xml/sax" {
     }
     export interface $Locator {
         getLineNumber(): number;
-        getColumnNumber(): number;
         getSystemId(): string;
         getPublicId(): string;
+        getColumnNumber(): number;
         get lineNumber(): number;
-        get columnNumber(): number;
         get systemId(): string;
         get publicId(): string;
+        get columnNumber(): number;
     }
     export class $InputSource {
         isEmpty(): boolean;
         getEncoding(): string;
-        setSystemId(arg0: string): void;
         getSystemId(): string;
         setByteStream(arg0: $InputStream): void;
         setCharacterStream(arg0: $Reader): void;
@@ -33,6 +32,7 @@ declare module "@package/org/xml/sax" {
         getByteStream(): $InputStream;
         setEncoding(arg0: string): void;
         getCharacterStream(): $Reader;
+        setSystemId(arg0: string): void;
         constructor(arg0: $Reader);
         constructor(arg0: $InputStream);
         constructor(arg0: string);
@@ -41,17 +41,17 @@ declare module "@package/org/xml/sax" {
     }
     export class $SAXParseException extends $SAXException {
         getLineNumber(): number;
-        getColumnNumber(): number;
         getSystemId(): string;
         getPublicId(): string;
+        getColumnNumber(): number;
         constructor(arg0: string, arg1: string, arg2: string, arg3: number, arg4: number, arg5: $Exception);
         constructor(arg0: string, arg1: string, arg2: string, arg3: number, arg4: number);
         constructor(arg0: string, arg1: $Locator, arg2: $Exception);
         constructor(arg0: string, arg1: $Locator);
         get lineNumber(): number;
-        get columnNumber(): number;
         get systemId(): string;
         get publicId(): string;
+        get columnNumber(): number;
     }
     export class $SAXException extends $Exception {
         getException(): $Exception;
@@ -73,12 +73,12 @@ declare module "@package/org/xml/sax" {
     export class $ContentHandler {
     }
     export interface $ContentHandler {
-        declaration(arg0: string, arg1: string, arg2: string): void;
+        startElement(arg0: string, arg1: string, arg2: string, arg3: $Attributes): void;
+        endElement(arg0: string, arg1: string, arg2: string): void;
         endPrefixMapping(arg0: string): void;
         startPrefixMapping(arg0: string, arg1: string): void;
         skippedEntity(arg0: string): void;
-        startElement(arg0: string, arg1: string, arg2: string, arg3: $Attributes): void;
-        endElement(arg0: string, arg1: string, arg2: string): void;
+        declaration(arg0: string, arg1: string, arg2: string): void;
         processingInstruction(arg0: string, arg1: string): void;
         startDocument(): void;
         characters(arg0: string[], arg1: number, arg2: number): void;
@@ -100,8 +100,8 @@ declare module "@package/org/xml/sax" {
         getIndex(arg0: string, arg1: string): number;
         getIndex(arg0: string): number;
         getURI(arg0: number): string;
-        getLocalName(arg0: number): string;
         getQName(arg0: number): string;
+        getLocalName(arg0: number): string;
         get length(): number;
     }
 }

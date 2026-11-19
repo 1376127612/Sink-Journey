@@ -308,11 +308,11 @@ declare module "@package/net/minecraft/util/datafix/schemas" {
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
         constructor(versionKey: number, parent: $Schema);
     }
-    export class $V1022 extends $Schema {
-        constructor(versionKey: number, parent: $Schema);
-    }
     export class $V3685 extends $NamespacedSchema {
         static NAMESPACED_STRING_CODEC: $PrimitiveCodec<string>;
+        constructor(versionKey: number, parent: $Schema);
+    }
+    export class $V1022 extends $Schema {
         constructor(versionKey: number, parent: $Schema);
     }
     export class $V3689 extends $NamespacedSchema {

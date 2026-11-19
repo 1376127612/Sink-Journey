@@ -12,14 +12,14 @@ declare module "@package/sirttas/dpanvil/api/predicate/block/direction" {
         test(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_): boolean;
         static valueOf(arg0: string): $FacingBlockPredicate;
         getType(): $BlockPosPredicateType<$IBlockPosPredicate>;
+        simplify(): $IBlockPosPredicate;
         cache(): $IBlockPosPredicate;
-        offset(arg0: $Vec3i): $IBlockPosPredicate;
         offset(arg0: number, arg1: number, arg2: number): $IBlockPosPredicate;
+        offset(arg0: $Vec3i): $IBlockPosPredicate;
         or(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
         and(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
         not(): $IBlockPosPredicate;
         getTooltip(): $List<$Component>;
-        simplify(): $IBlockPosPredicate;
         static DOWN: $FacingBlockPredicate;
         static CODEC: $MapCodec<$FacingBlockPredicate>;
         static NORTH: $FacingBlockPredicate;

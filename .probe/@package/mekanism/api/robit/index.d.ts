@@ -7,14 +7,14 @@ import { $List } from "@package/java/util";
 
 declare module "@package/mekanism/api/robit" {
     export class $RobitSkin {
-        static getTranslatedName(arg0: $ResourceKey_<$RobitSkin>): $Component;
         static getTranslationKey(arg0: $ResourceKey_<$RobitSkin>): string;
+        static getTranslatedName(arg0: $ResourceKey_<$RobitSkin>): $Component;
     }
     export interface $RobitSkin {
-        textures(): $List<$ResourceLocation>;
         codec(): $MapCodec<$RobitSkin>;
-        isUnlocked(arg0: $Player): boolean;
         customModel(): $ResourceLocation;
+        textures(): $List<$ResourceLocation>;
+        isUnlocked(arg0: $Player): boolean;
     }
     /**
      * Values that may be interpreted as {@link $RobitSkin}.

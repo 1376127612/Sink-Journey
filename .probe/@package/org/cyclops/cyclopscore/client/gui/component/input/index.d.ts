@@ -1,11 +1,12 @@
 import { $Consumer } from "@package/java/util/function";
 import { $Component_ } from "@package/net/minecraft/network/chat";
-import { $EditBox, $WidgetTooltipHolder } from "@package/net/minecraft/client/gui/components";
+import { $EditBox, $WidgetSprites, $WidgetTooltipHolder } from "@package/net/minecraft/client/gui/components";
 import { $Font } from "@package/net/minecraft/client/gui";
 
 declare module "@package/org/cyclops/cyclopscore/client/gui/component/input" {
     export class $WidgetTextFieldExtended extends $EditBox {
         setListener(arg0: $IInputListener_): void;
+        static SPRITES: $WidgetSprites;
         canLoseFocus: boolean;
         visible: boolean;
         static BACKWARDS: number;
@@ -21,6 +22,7 @@ declare module "@package/org/cyclops/cyclopscore/client/gui/component/input" {
         focused: boolean;
         static FORWARDS: number;
         maxLength: number;
+        height: number;
         constructor(arg0: $Font, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Component_, arg6: boolean);
         constructor(arg0: $Font, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $Component_);
         set listener(value: $IInputListener_);

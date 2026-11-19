@@ -6,13 +6,13 @@ declare module "@package/dev/architectury/registry/registries" {
     export class $DeferredSupplier<T> {
     }
     export interface $DeferredSupplier<T> extends $OptionalSupplier<T> {
-        getKey(): $ResourceKey<T>;
-        getId(): $ResourceLocation;
         getRegistryKey(): $ResourceKey<$Registry<T>>;
         getRegistryId(): $ResourceLocation;
-        get key(): $ResourceKey<T>;
-        get id(): $ResourceLocation;
+        getKey(): $ResourceKey<T>;
+        getId(): $ResourceLocation;
         get registryKey(): $ResourceKey<$Registry<T>>;
         get registryId(): $ResourceLocation;
+        get key(): $ResourceKey<T>;
+        get id(): $ResourceLocation;
     }
 }

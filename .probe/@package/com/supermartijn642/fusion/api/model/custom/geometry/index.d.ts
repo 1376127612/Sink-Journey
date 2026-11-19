@@ -26,24 +26,24 @@ declare module "@package/com/supermartijn642/fusion/api/model/custom/geometry" {
         static of(cuboidModel: $BlockModel): $CuboidModelGeometry;
     }
     export interface $ModelGeometry {
-        isGui3d(): boolean;
-        bake(consumer: $ModelGeometry$QuadConsumer_, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): void;
         bake(transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): $CullableQuads;
+        bake(consumer: $ModelGeometry$QuadConsumer_, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): void;
         isCuboidGeometry(): boolean;
-        get gui3d(): boolean;
+        isGui3d(): boolean;
         get cuboidGeometry(): boolean;
+        get gui3d(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ModelGeometry}.
      */
     export type $ModelGeometry_ = ((consumer: $ModelGeometry$QuadConsumer, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver) => void);
     export class $CuboidModelGeometry {
-        static of(elements: $List_<$CuboidModelGeometry$Element>): $CuboidModelGeometry;
-        static of(model: $BlockModel): $CuboidModelGeometry;
-        static bakeElement(consumer: $ModelGeometry$QuadConsumer_, element: $CuboidModelGeometry$Element, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): void;
-        static bakeElement(element: $CuboidModelGeometry$Element, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): $CullableQuads;
         static bakeFace(face: $CuboidModelGeometry$Face, element: $CuboidModelGeometry$Element, side: $Direction_, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): $QuadAccess;
         static bakeFace(consumer: $ModelGeometry$QuadConsumer_, face: $CuboidModelGeometry$Face, element: $CuboidModelGeometry$Element, side: $Direction_, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): void;
+        static bakeElement(consumer: $ModelGeometry$QuadConsumer_, element: $CuboidModelGeometry$Element, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): void;
+        static bakeElement(element: $CuboidModelGeometry$Element, transformation: $ModelTransform, materialResolver: $ModelGeometry$MaterialKeyResolver_): $CullableQuads;
+        static of(elements: $List_<$CuboidModelGeometry$Element>): $CuboidModelGeometry;
+        static of(model: $BlockModel): $CuboidModelGeometry;
     }
     export interface $CuboidModelGeometry extends $ModelGeometry {
         elements(): $List<$CuboidModelGeometry$Element>;
@@ -62,28 +62,28 @@ declare module "@package/com/supermartijn642/fusion/api/model/custom/geometry" {
         static builder(): $CuboidModelGeometry$Element$Builder;
     }
     export interface $CuboidModelGeometry$Element extends $PropertyGetter {
+        emissive(): boolean;
         from(): $Vector3fc;
         to(): $Vector3fc;
-        lightEmission(): number;
-        ambientOcclusion(): boolean;
-        shade(): boolean;
         face(side: $Direction_): $CuboidModelGeometry$Face;
+        shade(): boolean;
+        ambientOcclusion(): boolean;
+        lightEmission(): number;
         rotation(): $BlockElementRotation;
-        emissive(): boolean;
     }
     export class $CuboidModelGeometry$Face {
         static of(face: $BlockElementFace_): $CuboidModelGeometry$Face;
         static builder(): $CuboidModelGeometry$Face$Builder;
     }
     export interface $CuboidModelGeometry$Face extends $PropertyGetter {
-        lightEmission(): number;
-        uv(): $CuboidModelGeometry$Face$UV;
-        ambientOcclusion(): boolean;
-        shade(): boolean;
-        tintIndex(): number;
-        material(): string;
-        rotation(): $CuboidModelGeometry$Face$Rotation;
         cullDirection(): $Direction;
         emissive(): boolean;
+        tintIndex(): number;
+        shade(): boolean;
+        ambientOcclusion(): boolean;
+        lightEmission(): number;
+        rotation(): $CuboidModelGeometry$Face$Rotation;
+        material(): string;
+        uv(): $CuboidModelGeometry$Face$UV;
     }
 }

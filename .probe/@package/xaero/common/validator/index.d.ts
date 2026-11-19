@@ -9,10 +9,10 @@ declare module "@package/xaero/common/validator" {
         constructor();
     }
     export class $FieldValidatorHolder {
-        getNumericFieldValidator(): $NumericFieldValidator;
         getWpCoordFieldValidator(): $WaypointCoordinateFieldValidator;
+        getNumericFieldValidator(): $NumericFieldValidator;
         constructor(arg0: $NumericFieldValidator, arg1: $WaypointCoordinateFieldValidator);
-        get numericFieldValidator(): $NumericFieldValidator;
         get wpCoordFieldValidator(): $WaypointCoordinateFieldValidator;
+        get numericFieldValidator(): $NumericFieldValidator;
     }
 }

@@ -1,6 +1,6 @@
 import { $CommandResultCallback_, $ExecutionCommandSource } from "@package/net/minecraft/commands";
 import { $Consumer_ } from "@package/java/util/function";
-import { $UnboundEntryAction, $CommandQueueEntry, $CommandQueueEntry_, $Frame_, $ChainModifiers_, $ExecutionContext, $EntryAction, $Frame, $ExecutionControl } from "@package/net/minecraft/commands/execution";
+import { $UnboundEntryAction, $CommandQueueEntry, $CommandQueueEntry_, $ChainModifiers_, $Frame_, $EntryAction, $ExecutionContext, $Frame, $ExecutionControl } from "@package/net/minecraft/commands/execution";
 import { $DynamicCommandExceptionType } from "@package/com/mojang/brigadier/exceptions";
 import { $List_ } from "@package/java/util";
 import { $InstantiatedFunction } from "@package/net/minecraft/commands/functions";
@@ -14,7 +14,7 @@ declare module "@package/net/minecraft/commands/execution/tasks" {
     }
     export class $CallFunction<T extends $ExecutionCommandSource<T>> implements $UnboundEntryAction<T> {
         execute(source: T, executionContext: $ExecutionContext<T>, frame: $Frame_): void;
-        bind(source: T): $EntryAction<T>;
+        bind(arg0: T): $EntryAction<T>;
         constructor(_function: $InstantiatedFunction<T>, resultCallback: $CommandResultCallback_, returnParentFrame: boolean);
     }
     export class $BuildContexts<T extends $ExecutionCommandSource<T>> {
@@ -40,7 +40,7 @@ declare module "@package/net/minecraft/commands/execution/tasks" {
     }
     export class $ExecuteCommand<T extends $ExecutionCommandSource<T>> implements $UnboundEntryAction<T> {
         execute(source: T, executionContext: $ExecutionContext<T>, frame: $Frame_): void;
-        bind(source: T): $EntryAction<T>;
+        bind(arg0: T): $EntryAction<T>;
         constructor(commandInput: string, modifiers: $ChainModifiers_, executionContext: $CommandContext<T>);
     }
     export class $FallthroughTask<T extends $ExecutionCommandSource<T>> implements $EntryAction<T> {

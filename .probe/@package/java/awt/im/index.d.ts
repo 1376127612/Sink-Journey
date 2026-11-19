@@ -13,11 +13,11 @@ declare module "@package/java/awt/im" {
         reconvert(): void;
         getInputMethodControlObject(): $Object;
         static getInstance(): $InputContext;
-        getLocale(): $Locale;
-        dispatchEvent(arg0: $AWTEvent): void;
         dispose(): void;
         removeNotify(arg0: $Component): void;
         endComposition(): void;
+        dispatchEvent(arg0: $AWTEvent): void;
+        getLocale(): $Locale;
         set characterSubsets(value: $Character$Subset[]);
         get inputMethodControlObject(): $Object;
         static get instance(): $InputContext;
@@ -26,8 +26,8 @@ declare module "@package/java/awt/im" {
     export class $InputMethodHighlight {
         getState(): number;
         isSelected(): boolean;
-        getVariation(): number;
         getStyle(): $Map<$TextAttribute, never>;
+        getVariation(): number;
         static UNSELECTED_CONVERTED_TEXT_HIGHLIGHT: $InputMethodHighlight;
         static SELECTED_CONVERTED_TEXT_HIGHLIGHT: $InputMethodHighlight;
         static RAW_TEXT: number;
@@ -39,19 +39,19 @@ declare module "@package/java/awt/im" {
         constructor(arg0: boolean, arg1: number);
         get state(): number;
         get selected(): boolean;
-        get variation(): number;
         get style(): $Map<$TextAttribute, never>;
+        get variation(): number;
     }
     export class $InputMethodRequests {
     }
     export interface $InputMethodRequests {
+        getSelectedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
+        getLocationOffset(arg0: number, arg1: number): $TextHitInfo;
         getTextLocation(arg0: $TextHitInfo): $Rectangle;
         getInsertPositionOffset(): number;
         getCommittedText(arg0: number, arg1: number, arg2: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
         getCommittedTextLength(): number;
         cancelLatestCommittedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
-        getSelectedText(arg0: $AttributedCharacterIterator$Attribute[]): $AttributedCharacterIterator;
-        getLocationOffset(arg0: number, arg1: number): $TextHitInfo;
         get insertPositionOffset(): number;
         get committedTextLength(): number;
     }

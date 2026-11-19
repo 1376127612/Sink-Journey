@@ -6,8 +6,8 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/hellfirepvp/astralsorcery/common/perk/tree/perk" {
     export class $RootPerk<D extends $AbstractPerk$Data> extends $AttributeModifierPerk<D> {
-        getConstellation(): $BaseConstellation;
         setConstellation<P extends $RootPerk<never>>(arg0: $BaseConstellation_): P;
+        getConstellation(): $BaseConstellation;
         static CODEC: $MapCodec<$AttributeModifierPerk<never>>;
         static TO_CLIENT_PERKTREE_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $AbstractPerk<never>>;
         static DATAPACK_CODEC: $Codec<$AbstractPerk<never>>;

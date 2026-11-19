@@ -10,9 +10,9 @@ import { $DensityFunction$FunctionContext } from "@package/net/minecraft/world/l
 
 declare module "@package/net/minecraft/world/level/levelgen/blending" {
     export class $BlendingData {
-        static sideByGenerationAge(level: $WorldGenLevel, chunkX: number, chunkZ: number, oldNoiseGeneration: boolean): $Set<$Direction8>;
         getAreaWithOldGeneration(): $LevelHeightAccessor;
         static getOrUpdateBlendingData(region: $WorldGenRegion, chunkX: number, chunkZ: number): $BlendingData;
+        static sideByGenerationAge(level: $WorldGenLevel, chunkX: number, chunkZ: number, oldNoiseGeneration: boolean): $Set<$Direction8>;
         static CODEC: $Codec<$BlendingData>;
         get areaWithOldGeneration(): $LevelHeightAccessor;
     }
@@ -24,7 +24,7 @@ declare module "@package/net/minecraft/world/level/levelgen/blending" {
     /**
      * Values that may be interpreted as {@link $Blender$BlendingOutput}.
      */
-    export type $Blender$BlendingOutput_ = { alpha?: number, blendingOffset?: number,  } | [alpha?: number, blendingOffset?: number, ];
+    export type $Blender$BlendingOutput_ = { blendingOffset?: number, alpha?: number,  } | [blendingOffset?: number, alpha?: number, ];
     export class $Blender$DistanceGetter {
     }
     export interface $Blender$DistanceGetter {
@@ -59,14 +59,14 @@ declare module "@package/net/minecraft/world/level/levelgen/blending" {
      */
     export type $BlendingData$DensityConsumer_ = (() => void);
     export class $Blender {
-        blendOffsetAndFactor(x: number, z: number): $Blender$BlendingOutput;
-        static makeOldChunkDistanceGetter(blendingData: $BlendingData | null, surroundingBlendingData: $Map_<$Direction8_, $BlendingData>): $Blender$DistanceGetter;
-        static addAroundOldChunksCarvingMaskFilter(level: $WorldGenLevel, chunk: $ProtoChunk): void;
-        static generateBorderTicks(region: $WorldGenRegion, chunk: $ChunkAccess): void;
+        blendDensity(context: $DensityFunction$FunctionContext, density: number): number;
         static of(region: $WorldGenRegion | null): $Blender;
         static empty(): $Blender;
-        blendDensity(context: $DensityFunction$FunctionContext, density: number): number;
         getBiomeResolver(resolver: $BiomeResolver_): $BiomeResolver;
+        static addAroundOldChunksCarvingMaskFilter(level: $WorldGenLevel, chunk: $ProtoChunk): void;
+        static generateBorderTicks(region: $WorldGenRegion, chunk: $ChunkAccess): void;
+        blendOffsetAndFactor(x: number, z: number): $Blender$BlendingOutput;
+        static makeOldChunkDistanceGetter(blendingData: $BlendingData | null, surroundingBlendingData: $Map_<$Direction8_, $BlendingData>): $Blender$DistanceGetter;
     }
     export class $Blender$CellValueGetter {
     }

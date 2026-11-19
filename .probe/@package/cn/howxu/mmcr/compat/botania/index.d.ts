@@ -7,19 +7,19 @@ import { $RequirementType, $RequirementHandler_, $MachineRequirement } from "@pa
 
 declare module "@package/cn/howxu/mmcr/compat/botania" {
     export class $ManaRequirement extends $Record implements $MachineRequirement {
+        chance(): number;
+        consumeChance(): number;
+        static supportsSearchSnapshot(): boolean;
+        static installHandler(handler: $RequirementHandler_<$ManaRequirement>): void;
+        static installUnavailableHandler(): void;
         type(): $RequirementType<$ManaRequirement>;
-        static input(amount: number, consumeChance: number): $ManaRequirement;
         static input(amount: number): $ManaRequirement;
+        static input(amount: number, consumeChance: number): $ManaRequirement;
         io(): $RecipeModifier$IOType;
-        static output(amount: number): $ManaRequirement;
         static output(amount: number, chance: number): $ManaRequirement;
+        static output(amount: number): $ManaRequirement;
         tags(): $List<string>;
         amount(): number;
-        chance(): number;
-        static installHandler(handler: $RequirementHandler_<$ManaRequirement>): void;
-        static supportsSearchSnapshot(): boolean;
-        static installUnavailableHandler(): void;
-        consumeChance(): number;
         static CODEC: $MapCodec<$ManaRequirement>;
         static SYNC_CODEC: $RecipeSyncCodec<$ManaRequirement>;
         static TYPE: $RequirementType<$ManaRequirement>;
@@ -29,5 +29,5 @@ declare module "@package/cn/howxu/mmcr/compat/botania" {
     /**
      * Values that may be interpreted as {@link $ManaRequirement}.
      */
-    export type $ManaRequirement_ = { io?: $RecipeModifier$IOType_, chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>,  } | [io?: $RecipeModifier$IOType_, chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>, ];
+    export type $ManaRequirement_ = { chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>, io?: $RecipeModifier$IOType_,  } | [chance?: number, amount?: number, consumeChance?: number, tags?: $List_<string>, io?: $RecipeModifier$IOType_, ];
 }

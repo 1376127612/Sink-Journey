@@ -5,8 +5,8 @@ import { $RandomSource } from "@package/net/minecraft/util";
 
 declare module "@package/net/minecraft/util/valueproviders" {
     export class $ClampedNormalFloat extends $FloatProvider {
-        static of(mean: number, deviation: number, min: number, max: number): $ClampedNormalFloat;
         static sample(random: $RandomSource, mean: number, deviation: number, min: number, max: number): number;
+        static of(mean: number, deviation: number, min: number, max: number): $ClampedNormalFloat;
         static CODEC: $MapCodec<$ClampedNormalFloat>;
     }
     export class $TrapezoidFloat extends $FloatProvider {
@@ -59,14 +59,14 @@ declare module "@package/net/minecraft/util/valueproviders" {
         constructor(source: $IntProvider_, minInclusive: number, maxInclusive: number);
     }
     export class $IntProvider {
-        getType(): $IntProviderType<never>;
-        getMinValue(): number;
-        getMaxValue(): number;
-        sample(random: $RandomSource): number;
         /**
          * Creates a codec for an IntProvider that only accepts numbers in the given range.
          */
         static codec(minInclusive: number, maxInclusive: number): $Codec<$IntProvider>;
+        sample(random: $RandomSource): number;
+        getType(): $IntProviderType<never>;
+        getMinValue(): number;
+        getMaxValue(): number;
         static validateCodec<T extends $IntProvider>(min: number, max: number, codec: $Codec<T>): $Codec<T>;
         static CODEC: $Codec<$IntProvider>;
         static NON_NEGATIVE_CODEC: $Codec<$IntProvider>;
@@ -106,8 +106,8 @@ declare module "@package/net/minecraft/util/valueproviders" {
      */
     export type $SampledFloat_ = ((arg0: $RandomSource) => number);
     export class $ClampedNormalInt extends $IntProvider {
-        static of(mean: number, deviation: number, minInclusive: number, maxInclusive: number): $ClampedNormalInt;
         static sample(random: $RandomSource, mean: number, deviation: number, minInclusive: number, maxInclusive: number): number;
+        static of(mean: number, deviation: number, minInclusive: number, maxInclusive: number): $ClampedNormalInt;
         static CODEC: $MapCodec<$ClampedNormalInt>;
         static NON_NEGATIVE_CODEC: $Codec<$IntProvider>;
         static POSITIVE_CODEC: $Codec<$IntProvider>;
@@ -133,13 +133,13 @@ declare module "@package/net/minecraft/util/valueproviders" {
         get value(): number;
     }
     export class $FloatProvider implements $SampledFloat {
-        getType(): $FloatProviderType<never>;
-        getMinValue(): number;
-        getMaxValue(): number;
         /**
          * Creates a codec for a FloatProvider that only accepts numbers in the given range.
          */
         static codec(minInclusive: number, maxInclusive: number): $Codec<$FloatProvider>;
+        getType(): $FloatProviderType<never>;
+        getMinValue(): number;
+        getMaxValue(): number;
         static CODEC: $Codec<$FloatProvider>;
         constructor();
         get type(): $FloatProviderType<never>;

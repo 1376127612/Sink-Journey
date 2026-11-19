@@ -4,15 +4,15 @@ export * as mixininterface from "@package/dzwdz/chat_heads/mixininterface";
 
 declare module "@package/dzwdz/chat_heads" {
     export class $HeadData extends $Record {
-        static of(playerInfo: $PlayerInfo): $HeadData;
-        playerInfo(): $PlayerInfo;
-        hasHeadPosition(): boolean;
         codePointIndex(): number;
+        static of(playerInfo: $PlayerInfo): $HeadData;
+        hasHeadPosition(): boolean;
+        playerInfo(): $PlayerInfo;
         static EMPTY: $HeadData;
         constructor(playerInfo: $PlayerInfo, codePointIndex: number);
     }
     /**
      * Values that may be interpreted as {@link $HeadData}.
      */
-    export type $HeadData_ = { playerInfo?: $PlayerInfo, codePointIndex?: number,  } | [playerInfo?: $PlayerInfo, codePointIndex?: number, ];
+    export type $HeadData_ = { codePointIndex?: number, playerInfo?: $PlayerInfo,  } | [codePointIndex?: number, playerInfo?: $PlayerInfo, ];
 }

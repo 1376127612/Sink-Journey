@@ -3,29 +3,29 @@ import { $Iterable } from "@package/java/lang";
 
 declare module "@package/xaero/hud/pushbox" {
     export class $PushboxHandler {
-        updateAll(arg0: $PushboxManager): void;
-        applyPushboxes(arg0: $PushboxManager, arg1: $PushboxHandler$State, arg2: number, arg3: number, arg4: number): void;
-        postUpdateAll(arg0: $PushboxManager): void;
         applyScreenEdges(arg0: $PushboxHandler$State, arg1: number, arg2: number, arg3: number): void;
+        postUpdateAll(arg0: $PushboxManager): void;
+        applyPushboxes(arg0: $PushboxManager, arg1: $PushboxHandler$State, arg2: number, arg3: number, arg4: number): void;
+        updateAll(arg0: $PushboxManager): void;
         constructor();
     }
     export class $PushBox {
+        postUpdate(): void;
+        getVerticalBias(): number;
+        getW(arg0: number, arg1: number): number;
         update(): void;
         isActive(): boolean;
         push(arg0: $PushboxHandler$State, arg1: number, arg2: number): void;
-        setActive(arg0: boolean): void;
-        getY(arg0: number, arg1: number): number;
-        getW(arg0: number, arg1: number): number;
-        getX(arg0: number, arg1: number): number;
-        getH(arg0: number, arg1: number): number;
         getAnchorY(): number;
+        getH(arg0: number, arg1: number): number;
         getAnchorX(): number;
-        postUpdate(): void;
-        getVerticalBias(): number;
+        getX(arg0: number, arg1: number): number;
+        getY(arg0: number, arg1: number): number;
+        setActive(arg0: boolean): void;
         constructor(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number);
+        get verticalBias(): number;
         get anchorY(): number;
         get anchorX(): number;
-        get verticalBias(): number;
     }
     export class $PushboxManager {
         add(arg0: $PushBox): void;

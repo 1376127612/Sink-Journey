@@ -1,6 +1,7 @@
 import { $Level, $LightLayer_ } from "@package/net/minecraft/world/level";
 import { $MultiBufferSource_, $MultiBufferSource, $MultiBufferSource$BufferSource } from "@package/net/minecraft/client/renderer";
 import { $Entity } from "@package/net/minecraft/world/entity";
+import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $GameEventListener, $PositionSource, $GameEvent, $GameEventListener$DeliveryMode } from "@package/net/minecraft/world/level/gameevent";
 import { $Minecraft } from "@package/net/minecraft/client";
 import { $BeeDebugPayload$BeeInfo_, $HiveDebugPayload$HiveInfo_, $BrainDebugPayload$BrainDump_, $StructuresDebugPayload$PieceInfo_, $BreezeDebugPayload$BreezeInfo_, $GoalDebugPayload$DebugGoal_ } from "@package/net/minecraft/network/protocol/common/custom";
@@ -17,24 +18,25 @@ declare module "@package/net/minecraft/client/renderer/debug" {
     export class $LightSectionDebugRenderer$SectionData {
     }
     export class $DebugRenderer {
-        clear(): void;
-        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource$BufferSource, camX: number, arg3: number, camY: number): void;
         /**
          * Toggles the `#renderChunkborder` value, effectively toggling the `#chunkBorderRenderer` on or off.
          * 
          * @return the new, inverted value
          */
         switchRenderChunkborder(): boolean;
-        static renderFilledUnitCube(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, pos: $BlockPos_, red: number, green: number, blue: number, alpha: number): void;
+        static renderFloatingText(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, text: string, x: number, arg4: number, y: number, arg6: number, z: number, arg8: boolean, color: number, scale: boolean): void;
+        static renderFloatingText(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, text: string, x: number, arg4: number, y: number, arg6: number, z: number): void;
         static renderFloatingText(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, text: string, x: number, y: number, z: number, color: number): void;
         static renderFloatingText(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, text: string, x: number, arg4: number, y: number, arg6: number): void;
-        static renderFloatingText(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, text: string, x: number, arg4: number, y: number, arg6: number, z: number): void;
-        static renderFloatingText(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, text: string, x: number, arg4: number, y: number, arg6: number, z: number, arg8: boolean, color: number, scale: boolean): void;
-        static getTargetedEntity(entity: $Entity | null, distance: number): ($Entity) | undefined;
         static renderFilledBox(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, pos: $BlockPos_, scale: number, red: number, green: number, blue: number, alpha: number): void;
-        static renderFilledBox(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, startPos: $BlockPos_, endPos: $BlockPos_, red: number, green: number, blue: number, alpha: number): void;
-        static renderFilledBox(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number): void;
         static renderFilledBox(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, boundingBox: $AABB_, red: number, green: number, blue: number, alpha: number): void;
+        static renderFilledBox(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number): void;
+        static renderFilledBox(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, startPos: $BlockPos_, endPos: $BlockPos_, red: number, green: number, blue: number, alpha: number): void;
+        static getTargetedEntity(entity: $Entity | null, distance: number): ($Entity) | undefined;
+        static renderFilledUnitCube(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, pos: $BlockPos_, red: number, green: number, blue: number, alpha: number): void;
+        handler$ggg000$moonlight$supp$renderVanillaDebug(arg0: $PoseStack, arg1: $MultiBufferSource$BufferSource, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfo): void;
+        clear(): void;
+        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource$BufferSource, camX: number, arg3: number, camY: number): void;
         waterDebugRenderer: $DebugRenderer$SimpleDebugRenderer;
         neighborsUpdateRenderer: $DebugRenderer$SimpleDebugRenderer;
         pathfindingRenderer: $PathfindingRenderer;
@@ -69,9 +71,9 @@ declare module "@package/net/minecraft/client/renderer/debug" {
         clear(): void;
     }
     export class $StructureRenderer implements $DebugRenderer$SimpleDebugRenderer {
+        addBoundingBox(boundingBox: $BoundingBox, pieces: $List_<$StructuresDebugPayload$PieceInfo_>, dimension: $ResourceKey_<$Level>): void;
         clear(): void;
         render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
-        addBoundingBox(boundingBox: $BoundingBox, pieces: $List_<$StructuresDebugPayload$PieceInfo_>, dimension: $ResourceKey_<$Level>): void;
         constructor(minecraft: $Minecraft);
     }
     export class $BreezeDebugRenderer {
@@ -98,17 +100,17 @@ declare module "@package/net/minecraft/client/renderer/debug" {
         constructor();
     }
     export class $RaidDebugRenderer implements $DebugRenderer$SimpleDebugRenderer {
-        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         setRaidCenters(raidCenters: $Collection_<$BlockPos_>): void;
+        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         clear(): void;
         constructor(minecraft: $Minecraft);
         set raidCenters(value: $Collection_<$BlockPos_>);
     }
     export class $PathfindingRenderer implements $DebugRenderer$SimpleDebugRenderer {
         static renderPathLine(poseStack: $PoseStack, consumer: $VertexConsumer, path: $Path, x: number, arg4: number, y: number): void;
+        static renderPath(poseStack: $PoseStack, buffer: $MultiBufferSource_, path: $Path, arg3: number, arg4: boolean, arg5: boolean, x: number, arg7: number, y: number): void;
         render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         addPath(entityId: number, path: $Path, maxDistanceToWaypoint: number): void;
-        static renderPath(poseStack: $PoseStack, buffer: $MultiBufferSource_, path: $Path, arg3: number, arg4: boolean, arg5: boolean, x: number, arg7: number, y: number): void;
         clear(): void;
         constructor();
     }
@@ -128,7 +130,7 @@ declare module "@package/net/minecraft/client/renderer/debug" {
     /**
      * Values that may be interpreted as {@link $GameEventListenerRenderer$TrackedGameEvent}.
      */
-    export type $GameEventListenerRenderer$TrackedGameEvent_ = { gameEvent?: $ResourceKey_<$GameEvent>, position?: $Vec3_, timeStamp?: number,  } | [gameEvent?: $ResourceKey_<$GameEvent>, position?: $Vec3_, timeStamp?: number, ];
+    export type $GameEventListenerRenderer$TrackedGameEvent_ = { position?: $Vec3_, timeStamp?: number, gameEvent?: $ResourceKey_<$GameEvent>,  } | [position?: $Vec3_, timeStamp?: number, gameEvent?: $ResourceKey_<$GameEvent>, ];
     export class $ChunkBorderRenderer implements $DebugRenderer$SimpleDebugRenderer {
         render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         clear(): void;
@@ -150,24 +152,24 @@ declare module "@package/net/minecraft/client/renderer/debug" {
         constructor(minecraft: $Minecraft);
     }
     export class $GoalSelectorDebugRenderer implements $DebugRenderer$SimpleDebugRenderer {
-        clear(): void;
-        removeGoalSelector(mobId: number): void;
-        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         addGoalSelector(mobId: number, entityPos: $BlockPos_, goals: $List_<$GoalDebugPayload$DebugGoal_>): void;
+        removeGoalSelector(mobId: number): void;
+        clear(): void;
+        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         constructor(minecraft: $Minecraft);
     }
     export class $BeeDebugRenderer implements $DebugRenderer$SimpleDebugRenderer {
-        clear(): void;
-        removeBeeInfo(id: number): void;
-        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         addOrUpdateHiveInfo(hiveInfo: $HiveDebugPayload$HiveInfo_, lastSeen: number): void;
         addOrUpdateBeeInfo(beeInfo: $BeeDebugPayload$BeeInfo_): void;
+        removeBeeInfo(id: number): void;
+        clear(): void;
+        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         constructor(minecraft: $Minecraft);
     }
     export class $GameEventListenerRenderer implements $DebugRenderer$SimpleDebugRenderer {
-        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         trackGameEvent(gameEvent: $ResourceKey_<$GameEvent>, position: $Vec3_): void;
         trackListener(listenerSource: $PositionSource, listenerRange: number): void;
+        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         clear(): void;
         constructor(minecraft: $Minecraft);
     }
@@ -194,12 +196,12 @@ declare module "@package/net/minecraft/client/renderer/debug" {
     /**
      * Values that may be interpreted as {@link $BeeDebugRenderer$HiveDebugInfo}.
      */
-    export type $BeeDebugRenderer$HiveDebugInfo_ = { info?: $HiveDebugPayload$HiveInfo_, lastSeen?: number,  } | [info?: $HiveDebugPayload$HiveInfo_, lastSeen?: number, ];
+    export type $BeeDebugRenderer$HiveDebugInfo_ = { lastSeen?: number, info?: $HiveDebugPayload$HiveInfo_,  } | [lastSeen?: number, info?: $HiveDebugPayload$HiveInfo_, ];
     export class $VillageSectionsDebugRenderer implements $DebugRenderer$SimpleDebugRenderer {
-        clear(): void;
-        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         setNotVillageSection(pos: $SectionPos): void;
         setVillageSection(pos: $SectionPos): void;
+        clear(): void;
+        render(poseStack: $PoseStack, bufferSource: $MultiBufferSource_, camX: number, arg3: number, camY: number): void;
         set notVillageSection(value: $SectionPos);
         set villageSection(value: $SectionPos);
     }
@@ -220,11 +222,11 @@ declare module "@package/net/minecraft/client/renderer/debug" {
         get deliveryMode(): $GameEventListener$DeliveryMode;
     }
     export class $BrainDebugRenderer implements $DebugRenderer$SimpleDebugRenderer {
-        clear(): void;
-        removeBrainDump(id: number): void;
-        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, x: number, arg3: number, y: number): void;
         addOrUpdateBrainDump(brainDump: $BrainDebugPayload$BrainDump_): void;
         setFreeTicketCount(pos: $BlockPos_, freeTicketCount: number): void;
+        removeBrainDump(id: number): void;
+        clear(): void;
+        render(poseStack: $PoseStack, buffer: $MultiBufferSource_, x: number, arg3: number, y: number): void;
         addPoi(poiInfo: $BrainDebugRenderer$PoiInfo): void;
         removePoi(pos: $BlockPos_): void;
         constructor(minecraft: $Minecraft);

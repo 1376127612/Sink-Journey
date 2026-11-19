@@ -6,16 +6,16 @@ declare module "@package/appeng/api/networking/spatial" {
     export class $ISpatialService {
     }
     export interface $ISpatialService extends $IGridService {
-        getMax(): $BlockPos;
-        getMin(): $BlockPos;
-        getLevel(): $Level;
-        hasRegion(): boolean;
-        isValidRegion(): boolean;
         currentEfficiency(): number;
+        isValidRegion(): boolean;
         requiredPower(): number;
-        get max(): $BlockPos;
-        get min(): $BlockPos;
-        get level(): $Level;
+        hasRegion(): boolean;
+        getLevel(): $Level;
+        getMin(): $BlockPos;
+        getMax(): $BlockPos;
         get validRegion(): boolean;
+        get level(): $Level;
+        get min(): $BlockPos;
+        get max(): $BlockPos;
     }
 }

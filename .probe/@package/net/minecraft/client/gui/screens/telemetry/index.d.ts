@@ -30,9 +30,9 @@ declare module "@package/net/minecraft/client/gui/screens/telemetry" {
         constructor(lastScreen: $Screen, options: $Options);
     }
     export class $TelemetryEventWidget extends $AbstractScrollWidget {
+        updateLayout(): void;
         setOnScrolledListener(onScrolledListener: $DoubleConsumer_ | null): void;
         onOptInChanged(optIn: boolean): void;
-        updateLayout(): void;
         static PERIOD_PER_SCROLLED_PIXEL: number;
         static UNSET_FG_COLOR: number;
         visible: boolean;
@@ -40,6 +40,7 @@ declare module "@package/net/minecraft/client/gui/screens/telemetry" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
         constructor(x: number, y: number, width: number, height: number, font: $Font);
         set onScrolledListener(value: $DoubleConsumer_ | null);
     }
@@ -50,5 +51,5 @@ declare module "@package/net/minecraft/client/gui/screens/telemetry" {
     /**
      * Values that may be interpreted as {@link $TelemetryEventWidget$Content}.
      */
-    export type $TelemetryEventWidget$Content_ = { narration?: $Component_, container?: $Layout,  } | [narration?: $Component_, container?: $Layout, ];
+    export type $TelemetryEventWidget$Content_ = { container?: $Layout, narration?: $Component_,  } | [container?: $Layout, narration?: $Component_, ];
 }

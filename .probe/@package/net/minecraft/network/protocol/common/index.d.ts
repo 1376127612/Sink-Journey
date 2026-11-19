@@ -24,34 +24,28 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ClientCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundPingPacket>;
         constructor(id: number);
         get id(): number;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $ClientCommonPacketListener {
     }
     export interface $ClientCommonPacketListener extends $ClientCookiePacketListener, $ClientboundPacketListener, $IClientCommonPacketListenerExtension {
-        handlePing(packet: $ClientboundPingPacket): void;
+        handleCustomReportDetails(packet: $ClientboundCustomReportDetailsPacket_): void;
+        handleResourcePackPop(packet: $ClientboundResourcePackPopPacket_): void;
+        handleResourcePackPush(packet: $ClientboundResourcePackPushPacket_): void;
         handleDisconnect(packet: $ClientboundDisconnectPacket_): void;
         handleCustomPayload(packet: $ClientboundCustomPayloadPacket_): void;
         handleKeepAlive(packet: $ClientboundKeepAlivePacket): void;
         handleUpdateTags(packet: $ClientboundUpdateTagsPacket): void;
-        handleServerLinks(packet: $ClientboundServerLinksPacket_): void;
         handleStoreCookie(packet: $ClientboundStoreCookiePacket_): void;
+        handleServerLinks(packet: $ClientboundServerLinksPacket_): void;
         handleTransfer(packet: $ClientboundTransferPacket_): void;
-        handleResourcePackPush(packet: $ClientboundResourcePackPushPacket_): void;
-        handleResourcePackPop(packet: $ClientboundResourcePackPopPacket_): void;
-        handleCustomReportDetails(packet: $ClientboundCustomReportDetailsPacket_): void;
+        handlePing(packet: $ClientboundPingPacket): void;
     }
     export class $ClientboundCustomPayloadPacket extends $Record implements $Packet<$ClientCommonPacketListener> {
         payload(): $CustomPacketPayload;
@@ -60,19 +54,13 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ClientCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static GAMEPLAY_STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ClientboundCustomPayloadPacket>;
         static CONFIG_STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundCustomPayloadPacket>;
         constructor(payload: $CustomPacketPayload_);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundCustomPayloadPacket}.
@@ -85,19 +73,13 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ClientCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundKeepAlivePacket>;
         constructor(id: number);
         get id(): number;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $ClientboundUpdateTagsPacket implements $Packet<$ClientCommonPacketListener> {
         type(): $PacketType<$ClientboundUpdateTagsPacket>;
@@ -106,19 +88,13 @@ declare module "@package/net/minecraft/network/protocol/common" {
          */
         handle(handler: $ClientCommonPacketListener): void;
         getTags(): $Map<$ResourceKey<$Registry<never>>, $TagNetworkSerialization$NetworkPayload>;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundUpdateTagsPacket>;
         constructor(tags: $Map_<$ResourceKey_<$Registry<never>>, $TagNetworkSerialization$NetworkPayload>);
         get tags(): $Map<$ResourceKey<$Registry<never>>, $TagNetworkSerialization$NetworkPayload>;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $ServerboundPongPacket implements $Packet<$ServerCommonPacketListener> {
         type(): $PacketType<$ServerboundPongPacket>;
@@ -127,19 +103,13 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ServerCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundPongPacket>;
         constructor(id: number);
         get id(): number;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $CommonPacketTypes {
         static CLIENTBOUND_CUSTOM_PAYLOAD: $PacketType<$ClientboundCustomPayloadPacket>;
@@ -168,18 +138,12 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ServerCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundResourcePackPacket>;
         constructor(arg0: $UUID_, arg1: $ServerboundResourcePackPacket$Action_);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ServerboundResourcePackPacket}.
@@ -195,16 +159,16 @@ declare module "@package/net/minecraft/network/protocol/common" {
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isTerminal(): boolean;
+        isSkippable(): boolean;
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundKeepAlivePacket>;
         constructor(id: number);
         get id(): number;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $ClientboundStoreCookiePacket extends $Record implements $Packet<$ClientCommonPacketListener> {
         payload(): number[];
@@ -217,16 +181,16 @@ declare module "@package/net/minecraft/network/protocol/common" {
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isTerminal(): boolean;
+        isSkippable(): boolean;
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundStoreCookiePacket>;
         static PAYLOAD_STREAM_CODEC: $StreamCodec<$ByteBuf, number[]>;
         constructor(arg0: $ResourceLocation_, arg1: number[]);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundStoreCookiePacket}.
@@ -242,15 +206,15 @@ declare module "@package/net/minecraft/network/protocol/common" {
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isTerminal(): boolean;
+        isSkippable(): boolean;
         /**
          * Whether decoding errors will be ignored for this packet.
          */
-        isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ClientboundDisconnectPacket>;
         constructor(reason: $Component_);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundDisconnectPacket}.
@@ -260,13 +224,13 @@ declare module "@package/net/minecraft/network/protocol/common" {
         payload(): $CustomPacketPayload;
         type(): $PacketType<$ServerboundCustomPayloadPacket>;
         handle(arg0: $ServerCommonPacketListener): void;
-        isTerminal(): boolean;
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static CONFIG_STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundCustomPayloadPacket>;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundCustomPayloadPacket>;
         constructor(payload: $CustomPacketPayload_);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ServerboundCustomPayloadPacket}.
@@ -281,48 +245,39 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ClientCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         required(): boolean;
         prompt(): ($Component) | undefined;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ClientboundResourcePackPushPacket>;
         static MAX_HASH_LENGTH: number;
         constructor(id: $UUID_, url: string, hash: string, required: boolean, prompt: ($Component_) | undefined);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundResourcePackPushPacket}.
      */
-    export type $ClientboundResourcePackPushPacket_ = { hash?: string, url?: string, prompt?: ($Component_) | undefined, id?: $UUID_, required?: boolean,  } | [hash?: string, url?: string, prompt?: ($Component_) | undefined, id?: $UUID_, required?: boolean, ];
+    export type $ClientboundResourcePackPushPacket_ = { id?: $UUID_, required?: boolean, hash?: string, url?: string, prompt?: ($Component_) | undefined,  } | [id?: $UUID_, required?: boolean, hash?: string, url?: string, prompt?: ($Component_) | undefined, ];
     export class $ServerCommonPacketListener {
     }
     export interface $ServerCommonPacketListener extends $ServerCookiePacketListener, $ServerPacketListener, $IServerCommonPacketListenerExtension {
-        handlePong(packet: $ServerboundPongPacket): void;
-        handleClientInformation(packet: $ServerboundClientInformationPacket_): void;
         handleResourcePackResponse(packet: $ServerboundResourcePackPacket_): void;
+        handleClientInformation(packet: $ServerboundClientInformationPacket_): void;
         handleCustomPayload(packet: $ServerboundCustomPayloadPacket_): void;
         handleKeepAlive(packet: $ServerboundKeepAlivePacket): void;
+        handlePong(packet: $ServerboundPongPacket): void;
     }
     export class $ClientboundServerLinksPacket extends $Record implements $Packet<$ClientCommonPacketListener> {
+        links(): $List<$ServerLinks$UntrustedEntry>;
         type(): $PacketType<$ClientboundServerLinksPacket>;
         handle(arg0: $ClientCommonPacketListener): void;
-        links(): $List<$ServerLinks$UntrustedEntry>;
-        isTerminal(): boolean;
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ClientboundServerLinksPacket>;
         constructor(arg0: $List_<$ServerLinks$UntrustedEntry_>);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundServerLinksPacket}.
@@ -332,12 +287,12 @@ declare module "@package/net/minecraft/network/protocol/common" {
         type(): $PacketType<$ClientboundCustomReportDetailsPacket>;
         handle(arg0: $ClientCommonPacketListener): void;
         details(): $Map<string, string>;
-        isTerminal(): boolean;
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ClientboundCustomReportDetailsPacket>;
         constructor(arg0: $Map_<string, string>);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundCustomReportDetailsPacket}.
@@ -369,18 +324,12 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ClientCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundTransferPacket>;
         constructor(arg0: string, arg1: number);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundTransferPacket}.
@@ -393,18 +342,12 @@ declare module "@package/net/minecraft/network/protocol/common" {
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ClientCommonPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundResourcePackPopPacket>;
         constructor(arg0: ($UUID_) | undefined);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundResourcePackPopPacket}.
@@ -417,18 +360,12 @@ declare module "@package/net/minecraft/network/protocol/common" {
          */
         handle(handler: $ServerCommonPacketListener): void;
         information(): $ClientInformation;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundClientInformationPacket>;
         constructor(arg0: $ClientInformation_);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ServerboundClientInformationPacket}.

@@ -31,13 +31,13 @@ declare module "@package/cn/howxu/mmcr/publicapi/recipe/modifier" {
     export class $RecipeAdjustmentSpec {
     }
     export interface $RecipeAdjustmentSpec {
+        affectsChance(): boolean;
         value(): number;
         target(): string;
         add(value: number): $RecipeAdjustmentSpec;
         multiply(value: number): $RecipeAdjustmentSpec;
         io(): $IoDirection;
         operation(): $ModifierOperation;
-        affectsChance(): boolean;
     }
     export class $ModifierOperation extends $Enum<$ModifierOperation> {
         static values(): $ModifierOperation[];
@@ -54,6 +54,11 @@ declare module "@package/cn/howxu/mmcr/publicapi/recipe/modifier" {
     export class $SmartModifierSpec {
     }
     export interface $SmartModifierSpec {
+        interfaceType(): string;
+        atMax(): number;
+        atMin(): number;
+        toModifier(value: number): $NumericModifierSpec;
+        affectsChance(): boolean;
         scope(): $ModifierScope;
         target(): string;
         mappedValue(value: number): number;
@@ -61,19 +66,14 @@ declare module "@package/cn/howxu/mmcr/publicapi/recipe/modifier" {
         maxValue(): number;
         operation(): $ModifierOperation;
         minValue(): number;
-        interfaceType(): string;
-        atMax(): number;
-        atMin(): number;
-        affectsChance(): boolean;
-        toModifier(value: number): $NumericModifierSpec;
     }
     export class $NumericModifierSpec {
     }
     export interface $NumericModifierSpec extends $ModifierSpec {
+        affectsChance(): boolean;
         scope(): $ModifierScope;
         value(): number;
         target(): string;
         operation(): $ModifierOperation;
-        affectsChance(): boolean;
     }
 }

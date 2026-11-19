@@ -15,49 +15,49 @@ declare module "@package/org/antlr/v4/runtime" {
         getState(): number;
         setState(arg0: number): void;
         getInputStream(): $IntStream;
-        getErrorListenerDispatch(): $ANTLRErrorListener;
-        /**
-         * @deprecated
-         */
-        getTokenErrorDisplay(arg0: $Token): string;
-        removeErrorListener(arg0: $ANTLRErrorListener): void;
-        removeErrorListeners(): void;
-        getRuleNames(): string[];
+        precpred(arg0: $RuleContext, arg1: number): boolean;
+        sempred(arg0: $RuleContext, arg1: number, arg2: number): boolean;
+        getATN(): $ATN;
+        getTokenFactory(): $TokenFactory<never>;
+        addErrorListener(arg0: $ANTLRErrorListener): void;
+        setTokenFactory(arg0: $TokenFactory<never>): void;
+        getRuleIndexMap(): $Map<string, number>;
+        getTokenType(arg0: string): number;
+        getErrorHeader(arg0: $RecognitionException): string;
+        setInputStream(arg0: $IntStream): void;
+        getParseInfo(): $ParseInfo;
+        setInterpreter(arg0: ATNInterpreter): void;
+        getInterpreter(): ATNInterpreter;
+        getErrorListeners(): $List<$ANTLRErrorListener>;
+        getTokenTypeMap(): $Map<string, number>;
+        getVocabulary(): $Vocabulary;
+        getGrammarFileName(): string;
+        getSerializedATN(): string;
         /**
          * @deprecated
          */
         getTokenNames(): string[];
-        getVocabulary(): $Vocabulary;
-        getGrammarFileName(): string;
-        getSerializedATN(): string;
-        setInterpreter(arg0: ATNInterpreter): void;
-        getTokenTypeMap(): $Map<string, number>;
-        setInputStream(arg0: $IntStream): void;
-        getErrorListeners(): $List<$ANTLRErrorListener>;
-        getInterpreter(): ATNInterpreter;
-        getParseInfo(): $ParseInfo;
-        getRuleIndexMap(): $Map<string, number>;
-        getErrorHeader(arg0: $RecognitionException): string;
-        getTokenType(arg0: string): number;
-        addErrorListener(arg0: $ANTLRErrorListener): void;
-        setTokenFactory(arg0: $TokenFactory<never>): void;
-        getTokenFactory(): $TokenFactory<never>;
-        getATN(): $ATN;
-        sempred(arg0: $RuleContext, arg1: number, arg2: number): boolean;
-        precpred(arg0: $RuleContext, arg1: number): boolean;
+        getRuleNames(): string[];
+        removeErrorListeners(): void;
+        /**
+         * @deprecated
+         */
+        getTokenErrorDisplay(arg0: $Token): string;
+        getErrorListenerDispatch(): $ANTLRErrorListener;
+        removeErrorListener(arg0: $ANTLRErrorListener): void;
         static EOF: number;
         constructor();
-        get errorListenerDispatch(): $ANTLRErrorListener;
-        get ruleNames(): string[];
-        get tokenNames(): string[];
+        get ATN(): $ATN;
+        get ruleIndexMap(): $Map<string, number>;
+        get parseInfo(): $ParseInfo;
+        get errorListeners(): $List<$ANTLRErrorListener>;
+        get tokenTypeMap(): $Map<string, number>;
         get vocabulary(): $Vocabulary;
         get grammarFileName(): string;
         get serializedATN(): string;
-        get tokenTypeMap(): $Map<string, number>;
-        get errorListeners(): $List<$ANTLRErrorListener>;
-        get parseInfo(): $ParseInfo;
-        get ruleIndexMap(): $Map<string, number>;
-        get ATN(): $ATN;
+        get tokenNames(): string[];
+        get ruleNames(): string[];
+        get errorListenerDispatch(): $ANTLRErrorListener;
     }
     export class $TokenStream {
     }
@@ -67,8 +67,8 @@ declare module "@package/org/antlr/v4/runtime" {
         getText(): string;
         getText(arg0: $RuleContext): string;
         getText(arg0: $Interval): string;
-        getTokenSource(): $TokenSource;
         LT(arg0: number): $Token;
+        getTokenSource(): $TokenSource;
         get tokenSource(): $TokenSource;
     }
     export class $RuleContext implements $RuleNode {
@@ -83,16 +83,16 @@ declare module "@package/org/antlr/v4/runtime" {
         getPayload(): $RuleContext;
         getChildCount(): number;
         getChild(arg0: number): $ParseTree;
+        getRuleIndex(): number;
+        setAltNumber(arg0: number): void;
+        toStringTree(arg0: $Parser): string;
+        toStringTree(): string;
+        toStringTree(arg0: $List_<string>): string;
+        getAltNumber(): number;
+        getRuleContext(): $RuleContext;
         getText(): string;
         setParent(arg0: $RuleContext): void;
         getSourceInterval(): $Interval;
-        getRuleContext(): $RuleContext;
-        getRuleIndex(): number;
-        setAltNumber(arg0: number): void;
-        toStringTree(arg0: $List_<string>): string;
-        toStringTree(arg0: $Parser): string;
-        toStringTree(): string;
-        getAltNumber(): number;
         parent: $RuleContext;
         invokingState: number;
         constructor();
@@ -100,10 +100,10 @@ declare module "@package/org/antlr/v4/runtime" {
         get empty(): boolean;
         get payload(): $RuleContext;
         get childCount(): number;
+        get ruleIndex(): number;
+        get ruleContext(): $RuleContext;
         get text(): string;
         get sourceInterval(): $Interval;
-        get ruleContext(): $RuleContext;
-        get ruleIndex(): number;
     }
     export class $IntStream {
         static UNKNOWN_SOURCE_NAME: string;
@@ -124,28 +124,28 @@ declare module "@package/org/antlr/v4/runtime" {
         getParent(): $ParserRuleContext;
         copyFrom(arg0: $ParserRuleContext): void;
         getChild<T extends $ParseTree>(arg0: $Class<T>, arg1: number): T;
-        /**
-         * @deprecated
-         */
-        addChild(arg0: $Token): $TerminalNode;
-        addChild(arg0: $RuleContext): $RuleContext;
-        addChild(arg0: $TerminalNode): $TerminalNode;
         getToken(arg0: number, arg1: number): $TerminalNode;
-        getTokens(arg0: number): $List<$TerminalNode>;
-        enterRule(arg0: $ParseTreeListener): void;
-        exitRule(arg0: $ParseTreeListener): void;
-        getStart(): $Token;
-        getStop(): $Token;
+        toInfoString(arg0: $Parser): string;
+        removeLastChild(): void;
+        addAnyChild<T extends $ParseTree>(arg0: T): T;
         addErrorNode(arg0: $ErrorNode): $ErrorNode;
         /**
          * @deprecated
          */
         addErrorNode(arg0: $Token): $ErrorNode;
-        getRuleContext<T extends $ParserRuleContext>(arg0: $Class<T>, arg1: number): T;
         getRuleContexts<T extends $ParserRuleContext>(arg0: $Class<T>): $List<T>;
-        addAnyChild<T extends $ParseTree>(arg0: T): T;
-        removeLastChild(): void;
-        toInfoString(arg0: $Parser): string;
+        getRuleContext<T extends $ParserRuleContext>(arg0: $Class<T>, arg1: number): T;
+        exitRule(arg0: $ParseTreeListener): void;
+        enterRule(arg0: $ParseTreeListener): void;
+        getTokens(arg0: number): $List<$TerminalNode>;
+        getStart(): $Token;
+        getStop(): $Token;
+        addChild(arg0: $TerminalNode): $TerminalNode;
+        addChild(arg0: $RuleContext): $RuleContext;
+        /**
+         * @deprecated
+         */
+        addChild(arg0: $Token): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -161,11 +161,11 @@ declare module "@package/org/antlr/v4/runtime" {
     export interface $ANTLRErrorStrategy {
         reset(arg0: $Parser): void;
         sync(arg0: $Parser): void;
-        reportError(arg0: $Parser, arg1: $RecognitionException): void;
-        reportMatch(arg0: $Parser): void;
         recoverInline(arg0: $Parser): $Token;
+        reportMatch(arg0: $Parser): void;
         recover(arg0: $Parser, arg1: $RecognitionException): void;
         inErrorRecoveryMode(arg0: $Parser): boolean;
+        reportError(arg0: $Parser, arg1: $RecognitionException): void;
     }
     export class $CharStream {
     }
@@ -174,18 +174,18 @@ declare module "@package/org/antlr/v4/runtime" {
     }
     export class $RecognitionException extends $RuntimeException {
         getInputStream(): $IntStream;
+        getOffendingToken(): $Token;
+        getExpectedTokens(): $IntervalSet;
         getRecognizer(): $Recognizer<never, never>;
         getOffendingState(): number;
-        getExpectedTokens(): $IntervalSet;
-        getOffendingToken(): $Token;
         getCtx(): $RuleContext;
         constructor(arg0: $Recognizer<never, never>, arg1: $IntStream, arg2: $ParserRuleContext);
         constructor(arg0: string, arg1: $Recognizer<never, never>, arg2: $IntStream, arg3: $ParserRuleContext);
         get inputStream(): $IntStream;
+        get offendingToken(): $Token;
+        get expectedTokens(): $IntervalSet;
         get recognizer(): $Recognizer<never, never>;
         get offendingState(): number;
-        get expectedTokens(): $IntervalSet;
-        get offendingToken(): $Token;
         get ctx(): $RuleContext;
     }
     export class $Lexer extends $Recognizer<number, $LexerATNSimulator> implements $TokenSource {
@@ -197,32 +197,32 @@ declare module "@package/org/antlr/v4/runtime" {
         skip(): void;
         getChannel(): number;
         more(): void;
-        setType(arg0: number): void;
-        setCharPositionInLine(arg0: number): void;
-        getCharErrorDisplay(arg0: number): string;
-        setText(arg0: string): void;
-        getLine(): number;
-        getText(): string;
-        notifyListeners(arg0: $LexerNoViableAltException): void;
-        getModeNames(): string[];
-        getChannelNames(): string[];
-        getErrorDisplay(arg0: string): string;
-        getErrorDisplay(arg0: number): string;
-        getCharIndex(): number;
-        getAllTokens(): $List<$Token>;
-        getSourceName(): string;
         getToken(): $Token;
+        setType(arg0: number): void;
+        setText(arg0: string): void;
+        setChannel(arg0: number): void;
+        setToken(arg0: $Token): void;
+        recover(arg0: $LexerNoViableAltException): void;
+        recover(arg0: $RecognitionException): void;
+        setLine(arg0: number): void;
+        getText(): string;
         emit(): $Token;
         emit(arg0: $Token): void;
-        getCharPositionInLine(): number;
-        setToken(arg0: $Token): void;
-        setChannel(arg0: number): void;
+        getLine(): number;
+        notifyListeners(arg0: $LexerNoViableAltException): void;
         emitEOF(): $Token;
-        setLine(arg0: number): void;
-        pushMode(arg0: number): void;
         popMode(): number;
-        recover(arg0: $RecognitionException): void;
-        recover(arg0: $LexerNoViableAltException): void;
+        pushMode(arg0: number): void;
+        getCharPositionInLine(): number;
+        getSourceName(): string;
+        getErrorDisplay(arg0: number): string;
+        getErrorDisplay(arg0: string): string;
+        getModeNames(): string[];
+        getCharIndex(): number;
+        getChannelNames(): string[];
+        getAllTokens(): $List<$Token>;
+        setCharPositionInLine(arg0: number): void;
+        getCharErrorDisplay(arg0: number): string;
         static MAX_CHAR_VALUE: number;
         static DEFAULT_TOKEN_CHANNEL: number;
         _type: number;
@@ -245,11 +245,11 @@ declare module "@package/org/antlr/v4/runtime" {
         constructor();
         constructor(arg0: $CharStream);
         get inputStream(): $CharStream;
-        get modeNames(): string[];
-        get channelNames(): string[];
-        get charIndex(): number;
-        get allTokens(): $List<$Token>;
         get sourceName(): string;
+        get modeNames(): string[];
+        get charIndex(): number;
+        get channelNames(): string[];
+        get allTokens(): $List<$Token>;
     }
     export class $Parser extends $Recognizer<$Token, $ParserATNSimulator> {
         reset(): void;
@@ -257,72 +257,72 @@ declare module "@package/org/antlr/v4/runtime" {
         getContext(): $ParserRuleContext;
         getInputStream(): $TokenStream;
         consume(): $Token;
-        setContext(arg0: $ParserRuleContext): void;
-        getExpectedTokens(): $IntervalSet;
-        getSourceName(): string;
+        getRuleIndex(arg0: string): number;
+        getDFAStrings(): $List<string>;
+        isMatchedEOF(): boolean;
+        getRuleContext(): $ParserRuleContext;
+        getExpectedTokensWithinCurrentRule(): $IntervalSet;
         setErrorHandler(arg0: $ANTLRErrorStrategy): void;
         getErrorHandler(): $ANTLRErrorStrategy;
-        getExpectedTokensWithinCurrentRule(): $IntervalSet;
-        dumpDFA(): void;
-        dumpDFA(arg0: $PrintStream): void;
-        setProfile(arg0: boolean): void;
-        enterRule(arg0: $ParserRuleContext, arg1: number, arg2: number): void;
-        exitRule(): void;
-        inContext(arg0: string): boolean;
-        setTrace(arg0: boolean): void;
-        isTrace(): boolean;
-        getCurrentToken(): $Token;
-        getRuleContext(): $ParserRuleContext;
-        getDFAStrings(): $List<string>;
-        createTerminalNode(arg0: $ParserRuleContext, arg1: $Token): $TerminalNode;
-        getTrimParseTree(): boolean;
         enterOuterAlt(arg0: $ParserRuleContext, arg1: number): void;
-        matchWildcard(): $Token;
+        exitRule(): void;
+        enterRule(arg0: $ParserRuleContext, arg1: number, arg2: number): void;
+        setContext(arg0: $ParserRuleContext): void;
+        setTrace(arg0: boolean): void;
+        setProfile(arg0: boolean): void;
+        isTrace(): boolean;
+        dumpDFA(arg0: $PrintStream): void;
+        dumpDFA(): void;
+        inContext(arg0: string): boolean;
+        getNumberOfSyntaxErrors(): number;
+        removeParseListeners(): void;
+        getATNWithBypassAlts(): $ATN;
+        getRuleInvocationStack(arg0: $RuleContext): $List<string>;
+        getRuleInvocationStack(): $List<string>;
+        removeParseListener(arg0: $ParseTreeListener): void;
+        compileParseTreePattern(arg0: string, arg1: number, arg2: $Lexer): $ParseTreePattern;
+        compileParseTreePattern(arg0: string, arg1: number): $ParseTreePattern;
+        pushNewRecursionContext(arg0: $ParserRuleContext, arg1: number, arg2: number): void;
+        unrollRecursionContexts(arg0: $ParserRuleContext): void;
+        notifyErrorListeners(arg0: $Token, arg1: string, arg2: $RecognitionException): void;
+        notifyErrorListeners(arg0: string): void;
+        getSourceName(): string;
+        getExpectedTokens(): $IntervalSet;
+        getTrimParseTree(): boolean;
         getBuildParseTree(): boolean;
-        setTrimParseTree(arg0: boolean): void;
-        setTokenStream(arg0: $TokenStream): void;
-        getPrecedence(): number;
         getParseListeners(): $List<$ParseTreeListener>;
-        getTokenStream(): $TokenStream;
-        isMatchedEOF(): boolean;
         setBuildParseTree(arg0: boolean): void;
         addParseListener(arg0: $ParseTreeListener): void;
+        matchWildcard(): $Token;
+        setTokenStream(arg0: $TokenStream): void;
+        createTerminalNode(arg0: $ParserRuleContext, arg1: $Token): $TerminalNode;
+        setTrimParseTree(arg0: boolean): void;
         createErrorNode(arg0: $ParserRuleContext, arg1: $Token): $ErrorNode;
+        getInvokingContext(arg0: number): $ParserRuleContext;
+        getPrecedence(): number;
+        getTokenStream(): $TokenStream;
         enterRecursionRule(arg0: $ParserRuleContext, arg1: number, arg2: number, arg3: number): void;
         /**
          * @deprecated
          */
         enterRecursionRule(arg0: $ParserRuleContext, arg1: number): void;
-        getInvokingContext(arg0: number): $ParserRuleContext;
         isExpectedToken(arg0: number): boolean;
-        getRuleIndex(arg0: string): number;
-        removeParseListeners(): void;
-        compileParseTreePattern(arg0: string, arg1: number): $ParseTreePattern;
-        compileParseTreePattern(arg0: string, arg1: number, arg2: $Lexer): $ParseTreePattern;
-        getATNWithBypassAlts(): $ATN;
-        removeParseListener(arg0: $ParseTreeListener): void;
-        notifyErrorListeners(arg0: string): void;
-        notifyErrorListeners(arg0: $Token, arg1: string, arg2: $RecognitionException): void;
-        pushNewRecursionContext(arg0: $ParserRuleContext, arg1: number, arg2: number): void;
-        getNumberOfSyntaxErrors(): number;
-        unrollRecursionContexts(arg0: $ParserRuleContext): void;
-        getRuleInvocationStack(arg0: $RuleContext): $List<string>;
-        getRuleInvocationStack(): $List<string>;
+        getCurrentToken(): $Token;
         static EOF: number;
         constructor(arg0: $TokenStream);
         get inputStream(): $TokenStream;
-        get expectedTokens(): $IntervalSet;
-        get sourceName(): string;
+        get DFAStrings(): $List<string>;
+        get matchedEOF(): boolean;
+        get ruleContext(): $ParserRuleContext;
         get expectedTokensWithinCurrentRule(): $IntervalSet;
         set profile(value: boolean);
-        get currentToken(): $Token;
-        get ruleContext(): $ParserRuleContext;
-        get DFAStrings(): $List<string>;
-        get precedence(): number;
-        get parseListeners(): $List<$ParseTreeListener>;
-        get matchedEOF(): boolean;
-        get ATNWithBypassAlts(): $ATN;
         get numberOfSyntaxErrors(): number;
+        get ATNWithBypassAlts(): $ATN;
+        get sourceName(): string;
+        get expectedTokens(): $IntervalSet;
+        get parseListeners(): $List<$ParseTreeListener>;
+        get precedence(): number;
+        get currentToken(): $Token;
     }
     export class $Token {
         static DEFAULT_CHANNEL: number;
@@ -337,23 +337,23 @@ declare module "@package/org/antlr/v4/runtime" {
         getType(): number;
         getInputStream(): $CharStream;
         getChannel(): number;
-        getLine(): number;
         getText(): string;
-        getStartIndex(): number;
-        getTokenSource(): $TokenSource;
+        getLine(): number;
         getCharPositionInLine(): number;
-        getStopIndex(): number;
+        getTokenSource(): $TokenSource;
+        getStartIndex(): number;
         getTokenIndex(): number;
+        getStopIndex(): number;
         get type(): number;
         get inputStream(): $CharStream;
         get channel(): number;
-        get line(): number;
         get text(): string;
-        get startIndex(): number;
-        get tokenSource(): $TokenSource;
+        get line(): number;
         get charPositionInLine(): number;
-        get stopIndex(): number;
+        get tokenSource(): $TokenSource;
+        get startIndex(): number;
         get tokenIndex(): number;
+        get stopIndex(): number;
     }
     export class $Vocabulary {
     }
@@ -370,13 +370,13 @@ declare module "@package/org/antlr/v4/runtime" {
         nextToken(): $Token;
         getInputStream(): $CharStream;
         getLine(): number;
-        getSourceName(): string;
-        setTokenFactory(arg0: $TokenFactory<never>): void;
-        getTokenFactory(): $TokenFactory<never>;
         getCharPositionInLine(): number;
+        getSourceName(): string;
+        getTokenFactory(): $TokenFactory<never>;
+        setTokenFactory(arg0: $TokenFactory<never>): void;
         get inputStream(): $CharStream;
         get line(): number;
-        get sourceName(): string;
         get charPositionInLine(): number;
+        get sourceName(): string;
     }
 }

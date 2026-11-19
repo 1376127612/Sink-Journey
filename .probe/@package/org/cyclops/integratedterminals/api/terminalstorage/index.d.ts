@@ -22,24 +22,24 @@ declare module "@package/org/cyclops/integratedterminals/api/terminalstorage" {
     export class $ITerminalButton<C extends $ITerminalStorageTabClient<any>, O extends $ITerminalStorageTabCommon, B extends $Button> {
     }
     export interface $ITerminalButton<C extends $ITerminalStorageTabClient<any>, O extends $ITerminalStorageTabCommon, B extends $Button> {
-        getY(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): number;
-        getX(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): number;
         getTranslationKey(): string;
-        getTooltip(arg0: $Player, arg1: $TooltipFlag, arg2: $List_<$Component_>): void;
-        onClick(arg0: C, arg1: O | null, arg2: B, arg3: number, arg4: number): void;
-        createButton(arg0: number, arg1: number): B;
         isInLeftColumn(): boolean;
         reloadFromState(): void;
+        getX(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): number;
+        onClick(arg0: C, arg1: O | null, arg2: B, arg3: number, arg4: number): void;
+        getY(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): number;
+        createButton(arg0: number, arg1: number): B;
+        getTooltip(arg0: $Player, arg1: $TooltipFlag, arg2: $List_<$Component_>): void;
         get translationKey(): string;
         get inLeftColumn(): boolean;
     }
     export class $ITerminalStorageTabCommon {
     }
     export interface $ITerminalStorageTabCommon {
+        handleQuickMove(arg0: $ContainerTerminalStorageBase<never>, arg1: $Player, arg2: number): ($ItemStack) | undefined;
         loadSlots(arg0: $AbstractContainerMenu, arg1: number, arg2: $Player, arg3: ($ITerminalStorageTabCommon$IVariableInventory) | undefined, arg4: $ValueDeseralizationContext_): $List<$Pair<$Slot, $ITerminalStorageTabCommon$ISlotPositionCallback>>;
         getName(): $ResourceLocation;
         onUpdate(arg0: $AbstractContainerMenu, arg1: $Player, arg2: ($ITerminalStorageTabCommon$IVariableInventory) | undefined): void;
-        handleQuickMove(arg0: $ContainerTerminalStorageBase<never>, arg1: $Player, arg2: number): ($ItemStack) | undefined;
         get name(): $ResourceLocation;
     }
     /**
@@ -47,18 +47,18 @@ declare module "@package/org/cyclops/integratedterminals/api/terminalstorage" {
      */
     export type $ITerminalStorageTabCommon_ = (() => $ResourceLocation_);
     export class $ITerminalStorageTabCommon$SlotPositionFactors extends $Record {
-        offsetY(): number;
-        offsetX(): number;
-        gridYSize(): number;
-        gridXSize(): number;
-        playerInventoryOffsetX(): number;
         playerInventoryOffsetY(): number;
+        playerInventoryOffsetX(): number;
+        gridXSize(): number;
+        gridYSize(): number;
+        offsetX(): number;
+        offsetY(): number;
         constructor(offsetX: number, offsetY: number, gridXSize: number, gridYSize: number, playerInventoryOffsetX: number, playerInventoryOffsetY: number);
     }
     /**
      * Values that may be interpreted as {@link $ITerminalStorageTabCommon$SlotPositionFactors}.
      */
-    export type $ITerminalStorageTabCommon$SlotPositionFactors_ = { offsetY?: number, offsetX?: number, gridYSize?: number, gridXSize?: number, playerInventoryOffsetY?: number, playerInventoryOffsetX?: number,  } | [offsetY?: number, offsetX?: number, gridYSize?: number, gridXSize?: number, playerInventoryOffsetY?: number, playerInventoryOffsetX?: number, ];
+    export type $ITerminalStorageTabCommon$SlotPositionFactors_ = { gridXSize?: number, playerInventoryOffsetY?: number, playerInventoryOffsetX?: number, offsetY?: number, offsetX?: number, gridYSize?: number,  } | [gridXSize?: number, playerInventoryOffsetY?: number, playerInventoryOffsetX?: number, offsetY?: number, offsetX?: number, gridYSize?: number, ];
     export class $ITerminalRowColumnProvider {
     }
     export interface $ITerminalRowColumnProvider {
@@ -91,77 +91,77 @@ declare module "@package/org/cyclops/integratedterminals/api/terminalstorage" {
         static DEFAULT_SLOT_ROW_LENGTH: number;
     }
     export interface $ITerminalStorageTabClient<S extends $ITerminalStorageSlot> {
-        getName(): $ResourceLocation;
-        isEnabled(): boolean;
-        getStatus(arg0: number): string;
         getIcon(): $ItemStack;
-        getTooltip(): $List<$Component>;
-        getSlots(arg0: number, arg1: number, arg2: number): $List<S>;
-        onSelect(arg0: number): void;
-        getBackgroundTexture(): $ResourceLocation;
-        getChannels(): number[];
-        getButtons(): $List<$ITerminalButton<never, never, never>>;
-        getTabSettingsName(): $ResourceLocation;
-        getSlotCount(arg0: number): number;
-        setInstanceFilter(arg0: number, arg1: string): void;
-        getInstanceFilter(arg0: number): string;
-        onCommonSlotRender(arg0: $AbstractContainerScreen<any>, arg1: $GuiGraphics, arg2: $ContainerScreenTerminalStorage$DrawLayer_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $ITerminalStorageTabCommon_): void;
-        handleScroll(arg0: $AbstractContainerMenu, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: boolean, arg6: number): boolean;
-        hasSearchField(): boolean;
-        getActiveSlotId(): number;
-        hasScrollbar(): boolean;
-        hasChannelField(): boolean;
-        getSlotOffsetY(): number;
-        getSlotRowLength(): number;
-        dragIntoSlot(arg0: $AbstractContainerMenu, arg1: number, arg2: $Slot, arg3: number, arg4: boolean): number;
-        getSlotOffsetX(): number;
-        getSlotVisibleRows(): number;
-        resetActiveSlot(): void;
-        onDeselect(arg0: number): void;
-        getPlayerInventoryOffsetY(): number;
+        getActiveSlotQuantity(): number;
         getPlayerInventoryOffsetX(): number;
+        getPlayerInventoryOffsetY(): number;
         isQuickMovePrevented(arg0: number): boolean;
         isQuickMovePrevented(arg0: $Slot): boolean;
+        hasVariableFilterSlots(): boolean;
+        getRowColumnProvider(): $ITerminalRowColumnProvider;
+        setActiveSlotQuantity(arg0: number): void;
+        onTabBackgroundRender(arg0: $ContainerScreenTerminalStorage<never, never>, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number): void;
         computeDraggingQuantity(arg0: $Set_<$Slot>, arg1: number, arg2: $ItemStack_, arg3: number): number;
         isSlotValidForDraggingInto(arg0: number, arg1: $Slot): boolean;
-        setActiveSlotQuantity(arg0: number): void;
-        hasVariableFilterSlots(): boolean;
-        onTabBackgroundRender(arg0: $ContainerScreenTerminalStorage<never, never>, arg1: $GuiGraphics, arg2: number, arg3: number, arg4: number): void;
-        getActiveSlotQuantity(): number;
-        getRowColumnProvider(): $ITerminalRowColumnProvider;
+        onSelect(arg0: number): void;
+        getButtons(): $List<$ITerminalButton<never, never, never>>;
+        hasScrollbar(): boolean;
+        hasChannelField(): boolean;
+        hasSearchField(): boolean;
+        getSlotOffsetX(): number;
+        getInstanceFilter(arg0: number): string;
+        dragIntoSlot(arg0: $AbstractContainerMenu, arg1: number, arg2: $Slot, arg3: number, arg4: boolean): number;
+        getActiveSlotId(): number;
+        handleScroll(arg0: $AbstractContainerMenu, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: boolean, arg6: number): boolean;
+        getSlotRowLength(): number;
+        getSlotOffsetY(): number;
+        onCommonSlotRender(arg0: $AbstractContainerScreen<any>, arg1: $GuiGraphics, arg2: $ContainerScreenTerminalStorage$DrawLayer_, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: $ITerminalStorageTabCommon_): void;
+        getSlotVisibleRows(): number;
+        getTabSettingsName(): $ResourceLocation;
+        getSlotCount(arg0: number): number;
         handleClick(arg0: $AbstractContainerMenu, arg1: number, arg2: number, arg3: number, arg4: boolean, arg5: boolean, arg6: number, arg7: boolean): boolean;
+        resetActiveSlot(): void;
+        getName(): $ResourceLocation;
+        isEnabled(): boolean;
+        getChannels(): number[];
+        getSlots(arg0: number, arg1: number, arg2: number): $List<S>;
+        getStatus(arg0: number): string;
+        onDeselect(arg0: number): void;
+        setInstanceFilter(arg0: number, arg1: string): void;
+        getBackgroundTexture(): $ResourceLocation;
+        getTooltip(): $List<$Component>;
+        get icon(): $ItemStack;
+        get playerInventoryOffsetX(): number;
+        get playerInventoryOffsetY(): number;
+        get rowColumnProvider(): $ITerminalRowColumnProvider;
+        get buttons(): $List<$ITerminalButton<never, never, never>>;
+        get slotOffsetX(): number;
+        get activeSlotId(): number;
+        get slotRowLength(): number;
+        get slotOffsetY(): number;
+        get slotVisibleRows(): number;
+        get tabSettingsName(): $ResourceLocation;
         get name(): $ResourceLocation;
         get enabled(): boolean;
-        get icon(): $ItemStack;
-        get tooltip(): $List<$Component>;
-        get backgroundTexture(): $ResourceLocation;
         get channels(): number[];
-        get buttons(): $List<$ITerminalButton<never, never, never>>;
-        get tabSettingsName(): $ResourceLocation;
-        get activeSlotId(): number;
-        get slotOffsetY(): number;
-        get slotRowLength(): number;
-        get slotOffsetX(): number;
-        get slotVisibleRows(): number;
-        get playerInventoryOffsetY(): number;
-        get playerInventoryOffsetX(): number;
-        get rowColumnProvider(): $ITerminalRowColumnProvider;
+        get backgroundTexture(): $ResourceLocation;
+        get tooltip(): $List<$Component>;
     }
     export class $ITerminalStorageTabCommon$IVariableInventory {
     }
     export interface $ITerminalStorageTabCommon$IVariableInventory {
-        getNamedInventory(arg0: string, arg1: $HolderLookup$Provider): $NonNullList<$ItemStack>;
+        loadNamedInventory(arg0: string, arg1: $Container, arg2: $HolderLookup$Provider): void;
         saveNamedInventory(arg0: string, arg1: $Container, arg2: $HolderLookup$Provider): void;
         setNamedInventory(arg0: string, arg1: $NonNullList<$ItemStack_>, arg2: $HolderLookup$Provider): void;
-        loadNamedInventory(arg0: string, arg1: $Container, arg2: $HolderLookup$Provider): void;
+        getNamedInventory(arg0: string, arg1: $HolderLookup$Provider): $NonNullList<$ItemStack>;
     }
     export class $ITerminalStorageTabServer {
     }
     export interface $ITerminalStorageTabServer {
         deInit(): void;
+        updateActive(arg0: number): void;
         getName(): $ResourceLocation;
         init(): void;
-        updateActive(arg0: number): void;
         get name(): $ResourceLocation;
     }
     export class $ITerminalStorageTabCommon$ISlotPositionCallback {
@@ -181,7 +181,7 @@ declare module "@package/org/cyclops/integratedterminals/api/terminalstorage" {
     /**
      * Values that may be interpreted as {@link $ITerminalRowColumnProvider$RowsAndColumns}.
      */
-    export type $ITerminalRowColumnProvider$RowsAndColumns_ = { rows?: number, columns?: number,  } | [rows?: number, columns?: number, ];
+    export type $ITerminalRowColumnProvider$RowsAndColumns_ = { columns?: number, rows?: number,  } | [columns?: number, rows?: number, ];
     export class $ITerminalStorageSlot {
     }
     export interface $ITerminalStorageSlot {

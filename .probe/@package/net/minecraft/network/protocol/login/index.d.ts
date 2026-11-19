@@ -15,30 +15,24 @@ export * as custom from "@package/net/minecraft/network/protocol/login/custom";
 
 declare module "@package/net/minecraft/network/protocol/login" {
     export class $ServerboundCustomQueryAnswerPacket extends $Record implements $Packet<$ServerLoginPacketListener> {
+        transactionId(): number;
         payload(): $CustomQueryAnswerPayload;
         type(): $PacketType<$ServerboundCustomQueryAnswerPacket>;
         /**
          * Passes this Packet on to the PacketListener for processing.
          */
         handle(handler: $ServerLoginPacketListener): void;
-        transactionId(): number;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundCustomQueryAnswerPacket>;
         constructor(arg0: number, arg1: $CustomQueryAnswerPayload_ | null);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ServerboundCustomQueryAnswerPacket}.
      */
-    export type $ServerboundCustomQueryAnswerPacket_ = { payload?: $CustomQueryAnswerPayload_, transactionId?: number,  } | [payload?: $CustomQueryAnswerPayload_, transactionId?: number, ];
+    export type $ServerboundCustomQueryAnswerPacket_ = { transactionId?: number, payload?: $CustomQueryAnswerPayload_,  } | [transactionId?: number, payload?: $CustomQueryAnswerPayload_, ];
     export class $LoginProtocols {
         static CLIENTBOUND: $ProtocolInfo<$ClientLoginPacketListener>;
         static CLIENTBOUND_TEMPLATE: $ProtocolInfo$Unbound<$ClientLoginPacketListener, $FriendlyByteBuf>;
@@ -47,24 +41,17 @@ declare module "@package/net/minecraft/network/protocol/login" {
         constructor();
     }
     export class $ClientboundGameProfilePacket extends $Record implements $Packet<$ClientLoginPacketListener> {
+        /**
+         * @deprecated
+         */
+        strictErrorHandling(): boolean;
+        gameProfile(): $GameProfile;
         type(): $PacketType<$ClientboundGameProfilePacket>;
         /**
          * Passes this Packet on to the NetHandler for processing.
          */
         handle(handler: $ClientLoginPacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isTerminal(): boolean;
-        gameProfile(): $GameProfile;
-        /**
-         * @deprecated
-         * Whether decoding errors will be ignored for this packet.
-         */
-        strictErrorHandling(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ClientboundGameProfilePacket>;
         constructor(arg0: $GameProfile, arg1: boolean);
@@ -74,32 +61,26 @@ declare module "@package/net/minecraft/network/protocol/login" {
     /**
      * Values that may be interpreted as {@link $ClientboundGameProfilePacket}.
      */
-    export type $ClientboundGameProfilePacket_ = { gameProfile?: $GameProfile, strictErrorHandling?: boolean,  } | [gameProfile?: $GameProfile, strictErrorHandling?: boolean, ];
+    export type $ClientboundGameProfilePacket_ = { strictErrorHandling?: boolean, gameProfile?: $GameProfile,  } | [strictErrorHandling?: boolean, gameProfile?: $GameProfile, ];
     export class $ClientboundCustomQueryPacket extends $Record implements $Packet<$ClientLoginPacketListener> {
+        transactionId(): number;
         payload(): $CustomQueryPayload;
         type(): $PacketType<$ClientboundCustomQueryPacket>;
         /**
          * Passes this Packet on to the NetHandler for processing.
          */
         handle(handler: $ClientLoginPacketListener): void;
-        transactionId(): number;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundCustomQueryPacket>;
         constructor(arg0: number, arg1: $CustomQueryPayload);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ClientboundCustomQueryPacket}.
      */
-    export type $ClientboundCustomQueryPacket_ = { payload?: $CustomQueryPayload, transactionId?: number,  } | [payload?: $CustomQueryPayload, transactionId?: number, ];
+    export type $ClientboundCustomQueryPacket_ = { transactionId?: number, payload?: $CustomQueryPayload,  } | [transactionId?: number, payload?: $CustomQueryPayload, ];
     export class $ServerboundLoginAcknowledgedPacket implements $Packet<$ServerLoginPacketListener> {
         type(): $PacketType<$ServerboundLoginAcknowledgedPacket>;
         handle(arg0: $ServerLoginPacketListener): void;
@@ -118,23 +99,17 @@ declare module "@package/net/minecraft/network/protocol/login" {
          */
         handle(handler: $ServerLoginPacketListener): void;
         profileId(): $UUID;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundHelloPacket>;
         constructor(arg0: string, arg1: $UUID_);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ServerboundHelloPacket}.
      */
-    export type $ServerboundHelloPacket_ = { name?: string, profileId?: $UUID_,  } | [name?: string, profileId?: $UUID_, ];
+    export type $ServerboundHelloPacket_ = { profileId?: $UUID_, name?: string,  } | [profileId?: $UUID_, name?: string, ];
     export class $LoginPacketTypes {
         static CLIENTBOUND_GAME_PROFILE: $PacketType<$ClientboundGameProfilePacket>;
         static CLIENTBOUND_CUSTOM_QUERY: $PacketType<$ClientboundCustomQueryPacket>;
@@ -149,32 +124,23 @@ declare module "@package/net/minecraft/network/protocol/login" {
     }
     export class $ClientboundHelloPacket implements $Packet<$ClientLoginPacketListener> {
         getServerId(): string;
+        shouldAuthenticate(): boolean;
+        getChallenge(): number[];
         type(): $PacketType<$ClientboundHelloPacket>;
         /**
          * Passes this Packet on to the NetHandler for processing.
          */
         handle(handler: $ClientLoginPacketListener): void;
         getPublicKey(): $PublicKey;
-        getChallenge(): number[];
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        shouldAuthenticate(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundHelloPacket>;
         constructor(serverId: string, publicKey: number[], challenge: number[], shouldAuthenticate: boolean);
         get serverId(): string;
-        get publicKey(): $PublicKey;
         get challenge(): number[];
-        get terminal(): boolean;
+        get publicKey(): $PublicKey;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * PacketListener for the server side of the LOGIN protocol.
@@ -182,53 +148,41 @@ declare module "@package/net/minecraft/network/protocol/login" {
     export class $ServerLoginPacketListener {
     }
     export interface $ServerLoginPacketListener extends $ServerCookiePacketListener, $ServerPacketListener {
-        protocol(): $ConnectionProtocol;
-        handleKey(packet: $ServerboundKeyPacket): void;
         handleHello(packet: $ServerboundHelloPacket_): void;
         handleLoginAcknowledgement(packet: $ServerboundLoginAcknowledgedPacket): void;
         handleCustomQueryPacket(packet: $ServerboundCustomQueryAnswerPacket_): void;
+        handleKey(packet: $ServerboundKeyPacket): void;
+        protocol(): $ConnectionProtocol;
     }
     export class $ServerboundKeyPacket implements $Packet<$ServerLoginPacketListener> {
+        isChallengeValid(expected: number[], key: $PrivateKey): boolean;
         type(): $PacketType<$ServerboundKeyPacket>;
         /**
          * Passes this Packet on to the NetHandler for processing.
          */
         handle(handler: $ServerLoginPacketListener): void;
         getSecretKey(key: $PrivateKey): $SecretKey;
-        isChallengeValid(expected: number[], key: $PrivateKey): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ServerboundKeyPacket>;
         constructor(secretKey: $SecretKey, publicKey: $PublicKey, challenge: number[]);
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $ClientboundLoginCompressionPacket implements $Packet<$ClientLoginPacketListener> {
+        getCompressionThreshold(): number;
         type(): $PacketType<$ClientboundLoginCompressionPacket>;
         /**
          * Passes this Packet on to the NetHandler for processing.
          */
         handle(handler: $ClientLoginPacketListener): void;
-        getCompressionThreshold(): number;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundLoginCompressionPacket>;
         constructor(compressionThreshold: number);
         get compressionThreshold(): number;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     export class $ClientboundLoginDisconnectPacket implements $Packet<$ClientLoginPacketListener> {
         type(): $PacketType<$ClientboundLoginDisconnectPacket>;
@@ -237,19 +191,13 @@ declare module "@package/net/minecraft/network/protocol/login" {
          */
         handle(handler: $ClientLoginPacketListener): void;
         getReason(): $Component;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
-        isTerminal(): boolean;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
+        isTerminal(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientboundLoginDisconnectPacket>;
         constructor(reason: $Component_);
         get reason(): $Component;
-        get terminal(): boolean;
         get skippable(): boolean;
+        get terminal(): boolean;
     }
     /**
      * PacketListener for the client side of the LOGIN protocol.
@@ -257,11 +205,11 @@ declare module "@package/net/minecraft/network/protocol/login" {
     export class $ClientLoginPacketListener {
     }
     export interface $ClientLoginPacketListener extends $ClientCookiePacketListener, $ClientboundPacketListener {
-        protocol(): $ConnectionProtocol;
+        handleCompression(packet: $ClientboundLoginCompressionPacket): void;
         handleGameProfile(packet: $ClientboundGameProfilePacket_): void;
+        handleDisconnect(packet: $ClientboundLoginDisconnectPacket): void;
         handleCustomQuery(packet: $ClientboundCustomQueryPacket_): void;
         handleHello(packet: $ClientboundHelloPacket): void;
-        handleCompression(packet: $ClientboundLoginCompressionPacket): void;
-        handleDisconnect(packet: $ClientboundLoginDisconnectPacket): void;
+        protocol(): $ConnectionProtocol;
     }
 }

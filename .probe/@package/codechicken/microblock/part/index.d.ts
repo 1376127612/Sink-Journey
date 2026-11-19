@@ -11,30 +11,30 @@ import { $BaseMultipart } from "@package/codechicken/multipart/api/part";
 
 declare module "@package/codechicken/microblock/part" {
     export class $MicroblockPart extends $BaseMultipart {
-        getSize(): number;
-        getBounds(): $Cuboid6;
         getMaterial(): $MicroMaterial;
-        setShape(arg0: number, arg1: number): void;
+        getMicroFactory(): $MicroblockPartFactory;
+        getRenderCuboids(arg0: boolean): $Iterable<$MaskedCuboid>;
+        getShapeSlot(): number;
+        getItemFactoryId(): number;
         sendShapeUpdate(): void;
         isTransparent(): boolean;
-        getItemFactoryId(): number;
-        getRenderCuboids(arg0: boolean): $Iterable<$MaskedCuboid>;
-        getMicroFactory(): $MicroblockPartFactory;
-        getShapeSlot(): number;
+        getSize(): number;
+        getBounds(): $Cuboid6;
+        setShape(arg0: number, arg1: number): void;
         material: $MicroMaterial;
         shape: number;
         constructor(arg0: $MicroMaterial_);
-        get size(): number;
-        get bounds(): $Cuboid6;
-        get transparent(): boolean;
-        get itemFactoryId(): number;
         get microFactory(): $MicroblockPartFactory;
         get shapeSlot(): number;
+        get itemFactoryId(): number;
+        get transparent(): boolean;
+        get size(): number;
+        get bounds(): $Cuboid6;
     }
     export class $MicroblockPartFactory extends $MultipartType<$MicroblockPart> {
-        create(arg0: boolean, arg1: $MicroMaterial_): $MicroblockPart;
         createPartClient(arg0: $MCDataInput): $MicroblockPart;
         createPartServer(arg0: $CompoundTag_): $MicroblockPart;
+        create(arg0: boolean, arg1: $MicroMaterial_): $MicroblockPart;
         getResistanceFactor(): number;
         static MULTIPART_TYPES: $ResourceKey<$Registry<$MultipartType<never>>>;
         constructor();

@@ -11,26 +11,26 @@ import { $IElementStorage } from "@package/sirttas/elementalcraft/api/element/st
 
 declare module "@package/sirttas/elementalcraft/jewel" {
     export class $Jewel implements $IElementTypeProvider, $ItemLike {
-        getKey(): $ResourceLocation;
-        isActive(arg0: $Entity, arg1: $IElementStorage | null): boolean;
-        getElementType(): $ElementType;
-        getDisplayName(): $Component;
-        consume(arg0: $Entity, arg1: $IElementStorage | null): void;
-        consume(arg0: $Entity): void;
-        getDescriptionId(): string;
-        appendHoverText(arg0: $List_<$Component_>): void;
         asItem(): $Item;
         isTicking(): boolean;
         getConsumption(): number;
         getModelName(): $ResourceLocation;
+        getKey(): $ResourceLocation;
+        isActive(arg0: $Entity, arg1: $IElementStorage | null): boolean;
+        getElementType(): $ElementType;
+        consume(arg0: $Entity): void;
+        consume(arg0: $Entity, arg1: $IElementStorage | null): void;
+        getDisplayName(): $Component;
+        getDescriptionId(): string;
+        appendHoverText(arg0: $List_<$Component_>): void;
         getElementTypeSupplier(): $Supplier<$ElementType>;
+        get ticking(): boolean;
+        get consumption(): number;
+        get modelName(): $ResourceLocation;
         get key(): $ResourceLocation;
         get elementType(): $ElementType;
         get displayName(): $Component;
         get descriptionId(): string;
-        get ticking(): boolean;
-        get consumption(): number;
-        get modelName(): $ResourceLocation;
         get elementTypeSupplier(): $Supplier<$ElementType>;
     }
     /**

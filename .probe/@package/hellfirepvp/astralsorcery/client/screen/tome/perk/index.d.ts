@@ -4,8 +4,8 @@ export * as render from "@package/hellfirepvp/astralsorcery/client/screen/tome/p
 
 declare module "@package/hellfirepvp/astralsorcery/client/screen/tome/perk" {
     export class $BatchPerkContext$Builder {
-        build(): $BatchPerkContext;
         addRenderType(arg0: $PerkRenderType_): $BatchPerkContext$Builder;
+        build(): $BatchPerkContext;
         constructor();
     }
     export class $BatchPerkContext {

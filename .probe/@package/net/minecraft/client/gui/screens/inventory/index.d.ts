@@ -2,14 +2,17 @@ import { $PanoramaRenderer } from "@package/net/minecraft/client/renderer";
 import { $Pair } from "@package/com/mojang/datafixers/util";
 import { $RecipeUpdateListener, $AbstractFurnaceRecipeBookComponent, $RecipeBookComponent } from "@package/net/minecraft/client/gui/screens/recipebook";
 import { $LivingEntity } from "@package/net/minecraft/world/entity";
-import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
+import { $CallbackInfo, $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $FeatureFlagSet } from "@package/net/minecraft/world/flag";
 import { $Minecraft } from "@package/net/minecraft/client";
 import { $Map, $Set, $List, $List_ } from "@package/java/util";
 import { $AccessorSmithingScreen } from "@package/com/illusivesoulworks/polymorph/mixin/core";
+import { $RandomSource } from "@package/net/minecraft/util";
 import { $AbstractHorse } from "@package/net/minecraft/world/entity/animal/horse";
+import { $BookModel } from "@package/net/minecraft/client/model";
 import { $InteractionHand_, $Container } from "@package/net/minecraft/world";
 import { $NonNullList } from "@package/net/minecraft/core";
+import { $DrawsOnLeft } from "@package/dev/shadowsoffire/placebo/util";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $AbstractContainerScreenAccessor } from "@package/com/denfop/mixin/access";
 import { $HorseInventoryMenu, $ChestMenu, $FurnaceMenu, $LecternMenu, $BeaconMenu, $CartographyTableMenu, $StonecutterMenu, $AnvilMenu, $Slot, $ShulkerBoxMenu, $ItemCombinerMenu, $EnchantmentMenu, $CrafterMenu, $CraftingMenu, $SmokerMenu, $BlastFurnaceMenu, $MerchantMenu, $SmithingMenu, $HopperMenu, $GrindstoneMenu, $DispenserMenu, $AbstractContainerMenu, $BrewingStandMenu, $AbstractFurnaceMenu, $InventoryMenu, $LoomMenu, $ContainerListener } from "@package/net/minecraft/world/inventory";
@@ -18,7 +21,7 @@ import { $AbstractContainerScreenExtension } from "@package/earth/terrarium/adas
 import { $ContainerScreenInputControl } from "@package/cn/howxu/mmcr/client/controller/ui";
 import { $AbstractContainerScreenAccessor as $AbstractContainerScreenAccessor$1 } from "@package/com/extendedae_plus/mixin/accessor";
 import { $BaseCommandBlock } from "@package/net/minecraft/world/level";
-import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
+import { $CreativeModeTab, $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $NarratableEntry } from "@package/net/minecraft/client/gui/narration";
 import { $Component_, $FormattedText, $Style, $Component } from "@package/net/minecraft/network/chat";
 import { $AbstractContainerScreenAccessor as $AbstractContainerScreenAccessor$2 } from "@package/com/ultramega/ae2importexportcard/mixin";
@@ -27,8 +30,11 @@ import { $EditBox, $AbstractButton, $Renderable, $WidgetTooltipHolder, $Button, 
 import { $BookScreenAccessor } from "@package/com/euphony/neo_language_reload/mixin";
 import { $Player, $Inventory } from "@package/net/minecraft/world/entity/player";
 import { $CreativeTabsScreenPage } from "@package/net/neoforged/neoforge/client/gui";
+import { $CreativeModeInventoryScreenAccessor } from "@package/de/dafuqs/fractal/mixin/client";
+import { $ISubTabLocation } from "@package/de/dafuqs/fractal/interfaces";
 import { $Screen, $Screen$DeferredTooltipRendering } from "@package/net/minecraft/client/gui/screens";
 import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
+import { $ApothEnchantmentScreen$SuperRender } from "@package/dev/shadowsoffire/apothic_enchanting/table";
 import { $Font, $GuiGraphics } from "@package/net/minecraft/client/gui";
 import { $ContainerEventHandler } from "@package/net/minecraft/client/gui/components/events";
 import { $SignBlockEntity, $StructureBlockEntity, $JigsawBlockEntity, $CommandBlockEntity } from "@package/net/minecraft/world/level/block/entity";
@@ -58,6 +64,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -77,8 +84,16 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         font: $Font;
         constructor(menu: $SmithingMenu, playerInventory: $Inventory, title: $Component_);
     }
-    export class $EnchantmentScreen extends $AbstractContainerScreen<$EnchantmentMenu> {
+    export class $EnchantmentScreen extends $AbstractContainerScreen<$EnchantmentMenu> implements $ApothEnchantmentScreen$SuperRender {
         containerTick(): void;
+        /**
+         * Renders the graphical user interface (GUI) element.
+         */
+        apoth_superRender(guiGraphics: $GuiGraphics, mouseX: number, mouseY: number, partialTick: number): void;
+        /**
+         * Renders the graphical user interface (GUI) element.
+         */
+        renderBook(guiGraphics: $GuiGraphics, mouseX: number, mouseY: number, partialTick: number): void;
         tickBook(): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
@@ -86,6 +101,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         oFlip: number;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
         clickedSlot: $Slot;
+        random: $RandomSource;
         snapbackStartY: number;
         renderables: $List<$Renderable>;
         hoveredSlot: $Slot;
@@ -101,14 +117,17 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         flipA: number;
+        last: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
         isQuickCrafting: boolean;
         quickCraftingRemainder: number;
         deferredTooltipRendering: $Screen$DeferredTooltipRendering;
         static FOOTER_SEPARATOR: $ResourceLocation;
+        bookModel: $BookModel;
         quickCraftingType: number;
         quickCraftSlots: $Set<$Slot>;
         narratables: $List<$NarratableEntry>;
@@ -143,6 +162,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
     }
     export class $CyclingSlotBackground {
         tick(icons: $List_<$ResourceLocation_>): void;
@@ -167,6 +187,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -227,6 +248,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -243,16 +265,25 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         font: $Font;
         constructor(menu: $BrewingStandMenu, playerInventory: $Inventory, title: $Component_);
     }
-    export class $CreativeModeInventoryScreen extends $EffectRenderingInventoryScreen<$CreativeModeInventoryScreen$ItemPickerMenu> {
+    export class $CreativeModeInventoryScreen extends $EffectRenderingInventoryScreen<$CreativeModeInventoryScreen$ItemPickerMenu> implements $CreativeModeInventoryScreenAccessor, $ISubTabLocation {
         static handleHotbarLoadOrSave(client: $Minecraft, index: number, load: boolean, save: boolean): void;
         containerTick(): void;
-        getTooltipFromContainerItem(stack: $ItemStack_): $List<$Component>;
-        setCurrentPage(arg0: $CreativeTabsScreenPage): void;
         getCurrentPage(): $CreativeTabsScreenPage;
+        setCurrentPage(arg0: $CreativeTabsScreenPage): void;
+        getTooltipFromContainerItem(stack: $ItemStack_): $List<$Component>;
         /**
          * Returns (if you are not on the inventoryTab) and (the flag isn't set) and (you have more than 1 page of items).
          */
         isInventoryOpen(): boolean;
+        handler$enc000$fractal$renderSubTabs(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: $CallbackInfo): void;
+        handler$enc000$fractal$mouseClicked(arg0: number, arg1: number, arg2: number, arg3: $CallbackInfoReturnable<any>): void;
+        static getSelectedTab$fractal_$md$e03d8d$0(): $CreativeModeTab;
+        fractal$getX2(): number;
+        fractal$getX(): number;
+        fractal$getH2(): number;
+        fractal$getH(): number;
+        fractal$getY(): number;
+        wrapWithCondition$enc000$fractal$wrapParentTitle(arg0: $GuiGraphics, arg1: $Font, arg2: $Component_, arg3: number, arg4: number, arg5: number, arg6: boolean): boolean;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -265,11 +296,13 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         isSplittingStack: boolean;
         snapbackItem: $ItemStack;
         static PANORAMA: $PanoramaRenderer;
+        static selectedTab: $CreativeModeTab;
         snapbackStartX: number;
         static INVENTORY_LOCATION: $ResourceLocation;
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -287,6 +320,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         font: $Font;
         constructor(player: $LocalPlayer, enabledFeatures: $FeatureFlagSet, displayOperatorCreativeTab: boolean);
         get inventoryOpen(): boolean;
+        static get selectedTab$fractal_$md$e03d8d$0(): $CreativeModeTab;
     }
     export class $AbstractCommandBlockEditScreen extends $Screen {
         static MENU_BACKGROUND: $ResourceLocation;
@@ -306,9 +340,6 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor();
     }
     export class $EffectRenderingInventoryScreen<T extends $AbstractContainerMenu> extends $AbstractContainerScreen<T> {
-        /**
-         * @return `true` if the GUI element is dragging, `false` otherwise
-         */
         canSeeEffects(): boolean;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
@@ -327,6 +358,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -361,6 +393,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -386,8 +419,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         backgroundPair: $Pair<$ResourceLocation, $ResourceLocation>;
     }
     export class $BookViewScreen extends $Screen implements $BookScreenAccessor {
-        setBookAccess(bookAccess: $BookViewScreen$BookAccess_): void;
         getClickedComponentStyleAt(mouseX: number, arg1: number): $Style;
+        setBookAccess(bookAccess: $BookViewScreen$BookAccess_): void;
         /**
          * I'm not sure why this exists. The function it calls is public and does all the work.
          */
@@ -436,6 +469,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -470,6 +504,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -494,15 +529,16 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
     }
     export class $InventoryScreen extends $EffectRenderingInventoryScreen<$InventoryMenu> implements $RecipeUpdateListener {
-        static renderEntityInInventoryFollowsMouse(guiGraphics: $GuiGraphics, x1: number, y1: number, x2: number, y2: number, scale: number, yOffset: number, mouseX: number, mouseY: number, entity: $LivingEntity): void;
-        static renderEntityInInventoryFollowsAngle(guiGraphics: $GuiGraphics, x1: number, y1: number, x2: number, y2: number, scale: number, yOffset: number, mouseX: number, mouseY: number, entity: $LivingEntity): void;
-        handler$bia000$patchouli$onGuiInitPost(arg0: $CallbackInfo): void;
+        getRecipeBookComponent(): $RecipeBookComponent;
+        static renderEntityInInventory(guiGraphics: $GuiGraphics, x: number, y: number, scale: number, translate: $Vector3f, pose: $Quaternionf, cameraOrientation: $Quaternionf | null, entity: $LivingEntity): void;
         containerTick(): void;
         recipesUpdated(): void;
-        static renderEntityInInventory(guiGraphics: $GuiGraphics, x: number, y: number, scale: number, translate: $Vector3f, pose: $Quaternionf, cameraOrientation: $Quaternionf | null, entity: $LivingEntity): void;
-        getRecipeBookComponent(): $RecipeBookComponent;
+        handler$faa000$patchouli$onGuiInitPost(arg0: $CallbackInfo): void;
+        static renderEntityInInventoryFollowsMouse(guiGraphics: $GuiGraphics, x1: number, y1: number, x2: number, y2: number, scale: number, yOffset: number, mouseX: number, mouseY: number, entity: $LivingEntity): void;
+        static renderEntityInInventoryFollowsAngle(guiGraphics: $GuiGraphics, x1: number, y1: number, x2: number, y2: number, scale: number, yOffset: number, mouseX: number, mouseY: number, entity: $LivingEntity): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -521,6 +557,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -557,6 +594,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -593,6 +631,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -611,14 +650,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(menu: $FurnaceMenu, playerInventory: $Inventory, title: $Component_);
     }
     export class $MerchantScreen$TradeOfferButton extends $Button {
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getIndex(): number;
         renderToolTip(guiGraphics: $GuiGraphics, mouseX: number, mouseY: number): void;
+        getIndex(): number;
         visible: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
@@ -631,6 +664,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         focused: boolean;
         static BIG_WIDTH: number;
         static DEFAULT_SPACING: number;
+        height: number;
         constructor(x: $MerchantScreen, y: number, index: number, onPress: number, arg4: $Button$OnPress_);
         get index(): number;
     }
@@ -652,6 +686,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -686,6 +721,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -703,10 +739,10 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(menu: $LoomMenu, playerInventory: $Inventory, title: $Component_);
     }
     export class $AbstractFurnaceScreen<T extends $AbstractFurnaceMenu> extends $AbstractContainerScreen<T> implements $RecipeUpdateListener {
-        init(): void;
+        getRecipeBookComponent(): $RecipeBookComponent;
         containerTick(): void;
         recipesUpdated(): void;
-        getRecipeBookComponent(): $RecipeBookComponent;
+        init(): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -724,6 +760,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -759,6 +796,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -777,129 +815,58 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(menu: $SmokerMenu, playerInventory: $Inventory, title: $Component_);
     }
     export class $EnchantmentNames {
-        static getInstance(): $EnchantmentNames;
         getRandomName(fontRenderer: $Font, maxWidth: number): $FormattedText;
         /**
          * Resets the underlying random number generator using a given seed.
          */
         initSeed(seed: number): void;
+        static getInstance(): $EnchantmentNames;
         static get instance(): $EnchantmentNames;
     }
-    export class $AbstractContainerScreen<T extends $AbstractContainerMenu> extends $Screen implements $MenuAccess<T>, $ContainerEventHandler, $AbstractContainerScreenAccessor$2, $AbstractContainerScreenAccessor, $AbstractContainerScreenAccessor$1<any>, $ContainerScreenInputControl, $AbstractContainerScreenExtension {
-        isHovering(slot: $Slot, mouseX: number, arg2: number): boolean;
-        renderSlot(guiGraphics: $GuiGraphics, slot: $Slot): void;
-        findSlot(mouseX: number, arg1: number): $Slot;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getXSize(): number;
-        getMenu(): T;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getYSize(): number;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getGuiLeft(): number;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
+    export class $AbstractContainerScreen<T extends $AbstractContainerMenu> extends $Screen implements $MenuAccess<T>, $ContainerEventHandler, $AbstractContainerScreenAccessor$2, $AbstractContainerScreenExtension, $DrawsOnLeft, $AbstractContainerScreenAccessor, $AbstractContainerScreenAccessor$1<any>, $ContainerScreenInputControl {
         getGuiTop(): number;
-        renderFloatingItem(guiGraphics: $GuiGraphics, stack: $ItemStack_, x: number, y: number, text: string): void;
-        clearDraggingState(): void;
-        getSlotColor(arg0: number): number;
-        getSlotUnderMouse(): $Slot;
-        recalculateQuickCraftRemaining(): void;
+        getGuiLeft(): number;
+        static renderSlotHighlight(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number): void;
         static renderSlotHighlight(guiGraphics: $GuiGraphics, x: number, y: number, blitOffset: number): void;
-        static renderSlotHighlight(guiGraphics: $GuiGraphics, x: number, y: number, width: number, height: number): void;
         resetControllerSlotInput(): void;
+        getSlotColor(arg0: number): number;
+        clearDraggingState(): void;
+        getSlotUnderMouse(): $Slot;
+        renderFloatingItem(guiGraphics: $GuiGraphics, stack: $ItemStack_, x: number, y: number, text: string): void;
+        recalculateQuickCraftRemaining(): void;
+        handler$efg000$apothic_attributes$apoth_superMouseDragged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: $CallbackInfoReturnable<any>): void;
+        isHovering(slot: $Slot, mouseX: number, arg2: number): boolean;
+        findSlot(mouseX: number, arg1: number): $Slot;
+        renderSlot(guiGraphics: $GuiGraphics, slot: $Slot): void;
+        getMenu(): T;
+        getXSize(): number;
+        getYSize(): number;
         adastra$renderPreSlot(guiGraphics: $GuiGraphics, slot: $Slot): void;
-        setTopPos(keyCode: number): void;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        eap$getImageHeight(): number;
-        getSnapbackEnd(): $Slot;
-        getClickedSlot(): $Slot;
-        getSnapbackTime(): number;
-        setSnapbackItem(arg0: $ItemStack_): void;
-        setImageHeight(keyCode: number): void;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getSnapbackStartX(): number;
-        getHoveredSlot(): $Slot;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        eap$getLeftPos(): number;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        eap$getTopPos(): number;
-        getDraggingItem(): $ItemStack;
-        getQuickdropSlot(): $Slot;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        eap$getImageWidth(): number;
-        getSnapbackItem(): $ItemStack;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getSnapbackStartY(): number;
-        eap$getHoveredSlot(): $Slot;
-        eap$setHoveredSlot(arg0: $Slot): void;
-        /**
-         * @return `true` if the GUI element is dragging, `false` otherwise
-         */
-        getIsSplittingStack(): boolean;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
-        getQuickCraftingType(): number;
-        /**
-         * Returns the tab order group of the GUI component.
-         * Tab order group determines the order in which the components are traversed when using keyboard navigation.
-         * 
-         * @return The tab order group of the GUI component.
-         */
+        __ths(): $AbstractContainerScreen<never>;
+        drawOnLeft(arg0: $GuiGraphics, arg1: $List_<$FormattedText>, arg2: number, arg3: number): void;
+        drawOnLeft(arg0: $GuiGraphics, arg1: $List_<$FormattedText>, arg2: number): void;
         getQuickCraftingRemainder(): number;
         setQuickCraftingRemainder(keyCode: number): void;
+        getIsSplittingStack(): boolean;
+        getQuickCraftingType(): number;
+        getSnapbackStartY(): number;
+        getSnapbackTime(): number;
+        getClickedSlot(): $Slot;
+        setImageHeight(keyCode: number): void;
+        eap$getLeftPos(): number;
+        getQuickdropSlot(): $Slot;
+        eap$getTopPos(): number;
+        eap$setHoveredSlot(arg0: $Slot): void;
+        getHoveredSlot(): $Slot;
+        getSnapbackEnd(): $Slot;
+        eap$getImageHeight(): number;
+        setSnapbackItem(arg0: $ItemStack_): void;
+        getSnapbackItem(): $ItemStack;
+        eap$getImageWidth(): number;
+        eap$getHoveredSlot(): $Slot;
+        getDraggingItem(): $ItemStack;
+        getSnapbackStartX(): number;
+        setTopPos(keyCode: number): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -917,6 +884,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -932,12 +900,12 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         static INWORLD_MENU_BACKGROUND: $ResourceLocation;
         font: $Font;
         constructor(menu: T, playerInventory: $Inventory, title: $Component_);
-        get XSize(): number;
-        get menu(): T;
-        get YSize(): number;
-        get guiLeft(): number;
         get guiTop(): number;
+        get guiLeft(): number;
         get slotUnderMouse(): $Slot;
+        get menu(): T;
+        get XSize(): number;
+        get YSize(): number;
         set imageHeight(value: number);
         get quickdropSlot(): $Slot;
     }
@@ -967,6 +935,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1002,6 +971,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1036,6 +1006,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1060,6 +1031,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
     }
     export class $BeaconScreen$BeaconUpgradePowerButton extends $BeaconScreen$BeaconPowerButton {
         static PERIOD_PER_SCROLLED_PIXEL: number;
@@ -1069,6 +1041,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
     }
     export class $MinecartCommandBlockEditScreen extends $AbstractCommandBlockEditScreen {
         getCommandBlock(): $BaseCommandBlock;
@@ -1112,6 +1085,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1172,9 +1146,9 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $SignBlockEntity, arg1: boolean, arg2: boolean);
     }
     export class $CraftingScreen extends $AbstractContainerScreen<$CraftingMenu> implements $RecipeUpdateListener {
+        getRecipeBookComponent(): $RecipeBookComponent;
         containerTick(): void;
         recipesUpdated(): void;
-        getRecipeBookComponent(): $RecipeBookComponent;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -1192,6 +1166,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1230,6 +1205,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1255,6 +1231,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
     }
     export class $BookEditScreen$Pos2i {
     }
@@ -1284,6 +1261,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
     }
     export class $CreativeModeInventoryScreen$ItemPickerMenu extends $AbstractContainerMenu {
         canScroll(): boolean;
@@ -1304,6 +1282,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         ldlib2$itemSlotMap: $Map<any, any>;
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         items: $NonNullList<$ItemStack>;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
@@ -1355,6 +1334,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         constructor(arg0: $SignBlockEntity, arg1: boolean, arg2: boolean);
     }
     export class $StonecutterScreen extends $AbstractContainerScreen<$StonecutterMenu> {
+        redirect$dfj000$astages$renderRecipes(instance: $StonecutterMenu): $List<any>;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -1372,6 +1352,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1399,6 +1380,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
      */
     export type $MenuAccess_<T> = (() => T);
     export class $AnvilScreen extends $ItemCombinerScreen<$AnvilMenu> {
+        handler$emb000$bclib$be_onSlotUpdate(arg0: $AbstractContainerMenu, arg1: number, arg2: $ItemStack_, arg3: $CallbackInfo): void;
+        constant$blc001$apothic_enchanting$apoth_removeLevelCap(arg0: number): number;
         renderFg(guiGraphics: $GuiGraphics, mouseX: number, mouseY: number, partialTick: number): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
@@ -1417,6 +1400,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1449,8 +1433,8 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
         font: $Font;
-        constructor(sign: $SignBlockEntity, isFrontText: boolean, isFiltered: boolean);
         constructor(sign: $SignBlockEntity, isFrontText: boolean, isFiltered: boolean, title: $Component_);
+        constructor(sign: $SignBlockEntity, isFrontText: boolean, isFiltered: boolean);
     }
     export class $GrindstoneScreen extends $AbstractContainerScreen<$GrindstoneMenu> {
         leftPos: number;
@@ -1470,6 +1454,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -1500,6 +1485,7 @@ declare module "@package/net/minecraft/client/gui/screens/inventory" {
         focused: boolean;
         static BIG_WIDTH: number;
         static DEFAULT_SPACING: number;
+        height: number;
         constructor(x: number, y: number, isForward: boolean, onPress: $Button$OnPress_, playTurnSound: boolean);
     }
     export class $StructureBlockEditScreen extends $Screen {

@@ -7,10 +7,10 @@ import { $IJeiKeyMapping } from "@package/mezz/jei/api/runtime";
 
 declare module "@package/mezz/jei/api/gui/inputs" {
     export class $RecipeSlotUnderMouse extends $Record {
+        isMouseOver(arg0: number, arg1: number): boolean;
+        addOffset(arg0: number, arg1: number): $RecipeSlotUnderMouse;
         slot(): $IRecipeSlotDrawable;
         offset(): $ScreenPosition;
-        addOffset(arg0: number, arg1: number): $RecipeSlotUnderMouse;
-        isMouseOver(arg0: number, arg1: number): boolean;
         constructor(arg0: $IRecipeSlotDrawable, arg1: number, arg2: number);
         constructor(slot: $IRecipeSlotDrawable, offset: $ScreenPosition_);
     }
@@ -21,25 +21,25 @@ declare module "@package/mezz/jei/api/gui/inputs" {
     export class $IJeiUserInput {
     }
     export interface $IJeiUserInput {
+        isSimulate(): boolean;
         getModifiers(): number;
         getKey(): $InputConstants$Key;
         is(arg0: $KeyMapping): boolean;
         is(arg0: $IJeiKeyMapping): boolean;
-        isSimulate(): boolean;
+        get simulate(): boolean;
         get modifiers(): number;
         get key(): $InputConstants$Key;
-        get simulate(): boolean;
     }
     export class $IJeiGuiEventListener {
     }
     export interface $IJeiGuiEventListener {
         getArea(): $ScreenRectangle;
-        keyPressed(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
-        mouseMoved(arg0: number, arg1: number): void;
+        mouseScrolled(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
+        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
         mouseDragged(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
         mouseReleased(arg0: number, arg1: number, arg2: number): boolean;
-        mouseClicked(arg0: number, arg1: number, arg2: number): boolean;
-        mouseScrolled(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
+        keyPressed(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number): boolean;
+        mouseMoved(arg0: number, arg1: number): void;
         get area(): $ScreenRectangle;
     }
     /**
@@ -49,9 +49,9 @@ declare module "@package/mezz/jei/api/gui/inputs" {
     export class $IJeiInputHandler {
     }
     export interface $IJeiInputHandler {
-        handleMouseDragged(arg0: number, arg1: number, arg2: $InputConstants$Key, arg3: number, arg4: number): boolean;
         getArea(): $ScreenRectangle;
         handleInput(arg0: number, arg1: number, arg2: $IJeiUserInput): boolean;
+        handleMouseDragged(arg0: number, arg1: number, arg2: $InputConstants$Key, arg3: number, arg4: number): boolean;
         handleMouseMoved(arg0: number, arg1: number): void;
         handleMouseScrolled(arg0: number, arg1: number, arg2: number, arg3: number): boolean;
         get area(): $ScreenRectangle;

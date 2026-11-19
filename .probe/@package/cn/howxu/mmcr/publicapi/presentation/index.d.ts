@@ -17,11 +17,11 @@ declare module "@package/cn/howxu/mmcr/publicapi/presentation" {
     export class $JadeText {
     }
     export interface $JadeText {
+        appendAfter(lineId: $ResourceLocation_, afterLineId: $ResourceLocation_, text: $Component_): void;
         remove(lineId: $ResourceLocation_): void;
         append(lineId: $ResourceLocation_, text: $Component_): void;
         clear(): void;
         replace(lineId: $ResourceLocation_, text: $Component_): void;
-        appendAfter(lineId: $ResourceLocation_, afterLineId: $ResourceLocation_, text: $Component_): void;
     }
     export class $DisplayStackView {
     }
@@ -35,18 +35,18 @@ declare module "@package/cn/howxu/mmcr/publicapi/presentation" {
     export class $IoDisplay {
     }
     export interface $IoDisplay {
+        icon(): ($DisplayStackView) | undefined;
         value(): string;
         unit(): string;
         label(): string;
-        icon(): ($DisplayStackView) | undefined;
     }
     export class $ControllerText {
     }
     export interface $ControllerText {
+        appendAfter(scope: $TextScope_, lineId: $ResourceLocation_, afterLineId: $ResourceLocation_, text: $Component_): void;
         remove(scope: $TextScope_, lineId: $ResourceLocation_): void;
         append(scope: $TextScope_, lineId: $ResourceLocation_, text: $Component_): void;
         clear(scope: $TextScope_): void;
         replace(lineId: $ResourceLocation_, text: $Component_): void;
-        appendAfter(scope: $TextScope_, lineId: $ResourceLocation_, afterLineId: $ResourceLocation_, text: $Component_): void;
     }
 }

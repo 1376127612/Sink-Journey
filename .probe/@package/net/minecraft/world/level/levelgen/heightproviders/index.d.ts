@@ -10,8 +10,8 @@ declare module "@package/net/minecraft/world/level/levelgen/heightproviders" {
         constructor(distribution: $SimpleWeightedRandomList<$HeightProvider>);
     }
     export class $HeightProvider {
-        getType(): $HeightProviderType<never>;
         sample(random: $RandomSource, context: $WorldGenerationContext): number;
+        getType(): $HeightProviderType<never>;
         static CODEC: $Codec<$HeightProvider>;
         constructor();
         get type(): $HeightProviderType<never>;

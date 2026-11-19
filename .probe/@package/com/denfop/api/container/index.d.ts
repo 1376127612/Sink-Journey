@@ -10,14 +10,14 @@ declare module "@package/com/denfop/api/container" {
     export class $CustomWorldContainer {
     }
     export interface $CustomWorldContainer extends $Container, $MenuProvider {
-        getWorld(): $Level;
-        getGui(arg0: $Player, arg1: $ContainerMenuBase<$CustomWorldContainer>): $ScreenIndustrialUpgrade<$ContainerMenuBase<$CustomWorldContainer>>;
-        getContainerId(): number;
-        getMenuType(): $MenuType<never>;
-        addInventorySlot(arg0: $Inventory): void;
         getGuiContainer(arg0: $Player): $ContainerMenuBase<never>;
-        get world(): $Level;
+        getContainerId(): number;
+        getGui(arg0: $Player, arg1: $ContainerMenuBase<$CustomWorldContainer>): $ScreenIndustrialUpgrade<$ContainerMenuBase<$CustomWorldContainer>>;
+        addInventorySlot(arg0: $Inventory): void;
+        getWorld(): $Level;
+        getMenuType(): $MenuType<never>;
         get containerId(): number;
+        get world(): $Level;
         get menuType(): $MenuType<never>;
     }
 }

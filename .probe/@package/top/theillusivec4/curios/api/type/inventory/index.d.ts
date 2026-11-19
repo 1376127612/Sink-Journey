@@ -11,28 +11,38 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
     export class $IDynamicStackHandler {
     }
     export interface $IDynamicStackHandler extends $IItemHandlerModifiable {
-        grow(arg0: number): void;
-        getStackInSlot(arg0: number): $ItemStack;
-        shrink(arg0: number): void;
         setStackInSlot(arg0: number, arg1: $ItemStack_): void;
-        getSlots(): number;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        getStackInSlot(arg0: number): $ItemStack;
         setPreviousStackInSlot(arg0: number, arg1: $ItemStack_): void;
         getPreviousStackInSlot(arg0: number): $ItemStack;
+        grow(arg0: number): void;
+        shrink(arg0: number): void;
+        getSlots(): number;
         get slots(): number;
     }
     export class $ICurioStacksHandler {
     }
     export interface $ICurioStacksHandler {
-        updateActiveState(arg0: number): void;
+        addTransientModifier(arg0: $AttributeModifier_): void;
+        getActiveStates(): $NonNullList<boolean>;
+        getDropRule(): $ICurio$DropRule;
+        deserializeNBT(arg0: $CompoundTag_): void;
+        serializeNBT(): $CompoundTag;
+        getCosmeticStacks(): $IDynamicStackHandler;
+        getSyncTag(): $CompoundTag;
+        clearModifiers(): void;
         copyModifiers(arg0: $ICurioStacksHandler): void;
         /**
          * @deprecated
          */
         getSizeShift(): number;
         getCachedModifiers(): $Set<$AttributeModifier>;
+        updateActiveState(arg0: number): void;
         applySyncTag(arg0: $CompoundTag_): void;
+        hasCosmetic(): boolean;
+        canToggleRendering(): boolean;
         getStacks(): $IDynamicStackHandler;
         getModifiers(): $Map<$ResourceLocation, $AttributeModifier>;
         update(): void;
@@ -40,41 +50,31 @@ declare module "@package/top/theillusivec4/curios/api/type/inventory" {
          * @deprecated
          */
         grow(arg0: number): void;
-        addTransientModifier(arg0: $AttributeModifier_): void;
-        getIdentifier(): string;
         /**
          * @deprecated
          */
         shrink(arg0: number): void;
-        getSyncTag(): $CompoundTag;
+        getIdentifier(): string;
         getSlots(): number;
-        addPermanentModifier(arg0: $AttributeModifier_): void;
         isVisible(): boolean;
-        serializeNBT(): $CompoundTag;
-        deserializeNBT(arg0: $CompoundTag_): void;
         removeModifier(arg0: $ResourceLocation_): void;
+        addPermanentModifier(arg0: $AttributeModifier_): void;
         getRenders(): $NonNullList<boolean>;
+        getPermanentModifiers(): $Set<$AttributeModifier>;
         getModifiersByOperation(arg0: $AttributeModifier$Operation_): $Collection<$AttributeModifier>;
         clearCachedModifiers(): void;
-        getPermanentModifiers(): $Set<$AttributeModifier>;
-        hasCosmetic(): boolean;
-        canToggleRendering(): boolean;
-        clearModifiers(): void;
-        getCosmeticStacks(): $IDynamicStackHandler;
-        getActiveStates(): $NonNullList<boolean>;
-        getDropRule(): $ICurio$DropRule;
+        get activeStates(): $NonNullList<boolean>;
+        get dropRule(): $ICurio$DropRule;
+        get cosmeticStacks(): $IDynamicStackHandler;
+        get syncTag(): $CompoundTag;
         get sizeShift(): number;
         get cachedModifiers(): $Set<$AttributeModifier>;
         get stacks(): $IDynamicStackHandler;
         get modifiers(): $Map<$ResourceLocation, $AttributeModifier>;
         get identifier(): string;
-        get syncTag(): $CompoundTag;
         get slots(): number;
         get visible(): boolean;
         get renders(): $NonNullList<boolean>;
         get permanentModifiers(): $Set<$AttributeModifier>;
-        get cosmeticStacks(): $IDynamicStackHandler;
-        get activeStates(): $NonNullList<boolean>;
-        get dropRule(): $ICurio$DropRule;
     }
 }

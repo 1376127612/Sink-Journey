@@ -2,24 +2,37 @@ import { $LevelAccessor } from "@package/net/minecraft/world/level";
 import { $Predicate_, $Supplier_, $Function_, $BiFunction_, $Consumer_, $BiConsumer_ } from "@package/java/util/function";
 import { $Stream } from "@package/java/util/stream";
 import { $Codec } from "@package/com/mojang/serialization";
-import { $ListTag, $CompoundTag, $ListTag_ } from "@package/net/minecraft/nbt";
+import { $CompoundTag, $ListTag, $ListTag_ } from "@package/net/minecraft/nbt";
 import { $Iterable } from "@package/java/lang";
 import { $Spliterator, $Iterator } from "@package/java/util";
 import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/createmod/catnip/data" {
     export class $Pair<F, S> {
+        static codec<F, S>(arg0: $Codec<F>, arg1: $Codec<S>): $Codec<$Pair<F, S>>;
+        setFirst(arg0: F): void;
+        setSecond(arg0: S): void;
         static of<F, S>(arg0: F, arg1: S): $Pair<F, S>;
         copy(): $Pair<F, S>;
         getFirst(): F;
         swap(): $Pair<S, F>;
         getSecond(): S;
-        setSecond(arg0: S): void;
         static streamCodec<B, F, S>(arg0: $StreamCodec<B, F>, arg1: $StreamCodec<B, S>): $StreamCodec<B, $Pair<F, S>>;
-        static codec<F, S>(arg0: $Codec<F>, arg1: $Codec<S>): $Codec<$Pair<F, S>>;
-        setFirst(arg0: F): void;
     }
     export class $Couple<T> extends $Pair<T, T> implements $Iterable<T> {
+        static createWithContext<T>(arg0: $Function_<boolean, T>): $Couple<T>;
+        static codec<T>(arg0: $Codec<T>): $Codec<$Couple<T>>;
+        mapNotNull<S>(arg0: $Function_<T, S>): $Couple<S>;
+        either(arg0: $Predicate_<T>): boolean;
+        forEachWithContext(arg0: $BiConsumer_<T, boolean>): void;
+        static deserializeEach<S>(arg0: $ListTag_, arg1: $Function_<$CompoundTag, S>): $Couple<S>;
+        serializeEach(arg0: $Function_<T, $CompoundTag>): $ListTag;
+        mapNotNullWithParam<S, R>(arg0: $BiFunction_<T, R, S>, arg1: R): $Couple<S>;
+        mapWithContext<S>(arg0: $BiFunction_<T, boolean, S>): $Couple<S>;
+        mapWithParams<S, R>(arg0: $BiFunction_<T, R, S>, arg1: $Couple<R>): $Couple<S>;
+        replaceWithContext(arg0: $BiFunction_<T, boolean, T>): void;
+        forEachWithParams<S>(arg0: $BiConsumer_<T, S>, arg1: $Couple<S>): void;
+        replaceWithParams<S>(arg0: $BiFunction_<T, S, T>, arg1: $Couple<S>): void;
         get(arg0: boolean): T;
         replace(arg0: $Function_<T, T>): void;
         iterator(): $Iterator<T>;
@@ -31,21 +44,8 @@ declare module "@package/net/createmod/catnip/data" {
         static create<T>(arg0: $Supplier_<T>): $Couple<T>;
         static create<T>(arg0: T, arg1: T): $Couple<T>;
         swap(): $Couple<T>;
-        mapWithParams<S, R>(arg0: $BiFunction_<T, R, S>, arg1: $Couple<R>): $Couple<S>;
-        forEachWithParams<S>(arg0: $BiConsumer_<T, S>, arg1: $Couple<S>): void;
-        replaceWithContext(arg0: $BiFunction_<T, boolean, T>): void;
-        mapWithContext<S>(arg0: $BiFunction_<T, boolean, S>): $Couple<S>;
-        replaceWithParams<S>(arg0: $BiFunction_<T, S, T>, arg1: $Couple<S>): void;
-        either(arg0: $Predicate_<T>): boolean;
-        serializeEach(arg0: $Function_<T, $CompoundTag>): $ListTag;
-        static deserializeEach<S>(arg0: $ListTag_, arg1: $Function_<$CompoundTag, S>): $Couple<S>;
-        static createWithContext<T>(arg0: $Function_<boolean, T>): $Couple<T>;
-        mapNotNull<S>(arg0: $Function_<T, S>): $Couple<S>;
-        static streamCodec<B, T>(arg0: $StreamCodec<B, T>): $StreamCodec<B, $Couple<T>>;
         both(arg0: $Predicate_<T>): boolean;
-        static codec<T>(arg0: $Codec<T>): $Codec<$Couple<T>>;
-        mapNotNullWithParam<S, R>(arg0: $BiFunction_<T, R, S>, arg1: R): $Couple<S>;
-        forEachWithContext(arg0: $BiConsumer_<T, boolean>): void;
+        static streamCodec<B, T>(arg0: $StreamCodec<B, T>): $StreamCodec<B, $Couple<T>>;
         spliterator(): $Spliterator<T>;
         [Symbol.iterator](): Iterator<T>
     }

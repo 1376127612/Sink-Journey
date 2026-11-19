@@ -8,20 +8,20 @@ declare module "@package/net/neoforged/neoforge/fluids/capability" {
     export class $IFluidHandler {
     }
     export interface $IFluidHandler {
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         getTanks(): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         getFluidInTank(arg0: number): $FluidStack;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         getTankCapacity(arg0: number): number;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         get tanks(): number;
     }
     export class $IFluidHandler$FluidAction extends $Enum<$IFluidHandler$FluidAction> {
+        simulate(): boolean;
         static values(): $IFluidHandler$FluidAction[];
         static valueOf(arg0: string): $IFluidHandler$FluidAction;
         execute(): boolean;
-        simulate(): boolean;
         static EXECUTE: $IFluidHandler$FluidAction;
         static SIMULATE: $IFluidHandler$FluidAction;
     }

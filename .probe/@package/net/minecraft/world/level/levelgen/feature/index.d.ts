@@ -1,26 +1,28 @@
-import { $ServerLevelAccessor, $LevelAccessor, $LevelSimulatedReader, $WorldGenLevel } from "@package/net/minecraft/world/level";
 import { $DeltaFeatureConfiguration, $EndGatewayConfiguration, $ColumnFeatureConfiguration, $UnderwaterMagmaConfiguration, $OreConfiguration$TargetBlockState, $MultifaceGrowthConfiguration, $RootSystemConfiguration, $LayerConfiguration, $PointedDripstoneConfiguration, $SpringConfiguration, $SculkPatchConfiguration_, $HugeMushroomFeatureConfiguration, $ProbabilityFeatureConfiguration, $FeatureConfiguration, $RandomPatchConfiguration_, $RandomPatchConfiguration, $SimpleBlockConfiguration_, $SimpleBlockConfiguration, $DripstoneClusterConfiguration, $ReplaceBlockConfiguration, $BlockPileConfiguration, $NoneFeatureConfiguration, $RandomBooleanFeatureConfiguration, $NetherForestVegetationConfig, $DiskConfiguration_, $RandomFeatureConfiguration, $SpikeConfiguration, $BlockColumnConfiguration_, $ReplaceSphereConfiguration, $DiskConfiguration, $TwistingVinesConfig, $SimpleRandomFeatureConfiguration, $VegetationPatchConfiguration, $SculkPatchConfiguration, $LargeDripstoneConfiguration, $GeodeConfiguration, $TreeConfiguration, $TwistingVinesConfig_, $CountConfiguration, $BlockColumnConfiguration, $BlockStateConfiguration, $OreConfiguration } from "@package/net/minecraft/world/level/levelgen/feature/configurations";
-import { $TagKey_ } from "@package/net/minecraft/tags";
 import { $Codec, $MapCodec } from "@package/com/mojang/serialization";
-import { $BlockStateProvider } from "@package/net/minecraft/world/level/levelgen/feature/stateproviders";
-import { $StructureProcessorList } from "@package/net/minecraft/world/level/levelgen/structure/templatesystem";
-import { $ChunkGenerator } from "@package/net/minecraft/world/level/chunk";
+import { $IEndSpike } from "@package/com/yungnickyoung/minecraft/betterendisland/world";
+import { $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $List, $List_ } from "@package/java/util";
-import { $PlacedFeature, $PlacedFeature_ } from "@package/net/minecraft/world/level/levelgen/placement";
-import { $BlockPredicate } from "@package/net/minecraft/world/level/levelgen/blockpredicates";
-import { $CacheLoader } from "@package/com/google/common/cache";
 import { $RandomSource } from "@package/net/minecraft/util";
 import { $Predicate_, $Predicate, $Function_ } from "@package/java/util/function";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $Object2IntMap } from "@package/it/unimi/dsi/fastutil/objects";
 import { $BlockPos, $BlockPos$MutableBlockPos, $BlockPos_, $Holder_, $HolderSet, $Holder, $Direction_ } from "@package/net/minecraft/core";
-import { $Stream } from "@package/java/util/stream";
 import { RegistryMarked, RegistryTypes } from "@special/types";
 import { $BlockState_, $BlockState } from "@package/net/minecraft/world/level/block/state";
+import { $Record } from "@package/java/lang";
+import { $ServerLevelAccessor, $LevelAccessor, $LevelSimulatedReader, $WorldGenLevel } from "@package/net/minecraft/world/level";
+import { $TagKey_ } from "@package/net/minecraft/tags";
+import { $BlockStateProvider } from "@package/net/minecraft/world/level/levelgen/feature/stateproviders";
+import { $StructureProcessorList } from "@package/net/minecraft/world/level/levelgen/structure/templatesystem";
+import { $ChunkGenerator } from "@package/net/minecraft/world/level/chunk";
+import { $PlacedFeature, $PlacedFeature_ } from "@package/net/minecraft/world/level/levelgen/placement";
+import { $BlockPredicate } from "@package/net/minecraft/world/level/levelgen/blockpredicates";
+import { $CacheLoader } from "@package/com/google/common/cache";
+import { $Stream } from "@package/java/util/stream";
 import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $Block } from "@package/net/minecraft/world/level/block";
 import { $MutableInt } from "@package/org/apache/commons/lang3/mutable";
-import { $Record } from "@package/java/lang";
 import { $AABB } from "@package/net/minecraft/world/phys";
 export * as foliageplacers from "@package/net/minecraft/world/level/levelgen/feature/foliageplacers";
 export * as configurations from "@package/net/minecraft/world/level/levelgen/feature/configurations";
@@ -159,6 +161,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
         static DRIPSTONE_CLUSTER: $Feature<$DripstoneClusterConfiguration>;
         static GEODE: $Feature<$GeodeConfiguration>;
         static KELP: $Feature<$NoneFeatureConfiguration>;
+        constructor(codec: $Codec<$OreConfiguration>);
     }
     export class $WaterloggedVegetationPatchFeature extends $VegetationPatchFeature {
         static VEGETATION_PATCH: $Feature<$VegetationPatchConfiguration>;
@@ -685,12 +688,12 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
         constructor(codec: $Codec<$ColumnFeatureConfiguration>);
     }
     export class $FeaturePlaceContext<FC extends $FeatureConfiguration> {
+        chunkGenerator(): $ChunkGenerator;
+        topFeature(): ($ConfiguredFeature<never, never>) | undefined;
         random(): $RandomSource;
         config(): FC;
         origin(): $BlockPos;
         level(): $WorldGenLevel;
-        topFeature(): ($ConfiguredFeature<never, never>) | undefined;
-        chunkGenerator(): $ChunkGenerator;
         constructor(topFeature: ($ConfiguredFeature_<never, never>) | undefined, level: $WorldGenLevel, chunkGenerator: $ChunkGenerator, random: $RandomSource, origin: $BlockPos_, config: FC);
     }
     export class $RootSystemFeature extends $Feature<$RootSystemConfiguration> {
@@ -2002,11 +2005,11 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
         constructor(arg0: $Codec<$BlockStateConfiguration>);
     }
     export class $DripstoneUtils {
-        static isDripstoneBaseOrLava(state: $BlockState_): boolean;
-        static isNeitherEmptyNorWater(state: $BlockState_): boolean;
-        static isEmptyOrWater(state: $BlockState_): boolean;
         static isDripstoneBase(state: $BlockState_): boolean;
+        static isEmptyOrWater(state: $BlockState_): boolean;
         static isEmptyOrWaterOrLava(state: $BlockState_): boolean;
+        static isNeitherEmptyNorWater(state: $BlockState_): boolean;
+        static isDripstoneBaseOrLava(state: $BlockState_): boolean;
         constructor();
     }
     export class $RandomSelectorFeature extends $Feature<$RandomFeatureConfiguration> {
@@ -2413,24 +2416,24 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
     export class $LargeDripstoneFeature$LargeDripstone {
     }
     export class $Feature<FC extends $FeatureConfiguration> {
-        place(config: FC, level: $WorldGenLevel, chunkGenerator: $ChunkGenerator, random: $RandomSource, origin: $BlockPos_): boolean;
+        configuredCodec(): $MapCodec<$ConfiguredFeature<FC, $Feature<FC>>>;
+        /**
+         * @return `true` if any of the six adjacent blocks to the block at `pos` are air.
+         */
+        static isAdjacentToAir(adjacentStateAccessor: $Function_<$BlockPos, $BlockState>, pos: $BlockPos_): boolean;
+        static isGrassOrDirt(level: $LevelSimulatedReader, pos: $BlockPos_): boolean;
+        static isReplaceable(blockTag: $TagKey_<$Block>): $Predicate<$BlockState>;
+        /**
+         * @return `true` if any of the six adjacent blocks to the block at `pos` return `true` to the given filter.
+         */
+        static checkNeighbors(adjacentStateAccessor: $Function_<$BlockPos, $BlockState>, pos: $BlockPos_, filter: $Predicate_<$BlockState>): boolean;
+        static isDirt(state: $BlockState_): boolean;
         /**
          * Places the given feature at the given location.
          * During world generation, features are provided with a 3x3 region of chunks, centered on the chunk being generated, that they can safely generate into.
          */
         place(context: $FeaturePlaceContext<FC>): boolean;
-        static isDirt(state: $BlockState_): boolean;
-        /**
-         * @return `true` if any of the six adjacent blocks to the block at `pos` are air.
-         */
-        static isAdjacentToAir(adjacentStateAccessor: $Function_<$BlockPos, $BlockState>, pos: $BlockPos_): boolean;
-        /**
-         * @return `true` if any of the six adjacent blocks to the block at `pos` return `true` to the given filter.
-         */
-        static checkNeighbors(adjacentStateAccessor: $Function_<$BlockPos, $BlockState>, pos: $BlockPos_, filter: $Predicate_<$BlockState>): boolean;
-        static isGrassOrDirt(level: $LevelSimulatedReader, pos: $BlockPos_): boolean;
-        static isReplaceable(blockTag: $TagKey_<$Block>): $Predicate<$BlockState>;
-        configuredCodec(): $MapCodec<$ConfiguredFeature<FC, $Feature<FC>>>;
+        place(config: FC, level: $WorldGenLevel, chunkGenerator: $ChunkGenerator, random: $RandomSource, origin: $BlockPos_): boolean;
         static VEGETATION_PATCH: $Feature<$VegetationPatchConfiguration>;
         static CHORUS_PLANT: $Feature<$NoneFeatureConfiguration>;
         static MONSTER_ROOM: $Feature<$NoneFeatureConfiguration>;
@@ -2765,10 +2768,10 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
         constructor(arg0: $Codec<$NoneFeatureConfiguration>);
     }
     export class $ConfiguredFeature<FC extends $FeatureConfiguration, F extends $Feature<FC>> extends $Record {
+        getFeatures(): $Stream<$ConfiguredFeature<never, never>>;
         feature(): F;
         config(): FC;
         place(reader: $WorldGenLevel, chunkGenerator: $ChunkGenerator, random: $RandomSource, pos: $BlockPos_): boolean;
-        getFeatures(): $Stream<$ConfiguredFeature<never, never>>;
         static CODEC: $Codec<$Holder<$ConfiguredFeature<never, never>>>;
         static DIRECT_CODEC: $Codec<$ConfiguredFeature<never, never>>;
         static LIST_CODEC: $Codec<$HolderSet<$ConfiguredFeature<never, never>>>;
@@ -3246,22 +3249,26 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
         static KELP: $Feature<$NoneFeatureConfiguration>;
         constructor(codec: $Codec<$EndGatewayConfiguration>);
     }
-    export class $SpikeFeature$EndSpike {
+    export class $SpikeFeature$EndSpike implements $IEndSpike {
+        getHeight(): number;
+        getCrystalYOffset(): number;
+        getTopBoundingBox(): $AABB;
+        isGuarded(): boolean;
         getCenterX(): number;
         getCenterZ(): number;
         getRadius(): number;
-        getHeight(): number;
+        setCrystalYOffsetFromPillarHeight(arg0: number): void;
         isCenterWithinChunk(pos: $BlockPos_): boolean;
-        isGuarded(): boolean;
-        getTopBoundingBox(): $AABB;
         static CODEC: $Codec<$SpikeFeature$EndSpike>;
         constructor(centerX: number, centerZ: number, radius: number, height: number, guarded: boolean);
+        get height(): number;
+        get crystalYOffset(): number;
+        get topBoundingBox(): $AABB;
+        get guarded(): boolean;
         get centerX(): number;
         get centerZ(): number;
         get radius(): number;
-        get height(): number;
-        get guarded(): boolean;
-        get topBoundingBox(): $AABB;
+        set crystalYOffsetFromPillarHeight(value: number);
     }
     export class $GlowstoneFeature extends $Feature<$NoneFeatureConfiguration> {
         static VEGETATION_PATCH: $Feature<$VegetationPatchConfiguration>;
@@ -3394,13 +3401,14 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
         constructor(arg0: $Codec<$RandomPatchConfiguration_>);
     }
     export class $FeatureCountTracker {
-        static featurePlaced(level: $ServerLevel, feature: $ConfiguredFeature_<never, never>, topFeature: ($PlacedFeature_) | undefined): void;
         static clearCounts(): void;
+        static featurePlaced(level: $ServerLevel, feature: $ConfiguredFeature_<never, never>, topFeature: ($PlacedFeature_) | undefined): void;
         static chunkDecorated(level: $ServerLevel): void;
         static logCounts(): void;
         constructor();
     }
     export class $GeodeFeature extends $Feature<$GeodeConfiguration> {
+        handler$egm000$spectrum$generate(arg0: $FeaturePlaceContext<any>, arg1: $CallbackInfoReturnable<any>): void;
         static VEGETATION_PATCH: $Feature<$VegetationPatchConfiguration>;
         static CHORUS_PLANT: $Feature<$NoneFeatureConfiguration>;
         static MONSTER_ROOM: $Feature<$NoneFeatureConfiguration>;
@@ -3995,7 +4003,7 @@ declare module "@package/net/minecraft/world/level/levelgen/feature" {
     /**
      * Values that may be interpreted as {@link $FeatureCountTracker$FeatureData}.
      */
-    export type $FeatureCountTracker$FeatureData_ = { feature?: $ConfiguredFeature_<never, never>, topFeature?: ($PlacedFeature_) | undefined,  } | [feature?: $ConfiguredFeature_<never, never>, topFeature?: ($PlacedFeature_) | undefined, ];
+    export type $FeatureCountTracker$FeatureData_ = { topFeature?: ($PlacedFeature_) | undefined, feature?: $ConfiguredFeature_<never, never>,  } | [topFeature?: ($PlacedFeature_) | undefined, feature?: $ConfiguredFeature_<never, never>, ];
     export class $FillLayerFeature extends $Feature<$LayerConfiguration> {
         static VEGETATION_PATCH: $Feature<$VegetationPatchConfiguration>;
         static CHORUS_PLANT: $Feature<$NoneFeatureConfiguration>;

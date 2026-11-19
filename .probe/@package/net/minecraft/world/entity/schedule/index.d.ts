@@ -41,8 +41,8 @@ declare module "@package/net/minecraft/world/entity/schedule" {
     export class $ScheduleBuilder$ActivityTransition {
     }
     export class $ScheduleBuilder {
-        build(): $Schedule;
         changeActivityAt(duration: number, activity: $Activity_): $ScheduleBuilder;
+        build(): $Schedule;
         constructor(schedule: $Schedule_);
     }
     export interface $Activity extends RegistryMarked<RegistryTypes.ActivityTag, RegistryTypes.Activity> {}
@@ -55,10 +55,10 @@ declare module "@package/net/minecraft/world/entity/schedule" {
     }
     export interface $Schedule extends RegistryMarked<RegistryTypes.ScheduleTag, RegistryTypes.Schedule> {}
     export class $Timeline {
-        getValueAt(dayTime: number): number;
-        addKeyframe(duration: number, active: number): $Timeline;
-        getKeyframes(): $ImmutableList<$Keyframe>;
         addKeyframes(frames: $Collection_<$Keyframe>): $Timeline;
+        getKeyframes(): $ImmutableList<$Keyframe>;
+        addKeyframe(duration: number, active: number): $Timeline;
+        getValueAt(dayTime: number): number;
         constructor();
         get keyframes(): $ImmutableList<$Keyframe>;
     }

@@ -14,7 +14,7 @@ declare module "@package/dev/ftb/mods/ftbchunks/core" {
     export class $BiomeFTBC {
     }
     export interface $BiomeFTBC {
-        setFTBCBiomeColorIndex(arg0: number): void;
         getFTBCBiomeColorIndex(): number;
+        setFTBCBiomeColorIndex(arg0: number): void;
     }
 }

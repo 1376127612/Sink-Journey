@@ -19,15 +19,15 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/com/simibubi/create/content/logistics/packagePort" {
     export class $PackagePortTarget {
+        getIcon(): $ItemStack;
+        deregister(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
+        depositImmediately(): boolean;
+        getExactTargetLocation(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): $Vec3;
         register(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
         setup(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
         be(arg0: $LevelAccessor, arg1: $BlockPos_): $BlockEntity;
         "export"(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $ItemStack_, arg3: boolean): boolean;
         canSupport(arg0: $BlockEntity): boolean;
-        getExactTargetLocation(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): $Vec3;
-        getIcon(): $ItemStack;
-        deregister(arg0: $PackagePortBlockEntity, arg1: $LevelAccessor, arg2: $BlockPos_): void;
-        depositImmediately(): boolean;
         static CODEC: $Codec<$PackagePortTarget>;
         relativePos: $BlockPos;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $PackagePortTarget>;
@@ -38,23 +38,23 @@ declare module "@package/com/simibubi/create/content/logistics/packagePort" {
     export class $PackagePortTargetType {
     }
     export interface $PackagePortTargetType {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $PackagePortTarget>;
         codec(): $MapCodec<$PackagePortTarget>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $PackagePortTarget>;
     }
     /**
      * Values that may be interpreted as {@link $PackagePortTargetType}.
      */
     export type $PackagePortTargetType_ = RegistryTypes.CreatePackagePortTargetType;
     export class $PackagePortBlockEntity extends $SmartBlockEntity implements $MenuProvider, $Clearable {
-        use(arg0: $Player): $ItemInteractionResult;
-        isBackedUp(): boolean;
-        getDisplayName(): $Component;
-        drop(arg0: $ItemStack_): void;
-        getFilterString(): string;
-        clearContent(): void;
         createMenu(arg0: number, arg1: $Inventory, arg2: $Player): $AbstractContainerMenu;
         getComparatorOutput(): number;
+        getFilterString(): string;
         filterChanged(): void;
+        isBackedUp(): boolean;
+        use(arg0: $Player): $ItemInteractionResult;
+        getDisplayName(): $Component;
+        drop(arg0: $ItemStack_): void;
+        clearContent(): void;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
         writeClientSideData(arg0: $AbstractContainerMenu, arg1: $RegistryFriendlyByteBuf): void;
         acceptsPackages: boolean;
@@ -72,9 +72,9 @@ declare module "@package/com/simibubi/create/content/logistics/packagePort" {
         static LOGGER: $Logger;
         customPersistentData: $CompoundTag;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
+        get comparatorOutput(): number;
+        get filterString(): string;
         get backedUp(): boolean;
         get displayName(): $Component;
-        get filterString(): string;
-        get comparatorOutput(): number;
     }
 }

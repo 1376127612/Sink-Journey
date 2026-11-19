@@ -56,39 +56,39 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
     export class $IMinecraftExtension {
     }
     export interface $IMinecraftExtension {
-        getLocale(): $Locale;
-        pushGuiLayer(arg0: $Screen): void;
         popGuiLayer(): void;
+        pushGuiLayer(arg0: $Screen): void;
+        getLocale(): $Locale;
         get locale(): $Locale;
     }
     export class $IVertexConsumerExtension {
     }
     export interface $IVertexConsumerExtension {
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
     }
     export class $IBakedModelExtension {
     }
     export interface $IBakedModelExtension {
         useAmbientOcclusion(arg0: $BlockState_, arg1: $ModelData, arg2: $RenderType): $TriState;
+        getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
+        getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
         applyTransform(arg0: $ItemDisplayContext_, arg1: $PoseStack, arg2: boolean): $BakedModel;
         getRenderPasses(arg0: $ItemStack_, arg1: boolean): $List<$BakedModel>;
-        getRenderTypes(arg0: $BlockState_, arg1: $RandomSource, arg2: $ModelData): $ChunkRenderTypeSet;
-        getRenderTypes(arg0: $ItemStack_, arg1: boolean): $List<$RenderType>;
-        getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         getQuads(arg0: $BlockState_, arg1: $Direction_, arg2: $RandomSource, arg3: $ModelData, arg4: $RenderType): $List<$BakedQuad>;
+        getParticleIcon(arg0: $ModelData): $TextureAtlasSprite;
         getModelData(arg0: $BlockAndTintGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $ModelData): $ModelData;
     }
     export class $IDimensionSpecialEffectsExtension {
     }
     export interface $IDimensionSpecialEffectsExtension {
-        renderClouds(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $PoseStack, arg4: number, arg5: number, arg6: number, arg7: $Matrix4f, arg8: $Matrix4f): boolean;
         renderSnowAndRain(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $LightTexture, arg4: number, arg5: number, arg6: number): boolean;
-        tickRain(arg0: $ClientLevel, arg1: number, arg2: $Camera): boolean;
+        renderClouds(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $PoseStack, arg4: number, arg5: number, arg6: number, arg7: $Matrix4f, arg8: $Matrix4f): boolean;
         adjustLightmapColors(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $Vector3f): void;
         renderSky(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $Camera, arg5: $Matrix4f, arg6: boolean, arg7: $Runnable_): boolean;
+        tickRain(arg0: $ClientLevel, arg1: number, arg2: $Camera): boolean;
     }
     export class $IAbstractWidgetExtension {
     }
@@ -98,22 +98,22 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
     export class $IKeyMappingExtension {
     }
     export interface $IKeyMappingExtension {
-        getKey(): $InputConstants$Key;
-        getDisplayName(): $Component;
-        setToDefault(): void;
+        isConflictContextAndModifierActive(): boolean;
+        isActiveAndMatches(arg0: $InputConstants$Key): boolean;
+        getKeyConflictContext(): $IKeyConflictContext;
+        setKeyModifierAndCode(arg0: $KeyModifier_, arg1: $InputConstants$Key): void;
         getDefaultKeyModifier(): $KeyModifier;
         setKeyConflictContext(arg0: $IKeyConflictContext): void;
         hasKeyModifierConflict(arg0: $KeyMapping): boolean;
-        setKeyModifierAndCode(arg0: $KeyModifier_, arg1: $InputConstants$Key): void;
-        getKeyConflictContext(): $IKeyConflictContext;
+        getKey(): $InputConstants$Key;
+        getDisplayName(): $Component;
+        setToDefault(): void;
         getKeyModifier(): $KeyModifier;
-        isConflictContextAndModifierActive(): boolean;
-        isActiveAndMatches(arg0: $InputConstants$Key): boolean;
+        get conflictContextAndModifierActive(): boolean;
+        get defaultKeyModifier(): $KeyModifier;
         get key(): $InputConstants$Key;
         get displayName(): $Component;
-        get defaultKeyModifier(): $KeyModifier;
         get keyModifier(): $KeyModifier;
-        get conflictContextAndModifierActive(): boolean;
     }
     export class $IGuiGraphicsExtension {
         static DEFAULT_BORDER_COLOR_START: number;
@@ -126,19 +126,19 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
         static RESET_CHAR: string;
     }
     export interface $IGuiGraphicsExtension {
-        blitWithBorder(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): void;
-        blitWithBorder(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
-        blitInscribed(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
-        blitInscribed(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean): void;
-        getColorFromFormattingCharacter(arg0: string, arg1: boolean): number;
         drawScrollingString(arg0: $Font, arg1: $Component_, arg2: number, arg3: number, arg4: number, arg5: number): number;
+        blitInscribed(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: boolean, arg8: boolean): void;
+        blitInscribed(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): void;
+        blitWithBorder(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
+        blitWithBorder(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number, arg11: number, arg12: number): void;
+        getColorFromFormattingCharacter(arg0: string, arg1: boolean): number;
     }
     export class $IFontExtension {
         static ELLIPSIS: $FormattedText;
     }
     export interface $IFontExtension {
-        self(): $Font;
         ellipsize(arg0: $FormattedText, arg1: number): $FormattedText;
+        self(): $Font;
     }
     /**
      * Values that may be interpreted as {@link $IFontExtension}.
@@ -147,9 +147,9 @@ declare module "@package/net/neoforged/neoforge/client/extensions" {
     export class $IModelBakerExtension {
     }
     export interface $IModelBakerExtension {
-        getTopLevelModel(arg0: $ModelResourceLocation_): $UnbakedModel;
-        bakeUncached(arg0: $UnbakedModel, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
         bake(arg0: $ResourceLocation_, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
+        bakeUncached(arg0: $UnbakedModel, arg1: $ModelState, arg2: $Function_<$Material, $TextureAtlasSprite>): $BakedModel;
+        getTopLevelModel(arg0: $ModelResourceLocation_): $UnbakedModel;
         getModelTextureGetter(): $Function<$Material, $TextureAtlasSprite>;
         get modelTextureGetter(): $Function<$Material, $TextureAtlasSprite>;
     }

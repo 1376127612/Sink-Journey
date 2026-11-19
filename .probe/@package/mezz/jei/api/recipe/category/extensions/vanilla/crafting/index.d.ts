@@ -23,16 +23,6 @@ declare module "@package/mezz/jei/api/recipe/category/extensions/vanilla/craftin
         /**
          * @deprecated
          */
-        getWidth(): number;
-        getWidth(arg0: $RecipeHolder_<R>): number;
-        /**
-         * @deprecated
-         */
-        getHeight(): number;
-        getHeight(arg0: $RecipeHolder_<R>): number;
-        /**
-         * @deprecated
-         */
         getRegistryName(): $ResourceLocation;
         /**
          * @deprecated
@@ -41,8 +31,18 @@ declare module "@package/mezz/jei/api/recipe/category/extensions/vanilla/craftin
         /**
          * @deprecated
          */
+        getHeight(): number;
+        getHeight(arg0: $RecipeHolder_<R>): number;
+        onDisplayedIngredientsUpdate(arg0: $RecipeHolder_<R>, arg1: $List_<$IRecipeSlotDrawable>, arg2: $IFocusGroup): void;
+        /**
+         * @deprecated
+         */
+        getWidth(): number;
+        getWidth(arg0: $RecipeHolder_<R>): number;
+        /**
+         * @deprecated
+         */
         setRecipe(arg0: $IRecipeLayoutBuilder, arg1: $ICraftingGridHelper, arg2: $IFocusGroup): void;
         setRecipe(arg0: $RecipeHolder_<R>, arg1: $IRecipeLayoutBuilder, arg2: $ICraftingGridHelper, arg3: $IFocusGroup): void;
-        onDisplayedIngredientsUpdate(arg0: $RecipeHolder_<R>, arg1: $List_<$IRecipeSlotDrawable>, arg2: $IFocusGroup): void;
     }
 }

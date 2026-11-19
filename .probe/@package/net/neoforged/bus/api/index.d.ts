@@ -5,8 +5,8 @@ declare module "@package/net/neoforged/bus/api" {
     export class $ICancellableEvent {
     }
     export interface $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
     }
     export class $EventPriority extends $Enum<$EventPriority> {
         static values(): $EventPriority[];

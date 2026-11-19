@@ -13,13 +13,13 @@ import { $PerkAttributeModifier } from "@package/hellfirepvp/astralsorcery/commo
 
 declare module "@package/hellfirepvp/astralsorcery/common/perk/type/base" {
     export class $ModifierType extends $Enum<$ModifierType> {
+        stringifyValue(arg0: number): string;
+        isNeutralVanillaValue(arg0: number): boolean;
+        getModifierOperationNameId(arg0: number): string;
+        getVanillaAttributeOperation(): $AttributeModifier$Operation;
+        static fromVanillaAttributeOperation(arg0: $AttributeModifier$Operation_): $ModifierType;
         static values(): $ModifierType[];
         static valueOf(arg0: string): $ModifierType;
-        stringifyValue(arg0: number): string;
-        getModifierOperationNameId(arg0: number): string;
-        isNeutralVanillaValue(arg0: number): boolean;
-        static fromVanillaAttributeOperation(arg0: $AttributeModifier$Operation_): $ModifierType;
-        getVanillaAttributeOperation(): $AttributeModifier$Operation;
         static ADDED_MULTIPLY: $ModifierType;
         static STACKING_MULTIPLY: $ModifierType;
         static ADDITION: $ModifierType;
@@ -31,24 +31,24 @@ declare module "@package/hellfirepvp/astralsorcery/common/perk/type/base" {
     export type $ModifierType_ = "addition" | "added_multiply" | "stacking_multiply";
     export interface $PerkAttributeType extends RegistryMarked<RegistryTypes.AstralsorceryPerkAttributeTypesTag, RegistryTypes.AstralsorceryPerkAttributeTypes> {}
     export class $PerkAttributeType {
+        onRemove(arg0: $Player, arg1: $LogicalSide_, arg2: boolean, arg3: $ModifierSource): void;
+        static fromVanillaType(arg0: $Holder_<$Attribute>): ($PerkAttributeType) | undefined;
+        isMultiplicative(): boolean;
+        onModeRemove(arg0: $Player, arg1: $ModifierType_, arg2: $LogicalSide_, arg3: boolean): void;
+        onModeApply(arg0: $Player, arg1: $ModifierType_, arg2: $LogicalSide_): void;
+        hasTypeApplied(arg0: $Player, arg1: $LogicalSide_): boolean;
         getName(): $MutableComponent;
-        is(arg0: $Supplier_<$PerkAttributeType>): boolean;
-        is(arg0: $PerkAttributeType_): boolean;
         static create(arg0: boolean): $PerkAttributeType;
+        is(arg0: $PerkAttributeType_): boolean;
+        is(arg0: $Supplier_<$PerkAttributeType>): boolean;
+        static clearCache(arg0: $LogicalSide_): void;
         getReader(): ($PerkAttributeTypeReader) | undefined;
         onApply(arg0: $Player, arg1: $LogicalSide_, arg2: $ModifierSource): void;
-        static clearCache(arg0: $LogicalSide_): void;
-        onRemove(arg0: $Player, arg1: $LogicalSide_, arg2: boolean, arg3: $ModifierSource): void;
         createModifier(arg0: number, arg1: $ModifierType_): $PerkAttributeModifier;
-        onModeApply(arg0: $Player, arg1: $ModifierType_, arg2: $LogicalSide_): void;
-        isMultiplicative(): boolean;
-        hasTypeApplied(arg0: $Player, arg1: $LogicalSide_): boolean;
-        onModeRemove(arg0: $Player, arg1: $ModifierType_, arg2: $LogicalSide_, arg3: boolean): void;
-        static fromVanillaType(arg0: $Holder_<$Attribute>): ($PerkAttributeType) | undefined;
         static CODEC: $Codec<$PerkAttributeType>;
+        get multiplicative(): boolean;
         get name(): $MutableComponent;
         get reader(): ($PerkAttributeTypeReader) | undefined;
-        get multiplicative(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $PerkAttributeType}.

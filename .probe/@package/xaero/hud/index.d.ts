@@ -24,41 +24,41 @@ export * as io from "@package/xaero/hud/io";
 
 declare module "@package/xaero/hud" {
     export class $Hud {
-        getPresetManager(): $HudPresetManager;
         getPushboxManager(): $PushboxManager;
-        getSessionHandler(): $ModuleSessionHandler;
+        getPresetManager(): $HudPresetManager;
         getModuleManager(): $ModuleManager;
+        getSessionHandler(): $ModuleSessionHandler;
         getEventHandler(): $HudEventHandler;
         getOldSystemCompatibility(): $OldSystemCompatibility;
         constructor(arg0: $ModuleManager, arg1: $PushboxManager, arg2: $HudPresetManager, arg3: $HudEventHandler, arg4: $ModuleSessionHandler, arg5: $OldSystemCompatibility);
-        get presetManager(): $HudPresetManager;
         get pushboxManager(): $PushboxManager;
-        get sessionHandler(): $ModuleSessionHandler;
+        get presetManager(): $HudPresetManager;
         get moduleManager(): $ModuleManager;
+        get sessionHandler(): $ModuleSessionHandler;
         get eventHandler(): $HudEventHandler;
         get oldSystemCompatibility(): $OldSystemCompatibility;
     }
     export class $HudSession {
+        getSession<MS extends $ModuleSession<MS>>(arg0: $HudModule<MS>): MS;
+        static getCurrentSession(): $HudSession;
+        getHudMod(): $HudMod;
+        static getForPlayer(arg0: $LocalPlayer): $HudSession;
+        /**
+         * @deprecated
+         */
+        getMultiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
+        getKeyMappingTickHandler(): $KeyMappingTickHandler;
         init(arg0: $ClientPacketListener): void;
         /**
          * @deprecated
          */
         getControls(): $ControlsHandler;
-        getSession<MS extends $ModuleSession<MS>>(arg0: $HudModule<MS>): MS;
-        static getCurrentSession(): $HudSession;
-        getKeyMappingTickHandler(): $KeyMappingTickHandler;
-        /**
-         * @deprecated
-         */
-        getMultiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
-        static getForPlayer(arg0: $LocalPlayer): $HudSession;
-        getHudMod(): $HudMod;
         tryCleanup(): void;
         constructor(arg0: $HudMod);
-        get controls(): $ControlsHandler;
         static get currentSession(): $HudSession;
-        get keyMappingTickHandler(): $KeyMappingTickHandler;
-        get multiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
         get hudMod(): $HudMod;
+        get multiTextureRenderTypeRenderers(): $MultiTextureRenderTypeRendererProvider;
+        get keyMappingTickHandler(): $KeyMappingTickHandler;
+        get controls(): $ControlsHandler;
     }
 }

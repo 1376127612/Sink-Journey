@@ -42,8 +42,8 @@ declare module "@package/net/minecraft/world" {
     export class $RandomSequences extends $SavedData {
         forAllSequences(action: $BiConsumer_<$ResourceLocation, $RandomSequence>): void;
         setSeedDefaults(salt: number, includeWorldSeed: boolean, includeSequenceId: boolean): void;
-        reset(sequence: $ResourceLocation_): void;
         reset(sequence: $ResourceLocation_, seed: number, includeWorldSeed: boolean, includeSequenceId: boolean): void;
+        reset(sequence: $ResourceLocation_): void;
         get(location: $ResourceLocation_): $RandomSource;
         static load(seed: number, arg1: $CompoundTag_): $RandomSequences;
         clear(): number;
@@ -51,11 +51,11 @@ declare module "@package/net/minecraft/world" {
         constructor(seed: number);
     }
     export class $BossEvent$BossBarColor extends $Enum<$BossEvent$BossBarColor> {
+        getFormatting(): $ChatFormatting;
         getName(): string;
         static values(): $BossEvent$BossBarColor[];
         static valueOf(name: string): $BossEvent$BossBarColor;
         static byName(name: string): $BossEvent$BossBarColor;
-        getFormatting(): $ChatFormatting;
         static RED: $BossEvent$BossBarColor;
         static WHITE: $BossEvent$BossBarColor;
         static PINK: $BossEvent$BossBarColor;
@@ -70,16 +70,16 @@ declare module "@package/net/minecraft/world" {
      */
     export type $BossEvent$BossBarColor_ = "pink" | "blue" | "red" | "green" | "yellow" | "purple" | "white";
     export class $DifficultyInstance {
-        isHard(): boolean;
-        getEffectiveDifficulty(): number;
         getDifficulty(): $Difficulty;
         getSpecialMultiplier(): number;
+        isHard(): boolean;
         isHarderThan(difficulty: number): boolean;
+        getEffectiveDifficulty(): number;
         constructor(base: $Difficulty_, levelTime: number, arg2: number, chunkInhabitedTime: number);
-        get hard(): boolean;
-        get effectiveDifficulty(): number;
         get difficulty(): $Difficulty;
         get specialMultiplier(): number;
+        get hard(): boolean;
+        get effectiveDifficulty(): number;
     }
     export class $BossEvent$BossBarOverlay extends $Enum<$BossEvent$BossBarOverlay> {
         getName(): string;
@@ -97,13 +97,13 @@ declare module "@package/net/minecraft/world" {
      */
     export type $BossEvent$BossBarOverlay_ = "progress" | "notched_6" | "notched_10" | "notched_12" | "notched_20";
     export class $InteractionResultHolder<T> {
+        static sidedSuccess<T>(object: T, isClientSide: boolean): $InteractionResultHolder<T>;
         static fail<T>(type: T): $InteractionResultHolder<T>;
         getObject(): T;
-        static pass<T>(type: T): $InteractionResultHolder<T>;
         getResult(): $InteractionResult;
+        static pass<T>(type: T): $InteractionResultHolder<T>;
         static consume<T>(type: T): $InteractionResultHolder<T>;
         static success<T>(type: T): $InteractionResultHolder<T>;
-        static sidedSuccess<T>(object: T, isClientSide: boolean): $InteractionResultHolder<T>;
         constructor(result: $InteractionResult_, object: T);
         get object(): T;
         get result(): $InteractionResult;
@@ -111,19 +111,45 @@ declare module "@package/net/minecraft/world" {
     export class $Nameable {
     }
     export interface $Nameable {
-        getName(): $Component;
-        getDisplayName(): $Component;
         getCustomName(): $Component;
         hasCustomName(): boolean;
+        getName(): $Component;
+        getDisplayName(): $Component;
+        get customName(): $Component;
         get name(): $Component;
         get displayName(): $Component;
-        get customName(): $Component;
     }
     /**
      * Values that may be interpreted as {@link $Nameable}.
      */
     export type $Nameable_ = (() => $Component_);
-    export class $CompoundContainer implements $Container, $CompoundContainerFTBL, $CompoundContainerAccessor {
+    export class $CompoundContainer implements $Container, $CompoundContainerAccessor, $CompoundContainerFTBL {
+        /**
+         * Don't rename this method to canInteractWith due to conflicts with Container
+         */
+        stillValid(player: $Player): boolean;
+        /**
+         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
+         */
+        setChanged(): void;
+        /**
+         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+         */
+        setItem(index: number, stack: $ItemStack_): void;
+        /**
+         * Returns the stack in the given slot.
+         */
+        removeItemNoUpdate(index: number): $ItemStack;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        getContainerSize(): number;
+        /**
+         * Returns `true` if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For guis use Slot.isItemValid
+         */
+        canPlaceItem(index: number, stack: $ItemStack_): boolean;
+        startOpen(player: $Player): void;
+        stopOpen(player: $Player): void;
         isEmpty(): boolean;
         /**
          * Return whether the given inventory is part of this large chest.
@@ -134,57 +160,29 @@ declare module "@package/net/minecraft/world" {
          */
         getItem(index: number): $ItemStack;
         /**
+         * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
+         */
+        removeItem(index: number, count: number): $ItemStack;
+        /**
          * Returns the number of slots in the inventory.
          */
         getMaxStackSize(): number;
         /**
-         * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
-         */
-        removeItem(index: number, count: number): $ItemStack;
-        startOpen(player: $Player): void;
-        stopOpen(player: $Player): void;
-        /**
          * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
          */
         clearContent(): void;
-        /**
-         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-         */
-        setItem(index: number, stack: $ItemStack_): void;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        getContainerSize(): number;
-        /**
-         * Returns the stack in the given slot.
-         */
-        removeItemNoUpdate(index: number): $ItemStack;
-        /**
-         * Don't rename this method to canInteractWith due to conflicts with Container
-         */
-        stillValid(player: $Player): boolean;
+        canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
+        hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
+        hasAnyOf(arg0: $Set_<$Item_>): boolean;
+        countItem(arg0: $Item_): number;
+        getMaxStackSize(arg0: $ItemStack_): number;
+        setTransferCooldown(arg0: number): void;
+        canReceiveTransferCooldown(): boolean;
+        lithium$itemInsertionTestRequiresStackSize1(): boolean;
         /**
          * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
          */
-        setChanged(): void;
-        /**
-         * Returns `true` if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For guis use Slot.isItemValid
-         */
-        canPlaceItem(index: number, stack: $ItemStack_): boolean;
-        getMaxStackSize(stack: $ItemStack_): number;
-        /**
-         * Returns the total amount of the specified item in this inventory. This method does not check for nbt.
-         */
-        countItem(item: $Item_): number;
-        /**
-         * Returns `true` if any item from the passed set exists in this inventory.
-         */
-        hasAnyOf(set: $Set_<$Item_>): boolean;
-        /**
-         * @return `true` if the given stack can be extracted into the target inventory
-         */
-        canTakeItem(target: $Container, slot: number, stack: $ItemStack_): boolean;
-        hasAnyMatching(predicate: $Predicate_<$ItemStack>): boolean;
+        clear(): void;
         isMutable(): boolean;
         /**
          * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
@@ -198,82 +196,75 @@ declare module "@package/net/minecraft/world" {
          * Returns the stack in the given slot.
          */
         getStackInSlot(index: number): $ItemStack;
-        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
-        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
-        getSlotLimit(slot: number): number;
-        /**
-         * Returns `true` if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For guis use Slot.isItemValid
-         */
-        isItemValid(index: number, stack: $ItemStack_): boolean;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        getWidth(): number;
         /**
          * Returns the number of slots in the inventory.
          */
         getHeight(): number;
-        asContainer(): $Container;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        getWidth(): number;
+        getSlotLimit(slot: number): number;
         /**
          * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
          */
         setChanged(): void;
+        asContainer(): $Container;
+        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
+        /**
+         * Returns `true` if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For guis use Slot.isItemValid
+         */
+        isItemValid(index: number, stack: $ItemStack_): boolean;
+        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
         self(): $Container;
         getBlock(level: $Level_): $LevelBlock;
         /**
-         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
+         * Returns the number of slots in the inventory.
          */
-        clear(): void;
-        setTransferCooldown(arg0: number): void;
-        canReceiveTransferCooldown(): boolean;
-        lithium$itemInsertionTestRequiresStackSize1(): boolean;
+        find(): number;
+        find(match: $ItemPredicate_): number;
+        count(match: $ItemPredicate_): number;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        count(): number;
+        clear(match: $ItemPredicate_): void;
+        isEmpty(): boolean;
+        getAllItems(): $List<$ItemStack>;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         countNonEmpty(match: $ItemPredicate_): number;
         /**
          * Returns the number of slots in the inventory.
          */
         countNonEmpty(): number;
-        getAllItems(): $List<$ItemStack>;
-        isEmpty(): boolean;
-        clear(match: $ItemPredicate_): void;
-        count(match: $ItemPredicate_): number;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        count(): number;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        find(): number;
-        find(match: $ItemPredicate_): number;
-        getContainer1FTBL(): $Container;
         getContainer2FTBL(): $Container;
+        getContainer1FTBL(): $Container;
         getFirst(): $Container;
         getSecond(): $Container;
         constructor(container1: $Container, container2: $Container);
         get containerSize(): number;
+        set transferCooldown(value: number);
         get mutable(): boolean;
         get slots(): number;
-        get width(): number;
         get height(): number;
-        set transferCooldown(value: number);
+        get width(): number;
         get allItems(): $List<$ItemStack>;
-        get container1FTBL(): $Container;
         get container2FTBL(): $Container;
+        get container1FTBL(): $Container;
         get first(): $Container;
         get second(): $Container;
     }
     export class $RandomSequences$DirtyMarkingRandomSource implements $RandomSource {
-        nextInt(min: number, max: number): number;
-        triangle(min: number, arg1: number): number;
-        consumeCount(count: number): void;
-        nextIntBetweenInclusive(min: number, max: number): number;
+        nextIntBetweenInclusive(arg0: number, arg1: number): number;
+        triangle(arg0: number, arg1: number): number;
+        consumeCount(arg0: number): void;
+        nextInt(arg0: number, arg1: number): number;
     }
     export class $LockCode extends $Record {
-        key(): string;
-        addToTag(nbt: $CompoundTag_): void;
         static fromTag(nbt: $CompoundTag_): $LockCode;
+        addToTag(nbt: $CompoundTag_): void;
         unlocksWith(stack: $ItemStack_): boolean;
+        key(): string;
         static CODEC: $Codec<$LockCode>;
         static NO_LOCK: $LockCode;
         static TAG_LOCK: string;
@@ -284,44 +275,7 @@ declare module "@package/net/minecraft/world" {
      */
     export type $LockCode_ = { key?: string,  } | [key?: string, ];
     export class $SimpleContainer implements $Container, $StackedContentsCompatible {
-        isEmpty(): boolean;
-        /**
-         * Returns the stack in the given slot.
-         */
-        getItem(index: number): $ItemStack;
-        addItem(stack: $ItemStack_): $ItemStack;
-        removeAllItems(): $List<$ItemStack>;
-        /**
-         * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
-         */
-        removeItem(index: number, count: number): $ItemStack;
-        /**
-         * Add a listener that will be notified when any item in this inventory is modified.
-         */
-        removeListener(listener: $ContainerListener_): void;
-        createTag(levelRegistry: $HolderLookup$Provider): $ListTag;
-        /**
-         * Add a listener that will be notified when any item in this inventory is modified.
-         */
-        addListener(listener: $ContainerListener_): void;
-        /**
-         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
-         */
-        clearContent(): void;
-        /**
-         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-         */
-        setItem(index: number, stack: $ItemStack_): void;
         getItems(): $NonNullList<$ItemStack>;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        getContainerSize(): number;
-        /**
-         * Returns the stack in the given slot.
-         */
-        removeItemNoUpdate(index: number): $ItemStack;
-        removeItemType(item: $Item_, amount: number): $ItemStack;
         fromTag(tag: $ListTag_, levelRegistry: $HolderLookup$Provider): void;
         /**
          * Don't rename this method to canInteractWith due to conflicts with Container
@@ -331,32 +285,64 @@ declare module "@package/net/minecraft/world" {
          * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
          */
         setChanged(): void;
+        /**
+         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+         */
+        setItem(index: number, stack: $ItemStack_): void;
+        /**
+         * Returns the stack in the given slot.
+         */
+        removeItemNoUpdate(index: number): $ItemStack;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        getContainerSize(): number;
         fillStackedContents(helper: $StackedContents): void;
+        isEmpty(): boolean;
+        /**
+         * Returns the stack in the given slot.
+         */
+        getItem(index: number): $ItemStack;
+        createTag(levelRegistry: $HolderLookup$Provider): $ListTag;
+        /**
+         * Add a listener that will be notified when any item in this inventory is modified.
+         */
+        removeListener(listener: $ContainerListener_): void;
+        removeItemType(item: $Item_, amount: number): $ItemStack;
+        removeAllItems(): $List<$ItemStack>;
+        /**
+         * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
+         */
+        removeItem(index: number, count: number): $ItemStack;
+        /**
+         * Add a listener that will be notified when any item in this inventory is modified.
+         */
+        addListener(listener: $ContainerListener_): void;
+        addItem(stack: $ItemStack_): $ItemStack;
         canAddItem(stack: $ItemStack_): boolean;
-        getMaxStackSize(stack: $ItemStack_): number;
+        /**
+         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
+         */
+        clearContent(): void;
+        canTakeItem(arg0: $Container, arg1: number, arg2: $ItemStack_): boolean;
+        canPlaceItem(arg0: number, arg1: $ItemStack_): boolean;
+        hasAnyMatching(arg0: $Predicate_<$ItemStack>): boolean;
+        hasAnyOf(arg0: $Set_<$Item_>): boolean;
+        startOpen(arg0: $Player): void;
+        stopOpen(arg0: $Player): void;
+        countItem(arg0: $Item_): number;
         /**
          * Returns the number of slots in the inventory.
          */
         getMaxStackSize(): number;
-        startOpen(player: $Player): void;
+        getMaxStackSize(arg0: $ItemStack_): number;
+        setTransferCooldown(arg0: number): void;
+        canReceiveTransferCooldown(): boolean;
+        lithium$itemInsertionTestRequiresStackSize1(): boolean;
         /**
-         * Returns the total amount of the specified item in this inventory. This method does not check for nbt.
+         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
          */
-        countItem(item: $Item_): number;
-        /**
-         * Returns `true` if any item from the passed set exists in this inventory.
-         */
-        hasAnyOf(set: $Set_<$Item_>): boolean;
-        stopOpen(player: $Player): void;
-        /**
-         * @return `true` if the given stack can be extracted into the target inventory
-         */
-        canTakeItem(target: $Container, slot: number, stack: $ItemStack_): boolean;
-        hasAnyMatching(predicate: $Predicate_<$ItemStack>): boolean;
-        /**
-         * Returns `true` if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For guis use Slot.isItemValid
-         */
-        canPlaceItem(slot: number, stack: $ItemStack_): boolean;
+        clear(): void;
         isMutable(): boolean;
         /**
          * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
@@ -370,63 +356,53 @@ declare module "@package/net/minecraft/world" {
          * Returns the stack in the given slot.
          */
         getStackInSlot(index: number): $ItemStack;
-        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
-        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
-        getSlotLimit(slot: number): number;
-        /**
-         * Returns `true` if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For guis use Slot.isItemValid
-         */
-        isItemValid(slot: number, stack: $ItemStack_): boolean;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        getWidth(): number;
         /**
          * Returns the number of slots in the inventory.
          */
         getHeight(): number;
-        asContainer(): $Container;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        getWidth(): number;
+        getSlotLimit(slot: number): number;
         /**
          * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
          */
         setChanged(): void;
+        asContainer(): $Container;
+        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
+        isItemValid(slot: number, stack: $ItemStack_): boolean;
+        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
         self(): $Container;
         getBlock(level: $Level_): $LevelBlock;
         /**
-         * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
+         * Returns the number of slots in the inventory.
          */
-        clear(): void;
-        setTransferCooldown(arg0: number): void;
-        canReceiveTransferCooldown(): boolean;
-        lithium$itemInsertionTestRequiresStackSize1(): boolean;
+        find(): number;
+        find(match: $ItemPredicate_): number;
+        count(match: $ItemPredicate_): number;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        count(): number;
+        clear(match: $ItemPredicate_): void;
+        isEmpty(): boolean;
+        getAllItems(): $List<$ItemStack>;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         countNonEmpty(match: $ItemPredicate_): number;
         /**
          * Returns the number of slots in the inventory.
          */
         countNonEmpty(): number;
-        getAllItems(): $List<$ItemStack>;
-        isEmpty(): boolean;
-        clear(match: $ItemPredicate_): void;
-        count(match: $ItemPredicate_): number;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        count(): number;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        find(): number;
-        find(match: $ItemPredicate_): number;
         items: $NonNullList<$ItemStack>;
         constructor(size: number);
         constructor(...items: $ItemStack_[]);
         get containerSize(): number;
+        set transferCooldown(value: number);
         get mutable(): boolean;
         get slots(): number;
-        get width(): number;
         get height(): number;
-        set transferCooldown(value: number);
+        get width(): number;
         get allItems(): $List<$ItemStack>;
     }
     export class $Clearable {
@@ -440,84 +416,44 @@ declare module "@package/net/minecraft/world" {
      */
     export type $Clearable_ = (() => void);
     export class $TickRateManager {
-        frozenTicksToRun(): number;
-        isFrozen(): boolean;
-        tick(): void;
         millisecondsPerTick(): number;
-        setFrozen(frozen: boolean): void;
-        runsNormally(): boolean;
-        tickrate(): number;
-        isEntityFrozen(entity: $Entity): boolean;
+        frozenTicksToRun(): number;
         setFrozenTicksToRun(frozenTicksToRun: number): void;
         nanosecondsPerTick(): number;
         setTickRate(tickRate: number): void;
         isSteppingForward(): boolean;
+        isFrozen(): boolean;
+        tickrate(): number;
+        tick(): void;
+        runsNormally(): boolean;
+        isEntityFrozen(entity: $Entity): boolean;
+        setFrozen(frozen: boolean): void;
         static MIN_TICKRATE: number;
         constructor();
         set tickRate(value: number);
         get steppingForward(): boolean;
     }
     export class $ContainerHelper {
-        static removeItem(stacks: $List_<$ItemStack_>, index: number, amount: number): $ItemStack;
         static takeItem(stacks: $List_<$ItemStack_>, index: number): $ItemStack;
-        static loadAllItems(tag: $CompoundTag_, items: $NonNullList<$ItemStack_>, levelRegistry: $HolderLookup$Provider): void;
-        static saveAllItems(tag: $CompoundTag_, items: $NonNullList<$ItemStack_>, alwaysPutTag: boolean, levelRegistry: $HolderLookup$Provider): $CompoundTag;
         static saveAllItems(tag: $CompoundTag_, items: $NonNullList<$ItemStack_>, levelRegistry: $HolderLookup$Provider): $CompoundTag;
+        static saveAllItems(tag: $CompoundTag_, items: $NonNullList<$ItemStack_>, alwaysPutTag: boolean, levelRegistry: $HolderLookup$Provider): $CompoundTag;
+        static loadAllItems(tag: $CompoundTag_, items: $NonNullList<$ItemStack_>, levelRegistry: $HolderLookup$Provider): void;
         /**
          * Clears items from the inventory matching a predicate.
          * @return The amount of items cleared
          */
         static clearOrCountMatchingItems(container: $Container, itemPredicate: $Predicate_<$ItemStack>, maxItems: number, simulate: boolean): number;
         static clearOrCountMatchingItems(stack: $ItemStack_, itemPredicate: $Predicate_<$ItemStack>, maxItems: number, simulate: boolean): number;
+        static removeItem(stacks: $List_<$ItemStack_>, index: number, amount: number): $ItemStack;
         static TAG_ITEMS: string;
         constructor();
     }
     export class $Container {
-        static stillValidBlockEntity(blockEntity: $BlockEntity, player: $Player): boolean;
         static stillValidBlockEntity(blockEntity: $BlockEntity, player: $Player, distance: number): boolean;
+        static stillValidBlockEntity(blockEntity: $BlockEntity, player: $Player): boolean;
         static DEFAULT_DISTANCE_BUFFER: number;
     }
-    export interface $Container extends $Clearable, $ContainerKJS, $LithiumCooldownReceivingInventory, $ContainerMixin, $LithiumTransferConditionInventory {
-        isEmpty(): boolean;
-        /**
-         * Returns the stack in the given slot.
-         */
-        getItem(slot: number): $ItemStack;
-        getMaxStackSize(stack: $ItemStack_): number;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        getMaxStackSize(): number;
-        /**
-         * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
-         */
-        removeItem(slot: number, amount: number): $ItemStack;
-        startOpen(player: $Player): void;
-        /**
-         * Returns the total amount of the specified item in this inventory. This method does not check for nbt.
-         */
-        countItem(item: $Item_): number;
-        /**
-         * Returns `true` if any item from the passed set exists in this inventory.
-         */
-        hasAnyOf(set: $Set_<$Item_>): boolean;
-        stopOpen(player: $Player): void;
-        /**
-         * @return `true` if the given stack can be extracted into the target inventory
-         */
-        canTakeItem(target: $Container, slot: number, stack: $ItemStack_): boolean;
-        /**
-         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-         */
-        setItem(slot: number, stack: $ItemStack_): void;
-        /**
-         * Returns the number of slots in the inventory.
-         */
-        getContainerSize(): number;
-        /**
-         * Returns the stack in the given slot.
-         */
-        removeItemNoUpdate(slot: number): $ItemStack;
+    export interface $Container extends $Clearable, $LithiumCooldownReceivingInventory, $ContainerMixin, $LithiumTransferConditionInventory, $ContainerKJS {
         /**
          * Don't rename this method to canInteractWith due to conflicts with Container
          */
@@ -526,13 +462,53 @@ declare module "@package/net/minecraft/world" {
          * For block entities, ensures the chunk containing the block entity is saved to disk later - the game won't think it hasn't changed and skip it.
          */
         setChanged(): void;
-        hasAnyMatching(predicate: $Predicate_<$ItemStack>): boolean;
+        /**
+         * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+         */
+        setItem(slot: number, stack: $ItemStack_): void;
+        /**
+         * @return `true` if the given stack can be extracted into the target inventory
+         */
+        canTakeItem(target: $Container, slot: number, stack: $ItemStack_): boolean;
+        /**
+         * Returns the stack in the given slot.
+         */
+        removeItemNoUpdate(slot: number): $ItemStack;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        getContainerSize(): number;
         /**
          * Returns `true` if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For guis use Slot.isItemValid
          */
         canPlaceItem(slot: number, stack: $ItemStack_): boolean;
-        get empty(): boolean;
+        hasAnyMatching(predicate: $Predicate_<$ItemStack>): boolean;
+        /**
+         * Returns `true` if any item from the passed set exists in this inventory.
+         */
+        hasAnyOf(set: $Set_<$Item_>): boolean;
+        startOpen(player: $Player): void;
+        stopOpen(player: $Player): void;
+        /**
+         * Returns the total amount of the specified item in this inventory. This method does not check for nbt.
+         */
+        countItem(item: $Item_): number;
+        isEmpty(): boolean;
+        /**
+         * Returns the stack in the given slot.
+         */
+        getItem(slot: number): $ItemStack;
+        /**
+         * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
+         */
+        removeItem(slot: number, amount: number): $ItemStack;
+        /**
+         * Returns the number of slots in the inventory.
+         */
+        getMaxStackSize(): number;
+        getMaxStackSize(stack: $ItemStack_): number;
         get containerSize(): number;
+        get empty(): boolean;
     }
     export class $MenuProvider {
     }
@@ -541,25 +517,25 @@ declare module "@package/net/minecraft/world" {
         get displayName(): $Component;
     }
     export class $BossEvent {
+        shouldDarkenScreen(): boolean;
+        setProgress(progress: number): void;
+        getProgress(): number;
+        shouldPlayBossMusic(): boolean;
+        setPlayBossMusic(createFog: boolean): $BossEvent;
+        setCreateWorldFog(createFog: boolean): $BossEvent;
         getName(): $Component;
         setName(name: $Component_): void;
         getId(): $UUID;
         setColor(color: $BossEvent$BossBarColor_): void;
-        setPlayBossMusic(createFog: boolean): $BossEvent;
-        setCreateWorldFog(createFog: boolean): $BossEvent;
-        shouldDarkenScreen(): boolean;
         setOverlay(overlay: $BossEvent$BossBarOverlay_): void;
         getOverlay(): $BossEvent$BossBarOverlay;
         getColor(): $BossEvent$BossBarColor;
-        getProgress(): number;
-        setProgress(progress: number): void;
         setDarkenScreen(createFog: boolean): $BossEvent;
         shouldCreateWorldFog(): boolean;
-        shouldPlayBossMusic(): boolean;
         constructor(id: $UUID_, name: $Component_, color: $BossEvent$BossBarColor_, overlay: $BossEvent$BossBarOverlay_);
-        get id(): $UUID;
         set playBossMusic(value: boolean);
         set createWorldFog(value: boolean);
+        get id(): $UUID;
         set darkenScreen(value: boolean);
     }
     export class $WorldlyContainer {
@@ -588,11 +564,11 @@ declare module "@package/net/minecraft/world" {
      */
     export type $ContainerListener_ = ((arg0: $Container) => void);
     export class $InteractionResult extends $Enum<$InteractionResult> {
+        static sidedSuccess(isClientSide: boolean): $InteractionResult;
         static values(): $InteractionResult[];
         static valueOf(arg0: string): $InteractionResult;
-        consumesAction(): boolean;
         shouldSwing(): boolean;
-        static sidedSuccess(isClientSide: boolean): $InteractionResult;
+        consumesAction(): boolean;
         indicateItemUse(): boolean;
         static SUCCESS: $InteractionResult;
         static PASS: $InteractionResult;
@@ -633,11 +609,11 @@ declare module "@package/net/minecraft/world" {
      */
     export type $InteractionHand_ = "main_hand" | "off_hand";
     export class $Containers {
+        static dropContentsOnDestroy(state: $BlockState_, newState: $BlockState_, level: $Level_, pos: $BlockPos_): void;
         static dropItemStack(level: $Level_, x: number, arg2: number, y: number, arg4: $ItemStack_): void;
         static dropContents(level: $Level_, pos: $BlockPos_, stackList: $NonNullList<$ItemStack_>): void;
-        static dropContents(level: $Level_, entityAt: $Entity, inventory: $Container): void;
         static dropContents(level: $Level_, pos: $BlockPos_, inventory: $Container): void;
-        static dropContentsOnDestroy(state: $BlockState_, newState: $BlockState_, level: $Level_, pos: $BlockPos_): void;
+        static dropContents(level: $Level_, entityAt: $Entity, inventory: $Container): void;
         constructor();
     }
     export class $RandomizableContainer {
@@ -646,33 +622,33 @@ declare module "@package/net/minecraft/world" {
         static LOOT_TABLE_TAG: string;
     }
     export interface $RandomizableContainer extends $Container {
-        getLevel(): $Level;
-        getBlockPos(): $BlockPos;
-        getLootTable(): $ResourceKey<$LootTable>;
-        getLootTableSeed(): number;
-        unpackLootTable(player: $Player | null): void;
         tryLoadLootTable(tag: $CompoundTag_): boolean;
         trySaveLootTable(tag: $CompoundTag_): boolean;
         setLootTableSeed(seed: number): void;
         setLootTable(lootTable: $ResourceKey_<$LootTable> | null): void;
         setLootTable(lootTable: $ResourceKey_<$LootTable>, seed: number): void;
+        getLootTableSeed(): number;
+        getLootTable(): $ResourceKey<$LootTable>;
+        getLevel(): $Level;
+        getBlockPos(): $BlockPos;
+        unpackLootTable(player: $Player | null): void;
         get level(): $Level;
         get blockPos(): $BlockPos;
     }
     export class $SimpleMenuProvider implements $MenuProvider {
-        getDisplayName(): $Component;
         createMenu(containerId: number, playerInventory: $Inventory, player: $Player): $AbstractContainerMenu;
+        getDisplayName(): $Component;
         shouldTriggerClientSideContainerClosingOnOpen(): boolean;
         writeClientSideData(arg0: $AbstractContainerMenu, arg1: $RegistryFriendlyByteBuf): void;
         constructor(menuConstructor: $MenuConstructor_, title: $Component_);
         get displayName(): $Component;
     }
     export class $ItemInteractionResult extends $Enum<$ItemInteractionResult> {
+        static sidedSuccess(clientSide: boolean): $ItemInteractionResult;
         static values(): $ItemInteractionResult[];
         static valueOf(arg0: string): $ItemInteractionResult;
         result(): $InteractionResult;
         consumesAction(): boolean;
-        static sidedSuccess(clientSide: boolean): $ItemInteractionResult;
         static SUCCESS: $ItemInteractionResult;
         static SKIP_DEFAULT_BLOCK_INTERACTION: $ItemInteractionResult;
         static CONSUME_PARTIAL: $ItemInteractionResult;
@@ -685,26 +661,26 @@ declare module "@package/net/minecraft/world" {
      */
     export type $ItemInteractionResult_ = "success" | "consume" | "consume_partial" | "pass_to_default_block_interaction" | "skip_default_block_interaction" | "fail";
     export class $Difficulty extends $Enum<$Difficulty> implements $StringRepresentable {
+        static byId(id: number): $Difficulty;
+        getSerializedName(): string;
         static values(): $Difficulty[];
         static valueOf(name: string): $Difficulty;
         getKey(): string;
         getId(): number;
         getDisplayName(): $Component;
-        static byName(name: string): $Difficulty;
         getInfo(): $Component;
-        getSerializedName(): string;
-        static byId(id: number): $Difficulty;
+        static byName(name: string): $Difficulty;
         getRemappedEnumConstantName(): string;
         static EASY: $Difficulty;
         static CODEC: $StringRepresentable$EnumCodec<$Difficulty>;
         static PEACEFUL: $Difficulty;
         static HARD: $Difficulty;
         static NORMAL: $Difficulty;
+        get serializedName(): string;
         get key(): string;
         get id(): number;
         get displayName(): $Component;
         get info(): $Component;
-        get serializedName(): string;
         get remappedEnumConstantName(): string;
     }
     /**

@@ -16,12 +16,12 @@ declare module "@package/mezz/jei/api/gui/handlers" {
     }
     export interface $IGuiClickableArea {
         getArea(): $Rect2i;
-        getTooltip(arg0: $ITooltipBuilder): void;
-        onClick(arg0: $IFocusFactory, arg1: $IRecipesGui): void;
         /**
          * @deprecated
          */
         getTooltipStrings(): $List<$Component>;
+        onClick(arg0: $IFocusFactory, arg1: $IRecipesGui): void;
+        getTooltip(arg0: $ITooltipBuilder): void;
         isTooltipEnabled(): boolean;
         get area(): $Rect2i;
         get tooltipStrings(): $List<$Component>;
@@ -30,40 +30,40 @@ declare module "@package/mezz/jei/api/gui/handlers" {
     export class $IGuiContainerHandler<T extends $AbstractContainerScreen<never>> {
     }
     export interface $IGuiContainerHandler<T extends $AbstractContainerScreen<never>> {
+        getGuiClickableAreas(arg0: T, arg1: number, arg2: number): $Collection<$IGuiClickableArea>;
         /**
          * @deprecated
          */
         getClickableIngredientUnderMouse(arg0: T, arg1: number, arg2: number): ($IClickableIngredient<never>) | undefined;
         getClickableIngredientUnderMouse(arg0: $IClickableIngredientFactory, arg1: T, arg2: number, arg3: number): ($IClickableIngredient<never>) | undefined;
         getGuiExtraAreas(arg0: T): $List<$Rect2i>;
-        getGuiClickableAreas(arg0: T, arg1: number, arg2: number): $Collection<$IGuiClickableArea>;
     }
     export class $IGhostIngredientHandler<T extends $Screen> {
     }
     export interface $IGhostIngredientHandler<T extends $Screen> {
+        shouldHighlightTargets(): boolean;
+        getTargetsTyped<I>(arg0: T, arg1: $ITypedIngredient<I>, arg2: boolean): $List<$IGhostIngredientHandler$Target<I>>;
         onComplete(): void;
         quickMove<I>(arg0: T, arg1: $ITypedIngredient<I>): boolean;
-        getTargetsTyped<I>(arg0: T, arg1: $ITypedIngredient<I>, arg2: boolean): $List<$IGhostIngredientHandler$Target<I>>;
-        shouldHighlightTargets(): boolean;
     }
     export class $IGuiProperties {
     }
     export interface $IGuiProperties {
+        screenHeight(): number;
+        screenWidth(): number;
         guiTop(): number;
         guiLeft(): number;
         screenClass(): $Class<$Screen>;
-        screenWidth(): number;
-        screenHeight(): number;
+        guiBottom(): number;
+        guiRight(): number;
         guiXSize(): number;
         guiYSize(): number;
-        guiRight(): number;
-        guiBottom(): number;
     }
     export class $IScreenHandler<T extends $Screen> {
     }
     export interface $IScreenHandler<T extends $Screen> extends $Function<T, $IGuiProperties> {
-        apply(arg0: T): $IGuiProperties;
         getClickableIngredientUnderMouse(arg0: $IClickableIngredientFactory, arg1: T, arg2: number, arg3: number): ($IClickableIngredient<never>) | undefined;
+        apply(arg0: T): $IGuiProperties;
     }
     /**
      * Values that may be interpreted as {@link $IScreenHandler}.
@@ -72,8 +72,8 @@ declare module "@package/mezz/jei/api/gui/handlers" {
     export class $IGhostIngredientHandler$Target<I> {
     }
     export interface $IGhostIngredientHandler$Target<I> extends $Consumer<I> {
-        accept(arg0: I): void;
         getArea(): $Rect2i;
+        accept(arg0: I): void;
         get area(): $Rect2i;
     }
     export class $IGlobalGuiHandler {

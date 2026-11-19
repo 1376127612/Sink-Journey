@@ -8,13 +8,13 @@ declare module "@package/sirttas/elementalcraft/api/element/transfer" {
     export class $IElementTransferer {
     }
     export interface $IElementTransferer {
-        isValid(): boolean;
+        canConnectTo(arg0: $BlockPos_): boolean;
         getRemainingTransferAmount(): number;
         getConnectedNodes(arg0: $ElementType_): $List<$IElementTransferPathNode>;
+        isValid(): boolean;
         onTransfer(arg0: $ElementType_, arg1: number, arg2: $IElementTransferPathNode_ | null, arg3: $IElementTransferPathNode_ | null): void;
-        canConnectTo(arg0: $BlockPos_): boolean;
-        get valid(): boolean;
         get remainingTransferAmount(): number;
+        get valid(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $IElementTransferer}.

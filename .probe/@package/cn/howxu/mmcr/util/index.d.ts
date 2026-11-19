@@ -3,9 +3,9 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/cn/howxu/mmcr/util" {
     export class $IOType extends $Enum<$IOType> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $IOType[];
         static valueOf(name: string): $IOType;
-        getSerializedName(): string;
         opposite(): $IOType;
         getRemappedEnumConstantName(): string;
         static INPUT: $IOType;

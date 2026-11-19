@@ -1,8 +1,8 @@
 import { $Serializable } from "@package/java/io";
-import { $BiConsumer_, $ObjIntConsumer_, $Function_, $BinaryOperator_, $Consumer_, $UnaryOperator_, $BiFunction_, $ToIntFunction_ } from "@package/java/util/function";
+import { $BiConsumer_, $IntFunction_, $ObjIntConsumer_, $Function_, $BinaryOperator_, $Consumer_, $UnaryOperator_, $Predicate_, $BiFunction_, $ToIntFunction_ } from "@package/java/util/function";
 import { $Collector, $Stream } from "@package/java/util/stream";
-import { $Iterable_, $Comparable, $Object } from "@package/java/lang";
-import { $Spliterator, $Iterator, $List, $Map_, $Collection_, $Collection, $Comparator, $Map, $Map$Entry, $Set, $ListIterator, $AbstractCollection, $RandomAccess } from "@package/java/util";
+import { $Iterable_, $Comparable, $Object, $Iterable } from "@package/java/lang";
+import { $Spliterator, $Iterator, $SortedSet, $List, $Map_, $Collection_, $Collection, $Comparator, $NavigableSet, $Map, $Map$Entry, $Set, $ListIterator, $AbstractCollection, $RandomAccess } from "@package/java/util";
 
 declare module "@package/com/google/common/collect" {
     export class $ImmutableMultimap$Builder<K, V> {
@@ -13,8 +13,8 @@ declare module "@package/com/google/common/collect" {
         putAll(key: K, values: $Iterable_<V>): $ImmutableMultimap$Builder<K, V>;
         putAll(entries: $Iterable_<$Map$Entry<K, V>>): $ImmutableMultimap$Builder<K, V>;
         build(): $ImmutableMultimap<K, V>;
-        orderKeysBy(keyComparator: $Comparator<K>): $ImmutableMultimap$Builder<K, V>;
         orderValuesBy(valueComparator: $Comparator<V>): $ImmutableMultimap$Builder<K, V>;
+        orderKeysBy(keyComparator: $Comparator<K>): $ImmutableMultimap$Builder<K, V>;
         constructor();
     }
     export class $AbstractIterator<T> extends $UnmodifiableIterator<T> {
@@ -25,20 +25,20 @@ declare module "@package/com/google/common/collect" {
          * @deprecated
          */
         remove(element: $Object, occurrences: number): number;
+        static copyOf<E>(elements: $Iterable_<E>): $ImmutableMultiset<E>;
         static copyOf<E>(elements: $Iterator<E>): $ImmutableMultiset<E>;
         static copyOf<E>(elements: E[]): $ImmutableMultiset<E>;
-        static copyOf<E>(elements: $Iterable_<E>): $ImmutableMultiset<E>;
         /**
          * @deprecated
          */
         add(element: E, occurrences: number): number;
-        static of<E>(e1: E, e2: E, e3: E): $ImmutableMultiset<E>;
+        static of<E>(e1: E, e2: E, e3: E, e4: E): $ImmutableMultiset<E>;
         static of<E>(element: E): $ImmutableMultiset<E>;
+        static of<E>(e1: E, e2: E, e3: E): $ImmutableMultiset<E>;
         static of<E>(e1: E, e2: E): $ImmutableMultiset<E>;
+        static of<E>(e1: E, e2: E, e3: E, e4: E, e5: E, e6: E, ...others: E[]): $ImmutableMultiset<E>;
         static of<E>(): $ImmutableMultiset<E>;
         static of<E>(e1: E, e2: E, e3: E, e4: E, e5: E): $ImmutableMultiset<E>;
-        static of<E>(e1: E, e2: E, e3: E, e4: E, e5: E, e6: E, ...others: E[]): $ImmutableMultiset<E>;
-        static of<E>(e1: E, e2: E, e3: E, e4: E): $ImmutableMultiset<E>;
         static builder<E>(): $ImmutableMultiset$Builder<E>;
         entrySet(): $ImmutableSet<$Multiset$Entry<E>>;
         elementSet(): $ImmutableSet<E>;
@@ -50,8 +50,8 @@ declare module "@package/com/google/common/collect" {
          * @deprecated
          */
         setCount(element: E, count: number): number;
-        static toImmutableMultiset<T, E>(elementFunction: $Function_<T, E>, countFunction: $ToIntFunction_<T>): $Collector<T, never, $ImmutableMultiset<E>>;
         static toImmutableMultiset<E>(): $Collector<E, never, $ImmutableMultiset<E>>;
+        static toImmutableMultiset<T, E>(elementFunction: $Function_<T, E>, countFunction: $ToIntFunction_<T>): $Collector<T, never, $ImmutableMultiset<E>>;
         forEachEntry(action: $ObjIntConsumer_<E>): void;
     }
     export class $ImmutableMap$Builder<K, V> {
@@ -71,15 +71,15 @@ declare module "@package/com/google/common/collect" {
         static copyOf<E>(elements: $Collection_<E>): $ImmutableSet<E>;
         static copyOf<E>(elements: E[]): $ImmutableSet<E>;
         static of<E>(e1: E, e2: E, e3: E, e4: E): $ImmutableSet<E>;
-        static of<E>(): $ImmutableSet<E>;
-        static of<E>(e1: E, e2: E, e3: E): $ImmutableSet<E>;
         static of<E>(element: E): $ImmutableSet<E>;
+        static of<E>(e1: E, e2: E, e3: E): $ImmutableSet<E>;
+        static of<E>(): $ImmutableSet<E>;
         static of<E>(e1: E, e2: E): $ImmutableSet<E>;
         static of<E>(e1: E, e2: E, e3: E, e4: E, e5: E, e6: E, ...others: E[]): $ImmutableSet<E>;
         static of<E>(e1: E, e2: E, e3: E, e4: E, e5: E): $ImmutableSet<E>;
         static builder<E>(): $ImmutableSet$Builder<E>;
-        static toImmutableSet<E>(): $Collector<E, never, $ImmutableSet<E>>;
         static builderWithExpectedSize<E>(expectedSize: number): $ImmutableSet$Builder<E>;
+        static toImmutableSet<E>(): $Collector<E, never, $ImmutableSet<E>>;
     }
     export class $ImmutableCollection$Builder<E> {
         add(element: E): $ImmutableCollection$Builder<E>;
@@ -95,6 +95,8 @@ declare module "@package/com/google/common/collect" {
         addAll(elements: $Iterable_<E>): $ImmutableList$Builder<E>;
         build(): $ImmutableList<E>;
         constructor();
+    }
+    export class $ImmutableSortedSetFauxverideShim<E> extends $ImmutableSet$CachingAsList<E> {
     }
     export class $Multiset$Entry<E> {
     }
@@ -115,8 +117,8 @@ declare module "@package/com/google/common/collect" {
         putAll(key: K, ...values: V[]): $ImmutableSetMultimap$Builder<K, V>;
         putAll(multimap: $Multimap<K, V>): $ImmutableSetMultimap$Builder<K, V>;
         build(): $ImmutableSetMultimap<K, V>;
-        orderKeysBy(keyComparator: $Comparator<K>): $ImmutableSetMultimap$Builder<K, V>;
         orderValuesBy(valueComparator: $Comparator<V>): $ImmutableSetMultimap$Builder<K, V>;
+        orderKeysBy(keyComparator: $Comparator<K>): $ImmutableSetMultimap$Builder<K, V>;
         constructor();
     }
     export class $Table<R, C, V> {
@@ -136,13 +138,13 @@ declare module "@package/com/google/common/collect" {
         containsValue(value: $Object): boolean;
         column(columnKey: C): $Map<R, V>;
         row(rowKey: R): $Map<C, V>;
-        columnKeySet(): $Set<C>;
+        columnMap(): $Map<C, $Map<R, V>>;
+        cellSet(): $Set<$Table$Cell<R, C, V>>;
+        rowKeySet(): $Set<R>;
+        rowMap(): $Map<R, $Map<C, V>>;
         containsRow(rowKey: $Object): boolean;
         containsColumn(columnKey: $Object): boolean;
-        cellSet(): $Set<$Table$Cell<R, C, V>>;
-        columnMap(): $Map<C, $Map<R, V>>;
-        rowMap(): $Map<R, $Map<C, V>>;
-        rowKeySet(): $Set<R>;
+        columnKeySet(): $Set<C>;
         get empty(): boolean;
     }
     export class $ForwardingMultimap<K, V> extends $ForwardingObject implements $Multimap<K, V> {
@@ -162,8 +164,8 @@ declare module "@package/com/google/common/collect" {
         entries(): $Collection<$Map$Entry<K, V>>;
         removeAll(key: $Object): $Collection<V>;
         asMap(): $Map<K, $Collection<V>>;
-        containsEntry(key: $Object, value: $Object): boolean;
         replaceValues(key: K, values: $Iterable_<V>): $Collection<V>;
+        containsEntry(key: $Object, value: $Object): boolean;
         forEach(action: $BiConsumer_<K, V>): void;
         get empty(): boolean;
     }
@@ -193,8 +195,8 @@ declare module "@package/com/google/common/collect" {
         entries(): $Collection<$Map$Entry<K, V>>;
         removeAll(key: $Object): $Collection<V>;
         asMap(): $Map<K, $Collection<V>>;
-        containsEntry(key: $Object, value: $Object): boolean;
         replaceValues(key: K, values: $Iterable_<V>): $Collection<V>;
+        containsEntry(key: $Object, value: $Object): boolean;
         get empty(): boolean;
     }
     export class $ImmutableMap<K, V> implements $Map<K, V>, $Serializable {
@@ -273,10 +275,10 @@ declare module "@package/com/google/common/collect" {
          */
         computeIfPresent(key: K, remappingFunction: $BiFunction_<K, V, V>): V;
         static ofEntries<K, V>(...entries: $Map$Entry<K, V>[]): $ImmutableMap<K, V>;
-        asMultimap(): $ImmutableSetMultimap<K, V>;
         static builderWithExpectedSize<K, V>(expectedSize: number): $ImmutableMap$Builder<K, V>;
         static toImmutableMap<T, K, V>(keyFunction: $Function_<T, K>, valueFunction: $Function_<T, V>, mergeFunction: $BinaryOperator_<V>): $Collector<T, never, $ImmutableMap<K, V>>;
         static toImmutableMap<T, K, V>(keyFunction: $Function_<T, K>, valueFunction: $Function_<T, V>): $Collector<T, never, $ImmutableMap<K, V>>;
+        asMultimap(): $ImmutableSetMultimap<K, V>;
         forEach(arg0: $BiConsumer_<K, V>): void;
         get empty(): boolean;
     }
@@ -339,10 +341,10 @@ declare module "@package/com/google/common/collect" {
         sort(c: $Comparator<E>): void;
         listIterator(index: number): $UnmodifiableListIterator<E>;
         listIterator(): $UnmodifiableListIterator<E>;
+        static builderWithExpectedSize<E>(expectedSize: number): $ImmutableList$Builder<E>;
         static toImmutableList<E>(): $Collector<E, never, $ImmutableList<E>>;
         static sortedCopyOf<E>(comparator: $Comparator<E>, elements: $Iterable_<E>): $ImmutableList<E>;
         static sortedCopyOf<E extends $Comparable<E>>(elements: $Iterable_<E>): $ImmutableList<E>;
-        static builderWithExpectedSize<E>(expectedSize: number): $ImmutableList$Builder<E>;
         reversed(): $List<E>;
         getFirst(): E;
         getLast(): E;
@@ -356,6 +358,29 @@ declare module "@package/com/google/common/collect" {
     export class $ImmutableCollection<E> extends $AbstractCollection<E> implements $Serializable {
         iterator(): $UnmodifiableIterator<E>;
         asList(): $ImmutableList<E>;
+    }
+    export class $ForwardingCollection<E> extends $ForwardingObject implements $Collection<E> {
+        remove(object: $Object): boolean;
+        size(): number;
+        clear(): void;
+        isEmpty(): boolean;
+        add(element: E): boolean;
+        toArray<T>(array: T[]): T[];
+        toArray(): $Object[];
+        iterator(): $Iterator<E>;
+        contains(object: $Object): boolean;
+        addAll(collection: $Collection_<E>): boolean;
+        removeAll(collection: $Collection_<never>): boolean;
+        retainAll(collection: $Collection_<never>): boolean;
+        containsAll(collection: $Collection_<never>): boolean;
+        toArray<T>(arg0: $IntFunction_<T[]>): T[];
+        stream(): $Stream<E>;
+        spliterator(): $Spliterator<E>;
+        parallelStream(): $Stream<E>;
+        removeIf(arg0: $Predicate_<E>): boolean;
+        forEach(arg0: $Consumer_<E>): void;
+        [Symbol.iterator](): Iterator<E>
+        get empty(): boolean;
     }
     export class $ImmutableSetMultimap<K, V> extends $ImmutableMultimap<K, V> implements $SetMultimap<K, V> {
         get(key: K): $ImmutableSet<V>;
@@ -373,11 +398,11 @@ declare module "@package/com/google/common/collect" {
          * @deprecated
          */
         removeAll(key: $Object): $ImmutableSet<V>;
-        inverse(): $ImmutableSetMultimap<V, K>;
         /**
          * @deprecated
          */
         replaceValues(key: K, values: $Iterable_<V>): $ImmutableSet<V>;
+        inverse(): $ImmutableSetMultimap<V, K>;
         static toImmutableSetMultimap<T, K, V>(keyFunction: $Function_<T, K>, valueFunction: $Function_<T, V>): $Collector<T, never, $ImmutableSetMultimap<K, V>>;
         static flatteningToImmutableSetMultimap<T, K, V>(keyFunction: $Function_<T, K>, valuesFunction: $Function_<T, $Stream<V>>): $Collector<T, never, $ImmutableSetMultimap<K, V>>;
     }
@@ -392,14 +417,14 @@ declare module "@package/com/google/common/collect" {
     export class $ImmutableMultimap<K, V> extends $BaseImmutableMultimap<K, V> implements $Serializable {
         get(key: K): $ImmutableCollection<V>;
         values(): $ImmutableCollection<V>;
-        static copyOf<K, V>(multimap: $Multimap<K, V>): $ImmutableMultimap<K, V>;
         static copyOf<K, V>(entries: $Iterable_<$Map$Entry<K, V>>): $ImmutableMultimap<K, V>;
-        static of<K, V>(): $ImmutableMultimap<K, V>;
+        static copyOf<K, V>(multimap: $Multimap<K, V>): $ImmutableMultimap<K, V>;
+        static of<K, V>(k1: K, v1: V, k2: K, v2: V, k3: K, v3: V, k4: K, v4: V, k5: K, v5: V): $ImmutableMultimap<K, V>;
+        static of<K, V>(k1: K, v1: V, k2: K, v2: V, k3: K, v3: V, k4: K, v4: V): $ImmutableMultimap<K, V>;
+        static of<K, V>(k1: K, v1: V, k2: K, v2: V, k3: K, v3: V): $ImmutableMultimap<K, V>;
         static of<K, V>(k1: K, v1: V, k2: K, v2: V): $ImmutableMultimap<K, V>;
         static of<K, V>(k1: K, v1: V): $ImmutableMultimap<K, V>;
-        static of<K, V>(k1: K, v1: V, k2: K, v2: V, k3: K, v3: V, k4: K, v4: V, k5: K, v5: V): $ImmutableMultimap<K, V>;
-        static of<K, V>(k1: K, v1: V, k2: K, v2: V, k3: K, v3: V): $ImmutableMultimap<K, V>;
-        static of<K, V>(k1: K, v1: V, k2: K, v2: V, k3: K, v3: V, k4: K, v4: V): $ImmutableMultimap<K, V>;
+        static of<K, V>(): $ImmutableMultimap<K, V>;
         static builder<K, V>(): $ImmutableMultimap$Builder<K, V>;
         keys(): $ImmutableMultiset<K>;
         keySet(): $ImmutableSet<K>;
@@ -408,15 +433,66 @@ declare module "@package/com/google/common/collect" {
          * @deprecated
          */
         removeAll(key: $Object): $ImmutableCollection<V>;
-        inverse(): $ImmutableMultimap<V, K>;
         asMap(): $ImmutableMap<K, $Collection<V>>;
         /**
          * @deprecated
          */
         replaceValues(key: K, values: $Iterable_<V>): $ImmutableCollection<V>;
+        inverse(): $ImmutableMultimap<V, K>;
     }
     export class $AbstractMultimap<K, V> implements $Multimap<K, V> {
         forEach(action: $BiConsumer_<K, V>): void;
+    }
+    export class $ImmutableSortedSet<E> extends $ImmutableSortedSetFauxverideShim<E> implements $NavigableSet<E>, $SortedIterable<E> {
+        floor(e: E): E;
+        static copyOf<E>(elements: $Collection_<E>): $ImmutableSortedSet<E>;
+        static copyOf<E>(elements: $Iterator<E>): $ImmutableSortedSet<E>;
+        static copyOf<E>(elements: $Iterable_<E>): $ImmutableSortedSet<E>;
+        static copyOf<E extends $Comparable<E>>(elements: E[]): $ImmutableSortedSet<E>;
+        static copyOf<E>(comparator: $Comparator<E>, elements: $Iterator<E>): $ImmutableSortedSet<E>;
+        static copyOf<E>(comparator: $Comparator<E>, elements: $Iterable_<E>): $ImmutableSortedSet<E>;
+        static copyOf<E>(comparator: $Comparator<E>, elements: $Collection_<E>): $ImmutableSortedSet<E>;
+        static of<E>(): $ImmutableSortedSet<E>;
+        static of<E extends $Comparable<E>>(element: E): $ImmutableSortedSet<E>;
+        static of<E extends $Comparable<E>>(e1: E, e2: E, e3: E, e4: E, e5: E, e6: E, ...remaining: E[]): $ImmutableSortedSet<E>;
+        static of<E extends $Comparable<E>>(e1: E, e2: E, e3: E, e4: E, e5: E): $ImmutableSortedSet<E>;
+        static of<E extends $Comparable<E>>(e1: E, e2: E, e3: E, e4: E): $ImmutableSortedSet<E>;
+        static of<E extends $Comparable<E>>(e1: E, e2: E): $ImmutableSortedSet<E>;
+        static of<E extends $Comparable<E>>(e1: E, e2: E, e3: E): $ImmutableSortedSet<E>;
+        last(): E;
+        first(): E;
+        lower(e: E): E;
+        static reverseOrder<E extends $Comparable<never>>(): $ImmutableSortedSet$Builder<E>;
+        static naturalOrder<E extends $Comparable<never>>(): $ImmutableSortedSet$Builder<E>;
+        comparator(): $Comparator<E>;
+        /**
+         * @deprecated
+         */
+        pollFirst(): E;
+        /**
+         * @deprecated
+         */
+        pollLast(): E;
+        descendingIterator(): $UnmodifiableIterator<E>;
+        subSet(fromElement: E, fromInclusive: boolean, toElement: E, toInclusive: boolean): $ImmutableSortedSet<E>;
+        subSet(fromElement: E, toElement: E): $ImmutableSortedSet<E>;
+        headSet(toElement: E, inclusive: boolean): $ImmutableSortedSet<E>;
+        headSet(toElement: E): $ImmutableSortedSet<E>;
+        tailSet(fromElement: E): $ImmutableSortedSet<E>;
+        tailSet(fromElement: E, inclusive: boolean): $ImmutableSortedSet<E>;
+        descendingSet(): $ImmutableSortedSet<E>;
+        ceiling(e: E): E;
+        higher(e: E): E;
+        static copyOfSorted<E>(sortedSet: $SortedSet<E>): $ImmutableSortedSet<E>;
+        static orderedBy<E>(comparator: $Comparator<E>): $ImmutableSortedSet$Builder<E>;
+        static toImmutableSortedSet<E>(comparator: $Comparator<E>): $Collector<E, never, $ImmutableSortedSet<E>>;
+        reversed(): $NavigableSet<E>;
+        removeFirst(): E;
+        removeLast(): E;
+        getFirst(): E;
+        getLast(): E;
+        addFirst(arg0: E): void;
+        addLast(arg0: E): void;
     }
     export class $Table$Cell<R, C, V> {
     }
@@ -430,6 +506,14 @@ declare module "@package/com/google/common/collect" {
         get columnKey(): C;
         get rowKey(): R;
     }
+    export class $ImmutableSortedSet$Builder<E> extends $ImmutableSet$Builder<E> {
+        add(element: E): $ImmutableSortedSet$Builder<E>;
+        add(...elements: E[]): $ImmutableSortedSet$Builder<E>;
+        addAll(elements: $Iterable_<E>): $ImmutableSortedSet$Builder<E>;
+        addAll(elements: $Iterator<E>): $ImmutableSortedSet$Builder<E>;
+        build(): $ImmutableSortedSet<E>;
+        constructor(comparator: $Comparator<E>);
+    }
     export class $BiMap<K, V> {
     }
     export interface $BiMap<K, V> extends $Map<K, V> {
@@ -440,6 +524,10 @@ declare module "@package/com/google/common/collect" {
         forcePut(key: K, value: V): V;
     }
     export class $BaseImmutableMultimap<K, V> extends $AbstractMultimap<K, V> {
+    }
+    export class $SortedIterable<T> {
+    }
+    export interface $SortedIterable<T> extends $Iterable<T> {
     }
     export class $Multiset<E> {
         [Symbol.iterator](): Iterator<E>
@@ -488,8 +576,8 @@ declare module "@package/com/google/common/collect" {
     export class $ImmutableMultiset$Builder<E> extends $ImmutableCollection$Builder<E> {
         add(element: E): $ImmutableMultiset$Builder<E>;
         add(...elements: E[]): $ImmutableMultiset$Builder<E>;
-        addAll(elements: $Iterable_<E>): $ImmutableMultiset$Builder<E>;
         addAll(elements: $Iterator<E>): $ImmutableMultiset$Builder<E>;
+        addAll(elements: $Iterable_<E>): $ImmutableMultiset$Builder<E>;
         build(): $ImmutableMultiset<E>;
         setCount(element: E, count: number): $ImmutableMultiset$Builder<E>;
         addCopies(element: E, occurrences: number): $ImmutableMultiset$Builder<E>;

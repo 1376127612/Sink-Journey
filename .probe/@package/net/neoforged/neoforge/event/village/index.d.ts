@@ -10,42 +10,42 @@ import { $Vec3_, $Vec3 } from "@package/net/minecraft/world/phys";
 
 declare module "@package/net/neoforged/neoforge/event/village" {
     export class $WandererTradesEvent extends $Event {
+        getRegistryAccess(): $RegistryAccess;
         getRareTrades(): $List<$VillagerTrades$ItemListing>;
         getGenericTrades(): $List<$VillagerTrades$ItemListing>;
-        getRegistryAccess(): $RegistryAccess;
+        constructor(arg0: $List_<$VillagerTrades$ItemListing_>, arg1: $List_<$VillagerTrades$ItemListing_>, arg2: $RegistryAccess);
         /**
          * @deprecated
          */
         constructor(arg0: $List_<$VillagerTrades$ItemListing_>, arg1: $List_<$VillagerTrades$ItemListing_>);
-        constructor(arg0: $List_<$VillagerTrades$ItemListing_>, arg1: $List_<$VillagerTrades$ItemListing_>, arg2: $RegistryAccess);
+        get registryAccess(): $RegistryAccess;
         get rareTrades(): $List<$VillagerTrades$ItemListing>;
         get genericTrades(): $List<$VillagerTrades$ItemListing>;
-        get registryAccess(): $RegistryAccess;
     }
     export class $VillagerTradesEvent extends $Event {
-        getType(): $VillagerProfession;
         getTrades(): $Int2ObjectMap<$List<$VillagerTrades$ItemListing>>;
         getRegistryAccess(): $RegistryAccess;
+        getType(): $VillagerProfession;
+        constructor(arg0: $Int2ObjectMap<$List_<$VillagerTrades$ItemListing_>>, arg1: $VillagerProfession_, arg2: $RegistryAccess);
         /**
          * @deprecated
          */
         constructor(arg0: $Int2ObjectMap<$List_<$VillagerTrades$ItemListing_>>, arg1: $VillagerProfession_);
-        constructor(arg0: $Int2ObjectMap<$List_<$VillagerTrades$ItemListing_>>, arg1: $VillagerProfession_, arg2: $RegistryAccess);
-        get type(): $VillagerProfession;
         get trades(): $Int2ObjectMap<$List<$VillagerTrades$ItemListing>>;
         get registryAccess(): $RegistryAccess;
+        get type(): $VillagerProfession;
     }
     export class $VillageSiegeEvent extends $Event implements $ICancellableEvent {
-        getAttemptedSpawnPos(): $Vec3;
         getLevel(): $Level;
         getPlayer(): $Player;
         getSiege(): $VillageSiege;
-        isCanceled(): boolean;
+        getAttemptedSpawnPos(): $Vec3;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $VillageSiege, arg1: $Level_, arg2: $Player, arg3: $Vec3_);
-        get attemptedSpawnPos(): $Vec3;
         get level(): $Level;
         get player(): $Player;
         get siege(): $VillageSiege;
+        get attemptedSpawnPos(): $Vec3;
     }
 }

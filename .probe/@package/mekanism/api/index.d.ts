@@ -23,16 +23,17 @@ export * as heat from "@package/mekanism/api/heat";
 export * as datamaps from "@package/mekanism/api/datamaps";
 export * as radial from "@package/mekanism/api/radial";
 export * as tier from "@package/mekanism/api/tier";
+export * as recipes from "@package/mekanism/api/recipes";
 
 declare module "@package/mekanism/api" {
     export class $Action extends $Enum<$Action> {
+        simulate(): boolean;
+        toFluidAction(): $IFluidHandler$FluidAction;
         static get(arg0: boolean): $Action;
         static values(): $Action[];
         static valueOf(arg0: string): $Action;
         execute(): boolean;
         combine(arg0: boolean): $Action;
-        toFluidAction(): $IFluidHandler$FluidAction;
-        simulate(): boolean;
         static fromFluidAction(arg0: $IFluidHandler$FluidAction_): $Action;
         static EXECUTE: $Action;
         static SIMULATE: $Action;
@@ -74,33 +75,33 @@ declare module "@package/mekanism/api" {
     export class $SupportsColorMap {
     }
     export interface $SupportsColorMap {
-        getColor(arg0: number): number;
-        getRgbCodeFloat(): number[];
         setColorFromAtlas(arg0: number[]): void;
         getPackedColor(): number;
         getPackedColor(arg0: number): number;
+        getRgbCodeFloat(): number[];
+        getColor(arg0: number): number;
         getRgbCode(): number[];
-        get rgbCodeFloat(): number[];
         set colorFromAtlas(value: number[]);
+        get rgbCodeFloat(): number[];
         get rgbCode(): number[];
     }
     export class $IConfigurable {
     }
     export interface $IConfigurable {
-        onRightClick(arg0: $Player): $InteractionResult;
         onSneakRightClick(arg0: $Player): $InteractionResult;
+        onRightClick(arg0: $Player): $InteractionResult;
     }
     export class $IIncrementalEnum<TYPE extends $Enum<TYPE>> {
     }
     export interface $IIncrementalEnum<TYPE extends $Enum<TYPE>> {
+        byIndex(arg0: number): TYPE;
         ordinal(): number;
+        getNext(): TYPE;
+        getNext(arg0: $Predicate_<TYPE>): TYPE;
         adjust(arg0: number): TYPE;
         adjust(arg0: number, arg1: $Predicate_<TYPE>): TYPE;
-        getNext(arg0: $Predicate_<TYPE>): TYPE;
-        getNext(): TYPE;
-        getPrevious(): TYPE;
         getPrevious(arg0: $Predicate_<TYPE>): TYPE;
-        byIndex(arg0: number): TYPE;
+        getPrevious(): TYPE;
     }
     export class $Chunk3D extends $ChunkPos {
         expand(arg0: number): $Set<$Chunk3D>;

@@ -1,13 +1,15 @@
 import { $MetadataSectionSerializer } from "@package/net/minecraft/server/packs/metadata";
 import { $Predicate_, $Function } from "@package/java/util/function";
+import { $SpriteSourcesAccessor } from "@package/net/mehvahdjukaar/codecui/mixins";
 import { $Logger } from "@package/org/slf4j";
 import { $MapCodec_, $MapCodec, $Codec } from "@package/com/mojang/serialization";
 import { $ResourceLocation_, $ResourceLocation, $FileToIdConverter } from "@package/net/minecraft/resources";
+import { $BiMap } from "@package/com/google/common/collect";
 import { $SpriteContents } from "@package/net/minecraft/client/renderer/texture";
 import { $ResourceManager, $Resource } from "@package/net/minecraft/server/packs/resources";
 import { $Record } from "@package/java/lang";
-import { $Collection_, $List } from "@package/java/util";
-import { $SpriteContentsConstructor_, $SpriteContentsConstructor } from "@package/net/neoforged/neoforge/client/textures";
+import { $SpriteContentsConstructor, $SpriteContentsConstructor_ } from "@package/net/neoforged/neoforge/client/textures";
+import { $List, $Collection_ } from "@package/java/util";
 export * as sources from "@package/net/minecraft/client/renderer/texture/atlas/sources";
 
 declare module "@package/net/minecraft/client/renderer/texture/atlas" {
@@ -16,8 +18,8 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas" {
         static LOGGER: $Logger;
     }
     export interface $SpriteResourceLoader {
-        loadSprite(location: $ResourceLocation_, resource: $Resource): $SpriteContents;
         loadSprite(arg0: $ResourceLocation_, arg1: $Resource, arg2: $SpriteContentsConstructor_): $SpriteContents;
+        loadSprite(location: $ResourceLocation_, resource: $Resource): $SpriteContents;
     }
     /**
      * Values that may be interpreted as {@link $SpriteResourceLoader}.
@@ -47,7 +49,8 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas" {
         add(location: $ResourceLocation_, sprite: $SpriteSource$SpriteSupplier_): void;
         removeAll(predicate: $Predicate_<$ResourceLocation>): void;
     }
-    export class $SpriteSources {
+    export class $SpriteSources implements $SpriteSourcesAccessor {
+        static getTypes$codecui_$md$e03d8d$0(): $BiMap<any, any>;
         static TYPE_CODEC: $Codec<$SpriteSourceType>;
         static PALETTED_PERMUTATIONS: $SpriteSourceType;
         static FILE_CODEC: $Codec<$List<$SpriteSource>>;
@@ -57,6 +60,7 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas" {
         static SINGLE_FILE: $SpriteSourceType;
         static UNSTITCHER: $SpriteSourceType;
         constructor();
+        static get types$codecui_$md$e03d8d$0(): $BiMap<any, any>;
     }
     export class $SpriteSourceList {
         static load(resourceManager: $ResourceManager, sprite: $ResourceLocation_): $SpriteSourceList;

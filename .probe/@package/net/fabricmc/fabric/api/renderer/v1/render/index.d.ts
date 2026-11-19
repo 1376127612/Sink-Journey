@@ -22,32 +22,32 @@ declare module "@package/net/fabricmc/fabric/api/renderer/v1/render" {
     }
     export interface $RenderContext {
         getRenderType(): $RenderType;
-        getModelData(): $ModelData;
         getEmitter(): $QuadEmitter;
-        pushTransform(arg0: $RenderContext$QuadTransform_): void;
-        isFaceCulled(arg0: $Direction_): boolean;
-        /**
-         * @deprecated
-         */
-        fallbackConsumer(): $Consumer<$BakedModel>;
-        pushModelData(arg0: $ModelData): void;
-        popTransform(): void;
+        hasTransform(): boolean;
         /**
          * @deprecated
          */
         meshConsumer(): $Consumer<$Mesh>;
         popModelData(): void;
+        popTransform(): void;
+        pushModelData(arg0: $ModelData): void;
         /**
          * @deprecated
          */
         bakedModelConsumer(): $RenderContext$BakedModelConsumer;
-        hasTransform(): boolean;
-        itemTransformationMode(): $ItemDisplayContext;
+        /**
+         * @deprecated
+         */
+        fallbackConsumer(): $Consumer<$BakedModel>;
+        pushTransform(arg0: $RenderContext$QuadTransform_): void;
+        isFaceCulled(arg0: $Direction_): boolean;
         usesAmbientOcclusion(): $TriState;
         setUsesAmbientOcclusion(arg0: $TriState_): void;
+        itemTransformationMode(): $ItemDisplayContext;
+        getModelData(): $ModelData;
         get renderType(): $RenderType;
-        get modelData(): $ModelData;
         get emitter(): $QuadEmitter;
+        get modelData(): $ModelData;
     }
     /**
      * @deprecated

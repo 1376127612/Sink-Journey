@@ -36,16 +36,16 @@ declare module "@package/net/minecraft/client/server" {
         constructor();
     }
     export class $IntegratedServer extends $MinecraftServer implements $IDeferrableIntegratedServer {
+        setUUID(uuid: $UUID_): void;
         /**
          * Initialises the server and starts it.
          */
         initServer(): boolean;
-        setUUID(uuid: $UUID_): void;
         /**
          * Saves all necessary data as preparation for stopping the server.
          */
         mfix$markClientLoadFinished(): void;
-        handler$bik000$threadtweak$onInit(arg0: $CallbackInfo): void;
+        handler$bkg000$threadtweak$onInit(arg0: $CallbackInfo): void;
         static VANILLA_BRAND: string;
         static ANONYMOUS_PLAYER_PROFILE: $GameProfile;
         resources: $MinecraftServer$ReloadableResources;
@@ -68,8 +68,8 @@ declare module "@package/net/minecraft/client/server" {
     }
     export class $LanServerPinger extends $Thread {
         static parseAddress(pingResponse: string): string;
-        static parseMotd(pingResponse: string): string;
         static createPingString(motdMessage: string, adMessage: string): string;
+        static parseMotd(pingResponse: string): string;
         static MULTICAST_GROUP: string;
         static PING_PORT: number;
         static MIN_PRIORITY: number;

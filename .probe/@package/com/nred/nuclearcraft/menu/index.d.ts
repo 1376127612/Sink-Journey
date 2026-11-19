@@ -3,9 +3,9 @@ import { $ItemStack, $ItemStack_ } from "@package/net/minecraft/world/item";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $NCPacket } from "@package/com/nred/nuclearcraft/payload";
 import { $Player, $Inventory } from "@package/net/minecraft/world/entity/player";
-import { $Slot, $MenuType_, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
-import { $Map } from "@package/java/util";
+import { $ContainerListener, $Slot, $MenuType_, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
 import { $BlockEntityMenuInfo } from "@package/com/nred/nuclearcraft/handler";
+import { $List, $Map } from "@package/java/util";
 import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 export * as processor from "@package/com/nred/nuclearcraft/menu/processor";
 
@@ -26,6 +26,7 @@ declare module "@package/com/nred/nuclearcraft/menu" {
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
         tile: $BlockEntity;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         info: INFO;
@@ -47,6 +48,7 @@ declare module "@package/com/nred/nuclearcraft/menu" {
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
         tile: $BlockEntity;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         constructor(arg0: $MenuType_<never>, arg1: number, arg2: $Inventory, arg3: $BlockEntity);

@@ -15,18 +15,18 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer" {
     export class $RemoveRecipesKubeEvent {
     }
     export interface $RemoveRecipesKubeEvent extends $KubeEvent {
-        remove(recipesToRemove: SpecialTypes.RecipeId[]): void;
         removeFromCategory(category: $ResourceLocation_, recipesToRemove: $ResourceLocation_[]): void;
+        remove(recipesToRemove: SpecialTypes.RecipeId[]): void;
     }
     /**
      * Values that may be interpreted as {@link $RemoveRecipesKubeEvent}.
      */
     export type $RemoveRecipesKubeEvent_ = ((category: $ResourceLocation, recipesToRemove: $ResourceLocation[]) => void);
     export class $RecipeViewerEntryType {
-        getBase(from: $Object): $Object;
-        static fromString(id: $Object): $RecipeViewerEntryType;
         wrapEntry(from: $Object): $Object;
         wrapPredicate(from: $Object): $Object;
+        static fromString(id: $Object): $RecipeViewerEntryType;
+        getBase(from: $Object): $Object;
         static ITEM: $RecipeViewerEntryType;
         entryType: $RecipeViewerEntryType$Component<never>;
         static ALL_TYPES: $Lazy<$List<$RecipeViewerEntryType>>;
@@ -64,7 +64,7 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer" {
     /**
      * Values that may be interpreted as {@link $RecipeViewerEntryType$Component}.
      */
-    export type $RecipeViewerEntryType$Component_<T> = { streamCodec?: $StreamCodec<never, any>, empty?: $Predicate_<any>, type?: $TypeInfo_,  } | [streamCodec?: $StreamCodec<never, any>, empty?: $Predicate_<any>, type?: $TypeInfo_, ];
+    export type $RecipeViewerEntryType$Component_<T> = { empty?: $Predicate_<any>, type?: $TypeInfo_, streamCodec?: $StreamCodec<never, any>,  } | [empty?: $Predicate_<any>, type?: $TypeInfo_, streamCodec?: $StreamCodec<never, any>, ];
     export class $RemoveCategoriesKubeEvent {
     }
     export interface $RemoveCategoriesKubeEvent extends $KubeEvent {
@@ -77,9 +77,9 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/viewer" {
     export class $RegisterSubtypesKubeEvent<F> {
     }
     export interface $RegisterSubtypesKubeEvent<F> extends $KubeEvent {
-        register(filter: F, interpreter: $SubtypeInterpreter_): void;
         useComponents(filter: F): void;
         useComponents(filter: F, components: $List_<$DataComponentType_<never>>): void;
+        register(filter: F, interpreter: $SubtypeInterpreter_): void;
     }
     export class $SubtypeInterpreter {
     }

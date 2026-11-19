@@ -6,13 +6,13 @@ import { $Comparable } from "@package/java/lang";
 
 declare module "@package/com/simibubi/create/content/kinetics/belt/transport" {
     export class $TransportedItemStack implements $Comparable<$TransportedItemStack> {
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        getSimilar(): $TransportedItemStack;
+        clearFanProcessingData(): void;
+        getTargetSideOffset(): number;
         compareTo(arg0: $TransportedItemStack): number;
         static read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $TransportedItemStack;
         copy(): $TransportedItemStack;
-        clearFanProcessingData(): void;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
-        getTargetSideOffset(): number;
-        getSimilar(): $TransportedItemStack;
         lockedExternally: boolean;
         stack: $ItemStack;
         beltPosition: number;
@@ -26,7 +26,7 @@ declare module "@package/com/simibubi/create/content/kinetics/belt/transport" {
         processedBy: $FanProcessingType;
         processingTime: number;
         constructor(arg0: $ItemStack_);
-        get targetSideOffset(): number;
         get similar(): $TransportedItemStack;
+        get targetSideOffset(): number;
     }
 }

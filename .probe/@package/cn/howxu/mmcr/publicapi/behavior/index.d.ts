@@ -14,42 +14,42 @@ declare module "@package/cn/howxu/mmcr/publicapi/behavior" {
     export class $MachineContext {
     }
     export interface $MachineContext {
-        level(): $ServerLevel;
-        screenText(): $ControllerText;
-        upgradeItems(): $List<$ItemStack>;
-        dataStorage(): $DataStore;
-        controller(): $MachineView;
-        machineId(): $ResourceLocation;
         gameTime(): number;
+        dataStorage(): $DataStore;
         controllerPos(): $BlockPos;
+        jadeText(): $JadeText;
+        ioView(): $IoSnapshot;
+        screenText(): $ControllerText;
+        isDue(period: number): boolean;
         countStructureBlocks(block: $Block_): number;
         countStructureBlocks(blockId: $ResourceLocation_): number;
-        jadeText(): $JadeText;
-        isDue(period: number): boolean;
-        ioView(): $IoSnapshot;
+        upgradeItems(): $List<$ItemStack>;
+        level(): $ServerLevel;
+        controller(): $MachineView;
+        machineId(): $ResourceLocation;
     }
     export class $RecipeTickContext {
     }
     export interface $RecipeTickContext {
-        parallelism(): number;
-        recipe(): $RecipeView;
-        outputs(): $List<$OutputView>;
         requirements(): $List<$RequirementSpec>;
         totalTick(): number;
-        currentTick(): number;
         machineContext(): $MachineContext;
+        parallelism(): number;
+        recipe(): $RecipeView;
+        currentTick(): number;
+        outputs(): $List<$OutputView>;
         ioSnapshot(): $IoSnapshot;
     }
     export class $RecipeHooks {
     }
     export interface $RecipeHooks {
-        beforeStart(callback: $Consumer_<$RecipeStartContext>): $RecipeHooks;
-        recipeTick(callback: $Consumer_<$RecipeTickContext>): $RecipeHooks;
         postServerTick(callback: $Consumer_<$MachineContext>): $RecipeHooks;
         preServerTick(callback: $Consumer_<$MachineContext>): $RecipeHooks;
+        recipeTick(callback: $Consumer_<$RecipeTickContext>): $RecipeHooks;
         idleEnd(callback: $Consumer_<$MachineContext>): $RecipeHooks;
         idleStart(callback: $Consumer_<$MachineContext>): $RecipeHooks;
         beforeFinish(callback: $Consumer_<$RecipeFinishContext>): $RecipeHooks;
+        beforeStart(callback: $Consumer_<$RecipeStartContext>): $RecipeHooks;
     }
     export class $TickHooks {
     }
@@ -63,44 +63,44 @@ declare module "@package/cn/howxu/mmcr/publicapi/behavior" {
     export class $RecipeStartContext {
     }
     export interface $RecipeStartContext {
+        requirements(): $List<$RequirementSpec>;
+        requestedParallelism(): number;
+        effectiveParallelism(): number;
+        replaceExactItemInputCount(item: $Item_, expectedCount: number, replacementCount: number): boolean;
+        machineContext(): $MachineContext;
+        setRequirements(requirements: $List_<$RequirementSpec>): void;
         snapshot(): $RecipeExecutionView;
         duration(): number;
         cancel(): void;
         cancelled(): boolean;
         recipe(): $RecipeView;
         setDuration(ticks: number): void;
+        setOutputs(outputs: $List_<$OutputView>): void;
         recipeId(): $ResourceLocation;
         outputs(): $List<$OutputView>;
-        requirements(): $List<$RequirementSpec>;
-        requestedParallelism(): number;
-        setOutputs(outputs: $List_<$OutputView>): void;
-        effectiveParallelism(): number;
-        replaceExactItemInputCount(item: $Item_, expectedCount: number, replacementCount: number): boolean;
-        machineContext(): $MachineContext;
-        setRequirements(requirements: $List_<$RequirementSpec>): void;
     }
     export class $RecipeFinishContext {
     }
     export interface $RecipeFinishContext {
+        requestedParallelism(): number;
+        effectiveParallelism(): number;
+        machineContext(): $MachineContext;
+        outputsDiscarded(): boolean;
+        discardOutputs(): void;
         cancel(): void;
         cancelled(): boolean;
         recipe(): $RecipeView;
+        setOutputs(outputs: $List_<$OutputView>): void;
         recipeId(): $ResourceLocation;
         outputs(): $List<$OutputView>;
-        requestedParallelism(): number;
-        setOutputs(outputs: $List_<$OutputView>): void;
-        effectiveParallelism(): number;
-        machineContext(): $MachineContext;
-        discardOutputs(): void;
-        outputsDiscarded(): boolean;
     }
     export class $TickContext {
     }
     export interface $TickContext extends $MachineContext {
-        parallelism(): number;
         factoryThreadCount(): number;
-        smartInterfaceValues(): $Map<string, number>;
+        parallelism(): number;
         smartInterfaceValue(name: string): (number) | undefined;
+        smartInterfaceValues(): $Map<string, number>;
         ioPlan(): $IoTransaction;
     }
 }

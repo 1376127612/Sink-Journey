@@ -8,13 +8,13 @@ import { $BaseCapability, $ICapabilityProvider } from "@package/net/neoforged/ne
 
 declare module "@package/sirttas/elementalcraft/block/pipe/upgrade/capability" {
     export class $PipeUpgradeCapability<T, C> extends $BaseCapability<T, C> {
-        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $PipeUpgradeCapability<T, C>;
-        getCapability(arg0: $PipeUpgrade, arg1: C): T;
-        static getAll(): $List<$PipeUpgradeCapability<never, never>>;
-        static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $PipeUpgradeCapability<T, void>;
         static createSided<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $PipeUpgradeCapability<T, $Direction>;
         getBlockCapabilityProvider<B extends $ElementPipeBlockEntity>(): $ICapabilityProvider<B, $Direction, T>;
-        static get all(): $List<$PipeUpgradeCapability<never, never>>;
+        static create<T, C>(arg0: $ResourceLocation_, arg1: $Class<T>, arg2: $Class<C>): $PipeUpgradeCapability<T, C>;
+        static getAll(): $List<$PipeUpgradeCapability<never, never>>;
+        static createVoid<T>(arg0: $ResourceLocation_, arg1: $Class<T>): $PipeUpgradeCapability<T, void>;
+        getCapability(arg0: $PipeUpgrade, arg1: C): T;
         get blockCapabilityProvider(): $ICapabilityProvider<B, $Direction, T>;
+        static get all(): $List<$PipeUpgradeCapability<never, never>>;
     }
 }

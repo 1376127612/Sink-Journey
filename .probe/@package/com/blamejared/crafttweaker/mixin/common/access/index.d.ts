@@ -1,0 +1,13 @@
+export * as registry from "@package/com/blamejared/crafttweaker/mixin/common/access/registry";
+export * as item from "@package/com/blamejared/crafttweaker/mixin/common/access/item";
+export * as predicate from "@package/com/blamejared/crafttweaker/mixin/common/access/predicate";
+export * as recipe from "@package/com/blamejared/crafttweaker/mixin/common/access/recipe";
+export * as loot from "@package/com/blamejared/crafttweaker/mixin/common/access/loot";
+export * as entity from "@package/com/blamejared/crafttweaker/mixin/common/access/entity";
+export * as neoforge from "@package/com/blamejared/crafttweaker/mixin/common/access/neoforge";
+export * as brewing from "@package/com/blamejared/crafttweaker/mixin/common/access/brewing";
+export * as villager from "@package/com/blamejared/crafttweaker/mixin/common/access/villager";
+export * as tag from "@package/com/blamejared/crafttweaker/mixin/common/access/tag";
+export * as level from "@package/com/blamejared/crafttweaker/mixin/common/access/level";
+export * as block from "@package/com/blamejared/crafttweaker/mixin/common/access/block";
+export * as server from "@package/com/blamejared/crafttweaker/mixin/common/access/server";

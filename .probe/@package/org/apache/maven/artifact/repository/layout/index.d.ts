@@ -7,8 +7,8 @@ declare module "@package/org/apache/maven/artifact/repository/layout" {
         static ROLE: string;
     }
     export interface $ArtifactRepositoryLayout {
-        getId(): string;
         pathOf(arg0: $Artifact): string;
+        getId(): string;
         pathOfLocalRepositoryMetadata(arg0: $ArtifactMetadata, arg1: $ArtifactRepository): string;
         pathOfRemoteRepositoryMetadata(arg0: $ArtifactMetadata): string;
         get id(): string;

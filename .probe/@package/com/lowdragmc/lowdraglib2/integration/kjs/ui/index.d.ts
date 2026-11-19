@@ -27,29 +27,29 @@ declare module "@package/com/lowdragmc/lowdraglib2/integration/kjs/ui" {
     export class $UIEventJS implements $KubeEvent, $MenuProvider, $IContainerUIHolder {
         getMenuType(): $MenuType<$ModularUIContainerMenu>;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -95,11 +95,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/integration/kjs/ui" {
         constructor(arg0: $Player, arg1: $BlockPos_, arg2: $BlockState_, arg3: string);
     }
     export class $LDKJSMenuTypes {
-        static init(): void;
         static onRegisterMenuScreensEvent(arg0: $RegisterMenuScreensEvent): void;
-        static openPlayerUI(arg0: $Player, arg1: string): boolean;
         static openHeldItemUI(arg0: $Player, arg1: $InteractionHand_, arg2: string): boolean;
         static openBlockUI(arg0: $Player, arg1: $BlockPos_, arg2: string): boolean;
+        static openPlayerUI(arg0: $Player, arg1: string): boolean;
+        static init(): void;
         static PLAYER_UI: $Supplier<$MenuType<$ModularUIContainerMenu>>;
         static HELD_ITEM_UI: $Supplier<$MenuType<$ModularUIContainerMenu>>;
         static BLOCK_UI: $Supplier<$MenuType<$ModularUIContainerMenu>>;

@@ -17,18 +17,18 @@ declare module "@package/com/nred/nuclearcraft/block_entity/internal/inventory" 
      */
     export type $ItemSorption$Type_ = "default" | "input" | "output";
     export class $ItemSorption extends $Enum<$ItemSorption> implements $StringRepresentable, $IGuiButton {
-        static values(): $ItemSorption[];
-        static valueOf(arg0: string): $ItemSorption;
-        next(arg0: $ItemSorption$Type_, arg1: boolean): $ItemSorption;
         canExtract(): boolean;
-        getTexture(arg0: boolean): $ResourceLocation;
         canReceive(): boolean;
-        getSerializedName(): string;
-        canConnect(): boolean;
         getTextColor(): $ChatFormatting;
+        getSerializedName(): string;
         static fromInt(arg0: $ItemSorption$Type_, arg1: number): $ItemSorption;
         getTextureWidth(): number;
         getTextureHeight(): number;
+        canConnect(): boolean;
+        static values(): $ItemSorption[];
+        static valueOf(arg0: string): $ItemSorption;
+        next(arg0: $ItemSorption$Type_, arg1: boolean): $ItemSorption;
+        getTexture(arg0: boolean): $ResourceLocation;
         getRemappedEnumConstantName(): string;
         static AUTO_IN: $ItemSorption;
         static AUTO_OUT: $ItemSorption;
@@ -36,8 +36,8 @@ declare module "@package/com/nred/nuclearcraft/block_entity/internal/inventory" 
         static NON: $ItemSorption;
         static BOTH: $ItemSorption;
         static OUT: $ItemSorption;
-        get serializedName(): string;
         get textColor(): $ChatFormatting;
+        get serializedName(): string;
         get textureWidth(): number;
         get textureHeight(): number;
         get remappedEnumConstantName(): string;

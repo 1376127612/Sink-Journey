@@ -5,7 +5,7 @@ import { $SpriteContents } from "@package/net/minecraft/client/renderer/texture"
 import { $ResourceManager, $Resource } from "@package/net/minecraft/server/packs/resources";
 import { $NativeImage } from "@package/com/mojang/blaze3d/platform";
 import { $Record } from "@package/java/lang";
-import { $Map_, $List_ } from "@package/java/util";
+import { $List, $Map_, $Map, $List_ } from "@package/java/util";
 import { $SpriteSource$SpriteSupplier, $SpriteResourceLoader, $SpriteSource$Output, $SpriteSourceType, $SpriteResourceLoader_, $SpriteSource } from "@package/net/minecraft/client/renderer/texture/atlas";
 import { $ResourceLocationPattern } from "@package/net/minecraft/util";
 
@@ -17,10 +17,14 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
         constructor(resourceId: $ResourceLocation_, spriteId: ($ResourceLocation_) | undefined);
     }
     export class $PalettedPermutations implements $SpriteSource {
+        static loadPaletteEntryFromImage(resourceMananger: $ResourceManager, palette: $ResourceLocation_): number[];
+        static createPaletteMapping(arg0: number[], arg1: number[]): $IntUnaryOperator;
         run(resourceManager: $ResourceManager, output: $SpriteSource$Output): void;
         type(): $SpriteSourceType;
-        static loadPaletteEntryFromImage(resourceMananger: $ResourceManager, palette: $ResourceLocation_): number[];
         static CODEC: $MapCodec<$PalettedPermutations>;
+        paletteKey: $ResourceLocation;
+        textures: $List<$ResourceLocation>;
+        permutations: $Map<string, $ResourceLocation>;
         constructor(textures: $List_<$ResourceLocation_>, paletteKey: $ResourceLocation_, permutations: $Map_<string, $ResourceLocation_>);
     }
     export class $LazyLoadedImage {
@@ -54,11 +58,11 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
         constructor(filter: $ResourceLocationPattern);
     }
     export class $PalettedPermutations$PalettedSpriteSupplier extends $Record implements $SpriteSource$SpriteSupplier {
-        apply(arg0: $SpriteResourceLoader_): $SpriteContents;
-        baseImage(): $LazyLoadedImage;
-        discard(): void;
         palette(): $Supplier<$IntUnaryOperator>;
         permutationLocation(): $ResourceLocation;
+        baseImage(): $LazyLoadedImage;
+        apply(arg0: $SpriteResourceLoader_): $SpriteContents;
+        discard(): void;
         compose<V>(arg0: $Function_<V, $SpriteResourceLoader>): $Function<V, $SpriteContents>;
         andThen<V>(arg0: $Function_<$SpriteContents, V>): $Function<$SpriteResourceLoader, V>;
         constructor(arg0: $LazyLoadedImage, arg1: $Supplier_<$IntUnaryOperator>, arg2: $ResourceLocation_);
@@ -66,18 +70,18 @@ declare module "@package/net/minecraft/client/renderer/texture/atlas/sources" {
     /**
      * Values that may be interpreted as {@link $PalettedPermutations$PalettedSpriteSupplier}.
      */
-    export type $PalettedPermutations$PalettedSpriteSupplier_ = { permutationLocation?: $ResourceLocation_, baseImage?: $LazyLoadedImage, palette?: $Supplier_<$IntUnaryOperator>,  } | [permutationLocation?: $ResourceLocation_, baseImage?: $LazyLoadedImage, palette?: $Supplier_<$IntUnaryOperator>, ];
+    export type $PalettedPermutations$PalettedSpriteSupplier_ = { baseImage?: $LazyLoadedImage, palette?: $Supplier_<$IntUnaryOperator>, permutationLocation?: $ResourceLocation_,  } | [baseImage?: $LazyLoadedImage, palette?: $Supplier_<$IntUnaryOperator>, permutationLocation?: $ResourceLocation_, ];
     export class $Unstitcher$Region extends $Record {
         x(): number;
         y(): number;
         width(): number;
-        height(): number;
         sprite(): $ResourceLocation;
+        height(): number;
         static CODEC: $Codec<$Unstitcher$Region>;
         constructor(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number);
     }
     /**
      * Values that may be interpreted as {@link $Unstitcher$Region}.
      */
-    export type $Unstitcher$Region_ = { x?: number, height?: number, sprite?: $ResourceLocation_, width?: number, y?: number,  } | [x?: number, height?: number, sprite?: $ResourceLocation_, width?: number, y?: number, ];
+    export type $Unstitcher$Region_ = { width?: number, y?: number, x?: number, height?: number, sprite?: $ResourceLocation_,  } | [width?: number, y?: number, x?: number, height?: number, sprite?: $ResourceLocation_, ];
 }

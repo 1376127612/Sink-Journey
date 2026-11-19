@@ -1,4 +1,5 @@
 import { $Level_ } from "@package/net/minecraft/world/level";
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $ServerLevel } from "@package/net/minecraft/server/level";
 import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $ItemStack_ } from "@package/net/minecraft/world/item";
@@ -9,13 +10,13 @@ import { $ArtifactComponent_, $ArtifactComponent } from "@package/hellfirepvp/as
 
 declare module "@package/hellfirepvp/astralsorcery/common/entity/item" {
     export class $ItemEntityArtifact extends $ItemEntityChiselAttackable {
-        static factory(): $EntityType$EntityFactory<$ItemEntityArtifact>;
         resetForcedMovePos(): void;
         setForcedMovePos(arg0: $BlockPos_ | null, arg1: number): void;
-        getArtifactComponent(): ($ArtifactComponent) | undefined;
-        setArtifactComponent(arg0: $ArtifactComponent_): void;
-        finishTriggerFailure(): void;
         finishTriggerSuccess(arg0: $ServerLevel): void;
+        finishTriggerFailure(): void;
+        setArtifactComponent(arg0: $ArtifactComponent_): void;
+        getArtifactComponent(): ($ArtifactComponent) | undefined;
+        static factory(): $EntityType$EntityFactory<$ItemEntityArtifact>;
         lifespan: number;
         hasImpulse: boolean;
         tickCount: number;
@@ -69,12 +70,13 @@ declare module "@package/hellfirepvp/astralsorcery/common/entity/item" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         age: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;
-        constructor(arg0: $EntityType_<$ItemEntityArtifact>, arg1: $Level_, arg2: number, arg3: number, arg4: number, arg5: $ItemStack_, arg6: number, arg7: number, arg8: number);
-        constructor(arg0: $EntityType_<$ItemEntityArtifact>, arg1: $Level_, arg2: number, arg3: number, arg4: number, arg5: $ItemStack_);
         constructor(arg0: $EntityType_<$ItemEntityArtifact>, arg1: $Level_);
+        constructor(arg0: $EntityType_<$ItemEntityArtifact>, arg1: $Level_, arg2: number, arg3: number, arg4: number, arg5: $ItemStack_);
+        constructor(arg0: $EntityType_<$ItemEntityArtifact>, arg1: $Level_, arg2: number, arg3: number, arg4: number, arg5: $ItemStack_, arg6: number, arg7: number, arg8: number);
     }
 }

@@ -12,23 +12,23 @@ declare module "@package/net/neoforged/neoforge/event/level/block" {
         get originalState(): $BlockState;
     }
     export class $CropGrowEvent$Pre extends $CropGrowEvent {
-        setResult(arg0: $CropGrowEvent$Pre$Result_): void;
         getResult(): $CropGrowEvent$Pre$Result;
+        setResult(arg0: $CropGrowEvent$Pre$Result_): void;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_);
     }
     export class $CropGrowEvent extends $BlockEvent {
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_);
     }
     export class $CreateFluidSourceEvent extends $BlockEvent {
+        getFluidState(): $FluidState;
         getVanillaResult(): boolean;
         setCanConvert(arg0: boolean): void;
         canConvert(): boolean;
         getLevel(): $Level;
-        getFluidState(): $FluidState;
         constructor(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_);
+        get fluidState(): $FluidState;
         get vanillaResult(): boolean;
         get level(): $Level;
-        get fluidState(): $FluidState;
     }
     export class $CropGrowEvent$Pre$Result extends $Enum<$CropGrowEvent$Pre$Result> {
         static values(): $CropGrowEvent$Pre$Result[];

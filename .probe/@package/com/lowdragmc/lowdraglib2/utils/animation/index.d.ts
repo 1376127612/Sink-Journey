@@ -9,40 +9,40 @@ import { $Object, $Record } from "@package/java/lang";
 
 declare module "@package/com/lowdragmc/lowdraglib2/utils/animation" {
     export class $KFExecutor<T> extends $Record {
+        onFinished(arg0: $AnimationRuntime): void;
         keyFrames(): $KeyFrames<T>;
         apply(arg0: $AnimationRuntime, arg1: number): void;
         handler(): $IFrameValueHandler<T>;
-        onFinished(arg0: $AnimationRuntime): void;
         constructor(keyFrames: $KeyFrames_<T>, handler: $IFrameValueHandler<T>);
     }
     /**
      * Values that may be interpreted as {@link $KFExecutor}.
      */
-    export type $KFExecutor_<T> = { handler?: $IFrameValueHandler<any>, keyFrames?: $KeyFrames_<any>,  } | [handler?: $IFrameValueHandler<any>, keyFrames?: $KeyFrames_<any>, ];
+    export type $KFExecutor_<T> = { keyFrames?: $KeyFrames_<any>, handler?: $IFrameValueHandler<any>,  } | [keyFrames?: $KeyFrames_<any>, handler?: $IFrameValueHandler<any>, ];
     export class $Animation extends $Record {
+        ease(): $IEase;
         duration(): number;
         delay(): number;
-        ease(): $IEase;
         static CODEC: $Codec<$Animation>;
         constructor(duration: number, delay: number, ease: $IEase_);
     }
     /**
      * Values that may be interpreted as {@link $Animation}.
      */
-    export type $Animation_ = { delay?: number, ease?: $IEase_, duration?: number,  } | [delay?: number, ease?: $IEase_, duration?: number, ];
+    export type $Animation_ = { ease?: $IEase_, duration?: number, delay?: number,  } | [ease?: $IEase_, duration?: number, delay?: number, ];
     export class $AnimationEngine {
-        getAppTime(): number;
-        play(arg0: $KeyFrameAnimation_): $ISubscription;
         handOver(arg0: $AnimationEngine, arg1: $Predicate_<$Object>): void;
         updateFrame(): void;
+        getAppTime(): number;
+        play(arg0: $KeyFrameAnimation_): $ISubscription;
         constructor();
         get appTime(): number;
     }
     export class $AnimationRuntime {
-        update(arg0: number): void;
-        shiftClock(arg0: number): void;
         isFinished(): boolean;
         getInterpolator(): $Interpolator;
+        shiftClock(arg0: number): void;
+        update(arg0: number): void;
         animation: $KeyFrameAnimation;
         constructor(arg0: number, arg1: $KeyFrameAnimation_);
         get finished(): boolean;
@@ -51,13 +51,13 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/animation" {
     export class $IFrameValueHandler<T> {
     }
     export interface $IFrameValueHandler<T> {
+        onFinished(arg0: $AnimationRuntime): void;
         accept(arg0: $AnimationRuntime, arg1: T): void;
         owner(): $Object;
-        onFinished(arg0: $AnimationRuntime): void;
     }
     export class $KeyFrameAnimation extends $Record {
-        static of(arg0: $Animation_, ...arg1: $KFExecutor_<never>[]): $KeyFrameAnimation;
         animation(): $Animation;
+        static of(arg0: $Animation_, ...arg1: $KFExecutor_<never>[]): $KeyFrameAnimation;
         kfExecutors(): $KFExecutor<never>[];
         constructor(kfExecutors: $KFExecutor_<never>[], animation: $Animation_);
     }
@@ -66,15 +66,15 @@ declare module "@package/com/lowdragmc/lowdraglib2/utils/animation" {
      */
     export type $KeyFrameAnimation_ = { kfExecutors?: $KFExecutor_<never>[], animation?: $Animation_,  } | [kfExecutors?: $KFExecutor_<never>[], animation?: $Animation_, ];
     export class $KeyFrames<T> extends $Record {
-        getValue(arg0: number): T;
-        static of<T>(arg0: $IValueInterpolator_<T>, arg1: T, arg2: T): $KeyFrames<T>;
-        static of<T>(arg0: $IValueInterpolator_<T>, ...arg1: $FloatObjectPair<T>[]): $KeyFrames<T>;
-        interpolator(): $IValueInterpolator<T>;
         keyframes(): $TreeSet<$FloatObjectPair<T>>;
+        getValue(arg0: number): T;
+        static of<T>(arg0: $IValueInterpolator_<T>, ...arg1: $FloatObjectPair<T>[]): $KeyFrames<T>;
+        static of<T>(arg0: $IValueInterpolator_<T>, arg1: T, arg2: T): $KeyFrames<T>;
+        interpolator(): $IValueInterpolator<T>;
         constructor(keyframes: $TreeSet<$FloatObjectPair<T>>, interpolator: $IValueInterpolator_<T>);
     }
     /**
      * Values that may be interpreted as {@link $KeyFrames}.
      */
-    export type $KeyFrames_<T> = { interpolator?: $IValueInterpolator_<any>, keyframes?: $TreeSet<$FloatObjectPair<any>>,  } | [interpolator?: $IValueInterpolator_<any>, keyframes?: $TreeSet<$FloatObjectPair<any>>, ];
+    export type $KeyFrames_<T> = { keyframes?: $TreeSet<$FloatObjectPair<any>>, interpolator?: $IValueInterpolator_<any>,  } | [keyframes?: $TreeSet<$FloatObjectPair<any>>, interpolator?: $IValueInterpolator_<any>, ];
 }

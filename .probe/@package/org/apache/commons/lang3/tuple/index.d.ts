@@ -14,23 +14,23 @@ declare module "@package/org/apache/commons/lang3/tuple" {
         getKey(): L;
         accept<E extends $Throwable>(arg0: $FailableBiConsumer_<L, R, E>): void;
         static emptyArray<L, R>(): $Pair<L, R>[];
+        getLeft(): L;
         getRight(): R;
         static ofNonNull<L, R>(arg0: L, arg1: R): $Pair<L, R>;
-        getLeft(): L;
         static EMPTY_ARRAY: $Pair<never, never>[];
         constructor();
         get value(): R;
         get key(): L;
-        get right(): R;
         get left(): L;
+        get right(): R;
     }
     export class $MutablePair<L, R> extends $Pair<L, R> {
         static of<L, R>(arg0: L, arg1: R): $MutablePair<L, R>;
         static of<L, R>(arg0: $Map$Entry<L, R>): $MutablePair<L, R>;
         static emptyArray<L, R>(): $MutablePair<L, R>[];
-        static ofNonNull<L, R>(arg0: L, arg1: R): $MutablePair<L, R>;
-        setRight(arg0: R): void;
         setLeft(arg0: L): void;
+        setRight(arg0: R): void;
+        static ofNonNull<L, R>(arg0: L, arg1: R): $MutablePair<L, R>;
         static EMPTY_ARRAY: $MutablePair<never, never>[];
         left: L;
         right: R;
@@ -42,14 +42,14 @@ declare module "@package/org/apache/commons/lang3/tuple" {
         compareTo(arg0: $Triple<L, M, R>): number;
         static of<L, M, R>(arg0: L, arg1: M, arg2: R): $Triple<L, M, R>;
         static emptyArray<L, M, R>(): $Triple<L, M, R>[];
-        getRight(): R;
-        static ofNonNull<L, M, R>(arg0: L, arg1: M, arg2: R): $Triple<L, M, R>;
         getLeft(): L;
+        getRight(): R;
         getMiddle(): M;
+        static ofNonNull<L, M, R>(arg0: L, arg1: M, arg2: R): $Triple<L, M, R>;
         static EMPTY_ARRAY: $Triple<never, never, never>[];
         constructor();
-        get right(): R;
         get left(): L;
+        get right(): R;
         get middle(): M;
     }
 }

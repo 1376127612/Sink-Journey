@@ -25,18 +25,18 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
     /**
      * Values that may be interpreted as {@link $AdvancementTabType$Sprites}.
      */
-    export type $AdvancementTabType$Sprites_ = { last?: $ResourceLocation_, middle?: $ResourceLocation_, first?: $ResourceLocation_,  } | [last?: $ResourceLocation_, middle?: $ResourceLocation_, first?: $ResourceLocation_, ];
+    export type $AdvancementTabType$Sprites_ = { middle?: $ResourceLocation_, first?: $ResourceLocation_, last?: $ResourceLocation_,  } | [middle?: $ResourceLocation_, first?: $ResourceLocation_, last?: $ResourceLocation_, ];
     export class $AdvancementsScreen extends $Screen implements $ClientAdvancements$Listener, $IAdvancementsScreen {
+        onAddAdvancementRoot(advancement: $AdvancementNode): void;
+        onRemoveAdvancementRoot(advancement: $AdvancementNode): void;
+        onAddAdvancementTask(advancement: $AdvancementNode): void;
+        onRemoveAdvancementTask(advancement: $AdvancementNode): void;
+        getAdvancementWidget(advancement: $AdvancementNode): $AdvancementWidget;
+        onSelectedTabChanged(advancement: $AdvancementHolder_ | null): void;
+        onAdvancementsCleared(): void;
         renderWindow(guiGraphics: $GuiGraphics, offsetX: number, offsetY: number): void;
         onUpdateAdvancementProgress(advancement: $AdvancementNode, advancementProgress: $AdvancementProgress): void;
         languagereload_recreateWidgets(): void;
-        onAdvancementsCleared(): void;
-        onAddAdvancementTask(advancement: $AdvancementNode): void;
-        onSelectedTabChanged(advancement: $AdvancementHolder_ | null): void;
-        onRemoveAdvancementTask(advancement: $AdvancementNode): void;
-        onRemoveAdvancementRoot(advancement: $AdvancementNode): void;
-        getAdvancementWidget(advancement: $AdvancementNode): $AdvancementWidget;
-        onAddAdvancementRoot(advancement: $AdvancementNode): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static WINDOW_INSIDE_HEIGHT: number;
@@ -59,14 +59,14 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
         font: $Font;
-        constructor(advancements: $ClientAdvancements);
         constructor(advancements: $ClientAdvancements, lastScreen: $Screen | null);
+        constructor(advancements: $ClientAdvancements);
     }
     export class $AdvancementWidgetType extends $Enum<$AdvancementWidgetType> {
         static values(): $AdvancementWidgetType[];
         static valueOf(arg0: string): $AdvancementWidgetType;
-        boxSprite(): $ResourceLocation;
         frameSprite(type: $AdvancementType_): $ResourceLocation;
+        boxSprite(): $ResourceLocation;
         static OBTAINED: $AdvancementWidgetType;
         static UNOBTAINED: $AdvancementWidgetType;
     }
@@ -75,56 +75,56 @@ declare module "@package/net/minecraft/client/gui/screens/advancements" {
      */
     export type $AdvancementWidgetType_ = "obtained" | "unobtained";
     export class $AdvancementTab implements $IAdvancementsTab {
+        isMouseOver(offsetX: number, offsetY: number, mouseX: number, arg3: number): boolean;
+        addAdvancement(node: $AdvancementNode): void;
+        drawContents(guiGraphics: $GuiGraphics, x: number, y: number): void;
+        drawTooltips(guiGraphics: $GuiGraphics, mouseX: number, mouseY: number, width: number, height: number): void;
+        languagereload_recreateWidgets(): void;
         getType(): $AdvancementTabType;
         static create(minecraft: $Minecraft, screen: $AdvancementsScreen, index: number, rootNode: $AdvancementNode): $AdvancementTab;
         getIndex(): number;
+        getScreen(): $AdvancementsScreen;
+        scroll(dragX: number, arg1: number): void;
+        drawIcon(guiGraphics: $GuiGraphics, x: number, y: number): void;
+        getPage(): number;
+        drawTab(guiGraphics: $GuiGraphics, offsetX: number, offsetY: number, isSelected: boolean): void;
         getTitle(): $Component;
         getRootNode(): $AdvancementNode;
-        getWidget(advancement: $AdvancementHolder_): $AdvancementWidget;
-        getPage(): number;
-        drawIcon(guiGraphics: $GuiGraphics, x: number, y: number): void;
-        drawTab(guiGraphics: $GuiGraphics, offsetX: number, offsetY: number, isSelected: boolean): void;
-        scroll(dragX: number, arg1: number): void;
-        getScreen(): $AdvancementsScreen;
-        isMouseOver(offsetX: number, offsetY: number, mouseX: number, arg3: number): boolean;
-        drawContents(guiGraphics: $GuiGraphics, x: number, y: number): void;
-        drawTooltips(guiGraphics: $GuiGraphics, mouseX: number, mouseY: number, width: number, height: number): void;
-        addAdvancement(node: $AdvancementNode): void;
-        languagereload_recreateWidgets(): void;
         getDisplay(): $DisplayInfo;
+        getWidget(advancement: $AdvancementHolder_): $AdvancementWidget;
         constructor(minecraft: $Minecraft, screen: $AdvancementsScreen, type: $AdvancementTabType_, index: number, rootNode: $AdvancementNode, display: $DisplayInfo);
         constructor(arg0: $Minecraft, arg1: $AdvancementsScreen, arg2: $AdvancementTabType_, arg3: number, arg4: number, arg5: $AdvancementNode, arg6: $DisplayInfo);
         get type(): $AdvancementTabType;
         get index(): number;
+        get screen(): $AdvancementsScreen;
+        get page(): number;
         get title(): $Component;
         get rootNode(): $AdvancementNode;
-        get page(): number;
-        get screen(): $AdvancementsScreen;
         get display(): $DisplayInfo;
     }
     export class $AdvancementWidget implements $AdvancementWidgetAccessor {
-        addChild(advancementWidget: $AdvancementWidget): void;
-        getY(): number;
-        draw(guiGraphics: $GuiGraphics, x: number, y: number): void;
-        getWidth(): number;
-        getX(): number;
         isMouseOver(x: number, y: number, mouseX: number, mouseY: number): boolean;
         setProgress(progress: $AdvancementProgress): void;
+        addChild(advancementWidget: $AdvancementWidget): void;
         drawHover(guiGraphics: $GuiGraphics, x: number, y: number, fade: number, width: number, height: number): void;
-        drawConnectivity(guiGraphics: $GuiGraphics, x: number, y: number, dropShadow: boolean): void;
+        getWidth(): number;
+        getX(): number;
+        getY(): number;
+        draw(guiGraphics: $GuiGraphics, x: number, y: number): void;
         attachToParent(): void;
-        languagereload_getAdvancement(): $AdvancementNode;
+        drawConnectivity(guiGraphics: $GuiGraphics, x: number, y: number, dropShadow: boolean): void;
         languagereload_getTab(): $AdvancementTab;
+        languagereload_getDisplay(): $DisplayInfo;
         languagereload_getProgress(): $AdvancementProgress;
         languagereload_getParent(): $AdvancementWidget;
+        languagereload_getChildren(): $List<$AdvancementWidget>;
         languagereload_setChildren(arg0: $List_<$AdvancementWidget>): void;
         languagereload_setParent(advancementWidget: $AdvancementWidget): void;
-        languagereload_getDisplay(): $DisplayInfo;
-        languagereload_getChildren(): $List<$AdvancementWidget>;
+        languagereload_getAdvancement(): $AdvancementNode;
         constructor(tab: $AdvancementTab, minecraft: $Minecraft, advancementNode: $AdvancementNode, display: $DisplayInfo);
-        get y(): number;
+        set progress(value: $AdvancementProgress);
         get width(): number;
         get x(): number;
-        set progress(value: $AdvancementProgress);
+        get y(): number;
     }
 }

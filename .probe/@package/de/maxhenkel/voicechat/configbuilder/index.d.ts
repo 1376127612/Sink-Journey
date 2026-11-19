@@ -8,18 +8,18 @@ declare module "@package/de/maxhenkel/voicechat/configbuilder" {
         static builder<C>(arg0: $Function_<$ConfigBuilder, C>): $ConfigBuilder$Builder<C>;
     }
     export interface $ConfigBuilder {
-        entry<T>(arg0: string, arg1: T, ...arg2: string[]): $ConfigEntry<T>;
-        header(...arg0: string[]): $ConfigBuilder;
-        floatEntry(arg0: string, arg1: number, ...arg2: string[]): $FloatConfigEntry;
-        floatEntry(arg0: string, arg1: number, arg2: number, arg3: number, ...arg4: string[]): $FloatConfigEntry;
-        longEntry(arg0: string, arg1: number, arg2: number, arg3: number, ...arg4: string[]): $LongConfigEntry;
-        longEntry(arg0: string, arg1: number, ...arg2: string[]): $LongConfigEntry;
         enumEntry<E extends $Enum<E>>(arg0: string, arg1: E, ...arg2: string[]): $EnumConfigEntry<E>;
-        booleanEntry(arg0: string, arg1: boolean, ...arg2: string[]): $BooleanConfigEntry;
         integerEntry(arg0: string, arg1: number, arg2: number, arg3: number, ...arg4: string[]): $IntegerConfigEntry;
         integerEntry(arg0: string, arg1: number, ...arg2: string[]): $IntegerConfigEntry;
-        doubleEntry(arg0: string, arg1: number, ...arg2: string[]): $DoubleConfigEntry;
         doubleEntry(arg0: string, arg1: number, arg2: number, arg3: number, ...arg4: string[]): $DoubleConfigEntry;
+        doubleEntry(arg0: string, arg1: number, ...arg2: string[]): $DoubleConfigEntry;
         stringEntry(arg0: string, arg1: string, ...arg2: string[]): $StringConfigEntry;
+        booleanEntry(arg0: string, arg1: boolean, ...arg2: string[]): $BooleanConfigEntry;
+        floatEntry(arg0: string, arg1: number, ...arg2: string[]): $FloatConfigEntry;
+        floatEntry(arg0: string, arg1: number, arg2: number, arg3: number, ...arg4: string[]): $FloatConfigEntry;
+        longEntry(arg0: string, arg1: number, ...arg2: string[]): $LongConfigEntry;
+        longEntry(arg0: string, arg1: number, arg2: number, arg3: number, ...arg4: string[]): $LongConfigEntry;
+        entry<T>(arg0: string, arg1: T, ...arg2: string[]): $ConfigEntry<T>;
+        header(...arg0: string[]): $ConfigBuilder;
     }
 }

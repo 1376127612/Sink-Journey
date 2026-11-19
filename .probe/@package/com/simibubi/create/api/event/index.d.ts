@@ -18,11 +18,11 @@ declare module "@package/com/simibubi/create/api/event" {
         constructor(arg0: $SmartBlockEntity, arg1: $Map_<$BehaviourType<never>, $BlockEntityBehaviour>);
     }
     export class $TrackGraphMergeEvent extends $Event {
-        getGraphMergedFrom(): $TrackGraph;
         getGraphMergedInto(): $TrackGraph;
+        getGraphMergedFrom(): $TrackGraph;
         constructor(arg0: $TrackGraph, arg1: $TrackGraph);
-        get graphMergedFrom(): $TrackGraph;
         get graphMergedInto(): $TrackGraph;
+        get graphMergedFrom(): $TrackGraph;
     }
     export class $PipeCollisionEvent$Spill extends $PipeCollisionEvent {
         getPipeFluid(): $Fluid;
@@ -32,12 +32,12 @@ declare module "@package/com/simibubi/create/api/event" {
         get worldFluid(): $Fluid;
     }
     export class $PipeCollisionEvent extends $Event {
+        getPos(): $BlockPos;
         getState(): $BlockState;
         setState(arg0: $BlockState_): void;
         getLevel(): $Level;
-        getPos(): $BlockPos;
-        get level(): $Level;
         get pos(): $BlockPos;
+        get level(): $Level;
     }
     export class $PipeCollisionEvent$Flow extends $PipeCollisionEvent {
         getFirstFluid(): $Fluid;

@@ -7,6 +7,10 @@ import { $Object, $Throwable, $Class } from "@package/java/lang";
 
 declare module "@package/com/google/common/reflect" {
     export class $Invokable<T, R> implements $AnnotatedElement, $Member {
+        returning<R1 extends R>(returnType: $Class<R1>): $Invokable<T, R1>;
+        returning<R1 extends R>(returnType: $TypeToken<R1>): $Invokable<T, R1>;
+        isOverridable(): boolean;
+        isPackagePrivate(): boolean;
         getExceptionTypes(): $ImmutableList<$TypeToken<$Throwable>>;
         getAnnotatedReturnType(): $AnnotatedType;
         getParameters(): $ImmutableList<$Parameter>;
@@ -36,14 +40,12 @@ declare module "@package/com/google/common/reflect" {
         isNative(): boolean;
         isSynchronized(): boolean;
         getOwnerType(): $TypeToken<T>;
-        isPackagePrivate(): boolean;
-        isOverridable(): boolean;
-        returning<R1 extends R>(returnType: $Class<R1>): $Invokable<T, R1>;
-        returning<R1 extends R>(returnType: $TypeToken<R1>): $Invokable<T, R1>;
         getAnnotationsByType<T extends $Annotation>(arg0: $Class<T>): T[];
         getDeclaredAnnotation<T extends $Annotation>(arg0: $Class<T>): T;
         getDeclaredAnnotationsByType<T extends $Annotation>(arg0: $Class<T>): T[];
         accessFlags(): $Set<$AccessFlag>;
+        get overridable(): boolean;
+        get packagePrivate(): boolean;
         get exceptionTypes(): $ImmutableList<$TypeToken<$Throwable>>;
         get annotatedReturnType(): $AnnotatedType;
         get parameters(): $ImmutableList<$Parameter>;
@@ -65,8 +67,6 @@ declare module "@package/com/google/common/reflect" {
         get native(): boolean;
         get synchronized(): boolean;
         get ownerType(): $TypeToken<T>;
-        get packagePrivate(): boolean;
-        get overridable(): boolean;
     }
     export class $TypeToken$TypeSet extends $ForwardingSet<$TypeToken<T>> implements $Serializable {
         interfaces(): $TypeToken$TypeSet;
@@ -76,27 +76,27 @@ declare module "@package/com/google/common/reflect" {
     export class $TypeCapture<T> {
     }
     export class $TypeToken<T> extends $TypeCapture<T> implements $Serializable {
+        getSubtype(subclass: $Class<never>): $TypeToken<T>;
+        isSubtypeOf(supertype: $Type): boolean;
+        isSubtypeOf(type: $TypeToken<never>): boolean;
+        resolveType(type: $Type): $TypeToken<never>;
         method(method: $Method): $Invokable<T, $Object>;
         isArray(): boolean;
         isPrimitive(): boolean;
         wrap(): $TypeToken<T>;
-        static of<T>(type: $Class<T>): $TypeToken<T>;
         static of(type: $Type): $TypeToken<never>;
+        static of<T>(type: $Class<T>): $TypeToken<T>;
         getComponentType(): $TypeToken<never>;
         "constructor"(arg0: $Constructor<never>): $Invokable<T, T>;
         getType(): $Type;
         unwrap(): $TypeToken<T>;
         getRawType(): $Class<T>;
-        where<X>(typeParam: $TypeParameter<X>, typeArg: $TypeToken<X>): $TypeToken<T>;
-        where<X>(typeParam: $TypeParameter<X>, typeArg: $Class<X>): $TypeToken<T>;
-        resolveType(type: $Type): $TypeToken<never>;
-        isSubtypeOf(supertype: $Type): boolean;
-        isSubtypeOf(type: $TypeToken<never>): boolean;
-        getSupertype(superclass: $Class<T>): $TypeToken<T>;
         isSupertypeOf(type: $TypeToken<never>): boolean;
         isSupertypeOf(type: $Type): boolean;
+        where<X>(typeParam: $TypeParameter<X>, typeArg: $TypeToken<X>): $TypeToken<T>;
+        where<X>(typeParam: $TypeParameter<X>, typeArg: $Class<X>): $TypeToken<T>;
+        getSupertype(superclass: $Class<T>): $TypeToken<T>;
         getTypes(): $TypeToken$TypeSet;
-        getSubtype(subclass: $Class<never>): $TypeToken<T>;
         get array(): boolean;
         get primitive(): boolean;
         get componentType(): $TypeToken<never>;

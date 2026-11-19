@@ -16,10 +16,10 @@ export * as behaviour from "@package/plus/dragons/createenchantmentindustry/comm
 
 declare module "@package/plus/dragons/createenchantmentindustry/common/fluids/printer" {
     export class $PrinterBlockEntity extends $SmartBlockEntity implements $IHaveGoggleInformation {
+        addToGoggleTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
+        onItemEnters(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour): $BeltProcessingBehaviour$ProcessingResult;
         onItemHeld(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour): $BeltProcessingBehaviour$ProcessingResult;
         getFluidHandler(arg0: $Direction_): $IFluidHandler;
-        onItemEnters(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour): $BeltProcessingBehaviour$ProcessingResult;
-        addToGoggleTooltip(arg0: $List_<$Component_>, arg1: boolean): boolean;
         containedFluidTooltip(arg0: $List_<$Component_>, arg1: boolean, arg2: $IFluidHandler): boolean;
         getIcon(arg0: boolean): $ItemStack;
         worldPosition: $BlockPos;

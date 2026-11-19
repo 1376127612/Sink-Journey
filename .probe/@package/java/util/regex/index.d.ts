@@ -2,37 +2,29 @@ import { $Serializable } from "@package/java/io";
 import { $Predicate, $Function_ } from "@package/java/util/function";
 import { $Stream } from "@package/java/util/stream";
 import { $Map } from "@package/java/util";
-import { $CharSequence, $StringBuffer, $StringBuilder } from "@package/java/lang";
+import { $CharSequence, $StringBuilder, $StringBuffer } from "@package/java/lang";
 
 declare module "@package/java/util/regex" {
     export class $Matcher implements $MatchResult {
         group(arg0: number): string;
         group(): string;
         group(arg0: string): string;
-        reset(): $Matcher;
         reset(arg0: $CharSequence): $Matcher;
-        end(arg0: number): number;
+        reset(): $Matcher;
         end(): number;
+        end(arg0: number): number;
         end(arg0: string): number;
         matches(): boolean;
-        replaceFirst(arg0: $Function_<$MatchResult, string>): string;
         replaceFirst(arg0: string): string;
+        replaceFirst(arg0: $Function_<$MatchResult, string>): string;
         replaceAll(arg0: string): string;
         replaceAll(arg0: $Function_<$MatchResult, string>): string;
         pattern(): $Pattern;
         find(arg0: number): boolean;
         find(): boolean;
-        start(arg0: number): number;
         start(): number;
+        start(arg0: number): number;
         start(arg0: string): number;
-        appendReplacement(arg0: $StringBuilder, arg1: string): $Matcher;
-        appendReplacement(arg0: $StringBuffer, arg1: string): $Matcher;
-        appendTail(arg0: $StringBuilder): $StringBuilder;
-        appendTail(arg0: $StringBuffer): $StringBuffer;
-        region(arg0: number, arg1: number): $Matcher;
-        namedGroups(): $Map<string, number>;
-        hitEnd(): boolean;
-        groupCount(): number;
         requireEnd(): boolean;
         hasMatch(): boolean;
         regionStart(): number;
@@ -46,6 +38,14 @@ declare module "@package/java/util/regex" {
         useTransparentBounds(arg0: boolean): $Matcher;
         hasAnchoringBounds(): boolean;
         useAnchoringBounds(arg0: boolean): $Matcher;
+        appendReplacement(arg0: $StringBuffer, arg1: string): $Matcher;
+        appendReplacement(arg0: $StringBuilder, arg1: string): $Matcher;
+        appendTail(arg0: $StringBuffer): $StringBuffer;
+        appendTail(arg0: $StringBuilder): $StringBuilder;
+        hitEnd(): boolean;
+        groupCount(): number;
+        region(arg0: number, arg1: number): $Matcher;
+        namedGroups(): $Map<string, number>;
     }
     export class $MatchResult {
     }
@@ -59,9 +59,9 @@ declare module "@package/java/util/regex" {
         start(): number;
         start(arg0: string): number;
         start(arg0: number): number;
-        namedGroups(): $Map<string, number>;
-        groupCount(): number;
         hasMatch(): boolean;
+        groupCount(): number;
+        namedGroups(): $Map<string, number>;
     }
     export class $Pattern implements $Serializable {
         flags(): number;
@@ -74,10 +74,10 @@ declare module "@package/java/util/regex" {
         splitWithDelimiters(arg0: $CharSequence, arg1: number): string[];
         pattern(): string;
         static quote(arg0: string): string;
-        namedGroups(): $Map<string, number>;
         asPredicate(): $Predicate<string>;
         asMatchPredicate(): $Predicate<string>;
         splitAsStream(arg0: $CharSequence): $Stream<string>;
+        namedGroups(): $Map<string, number>;
         static DOTALL: number;
         static UNICODE_CASE: number;
         static LITERAL: number;

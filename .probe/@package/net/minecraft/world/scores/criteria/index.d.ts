@@ -4,11 +4,11 @@ import { $StringRepresentable$EnumCodec, $StringRepresentable } from "@package/n
 
 declare module "@package/net/minecraft/world/scores/criteria" {
     export class $ObjectiveCriteria {
+        static getCustomCriteriaNames(): $Set<string>;
+        getDefaultRenderType(): $ObjectiveCriteria$RenderType;
         getName(): string;
         isReadOnly(): boolean;
         static byName(name: string): ($ObjectiveCriteria) | undefined;
-        getDefaultRenderType(): $ObjectiveCriteria$RenderType;
-        static getCustomCriteriaNames(): $Set<string>;
         static DEATH_COUNT: $ObjectiveCriteria;
         static ARMOR: $ObjectiveCriteria;
         static TRIGGER: $ObjectiveCriteria;
@@ -22,23 +22,23 @@ declare module "@package/net/minecraft/world/scores/criteria" {
         static TEAM_KILL: $ObjectiveCriteria[];
         static KILLED_BY_TEAM: $ObjectiveCriteria[];
         static FOOD: $ObjectiveCriteria;
+        static get customCriteriaNames(): $Set<string>;
+        get defaultRenderType(): $ObjectiveCriteria$RenderType;
         get name(): string;
         get readOnly(): boolean;
-        get defaultRenderType(): $ObjectiveCriteria$RenderType;
-        static get customCriteriaNames(): $Set<string>;
     }
     export class $ObjectiveCriteria$RenderType extends $Enum<$ObjectiveCriteria$RenderType> implements $StringRepresentable {
+        static byId(renderType: string): $ObjectiveCriteria$RenderType;
+        getSerializedName(): string;
         static values(): $ObjectiveCriteria$RenderType[];
         static valueOf(renderType: string): $ObjectiveCriteria$RenderType;
         getId(): string;
-        getSerializedName(): string;
-        static byId(renderType: string): $ObjectiveCriteria$RenderType;
         getRemappedEnumConstantName(): string;
         static CODEC: $StringRepresentable$EnumCodec<$ObjectiveCriteria$RenderType>;
         static HEARTS: $ObjectiveCriteria$RenderType;
         static INTEGER: $ObjectiveCriteria$RenderType;
-        get id(): string;
         get serializedName(): string;
+        get id(): string;
         get remappedEnumConstantName(): string;
     }
     /**

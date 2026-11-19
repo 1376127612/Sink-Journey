@@ -7,6 +7,9 @@ import { $WeakReference } from "@package/java/lang/ref";
 
 declare module "@package/org/cyclops/cyclopscore/datastructure" {
     export class $DimPos implements $Comparable<$DimPos> {
+        getLevelKey(): $ResourceKey<$Level>;
+        getWorldReference(): $WeakReference<$Level>;
+        setWorldReference(arg0: $WeakReference<$Level_>): void;
         compareTo(arg0: $DimPos): number;
         static of(arg0: $Level_, arg1: $BlockPos_): $DimPos;
         static of(arg0: $ResourceKey_<$Level>, arg1: $BlockPos_): $DimPos;
@@ -14,22 +17,19 @@ declare module "@package/org/cyclops/cyclopscore/datastructure" {
         isLoaded(): boolean;
         getLevel(): string;
         getLevel(arg0: boolean): $Level;
-        getWorldReference(): $WeakReference<$Level>;
-        setWorldReference(arg0: $WeakReference<$Level_>): void;
         getBlockPos(): $BlockPos;
         withPosition(arg0: $BlockPos_): $DimPos;
-        getLevelKey(): $ResourceKey<$Level>;
+        get levelKey(): $ResourceKey<$Level>;
         get loaded(): boolean;
         get blockPos(): $BlockPos;
-        get levelKey(): $ResourceKey<$Level>;
     }
     export class $EnumFacingMap<V> extends $EnumMap<$Direction, V> {
+        static forAllValues<V>(arg0: V, arg1: V, arg2: V, arg3: V, arg4: V, arg5: V): $EnumFacingMap<V>;
+        static newMap<V>(): $EnumFacingMap<V>;
         static newMap<V>(arg0: $Map_<$Direction_, V>): $EnumFacingMap<V>;
         static newMap<V>(arg0: $EnumMap<$Direction_, V>): $EnumFacingMap<V>;
-        static newMap<V>(): $EnumFacingMap<V>;
-        static forAllValues<V>(arg0: V, arg1: V, arg2: V, arg3: V, arg4: V, arg5: V): $EnumFacingMap<V>;
+        constructor();
         constructor(arg0: $Map_<$Direction_, V>);
         constructor(arg0: $EnumMap<$Direction_, V>);
-        constructor();
     }
 }

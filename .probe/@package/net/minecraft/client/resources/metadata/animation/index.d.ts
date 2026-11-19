@@ -34,14 +34,14 @@ declare module "@package/net/minecraft/client/resources/metadata/animation" {
      */
     export type $VillagerMetaDataSection$Hat_ = "none" | "partial" | "full";
     export class $AnimationMetadataSection implements $AnimationMetadataSectionAccessor {
-        isInterpolatedFrames(): boolean;
         getDefaultFrameTime(): number;
+        isInterpolatedFrames(): boolean;
         forEachFrame(output: $AnimationMetadataSection$FrameOutput_): void;
         calculateFrameSize(width: number, height: number): $FrameSize;
-        getFrameHeight(): number;
-        getFrameWidth(): number;
         setFrameWidth(arg0: number): void;
         setFrameHeight(arg0: number): void;
+        getFrameWidth(): number;
+        getFrameHeight(): number;
         static SECTION_NAME: string;
         frameHeight: number;
         frameWidth: number;
@@ -51,8 +51,8 @@ declare module "@package/net/minecraft/client/resources/metadata/animation" {
         static DEFAULT_FRAME_TIME: number;
         static EMPTY: $AnimationMetadataSection;
         constructor(frames: $List_<$AnimationFrame>, frameWidth: number, frameHeight: number, defaultFrameTime: number, interpolatedFrames: boolean);
-        get interpolatedFrames(): boolean;
         get defaultFrameTime(): number;
+        get interpolatedFrames(): boolean;
     }
     export class $AnimationMetadataSectionSerializer implements $MetadataSectionSerializer<$AnimationMetadataSection> {
         fromJson(json: $JsonObject_): $AnimationMetadataSection;

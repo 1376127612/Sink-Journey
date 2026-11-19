@@ -3,13 +3,13 @@ import { $Record } from "@package/java/lang";
 
 declare module "@package/cn/howxu/mmcr/api/compat/pneumaticcraft" {
     export class $AirState extends $Record {
+        air(): number;
+        pressure(): number;
+        volume(): number;
+        dangerPressure(): number;
+        criticalPressure(): number;
         position(): $BlockPos;
         outputCapacity(): number;
-        volume(): number;
-        criticalPressure(): number;
-        air(): number;
-        dangerPressure(): number;
-        pressure(): number;
         constructor(position: $BlockPos_, air: number, volume: number, dangerPressure: number, criticalPressure: number);
     }
     /**

@@ -10,10 +10,10 @@ export * as properties from "@package/sirttas/elementalcraft/block/entity/proper
 
 declare module "@package/sirttas/elementalcraft/block/entity" {
     export class $AbstractECBlockEntity extends $BlockEntity {
-        isDirty(): boolean;
         getUpdatePacket(): $ClientboundBlockEntityDataPacket;
-        sendUpdate(): void;
         isPowered(): boolean;
+        isDirty(): boolean;
+        sendUpdate(): void;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -25,8 +25,8 @@ declare module "@package/sirttas/elementalcraft/block/entity" {
         type: $BlockEntityType<never>;
         remove: boolean;
         customPersistentData: $CompoundTag;
-        get dirty(): boolean;
         get updatePacket(): $ClientboundBlockEntityDataPacket;
         get powered(): boolean;
+        get dirty(): boolean;
     }
 }

@@ -3,8 +3,8 @@ import { $FusionModelPart } from "@package/com/supermartijn642/fusion/entity/mod
 import { $SpriteInstance } from "@package/com/supermartijn642/fusion/api/texture/custom";
 import { $RenderType } from "@package/net/minecraft/client/renderer";
 import { $FusionPackMetadata } from "@package/com/supermartijn642/fusion/resources";
-import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $ModelPart } from "@package/net/minecraft/client/model/geom";
+import { $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $ModelInstance } from "@package/com/supermartijn642/fusion/api/model";
 import { $List_, $List } from "@package/java/util";
 
@@ -12,22 +12,22 @@ declare module "@package/com/supermartijn642/fusion/extensions" {
     export class $EntityRendererExtension {
     }
     export interface $EntityRendererExtension {
-        setFusionModelParts(parts: $List_<$FusionModelPart>): void;
         getFusionModelParts(): $List<$FusionModelPart>;
+        setFusionModelParts(parts: $List_<$FusionModelPart>): void;
     }
     export class $EntityExtension {
     }
     export interface $EntityExtension {
+        setFusionModel(layerIndex: number, model: $Triple_<$ModelPart, $ResourceLocation_, number>): void;
+        getFusionModel(layerIndex: number): $Triple<$ModelPart, $ResourceLocation, number>;
         shouldFusionRecomputeModel(layerIndex: number): boolean;
         markFusionRecomputeModels(): void;
-        getFusionModel(layerIndex: number): $Triple<$ModelPart, $ResourceLocation, number>;
-        setFusionModel(layerIndex: number, model: $Triple_<$ModelPart, $ResourceLocation_, number>): void;
     }
     export class $BlockModelExtension {
     }
     export interface $BlockModelExtension {
-        getFusionModel(): $ModelInstance<never>;
         setFusionModel(model: $ModelInstance<never>): void;
+        getFusionModel(): $ModelInstance<never>;
     }
     export class $PackExtension {
     }
@@ -42,8 +42,8 @@ declare module "@package/com/supermartijn642/fusion/extensions" {
     export class $TextureAtlasSpriteExtension {
     }
     export interface $TextureAtlasSpriteExtension {
-        setFusionSpriteInstance(instance: $SpriteInstance): void;
         getFusionSpriteInstance(): $SpriteInstance;
+        setFusionSpriteInstance(instance: $SpriteInstance): void;
     }
     export class $BufferSourceExtension {
     }

@@ -205,14 +205,14 @@ declare module "@package/net/minecraft/data/worldgen/features" {
         constructor();
     }
     export class $FeatureUtils {
-        static register(context: $BootstrapContext<$ConfiguredFeature_<never, never>>, key: $ResourceKey_<$ConfiguredFeature<never, never>>, feature: $Feature_<$NoneFeatureConfiguration>): void;
-        static register<FC extends $FeatureConfiguration, F extends $Feature<FC>>(context: $BootstrapContext<$ConfiguredFeature_<never, never>>, key: $ResourceKey_<$ConfiguredFeature<never, never>>, feature: F, config: FC): void;
-        static bootstrap(context: $BootstrapContext<$ConfiguredFeature_<never, never>>): void;
         static createKey(name: string): $ResourceKey<$ConfiguredFeature<never, never>>;
         static simpleRandomPatchConfiguration(tries: number, feature: $Holder_<$PlacedFeature>): $RandomPatchConfiguration;
-        static simplePatchConfiguration<FC extends $FeatureConfiguration, F extends $Feature<FC>>(feature: F, config: FC, blocks: $List_<$Block_>): $RandomPatchConfiguration;
         static simplePatchConfiguration<FC extends $FeatureConfiguration, F extends $Feature<FC>>(feature: F, config: FC): $RandomPatchConfiguration;
         static simplePatchConfiguration<FC extends $FeatureConfiguration, F extends $Feature<FC>>(feature: F, config: FC, blocks: $List_<$Block_>, tries: number): $RandomPatchConfiguration;
+        static simplePatchConfiguration<FC extends $FeatureConfiguration, F extends $Feature<FC>>(feature: F, config: FC, blocks: $List_<$Block_>): $RandomPatchConfiguration;
+        static register<FC extends $FeatureConfiguration, F extends $Feature<FC>>(context: $BootstrapContext<$ConfiguredFeature_<never, never>>, key: $ResourceKey_<$ConfiguredFeature<never, never>>, feature: F, config: FC): void;
+        static register(context: $BootstrapContext<$ConfiguredFeature_<never, never>>, key: $ResourceKey_<$ConfiguredFeature<never, never>>, feature: $Feature_<$NoneFeatureConfiguration>): void;
+        static bootstrap(context: $BootstrapContext<$ConfiguredFeature_<never, never>>): void;
         constructor();
     }
     export class $OreFeatures {

@@ -37,7 +37,7 @@ declare module "@package/net/minecraft/client/resources/metadata/gui" {
     /**
      * Values that may be interpreted as {@link $GuiSpriteScaling$NineSlice}.
      */
-    export type $GuiSpriteScaling$NineSlice_ = { width?: number, border?: $GuiSpriteScaling$NineSlice$Border_, height?: number,  } | [width?: number, border?: $GuiSpriteScaling$NineSlice$Border_, height?: number, ];
+    export type $GuiSpriteScaling$NineSlice_ = { height?: number, width?: number, border?: $GuiSpriteScaling$NineSlice$Border_,  } | [height?: number, width?: number, border?: $GuiSpriteScaling$NineSlice$Border_, ];
     export class $GuiSpriteScaling$NineSlice$Border extends $Record {
         bottom(): number;
         top(): number;
@@ -48,12 +48,12 @@ declare module "@package/net/minecraft/client/resources/metadata/gui" {
     /**
      * Values that may be interpreted as {@link $GuiSpriteScaling$NineSlice$Border}.
      */
-    export type $GuiSpriteScaling$NineSlice$Border_ = { left?: number, top?: number, right?: number, bottom?: number,  } | [left?: number, top?: number, right?: number, bottom?: number, ];
+    export type $GuiSpriteScaling$NineSlice$Border_ = { right?: number, bottom?: number, left?: number, top?: number,  } | [right?: number, bottom?: number, left?: number, top?: number, ];
     export class $GuiSpriteScaling$Type extends $Enum<$GuiSpriteScaling$Type> implements $StringRepresentable {
+        codec(): $MapCodec<$GuiSpriteScaling>;
+        getSerializedName(): string;
         static values(): $GuiSpriteScaling$Type[];
         static valueOf(arg0: string): $GuiSpriteScaling$Type;
-        getSerializedName(): string;
-        codec(): $MapCodec<$GuiSpriteScaling>;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$GuiSpriteScaling$Type>;
         static STRETCH: $GuiSpriteScaling$Type;

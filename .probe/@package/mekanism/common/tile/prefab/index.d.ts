@@ -23,16 +23,16 @@ declare module "@package/mekanism/common/tile/prefab" {
     export class $TileEntityStructuralMultiblock extends $TileEntityMekanism implements $IStructuralMultiblock, $IConfigurable {
         getStructure(manager: $MultiblockManager<never>): $Structure;
         onActivate(player: $Player, hand: $InteractionHand_, stack: $ItemStack_): $ItemInteractionResult;
-        hasStructure(structure: $Structure): boolean;
-        structuralGuiAccessAllowed(): boolean;
-        onRightClick(player: $Player): $InteractionResult;
-        setStructure(manager: $MultiblockManager<never>, structure: $Structure): void;
         multiblockFormed(multiblock: $MultiblockData): void;
         multiblockUnformed(structure: $Structure): void;
         onSneakRightClick(player: $Player): $InteractionResult;
+        onRightClick(player: $Player): $InteractionResult;
         getStructureMap(): $Map<$MultiblockManager<never>, $Structure>;
+        structuralGuiAccessAllowed(): boolean;
+        hasStructure(structure: $Structure): boolean;
         hasFormedMultiblock(): boolean;
         getDefaultData(): $MultiblockData;
+        setStructure(manager: $MultiblockManager<never>, structure: $Structure): void;
         getMultiblockData(manager: $MultiblockManager<never>): $MultiblockData;
         setMultiblockData(manager: $MultiblockManager<never>, multiblockData: $MultiblockData): void;
         resetForFormed(): void;

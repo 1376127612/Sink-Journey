@@ -11,23 +11,23 @@ import { $UUID_, $UUID } from "@package/java/util";
 
 declare module "@package/xaero/common/server/radar/tracker" {
     export class $SyncedTrackedPlayer {
-        matchesEnough(arg0: $Player, arg1: number): boolean;
+        getZ(): number;
+        getDimensionKey(): $ResourceKey<$Level>;
+        setDimension(arg0: $ResourceKey_<$Level>): $SyncedTrackedPlayer;
         update(arg0: $Player): void;
         getId(): $UUID;
         copyFrom(arg0: $SyncedTrackedPlayer): void;
-        getY(): number;
-        getX(): number;
-        getZ(): number;
         setPos(arg0: number, arg1: number, arg2: number): $SyncedTrackedPlayer;
-        getDimensionKey(): $ResourceKey<$Level>;
-        setDimension(arg0: $ResourceKey_<$Level>): $SyncedTrackedPlayer;
+        getX(): number;
+        getY(): number;
+        matchesEnough(arg0: $Player, arg1: number): boolean;
         constructor(arg0: $UUID_, arg1: number, arg2: number, arg3: number, arg4: $ResourceKey_<$Level>);
-        get id(): $UUID;
-        get y(): number;
-        get x(): number;
         get z(): number;
         get dimensionKey(): $ResourceKey<$Level>;
         set dimension(value: $ResourceKey_<$Level>);
+        get id(): $UUID;
+        get x(): number;
+        get y(): number;
     }
     export class $SyncedPlayerTrackerSystemManager {
         register(arg0: string, arg1: $ISyncedPlayerTrackerSystem): void;
@@ -42,8 +42,8 @@ declare module "@package/xaero/common/server/radar/tracker" {
     export class $ISyncedPlayerTrackerSystem {
     }
     export interface $ISyncedPlayerTrackerSystem {
-        isPartySystem(): boolean;
         getTrackingLevel(arg0: $Player, arg1: $Player): number;
+        isPartySystem(): boolean;
         get partySystem(): boolean;
     }
 }

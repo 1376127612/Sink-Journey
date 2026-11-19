@@ -14,26 +14,26 @@ declare module "@package/org/graalvm/options" {
         [Symbol.iterator](): Iterator<$OptionDescriptor>
     }
     export class $OptionDescriptor {
-        getName(): string;
-        getKey(): $OptionKey<never>;
-        static newBuilder<T>(key: $OptionKey<T>, name: string): $OptionDescriptor$Builder;
-        isDeprecated(): boolean;
-        getCategory(): $OptionCategory;
-        isConstant(): boolean;
-        getHelp(): string;
-        isOptionMap(): boolean;
-        getStability(): $OptionStability;
         getUsageSyntax(): string;
         getDeprecationMessage(): string;
+        getHelp(): string;
+        getStability(): $OptionStability;
+        isOptionMap(): boolean;
+        getName(): string;
+        getKey(): $OptionKey<never>;
+        isDeprecated(): boolean;
+        static newBuilder<T>(key: $OptionKey<T>, name: string): $OptionDescriptor$Builder;
+        getCategory(): $OptionCategory;
+        isConstant(): boolean;
+        get usageSyntax(): string;
+        get deprecationMessage(): string;
+        get help(): string;
+        get stability(): $OptionStability;
+        get optionMap(): boolean;
         get name(): string;
         get key(): $OptionKey<never>;
         get deprecated(): boolean;
         get category(): $OptionCategory;
         get constant(): boolean;
-        get help(): string;
-        get optionMap(): boolean;
-        get stability(): $OptionStability;
-        get usageSyntax(): string;
-        get deprecationMessage(): string;
     }
 }

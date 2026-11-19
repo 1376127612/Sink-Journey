@@ -28,19 +28,19 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
      * This class handles a single region (or anvil) file and all files for single chunks at chunk positions for that one region file.
      */
     export class $RegionFile implements $AutoCloseable {
-        clear(chunkPos: $ChunkPos): void;
-        flush(): void;
-        close(): void;
-        getPath(): $Path;
-        doesChunkExist(chunkPos: $ChunkPos): boolean;
-        hasChunk(chunkPos: $ChunkPos): boolean;
         /**
          * Creates a new `InputStream` for a chunk stored in a separate file.
          */
         getChunkDataOutputStream(chunkPos: $ChunkPos): $DataOutputStream;
         getChunkDataInputStream(chunkPos: $ChunkPos): $DataInputStream;
-        constructor(info: $RegionStorageInfo_, path: $Path_, externalFileDir: $Path_, version: $RegionFileVersion, sync: boolean);
+        doesChunkExist(chunkPos: $ChunkPos): boolean;
+        clear(chunkPos: $ChunkPos): void;
+        flush(): void;
+        close(): void;
+        getPath(): $Path;
+        hasChunk(chunkPos: $ChunkPos): boolean;
         constructor(info: $RegionStorageInfo_, path: $Path_, externalFileDir: $Path_, sync: boolean);
+        constructor(info: $RegionStorageInfo_, path: $Path_, externalFileDir: $Path_, version: $RegionFileVersion, sync: boolean);
         get path(): $Path;
     }
     /**
@@ -55,15 +55,15 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
         static ANVIL_EXTENSION: string;
     }
     export class $ChunkStorage implements $AutoCloseable {
-        flushWorker(): void;
+        chunkScanner(): $ChunkScanAccess;
         upgradeChunkTag(levelKey: $ResourceKey_<$Level>, storage: $Supplier_<$DimensionDataStorage>, chunkData: $CompoundTag_, chunkGeneratorKey: ($ResourceKey_<$MapCodec<$ChunkGenerator>>) | undefined): $CompoundTag;
-        isOldChunkAround(pos: $ChunkPos, radius: number): boolean;
         static injectDatafixingContext(chunkData: $CompoundTag_, levelKey: $ResourceKey_<$Level>, chunkGeneratorKey: ($ResourceKey_<$MapCodec<$ChunkGenerator>>) | undefined): void;
         write(chunkPos: $ChunkPos, data: $CompoundTag_): $CompletableFuture<void>;
         read(chunkPos: $ChunkPos): $CompletableFuture<($CompoundTag) | undefined>;
         close(): void;
         static getVersion(chunkData: $CompoundTag_): number;
-        chunkScanner(): $ChunkScanAccess;
+        flushWorker(): void;
+        isOldChunkAround(pos: $ChunkPos, radius: number): boolean;
         static LAST_MONOLYTH_STRUCTURE_DATA_VERSION: number;
         constructor(info: $RegionStorageInfo_, folder: $Path_, fixerUpper: $DataFixer, sync: boolean);
     }
@@ -80,12 +80,12 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
     export type $RegionStorageInfo_ = { dimension?: $ResourceKey_<$Level>, level?: string, type?: string,  } | [dimension?: $ResourceKey_<$Level>, level?: string, type?: string, ];
     export class $IOWorker implements $ChunkScanAccess, $AutoCloseable {
         storageInfo(): $RegionStorageInfo;
-        isOldChunkAround(chunkPos: $ChunkPos, radius: number): boolean;
         scanChunk(chunkPos: $ChunkPos, visitor: $StreamTagVisitor): $CompletableFuture<void>;
         store(chunkPos: $ChunkPos, chunkData: $CompoundTag_ | null): $CompletableFuture<void>;
         close(): void;
         synchronize(flushStorage: boolean): $CompletableFuture<void>;
         loadAsync(chunkPos: $ChunkPos): $CompletableFuture<($CompoundTag) | undefined>;
+        isOldChunkAround(chunkPos: $ChunkPos, radius: number): boolean;
     }
     export class $ChunkSerializer {
         static getChunkTypeFromTag(tag: $CompoundTag_ | null): $ChunkType;
@@ -110,9 +110,9 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
         static createMisplacedChunkReport(pos: $ChunkPos, expectedPos: $ChunkPos): $ReportedException;
     }
     export interface $ChunkIOErrorReporter {
-        reportMisplacedChunk(pos: $ChunkPos, expectedPos: $ChunkPos, regionStorageInfo: $RegionStorageInfo_): void;
         reportChunkLoadFailure(throwable: $Throwable, regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos): void;
         reportChunkSaveFailure(throwable: $Throwable, regionStorageInfo: $RegionStorageInfo_, chunkPos: $ChunkPos): void;
+        reportMisplacedChunk(pos: $ChunkPos, expectedPos: $ChunkPos, regionStorageInfo: $RegionStorageInfo_): void;
     }
     export class $ChunkScanAccess {
     }
@@ -124,13 +124,13 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
      */
     export type $ChunkScanAccess_ = ((arg0: $ChunkPos, arg1: $StreamTagVisitor) => $CompletableFuture<void>);
     export class $SectionStorage<R> implements $AutoCloseable, $RegionBasedStorageSectionExtended<any> {
+        lithium$getInChunkColumn(arg0: number, arg1: number): $Iterable<any>;
+        lithium$getWithinChunkColumn(arg0: number, arg1: number): $Stream<any>;
         remove(sectionKey: number): void;
         flush(chunkPos: $ChunkPos): void;
         close(): void;
         getOrLoad(sectionKey: number): (never) | undefined;
-        lithium$getWithinChunkColumn(arg0: number, arg1: number): $Stream<any>;
         hasWork(): boolean;
-        lithium$getInChunkColumn(arg0: number, arg1: number): $Iterable<any>;
         constructor(simpleRegionStorage: $SimpleRegionStorage, codec: $Function_<$Runnable, $Codec<$Object>>, factory: $Function_<$Runnable, $Object>, registryAccess: $RegistryAccess, errorReporter: $ChunkIOErrorReporter, levelHeightAccessor: $LevelHeightAccessor);
     }
     export class $ChunkSerializer$ChunkReadException extends $NbtException {
@@ -155,13 +155,13 @@ declare module "@package/net/minecraft/world/level/chunk/storage" {
      * @see net.minecraft.world.level.chunk.storage.RegionFileVersion#VERSION_NONE
      */
     export class $RegionFileVersion {
-        wrap(outputWrapper: $OutputStream): $OutputStream;
+        static fromId(id: number): $RegionFileVersion;
         wrap(inputWrapper: $InputStream): $InputStream;
+        wrap(outputWrapper: $OutputStream): $OutputStream;
         getId(): number;
-        static configure(optionValue: string): void;
         static getSelected(): $RegionFileVersion;
         static isValidVersion(id: number): boolean;
-        static fromId(id: number): $RegionFileVersion;
+        static configure(optionValue: string): void;
         static VERSION_GZIP: $RegionFileVersion;
         static VERSION_LZ4: $RegionFileVersion;
         static VERSION_DEFLATE: $RegionFileVersion;

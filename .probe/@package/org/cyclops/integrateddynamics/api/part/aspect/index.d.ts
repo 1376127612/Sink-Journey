@@ -1,7 +1,7 @@
 import { $IPartTypeWriter, $IPartStateWriter } from "@package/org/cyclops/integrateddynamics/api/part/write";
 import { $MenuProvider } from "@package/net/minecraft/world";
 import { $Supplier_ } from "@package/java/util/function";
-import { $INetwork, $IPartNetwork } from "@package/org/cyclops/integrateddynamics/api/network";
+import { $IPartNetwork, $INetwork } from "@package/org/cyclops/integrateddynamics/api/network";
 import { $IVariable, $IValueType, $IValue } from "@package/org/cyclops/integrateddynamics/api/evaluate/variable";
 import { $IAspectPropertyTypeInstance, $IAspectProperties } from "@package/org/cyclops/integrateddynamics/api/part/aspect/property";
 import { $Component_ } from "@package/net/minecraft/network/chat";
@@ -37,37 +37,37 @@ declare module "@package/org/cyclops/integrateddynamics/api/part/aspect" {
     export class $IAspect<V extends $IValue, T extends $IValueType<V>> {
     }
     export interface $IAspect<V extends $IValue, T extends $IValueType<V>> {
+        getValueType(): T;
+        getPropertiesContainerProvider(arg0: $PartPos): $MenuProvider;
+        getUniqueName(): $ResourceLocation;
+        getTranslationKey(): string;
+        loadTooltip(arg0: $List_<$Component_>, arg1: boolean): void;
+        getStaticProperties<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: P, arg1: $PartTarget, arg2: S): $IAspectProperties;
+        getPropertyTypes(): $Collection<$IAspectPropertyTypeInstance<any, any>>;
         update<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: $INetwork, arg1: $IPartNetwork, arg2: P, arg3: $PartTarget, arg4: S): void;
         getProperties<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: P, arg1: $PartTarget, arg2: S): $IAspectProperties;
         setProperties<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: P, arg1: $PartTarget, arg2: S, arg3: $IAspectProperties): void;
-        getDefaultProperties(): $IAspectProperties;
-        getValueType(): T;
-        getTranslationKey(): string;
-        loadTooltip(arg0: $List_<$Component_>, arg1: boolean): void;
-        getPropertiesContainerProvider(arg0: $PartPos): $MenuProvider;
-        getUniqueName(): $ResourceLocation;
-        getStaticProperties<P extends $IPartType<P, S>, S extends $IPartState<P>>(arg0: P, arg1: $PartTarget, arg2: S): $IAspectProperties;
         hasProperties<P extends $IPartType<P, S>, S extends $IPartState<P>>(): boolean;
-        getPropertyTypes(): $Collection<$IAspectPropertyTypeInstance<any, any>>;
-        get defaultProperties(): $IAspectProperties;
+        getDefaultProperties(): $IAspectProperties;
         get valueType(): T;
-        get translationKey(): string;
         get uniqueName(): $ResourceLocation;
+        get translationKey(): string;
         get propertyTypes(): $Collection<$IAspectPropertyTypeInstance<any, any>>;
+        get defaultProperties(): $IAspectProperties;
     }
     export class $IAspectWrite<V extends $IValue, T extends $IValueType<V>> {
     }
     export interface $IAspectWrite<V extends $IValue, T extends $IValueType<V>> extends $IAspect<V, T> {
-        write<P extends $IPartTypeWriter<P, S>, S extends $IPartStateWriter<P>>(arg0: P, arg1: $PartTarget, arg2: S, arg3: $IVariable<V>): void;
         onActivate<P extends $IPartTypeWriter<P, S>, S extends $IPartStateWriter<P>>(arg0: P, arg1: $PartTarget, arg2: S): void;
         onDeactivate<P extends $IPartTypeWriter<P, S>, S extends $IPartStateWriter<P>>(arg0: P, arg1: $PartTarget, arg2: S): void;
+        write<P extends $IPartTypeWriter<P, S>, S extends $IPartStateWriter<P>>(arg0: P, arg1: $PartTarget, arg2: S, arg3: $IVariable<V>): void;
     }
     export class $IAspectVariable<V extends $IValue> {
     }
     export interface $IAspectVariable<V extends $IValue> extends $IVariable<V> {
-        getTarget(): $PartTarget;
         getAspect(): $IAspectRead<V, never>;
-        get target(): $PartTarget;
+        getTarget(): $PartTarget;
         get aspect(): $IAspectRead<V, never>;
+        get target(): $PartTarget;
     }
 }

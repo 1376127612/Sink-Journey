@@ -7,8 +7,8 @@ declare module "@package/net/minecraft/client/gui/components/debugchart" {
         constructor(font: $Font, sampleStorage: $SampleStorage);
     }
     export class $AbstractDebugChart {
-        getWidth(maxWidth: number): number;
         drawChart(guiGraphics: $GuiGraphics, x: number, width: number): void;
+        getWidth(maxWidth: number): number;
     }
     export class $FpsDebugChart extends $AbstractDebugChart {
         constructor(font: $Font, sampleStorage: $SampleStorage);

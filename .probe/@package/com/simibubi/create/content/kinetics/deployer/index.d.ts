@@ -20,7 +20,7 @@ import { $Logger } from "@package/org/slf4j";
 import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $BeltProcessingBehaviour } from "@package/com/simibubi/create/content/kinetics/belt/behaviour";
 import { $ServerGamePacketListenerImpl } from "@package/net/minecraft/server/network";
-import { $Inventory } from "@package/net/minecraft/world/entity/player";
+import { $Player, $Inventory } from "@package/net/minecraft/world/entity/player";
 import { $FishingHook } from "@package/net/minecraft/world/entity/projectile";
 import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $RecipeWrapper } from "@package/net/neoforged/neoforge/items/wrapper";
@@ -32,19 +32,19 @@ import { $RegisterCapabilitiesEvent } from "@package/net/neoforged/neoforge/capa
 
 declare module "@package/com/simibubi/create/content/kinetics/deployer" {
     export class $DeployerBlockEntity extends $KineticBlockEntity implements $Clearable {
-        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
-        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
-        clearContent(): void;
-        getPlayer(): $DeployerFakePlayer;
-        startFistBump(arg0: $Direction_): boolean;
-        getHandOffset(arg0: number): number;
-        triggerFistBump(): void;
-        setAnimatedOffset(arg0: number): void;
         getRecipe(arg0: $ItemStack_): $RecipeHolder<$Recipe<$RecipeInput>>;
         getHandPose(): $PartialModel;
         redstoneUpdate(): void;
         discardPlayer(): void;
+        triggerFistBump(): void;
+        getHandOffset(arg0: number): number;
+        setAnimatedOffset(arg0: number): void;
+        startFistBump(arg0: $Direction_): boolean;
+        write(arg0: $CompoundTag_, arg1: $HolderLookup$Provider, arg2: boolean): void;
+        getPlayer(): $DeployerFakePlayer;
         changeMode(): void;
+        clearContent(): void;
+        static registerCapabilities(arg0: $RegisterCapabilitiesEvent): void;
         blockState: $BlockState;
         level: $Level;
         static ATTACHMENTS_NBT_KEY: string;
@@ -63,28 +63,28 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         preventSpeedUpdate: number;
         customPersistentData: $CompoundTag;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get player(): $DeployerFakePlayer;
-        set animatedOffset(value: number);
         get handPose(): $PartialModel;
+        set animatedOffset(value: number);
+        get player(): $DeployerFakePlayer;
     }
     export class $DeployerRecipeSearchEvent extends $Event implements $ICancellableEvent {
+        addRecipe(arg0: $Supplier_<($RecipeHolder<$Recipe<$RecipeInput>>) | undefined>, arg1: number): void;
+        getRecipe(): $RecipeHolder<$Recipe<$RecipeInput>>;
         shouldAddRecipeWithPriority(arg0: number): boolean;
         getInventory(): $RecipeWrapper;
         getBlockEntity(): $DeployerBlockEntity;
-        addRecipe(arg0: $Supplier_<($RecipeHolder<$Recipe<$RecipeInput>>) | undefined>, arg1: number): void;
-        getRecipe(): $RecipeHolder<$Recipe<$RecipeInput>>;
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $DeployerBlockEntity, arg1: $RecipeWrapper);
+        get recipe(): $RecipeHolder<$Recipe<$RecipeInput>>;
         get inventory(): $RecipeWrapper;
         get blockEntity(): $DeployerBlockEntity;
-        get recipe(): $RecipeHolder<$Recipe<$RecipeInput>>;
     }
     export class $DeployerFakePlayer extends $FakePlayer {
         static deployerCollectsDropsFromKilledEntities(arg0: $LivingDropsEvent): void;
-        static deployerKillsDoNotSpawnXP(arg0: $LivingExperienceDropEvent): void;
-        static entitiesDontRetaliate(arg0: $LivingChangeTargetEvent): void;
         static deployerHasEyesOnHisFeet(arg0: $EntityEvent$Size): void;
+        static entitiesDontRetaliate(arg0: $LivingChangeTargetEvent): void;
+        static deployerKillsDoNotSpawnXP(arg0: $LivingExperienceDropEvent): void;
         static DEFAULT_BASE_GRAVITY: number;
         hasImpulse: boolean;
         static USE_ITEM_INTERVAL: number;
@@ -148,6 +148,7 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -160,6 +161,7 @@ declare module "@package/com/simibubi/create/content/kinetics/deployer" {
         static BODY_ARMOR_OFFSET: number;
         xCloak: number;
         tickCount: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static MAX_HEALTH: number;
         static SWING_DURATION: number;

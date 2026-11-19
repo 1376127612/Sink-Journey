@@ -23,9 +23,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings" {
         unbind(arg0: $IBinding<T>): $UIElement;
     }
     export class $SyncStrategy extends $Enum<$SyncStrategy> {
+        doSync(): boolean;
         static values(): $SyncStrategy[];
         static valueOf(arg0: string): $SyncStrategy;
-        doSync(): boolean;
         static CHANGED_PERIODIC: $SyncStrategy;
         static NONE: $SyncStrategy;
         static ALWAYS: $SyncStrategy;
@@ -46,17 +46,17 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings" {
     export class $IObservable<T> {
     }
     export interface $IObservable<T> {
+        bindObserver(arg0: $IObserver_<T>): $UIElement;
         unbindObserver(arg0: $IObserver_<T>): $UIElement;
         getBoundObservers(): $Collection<$IObserver<T>>;
-        bindObserver(arg0: $IObserver_<T>): $UIElement;
         get boundObservers(): $Collection<$IObserver<T>>;
     }
     export class $IDataConsumer<T> {
     }
     export interface $IDataConsumer<T> {
         getBoundDataSources(): $Collection<$IDataProvider<T>>;
-        unbindDataSource(arg0: $IDataProvider<T>): $UIElement;
         bindDataSource(arg0: $IDataProvider<T>): $UIElement;
+        unbindDataSource(arg0: $IDataProvider<T>): $UIElement;
         get boundDataSources(): $Collection<$IDataProvider<T>>;
     }
     export class $IDataProvider<T> {
@@ -70,15 +70,15 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/sync/bindings" {
     export class $IBinding<T> {
     }
     export interface $IBinding<T> {
-        setRemoteDataSource(arg0: $IDataSource<T>): void;
         getRemoteDataSource(): $IDataSource<T>;
+        setRemoteDataSource(arg0: $IDataSource<T>): void;
+        getServerDataSource(): $IDataSource<T>;
+        setServerDataSource(arg0: $IDataSource<T>): void;
+        acceptS2C(): boolean;
+        acceptC2S(): boolean;
         getSyncValue(): $SyncValue<T>;
         s2cStrategy(): $SyncStrategy;
         c2sStrategy(): $SyncStrategy;
-        acceptS2C(): boolean;
-        acceptC2S(): boolean;
-        setServerDataSource(arg0: $IDataSource<T>): void;
-        getServerDataSource(): $IDataSource<T>;
         get syncValue(): $SyncValue<T>;
     }
 }

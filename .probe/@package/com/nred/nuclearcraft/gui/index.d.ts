@@ -4,9 +4,9 @@ declare module "@package/com/nred/nuclearcraft/gui" {
     export class $IGuiButton {
     }
     export interface $IGuiButton {
-        getTexture(arg0: boolean): $ResourceLocation;
         getTextureWidth(): number;
         getTextureHeight(): number;
+        getTexture(arg0: boolean): $ResourceLocation;
         get textureWidth(): number;
         get textureHeight(): number;
     }

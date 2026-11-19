@@ -3,7 +3,7 @@ import { $LevelAccessor, $Level_ } from "@package/net/minecraft/world/level";
 import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
-import { $AnimationState, $EntityType_, $Entity$RemovalReason, $LivingEntity, $VariantHolder, $PortalProcessor, $WalkAnimationState, $Entity, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $AnimationState, $EntityType_, $Entity$RemovalReason, $LivingEntity, $PortalProcessor, $VariantHolder, $WalkAnimationState, $Entity, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $RandomSource } from "@package/net/minecraft/util";
@@ -19,8 +19,8 @@ import { $Enum } from "@package/java/lang";
 
 declare module "@package/net/minecraft/world/entity/animal/frog" {
     export class $FrogAi {
-        static updateActivity(frog: $Frog): void;
         static getTemptations(): $Predicate<$ItemStack>;
+        static updateActivity(frog: $Frog): void;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }
@@ -41,11 +41,11 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         constructor(tongueSound: $SoundEvent_, eatSound: $SoundEvent_);
     }
     export class $Frog extends $Animal implements $VariantHolder<$Holder<$FrogVariant>> {
+        static canEat(entity: $LivingEntity): boolean;
+        static createAttributes(): $AttributeSupplier$Builder;
+        static checkFrogSpawnRules(animal: $EntityType_<$Animal>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         getVariant(): $Holder<$FrogVariant>;
         setVariant(variant: $Holder_<$FrogVariant>): void;
-        static createAttributes(): $AttributeSupplier$Builder;
-        static canEat(entity: $LivingEntity): boolean;
-        static checkFrogSpawnRules(animal: $EntityType_<$Animal>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         /**
          * Called to update the entity's position/logic.
          */
@@ -100,6 +100,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -112,6 +113,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -176,6 +178,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
     export type $ShootTongue$State_ = "move_to_target" | "catch_animation" | "eat_animation" | "done";
     export class $Tadpole extends $AbstractFish {
         mobInteract(player: $Player, hand: $InteractionHand_): $InteractionResult;
+        getTicksLeftUntilAdult(): number;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -224,6 +227,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -234,6 +238,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -286,6 +291,7 @@ declare module "@package/net/minecraft/world/entity/animal/frog" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$AbstractFish>, level: $Level_);
+        get ticksLeftUntilAdult(): number;
     }
     export class $Frog$FrogLookControl extends $LookControl {
         xMaxRotAngle: number;

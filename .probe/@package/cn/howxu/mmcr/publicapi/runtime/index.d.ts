@@ -19,26 +19,26 @@ declare module "@package/cn/howxu/mmcr/publicapi/runtime" {
     export interface $IoSimulation {
         failure(): $RuntimeFailure;
         outputs(): $List<$OutputAcceptance>;
-        energySatisfied(): boolean;
         inputsSatisfied(): boolean;
+        energySatisfied(): boolean;
     }
     export class $MachineView {
     }
     export interface $MachineView {
-        machineId(): $ResourceLocation;
         controllerPos(): $BlockPos;
-        formed(): boolean;
-        countStructureBlocks(block: $Block_): number;
         countStructureBlocks(blockId: $ResourceLocation_): number;
+        countStructureBlocks(block: $Block_): number;
+        machineId(): $ResourceLocation;
+        formed(): boolean;
     }
     export class $AirState extends $Record {
+        air(): number;
+        pressure(): number;
+        volume(): number;
+        dangerPressure(): number;
+        criticalPressure(): number;
         position(): $BlockPos;
         outputCapacity(): number;
-        volume(): number;
-        criticalPressure(): number;
-        air(): number;
-        dangerPressure(): number;
-        pressure(): number;
         constructor(position: $BlockPos_, air: number, volume: number, dangerPressure: number, criticalPressure: number);
     }
     /**
@@ -53,7 +53,7 @@ declare module "@package/cn/howxu/mmcr/publicapi/runtime" {
     /**
      * Values that may be interpreted as {@link $ResourceAmount}.
      */
-    export type $ResourceAmount_<R> = { resource?: any, amount?: number,  } | [resource?: any, amount?: number, ];
+    export type $ResourceAmount_<R> = { amount?: number, resource?: any,  } | [amount?: number, resource?: any, ];
     export class $RecipeFailureMode extends $Enum<$RecipeFailureMode> {
         static values(): $RecipeFailureMode[];
         static valueOf(name: string): $RecipeFailureMode;
@@ -74,55 +74,55 @@ declare module "@package/cn/howxu/mmcr/publicapi/runtime" {
     /**
      * Values that may be interpreted as {@link $HeatState}.
      */
-    export type $HeatState_ = { temperature?: number, heat?: number, heatCapacity?: number,  } | [temperature?: number, heat?: number, heatCapacity?: number, ];
+    export type $HeatState_ = { heatCapacity?: number, temperature?: number, heat?: number,  } | [heatCapacity?: number, temperature?: number, heat?: number, ];
     export class $IoCommitResult {
     }
     export interface $IoCommitResult {
-        failure(): $RuntimeFailure;
         successful(): boolean;
+        failure(): $RuntimeFailure;
     }
     export class $RecipeExecutionView {
     }
     export interface $RecipeExecutionView {
+        requirements(): $List<$RequirementSpec>;
         duration(): number;
         outputs(): $List<$OutputView>;
-        requirements(): $List<$RequirementSpec>;
     }
     export class $FailureFrame {
     }
     export interface $FailureFrame {
+        requirementIndex(): number;
         source(): $ResourceLocation;
         phase(): $FailurePhase;
         recipeId(): $ResourceLocation;
-        requirementIndex(): number;
     }
     export class $IoSnapshot {
     }
     export interface $IoSnapshot {
-        manaInput(): number;
+        fluidAmount(ingredient: $FluidIngredient_): number;
         itemInputs(): $List<$ResourceAmount<$ItemStack>>;
         fluidInputs(): $List<$ResourceAmount<$FluidStack>>;
-        itemAmount(ingredient: $Ingredient_): number;
-        fluidAmount(ingredient: $FluidIngredient_): number;
-        chemicalAmount(chemicalId: $ResourceLocation_): number;
         displays(): $List<$IoDisplay>;
-        sourceInput(): number;
+        chemicalAmount(chemicalId: $ResourceLocation_): number;
         energyInput(): number;
-        airInputs(): $List<$AirState>;
-        airOutputs(): $List<$AirState>;
+        sourceInput(): number;
+        manaInput(): number;
+        itemAmount(ingredient: $Ingredient_): number;
         stressInputs(): $List<$StressState>;
         stressOutputs(): $List<$StressState>;
         chemicalInputs(): $List<$ResourceAmount<$ResourceLocation>>;
-        smartInterfaceValues(): $Map<string, number>;
-        chemicalOutputCapacity(chemicalId: $ResourceLocation_): number;
-        sourceOutputCapacity(): number;
-        energyOutputCapacity(): number;
-        smartInterfaceValue(name: string): (number) | undefined;
-        fluidOutputCapacity(stack: $FluidStack_): number;
+        airInputs(): $List<$AirState>;
+        airOutputs(): $List<$AirState>;
+        manaOutputCapacity(): number;
         heatOutputs(): $List<$HeatState>;
         itemOutputCapacity(stack: $ItemStack_): number;
-        manaOutputCapacity(): number;
         chemicalTagAmount(tagId: $ResourceLocation_): number;
+        chemicalOutputCapacity(chemicalId: $ResourceLocation_): number;
+        sourceOutputCapacity(): number;
+        fluidOutputCapacity(stack: $FluidStack_): number;
+        smartInterfaceValue(name: string): (number) | undefined;
+        smartInterfaceValues(): $Map<string, number>;
+        energyOutputCapacity(): number;
         heatInputs(): $List<$HeatState>;
         forTags(requiredTags: $Set_<string>): $IoSnapshot;
     }
@@ -140,39 +140,39 @@ declare module "@package/cn/howxu/mmcr/publicapi/runtime" {
     export class $RecipeView {
     }
     export interface $RecipeView {
+        requirements(): $List<$RequirementSpec>;
+        recipePoolId(): $ResourceLocation;
+        parallelized(): boolean;
+        requiredHostIds(): $Set<$ResourceLocation>;
+        runtimeRequirements(): $List<$RequirementSpec>;
+        runtimeRequirements(extraModifiers: $List_<$RecipeAdjustmentSpec>): $List<$RequirementSpec>;
+        runtimeRequirements(extraModifiers: $List_<$RecipeAdjustmentSpec>, energyMultiplier: number, outputMultiplier: number): $List<$RequirementSpec>;
+        runtimeMachineOutputs(extraModifiers: $List_<$RecipeAdjustmentSpec>): $List<$OutputView>;
+        runtimeMachineOutputs(): $List<$OutputView>;
+        allowPartialOutputs(): boolean;
         cancelRecipeOnPerTickFailure(): boolean;
         modifiers(): $List<$RecipeAdjustmentSpec>;
         priority(): number;
         id(): $ResourceLocation;
-        maxThreads(): number;
         tickTime(): number;
+        maxThreads(): number;
         outputs(): $List<$OutputView>;
-        requirements(): $List<$RequirementSpec>;
-        allowPartialOutputs(): boolean;
-        recipePoolId(): $ResourceLocation;
-        parallelized(): boolean;
-        requiredHostIds(): $Set<$ResourceLocation>;
-        runtimeMachineOutputs(): $List<$OutputView>;
-        runtimeMachineOutputs(extraModifiers: $List_<$RecipeAdjustmentSpec>): $List<$OutputView>;
-        runtimeRequirements(): $List<$RequirementSpec>;
-        runtimeRequirements(extraModifiers: $List_<$RecipeAdjustmentSpec>): $List<$RequirementSpec>;
-        runtimeRequirements(extraModifiers: $List_<$RecipeAdjustmentSpec>, energyMultiplier: number, outputMultiplier: number): $List<$RequirementSpec>;
     }
     export class $IoTransaction {
     }
     export interface $IoTransaction {
-        commit(): $IoCommitResult;
-        commit(writes: $Consumer_<$DataStore$Transaction>): $IoCommitResult;
-        add(requirement: $RequirementSpec): $IoTransaction;
-        view(): $IoSnapshot;
         simulate(): $IoSimulation;
-        requirements(): $List<$RequirementSpec>;
         addOutput(requirement: $RequirementSpec, mode: $OutputMode_): $IoTransaction;
         addInput(requirement: $RequirementSpec): $IoTransaction;
-        commitData(writes: $Consumer_<$DataStore$Transaction>): $IoCommitResult;
+        requirements(): $List<$RequirementSpec>;
+        commit(writes: $Consumer_<$DataStore$Transaction>): $IoCommitResult;
+        commit(): $IoCommitResult;
+        add(requirement: $RequirementSpec): $IoTransaction;
+        view(): $IoSnapshot;
         outputSimulations(): $List<$OutputAcceptance>;
-        energySatisfied(): boolean;
         inputsSatisfied(): boolean;
+        energySatisfied(): boolean;
+        commitData(writes: $Consumer_<$DataStore$Transaction>): $IoCommitResult;
     }
     export class $RuntimeFailure {
     }
@@ -180,11 +180,11 @@ declare module "@package/cn/howxu/mmcr/publicapi/runtime" {
         id(): $ResourceLocation;
         source(): $ResourceLocation;
         trace(): $List<$FailureFrame>;
-        details(): $Map<string, string>;
         severity(): $FailureSeverity;
-        reasonTranslationKey(): string;
+        details(): $Map<string, string>;
         reasonPriority(): number;
         reasonId(): $ResourceLocation;
+        reasonTranslationKey(): string;
     }
     export class $OutputMode extends $Enum<$OutputMode> {
         static values(): $OutputMode[];
@@ -199,36 +199,36 @@ declare module "@package/cn/howxu/mmcr/publicapi/runtime" {
     export class $OutputView {
     }
     export interface $OutputView {
+        chance(): number;
+        withChance(chance: number): $OutputView;
+        serializedId(): string;
+        applyModifiers(modifiers: $List_<$RecipeAdjustmentSpec>): $OutputView;
+        kindId(): $ResourceLocation;
         copy(): $OutputView;
         amount(): number;
-        withChance(chance: number): $OutputView;
-        chance(): number;
-        applyModifiers(modifiers: $List_<$RecipeAdjustmentSpec>): $OutputView;
-        serializedId(): string;
-        kindId(): $ResourceLocation;
     }
     export class $StressState extends $Record {
-        position(): $BlockPos;
-        connected(): boolean;
+        overstressed(): boolean;
+        theoreticalRpm(): number;
+        baseContribution(): number;
         actualRpm(): number;
         networkCapacity(): number;
         networkStress(): number;
-        theoreticalRpm(): number;
-        baseContribution(): number;
-        overstressed(): boolean;
         generatedRpm(): number;
+        position(): $BlockPos;
+        connected(): boolean;
         actualContribution(): number;
         constructor(position: $BlockPos_, actualRpm: number, theoreticalRpm: number, generatedRpm: number, baseContribution: number, actualContribution: number, networkCapacity: number, networkStress: number, connected: boolean, overstressed: boolean);
     }
     /**
      * Values that may be interpreted as {@link $StressState}.
      */
-    export type $StressState_ = { actualRpm?: number, overstressed?: boolean, networkStress?: number, networkCapacity?: number, connected?: boolean, generatedRpm?: number, position?: $BlockPos_, baseContribution?: number, theoreticalRpm?: number, actualContribution?: number,  } | [actualRpm?: number, overstressed?: boolean, networkStress?: number, networkCapacity?: number, connected?: boolean, generatedRpm?: number, position?: $BlockPos_, baseContribution?: number, theoreticalRpm?: number, actualContribution?: number, ];
+    export type $StressState_ = { generatedRpm?: number, position?: $BlockPos_, baseContribution?: number, theoreticalRpm?: number, actualContribution?: number, actualRpm?: number, overstressed?: boolean, networkStress?: number, networkCapacity?: number, connected?: boolean,  } | [generatedRpm?: number, position?: $BlockPos_, baseContribution?: number, theoreticalRpm?: number, actualContribution?: number, actualRpm?: number, overstressed?: boolean, networkStress?: number, networkCapacity?: number, connected?: boolean, ];
     export class $OutputAcceptance {
     }
     export interface $OutputAcceptance {
+        accepted(): number;
         requested(): number;
         fit(): $OutputFit;
-        accepted(): number;
     }
 }

@@ -9,33 +9,33 @@ import { $Unit, $BlockPosMap, $BlockPosIterator, $BlockPosSet, $ChunkPosMap } fr
 
 declare module "@package/ca/teamdman/sfm/common/block_network" {
     export class $SFMBlockCapabilityCacheForLevel {
+        getPositions(): $BlockPosIterator;
         remove(arg0: $BlockPos_, arg1: $SFMBlockCapabilityKind_<never>, arg2: $Direction_): void;
         size(): number;
         clear(): void;
         putAll(arg0: $SFMBlockCapabilityCacheForLevel): void;
-        getCapability<CAP>(arg0: $BlockPos_, arg1: $SFMBlockCapabilityKind_<CAP>, arg2: $Direction_): $SFMBlockCapabilityResult<CAP>;
-        getPositions(): $BlockPosIterator;
         getPositionsRaw(): $LongSet;
         overwriteFromOther(arg0: $BlockPos_, arg1: $SFMBlockCapabilityCacheForLevel): void;
         bustCacheForChunk(arg0: $ChunkPos): void;
         bustCacheForChunk(arg0: $ChunkAccess): void;
+        getCapability<CAP>(arg0: $BlockPos_, arg1: $SFMBlockCapabilityKind_<CAP>, arg2: $Direction_): $SFMBlockCapabilityResult<CAP>;
         putCapability<CAP>(arg0: $BlockPos_, arg1: $SFMBlockCapabilityKind_<CAP>, arg2: $Direction_, arg3: $SFMBlockCapabilityResult_<CAP>): void;
         constructor(arg0: $Level_);
         get positions(): $BlockPosIterator;
         get positionsRaw(): $LongSet;
     }
     export class $BlockNetwork<LEVEL, T> {
-        size(): number;
-        isEmpty(): boolean;
-        members(): $BlockPosMap<T>;
-        level(): LEVEL;
+        memberBlockPositionsByChunk(): $ChunkPosMap<$BlockPosSet>;
         isMember(arg0: $BlockPos_): boolean;
         usesChunk(arg0: number): boolean;
         usesChunk(arg0: $ChunkPos): boolean;
         containsBlockPos(arg0: $BlockPos_): boolean;
-        memberBlockPositionsByChunk(): $ChunkPosMap<$BlockPosSet>;
-        constructor(arg0: LEVEL, arg1: $BlockNetworkMemberFilterMapper_<LEVEL, T>);
+        size(): number;
+        isEmpty(): boolean;
+        members(): $BlockPosMap<T>;
+        level(): LEVEL;
         constructor(arg0: LEVEL, arg1: $BlockNetworkMemberFilterMapper_<LEVEL, T>, arg2: $BlockNetworkConstructor_<LEVEL, T, $BlockNetwork<LEVEL, T>>);
+        constructor(arg0: LEVEL, arg1: $BlockNetworkMemberFilterMapper_<LEVEL, T>);
         get empty(): boolean;
     }
     export class $BlockNetworkConstructor<LEVEL, T, NETWORK extends $BlockNetwork<LEVEL, T>> {
@@ -57,25 +57,25 @@ declare module "@package/ca/teamdman/sfm/common/block_network" {
      */
     export type $BlockNetworkMemberFilterMapper_<LEVEL, T> = ((arg0: LEVEL, arg1: $BlockPos) => T);
     export class $CableNetwork extends $BlockNetwork<$Level, $Unit> {
-        getCapability<CAP>(arg0: $SFMBlockCapabilityKind_<CAP>, arg1: $BlockPos_, arg2: $Direction_, arg3: $TranslatableLogger): $SFMBlockCapabilityResult<CAP>;
-        getLevel(): $Level;
-        isAdjacentToCable(arg0: $BlockPos_): boolean;
         getCablePositionsRaw(): $LongSet;
-        getCapabilityProviderPositionsRaw(): $LongSet;
-        getCapabilityProviderPositions(): $BlockPosIterator;
-        getCablePositions(): $BlockPosIterator;
         static isCable(arg0: $Level_, arg1: $BlockPos_): boolean;
         static cableMemberFilterMapper(arg0: $Level_, arg1: $BlockPos_): $Unit;
-        containsCablePosition(arg0: $BlockPos_): boolean;
         getLevelCapabilityCache(): $SFMBlockCapabilityCacheForLevel;
-        getCableCount(): number;
+        containsCablePosition(arg0: $BlockPos_): boolean;
+        getCablePositions(): $BlockPosIterator;
+        getLevel(): $Level;
         static discoverCables(arg0: $Level_, arg1: $BlockPos_): $Stream<$BlockPos>;
+        getCableCount(): number;
+        isAdjacentToCable(arg0: $BlockPos_): boolean;
+        getCapabilityProviderPositions(): $BlockPosIterator;
+        getCapabilityProviderPositionsRaw(): $LongSet;
+        getCapability<CAP>(arg0: $SFMBlockCapabilityKind_<CAP>, arg1: $BlockPos_, arg2: $Direction_, arg3: $TranslatableLogger): $SFMBlockCapabilityResult<CAP>;
         constructor(arg0: $Level_, arg1: $BlockNetworkMemberFilterMapper_<$Level, $Unit>);
         get cablePositionsRaw(): $LongSet;
-        get capabilityProviderPositionsRaw(): $LongSet;
-        get capabilityProviderPositions(): $BlockPosIterator;
-        get cablePositions(): $BlockPosIterator;
         get levelCapabilityCache(): $SFMBlockCapabilityCacheForLevel;
+        get cablePositions(): $BlockPosIterator;
         get cableCount(): number;
+        get capabilityProviderPositions(): $BlockPosIterator;
+        get capabilityProviderPositionsRaw(): $LongSet;
     }
 }

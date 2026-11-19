@@ -18,8 +18,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/util/tank" {
      */
     export type $FluidTankView$InputFilter_ = ((arg0: number, arg1: $FluidStack, arg2: $FluidStack) => boolean);
     export class $FluidContainerList {
-        static create(): $FluidContainerList;
         getTank(arg0: number): $FluidContainer;
+        static create(): $FluidContainerList;
         static CODEC: $Codec<$FluidContainerList>;
     }
     export class $FluidContainer {
@@ -35,26 +35,26 @@ declare module "@package/hellfirepvp/astralsorcery/common/util/tank" {
         static NO_FILTER: $FluidTankView$ExtractFilter;
     }
     export interface $FluidTankView$ExtractFilter {
-        and(arg0: $FluidTankView$ExtractFilter_): $FluidTankView$ExtractFilter;
         canExtract(arg0: number, arg1: number, arg2: $FluidStack_): boolean;
+        and(arg0: $FluidTankView$ExtractFilter_): $FluidTankView$ExtractFilter;
     }
     /**
      * Values that may be interpreted as {@link $FluidTankView$ExtractFilter}.
      */
     export type $FluidTankView$ExtractFilter_ = ((arg0: number, arg1: number, arg2: $FluidStack) => boolean);
     export class $FluidTankView implements $IFluidHandler {
-        clearTanks(): void;
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         getTanks(): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         getFluidInTank(arg0: number): $FluidStack;
-        getTankCapacity(arg0: number): number;
         getWithoutFilters<T>(arg0: $Function_<$FluidTankView, T>): T;
         withoutFilters(arg0: $Consumer_<$FluidTankView>): void;
         getFluidAccess(arg0: $Direction_ | null): $FluidTankView;
         clearTank(arg0: number): void;
+        clearTanks(): void;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        getTankCapacity(arg0: number): number;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         constructor(arg0: number, arg1: $FluidContainerList, arg2: $Set_<$Direction_>, arg3: $Consumer_<number>, arg4: $Function_<number, number>, arg5: $FluidTankView$InputFilter_, arg6: $FluidTankView$ExtractFilter_);
         get tanks(): number;
     }

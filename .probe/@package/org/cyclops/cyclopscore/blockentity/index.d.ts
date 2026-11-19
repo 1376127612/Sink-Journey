@@ -13,14 +13,14 @@ declare module "@package/org/cyclops/cyclopscore/blockentity" {
     export class $IBlockEntityDelayedTickable {
     }
     export interface $IBlockEntityDelayedTickable {
-        reduceUpdateBackoff(): void;
+        getUpdateBackoffTicks(): number;
         sendImmediateUpdate(): void;
-        sendUpdate(): void;
-        getUpdateBackoff(): number;
+        reduceUpdateBackoff(): void;
+        shouldSendUpdate(): boolean;
         unsetSendUpdate(): void;
         setUpdateBackoff(arg0: number): void;
-        shouldSendUpdate(): boolean;
-        getUpdateBackoffTicks(): number;
+        getUpdateBackoff(): number;
+        sendUpdate(): void;
         get updateBackoffTicks(): number;
     }
     /**
@@ -42,24 +42,24 @@ declare module "@package/org/cyclops/cyclopscore/blockentity" {
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
     }
     export class $CyclopsBlockEntityCommon extends $BlockEntity implements $INBTProvider, $IDirtyMarkListener, $IBlockEntityDelayedTickable {
+        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
+        writeToItemStack(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
+        onDirty(): void;
+        readGeneratedFieldsFromNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        writeGeneratedFieldsToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        getUpdateBackoffTicks(): number;
+        saveAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        canInteractWith(arg0: $Player): boolean;
         read(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         getRotation(): $Direction;
-        loadAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        onDirty(): void;
-        getUpdatePacket(): $ClientboundBlockEntityDataPacket;
-        sendUpdate(): void;
-        canInteractWith(arg0: $Player): boolean;
-        saveAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        writeToItemStack(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
-        getUpdateBackoff(): number;
+        shouldSendUpdate(): boolean;
         unsetSendUpdate(): void;
         setUpdateBackoff(arg0: number): void;
-        shouldSendUpdate(): boolean;
-        writeGeneratedFieldsToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        readGeneratedFieldsFromNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
-        getUpdateBackoffTicks(): number;
-        reduceUpdateBackoff(): void;
+        getUpdateBackoff(): number;
+        loadAdditional(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        sendUpdate(): void;
         sendImmediateUpdate(): void;
+        reduceUpdateBackoff(): void;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -72,8 +72,8 @@ declare module "@package/org/cyclops/cyclopscore/blockentity" {
         remove: boolean;
         customPersistentData: $CompoundTag;
         constructor(arg0: $BlockEntityType_<never>, arg1: $BlockPos_, arg2: $BlockState_);
-        get rotation(): $Direction;
         get updatePacket(): $ClientboundBlockEntityDataPacket;
         get updateBackoffTicks(): number;
+        get rotation(): $Direction;
     }
 }

@@ -3,10 +3,10 @@ declare module "@package/com/ultramega/ae2importexportcard/mixin" {
     export class $AbstractContainerScreenAccessor {
     }
     export interface $AbstractContainerScreenAccessor {
-        setTopPos(arg0: number): void;
         setImageHeight(arg0: number): void;
-        set topPos(value: number);
+        setTopPos(arg0: number): void;
         set imageHeight(value: number);
+        set topPos(value: number);
     }
     export class $SlotAccessor {
     }

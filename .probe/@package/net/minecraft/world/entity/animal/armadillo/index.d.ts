@@ -4,6 +4,7 @@ import { $GoalSelector } from "@package/net/minecraft/world/entity/ai/goal";
 import { $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $AnimationState, $EntityType_, $Entity$RemovalReason, $LivingEntity, $PortalProcessor, $WalkAnimationState, $MobSpawnType_ } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $Animal } from "@package/net/minecraft/world/entity/animal";
 import { $StringRepresentable, $RandomSource } from "@package/net/minecraft/util";
@@ -18,21 +19,21 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/minecraft/world/entity/animal/armadillo" {
     export class $Armadillo$ArmadilloState extends $Enum<$Armadillo$ArmadilloState> implements $StringRepresentable {
+        static fromName(name: string): $Armadillo$ArmadilloState;
+        isThreatened(): boolean;
+        getSerializedName(): string;
+        animationDuration(): number;
+        shouldHideInShell(inStateTicks: number): boolean;
         static values(): $Armadillo$ArmadilloState[];
         static valueOf(name: string): $Armadillo$ArmadilloState;
-        static fromName(name: string): $Armadillo$ArmadilloState;
-        getSerializedName(): string;
-        shouldHideInShell(inStateTicks: number): boolean;
-        animationDuration(): number;
-        isThreatened(): boolean;
         getRemappedEnumConstantName(): string;
         static SCARED: $Armadillo$ArmadilloState;
         static ROLLING: $Armadillo$ArmadilloState;
         static IDLE: $Armadillo$ArmadilloState;
         static UNROLLING: $Armadillo$ArmadilloState;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $Armadillo$ArmadilloState>;
-        get serializedName(): string;
         get threatened(): boolean;
+        get serializedName(): string;
         get remappedEnumConstantName(): string;
     }
     /**
@@ -40,39 +41,24 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
      */
     export type $Armadillo$ArmadilloState_ = "idle" | "rolling" | "scared" | "unrolling";
     export class $Armadillo extends $Animal {
-        getState(): $Armadillo$ArmadilloState;
-        /**
-         * Called to update the entity's position/logic.
-         */
-        rollUp(): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isScared(): boolean;
-        isScaredBy(entity: $LivingEntity): boolean;
         /**
          * Called to update the entity's position/logic.
          */
         rollOut(): void;
-        static createAttributes(): $AttributeSupplier$Builder;
+        isScaredBy(entity: $LivingEntity): boolean;
         /**
-         * Return whether this entity should be rendered as on fire.
+         * Called to update the entity's position/logic.
          */
+        rollUp(): void;
+        static createAttributes(): $AttributeSupplier$Builder;
         shouldSwitchToScaredState(): boolean;
         static checkArmadilloSpawnRules(entityType: $EntityType_<$Armadillo>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        shouldHideInShell(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        canStayRolledUp(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         brushOffScute(): boolean;
         switchToState(state: $Armadillo$ArmadilloState_): void;
+        canStayRolledUp(): boolean;
+        shouldHideInShell(): boolean;
+        getState(): $Armadillo$ArmadilloState;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -121,6 +107,7 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -132,6 +119,7 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -179,6 +167,7 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         yBodyRot: number;
         blocksBuilding: boolean;
         deathScore: number;
+        scuteTime: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
         invulnerableDuration: number;
@@ -187,8 +176,8 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         static BASE_SAFE_FALL_DISTANCE: number;
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Animal>, level: $Level_);
-        get state(): $Armadillo$ArmadilloState;
         get scared(): boolean;
+        get state(): $Armadillo$ArmadilloState;
     }
     export class $ArmadilloAi$ArmadilloPanic extends $AnimalPanic<$Armadillo> {
         static DEFAULT_DURATION: number;
@@ -199,9 +188,9 @@ declare module "@package/net/minecraft/world/entity/animal/armadillo" {
         constructor();
     }
     export class $ArmadilloAi {
-        static brainProvider(): $Brain$Provider<$Armadillo>;
-        static updateActivity(armadillo: $Armadillo): void;
         static getTemptations(): $Predicate<$ItemStack>;
+        static updateActivity(armadillo: $Armadillo): void;
+        static brainProvider(): $Brain$Provider<$Armadillo>;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }

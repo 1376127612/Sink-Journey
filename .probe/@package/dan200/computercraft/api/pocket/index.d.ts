@@ -15,10 +15,10 @@ declare module "@package/dan200/computercraft/api/pocket" {
         static REGISTRY: $ResourceKey<$Registry<$IPocketUpgrade>>;
     }
     export interface $IPocketUpgrade extends $UpgradeBase {
-        update(arg0: $IPocketAccess, arg1: $IPeripheral): void;
-        getType(): $UpgradeType<$IPocketUpgrade>;
         onRightClick(arg0: $Level_, arg1: $IPocketAccess, arg2: $IPeripheral): boolean;
         createPeripheral(arg0: $IPocketAccess): $IPeripheral;
+        update(arg0: $IPocketAccess, arg1: $IPeripheral): void;
+        getType(): $UpgradeType<$IPocketUpgrade>;
         get type(): $UpgradeType<$IPocketUpgrade>;
     }
     /**
@@ -29,28 +29,28 @@ declare module "@package/dan200/computercraft/api/pocket" {
     export class $IPocketAccess {
     }
     export interface $IPocketAccess {
-        getPosition(): $Vec3;
-        getEntity(): $Entity;
-        getLevel(): $ServerLevel;
-        setLight(arg0: number): void;
         getLight(): number;
+        getColour(): number;
+        setColour(arg0: number): void;
         /**
          * @deprecated
          */
         getUpgradeData(): $DataComponentPatch;
-        getUpgrade(): $UpgradeData<$IPocketUpgrade>;
-        setColour(arg0: number): void;
         setUpgrade(arg0: $UpgradeData<$IPocketUpgrade_>): void;
-        getColour(): number;
-        invalidatePeripheral(): void;
+        getUpgrade(): $UpgradeData<$IPocketUpgrade>;
+        getUpgradeHandle(): $UpgradeHandle<$IPocketUpgrade>;
         /**
          * @deprecated
          */
         setUpgradeData(arg0: $DataComponentPatch_): void;
-        getUpgradeHandle(): $UpgradeHandle<$IPocketUpgrade>;
-        get position(): $Vec3;
-        get entity(): $Entity;
-        get level(): $ServerLevel;
+        invalidatePeripheral(): void;
+        getPosition(): $Vec3;
+        getLevel(): $ServerLevel;
+        getEntity(): $Entity;
+        setLight(arg0: number): void;
         get upgradeHandle(): $UpgradeHandle<$IPocketUpgrade>;
+        get position(): $Vec3;
+        get level(): $ServerLevel;
+        get entity(): $Entity;
     }
 }

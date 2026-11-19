@@ -13,12 +13,12 @@ declare module "@package/mekanism/api/providers" {
     export class $IBaseProvider {
     }
     export interface $IBaseProvider extends $IHasTextComponent, $IHasTranslationKey {
-        getName(): string;
         getRegistryName(): $ResourceLocation;
         getTextComponent(): $Component;
-        get name(): string;
+        getName(): string;
         get registryName(): $ResourceLocation;
         get textComponent(): $Component;
+        get name(): string;
     }
     /**
      * @deprecated
@@ -26,11 +26,11 @@ declare module "@package/mekanism/api/providers" {
     export class $IModuleDataProvider<MODULE extends $ICustomModule<MODULE>> {
     }
     export interface $IModuleDataProvider<MODULE extends $ICustomModule<MODULE>> extends $IBaseProvider {
-        getTranslationKey(): string;
         getRegistryName(): $ResourceLocation;
+        getTranslationKey(): string;
         getModuleData(): $ModuleData<MODULE>;
-        get translationKey(): string;
         get registryName(): $ResourceLocation;
+        get translationKey(): string;
         get moduleData(): $ModuleData<MODULE>;
     }
     /**
@@ -43,13 +43,13 @@ declare module "@package/mekanism/api/providers" {
     export class $IItemProvider {
     }
     export interface $IItemProvider extends $IBaseProvider, $ItemLike {
-        getItemStack(): $ItemStack;
-        getItemStack(arg0: number): $ItemStack;
-        getTranslationKey(): string;
         getRegistryName(): $ResourceLocation;
+        getTranslationKey(): string;
         getTextComponent(): $Component;
-        get translationKey(): string;
+        getItemStack(arg0: number): $ItemStack;
+        getItemStack(): $ItemStack;
         get registryName(): $ResourceLocation;
+        get translationKey(): string;
         get textComponent(): $Component;
     }
     /**
@@ -62,13 +62,13 @@ declare module "@package/mekanism/api/providers" {
     export class $IChemicalProvider {
     }
     export interface $IChemicalProvider extends $IBaseProvider {
-        getStack(arg0: number): $ChemicalStack;
-        getTranslationKey(): string;
         getRegistryName(): $ResourceLocation;
+        getTranslationKey(): string;
         getChemical(): $Chemical;
         getTextComponent(): $Component;
-        get translationKey(): string;
+        getStack(arg0: number): $ChemicalStack;
         get registryName(): $ResourceLocation;
+        get translationKey(): string;
         get chemical(): $Chemical;
         get textComponent(): $Component;
     }

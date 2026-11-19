@@ -1,6 +1,6 @@
 import { $ItemStack } from "@package/net/minecraft/world/item";
-import { $IValueNotifiable } from "@package/org/cyclops/cyclopscore/inventory";
 import { $PanoramaRenderer } from "@package/net/minecraft/client/renderer";
+import { $IValueNotifiable } from "@package/org/cyclops/cyclopscore/inventory";
 import { $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $Component_ } from "@package/net/minecraft/network/chat";
 import { $NarratableEntry } from "@package/net/minecraft/client/gui/narration";
@@ -22,15 +22,15 @@ declare module "@package/org/cyclops/cyclopscore/client/gui/container" {
      * @deprecated
      */
     export class $ContainerScreenExtended<T extends $ContainerExtended> extends $AbstractContainerScreen<T> implements $IValueNotifiable {
-        init(): void;
-        isHovering(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
-        onUpdate(arg0: number, arg1: $CompoundTag_): void;
+        getValueNotifiableType(): $MenuType<never>;
         drawTooltip(arg0: $List_<$Component_>, arg1: $PoseStack, arg2: number, arg3: number): void;
         isPointInRegion(arg0: $Rectangle, arg1: $Point): boolean;
         getGuiTexture(): $ResourceLocation;
-        getGuiTopTotal(): number;
         getGuiLeftTotal(): number;
-        getValueNotifiableType(): $MenuType<never>;
+        getGuiTopTotal(): number;
+        init(): void;
+        isHovering(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): boolean;
+        onUpdate(arg0: number, arg1: $CompoundTag_): void;
         leftPos: number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -48,6 +48,7 @@ declare module "@package/org/cyclops/cyclopscore/client/gui/container" {
         snapbackTime: number;
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
+        imageWidth: number;
         snapbackEnd: $Slot;
         draggingItem: $ItemStack;
         static SLOT_ITEM_BLIT_OFFSET: number;
@@ -63,9 +64,9 @@ declare module "@package/org/cyclops/cyclopscore/client/gui/container" {
         static INWORLD_MENU_BACKGROUND: $ResourceLocation;
         font: $Font;
         constructor(arg0: T, arg1: $Inventory, arg2: $Component_);
-        get guiTexture(): $ResourceLocation;
-        get guiTopTotal(): number;
-        get guiLeftTotal(): number;
         get valueNotifiableType(): $MenuType<never>;
+        get guiTexture(): $ResourceLocation;
+        get guiLeftTotal(): number;
+        get guiTopTotal(): number;
     }
 }

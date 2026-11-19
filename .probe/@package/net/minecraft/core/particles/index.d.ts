@@ -166,15 +166,15 @@ declare module "@package/net/minecraft/core/particles" {
         get color(): $Vector3f;
     }
     export class $ColorParticleOption implements $ParticleOptions {
+        static codec(particleType: $ParticleType_<$ColorParticleOption>): $MapCodec<$ColorParticleOption>;
         getType(): $ParticleType<$ColorParticleOption>;
         static create(type: $ParticleType_<$ColorParticleOption>, color: number): $ColorParticleOption;
         static create(type: $ParticleType_<$ColorParticleOption>, red: number, green: number, blue: number): $ColorParticleOption;
         getRed(): number;
         getGreen(): number;
         getBlue(): number;
-        static streamCodec(type: $ParticleType_<$ColorParticleOption>): $StreamCodec<$ByteBuf, $ColorParticleOption>;
         getAlpha(): number;
-        static codec(particleType: $ParticleType_<$ColorParticleOption>): $MapCodec<$ColorParticleOption>;
+        static streamCodec(type: $ParticleType_<$ColorParticleOption>): $StreamCodec<$ByteBuf, $ColorParticleOption>;
         get type(): $ParticleType<$ColorParticleOption>;
         get red(): number;
         get green(): number;
@@ -182,15 +182,15 @@ declare module "@package/net/minecraft/core/particles" {
         get alpha(): number;
     }
     export class $VibrationParticleOption implements $ParticleOptions {
+        getArrivalInTicks(): number;
         getType(): $ParticleType<$VibrationParticleOption>;
         getDestination(): $PositionSource;
-        getArrivalInTicks(): number;
         static CODEC: $MapCodec<$VibrationParticleOption>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $VibrationParticleOption>;
         constructor(destination: $PositionSource, arrivalInTicks: number);
+        get arrivalInTicks(): number;
         get type(): $ParticleType<$VibrationParticleOption>;
         get destination(): $PositionSource;
-        get arrivalInTicks(): number;
     }
     export class $ParticleGroup {
         getLimit(): number;
@@ -209,12 +209,12 @@ declare module "@package/net/minecraft/core/particles" {
      */
     export type $ParticleOptions_ = string | (() => $ParticleType_<never>);
     export class $BlockParticleOption implements $ParticleOptions {
+        static codec(particleType: $ParticleType_<$BlockParticleOption>): $MapCodec<$BlockParticleOption>;
+        getPos(): $BlockPos;
         getState(): $BlockState;
         getType(): $ParticleType<$BlockParticleOption>;
-        getPos(): $BlockPos;
-        static streamCodec(particleType: $ParticleType_<$BlockParticleOption>): $StreamCodec<$RegistryFriendlyByteBuf, $BlockParticleOption>;
-        static codec(particleType: $ParticleType_<$BlockParticleOption>): $MapCodec<$BlockParticleOption>;
         setPos(arg0: $BlockPos_): $BlockParticleOption;
+        static streamCodec(particleType: $ParticleType_<$BlockParticleOption>): $StreamCodec<$RegistryFriendlyByteBuf, $BlockParticleOption>;
         constructor(type: $ParticleType_<$BlockParticleOption>, state: $BlockState_);
         get state(): $BlockState;
         get type(): $ParticleType<$BlockParticleOption>;
@@ -227,19 +227,19 @@ declare module "@package/net/minecraft/core/particles" {
         get scale(): number;
     }
     export class $ItemParticleOption implements $ParticleOptions {
+        static codec(particleType: $ParticleType_<$ItemParticleOption>): $MapCodec<$ItemParticleOption>;
         getType(): $ParticleType<$ItemParticleOption>;
         getItem(): $ItemStack;
         static streamCodec(particleType: $ParticleType_<$ItemParticleOption>): $StreamCodec<$RegistryFriendlyByteBuf, $ItemParticleOption>;
-        static codec(particleType: $ParticleType_<$ItemParticleOption>): $MapCodec<$ItemParticleOption>;
         constructor(type: $ParticleType_<$ItemParticleOption>, itemStack: $ItemStack_);
         get type(): $ParticleType<$ItemParticleOption>;
         get item(): $ItemStack;
     }
     export class $ParticleType<T extends $ParticleOptions> implements $IParticleTypeData {
-        getId(): $ResourceLocation;
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         codec(): $MapCodec<T>;
+        getId(): $ResourceLocation;
         getOverrideLimiter(): boolean;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         get id(): $ResourceLocation;
         get overrideLimiter(): boolean;
     }

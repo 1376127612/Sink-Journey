@@ -1,7 +1,7 @@
 import { $Music, $SoundEvent } from "@package/net/minecraft/sounds";
 import { $Holder_, $Holder } from "@package/net/minecraft/core";
 import { $MapCodec, $Codec } from "@package/com/mojang/serialization";
-import { $Biome$TemperatureModifier_, $AmbientMoodSettings, $AmbientParticleSettings, $Biome$TemperatureModifier, $BiomeSpecialEffects$GrassColorModifier_, $AmbientAdditionsSettings, $BiomeSpecialEffects$GrassColorModifier } from "@package/net/minecraft/world/level/biome";
+import { $Biome$TemperatureModifier_, $AmbientParticleSettings, $AmbientMoodSettings, $Biome$TemperatureModifier, $BiomeSpecialEffects$GrassColorModifier_, $AmbientAdditionsSettings, $BiomeSpecialEffects$GrassColorModifier } from "@package/net/minecraft/world/level/biome";
 import { $EntityType_, $EntityType } from "@package/net/minecraft/world/entity";
 import { $PlacementCondition$Context_ } from "@package/dev/worldgen/lithostitched/api/worldgen/placementcondition";
 import { $Enum, $Record } from "@package/java/lang";
@@ -10,16 +10,16 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/dev/worldgen/lithostitched/api/worldgen/util" {
     export class $DensityFunctionWrapper implements $DensityFunction$Visitor {
-        apply(arg0: $DensityFunction_): $DensityFunction;
         visitNoise(arg0: $DensityFunction$NoiseHolder_): $DensityFunction$NoiseHolder;
-        constructor(arg0: $PlacementCondition$Context_, arg1: $NoiseGeneratorSettings_);
+        apply(arg0: $DensityFunction_): $DensityFunction;
         constructor(arg0: number, arg1: boolean, arg2: $RandomState, arg3: $PositionalRandomFactory);
+        constructor(arg0: $PlacementCondition$Context_, arg1: $NoiseGeneratorSettings_);
     }
     export class $NoiseRouterTarget extends $Enum<$NoiseRouterTarget> implements $StringRepresentable {
+        getDensityFunction(arg0: $NoiseRouter_): $DensityFunction;
+        getSerializedName(): string;
         static values(): $NoiseRouterTarget[];
         static valueOf(arg0: string): $NoiseRouterTarget;
-        getSerializedName(): string;
-        getDensityFunction(arg0: $NoiseRouter_): $DensityFunction;
         getRemappedEnumConstantName(): string;
         static LAVA: $NoiseRouterTarget;
         static CODEC: $Codec<$NoiseRouterTarget>;
@@ -55,29 +55,29 @@ declare module "@package/dev/worldgen/lithostitched/api/worldgen/util" {
     /**
      * Values that may be interpreted as {@link $WeightedSpawnerData}.
      */
-    export type $WeightedSpawnerData_ = { minCount?: number, maxCount?: number, type?: $EntityType_<never>, weight?: number,  } | [minCount?: number, maxCount?: number, type?: $EntityType_<never>, weight?: number, ];
+    export type $WeightedSpawnerData_ = { maxCount?: number, type?: $EntityType_<never>, weight?: number, minCount?: number,  } | [maxCount?: number, type?: $EntityType_<never>, weight?: number, minCount?: number, ];
     export class $BiomeEffects extends $Record {
-        waterColor(): (number) | undefined;
-        skyColor(): (number) | undefined;
         fogColor(): (number) | undefined;
-        waterFogColor(): (number) | undefined;
-        grassColorModifier(): ($BiomeSpecialEffects$GrassColorModifier) | undefined;
+        waterColor(): (number) | undefined;
+        dryFoliageColor(): (number) | undefined;
+        ambientParticle(): ($AmbientParticleSettings) | undefined;
+        additionsSound(): ($AmbientAdditionsSettings) | undefined;
+        musicVolume(): (number) | undefined;
+        ambientSound(): ($Holder<$SoundEvent>) | undefined;
+        skyColor(): (number) | undefined;
         music(): ($Music) | undefined;
+        grassColorModifier(): ($BiomeSpecialEffects$GrassColorModifier) | undefined;
+        waterFogColor(): (number) | undefined;
         foliageColor(): (number) | undefined;
         moodSound(): ($AmbientMoodSettings) | undefined;
         grassColor(): (number) | undefined;
-        ambientParticle(): ($AmbientParticleSettings) | undefined;
-        additionsSound(): ($AmbientAdditionsSettings) | undefined;
-        ambientSound(): ($Holder<$SoundEvent>) | undefined;
-        musicVolume(): (number) | undefined;
-        dryFoliageColor(): (number) | undefined;
         static CODEC: $Codec<$BiomeEffects>;
         constructor(fogColor: (number) | undefined, waterColor: (number) | undefined, waterFogColor: (number) | undefined, skyColor: (number) | undefined, foliageColor: (number) | undefined, dryFoliageColor: (number) | undefined, grassColor: (number) | undefined, grassColorModifier: ($BiomeSpecialEffects$GrassColorModifier_) | undefined, ambientParticle: ($AmbientParticleSettings) | undefined, ambientSound: ($Holder_<$SoundEvent>) | undefined, moodSound: ($AmbientMoodSettings) | undefined, additionsSound: ($AmbientAdditionsSettings) | undefined, music: ($Music) | undefined, musicVolume: (number) | undefined);
     }
     /**
      * Values that may be interpreted as {@link $BiomeEffects}.
      */
-    export type $BiomeEffects_ = { dryFoliageColor?: (number) | undefined, music?: ($Music) | undefined, moodSound?: ($AmbientMoodSettings) | undefined, waterColor?: (number) | undefined, fogColor?: (number) | undefined, musicVolume?: (number) | undefined, additionsSound?: ($AmbientAdditionsSettings) | undefined, foliageColor?: (number) | undefined, grassColorModifier?: ($BiomeSpecialEffects$GrassColorModifier_) | undefined, grassColor?: (number) | undefined, ambientSound?: ($Holder_<$SoundEvent>) | undefined, ambientParticle?: ($AmbientParticleSettings) | undefined, skyColor?: (number) | undefined, waterFogColor?: (number) | undefined,  } | [dryFoliageColor?: (number) | undefined, music?: ($Music) | undefined, moodSound?: ($AmbientMoodSettings) | undefined, waterColor?: (number) | undefined, fogColor?: (number) | undefined, musicVolume?: (number) | undefined, additionsSound?: ($AmbientAdditionsSettings) | undefined, foliageColor?: (number) | undefined, grassColorModifier?: ($BiomeSpecialEffects$GrassColorModifier_) | undefined, grassColor?: (number) | undefined, ambientSound?: ($Holder_<$SoundEvent>) | undefined, ambientParticle?: ($AmbientParticleSettings) | undefined, skyColor?: (number) | undefined, waterFogColor?: (number) | undefined, ];
+    export type $BiomeEffects_ = { fogColor?: (number) | undefined, musicVolume?: (number) | undefined, additionsSound?: ($AmbientAdditionsSettings) | undefined, foliageColor?: (number) | undefined, grassColorModifier?: ($BiomeSpecialEffects$GrassColorModifier_) | undefined, grassColor?: (number) | undefined, ambientSound?: ($Holder_<$SoundEvent>) | undefined, ambientParticle?: ($AmbientParticleSettings) | undefined, skyColor?: (number) | undefined, waterFogColor?: (number) | undefined, dryFoliageColor?: (number) | undefined, music?: ($Music) | undefined, moodSound?: ($AmbientMoodSettings) | undefined, waterColor?: (number) | undefined,  } | [fogColor?: (number) | undefined, musicVolume?: (number) | undefined, additionsSound?: ($AmbientAdditionsSettings) | undefined, foliageColor?: (number) | undefined, grassColorModifier?: ($BiomeSpecialEffects$GrassColorModifier_) | undefined, grassColor?: (number) | undefined, ambientSound?: ($Holder_<$SoundEvent>) | undefined, ambientParticle?: ($AmbientParticleSettings) | undefined, skyColor?: (number) | undefined, waterFogColor?: (number) | undefined, dryFoliageColor?: (number) | undefined, music?: ($Music) | undefined, moodSound?: ($AmbientMoodSettings) | undefined, waterColor?: (number) | undefined, ];
     export class $BiomeClimate extends $Record {
         temperature(): (number) | undefined;
         hasPrecipitation(): (boolean) | undefined;
@@ -89,5 +89,5 @@ declare module "@package/dev/worldgen/lithostitched/api/worldgen/util" {
     /**
      * Values that may be interpreted as {@link $BiomeClimate}.
      */
-    export type $BiomeClimate_ = { downfall?: (number) | undefined, temperature?: (number) | undefined, temperatureModifier?: ($Biome$TemperatureModifier_) | undefined, hasPrecipitation?: (boolean) | undefined,  } | [downfall?: (number) | undefined, temperature?: (number) | undefined, temperatureModifier?: ($Biome$TemperatureModifier_) | undefined, hasPrecipitation?: (boolean) | undefined, ];
+    export type $BiomeClimate_ = { temperature?: (number) | undefined, temperatureModifier?: ($Biome$TemperatureModifier_) | undefined, hasPrecipitation?: (boolean) | undefined, downfall?: (number) | undefined,  } | [temperature?: (number) | undefined, temperatureModifier?: ($Biome$TemperatureModifier_) | undefined, hasPrecipitation?: (boolean) | undefined, downfall?: (number) | undefined, ];
 }

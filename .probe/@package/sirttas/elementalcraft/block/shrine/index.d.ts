@@ -8,14 +8,14 @@ import { $List, $List_ } from "@package/java/util";
 
 declare module "@package/sirttas/elementalcraft/block/shrine" {
     export class $ShrineProperties extends $Record implements $IConfigurableBlockEntityProperties, $IElementTypeProvider {
+        consumption(): number;
         elementType(): $ElementType;
         getType(): $ConfigurableBlockEntityPropertiesType<$ShrineProperties>;
         capacity(): number;
         getElementType(): $ElementType;
-        strength(): $List<number>;
         period(): number;
         ranges(): $RangeVariants;
-        consumption(): number;
+        strength(): $List<number>;
         getElementTypeSupplier(): $Supplier<$ElementType>;
         static CODEC: $MapCodec<$ShrineProperties>;
         static DEFAULT: $ShrineProperties;
@@ -26,5 +26,5 @@ declare module "@package/sirttas/elementalcraft/block/shrine" {
     /**
      * Values that may be interpreted as {@link $ShrineProperties}.
      */
-    export type $ShrineProperties_ = { period?: number, elementType?: $ElementType_, consumption?: number, ranges?: $RangeVariants_, capacity?: number, strength?: $List_<number>,  } | [period?: number, elementType?: $ElementType_, consumption?: number, ranges?: $RangeVariants_, capacity?: number, strength?: $List_<number>, ];
+    export type $ShrineProperties_ = { consumption?: number, ranges?: $RangeVariants_, capacity?: number, strength?: $List_<number>, period?: number, elementType?: $ElementType_,  } | [consumption?: number, ranges?: $RangeVariants_, capacity?: number, strength?: $List_<number>, period?: number, elementType?: $ElementType_, ];
 }

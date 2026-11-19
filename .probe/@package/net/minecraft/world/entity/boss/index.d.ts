@@ -1,3 +1,4 @@
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $EnderDragon } from "@package/net/minecraft/world/entity/boss/enderdragon";
 import { $BlockPos } from "@package/net/minecraft/core";
 import { $PartEntity } from "@package/net/neoforged/neoforge/entity";
@@ -54,6 +55,7 @@ declare module "@package/net/minecraft/world/entity/boss" {
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;

@@ -20,25 +20,25 @@ declare module "@package/com/simibubi/create/content/kinetics/belt/behaviour" {
      */
     export type $TransportedItemStackHandlerBehaviour$ProcessingCallback_ = ((arg0: number, arg1: $Function<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>) => void);
     export class $TransportedItemStackHandlerBehaviour extends $BlockEntityBehaviour {
-        handleProcessingOnAllItems(arg0: $Function_<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>): void;
-        handleProcessingOnItem(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour$TransportedResult): void;
-        getWorldPositionOf(arg0: $TransportedItemStack): $Vec3;
-        withStackPlacement(arg0: $TransportedItemStackHandlerBehaviour$PositionGetter_): $TransportedItemStackHandlerBehaviour;
         handleCenteredProcessingOnAllItems(arg0: number, arg1: $Function_<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>): void;
+        handleProcessingOnAllItems(arg0: $Function_<$TransportedItemStack, $TransportedItemStackHandlerBehaviour$TransportedResult>): void;
+        withStackPlacement(arg0: $TransportedItemStackHandlerBehaviour$PositionGetter_): $TransportedItemStackHandlerBehaviour;
+        getWorldPositionOf(arg0: $TransportedItemStack): $Vec3;
+        handleProcessingOnItem(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour$TransportedResult): void;
         blockEntity: $SmartBlockEntity;
         static TYPE: $BehaviourType<$TransportedItemStackHandlerBehaviour>;
         constructor(arg0: $SmartBlockEntity, arg1: $TransportedItemStackHandlerBehaviour$ProcessingCallback_);
     }
     export class $TransportedItemStackHandlerBehaviour$TransportedResult {
-        static removeItem(): $TransportedItemStackHandlerBehaviour$TransportedResult;
-        static convertTo(arg0: $List_<$TransportedItemStack>): $TransportedItemStackHandlerBehaviour$TransportedResult;
         static convertTo(arg0: $TransportedItemStack): $TransportedItemStackHandlerBehaviour$TransportedResult;
-        static convertToAndLeaveHeld(arg0: $List_<$TransportedItemStack>, arg1: $TransportedItemStack): $TransportedItemStackHandlerBehaviour$TransportedResult;
-        static doNothing(): $TransportedItemStackHandlerBehaviour$TransportedResult;
-        hasHeldOutput(): boolean;
-        getHeldOutput(): $TransportedItemStack;
-        didntChangeFrom(arg0: $ItemStack_): boolean;
+        static convertTo(arg0: $List_<$TransportedItemStack>): $TransportedItemStackHandlerBehaviour$TransportedResult;
         doesNothing(): boolean;
+        hasHeldOutput(): boolean;
+        didntChangeFrom(arg0: $ItemStack_): boolean;
+        getHeldOutput(): $TransportedItemStack;
+        static convertToAndLeaveHeld(arg0: $List_<$TransportedItemStack>, arg1: $TransportedItemStack): $TransportedItemStackHandlerBehaviour$TransportedResult;
+        static removeItem(): $TransportedItemStackHandlerBehaviour$TransportedResult;
+        static doNothing(): $TransportedItemStackHandlerBehaviour$TransportedResult;
         getOutputs(): $List<$TransportedItemStack>;
         get heldOutput(): $TransportedItemStack;
         get outputs(): $List<$TransportedItemStack>;
@@ -64,11 +64,11 @@ declare module "@package/com/simibubi/create/content/kinetics/belt/behaviour" {
      */
     export type $BeltProcessingBehaviour$ProcessingResult_ = "pass" | "hold" | "remove";
     export class $BeltProcessingBehaviour extends $BlockEntityBehaviour {
-        static isBlocked(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
-        whenItemEnters(arg0: $BeltProcessingBehaviour$ProcessingCallback_): $BeltProcessingBehaviour;
         whileItemHeld(arg0: $BeltProcessingBehaviour$ProcessingCallback_): $BeltProcessingBehaviour;
-        handleHeldItem(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour): $BeltProcessingBehaviour$ProcessingResult;
+        whenItemEnters(arg0: $BeltProcessingBehaviour$ProcessingCallback_): $BeltProcessingBehaviour;
+        static isBlocked(arg0: $BlockGetter, arg1: $BlockPos_): boolean;
         handleReceivedItem(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour): $BeltProcessingBehaviour$ProcessingResult;
+        handleHeldItem(arg0: $TransportedItemStack, arg1: $TransportedItemStackHandlerBehaviour): $BeltProcessingBehaviour$ProcessingResult;
         blockEntity: $SmartBlockEntity;
         static TYPE: $BehaviourType<$BeltProcessingBehaviour>;
         constructor(arg0: $SmartBlockEntity);

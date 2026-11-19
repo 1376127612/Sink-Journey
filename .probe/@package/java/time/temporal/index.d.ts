@@ -9,12 +9,12 @@ declare module "@package/java/time/temporal" {
         static values(): $ChronoUnit[];
         static valueOf(arg0: string): $ChronoUnit;
         between(arg0: $Temporal, arg1: $Temporal): number;
-        getDuration(): $Duration;
-        isDurationEstimated(): boolean;
         isDateBased(): boolean;
         isTimeBased(): boolean;
         isSupportedBy(arg0: $Temporal): boolean;
         addTo<R extends $Temporal>(arg0: R, arg1: number): R;
+        getDuration(): $Duration;
+        isDurationEstimated(): boolean;
         static FOREVER: $ChronoUnit;
         static MICROS: $ChronoUnit;
         static SECONDS: $ChronoUnit;
@@ -31,10 +31,10 @@ declare module "@package/java/time/temporal" {
         static CENTURIES: $ChronoUnit;
         static MINUTES: $ChronoUnit;
         static ERAS: $ChronoUnit;
-        get duration(): $Duration;
-        get durationEstimated(): boolean;
         get dateBased(): boolean;
         get timeBased(): boolean;
+        get duration(): $Duration;
+        get durationEstimated(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $ChronoUnit}.
@@ -45,16 +45,16 @@ declare module "@package/java/time/temporal" {
     export interface $TemporalUnit {
         toString(): string;
         between(arg0: $Temporal, arg1: $Temporal): number;
-        getDuration(): $Duration;
-        isDurationEstimated(): boolean;
         isDateBased(): boolean;
         isTimeBased(): boolean;
         isSupportedBy(arg0: $Temporal): boolean;
         addTo<R extends $Temporal>(arg0: R, arg1: number): R;
-        get duration(): $Duration;
-        get durationEstimated(): boolean;
+        getDuration(): $Duration;
+        isDurationEstimated(): boolean;
         get dateBased(): boolean;
         get timeBased(): boolean;
+        get duration(): $Duration;
+        get durationEstimated(): boolean;
     }
     export class $TemporalAccessor {
     }
@@ -72,18 +72,18 @@ declare module "@package/java/time/temporal" {
         resolve(arg0: $Map_<$TemporalField, number>, arg1: $TemporalAccessor, arg2: $ResolverStyle_): $TemporalAccessor;
         range(): $ValueRange;
         getDisplayName(arg0: $Locale): string;
-        getBaseUnit(): $TemporalUnit;
-        getRangeUnit(): $TemporalUnit;
         isDateBased(): boolean;
         isTimeBased(): boolean;
         isSupportedBy(arg0: $TemporalAccessor): boolean;
         rangeRefinedBy(arg0: $TemporalAccessor): $ValueRange;
         getFrom(arg0: $TemporalAccessor): number;
         adjustInto<R extends $Temporal>(arg0: R, arg1: number): R;
-        get baseUnit(): $TemporalUnit;
-        get rangeUnit(): $TemporalUnit;
+        getBaseUnit(): $TemporalUnit;
+        getRangeUnit(): $TemporalUnit;
         get dateBased(): boolean;
         get timeBased(): boolean;
+        get baseUnit(): $TemporalUnit;
+        get rangeUnit(): $TemporalUnit;
     }
     export class $TemporalAdjuster {
     }
@@ -119,9 +119,9 @@ declare module "@package/java/time/temporal" {
     }
     export interface $TemporalAmount {
         get(arg0: $TemporalUnit): number;
-        getUnits(): $List<$TemporalUnit>;
         addTo(arg0: $Temporal): $Temporal;
         subtractFrom(arg0: $Temporal): $Temporal;
+        getUnits(): $List<$TemporalUnit>;
         get units(): $List<$TemporalUnit>;
     }
     /**
@@ -134,8 +134,6 @@ declare module "@package/java/time/temporal" {
         range(): $ValueRange;
         getDisplayName(arg0: $Locale): string;
         checkValidValue(arg0: number): number;
-        getBaseUnit(): $TemporalUnit;
-        getRangeUnit(): $TemporalUnit;
         isDateBased(): boolean;
         isTimeBased(): boolean;
         isSupportedBy(arg0: $TemporalAccessor): boolean;
@@ -143,6 +141,8 @@ declare module "@package/java/time/temporal" {
         getFrom(arg0: $TemporalAccessor): number;
         adjustInto<R extends $Temporal>(arg0: R, arg1: number): R;
         checkValidIntValue(arg0: number): number;
+        getBaseUnit(): $TemporalUnit;
+        getRangeUnit(): $TemporalUnit;
         resolve(arg0: $Map_<$TemporalField, number>, arg1: $TemporalAccessor, arg2: $ResolverStyle_): $TemporalAccessor;
         static CLOCK_HOUR_OF_AMPM: $ChronoField;
         static DAY_OF_YEAR: $ChronoField;
@@ -174,10 +174,10 @@ declare module "@package/java/time/temporal" {
         static INSTANT_SECONDS: $ChronoField;
         static ALIGNED_WEEK_OF_YEAR: $ChronoField;
         static DAY_OF_WEEK: $ChronoField;
-        get baseUnit(): $TemporalUnit;
-        get rangeUnit(): $TemporalUnit;
         get dateBased(): boolean;
         get timeBased(): boolean;
+        get baseUnit(): $TemporalUnit;
+        get rangeUnit(): $TemporalUnit;
     }
     /**
      * Values that may be interpreted as {@link $ChronoField}.

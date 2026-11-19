@@ -21,29 +21,29 @@ declare module "@package/dev/latvian/mods/kubejs/generator" {
     export class $KubeResourceGenerator {
     }
     export interface $KubeResourceGenerator extends $KubeEvent {
+        getRegistries(): $RegistryAccessContainer;
+        getGenerated(id: $ResourceLocation_): $GeneratedData;
         flush(): void;
         add(data: $GeneratedData_): void;
         text(id: $ResourceLocation_, content: string): void;
         json(id: $ResourceLocation_, json: $JsonElement_): void;
-        getRegistries(): $RegistryAccessContainer;
-        getGenerated(id: $ResourceLocation_): $GeneratedData;
         get registries(): $RegistryAccessContainer;
     }
     export class $KubeDataGenerator {
     }
     export interface $KubeDataGenerator extends $KubeResourceGenerator {
-        dataMap<R, T>(type: $DataMapType<R, T>, consumer: $Consumer_<$VirtualDataMapFile<R, T>>): void;
-        setWaxable(from: $Block_, to: $Block_): void;
-        setVibrationFrequency(gameEvent: $GameEvent_, frequency: number): void;
+        setCompostable(items: $ItemPredicate_, chance: number, canVillagerCompost: boolean): void;
+        setParrotImitation(type: $EntityType_<never>, sound: $SoundEvent_): void;
         setVillagerType(biome: $ResourceKey_<$Biome>, villagerType: $VillagerType_): void;
+        removeCompostable(items: $ItemPredicate_): void;
+        removeFurnaceFuel(items: $ItemPredicate_): void;
+        setRaidHeroGifts(profession: $VillagerProfession_, lootTable: $ResourceKey_<$LootTable>): void;
         setFurnaceFuel(items: $ItemPredicate_, ticks: $TickDuration_): void;
         setMonsterRoomMobs(entityType: $EntityType_<never>, weight: number): void;
-        removeFurnaceFuel(items: $ItemPredicate_): void;
-        setCompostable(items: $ItemPredicate_, chance: number, canVillagerCompost: boolean): void;
-        removeCompostable(items: $ItemPredicate_): void;
-        setRaidHeroGifts(profession: $VillagerProfession_, lootTable: $ResourceKey_<$LootTable>): void;
-        setParrotImitation(type: $EntityType_<never>, sound: $SoundEvent_): void;
         setOxidizable(from: $Block_, to: $Block_): void;
+        setVibrationFrequency(gameEvent: $GameEvent_, frequency: number): void;
+        setWaxable(from: $Block_, to: $Block_): void;
+        dataMap<R, T>(type: $DataMapType<R, T>, consumer: $Consumer_<$VirtualDataMapFile<R, T>>): void;
     }
     export class $KubeAssetGenerator {
         static HANDHELD_ITEM_MODEL: $ResourceLocation;
@@ -52,17 +52,17 @@ declare module "@package/dev/latvian/mods/kubejs/generator" {
         static GENERATED_ITEM_MODEL: $ResourceLocation;
     }
     export interface $KubeAssetGenerator extends $KubeResourceGenerator {
-        mask(target: $ResourceLocation_, mask: $ResourceLocation_, input: $ResourceLocation_): boolean;
-        texture(target: $ResourceLocation_, texture: $LoadedTexture): void;
-        blockModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
-        itemModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
-        sounds(namespace: string, consumer: $Consumer_<$SoundsGenerator>): void;
-        blockState(id: $ResourceLocation_, consumer: $Consumer_<$VariantBlockStateGenerator>): void;
         particle(id: $ResourceLocation_, consumer: $Consumer_<$ParticleGenerator>): void;
+        defaultHandheldItemModel(id: $ResourceLocation_): void;
+        defaultItemModel(id: $ResourceLocation_): void;
         loadTexture(id: $ResourceLocation_): $LoadedTexture;
         multipartState(id: $ResourceLocation_, consumer: $Consumer_<$MultipartBlockStateGenerator>): void;
-        defaultItemModel(id: $ResourceLocation_): void;
         stencil(target: $ResourceLocation_, stencil: $ResourceLocation_, colors: $Map_<$KubeColor_, $KubeColor_>): void;
-        defaultHandheldItemModel(id: $ResourceLocation_): void;
+        mask(target: $ResourceLocation_, mask: $ResourceLocation_, input: $ResourceLocation_): boolean;
+        itemModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
+        blockModel(id: $ResourceLocation_, consumer: $Consumer_<$ModelGenerator>): void;
+        sounds(namespace: string, consumer: $Consumer_<$SoundsGenerator>): void;
+        blockState(id: $ResourceLocation_, consumer: $Consumer_<$VariantBlockStateGenerator>): void;
+        texture(target: $ResourceLocation_, texture: $LoadedTexture): void;
     }
 }

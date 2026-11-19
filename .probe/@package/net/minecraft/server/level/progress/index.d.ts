@@ -29,30 +29,30 @@ declare module "@package/net/minecraft/server/level/progress" {
         onStatusChange(chunkPos: $ChunkPos, chunkStatus: $ChunkStatus_ | null): void;
     }
     export class $StoringChunkProgressListener implements $ChunkProgressListener {
+        static createFromGameruleRadius(radius: number): $StoringChunkProgressListener;
+        getProgress(): number;
+        getFullDiameter(): number;
+        getDiameter(): number;
+        static createCompleted(): $StoringChunkProgressListener;
         start(): void;
         stop(): void;
         static create(radius: number): $StoringChunkProgressListener;
         getStatus(x: number, z: number): $ChunkStatus;
-        static createFromGameruleRadius(radius: number): $StoringChunkProgressListener;
         updateSpawnPos(center: $ChunkPos): void;
         onStatusChange(chunkPos: $ChunkPos, chunkStatus: $ChunkStatus_ | null): void;
-        getDiameter(): number;
-        getFullDiameter(): number;
-        getProgress(): number;
-        static createCompleted(): $StoringChunkProgressListener;
-        get diameter(): number;
-        get fullDiameter(): number;
         get progress(): number;
+        get fullDiameter(): number;
+        get diameter(): number;
     }
     export class $LoggerChunkProgressListener implements $ChunkProgressListener {
+        static createFromGameruleRadius(radius: number): $LoggerChunkProgressListener;
+        getProgress(): number;
+        static createCompleted(): $LoggerChunkProgressListener;
         start(): void;
         stop(): void;
         static create(radius: number): $LoggerChunkProgressListener;
-        static createFromGameruleRadius(radius: number): $LoggerChunkProgressListener;
         updateSpawnPos(center: $ChunkPos): void;
         onStatusChange(chunkPos: $ChunkPos, chunkStatus: $ChunkStatus_ | null): void;
-        getProgress(): number;
-        static createCompleted(): $LoggerChunkProgressListener;
         get progress(): number;
     }
 }

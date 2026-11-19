@@ -19,30 +19,42 @@ import { $IDimensionSpecialEffectsExtension } from "@package/net/neoforged/neofo
 import { $BlockState_ } from "@package/net/minecraft/world/level/block/state";
 import { $LevelRendererAccessor as $LevelRendererAccessor$4 } from "@package/dev/engine_room/flywheel/backend/mixin";
 import { $ILDShaderInstance } from "@package/com/lowdragmc/lowdraglib2/client/shader";
+import { $LocalRef } from "@package/com/llamalad7/mixinextras/sugar/ref";
 import { $MethodHandle } from "@package/java/lang/invoke";
 import { $LevelRendererAccessor as $LevelRendererAccessor$3 } from "@package/com/george_vi/electroenergetics/mixins";
 import { $BlendMode, $FogShape, $Program, $Program$Type_, $Shader, $EffectProgram, $Uniform, $Effect, $AbstractUniform } from "@package/com/mojang/blaze3d/shaders";
+import { $WorldRendererMixinAccessor } from "@package/de/dafuqs/revelationary/mixin/client";
 import { $LevelRendererAccessor as $LevelRendererAccessor$1, $LightTextureAccessor, $GameRendererAccessor as $GameRendererAccessor$1 } from "@package/net/irisshaders/iris/mixin";
+import { $LevelRendererAccess } from "@package/org/betterx/bclib/interfaces";
 import { $ShaderInstanceAccessor } from "@package/com/lowdragmc/lowdraglib2/core/mixins/accessor";
 import { $BufferSourceExtension } from "@package/com/supermartijn642/fusion/extensions";
-import { $Item_, $JukeboxSong, $ItemStack_, $ItemStack, $ItemDisplayContext_ } from "@package/net/minecraft/world/item";
+import { $Item, $Item_, $JukeboxSong, $ItemStack_, $ItemStack, $ItemDisplayContext_ } from "@package/net/minecraft/world/item";
 import { $EntityOutlineState, $PaniniProjection } from "@package/me/flashyreese/mods/sodiumextra/client/render";
+import { $Particle } from "@package/net/minecraft/client/particle";
+import { $TranslucentRenderTargetLayer } from "@package/dev/compactmods/gander/render/translucency";
+import { $WorldRendererAccessor } from "@package/de/dafuqs/spectrum/mixin/accessors";
 import { $MobEffectInstance, $MobEffect } from "@package/net/minecraft/world/effect";
+import { $WorldRendererAccessor as $WorldRendererAccessor$1 } from "@package/de/dafuqs/revelationary/api/revelations";
+import { $IShaderInstance, $LodestoneProgram } from "@package/team/lodestar/lodestone/systems/rendering/shader";
 import { $VertexBufferWriter } from "@package/net/caffeinemc/mods/sodium/api/vertex/buffer";
-import { $WoodType_, $WoodType, $ChestType_ } from "@package/net/minecraft/world/level/block/state/properties";
+import { $WoodType, $ChestType_ } from "@package/net/minecraft/world/level/block/state/properties";
+import { $LevelRendererAccessor as $LevelRendererAccessor$7 } from "@package/org/betterx/bclib/mixin/client";
 import { $AccessorMultiBufferSource } from "@package/vazkii/patchouli/mixin/client";
 import { $Block_ } from "@package/net/minecraft/world/level/block";
 import { $RenderStateShardAccessor, $RenderTypeAccessor } from "@package/net/irisshaders/iris/mixin/rendertype";
+import { $GanderCompositeRenderType } from "@package/dev/compactmods/gander/render/rendertypes";
 import { $DimensionType_ } from "@package/net/minecraft/world/level/dimension";
 import { $AABB_, $Vec3, $Vec3_ } from "@package/net/minecraft/world/phys";
 import { $Matrix4f, $Vector3f, $Matrix3f } from "@package/org/joml";
-import { $JsonObject_ } from "@package/com/google/gson";
+import { $JsonObject_, $JsonElement_ } from "@package/com/google/gson";
 import { $AccessBufferSource } from "@package/icyllis/modernui/mc/text/mixin";
 import { $AccessorGameRenderer, $AccessorPostChain as $AccessorPostChain$1, $AccessorPostPass } from "@package/hellfirepvp/astralsorcery/mixin/client";
+import { $Args } from "@package/org/spongepowered/asm/mixin/injection/invoke/arg";
+import { $AccessorMixinLevelRenderer, $AccessorMixinCompositeRenderType, $AccessorMixinCompositeState } from "@package/mysticmods/roots/mixin/client/accessor";
 import { $BakedModel, $ModelResourceLocation, $ModelResourceLocation_, $ModelManager, $Material } from "@package/net/minecraft/client/resources/model";
 import { $LevelRendererAccessor as $LevelRendererAccessor$2 } from "@package/com/simibubi/create/foundation/mixin/accessor";
 import { $Map, $List, $Map_, $OptionalDouble, $Collection_, $List_, $SortedSet, $SequencedMap } from "@package/java/util";
-import { $Supplier_, $Function, $Supplier, $Consumer_, $BiFunction, $Predicate_, $IntSupplier_ } from "@package/java/util/function";
+import { $Supplier_, $Function, $Supplier, $Consumer_, $BiFunction, $Predicate_, $IntSupplier_, $IntSupplier } from "@package/java/util/function";
 import { $ShaderInstanceInterface, $ItemInHandInterface } from "@package/net/irisshaders/iris/mixinterface";
 import { $BlockDestructionProgress } from "@package/net/minecraft/server/level";
 import { $BlockPos_, $Holder, $Direction_, $Direction, $Holder_ } from "@package/net/minecraft/core";
@@ -52,6 +64,7 @@ import { $DynamicTexture, $TextureAtlasSprite, $OverlayTexture, $TextureManager 
 import { $CharSequence, $Throwable, $Runnable, $Enum, $RuntimeException, $Iterable, $Record, $AutoCloseable, $Runnable_, $Object } from "@package/java/lang";
 import { $MemoryStack } from "@package/org/lwjgl/system";
 import { $LevelRendererExtension } from "@package/net/caffeinemc/mods/sodium/client/world";
+import { $LevelRendererAccessor as $LevelRendererAccessor$6 } from "@package/com/lowdragmc/mbd2/core/mixins";
 import { $BufferedReader, $InputStream } from "@package/java/io";
 import { $ChunkPos, $BlockGetter, $ColorResolver, $Level_, $BlockAndTintGetter, $LevelHeightAccessor } from "@package/net/minecraft/world/level";
 import { $Int2ObjectMap } from "@package/it/unimi/dsi/fastutil/ints";
@@ -86,41 +99,46 @@ export * as blockentity from "@package/net/minecraft/client/renderer/blockentity
 export * as culling from "@package/net/minecraft/client/renderer/culling";
 
 declare module "@package/net/minecraft/client/renderer" {
-    export class $MultiBufferSource$BufferSource implements $MultiBufferSource, $AccessBufferSource, $BufferSourceAccessor, $MemoryTrackingBuffer, $AccessorMultiBufferSource, $BufferSourceExtension, $IBufferSource {
-        getBuffer(renderType: $RenderType): $VertexConsumer;
+    export class $MultiBufferSource$BufferSource implements $MultiBufferSource, $AccessBufferSource, $BufferSourceAccessor, $MemoryTrackingBuffer, $BufferSourceExtension, $IBufferSource, $AccessorMultiBufferSource {
+        setXaero_lastRenderType(renderType: $RenderType): void;
+        getXaero_lastRenderType(): $RenderType;
+        fusionGetLastRenderType(): $RenderType;
         endLastBatch(): void;
+        freeAndDeleteBuffer(): void;
+        localvar$dco001$xaerominimap$onGetBuffer(arg0: $RenderType): $RenderType;
+        getBuffer(renderType: $RenderType): $VertexConsumer;
         endBatch(renderType: $RenderType, builder: $BufferBuilder): void;
         endBatch(renderType: $RenderType): void;
         endBatch(): void;
-        getAllocatedSize(): number;
         getUsedSize(): number;
-        freeAndDeleteBuffer(): void;
-        localvar$doh001$xaerominimap$onGetBuffer(arg0: $RenderType): $RenderType;
-        setXaero_lastRenderType(renderType: $RenderType): void;
-        fusionGetLastRenderType(): $RenderType;
-        getXaero_lastRenderType(): $RenderType;
-        getFixedBuffers(): $SequencedMap<$RenderType, $ByteBufferBuilder>;
+        getAllocatedSize(): number;
         getFallbackBuffer(): $ByteBufferBuilder;
+        getFixedBuffers(): $SequencedMap<$RenderType, $ByteBufferBuilder>;
         fixedBuffers: $SequencedMap<$RenderType, $ByteBufferBuilder>;
         lastSharedType: $RenderType;
         sharedBuffer: $ByteBufferBuilder;
         constructor(sharedBuffer: $ByteBufferBuilder, fixedBuffers: $SequencedMap<$RenderType, $ByteBufferBuilder>);
-        get allocatedSize(): number;
         get usedSize(): number;
+        get allocatedSize(): number;
         get fallbackBuffer(): $ByteBufferBuilder;
     }
-    export class $PostChain implements $AutoCloseable, $AccessorPostChain$1, $AccessorPostChain {
+    export class $PostChain implements $AutoCloseable, $AccessorPostChain, $AccessorPostChain$1 {
+        getTempTarget(target: string): $RenderTarget;
+        addPass(name: string, inTarget: $RenderTarget, outTarget: $RenderTarget, useLinearFilter: boolean): $PostPass;
+        updateOrthoMatrix(): void;
+        redirect$hog000$lodestone$addAdditionalTargetNodeSpecifications(arg0: $PostChain, arg1: string, arg2: number, arg3: number, arg4: $JsonObject_): void;
+        addTempTarget(name: string, width: number, height: number): void;
+        getRenderTarget(target: string | null): $RenderTarget;
+        redirect$hog000$lodestone$addAdditionalTargetNodeSpecifications$mixinextras$bridge$21(arg0: $PostChain, arg1: string, arg2: number, arg3: number, arg4: $LocalRef<any>): void;
         getName(): string;
+        load(textureManager: $TextureManager, resourceLocation: $ResourceLocation_): void;
         close(): void;
         resize(width: number, height: number): void;
         process(partialTicks: number): void;
-        getTempTarget(target: string): $RenderTarget;
         setUniform(name: string, backgroundBlurriness: number): void;
-        addTempTarget(name: string, width: number, height: number): void;
-        addPass(name: string, inTarget: $RenderTarget, outTarget: $RenderTarget, useLinearFilter: boolean): $PostPass;
-        getResourceProvider(): $ResourceProvider;
-        sodiumExtra$getPasses(): $List<$PostPass>;
         getPasses(): $List<$PostPass>;
+        sodiumExtra$getPasses(): $List<$PostPass>;
+        getResourceProvider(): $ResourceProvider;
         customRenderTargets: $Map<string, $RenderTarget>;
         screenWidth: number;
         static MAIN_RENDER_TARGET: string;
@@ -137,8 +155,8 @@ declare module "@package/net/minecraft/client/renderer" {
     }
     export class $BlockEntityWithoutLevelRenderer implements $ResourceManagerReloadListener {
         renderByItem(stack: $ItemStack_, displayContext: $ItemDisplayContext_, poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, packedOverlay: number): void;
+        handler$edh000$geckolib$renderGeckolibItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         onResourceManagerReload(resourceManager: $ResourceManager): void;
-        handler$zem000$geckolib$renderGeckolibItem(arg0: $ItemStack_, arg1: $ItemDisplayContext_, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number, arg6: $CallbackInfo): void;
         reload(preparationBarrier: $PreparableReloadListener$PreparationBarrier_, resourceManager: $ResourceManager, preparationsProfiler: $ProfilerFiller, reloadProfiler: $ProfilerFiller, backgroundExecutor: $Executor_, gameExecutor: $Executor_): $CompletableFuture<void>;
         getName(): string;
         constructor(blockEntityRenderDispatcher: $BlockEntityRenderDispatcher, entityModelSet: $EntityModelSet);
@@ -147,77 +165,30 @@ declare module "@package/net/minecraft/client/renderer" {
     export class $FogRenderer$MobEffectFogFunction {
     }
     export interface $FogRenderer$MobEffectFogFunction {
+        getMobEffect(): $Holder<$MobEffect>;
         getModifiedVoidDarkness(entity: $LivingEntity, effectInstance: $MobEffectInstance, arg2: number, partialTick: number): number;
         isEnabled(entity: $LivingEntity, arg1: number): boolean;
         setupFog(fogData: $FogRenderer$FogData, entity: $LivingEntity, effectInstance: $MobEffectInstance, farPlaneDistance: number, arg4: number): void;
-        getMobEffect(): $Holder<$MobEffect>;
         get mobEffect(): $Holder<$MobEffect>;
     }
     export class $SectionBufferBuilderPack implements $AutoCloseable, $SectionBufferBuilderPackAccessor {
+        discardAll(): void;
         buffer(renderType: $RenderType): $ByteBufferBuilder;
         close(): void;
         clearAll(): void;
-        discardAll(): void;
         getBuffers(): $Map<$RenderType, $ByteBufferBuilder>;
         static TOTAL_BUFFERS_SIZE: number;
         constructor();
         get buffers(): $Map<$RenderType, $ByteBufferBuilder>;
     }
-    export class $LevelRenderer implements $ResourceManagerReloadListener, $AutoCloseable, $AccessorLevelRenderer, $EntityOutlineState, $LevelRendererAccessor$1, $CullingDataCache, $LevelRendererAccessor$5, $LevelRendererExtension, $LevelRendererAccessor$4, $LevelRendererAccessor$2, $LevelRendererAccessor, $LevelRendererAccessor$3 {
-        /**
-         * Loads all renderers and sets up the basic options usage.
-         */
-        clear(): void;
-        /**
-         * Loads all renderers and sets up the basic options usage.
-         */
-        close(): void;
-        countRenderedSections(): number;
-        hasRenderedAllSections(): boolean;
-        resize(width: number, height: number): void;
-        playJukeboxSong(song: $Holder_<$JukeboxSong>, pos: $BlockPos_): void;
-        setSectionDirty(sectionX: number, sectionY: number, sectionZ: number): void;
-        setSectionDirty(sectionX: number, sectionY: number, sectionZ: number, reRenderOnMainThread: boolean): void;
-        static renderShape(poseStack: $PoseStack, consumer: $VertexConsumer, shape: $VoxelShape, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number, red: number): void;
-        static renderVoxelShape(poseStack: $PoseStack, consumer: $VertexConsumer, shape: $VoxelShape, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number, red: number, green: boolean): void;
-        static renderLineBox(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number, maxZ: number, arg13: number, red: number): void;
-        static renderLineBox(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number): void;
-        static renderLineBox(poseStack: $PoseStack, buffer: $VertexConsumer, box: $AABB_, red: number, green: number, blue: number, alpha: number): void;
-        static renderLineBox(consumer: $VertexConsumer, minX: number, arg2: number, minY: number, arg4: number, minZ: number, arg6: number, maxX: number, arg8: number, maxY: number, arg10: number): void;
-        renderHitOutline(poseStack: $PoseStack, consumer: $VertexConsumer, entity: $Entity, camX: number, arg4: number, camY: number, arg6: $BlockPos_, camZ: $BlockState_): void;
-        renderClouds(poseStack: $PoseStack, frustumMatrix: $Matrix4f, projectionMatrix: $Matrix4f, partialTick: number, camX: number, arg5: number, camY: number): void;
-        /**
-         * Loads all renderers and sets up the basic options usage.
-         */
-        killFrustum(): void;
-        getTranslucentTarget(): $RenderTarget;
-        getItemEntityTarget(): $RenderTarget;
-        handler$dec000$chloride$inject$tick(arg0: $Camera, arg1: $CallbackInfo): void;
-        handler$fkl000$ad_astra$adastra$tickRain(arg0: $Camera, arg1: $CallbackInfo): void;
-        setLevel(level: $ClientLevel | null): void;
-        sodiumExtra$hasEntityOutline(): boolean;
-        iterateVisibleBlockEntities(arg0: $Consumer_<$BlockEntity>): void;
-        handler$dbn000$sodium$renderClouds(arg0: $PoseStack, arg1: $Matrix4f, arg2: $Matrix4f, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $CallbackInfo): void;
-        stopJukeboxSongAndNotifyNearby(pos: $BlockPos_): void;
-        static addChainedFilledBoxVertices(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number): void;
-        static addChainedFilledBoxVertices(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number, red: number, green: number, blue: number, alpha: number): void;
-        handler$bib000$patchouli$onRender(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
-        handler$zeb000$sodium_extra$preRenderEndSky(stack: $PoseStack, ci: $CallbackInfo): void;
-        handler$zbi000$astralsorcery$specialSkyRenderer(arg0: $Matrix4f, arg1: $Matrix4f, arg2: number, arg3: $Camera, arg4: boolean, arg5: $Runnable_, arg6: $CallbackInfo): void;
-        handler$dad000$sodium$replaceBlockEntityIteration(arg0: $Consumer_<any>, arg1: $CallbackInfo): void;
-        /**
-         * Loads all renderers and sets up the basic options usage.
-         */
-        tick(): void;
-        isSectionCompiled(pos: $BlockPos_): boolean;
-        getCloudsTarget(): $RenderTarget;
-        getWeatherTarget(): $RenderTarget;
-        getParticlesTarget(): $RenderTarget;
+    export class $LevelRenderer implements $ResourceManagerReloadListener, $AutoCloseable, $WorldRendererAccessor$1, $AccessorLevelRenderer, $EntityOutlineState, $LevelRendererAccessor$1, $CullingDataCache, $LevelRendererAccessor$6, $LevelRendererExtension, $LevelRendererAccessor$4, $LevelRendererAccessor, $WorldRendererMixinAccessor, $WorldRendererAccessor, $LevelRendererAccessor$7, $LevelRendererAccess, $LevelRendererAccessor$5, $LevelRendererAccessor$2, $AccessorMixinLevelRenderer, $LevelRendererAccessor$3 {
         /**
          * Loads all renderers and sets up the basic options usage.
          */
         doEntityOutline(): void;
-        prepareCullFrustum(cameraPosition: $Vec3_, frustumMatrix: $Matrix4f, projectionMatrix: $Matrix4f): void;
+        static getLightColor(level: $BlockAndTintGetter, pos: $BlockPos_): number;
+        static getLightColor(level: $BlockAndTintGetter, state: $BlockState_, pos: $BlockPos_): number;
+        getTotalSections(): number;
         /**
          * Loads all renderers and sets up the basic options usage.
          */
@@ -226,14 +197,76 @@ declare module "@package/net/minecraft/client/renderer" {
          * Loads all renderers and sets up the basic options usage.
          */
         initOutline(): void;
-        getTotalSections(): number;
         static offsetFrustum(frustum: $Frustum): $Frustum;
-        handler$zeo000$geckolib$captureRenderedEntities(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
-        handler$bfh000$supermartijn642corelib$renderLevel(deltaTracker: $DeltaTracker, bl: boolean, camera: $Camera, gameRenderer: $GameRenderer, lightTexture: $LightTexture, matrix4f: $Matrix4f, matrix4f2: $Matrix4f, ci: $CallbackInfo): void;
-        wrapOperation$zeg000$sodium_extra$redirectGetFogColorOverride(instance: $DimensionSpecialEffects, skyAngle: number, tickDelta: number, original: $Operation_<any>): number[];
-        wrapOperation$zee000$sodium_extra$redirectGetStarBrightness(instance: $ClientLevel, f: number, original: $Operation_<any>): number;
-        handler$zbi000$astralsorcery$renderStellarFilamentCustomHitRender(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
-        handler$zbi000$astralsorcery$renderLinkSessionSourceOutline(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
+        renderClouds(poseStack: $PoseStack, frustumMatrix: $Matrix4f, projectionMatrix: $Matrix4f, partialTick: number, camX: number, arg5: number, camY: number): void;
+        isSectionCompiled(pos: $BlockPos_): boolean;
+        /**
+         * Loads all renderers and sets up the basic options usage.
+         */
+        killFrustum(): void;
+        static renderShape(poseStack: $PoseStack, consumer: $VertexConsumer, shape: $VoxelShape, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number, red: number): void;
+        renderHitOutline(poseStack: $PoseStack, consumer: $VertexConsumer, entity: $Entity, camX: number, arg4: number, camY: number, arg6: $BlockPos_, camZ: $BlockState_): void;
+        static renderVoxelShape(poseStack: $PoseStack, consumer: $VertexConsumer, shape: $VoxelShape, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number, red: number, green: boolean): void;
+        static renderLineBox(poseStack: $PoseStack, buffer: $VertexConsumer, box: $AABB_, red: number, green: number, blue: number, alpha: number): void;
+        static renderLineBox(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number): void;
+        static renderLineBox(consumer: $VertexConsumer, minX: number, arg2: number, minY: number, arg4: number, minZ: number, arg6: number, maxX: number, arg8: number, maxY: number, arg10: number): void;
+        static renderLineBox(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number, maxZ: number, arg13: number, red: number): void;
+        setSectionDirty(sectionX: number, sectionY: number, sectionZ: number, reRenderOnMainThread: boolean): void;
+        setSectionDirty(sectionX: number, sectionY: number, sectionZ: number): void;
+        playJukeboxSong(song: $Holder_<$JukeboxSong>, pos: $BlockPos_): void;
+        handler$dpl000$astralsorcery$skyConstellationOverlay(arg0: $Matrix4f, arg1: $Matrix4f, arg2: number, arg3: $Camera, arg4: boolean, arg5: $Runnable_, arg6: $CallbackInfo): void;
+        localvar$hod000$lodestone$cacheBlockModelViewMatrix(arg0: $Matrix4f): $Matrix4f;
+        wrapOperation$zck000$sodium_extra$redirectSetSkyShader(instance: $VertexBuffer, viewMatrix: $Matrix4f, projectionMatrix: $Matrix4f, program: $ShaderInstance, original: $Operation_<any>): void;
+        entityTarget(): $RenderTarget;
+        addParticle(options: $ParticleOptions_, force: boolean, x: number, arg3: number, y: number, arg5: number, z: number, arg7: number): void;
+        addParticle(options: $ParticleOptions_, force: boolean, decreased: boolean, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number): void;
+        /**
+         * Re-renders all blocks in the specified range.
+         */
+        setBlocksDirty(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): void;
+        globalLevelEvent(breakerId: number, pos: $BlockPos_, progress: number): void;
+        destroyBlockProgress(breakerId: number, pos: $BlockPos_, progress: number): void;
+        sodiumExtra$hasEntityOutline(): boolean;
+        handler$cmh000$sodium$renderClouds(arg0: $PoseStack, arg1: $Matrix4f, arg2: $Matrix4f, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $CallbackInfo): void;
+        static addChainedFilledBoxVertices(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number, red: number, green: number, blue: number, alpha: number): void;
+        static addChainedFilledBoxVertices(poseStack: $PoseStack, consumer: $VertexConsumer, minX: number, arg3: number, minY: number, arg5: number, minZ: number, arg7: number, maxX: number, arg9: number, maxY: number, arg11: number): void;
+        iterateVisibleBlockEntities(arg0: $Consumer_<$BlockEntity>): void;
+        stopJukeboxSongAndNotifyNearby(pos: $BlockPos_): void;
+        handler$fab000$patchouli$onRender(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
+        getWeatherTarget(): $RenderTarget;
+        getParticlesTarget(): $RenderTarget;
+        getCloudsTarget(): $RenderTarget;
+        /**
+         * Loads all renderers and sets up the basic options usage.
+         */
+        clear(): void;
+        /**
+         * Loads all renderers and sets up the basic options usage.
+         */
+        close(): void;
+        resize(width: number, height: number): void;
+        /**
+         * Loads all renderers and sets up the basic options usage.
+         */
+        tick(): void;
+        prepareCullFrustum(cameraPosition: $Vec3_, frustumMatrix: $Matrix4f, projectionMatrix: $Matrix4f): void;
+        setLevel(level: $ClientLevel | null): void;
+        renderSky(frustumMatrix: $Matrix4f, projectionMatrix: $Matrix4f, partialTick: number, camera: $Camera, isFoggy: boolean, skyFogSetup: $Runnable_): void;
+        tickRain(camera: $Camera): void;
+        getFrustum(): $Frustum;
+        static renderFace(poseStack: $PoseStack, buffer: $VertexConsumer, face: $Direction_, x1: number, y1: number, z1: number, x2: number, y2: number, z2: number, red: number, green: number, blue: number, alpha: number): void;
+        sodium$getWorldRenderer(): $SodiumWorldRenderer;
+        /**
+         * @return entity rendering statistics to display on the debug overlay
+         */
+        getSectionStatistics(): string;
+        getTranslucentTarget(): $RenderTarget;
+        getItemEntityTarget(): $RenderTarget;
+        handler$ckn000$sodium$replaceBlockEntityIteration(arg0: $Consumer_<any>, arg1: $CallbackInfo): void;
+        handler$bhm000$supermartijn642corelib$renderLevel(deltaTracker: $DeltaTracker, bl: boolean, camera: $Camera, gameRenderer: $GameRenderer, lightTexture: $LightTexture, matrix4f: $Matrix4f, matrix4f2: $Matrix4f, ci: $CallbackInfo): void;
+        handler$edj000$geckolib$captureRenderedEntities(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
+        handler$zck000$sodium_extra$preRenderEndSky(stack: $PoseStack, ci: $CallbackInfo): void;
+        handler$dpl000$astralsorcery$specialSkyRenderer(arg0: $Matrix4f, arg1: $Matrix4f, arg2: number, arg3: $Camera, arg4: boolean, arg5: $Runnable_, arg6: $CallbackInfo): void;
         /**
          * Loads all renderers and sets up the basic options usage.
          */
@@ -241,7 +274,7 @@ declare module "@package/net/minecraft/client/renderer" {
         /**
          * Loads all renderers and sets up the basic options usage.
          */
-        saveState(): void;
+        allChanged(): void;
         /**
          * Loads all renderers and sets up the basic options usage.
          */
@@ -254,37 +287,19 @@ declare module "@package/net/minecraft/client/renderer" {
         /**
          * Loads all renderers and sets up the basic options usage.
          */
-        allChanged(): void;
-        static getLightColor(level: $BlockAndTintGetter, pos: $BlockPos_): number;
-        static getLightColor(level: $BlockAndTintGetter, state: $BlockState_, pos: $BlockPos_): number;
-        addParticle(options: $ParticleOptions_, force: boolean, decreased: boolean, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number): void;
-        addParticle(options: $ParticleOptions_, force: boolean, x: number, arg3: number, y: number, arg5: number, z: number, arg7: number): void;
-        /**
-         * Re-renders all blocks in the specified range.
-         */
-        setBlocksDirty(minX: number, minY: number, minZ: number, maxX: number, maxY: number, maxZ: number): void;
-        globalLevelEvent(breakerId: number, pos: $BlockPos_, progress: number): void;
-        setBlockDirty(pos: $BlockPos_, oldState: $BlockState_, newState: $BlockState_): void;
-        onChunkLoaded(chunkPos: $ChunkPos): void;
-        blockChanged(level: $BlockGetter, pos: $BlockPos_, oldState: $BlockState_, newState: $BlockState_, flags: number): void;
-        levelEvent(breakerId: number, pos: $BlockPos_, progress: number): void;
-        tickRain(camera: $Camera): void;
-        getFrustum(): $Frustum;
-        setSectionDirtyWithNeighbors(sectionX: number, sectionY: number, sectionZ: number): void;
-        destroyBlockProgress(breakerId: number, pos: $BlockPos_, progress: number): void;
-        static renderFace(poseStack: $PoseStack, buffer: $VertexConsumer, face: $Direction_, x1: number, y1: number, z1: number, x2: number, y2: number, z2: number, red: number, green: number, blue: number, alpha: number): void;
-        renderSky(frustumMatrix: $Matrix4f, projectionMatrix: $Matrix4f, partialTick: number, camera: $Camera, isFoggy: boolean, skyFogSetup: $Runnable_): void;
-        handler$zbi000$astralsorcery$skyConstellationOverlay(arg0: $Matrix4f, arg1: $Matrix4f, arg2: number, arg3: $Camera, arg4: boolean, arg5: $Runnable_, arg6: $CallbackInfo): void;
-        wrapOperation$zeb000$sodium_extra$redirectSetSkyShader(instance: $VertexBuffer, viewMatrix: $Matrix4f, projectionMatrix: $Matrix4f, program: $ShaderInstance, original: $Operation_<any>): void;
-        redirect$ddf000$chloride$redirect$entitiesForRendering(arg0: $ClientLevel): $Iterable<any>;
+        saveState(): void;
+        handler$flb000$chloride$inject$tick(arg0: $Camera, arg1: $CallbackInfo): void;
+        handler$doe000$ad_astra$adastra$tickRain(arg0: $Camera, arg1: $CallbackInfo): void;
+        getLastViewDistance(): number;
+        addRecentlyCompiledSection(renderSection: $SectionRenderDispatcher$RenderSection): void;
+        addParticleInternal(options: $ParticleOptions_, force: boolean, decreased: boolean, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number): $Particle;
         shouldShowEntityOutlines(): boolean;
         getSectionRenderDispatcher(): $SectionRenderDispatcher;
-        getLastViewDistance(): number;
         /**
-         * @return entity rendering statistics to display on the debug overlay
+         * Notifies living entities in a 3 block range of the specified `pos` that a record is or isn't playing nearby, dependent on the specified `playing` parameter.
+         * This is used to make parrots start or stop partying.
          */
-        getEntityStatistics(): string;
-        addRecentlyCompiledSection(renderSection: $SectionRenderDispatcher$RenderSection): void;
+        notifyNearbyEntities(level: $Level_, pos: $BlockPos_, playing: boolean): void;
         /**
          * Loads all renderers and sets up the basic options usage.
          */
@@ -292,55 +307,77 @@ declare module "@package/net/minecraft/client/renderer" {
         /**
          * @return entity rendering statistics to display on the debug overlay
          */
-        getSectionStatistics(): string;
-        sodium$getWorldRenderer(): $SodiumWorldRenderer;
+        getEntityStatistics(): string;
         updateGlobalBlockEntities(blockEntitiesToRemove: $Collection_<$BlockEntity>, blockEntitiesToAdd: $Collection_<$BlockEntity>): void;
+        onChunkLoaded(chunkPos: $ChunkPos): void;
+        setBlockDirty(pos: $BlockPos_, oldState: $BlockState_, newState: $BlockState_): void;
+        blockChanged(level: $BlockGetter, pos: $BlockPos_, oldState: $BlockState_, newState: $BlockState_, flags: number): void;
+        bcl_addParticle(arg0: $ParticleOptions_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number): $Particle;
+        static invokeRenderShape$spectrum_$md$e03d8d$8(poseStack: $PoseStack, consumer: $VertexConsumer, shape: $VoxelShape, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number, red: number): void;
+        static renderShape$bclib_$md$e03d8d$9(poseStack: $PoseStack, consumer: $VertexConsumer, shape: $VoxelShape, x: number, arg4: number, y: number, arg6: number, z: number, arg8: number, red: number): void;
+        /**
+         * Loads all renderers and sets up the basic options usage.
+         */
+        revelationary$rebuildAllChunks(): void;
+        redirect$fke000$chloride$redirect$entitiesForRendering(arg0: $ClientLevel): $Iterable<any>;
         onResourceManagerReload(resourceManager: $ResourceManager): void;
-        entityTarget(): $RenderTarget;
-        reload(preparationBarrier: $PreparableReloadListener$PreparationBarrier_, resourceManager: $ResourceManager, preparationsProfiler: $ProfilerFiller, reloadProfiler: $ProfilerFiller, backgroundExecutor: $Executor_, gameExecutor: $Executor_): $CompletableFuture<void>;
+        setSectionDirtyWithNeighbors(sectionX: number, sectionY: number, sectionZ: number): void;
+        levelEvent(breakerId: number, pos: $BlockPos_, progress: number): void;
+        countRenderedSections(): number;
+        hasRenderedAllSections(): boolean;
+        handler$hod000$lodestone$injectionBeforeTransparencyChainProcess(arg0: $CallbackInfo): void;
+        handler$dpl000$astralsorcery$renderStellarFilamentCustomHitRender(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
+        handler$dpl000$astralsorcery$renderLinkSessionSourceOutline(arg0: $DeltaTracker, arg1: boolean, arg2: $Camera, arg3: $GameRenderer, arg4: $LightTexture, arg5: $Matrix4f, arg6: $Matrix4f, arg7: $CallbackInfo): void;
+        wrapOperation$zcn000$sodium_extra$redirectGetStarBrightness(instance: $ClientLevel, f: number, original: $Operation_<any>): number;
+        wrapOperation$zcp000$sodium_extra$redirectGetFogColorOverride(instance: $DimensionSpecialEffects, skyAngle: number, tickDelta: number, original: $Operation_<any>): number[];
+        reload(arg0: $PreparableReloadListener$PreparationBarrier_, arg1: $ResourceManager, arg2: $ProfilerFiller, arg3: $ProfilerFiller, arg4: $Executor_, arg5: $Executor_): $CompletableFuture<void>;
         /**
          * @return entity rendering statistics to display on the debug overlay
          */
         getName(): string;
-        sodiumExtra$getEntityOutlinePostChain(): $PostChain;
-        getLevel(): $ClientLevel;
-        sodiumExtra$getTransparencyChain(): $PostChain;
-        electroEnergetics$getRenderBuffers(): $RenderBuffers;
-        invokeDoesMobEffectBlockSky(camera: $Camera): boolean;
-        sodiumExtra$getEntityOutlineTarget(): $RenderTarget;
-        sodiumExtra$getCapturedFrustum(): $Frustum;
         getEntityRenderDispatcher(): $EntityRenderDispatcher;
+        getLevel(): $ClientLevel;
         getTicks(): number;
+        shouldRegenerateClouds(): boolean;
+        roots$CallRenderHitOutline(poseStack: $PoseStack, consumer: $VertexConsumer, entity: $Entity, camX: number, arg4: number, camY: number, arg6: $BlockPos_, camZ: $BlockState_): void;
+        create$getCullingFrustum(): $Frustum;
+        invokeRenderSectionLayer(renderType: $RenderType, x: number, arg2: number, y: number, arg4: $Matrix4f, z: $Matrix4f): void;
+        setShouldRegenerateClouds(arg0: boolean): void;
+        getDestructionProgress(): $Long2ObjectMap<$SortedSet<$BlockDestructionProgress>>;
+        create$getCapturedFrustum(): $Frustum;
+        invokeSetSectionDirty(sectionX: number, sectionY: number, sectionZ: number, reRenderOnMainThread: boolean): void;
+        sodiumExtra$getEntityOutlinePostChain(): $PostChain;
+        sodiumExtra$getCapturedFrustum(): $Frustum;
+        sodiumExtra$getTransparencyChain(): $PostChain;
+        sodiumExtra$getEntityOutlineTarget(): $RenderTarget;
+        invokeDoesMobEffectBlockSky(camera: $Camera): boolean;
+        electroEnergetics$getRenderBuffers(): $RenderBuffers;
+        flywheel$getTicks(): number;
+        invokeRenderEntity(entity: $Entity, camX: number, arg2: number, camY: number, arg4: number, camZ: $PoseStack, arg6: $MultiBufferSource_): void;
         setRenderBuffers(arg0: $RenderBuffers): void;
-        getRenderBuffers(): $RenderBuffers;
         invokeSetupRender(camera: $Camera, frustum: $Frustum, hasCapturedFrustum: boolean, isSpectator: boolean): void;
         getSkyBuffer(): $VertexBuffer;
-        invokeRenderEntity(entity: $Entity, camX: number, arg2: number, camY: number, arg4: number, camZ: $PoseStack, arg6: $MultiBufferSource_): void;
-        flywheel$getTicks(): number;
-        invokeRenderSectionLayer(renderType: $RenderType, x: number, arg2: number, y: number, arg4: $Matrix4f, z: $Matrix4f): void;
-        shouldRegenerateClouds(): boolean;
-        getDestructionProgress(): $Long2ObjectMap<$SortedSet<$BlockDestructionProgress>>;
-        setShouldRegenerateClouds(arg0: boolean): void;
-        create$getCullingFrustum(): $Frustum;
-        create$getCapturedFrustum(): $Frustum;
+        getRenderBuffers(): $RenderBuffers;
         destructionProgress: $Long2ObjectMap<$SortedSet<$BlockDestructionProgress>>;
         renderBuffers: $RenderBuffers;
         static HALF_SECTION_SIZE: number;
+        transparencyChain: $PostChain;
         static SECTION_SIZE: number;
+        viewArea: $ViewArea;
         destroyingBlocks: $Int2ObjectMap<$BlockDestructionProgress>;
         static DIRECTIONS: $Direction[];
         constructor(minecraft: $Minecraft, entityRenderDispatcher: $EntityRenderDispatcher, blockEntityRenderDispatcher: $BlockEntityRenderDispatcher, renderBuffers: $RenderBuffers);
-        get translucentTarget(): $RenderTarget;
-        get itemEntityTarget(): $RenderTarget;
-        get cloudsTarget(): $RenderTarget;
+        get totalSections(): number;
         get weatherTarget(): $RenderTarget;
         get particlesTarget(): $RenderTarget;
-        get totalSections(): number;
+        get cloudsTarget(): $RenderTarget;
         get frustum(): $Frustum;
-        get sectionRenderDispatcher(): $SectionRenderDispatcher;
-        get lastViewDistance(): number;
-        get entityStatistics(): string;
         get sectionStatistics(): string;
+        get translucentTarget(): $RenderTarget;
+        get itemEntityTarget(): $RenderTarget;
+        get lastViewDistance(): number;
+        get sectionRenderDispatcher(): $SectionRenderDispatcher;
+        get entityStatistics(): string;
         get name(): string;
         get entityRenderDispatcher(): $EntityRenderDispatcher;
         get ticks(): number;
@@ -449,20 +486,20 @@ declare module "@package/net/minecraft/client/renderer" {
     export class $SectionOcclusionGraph$Node {
     }
     export class $DimensionSpecialEffects implements $IDimensionSpecialEffectsExtension {
-        getCloudHeight(): number;
-        static forType(dimensionType: $DimensionType_): $DimensionSpecialEffects;
-        getBrightnessDependentFogColor(fogColor: $Vec3_, brightness: number): $Vec3;
-        constantAmbientLight(): boolean;
-        forceBrightLightmap(): boolean;
         skyType(): $DimensionSpecialEffects$SkyType;
-        isFoggyAt(x: number, y: number): boolean;
-        getSunriseColor(timeOfDay: number, partialTicks: number): number[];
+        getCloudHeight(): number;
+        constantAmbientLight(): boolean;
+        getBrightnessDependentFogColor(fogColor: $Vec3_, brightness: number): $Vec3;
         hasGround(): boolean;
-        renderClouds(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $PoseStack, arg4: number, arg5: number, arg6: number, arg7: $Matrix4f, arg8: $Matrix4f): boolean;
+        isFoggyAt(x: number, y: number): boolean;
+        static forType(dimensionType: $DimensionType_): $DimensionSpecialEffects;
+        forceBrightLightmap(): boolean;
+        getSunriseColor(timeOfDay: number, partialTicks: number): number[];
         renderSnowAndRain(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $LightTexture, arg4: number, arg5: number, arg6: number): boolean;
-        tickRain(arg0: $ClientLevel, arg1: number, arg2: $Camera): boolean;
+        renderClouds(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $PoseStack, arg4: number, arg5: number, arg6: number, arg7: $Matrix4f, arg8: $Matrix4f): boolean;
         adjustLightmapColors(arg0: $ClientLevel, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $Vector3f): void;
         renderSky(arg0: $ClientLevel, arg1: number, arg2: number, arg3: $Matrix4f, arg4: $Camera, arg5: $Matrix4f, arg6: boolean, arg7: $Runnable_): boolean;
+        tickRain(arg0: $ClientLevel, arg1: number, arg2: $Camera): boolean;
         constructor(cloudLevel: number, hasGround: boolean, skyType: $DimensionSpecialEffects$SkyType_, forceBrightLightmap: boolean, constantAmbientLight: boolean);
         get cloudHeight(): number;
     }
@@ -470,8 +507,8 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(message: string, cause: $Throwable);
     }
     export class $ViewArea {
-        releaseAllBuffers(): void;
         repositionCamera(viewEntityX: number, arg1: number): void;
+        releaseAllBuffers(): void;
         setDirty(sectionX: number, sectionY: number, sectionZ: number, reRenderOnMainThread: boolean): void;
         getViewDistance(): number;
         getLevelHeightAccessor(): $LevelHeightAccessor;
@@ -590,13 +627,13 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(useOverlay: boolean);
     }
     export class $SectionOcclusionGraph {
-        update(smartCull: boolean, camera: $Camera, frustum: $Frustum, sections: $List_<$SectionRenderDispatcher$RenderSection>): void;
-        invalidate(): void;
         waitAndReset(viewArea: $ViewArea | null): void;
         onSectionCompiled(renderSection: $SectionRenderDispatcher$RenderSection): void;
-        onChunkLoaded(chunkPos: $ChunkPos): void;
-        addSectionsInFrustum(frustum: $Frustum, sections: $List_<$SectionRenderDispatcher$RenderSection>): void;
         consumeFrustumUpdate(): boolean;
+        update(smartCull: boolean, camera: $Camera, frustum: $Frustum, sections: $List_<$SectionRenderDispatcher$RenderSection>): void;
+        invalidate(): void;
+        addSectionsInFrustum(frustum: $Frustum, sections: $List_<$SectionRenderDispatcher$RenderSection>): void;
+        onChunkLoaded(chunkPos: $ChunkPos): void;
         constructor();
     }
     export class $RenderStateShard$EmptyTextureStateShard extends $RenderStateShard {
@@ -723,6 +760,7 @@ declare module "@package/net/minecraft/client/renderer" {
         static RENDERTYPE_ENTITY_CUTOUT_SHADER: $RenderStateShard$ShaderStateShard;
         static ADDITIVE_TRANSPARENCY: $RenderStateShard$TransparencyStateShard;
         static RENDERTYPE_ENTITY_GLINT_DIRECT_SHADER: $RenderStateShard$ShaderStateShard;
+        writeColor: boolean;
         static DEFAULT_LINE: $RenderStateShard$LineStateShard;
         static RENDERTYPE_GUI_SHADER: $RenderStateShard$ShaderStateShard;
         static OUTLINE_TARGET: $RenderStateShard$OutputStateShard;
@@ -764,6 +802,7 @@ declare module "@package/net/minecraft/client/renderer" {
         static RENDERTYPE_TEXT_BACKGROUND_SHADER: $RenderStateShard$ShaderStateShard;
         static RENDERTYPE_TRANSLUCENT_SHADER: $RenderStateShard$ShaderStateShard;
         static NO_COLOR_LOGIC: $RenderStateShard$ColorLogicStateShard;
+        writeDepth: boolean;
         name: string;
         static RENDERTYPE_ENERGY_SWIRL_SHADER: $RenderStateShard$ShaderStateShard;
         static POSITION_SHADER: $RenderStateShard$ShaderStateShard;
@@ -810,22 +849,22 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(size: number);
     }
     export class $PostPass implements $AutoCloseable, $AccessorPostPass {
+        getFilterMode(): number;
+        setOrthoMatrix(shaderOrthoMatrix: $Matrix4f): void;
+        addAuxAsset(auxName: string, auxFramebuffer: $IntSupplier_, width: number, height: number): void;
         getName(): string;
         close(): void;
         process(partialTicks: number): void;
-        getFilterMode(): number;
         getEffect(): $EffectInstance;
-        addAuxAsset(auxName: string, auxFramebuffer: $IntSupplier_, width: number, height: number): void;
-        setOrthoMatrix(shaderOrthoMatrix: $Matrix4f): void;
         setInTarget(arg0: $RenderTarget): void;
         setOutTarget(arg0: $RenderTarget): void;
         outTarget: $RenderTarget;
         inTarget: $RenderTarget;
         constructor(resourceProvider: $ResourceProvider_, name: string, inTarget: $RenderTarget, outTarget: $RenderTarget, useLinearFilter: boolean);
-        get name(): string;
         get filterMode(): number;
-        get effect(): $EffectInstance;
         set orthoMatrix(value: $Matrix4f);
+        get name(): string;
+        get effect(): $EffectInstance;
     }
     export class $RenderStateShard$OffsetTexturingStateShard extends $RenderStateShard$TexturingStateShard {
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
@@ -934,117 +973,117 @@ declare module "@package/net/minecraft/client/renderer" {
         end: number;
         constructor(mode: $FogRenderer$FogMode_);
     }
-    export class $RenderType extends $RenderStateShard implements $RenderTypeAccessor, $BlendingStateHolder, $RenderTypeAccessor$1, $MixinRenderTypeAccessor, $RenderTypeAccessor$2 {
+    export class $RenderType extends $RenderStateShard implements $RenderTypeAccessor, $BlendingStateHolder, $RenderTypeAccessor$1, $RenderTypeAccessor$2, $MixinRenderTypeAccessor {
+        static lambda$static$12(location: $ResourceLocation_): $RenderType;
+        static lambda$static$17(location: $ResourceLocation_): $RenderType;
+        static lambda$static$18(location: $ResourceLocation_): $RenderType;
+        static lambda$static$16(location: $ResourceLocation_): $RenderType;
+        static lambda$static$10(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
+        static lambda$static$6(location: $ResourceLocation_): $RenderType;
+        static lambda$static$14(location: $ResourceLocation_): $RenderType;
+        static lambda$static$7(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
+        static lambda$static$8(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
+        static lambda$static$11(location: $ResourceLocation_): $RenderType;
+        static lambda$static$13(location: $ResourceLocation_): $RenderType;
+        static lambda$static$15(arg0: $ResourceLocation_, arg1: $RenderStateShard$TransparencyStateShard): $RenderType;
+        static lambda$static$9(location: $ResourceLocation_): $RenderType;
+        static gui(): $RenderType;
+        static lambda$static$5(location: $ResourceLocation_): $RenderType;
+        static lambda$static$4(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
+        static lambda$static$22(location: $ResourceLocation_): $RenderType;
+        static lambda$static$20(location: $ResourceLocation_): $RenderType;
+        static lambda$static$21(location: $ResourceLocation_): $RenderType;
+        static lambda$static$23(width: number): $RenderType$CompositeRenderType;
+        static eyes(location: $ResourceLocation_): $RenderType;
+        static lambda$static$19(location: $ResourceLocation_): $RenderType;
+        static debugLineStrip(width: number): $RenderType;
+        static glintTranslucent(): $RenderType;
+        static createClouds(color: boolean): $RenderType$CompositeRenderType;
+        static debugSectionQuads(): $RenderType;
+        getChunkLayerId(): number;
+        static entityShadow(location: $ResourceLocation_): $RenderType;
+        static textIntensity(location: $ResourceLocation_): $RenderType;
+        static dragonRaysDepth(): $RenderType;
+        static energySwirl(location: $ResourceLocation_, u: number, v: number): $RenderType;
+        static entityGlint(): $RenderType;
+        static textBackground(): $RenderType;
+        static cloudsDepthOnly(): $RenderType;
+        static textPolygonOffset(location: $ResourceLocation_): $RenderType;
+        static textSeeThrough(location: $ResourceLocation_): $RenderType;
+        static debugFilledBox(): $RenderType;
+        static guiTextHighlight(): $RenderType;
+        static entityGlintDirect(): $RenderType;
+        static tripwireState(): $RenderType$CompositeState;
+        static armorEntityGlint(): $RenderType;
         mode(): $VertexFormat$Mode;
         static lines(): $RenderType;
         format(): $VertexFormat;
-        static create(name: string, format: $VertexFormat, mode: $VertexFormat$Mode_, bufferSize: number, state: $RenderType$CompositeState): $RenderType$CompositeRenderType;
         static create(name: string, format: $VertexFormat, mode: $VertexFormat$Mode_, bufferSize: number, affectsCrumbling: boolean, sortOnUpload: boolean, state: $RenderType$CompositeState): $RenderType$CompositeRenderType;
+        static create(name: string, format: $VertexFormat, mode: $VertexFormat$Mode_, bufferSize: number, state: $RenderType$CompositeState): $RenderType$CompositeRenderType;
         static text(location: $ResourceLocation_): $RenderType;
-        static lambda$static$0(location: $ResourceLocation_): $RenderType;
         static lambda$static$1(location: $ResourceLocation_): $RenderType;
+        static lambda$static$0(location: $ResourceLocation_): $RenderType;
+        static endPortal(): $RenderType;
         bufferSize(): number;
+        static tripwire(): $RenderType;
+        static chunkBufferLayers(): $List<$RenderType>;
+        static lightning(): $RenderType;
         static createArmorCutoutNoCull(name: string, id: $ResourceLocation_, equalDepthTest: boolean): $RenderType$CompositeRenderType;
-        static entityCutoutNoCullZOffset(location: $ResourceLocation_): $RenderType;
-        static entityCutoutNoCullZOffset(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
-        static debugStructureQuads(): $RenderType;
-        static guiGhostRecipeOverlay(): $RenderType;
-        static dragonExplosionAlpha(location: $ResourceLocation_): $RenderType;
         static entityTranslucentEmissive(location: $ResourceLocation_): $RenderType;
         static entityTranslucentEmissive(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
-        static textBackgroundSeeThrough(): $RenderType;
-        static translucentMovingBlock(): $RenderType;
         static entityTranslucentCull(location: $ResourceLocation_): $RenderType;
+        static dragonExplosionAlpha(location: $ResourceLocation_): $RenderType;
+        static guiGhostRecipeOverlay(): $RenderType;
+        static textBackgroundSeeThrough(): $RenderType;
         static itemEntityTranslucentCull(location: $ResourceLocation_): $RenderType;
         static textIntensityPolygonOffset(location: $ResourceLocation_): $RenderType;
         static textIntensitySeeThrough(location: $ResourceLocation_): $RenderType;
+        static translucentMovingBlock(): $RenderType;
         getTransparencyType(): $TransparencyType;
+        static debugStructureQuads(): $RenderType;
+        static entityCutoutNoCullZOffset(location: $ResourceLocation_): $RenderType;
+        static entityCutoutNoCullZOffset(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
         setTransparencyType(arg0: $TransparencyType_): void;
-        static lambda$static$3(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
-        static lambda$static$2(location: $ResourceLocation_): $RenderType;
-        static translucentMovingBlockState(): $RenderType$CompositeState;
-        static createArmorDecalCutoutNoCull(location: $ResourceLocation_): $RenderType;
-        canConsolidateConsecutiveGeometry(): boolean;
-        static catnip$create$ponder_$md$796745$0(name: string, format: $VertexFormat, mode: $VertexFormat$Mode_, bufferSize: number, affectsCrumbling: boolean, sortOnUpload: boolean, state: $RenderType$CompositeState): $RenderType$CompositeRenderType;
-        draw(meshData: $MeshData): void;
-        static solid(): $RenderType;
-        static translucentState(state: $RenderStateShard$ShaderStateShard): $RenderType$CompositeState;
-        sortOnUpload(): boolean;
-        affectsCrumbling(): boolean;
-        static cutoutMipped(): $RenderType;
         static translucent(): $RenderType;
-        static entityDecal(location: $ResourceLocation_): $RenderType;
-        static guiTextHighlight(): $RenderType;
-        static entityCutoutNoCull(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
-        static entityCutoutNoCull(location: $ResourceLocation_): $RenderType;
-        static debugFilledBox(): $RenderType;
-        static glintTranslucent(): $RenderType;
-        static energySwirl(location: $ResourceLocation_, u: number, v: number): $RenderType;
-        static dragonRaysDepth(): $RenderType;
-        static textSeeThrough(location: $ResourceLocation_): $RenderType;
-        getChunkLayerId(): number;
         static entityCutout(location: $ResourceLocation_): $RenderType;
-        static entityGlint(): $RenderType;
-        static textPolygonOffset(location: $ResourceLocation_): $RenderType;
-        static debugLineStrip(width: number): $RenderType;
-        static textIntensity(location: $ResourceLocation_): $RenderType;
         static entityNoOutline(location: $ResourceLocation_): $RenderType;
-        static armorEntityGlint(): $RenderType;
+        static cutoutMipped(): $RenderType;
+        affectsCrumbling(): boolean;
+        sortOnUpload(): boolean;
+        static translucentState(state: $RenderStateShard$ShaderStateShard): $RenderType$CompositeState;
         static armorCutoutNoCull(location: $ResourceLocation_): $RenderType;
-        static debugSectionQuads(): $RenderType;
+        static entityCutoutNoCull(location: $ResourceLocation_): $RenderType;
+        static entityCutoutNoCull(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
         static entitySmoothCutout(location: $ResourceLocation_): $RenderType;
-        static entityGlintDirect(): $RenderType;
-        static entityShadow(location: $ResourceLocation_): $RenderType;
-        static tripwireState(): $RenderType$CompositeState;
-        static createClouds(color: boolean): $RenderType$CompositeRenderType;
-        static cloudsDepthOnly(): $RenderType;
-        static textBackground(): $RenderType;
-        static lambda$static$19(location: $ResourceLocation_): $RenderType;
-        static lambda$static$11(location: $ResourceLocation_): $RenderType;
-        static lambda$static$10(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
-        static lambda$static$14(location: $ResourceLocation_): $RenderType;
-        static lambda$static$18(location: $ResourceLocation_): $RenderType;
-        static lambda$static$15(arg0: $ResourceLocation_, arg1: $RenderStateShard$TransparencyStateShard): $RenderType;
-        static lambda$static$17(location: $ResourceLocation_): $RenderType;
-        static lambda$static$13(location: $ResourceLocation_): $RenderType;
-        static lambda$static$12(location: $ResourceLocation_): $RenderType;
-        static lambda$static$9(location: $ResourceLocation_): $RenderType;
-        static lambda$static$8(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
-        static lambda$static$7(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
-        static lambda$static$16(location: $ResourceLocation_): $RenderType;
-        static lambda$static$6(location: $ResourceLocation_): $RenderType;
-        static chunkBufferLayers(): $List<$RenderType>;
-        static lambda$static$5(location: $ResourceLocation_): $RenderType;
-        static lambda$static$4(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
-        static guiOverlay(): $RenderType;
-        static lightning(): $RenderType;
-        static endPortal(): $RenderType;
-        static lambda$static$20(location: $ResourceLocation_): $RenderType;
-        static lambda$static$23(width: number): $RenderType$CompositeRenderType;
-        static lambda$static$22(location: $ResourceLocation_): $RenderType;
-        static lambda$static$21(location: $ResourceLocation_): $RenderType;
+        static entityDecal(location: $ResourceLocation_): $RenderType;
+        static entitySolid(location: $ResourceLocation_): $RenderType;
         static entityTranslucent(location: $ResourceLocation_): $RenderType;
         static entityTranslucent(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
-        static entitySolid(location: $ResourceLocation_): $RenderType;
-        static outline(location: $ResourceLocation_): $RenderType;
-        outline(): ($RenderType) | undefined;
-        static tripwire(): $RenderType;
-        static gui(): $RenderType;
-        static leash(): $RenderType;
-        static eyes(location: $ResourceLocation_): $RenderType;
+        static lambda$static$3(id: $ResourceLocation_, effectsOutline: boolean): $RenderType;
+        static lambda$static$2(location: $ResourceLocation_): $RenderType;
+        static beaconBeam(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
+        static breezeEyes(location: $ResourceLocation_): $RenderType;
         static cutout(): $RenderType;
+        static clouds(): $RenderType;
+        static glint(): $RenderType;
+        static crumbling(location: $ResourceLocation_): $RenderType;
         static breezeWind(location: $ResourceLocation_, u: number, v: number): $RenderType;
         static lineStrip(): $RenderType;
-        static dragonRays(): $RenderType;
-        static clouds(): $RenderType;
-        static breezeEyes(location: $ResourceLocation_): $RenderType;
-        static waterMask(): $RenderType;
-        static crumbling(location: $ResourceLocation_): $RenderType;
-        static beaconBeam(location: $ResourceLocation_, colorFlag: boolean): $RenderType;
         static debugQuads(): $RenderType;
-        static glint(): $RenderType;
+        static dragonRays(): $RenderType;
+        static waterMask(): $RenderType;
         static endGateway(): $RenderType;
         isOutline(): boolean;
+        static leash(): $RenderType;
+        static guiOverlay(): $RenderType;
+        outline(): ($RenderType) | undefined;
+        static outline(location: $ResourceLocation_): $RenderType;
+        static solid(): $RenderType;
+        draw(meshData: $MeshData): void;
+        static catnip$create$ponder_$md$e03d8d$0(name: string, format: $VertexFormat, mode: $VertexFormat$Mode_, bufferSize: number, affectsCrumbling: boolean, sortOnUpload: boolean, state: $RenderType$CompositeState): $RenderType$CompositeRenderType;
+        canConsolidateConsecutiveGeometry(): boolean;
+        static translucentMovingBlockState(): $RenderType$CompositeState;
+        static createArmorDecalCutoutNoCull(location: $ResourceLocation_): $RenderType;
         shouldSortOnUpload(): boolean;
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
         static TEXT: $Function<$ResourceLocation, $RenderType>;
@@ -1319,57 +1358,57 @@ declare module "@package/net/minecraft/client/renderer" {
      */
     export type $RenderType$OutlineProperty_ = "none" | "is_outline" | "affects_outline";
     export class $SpriteCoordinateExpander implements $VertexConsumer, $VertexBufferWriter {
+        canUseIntrinsics(): boolean;
+        canUseIntrinsics(arg0: $VertexFormat): boolean;
         push(arg0: $MemoryStack, arg1: number, arg2: number, arg3: $VertexFormat): void;
         setColor(red: number, green: number, blue: number, alpha: number): $VertexConsumer;
-        addVertex(x: number, y: number, z: number, color: number, u: number, v: number, packedOverlay: number, packedLight: number, normalX: number, normalY: number, normalZ: number): void;
         addVertex(x: number, y: number, z: number): $VertexConsumer;
+        addVertex(x: number, y: number, z: number, color: number, u: number, v: number, packedOverlay: number, packedLight: number, normalX: number, normalY: number, normalZ: number): void;
         setUv(u: number, v: number): $VertexConsumer;
         setUv2(u: number, v: number): $VertexConsumer;
         setUv1(u: number, v: number): $VertexConsumer;
         setNormal(x: number, y: number, z: number): $VertexConsumer;
-        canUseIntrinsics(): boolean;
-        canUseIntrinsics(arg0: $VertexFormat): boolean;
-        setColor(red: number, green: number, blue: number, alpha: number): $VertexConsumer;
-        setColor(packedOverlay: number): $VertexConsumer;
-        putBulkData(pose: $PoseStack$Pose, quad: $BakedQuad, brightness: number[], red: number, green: number, blue: number, alpha: number, lightmap: number[], packedOverlay: number, readAlpha: boolean): void;
-        putBulkData(pose: $PoseStack$Pose, quad: $BakedQuad, red: number, green: number, blue: number, alpha: number, packedLight: number, packedOverlay: number): void;
-        setWhiteAlpha(packedOverlay: number): $VertexConsumer;
-        wrapMethod$dbh000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
-        wrapMethod$dbh000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean, arg10: $Operation_<any>): void;
-        addVertex(pos: $Vector3f): $VertexConsumer;
-        addVertex(pose: $PoseStack$Pose, pos: $Vector3f): $VertexConsumer;
-        addVertex(pose: $PoseStack$Pose, normalX: number, normalY: number, normalZ: number): $VertexConsumer;
-        addVertex(pose: $Matrix4f, x: number, y: number, z: number): $VertexConsumer;
-        setOverlay(packedOverlay: number): $VertexConsumer;
-        setLight(packedOverlay: number): $VertexConsumer;
-        setNormal(pose: $PoseStack$Pose, normalX: number, normalY: number, normalZ: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
+        wrapMethod$cmb000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
+        wrapMethod$cmb000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean, arg10: $Operation_<any>): void;
+        setColor(arg0: number): $VertexConsumer;
+        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setOverlay(arg0: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         constructor(delegate: $VertexConsumer, sprite: $TextureAtlasSprite);
-        set whiteAlpha(value: number);
         set overlay(value: number);
         set light(value: number);
+        set whiteAlpha(value: number);
     }
     export class $Sheets {
-        static getDecoratedPotMaterial(key: $ResourceKey_<$DecoratedPotPattern> | null): $Material;
-        static getHangingSignMaterial(woodType: $WoodType_): $Material;
-        static cutoutBlockSheet(): $RenderType;
-        static shieldSheet(): $RenderType;
-        static solidBlockSheet(): $RenderType;
-        static bannerSheet(): $RenderType;
-        static hangingSignSheet(): $RenderType;
         static shulkerBoxSheet(): $RenderType;
-        static signSheet(): $RenderType;
-        static bedSheet(): $RenderType;
-        static chestSheet(): $RenderType;
-        static getBannerMaterial(pattern: $Holder_<$BannerPattern>): $Material;
-        static addWoodType(arg0: $WoodType_): void;
-        static getShieldMaterial(pattern: $Holder_<$BannerPattern>): $Material;
-        static chooseMaterial(blockEntity: $BlockEntity, chestType: $ChestType_, holiday: boolean): $Material;
+        static bannerSheet(): $RenderType;
+        static shieldSheet(): $RenderType;
+        static hangingSignSheet(): $RenderType;
+        static cutoutBlockSheet(): $RenderType;
+        static solidBlockSheet(): $RenderType;
+        static addWoodType(arg0: $WoodType): void;
+        static getDecoratedPotMaterial(key: $ResourceKey_<$DecoratedPotPattern> | null): $Material;
+        static getHangingSignMaterial(woodType: $WoodType): $Material;
+        static getSignMaterial(woodType: $WoodType): $Material;
         static armorTrimsSheet(decal: boolean): $RenderType;
-        static getSignMaterial(woodType: $WoodType_): $Material;
+        static chooseMaterial(blockEntity: $BlockEntity, chestType: $ChestType_, holiday: boolean): $Material;
+        static getBannerMaterial(pattern: $Holder_<$BannerPattern>): $Material;
+        static getShieldMaterial(pattern: $Holder_<$BannerPattern>): $Material;
+        static chestSheet(): $RenderType;
+        static bedSheet(): $RenderType;
+        static signSheet(): $RenderType;
         static translucentItemSheet(): $RenderType;
         static translucentCullBlockSheet(): $RenderType;
         static SIGN_SHEET: $ResourceLocation;
@@ -1416,10 +1455,25 @@ declare module "@package/net/minecraft/client/renderer" {
         static CLOUD_LEVEL: number;
         constructor();
     }
-    export class $RenderType$CompositeState implements $CompositeStateAccessor {
+    export class $RenderType$CompositeState implements $CompositeStateAccessor, $AccessorMixinCompositeState {
         static builder(): $RenderType$CompositeState$CompositeStateBuilder;
+        static CreateCompositeState$roots_$md$e03d8d$0(arg0: $RenderStateShard$EmptyTextureStateShard, arg1: $RenderStateShard$ShaderStateShard, arg2: $RenderStateShard$TransparencyStateShard, arg3: $RenderStateShard$DepthTestStateShard, arg4: $RenderStateShard$CullStateShard, arg5: $RenderStateShard$LightmapStateShard, arg6: $RenderStateShard$OverlayStateShard, arg7: $RenderStateShard$LayeringStateShard, arg8: $RenderStateShard$OutputStateShard, arg9: $RenderStateShard$TexturingStateShard, arg10: $RenderStateShard$WriteMaskStateShard, arg11: $RenderStateShard$LineStateShard, arg12: $RenderStateShard$ColorLogicStateShard, arg13: $RenderType$OutlineProperty_): $RenderType$CompositeState;
+        roots$GetLineState(): $RenderStateShard$LineStateShard;
+        roots$GetCullState(): $RenderStateShard$CullStateShard;
         getDepth(): $RenderStateShard$DepthTestStateShard;
         getTransparency(): $RenderStateShard$TransparencyStateShard;
+        roots$GetOverlayState(): $RenderStateShard$OverlayStateShard;
+        roots$GetLayeringState(): $RenderStateShard$LayeringStateShard;
+        roots$GetTextureState(): $RenderStateShard$EmptyTextureStateShard;
+        roots$GetShaderState(): $RenderStateShard$ShaderStateShard;
+        roots$GetTransparencyState(): $RenderStateShard$TransparencyStateShard;
+        roots$GetDepthTestState(): $RenderStateShard$DepthTestStateShard;
+        roots$GetLightmapState(): $RenderStateShard$LightmapStateShard;
+        roots$GetTexturingState(): $RenderStateShard$TexturingStateShard;
+        roots$GetWriteMaskState(): $RenderStateShard$WriteMaskStateShard;
+        roots$GetColorLogicState(): $RenderStateShard$ColorLogicStateShard;
+        roots$GetOutputState(): $RenderStateShard$OutputStateShard;
+        roots$GetOutlineProperty(): $RenderType$OutlineProperty;
         transparencyState: $RenderStateShard$TransparencyStateShard;
         overlayState: $RenderStateShard$OverlayStateShard;
         outputState: $RenderStateShard$OutputStateShard;
@@ -1430,224 +1484,230 @@ declare module "@package/net/minecraft/client/renderer" {
         texturingState: $RenderStateShard$TexturingStateShard;
         textureState: $RenderStateShard$EmptyTextureStateShard;
         states: $ImmutableList<$RenderStateShard>;
+        colorLogicState: $RenderStateShard$ColorLogicStateShard;
         layeringState: $RenderStateShard$LayeringStateShard;
         lineState: $RenderStateShard$LineStateShard;
         shaderState: $RenderStateShard$ShaderStateShard;
         writeMaskState: $RenderStateShard$WriteMaskStateShard;
+        constructor(textureState: $RenderStateShard$EmptyTextureStateShard, shaderState: $RenderStateShard$ShaderStateShard, transparencyState: $RenderStateShard$TransparencyStateShard, depthState: $RenderStateShard$DepthTestStateShard, cullState: $RenderStateShard$CullStateShard, lightmapState: $RenderStateShard$LightmapStateShard, overlayState: $RenderStateShard$OverlayStateShard, layeringState: $RenderStateShard$LayeringStateShard, outputState: $RenderStateShard$OutputStateShard, texturingState: $RenderStateShard$TexturingStateShard, writeMaskState: $RenderStateShard$WriteMaskStateShard, lineState: $RenderStateShard$LineStateShard, colorLogicState: $RenderStateShard$ColorLogicStateShard, outlineProperty: $RenderType$OutlineProperty_);
         get depth(): $RenderStateShard$DepthTestStateShard;
         get transparency(): $RenderStateShard$TransparencyStateShard;
     }
     export class $SectionOcclusionGraph$SectionToNodeMap {
     }
-    export class $GameRenderer implements $AutoCloseable, $AccessorGameRenderer, $PaniniProjectionAccess, $GameRendererAccessor$1, $GameRendererAccessor {
-        /**
-         * Updates the entity renderer
-         */
-        close(): void;
-        static getNightVisionScale(livingEntity: $LivingEntity, nanoTime: number): number;
-        displayItemActivation(stack: $ItemStack_): void;
-        resetProjectionMatrix(matrix: $Matrix4f): void;
-        getDarkenWorldAmount(partialTicks: number): number;
-        getProjectionMatrix(fov: number): $Matrix4f;
-        /**
-         * Gets the block or object that is being moused over.
-         */
-        pick(partialTicks: number): void;
-        resize(width: number, height: number): void;
-        static getRendertypeCutoutShader(): $ShaderInstance;
-        static getRendertypeLinesShader(): $ShaderInstance;
-        static getRendertypeGuiShader(): $ShaderInstance;
-        static getRendertypeEyesShader(): $ShaderInstance;
-        static getRendertypeTextShader(): $ShaderInstance;
-        static getRendertypeLeashShader(): $ShaderInstance;
-        static getRendertypeOutlineShader(): $ShaderInstance;
-        static getRendertypeGlintShader(): $ShaderInstance;
-        static getRendertypeSolidShader(): $ShaderInstance;
-        static getRendertypeCloudsShader(): $ShaderInstance;
-        static getRendertypeTextBackgroundShader(): $ShaderInstance;
-        static getRendertypeEntityCutoutShader(): $ShaderInstance;
-        static getRendertypeTextIntensityShader(): $ShaderInstance;
-        static getRendertypeTextSeeThroughShader(): $ShaderInstance;
-        static getRendertypeEntityNoOutlineShader(): $ShaderInstance;
-        static getRendertypeEndPortalShader(): $ShaderInstance;
-        static getPositionColorLightmapShader(): $ShaderInstance;
-        static getPositionColorTexLightmapShader(): $ShaderInstance;
-        static getRendertypeCutoutMippedShader(): $ShaderInstance;
-        static getRendertypeEnergySwirlShader(): $ShaderInstance;
-        static getRendertypeEntityShadowShader(): $ShaderInstance;
-        static getRendertypeTranslucentShader(): $ShaderInstance;
-        static getRendertypeBeaconBeamShader(): $ShaderInstance;
-        static getRendertypeWaterMaskShader(): $ShaderInstance;
-        static getRendertypeGuiOverlayShader(): $ShaderInstance;
-        static getRendertypeEntitySolidShader(): $ShaderInstance;
-        static getRendertypeTripwireShader(): $ShaderInstance;
-        static getRendertypeLightningShader(): $ShaderInstance;
-        static getRendertypeEndGatewayShader(): $ShaderInstance;
-        static getRendertypeBreezeWindShader(): $ShaderInstance;
-        static getRendertypeEntityGlintShader(): $ShaderInstance;
-        static getRendertypeEntityDecalShader(): $ShaderInstance;
-        static getRendertypeEntityAlphaShader(): $ShaderInstance;
-        static getRendertypeCrumblingShader(): $ShaderInstance;
-        static getRendertypeArmorGlintShader(): $ShaderInstance;
-        static getRendertypeGlintDirectShader(): $ShaderInstance;
-        /**
-         * Updates the entity renderer
-         */
-        tick(): void;
-        render(deltaTracker: $DeltaTracker, renderLevel: boolean): void;
-        static getPositionShader(): $ShaderInstance;
+    export class $GameRenderer implements $AutoCloseable, $PaniniProjectionAccess, $GameRendererAccessor$1, $GameRendererAccessor, $AccessorGameRenderer {
+        getMapRenderer(): $MapRenderer;
+        getRenderDistance(): number;
+        static getParticleShader(): $ShaderInstance;
+        setRenderHand(panoramicMode: boolean): void;
+        lightTexture(): $LightTexture;
+        overlayTexture(): $OverlayTexture;
         getDepthFar(): number;
         /**
          * Updates the entity renderer
          */
         togglePostEffect(): void;
-        overlayTexture(): $OverlayTexture;
-        setRenderHand(panoramicMode: boolean): void;
-        lightTexture(): $LightTexture;
-        getRenderDistance(): number;
-        static getParticleShader(): $ShaderInstance;
-        getMapRenderer(): $MapRenderer;
-        static getRendertypeTextBackgroundSeeThroughShader(): $ShaderInstance;
-        static getRendertypeEntityCutoutNoCullZOffsetShader(): $ShaderInstance;
-        static getRendertypeEntityTranslucentEmissiveShader(): $ShaderInstance;
-        handler$fhj000$imblocker$renderIMEOverlaysUnobf(arg0: $CallbackInfo): void;
-        static getRendertypeItemEntityTranslucentCullShader(): $ShaderInstance;
-        static getRendertypeEntityTranslucentCullShader(): $ShaderInstance;
-        static getRendertypeTextIntensitySeeThroughShader(): $ShaderInstance;
-        static getRendertypeGuiTextHighlightShader(): $ShaderInstance;
-        static getRendertypeEntityGlintDirectShader(): $ShaderInstance;
-        static getRendertypeTranslucentMovingBlockShader(): $ShaderInstance;
-        static getRendertypeEntityCutoutNoCullShader(): $ShaderInstance;
-        static getRendertypeArmorEntityGlintShader(): $ShaderInstance;
-        static getRendertypeGuiGhostRecipeOverlayShader(): $ShaderInstance;
-        static getRendertypeArmorCutoutNoCullShader(): $ShaderInstance;
-        static getRendertypeEntityTranslucentShader(): $ShaderInstance;
-        static getRendertypeEntitySmoothCutoutShader(): $ShaderInstance;
-        static getRendertypeGlintTranslucentShader(): $ShaderInstance;
-        handler$zbf000$astralsorcery$resize(arg0: number, arg1: number, arg2: $CallbackInfo): void;
         createReloadListener(): $PreparableReloadListener;
         /**
          * What shader to use when spectating this entity
          */
         checkEntityPostEffect(entity: $Entity | null): void;
         setRenderBlockOutline(panoramicMode: boolean): void;
-        preloadUiShader(resourceProvider: $ResourceProvider_): void;
-        getMainCamera(): $Camera;
-        currentEffect(): $PostChain;
-        /**
-         * Updates the entity renderer
-         */
-        shutdownEffect(): void;
-        isPanoramicMode(): boolean;
-        renderZoomed(zoom: number, zoomX: number, zoomY: number): void;
-        setPanoramicMode(panoramicMode: boolean): void;
-        renderLevel(deltaTracker: $DeltaTracker): void;
-        getMinecraft(): $Minecraft;
+        static getPositionColorShader(): $ShaderInstance;
+        static getPositionTexColorShader(): $ShaderInstance;
+        args$hoa000$lodestone$extractViewBob(arg0: $Args): void;
+        handler$hoa000$lodestone$clearViewBob(arg0: $CallbackInfo): void;
+        handler$dpi000$astralsorcery$resize(arg0: number, arg1: number, arg2: $CallbackInfo): void;
         sodiumExtra$getPaniniProjection(): $PaniniProjection;
-        /**
-         * Updates the entity renderer
-         */
-        resetData(): void;
-        static getPositionTexShader(): $ShaderInstance;
+        getMinecraft(): $Minecraft;
         /**
          * Gets the block or object that is being moused over.
          */
         processBlurEffect(partialTicks: number): void;
-        static getPositionColorShader(): $ShaderInstance;
-        static getPositionTexColorShader(): $ShaderInstance;
+        static getRendertypeEntityCutoutNoCullZOffsetShader(): $ShaderInstance;
+        handler$hoa000$lodestone$injectionResizeListener(arg0: number, arg1: number, arg2: $CallbackInfo): void;
+        static getRendertypeEntityTranslucentEmissiveShader(): $ShaderInstance;
+        static getRendertypeItemEntityTranslucentCullShader(): $ShaderInstance;
+        static getRendertypeTextBackgroundSeeThroughShader(): $ShaderInstance;
+        static getRendertypeEntityTranslucentShader(): $ShaderInstance;
+        static getRendertypeGuiGhostRecipeOverlayShader(): $ShaderInstance;
+        static getRendertypeTranslucentMovingBlockShader(): $ShaderInstance;
+        static getRendertypeEntityGlintDirectShader(): $ShaderInstance;
+        static getRendertypeGuiTextHighlightShader(): $ShaderInstance;
+        static getRendertypeEntityCutoutNoCullShader(): $ShaderInstance;
+        static getRendertypeGlintTranslucentShader(): $ShaderInstance;
+        static getRendertypeArmorEntityGlintShader(): $ShaderInstance;
+        static getRendertypeTextIntensitySeeThroughShader(): $ShaderInstance;
+        static getRendertypeEntityTranslucentCullShader(): $ShaderInstance;
+        static getRendertypeEntitySmoothCutoutShader(): $ShaderInstance;
+        static getRendertypeArmorCutoutNoCullShader(): $ShaderInstance;
+        static getRendertypeArmorGlintShader(): $ShaderInstance;
+        static getRendertypeGlintDirectShader(): $ShaderInstance;
+        static getPositionShader(): $ShaderInstance;
+        /**
+         * Updates the entity renderer
+         */
+        close(): void;
+        /**
+         * Gets the block or object that is being moused over.
+         */
+        pick(partialTicks: number): void;
+        resize(width: number, height: number): void;
+        /**
+         * Updates the entity renderer
+         */
+        tick(): void;
         getShader(name: string | null): $ShaderInstance;
+        getFov(activeRenderInfo: $Camera, partialTicks: number, useFOVSetting: boolean): number;
+        static getPositionTexShader(): $ShaderInstance;
+        static getRendertypeCutoutShader(): $ShaderInstance;
+        static getRendertypeGuiShader(): $ShaderInstance;
+        static getRendertypeLinesShader(): $ShaderInstance;
+        static getRendertypeEyesShader(): $ShaderInstance;
+        static getRendertypeSolidShader(): $ShaderInstance;
+        static getRendertypeLeashShader(): $ShaderInstance;
+        static getRendertypeOutlineShader(): $ShaderInstance;
+        static getRendertypeTextShader(): $ShaderInstance;
+        static getRendertypeGlintShader(): $ShaderInstance;
+        static getRendertypeCloudsShader(): $ShaderInstance;
+        /**
+         * Updates the entity renderer
+         */
+        resetData(): void;
+        preloadUiShader(resourceProvider: $ResourceProvider_): void;
+        getMainCamera(): $Camera;
+        /**
+         * Updates the entity renderer
+         */
+        shutdownEffect(): void;
+        currentEffect(): $PostChain;
+        isPanoramicMode(): boolean;
+        setPanoramicMode(panoramicMode: boolean): void;
+        renderLevel(deltaTracker: $DeltaTracker): void;
+        renderZoomed(zoom: number, zoomX: number, zoomY: number): void;
+        render(deltaTracker: $DeltaTracker, renderLevel: boolean): void;
+        static getRendertypeEntityShadowShader(): $ShaderInstance;
+        static getRendertypeTextSeeThroughShader(): $ShaderInstance;
+        static getRendertypeEntitySolidShader(): $ShaderInstance;
+        static getRendertypeBeaconBeamShader(): $ShaderInstance;
+        static getRendertypeEntityAlphaShader(): $ShaderInstance;
+        static getRendertypeCutoutMippedShader(): $ShaderInstance;
+        static getRendertypeEntityNoOutlineShader(): $ShaderInstance;
+        static getRendertypeEntityGlintShader(): $ShaderInstance;
+        static getRendertypeLightningShader(): $ShaderInstance;
+        static getRendertypeEnergySwirlShader(): $ShaderInstance;
+        static getPositionColorLightmapShader(): $ShaderInstance;
+        static getPositionColorTexLightmapShader(): $ShaderInstance;
+        static getRendertypeTranslucentShader(): $ShaderInstance;
+        static getRendertypeEntityCutoutShader(): $ShaderInstance;
+        static getRendertypeEntityDecalShader(): $ShaderInstance;
+        static getRendertypeWaterMaskShader(): $ShaderInstance;
+        static getRendertypeCrumblingShader(): $ShaderInstance;
+        static getRendertypeTextBackgroundShader(): $ShaderInstance;
+        static getRendertypeTextIntensityShader(): $ShaderInstance;
+        static getRendertypeTripwireShader(): $ShaderInstance;
+        static getRendertypeBreezeWindShader(): $ShaderInstance;
+        static getRendertypeGuiOverlayShader(): $ShaderInstance;
+        static getRendertypeEndGatewayShader(): $ShaderInstance;
+        static getRendertypeEndPortalShader(): $ShaderInstance;
         loadEffect(resourceLocation: $ResourceLocation_): void;
-        invokeBobView(poseStack: $PoseStack, partialTicks: number): void;
-        getRenderHand(): boolean;
-        invokeBobHurt(poseStack: $PoseStack, partialTicks: number): void;
-        invokeGetFov(activeRenderInfo: $Camera, partialTicks: number, useFOVSetting: boolean): number;
-        catnip$callGetFov(activeRenderInfo: $Camera, partialTicks: number, useFOVSetting: boolean): number;
-        getPanoramicMode(): boolean;
+        getProjectionMatrix(fov: number): $Matrix4f;
+        resetProjectionMatrix(matrix: $Matrix4f): void;
+        static getNightVisionScale(livingEntity: $LivingEntity, nanoTime: number): number;
+        displayItemActivation(stack: $ItemStack_): void;
+        getDarkenWorldAmount(partialTicks: number): number;
         getBlurEffect(): $PostChain;
+        catnip$callGetFov(activeRenderInfo: $Camera, partialTicks: number, useFOVSetting: boolean): number;
+        invokeGetFov(activeRenderInfo: $Camera, partialTicks: number, useFOVSetting: boolean): number;
+        invokeBobView(poseStack: $PoseStack, partialTicks: number): void;
+        invokeBobHurt(poseStack: $PoseStack, partialTicks: number): void;
+        getRenderHand(): boolean;
+        getPanoramicMode(): boolean;
         getFov(): number;
         callGetFov(activeRenderInfo: $Camera, partialTicks: number, useFOVSetting: boolean): number;
         getOldFov(): number;
         shouldRenderBlockOutlineA(): boolean;
+        postEffect: $PostChain;
         renderBuffers: $RenderBuffers;
         static ITEM_ACTIVATION_ANIMATION_LENGTH: number;
+        effectActive: boolean;
         static PROJECTION_Z_NEAR: number;
         blitShader: $ShaderInstance;
         static MAX_BLUR_RADIUS: number;
         itemInHandRenderer: $ItemInHandRenderer;
         constructor(minecraft: $Minecraft, itemInHandRenderer: $ItemInHandRenderer, resourceManager: $ResourceManager, renderBuffers: $RenderBuffers);
-        static get rendertypeCutoutShader(): $ShaderInstance;
-        static get rendertypeLinesShader(): $ShaderInstance;
-        static get rendertypeGuiShader(): $ShaderInstance;
-        static get rendertypeEyesShader(): $ShaderInstance;
-        static get rendertypeTextShader(): $ShaderInstance;
-        static get rendertypeLeashShader(): $ShaderInstance;
-        static get rendertypeOutlineShader(): $ShaderInstance;
-        static get rendertypeGlintShader(): $ShaderInstance;
-        static get rendertypeSolidShader(): $ShaderInstance;
-        static get rendertypeCloudsShader(): $ShaderInstance;
-        static get rendertypeTextBackgroundShader(): $ShaderInstance;
-        static get rendertypeEntityCutoutShader(): $ShaderInstance;
-        static get rendertypeTextIntensityShader(): $ShaderInstance;
-        static get rendertypeTextSeeThroughShader(): $ShaderInstance;
-        static get rendertypeEntityNoOutlineShader(): $ShaderInstance;
-        static get rendertypeEndPortalShader(): $ShaderInstance;
-        static get positionColorLightmapShader(): $ShaderInstance;
-        static get positionColorTexLightmapShader(): $ShaderInstance;
-        static get rendertypeCutoutMippedShader(): $ShaderInstance;
-        static get rendertypeEnergySwirlShader(): $ShaderInstance;
-        static get rendertypeEntityShadowShader(): $ShaderInstance;
-        static get rendertypeTranslucentShader(): $ShaderInstance;
-        static get rendertypeBeaconBeamShader(): $ShaderInstance;
-        static get rendertypeWaterMaskShader(): $ShaderInstance;
-        static get rendertypeGuiOverlayShader(): $ShaderInstance;
-        static get rendertypeEntitySolidShader(): $ShaderInstance;
-        static get rendertypeTripwireShader(): $ShaderInstance;
-        static get rendertypeLightningShader(): $ShaderInstance;
-        static get rendertypeEndGatewayShader(): $ShaderInstance;
-        static get rendertypeBreezeWindShader(): $ShaderInstance;
-        static get rendertypeEntityGlintShader(): $ShaderInstance;
-        static get rendertypeEntityDecalShader(): $ShaderInstance;
-        static get rendertypeEntityAlphaShader(): $ShaderInstance;
-        static get rendertypeCrumblingShader(): $ShaderInstance;
-        static get rendertypeArmorGlintShader(): $ShaderInstance;
-        static get rendertypeGlintDirectShader(): $ShaderInstance;
-        static get positionShader(): $ShaderInstance;
-        get depthFar(): number;
+        get mapRenderer(): $MapRenderer;
         get renderDistance(): number;
         static get particleShader(): $ShaderInstance;
-        get mapRenderer(): $MapRenderer;
-        static get rendertypeTextBackgroundSeeThroughShader(): $ShaderInstance;
+        get depthFar(): number;
+        set renderBlockOutline(value: boolean);
+        static get positionColorShader(): $ShaderInstance;
+        static get positionTexColorShader(): $ShaderInstance;
+        get minecraft(): $Minecraft;
         static get rendertypeEntityCutoutNoCullZOffsetShader(): $ShaderInstance;
         static get rendertypeEntityTranslucentEmissiveShader(): $ShaderInstance;
         static get rendertypeItemEntityTranslucentCullShader(): $ShaderInstance;
-        static get rendertypeEntityTranslucentCullShader(): $ShaderInstance;
-        static get rendertypeTextIntensitySeeThroughShader(): $ShaderInstance;
-        static get rendertypeGuiTextHighlightShader(): $ShaderInstance;
-        static get rendertypeEntityGlintDirectShader(): $ShaderInstance;
-        static get rendertypeTranslucentMovingBlockShader(): $ShaderInstance;
-        static get rendertypeEntityCutoutNoCullShader(): $ShaderInstance;
-        static get rendertypeArmorEntityGlintShader(): $ShaderInstance;
-        static get rendertypeGuiGhostRecipeOverlayShader(): $ShaderInstance;
-        static get rendertypeArmorCutoutNoCullShader(): $ShaderInstance;
+        static get rendertypeTextBackgroundSeeThroughShader(): $ShaderInstance;
         static get rendertypeEntityTranslucentShader(): $ShaderInstance;
-        static get rendertypeEntitySmoothCutoutShader(): $ShaderInstance;
+        static get rendertypeGuiGhostRecipeOverlayShader(): $ShaderInstance;
+        static get rendertypeTranslucentMovingBlockShader(): $ShaderInstance;
+        static get rendertypeEntityGlintDirectShader(): $ShaderInstance;
+        static get rendertypeGuiTextHighlightShader(): $ShaderInstance;
+        static get rendertypeEntityCutoutNoCullShader(): $ShaderInstance;
         static get rendertypeGlintTranslucentShader(): $ShaderInstance;
-        set renderBlockOutline(value: boolean);
-        get mainCamera(): $Camera;
-        get minecraft(): $Minecraft;
+        static get rendertypeArmorEntityGlintShader(): $ShaderInstance;
+        static get rendertypeTextIntensitySeeThroughShader(): $ShaderInstance;
+        static get rendertypeEntityTranslucentCullShader(): $ShaderInstance;
+        static get rendertypeEntitySmoothCutoutShader(): $ShaderInstance;
+        static get rendertypeArmorCutoutNoCullShader(): $ShaderInstance;
+        static get rendertypeArmorGlintShader(): $ShaderInstance;
+        static get rendertypeGlintDirectShader(): $ShaderInstance;
+        static get positionShader(): $ShaderInstance;
         static get positionTexShader(): $ShaderInstance;
-        static get positionColorShader(): $ShaderInstance;
-        static get positionTexColorShader(): $ShaderInstance;
+        static get rendertypeCutoutShader(): $ShaderInstance;
+        static get rendertypeGuiShader(): $ShaderInstance;
+        static get rendertypeLinesShader(): $ShaderInstance;
+        static get rendertypeEyesShader(): $ShaderInstance;
+        static get rendertypeSolidShader(): $ShaderInstance;
+        static get rendertypeLeashShader(): $ShaderInstance;
+        static get rendertypeOutlineShader(): $ShaderInstance;
+        static get rendertypeTextShader(): $ShaderInstance;
+        static get rendertypeGlintShader(): $ShaderInstance;
+        static get rendertypeCloudsShader(): $ShaderInstance;
+        get mainCamera(): $Camera;
+        static get rendertypeEntityShadowShader(): $ShaderInstance;
+        static get rendertypeTextSeeThroughShader(): $ShaderInstance;
+        static get rendertypeEntitySolidShader(): $ShaderInstance;
+        static get rendertypeBeaconBeamShader(): $ShaderInstance;
+        static get rendertypeEntityAlphaShader(): $ShaderInstance;
+        static get rendertypeCutoutMippedShader(): $ShaderInstance;
+        static get rendertypeEntityNoOutlineShader(): $ShaderInstance;
+        static get rendertypeEntityGlintShader(): $ShaderInstance;
+        static get rendertypeLightningShader(): $ShaderInstance;
+        static get rendertypeEnergySwirlShader(): $ShaderInstance;
+        static get positionColorLightmapShader(): $ShaderInstance;
+        static get positionColorTexLightmapShader(): $ShaderInstance;
+        static get rendertypeTranslucentShader(): $ShaderInstance;
+        static get rendertypeEntityCutoutShader(): $ShaderInstance;
+        static get rendertypeEntityDecalShader(): $ShaderInstance;
+        static get rendertypeWaterMaskShader(): $ShaderInstance;
+        static get rendertypeCrumblingShader(): $ShaderInstance;
+        static get rendertypeTextBackgroundShader(): $ShaderInstance;
+        static get rendertypeTextIntensityShader(): $ShaderInstance;
+        static get rendertypeTripwireShader(): $ShaderInstance;
+        static get rendertypeBreezeWindShader(): $ShaderInstance;
+        static get rendertypeGuiOverlayShader(): $ShaderInstance;
+        static get rendertypeEndGatewayShader(): $ShaderInstance;
+        static get rendertypeEndPortalShader(): $ShaderInstance;
         get blurEffect(): $PostChain;
-        get fov(): number;
         get oldFov(): number;
     }
     export class $DimensionSpecialEffects$EndEffects extends $DimensionSpecialEffects {
         constructor();
     }
     export class $CubeMap {
-        render(mc: $Minecraft, pitch: number, yaw: number, alpha: number): void;
         preload(texMngr: $TextureManager, backgroundExecutor: $Executor_): $CompletableFuture<void>;
+        render(mc: $Minecraft, pitch: number, yaw: number, alpha: number): void;
         constructor(baseImageLocation: $ResourceLocation_);
     }
     export class $DimensionSpecialEffects$SkyType extends $Enum<$DimensionSpecialEffects$SkyType> {
@@ -1662,14 +1722,14 @@ declare module "@package/net/minecraft/client/renderer" {
      */
     export type $DimensionSpecialEffects$SkyType_ = "none" | "normal" | "end";
     export class $SectionBufferBuilderPool {
+        getFreeBufferCount(): number;
         isEmpty(): boolean;
         release(buffer: $SectionBufferBuilderPack): void;
         static allocate(bufferCount: number): $SectionBufferBuilderPool;
         acquire(): $SectionBufferBuilderPack;
-        getFreeBufferCount(): number;
         constructor(freeBuffers: $List_<$SectionBufferBuilderPack>);
-        get empty(): boolean;
         get freeBufferCount(): number;
+        get empty(): boolean;
     }
     export class $ScreenEffectRenderer {
         static renderScreenEffect(minecraft: $Minecraft, poseStack: $PoseStack): void;
@@ -1679,45 +1739,45 @@ declare module "@package/net/minecraft/client/renderer" {
     export class $SectionOcclusionGraph$GraphStorage {
     }
     export class $Rect2i {
+        getHeight(): number;
         contains(x: number, y: number): boolean;
         setPosition(xPos: number, yPos: number): void;
-        getY(): number;
+        setWidth(height: number): void;
+        setHeight(height: number): void;
         getWidth(): number;
-        getX(): number;
         setY(height: number): void;
+        getX(): number;
         setX(height: number): void;
         intersect(other: $Rect2i): $Rect2i;
-        setHeight(height: number): void;
-        setWidth(height: number): void;
-        getHeight(): number;
+        getY(): number;
         constructor(xPos: number, yPos: number, width: number, height: number);
     }
     export class $RenderBuffers implements $MemoryTrackingRenderBuffers, $RenderBuffersExt, $DrawCallTrackingRenderBuffers {
         endLevelRendering(): void;
         resetDrawCounts(): void;
-        bufferSource(): $MultiBufferSource$BufferSource;
-        getRenderTypes(): number;
-        freeAndDeleteBuffers(): void;
-        getMiscBufferAllocatedSize(): number;
-        beginLevelRendering(): void;
-        outlineBufferSource(): $OutlineBufferSource;
-        crumblingBufferSource(): $MultiBufferSource$BufferSource;
-        getEntityBufferAllocatedSize(): number;
         fixedBufferPack(): $SectionBufferBuilderPack;
         sectionBufferPool(): $SectionBufferBuilderPool;
         getMaxBegins(): number;
         getDrawCalls(): number;
+        getMiscBufferAllocatedSize(): number;
+        freeAndDeleteBuffers(): void;
+        getEntityBufferAllocatedSize(): number;
+        getRenderTypes(): number;
+        bufferSource(): $MultiBufferSource$BufferSource;
+        crumblingBufferSource(): $MultiBufferSource$BufferSource;
+        beginLevelRendering(): void;
+        outlineBufferSource(): $OutlineBufferSource;
         constructor(bufferCount: number);
-        get renderTypes(): number;
-        get miscBufferAllocatedSize(): number;
-        get entityBufferAllocatedSize(): number;
         get maxBegins(): number;
         get drawCalls(): number;
+        get miscBufferAllocatedSize(): number;
+        get entityBufferAllocatedSize(): number;
+        get renderTypes(): number;
     }
     export class $FaceInfo extends $Enum<$FaceInfo> {
+        getVertexInfo(index: number): $FaceInfo$VertexInfo;
         static values(): $FaceInfo[];
         static valueOf(arg0: string): $FaceInfo;
-        getVertexInfo(index: number): $FaceInfo$VertexInfo;
         static fromFacing(facing: $Direction_): $FaceInfo;
         static DOWN: $FaceInfo;
         static NORTH: $FaceInfo;
@@ -1735,13 +1795,14 @@ declare module "@package/net/minecraft/client/renderer" {
         isEnabled(arg0: $LivingEntity, arg1: number): boolean;
     }
     export class $ItemModelShaper {
+        modify$dfh000$astages$getItemModel(item: $Item_): $Item;
         register(item: $Item_, modelLocation: $ModelResourceLocation_): void;
-        handler$bdh000$ldlib2$injectGetModel(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
-        modifyReturnValue$cog000$fusion$getItemModel(model: $BakedModel, stack: $ItemStack_): $BakedModel;
-        getItemModel(item: $Item_): $BakedModel;
         getItemModel(stack: $ItemStack_): $BakedModel;
-        rebuildCache(): void;
+        getItemModel(item: $Item_): $BakedModel;
+        modifyReturnValue$cja000$fusion$getItemModel(model: $BakedModel, stack: $ItemStack_): $BakedModel;
         getModelManager(): $ModelManager;
+        handler$bfm000$ldlib2$injectGetModel(arg0: $ItemStack_, arg1: $CallbackInfoReturnable<any>): void;
+        rebuildCache(): void;
         shapes: $Int2ObjectMap<$ModelResourceLocation>;
         constructor(modelManager: $ModelManager);
         get modelManager(): $ModelManager;
@@ -1749,35 +1810,29 @@ declare module "@package/net/minecraft/client/renderer" {
     export class $GpuWarnlistManager$Preparations {
     }
     export class $EffectInstance implements $Effect, $AutoCloseable {
+        markDirty(): void;
+        static parseBlendNode(json: $JsonObject_ | null): $BlendMode;
         getName(): string;
         clear(): void;
         apply(): void;
         getId(): number;
         close(): void;
         static getOrCreate(resourceProvider: $ResourceProvider_, type: $Program$Type_, name: string): $EffectProgram;
-        getVertexProgram(): $Program;
         getFragmentProgram(): $Program;
-        safeGetUniform(name: string): $AbstractUniform;
+        getVertexProgram(): $Program;
         attachToProgram(): void;
-        setSampler(name: string, textureId: $IntSupplier_): void;
-        markDirty(): void;
+        parseUniformNode(json: $JsonElement_): void;
+        safeGetUniform(name: string): $AbstractUniform;
         getUniform(name: string): $Uniform;
-        static parseBlendNode(json: $JsonObject_ | null): $BlendMode;
+        setSampler(name: string, textureId: $IntSupplier_): void;
+        samplerMap: $Map<string, $IntSupplier>;
         constructor(resourceProvider: $ResourceProvider_, name: string);
         get name(): string;
         get id(): number;
-        get vertexProgram(): $Program;
         get fragmentProgram(): $Program;
+        get vertexProgram(): $Program;
     }
     export class $ItemBlockRenderTypes {
-        /**
-         * @deprecated
-         */
-        static getMovingBlockRenderType(state: $BlockState_): $RenderType;
-        /**
-         * @deprecated
-         */
-        static getRenderType(stack: $ItemStack_, cull: boolean): $RenderType;
         /**
          * @deprecated
          */
@@ -1785,7 +1840,21 @@ declare module "@package/net/minecraft/client/renderer" {
         /**
          * @deprecated
          */
+        static getRenderType(stack: $ItemStack_, cull: boolean): $RenderType;
+        static getRenderLayer(fluidState: $FluidState): $RenderType;
+        /**
+         * @deprecated
+         */
         static getChunkRenderType(state: $BlockState_): $RenderType;
+        /**
+         * @deprecated
+         */
+        static getMovingBlockRenderType(state: $BlockState_): $RenderType;
+        static setFancy(fancy: boolean): void;
+        /**
+         * @deprecated
+         */
+        static getRenderLayers(arg0: $BlockState_): $ChunkRenderTypeSet;
         static setRenderLayer(arg0: $Fluid_, arg1: $RenderType): void;
         /**
          * @deprecated
@@ -1799,32 +1868,35 @@ declare module "@package/net/minecraft/client/renderer" {
          * @deprecated
          */
         static setRenderLayer(arg0: $Block_, arg1: $ChunkRenderTypeSet): void;
-        /**
-         * @deprecated
-         */
-        static getRenderLayers(arg0: $BlockState_): $ChunkRenderTypeSet;
-        static setFancy(fancy: boolean): void;
-        static getRenderLayer(fluidState: $FluidState): $RenderType;
         constructor();
         static set fancy(value: boolean);
     }
     export class $ItemInHandRenderer$HandRenderSelection extends $Enum<$ItemInHandRenderer$HandRenderSelection> {
+        static onlyForHand(hand: $InteractionHand_): $ItemInHandRenderer$HandRenderSelection;
+        static values(): $ItemInHandRenderer$HandRenderSelection[];
+        static valueOf(arg0: string): $ItemInHandRenderer$HandRenderSelection;
+        static RENDER_OFF_HAND_ONLY: $ItemInHandRenderer$HandRenderSelection;
+        static RENDER_BOTH_HANDS: $ItemInHandRenderer$HandRenderSelection;
+        static RENDER_MAIN_HAND_ONLY: $ItemInHandRenderer$HandRenderSelection;
     }
     /**
      * Values that may be interpreted as {@link $ItemInHandRenderer$HandRenderSelection}.
      */
     export type $ItemInHandRenderer$HandRenderSelection_ = "render_both_hands" | "render_main_hand_only" | "render_off_hand_only";
     export class $LightTexture implements $AutoCloseable, $LightTextureAccessor {
+        turnOnLightLayer(): void;
+        turnOffLightLayer(): void;
+        static sky(packedLight: number): number;
+        handler$fjf000$elysium_api$useGuiLightmap(arg0: $CallbackInfo): void;
+        handler$flk000$chloride$inject$init(arg0: $GameRenderer, arg1: $Minecraft, arg2: $CallbackInfo): void;
+        calculateDarknessScale(entity: $LivingEntity, gamma: number, partialTick: number): number;
+        getDarknessGamma(partialTick: number): number;
         close(): void;
         static block(packedLight: number): number;
         static pack(blockLight: number, skyLight: number): number;
         tick(): void;
-        turnOffLightLayer(): void;
-        turnOnLightLayer(): void;
         updateLightTexture(partialTicks: number): void;
-        static sky(packedLight: number): number;
         static getBrightness(dimensionType: $DimensionType_, lightLevel: number): number;
-        handler$del000$chloride$inject$init(arg0: $GameRenderer, arg1: $Minecraft, arg2: $CallbackInfo): void;
         getLightTexture(): $DynamicTexture;
         static FULL_BRIGHT: number;
         static FULL_SKY: number;
@@ -2139,11 +2211,11 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(name: string, setupState: $Runnable_, clearState: $Runnable_, enabled: boolean);
     }
     export class $FogRenderer {
-        static getPriorityFogFunction(entity: $Entity, partialTick: number): $FogRenderer$MobEffectFogFunction;
         static levelFogColor(): void;
-        static setupNoFog(): void;
+        static getPriorityFogFunction(entity: $Entity, partialTick: number): $FogRenderer$MobEffectFogFunction;
         static setupFog(camera: $Camera, fogMode: $FogRenderer$FogMode_, farPlaneDistance: number, shouldCreateFog: boolean, partialTick: number): void;
         static setupColor(activeRenderInfo: $Camera, partialTicks: number, level: $ClientLevel, renderDistanceChunks: number, bossColorModifier: number): void;
+        static setupNoFog(): void;
         static BIOME_FOG_TRANSITION_TIME: number;
         constructor();
     }
@@ -2152,7 +2224,7 @@ declare module "@package/net/minecraft/client/renderer" {
     /**
      * Values that may be interpreted as {@link $SectionOcclusionGraph$GraphEvents}.
      */
-    export type $SectionOcclusionGraph$GraphEvents_ = { sectionsToPropagateFrom?: $BlockingQueue<$SectionRenderDispatcher$RenderSection>, chunksWhichReceivedNeighbors?: $LongSet,  } | [sectionsToPropagateFrom?: $BlockingQueue<$SectionRenderDispatcher$RenderSection>, chunksWhichReceivedNeighbors?: $LongSet, ];
+    export type $SectionOcclusionGraph$GraphEvents_ = { chunksWhichReceivedNeighbors?: $LongSet, sectionsToPropagateFrom?: $BlockingQueue<$SectionRenderDispatcher$RenderSection>,  } | [chunksWhichReceivedNeighbors?: $LongSet, sectionsToPropagateFrom?: $BlockingQueue<$SectionRenderDispatcher$RenderSection>, ];
     export class $MultiBufferSource {
         static immediate(sharedBuffer: $ByteBufferBuilder): $MultiBufferSource$BufferSource;
         static immediateWithBuffers(fixedBuffers: $SequencedMap<any, any>, sharedBuffer: $ByteBufferBuilder): $MultiBufferSource$BufferSource;
@@ -2165,20 +2237,24 @@ declare module "@package/net/minecraft/client/renderer" {
      */
     export type $MultiBufferSource_ = ((arg0: $RenderType) => $VertexConsumer);
     export class $ItemInHandRenderer implements $ItemInHandInterface {
-        renderHandsWithItems(partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource$BufferSource, playerEntity: $LocalPlayer, combinedLight: number): void;
-        tick(): void;
-        renderItem(entity: $LivingEntity, itemStack: $ItemStack_, displayContext: $ItemDisplayContext_, leftHand: boolean, poseStack: $PoseStack, buffer: $MultiBufferSource_, seed: number): void;
-        itemUsed(hand: $InteractionHand_): void;
+        handler$ggi000$moonlight$renderSpecial(arg0: $AbstractClientPlayer, arg1: number, arg2: number, arg3: $InteractionHand_, arg4: number, arg5: $ItemStack_, arg6: number, arg7: $PoseStack, arg8: $MultiBufferSource_, arg9: number, arg10: $CallbackInfo, arg11: $HumanoidArm_): void;
+        handler$ggi000$moonlight$animateItem(arg0: $AbstractClientPlayer, arg1: number, arg2: number, arg3: $InteractionHand_, arg4: number, arg5: $ItemStack_, arg6: number, arg7: $PoseStack, arg8: $MultiBufferSource_, arg9: number, arg10: $CallbackInfo): void;
+        handler$ieh000$electroenergetics$electroEnergetics$renderItem(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: boolean, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
+        iris$isAnyHandTranslucent(): boolean;
+        applyItemArmTransform(poseStack: $PoseStack, hand: $HumanoidArm_, swingProgress: number): void;
+        iris$isAnyHandSolid(): boolean;
+        renderPlayerArm(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, equippedProgress: number, swingProgress: number, side: $HumanoidArm_): void;
         /**
          * Return the angle to render the Map
          */
         calculateMapTilt(pitch: number): number;
-        renderMapHand(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, side: $HumanoidArm_): void;
         renderArmWithItem(player: $AbstractClientPlayer, partialTicks: number, pitch: number, hand: $InteractionHand_, swingProgress: number, stack: $ItemStack_, equippedProgress: number, poseStack: $PoseStack, buffer: $MultiBufferSource_, combinedLight: number): void;
-        renderPlayerArm(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, equippedProgress: number, swingProgress: number, side: $HumanoidArm_): void;
-        iris$isAnyHandTranslucent(): boolean;
-        iris$isAnyHandSolid(): boolean;
-        handler$fml000$electroenergetics$electroEnergetics$renderItem(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $ItemDisplayContext_, arg3: boolean, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: $CallbackInfo): void;
+        renderMapHand(poseStack: $PoseStack, buffer: $MultiBufferSource_, packedLight: number, side: $HumanoidArm_): void;
+        applyItemArmAttackTransform(poseStack: $PoseStack, hand: $HumanoidArm_, swingProgress: number): void;
+        tick(): void;
+        renderItem(entity: $LivingEntity, itemStack: $ItemStack_, displayContext: $ItemDisplayContext_, leftHand: boolean, poseStack: $PoseStack, buffer: $MultiBufferSource_, seed: number): void;
+        itemUsed(hand: $InteractionHand_): void;
+        renderHandsWithItems(partialTicks: number, poseStack: $PoseStack, buffer: $MultiBufferSource$BufferSource, playerEntity: $LocalPlayer, combinedLight: number): void;
         mainHandItem: $ItemStack;
         offHandItem: $ItemStack;
         constructor(minecraft: $Minecraft, entityRenderDispatcher: $EntityRenderDispatcher, itemRenderer: $ItemRenderer);
@@ -2284,57 +2360,61 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(useCull: boolean);
     }
     export class $RenderType$CompositeState$CompositeStateBuilder {
-        createCompositeState(outline: boolean): $RenderType$CompositeState;
-        createCompositeState(outlineState: $RenderType$OutlineProperty_): $RenderType$CompositeState;
-        setTransparencyState(transparencyState: $RenderStateShard$TransparencyStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setCullState(cullState: $RenderStateShard$CullStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setOverlayState(overlayState: $RenderStateShard$OverlayStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setLayeringState(layerState: $RenderStateShard$LayeringStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setShaderState(shaderState: $RenderStateShard$ShaderStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setLightmapState(lightmapState: $RenderStateShard$LightmapStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setOutputState(outputState: $RenderStateShard$OutputStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setTextureState(textureState: $RenderStateShard$EmptyTextureStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setWriteMaskState(writeMaskState: $RenderStateShard$WriteMaskStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        setDepthTestState(depthTestState: $RenderStateShard$DepthTestStateShard): $RenderType$CompositeState$CompositeStateBuilder;
         setTexturingState(texturingState: $RenderStateShard$TexturingStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setWriteMaskState(writeMaskState: $RenderStateShard$WriteMaskStateShard): $RenderType$CompositeState$CompositeStateBuilder;
         setLineState(lineState: $RenderStateShard$LineStateShard): $RenderType$CompositeState$CompositeStateBuilder;
         setColorLogicState(colorLogicState: $RenderStateShard$ColorLogicStateShard): $RenderType$CompositeState$CompositeStateBuilder;
-        set transparencyState(value: $RenderStateShard$TransparencyStateShard);
-        set cullState(value: $RenderStateShard$CullStateShard);
-        set overlayState(value: $RenderStateShard$OverlayStateShard);
-        set layeringState(value: $RenderStateShard$LayeringStateShard);
-        set shaderState(value: $RenderStateShard$ShaderStateShard);
-        set lightmapState(value: $RenderStateShard$LightmapStateShard);
-        set outputState(value: $RenderStateShard$OutputStateShard);
-        set textureState(value: $RenderStateShard$EmptyTextureStateShard);
-        set writeMaskState(value: $RenderStateShard$WriteMaskStateShard);
-        set depthTestState(value: $RenderStateShard$DepthTestStateShard);
+        setTransparencyState(transparencyState: $RenderStateShard$TransparencyStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        createCompositeState(outline: boolean): $RenderType$CompositeState;
+        createCompositeState(outlineState: $RenderType$OutlineProperty_): $RenderType$CompositeState;
+        setCullState(cullState: $RenderStateShard$CullStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setShaderState(shaderState: $RenderStateShard$ShaderStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setTextureState(textureState: $RenderStateShard$EmptyTextureStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setLightmapState(lightmapState: $RenderStateShard$LightmapStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setOutputState(outputState: $RenderStateShard$OutputStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setLayeringState(layerState: $RenderStateShard$LayeringStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setOverlayState(overlayState: $RenderStateShard$OverlayStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        setDepthTestState(depthTestState: $RenderStateShard$DepthTestStateShard): $RenderType$CompositeState$CompositeStateBuilder;
+        constructor();
         set texturingState(value: $RenderStateShard$TexturingStateShard);
+        set writeMaskState(value: $RenderStateShard$WriteMaskStateShard);
         set lineState(value: $RenderStateShard$LineStateShard);
         set colorLogicState(value: $RenderStateShard$ColorLogicStateShard);
+        set transparencyState(value: $RenderStateShard$TransparencyStateShard);
+        set cullState(value: $RenderStateShard$CullStateShard);
+        set shaderState(value: $RenderStateShard$ShaderStateShard);
+        set textureState(value: $RenderStateShard$EmptyTextureStateShard);
+        set lightmapState(value: $RenderStateShard$LightmapStateShard);
+        set outputState(value: $RenderStateShard$OutputStateShard);
+        set layeringState(value: $RenderStateShard$LayeringStateShard);
+        set overlayState(value: $RenderStateShard$OverlayStateShard);
+        set depthTestState(value: $RenderStateShard$DepthTestStateShard);
     }
-    export class $ShaderInstance implements $Shader, $AutoCloseable, $ShaderInstanceInterface, $ShaderInstanceAccessor, $ILDShaderInstance {
+    export class $ShaderInstance implements $Shader, $AutoCloseable, $ShaderInstanceInterface, $ShaderInstanceAccessor, $ILDShaderInstance, $IShaderInstance {
+        handler$bgh000$ldlib2$onCreateShader(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat, arg3: $CallbackInfo, arg4: $JsonObject_): void;
+        handler$bdd000$iris$setupGeometryShader(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat, arg3: $CallbackInfo): void;
+        redirect$zon000$iris$redirectBindAttributeLocation(arg0: number, arg1: number, arg2: $CharSequence): void;
+        markDirty(): void;
+        handler$hoh001$lodestone$close(arg0: $CallbackInfo): void;
         getName(): string;
         clear(): void;
         apply(): void;
         getId(): number;
         close(): void;
-        static invokeGetOrCreate$ldlib2_$md$796745$2(resourceProvider: $ResourceProvider_, programType: $Program$Type_, name: string): $Program;
-        redirect$znc000$iris$redirectBindAttributeLocation(arg0: number, arg1: number, arg2: $CharSequence): void;
-        getVertexProgram(): $Program;
         getFragmentProgram(): $Program;
-        getVertexFormat(): $VertexFormat;
-        safeGetUniform(name: string): $AbstractUniform;
+        getVertexProgram(): $Program;
         attachToProgram(): void;
-        callGetOrCreate(resourceProvider: $ResourceProvider_, programType: $Program$Type_, name: string): $Program;
-        setDefaultUniforms(mode: $VertexFormat$Mode_, projectionMatrix: $Matrix4f, frustrumMatrix: $Matrix4f, window: $Window): void;
+        getGeometryProgram(): $LodestoneProgram;
+        parseUniformNode(json: $JsonElement_): void;
         setShouldSkip(arg0: $MethodHandle): void;
-        handler$znc000$iris$setupGeometryShader(arg0: $ResourceProvider_, arg1: string, arg2: $VertexFormat, arg3: $CallbackInfo): void;
-        handler$bec000$ldlib2$onCreateShader(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat, arg3: $CallbackInfo, arg4: $JsonObject_): void;
-        handler$bbi000$iris$setupGeometryShader(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat, arg3: $CallbackInfo): void;
-        setSampler(name: string, textureId: $Object): void;
-        markDirty(): void;
+        callGetOrCreate(resourceProvider: $ResourceProvider_, programType: $Program$Type_, name: string): $Program;
+        getVertexFormat(): $VertexFormat;
+        setDefaultUniforms(mode: $VertexFormat$Mode_, projectionMatrix: $Matrix4f, frustrumMatrix: $Matrix4f, window: $Window): void;
+        safeGetUniform(name: string): $AbstractUniform;
         getUniform(name: string): $Uniform;
+        setSampler(name: string, textureId: $Object): void;
+        handler$zon000$iris$setupGeometryShader(arg0: $ResourceProvider_, arg1: string, arg2: $VertexFormat, arg3: $CallbackInfo): void;
+        static invokeGetOrCreate$ldlib2_$md$e03d8d$2(resourceProvider: $ResourceProvider_, programType: $Program$Type_, name: string): $Program;
         iris$shouldSkipThis(): boolean;
         iris$createExtraShaders(arg0: $ResourceProvider_, arg1: string): void;
         onCreateShader(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat, arg3: $JsonObject_): void;
@@ -2353,6 +2433,7 @@ declare module "@package/net/minecraft/client/renderer" {
         GLINT_ALPHA: $Uniform;
         COLOR_MODULATOR: $Uniform;
         LINE_WIDTH: $Uniform;
+        uniformMap: $Map<string, $Uniform>;
         LIGHT0_DIRECTION: $Uniform;
         CHUNK_OFFSET: $Uniform;
         FOG_COLOR: $Uniform;
@@ -2366,14 +2447,14 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(arg0: $ResourceProvider_, arg1: $ResourceLocation_, arg2: $VertexFormat);
         get name(): string;
         get id(): number;
-        get vertexProgram(): $Program;
         get fragmentProgram(): $Program;
-        get vertexFormat(): $VertexFormat;
+        get vertexProgram(): $Program;
+        get geometryProgram(): $LodestoneProgram;
         set shouldSkip(value: $MethodHandle);
+        get vertexFormat(): $VertexFormat;
         get shaderInstanceAccessor(): $ShaderInstanceAccessor;
         get samplerMap(): $Map<string, $Object>;
         get samplerNames(): $List<string>;
-        get uniformMap(): $Map<string, $Uniform>;
     }
     export class $DimensionSpecialEffects$NetherEffects extends $DimensionSpecialEffects {
         constructor();
@@ -2593,7 +2674,10 @@ declare module "@package/net/minecraft/client/renderer" {
         getModifiedVoidDarkness(arg0: $LivingEntity, arg1: $MobEffectInstance, arg2: number, arg3: number): number;
         isEnabled(arg0: $LivingEntity, arg1: number): boolean;
     }
-    export class $RenderType$CompositeRenderType extends $RenderType implements $BlendingStateHolder {
+    export class $RenderType$CompositeRenderType extends $RenderType implements $BlendingStateHolder, $AccessorMixinCompositeRenderType, $GanderCompositeRenderType {
+        static CreateCompositeRenderType$roots_$md$e03d8d$0(arg0: string, arg1: $VertexFormat, arg2: $VertexFormat$Mode_, arg3: number, arg4: boolean, arg5: boolean, arg6: $RenderType$CompositeState): $RenderType$CompositeRenderType;
+        targetingTranslucentRenderTarget(arg0: $TranslucentRenderTargetLayer, arg1: $TranslucentRenderTargetLayer): $RenderType;
+        rootsGetState(): $RenderType$CompositeState;
         state(): $RenderType$CompositeState;
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
         static TEXT: $Function<$ResourceLocation, $RenderType>;
@@ -2751,6 +2835,7 @@ declare module "@package/net/minecraft/client/renderer" {
         static ENTITY_SMOOTH_CUTOUT: $Function<$ResourceLocation, $RenderType>;
         static DEBUG_FILLED_BOX: $RenderType$CompositeRenderType;
         static CRUMBLING: $Function<$ResourceLocation, $RenderType>;
+        static OUTLINE: $BiFunction<$ResourceLocation, $RenderStateShard$CullStateShard, $RenderType>;
         static TEXT_BACKGROUND: $RenderType;
         static DEBUG_LINE_STRIP: $Function<number, $RenderType$CompositeRenderType>;
         static BLOCK_SHEET: $RenderStateShard$TextureStateShard;
@@ -2856,34 +2941,34 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(arg0: string, arg1: $Runnable_, arg2: $Runnable_);
     }
     export class $OutlineBufferSource implements $MultiBufferSource, $OutlineBufferSourceAccessor, $BufferSourceExtension {
+        fusionGetLastRenderType(): $RenderType;
         setColor(red: number, green: number, blue: number, alpha: number): void;
         getBuffer(renderType: $RenderType): $VertexConsumer;
         endOutlineBatch(): void;
-        fusionGetLastRenderType(): $RenderType;
         getOutlineBufferSource(): $MultiBufferSource$BufferSource;
         outlineBufferSource: $MultiBufferSource$BufferSource;
         constructor(bufferSource: $MultiBufferSource$BufferSource);
     }
     export class $GpuWarnlistManager extends $SimplePreparableReloadListener<$GpuWarnlistManager$Preparations> {
-        getRendererWarnings(): string;
-        getAllWarnings(): string;
-        showWarning(): void;
-        willShowWarning(): boolean;
-        isSkippingFabulous(): boolean;
-        dismissWarningAndSkipFabulous(): void;
-        resetWarnings(): void;
         dismissWarning(): void;
         hasWarnings(): boolean;
-        isShowingWarning(): boolean;
         getVendorWarnings(): string;
+        isShowingWarning(): boolean;
+        resetWarnings(): void;
         getVersionWarnings(): string;
+        getRendererWarnings(): string;
+        dismissWarningAndSkipFabulous(): void;
+        getAllWarnings(): string;
+        willShowWarning(): boolean;
+        isSkippingFabulous(): boolean;
+        showWarning(): void;
         constructor();
+        get vendorWarnings(): string;
+        get showingWarning(): boolean;
+        get versionWarnings(): string;
         get rendererWarnings(): string;
         get allWarnings(): string;
         get skippingFabulous(): boolean;
-        get showingWarning(): boolean;
-        get vendorWarnings(): string;
-        get versionWarnings(): string;
     }
     export class $RenderStateShard$LineStateShard extends $RenderStateShard {
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
@@ -2986,13 +3071,13 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(width: $OptionalDouble);
     }
     export class $RenderStateShard implements $RenderStateShardAccessor, $RenderStateShardAccessor$1 {
-        static setupGlintTexturing(scale: number): void;
-        clearRenderState(): void;
+        static getTranslucentTransparency$iris_$md$e03d8d$0(): $RenderStateShard$TransparencyStateShard;
+        static getCRUMBLING_TRANSPARENCY$iris_$md$e03d8d$3(): $RenderStateShard$TransparencyStateShard;
+        static getNO_TRANSPARENCY$iris_$md$e03d8d$1(): $RenderStateShard$TransparencyStateShard;
+        static getGLINT_TRANSPARENCY$iris_$md$e03d8d$2(): $RenderStateShard$TransparencyStateShard;
         setupRenderState(): void;
-        static getTranslucentTransparency$iris_$md$796745$0(): $RenderStateShard$TransparencyStateShard;
-        static getCRUMBLING_TRANSPARENCY$iris_$md$796745$3(): $RenderStateShard$TransparencyStateShard;
-        static getNO_TRANSPARENCY$iris_$md$796745$1(): $RenderStateShard$TransparencyStateShard;
-        static getGLINT_TRANSPARENCY$iris_$md$796745$2(): $RenderStateShard$TransparencyStateShard;
+        clearRenderState(): void;
+        static setupGlintTexturing(scale: number): void;
         getName(): string;
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
         static RENDERTYPE_ENTITY_DECAL_SHADER: $RenderStateShard$ShaderStateShard;
@@ -3092,11 +3177,11 @@ declare module "@package/net/minecraft/client/renderer" {
         static RENDERTYPE_GUI_TEXT_HIGHLIGHT_SHADER: $RenderStateShard$ShaderStateShard;
         static BLOCK_SHEET: $RenderStateShard$TextureStateShard;
         constructor(name: string, setupState: $Runnable_, clearState: $Runnable_);
+        static get translucentTransparency$iris_$md$e03d8d$0(): $RenderStateShard$TransparencyStateShard;
+        static get CRUMBLING_TRANSPARENCY$iris_$md$e03d8d$3(): $RenderStateShard$TransparencyStateShard;
+        static get NO_TRANSPARENCY$iris_$md$e03d8d$1(): $RenderStateShard$TransparencyStateShard;
+        static get GLINT_TRANSPARENCY$iris_$md$e03d8d$2(): $RenderStateShard$TransparencyStateShard;
         static set upGlintTexturing(value: number);
-        static get translucentTransparency$iris_$md$796745$0(): $RenderStateShard$TransparencyStateShard;
-        static get CRUMBLING_TRANSPARENCY$iris_$md$796745$3(): $RenderStateShard$TransparencyStateShard;
-        static get NO_TRANSPARENCY$iris_$md$796745$1(): $RenderStateShard$TransparencyStateShard;
-        static get GLINT_TRANSPARENCY$iris_$md$796745$2(): $RenderStateShard$TransparencyStateShard;
     }
     export class $FogRenderer$FogMode extends $Enum<$FogRenderer$FogMode> {
         static values(): $FogRenderer$FogMode[];
@@ -3209,6 +3294,8 @@ declare module "@package/net/minecraft/client/renderer" {
         constructor(useLightmap: boolean);
     }
     export class $OutlineBufferSource$EntityOutlineGenerator extends $Record implements $VertexConsumer, $VertexBufferWriter {
+        canUseIntrinsics(): boolean;
+        canUseIntrinsics(arg0: $VertexFormat): boolean;
         color(): number;
         delegate(): $VertexConsumer;
         push(arg0: $MemoryStack, arg1: number, arg2: number, arg3: $VertexFormat): void;
@@ -3218,37 +3305,35 @@ declare module "@package/net/minecraft/client/renderer" {
         setUv2(u: number, v: number): $VertexConsumer;
         setUv1(u: number, v: number): $VertexConsumer;
         setNormal(x: number, y: number, z: number): $VertexConsumer;
-        canUseIntrinsics(): boolean;
-        canUseIntrinsics(arg0: $VertexFormat): boolean;
-        setColor(red: number, green: number, blue: number, alpha: number): $VertexConsumer;
-        setColor(packedOverlay: number): $VertexConsumer;
-        putBulkData(pose: $PoseStack$Pose, quad: $BakedQuad, brightness: number[], red: number, green: number, blue: number, alpha: number, lightmap: number[], packedOverlay: number, readAlpha: boolean): void;
-        putBulkData(pose: $PoseStack$Pose, quad: $BakedQuad, red: number, green: number, blue: number, alpha: number, packedLight: number, packedOverlay: number): void;
-        setWhiteAlpha(packedOverlay: number): $VertexConsumer;
-        wrapMethod$dbh000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
-        wrapMethod$dbh000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean, arg10: $Operation_<any>): void;
-        addVertex(pos: $Vector3f): $VertexConsumer;
-        addVertex(pose: $PoseStack$Pose, pos: $Vector3f): $VertexConsumer;
-        addVertex(pose: $PoseStack$Pose, normalX: number, normalY: number, normalZ: number): $VertexConsumer;
-        addVertex(pose: $Matrix4f, x: number, y: number, z: number): $VertexConsumer;
-        addVertex(x: number, y: number, z: number, color: number, u: number, v: number, packedOverlay: number, packedLight: number, normalX: number, normalY: number, normalZ: number): void;
-        setOverlay(packedOverlay: number): $VertexConsumer;
-        setLight(packedOverlay: number): $VertexConsumer;
-        setNormal(pose: $PoseStack$Pose, normalX: number, normalY: number, normalZ: number): $VertexConsumer;
-        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
+        wrapMethod$cmb000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: $Operation_<any>): void;
+        wrapMethod$cmb000$sodium$modifyPutBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean, arg10: $Operation_<any>): void;
+        setColor(arg0: number): $VertexConsumer;
+        setColor(arg0: number, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $PoseStack$Pose, arg1: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $Vector3f): $VertexConsumer;
+        addVertex(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: $Matrix4f, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        addVertex(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number, arg10: number): void;
+        setOverlay(arg0: number): $VertexConsumer;
+        setLight(arg0: number): $VertexConsumer;
+        setNormal(arg0: $PoseStack$Pose, arg1: number, arg2: number, arg3: number): $VertexConsumer;
+        setWhiteAlpha(arg0: number): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number[], arg3: number, arg4: number, arg5: number, arg6: number, arg7: number[], arg8: number, arg9: boolean): void;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
         applyBakedLighting(arg0: number, arg1: $ByteBuffer): number;
         applyBakedNormals(arg0: $Vector3f, arg1: $ByteBuffer, arg2: $Matrix3f): void;
         misc(arg0: $VertexFormatElement_, ...arg1: number[]): $VertexConsumer;
+        putBulkData(arg0: $PoseStack$Pose, arg1: $BakedQuad, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number, arg8: boolean): void;
         constructor(delegate: $VertexConsumer, defaultR: number, defaultG: number, defaultB: number, defaultA: number);
         constructor(arg0: $VertexConsumer, arg1: number);
-        set whiteAlpha(value: number);
         set overlay(value: number);
         set light(value: number);
+        set whiteAlpha(value: number);
     }
     /**
      * Values that may be interpreted as {@link $OutlineBufferSource$EntityOutlineGenerator}.
      */
-    export type $OutlineBufferSource$EntityOutlineGenerator_ = { color?: number, delegate?: $VertexConsumer,  } | [color?: number, delegate?: $VertexConsumer, ];
+    export type $OutlineBufferSource$EntityOutlineGenerator_ = { delegate?: $VertexConsumer, color?: number,  } | [delegate?: $VertexConsumer, color?: number, ];
     export class $GameRenderer$ResourceCache extends $Record implements $ResourceProvider {
         cache(): $Map<$ResourceLocation, $Resource>;
         original(): $ResourceProvider;
@@ -3261,7 +3346,7 @@ declare module "@package/net/minecraft/client/renderer" {
     /**
      * Values that may be interpreted as {@link $GameRenderer$ResourceCache}.
      */
-    export type $GameRenderer$ResourceCache_ = { cache?: $Map_<$ResourceLocation_, $Resource>, original?: $ResourceProvider_,  } | [cache?: $Map_<$ResourceLocation_, $Resource>, original?: $ResourceProvider_, ];
+    export type $GameRenderer$ResourceCache_ = { original?: $ResourceProvider_, cache?: $Map_<$ResourceLocation_, $Resource>,  } | [original?: $ResourceProvider_, cache?: $Map_<$ResourceLocation_, $Resource>, ];
     export class $RenderStateShard$TextureStateShard extends $RenderStateShard$EmptyTextureStateShard {
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
         static RENDERTYPE_ENTITY_DECAL_SHADER: $RenderStateShard$ShaderStateShard;
@@ -3370,7 +3455,7 @@ declare module "@package/net/minecraft/client/renderer" {
     /**
      * Values that may be interpreted as {@link $SectionOcclusionGraph$GraphState}.
      */
-    export type $SectionOcclusionGraph$GraphState_ = { storage?: $SectionOcclusionGraph$GraphStorage, events?: $SectionOcclusionGraph$GraphEvents_,  } | [storage?: $SectionOcclusionGraph$GraphStorage, events?: $SectionOcclusionGraph$GraphEvents_, ];
+    export type $SectionOcclusionGraph$GraphState_ = { events?: $SectionOcclusionGraph$GraphEvents_, storage?: $SectionOcclusionGraph$GraphStorage,  } | [events?: $SectionOcclusionGraph$GraphEvents_, storage?: $SectionOcclusionGraph$GraphStorage, ];
     export class $RenderStateShard$OutputStateShard extends $RenderStateShard {
         static RENDERTYPE_ARMOR_CUTOUT_NO_CULL_SHADER: $RenderStateShard$ShaderStateShard;
         static RENDERTYPE_ENTITY_DECAL_SHADER: $RenderStateShard$ShaderStateShard;

@@ -32,11 +32,11 @@ declare module "@package/codechicken/lib/vec/uv" {
         constructor(arg0: $UVTransformationList);
     }
     export class $UVTransformation extends $ITransformation<$UV, $UVTransformation> implements $IVertexOperation {
+        operationID(): number;
+        operate(arg0: $CCRenderState): void;
         load(arg0: $CCRenderState): boolean;
         "with"(arg0: $UVTransformation): $UVTransformationList;
         at(arg0: $UV): $UVTransformation;
-        operate(arg0: $CCRenderState): void;
-        operationID(): number;
         static operationIndex: number;
         constructor();
     }

@@ -7,23 +7,24 @@ import { $SoundEvent } from "@package/net/minecraft/sounds";
 import { $BlockPos, $BlockPos_ } from "@package/net/minecraft/core";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $AnimationState, $WalkAnimationState, $EntityType_, $Entity$RemovalReason, $Mob, $MobSpawnType_, $PortalProcessor } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
 import { $RandomSource } from "@package/net/minecraft/util";
 
 declare module "@package/net/minecraft/world/entity/ambient" {
     export class $Bat extends $AmbientCreature {
+        setResting(isResting: boolean): void;
         /**
          * Return whether this entity should NOT trigger a pressure plate or a tripwire.
          */
         isResting(): boolean;
-        setResting(isResting: boolean): void;
         static createAttributes(): $AttributeSupplier$Builder;
         getAmbientSound(): $SoundEvent;
+        static checkBatSpawnRules(bat: $EntityType_<$Bat>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         /**
          * Return whether this entity should NOT trigger a pressure plate or a tripwire.
          */
         isFlapping(): boolean;
-        static checkBatSpawnRules(bat: $EntityType_<$Bat>, level: $LevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -71,6 +72,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -82,6 +84,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -185,6 +188,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -195,6 +199,7 @@ declare module "@package/net/minecraft/world/entity/ambient" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;

@@ -19,9 +19,9 @@ import { $Vector2f, $Matrix4f } from "@package/org/joml";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/data" {
     export class $GridTemplate extends $Record {
+        repeats(): $List<$GridTemplateComponent>;
         names(): $List<$NamedGridLine>;
         simples(): $List<$TrackSizingFunction>;
-        repeats(): $List<$GridTemplateComponent>;
         static EMPTY: $GridTemplate;
         constructor(arg0: $TrackSizingFunction[], arg1: $GridTemplateComponent[], arg2: $NamedGridLine[]);
         constructor(simples: $List_<$TrackSizingFunction>, repeats: $List_<$GridTemplateComponent>, names: $List_<$NamedGridLine>);
@@ -29,7 +29,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/data" {
     /**
      * Values that may be interpreted as {@link $GridTemplate}.
      */
-    export type $GridTemplate_ = { names?: $List_<$NamedGridLine>, simples?: $List_<$TrackSizingFunction>, repeats?: $List_<$GridTemplateComponent>,  } | [names?: $List_<$NamedGridLine>, simples?: $List_<$TrackSizingFunction>, repeats?: $List_<$GridTemplateComponent>, ];
+    export type $GridTemplate_ = { simples?: $List_<$TrackSizingFunction>, repeats?: $List_<$GridTemplateComponent>, names?: $List_<$NamedGridLine>,  } | [simples?: $List_<$TrackSizingFunction>, repeats?: $List_<$GridTemplateComponent>, names?: $List_<$NamedGridLine>, ];
     export class $TextWrap extends $Enum<$TextWrap> {
         static values(): $TextWrap[];
         static valueOf(arg0: string): $TextWrap;
@@ -56,12 +56,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/data" {
      */
     export type $Vertical_ = "top" | "center" | "bottom";
     export class $FillDirection extends $Enum<$FillDirection> {
-        static values(): $FillDirection[];
-        static valueOf(arg0: string): $FillDirection;
         getDrawnWidth(arg0: number): number;
         getDrawnHeight(arg0: number): number;
-        getDrawnU(arg0: number): number;
+        static values(): $FillDirection[];
+        static valueOf(arg0: string): $FillDirection;
         getDrawnV(arg0: number): number;
+        getDrawnU(arg0: number): number;
         static UP_TO_DOWN: $FillDirection;
         static RIGHT_TO_LEFT: $FillDirection;
         static ALWAYS_FULL: $FillDirection;
@@ -94,8 +94,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/data" {
     export type $ScrollDisplay_ = "auto" | "always" | "never";
     export class $Pivot {
         static of(arg0: number, arg1: number): $Pivot;
-        getY(): number;
         getX(): number;
+        getY(): number;
         static TOP_LEFT: $Pivot;
         static BOTTOM_CENTER: $Pivot;
         static CODEC: $Codec<$Pivot>;
@@ -151,46 +151,46 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/data" {
      */
     export type $GridAuto_ = { values?: $List_<$TrackSizingFunction>,  } | [values?: $List_<$TrackSizingFunction>, ];
     export class $Transform2D implements $IConfigurable, $IPersistedSerializable {
+        translatePercent(arg0: number, arg1: number): $Transform2D;
+        rotationRad(arg0: number): $Transform2D;
+        forwardPoint(arg0: $UIElement, arg1: number[]): void;
+        scale(): $Vector2f;
         scale(arg0: number, arg1: number): $Transform2D;
         scale(arg0: number): $Transform2D;
-        scale(): $Vector2f;
         static identity(): $Transform2D;
         copy(): $Transform2D;
         isIdentity(): boolean;
         copyFrom(arg0: $Transform2D): void;
         pivot(arg0: number, arg1: number): $Transform2D;
-        pivot(arg0: $Pivot): $Transform2D;
         pivot(): $Pivot;
-        static interpolate(arg0: $Transform2D, arg1: $Transform2D, arg2: number): $Transform2D;
+        pivot(arg0: $Pivot): $Transform2D;
+        beforeDeserialize(): void;
         setIdentity(): $Transform2D;
-        translate(arg0: number, arg1: number): $Transform2D;
-        translate(): $Translate2D;
-        translate(arg0: $Translate2D): $Transform2D;
-        rotation(arg0: number): $Transform2D;
-        rotation(): number;
+        pushPose(arg0: $GUIContext, arg1: $UIElement): void;
         pushPose(arg0: $Matrix4f, arg1: $UIElement): void;
         pushPose(arg0: $PoseStack, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        pushPose(arg0: $GUIContext, arg1: $UIElement): void;
         popPose(arg0: $PoseStack): void;
         popPose(arg0: $GUIContext): void;
-        beforeDeserialize(): void;
+        static interpolate(arg0: $Transform2D, arg1: $Transform2D, arg2: number): $Transform2D;
         inversePoint(arg0: $UIElement, arg1: number[]): void;
-        translatePercent(arg0: number, arg1: number): $Transform2D;
-        forwardPoint(arg0: $UIElement, arg1: number[]): void;
-        rotationRad(arg0: number): $Transform2D;
+        translate(): $Translate2D;
+        translate(arg0: $Translate2D): $Transform2D;
+        translate(arg0: number, arg1: number): $Transform2D;
+        rotation(arg0: number): $Transform2D;
+        rotation(): number;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         afterSerialize(): void;
+        writeToBuff(arg0: $ByteBuf): void;
         afterDeserialize(): void;
         readFromBuff(arg0: $ByteBuf): void;
         beforeSerialize(): void;
-        writeToBuff(arg0: $ByteBuf): void;
-        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         deserializeAdditionalNBT(arg0: $Tag_, arg1: $HolderLookup$Provider): void;
+        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         static CODEC: $Codec<$Transform2D>;
         constructor();
         get configurableName(): string;
@@ -225,28 +225,28 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/data" {
      */
     export type $LPSize_ = { size?: $TaffySize<$LengthPercentage>,  } | [size?: $TaffySize<$LengthPercentage>, ];
     export class $Translate2D {
-        isZero(): boolean;
-        getY(): $LengthPercent;
-        static percent(arg0: number, arg1: number): $Translate2D;
-        resolveY(arg0: number): number;
-        getX(): $LengthPercent;
-        static px(arg0: number, arg1: number): $Translate2D;
         static lerp(arg0: $Translate2D, arg1: $Translate2D, arg2: number): $Translate2D;
+        resolveY(arg0: number): number;
+        isZero(): boolean;
+        static percent(arg0: number, arg1: number): $Translate2D;
+        getX(): $LengthPercent;
+        getY(): $LengthPercent;
         resolveX(arg0: number): number;
         isPx(): boolean;
+        static px(arg0: number, arg1: number): $Translate2D;
         static ZERO: $Translate2D;
         static CODEC: $Codec<$Translate2D>;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $Translate2D>;
         constructor(arg0: $LengthPercent, arg1: $LengthPercent);
         get zero(): boolean;
-        get y(): $LengthPercent;
         get x(): $LengthPercent;
+        get y(): $LengthPercent;
     }
     export class $Tooltips extends $Record {
         append(...arg0: $Component_[]): $Tooltips;
         isEmpty(): boolean;
-        static of(...arg0: string[]): $Tooltips;
         static of(arg0: $List_<$Component_>): $Tooltips;
+        static of(...arg0: string[]): $Tooltips;
         static of(...arg0: $Component_[]): $Tooltips;
         merge(...arg0: $Tooltips_[]): $Tooltips;
         static empty(): $Tooltips;
@@ -260,12 +260,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/data" {
      */
     export type $Tooltips_ = { tooltips?: $Component_[],  } | [tooltips?: $Component_[], ];
     export class $LengthPercent {
+        static lerp(arg0: $LengthPercent, arg1: $LengthPercent, arg2: number): $LengthPercent;
         getValue(): number;
         resolve(arg0: number): number;
         isZero(): boolean;
         static percent(arg0: number): $LengthPercent;
         static px(arg0: number): $LengthPercent;
-        static lerp(arg0: $LengthPercent, arg1: $LengthPercent, arg2: number): $LengthPercent;
         isPercent(): boolean;
         static ZERO: $LengthPercent;
         static CODEC: $Codec<$LengthPercent>;

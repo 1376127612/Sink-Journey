@@ -20,12 +20,12 @@ declare module "@package/appeng/api/storage" {
         static checkPreconditions(arg0: $AEKey, arg1: number, arg2: $Actionable_, arg3: $IActionSource): void;
     }
     export interface $MEStorage {
+        getAvailableStacks(arg0: $KeyCounter): void;
+        getAvailableStacks(): $KeyCounter;
         extract(arg0: $AEKey, arg1: number, arg2: $Actionable_, arg3: $IActionSource): number;
         insert(arg0: $AEKey, arg1: number, arg2: $Actionable_, arg3: $IActionSource): number;
         getDescription(): $Component;
         isPreferredStorageFor(arg0: $AEKey, arg1: $IActionSource): boolean;
-        getAvailableStacks(): $KeyCounter;
-        getAvailableStacks(arg0: $KeyCounter): void;
         get description(): $Component;
     }
     /**

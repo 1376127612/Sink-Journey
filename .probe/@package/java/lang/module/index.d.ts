@@ -89,8 +89,8 @@ declare module "@package/java/lang/module" {
         name(): string;
         compareTo(arg0: $ModuleDescriptor$Requires): number;
         accessFlags(): $Set<$AccessFlag>;
-        compiledVersion(): ($ModuleDescriptor$Version) | undefined;
         rawCompiledVersion(): (string) | undefined;
+        compiledVersion(): ($ModuleDescriptor$Version) | undefined;
     }
     export class $ModuleFinder {
         static of(...arg0: $Path_[]): $ModuleFinder;

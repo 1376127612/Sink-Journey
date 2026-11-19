@@ -9,24 +9,24 @@ declare module "@package/com/george_vi/electroenergetics/mixin_interfaces" {
     export class $IPantographList {
     }
     export interface $IPantographList {
-        getPantographState(arg0: $BlockPos_): $TrainPantographEntry;
-        electroEnergetics$setPantographList(arg0: $List_<$TrainPantographEntry>): void;
-        electroEnergetics$getSoundModifyingBlocks(): $Set<$TrainSoundModifier>;
         electroEnergetics$getPantographList(): $List<$TrainPantographEntry>;
-        electroEnergetics$setAccumulators(arg0: number): void;
+        electroEnergetics$getSoundModifyingBlocks(): $Set<$TrainSoundModifier>;
+        electroEnergetics$setPantographList(arg0: $List_<$TrainPantographEntry>): void;
+        getPantographState(arg0: $BlockPos_): $TrainPantographEntry;
+        electroEnergetics$hasCreativeElectricalSource(): boolean;
         electroEnergetics$hasElectricMotor(): boolean;
         electroEnergetics$getAccumulators(): number;
         electroEnergetics$setElectricMotor(arg0: boolean): void;
-        electroEnergetics$hasCreativeElectricalSource(): boolean;
+        electroEnergetics$setAccumulators(arg0: number): void;
         changePantographState(arg0: $BlockPos_, arg1: boolean): void;
     }
     export class $ICEETrainExtension {
     }
     export interface $ICEETrainExtension {
-        setSoundType(arg0: $ElectricTrainSoundType_): void;
         getSoundType(): $ElectricTrainSoundType;
         getElectricTrainData(): $ElectricTrainData;
         getSoundModifyingBlocks(): $Set<$TrainSoundModifier>;
+        setSoundType(arg0: $ElectricTrainSoundType_): void;
         get electricTrainData(): $ElectricTrainData;
         get soundModifyingBlocks(): $Set<$TrainSoundModifier>;
     }

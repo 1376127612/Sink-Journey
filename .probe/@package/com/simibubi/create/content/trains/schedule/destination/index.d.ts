@@ -8,10 +8,10 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/com/simibubi/create/content/trains/schedule/destination" {
     export class $ScheduleInstruction extends $ScheduleDataEntry {
-        write(arg0: $HolderLookup$Provider): $CompoundTag;
-        start(arg0: $ScheduleRuntime, arg1: $Level_): $DiscoveredPath;
         static fromTag(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $ScheduleInstruction;
         supportsConditions(): boolean;
+        write(arg0: $HolderLookup$Provider): $CompoundTag;
+        start(arg0: $ScheduleRuntime, arg1: $Level_): $DiscoveredPath;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ScheduleInstruction>;
         constructor();
     }

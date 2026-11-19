@@ -21,8 +21,8 @@ declare module "@package/xaero/common/core" {
     export class $IXaeroMinimapClientPlayNetHandler {
     }
     export interface $IXaeroMinimapClientPlayNetHandler {
-        getXaero_minimapSession(): $XaeroMinimapSession;
         setXaero_minimapSession(arg0: $XaeroMinimapSession): void;
+        getXaero_minimapSession(): $XaeroMinimapSession;
     }
     export class $IXaeroMinimapMinecraftClient {
     }

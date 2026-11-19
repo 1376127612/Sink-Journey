@@ -16,9 +16,9 @@ declare module "@package/sirttas/elementalcraft/recipe/instrument/io" {
     export class $IOInstrumentRecipe<I extends $IOInstrumentRecipeInput> {
     }
     export interface $IOInstrumentRecipe<I extends $IOInstrumentRecipeInput> extends $IInstrumentRecipe<I>, $ILuckRecipe<I> {
-        matches(arg0: $ItemStack_, arg1: $Level_): boolean;
-        matches(arg0: I, arg1: $Level_): boolean;
         getInputSize(): number;
+        matches(arg0: I, arg1: $Level_): boolean;
+        matches(arg0: $ItemStack_, arg1: $Level_): boolean;
         get inputSize(): number;
     }
     export class $IOInstrumentRecipeInput {
@@ -27,35 +27,35 @@ declare module "@package/sirttas/elementalcraft/recipe/instrument/io" {
         toSingleRecipeInput(): $SingleRecipeInput;
     }
     export class $SimpleIOInstrumentRecipeInput extends $Record implements $IOInstrumentRecipeInput, $RuneBonusesRecipeInput {
+        randomSource(): $RandomSource;
+        elementAmount(): number;
+        getElementAmount(arg0: $ElementType_): number;
+        getItemLimit(arg0: number): number;
+        getRuneBonus(arg0: $Rune$BonusType_): number;
         size(): number;
         elementType(): $ElementType;
         input(): $ItemStack;
+        getElementType(): $ElementType;
         getItem(arg0: number): $ItemStack;
         output(): $ItemStack;
-        getElementType(): $ElementType;
-        getRuneBonus(arg0: $Rune$BonusType_): number;
-        getElementAmount(arg0: $ElementType_): number;
-        elementAmount(): number;
-        randomSource(): $RandomSource;
-        bonuses(): $Map<$Rune$BonusType, number>;
         getRandomSource(): $RandomSource;
-        getItemLimit(arg0: number): number;
+        bonuses(): $Map<$Rune$BonusType, number>;
         itemLimit(): number;
         toSingleRecipeInput(): $SingleRecipeInput;
         getElementTypeSupplier(): $Supplier<$ElementType>;
         isEmpty(): boolean;
-        find(filter: $SlotFilter_): $ItemStack;
-        find(filter: $SlotFilter_, skip: number): $ItemStack;
         self(): $RecipeInput;
+        find(filter: $SlotFilter_, skip: number): $ItemStack;
+        find(filter: $SlotFilter_): $ItemStack;
         findAll(filter: $SlotFilter_): $List<$ItemStack>;
         findAll(): $List<$ItemStack>;
-        constructor(input: $ItemStack_, output: $ItemStack_, itemLimit: number, randomSource: $RandomSource, elementType: $ElementType_, elementAmount: number, bonuses: $Map_<$Rune$BonusType_, number>);
         constructor(arg0: $ItemStack_, arg1: $ItemStack_, arg2: $RandomSource, arg3: $ElementType_, arg4: number, arg5: $Map_<$Rune$BonusType_, number>);
+        constructor(input: $ItemStack_, output: $ItemStack_, itemLimit: number, randomSource: $RandomSource, elementType: $ElementType_, elementAmount: number, bonuses: $Map_<$Rune$BonusType_, number>);
         get elementTypeSupplier(): $Supplier<$ElementType>;
         get empty(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $SimpleIOInstrumentRecipeInput}.
      */
-    export type $SimpleIOInstrumentRecipeInput_ = { input?: $ItemStack_, itemLimit?: number, elementType?: $ElementType_, bonuses?: $Map_<$Rune$BonusType_, number>, randomSource?: $RandomSource, output?: $ItemStack_, elementAmount?: number,  } | [input?: $ItemStack_, itemLimit?: number, elementType?: $ElementType_, bonuses?: $Map_<$Rune$BonusType_, number>, randomSource?: $RandomSource, output?: $ItemStack_, elementAmount?: number, ];
+    export type $SimpleIOInstrumentRecipeInput_ = { elementType?: $ElementType_, bonuses?: $Map_<$Rune$BonusType_, number>, randomSource?: $RandomSource, output?: $ItemStack_, elementAmount?: number, input?: $ItemStack_, itemLimit?: number,  } | [elementType?: $ElementType_, bonuses?: $Map_<$Rune$BonusType_, number>, randomSource?: $RandomSource, output?: $ItemStack_, elementAmount?: number, input?: $ItemStack_, itemLimit?: number, ];
 }

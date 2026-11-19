@@ -1,6 +1,6 @@
 import { $Affine } from "@package/dev/engine_room/flywheel/lib/transform";
 import { $MultiBufferSource_ } from "@package/net/minecraft/client/renderer";
-import { $Ingredient_, $Ingredient } from "@package/net/minecraft/world/item/crafting";
+import { $Ingredient, $Ingredient_ } from "@package/net/minecraft/world/item/crafting";
 import { $Codec, $MapCodec } from "@package/com/mojang/serialization";
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $SmartBlockEntity, $IMergeableBE } from "@package/com/simibubi/create/foundation/blockEntity";
@@ -28,7 +28,7 @@ import { $ItemRequirement } from "@package/com/simibubi/create/content/schematic
 import { $LevelAccessor, $LevelReader, $BlockGetter, $Level, $Level_ } from "@package/net/minecraft/world/level";
 import { $SpecialBlockItemRequirement } from "@package/com/simibubi/create/api/schematic/requirement";
 import { $Logger } from "@package/org/slf4j";
-import { $Item_, $ItemStack } from "@package/net/minecraft/world/item";
+import { $Item_, $Item, $ItemStack } from "@package/net/minecraft/world/item";
 import { $FluidState, $Fluid_ } from "@package/net/minecraft/world/level/material";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $NonNullSupplier_, $NonNullSupplier } from "@package/com/tterrag/registrate/util/nullness";
@@ -46,18 +46,18 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/com/simibubi/create/content/trains/track" {
     export class $TrackMaterial {
-        static deserialize(arg0: string): $TrackMaterial;
-        getBlock(): $TrackBlock;
-        getModelHolder(): $TrackMaterial$TrackModelHolder;
-        getBlockSupplier(): $NonNullSupplier<$TrackBlock>;
-        static allBlocksFromMod(arg0: string): $List<$NonNullSupplier<$Block>>;
-        resourceName(): string;
-        asStack(arg0: number): $ItemStack;
-        asStack(): $ItemStack;
-        static allBlocks(): $List<$NonNullSupplier<$Block>>;
         createBlock(arg0: $BlockBehaviour$Properties): $TrackBlock;
+        static allBlocks(): $List<$NonNullSupplier<$Block>>;
         static allFromMod(arg0: string): $List<$TrackMaterial>;
         isFromMod(arg0: string): boolean;
+        static allBlocksFromMod(arg0: string): $List<$NonNullSupplier<$Block>>;
+        getBlockSupplier(): $NonNullSupplier<$TrackBlock>;
+        getModelHolder(): $TrackMaterial$TrackModelHolder;
+        static deserialize(arg0: string): $TrackMaterial;
+        asStack(arg0: number): $ItemStack;
+        asStack(): $ItemStack;
+        resourceName(): string;
+        getBlock(): $TrackBlock;
         static fromItem(arg0: $Item_): $TrackMaterial;
         static ALL: $Map<$ResourceLocation, $TrackMaterial>;
         trackBlock: $NonNullSupplier<$NonNullSupplier<$TrackBlock>>;
@@ -70,9 +70,9 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         railsIngredient: $Ingredient;
         constructor(arg0: $ResourceLocation_, arg1: string, arg2: $NonNullSupplier_<$NonNullSupplier<$TrackBlock>>, arg3: $ResourceLocation_, arg4: $Ingredient_, arg5: $Ingredient_, arg6: $TrackMaterial$TrackType, arg7: $Supplier_<$Supplier<$TrackMaterial$TrackModelHolder>>, arg8: $TrackMaterial$TrackType$TrackBlockFactory_);
         constructor(arg0: $ResourceLocation_, arg1: string, arg2: $NonNullSupplier_<$NonNullSupplier<$TrackBlock>>, arg3: $ResourceLocation_, arg4: $Ingredient_, arg5: $Ingredient_, arg6: $TrackMaterial$TrackType, arg7: $Supplier_<$Supplier<$TrackMaterial$TrackModelHolder>>);
-        get block(): $TrackBlock;
-        get modelHolder(): $TrackMaterial$TrackModelHolder;
         get blockSupplier(): $NonNullSupplier<$TrackBlock>;
+        get modelHolder(): $TrackMaterial$TrackModelHolder;
+        get block(): $TrackBlock;
     }
     export class $BezierConnection$GirderAngles {
         beams: $Couple<$PoseStack$Pose>[];
@@ -81,37 +81,37 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         beamCaps: $Couple<$Couple<$PoseStack$Pose>>[];
     }
     export class $TrackTargetingBehaviour<T extends $TrackEdgePoint> extends $BlockEntityBehaviour {
-        getTargetBezier(): $BezierTrackPointLocation;
-        getPositionForMapMarker(): $BlockPos;
-        transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
+        getTargetDirection(): $Direction$AxisDirection;
         isOnCurve(): boolean;
-        static render(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Direction$AxisDirection_, arg3: $BezierTrackPointLocation_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: number, arg8: $TrackTargetingBehaviour$RenderedTrackOverlayType_, arg9: number): void;
-        isOrthogonal(): boolean;
         invalidateEdgePoint(arg0: $CompoundTag_): void;
+        isOrthogonal(): boolean;
+        getTrack(): $ITrackBlock;
+        determineGraphLocation(): $TrackGraphLocation;
         getTrackBlockState(): $BlockState;
         hasValidTrack(): boolean;
-        getGlobalPosition(): $BlockPos;
         getEdgePoint(): T;
-        getTargetDirection(): $Direction$AxisDirection;
-        determineGraphLocation(): $TrackGraphLocation;
-        getTrack(): $ITrackBlock;
+        getGlobalPosition(): $BlockPos;
+        transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
+        static render(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $Direction$AxisDirection_, arg3: $BezierTrackPointLocation_, arg4: $PoseStack, arg5: $MultiBufferSource_, arg6: number, arg7: number, arg8: $TrackTargetingBehaviour$RenderedTrackOverlayType_, arg9: number): void;
+        getTargetBezier(): $BezierTrackPointLocation;
+        getPositionForMapMarker(): $BlockPos;
         createEdgePoint(): T;
         blockEntity: $SmartBlockEntity;
         static TYPE: $BehaviourType<$TrackTargetingBehaviour<never>>;
         constructor(arg0: $SmartBlockEntity, arg1: $EdgePointType<T>);
-        get targetBezier(): $BezierTrackPointLocation;
-        get positionForMapMarker(): $BlockPos;
+        get targetDirection(): $Direction$AxisDirection;
         get onCurve(): boolean;
         get orthogonal(): boolean;
-        get trackBlockState(): $BlockState;
-        get globalPosition(): $BlockPos;
-        get edgePoint(): T;
-        get targetDirection(): $Direction$AxisDirection;
         get track(): $ITrackBlock;
+        get trackBlockState(): $BlockState;
+        get edgePoint(): T;
+        get globalPosition(): $BlockPos;
+        get targetBezier(): $BezierTrackPointLocation;
+        get positionForMapMarker(): $BlockPos;
     }
     export class $BezierTrackPointLocation extends $Record {
-        segment(): number;
         curveTarget(): $BlockPos;
+        segment(): number;
         static CODEC: $Codec<$BezierTrackPointLocation>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $BezierTrackPointLocation>;
         constructor(curveTarget: $BlockPos_, segment: number);
@@ -119,7 +119,7 @@ declare module "@package/com/simibubi/create/content/trains/track" {
     /**
      * Values that may be interpreted as {@link $BezierTrackPointLocation}.
      */
-    export type $BezierTrackPointLocation_ = { segment?: number, curveTarget?: $BlockPos_,  } | [segment?: number, curveTarget?: $BlockPos_, ];
+    export type $BezierTrackPointLocation_ = { curveTarget?: $BlockPos_, segment?: number,  } | [curveTarget?: $BlockPos_, segment?: number, ];
     export class $TrackTargetingBehaviour$RenderedTrackOverlayType extends $Enum<$TrackTargetingBehaviour$RenderedTrackOverlayType> {
         static values(): $TrackTargetingBehaviour$RenderedTrackOverlayType[];
         static valueOf(arg0: string): $TrackTargetingBehaviour$RenderedTrackOverlayType;
@@ -138,34 +138,34 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         constructor(arg0: $ResourceLocation_, arg1: $TrackMaterial$TrackType$TrackBlockFactory_);
     }
     export class $BezierConnection implements $Iterable<$BezierConnection$Segment> {
-        getBakedGirders(): $BezierConnection$GirderAngles;
+        getMaterial(): $TrackMaterial;
+        isPrimary(): boolean;
+        secondary(): $BezierConnection;
+        getGirderItemCost(): number;
+        addItemsToPlayer(arg0: $Player): void;
+        getTrackItemCost(): number;
+        incrementT(arg0: number, arg1: number): number;
+        yOffsetAt(arg0: $Vec3_): number;
+        getHandleLength(): number;
+        setMaterial(arg0: $TrackMaterial): void;
+        rasterise(): $Map<$Pair<number, number>, number>;
+        spawnItems(arg0: $Level_): void;
+        equalsSansMaterial(arg0: $BezierConnection): boolean;
+        getSegmentCount(): number;
+        getStepLUT(): number[];
         getBakedSegments(): $BezierConnection$SegmentAngles;
+        getBakedGirders(): $BezierConnection$GirderAngles;
         clone(): $BezierConnection;
         getLength(): number;
         iterator(): $Iterator<$BezierConnection$Segment>;
         getBounds(): $AABB;
         getKey(): $BlockPos;
-        write(arg0: $FriendlyByteBuf): void;
         write(arg0: $BlockPos_): $CompoundTag;
+        write(arg0: $FriendlyByteBuf): void;
         getPosition(arg0: number): $Vec3;
-        addItemsToPlayer(arg0: $Player): void;
-        getGirderItemCost(): number;
-        getTrackItemCost(): number;
         spawnDestroyParticles(arg0: $Level_): void;
-        yOffsetAt(arg0: $Vec3_): number;
-        spawnItems(arg0: $Level_): void;
-        rasterise(): $Map<$Pair<number, number>, number>;
         getNormal(arg0: number): $Vec3;
         getRadius(): number;
-        getMaterial(): $TrackMaterial;
-        equalsSansMaterial(arg0: $BezierConnection): boolean;
-        secondary(): $BezierConnection;
-        incrementT(arg0: number, arg1: number): number;
-        isPrimary(): boolean;
-        setMaterial(arg0: $TrackMaterial): void;
-        getSegmentCount(): number;
-        getHandleLength(): number;
-        getStepLUT(): number[];
         getSegmentT(arg0: number): number;
         spliterator(): $Spliterator<$BezierConnection$Segment>;
         forEach(arg0: $Consumer_<$BezierConnection$Segment>): void;
@@ -176,73 +176,74 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         normals: $Couple<$Vec3>;
         bePositions: $Couple<$BlockPos>;
         primary: boolean;
-        constructor(arg0: $CompoundTag_, arg1: $BlockPos_);
-        constructor(arg0: $FriendlyByteBuf);
         constructor(arg0: $Couple<$BlockPos_>, arg1: $Couple<$Vec3_>, arg2: $Couple<$Vec3_>, arg3: $Couple<$Vec3_>, arg4: boolean, arg5: boolean, arg6: $TrackMaterial);
+        constructor(arg0: $FriendlyByteBuf);
+        constructor(arg0: $CompoundTag_, arg1: $BlockPos_);
         [Symbol.iterator](): Iterator<$BezierConnection$Segment>
-        get bakedGirders(): $BezierConnection$GirderAngles;
+        get girderItemCost(): number;
+        get trackItemCost(): number;
+        get handleLength(): number;
+        get segmentCount(): number;
+        get stepLUT(): number[];
         get bakedSegments(): $BezierConnection$SegmentAngles;
+        get bakedGirders(): $BezierConnection$GirderAngles;
         get length(): number;
         get bounds(): $AABB;
         get key(): $BlockPos;
-        get girderItemCost(): number;
-        get trackItemCost(): number;
         get radius(): number;
-        get segmentCount(): number;
-        get handleLength(): number;
-        get stepLUT(): number[];
     }
     export class $TrackBlock extends $Block implements $IBE<$TrackBlockEntity>, $IWrenchable, $ITrackBlock, $SpecialBlockItemRequirement, $ProperWaterloggedBlock, $IHaveBigOutline {
+        getMaterial(): $TrackMaterial;
+        onRemove(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: boolean): void;
+        getBlockEntityClass(): $Class<$TrackBlockEntity>;
+        getFluidState(arg0: $BlockState_): $FluidState;
+        getCollisionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $CollisionContext): $VoxelShape;
+        onSneakWrenched(arg0: $BlockState_, arg1: $UseOnContext): $InteractionResult;
+        getConnected(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: boolean, arg4: $TrackNodeLocation): $Collection<$TrackNodeLocation$DiscoveredLocation>;
+        getInteractionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): $VoxelShape;
+        getBlockEntityType(): $BlockEntityType<$TrackBlockEntity>;
+        getRequiredItems(arg0: $BlockState_, arg1: $BlockEntity): $ItemRequirement;
+        trackEquals(arg0: $BlockState_, arg1: $BlockState_): boolean;
+        getYOffsetAt(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): number;
+        getUpNormal(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $Vec3;
+        getBogeyAnchor(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $BlockState;
+        getTrackAxes(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $List<$Vec3>;
+        getCurveStart(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Vec3;
+        prepareTrackOverlay<Self extends $Affine<Self>>(arg0: $Affine<Self>, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BezierTrackPointLocation_, arg5: $Direction$AxisDirection_, arg6: $TrackTargetingBehaviour$RenderedTrackOverlayType_): $PartialModel;
+        prepareAssemblyOverlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_, arg4: $PoseStack): $PartialModel;
         rotate(arg0: $BlockState_, arg1: $Rotation_): $BlockState;
         getShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $CollisionContext): $VoxelShape;
-        getUpNormal(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $Vec3;
-        getCurveStart(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Vec3;
-        getBogeyAnchor(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $BlockState;
-        trackEquals(arg0: $BlockState_, arg1: $BlockState_): boolean;
-        getTrackAxes(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $List<$Vec3>;
-        getYOffsetAt(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): number;
+        canSurvive(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): boolean;
         tick(arg0: $BlockState_, arg1: $ServerLevel, arg2: $BlockPos_, arg3: $RandomSource): void;
-        overlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_): $BlockState;
-        mirror(arg0: $BlockState_, arg1: $Mirror_): $BlockState;
-        getFluidState(arg0: $BlockState_): $FluidState;
+        onWrenched(arg0: $BlockState_, arg1: $UseOnContext): $InteractionResult;
         animateTick(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $Random): void;
         updateShape(arg0: $BlockState_, arg1: $Direction_, arg2: $BlockState_, arg3: $LevelAccessor, arg4: $BlockPos_, arg5: $BlockPos_): $BlockState;
-        getMaterial(): $TrackMaterial;
-        canSurvive(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_): boolean;
-        getCollisionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $CollisionContext): $VoxelShape;
-        onPlace(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: boolean): void;
-        onRemove(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: boolean): void;
         newBlockEntity(arg0: $BlockPos_, arg1: $BlockState_): $BlockEntity;
-        getInteractionShape(arg0: $BlockState_, arg1: $BlockGetter, arg2: $BlockPos_): $VoxelShape;
-        getConnected(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: boolean, arg4: $TrackNodeLocation): $Collection<$TrackNodeLocation$DiscoveredLocation>;
-        prepareAssemblyOverlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_, arg4: $PoseStack): $PartialModel;
-        prepareTrackOverlay<Self extends $Affine<Self>>(arg0: $Affine<Self>, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BezierTrackPointLocation_, arg5: $Direction$AxisDirection_, arg6: $TrackTargetingBehaviour$RenderedTrackOverlayType_): $PartialModel;
-        onWrenched(arg0: $BlockState_, arg1: $UseOnContext): $InteractionResult;
-        getRequiredItems(arg0: $BlockState_, arg1: $BlockEntity): $ItemRequirement;
-        getBlockEntityType(): $BlockEntityType<$TrackBlockEntity>;
-        onSneakWrenched(arg0: $BlockState_, arg1: $UseOnContext): $InteractionResult;
-        getBlockEntityClass(): $Class<$TrackBlockEntity>;
-        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): $TrackBlockEntity;
-        getTicker<S extends $BlockEntity>(arg0: $Level_, arg1: $BlockState_, arg2: $BlockEntityType_<S>): $BlockEntityTicker<S>;
-        onBlockEntityUse(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<$TrackBlockEntity, $InteractionResult>): $InteractionResult;
-        withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<$TrackBlockEntity>): void;
-        onBlockEntityUseItemOn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<$TrackBlockEntity, $ItemInteractionResult>): $ItemInteractionResult;
+        mirror(arg0: $BlockState_, arg1: $Mirror_): $BlockState;
+        onPlace(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $BlockState_, arg4: boolean): void;
+        overlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_): $BlockState;
         getBlockEntityOptional(arg0: $BlockGetter, arg1: $BlockPos_): ($TrackBlockEntity) | undefined;
+        onBlockEntityUseItemOn(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<$TrackBlockEntity, $ItemInteractionResult>): $ItemInteractionResult;
+        getTicker<S extends $BlockEntity>(arg0: $Level_, arg1: $BlockState_, arg2: $BlockEntityType_<S>): $BlockEntityTicker<S>;
+        withBlockEntityDo(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Consumer_<$TrackBlockEntity>): void;
+        onBlockEntityUse(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $Function_<$TrackBlockEntity, $InteractionResult>): $InteractionResult;
+        getBlockEntity(arg0: $BlockGetter, arg1: $BlockPos_): $TrackBlockEntity;
         getRotatedBlockState(arg0: $BlockState_, arg1: $Direction_): $BlockState;
         updateAfterWrenched(arg0: $BlockState_, arg1: $UseOnContext): $BlockState;
         isSlope(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): boolean;
-        getNearestTrackAxis(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Pair<$Vec3, $Direction$AxisDirection>;
         getElevationAtCenter(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): number;
-        fluidState(arg0: $BlockState_): $FluidState;
-        withWater(arg0: $BlockState_, arg1: $BlockPlaceContext): $BlockState;
+        getNearestTrackAxis(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Pair<$Vec3, $Direction$AxisDirection>;
         updateWater(arg0: $LevelAccessor, arg1: $BlockState_, arg2: $BlockPos_): void;
+        withWater(arg0: $BlockState_, arg1: $BlockPlaceContext): $BlockState;
+        fluidState(arg0: $BlockState_): $FluidState;
         getListener<T extends $BlockEntity>(arg0: $ServerLevel, arg1: T): $GameEventListener;
         getPickupSound(): ($SoundEvent) | undefined;
-        placeLiquid(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockState_, arg3: $FluidState): boolean;
         canPlaceLiquid(arg0: $Player | null, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $Fluid_): boolean;
         pickupBlock(arg0: $Player | null, arg1: $LevelAccessor, arg2: $BlockPos_, arg3: $BlockState_): $ItemStack;
+        placeLiquid(arg0: $LevelAccessor, arg1: $BlockPos_, arg2: $BlockState_, arg3: $FluidState): boolean;
         getPickupSound(arg0: $BlockState_): ($SoundEvent) | undefined;
         static UPDATE_IMMEDIATE: number;
+        item: $Item;
         static CODEC: $MapCodec<$Block>;
         static UPDATE_NEIGHBORS: number;
         static INDESTRUCTIBLE: number;
@@ -263,31 +264,31 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         static UPDATE_CLIENTS: number;
         constructor(arg0: $BlockBehaviour$Properties, arg1: $TrackMaterial);
         get material(): $TrackMaterial;
-        get blockEntityType(): $BlockEntityType<$TrackBlockEntity>;
         get blockEntityClass(): $Class<$TrackBlockEntity>;
+        get blockEntityType(): $BlockEntityType<$TrackBlockEntity>;
     }
     export class $TrackMaterial$TrackModelHolder extends $Record {
-        tie(): $PartialModel;
-        rightSegment(): $PartialModel;
         leftSegment(): $PartialModel;
+        rightSegment(): $PartialModel;
+        tie(): $PartialModel;
         constructor(tie: $PartialModel, leftSegment: $PartialModel, rightSegment: $PartialModel);
     }
     /**
      * Values that may be interpreted as {@link $TrackMaterial$TrackModelHolder}.
      */
-    export type $TrackMaterial$TrackModelHolder_ = { tie?: $PartialModel, rightSegment?: $PartialModel, leftSegment?: $PartialModel,  } | [tie?: $PartialModel, rightSegment?: $PartialModel, leftSegment?: $PartialModel, ];
+    export type $TrackMaterial$TrackModelHolder_ = { rightSegment?: $PartialModel, leftSegment?: $PartialModel, tie?: $PartialModel,  } | [rightSegment?: $PartialModel, leftSegment?: $PartialModel, tie?: $PartialModel, ];
     export class $TrackBlockEntity extends $SmartBlockEntity implements $TransformableBlockEntity, $IMergeableBE {
+        removeConnection(arg0: $BlockPos_): void;
+        addConnection(arg0: $BezierConnection): void;
+        isTilted(): boolean;
+        removeInboundConnections(arg0: boolean): void;
+        validateConnections(): void;
+        hasInteractableConnections(): boolean;
+        manageFakeTracksAlong(arg0: $BezierConnection, arg1: boolean): void;
         transform(arg0: $BlockEntity, arg1: $StructureTransform): void;
         accept(arg0: $BlockEntity): void;
         bind(arg0: $ResourceKey_<$Level>, arg1: $BlockPos_): void;
-        isTilted(): boolean;
         getConnections(): $Map<$BlockPos, $BezierConnection>;
-        removeConnection(arg0: $BlockPos_): void;
-        removeInboundConnections(arg0: boolean): void;
-        validateConnections(): void;
-        manageFakeTracksAlong(arg0: $BezierConnection, arg1: boolean): void;
-        hasInteractableConnections(): boolean;
-        addConnection(arg0: $BezierConnection): void;
         worldPosition: $BlockPos;
         blockState: $BlockState;
         level: $Level;
@@ -313,18 +314,18 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         constructor();
     }
     export class $TrackShape extends $Enum<$TrackShape> implements $StringRepresentable {
+        isPortal(): boolean;
+        getSerializedName(): string;
+        getAxes(): $List<$Vec3>;
+        isJunction(): boolean;
+        static asPortal(arg0: $Direction_): $TrackShape;
+        getModelRotation(): number;
         static values(): $TrackShape[];
         static valueOf(arg0: string): $TrackShape;
         rotate(arg0: $Rotation_): $TrackShape;
-        getModelRotation(): number;
-        mirror(arg0: $Mirror_): $TrackShape;
-        getSerializedName(): string;
-        static asPortal(arg0: $Direction_): $TrackShape;
-        getAxes(): $List<$Vec3>;
-        isJunction(): boolean;
-        getNormal(): $Vec3;
         getModel(): string;
-        isPortal(): boolean;
+        getNormal(): $Vec3;
+        mirror(arg0: $Mirror_): $TrackShape;
         getRemappedEnumConstantName(): string;
         static CR_O: $TrackShape;
         static TW: $TrackShape;
@@ -345,13 +346,13 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         static TN: $TrackShape;
         static NONE: $TrackShape;
         static TS: $TrackShape;
-        get modelRotation(): number;
+        get portal(): boolean;
         get serializedName(): string;
         get axes(): $List<$Vec3>;
         get junction(): boolean;
-        get normal(): $Vec3;
+        get modelRotation(): number;
         get model(): string;
-        get portal(): boolean;
+        get normal(): $Vec3;
         get remappedEnumConstantName(): string;
     }
     /**
@@ -365,26 +366,26 @@ declare module "@package/com/simibubi/create/content/trains/track" {
         railTransforms: $Couple<$PoseStack$Pose>[];
     }
     export class $ITrackBlock {
-        static getMaterialSimple(arg0: $BlockGetter, arg1: $Vec3_, arg2: $TrackMaterial): $TrackMaterial;
         static getMaterialSimple(arg0: $BlockGetter, arg1: $Vec3_): $TrackMaterial;
+        static getMaterialSimple(arg0: $BlockGetter, arg1: $Vec3_, arg2: $TrackMaterial): $TrackMaterial;
         static addToListIfConnected(arg0: $TrackNodeLocation, arg1: $Collection_<$TrackNodeLocation$DiscoveredLocation>, arg2: $BiFunction_<number, boolean, $Vec3>, arg3: $Function_<boolean, $Vec3>, arg4: $Function_<boolean, $ResourceKey<$Level>>, arg5: $Function_<$Vec3, number>, arg6: $Vec3_, arg7: $BezierConnection, arg8: $BiFunction_<boolean, $Vec3, $TrackMaterial>): void;
         static walkConnectedTracks(arg0: $BlockGetter, arg1: $TrackNodeLocation, arg2: boolean): $Collection<$TrackNodeLocation$DiscoveredLocation>;
     }
     export interface $ITrackBlock {
-        getUpNormal(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $Vec3;
-        getCurveStart(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Vec3;
-        getBogeyAnchor(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $BlockState;
-        trackEquals(arg0: $BlockState_, arg1: $BlockState_): boolean;
-        getTrackAxes(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $List<$Vec3>;
-        getYOffsetAt(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): number;
-        overlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_): $BlockState;
-        isSlope(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): boolean;
         getMaterial(): $TrackMaterial;
         getConnected(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: boolean, arg4: $TrackNodeLocation): $Collection<$TrackNodeLocation$DiscoveredLocation>;
-        getNearestTrackAxis(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Pair<$Vec3, $Direction$AxisDirection>;
-        prepareAssemblyOverlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_, arg4: $PoseStack): $PartialModel;
-        prepareTrackOverlay<Self extends $Affine<Self>>(arg0: $Affine<Self>, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BezierTrackPointLocation_, arg5: $Direction$AxisDirection_, arg6: $TrackTargetingBehaviour$RenderedTrackOverlayType_): $PartialModel;
+        trackEquals(arg0: $BlockState_, arg1: $BlockState_): boolean;
+        getYOffsetAt(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): number;
+        getUpNormal(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $Vec3;
+        getBogeyAnchor(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $BlockState;
+        getTrackAxes(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): $List<$Vec3>;
+        getCurveStart(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Vec3;
+        isSlope(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): boolean;
         getElevationAtCenter(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_): number;
+        prepareTrackOverlay<Self extends $Affine<Self>>(arg0: $Affine<Self>, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $BezierTrackPointLocation_, arg5: $Direction$AxisDirection_, arg6: $TrackTargetingBehaviour$RenderedTrackOverlayType_): $PartialModel;
+        prepareAssemblyOverlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Direction_, arg4: $PoseStack): $PartialModel;
+        getNearestTrackAxis(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $Vec3_): $Pair<$Vec3, $Direction$AxisDirection>;
+        overlay(arg0: $BlockGetter, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockState_): $BlockState;
         get material(): $TrackMaterial;
     }
     export class $TrackMaterial$TrackType$TrackBlockFactory {

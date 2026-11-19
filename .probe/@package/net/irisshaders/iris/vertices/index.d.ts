@@ -13,10 +13,10 @@ declare module "@package/net/irisshaders/iris/vertices" {
     export class $BlockSensitiveBufferBuilder {
     }
     export interface $BlockSensitiveBufferBuilder {
-        restoreBlock(): void;
-        endBlock(): void;
-        beginBlock(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
         ignoreMidBlock(arg0: boolean): void;
         overrideBlock(arg0: number): void;
+        beginBlock(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
+        endBlock(): void;
+        restoreBlock(): void;
     }
 }

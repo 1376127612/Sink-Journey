@@ -6,9 +6,9 @@ declare module "@package/com/moepus/gbf/animation" {
     export class $AnimationControllerExtension {
     }
     export interface $AnimationControllerExtension {
-        gbf$setJustStarting(arg0: boolean): void;
-        gbf$getActiveQueues(): $ObjectArrayList<$BoneAnimationQueue>;
-        gbf$beginFrame(): void;
         gbf$getEasingType(): $EasingType;
+        gbf$beginFrame(): void;
+        gbf$getActiveQueues(): $ObjectArrayList<$BoneAnimationQueue>;
+        gbf$setJustStarting(arg0: boolean): void;
     }
 }

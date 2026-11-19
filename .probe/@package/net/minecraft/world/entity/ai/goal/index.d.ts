@@ -2,7 +2,9 @@ import { $LevelAccessor, $Level_ } from "@package/net/minecraft/world/level";
 import { $TagKey, $TagKey_ } from "@package/net/minecraft/tags";
 import { $ItemStack_, $ItemStack } from "@package/net/minecraft/world/item";
 import { $ProfilerFiller } from "@package/net/minecraft/util/profiling";
+import { $ProjectileAttackGoalAccessor } from "@package/de/dafuqs/spectrum/mixin/accessors";
 import { $PathfinderMob, $TamableAnimal, $LivingEntity, $Mob } from "@package/net/minecraft/world/entity";
+import { $CallbackInfoReturnable } from "@package/org/spongepowered/asm/mixin/injection/callback";
 import { $Raider } from "@package/net/minecraft/world/entity/raid";
 import { $EnumSet, $Set } from "@package/java/util";
 import { $AbstractVillager } from "@package/net/minecraft/world/entity/npc";
@@ -29,20 +31,20 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
      * `Goal`
      */
     export class $WrappedGoal extends $Goal {
-        getPriority(): number;
-        /**
-         * @return whether the goal should continue executing
-         */
-        isRunning(): boolean;
         /**
          * Gets the private goal enclosed by this WrappedGoal.
          */
         getGoal(): $Goal;
         canBeReplacedBy(other: $WrappedGoal): boolean;
+        getPriority(): number;
+        /**
+         * @return whether the goal should continue executing
+         */
+        isRunning(): boolean;
         constructor(priority: number, goal: $Goal);
+        get goal(): $Goal;
         get priority(): number;
         get running(): boolean;
-        get goal(): $Goal;
     }
     export class $MoveTowardsRestrictionGoal extends $Goal {
         constructor(mob: $PathfinderMob, speedModifier: number);
@@ -74,24 +76,24 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     }
     export class $GoalSelector {
         /**
+         * Add a goal to the GoalSelector with a certain priority. Lower numbers are higher priority.
+         */
+        addGoal(priority: number, goal: $Goal): void;
+        /**
          * Remove the goal from the GoalSelector. This must be the same object as the goal you are trying to remove, which may not always be accessible.
          */
         removeGoal(goal: $Goal): void;
+        setControlFlag(flag: $Goal$Flag_, enabled: boolean): void;
+        removeAllGoals(filter: $Predicate_<$Goal>): void;
+        tickRunningGoals(tickAllRunning: boolean): void;
+        disableControlFlag(flag: $Goal$Flag_): void;
+        enableControlFlag(flag: $Goal$Flag_): void;
+        getAvailableGoals(): $Set<$WrappedGoal>;
         /**
          * Ticks every goal in the selector.
          * Attempts to start each goal based on if it can be used, or stop it if it can't.
          */
         tick(): void;
-        /**
-         * Add a goal to the GoalSelector with a certain priority. Lower numbers are higher priority.
-         */
-        addGoal(priority: number, goal: $Goal): void;
-        setControlFlag(flag: $Goal$Flag_, enabled: boolean): void;
-        disableControlFlag(flag: $Goal$Flag_): void;
-        tickRunningGoals(tickAllRunning: boolean): void;
-        enableControlFlag(flag: $Goal$Flag_): void;
-        getAvailableGoals(): $Set<$WrappedGoal>;
-        removeAllGoals(filter: $Predicate_<$Goal>): void;
         availableGoals: $Set<$WrappedGoal>;
         constructor(profiler: $Supplier_<$ProfilerFiller>);
     }
@@ -99,12 +101,12 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         constructor(horse: $AbstractHorse, speedModifier: number);
     }
     export class $AvoidEntityGoal<T extends $LivingEntity> extends $Goal {
+        constructor(mob: $PathfinderMob, entityClassToAvoid: $Class<T>, maxDistance: number, walkSpeedModifier: number, arg4: number);
         constructor(mob: $PathfinderMob, entityClassToAvoid: $Class<T>, maxDistance: number, walkSpeedModifier: number, arg4: number, sprintSpeedModifier: $Predicate_<$LivingEntity>);
         /**
          * Goal that helps mobs avoid mobs of a specific class
          */
         constructor(mob: $PathfinderMob, entityClassToAvoid: $Class<T>, avoidPredicate: $Predicate_<$LivingEntity>, maxDistance: number, walkSpeedModifier: number, arg5: number, sprintSpeedModifier: $Predicate_<$LivingEntity>);
-        constructor(mob: $PathfinderMob, entityClassToAvoid: $Class<T>, maxDistance: number, walkSpeedModifier: number, arg4: number);
     }
     export class $LeapAtTargetGoal extends $Goal {
         constructor(mob: $Mob, yd: number);
@@ -126,8 +128,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
         lithium$findNearestBlock(arg0: $Predicate_<any>, arg1: $BiPredicate_<any, any>, arg2: boolean): boolean;
         acceptedDistance(): number;
         speedModifier: number;
-        constructor(mob: $PathfinderMob, speedModifier: number, arg2: number);
         constructor(mob: $PathfinderMob, speedModifier: number, arg2: number, searchRange: number);
+        constructor(mob: $PathfinderMob, speedModifier: number, arg2: number);
     }
     export class $FloatGoal extends $Goal {
         constructor(mob: $Mob);
@@ -169,9 +171,9 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     }
     export class $LookAtPlayerGoal extends $Goal {
         static DEFAULT_PROBABILITY: number;
+        constructor(mob: $Mob, lookAtType: $Class<$LivingEntity>, lookDistance: number);
         constructor(mob: $Mob, lookAtType: $Class<$LivingEntity>, lookDistance: number, probability: number, onlyHorizontal: boolean);
         constructor(mob: $Mob, lookAtType: $Class<$LivingEntity>, lookDistance: number, probability: number);
-        constructor(mob: $Mob, lookAtType: $Class<$LivingEntity>, lookDistance: number);
     }
     export class $BoatGoals extends $Enum<$BoatGoals> {
     }
@@ -188,9 +190,11 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
          */
         constructor(mob: $Mob, speedModifier: number, arg2: number, stopDistance: number);
     }
-    export class $RangedAttackGoal extends $Goal {
+    export class $RangedAttackGoal extends $Goal implements $ProjectileAttackGoalAccessor {
+        getProjectileAttackTarget(): $LivingEntity;
         constructor(rangedAttackMob: $RangedAttackMob_, speedModifier: number, arg2: number, attackInterval: number);
         constructor(rangedAttackMob: $RangedAttackMob_, speedModifier: number, arg2: number, attackIntervalMin: number, attackIntervalMax: number);
+        get projectileAttackTarget(): $LivingEntity;
     }
     export class $Goal$Flag extends $Enum<$Goal$Flag> {
         static values(): $Goal$Flag[];
@@ -246,6 +250,7 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
          * Returns whether an in-progress EntityAIBase should continue executing
          */
         isRunning(): boolean;
+        handler$bla000$apothic_enchanting$apoth_tempting(arg0: $LivingEntity, arg1: $CallbackInfoReturnable<any>): void;
         constructor(mob: $PathfinderMob, speedModifier: number, arg2: $Predicate_<$ItemStack>, items: boolean);
         get running(): boolean;
     }
@@ -280,8 +285,8 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
          */
         isRunning(): boolean;
         static WATER_CHECK_DISTANCE_VERTICAL: number;
-        constructor(mob: $PathfinderMob, speedModifier: number, arg2: $Function_<$PathfinderMob, $TagKey<$DamageType>>);
         constructor(mob: $PathfinderMob, speedModifier: number, arg2: $TagKey_<$DamageType>);
+        constructor(mob: $PathfinderMob, speedModifier: number, arg2: $Function_<$PathfinderMob, $TagKey<$DamageType>>);
         constructor(mob: $PathfinderMob, speedModifier: number);
         get running(): boolean;
     }
@@ -302,6 +307,18 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     }
     export class $Goal {
         /**
+         * @return whether the goal should continue executing
+         */
+        requiresUpdateEveryTick(): boolean;
+        /**
+         * @return whether the goal should continue executing
+         */
+        isInterruptable(): boolean;
+        /**
+         * @return whether the goal should continue executing
+         */
+        canContinueToUse(): boolean;
+        /**
          * Called when the goal is about to start executing
          */
         start(): void;
@@ -313,24 +330,12 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
          * @return whether the goal should continue executing
          */
         canUse(): boolean;
-        setFlags(flagSet: $EnumSet<$Goal$Flag_>): void;
         getFlags(): $EnumSet<$Goal$Flag>;
+        setFlags(flagSet: $EnumSet<$Goal$Flag_>): void;
         /**
          * Called when the goal is about to start executing
          */
         tick(): void;
-        /**
-         * @return whether the goal should continue executing
-         */
-        requiresUpdateEveryTick(): boolean;
-        /**
-         * @return whether the goal should continue executing
-         */
-        canContinueToUse(): boolean;
-        /**
-         * @return whether the goal should continue executing
-         */
-        isInterruptable(): boolean;
         constructor();
         get interruptable(): boolean;
     }
@@ -339,22 +344,22 @@ declare module "@package/net/minecraft/world/entity/ai/goal" {
     }
     export class $RandomStrollGoal extends $Goal {
         /**
-         * Execute a one shot task or start executing a continuous task
-         */
-        trigger(): void;
-        /**
          * Changes task random possibility for execution
          */
         setInterval(newchance: number): void;
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        trigger(): void;
         static DEFAULT_INTERVAL: number;
-        constructor(mob: $PathfinderMob, speedModifier: number, arg2: number, interval: boolean);
-        constructor(mob: $PathfinderMob, speedModifier: number, arg2: number);
         constructor(mob: $PathfinderMob, speedModifier: number);
+        constructor(mob: $PathfinderMob, speedModifier: number, arg2: number);
+        constructor(mob: $PathfinderMob, speedModifier: number, arg2: number, interval: boolean);
         set interval(value: number);
     }
     export class $BreedGoal extends $Goal {
-        constructor(animal: $Animal, speedModifier: number);
         constructor(animal: $Animal, speedModifier: number, arg2: $Class<$Animal>);
+        constructor(animal: $Animal, speedModifier: number);
     }
     export class $OpenDoorGoal extends $DoorInteractGoal {
         constructor(mob: $Mob, closeDoor: boolean);

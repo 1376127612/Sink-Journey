@@ -6,12 +6,12 @@ declare module "@package/com/simibubi/create/foundation/collision" {
         transform(arg0: $Vec3_): $Vec3;
         transform(arg0: number, arg1: number, arg2: number): $Vec3;
         multiply(arg0: $Matrix3d): $Matrix3d;
-        asXRotation(arg0: number): $Matrix3d;
-        asZRotation(arg0: number): $Matrix3d;
-        asYRotation(arg0: number): $Matrix3d;
-        asIdentity(): $Matrix3d;
         transformTransposed(arg0: number, arg1: number, arg2: number): $Vec3;
         transformTransposed(arg0: $Vec3_): $Vec3;
+        asIdentity(): $Matrix3d;
+        asYRotation(arg0: number): $Matrix3d;
+        asZRotation(arg0: number): $Matrix3d;
+        asXRotation(arg0: number): $Matrix3d;
         constructor();
     }
     export class $CollisionList {

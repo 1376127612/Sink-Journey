@@ -8,10 +8,10 @@ import { $Editor } from "@package/com/lowdragmc/lowdraglib2/editor/ui";
 
 declare module "@package/com/lowdragmc/lowdraglib2/editor/ui/menu" {
     export class $FileMenu extends $MenuTab {
+        addProjectProvider(arg0: $ProjectType): void;
+        openProject(arg0: $File_): boolean;
         getProjectType(arg0: $File_): $ProjectType;
         onOpenProject(): void;
-        openProject(arg0: $File_): boolean;
-        addProjectProvider(arg0: $ProjectType): void;
         registerNewMenuCreator(arg0: $BiConsumer_<$MenuTab, $TreeBuilder$Menu>): $ISubscription;
         editor: $Editor;
         constructor(arg0: $Editor);

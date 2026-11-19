@@ -29,12 +29,12 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
         constructor();
     }
     export class $PlacedFeature extends $Record implements $PlacedFeatureAccessor {
+        placeWithContext(context: $PlacementContext, source: $RandomSource, pos: $BlockPos_): boolean;
+        placement(): $List<$PlacementModifier>;
+        getFeatures(): $Stream<$ConfiguredFeature<never, never>>;
         feature(): $Holder<$ConfiguredFeature<never, never>>;
         place(level: $WorldGenLevel, generator: $ChunkGenerator, random: $RandomSource, pos: $BlockPos_): boolean;
-        getFeatures(): $Stream<$ConfiguredFeature<never, never>>;
         placeWithBiomeCheck(level: $WorldGenLevel, generator: $ChunkGenerator, random: $RandomSource, pos: $BlockPos_): boolean;
-        placement(): $List<$PlacementModifier>;
-        placeWithContext(context: $PlacementContext, source: $RandomSource, pos: $BlockPos_): boolean;
         setFeature(arg0: $Holder_<$ConfiguredFeature<never, never>>): void;
         static CODEC: $Codec<$Holder<$PlacedFeature>>;
         static DIRECT_CODEC: $Codec<$PlacedFeature>;
@@ -46,24 +46,24 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
     /**
      * Values that may be interpreted as {@link $PlacedFeature}.
      */
-    export type $PlacedFeature_ = RegistryTypes.WorldgenPlacedFeature | { feature?: $Holder_<$ConfiguredFeature<never, never>>, placement?: $List_<$PlacementModifier>,  } | [feature?: $Holder_<$ConfiguredFeature<never, never>>, placement?: $List_<$PlacementModifier>, ];
+    export type $PlacedFeature_ = RegistryTypes.WorldgenPlacedFeature | { placement?: $List_<$PlacementModifier>, feature?: $Holder_<$ConfiguredFeature<never, never>>,  } | [placement?: $List_<$PlacementModifier>, feature?: $Holder_<$ConfiguredFeature<never, never>>, ];
     export class $NoiseBasedCountPlacement extends $RepeatingPlacement {
         static of(noiseToCountRatio: number, noiseFactor: number, arg2: number): $NoiseBasedCountPlacement;
         static CODEC: $MapCodec<$NoiseBasedCountPlacement>;
     }
     export class $CaveSurface extends $Enum<$CaveSurface> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $CaveSurface[];
         static valueOf(arg0: string): $CaveSurface;
-        getY(): number;
-        getSerializedName(): string;
         getDirection(): $Direction;
+        getY(): number;
         getRemappedEnumConstantName(): string;
         static FLOOR: $CaveSurface;
         static CODEC: $Codec<$CaveSurface>;
         static CEILING: $CaveSurface;
-        get y(): number;
         get serializedName(): string;
         get direction(): $Direction;
+        get y(): number;
         get remappedEnumConstantName(): string;
     }
     /**
@@ -85,8 +85,8 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
     }
     export class $RandomOffsetPlacement extends $PlacementModifier {
         static of(xzSpread: $IntProvider_, ySpread: $IntProvider_): $RandomOffsetPlacement;
-        static horizontal(xzSpread: $IntProvider_): $RandomOffsetPlacement;
         static vertical(xzSpread: $IntProvider_): $RandomOffsetPlacement;
+        static horizontal(xzSpread: $IntProvider_): $RandomOffsetPlacement;
         static CODEC: $MapCodec<$RandomOffsetPlacement>;
     }
     export class $FixedPlacement extends $PlacementModifier {
@@ -107,8 +107,8 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
         static CODEC: $MapCodec<$SurfaceWaterDepthFilter>;
     }
     export class $EnvironmentScanPlacement extends $PlacementModifier {
-        static scanningFor(directionOfSearch: $Direction_, targetCondition: $BlockPredicate, maxSteps: number): $EnvironmentScanPlacement;
         static scanningFor(directionOfSearch: $Direction_, targetCondition: $BlockPredicate, allowedSearchCondition: $BlockPredicate, maxSteps: number): $EnvironmentScanPlacement;
+        static scanningFor(directionOfSearch: $Direction_, targetCondition: $BlockPredicate, maxSteps: number): $EnvironmentScanPlacement;
         static CODEC: $MapCodec<$EnvironmentScanPlacement>;
     }
     export class $NoiseThresholdCountPlacement extends $RepeatingPlacement {
@@ -120,8 +120,8 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
         constructor();
     }
     export class $HeightRangePlacement extends $PlacementModifier {
-        static of(height: $HeightProvider): $HeightRangePlacement;
         static triangle(minInclusive: $VerticalAnchor_, maxInclusive: $VerticalAnchor_): $HeightRangePlacement;
+        static of(height: $HeightProvider): $HeightRangePlacement;
         static uniform(minInclusive: $VerticalAnchor_, maxInclusive: $VerticalAnchor_): $HeightRangePlacement;
         static CODEC: $MapCodec<$HeightRangePlacement>;
     }
@@ -130,8 +130,8 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
      * @deprecated
      */
     export class $CountOnEveryLayerPlacement extends $PlacementModifier {
-        static of(count: number): $CountOnEveryLayerPlacement;
         static of(count: $IntProvider_): $CountOnEveryLayerPlacement;
+        static of(count: number): $CountOnEveryLayerPlacement;
         static CODEC: $MapCodec<$CountOnEveryLayerPlacement>;
     }
     export class $PlacementModifierType<P extends $PlacementModifier> {
@@ -165,22 +165,22 @@ declare module "@package/net/minecraft/world/level/levelgen/placement" {
         constructor();
     }
     export class $PlacementModifier {
-        type(): $PlacementModifierType<never>;
         getPositions(context: $PlacementContext, random: $RandomSource, pos: $BlockPos_): $Stream<$BlockPos>;
+        type(): $PlacementModifierType<never>;
         static CODEC: $Codec<$PlacementModifier>;
         constructor();
     }
     export class $PlacementContext extends $WorldGenerationContext {
+        getHeight(heightmapType: $Heightmap$Types_, x: number, z: number): number;
+        getMinBuildHeight(): number;
+        topFeature(): ($PlacedFeature) | undefined;
         generator(): $ChunkGenerator;
         getLevel(): $WorldGenLevel;
-        topFeature(): ($PlacedFeature) | undefined;
         getBlockState(pos: $BlockPos_): $BlockState;
-        getMinBuildHeight(): number;
-        getHeight(heightmapType: $Heightmap$Types_, x: number, z: number): number;
         getCarvingMask(chunkPos: $ChunkPos, step: $GenerationStep$Carving_): $CarvingMask;
         constructor(level: $WorldGenLevel, generator: $ChunkGenerator, topFeature: ($PlacedFeature_) | undefined);
-        get level(): $WorldGenLevel;
         get minBuildHeight(): number;
+        get level(): $WorldGenLevel;
     }
     export class $HeightmapPlacement extends $PlacementModifier {
         static onHeightmap(heightmap: $Heightmap$Types_): $HeightmapPlacement;

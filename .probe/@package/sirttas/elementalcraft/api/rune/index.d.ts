@@ -4,10 +4,10 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/sirttas/elementalcraft/api/rune" {
     export class $Rune$BonusType extends $Enum<$Rune$BonusType> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $Rune$BonusType[];
         static valueOf(arg0: string): $Rune$BonusType;
         static byName(arg0: string): $Rune$BonusType;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static SPEED: $Rune$BonusType;
         static LUCK: $Rune$BonusType;

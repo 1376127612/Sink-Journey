@@ -40,8 +40,8 @@ declare module "@package/java/time/chrono" {
         format(arg0: $DateTimeFormatter): string;
         isSupported(arg0: $TemporalUnit): boolean;
         isSupported(arg0: $TemporalField): boolean;
-        "with"(arg0: $TemporalAdjuster_): $ChronoZonedDateTime<D>;
         "with"(arg0: $TemporalField, arg1: number): $ChronoZonedDateTime<D>;
+        "with"(arg0: $TemporalAdjuster_): $ChronoZonedDateTime<D>;
         query<R>(arg0: $TemporalQuery_<R>): R;
         getOffset(): $ZoneOffset;
         range(arg0: $TemporalField): $ValueRange;
@@ -50,19 +50,19 @@ declare module "@package/java/time/chrono" {
         toInstant(): $Instant;
         getZone(): $ZoneId;
         toLocalDateTime(): $ChronoLocalDateTime<D>;
-        withZoneSameInstant(arg0: $ZoneId): $ChronoZonedDateTime<D>;
-        withZoneSameLocal(arg0: $ZoneId): $ChronoZonedDateTime<D>;
-        withLaterOffsetAtOverlap(): $ChronoZonedDateTime<D>;
-        plus(arg0: number, arg1: $TemporalUnit): $ChronoZonedDateTime<D>;
         plus(arg0: $TemporalAmount_): $ChronoZonedDateTime<D>;
-        minus(arg0: number, arg1: $TemporalUnit): $ChronoZonedDateTime<D>;
+        plus(arg0: number, arg1: $TemporalUnit): $ChronoZonedDateTime<D>;
         minus(arg0: $TemporalAmount_): $ChronoZonedDateTime<D>;
+        minus(arg0: number, arg1: $TemporalUnit): $ChronoZonedDateTime<D>;
         isAfter(arg0: $ChronoZonedDateTime<never>): boolean;
         isBefore(arg0: $ChronoZonedDateTime<never>): boolean;
         toLocalDate(): D;
         toLocalTime(): $LocalTime;
         getChronology(): $Chronology;
         withEarlierOffsetAtOverlap(): $ChronoZonedDateTime<D>;
+        withZoneSameInstant(arg0: $ZoneId): $ChronoZonedDateTime<D>;
+        withZoneSameLocal(arg0: $ZoneId): $ChronoZonedDateTime<D>;
+        withLaterOffsetAtOverlap(): $ChronoZonedDateTime<D>;
         get offset(): $ZoneOffset;
         get zone(): $ZoneId;
         get chronology(): $Chronology;
@@ -70,8 +70,8 @@ declare module "@package/java/time/chrono" {
     export class $AbstractChronology implements $Chronology {
         compareTo(arg0: $Chronology): number;
         resolveDate(arg0: $Map_<$TemporalField, number>, arg1: $ResolverStyle_): $ChronoLocalDate;
-        getDisplayName(arg0: $TextStyle_, arg1: $Locale): string;
         date(arg0: $Era_, arg1: number, arg2: number, arg3: number): $ChronoLocalDate;
+        getDisplayName(arg0: $TextStyle_, arg1: $Locale): string;
         epochSecond(arg0: $Era_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $ZoneOffset): number;
         epochSecond(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $ZoneOffset): number;
         localDateTime(arg0: $TemporalAccessor): $ChronoLocalDateTime<$ChronoLocalDate>;
@@ -94,20 +94,20 @@ declare module "@package/java/time/chrono" {
         toString(): string;
         hashCode(): number;
         normalized(): $ChronoPeriod;
-        getUnits(): $List<$TemporalUnit>;
-        negated(): $ChronoPeriod;
-        multipliedBy(arg0: number): $ChronoPeriod;
-        isNegative(): boolean;
         plus(arg0: $TemporalAmount_): $ChronoPeriod;
         addTo(arg0: $Temporal): $Temporal;
         minus(arg0: $TemporalAmount_): $ChronoPeriod;
         subtractFrom(arg0: $Temporal): $Temporal;
         getChronology(): $Chronology;
         isZero(): boolean;
-        get units(): $List<$TemporalUnit>;
-        get negative(): boolean;
+        getUnits(): $List<$TemporalUnit>;
+        negated(): $ChronoPeriod;
+        multipliedBy(arg0: number): $ChronoPeriod;
+        isNegative(): boolean;
         get chronology(): $Chronology;
         get zero(): boolean;
+        get units(): $List<$TemporalUnit>;
+        get negative(): boolean;
     }
     export class $Era {
     }
@@ -171,10 +171,10 @@ declare module "@package/java/time/chrono" {
         compareTo(arg0: $Chronology): number;
         getId(): string;
         range(arg0: $ChronoField_): $ValueRange;
-        getDisplayName(arg0: $TextStyle_, arg1: $Locale): string;
-        date(arg0: number, arg1: number, arg2: number): $ChronoLocalDate;
         date(arg0: $TemporalAccessor): $ChronoLocalDate;
+        date(arg0: number, arg1: number, arg2: number): $ChronoLocalDate;
         date(arg0: $Era_, arg1: number, arg2: number, arg3: number): $ChronoLocalDate;
+        getDisplayName(arg0: $TextStyle_, arg1: $Locale): string;
         epochSecond(arg0: $Era_, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $ZoneOffset): number;
         epochSecond(arg0: number, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $ZoneOffset): number;
         localDateTime(arg0: $TemporalAccessor): $ChronoLocalDateTime<$ChronoLocalDate>;

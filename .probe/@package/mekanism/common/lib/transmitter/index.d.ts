@@ -18,25 +18,25 @@ export * as acceptor from "@package/mekanism/common/lib/transmitter/acceptor";
 
 declare module "@package/mekanism/common/lib/transmitter" {
     export class $CompatibleTransmitterValidator<ACCEPTOR, NETWORK extends $DynamicNetwork<ACCEPTOR, NETWORK, TRANSMITTER>, TRANSMITTER extends $Transmitter<ACCEPTOR, NETWORK, TRANSMITTER>> {
-        isTransmitterCompatible(transmitter: $Transmitter<never, never, never>): boolean;
         isNetworkCompatible(net: NETWORK): boolean;
+        isTransmitterCompatible(transmitter: $Transmitter<never, never, never>): boolean;
         constructor();
     }
     export class $ConnectionType extends $Enum<$ConnectionType> implements $IIncrementalEnum<$ConnectionType>, $StringRepresentable, $IHasTranslationKey, $IHasTextComponent$IHasEnumNameTextComponent {
+        getTranslationKey(): string;
+        getSerializedName(): string;
+        byIndex(index: number): $ConnectionType;
+        getTextComponent(): $Component;
         static values(): $ConnectionType[];
         static valueOf(name: string): $ConnectionType;
-        getSerializedName(): string;
-        getTranslationKey(): string;
-        byIndex(index: number): $ConnectionType;
-        canSendTo(): boolean;
         canAccept(): boolean;
-        getTextComponent(): $Component;
+        canSendTo(): boolean;
+        getNext(): $ConnectionType;
+        getNext(arg0: $Predicate_<$ConnectionType>): $ConnectionType;
         adjust(arg0: number): $ConnectionType;
         adjust(arg0: number, arg1: $Predicate_<$ConnectionType>): $ConnectionType;
-        getNext(arg0: $Predicate_<$ConnectionType>): $ConnectionType;
-        getNext(): $ConnectionType;
-        getPrevious(): $ConnectionType;
         getPrevious(arg0: $Predicate_<$ConnectionType>): $ConnectionType;
+        getPrevious(): $ConnectionType;
         getRemappedEnumConstantName(): string;
         getTranslatedName(): $Component;
         static PULL: $ConnectionType;
@@ -45,8 +45,8 @@ declare module "@package/mekanism/common/lib/transmitter" {
         static NORMAL: $ConnectionType;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $ConnectionType>;
         static PUSH: $ConnectionType;
-        get serializedName(): string;
         get translationKey(): string;
+        get serializedName(): string;
         get textComponent(): $Component;
         get remappedEnumConstantName(): string;
         get translatedName(): $Component;
@@ -58,26 +58,26 @@ declare module "@package/mekanism/common/lib/transmitter" {
     export class $INetworkDataHandler {
     }
     export interface $INetworkDataHandler {
-        getNetworkReaderCapacity(): $Object;
-        getStoredInfo(): $Component;
-        getFlowInfo(): $Component;
         getNeededInfo(): $Component;
-        get networkReaderCapacity(): $Object;
-        get storedInfo(): $Component;
-        get flowInfo(): $Component;
+        getFlowInfo(): $Component;
+        getStoredInfo(): $Component;
+        getNetworkReaderCapacity(): $Object;
         get neededInfo(): $Component;
+        get flowInfo(): $Component;
+        get storedInfo(): $Component;
+        get networkReaderCapacity(): $Object;
     }
     export class $TransmissionType extends $Enum<$TransmissionType> implements $IHasTranslationKey$IHasEnumNameTranslationKey, $StringRepresentable {
+        checkTransmissionType(transmitter: $TileEntityTransmitter): boolean;
+        checkTransmissionType(transmitter: $Transmitter<never, never, never>): boolean;
+        getTranslationKey(): string;
+        getSerializedName(): string;
+        getTransmission(): string;
+        getLegacyOrdinal(): number;
+        getLangEntry(): $ILangEntry;
         getName(): string;
         static values(): $TransmissionType[];
         static valueOf(name: string): $TransmissionType;
-        getSerializedName(): string;
-        getTranslationKey(): string;
-        checkTransmissionType(transmitter: $Transmitter<never, never, never>): boolean;
-        checkTransmissionType(transmitter: $TileEntityTransmitter): boolean;
-        getLangEntry(): $ILangEntry;
-        getTransmission(): string;
-        getLegacyOrdinal(): number;
         getTranslatedName(): $Component;
         getRemappedEnumConstantName(): string;
         static ITEM: $TransmissionType;
@@ -88,11 +88,11 @@ declare module "@package/mekanism/common/lib/transmitter" {
         static BY_ID: $IntFunction<$TransmissionType>;
         static STREAM_CODEC: $StreamCodec<$ByteBuf, $TransmissionType>;
         static CHEMICAL: $TransmissionType;
-        get serializedName(): string;
         get translationKey(): string;
-        get langEntry(): $ILangEntry;
+        get serializedName(): string;
         get transmission(): string;
         get legacyOrdinal(): number;
+        get langEntry(): $ILangEntry;
         get translatedName(): $Component;
         get remappedEnumConstantName(): string;
     }
@@ -105,59 +105,59 @@ declare module "@package/mekanism/common/lib/transmitter" {
         constructor(network: NETWORK);
     }
     export class $DynamicNetwork<ACCEPTOR, NETWORK extends $DynamicNetwork<ACCEPTOR, NETWORK, TRANSMITTER>, TRANSMITTER extends $Transmitter<ACCEPTOR, NETWORK, TRANSMITTER>> implements $INetworkDataHandler, $IHasTextComponent {
+        deregister(): void;
+        hasAcceptor(acceptorPos: $BlockPos_): boolean;
+        getTransmitters(): $Collection<TRANSMITTER>;
+        getAcceptorCount(): number;
+        transmittersSize(): number;
+        isRemote(): boolean;
+        getAcceptorDirections(pos: number): $Set<$Direction>;
+        getTransmitter(pos: number): TRANSMITTER;
+        getTransmitter(pos: $BlockPos_): TRANSMITTER;
+        getCachedAcceptor(acceptorPos: number, side: $Direction_): ACCEPTOR;
+        removeTransmitter(transmitter: TRANSMITTER): void;
+        acceptorChanged(transmitter: TRANSMITTER, side: $Direction_): void;
+        addTransmitter(transmitter: TRANSMITTER): void;
+        addNewTransmitters(newTransmitters: $Collection_<TRANSMITTER>, transmitterValidator: $CompatibleTransmitterValidator<ACCEPTOR, NETWORK, TRANSMITTER>): void;
+        getTransmitterValidator(): $CompatibleTransmitterValidator<ACCEPTOR, NETWORK, TRANSMITTER>;
+        adoptTransmittersAndAcceptorsFrom(net: NETWORK): $List<TRANSMITTER>;
         commit(): void;
         isEmpty(): boolean;
         register(): void;
         invalidate(triggerTransmitter: TRANSMITTER): void;
-        getTransmitterValidator(): $CompatibleTransmitterValidator<ACCEPTOR, NETWORK, TRANSMITTER>;
-        addTransmitter(transmitter: TRANSMITTER): void;
-        getCachedAcceptor(acceptorPos: number, side: $Direction_): ACCEPTOR;
-        acceptorChanged(transmitter: TRANSMITTER, side: $Direction_): void;
-        removeTransmitter(transmitter: TRANSMITTER): void;
-        addNewTransmitters(newTransmitters: $Collection_<TRANSMITTER>, transmitterValidator: $CompatibleTransmitterValidator<ACCEPTOR, NETWORK, TRANSMITTER>): void;
-        getUUID(): $UUID;
         getWorld(): $Level;
-        isRemote(): boolean;
+        getUUID(): $UUID;
         onUpdate(): void;
-        deregister(): void;
-        getAcceptorDirections(pos: number): $Set<$Direction>;
-        getTransmitter(pos: number): TRANSMITTER;
-        getTransmitter(pos: $BlockPos_): TRANSMITTER;
-        hasAcceptor(acceptorPos: $BlockPos_): boolean;
-        transmittersSize(): number;
-        getAcceptorCount(): number;
-        getTransmitters(): $Collection<TRANSMITTER>;
-        adoptTransmittersAndAcceptorsFrom(net: NETWORK): $List<TRANSMITTER>;
-        getNetworkReaderCapacity(): $Object;
-        getStoredInfo(): $Component;
-        getFlowInfo(): $Component;
         getNeededInfo(): $Component;
-        get empty(): boolean;
-        get transmitterValidator(): $CompatibleTransmitterValidator<ACCEPTOR, NETWORK, TRANSMITTER>;
-        get UUID(): $UUID;
-        get world(): $Level;
-        get remote(): boolean;
-        get acceptorCount(): number;
+        getFlowInfo(): $Component;
+        getStoredInfo(): $Component;
+        getNetworkReaderCapacity(): $Object;
         get transmitters(): $Collection<TRANSMITTER>;
-        get networkReaderCapacity(): $Object;
-        get storedInfo(): $Component;
-        get flowInfo(): $Component;
+        get acceptorCount(): number;
+        get remote(): boolean;
+        get transmitterValidator(): $CompatibleTransmitterValidator<ACCEPTOR, NETWORK, TRANSMITTER>;
+        get empty(): boolean;
+        get world(): $Level;
+        get UUID(): $UUID;
         get neededInfo(): $Component;
+        get flowInfo(): $Component;
+        get storedInfo(): $Component;
+        get networkReaderCapacity(): $Object;
     }
     export class $DynamicBufferedNetwork<ACCEPTOR, NETWORK extends $DynamicBufferedNetwork<ACCEPTOR, NETWORK, BUFFER, TRANSMITTER>, BUFFER, TRANSMITTER extends $BufferedTransmitter<ACCEPTOR, NETWORK, BUFFER, TRANSMITTER>> extends $DynamicNetwork<ACCEPTOR, NETWORK, TRANSMITTER> {
-        getBuffer(): BUFFER;
-        getCapacity(): number;
-        isCompatibleWith(other: NETWORK): boolean;
-        updateCapacity(): void;
-        clampBuffer(): void;
         markDirty(): void;
         getPacketRange(): $Range3D;
         validateSaveShares(triggerTransmitter: TRANSMITTER): void;
+        clampBuffer(): void;
+        updateCapacity(): void;
         adoptTransmittersAndAcceptorsFrom(net: NETWORK): $List<TRANSMITTER>;
         absorbBuffer(transmitter: TRANSMITTER): void;
+        getCapacity(): number;
+        getBuffer(): BUFFER;
+        isCompatibleWith(other: NETWORK): boolean;
         currentScale: number;
-        get buffer(): BUFFER;
-        get capacity(): number;
         get packetRange(): $Range3D;
+        get capacity(): number;
+        get buffer(): BUFFER;
     }
 }

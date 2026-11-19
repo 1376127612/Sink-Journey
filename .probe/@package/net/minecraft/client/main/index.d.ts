@@ -8,9 +8,9 @@ import { $PropertyMap } from "@package/com/mojang/authlib/properties";
 
 declare module "@package/net/minecraft/client/main" {
     export class $GameConfig$QuickPlayData extends $Record {
+        realms(): string;
         isEnabled(): boolean;
         path(): string;
-        realms(): string;
         multiplayer(): string;
         singleplayer(): string;
         constructor(arg0: string | null, arg1: string | null, arg2: string | null, arg3: string | null);
@@ -19,7 +19,7 @@ declare module "@package/net/minecraft/client/main" {
     /**
      * Values that may be interpreted as {@link $GameConfig$QuickPlayData}.
      */
-    export type $GameConfig$QuickPlayData_ = { path?: string, realms?: string, multiplayer?: string, singleplayer?: string,  } | [path?: string, realms?: string, multiplayer?: string, singleplayer?: string, ];
+    export type $GameConfig$QuickPlayData_ = { realms?: string, multiplayer?: string, singleplayer?: string, path?: string,  } | [realms?: string, multiplayer?: string, singleplayer?: string, path?: string, ];
     export class $Main {
         static main(args: string[]): void;
         constructor();

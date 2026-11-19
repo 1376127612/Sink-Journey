@@ -12,27 +12,27 @@ import { $PerkAttributeModifier_ } from "@package/hellfirepvp/astralsorcery/comm
 declare module "@package/hellfirepvp/astralsorcery/common/perk/reader" {
     export interface $PerkAttributeTypeReader$Type extends RegistryMarked<RegistryTypes.AstralsorceryPerkAttributeTypeReadersTag, RegistryTypes.AstralsorceryPerkAttributeTypeReaders> {}
     export class $PerkAttributeTypeReader$Type extends $Record {
-        reader(): $PerkAttributeTypeReader;
         perkAttributeType(): $Supplier<$PerkAttributeType>;
+        reader(): $PerkAttributeTypeReader;
         constructor(perkAttributeType: $Supplier_<$PerkAttributeType>, reader: $PerkAttributeTypeReader);
     }
     /**
      * Values that may be interpreted as {@link $PerkAttributeTypeReader$Type}.
      */
-    export type $PerkAttributeTypeReader$Type_ = RegistryTypes.AstralsorceryPerkAttributeTypeReaders | { reader?: $PerkAttributeTypeReader, perkAttributeType?: $Supplier_<$PerkAttributeType>,  } | [reader?: $PerkAttributeTypeReader, perkAttributeType?: $Supplier_<$PerkAttributeType>, ];
+    export type $PerkAttributeTypeReader$Type_ = RegistryTypes.AstralsorceryPerkAttributeTypeReaders | { perkAttributeType?: $Supplier_<$PerkAttributeType>, reader?: $PerkAttributeTypeReader,  } | [perkAttributeType?: $Supplier_<$PerkAttributeType>, reader?: $PerkAttributeTypeReader, ];
     export class $PerkAttributeTypeReader {
+        getDisplayValue(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null): string;
+        formatDisplayValue(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null, arg3: string): $Component;
+        static formatDecimal(arg0: number): string;
+        getValueDisplayFormat(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null): string;
+        getModifierValueForMode(arg0: $PerkAttributeMap, arg1: $Player, arg2: $LogicalSide_, arg3: $ModifierType_): number;
+        formatDisplayModifierOperation(arg0: $PerkAttributeModifier_, arg1: string): $Component;
+        getDisplayModifierOperation(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null): string;
         getDefaultValue(arg0: $PerkAttributeMap, arg1: $Player, arg2: $LogicalSide_): number;
         getType(): $PerkAttributeType;
         negate<T extends $PerkAttributeTypeReader>(): T;
         getDisplayFormat(arg0: $PerkAttributeModifier_): string;
         getDisplay(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null): $MutableComponent;
-        static formatDecimal(arg0: number): string;
-        formatDisplayValue(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null, arg3: string): $Component;
-        getDisplayValue(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null): string;
-        getDisplayModifierOperation(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null): string;
-        formatDisplayModifierOperation(arg0: $PerkAttributeModifier_, arg1: string): $Component;
-        getModifierValueForMode(arg0: $PerkAttributeMap, arg1: $Player, arg2: $LogicalSide_, arg3: $ModifierType_): number;
-        getValueDisplayFormat(arg0: $PerkAttributeModifier_, arg1: $Player | null, arg2: $PlayerProgress | null): string;
         constructor(arg0: $Supplier_<$PerkAttributeType>);
         get type(): $PerkAttributeType;
     }

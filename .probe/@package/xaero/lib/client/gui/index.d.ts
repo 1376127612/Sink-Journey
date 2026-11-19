@@ -22,10 +22,10 @@ declare module "@package/xaero/lib/client/gui" {
         get escape(): $Screen;
     }
     export class $GuiSettings extends $ScreenBase implements $WidgetScreen {
+        getEntriesCopy(): $ISettingEntry[];
+        addButtonVisible(arg0: $AbstractWidget): void;
         init(): void;
         getScreen<S extends $Screen>(): S;
-        addButtonVisible(arg0: $AbstractWidget): void;
-        getEntriesCopy(): $ISettingEntry[];
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         parent: $Screen;
@@ -44,24 +44,24 @@ declare module "@package/xaero/lib/client/gui" {
         font: $Font;
         constructor(arg0: $Component_, arg1: $Screen, arg2: $Screen);
         constructor(arg0: $Component_, arg1: $Screen, arg2: $Screen, arg3: boolean);
-        get screen(): S;
         get entriesCopy(): $ISettingEntry[];
+        get screen(): S;
     }
     export class $ScreenBase extends $Screen implements $IScreenBase {
+        static tryToGetEscape(arg0: $Screen): $Screen;
+        getEscape(): $Screen;
+        replaceRenderableWidget(arg0: $AbstractWidget, arg1: $AbstractWidget): void;
+        shouldSkipWorldRender(): boolean;
+        renderEscapeScreen(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
+        canSkipWorldRender(): boolean;
+        onDropdownOpen(arg0: $DropDownWidget): void;
+        replaceWidget(arg0: $AbstractWidget, arg1: $AbstractWidget): void;
+        onDropdownClosed(arg0: $DropDownWidget): void;
+        restoreFocus(arg0: number): void;
         onExit(arg0: $Screen): void;
         getIndex(arg0: $GuiEventListener): number;
         refresh(): void;
-        getEscape(): $Screen;
-        shouldSkipWorldRender(): boolean;
-        replaceRenderableWidget(arg0: $AbstractWidget, arg1: $AbstractWidget): void;
         goBack(): void;
-        canSkipWorldRender(): boolean;
-        renderEscapeScreen(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number): void;
-        restoreFocus(arg0: number): void;
-        static tryToGetEscape(arg0: $Screen): $Screen;
-        replaceWidget(arg0: $AbstractWidget, arg1: $AbstractWidget): void;
-        onDropdownOpen(arg0: $DropDownWidget): void;
-        onDropdownClosed(arg0: $DropDownWidget): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         parent: $Screen;
@@ -82,8 +82,8 @@ declare module "@package/xaero/lib/client/gui" {
     export class $ISettingEntry {
     }
     export interface $ISettingEntry {
-        createWidget(arg0: number, arg1: number, arg2: number): $AbstractWidget;
         getStringForSearch(): string;
+        createWidget(arg0: number, arg1: number, arg2: number): $AbstractWidget;
         get stringForSearch(): string;
     }
 }

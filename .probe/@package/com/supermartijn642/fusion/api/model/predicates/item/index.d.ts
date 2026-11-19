@@ -6,15 +6,15 @@ declare module "@package/com/supermartijn642/fusion/api/model/predicates/item" {
     export class $ItemModelPredicate {
     }
     export interface $ItemModelPredicate {
+        simplify(): $ItemModelPredicate;
+        alwaysFalse(): boolean;
+        alwaysTrue(): boolean;
+        getSerializer(): $Serializer<$ItemModelPredicate>;
+        asModelPredicate(): $ModelPredicate;
         test(stack: $ItemStack_): boolean;
         or(...predicates: $ItemModelPredicate[]): $ItemModelPredicate;
         negate(): $ItemModelPredicate;
         and(...predicates: $ItemModelPredicate[]): $ItemModelPredicate;
-        alwaysTrue(): boolean;
-        alwaysFalse(): boolean;
-        simplify(): $ItemModelPredicate;
-        getSerializer(): $Serializer<$ItemModelPredicate>;
-        asModelPredicate(): $ModelPredicate;
         get serializer(): $Serializer<$ItemModelPredicate>;
     }
 }

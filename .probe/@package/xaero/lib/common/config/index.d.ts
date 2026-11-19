@@ -11,28 +11,28 @@ export * as sync from "@package/xaero/lib/common/config/sync";
 
 declare module "@package/xaero/lib/common/config" {
     export class $Config {
+        getRemovedLargeOptions(): $Iterable<$ConfigOption<never>>;
+        addFailedSerializedValue<T>(arg0: $ConfigOption<T>, arg1: string): void;
+        setDefaults(): void;
+        getChangeListener(): $IConfigChangeListener;
+        getFailedSerializedValue(arg0: $ConfigOption<never>): string;
+        getChangeCount(): number;
+        copyOptionFrom<T>(arg0: $ConfigOption<T>, arg1: $Config): void;
+        usedOptions(): $Iterable<$ConfigOption<never>>;
+        setChangeListener(arg0: $IConfigChangeListener): void;
+        isAllowNullValues(): boolean;
+        getDirtyOptions(): $Iterable<$ConfigOption<never>>;
+        setOptionDefault<T>(arg0: $ConfigOption<T>): void;
+        clearDirtyOptions(): void;
+        copyOptionsFrom(arg0: $Config): void;
         reset(): void;
         get<T>(arg0: $ConfigOption<T>): T;
         set<T>(arg0: $ConfigOption<T>, arg1: T): T;
-        getChangeListener(): $IConfigChangeListener;
         postSave(): void;
-        setChangeListener(arg0: $IConfigChangeListener): void;
-        getFailedSerializedValue(arg0: $ConfigOption<never>): string;
-        getRemovedLargeOptions(): $Iterable<$ConfigOption<never>>;
-        addFailedSerializedValue<T>(arg0: $ConfigOption<T>, arg1: string): void;
-        usedOptions(): $Iterable<$ConfigOption<never>>;
-        copyOptionFrom<T>(arg0: $ConfigOption<T>, arg1: $Config): void;
-        getDirtyOptions(): $Iterable<$ConfigOption<never>>;
-        copyOptionsFrom(arg0: $Config): void;
-        clearDirtyOptions(): void;
-        getChangeCount(): number;
-        setDefaults(): void;
-        setOptionDefault<T>(arg0: $ConfigOption<T>): void;
-        isAllowNullValues(): boolean;
         get removedLargeOptions(): $Iterable<$ConfigOption<never>>;
-        get dirtyOptions(): $Iterable<$ConfigOption<never>>;
         get changeCount(): number;
-        set optionDefault(value: $ConfigOption<T>);
         get allowNullValues(): boolean;
+        get dirtyOptions(): $Iterable<$ConfigOption<never>>;
+        set optionDefault(value: $ConfigOption<T>);
     }
 }

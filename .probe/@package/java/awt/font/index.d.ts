@@ -5,44 +5,40 @@ import { $Object, $Cloneable } from "@package/java/lang";
 
 declare module "@package/java/awt/font" {
     export class $FontRenderContext {
+        isTransformed(): boolean;
         equals(arg0: $FontRenderContext): boolean;
         usesFractionalMetrics(): boolean;
         getTransformType(): number;
         isAntiAliased(): boolean;
         getTransform(): $AffineTransform;
-        isTransformed(): boolean;
         getAntiAliasingHint(): $Object;
         getFractionalMetricsHint(): $Object;
         constructor(arg0: $AffineTransform, arg1: $Object, arg2: $Object);
         constructor(arg0: $AffineTransform, arg1: boolean, arg2: boolean);
+        get transformed(): boolean;
         get transformType(): number;
         get antiAliased(): boolean;
         get transform(): $AffineTransform;
-        get transformed(): boolean;
         get antiAliasingHint(): $Object;
         get fractionalMetricsHint(): $Object;
     }
     export class $TextHitInfo {
+        getInsertionIndex(): number;
         equals(arg0: $TextHitInfo): boolean;
+        static leading(arg0: number): $TextHitInfo;
         static trailing(arg0: number): $TextHitInfo;
         getCharIndex(): number;
-        static leading(arg0: number): $TextHitInfo;
-        getInsertionIndex(): number;
         isLeadingEdge(): boolean;
         static beforeOffset(arg0: number): $TextHitInfo;
         static afterOffset(arg0: number): $TextHitInfo;
         getOtherHit(): $TextHitInfo;
         getOffsetHit(arg0: number): $TextHitInfo;
-        get charIndex(): number;
         get insertionIndex(): number;
+        get charIndex(): number;
         get leadingEdge(): boolean;
         get otherHit(): $TextHitInfo;
     }
     export class $GlyphVector implements $Cloneable {
-        equals(arg0: $GlyphVector): boolean;
-        getGlyphMetrics(arg0: number): $GlyphMetrics;
-        getGlyphOutline(arg0: number): $Shape;
-        getGlyphOutline(arg0: number, arg1: number, arg2: number): $Shape;
         getLayoutFlags(): number;
         getGlyphVisualBounds(arg0: number): $Shape;
         getGlyphTransform(arg0: number): $AffineTransform;
@@ -54,18 +50,22 @@ declare module "@package/java/awt/font" {
         getGlyphLogicalBounds(arg0: number): $Shape;
         getGlyphPixelBounds(arg0: number, arg1: $FontRenderContext, arg2: number, arg3: number): $Rectangle;
         getGlyphJustificationInfo(arg0: number): $GlyphJustificationInfo;
-        getOutline(): $Shape;
-        getOutline(arg0: number, arg1: number): $Shape;
-        getFont(): $Font;
         getNumGlyphs(): number;
-        getFontRenderContext(): $FontRenderContext;
-        getGlyphCodes(arg0: number, arg1: number, arg2: number[]): number[];
         getGlyphPositions(arg0: number, arg1: number, arg2: number[]): number[];
-        getVisualBounds(): $Rectangle2D;
-        getGlyphPosition(arg0: number): $Point2D;
-        getGlyphCharIndex(arg0: number): number;
+        getGlyphCodes(arg0: number, arg1: number, arg2: number[]): number[];
         getPixelBounds(arg0: $FontRenderContext, arg1: number, arg2: number): $Rectangle;
         getGlyphCode(arg0: number): number;
+        getFontRenderContext(): $FontRenderContext;
+        getGlyphPosition(arg0: number): $Point2D;
+        getGlyphCharIndex(arg0: number): number;
+        getVisualBounds(): $Rectangle2D;
+        equals(arg0: $GlyphVector): boolean;
+        getGlyphMetrics(arg0: number): $GlyphMetrics;
+        getGlyphOutline(arg0: number): $Shape;
+        getGlyphOutline(arg0: number, arg1: number, arg2: number): $Shape;
+        getFont(): $Font;
+        getOutline(): $Shape;
+        getOutline(arg0: number, arg1: number): $Shape;
         static FLAG_HAS_TRANSFORMS: number;
         static FLAG_HAS_POSITION_ADJUSTMENTS: number;
         static FLAG_MASK: number;
@@ -73,10 +73,10 @@ declare module "@package/java/awt/font" {
         static FLAG_RUN_RTL: number;
         get layoutFlags(): number;
         get logicalBounds(): $Rectangle2D;
-        get font(): $Font;
         get numGlyphs(): number;
         get fontRenderContext(): $FontRenderContext;
         get visualBounds(): $Rectangle2D;
+        get font(): $Font;
     }
     export class $GlyphJustificationInfo {
         growRightLimit: number;
@@ -159,36 +159,36 @@ declare module "@package/java/awt/font" {
         static UNDERLINE_LOW_TWO_PIXEL: number;
     }
     export class $LineMetrics {
-        getUnderlineOffset(): number;
         getHeight(): number;
-        getAscent(): number;
-        getDescent(): number;
-        getLeading(): number;
-        getUnderlineThickness(): number;
-        getStrikethroughThickness(): number;
-        getStrikethroughOffset(): number;
         getNumChars(): number;
         getBaselineIndex(): number;
         getBaselineOffsets(): number[];
-        get underlineOffset(): number;
+        getAscent(): number;
+        getDescent(): number;
+        getStrikethroughOffset(): number;
+        getStrikethroughThickness(): number;
+        getUnderlineThickness(): number;
+        getUnderlineOffset(): number;
+        getLeading(): number;
         get height(): number;
-        get ascent(): number;
-        get descent(): number;
-        get leading(): number;
-        get underlineThickness(): number;
-        get strikethroughThickness(): number;
-        get strikethroughOffset(): number;
         get numChars(): number;
         get baselineIndex(): number;
         get baselineOffsets(): number[];
+        get ascent(): number;
+        get descent(): number;
+        get strikethroughOffset(): number;
+        get strikethroughThickness(): number;
+        get underlineThickness(): number;
+        get underlineOffset(): number;
+        get leading(): number;
     }
     export class $GlyphMetrics {
+        isStandard(): boolean;
+        getAdvance(): number;
+        isCombining(): boolean;
         isWhitespace(): boolean;
         getType(): number;
-        isCombining(): boolean;
-        isStandard(): boolean;
         getBounds2D(): $Rectangle2D;
-        getAdvance(): number;
         getAdvanceY(): number;
         getLSB(): number;
         getRSB(): number;
@@ -202,12 +202,12 @@ declare module "@package/java/awt/font" {
         static STANDARD: number;
         constructor(arg0: number, arg1: $Rectangle2D, arg2: number);
         constructor(arg0: boolean, arg1: number, arg2: number, arg3: $Rectangle2D, arg4: number);
+        get standard(): boolean;
+        get advance(): number;
+        get combining(): boolean;
         get whitespace(): boolean;
         get type(): number;
-        get combining(): boolean;
-        get standard(): boolean;
         get bounds2D(): $Rectangle2D;
-        get advance(): number;
         get advanceY(): number;
         get LSB(): number;
         get RSB(): number;

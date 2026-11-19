@@ -5,6 +5,7 @@ import { $LookControl } from "@package/net/minecraft/world/entity/ai/control";
 import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $EntityType_, $Entity$RemovalReason, $LivingEntity, $PortalProcessor, $WalkAnimationState, $PathfinderMob } from "@package/net/minecraft/world/entity";
+import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $ImmutableList } from "@package/com/google/common/collect";
 import { $GameEventListener, $GameEvent, $GameEvent$Context_, $GameEventListener$DeliveryMode } from "@package/net/minecraft/world/level/gameevent";
 import { $AttributeSupplier$Builder } from "@package/net/minecraft/world/entity/ai/attributes";
@@ -22,36 +23,21 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         get deliveryMode(): $GameEventListener$DeliveryMode;
     }
     export class $Allay extends $PathfinderMob implements $InventoryCarrier, $VibrationSystem {
-        getHoldingItemAnimationProgress(partialTick: number): number;
-        setDancing(dancing: boolean): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isDancing(): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
+        setDancing(dancing: boolean): void;
         isSpinning(): boolean;
-        getInventory(): $SimpleContainer;
-        /**
-         * Returns a (normalized) vector of where this entity is looking.
-         */
-        getLeashOffset(): $Vec3;
         static createAttributes(): $AttributeSupplier$Builder;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
-        isFlapping(): boolean;
-        getVibrationData(): $VibrationSystem$Data;
-        getVibrationUser(): $VibrationSystem$User;
+        getLeashOffset(): $Vec3;
         getSpinningProgress(partialTick: number): number;
-        setJukeboxPlaying(jukeboxPos: $BlockPos_, jukeboxPlaying: boolean): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         hasItemInHand(): boolean;
-        readInventoryFromTag(tag: $CompoundTag_, levelRegistry: $HolderLookup$Provider): void;
-        writeInventoryToTag(tag: $CompoundTag_, levelRegistry: $HolderLookup$Provider): void;
+        setJukeboxPlaying(jukeboxPos: $BlockPos_, jukeboxPlaying: boolean): void;
+        getHoldingItemAnimationProgress(partialTick: number): number;
+        getInventory(): $SimpleContainer;
+        getVibrationUser(): $VibrationSystem$User;
+        getVibrationData(): $VibrationSystem$Data;
+        isFlapping(): boolean;
+        readInventoryFromTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        writeInventoryToTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -99,6 +85,7 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         attackAnim: number;
         zOld: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -109,6 +96,7 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -150,6 +138,7 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         static FREEZE_HURT_FREQUENCY: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        duplicationCooldown: number;
         yBodyRot: number;
         blocksBuilding: boolean;
         deathScore: number;
@@ -161,25 +150,25 @@ declare module "@package/net/minecraft/world/entity/animal/allay" {
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Allay>, level: $Level_);
         get spinning(): boolean;
-        get inventory(): $SimpleContainer;
         get leashOffset(): $Vec3;
-        get flapping(): boolean;
-        get vibrationData(): $VibrationSystem$Data;
+        get inventory(): $SimpleContainer;
         get vibrationUser(): $VibrationSystem$User;
+        get vibrationData(): $VibrationSystem$Data;
+        get flapping(): boolean;
     }
     export class $AllayAi {
         static updateActivity(allay: $Allay): void;
-        static hearNoteblock(entity: $LivingEntity, pos: $BlockPos_): void;
         static getLikedPlayer(entity: $LivingEntity): ($ServerPlayer) | undefined;
+        static hearNoteblock(entity: $LivingEntity, pos: $BlockPos_): void;
         constructor();
     }
     export class $Allay$VibrationUser implements $VibrationSystem$User {
-        requiresAdjacentChunksToBeTicking(): boolean;
-        getListenableEvents(): $TagKey<$GameEvent>;
-        canTriggerAvoidVibration(): boolean;
         calculateTravelTimeInTicks(arg0: number): number;
+        canTriggerAvoidVibration(): boolean;
+        getListenableEvents(): $TagKey<$GameEvent>;
         onDataChanged(): void;
         isValidVibration(arg0: $Holder_<$GameEvent>, arg1: $GameEvent$Context_): boolean;
+        requiresAdjacentChunksToBeTicking(): boolean;
         get listenableEvents(): $TagKey<$GameEvent>;
     }
 }

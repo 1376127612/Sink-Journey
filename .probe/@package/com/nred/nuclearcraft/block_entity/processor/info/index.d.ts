@@ -16,27 +16,27 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/com/nred/nuclearcraft/block_entity/processor/info" {
     export class $ProcessorMenuInfo<TILE extends $BlockEntity, PACKET extends $ProcessorUpdatePacket, INFO extends $ProcessorMenuInfo<TILE, PACKET, INFO, RECIPE>, RECIPE extends $BasicRecipe> extends $BlockEntityMenuInfo<TILE> {
+        getEnergyCapacity(arg0: number, arg1: number): number;
+        addPlayerSlots(arg0: $Consumer_<$Slot>, arg1: $Player): void;
+        getInventorySize(): number;
+        getRecipeHandler(): $BasicRecipeHandler<RECIPE>;
+        getTankCount(): number;
         getDefaultProcessTime(): number;
         getDefaultProcessPower(): number;
-        defaultEnergyConnection(): $EnergyConnection;
-        defaultTankSorptions(): $List<$TankSorption>;
-        defaultTankCapacities(): $IntList;
         defaultItemSorptions(): $List<$ItemSorption>;
-        getInventorySize(): number;
-        addPlayerSlots(arg0: $Consumer_<$Slot>, arg1: $Player): void;
-        getTankCount(): number;
-        getRecipeHandler(): $BasicRecipeHandler<RECIPE>;
+        defaultEnergyConnection(): $EnergyConnection;
+        defaultTankCapacities(): $IntList;
+        defaultTankSorptions(): $List<$TankSorption>;
         getInventoryStacks(): $NonNullList<$ItemStack>;
-        getEnergyCapacity(arg0: number, arg1: number): number;
-        getConsumedTanks(): $List<$Tank>;
         getConsumedStacks(): $NonNullList<$ItemStack>;
-        getScreenTexture(): $ResourceLocation;
+        getConsumedTanks(): $List<$Tank>;
         getFrontTexture(): $ResourceLocation;
         nonItemSorptions(): $List<$ItemSorption>;
         nonTankSorptions(): $List<$TankSorption>;
+        getScreenTexture(): $ResourceLocation;
         getRedstoneControlButtonID(): number;
-        getMachineConfigButtonID(): number;
         getCombinedInventorySize(): number;
+        getMachineConfigButtonID(): number;
         maxBaseProcessPower: number;
         fluidOutputSorptionButtonID: number[];
         redstoneControlGuiY: number;
@@ -103,13 +103,13 @@ declare module "@package/com/nred/nuclearcraft/block_entity/processor/info" {
         fluidOutputSize: number;
         itemOutputSorptionButtonID: number[];
         get inventorySize(): number;
-        get tankCount(): number;
         get recipeHandler(): $BasicRecipeHandler<RECIPE>;
+        get tankCount(): number;
         get inventoryStacks(): $NonNullList<$ItemStack>;
-        get consumedTanks(): $List<$Tank>;
         get consumedStacks(): $NonNullList<$ItemStack>;
+        get consumedTanks(): $List<$Tank>;
         get redstoneControlButtonID(): number;
-        get machineConfigButtonID(): number;
         get combinedInventorySize(): number;
+        get machineConfigButtonID(): number;
     }
 }

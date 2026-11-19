@@ -6,8 +6,8 @@ import { $PlayerEvent } from "@package/net/neoforged/neoforge/event/entity/playe
 
 declare module "@package/appeng/util" {
     export class $SearchInventoryEvent extends $PlayerEvent {
-        getStacks(): $List<$ItemStack>;
         static getItems(arg0: $Player): $List<$ItemStack>;
+        getStacks(): $List<$ItemStack>;
         constructor(arg0: $Player, arg1: $List_<$ItemStack_>);
         get stacks(): $List<$ItemStack>;
     }

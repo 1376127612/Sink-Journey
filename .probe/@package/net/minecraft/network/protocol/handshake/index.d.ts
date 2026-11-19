@@ -18,22 +18,16 @@ declare module "@package/net/minecraft/network/protocol/handshake" {
         protocol(): $ConnectionProtocol;
     }
     export class $ClientIntentionPacket extends $Record implements $Packet<$ServerHandshakePacketListener> {
+        intention(): $ClientIntent;
         type(): $PacketType<$ClientIntentionPacket>;
         port(): number;
         /**
          * Passes this Packet on to the NetHandler for processing.
          */
         handle(handler: $ServerHandshakePacketListener): void;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isTerminal(): boolean;
         hostName(): string;
         protocolVersion(): number;
-        intention(): $ClientIntent;
-        /**
-         * Whether decoding errors will be ignored for this packet.
-         */
         isSkippable(): boolean;
         static STREAM_CODEC: $StreamCodec<$FriendlyByteBuf, $ClientIntentionPacket>;
         /**
@@ -53,10 +47,10 @@ declare module "@package/net/minecraft/network/protocol/handshake" {
         constructor();
     }
     export class $ClientIntent extends $Enum<$ClientIntent> {
+        static byId(id: number): $ClientIntent;
         static values(): $ClientIntent[];
         static valueOf(arg0: string): $ClientIntent;
         id(): number;
-        static byId(id: number): $ClientIntent;
         static STATUS: $ClientIntent;
         static TRANSFER: $ClientIntent;
         static LOGIN: $ClientIntent;

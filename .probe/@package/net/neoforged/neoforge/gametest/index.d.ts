@@ -8,8 +8,8 @@ declare module "@package/net/neoforged/neoforge/gametest" {
     export class $GameTestHooks {
         static isGametestServer(): boolean;
         static isGametestEnabled(): boolean;
-        static getTemplateNamespace(arg0: $Method): string;
         static prefixGameTestTemplate(arg0: $Method): boolean;
+        static getTemplateNamespace(arg0: $Method): string;
         static registerGametests(): void;
         constructor();
         static get gametestServer(): boolean;

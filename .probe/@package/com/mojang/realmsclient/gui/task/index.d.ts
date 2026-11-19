@@ -7,10 +7,10 @@ import { $TimeSource_ } from "@package/net/minecraft/util";
 
 declare module "@package/com/mojang/realmsclient/gui/task" {
     export class $DataFetcher$Subscription {
-        reset(): void;
-        subscribe<T>(task: $DataFetcher$Task<T>, output: $Consumer_<T>): void;
-        tick(): void;
         forceUpdate(): void;
+        reset(): void;
+        tick(): void;
+        subscribe<T>(task: $DataFetcher$Task<T>, output: $Consumer_<T>): void;
         constructor(arg0: $DataFetcher);
     }
     export class $DataFetcher {
@@ -23,13 +23,13 @@ declare module "@package/com/mojang/realmsclient/gui/task" {
     /**
      * Values that may be interpreted as {@link $DataFetcher$SuccessfulComputationResult}.
      */
-    export type $DataFetcher$SuccessfulComputationResult_<T> = { value?: any, time?: number,  } | [value?: any, time?: number, ];
+    export type $DataFetcher$SuccessfulComputationResult_<T> = { time?: number, value?: any,  } | [time?: number, value?: any, ];
     export class $DataFetcher$ComputationResult<T> extends $Record {
     }
     /**
      * Values that may be interpreted as {@link $DataFetcher$ComputationResult}.
      */
-    export type $DataFetcher$ComputationResult_<T> = { value?: $Either<any, $Exception>, time?: number,  } | [value?: $Either<any, $Exception>, time?: number, ];
+    export type $DataFetcher$ComputationResult_<T> = { time?: number, value?: $Either<any, $Exception>,  } | [time?: number, value?: $Either<any, $Exception>, ];
     export class $DataFetcher$SubscribedTask<T> {
     }
     export class $RepeatedDelayStrategy {
@@ -37,8 +37,8 @@ declare module "@package/com/mojang/realmsclient/gui/task" {
         static CONSTANT: $RepeatedDelayStrategy;
     }
     export interface $RepeatedDelayStrategy {
-        delayCyclesAfterFailure(): number;
         delayCyclesAfterSuccess(): number;
+        delayCyclesAfterFailure(): number;
     }
     export class $DataFetcher$Task<T> {
         reset(): void;

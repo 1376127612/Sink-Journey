@@ -58,24 +58,25 @@ declare module "@package/com/mojang/realmsclient/gui" {
         static DEFAULT_WORLD_SLOT_3: $ResourceLocation;
         static DEFAULT_WORLD_SLOT_1: $ResourceLocation;
         static DEFAULT_SPACING: number;
+        height: number;
         constructor(x: number, y: number, width: number, height: number, slotIndex: number, onPress: $Button$OnPress_);
         set serverData(value: $RealmsServer);
         get state(): $RealmsWorldSlotButton$State;
     }
     export class $RowButton {
-        getRight(): number;
-        getBottom(): number;
-        onClick(index: number): void;
-        static rowButtonMouseClicked(list: $RealmsObjectSelectionList<never>, entry: $ObjectSelectionList$Entry<never>, buttons: $List_<$RowButton>, button: number, mouseX: number, arg5: number): void;
         static drawButtonsInRow(guiGraphics: $GuiGraphics, buttons: $List_<$RowButton>, pendingInvitations: $RealmsObjectSelectionList<never>, x: number, y: number, mouseX: number, mouseY: number): void;
         drawForRowAt(guiGraphics: $GuiGraphics, x: number, y: number, mouseX: number, mouseY: number): void;
+        getBottom(): number;
+        onClick(index: number): void;
+        getRight(): number;
+        static rowButtonMouseClicked(list: $RealmsObjectSelectionList<never>, entry: $ObjectSelectionList$Entry<never>, buttons: $List_<$RowButton>, button: number, mouseX: number, arg5: number): void;
         yOffset: number;
         xOffset: number;
         width: number;
         height: number;
         constructor(width: number, height: number, xOffset: number, yOffset: number);
-        get right(): number;
         get bottom(): number;
+        get right(): number;
     }
     export class $RealmsWorldSlotButton$State {
         minigame: boolean;
@@ -84,16 +85,16 @@ declare module "@package/com/mojang/realmsclient/gui" {
         constructor(server: $RealmsServer, slot: number);
     }
     export class $RealmsNewsManager {
-        updateUnreadNews(realmsNews: $RealmsNews): void;
         hasUnreadNews(): boolean;
+        updateUnreadNews(realmsNews: $RealmsNews): void;
         newsLink(): string;
         constructor(newsLocalStorage: $RealmsPersistence);
     }
     export class $RealmsServerList implements $Iterable<$RealmsServer> {
+        updateServersList(servers: $List_<$RealmsServer>): void;
         isEmpty(): boolean;
         iterator(): $Iterator<$RealmsServer>;
         removeItem(server: $RealmsServer): void;
-        updateServersList(servers: $List_<$RealmsServer>): void;
         spliterator(): $Spliterator<$RealmsServer>;
         forEach(arg0: $Consumer_<$RealmsServer>): void;
         constructor(minecraft: $Minecraft);
@@ -101,12 +102,12 @@ declare module "@package/com/mojang/realmsclient/gui" {
         get empty(): boolean;
     }
     export class $RealmsDataFetcher$ServerListData extends $Record {
-        serverList(): $List<$RealmsServer>;
         availableSnapshotServers(): $List<$RealmsServer>;
+        serverList(): $List<$RealmsServer>;
         constructor(arg0: $List_<$RealmsServer>, arg1: $List_<$RealmsServer>);
     }
     /**
      * Values that may be interpreted as {@link $RealmsDataFetcher$ServerListData}.
      */
-    export type $RealmsDataFetcher$ServerListData_ = { availableSnapshotServers?: $List_<$RealmsServer>, serverList?: $List_<$RealmsServer>,  } | [availableSnapshotServers?: $List_<$RealmsServer>, serverList?: $List_<$RealmsServer>, ];
+    export type $RealmsDataFetcher$ServerListData_ = { serverList?: $List_<$RealmsServer>, availableSnapshotServers?: $List_<$RealmsServer>,  } | [serverList?: $List_<$RealmsServer>, availableSnapshotServers?: $List_<$RealmsServer>, ];
 }

@@ -1,17 +1,17 @@
 
 declare module "@package/xaero/lib/common/player/config" {
     export class $ServerPlayerConfigChannelData {
-        setCachedUsingConfigProfilePermission(arg0: boolean): void;
-        setCachedEnforcedConfigProfilePermission(arg0: string): void;
-        setCachedHasServerProfileEditPermission(arg0: boolean): void;
+        hasServerProfileEditPermission(): boolean;
         isUsingConfigProfilePermission(): boolean;
         getEnforcedConfigProfilePermission(): string;
-        hasServerProfileEditPermission(): boolean;
+        setCachedHasServerProfileEditPermission(arg0: boolean): void;
+        setCachedUsingConfigProfilePermission(arg0: boolean): void;
+        setCachedEnforcedConfigProfilePermission(arg0: string): void;
         constructor();
-        set cachedUsingConfigProfilePermission(value: boolean);
-        set cachedEnforcedConfigProfilePermission(value: string);
-        set cachedHasServerProfileEditPermission(value: boolean);
         get usingConfigProfilePermission(): boolean;
         get enforcedConfigProfilePermission(): string;
+        set cachedHasServerProfileEditPermission(value: boolean);
+        set cachedUsingConfigProfilePermission(value: boolean);
+        set cachedEnforcedConfigProfilePermission(value: string);
     }
 }

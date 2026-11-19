@@ -37,11 +37,11 @@ declare module "@package/plus/dragons/createenchantmentindustry/common/fluids/pr
         static REGISTRY: $Registry<$PrintingBehaviourProvider>;
     }
     export interface $PrintingBehaviour extends $IHaveGoggleInformation {
-        getResult(arg0: $Level_, arg1: $ItemStack_, arg2: $FluidStack_): $ItemStack;
-        isValid(): boolean;
+        onFinished(arg0: $Level_, arg1: $BlockPos_, arg2: $PrinterBlockEntity): void;
         getRequiredItemCount(arg0: $Level_, arg1: $ItemStack_): number;
         getRequiredFluidAmount(arg0: $Level_, arg1: $ItemStack_, arg2: $FluidStack_): number;
-        onFinished(arg0: $Level_, arg1: $BlockPos_, arg2: $PrinterBlockEntity): void;
+        getResult(arg0: $Level_, arg1: $ItemStack_, arg2: $FluidStack_): $ItemStack;
+        isValid(): boolean;
         isSafeNBT(): boolean;
         get valid(): boolean;
         get safeNBT(): boolean;

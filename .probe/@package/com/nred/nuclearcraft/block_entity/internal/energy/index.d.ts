@@ -4,21 +4,21 @@ import { $StringRepresentable } from "@package/net/minecraft/util";
 
 declare module "@package/com/nred/nuclearcraft/block_entity/internal/energy" {
     export class $EnergyConnection extends $Enum<$EnergyConnection> implements $StringRepresentable {
+        canExtract(): boolean;
+        canReceive(): boolean;
+        getTextColor(): $ChatFormatting;
+        getSerializedName(): string;
+        canConnect(): boolean;
         static values(): $EnergyConnection[];
         static valueOf(arg0: string): $EnergyConnection;
         next(arg0: $EnergyConnection$Type_): $EnergyConnection;
-        canExtract(): boolean;
-        canReceive(): boolean;
-        getSerializedName(): string;
-        canConnect(): boolean;
-        getTextColor(): $ChatFormatting;
         getRemappedEnumConstantName(): string;
         static IN: $EnergyConnection;
         static NON: $EnergyConnection;
         static BOTH: $EnergyConnection;
         static OUT: $EnergyConnection;
-        get serializedName(): string;
         get textColor(): $ChatFormatting;
+        get serializedName(): string;
         get remappedEnumConstantName(): string;
     }
     /**

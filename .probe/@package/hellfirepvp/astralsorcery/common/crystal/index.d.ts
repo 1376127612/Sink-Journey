@@ -6,17 +6,17 @@ import { $Comparable } from "@package/java/lang";
 
 declare module "@package/hellfirepvp/astralsorcery/common/crystal" {
     export class $CrystalProperty implements $Comparable<$CrystalProperty> {
+        getMaxTier(): number;
+        getNameFormat(): string;
         getName(arg0: number, arg1: number): $MutableComponent;
         compareTo(arg0: $CrystalProperty_): number;
         getColor(): $ColorWrapper;
-        getMaxTier(): number;
-        getNameFormat(): string;
         constructor(arg0: $ChatFormatting_, arg1: number);
-        constructor(arg0: $ColorWrapper, arg1: number);
         constructor(arg0: $TextColor_, arg1: number);
-        get color(): $ColorWrapper;
+        constructor(arg0: $ColorWrapper, arg1: number);
         get maxTier(): number;
         get nameFormat(): string;
+        get color(): $ColorWrapper;
     }
     /**
      * Values that may be interpreted as {@link $CrystalProperty}.

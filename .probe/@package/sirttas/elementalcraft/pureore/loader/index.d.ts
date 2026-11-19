@@ -29,23 +29,23 @@ declare module "@package/sirttas/elementalcraft/pureore/loader" {
         get order(): number;
     }
     export class $LoadedPureOre {
+        addRecipe<C extends $RecipeInput, T extends $Recipe<C>>(arg0: T, arg1: $ItemStack_): void;
+        getRecipe<C extends $RecipeInput, T extends $Recipe<C>>(arg0: $RecipeType_<T>): T;
+        isProcessable(): boolean;
+        getResultForColor(): $ItemStack;
+        getOrePurificationRecipe(): $OrePurificationRecipe;
         contains(arg0: $Holder_<$Item>): boolean;
         getId(): $ResourceLocation;
         getInput(): $Ingredient;
-        getOrePurificationRecipe(): $OrePurificationRecipe;
-        addRecipe<C extends $RecipeInput, T extends $Recipe<C>>(arg0: T, arg1: $ItemStack_): void;
+        getOres(): $Set<$Holder<$Item>>;
         addTag(arg0: $HolderSet$Named<$Item_>): void;
         addTag(arg0: $TagKey_<$Item>): void;
-        getRecipe<C extends $RecipeInput, T extends $Recipe<C>>(arg0: $RecipeType_<T>): T;
-        getResultForColor(): $ItemStack;
-        isProcessable(): boolean;
-        getOres(): $Set<$Holder<$Item>>;
         constructor(arg0: $ResourceLocation_, arg1: number, arg2: number, arg3: number, arg4: number);
+        get processable(): boolean;
+        get resultForColor(): $ItemStack;
+        get orePurificationRecipe(): $OrePurificationRecipe;
         get id(): $ResourceLocation;
         get input(): $Ingredient;
-        get orePurificationRecipe(): $OrePurificationRecipe;
-        get resultForColor(): $ItemStack;
-        get processable(): boolean;
         get ores(): $Set<$Holder<$Item>>;
     }
 }

@@ -17,8 +17,8 @@ declare module "@package/me/flashyreese/mods/sodiumextra/mixin/panini_projection
     }
     export interface $AccessorLevelRenderer {
         sodiumExtra$getEntityOutlinePostChain(): $PostChain;
+        sodiumExtra$getCapturedFrustum(): $Frustum;
         sodiumExtra$getTransparencyChain(): $PostChain;
         sodiumExtra$getEntityOutlineTarget(): $RenderTarget;
-        sodiumExtra$getCapturedFrustum(): $Frustum;
     }
 }

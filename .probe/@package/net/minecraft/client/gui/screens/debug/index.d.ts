@@ -33,9 +33,9 @@ declare module "@package/net/minecraft/client/gui/screens/debug" {
         constructor();
     }
     export class $GameModeSwitcherScreen$GameModeSlot extends $AbstractWidget {
+        updateWidgetNarration(narrationElementOutput: $NarrationElementOutput): void;
         setSelected(isSelected: boolean): void;
         renderWidget(guiGraphics: $GuiGraphics, mouseX: number, mouseY: number, partialTick: number): void;
-        updateWidgetNarration(narrationElementOutput: $NarrationElementOutput): void;
         static PERIOD_PER_SCROLLED_PIXEL: number;
         static UNSET_FG_COLOR: number;
         visible: boolean;
@@ -43,6 +43,7 @@ declare module "@package/net/minecraft/client/gui/screens/debug" {
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        height: number;
         constructor(icon: $GameModeSwitcherScreen, x: $GameModeSwitcherScreen$GameModeIcon_, y: number, arg3: number);
         set selected(value: boolean);
     }

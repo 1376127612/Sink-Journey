@@ -18,18 +18,18 @@ export * as events from "@package/net/minecraft/client/telemetry/events";
 
 declare module "@package/net/minecraft/client/telemetry" {
     export class $ClientTelemetryManager implements $AutoCloseable {
-        close(): void;
         getOutsideSessionSender(): $TelemetryEventSender;
-        createWorldSessionManager(newWorld: boolean, worldLoadDuration: $Duration_ | null, minigameName: string | null): $WorldSessionTelemetryManager;
         getLogDirectory(): $Path;
+        createWorldSessionManager(newWorld: boolean, worldLoadDuration: $Duration_ | null, minigameName: string | null): $WorldSessionTelemetryManager;
+        close(): void;
         constructor(minecraft: $Minecraft, userApiService: $UserApiService, user: $User);
         get outsideSessionSender(): $TelemetryEventSender;
         get logDirectory(): $Path;
     }
     export class $TelemetryProperty$ServerType extends $Enum<$TelemetryProperty$ServerType> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $TelemetryProperty$ServerType[];
         static valueOf(arg0: string): $TelemetryProperty$ServerType;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static OTHER: $TelemetryProperty$ServerType;
         static CODEC: $Codec<$TelemetryProperty$ServerType>;
@@ -48,13 +48,13 @@ declare module "@package/net/minecraft/client/telemetry" {
         constructor(channel: $FileChannel, dispatcher: $Executor_);
     }
     export class $WorldSessionTelemetryManager {
-        onAdvancementDone(level: $Level_, advancement: $AdvancementHolder_): void;
-        worldSessionStart(): void;
-        setTime(time: number): void;
-        tick(): void;
+        onPlayerInfoReceived(gameType: $GameType_, isHardcore: boolean): void;
         onServerBrandReceived(serverBrand: string): void;
         onDisconnect(): void;
-        onPlayerInfoReceived(gameType: $GameType_, isHardcore: boolean): void;
+        worldSessionStart(): void;
+        onAdvancementDone(level: $Level_, advancement: $AdvancementHolder_): void;
+        setTime(time: number): void;
+        tick(): void;
         constructor(sender: $TelemetryEventSender_, newWorld: boolean, worldLoadDuration: $Duration_ | null, minigameName: string | null);
         set time(value: number);
     }
@@ -79,31 +79,31 @@ declare module "@package/net/minecraft/client/telemetry" {
      */
     export type $TelemetryEventLogger_ = ((arg0: $TelemetryEventInstance) => void);
     export class $TelemetryPropertyMap$Builder {
+        putIfNotNull<T>(key: $TelemetryProperty_<T>, value: T | null): $TelemetryPropertyMap$Builder;
         put<T>(key: $TelemetryProperty_<T>, value: T): $TelemetryPropertyMap$Builder;
         putAll(propertyMap: $TelemetryPropertyMap): $TelemetryPropertyMap$Builder;
         build(): $TelemetryPropertyMap;
-        putIfNotNull<T>(key: $TelemetryProperty_<T>, value: T | null): $TelemetryPropertyMap$Builder;
     }
     export class $TelemetryLogManager implements $AutoCloseable {
+        openLogger(): $CompletableFuture<($TelemetryEventLogger) | undefined>;
         close(): void;
         static open(path: $Path_): $CompletableFuture<($TelemetryLogManager) | undefined>;
-        openLogger(): $CompletableFuture<($TelemetryEventLogger) | undefined>;
     }
     export class $TelemetryProperty<T> extends $Record {
+        static gameLoadMeasurement(id: string, exportKey: string): $TelemetryProperty<$GameLoadTimesEvent$Measurement>;
+        exporter(): $TelemetryProperty$Exporter<T>;
+        codec(): $Codec<T>;
+        exportKey(): string;
+        static longSamples(id: string, exportKey: string): $TelemetryProperty<$LongList>;
         id(): string;
         static create<T>(id: string, exportKey: string, codec: $Codec<T>, exporter: $TelemetryProperty$Exporter_<T>): $TelemetryProperty<T>;
         static makeLong(id: string, exportKey: string): $TelemetryProperty<number>;
         static string(id: string, exportKey: string): $TelemetryProperty<string>;
         "export"(propertyMap: $TelemetryPropertyMap, container: $TelemetryPropertyContainer): void;
+        static uuid(id: string, exportKey: string): $TelemetryProperty<$UUID>;
+        title(): $MutableComponent;
         static bool(id: string, exportKey: string): $TelemetryProperty<boolean>;
         static integer(id: string, exportKey: string): $TelemetryProperty<number>;
-        title(): $MutableComponent;
-        static uuid(id: string, exportKey: string): $TelemetryProperty<$UUID>;
-        exportKey(): string;
-        static longSamples(id: string, exportKey: string): $TelemetryProperty<$LongList>;
-        static gameLoadMeasurement(id: string, exportKey: string): $TelemetryProperty<$GameLoadTimesEvent$Measurement>;
-        codec(): $Codec<T>;
-        exporter(): $TelemetryProperty$Exporter<T>;
         static RENDER_TIME_SAMPLES: $TelemetryProperty<$LongList>;
         static LOAD_TIME_BOOTSTRAP_MS: $TelemetryProperty<$GameLoadTimesEvent$Measurement>;
         static USED_MEMORY_SAMPLES: $TelemetryProperty<$LongList>;
@@ -140,18 +140,18 @@ declare module "@package/net/minecraft/client/telemetry" {
     /**
      * Values that may be interpreted as {@link $TelemetryProperty}.
      */
-    export type $TelemetryProperty_<T> = { codec?: $Codec<any>, id?: string, exportKey?: string, exporter?: $TelemetryProperty$Exporter_<any>,  } | [codec?: $Codec<any>, id?: string, exportKey?: string, exporter?: $TelemetryProperty$Exporter_<any>, ];
+    export type $TelemetryProperty_<T> = { id?: string, exportKey?: string, exporter?: $TelemetryProperty$Exporter_<any>, codec?: $Codec<any>,  } | [id?: string, exportKey?: string, exporter?: $TelemetryProperty$Exporter_<any>, codec?: $Codec<any>, ];
     export class $TelemetryPropertyMap {
+        static createCodec(properties: $List_<$TelemetryProperty_<never>>): $MapCodec<$TelemetryPropertyMap>;
         get<T>(key: $TelemetryProperty_<T>): T;
         static builder(): $TelemetryPropertyMap$Builder;
         propertySet(): $Set<$TelemetryProperty<never>>;
-        static createCodec(properties: $List_<$TelemetryProperty_<never>>): $MapCodec<$TelemetryPropertyMap>;
     }
     export class $TelemetryProperty$GameMode extends $Enum<$TelemetryProperty$GameMode> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $TelemetryProperty$GameMode[];
         static valueOf(arg0: string): $TelemetryProperty$GameMode;
         id(): number;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static SURVIVAL: $TelemetryProperty$GameMode;
         static SPECTATOR: $TelemetryProperty$GameMode;
@@ -167,6 +167,8 @@ declare module "@package/net/minecraft/client/telemetry" {
      */
     export type $TelemetryProperty$GameMode_ = "survival" | "creative" | "adventure" | "spectator" | "hardcore";
     export class $TelemetryEventType {
+        codec(): $MapCodec<$TelemetryEventInstance>;
+        isOptIn(): boolean;
         static values(): $List<$TelemetryEventType>;
         static builder(id: string, exportKey: string): $TelemetryEventType$Builder;
         contains<T>(property: $TelemetryProperty_<T>): boolean;
@@ -175,8 +177,6 @@ declare module "@package/net/minecraft/client/telemetry" {
         "export"(session: $TelemetrySession, propertyMap: $TelemetryPropertyMap): $TelemetryEvent;
         title(): $MutableComponent;
         description(): $MutableComponent;
-        codec(): $MapCodec<$TelemetryEventInstance>;
-        isOptIn(): boolean;
         static CODEC: $Codec<$TelemetryEventType>;
         static WORLD_LOADED: $TelemetryEventType;
         static ADVANCEMENT_MADE: $TelemetryEventType;
@@ -187,10 +187,10 @@ declare module "@package/net/minecraft/client/telemetry" {
         get optIn(): boolean;
     }
     export class $TelemetryEventType$Builder {
+        defineAll(properties: $List_<$TelemetryProperty_<never>>): $TelemetryEventType$Builder;
         register(): $TelemetryEventType;
         define<T>(property: $TelemetryProperty_<T>): $TelemetryEventType$Builder;
         optIn(): $TelemetryEventType$Builder;
-        defineAll(properties: $List_<$TelemetryProperty_<never>>): $TelemetryEventType$Builder;
     }
     export class $TelemetryEventSender {
         static DISABLED: $TelemetryEventSender;

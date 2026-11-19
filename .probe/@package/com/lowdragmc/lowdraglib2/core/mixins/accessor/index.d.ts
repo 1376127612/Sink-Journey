@@ -20,27 +20,27 @@ declare module "@package/com/lowdragmc/lowdraglib2/core/mixins/accessor" {
     export class $GuiGraphicsAccessor {
     }
     export interface $GuiGraphicsAccessor {
-        ldlib2$renderTooltipInternal(arg0: $Font, arg1: $List_<$ClientTooltipComponent>, arg2: number, arg3: number, arg4: $ClientTooltipPositioner_): void;
         ldlib2$setTooltipStack(arg0: $ItemStack_): void;
+        ldlib2$renderTooltipInternal(arg0: $Font, arg1: $List_<$ClientTooltipComponent>, arg2: number, arg3: number, arg4: $ClientTooltipPositioner_): void;
     }
     export class $MouseHandlerAccessor {
     }
     export interface $MouseHandlerAccessor {
-        setMouseGrabbed(arg0: boolean): void;
         getActiveButton(): number;
-        set mouseGrabbed(value: boolean);
+        setMouseGrabbed(arg0: boolean): void;
         get activeButton(): number;
+        set mouseGrabbed(value: boolean);
     }
     export class $ModelBakeryAccessor {
     }
     export interface $ModelBakeryAccessor {
-        getMissingModel(): $UnbakedModel;
-        getTopLevelModels(): $Map<$ModelResourceLocation, $UnbakedModel>;
         invokeGetModel(arg0: $ResourceLocation_): $UnbakedModel;
+        getTopLevelModels(): $Map<$ModelResourceLocation, $UnbakedModel>;
         getUnbakedCache(): $Map<$ResourceLocation, $UnbakedModel>;
-        get missingModel(): $UnbakedModel;
+        getMissingModel(): $UnbakedModel;
         get topLevelModels(): $Map<$ModelResourceLocation, $UnbakedModel>;
         get unbakedCache(): $Map<$ResourceLocation, $UnbakedModel>;
+        get missingModel(): $UnbakedModel;
     }
     export class $ProgramTypeAccessor {
         static ldlib2$createProgramType(arg0: string, arg1: number, arg2: string, arg3: string, arg4: number): $Program$Type;
@@ -68,16 +68,16 @@ declare module "@package/com/lowdragmc/lowdraglib2/core/mixins/accessor" {
     export class $MeshDataAccessor {
     }
     export interface $MeshDataAccessor {
-        setIndexBuffer(arg0: $ByteBufferBuilder$Result): void;
         getIndexBuffer(): $ByteBufferBuilder$Result;
+        setIndexBuffer(arg0: $ByteBufferBuilder$Result): void;
     }
     export class $SlotAccessor {
     }
     export interface $SlotAccessor {
-        getY(): number;
-        getX(): number;
         setY(arg0: number): void;
+        getX(): number;
         setX(arg0: number): void;
+        getY(): number;
     }
     export class $DelegatingOpsAccessor<T> {
     }

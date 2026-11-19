@@ -11,56 +11,56 @@ declare module "@package/mekanism/api/inventory" {
     export class $IInventorySlot {
     }
     export interface $IInventorySlot extends $INBTSerializable<$CompoundTag>, $IContentsListener {
+        insertItem(arg0: $ItemStack_, arg1: $Action_, arg2: $AutomationType_): $ItemStack;
+        createContainerSlot(): $Slot;
+        extractItem(arg0: number, arg1: $Action_, arg2: $AutomationType_): $ItemStack;
+        isItemValid(arg0: $ItemStack_): boolean;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        setStackSize(arg0: number, arg1: $Action_): number;
+        shrinkStack(arg0: number, arg1: $Action_): number;
         isEmpty(): boolean;
         getCount(): number;
         getStack(): $ItemStack;
-        setStack(arg0: $ItemStack_): void;
         setEmpty(): void;
         getLimit(arg0: $ItemStack_): number;
-        isItemValid(arg0: $ItemStack_): boolean;
-        extractItem(arg0: number, arg1: $Action_, arg2: $AutomationType_): $ItemStack;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
-        insertItem(arg0: $ItemStack_, arg1: $Action_, arg2: $AutomationType_): $ItemStack;
-        createContainerSlot(): $Slot;
-        setStackSize(arg0: number, arg1: $Action_): number;
-        shrinkStack(arg0: number, arg1: $Action_): number;
+        setStack(arg0: $ItemStack_): void;
         growStack(arg0: number, arg1: $Action_): number;
         get count(): number;
     }
     export class $ISidedItemHandler {
     }
     export interface $ISidedItemHandler extends $IItemHandlerModifiable {
-        getStackInSlot(arg0: number, arg1: $Direction_): $ItemStack;
-        getStackInSlot(arg0: number): $ItemStack;
-        isItemValid(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
-        isItemValid(arg0: number, arg1: $ItemStack_): boolean;
-        setStackInSlot(arg0: number, arg1: $ItemStack_): void;
-        setStackInSlot(arg0: number, arg1: $ItemStack_, arg2: $Direction_): void;
-        extractItem(arg0: number, arg1: number, arg2: boolean): $ItemStack;
+        insertItem(arg0: number, arg1: $ItemStack_, arg2: $Direction_, arg3: $Action_): $ItemStack;
+        insertItem(arg0: number, arg1: $ItemStack_, arg2: boolean): $ItemStack;
+        getInventorySideFor(): $Direction;
         extractItem(arg0: number, arg1: number, arg2: $Direction_, arg3: $Action_): $ItemStack;
+        extractItem(arg0: number, arg1: number, arg2: boolean): $ItemStack;
         getSlotLimit(arg0: number, arg1: $Direction_): number;
         getSlotLimit(arg0: number): number;
-        getSlots(arg0: $Direction_): number;
+        isItemValid(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
+        isItemValid(arg0: number, arg1: $ItemStack_): boolean;
+        setStackInSlot(arg0: number, arg1: $ItemStack_, arg2: $Direction_): void;
+        setStackInSlot(arg0: number, arg1: $ItemStack_): void;
+        getStackInSlot(arg0: number, arg1: $Direction_): $ItemStack;
+        getStackInSlot(arg0: number): $ItemStack;
         getSlots(): number;
-        insertItem(arg0: number, arg1: $ItemStack_, arg2: boolean): $ItemStack;
-        insertItem(arg0: number, arg1: $ItemStack_, arg2: $Direction_, arg3: $Action_): $ItemStack;
-        getInventorySideFor(): $Direction;
+        getSlots(arg0: $Direction_): number;
         get inventorySideFor(): $Direction;
     }
     export class $IMekanismInventory {
     }
     export interface $IMekanismInventory extends $ISidedItemHandler, $IContentsListener {
-        getStackInSlot(arg0: number, arg1: $Direction_): $ItemStack;
-        isItemValid(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
-        setStackInSlot(arg0: number, arg1: $ItemStack_, arg2: $Direction_): void;
+        insertItem(arg0: number, arg1: $ItemStack_, arg2: $Direction_, arg3: $Action_): $ItemStack;
         extractItem(arg0: number, arg1: number, arg2: $Direction_, arg3: $Action_): $ItemStack;
         getSlotLimit(arg0: number, arg1: $Direction_): number;
+        isItemValid(arg0: number, arg1: $ItemStack_, arg2: $Direction_): boolean;
+        setStackInSlot(arg0: number, arg1: $ItemStack_, arg2: $Direction_): void;
+        getStackInSlot(arg0: number, arg1: $Direction_): $ItemStack;
         getSlots(arg0: $Direction_): number;
-        insertItem(arg0: number, arg1: $ItemStack_, arg2: $Direction_, arg3: $Action_): $ItemStack;
-        getInventorySlots(arg0: $Direction_): $List<$IInventorySlot>;
-        getInventorySlot(arg0: number, arg1: $Direction_): $IInventorySlot;
+        hasInventory(): boolean;
         isInventoryEmpty(arg0: $Direction_): boolean;
         isInventoryEmpty(): boolean;
-        hasInventory(): boolean;
+        getInventorySlots(arg0: $Direction_): $List<$IInventorySlot>;
+        getInventorySlot(arg0: number, arg1: $Direction_): $IInventorySlot;
     }
 }

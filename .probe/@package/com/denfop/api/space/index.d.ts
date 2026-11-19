@@ -15,26 +15,26 @@ declare module "@package/com/denfop/api/space" {
     export class $IPlanet {
     }
     export interface $IPlanet extends $IBody {
+        getLevels(): $EnumLevels;
+        getRing(): $EnumRing;
+        getStar(): $IStar;
+        hasOxygen(): boolean;
+        getSatelliteList(): $List<$ISatellite>;
+        getDistanceFromStar(): number;
+        canHaveColonies(): boolean;
         getResource(): $ResourceLocation;
         getType(): $EnumType;
         getTemperature(): number;
-        getLevels(): $EnumLevels;
-        hasOxygen(): boolean;
-        getRing(): $EnumRing;
-        getSatelliteList(): $List<$ISatellite>;
-        getDistanceFromStar(): number;
         getPressure(): boolean;
-        getStar(): $IStar;
-        canHaveColonies(): boolean;
+        get levels(): $EnumLevels;
+        get ring(): $EnumRing;
+        get star(): $IStar;
+        get satelliteList(): $List<$ISatellite>;
+        get distanceFromStar(): number;
         get resource(): $ResourceLocation;
         get type(): $EnumType;
         get temperature(): number;
-        get levels(): $EnumLevels;
-        get ring(): $EnumRing;
-        get satelliteList(): $List<$ISatellite>;
-        get distanceFromStar(): number;
         get pressure(): boolean;
-        get star(): $IStar;
     }
     export class $EnumLevels extends $Enum<$EnumLevels> {
         static values(): $EnumLevels[];
@@ -55,92 +55,92 @@ declare module "@package/com/denfop/api/space" {
     export class $IStar {
     }
     export interface $IStar extends $IBody {
-        getResource(): $ResourceLocation;
         getAsteroidList(): $List<$IAsteroid>;
         getPlanetList(): $List<$IPlanet>;
-        get resource(): $ResourceLocation;
+        getResource(): $ResourceLocation;
         get asteroidList(): $List<$IAsteroid>;
         get planetList(): $List<$IPlanet>;
+        get resource(): $ResourceLocation;
     }
     export class $ISystem {
     }
     export interface $ISystem {
-        getName(): string;
-        getDistanceFromSolar(): number;
         getStarList(): $List<$IStar>;
-        get name(): string;
-        get distanceFromSolar(): number;
+        getDistanceFromSolar(): number;
+        getName(): string;
         get starList(): $List<$IStar>;
+        get distanceFromSolar(): number;
+        get name(): string;
     }
     export class $IBody {
     }
     export interface $IBody {
+        getSystem(): $ISystem;
+        getDistance(): number;
+        getRotationAngle(): number;
+        getRotationTimeX(arg0: number): number;
+        getOrbitPeriod(): number;
+        getRotationTimeZ(arg0: number): number;
         getSize(): number;
         getName(): string;
         getLocation(): $ResourceLocation;
         getResources(): $List<$IBaseResource>;
-        getDistance(): number;
-        getRotation(arg0: number): number;
         getTemperature(): number;
-        getSystem(): $ISystem;
-        getRotationAngle(): number;
-        getRotationTimeZ(arg0: number): number;
-        getOrbitPeriod(): number;
-        getRotationTimeX(arg0: number): number;
+        getRotation(arg0: number): number;
+        get system(): $ISystem;
+        get distance(): number;
+        get rotationAngle(): number;
+        get orbitPeriod(): number;
         get size(): number;
         get name(): string;
         get location(): $ResourceLocation;
         get resources(): $List<$IBaseResource>;
-        get distance(): number;
         get temperature(): number;
-        get system(): $ISystem;
-        get rotationAngle(): number;
-        get orbitPeriod(): number;
     }
     export class $IAsteroid {
     }
     export interface $IAsteroid extends $IBody {
+        getLevels(): $EnumLevels;
+        getStar(): $IStar;
+        getMaxDistance(): number;
+        getDistanceFromStar(): number;
+        getMinDistance(): number;
+        canHaveColonies(): boolean;
+        getMiniAsteroid(): $List<$MiniAsteroid>;
         getResource(): $ResourceLocation;
         getResources(): $List<$IBaseResource>;
         getType(): $EnumType;
         getTemperature(): number;
-        getLevels(): $EnumLevels;
-        getDistanceFromStar(): number;
-        getMaxDistance(): number;
-        getStar(): $IStar;
-        getMinDistance(): number;
-        canHaveColonies(): boolean;
-        getMiniAsteroid(): $List<$MiniAsteroid>;
+        get levels(): $EnumLevels;
+        get star(): $IStar;
+        get maxDistance(): number;
+        get distanceFromStar(): number;
+        get minDistance(): number;
+        get miniAsteroid(): $List<$MiniAsteroid>;
         get resource(): $ResourceLocation;
         get resources(): $List<$IBaseResource>;
         get type(): $EnumType;
         get temperature(): number;
-        get levels(): $EnumLevels;
-        get distanceFromStar(): number;
-        get maxDistance(): number;
-        get star(): $IStar;
-        get minDistance(): number;
-        get miniAsteroid(): $List<$MiniAsteroid>;
     }
     export class $IBaseResource {
     }
     export interface $IBaseResource {
-        getItemStack(): $ItemStack;
-        getBody(): $IBody;
-        getChance(): number;
         getFluidStack(): $FluidStack;
-        getTypeRovers(): $EnumTypeRovers;
         getMaxChance(): number;
+        getTypeRovers(): $EnumTypeRovers;
         getPercentPanel(): number;
         writeNBTTag(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $CompoundTag;
         getPercentResearchBody(): number;
-        get itemStack(): $ItemStack;
-        get body(): $IBody;
-        get chance(): number;
+        getItemStack(): $ItemStack;
+        getChance(): number;
+        getBody(): $IBody;
         get fluidStack(): $FluidStack;
-        get typeRovers(): $EnumTypeRovers;
         get maxChance(): number;
+        get typeRovers(): $EnumTypeRovers;
         get percentPanel(): number;
         get percentResearchBody(): number;
+        get itemStack(): $ItemStack;
+        get chance(): number;
+        get body(): $IBody;
     }
 }

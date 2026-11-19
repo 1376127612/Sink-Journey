@@ -18,8 +18,8 @@ declare module "@package/cpw/mods/jarhandling" {
         uri(): $URI;
         open(arg0: string): ($InputStream) | undefined;
         getManifest(): $Manifest;
-        verifyAndGetSigners(arg0: string, arg1: number[]): $CodeSigner[];
         findFile(arg0: string): ($URI) | undefined;
+        verifyAndGetSigners(arg0: string, arg1: number[]): $CodeSigner[];
         get manifest(): $Manifest;
     }
     export class $JarMetadata {
@@ -49,13 +49,13 @@ declare module "@package/cpw/mods/jarhandling" {
         name(): string;
         close(): void;
         getPath(arg0: string, ...arg1: string[]): $Path;
-        moduleDataProvider(): $SecureJar$ModuleDataProvider;
         getPrimaryPath(): $Path;
-        getTrustedManifestEntries(arg0: string): $Attributes;
+        moduleDataProvider(): $SecureJar$ModuleDataProvider;
         verifyPath(arg0: $Path_): $SecureJar$Status;
-        getManifestSigners(): $CodeSigner[];
-        getFileStatus(arg0: string): $SecureJar$Status;
         hasSecurityData(): boolean;
+        getFileStatus(arg0: string): $SecureJar$Status;
+        getManifestSigners(): $CodeSigner[];
+        getTrustedManifestEntries(arg0: string): $Attributes;
         getRootPath(): $Path;
         get primaryPath(): $Path;
         get manifestSigners(): $CodeSigner[];
@@ -70,8 +70,8 @@ declare module "@package/cpw/mods/jarhandling" {
         getManifest(): $Manifest;
         getPrimaryPath(): $Path;
         getMetaInfServices(): $List<$SecureJar$Provider>;
-        getPackagesExcluding(...arg0: string[]): $Set<string>;
         findFile(arg0: string): ($URI) | undefined;
+        getPackagesExcluding(...arg0: string[]): $Set<string>;
         get packages(): $Set<string>;
         get manifest(): $Manifest;
         get primaryPath(): $Path;
@@ -86,7 +86,7 @@ declare module "@package/cpw/mods/jarhandling" {
     /**
      * Values that may be interpreted as {@link $SecureJar$Provider}.
      */
-    export type $SecureJar$Provider_ = { providers?: $List_<string>, serviceName?: string,  } | [providers?: $List_<string>, serviceName?: string, ];
+    export type $SecureJar$Provider_ = { serviceName?: string, providers?: $List_<string>,  } | [serviceName?: string, providers?: $List_<string>, ];
     export class $SecureJar$Status extends $Enum<$SecureJar$Status> {
         static values(): $SecureJar$Status[];
         static valueOf(arg0: string): $SecureJar$Status;

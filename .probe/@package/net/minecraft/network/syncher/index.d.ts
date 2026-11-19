@@ -33,8 +33,8 @@ declare module "@package/net/minecraft/network/syncher" {
         static forValueType<T>(arg0: $StreamCodec<$RegistryFriendlyByteBuf, T>): $EntityDataSerializer<T>;
     }
     export interface $EntityDataSerializer<T> {
-        copy(value: T): T;
         codec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
+        copy(value: T): T;
         createAccessor(id: number): $EntityDataAccessor<T>;
     }
     /**
@@ -42,27 +42,27 @@ declare module "@package/net/minecraft/network/syncher" {
      */
     export type $EntityDataSerializer_<T> = RegistryTypes.NeoforgeEntityDataSerializers;
     export class $SynchedEntityData$DataItem<T> {
+        setDirty(dirty: boolean): void;
+        isSetToDefault(): boolean;
         value(): $SynchedEntityData$DataValue<T>;
         getValue(): T;
         setValue(value: T): void;
         getAccessor(): $EntityDataAccessor<T>;
         isDirty(): boolean;
-        setDirty(dirty: boolean): void;
-        isSetToDefault(): boolean;
         constructor(accessor: $EntityDataAccessor_<T>, value: T);
-        get accessor(): $EntityDataAccessor<T>;
         get setToDefault(): boolean;
+        get accessor(): $EntityDataAccessor<T>;
     }
     /**
      * Registry for `EntityDataSerializer`.
      */
     export class $EntityDataSerializers {
+        static getSerializer(id: number): $EntityDataSerializer<never>;
+        static getSerializedId(serializer: $EntityDataSerializer_<never>): number;
         /**
          * @deprecated
          */
         static registerSerializer(serializer: $EntityDataSerializer_<never>): void;
-        static getSerializer(id: number): $EntityDataSerializer<never>;
-        static getSerializedId(serializer: $EntityDataSerializer_<never>): number;
         static FLOAT: $EntityDataSerializer<number>;
         static PARTICLE: $EntityDataSerializer<$ParticleOptions>;
         static PARTICLES: $EntityDataSerializer<$List<$ParticleOptions>>;
@@ -143,14 +143,26 @@ declare module "@package/net/minecraft/network/syncher" {
      */
     export class $SynchedEntityData {
         /**
+         * Gets all data entries which have changed since the last check and clears their dirty flag.
+         */
+        getNonDefaultValues(): $List<$SynchedEntityData$DataValue<never>>;
+        /**
+         * Gets all data entries which have changed since the last check and clears their dirty flag.
+         */
+        packDirty(): $List<$SynchedEntityData$DataValue<never>>;
+        /**
+         * Updates the data using the given entries. Used on the client when the update packet is received.
+         */
+        assignValues(entries: $List_<$SynchedEntityData$DataValue_<never>>): void;
+        /**
          * Get the value of the given key for this entity.
          */
         get<T>(key: $EntityDataAccessor_<T>): T;
+        set<T>(key: $EntityDataAccessor_<T>, value: T, force: boolean): void;
         /**
          * Set the value of the given key for this entity.
          */
         set<T>(key: $EntityDataAccessor_<T>, value: T): void;
-        set<T>(key: $EntityDataAccessor_<T>, value: T, force: boolean): void;
         /**
          * Whether any keys have changed since the last synchronization packet to the client.
          */
@@ -160,19 +172,7 @@ declare module "@package/net/minecraft/network/syncher" {
          * This method must be called during a static initializer of an entity class and the first parameter of this method must be that entity class.
          */
         static defineId<T>(clazz: $Class<$SyncedDataHolder>, serializer: $EntityDataSerializer_<T>): $EntityDataAccessor<T>;
-        /**
-         * Gets all data entries which have changed since the last check and clears their dirty flag.
-         */
-        packDirty(): $List<$SynchedEntityData$DataValue<never>>;
-        /**
-         * Gets all data entries which have changed since the last check and clears their dirty flag.
-         */
-        getNonDefaultValues(): $List<$SynchedEntityData$DataValue<never>>;
-        /**
-         * Updates the data using the given entries. Used on the client when the update packet is received.
-         */
-        assignValues(entries: $List_<$SynchedEntityData$DataValue_<never>>): void;
-        get dirty(): boolean;
         get nonDefaultValues(): $List<$SynchedEntityData$DataValue<never>>;
+        get dirty(): boolean;
     }
 }

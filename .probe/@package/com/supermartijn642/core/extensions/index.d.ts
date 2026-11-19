@@ -16,8 +16,8 @@ declare module "@package/com/supermartijn642/core/extensions" {
     export class $PlayerSkinExtension {
     }
     export interface $PlayerSkinExtension {
-        supermartijn642corelib_getSkin(): $PlayerProfileCache$Skin;
         supermartijn642corelib_setSkin(skin: $PlayerProfileCache$Skin): void;
+        supermartijn642corelib_getSkin(): $PlayerProfileCache$Skin;
     }
     export class $TagLoaderExtension {
     }

@@ -17,47 +17,47 @@ export * as entry from "@package/com/tterrag/registrate/util/entry";
 
 declare module "@package/com/tterrag/registrate/util" {
     export class $CreativeModeTabModifier implements $CreativeModeTab$Output {
-        getParameters(): $CreativeModeTab$ItemDisplayParameters;
-        accept(arg0: $Supplier_<$ItemLike>, arg1: $CreativeModeTab$TabVisibility_): void;
-        accept(arg0: $ItemStack_, arg1: $CreativeModeTab$TabVisibility_): void;
-        accept(arg0: $Supplier_<$ItemLike>): void;
-        getFlags(): $FeatureFlagSet;
         hasPermissions(): boolean;
-        accept(arg0: $ItemLike_): void;
-        accept(arg0: $ItemLike_, arg1: $CreativeModeTab$TabVisibility_): void;
-        accept(arg0: $ItemStack_): void;
+        getParameters(): $CreativeModeTab$ItemDisplayParameters;
+        accept(arg0: $Supplier_<$ItemLike>): void;
+        accept(arg0: $ItemStack_, arg1: $CreativeModeTab$TabVisibility_): void;
+        accept(arg0: $Supplier_<$ItemLike>, arg1: $CreativeModeTab$TabVisibility_): void;
+        getFlags(): $FeatureFlagSet;
         acceptAll(arg0: $Collection_<$ItemStack_>): void;
         acceptAll(arg0: $Collection_<$ItemStack_>, arg1: $CreativeModeTab$TabVisibility_): void;
+        accept(arg0: $ItemLike_): void;
+        accept(arg0: $ItemStack_): void;
+        accept(arg0: $ItemLike_, arg1: $CreativeModeTab$TabVisibility_): void;
         constructor(arg0: $Supplier_<$FeatureFlagSet>, arg1: $BooleanSupplier_, arg2: $BiConsumer_<$ItemStack, $CreativeModeTab$TabVisibility>, arg3: $Supplier_<$CreativeModeTab$ItemDisplayParameters>);
         get parameters(): $CreativeModeTab$ItemDisplayParameters;
         get flags(): $FeatureFlagSet;
     }
     export class $DataIngredient {
+        getCustomIngredient(): $ICustomIngredient;
+        hasNoItems(): boolean;
+        isCustom(): boolean;
+        getStackingIds(): $IntList;
         test(arg0: $ItemStack_): boolean;
         isEmpty(): boolean;
         getId(): $ResourceLocation;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
-        static tag(arg0: $TagKey_<$Item>): $DataIngredient;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
-        isSimple(): boolean;
+        static tag(arg0: $TagKey_<$Item>): $DataIngredient;
         static items<T extends $ItemLike>(arg0: $NonNullSupplier_<T>, ...arg1: $NonNullSupplier_<T>[]): $DataIngredient;
         static items<T extends $ItemLike>(arg0: T, ...arg1: T[]): $DataIngredient;
+        isSimple(): boolean;
         getCriterion(arg0: $RegistrateRecipeProvider): $Criterion<$InventoryChangeTrigger$TriggerInstance>;
         toVanilla(): $Ingredient;
-        static ingredient(arg0: $Ingredient_, arg1: $ItemLike_): $DataIngredient;
-        static ingredient(arg0: $Ingredient_, arg1: $ResourceLocation_, ...arg2: $ItemPredicate_[]): $DataIngredient;
         static ingredient(arg0: $Ingredient_, arg1: $TagKey_<$Item>): $DataIngredient;
+        static ingredient(arg0: $Ingredient_, arg1: $ResourceLocation_, ...arg2: $ItemPredicate_[]): $DataIngredient;
+        static ingredient(arg0: $Ingredient_, arg1: $ItemLike_): $DataIngredient;
         static stacks(arg0: $ItemStack_, ...arg1: $ItemStack_[]): $DataIngredient;
-        isCustom(): boolean;
-        hasNoItems(): boolean;
-        getCustomIngredient(): $ICustomIngredient;
-        getStackingIds(): $IntList;
+        get customIngredient(): $ICustomIngredient;
+        get custom(): boolean;
+        get stackingIds(): $IntList;
         get empty(): boolean;
         get id(): $ResourceLocation;
         get simple(): boolean;
-        get custom(): boolean;
-        get customIngredient(): $ICustomIngredient;
-        get stackingIds(): $IntList;
     }
 }

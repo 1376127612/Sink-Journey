@@ -26,7 +26,7 @@ declare module "@package/com/george_vi/electroenergetics/devices/device" {
     /**
      * Values that may be interpreted as {@link $SimulatedDeviceType}.
      */
-    export type $SimulatedDeviceType_<T> = RegistryTypes.ElectroenergeticsSimulatedDeviceType | { validBlocks?: $Collection_<$Block_>, id?: $ResourceLocation_, factory?: $SimulatedDeviceFactory_<$SimulatedDevice>,  } | [validBlocks?: $Collection_<$Block_>, id?: $ResourceLocation_, factory?: $SimulatedDeviceFactory_<$SimulatedDevice>, ];
+    export type $SimulatedDeviceType_<T> = RegistryTypes.ElectroenergeticsSimulatedDeviceType | { id?: $ResourceLocation_, factory?: $SimulatedDeviceFactory_<$SimulatedDevice>, validBlocks?: $Collection_<$Block_>,  } | [id?: $ResourceLocation_, factory?: $SimulatedDeviceFactory_<$SimulatedDevice>, validBlocks?: $Collection_<$Block_>, ];
     export interface $SimulatedDeviceType<T> extends RegistryMarked<RegistryTypes.ElectroenergeticsSimulatedDeviceTypeTag, RegistryTypes.ElectroenergeticsSimulatedDeviceType> {}
     export class $DevicesSavedData extends $SavedData {
         devicesToAddSable: $Deque<$Pair<$BlockPos, $SimulatedDevice>>;
@@ -35,12 +35,12 @@ declare module "@package/com/george_vi/electroenergetics/devices/device" {
         devicesToInitialize: $Deque<$SimulatedDevice>;
     }
     export class $SimulatedDevice {
+        onDestroy(): void;
         update(): void;
         initialize(): void;
         write(arg0: $CompoundTag_): void;
         read(arg0: $CompoundTag_): void;
         isValid(): boolean;
-        onDestroy(): void;
         shouldRemove(arg0: $BlockState_, arg1: $BlockState_): boolean;
         level: $Level;
         pos: $BlockPos;

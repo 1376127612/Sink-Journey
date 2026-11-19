@@ -1,6 +1,6 @@
 import { $LevelReader } from "@package/net/minecraft/world/level";
 import { $DeferredHolder } from "@package/net/neoforged/neoforge/registries";
-import { $OrBlockPredicate, $AndBlockPredicate, $NoneBlockPredicate, $AnyBlockPredicate, $NotBlockPredicate } from "@package/sirttas/dpanvil/api/predicate/block/logical";
+import { $OrBlockPredicate, $AndBlockPredicate, $NoneBlockPredicate, $NotBlockPredicate, $AnyBlockPredicate } from "@package/sirttas/dpanvil/api/predicate/block/logical";
 import { $TagKey_ } from "@package/net/minecraft/tags";
 import { $FacingBlockPredicate } from "@package/sirttas/dpanvil/api/predicate/block/direction";
 import { $IEventBus } from "@package/net/neoforged/bus/api";
@@ -23,8 +23,8 @@ export * as direction from "@package/sirttas/dpanvil/api/predicate/block/directi
 
 declare module "@package/sirttas/dpanvil/api/predicate/block" {
     export class $BlockPosPredicateType<T extends $IBlockPosPredicate> extends $Record {
-        static register(arg0: $IEventBus): void;
         codec(): $MapCodec<T>;
+        static register(arg0: $IEventBus): void;
         static OR: $DeferredHolder<$BlockPosPredicateType<never>, $BlockPosPredicateType<$OrBlockPredicate>>;
         static MATCH_TAG: $DeferredHolder<$BlockPosPredicateType<never>, $BlockPosPredicateType<$MatchBlockTagPredicate>>;
         static MATCH_BLOCK: $DeferredHolder<$BlockPosPredicateType<never>, $BlockPosPredicateType<$MatchBlockPredicate>>;
@@ -46,26 +46,26 @@ declare module "@package/sirttas/dpanvil/api/predicate/block" {
      */
     export type $BlockPosPredicateType_<T> = RegistryTypes.DpanvilBlockPosPredicate | { codec?: $MapCodec_<$IBlockPosPredicate>,  } | [codec?: $MapCodec_<$IBlockPosPredicate>, ];
     export class $IBlockPosPredicate {
-        static match(arg0: $BlockState_): $IBlockPosPredicate;
-        static match(arg0: $TagKey_<$Block>): $IBlockPosPredicate;
-        static match(...arg0: $Block_[]): $IBlockPosPredicate;
-        static any(): $IBlockPosPredicate;
-        static none(): $IBlockPosPredicate;
         static createOr(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
         static createAnd(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
+        static match(arg0: $TagKey_<$Block>): $IBlockPosPredicate;
+        static match(...arg0: $Block_[]): $IBlockPosPredicate;
+        static match(arg0: $BlockState_): $IBlockPosPredicate;
+        static any(): $IBlockPosPredicate;
+        static none(): $IBlockPosPredicate;
         static CODEC: $Codec<$IBlockPosPredicate>;
     }
     export interface $IBlockPosPredicate {
+        simplify(): $IBlockPosPredicate;
         cache(): $IBlockPosPredicate;
         test(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_ | null): boolean;
-        offset(arg0: $Vec3i): $IBlockPosPredicate;
         offset(arg0: number, arg1: number, arg2: number): $IBlockPosPredicate;
+        offset(arg0: $Vec3i): $IBlockPosPredicate;
         getType(): $BlockPosPredicateType<$IBlockPosPredicate>;
         or(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
         and(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
         not(): $IBlockPosPredicate;
         getTooltip(): $List<$Component>;
-        simplify(): $IBlockPosPredicate;
         get type(): $BlockPosPredicateType<$IBlockPosPredicate>;
         get tooltip(): $List<$Component>;
     }
@@ -73,8 +73,8 @@ declare module "@package/sirttas/dpanvil/api/predicate/block" {
     export class $IBlockStatePredicate {
     }
     export interface $IBlockStatePredicate extends $IBlockPosPredicate {
+        asBlockStatePredicate(): $Predicate<$BlockState>;
         test(arg0: $BlockState_): boolean;
         test(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_ | null): boolean;
-        asBlockStatePredicate(): $Predicate<$BlockState>;
     }
 }

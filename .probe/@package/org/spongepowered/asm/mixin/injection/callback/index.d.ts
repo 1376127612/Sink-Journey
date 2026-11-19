@@ -2,15 +2,15 @@ import { $Type } from "@package/org/objectweb/asm";
 
 declare module "@package/org/spongepowered/asm/mixin/injection/callback" {
     export class $CallbackInfoReturnable<R> extends $CallbackInfo {
-        getReturnValueD(): number;
-        getReturnValueF(): number;
         getReturnValueI(): number;
-        getReturnValueS(): number;
-        getReturnValueC(): string;
+        getReturnValueF(): number;
+        getReturnValueD(): number;
         setReturnValue(arg0: R): void;
-        getReturnValueZ(): boolean;
-        getReturnValueJ(): number;
+        getReturnValueC(): string;
         getReturnValueB(): number;
+        getReturnValueJ(): number;
+        getReturnValueS(): number;
+        getReturnValueZ(): boolean;
         getReturnValue(): R;
         constructor(arg0: string, arg1: boolean, arg2: number);
         constructor(arg0: string, arg1: boolean, arg2: number);
@@ -22,21 +22,21 @@ declare module "@package/org/spongepowered/asm/mixin/injection/callback" {
         constructor(arg0: string, arg1: boolean, arg2: number);
         constructor(arg0: string, arg1: boolean, arg2: string);
         constructor(arg0: string, arg1: boolean, arg2: number);
-        get returnValueD(): number;
-        get returnValueF(): number;
         get returnValueI(): number;
-        get returnValueS(): number;
+        get returnValueF(): number;
+        get returnValueD(): number;
         get returnValueC(): string;
-        get returnValueZ(): boolean;
-        get returnValueJ(): number;
         get returnValueB(): number;
+        get returnValueJ(): number;
+        get returnValueS(): number;
+        get returnValueZ(): boolean;
     }
     export class $CallbackInfo implements $Cancellable {
+        static getCallInfoClassName(arg0: $Type): string;
         getId(): string;
         cancel(): void;
         isCancelled(): boolean;
         isCancellable(): boolean;
-        static getCallInfoClassName(arg0: $Type): string;
         constructor(arg0: string, arg1: boolean);
         get id(): string;
         get cancelled(): boolean;

@@ -20,11 +20,11 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/slot" {
     }
     export class $ItemHandlerSlot extends $Slot {
         getItemHandler(): $IItemHandlerModifiable;
-        addChangeListener(arg0: $Runnable_): $ItemHandlerSlot;
         setCanPlace(arg0: $Predicate_<$ItemStack>): $ItemHandlerSlot;
         getCanPlace(): $Predicate<$ItemStack>;
-        setCanTake(arg0: $Predicate_<$Player>): $ItemHandlerSlot;
+        addChangeListener(arg0: $Runnable_): $ItemHandlerSlot;
         getCanTake(): $Predicate<$Player>;
+        setCanTake(arg0: $Predicate_<$Player>): $ItemHandlerSlot;
         container: $Container;
         x: number;
         index: number;

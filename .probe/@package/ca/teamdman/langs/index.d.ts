@@ -17,9 +17,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$WithDisjunctionContext extends $SFMLParser$WithClauseContext {
-        OR(): $TerminalNode;
-        withClause(arg0: number): $SFMLParser$WithClauseContext;
         withClause(): $List<$SFMLParser$WithClauseContext>;
+        withClause(arg0: number): $SFMLParser$WithClauseContext;
+        OR(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -30,9 +30,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$WithClauseContext);
     }
     export class $SFMLParser$SlotqualifierContext extends $ParserRuleContext {
+        rangeset(): $SFMLParser$RangesetContext;
         SLOT(): $TerminalNode;
         SLOTS(): $TerminalNode;
-        rangeset(): $SFMLParser$RangesetContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -43,11 +43,11 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$TimerTriggerContext extends $SFMLParser$TriggerContext {
+        EVERY(): $TerminalNode;
         block(): $SFMLParser$BlockContext;
         interval(): $SFMLParser$IntervalContext;
         END(): $TerminalNode;
         DO(): $TerminalNode;
-        EVERY(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -58,12 +58,12 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$TriggerContext);
     }
     export class $SFMLParser$PulseTriggerContext extends $SFMLParser$TriggerContext {
-        block(): $SFMLParser$BlockContext;
-        END(): $TerminalNode;
-        DO(): $TerminalNode;
-        PULSE(): $TerminalNode;
         REDSTONE(): $TerminalNode;
         EVERY(): $TerminalNode;
+        block(): $SFMLParser$BlockContext;
+        END(): $TerminalNode;
+        PULSE(): $TerminalNode;
+        DO(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -74,9 +74,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$TriggerContext);
     }
     export class $SFMLParser$BooleanParenContext extends $SFMLParser$BoolexprContext {
-        LPAREN(): $TerminalNode;
-        RPAREN(): $TerminalNode;
         boolexpr(): $SFMLParser$BoolexprContext;
+        RPAREN(): $TerminalNode;
+        LPAREN(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -98,8 +98,8 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$LimitContext);
     }
     export class $SFMLParser$EachSideContext extends $SFMLParser$SidequalifierContext {
-        SIDE(): $TerminalNode;
         EACH(): $TerminalNode;
+        SIDE(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -110,71 +110,71 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$SidequalifierContext);
     }
     export class $SFMLBaseVisitor<T> extends $AbstractParseTreeVisitor<T> implements $SFMLVisitor<T> {
-        visitString(arg0: $SFMLParser$StringContext): T;
         visitStatement(arg0: $SFMLParser$StatementContext): T;
-        visitProgram(arg0: $SFMLParser$ProgramContext): T;
-        visitStringLabel(arg0: $SFMLParser$StringLabelContext): T;
-        visitQuantity(arg0: $SFMLParser$QuantityContext): T;
-        visitSlotqualifier(arg0: $SFMLParser$SlotqualifierContext): T;
-        visitIntervalSpace(arg0: $SFMLParser$IntervalSpaceContext): T;
-        visitRangeset(arg0: $SFMLParser$RangesetContext): T;
-        visitWithParen(arg0: $SFMLParser$WithParenContext): T;
-        visitWithTag(arg0: $SFMLParser$WithTagContext): T;
-        visitBooleanTrue(arg0: $SFMLParser$BooleanTrueContext): T;
-        visitRetention(arg0: $SFMLParser$RetentionContext): T;
-        visitEachSide(arg0: $SFMLParser$EachSideContext): T;
-        visitBooleanHas(arg0: $SFMLParser$BooleanHasContext): T;
-        visitWithNegation(arg0: $SFMLParser$WithNegationContext): T;
-        visitResourceLimit(arg0: $SFMLParser$ResourceLimitContext): T;
-        visitBooleanParen(arg0: $SFMLParser$BooleanParenContext): T;
-        visitTimerTrigger(arg0: $SFMLParser$TimerTriggerContext): T;
-        visitTagMatcher(arg0: $SFMLParser$TagMatcherContext): T;
-        visitIdentifier(arg0: $SFMLParser$IdentifierContext): T;
-        visitLabelAccess(arg0: $SFMLParser$LabelAccessContext): T;
-        visitRoundrobin(arg0: $SFMLParser$RoundrobinContext): T;
-        visitResource(arg0: $SFMLParser$ResourceContext): T;
-        visitEmptyslots(arg0: $SFMLParser$EmptyslotsContext): T;
-        visitIfStatement(arg0: $SFMLParser$IfStatementContext): T;
-        visitComparisonOp(arg0: $SFMLParser$ComparisonOpContext): T;
-        visitPulseTrigger(arg0: $SFMLParser$PulseTriggerContext): T;
-        visitBooleanFalse(arg0: $SFMLParser$BooleanFalseContext): T;
-        visitQuantityLimit(arg0: $SFMLParser$QuantityLimitContext): T;
-        visitListedSides(arg0: $SFMLParser$ListedSidesContext): T;
-        visitRawLabel(arg0: $SFMLParser$RawLabelContext): T;
-        visitSetOp(arg0: $SFMLParser$SetOpContext): T;
-        visitWith(arg0: $SFMLParser$WithContext): T;
-        visitName(arg0: $SFMLParser$NameContext): T;
         visitRange(arg0: $SFMLParser$RangeContext): T;
-        visitSide(arg0: $SFMLParser$SideContext): T;
         visitBlock(arg0: $SFMLParser$BlockContext): T;
-        visitNumber(arg0: $SFMLParser$NumberContext): T;
+        visitString(arg0: $SFMLParser$StringContext): T;
+        visitName(arg0: $SFMLParser$NameContext): T;
+        visitWith(arg0: $SFMLParser$WithContext): T;
+        visitSide(arg0: $SFMLParser$SideContext): T;
+        visitSetOp(arg0: $SFMLParser$SetOpContext): T;
         visitQuantityRetentionLimit(arg0: $SFMLParser$QuantityRetentionLimitContext): T;
-        visitWithDisjunction(arg0: $SFMLParser$WithDisjunctionContext): T;
-        visitWithConjunction(arg0: $SFMLParser$WithConjunctionContext): T;
-        visitOutputStatement(arg0: $SFMLParser$OutputStatementContext): T;
-        visitRetentionLimit(arg0: $SFMLParser$RetentionLimitContext): T;
-        visitBooleanConjunction(arg0: $SFMLParser$BooleanConjunctionContext): T;
-        visitResourceExclusion(arg0: $SFMLParser$ResourceExclusionContext): T;
+        visitProgram(arg0: $SFMLParser$ProgramContext): T;
+        visitNumber(arg0: $SFMLParser$NumberContext): T;
         visitBooleanDisjunction(arg0: $SFMLParser$BooleanDisjunctionContext): T;
-        visitResourceIdList(arg0: $SFMLParser$ResourceIdListContext): T;
-        visitStringResource(arg0: $SFMLParser$StringResourceContext): T;
-        visitForgetStatement(arg0: $SFMLParser$ForgetStatementContext): T;
-        visitOutputResourceLimits(arg0: $SFMLParser$OutputResourceLimitsContext): T;
-        visitBooleanRedstone(arg0: $SFMLParser$BooleanRedstoneContext): T;
-        visitResourceLimitList(arg0: $SFMLParser$ResourceLimitListContext): T;
-        visitBooleanNegation(arg0: $SFMLParser$BooleanNegationContext): T;
+        visitBooleanConjunction(arg0: $SFMLParser$BooleanConjunctionContext): T;
+        visitOutputStatement(arg0: $SFMLParser$OutputStatementContext): T;
+        visitWithDisjunction(arg0: $SFMLParser$WithDisjunctionContext): T;
         visitInputStatement(arg0: $SFMLParser$InputStatementContext): T;
+        visitOutputResourceLimits(arg0: $SFMLParser$OutputResourceLimitsContext): T;
         visitResourceIdDisjunction(arg0: $SFMLParser$ResourceIdDisjunctionContext): T;
+        visitWithConjunction(arg0: $SFMLParser$WithConjunctionContext): T;
+        visitStringResource(arg0: $SFMLParser$StringResourceContext): T;
+        visitBooleanRedstone(arg0: $SFMLParser$BooleanRedstoneContext): T;
         visitIntervalNoSpace(arg0: $SFMLParser$IntervalNoSpaceContext): T;
+        visitRetentionLimit(arg0: $SFMLParser$RetentionLimitContext): T;
+        visitBooleanNegation(arg0: $SFMLParser$BooleanNegationContext): T;
+        visitResourceExclusion(arg0: $SFMLParser$ResourceExclusionContext): T;
+        visitResourceIdList(arg0: $SFMLParser$ResourceIdListContext): T;
+        visitForgetStatement(arg0: $SFMLParser$ForgetStatementContext): T;
         visitInputResourceLimits(arg0: $SFMLParser$InputResourceLimitsContext): T;
+        visitResourceLimitList(arg0: $SFMLParser$ResourceLimitListContext): T;
+        visitRawLabel(arg0: $SFMLParser$RawLabelContext): T;
+        visitTimerTrigger(arg0: $SFMLParser$TimerTriggerContext): T;
+        visitQuantityLimit(arg0: $SFMLParser$QuantityLimitContext): T;
+        visitEmptyslots(arg0: $SFMLParser$EmptyslotsContext): T;
+        visitResourceLimit(arg0: $SFMLParser$ResourceLimitContext): T;
+        visitWithNegation(arg0: $SFMLParser$WithNegationContext): T;
+        visitIfStatement(arg0: $SFMLParser$IfStatementContext): T;
+        visitBooleanFalse(arg0: $SFMLParser$BooleanFalseContext): T;
+        visitWithParen(arg0: $SFMLParser$WithParenContext): T;
+        visitRetention(arg0: $SFMLParser$RetentionContext): T;
+        visitLabelAccess(arg0: $SFMLParser$LabelAccessContext): T;
+        visitComparisonOp(arg0: $SFMLParser$ComparisonOpContext): T;
+        visitWithTag(arg0: $SFMLParser$WithTagContext): T;
+        visitQuantity(arg0: $SFMLParser$QuantityContext): T;
+        visitPulseTrigger(arg0: $SFMLParser$PulseTriggerContext): T;
+        visitBooleanParen(arg0: $SFMLParser$BooleanParenContext): T;
+        visitBooleanTrue(arg0: $SFMLParser$BooleanTrueContext): T;
+        visitEachSide(arg0: $SFMLParser$EachSideContext): T;
+        visitIntervalSpace(arg0: $SFMLParser$IntervalSpaceContext): T;
+        visitStringLabel(arg0: $SFMLParser$StringLabelContext): T;
+        visitSlotqualifier(arg0: $SFMLParser$SlotqualifierContext): T;
+        visitResource(arg0: $SFMLParser$ResourceContext): T;
+        visitRangeset(arg0: $SFMLParser$RangesetContext): T;
+        visitBooleanHas(arg0: $SFMLParser$BooleanHasContext): T;
+        visitRoundrobin(arg0: $SFMLParser$RoundrobinContext): T;
+        visitListedSides(arg0: $SFMLParser$ListedSidesContext): T;
+        visitIdentifier(arg0: $SFMLParser$IdentifierContext): T;
+        visitTagMatcher(arg0: $SFMLParser$TagMatcherContext): T;
         constructor();
     }
     export class $SFMLParser$TagMatcherContext extends $ParserRuleContext {
+        SLASH(): $List<$TerminalNode>;
+        SLASH(arg0: number): $TerminalNode;
         identifier(): $List<$SFMLParser$IdentifierContext>;
         identifier(arg0: number): $SFMLParser$IdentifierContext;
         COLON(): $TerminalNode;
-        SLASH(): $List<$TerminalNode>;
-        SLASH(arg0: number): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -198,8 +198,8 @@ declare module "@package/ca/teamdman/langs" {
     export class $SFMLParser$ResourceIdListContext extends $ParserRuleContext {
         COMMA(): $List<$TerminalNode>;
         COMMA(arg0: number): $TerminalNode;
-        resourceId(arg0: number): $SFMLParser$ResourceIdContext;
         resourceId(): $List<$SFMLParser$ResourceIdContext>;
+        resourceId(arg0: number): $SFMLParser$ResourceIdContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -244,8 +244,8 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$ResourceExclusionContext extends $ParserRuleContext {
-        resourceIdList(): $SFMLParser$ResourceIdListContext;
         EXCEPT(): $TerminalNode;
+        resourceIdList(): $SFMLParser$ResourceIdListContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -258,8 +258,8 @@ declare module "@package/ca/teamdman/langs" {
     export class $SFMLParser$ResourceLimitListContext extends $ParserRuleContext {
         COMMA(): $List<$TerminalNode>;
         COMMA(arg0: number): $TerminalNode;
-        resourceLimit(arg0: number): $SFMLParser$ResourceLimitContext;
         resourceLimit(): $List<$SFMLParser$ResourceLimitContext>;
+        resourceLimit(arg0: number): $SFMLParser$ResourceLimitContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -281,9 +281,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$LimitContext);
     }
     export class $SFMLParser$RetentionContext extends $ParserRuleContext {
+        EACH(): $TerminalNode;
         number(): $SFMLParser$NumberContext;
         RETAIN(): $TerminalNode;
-        EACH(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -294,11 +294,11 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$ListedSidesContext extends $SFMLParser$SidequalifierContext {
+        COMMA(): $List<$TerminalNode>;
+        COMMA(arg0: number): $TerminalNode;
         side(): $List<$SFMLParser$SideContext>;
         side(arg0: number): $SFMLParser$SideContext;
         SIDE(): $TerminalNode;
-        COMMA(arg0: number): $TerminalNode;
-        COMMA(): $List<$TerminalNode>;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -322,63 +322,63 @@ declare module "@package/ca/teamdman/langs" {
     export class $SFMLVisitor<T> {
     }
     export interface $SFMLVisitor<T> extends $ParseTreeVisitor<T> {
-        visitString(arg0: $SFMLParser$StringContext): T;
         visitStatement(arg0: $SFMLParser$StatementContext): T;
-        visitProgram(arg0: $SFMLParser$ProgramContext): T;
-        visitStringLabel(arg0: $SFMLParser$StringLabelContext): T;
-        visitQuantity(arg0: $SFMLParser$QuantityContext): T;
-        visitSlotqualifier(arg0: $SFMLParser$SlotqualifierContext): T;
-        visitIntervalSpace(arg0: $SFMLParser$IntervalSpaceContext): T;
-        visitRangeset(arg0: $SFMLParser$RangesetContext): T;
-        visitWithParen(arg0: $SFMLParser$WithParenContext): T;
-        visitWithTag(arg0: $SFMLParser$WithTagContext): T;
-        visitBooleanTrue(arg0: $SFMLParser$BooleanTrueContext): T;
-        visitRetention(arg0: $SFMLParser$RetentionContext): T;
-        visitEachSide(arg0: $SFMLParser$EachSideContext): T;
-        visitBooleanHas(arg0: $SFMLParser$BooleanHasContext): T;
-        visitWithNegation(arg0: $SFMLParser$WithNegationContext): T;
-        visitResourceLimit(arg0: $SFMLParser$ResourceLimitContext): T;
-        visitBooleanParen(arg0: $SFMLParser$BooleanParenContext): T;
-        visitTimerTrigger(arg0: $SFMLParser$TimerTriggerContext): T;
-        visitTagMatcher(arg0: $SFMLParser$TagMatcherContext): T;
-        visitIdentifier(arg0: $SFMLParser$IdentifierContext): T;
-        visitLabelAccess(arg0: $SFMLParser$LabelAccessContext): T;
-        visitRoundrobin(arg0: $SFMLParser$RoundrobinContext): T;
-        visitResource(arg0: $SFMLParser$ResourceContext): T;
-        visitEmptyslots(arg0: $SFMLParser$EmptyslotsContext): T;
-        visitIfStatement(arg0: $SFMLParser$IfStatementContext): T;
-        visitComparisonOp(arg0: $SFMLParser$ComparisonOpContext): T;
-        visitPulseTrigger(arg0: $SFMLParser$PulseTriggerContext): T;
-        visitBooleanFalse(arg0: $SFMLParser$BooleanFalseContext): T;
-        visitQuantityLimit(arg0: $SFMLParser$QuantityLimitContext): T;
-        visitListedSides(arg0: $SFMLParser$ListedSidesContext): T;
-        visitRawLabel(arg0: $SFMLParser$RawLabelContext): T;
-        visitSetOp(arg0: $SFMLParser$SetOpContext): T;
-        visitWith(arg0: $SFMLParser$WithContext): T;
-        visitName(arg0: $SFMLParser$NameContext): T;
         visitRange(arg0: $SFMLParser$RangeContext): T;
-        visitSide(arg0: $SFMLParser$SideContext): T;
         visitBlock(arg0: $SFMLParser$BlockContext): T;
-        visitNumber(arg0: $SFMLParser$NumberContext): T;
+        visitString(arg0: $SFMLParser$StringContext): T;
+        visitName(arg0: $SFMLParser$NameContext): T;
+        visitWith(arg0: $SFMLParser$WithContext): T;
+        visitSide(arg0: $SFMLParser$SideContext): T;
+        visitSetOp(arg0: $SFMLParser$SetOpContext): T;
         visitQuantityRetentionLimit(arg0: $SFMLParser$QuantityRetentionLimitContext): T;
-        visitWithDisjunction(arg0: $SFMLParser$WithDisjunctionContext): T;
-        visitWithConjunction(arg0: $SFMLParser$WithConjunctionContext): T;
-        visitOutputStatement(arg0: $SFMLParser$OutputStatementContext): T;
-        visitRetentionLimit(arg0: $SFMLParser$RetentionLimitContext): T;
-        visitBooleanConjunction(arg0: $SFMLParser$BooleanConjunctionContext): T;
-        visitResourceExclusion(arg0: $SFMLParser$ResourceExclusionContext): T;
+        visitProgram(arg0: $SFMLParser$ProgramContext): T;
+        visitNumber(arg0: $SFMLParser$NumberContext): T;
         visitBooleanDisjunction(arg0: $SFMLParser$BooleanDisjunctionContext): T;
-        visitResourceIdList(arg0: $SFMLParser$ResourceIdListContext): T;
-        visitStringResource(arg0: $SFMLParser$StringResourceContext): T;
-        visitForgetStatement(arg0: $SFMLParser$ForgetStatementContext): T;
-        visitOutputResourceLimits(arg0: $SFMLParser$OutputResourceLimitsContext): T;
-        visitBooleanRedstone(arg0: $SFMLParser$BooleanRedstoneContext): T;
-        visitResourceLimitList(arg0: $SFMLParser$ResourceLimitListContext): T;
-        visitBooleanNegation(arg0: $SFMLParser$BooleanNegationContext): T;
+        visitBooleanConjunction(arg0: $SFMLParser$BooleanConjunctionContext): T;
+        visitOutputStatement(arg0: $SFMLParser$OutputStatementContext): T;
+        visitWithDisjunction(arg0: $SFMLParser$WithDisjunctionContext): T;
         visitInputStatement(arg0: $SFMLParser$InputStatementContext): T;
+        visitOutputResourceLimits(arg0: $SFMLParser$OutputResourceLimitsContext): T;
         visitResourceIdDisjunction(arg0: $SFMLParser$ResourceIdDisjunctionContext): T;
+        visitWithConjunction(arg0: $SFMLParser$WithConjunctionContext): T;
+        visitStringResource(arg0: $SFMLParser$StringResourceContext): T;
+        visitBooleanRedstone(arg0: $SFMLParser$BooleanRedstoneContext): T;
         visitIntervalNoSpace(arg0: $SFMLParser$IntervalNoSpaceContext): T;
+        visitRetentionLimit(arg0: $SFMLParser$RetentionLimitContext): T;
+        visitBooleanNegation(arg0: $SFMLParser$BooleanNegationContext): T;
+        visitResourceExclusion(arg0: $SFMLParser$ResourceExclusionContext): T;
+        visitResourceIdList(arg0: $SFMLParser$ResourceIdListContext): T;
+        visitForgetStatement(arg0: $SFMLParser$ForgetStatementContext): T;
         visitInputResourceLimits(arg0: $SFMLParser$InputResourceLimitsContext): T;
+        visitResourceLimitList(arg0: $SFMLParser$ResourceLimitListContext): T;
+        visitRawLabel(arg0: $SFMLParser$RawLabelContext): T;
+        visitTimerTrigger(arg0: $SFMLParser$TimerTriggerContext): T;
+        visitQuantityLimit(arg0: $SFMLParser$QuantityLimitContext): T;
+        visitEmptyslots(arg0: $SFMLParser$EmptyslotsContext): T;
+        visitResourceLimit(arg0: $SFMLParser$ResourceLimitContext): T;
+        visitWithNegation(arg0: $SFMLParser$WithNegationContext): T;
+        visitIfStatement(arg0: $SFMLParser$IfStatementContext): T;
+        visitBooleanFalse(arg0: $SFMLParser$BooleanFalseContext): T;
+        visitWithParen(arg0: $SFMLParser$WithParenContext): T;
+        visitRetention(arg0: $SFMLParser$RetentionContext): T;
+        visitLabelAccess(arg0: $SFMLParser$LabelAccessContext): T;
+        visitComparisonOp(arg0: $SFMLParser$ComparisonOpContext): T;
+        visitWithTag(arg0: $SFMLParser$WithTagContext): T;
+        visitQuantity(arg0: $SFMLParser$QuantityContext): T;
+        visitPulseTrigger(arg0: $SFMLParser$PulseTriggerContext): T;
+        visitBooleanParen(arg0: $SFMLParser$BooleanParenContext): T;
+        visitBooleanTrue(arg0: $SFMLParser$BooleanTrueContext): T;
+        visitEachSide(arg0: $SFMLParser$EachSideContext): T;
+        visitIntervalSpace(arg0: $SFMLParser$IntervalSpaceContext): T;
+        visitStringLabel(arg0: $SFMLParser$StringLabelContext): T;
+        visitSlotqualifier(arg0: $SFMLParser$SlotqualifierContext): T;
+        visitResource(arg0: $SFMLParser$ResourceContext): T;
+        visitRangeset(arg0: $SFMLParser$RangesetContext): T;
+        visitBooleanHas(arg0: $SFMLParser$BooleanHasContext): T;
+        visitRoundrobin(arg0: $SFMLParser$RoundrobinContext): T;
+        visitListedSides(arg0: $SFMLParser$ListedSidesContext): T;
+        visitIdentifier(arg0: $SFMLParser$IdentifierContext): T;
+        visitTagMatcher(arg0: $SFMLParser$TagMatcherContext): T;
     }
     export class $SFMLParser$ProgramContext extends $ParserRuleContext {
         name(): $SFMLParser$NameContext;
@@ -395,17 +395,17 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$IdentifierContext extends $ParserRuleContext {
+        REDSTONE(): $TerminalNode;
         SECONDS(): $TerminalNode;
         TOP(): $TerminalNode;
-        GLOBAL(): $TerminalNode;
-        LEFT(): $TerminalNode;
         SECOND(): $TerminalNode;
+        GLOBAL(): $TerminalNode;
         RIGHT(): $TerminalNode;
-        BACK(): $TerminalNode;
         IDENTIFIER(): $TerminalNode;
         BOTTOM(): $TerminalNode;
-        REDSTONE(): $TerminalNode;
+        LEFT(): $TerminalNode;
         FRONT(): $TerminalNode;
+        BACK(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -416,9 +416,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$RangeContext extends $ParserRuleContext {
+        DASH(): $TerminalNode;
         number(): $List<$SFMLParser$NumberContext>;
         number(arg0: number): $SFMLParser$NumberContext;
-        DASH(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -429,10 +429,10 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$RangesetContext extends $ParserRuleContext {
-        range(arg0: number): $SFMLParser$RangeContext;
         range(): $List<$SFMLParser$RangeContext>;
-        COMMA(arg0: number): $TerminalNode;
+        range(arg0: number): $SFMLParser$RangeContext;
         COMMA(): $List<$TerminalNode>;
+        COMMA(arg0: number): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -443,9 +443,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$BooleanDisjunctionContext extends $SFMLParser$BoolexprContext {
-        OR(): $TerminalNode;
-        boolexpr(arg0: number): $SFMLParser$BoolexprContext;
         boolexpr(): $List<$SFMLParser$BoolexprContext>;
+        boolexpr(arg0: number): $SFMLParser$BoolexprContext;
+        OR(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -456,9 +456,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$BoolexprContext);
     }
     export class $SFMLParser$WithParenContext extends $SFMLParser$WithClauseContext {
-        LPAREN(): $TerminalNode;
-        RPAREN(): $TerminalNode;
         withClause(): $SFMLParser$WithClauseContext;
+        RPAREN(): $TerminalNode;
+        LPAREN(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -469,8 +469,8 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$WithClauseContext);
     }
     export class $SFMLParser$StatementContext extends $ParserRuleContext {
-        ifStatement(): $SFMLParser$IfStatementContext;
         outputStatement(): $SFMLParser$OutputStatementContext;
+        ifStatement(): $SFMLParser$IfStatementContext;
         inputStatement(): $SFMLParser$InputStatementContext;
         forgetStatement(): $SFMLParser$ForgetStatementContext;
         exception: $RecognitionException;
@@ -518,17 +518,17 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$IfStatementContext extends $ParserRuleContext {
+        THEN(arg0: number): $TerminalNode;
+        THEN(): $List<$TerminalNode>;
+        boolexpr(): $List<$SFMLParser$BoolexprContext>;
+        boolexpr(arg0: number): $SFMLParser$BoolexprContext;
         block(arg0: number): $SFMLParser$BlockContext;
         block(): $List<$SFMLParser$BlockContext>;
         END(): $TerminalNode;
+        ELSE(): $List<$TerminalNode>;
+        ELSE(arg0: number): $TerminalNode;
         IF(arg0: number): $TerminalNode;
         IF(): $List<$TerminalNode>;
-        ELSE(arg0: number): $TerminalNode;
-        ELSE(): $List<$TerminalNode>;
-        THEN(): $List<$TerminalNode>;
-        THEN(arg0: number): $TerminalNode;
-        boolexpr(): $List<$SFMLParser$BoolexprContext>;
-        boolexpr(arg0: number): $SFMLParser$BoolexprContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -539,11 +539,11 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$ForgetStatementContext extends $ParserRuleContext {
+        FORGET(): $TerminalNode;
         label(arg0: number): $SFMLParser$LabelContext;
         label(): $List<$SFMLParser$LabelContext>;
         COMMA(arg0: number): $TerminalNode;
         COMMA(): $List<$TerminalNode>;
-        FORGET(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -554,12 +554,12 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$IntervalNoSpaceContext extends $SFMLParser$IntervalContext {
+        TICK(): $TerminalNode;
+        TICKS(): $TerminalNode;
         SECONDS(): $TerminalNode;
         PLUS(): $TerminalNode;
-        NUMBER(): $TerminalNode;
         SECOND(): $TerminalNode;
-        TICKS(): $TerminalNode;
-        TICK(): $TerminalNode;
+        NUMBER(): $TerminalNode;
         NUMBER_WITH_G_SUFFIX(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
@@ -606,9 +606,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$BoolexprContext);
     }
     export class $SFMLParser$WithConjunctionContext extends $SFMLParser$WithClauseContext {
-        AND(): $TerminalNode;
-        withClause(arg0: number): $SFMLParser$WithClauseContext;
         withClause(): $List<$SFMLParser$WithClauseContext>;
+        withClause(arg0: number): $SFMLParser$WithClauseContext;
+        AND(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -619,11 +619,11 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$WithClauseContext);
     }
     export class $SFMLParser$RoundrobinContext extends $ParserRuleContext {
+        BLOCK(): $TerminalNode;
+        ROBIN(): $TerminalNode;
         LABEL(): $TerminalNode;
         BY(): $TerminalNode;
-        BLOCK(): $TerminalNode;
         ROUND(): $TerminalNode;
-        ROBIN(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -657,8 +657,8 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$WithNegationContext extends $SFMLParser$WithClauseContext {
-        NOT(): $TerminalNode;
         withClause(): $SFMLParser$WithClauseContext;
+        NOT(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -669,9 +669,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$WithClauseContext);
     }
     export class $SFMLParser$BooleanConjunctionContext extends $SFMLParser$BoolexprContext {
-        AND(): $TerminalNode;
-        boolexpr(arg0: number): $SFMLParser$BoolexprContext;
         boolexpr(): $List<$SFMLParser$BoolexprContext>;
+        boolexpr(arg0: number): $SFMLParser$BoolexprContext;
+        AND(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -695,8 +695,8 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$WithClauseContext);
     }
     export class $SFMLParser$BooleanRedstoneContext extends $SFMLParser$BoolexprContext {
-        number(): $SFMLParser$NumberContext;
         REDSTONE(): $TerminalNode;
+        number(): $SFMLParser$NumberContext;
         comparisonOp(): $SFMLParser$ComparisonOpContext;
         exception: $RecognitionException;
         parent: $RuleContext;
@@ -708,8 +708,8 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$BoolexprContext);
     }
     export class $SFMLParser$BooleanNegationContext extends $SFMLParser$BoolexprContext {
-        NOT(): $TerminalNode;
         boolexpr(): $SFMLParser$BoolexprContext;
+        NOT(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -720,13 +720,13 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$BoolexprContext);
     }
     export class $SFMLParser$LabelAccessContext extends $ParserRuleContext {
+        roundrobin(): $SFMLParser$RoundrobinContext;
         label(): $List<$SFMLParser$LabelContext>;
         label(arg0: number): $SFMLParser$LabelContext;
         COMMA(arg0: number): $TerminalNode;
         COMMA(): $List<$TerminalNode>;
         sidequalifier(): $SFMLParser$SidequalifierContext;
         slotqualifier(): $SFMLParser$SlotqualifierContext;
-        roundrobin(): $SFMLParser$RoundrobinContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -737,16 +737,16 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$ComparisonOpContext extends $ParserRuleContext {
-        LE(): $TerminalNode;
-        GE(): $TerminalNode;
         EQ(): $TerminalNode;
         LT(): $TerminalNode;
         GT(): $TerminalNode;
-        GE_SYMBOL(): $TerminalNode;
-        LE_SYMBOL(): $TerminalNode;
+        LE(): $TerminalNode;
+        GE(): $TerminalNode;
         GT_SYMBOL(): $TerminalNode;
-        EQ_SYMBOL(): $TerminalNode;
         LT_SYMBOL(): $TerminalNode;
+        LE_SYMBOL(): $TerminalNode;
+        GE_SYMBOL(): $TerminalNode;
+        EQ_SYMBOL(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -769,12 +769,12 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$InputStatementContext extends $ParserRuleContext {
-        labelAccess(): $SFMLParser$LabelAccessContext;
-        INPUT(): $TerminalNode;
         FROM(): $TerminalNode;
-        resourceExclusion(): $SFMLParser$ResourceExclusionContext;
         EACH(): $TerminalNode;
+        INPUT(): $TerminalNode;
+        labelAccess(): $SFMLParser$LabelAccessContext;
         inputResourceLimits(): $SFMLParser$InputResourceLimitsContext;
+        resourceExclusion(): $SFMLParser$ResourceExclusionContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -785,17 +785,17 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$SideContext extends $ParserRuleContext {
+        NORTH(): $TerminalNode;
+        SOUTH(): $TerminalNode;
         NULL(): $TerminalNode;
         TOP(): $TerminalNode;
-        WEST(): $TerminalNode;
-        LEFT(): $TerminalNode;
         RIGHT(): $TerminalNode;
         EAST(): $TerminalNode;
-        BACK(): $TerminalNode;
+        WEST(): $TerminalNode;
         BOTTOM(): $TerminalNode;
-        SOUTH(): $TerminalNode;
-        NORTH(): $TerminalNode;
+        LEFT(): $TerminalNode;
         FRONT(): $TerminalNode;
+        BACK(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -806,15 +806,15 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$BooleanHasContext extends $SFMLParser$BoolexprContext {
+        HAS(): $TerminalNode;
+        EXCEPT(): $TerminalNode;
+        setOp(): $SFMLParser$SetOpContext;
         "with"(): $SFMLParser$WithContext;
         number(): $SFMLParser$NumberContext;
         labelAccess(): $SFMLParser$LabelAccessContext;
-        setOp(): $SFMLParser$SetOpContext;
-        HAS(): $TerminalNode;
+        resourceIdDisjunction(): $SFMLParser$ResourceIdDisjunctionContext;
         comparisonOp(): $SFMLParser$ComparisonOpContext;
         resourceIdList(): $SFMLParser$ResourceIdListContext;
-        EXCEPT(): $TerminalNode;
-        resourceIdDisjunction(): $SFMLParser$ResourceIdDisjunctionContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -825,14 +825,14 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$BoolexprContext);
     }
     export class $SFMLParser$IntervalSpaceContext extends $SFMLParser$IntervalContext {
+        TICK(): $TerminalNode;
+        TICKS(): $TerminalNode;
         SECONDS(): $TerminalNode;
         PLUS(): $TerminalNode;
-        GLOBAL(): $TerminalNode;
-        NUMBER(arg0: number): $TerminalNode;
-        NUMBER(): $List<$TerminalNode>;
         SECOND(): $TerminalNode;
-        TICKS(): $TerminalNode;
-        TICK(): $TerminalNode;
+        GLOBAL(): $TerminalNode;
+        NUMBER(): $List<$TerminalNode>;
+        NUMBER(arg0: number): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -843,12 +843,12 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$IntervalContext);
     }
     export class $SFMLParser$SetOpContext extends $ParserRuleContext {
-        ONE(): $TerminalNode;
-        EVERY(): $TerminalNode;
-        SOME(): $TerminalNode;
-        LONE(): $TerminalNode;
-        OVERALL(): $TerminalNode;
         EACH(): $TerminalNode;
+        SOME(): $TerminalNode;
+        EVERY(): $TerminalNode;
+        ONE(): $TerminalNode;
+        OVERALL(): $TerminalNode;
+        LONE(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -860,8 +860,8 @@ declare module "@package/ca/teamdman/langs" {
     }
     export class $SFMLParser$EmptyslotsContext extends $ParserRuleContext {
         EMPTY(): $TerminalNode;
-        IN(): $TerminalNode;
         SLOT(): $TerminalNode;
+        IN(): $TerminalNode;
         SLOTS(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
@@ -910,10 +910,10 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $SFMLParser$ResourceIdContext);
     }
     export class $SFMLParser$ResourceIdDisjunctionContext extends $ParserRuleContext {
-        OR(): $List<$TerminalNode>;
-        OR(arg0: number): $TerminalNode;
-        resourceId(arg0: number): $SFMLParser$ResourceIdContext;
         resourceId(): $List<$SFMLParser$ResourceIdContext>;
+        resourceId(arg0: number): $SFMLParser$ResourceIdContext;
+        OR(arg0: number): $TerminalNode;
+        OR(): $List<$TerminalNode>;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -924,13 +924,13 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$OutputStatementContext extends $ParserRuleContext {
-        labelAccess(): $SFMLParser$LabelAccessContext;
         OUTPUT(): $TerminalNode;
         TO(): $TerminalNode;
-        resourceExclusion(): $SFMLParser$ResourceExclusionContext;
-        emptyslots(): $SFMLParser$EmptyslotsContext;
         EACH(): $TerminalNode;
+        emptyslots(): $SFMLParser$EmptyslotsContext;
+        labelAccess(): $SFMLParser$LabelAccessContext;
         outputResourceLimits(): $SFMLParser$OutputResourceLimitsContext;
+        resourceExclusion(): $SFMLParser$ResourceExclusionContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -941,9 +941,9 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$WithContext extends $ParserRuleContext {
-        WITH(): $TerminalNode;
         withClause(): $SFMLParser$WithClauseContext;
         WITHOUT(): $TerminalNode;
+        WITH(): $TerminalNode;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;
@@ -1000,8 +1000,8 @@ declare module "@package/ca/teamdman/langs" {
         constructor(arg0: $ParserRuleContext, arg1: number);
     }
     export class $SFMLParser$QuantityContext extends $ParserRuleContext {
-        number(): $SFMLParser$NumberContext;
         EACH(): $TerminalNode;
+        number(): $SFMLParser$NumberContext;
         exception: $RecognitionException;
         parent: $RuleContext;
         stop: $Token;

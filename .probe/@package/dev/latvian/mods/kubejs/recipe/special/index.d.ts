@@ -13,11 +13,11 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
     export class $ShapelessKubeJSRecipe extends $ShapelessRecipe implements $KubeJSCraftingRecipe {
-        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$getModifyResult(): string;
         kjs$getIngredientActions(): $List<$IngredientActionHolder>;
-        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
+        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
+        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
         result: $ItemStack;
         ingredients: $NonNullList<$Ingredient>;
         group: string;
@@ -26,16 +26,10 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
     export class $SpecialRecipeSerializerManager implements $KubeEvent {
         reset(): void;
         isSpecial(recipe: $Recipe<never>): boolean;
+        ignoreSpecialMod(modid: string): void;
         addSpecialMod(modid: string): void;
         ignoreSpecialFlag(id: $ResourceLocation_): void;
         addSpecialFlag(id: $ResourceLocation_): void;
-        ignoreSpecialMod(modid: string): void;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -43,17 +37,23 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -73,12 +73,12 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
         constructor();
     }
     export class $ShapedKubeJSRecipe extends $ShapedRecipe implements $KubeJSCraftingRecipe {
-        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
-        kjs$getMirror(): boolean;
         kjs$getModifyResult(): string;
         kjs$getIngredientActions(): $List<$IngredientActionHolder>;
-        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
+        kjs$getMirror(): boolean;
+        getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
         kjs$getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
+        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
         result: $ItemStack;
         pattern: $ShapedRecipePattern;
         constructor(group: string, category: $CraftingBookCategory_, pattern: $ShapedRecipePattern, result: $ItemStack_, showNotification: boolean, mirror: boolean, ingredientActions: $List_<$IngredientActionHolder_>, modifyResult: string);
@@ -89,14 +89,14 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
         static MODIFY_RESULT_KEY: string;
     }
     export interface $KubeJSCraftingRecipe extends $CraftingRecipe {
-        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
         kjs$getModifyResult(): string;
-        kjs$getIngredientActions(): $List<$IngredientActionHolder>;
         kjs$getRemainingItems(input: $CraftingInput): $NonNullList<$ItemStack>;
+        kjs$getIngredientActions(): $List<$IngredientActionHolder>;
+        kjs$assemble(input: $CraftingInput, registryAccess: $HolderLookup$Provider): $ItemStack;
     }
     export class $ShapelessKubeJSRecipe$SerializerKJS implements $RecipeSerializer<$ShapelessKubeJSRecipe> {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ShapelessKubeJSRecipe>;
         codec(): $MapCodec<$ShapelessKubeJSRecipe>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ShapelessKubeJSRecipe>;
         static CODEC: $MapCodec<$ShapelessKubeJSRecipe>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ShapelessKubeJSRecipe>;
         constructor();
@@ -109,8 +109,8 @@ declare module "@package/dev/latvian/mods/kubejs/recipe/special" {
     export interface $RecipeFlags {
     }
     export class $ShapedKubeJSRecipe$SerializerKJS implements $RecipeSerializer<$ShapedKubeJSRecipe> {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ShapedKubeJSRecipe>;
         codec(): $MapCodec<$ShapedKubeJSRecipe>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ShapedKubeJSRecipe>;
         static CODEC: $MapCodec<$ShapedKubeJSRecipe>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ShapedKubeJSRecipe>;
         constructor();

@@ -5,18 +5,18 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/hellfirepvp/astralsorcery/client/resource/query" {
     export class $SpriteSheetQuery extends $TextureQuery {
-        resolveSprite(): $SpriteSheet;
-        getRows(): number;
         getColumns(): number;
+        getRows(): number;
+        resolveSprite(): $SpriteSheet;
         static CODEC: $Codec<$TextureQuery>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $TextureQuery>;
         constructor(arg0: $AssetLocation_, arg1: number, arg2: number, ...arg3: string[]);
-        get rows(): number;
         get columns(): number;
+        get rows(): number;
     }
     export class $TextureQuery {
-        resolve(): $AbstractRenderTexture;
         asSpriteSheet(arg0: number, arg1: number): $SpriteSheetQuery;
+        resolve(): $AbstractRenderTexture;
         static CODEC: $Codec<$TextureQuery>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $TextureQuery>;
         constructor(arg0: $AssetLocation_, ...arg1: string[]);

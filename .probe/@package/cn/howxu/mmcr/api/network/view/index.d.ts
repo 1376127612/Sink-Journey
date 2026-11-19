@@ -7,12 +7,12 @@ import { $Object, $Enum, $Record } from "@package/java/lang";
 
 declare module "@package/cn/howxu/mmcr/api/network/view" {
     export class $RequestBody {
+        toInternal(): $RequestBody$1;
         static fromInternal(body: $RequestBody$1): $RequestBody;
+        bridgeValue(): $Object;
         get(key: string): ($DataValue) | undefined;
         values(): $Map<string, $DataValue>;
         static of(values: $Map_<string, $DataValue>): $RequestBody;
-        toInternal(): $RequestBody$1;
-        bridgeValue(): $Object;
     }
     export class $RequestFailed {
     }
@@ -33,8 +33,8 @@ declare module "@package/cn/howxu/mmcr/api/network/view" {
      */
     export type $RequestProcess_ = ((body: $RequestBody, request: $RequestInfo, senderStorage: $DataStorage, receiverStorage: $DataStorage) => void);
     export class $RequestInfo extends $Record {
-        peer(): $MachineReference;
         requestId(): $ResourceLocation;
+        peer(): $MachineReference;
         constructor(requestId: $ResourceLocation_, peer: $MachineReference_);
     }
     /**
@@ -42,16 +42,16 @@ declare module "@package/cn/howxu/mmcr/api/network/view" {
      */
     export type $RequestInfo_ = { peer?: $MachineReference_, requestId?: $ResourceLocation_,  } | [peer?: $MachineReference_, requestId?: $ResourceLocation_, ];
     export class $NetworkInterfaceReference {
+        bridgeValue(): $Object;
         position(): $BlockPos;
         connections(): $List<$MachineReference>;
-        bridgeValue(): $Object;
     }
     export class $MachineReference extends $Record {
+        toInternal(): $MachineReference$1;
         static fromInternal(reference: $MachineReference_$1): $MachineReference;
+        bridgeValue(): $Object;
         type(): $ResourceLocation;
         hash(): number;
-        toInternal(): $MachineReference$1;
-        bridgeValue(): $Object;
         constructor(type: $ResourceLocation_, hash: number);
     }
     /**

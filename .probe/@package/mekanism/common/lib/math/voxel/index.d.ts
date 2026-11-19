@@ -9,9 +9,9 @@ declare module "@package/mekanism/common/lib/math/voxel" {
     export interface $IShape {
     }
     export class $VoxelCuboid$WallRelative extends $Enum<$VoxelCuboid$WallRelative> {
+        isWall(): boolean;
         static values(): $VoxelCuboid$WallRelative[];
         static valueOf(name: string): $VoxelCuboid$WallRelative;
-        isWall(): boolean;
         isOnCorner(): boolean;
         isOnEdge(): boolean;
         static SIDE: $VoxelCuboid$WallRelative;
@@ -27,32 +27,32 @@ declare module "@package/mekanism/common/lib/math/voxel" {
      */
     export type $VoxelCuboid$WallRelative_ = "side" | "edge" | "corner" | "invalid";
     export class $VoxelPlane {
+        getAxis(): $Structure$Axis;
+        hasFrame(): boolean;
+        getMaxCol(): number;
+        getMinCol(): number;
+        getMinRow(): number;
+        getMaxRow(): number;
         size(): number;
         length(): number;
         merge(other: $VoxelPlane): void;
-        getMinRow(): number;
-        getMinCol(): number;
-        getMaxRow(): number;
         isFull(): boolean;
         height(): number;
-        getAxis(): $Structure$Axis;
-        getMaxCol(): number;
-        hasFrame(): boolean;
         getMissing(): number;
         isOutside(pos: $BlockPos_): boolean;
         constructor(axis: $Structure$Axis_, pos: $BlockPos_, frame: boolean);
-        get minRow(): number;
-        get minCol(): number;
-        get maxRow(): number;
-        get full(): boolean;
         get axis(): $Structure$Axis;
         get maxCol(): number;
+        get minCol(): number;
+        get minRow(): number;
+        get maxRow(): number;
+        get full(): boolean;
         get missing(): number;
     }
     export class $VoxelCuboid$CuboidRelative extends $Enum<$VoxelCuboid$CuboidRelative> {
+        isWall(): boolean;
         static values(): $VoxelCuboid$CuboidRelative[];
         static valueOf(name: string): $VoxelCuboid$CuboidRelative;
-        isWall(): boolean;
         static WALLS: $VoxelCuboid$CuboidRelative;
         static OUTSIDE: $VoxelCuboid$CuboidRelative;
         static INSIDE: $VoxelCuboid$CuboidRelative;
@@ -63,26 +63,26 @@ declare module "@package/mekanism/common/lib/math/voxel" {
      */
     export type $VoxelCuboid$CuboidRelative_ = "inside" | "outside" | "walls";
     export class $VoxelCuboid implements $IShape {
-        length(): number;
-        static from(p1: $VoxelPlane, p2: $VoxelPlane, p1Pos: number, p2Pos: number): $VoxelCuboid;
+        getMaxPos(): $BlockPos;
+        getRelativeLocation(pos: $BlockPos_): $VoxelCuboid$CuboidRelative;
+        getWallRelative(pos: $BlockPos_): $VoxelCuboid$WallRelative;
+        greaterOrEqual(other: $VoxelCuboid): boolean;
         isOnSide(pos: $BlockPos_): boolean;
+        asAABB(): $AABB;
         setMinPos(minPos: $BlockPos_): void;
         setMaxPos(maxPos: $BlockPos_): void;
-        getSide(pos: $BlockPos_): $Direction;
+        length(): number;
+        static from(p1: $VoxelPlane, p2: $VoxelPlane, p1Pos: number, p2Pos: number): $VoxelCuboid;
         width(): number;
-        height(): number;
-        getMaxPos(): $BlockPos;
         getMatches(pos: $BlockPos_): number;
-        getCenter(): $BlockPos;
-        greaterOrEqual(other: $VoxelCuboid): boolean;
-        getRelativeLocation(pos: $BlockPos_): $VoxelCuboid$CuboidRelative;
-        isOnCorner(pos: $BlockPos_): boolean;
         getMinPos(): $BlockPos;
-        getWallRelative(pos: $BlockPos_): $VoxelCuboid$WallRelative;
+        isOnCorner(pos: $BlockPos_): boolean;
         isOnEdge(pos: $BlockPos_): boolean;
-        asAABB(): $AABB;
-        constructor(minPos: $BlockPos_, maxPos: $BlockPos_);
+        getSide(pos: $BlockPos_): $Direction;
+        height(): number;
+        getCenter(): $BlockPos;
         constructor(length: number, height: number, width: number);
+        constructor(minPos: $BlockPos_, maxPos: $BlockPos_);
         get center(): $BlockPos;
     }
 }

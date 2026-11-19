@@ -13,29 +13,29 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 declare module "@package/com/simibubi/create/content/logistics/item/filter/attribute" {
     export interface $ItemAttributeType extends RegistryMarked<RegistryTypes.CreateItemAttributeTypeTag, RegistryTypes.CreateItemAttributeType> {}
     export class $ItemAttribute {
-        static saveStatic(arg0: $ItemAttribute, arg1: $HolderLookup$Provider): $CompoundTag;
         static loadStatic(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): $ItemAttribute;
         static getAllAttributes(arg0: $ItemStack_, arg1: $Level_): $List<$ItemAttribute>;
+        static saveStatic(arg0: $ItemAttribute, arg1: $HolderLookup$Provider): $CompoundTag;
         static CODEC: $Codec<$ItemAttribute>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ItemAttribute>;
     }
     export interface $ItemAttribute {
-        format(arg0: boolean): $MutableComponent;
-        getType(): $ItemAttributeType;
-        getTranslationParameters(): $Object[];
         getTranslationKey(): string;
         appliesTo(arg0: $ItemStack_, arg1: $Level_): boolean;
-        get type(): $ItemAttributeType;
-        get translationParameters(): $Object[];
+        getTranslationParameters(): $Object[];
+        format(arg0: boolean): $MutableComponent;
+        getType(): $ItemAttributeType;
         get translationKey(): string;
+        get translationParameters(): $Object[];
+        get type(): $ItemAttributeType;
     }
     export class $ItemAttributeType {
     }
     export interface $ItemAttributeType {
-        createAttribute(): $ItemAttribute;
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ItemAttribute>;
         codec(): $MapCodec<$ItemAttribute>;
         getAllAttributes(arg0: $ItemStack_, arg1: $Level_): $List<$ItemAttribute>;
+        createAttribute(): $ItemAttribute;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ItemAttribute>;
     }
     /**
      * Values that may be interpreted as {@link $ItemAttributeType}.

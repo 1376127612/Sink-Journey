@@ -4,21 +4,21 @@ import { $ModConfigSpec$Builder, $ModConfigSpec$ConfigValue } from "@package/net
 
 declare module "@package/mekanism/common/config/value" {
     export class $CachedValue<T> {
+        removeInvalidationListener(listener: $CachedValue$IConfigValueInvalidationListener): void;
+        hasInvalidationListeners(): boolean;
+        removeInvalidationListenersMatching<DATA>(data: DATA, checker: $BiPredicate_<$CachedValue$IConfigValueInvalidationListener, DATA>): void;
         clearCache(unloading: boolean): void;
         addInvalidationListener(listener: $CachedValue$IConfigValueInvalidationListener): void;
-        removeInvalidationListenersMatching<DATA>(data: DATA, checker: $BiPredicate_<$CachedValue$IConfigValueInvalidationListener, DATA>): void;
-        hasInvalidationListeners(): boolean;
-        removeInvalidationListener(listener: $CachedValue$IConfigValueInvalidationListener): void;
     }
     export class $CachedLongValue extends $CachedValue<number> implements $LongSupplier {
+        static definePositive(config: $IMekanismConfig, builder: $ModConfigSpec$Builder, comment: $IConfigTranslation, path: string, defaultValue: number): $CachedLongValue;
         get(): number;
         static wrap(config: $IMekanismConfig, internal: $ModConfigSpec$ConfigValue<number>): $CachedLongValue;
         set(value: number): void;
         getOrDefault(): number;
-        static define(config: $IMekanismConfig, builder: $ModConfigSpec$Builder, comment: $IConfigTranslation, path: string, defaultValue: number, min: number, max: number): $CachedLongValue;
         getAsLong(): number;
+        static define(config: $IMekanismConfig, builder: $ModConfigSpec$Builder, comment: $IConfigTranslation, path: string, defaultValue: number, min: number, max: number): $CachedLongValue;
         static definedMin(config: $IMekanismConfig, builder: $ModConfigSpec$Builder, comment: $IConfigTranslation, path: string, defaultValue: number, min: number): $CachedLongValue;
-        static definePositive(config: $IMekanismConfig, builder: $ModConfigSpec$Builder, comment: $IConfigTranslation, path: string, defaultValue: number): $CachedLongValue;
         get orDefault(): number;
         get asLong(): number;
     }

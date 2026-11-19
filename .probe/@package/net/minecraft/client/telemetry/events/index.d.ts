@@ -7,11 +7,11 @@ import { $Stopwatch } from "@package/com/google/common/base";
 
 declare module "@package/net/minecraft/client/telemetry/events" {
     export class $GameLoadTimesEvent {
+        setBootstrapTime(bootstrapTime: number): void;
         send(sender: $TelemetryEventSender_): void;
+        endStep(measurement: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
         beginStep(measurement: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>, stopwatch: $Stopwatch): void;
         beginStep(measurement: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
-        endStep(measurement: $TelemetryProperty_<$GameLoadTimesEvent$Measurement_>): void;
-        setBootstrapTime(bootstrapTime: number): void;
         static INSTANCE: $GameLoadTimesEvent;
         set bootstrapTime(value: number);
     }
@@ -20,20 +20,20 @@ declare module "@package/net/minecraft/client/telemetry/events" {
         constructor(newWorld: boolean, wordLoadDuration: $Duration_ | null);
     }
     export class $WorldUnloadEvent {
+        onPlayerInfoReceived(): void;
         setTime(time: number): void;
         send(sender: $TelemetryEventSender_): void;
-        onPlayerInfoReceived(): void;
         constructor();
         set time(value: number);
     }
     export class $AggregatedTelemetryEvent {
-        takeSample(): void;
+        sendEvent(sender: $TelemetryEventSender_): void;
         shouldSentEvent(): boolean;
         shouldTakeSample(): boolean;
         start(): void;
         stop(): void;
         tick(sender: $TelemetryEventSender_): void;
-        sendEvent(sender: $TelemetryEventSender_): void;
+        takeSample(): void;
         constructor();
     }
     export class $GameLoadTimesEvent$Measurement extends $Record {
@@ -49,10 +49,10 @@ declare module "@package/net/minecraft/client/telemetry/events" {
         constructor();
     }
     export class $WorldLoadEvent {
+        addProperties(builder: $TelemetryPropertyMap$Builder): void;
         setServerBrand(minigameName: string): void;
         send(sender: $TelemetryEventSender_): boolean;
         setGameMode(gameMode: $GameType_, isHardcore: boolean): void;
-        addProperties(builder: $TelemetryPropertyMap$Builder): void;
         constructor(minigameName: string | null);
         set serverBrand(value: string);
     }

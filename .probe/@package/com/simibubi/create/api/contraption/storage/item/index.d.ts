@@ -31,40 +31,40 @@ declare module "@package/com/simibubi/create/api/contraption/storage/item" {
     }
     export interface $MountedItemStorageType<T> extends RegistryMarked<RegistryTypes.CreateMountedItemStorageTypeTag, RegistryTypes.CreateMountedItemStorageType> {}
     export class $MountedItemStorage implements $IItemHandlerModifiable {
-        unmount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): void;
         handleInteraction(arg0: $ServerPlayer, arg1: $Contraption, arg2: $StructureTemplate$StructureBlockInfo_): boolean;
+        unmount(arg0: $Level_, arg1: $BlockState_, arg2: $BlockPos_, arg3: $BlockEntity): void;
         kjs$isMutable(): boolean;
         kjs$setStackInSlot(slot: number, stack: $ItemStack_): void;
         kjs$self(): $IItemHandler;
         kjs$getBlock(level: $Level_): $LevelBlock;
+        find(): number;
+        find(match: $ItemPredicate_): number;
+        count(match: $ItemPredicate_): number;
+        count(): number;
+        clear(): void;
+        clear(match: $ItemPredicate_): void;
+        isEmpty(): boolean;
+        getHeight(): number;
+        getWidth(): number;
+        setChanged(): void;
+        asContainer(): $Container;
+        getAllItems(): $List<$ItemStack>;
         insertItem(stack: $ItemStack_, simulate: boolean): $ItemStack;
         countNonEmpty(match: $ItemPredicate_): number;
         countNonEmpty(): number;
-        getWidth(): number;
-        getHeight(): number;
-        asContainer(): $Container;
-        getAllItems(): $List<$ItemStack>;
-        setChanged(): void;
-        isEmpty(): boolean;
-        clear(match: $ItemPredicate_): void;
-        clear(): void;
-        count(match: $ItemPredicate_): number;
-        count(): number;
-        find(): number;
-        find(match: $ItemPredicate_): number;
         getSlots(): number;
         getStackInSlot(slot: number): $ItemStack;
-        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
-        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
         getSlotLimit(slot: number): number;
+        insertItem(slot: number, stack: $ItemStack_, simulate: boolean): $ItemStack;
         isItemValid(slot: number, stack: $ItemStack_): boolean;
+        extractItem(slot: number, amount: number, simulate: boolean): $ItemStack;
         static CODEC: $Codec<$MountedItemStorage>;
         type: $MountedItemStorageType<$MountedItemStorage>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $MountedItemStorage>;
-        get width(): number;
-        get height(): number;
-        get allItems(): $List<$ItemStack>;
         get empty(): boolean;
+        get height(): number;
+        get width(): number;
+        get allItems(): $List<$ItemStack>;
         get slots(): number;
     }
     export class $MountedItemStorageType<T extends $MountedItemStorage> {

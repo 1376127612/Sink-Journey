@@ -7,17 +7,17 @@ declare module "@package/org/cyclops/integrateddynamics/api/path" {
     export class $ISidedPathElement {
     }
     export interface $ISidedPathElement extends $Comparable<$ISidedPathElement> {
-        getSide(): $Direction;
         getPathElement(): $IPathElement;
-        get side(): $Direction;
+        getSide(): $Direction;
         get pathElement(): $IPathElement;
+        get side(): $Direction;
     }
     export class $IPathElement {
     }
     export interface $IPathElement extends $Comparable<$IPathElement> {
-        getPosition(): $DimPos;
         getReachableElements(): $Set<$ISidedPathElement>;
-        get position(): $DimPos;
+        getPosition(): $DimPos;
         get reachableElements(): $Set<$ISidedPathElement>;
+        get position(): $DimPos;
     }
 }

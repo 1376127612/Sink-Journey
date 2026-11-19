@@ -15,20 +15,20 @@ import { $Font } from "@package/net/minecraft/client/gui";
 
 declare module "@package/net/minecraft/client/gui/screens/multiplayer" {
     export class $ServerSelectionList$NetworkServerEntry extends $ServerSelectionList$Entry {
-        getServerNarration(): $Component;
         getServerData(): $LanServer;
-        get serverNarration(): $Component;
+        getServerNarration(): $Component;
         get serverData(): $LanServer;
+        get serverNarration(): $Component;
     }
     export class $ServerSelectionList$Entry extends $ObjectSelectionList$Entry<$ServerSelectionList$Entry> implements $AutoCloseable {
         close(): void;
         constructor();
     }
     export class $JoinMultiplayerScreen extends $Screen {
-        setSelected(selected: $ServerSelectionList$Entry): void;
-        getPinger(): $ServerStatusPinger;
-        getServers(): $ServerList;
         joinSelectedServer(): void;
+        setSelected(selected: $ServerSelectionList$Entry): void;
+        getServers(): $ServerList;
+        getPinger(): $ServerStatusPinger;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static LOWER_ROW_BUTTON_WIDTH: number;
@@ -49,8 +49,8 @@ declare module "@package/net/minecraft/client/gui/screens/multiplayer" {
         font: $Font;
         constructor(lastScreen: $Screen);
         set selected(value: $ServerSelectionList$Entry);
-        get pinger(): $ServerStatusPinger;
         get servers(): $ServerList;
+        get pinger(): $ServerStatusPinger;
     }
     export class $SafetyScreen extends $WarningScreen {
         static MENU_BACKGROUND: $ResourceLocation;
@@ -107,38 +107,50 @@ declare module "@package/net/minecraft/client/gui/screens/multiplayer" {
     export class $ServerLinksScreen$LinkListEntry extends $ContainerObjectSelectionList$Entry<$ServerLinksScreen$LinkListEntry> {
     }
     export class $ServerSelectionList extends $ObjectSelectionList<$ServerSelectionList$Entry> {
-        removed(): void;
-        setSelected(entry: $ServerSelectionList$Entry | null): void;
         updateNetworkServers(lanServers: $List_<$LanServer>): void;
         updateOnlineServers(servers: $ServerList): void;
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        removed(): void;
+        setSelected(entry: $ServerSelectionList$Entry | null): void;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $ServerSelectionList$Entry;
+        height: number;
         constructor(screen: $JoinMultiplayerScreen, minecraft: $Minecraft, width: number, height: number, y: number, itemHeight: number);
         set selected(value: $ServerSelectionList$Entry | null);
     }
     export class $ServerSelectionList$OnlineServerEntry extends $ServerSelectionList$Entry {
-        getServerData(): $ServerData;
         updateServerList(): void;
+        getServerData(): $ServerData;
         get serverData(): $ServerData;
     }
     export class $ServerSelectionList$LANHeader extends $ServerSelectionList$Entry {
         constructor();
     }
     export class $ServerLinksScreen$LinkList extends $ContainerObjectSelectionList<$ServerLinksScreen$LinkListEntry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $ServerLinksScreen$LinkListEntry;
+        height: number;
     }
     export class $ServerLinksScreen extends $Screen {
         static MENU_BACKGROUND: $ResourceLocation;

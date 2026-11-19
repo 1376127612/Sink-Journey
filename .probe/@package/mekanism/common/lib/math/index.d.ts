@@ -7,14 +7,14 @@ declare module "@package/mekanism/common/lib/math" {
     export class $Range3D extends $Record {
         clone(): $Range3D;
         dimension(): $ResourceKey<$Level>;
-        xMin(): number;
-        zMin(): number;
         xMax(): number;
+        zMin(): number;
+        xMin(): number;
         zMax(): number;
         constructor(xMin: number, zMin: number, xMax: number, zMax: number, dimension: $ResourceKey_<$Level>);
     }
     /**
      * Values that may be interpreted as {@link $Range3D}.
      */
-    export type $Range3D_ = { zMax?: number, xMax?: number, zMin?: number, dimension?: $ResourceKey_<$Level>, xMin?: number,  } | [zMax?: number, xMax?: number, zMin?: number, dimension?: $ResourceKey_<$Level>, xMin?: number, ];
+    export type $Range3D_ = { xMax?: number, zMin?: number, dimension?: $ResourceKey_<$Level>, xMin?: number, zMax?: number,  } | [xMax?: number, zMin?: number, dimension?: $ResourceKey_<$Level>, xMin?: number, zMax?: number, ];
 }

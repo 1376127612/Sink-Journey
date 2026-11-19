@@ -12,9 +12,9 @@ declare module "@package/net/minecraft/client/gui/font/glyphs" {
         constructor(x0: number, y0: number, x1: number, y1: number, depth: number, r: number, g: number, b: number, a: number);
     }
     export class $BakedGlyph {
-        render(italic: boolean, x: number, y: number, matrix: $Matrix4f, buffer: $VertexConsumer, red: number, green: number, blue: number, alpha: number, packedLight: number): void;
-        renderType(displayMode: $Font$DisplayMode_): $RenderType;
         renderEffect(effect: $BakedGlyph$Effect, matrix: $Matrix4f, buffer: $VertexConsumer, packedLight: number): void;
+        renderType(displayMode: $Font$DisplayMode_): $RenderType;
+        render(italic: boolean, x: number, y: number, matrix: $Matrix4f, buffer: $VertexConsumer, red: number, green: number, blue: number, alpha: number, packedLight: number): void;
         constructor(renderTypes: $GlyphRenderTypes_, u0: number, u1: number, v0: number, v1: number, left: number, right: number, up: number, down: number);
     }
     export class $SpecialGlyphs$PixelProvider {
@@ -30,12 +30,12 @@ declare module "@package/net/minecraft/client/gui/font/glyphs" {
         constructor();
     }
     export class $SpecialGlyphs extends $Enum<$SpecialGlyphs> implements $GlyphInfo {
-        static values(): $SpecialGlyphs[];
-        static valueOf(arg0: string): $SpecialGlyphs;
         bake(glyphProvider: $Function_<$SheetGlyphInfo, $BakedGlyph>): $BakedGlyph;
         getAdvance(): number;
+        static values(): $SpecialGlyphs[];
+        static valueOf(arg0: string): $SpecialGlyphs;
+        getAdvance(arg0: boolean): number;
         getBoldOffset(): number;
-        getAdvance(bold: boolean): number;
         getShadowOffset(): number;
         static WHITE: $SpecialGlyphs;
         static MISSING: $SpecialGlyphs;

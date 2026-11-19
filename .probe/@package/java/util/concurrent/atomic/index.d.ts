@@ -6,6 +6,7 @@ declare module "@package/java/util/concurrent/atomic" {
     export class $AtomicBoolean implements $Serializable {
         get(): boolean;
         set(arg0: boolean): void;
+        lazySet(arg0: boolean): void;
         getOpaque(): boolean;
         setOpaque(arg0: boolean): void;
         getAcquire(): boolean;
@@ -22,7 +23,6 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetAcquire(arg0: boolean, arg1: boolean): boolean;
         weakCompareAndSetRelease(arg0: boolean, arg1: boolean): boolean;
         getAndSet(arg0: boolean): boolean;
-        lazySet(arg0: boolean): void;
         weakCompareAndSetVolatile(arg0: boolean, arg1: boolean): boolean;
         getPlain(): boolean;
         setPlain(arg0: boolean): void;
@@ -35,6 +35,7 @@ declare module "@package/java/util/concurrent/atomic" {
         get(arg0: number): E;
         length(): number;
         set(arg0: number, arg1: E): void;
+        lazySet(arg0: number, arg1: E): void;
         getOpaque(arg0: number): E;
         setOpaque(arg0: number, arg1: E): void;
         getAcquire(arg0: number): E;
@@ -51,7 +52,6 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetAcquire(arg0: number, arg1: E, arg2: E): boolean;
         weakCompareAndSetRelease(arg0: number, arg1: E, arg2: E): boolean;
         getAndSet(arg0: number, arg1: E): E;
-        lazySet(arg0: number, arg1: E): void;
         weakCompareAndSetVolatile(arg0: number, arg1: E, arg2: E): boolean;
         getAndUpdate(arg0: number, arg1: $UnaryOperator_<E>): E;
         updateAndGet(arg0: number, arg1: $UnaryOperator_<E>): E;
@@ -65,6 +65,7 @@ declare module "@package/java/util/concurrent/atomic" {
     export class $AtomicInteger extends $Number implements $Serializable {
         get(): number;
         set(arg0: number): void;
+        lazySet(arg0: number): void;
         getOpaque(): number;
         setOpaque(arg0: number): void;
         getAcquire(): number;
@@ -82,7 +83,6 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetRelease(arg0: number, arg1: number): boolean;
         getAndSet(arg0: number): number;
         getAndAdd(arg0: number): number;
-        lazySet(arg0: number): void;
         incrementAndGet(): number;
         weakCompareAndSetVolatile(arg0: number, arg1: number): boolean;
         getAndIncrement(): number;
@@ -105,6 +105,7 @@ declare module "@package/java/util/concurrent/atomic" {
     export class $AtomicReference<V> implements $Serializable {
         get(): V;
         set(arg0: V): void;
+        lazySet(arg0: V): void;
         getOpaque(): V;
         setOpaque(arg0: V): void;
         getAcquire(): V;
@@ -121,7 +122,6 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetAcquire(arg0: V, arg1: V): boolean;
         weakCompareAndSetRelease(arg0: V, arg1: V): boolean;
         getAndSet(arg0: V): V;
-        lazySet(arg0: V): void;
         weakCompareAndSetVolatile(arg0: V, arg1: V): boolean;
         getAndUpdate(arg0: $UnaryOperator_<V>): V;
         updateAndGet(arg0: $UnaryOperator_<V>): V;
@@ -137,6 +137,7 @@ declare module "@package/java/util/concurrent/atomic" {
     export class $AtomicLong extends $Number implements $Serializable {
         get(): number;
         set(arg0: number): void;
+        lazySet(arg0: number): void;
         getOpaque(): number;
         setOpaque(arg0: number): void;
         getAcquire(): number;
@@ -154,7 +155,6 @@ declare module "@package/java/util/concurrent/atomic" {
         weakCompareAndSetRelease(arg0: number, arg1: number): boolean;
         getAndSet(arg0: number): number;
         getAndAdd(arg0: number): number;
-        lazySet(arg0: number): void;
         incrementAndGet(): number;
         weakCompareAndSetVolatile(arg0: number, arg1: number): boolean;
         getAndIncrement(): number;

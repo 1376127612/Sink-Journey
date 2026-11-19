@@ -16,10 +16,10 @@ declare module "@package/ca/teamdman/sfm/client/screen/text_editor" {
     export class $ISFMTextEditScreen {
     }
     export interface $ISFMTextEditScreen {
-        openBehaviour(): $ISFMTextEditScreen$OpenBehaviour;
-        openContext(): $ISFMTextEditScreenOpenContext;
         onPreferenceChanged(): void;
         asScreen(): $Screen;
+        openContext(): $ISFMTextEditScreenOpenContext;
+        openBehaviour(): $ISFMTextEditScreen$OpenBehaviour;
     }
     /**
      * Values that may be interpreted as {@link $ISFMTextEditScreen}.

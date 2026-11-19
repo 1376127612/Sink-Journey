@@ -18,12 +18,12 @@ declare module "@package/net/neoforged/neoforge/common/ticket" {
         get tickets(): $Collection<$SimpleTicket<T>>;
     }
     export class $SimpleTicket<T> {
+        setManager(arg0: $ITicketManager<T>, ...arg1: $ITicketManager<T>[]): void;
         matches(arg0: T): boolean;
         validate(): void;
         unload(arg0: $ITicketManager<T>): boolean;
         isValid(): boolean;
         invalidate(): void;
-        setManager(arg0: $ITicketManager<T>, ...arg1: $ITicketManager<T>[]): void;
         constructor();
         get valid(): boolean;
     }

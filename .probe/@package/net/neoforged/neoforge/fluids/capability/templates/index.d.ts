@@ -15,94 +15,94 @@ declare module "@package/net/neoforged/neoforge/fluids/capability/templates" {
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: number);
     }
     export class $FluidTank implements $IFluidHandler, $IFluidTank, $IFluidHandlerModifiable {
+        getTanks(): number;
+        readFromNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $FluidTank;
+        getFluidInTank(arg0: number): $FluidStack;
+        setValidator(arg0: $Predicate_<$FluidStack>): $FluidTank;
+        getFluidAmount(): number;
         isEmpty(): boolean;
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        writeToNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $CompoundTag;
         getSpace(): number;
-        setCapacity(arg0: number): $FluidTank;
-        getCapacity(): number;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        getCapacity(): number;
         getFluid(): $FluidStack;
-        getTanks(): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
-        isFluidValid(arg0: $FluidStack_): boolean;
-        getFluidInTank(arg0: number): $FluidStack;
+        setCapacity(arg0: number): $FluidTank;
         setFluid(arg0: $FluidStack_): void;
         getTankCapacity(arg0: number): number;
-        readFromNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $FluidTank;
-        getFluidAmount(): number;
+        isFluidValid(arg0: $FluidStack_): boolean;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
+        writeToNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): $CompoundTag;
         setFluidInTank(arg0: number, arg1: $FluidStack_): void;
-        setValidator(arg0: $Predicate_<$FluidStack>): $FluidTank;
-        supportsDrain(arg0: number): boolean;
         supportsFill(arg0: number): boolean;
+        supportsDrain(arg0: number): boolean;
         constructor(arg0: number);
         constructor(arg0: number, arg1: $Predicate_<$FluidStack>);
+        get tanks(): number;
+        set validator(value: $Predicate_<$FluidStack>);
+        get fluidAmount(): number;
         get empty(): boolean;
         get space(): number;
-        get tanks(): number;
-        get fluidAmount(): number;
-        set validator(value: $Predicate_<$FluidStack>);
     }
     export class $FluidHandlerItemStack implements $IFluidHandlerItem {
-        canFillFluidType(arg0: $FluidStack_): boolean;
-        canDrainFluidType(arg0: $FluidStack_): boolean;
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        getContainer(): $ItemStack;
-        getFluid(): $FluidStack;
         getTanks(): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         getFluidInTank(arg0: number): $FluidStack;
+        canDrainFluidType(arg0: $FluidStack_): boolean;
+        canFillFluidType(arg0: $FluidStack_): boolean;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        getFluid(): $FluidStack;
+        getContainer(): $ItemStack;
         getTankCapacity(arg0: number): number;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: number);
-        get container(): $ItemStack;
-        get fluid(): $FluidStack;
         get tanks(): number;
+        get fluid(): $FluidStack;
+        get container(): $ItemStack;
     }
     export class $FluidHandlerItemStack$SwapEmpty extends $FluidHandlerItemStack {
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: $ItemStack_, arg3: number);
     }
     export class $EmptyFluidHandler implements $IFluidHandler {
+        getTanks(): number;
+        getFluidInTank(arg0: number): $FluidStack;
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        getTanks(): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
-        getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         static INSTANCE: $EmptyFluidHandler;
         get tanks(): number;
     }
     export class $FluidHandlerItemStackSimple implements $IFluidHandlerItem {
-        canFillFluidType(arg0: $FluidStack_): boolean;
-        canDrainFluidType(arg0: $FluidStack_): boolean;
-        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
-        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        getContainer(): $ItemStack;
-        getFluid(): $FluidStack;
         getTanks(): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         getFluidInTank(arg0: number): $FluidStack;
+        canDrainFluidType(arg0: $FluidStack_): boolean;
+        canFillFluidType(arg0: $FluidStack_): boolean;
+        fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
+        drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
+        getFluid(): $FluidStack;
+        getContainer(): $ItemStack;
         getTankCapacity(arg0: number): number;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: number);
-        get container(): $ItemStack;
-        get fluid(): $FluidStack;
         get tanks(): number;
+        get fluid(): $FluidStack;
+        get container(): $ItemStack;
     }
     export class $FluidHandlerItemStackSimple$Consumable extends $FluidHandlerItemStackSimple {
         constructor(arg0: $Supplier_<$DataComponentType<$SimpleFluidContent>>, arg1: $ItemStack_, arg2: number);
     }
     export class $VoidFluidHandler implements $IFluidHandler {
+        getTanks(): number;
+        getFluidInTank(arg0: number): $FluidStack;
         fill(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): number;
         drain(arg0: $FluidStack_, arg1: $IFluidHandler$FluidAction_): $FluidStack;
         drain(arg0: number, arg1: $IFluidHandler$FluidAction_): $FluidStack;
-        getTanks(): number;
-        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
-        getFluidInTank(arg0: number): $FluidStack;
         getTankCapacity(arg0: number): number;
+        isFluidValid(arg0: number, arg1: $FluidStack_): boolean;
         static INSTANCE: $VoidFluidHandler;
         constructor();
         get tanks(): number;

@@ -10,9 +10,9 @@ export * as compile from "@package/net/caffeinemc/mods/sodium/client/render/chun
 
 declare module "@package/net/caffeinemc/mods/sodium/client/render/chunk" {
     export class $ChunkRenderMatrices extends $Record {
-        static from(arg0: $PoseStack): $ChunkRenderMatrices;
         modelView(): $Matrix4fc;
         projection(): $Matrix4fc;
+        static from(arg0: $PoseStack): $ChunkRenderMatrices;
         constructor(projection: $Matrix4fc, modelView: $Matrix4fc);
     }
     /**

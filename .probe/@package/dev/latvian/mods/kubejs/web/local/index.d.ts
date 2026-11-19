@@ -14,12 +14,12 @@ declare module "@package/dev/latvian/mods/kubejs/web/local" {
         constructor(console: $ConsoleJS);
     }
     export class $KubeJSWeb {
-        static register(registry: $LocalWebServerRegistry): void;
-        static broadcastUpdate(type: string, requiredTag: string, payload: $Supplier_<$JsonElement>): number;
-        static addScriptTypeEndpoints(registry: $ServerRegistry_<$KJSHTTPRequest>, s: $ScriptType_, reload: $Runnable_): void;
-        static serverStarted(instance: $LocalWebServer_): void;
-        static broadcastEvent(handler: $WSHandler_<never, never>, event: string, requiredTag: string, payload: $Supplier_<$JsonElement>): number;
         static registerWithAuth(registry: $LocalWebServerRegistry): void;
+        static addScriptTypeEndpoints(registry: $ServerRegistry_<$KJSHTTPRequest>, s: $ScriptType_, reload: $Runnable_): void;
+        static register(registry: $LocalWebServerRegistry): void;
+        static serverStarted(instance: $LocalWebServer_): void;
+        static broadcastUpdate(type: string, requiredTag: string, payload: $Supplier_<$JsonElement>): number;
+        static broadcastEvent(handler: $WSHandler_<never, never>, event: string, requiredTag: string, payload: $Supplier_<$JsonElement>): number;
         static UPDATES: $WSHandler<$KJSHTTPRequest, $KJSWSSession>;
         constructor();
     }

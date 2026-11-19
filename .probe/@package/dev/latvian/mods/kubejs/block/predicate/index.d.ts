@@ -26,14 +26,14 @@ declare module "@package/dev/latvian/mods/kubejs/block/predicate" {
      */
     export type $BlockPredicate_ = ((block: $LevelBlock) => boolean);
     export class $BlockIDPredicate implements $BlockPredicate {
+        getBlockProperties(): $List<$BlockIDPredicate$PropertyObject>;
         "with"(key: string, value: string): $BlockIDPredicate;
         checkState(state: $BlockState_): boolean;
         check(b: $LevelBlock): boolean;
         getBlockState(): $BlockState;
-        getBlockProperties(): $List<$BlockIDPredicate$PropertyObject>;
         constructor(i: $ResourceLocation_);
-        get blockState(): $BlockState;
         get blockProperties(): $List<$BlockIDPredicate$PropertyObject>;
+        get blockState(): $BlockState;
     }
     export class $BlockEntityPredicate implements $BlockPredicate {
         data(cd: $BlockEntityPredicateDataCheck_): $BlockEntityPredicate;
@@ -48,5 +48,5 @@ declare module "@package/dev/latvian/mods/kubejs/block/predicate" {
     /**
      * Values that may be interpreted as {@link $BlockIDPredicate$PropertyObject}.
      */
-    export type $BlockIDPredicate$PropertyObject_ = { value?: $Object, property?: $Property<never>,  } | [value?: $Object, property?: $Property<never>, ];
+    export type $BlockIDPredicate$PropertyObject_ = { property?: $Property<never>, value?: $Object,  } | [property?: $Property<never>, value?: $Object, ];
 }

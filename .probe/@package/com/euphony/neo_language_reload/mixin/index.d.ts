@@ -13,14 +13,14 @@ declare module "@package/com/euphony/neo_language_reload/mixin" {
     export class $AdvancementWidgetAccessor {
     }
     export interface $AdvancementWidgetAccessor {
-        languagereload_getAdvancement(): $AdvancementNode;
         languagereload_getTab(): $AdvancementTab;
+        languagereload_getDisplay(): $DisplayInfo;
         languagereload_getProgress(): $AdvancementProgress;
         languagereload_getParent(): $AdvancementWidget;
+        languagereload_getChildren(): $List<$AdvancementWidget>;
         languagereload_setChildren(arg0: $List_<$AdvancementWidget>): void;
         languagereload_setParent(arg0: $AdvancementWidget): void;
-        languagereload_getDisplay(): $DisplayInfo;
-        languagereload_getChildren(): $List<$AdvancementWidget>;
+        languagereload_getAdvancement(): $AdvancementNode;
     }
     export class $TextDisplayEntityAccessor {
     }

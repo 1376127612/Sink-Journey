@@ -17,22 +17,22 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 
 declare module "@package/com/nred/nuclearcraft/handler" {
     export class $BasicRecipeHandler<RECIPE extends $BasicRecipe> extends $AbstractRecipeHandler<RECIPE> implements $IRecipeHandler {
-        isValidFluidInput(arg0: $FluidStack_, arg1: $RecipeManager): boolean;
-        isValidFluidInput(arg0: $FluidStack_, arg1: $Level_): boolean;
-        isValidFluidInput(arg0: $RecipeManager, arg1: $FluidStack_, arg2: number, arg3: $List_<$FluidStack_>, arg4: $List_<$ItemStack_>, arg5: $RecipeInfo<$BasicRecipe>, arg6: $Predicate_<$FluidStack>, arg7: $Predicate_<$ItemStack>, arg8: $Predicate_<$FluidStack>, arg9: $Function_<$BasicRecipe, $List<$SizedChanceFluidIngredient>>, arg10: $Function_<$BasicRecipe, $List<$SizedChanceItemIngredient>>): boolean;
-        isValidFluidInput(arg0: $RecipeManager, arg1: $FluidStack_, arg2: number, arg3: $List_<$Tank>, arg4: $List_<$ItemStack_>, arg5: $RecipeInfo<$BasicRecipe> | null): boolean;
-        isValidItemInput(arg0: $ItemStack_, arg1: $Level_): boolean;
-        isValidItemInput(arg0: $RecipeManager, arg1: $ItemStack_, arg2: number, arg3: $List_<$ItemStack_>, arg4: $List_<$FluidStack_>, arg5: $RecipeInfo<$BasicRecipe>, arg6: $Predicate_<$ItemStack>, arg7: $Predicate_<$FluidStack>, arg8: $Predicate_<$ItemStack>, arg9: $Function_<$BasicRecipe, $List<$SizedChanceItemIngredient>>, arg10: $Function_<$BasicRecipe, $List<$SizedChanceFluidIngredient>>): boolean;
-        isValidItemInput(arg0: $RecipeManager, arg1: $ItemStack_, arg2: number, arg3: $List_<$ItemStack_>, arg4: $List_<$Tank>, arg5: $RecipeInfo<$BasicRecipe>): boolean;
-        isValidInput(arg0: $ItemStack_, arg1: $Function_<$BasicRecipe, $List<$SizedChanceItemIngredient>>, arg2: $RecipeManager): boolean;
         isValidInput(arg0: $FluidStack_, arg1: $Function_<$BasicRecipe, $List<$SizedChanceFluidIngredient>>, arg2: $RecipeManager): boolean;
-        getValidFluids(arg0: $RecipeManager): $List<$Set<$ResourceLocation>>;
+        isValidInput(arg0: $ItemStack_, arg1: $Function_<$BasicRecipe, $List<$SizedChanceItemIngredient>>, arg2: $RecipeManager): boolean;
+        isValidItemInput(arg0: $RecipeManager, arg1: $ItemStack_, arg2: number, arg3: $List_<$ItemStack_>, arg4: $List_<$FluidStack_>, arg5: $RecipeInfo<$BasicRecipe>, arg6: $Predicate_<$ItemStack>, arg7: $Predicate_<$FluidStack>, arg8: $Predicate_<$ItemStack>, arg9: $Function_<$BasicRecipe, $List<$SizedChanceItemIngredient>>, arg10: $Function_<$BasicRecipe, $List<$SizedChanceFluidIngredient>>): boolean;
+        isValidItemInput(arg0: $ItemStack_, arg1: $Level_): boolean;
+        isValidItemInput(arg0: $RecipeManager, arg1: $ItemStack_, arg2: number, arg3: $List_<$ItemStack_>, arg4: $List_<$Tank>, arg5: $RecipeInfo<$BasicRecipe>): boolean;
+        isValidFluidInput(arg0: $FluidStack_, arg1: $Level_): boolean;
+        isValidFluidInput(arg0: $RecipeManager, arg1: $FluidStack_, arg2: number, arg3: $List_<$Tank>, arg4: $List_<$ItemStack_>, arg5: $RecipeInfo<$BasicRecipe> | null): boolean;
+        isValidFluidInput(arg0: $RecipeManager, arg1: $FluidStack_, arg2: number, arg3: $List_<$FluidStack_>, arg4: $List_<$ItemStack_>, arg5: $RecipeInfo<$BasicRecipe>, arg6: $Predicate_<$FluidStack>, arg7: $Predicate_<$ItemStack>, arg8: $Predicate_<$FluidStack>, arg9: $Function_<$BasicRecipe, $List<$SizedChanceFluidIngredient>>, arg10: $Function_<$BasicRecipe, $List<$SizedChanceItemIngredient>>): boolean;
+        isValidFluidInput(arg0: $FluidStack_, arg1: $RecipeManager): boolean;
         getValidFluids(arg0: $Level_, arg1: number): $Set<$ResourceLocation>;
-        getItemInputSize(): number;
+        getValidFluids(arg0: $RecipeManager): $List<$Set<$ResourceLocation>>;
         getFluidInputSize(): number;
         getItemOutputSize(): number;
-        getFluidOutputSize(): number;
         setValidFluids(): void;
+        getItemInputSize(): number;
+        getFluidOutputSize(): number;
         fluidInputSize: number;
         itemInputSize: number;
         itemOutputSize: number;
@@ -42,25 +42,25 @@ declare module "@package/com/nred/nuclearcraft/handler" {
         constructor(arg0: string, arg1: number, arg2: number, arg3: number, arg4: number);
     }
     export class $AbstractRecipeHandler<RECIPE extends $BasicRecipe> {
-        getName(): string;
-        init(arg0: $RecipeManager): void;
-        getRecipeList(arg0: $RecipeManager): $List<RECIPE>;
-        getRecipeInfoFromInputs(arg0: $Level_, arg1: $List_<$ItemStack_>, arg2: $List_<$Tank>): $RecipeInfo<RECIPE>;
         postInit(arg0: $RecipeManager): void;
-        getRecipeType(): $RecipeType<RECIPE>;
         setRecipes(arg0: $RecipeManager): void;
-        postReload(arg0: $RecipeManager): void;
+        getRecipeList(arg0: $RecipeManager): $List<RECIPE>;
+        getRecipeType(): $RecipeType<RECIPE>;
+        getRecipeInfoFromInputs(arg0: $Level_, arg1: $List_<$ItemStack_>, arg2: $List_<$Tank>): $RecipeInfo<RECIPE>;
         static getRecipeFromIngredients(arg0: $Level_, arg1: $RecipeType_<$BasicRecipe>, arg2: $List_<$SizedChanceItemIngredient>, arg3: $List_<$SizedChanceFluidIngredient>): $BasicRecipe;
         getRecipeFromIngredients(arg0: $Level_, arg1: $List_<$SizedChanceItemIngredient>, arg2: $List_<$SizedChanceFluidIngredient>): RECIPE;
+        postReload(arg0: $RecipeManager): void;
+        getName(): string;
+        init(arg0: $RecipeManager): void;
         static INVALID: $IntList;
         constructor();
-        get name(): string;
-        get recipeType(): $RecipeType<RECIPE>;
         set recipes(value: $RecipeManager);
+        get recipeType(): $RecipeType<RECIPE>;
+        get name(): string;
     }
     export class $BlockEntityMenuInfo<TILE extends $BlockEntity> {
-        getDisplayName(): $Component;
         createMenu(arg0: number, arg1: $Inventory, arg2: TILE): $AbstractContainerMenu;
+        getDisplayName(): $Component;
         name: string;
         constructor(arg0: string, arg1: $Class<TILE>, arg2: $MenuFunction_<TILE>);
         get displayName(): $Component;

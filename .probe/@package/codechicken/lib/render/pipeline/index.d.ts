@@ -7,13 +7,13 @@ declare module "@package/codechicken/lib/render/pipeline" {
     export class $IVertexSource {
     }
     export interface $IVertexSource {
+        getVertexCount(): number;
+        prepareVertex(arg0: $CCRenderState): void;
         getAttribute<T>(arg0: $AttributeKey<T>): T;
         hasAttribute(arg0: $AttributeKey<never>): boolean;
         getVertices(): $Vertex5[];
-        getVertexCount(): number;
-        prepareVertex(arg0: $CCRenderState): void;
-        get vertices(): $Vertex5[];
         get vertexCount(): number;
+        get vertices(): $Vertex5[];
     }
     export class $VertexAttribute<T> implements $IVertexOperation {
         operationID(): number;
@@ -21,13 +21,13 @@ declare module "@package/codechicken/lib/render/pipeline" {
         constructor(arg0: $AttributeKey<T>);
     }
     export class $CCRenderPipeline {
+        addRequirement(arg0: number): void;
+        operate(): void;
+        setPipeline(...arg0: $IVertexOperation[]): void;
         reset(): void;
         addAttribute(arg0: $VertexAttribute<never>): void;
         addDependency(arg0: $VertexAttribute<never>): void;
         rebuild(): void;
-        operate(): void;
-        addRequirement(arg0: number): void;
-        setPipeline(...arg0: $IVertexOperation[]): void;
         /**
          * @deprecated
          */
@@ -40,8 +40,8 @@ declare module "@package/codechicken/lib/render/pipeline" {
         static operationCount(): number;
     }
     export interface $IVertexOperation {
-        load(arg0: $CCRenderState): boolean;
-        operate(arg0: $CCRenderState): void;
         operationID(): number;
+        operate(arg0: $CCRenderState): void;
+        load(arg0: $CCRenderState): boolean;
     }
 }

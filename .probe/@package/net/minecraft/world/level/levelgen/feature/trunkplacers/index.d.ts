@@ -72,9 +72,9 @@ declare module "@package/net/minecraft/world/level/levelgen/feature/trunkplacers
         constructor(baseHeight: number, heightRandA: number, heightRandB: number);
     }
     export class $TrunkPlacer {
-        isFree(level: $LevelSimulatedReader, pos: $BlockPos_): boolean;
-        placeTrunk(level: $LevelSimulatedReader, blockSetter: $BiConsumer_<$BlockPos, $BlockState>, random: $RandomSource, freeTreeHeight: number, pos: $BlockPos_, config: $TreeConfiguration): $List<$FoliagePlacer$FoliageAttachment>;
         getTreeHeight(random: $RandomSource): number;
+        placeTrunk(level: $LevelSimulatedReader, blockSetter: $BiConsumer_<$BlockPos, $BlockState>, random: $RandomSource, freeTreeHeight: number, pos: $BlockPos_, config: $TreeConfiguration): $List<$FoliagePlacer$FoliageAttachment>;
+        isFree(level: $LevelSimulatedReader, pos: $BlockPos_): boolean;
         static CODEC: $Codec<$TrunkPlacer>;
         static MAX_HEIGHT: number;
         constructor(baseHeight: number, heightRandA: number, heightRandB: number);

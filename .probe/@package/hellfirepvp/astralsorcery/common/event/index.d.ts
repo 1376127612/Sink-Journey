@@ -50,18 +50,18 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         get constellation(): $BaseConstellation;
     }
     export class $ResearchEvent$ResearchTierSet extends $ResearchEvent {
-        getPrevious(): $ResearchTier;
         getTier(): $ResearchTier;
+        getPrevious(): $ResearchTier;
         constructor(arg0: $ServerPlayer, arg1: $PlayerProgress, arg2: $ResearchTier_, arg3: $ResearchTier_);
-        get previous(): $ResearchTier;
         get tier(): $ResearchTier;
+        get previous(): $ResearchTier;
     }
     export class $InventoryChangeEvent extends $PlayerEvent {
-        getPlayer(): $ServerPlayer;
         getNewStack(): $ItemStack;
+        getPlayer(): $ServerPlayer;
         constructor(arg0: $ServerPlayer, arg1: $ItemStack_);
-        get player(): $ServerPlayer;
         get newStack(): $ItemStack;
+        get player(): $ServerPlayer;
     }
     export class $RecipeEvent$Altar$End extends $RecipeEvent$Altar {
         constructor(arg0: $AltarRecipe, arg1: $ActiveAltarRecipe);
@@ -74,31 +74,31 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         constructor(arg0: $RecipeHolder_<$LiquidStarlightRecipe>);
     }
     export class $AttributeEvent$PostProcessModded extends $Event {
+        getOriginalValue(): number;
         getValue(): number;
         setValue(arg0: number): void;
         getType(): $PerkAttributeType;
         getPlayer(): $Player;
-        getOriginalValue(): number;
         constructor(arg0: number, arg1: $PerkAttributeType_, arg2: $Player);
+        get originalValue(): number;
         get type(): $PerkAttributeType;
         get player(): $Player;
-        get originalValue(): number;
     }
     export class $RecipeEvent$Altar$Start extends $RecipeEvent$Altar implements $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $RecipeHolder_<$AltarRecipe>, arg1: $ActiveAltarRecipe);
     }
     export class $CrystalPropertyEvent$Change extends $CrystalPropertyEvent {
-        setResultComponent(arg0: $CrystalAttributesComponent): void;
         getResultComponent(): $CrystalAttributesComponent;
-        getType(): $CrystalPropertyEvent$Change$Type;
-        getSourceComponent(): $CrystalAttributesComponent;
+        setResultComponent(arg0: $CrystalAttributesComponent): void;
         getOriginalResultComponent(): $CrystalAttributesComponent;
+        getSourceComponent(): $CrystalAttributesComponent;
+        getType(): $CrystalPropertyEvent$Change$Type;
         constructor(arg0: $ItemStack_, arg1: $CrystalPropertyEvent$Change$Type_, arg2: $CrystalAttributesComponent, arg3: $CrystalAttributesComponent);
-        get type(): $CrystalPropertyEvent$Change$Type;
-        get sourceComponent(): $CrystalAttributesComponent;
         get originalResultComponent(): $CrystalAttributesComponent;
+        get sourceComponent(): $CrystalAttributesComponent;
+        get type(): $CrystalPropertyEvent$Change$Type;
     }
     export class $ResearchEvent$AttunedConstellationSet extends $ResearchEvent {
         getPrevious(): $BaseConstellation;
@@ -108,8 +108,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         get attunedTo(): $BaseConstellation;
     }
     export class $RecipeEvent$Attunement$Start extends $RecipeEvent$Attunement implements $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $AttunementRecipe<never>, arg1: $AttunementRecipe$Active<never, never>);
     }
     export class $RecipeEvent$FocalTransmutation$End extends $RecipeEvent$FocalTransmutation {
@@ -132,20 +132,20 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         get recipe(): $RecipeHolder<T>;
     }
     export class $RecipeEvent$LiquidStarlight$Start extends $RecipeEvent$LiquidStarlight implements $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $RecipeHolder_<$LiquidStarlightRecipe>);
     }
     export class $CrystalPropertyEvent$Merge extends $CrystalPropertyEvent {
-        setResultComponent(arg0: $CrystalAttributesComponent): void;
         getResultComponent(): $CrystalAttributesComponent;
-        getType(): $CrystalPropertyEvent$Merge$Type;
+        setResultComponent(arg0: $CrystalAttributesComponent): void;
         getOriginalResultComponent(): $CrystalAttributesComponent;
         getSourceComponents(): $List<$CrystalAttributesComponent>;
+        getType(): $CrystalPropertyEvent$Merge$Type;
         constructor(arg0: $ItemStack_, arg1: $CrystalPropertyEvent$Merge$Type_, arg2: $List_<$CrystalAttributesComponent>, arg3: $CrystalAttributesComponent);
-        get type(): $CrystalPropertyEvent$Merge$Type;
         get originalResultComponent(): $CrystalAttributesComponent;
         get sourceComponents(): $List<$CrystalAttributesComponent>;
+        get type(): $CrystalPropertyEvent$Merge$Type;
     }
     export class $RecipeEvent$FocalTransmutation extends $RecipeEvent<$FocalTransmutationRecipe, $FocalTransmutationCraftingInput> {
         getActiveRecipe(): $ActiveFocalTransmutationRecipe;
@@ -163,8 +163,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         get projectile(): $Projectile;
     }
     export class $RecipeEvent$Infusion$Start extends $RecipeEvent$Infusion implements $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $RecipeHolder_<$InfusionRecipe>, arg1: $ActiveInfusionRecipe);
     }
     export class $RecipeEvent$FocalCombine extends $RecipeEvent<$FocalCombineRecipe, $FocalCombineCraftingInput> {
@@ -172,28 +172,28 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         get activeRecipe(): $ActiveFocalCombineRecipe;
     }
     export class $RecipeEvent$Attunement extends $Event {
-        getActiveRecipe(): $AttunementRecipe$Active<never, never>;
         getRecipe(): $AttunementRecipe<never>;
-        get activeRecipe(): $AttunementRecipe$Active<never, never>;
+        getActiveRecipe(): $AttunementRecipe$Active<never, never>;
         get recipe(): $AttunementRecipe<never>;
+        get activeRecipe(): $AttunementRecipe$Active<never, never>;
     }
     export class $ResearchEvent extends $PlayerEvent {
-        getPlayer(): $ServerPlayer;
         getProgress(): $PlayerProgress;
+        getPlayer(): $ServerPlayer;
         constructor(arg0: $ServerPlayer, arg1: $PlayerProgress);
-        get player(): $ServerPlayer;
         get progress(): $PlayerProgress;
+        get player(): $ServerPlayer;
     }
     export class $CrystalPropertyEvent$Split extends $CrystalPropertyEvent {
-        getType(): $CrystalPropertyEvent$Split$Type;
         getSourceComponent(): $CrystalAttributesComponent;
-        getOriginalResultComponents(): $List<$CrystalAttributesComponent>;
         getResultComponents(): $List<$CrystalAttributesComponent>;
         setResultComponents(arg0: $List_<$CrystalAttributesComponent>): void;
+        getOriginalResultComponents(): $List<$CrystalAttributesComponent>;
+        getType(): $CrystalPropertyEvent$Split$Type;
         constructor(arg0: $ItemStack_, arg1: $CrystalPropertyEvent$Split$Type_, arg2: $CrystalAttributesComponent, arg3: $List_<$CrystalAttributesComponent>);
-        get type(): $CrystalPropertyEvent$Split$Type;
         get sourceComponent(): $CrystalAttributesComponent;
         get originalResultComponents(): $List<$CrystalAttributesComponent>;
+        get type(): $CrystalPropertyEvent$Split$Type;
     }
     export class $RecipeEvent$Altar extends $RecipeEvent<$AltarRecipe, $AltarCraftingInput> {
         getActiveRecipe(): $ActiveAltarRecipe;
@@ -205,8 +205,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         get lumen(): $Lumen;
     }
     export class $RecipeEvent$FocalTransmutation$Start extends $RecipeEvent$FocalTransmutation implements $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $ActiveFocalTransmutationRecipe);
     }
     export class $ItemCooldownEvent extends $PlayerEvent {
@@ -238,20 +238,20 @@ declare module "@package/hellfirepvp/astralsorcery/common/event" {
         constructor(arg0: $InfusionRecipe, arg1: $ActiveInfusionRecipe);
     }
     export class $AttributeEvent$PostProcessVanilla extends $Event {
+        resolveAttributeType(): ($PerkAttributeType) | undefined;
+        getOriginalValue(): number;
         getValue(): number;
         getInstance(): $AttributeInstance;
         setValue(arg0: number): void;
         getAttribute(): $Holder<$Attribute>;
-        resolveAttributeType(): ($PerkAttributeType) | undefined;
-        getOriginalValue(): number;
         constructor(arg0: $AttributeInstance, arg1: number);
+        get originalValue(): number;
         get instance(): $AttributeInstance;
         get attribute(): $Holder<$Attribute>;
-        get originalValue(): number;
     }
     export class $RecipeEvent$FocalCombine$Start extends $RecipeEvent$FocalCombine implements $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $ActiveFocalCombineRecipe);
     }
     export class $RecipeEvent$LiquidStarlight extends $RecipeEvent<$LiquidStarlightRecipe, $LiquidStarlightRecipeInput> {

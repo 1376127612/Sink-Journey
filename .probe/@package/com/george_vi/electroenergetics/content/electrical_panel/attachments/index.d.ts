@@ -28,25 +28,25 @@ declare module "@package/com/george_vi/electroenergetics/content/electrical_pane
     export type $PanelAttachmentType$PanelAttachmentFactory_ = ((arg0: $PanelAttachmentType) => $PanelAttachment);
     export class $PanelAttachment {
         transformPose(arg0: $PoseStack, arg1: $ElectricalPanelBlockEntity): void;
+        addToGoggleTooltip(arg0: $ElectricalPanelBlockEntity, arg1: $List_<$Component_>, arg2: boolean): boolean;
+        tickClient(arg0: $ElectricalPanelBlockEntity): void;
+        sendData(): void;
+        onInteract(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $BlockHitResult): $ItemInteractionResult;
+        onInserted(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $BlockHitResult): void;
+        renderLabel(arg0: $ElectricalPanelBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
+        defaultDroppedStack(): $ItemStack;
+        preTick(arg0: $BridgeCollector): void;
+        getNodeLabel(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number): $MutableComponent;
+        getNodeSize(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number): number;
         initialize(): void;
         write(arg0: $CompoundTag_, arg1: boolean, arg2: $HolderLookup$Provider): void;
         read(arg0: $CompoundTag_, arg1: boolean, arg2: $HolderLookup$Provider): void;
-        render(arg0: $ElectricalPanelBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
-        onInserted(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $BlockHitResult): void;
-        defaultDroppedStack(): $ItemStack;
-        preTick(arg0: $BridgeCollector): void;
         postTick(arg0: $SimulationResults): void;
-        onRemoved(arg0: $Player): void;
-        tickClient(arg0: $ElectricalPanelBlockEntity): void;
         addToTooltip(arg0: $ElectricalPanelBlockEntity, arg1: $List_<$Component_>, arg2: boolean): boolean;
+        render(arg0: $ElectricalPanelBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
         getDrops(): $List<$ItemStack>;
         getCenter(): $Vec3;
-        sendData(): void;
-        addToGoggleTooltip(arg0: $ElectricalPanelBlockEntity, arg1: $List_<$Component_>, arg2: boolean): boolean;
-        getNodeSize(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number): number;
-        getNodeLabel(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: number): $MutableComponent;
-        onInteract(arg0: $ItemStack_, arg1: $Player, arg2: $InteractionHand_, arg3: $BlockHitResult): $ItemInteractionResult;
-        renderLabel(arg0: $ElectricalPanelBlockEntity, arg1: number, arg2: $PoseStack, arg3: $MultiBufferSource_, arg4: number, arg5: number): void;
+        onRemoved(arg0: $Player): void;
         nodes: $InWorldNode[];
         panelFacing: $Direction;
         pos: $BlockPos;
@@ -59,8 +59,8 @@ declare module "@package/com/george_vi/electroenergetics/content/electrical_pane
         get center(): $Vec3;
     }
     export class $PanelAttachmentType {
-        createNew(arg0: $BlockPos_, arg1: $InWorldNode[], arg2: $Level_, arg3: $ElectricalPanelSlot_, arg4: $Direction_, arg5: $HolderLookup$Provider): $PanelAttachment;
         static getForItem(arg0: $ItemStack_): $PanelAttachmentType;
+        createNew(arg0: $BlockPos_, arg1: $InWorldNode[], arg2: $Level_, arg3: $ElectricalPanelSlot_, arg4: $Direction_, arg5: $HolderLookup$Provider): $PanelAttachment;
         mode: $PanelAttachmentMode;
         item: $ItemLike;
         constructor(arg0: $PanelAttachmentType$PanelAttachmentFactory_, arg1: $ItemLike_, arg2: $PanelAttachmentMode_);

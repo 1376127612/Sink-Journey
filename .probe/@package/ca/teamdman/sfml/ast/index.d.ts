@@ -12,82 +12,82 @@ import { $ResourceType, $ResourceType_ } from "@package/ca/teamdman/sfm/common/r
 import { $ResourceKey_, $ResourceLocation, $ResourceLocation_ } from "@package/net/minecraft/resources";
 import { $ParserRuleContext } from "@package/org/antlr/v4/runtime";
 import { $Enum, $Record, $Object } from "@package/java/lang";
-import { $SFMLParser$WithParenContext, $SFMLParser$RoundrobinContext, $SFMLParser$WithNegationContext, $SFMLParser$QuantityLimitContext, $SFMLParser$TimerTriggerContext, $SFMLParser$TagMatcherContext, $SFMLParser$RetentionLimitContext, $SFMLParser$ResourceIdDisjunctionContext, $SFMLParser$ResourceIdListContext, $SFMLParser$QuantityRetentionLimitContext, $SFMLParser$EachSideContext, $SFMLParser$OutputStatementContext, $SFMLParser$RawLabelContext, $SFMLParser$StringLabelContext, $SFMLParser$RangeContext, $SFMLParser$ListedSidesContext, $SFMLParser$IntervalNoSpaceContext, $SFMLParser$WithConjunctionContext, $SFMLParser$StringResourceContext, $SFMLBaseVisitor, $SFMLParser$ResourceLimitContext, $SFMLParser$RangesetContext, $SFMLParser$BooleanTrueContext, $SFMLParser$ProgramContext, $SFMLParser$InputResourceLimitsContext, $SFMLParser$WithContext, $SFMLParser$WithDisjunctionContext, $SFMLParser$NumberContext, $SFMLParser$SlotqualifierContext, $SFMLParser$ResourceContext, $SFMLParser$BooleanRedstoneContext, $SFMLParser$BooleanDisjunctionContext, $SFMLParser$SideContext, $SFMLParser$BlockContext, $SFMLParser$RetentionContext, $SFMLParser$NameContext, $SFMLParser$StringContext, $SFMLParser$ResourceExclusionContext, $SFMLParser$ResourceLimitListContext, $SFMLParser$SetOpContext, $SFMLParser$IntervalSpaceContext, $SFMLParser$QuantityContext, $SFMLParser$OutputResourceLimitsContext, $SFMLParser$BooleanParenContext, $SFMLParser$BooleanFalseContext, $SFMLParser$LabelAccessContext, $SFMLParser$IfStatementContext, $SFMLParser$BooleanNegationContext, $SFMLParser$BooleanConjunctionContext, $SFMLParser$ForgetStatementContext, $SFMLParser$InputStatementContext, $SFMLParser$WithTagContext, $SFMLParser$BooleanHasContext, $SFMLParser$PulseTriggerContext, $SFMLParser$ComparisonOpContext } from "@package/ca/teamdman/langs";
+import { $SFMLParser$WithParenContext, $SFMLParser$RoundrobinContext, $SFMLParser$WithNegationContext, $SFMLParser$QuantityLimitContext, $SFMLParser$TimerTriggerContext, $SFMLParser$TagMatcherContext, $SFMLParser$RetentionLimitContext, $SFMLParser$ResourceIdDisjunctionContext, $SFMLParser$ResourceIdListContext, $SFMLParser$QuantityRetentionLimitContext, $SFMLParser$EachSideContext, $SFMLParser$OutputStatementContext, $SFMLParser$RawLabelContext, $SFMLParser$RangeContext, $SFMLParser$StringLabelContext, $SFMLParser$ListedSidesContext, $SFMLParser$IntervalNoSpaceContext, $SFMLParser$WithConjunctionContext, $SFMLParser$StringResourceContext, $SFMLBaseVisitor, $SFMLParser$RangesetContext, $SFMLParser$ResourceLimitContext, $SFMLParser$BooleanTrueContext, $SFMLParser$ProgramContext, $SFMLParser$InputResourceLimitsContext, $SFMLParser$WithContext, $SFMLParser$WithDisjunctionContext, $SFMLParser$NumberContext, $SFMLParser$SlotqualifierContext, $SFMLParser$ResourceContext, $SFMLParser$BooleanRedstoneContext, $SFMLParser$BooleanDisjunctionContext, $SFMLParser$SideContext, $SFMLParser$BlockContext, $SFMLParser$RetentionContext, $SFMLParser$NameContext, $SFMLParser$StringContext, $SFMLParser$ResourceExclusionContext, $SFMLParser$ResourceLimitListContext, $SFMLParser$SetOpContext, $SFMLParser$IntervalSpaceContext, $SFMLParser$QuantityContext, $SFMLParser$OutputResourceLimitsContext, $SFMLParser$BooleanParenContext, $SFMLParser$BooleanFalseContext, $SFMLParser$LabelAccessContext, $SFMLParser$IfStatementContext, $SFMLParser$BooleanNegationContext, $SFMLParser$BooleanConjunctionContext, $SFMLParser$ForgetStatementContext, $SFMLParser$InputStatementContext, $SFMLParser$WithTagContext, $SFMLParser$BooleanHasContext, $SFMLParser$PulseTriggerContext, $SFMLParser$ComparisonOpContext } from "@package/ca/teamdman/langs";
 
 declare module "@package/ca/teamdman/sfml/ast" {
     export class $ASTBuilder extends $SFMLBaseVisitor<$ASTNode> {
         getNodeAtIndex(arg0: number): ($ASTNode) | undefined;
-        visitString(arg0: $SFMLParser$StringContext): $StringHolder;
         getLineColumnForNode(arg0: $ASTNode): string;
-        visitProgram(arg0: $SFMLParser$ProgramContext): $Program;
-        visitStringLabel(arg0: $SFMLParser$StringLabelContext): $Label;
-        visitQuantity(arg0: $SFMLParser$QuantityContext): $ResourceQuantity;
-        visitSlotqualifier(arg0: $SFMLParser$SlotqualifierContext): $NumberRangeSet;
-        visitIntervalSpace(arg0: $SFMLParser$IntervalSpaceContext): $ASTNode;
-        visitRangeset(arg0: $SFMLParser$RangesetContext): $NumberRangeSet;
-        visitWithParen(arg0: $SFMLParser$WithParenContext): $WithParen;
-        visitWithTag(arg0: $SFMLParser$WithTagContext): $WithTag;
-        visitBooleanTrue(arg0: $SFMLParser$BooleanTrueContext): $BoolExpr;
-        visitRetention(arg0: $SFMLParser$RetentionContext): $ResourceQuantity;
-        visitEachSide(arg0: $SFMLParser$EachSideContext): $SideQualifier;
-        visitBooleanHas(arg0: $SFMLParser$BooleanHasContext): $BoolExpr;
-        visitWithNegation(arg0: $SFMLParser$WithNegationContext): $WithNegation;
-        visitResourceLimit(arg0: $SFMLParser$ResourceLimitContext): $ResourceLimit;
-        visitBooleanParen(arg0: $SFMLParser$BooleanParenContext): $BoolExpr;
-        visitTimerTrigger(arg0: $SFMLParser$TimerTriggerContext): $ASTNode;
-        visitTagMatcher(arg0: $SFMLParser$TagMatcherContext): $TagMatcher;
-        visitLabelAccess(arg0: $SFMLParser$LabelAccessContext): $LabelAccess;
-        visitRoundrobin(arg0: $SFMLParser$RoundrobinContext): $RoundRobin;
-        visitResource(arg0: $SFMLParser$ResourceContext): $ASTNode;
-        visitIfStatement(arg0: $SFMLParser$IfStatementContext): $IfStatement;
-        visitComparisonOp(arg0: $SFMLParser$ComparisonOpContext): $ComparisonOperator;
-        visitPulseTrigger(arg0: $SFMLParser$PulseTriggerContext): $ASTNode;
-        visitBooleanFalse(arg0: $SFMLParser$BooleanFalseContext): $BoolExpr;
-        visitQuantityLimit(arg0: $SFMLParser$QuantityLimitContext): $Limit;
-        visitListedSides(arg0: $SFMLParser$ListedSidesContext): $SideQualifier;
-        visitRawLabel(arg0: $SFMLParser$RawLabelContext): $Label;
-        getIndexForNode(arg0: $ASTNode): number;
-        visitSetOp(arg0: $SFMLParser$SetOpContext): $SetOperator;
-        visitWith(arg0: $SFMLParser$WithContext): $ASTNode;
-        visitName(arg0: $SFMLParser$NameContext): $StringHolder;
         visitRange(arg0: $SFMLParser$RangeContext): $NumberRange;
-        visitSide(arg0: $SFMLParser$SideContext): $Side;
         visitBlock(arg0: $SFMLParser$BlockContext): $Block;
-        visitNumber(arg0: $SFMLParser$NumberContext): $Number;
-        visitQuantityRetentionLimit(arg0: $SFMLParser$QuantityRetentionLimitContext): $Limit;
-        setLocationFromOtherNode(arg0: $ASTNode, arg1: $ASTNode): void;
-        visitWithDisjunction(arg0: $SFMLParser$WithDisjunctionContext): $WithDisjunction;
-        visitWithConjunction(arg0: $SFMLParser$WithConjunctionContext): $WithConjunction;
-        visitOutputStatement(arg0: $SFMLParser$OutputStatementContext): $OutputStatement;
-        visitRetentionLimit(arg0: $SFMLParser$RetentionLimitContext): $Limit;
-        visitBooleanConjunction(arg0: $SFMLParser$BooleanConjunctionContext): $BoolExpr;
-        visitResourceExclusion(arg0: $SFMLParser$ResourceExclusionContext): $ResourceIdSet;
-        visitBooleanDisjunction(arg0: $SFMLParser$BooleanDisjunctionContext): $BoolExpr;
-        visitResourceIdList(arg0: $SFMLParser$ResourceIdListContext): $ResourceIdSet;
-        visitStringResource(arg0: $SFMLParser$StringResourceContext): $ResourceIdentifier<never, never, never>;
-        visitForgetStatement(arg0: $SFMLParser$ForgetStatementContext): $ForgetStatement;
-        visitOutputResourceLimits(arg0: $SFMLParser$OutputResourceLimitsContext): $ResourceLimits;
-        visitBooleanRedstone(arg0: $SFMLParser$BooleanRedstoneContext): $ASTNode;
-        visitResourceLimitList(arg0: $SFMLParser$ResourceLimitListContext): $ResourceLimits;
-        visitBooleanNegation(arg0: $SFMLParser$BooleanNegationContext): $BoolExpr;
-        visitInputStatement(arg0: $SFMLParser$InputStatementContext): $InputStatement;
-        visitResourceIdDisjunction(arg0: $SFMLParser$ResourceIdDisjunctionContext): $ResourceIdSet;
-        visitIntervalNoSpace(arg0: $SFMLParser$IntervalNoSpaceContext): $ASTNode;
-        visitInputResourceLimits(arg0: $SFMLParser$InputResourceLimitsContext): $ResourceLimits;
-        getNodesUnderCursor(arg0: number): $List<$Pair<$ASTNode, $ParserRuleContext>>;
+        visitString(arg0: $SFMLParser$StringContext): $StringHolder;
         getContextForNode(arg0: $ASTNode): ($ParserRuleContext) | undefined;
+        visitName(arg0: $SFMLParser$NameContext): $StringHolder;
+        visitWith(arg0: $SFMLParser$WithContext): $ASTNode;
+        visitSide(arg0: $SFMLParser$SideContext): $Side;
+        visitSetOp(arg0: $SFMLParser$SetOpContext): $SetOperator;
+        visitQuantityRetentionLimit(arg0: $SFMLParser$QuantityRetentionLimitContext): $Limit;
+        visitProgram(arg0: $SFMLParser$ProgramContext): $Program;
+        setLocationFromOtherNode(arg0: $ASTNode, arg1: $ASTNode): void;
+        visitNumber(arg0: $SFMLParser$NumberContext): $Number;
+        visitBooleanDisjunction(arg0: $SFMLParser$BooleanDisjunctionContext): $BoolExpr;
+        visitBooleanConjunction(arg0: $SFMLParser$BooleanConjunctionContext): $BoolExpr;
+        visitOutputStatement(arg0: $SFMLParser$OutputStatementContext): $OutputStatement;
+        visitWithDisjunction(arg0: $SFMLParser$WithDisjunctionContext): $WithDisjunction;
+        visitInputStatement(arg0: $SFMLParser$InputStatementContext): $InputStatement;
+        visitOutputResourceLimits(arg0: $SFMLParser$OutputResourceLimitsContext): $ResourceLimits;
+        visitResourceIdDisjunction(arg0: $SFMLParser$ResourceIdDisjunctionContext): $ResourceIdSet;
+        visitWithConjunction(arg0: $SFMLParser$WithConjunctionContext): $WithConjunction;
+        visitStringResource(arg0: $SFMLParser$StringResourceContext): $ResourceIdentifier<never, never, never>;
+        visitBooleanRedstone(arg0: $SFMLParser$BooleanRedstoneContext): $ASTNode;
+        visitIntervalNoSpace(arg0: $SFMLParser$IntervalNoSpaceContext): $ASTNode;
+        visitRetentionLimit(arg0: $SFMLParser$RetentionLimitContext): $Limit;
+        visitBooleanNegation(arg0: $SFMLParser$BooleanNegationContext): $BoolExpr;
+        visitResourceExclusion(arg0: $SFMLParser$ResourceExclusionContext): $ResourceIdSet;
+        visitResourceIdList(arg0: $SFMLParser$ResourceIdListContext): $ResourceIdSet;
+        visitForgetStatement(arg0: $SFMLParser$ForgetStatementContext): $ForgetStatement;
+        visitInputResourceLimits(arg0: $SFMLParser$InputResourceLimitsContext): $ResourceLimits;
+        visitResourceLimitList(arg0: $SFMLParser$ResourceLimitListContext): $ResourceLimits;
+        getNodesUnderCursor(arg0: number): $List<$Pair<$ASTNode, $ParserRuleContext>>;
+        visitRawLabel(arg0: $SFMLParser$RawLabelContext): $Label;
+        visitTimerTrigger(arg0: $SFMLParser$TimerTriggerContext): $ASTNode;
+        visitQuantityLimit(arg0: $SFMLParser$QuantityLimitContext): $Limit;
+        visitResourceLimit(arg0: $SFMLParser$ResourceLimitContext): $ResourceLimit;
+        visitWithNegation(arg0: $SFMLParser$WithNegationContext): $WithNegation;
+        visitIfStatement(arg0: $SFMLParser$IfStatementContext): $IfStatement;
+        visitBooleanFalse(arg0: $SFMLParser$BooleanFalseContext): $BoolExpr;
+        visitWithParen(arg0: $SFMLParser$WithParenContext): $WithParen;
+        visitRetention(arg0: $SFMLParser$RetentionContext): $ResourceQuantity;
+        visitLabelAccess(arg0: $SFMLParser$LabelAccessContext): $LabelAccess;
+        visitComparisonOp(arg0: $SFMLParser$ComparisonOpContext): $ComparisonOperator;
+        visitWithTag(arg0: $SFMLParser$WithTagContext): $WithTag;
+        visitQuantity(arg0: $SFMLParser$QuantityContext): $ResourceQuantity;
+        visitPulseTrigger(arg0: $SFMLParser$PulseTriggerContext): $ASTNode;
+        visitBooleanParen(arg0: $SFMLParser$BooleanParenContext): $BoolExpr;
+        visitBooleanTrue(arg0: $SFMLParser$BooleanTrueContext): $BoolExpr;
+        visitEachSide(arg0: $SFMLParser$EachSideContext): $SideQualifier;
+        visitIntervalSpace(arg0: $SFMLParser$IntervalSpaceContext): $ASTNode;
+        visitStringLabel(arg0: $SFMLParser$StringLabelContext): $Label;
+        visitSlotqualifier(arg0: $SFMLParser$SlotqualifierContext): $NumberRangeSet;
+        visitResource(arg0: $SFMLParser$ResourceContext): $ASTNode;
+        visitRangeset(arg0: $SFMLParser$RangesetContext): $NumberRangeSet;
+        visitBooleanHas(arg0: $SFMLParser$BooleanHasContext): $BoolExpr;
+        visitRoundrobin(arg0: $SFMLParser$RoundrobinContext): $RoundRobin;
+        visitListedSides(arg0: $SFMLParser$ListedSidesContext): $SideQualifier;
+        visitTagMatcher(arg0: $SFMLParser$TagMatcherContext): $TagMatcher;
+        getIndexForNode(arg0: $ASTNode): number;
         constructor();
     }
     export class $Block extends $Record implements $Statement {
         tick(arg0: $ProgramContext): void;
         statements(): $List<$Statement>;
         getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
         static PROGRAM_TICK_STATEMENT_TIME_MS: $LocalizationEntry;
         constructor(statements: $List_<$Statement_>);
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $Block}.
@@ -105,20 +105,20 @@ declare module "@package/ca/teamdman/sfml/ast" {
     }
     export interface $IOStatement extends $Statement, $ToStringPretty {
         each(): boolean;
-        labelAccess(): $LabelAccess;
         resourceLimits(): $ResourceLimits;
+        labelAccess(): $LabelAccess;
     }
     export class $WithParen extends $Record implements $ASTNode, $WithClause, $ToStringPretty {
         inner(): $WithClause;
         matchesStack<STACK>(arg0: $ResourceType_<STACK, never, never>, arg1: STACK): boolean;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         toStringPretty(): string;
         constructor(inner: $WithClause_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $WithParen}.
@@ -158,16 +158,16 @@ declare module "@package/ca/teamdman/sfml/ast" {
         retention(): $ResourceQuantity;
         quantity(): $ResourceQuantity;
         withDefaults(arg0: $Limit_): $Limit;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static MAX_QUANTITY_MAX_RETENTION: $Limit;
         static MAX_QUANTITY_NO_RETENTION: $Limit;
         static UNSET: $Limit;
         constructor(quantity: $ResourceQuantity_, retention: $ResourceQuantity_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $Limit}.
@@ -187,16 +187,16 @@ declare module "@package/ca/teamdman/sfml/ast" {
     export class $Program extends $Record implements $Statement {
         replaceOutputStatement(arg0: $OutputStatement, arg1: $OutputStatement): void;
         name(): string;
-        tick(arg0: $ManagerBlockEntity): boolean;
         tick(arg0: $ProgramContext): void;
-        getStatements(): $List<$Statement>;
-        referencedLabels(): $Set<string>;
-        astBuilder(): $ASTBuilder;
+        tick(arg0: $ManagerBlockEntity): boolean;
         referencedResources(): $Set<$ResourceIdentifier<never, never, never>>;
         triggers(): $List<$Trigger>;
+        astBuilder(): $ASTBuilder;
+        referencedLabels(): $Set<string>;
+        getStatements(): $List<$Statement>;
         getConditionIndex(arg0: $IfStatement_): number;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
         static MAX_LABEL_LENGTH: number;
         static PROGRAM_WARNING_TOO_MANY_CONDITIONS: $LocalizationEntry;
         static LOG_LABEL_POSITION_HOLDER_DETAILS_BODY: $LocalizationEntry;
@@ -215,21 +215,21 @@ declare module "@package/ca/teamdman/sfml/ast" {
         static LOG_LABEL_POSITION_HOLDER_DETAILS_HEADER: $LocalizationEntry;
         constructor(astBuilder: $ASTBuilder, name: string, triggers: $List_<$Trigger>, referencedLabels: $Set_<string>, referencedResources: $Set_<$ResourceIdentifier<never, never, never>>);
         get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $Program}.
      */
-    export type $Program_ = { triggers?: $List_<$Trigger>, astBuilder?: $ASTBuilder, name?: string, referencedLabels?: $Set_<string>, referencedResources?: $Set_<$ResourceIdentifier<never, never, never>>,  } | [triggers?: $List_<$Trigger>, astBuilder?: $ASTBuilder, name?: string, referencedLabels?: $Set_<string>, referencedResources?: $Set_<$ResourceIdentifier<never, never, never>>, ];
+    export type $Program_ = { referencedLabels?: $Set_<string>, referencedResources?: $Set_<$ResourceIdentifier<never, never, never>>, triggers?: $List_<$Trigger>, astBuilder?: $ASTBuilder, name?: string,  } | [referencedLabels?: $Set_<string>, referencedResources?: $Set_<$ResourceIdentifier<never, never, never>>, triggers?: $List_<$Trigger>, astBuilder?: $ASTBuilder, name?: string, ];
     export class $Side extends $Enum<$Side> implements $ASTNode {
+        static fromDirection(arg0: $Direction_): $Side;
         static values(): $Side[];
         static valueOf(arg0: string): $Side;
         resolve(arg0: $BlockState_): $Direction;
-        static fromDirection(arg0: $Direction_): $Side;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static NULL: $Side;
         static TOP: $Side;
         static LEFT: $Side;
@@ -241,115 +241,115 @@ declare module "@package/ca/teamdman/sfml/ast" {
         static BOTTOM: $Side;
         static SOUTH: $Side;
         static EAST: $Side;
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $Side}.
      */
     export type $Side_ = "top" | "bottom" | "north" | "south" | "east" | "west" | "left" | "right" | "front" | "back" | "null";
     export class $ResourceLimits implements $ASTNode, $ToStringPretty {
-        toStringCondensed(arg0: $Limit_): string;
-        resourceLimitList(): $List<$ResourceLimit>;
         exclusions(): $ResourceIdSet;
+        toStringCondensed(arg0: $Limit_): string;
         getReferencedResourceTypes(): $ResourceType<never, never, never>[];
-        createOutputTrackers(): $List<$IOutputResourceTracker>;
-        createInputTrackers(): $List<$IInputResourceTracker>;
-        withDefaultLimit(arg0: $Limit_): $ResourceLimits;
+        resourceLimitList(): $List<$ResourceLimit>;
         withExclusions(arg0: $ResourceIdSet): $ResourceLimits;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
+        withDefaultLimit(arg0: $Limit_): $ResourceLimits;
+        createInputTrackers(): $List<$IInputResourceTracker>;
+        createOutputTrackers(): $List<$IOutputResourceTracker>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         toStringPretty(): string;
         constructor(arg0: $List_<$ResourceLimit_>, arg1: $ResourceIdSet);
         get referencedResourceTypes(): $ResourceType<never, never, never>[];
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $ResourceQuantity extends $Record implements $ASTNode {
         add(arg0: $ResourceQuantity_): $ResourceQuantity;
         number(): $Number;
         idExpansionBehaviour(): $ResourceQuantity$IdExpansionBehaviour;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static MAX_QUANTITY: $ResourceQuantity;
         static UNSET: $ResourceQuantity;
         constructor(number: $Number_, idExpansionBehaviour: $ResourceQuantity$IdExpansionBehaviour_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $ResourceQuantity}.
      */
-    export type $ResourceQuantity_ = { idExpansionBehaviour?: $ResourceQuantity$IdExpansionBehaviour_, number?: $Number_,  } | [idExpansionBehaviour?: $ResourceQuantity$IdExpansionBehaviour_, number?: $Number_, ];
+    export type $ResourceQuantity_ = { number?: $Number_, idExpansionBehaviour?: $ResourceQuantity$IdExpansionBehaviour_,  } | [number?: $Number_, idExpansionBehaviour?: $ResourceQuantity$IdExpansionBehaviour_, ];
     export class $RoundRobin implements $ASTNode {
         next(arg0: number): number;
         isEnabled(): boolean;
         getBehaviour(): $RoundRobin$Behaviour;
         static disabled(): $RoundRobin;
         getPositionsForLabels(arg0: $List_<$Label_>, arg1: $LabelPositionHolder_): $ArrayList<$Pair<$Label, $BlockPos>>;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         constructor(arg0: $RoundRobin$Behaviour_);
         get enabled(): boolean;
         get behaviour(): $RoundRobin$Behaviour;
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $WithDisjunction extends $Record implements $ASTNode, $WithClause, $ToStringPretty {
         left(): $WithClause;
         right(): $WithClause;
         matchesStack<STACK>(arg0: $ResourceType_<STACK, never, never>, arg1: STACK): boolean;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         toStringPretty(): string;
         constructor(left: $WithClause_, right: $WithClause_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $WithDisjunction}.
      */
-    export type $WithDisjunction_ = { left?: $WithClause_, right?: $WithClause_,  } | [left?: $WithClause_, right?: $WithClause_, ];
+    export type $WithDisjunction_ = { right?: $WithClause_, left?: $WithClause_,  } | [right?: $WithClause_, left?: $WithClause_, ];
     export class $InputStatement implements $IOStatement {
         gatherSlots(arg0: $ProgramContext, arg1: $Consumer_<$LimitedInputSlot<never, never, never>>): void;
         each(): boolean;
-        freeSlots(): void;
         tick(arg0: $ProgramContext): void;
-        labelAccess(): $LabelAccess;
-        toStringPretty(): string;
+        freeSlots(): void;
         resourceLimits(): $ResourceLimits;
+        toStringPretty(): string;
+        labelAccess(): $LabelAccess;
         freeSlotsIf(arg0: $Predicate_<$LimitedInputSlot<never, never, never>>): void;
         transferSlotsTo(arg0: $InputStatement): void;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static LOG_PROGRAM_TICK_IO_STATEMENT_GATHER_SLOTS_CACHE_MISS: $LocalizationEntry;
         static LOG_PROGRAM_TICK_IO_STATEMENT_GATHER_SLOTS_CACHE_HIT: $LocalizationEntry;
         static LOG_PROGRAM_TICK_INPUT_STATEMENT: $LocalizationEntry;
         constructor(arg0: $LabelAccess_, arg1: $ResourceLimits, arg2: boolean);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $Number extends $Record implements $ASTNode {
         value(): number;
         add(arg0: $Number_): $Number;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         constructor(value: number);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $Number}.
@@ -364,19 +364,19 @@ declare module "@package/ca/teamdman/sfml/ast" {
         left(): $WithClause;
         right(): $WithClause;
         matchesStack<STACK>(arg0: $ResourceType_<STACK, never, never>, arg1: STACK): boolean;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         toStringPretty(): string;
         constructor(left: $WithClause_, right: $WithClause_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $WithConjunction}.
      */
-    export type $WithConjunction_ = { left?: $WithClause_, right?: $WithClause_,  } | [left?: $WithClause_, right?: $WithClause_, ];
+    export type $WithConjunction_ = { right?: $WithClause_, left?: $WithClause_,  } | [right?: $WithClause_, left?: $WithClause_, ];
     export class $ResourceQuantity$IdExpansionBehaviour extends $Enum<$ResourceQuantity$IdExpansionBehaviour> {
         static values(): $ResourceQuantity$IdExpansionBehaviour[];
         static valueOf(arg0: string): $ResourceQuantity$IdExpansionBehaviour;
@@ -392,19 +392,19 @@ declare module "@package/ca/teamdman/sfml/ast" {
         condition(): $WithClause;
         matchesStack<STACK>(arg0: $ResourceType_<STACK, never, never>, arg1: STACK): boolean;
         toStringPretty(): string;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static ALWAYS_TRUE: $With;
         constructor(condition: $WithClause_, mode: $With$WithMode_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $With}.
      */
-    export type $With_ = { mode?: $With$WithMode_, condition?: $WithClause_,  } | [mode?: $With$WithMode_, condition?: $WithClause_, ];
+    export type $With_ = { condition?: $WithClause_, mode?: $With$WithMode_,  } | [condition?: $WithClause_, mode?: $With$WithMode_, ];
     export class $Statement {
     }
     export interface $Statement extends $ASTNode {
@@ -420,8 +420,8 @@ declare module "@package/ca/teamdman/sfml/ast" {
         shouldTick(arg0: $ProgramContext): boolean;
         getBlock(): $Block;
         getStatements(): $List<$Statement>;
-        getConditionCount(): number;
         getConditionIndex(arg0: $IfStatement_): number;
+        getConditionCount(): number;
         get block(): $Block;
         get statements(): $List<$Statement>;
         get conditionCount(): number;
@@ -429,14 +429,14 @@ declare module "@package/ca/teamdman/sfml/ast" {
     export class $NumberRangeSet extends $Record implements $ASTNode {
         contains(arg0: number): boolean;
         ranges(): $NumberRange[];
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static MAX_RANGE: $NumberRangeSet;
         constructor(ranges: $NumberRange_[]);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $NumberRangeSet}.
@@ -445,21 +445,21 @@ declare module "@package/ca/teamdman/sfml/ast" {
     export class $ASTNode {
     }
     export interface $ASTNode {
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $SetOperator extends $Enum<$SetOperator> implements $ASTNode, $BiPredicate<boolean, $List<boolean>>, $ToStringPretty {
         static values(): $SetOperator[];
         test(arg0: boolean, arg1: $List_<boolean>): boolean;
         static valueOf(arg0: string): $SetOperator;
         static from(arg0: string): $SetOperator;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         or(arg0: $BiPredicate_<boolean, $List<boolean>>): $BiPredicate<boolean, $List<boolean>>;
         negate(): $BiPredicate<boolean, $List<boolean>>;
         and(arg0: $BiPredicate_<boolean, $List<boolean>>): $BiPredicate<boolean, $List<boolean>>;
@@ -469,26 +469,26 @@ declare module "@package/ca/teamdman/sfml/ast" {
         static ONE: $SetOperator;
         static LONE: $SetOperator;
         static EVERY: $SetOperator;
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $SetOperator}.
      */
     export type $SetOperator_ = "overall" | "some" | "every" | "one" | "lone";
     export class $OutputStatement implements $IOStatement {
-        gatherSlots(arg0: $ProgramContext, arg1: $Consumer_<$LimitedOutputSlot<never, never, never>>): void;
         emptySlotsOnly(): boolean;
+        gatherSlots(arg0: $ProgramContext, arg1: $Consumer_<$LimitedOutputSlot<never, never, never>>): void;
         each(): boolean;
         tick(arg0: $ProgramContext): void;
-        labelAccess(): $LabelAccess;
-        toStringPretty(): string;
         resourceLimits(): $ResourceLimits;
+        toStringPretty(): string;
+        labelAccess(): $LabelAccess;
         static moveTo<STACK, ITEM, CAP>(arg0: $ProgramContext, arg1: $LimitedInputSlot<STACK, ITEM, CAP>, arg2: $LimitedOutputSlot<STACK, ITEM, CAP>): void;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static LOG_PROGRAM_TICK_OUTPUT_STATEMENT_DISCOVERED_INPUT_SLOT_COUNT: $LocalizationEntry;
         static LOG_PROGRAM_TICK_IO_STATEMENT_MOVE_TO_STACK_LIMIT_NEW_TO_MOVE: $LocalizationEntry;
         static LOG_PROGRAM_TICK_OUTPUT_STATEMENT_SHORT_CIRCUIT_NO_OUTPUT_SLOTS: $LocalizationEntry;
@@ -507,18 +507,18 @@ declare module "@package/ca/teamdman/sfml/ast" {
         static LOG_PROGRAM_TICK_OUTPUT_STATEMENT_SHORT_CIRCUIT_NO_INPUT_SLOTS: $LocalizationEntry;
         static LOG_PROGRAM_TICK_IO_STATEMENT_MOVE_TO_ZERO_SIMULATED_MOVEMENT: $LocalizationEntry;
         constructor(arg0: $LabelAccess_, arg1: $ResourceLimits, arg2: boolean, arg3: boolean);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $ComparisonOperator extends $Enum<$ComparisonOperator> implements $ASTNode, $BiPredicate<number, number>, $ToStringPretty {
         static values(): $ComparisonOperator[];
         test(arg0: number, arg1: number): boolean;
         static valueOf(arg0: string): $ComparisonOperator;
         static from(arg0: string): $ComparisonOperator;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         or(arg0: $BiPredicate_<number, number>): $BiPredicate<number, number>;
         negate(): $BiPredicate<number, number>;
         and(arg0: $BiPredicate_<number, number>): $BiPredicate<number, number>;
@@ -528,9 +528,9 @@ declare module "@package/ca/teamdman/sfml/ast" {
         static LESSER: $ComparisonOperator;
         static GREATER: $ComparisonOperator;
         static LESSER_OR_EQUAL: $ComparisonOperator;
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $ComparisonOperator}.
@@ -541,16 +541,16 @@ declare module "@package/ca/teamdman/sfml/ast" {
         expand(): $List<$ResourceIdentifier<STACK, ITEM, CAP>>;
         getLocation(): ($ResourceLocation) | undefined;
         static fromString<STACK, ITEM, CAP>(arg0: string): $ResourceIdentifier<STACK, ITEM, CAP>;
-        getResourceType(): $ResourceType<STACK, ITEM, CAP>;
-        assertValid(): void;
-        matchesStack(arg0: $Object): boolean;
         matchesResourceLocation(arg0: $ResourceLocation_): boolean;
+        assertValid(): void;
+        getResourceType(): $ResourceType<STACK, ITEM, CAP>;
+        matchesStack(arg0: $Object): boolean;
+        getResourceTypeId(): $ResourceLocation;
         setResourceTypeCache(arg0: $ResourceType_<STACK, ITEM, CAP>): void;
         usesRegex(): boolean;
-        getResourceTypeId(): $ResourceLocation;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static MATCH_ALL: $ResourceIdentifier<never, never, never>;
         resourceTypeNamespace: string;
         resourceNamespace: string;
@@ -565,11 +565,11 @@ declare module "@package/ca/teamdman/sfml/ast" {
         constructor(arg0: $ResourceKey_<$ResourceType<STACK, ITEM, CAP>>, arg1: $ResourceKey_<never>);
         get location(): ($ResourceLocation) | undefined;
         get resourceType(): $ResourceType<STACK, ITEM, CAP>;
-        set resourceTypeCache(value: $ResourceType_<STACK, ITEM, CAP>);
         get resourceTypeId(): $ResourceLocation;
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
+        set resourceTypeCache(value: $ResourceType_<STACK, ITEM, CAP>);
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $IfStatement extends $Record implements $ASTNode, $Statement, $ToStringCondensed {
         toStringCondensed(): string;
@@ -578,14 +578,14 @@ declare module "@package/ca/teamdman/sfml/ast" {
         getStatements(): $List<$Statement>;
         falseBlock(): $Block;
         trueBlock(): $Block;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
         static LOG_PROGRAM_TICK_IF_STATEMENT_WAS_FALSE: $LocalizationEntry;
         static LOG_PROGRAM_TICK_IF_STATEMENT_WAS_TRUE: $LocalizationEntry;
         constructor(condition: $BoolExpr_, trueBlock: $Block_, falseBlock: $Block_);
         get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $IfStatement}.
@@ -594,14 +594,14 @@ declare module "@package/ca/teamdman/sfml/ast" {
     export class $ForgetStatement extends $Record implements $Statement {
         tick(arg0: $ProgramContext): void;
         labelToForget(): $Set<$Label>;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static LOG_PROGRAM_TICK_FORGET_STATEMENT: $LocalizationEntry;
         constructor(labelToForget: $Set_<$Label_>);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $ForgetStatement}.
@@ -611,14 +611,14 @@ declare module "@package/ca/teamdman/sfml/ast" {
         end(): number;
         contains(arg0: number): boolean;
         start(): number;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static MAX_RANGE: $NumberRange;
         constructor(start: number, end: number);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $NumberRange}.
@@ -627,14 +627,14 @@ declare module "@package/ca/teamdman/sfml/ast" {
     export class $WithNegation extends $Record implements $ASTNode, $WithClause, $ToStringPretty {
         inner(): $WithClause;
         matchesStack<STACK>(arg0: $ResourceType_<STACK, never, never>, arg1: STACK): boolean;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         toStringPretty(): string;
         constructor(inner: $WithClause_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $WithNegation}.
@@ -649,34 +649,34 @@ declare module "@package/ca/teamdman/sfml/ast" {
         or(arg0: $Predicate_<$Object>): $Predicate<$Object>;
         negate(): $Predicate<$Object>;
         and(arg0: $Predicate_<$Object>): $Predicate<$Object>;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         namespacePattern: string;
         pathElementPatterns: $List<string>;
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $ResourceLimit extends $Record implements $ASTNode {
+        withLimit(arg0: $Limit_): $ResourceLimit;
         toStringCondensed(arg0: $Limit_): string;
         limit(): $Limit;
         "with"(): $With;
         resourceIds(): $ResourceIdSet;
-        withLimit(arg0: $Limit_): $ResourceLimit;
         matchesStack(arg0: $Object): boolean;
-        createOutputTracker(arg0: $ResourceIdSet): $IOutputResourceTracker;
-        withDefaultLimit(arg0: $Limit_): $ResourceLimit;
         createInputTracker(arg0: $ResourceIdSet): $IInputResourceTracker;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
+        withDefaultLimit(arg0: $Limit_): $ResourceLimit;
+        createOutputTracker(arg0: $ResourceIdSet): $IOutputResourceTracker;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static TAKE_ALL_LEAVE_NONE: $ResourceLimit;
         static ACCEPT_ALL_WITHOUT_RESTRAINT: $ResourceLimit;
         constructor(resourceIds: $ResourceIdSet, limit: $Limit_, arg2: $With_);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $ResourceLimit}.
@@ -695,68 +695,68 @@ declare module "@package/ca/teamdman/sfml/ast" {
         slots(): $NumberRangeSet;
         labels(): $List<$Label>;
         sides(): $SideQualifier;
-        roundRobin(): $RoundRobin;
         getLabelledPositions(arg0: $LabelPositionHolder_): $ArrayList<$Pair<$Label, $BlockPos>>;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
+        roundRobin(): $RoundRobin;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         constructor(labels: $List_<$Label_>, sides: $SideQualifier_, slots: $NumberRangeSet_, roundRobin: $RoundRobin);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $LabelAccess}.
      */
-    export type $LabelAccess_ = { labels?: $List_<$Label_>, roundRobin?: $RoundRobin, slots?: $NumberRangeSet_, sides?: $SideQualifier_,  } | [labels?: $List_<$Label_>, roundRobin?: $RoundRobin, slots?: $NumberRangeSet_, sides?: $SideQualifier_, ];
+    export type $LabelAccess_ = { sides?: $SideQualifier_, labels?: $List_<$Label_>, roundRobin?: $RoundRobin, slots?: $NumberRangeSet_,  } | [sides?: $SideQualifier_, labels?: $List_<$Label_>, roundRobin?: $RoundRobin, slots?: $NumberRangeSet_, ];
     export class $WithTag extends $Record implements $ASTNode, $WithClause, $ToStringPretty {
-        matchesStack<STACK>(arg0: $ResourceType_<STACK, never, never>, arg1: STACK): boolean;
         tagMatcher(): $TagMatcher;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
+        matchesStack<STACK>(arg0: $ResourceType_<STACK, never, never>, arg1: STACK): boolean;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         toStringPretty(): string;
         constructor(tagMatcher: $TagMatcher);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $WithTag}.
      */
     export type $WithTag_ = { tagMatcher?: $TagMatcher,  } | [tagMatcher?: $TagMatcher, ];
     export class $ResourceIdSet implements $ASTNode {
+        noneMatchStack(arg0: $Object): boolean;
         toStringCondensed(): string;
         size(): number;
         isEmpty(): boolean;
         stream(): $Stream<$ResourceIdentifier<never, never, never>>;
         couldMatchMoreThanOne(): boolean;
         getReferencedResourceTypes(): $ResourceType<never, never, never>[];
-        noneMatchStack(arg0: $Object): boolean;
-        anyMatchResourceLocation(arg0: $ResourceLocation_): boolean;
         getMatchingFromStack(arg0: $Object): $ResourceIdentifier<never, never, never>;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
+        anyMatchResourceLocation(arg0: $ResourceLocation_): boolean;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static MATCH_ALL: $ResourceIdSet;
         static EMPTY: $ResourceIdSet;
-        constructor(arg0: $ResourceIdentifier<never, never, never>[]);
         constructor(arg0: $Collection_<$ResourceIdentifier<never, never, never>>);
+        constructor(arg0: $ResourceIdentifier<never, never, never>[]);
         get empty(): boolean;
         get referencedResourceTypes(): $ResourceType<never, never, never>[];
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     export class $StringHolder extends $Record implements $ASTNode {
         value(): string;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         constructor(value: string);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $StringHolder}.
@@ -765,13 +765,13 @@ declare module "@package/ca/teamdman/sfml/ast" {
     export class $Label extends $Record implements $ASTNode {
         name(): string;
         static needsQuotes(arg0: string): boolean;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         constructor(name: string);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $Label}.
@@ -781,16 +781,16 @@ declare module "@package/ca/teamdman/sfml/ast" {
         resolve(arg0: $BlockState_): $ArrayList<$Direction>;
         sides(): $List<$Side>;
         getNonNullDirection(arg0: $BlockState_): $Direction;
-        getStatements(): $List<$Statement>;
-        getDescendantStatements(): $Stream<$Statement>;
         getReferencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        getDescendantStatements(): $Stream<$Statement>;
+        getStatements(): $List<$Statement>;
         static ALL: $SideQualifier;
         static NULL: $SideQualifier;
         static DEFAULT: $SideQualifier;
         constructor(sides: $List_<$Side_>);
-        get statements(): $List<$Statement>;
-        get descendantStatements(): $Stream<$Statement>;
         get referencedIOResourceIds(): $Stream<$ResourceIdentifier<never, never, never>>;
+        get descendantStatements(): $Stream<$Statement>;
+        get statements(): $List<$Statement>;
     }
     /**
      * Values that may be interpreted as {@link $SideQualifier}.

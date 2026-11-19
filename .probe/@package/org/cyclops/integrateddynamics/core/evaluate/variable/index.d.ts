@@ -3,9 +3,9 @@ import { $IValueType, $IValue } from "@package/org/cyclops/integrateddynamics/ap
 
 declare module "@package/org/cyclops/integrateddynamics/core/evaluate/variable" {
     export class $ValueBase implements $IValue {
+        canCast<V extends $IValue>(arg0: $IValueType<V>): boolean;
         cast<V extends $IValue>(arg0: $IValueType<V>): V;
         getType(): $IValueType<any>;
-        canCast<V extends $IValue>(arg0: $IValueType<V>): boolean;
         get type(): $IValueType<any>;
     }
     export class $ValueTypeOperator$ValueOperator extends $ValueBase {

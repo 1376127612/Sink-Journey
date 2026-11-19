@@ -16,10 +16,10 @@ declare module "@package/vazkii/patchouli/mixin/client" {
     export class $AccessorMultiBufferSource {
     }
     export interface $AccessorMultiBufferSource {
-        getFixedBuffers(): $SequencedMap<$RenderType, $ByteBufferBuilder>;
         getFallbackBuffer(): $ByteBufferBuilder;
-        get fixedBuffers(): $SequencedMap<$RenderType, $ByteBufferBuilder>;
+        getFixedBuffers(): $SequencedMap<$RenderType, $ByteBufferBuilder>;
         get fallbackBuffer(): $ByteBufferBuilder;
+        get fixedBuffers(): $SequencedMap<$RenderType, $ByteBufferBuilder>;
     }
     export class $AccessorScreen {
     }

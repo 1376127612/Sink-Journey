@@ -10,9 +10,9 @@ declare module "@package/appeng/api/networking/security" {
         static ofMachine(arg0: $IActionHost_): $IActionSource;
     }
     export interface $IActionSource {
-        context<T>(arg0: $Class<T>): (T) | undefined;
-        machine(): ($IActionHost) | undefined;
         player(): ($Player) | undefined;
+        machine(): ($IActionHost) | undefined;
+        context<T>(arg0: $Class<T>): (T) | undefined;
     }
     export class $IActionHost {
     }

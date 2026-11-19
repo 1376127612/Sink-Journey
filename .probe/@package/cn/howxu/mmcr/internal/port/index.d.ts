@@ -77,13 +77,13 @@ declare module "@package/cn/howxu/mmcr/internal/port" {
      */
     export type $ExtendedItemBusSize_ = "basic" | "advanced" | "reinforced" | "ultimate";
     export class $CombinedPortSize extends $Enum<$CombinedPortSize> {
+        fluidTypes(): number;
+        itemTier(): number;
+        fluidTier(): number;
         static values(): $CombinedPortSize[];
         static valueOf(name: string): $CombinedPortSize;
         id(): string;
         itemTypes(): number;
-        fluidTypes(): number;
-        itemTier(): number;
-        fluidTier(): number;
         static REINFORCED: $CombinedPortSize;
         static ULTIMATE: $CombinedPortSize;
         static BASIC: $CombinedPortSize;
@@ -112,13 +112,13 @@ declare module "@package/cn/howxu/mmcr/internal/port" {
      */
     export type $FluidHatchSize_ = "tiny" | "small" | "normal" | "reinforced" | "big" | "huge" | "ludicrous" | "vacuum";
     export class $ExtendedCombinedPortSize extends $Enum<$ExtendedCombinedPortSize> {
+        fluidTypes(): number;
+        itemTier(): number;
+        fluidTier(): number;
         static values(): $ExtendedCombinedPortSize[];
         static valueOf(name: string): $ExtendedCombinedPortSize;
         id(): string;
         itemTypes(): number;
-        fluidTypes(): number;
-        itemTier(): number;
-        fluidTier(): number;
         static REINFORCED: $ExtendedCombinedPortSize;
         static ULTIMATE: $ExtendedCombinedPortSize;
         static ADVANCED: $ExtendedCombinedPortSize;
@@ -128,17 +128,17 @@ declare module "@package/cn/howxu/mmcr/internal/port" {
      */
     export type $ExtendedCombinedPortSize_ = "advanced" | "reinforced" | "ultimate";
     export class $PortFamilyDescriptor extends $Record {
-        matches(binding: $CapabilityBinding_): boolean;
-        familyId(): $ResourceLocation;
         ioType(): $IOType;
         detectionTier(): number;
         countAliases(): $List<string>;
+        familyId(): $ResourceLocation;
+        matches(binding: $CapabilityBinding_): boolean;
         constructor(familyId: $ResourceLocation_, ioType: $IOType_, detectionTier: number, countAliases: $List_<string>);
     }
     /**
      * Values that may be interpreted as {@link $PortFamilyDescriptor}.
      */
-    export type $PortFamilyDescriptor_ = { familyId?: $ResourceLocation_, countAliases?: $List_<string>, detectionTier?: number, ioType?: $IOType_,  } | [familyId?: $ResourceLocation_, countAliases?: $List_<string>, detectionTier?: number, ioType?: $IOType_, ];
+    export type $PortFamilyDescriptor_ = { countAliases?: $List_<string>, detectionTier?: number, ioType?: $IOType_, familyId?: $ResourceLocation_,  } | [countAliases?: $List_<string>, detectionTier?: number, ioType?: $IOType_, familyId?: $ResourceLocation_, ];
     export class $ExtendedFluidHatchSize extends $Enum<$ExtendedFluidHatchSize> {
         static values(): $ExtendedFluidHatchSize[];
         static valueOf(name: string): $ExtendedFluidHatchSize;
@@ -157,31 +157,31 @@ declare module "@package/cn/howxu/mmcr/internal/port" {
         static binding(type: $CapabilityType_, ioType: $IOType_, families: $List_<$PortFamilyDescriptor_>): $CapabilityBinding;
     }
     export interface $IOPortKind {
+        createBlock(properties: $BlockBehaviour$Properties, type: $Supplier_<$BlockEntityType<never>>): $Block;
+        families(): $List<$PortFamilyDescriptor>;
+        ioType(): $IOType;
+        outputPriority(): number;
+        itemBusSize(): ($ItemBusSize) | undefined;
+        fluidHatchSize(): ($FluidHatchSize) | undefined;
+        energyHatchSize(): ($EnergyHatchSize) | undefined;
+        combinedPortSize(): ($CombinedPortSize) | undefined;
+        extendedFluidHatchSize(): ($ExtendedFluidHatchSize) | undefined;
+        extendedCombinedPortSize(): ($ExtendedCombinedPortSize) | undefined;
+        extendedItemBusSize(): ($ExtendedItemBusSize) | undefined;
+        extendedEnergyHatchSize(): ($ExtendedEnergyHatchSize) | undefined;
+        entityFactory(): $BlockEntityType$BlockEntitySupplier<$BlockEntity>;
         id(): string;
         bindings(): $List<$CapabilityBinding>;
         tick(be: $IOPortBlockEntity): void;
         modDependencies(): $List<string>;
-        outputPriority(): number;
-        ioType(): $IOType;
         definition(): $PortDefinition;
-        families(): $List<$PortFamilyDescriptor>;
-        energyHatchSize(): ($EnergyHatchSize) | undefined;
-        itemBusSize(): ($ItemBusSize) | undefined;
-        fluidHatchSize(): ($FluidHatchSize) | undefined;
-        combinedPortSize(): ($CombinedPortSize) | undefined;
-        createBlock(properties: $BlockBehaviour$Properties, type: $Supplier_<$BlockEntityType<never>>): $Block;
-        extendedFluidHatchSize(): ($ExtendedFluidHatchSize) | undefined;
-        extendedItemBusSize(): ($ExtendedItemBusSize) | undefined;
-        extendedCombinedPortSize(): ($ExtendedCombinedPortSize) | undefined;
-        extendedEnergyHatchSize(): ($ExtendedEnergyHatchSize) | undefined;
-        entityFactory(): $BlockEntityType$BlockEntitySupplier<$BlockEntity>;
     }
     export class $MachinePort {
     }
     export interface $MachinePort {
-        kind(): $IOPortKind;
-        onMachineFormed(controllerPos: $BlockPos_): void;
         onMachineUnformed(controllerPos: $BlockPos_): void;
+        onMachineFormed(controllerPos: $BlockPos_): void;
+        kind(): $IOPortKind;
     }
     /**
      * Values that may be interpreted as {@link $MachinePort}.

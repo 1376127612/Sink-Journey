@@ -35,13 +35,13 @@ declare module "@package/net/minecraft/core/dispenser" {
     /**
      * Values that may be interpreted as {@link $BlockSource}.
      */
-    export type $BlockSource_ = { pos?: $BlockPos_, level?: $ServerLevel, state?: $BlockState_, blockEntity?: $DispenserBlockEntity,  } | [pos?: $BlockPos_, level?: $ServerLevel, state?: $BlockState_, blockEntity?: $DispenserBlockEntity, ];
+    export type $BlockSource_ = { level?: $ServerLevel, state?: $BlockState_, blockEntity?: $DispenserBlockEntity, pos?: $BlockPos_,  } | [level?: $ServerLevel, state?: $BlockState_, blockEntity?: $DispenserBlockEntity, pos?: $BlockPos_, ];
     export class $ShearsDispenseItemBehavior extends $OptionalDispenseItemBehavior {
         constructor();
     }
     export class $OptionalDispenseItemBehavior extends $DefaultDispenseItemBehavior {
-        isSuccess(): boolean;
         setSuccess(success: boolean): void;
+        isSuccess(): boolean;
         constructor();
     }
     export class $DispenseItemBehavior {

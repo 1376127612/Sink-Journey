@@ -7,12 +7,12 @@ declare module "@package/net/neoforged/neoforge/server/permission/handler" {
     export class $IPermissionHandler {
     }
     export interface $IPermissionHandler {
+        getOfflinePermission<T>(arg0: $UUID_, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
+        getRegisteredNodes(): $Set<$PermissionNode<never>>;
         getPermission<T>(arg0: $ServerPlayer, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
         getIdentifier(): $ResourceLocation;
-        getRegisteredNodes(): $Set<$PermissionNode<never>>;
-        getOfflinePermission<T>(arg0: $UUID_, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
-        get identifier(): $ResourceLocation;
         get registeredNodes(): $Set<$PermissionNode<never>>;
+        get identifier(): $ResourceLocation;
     }
     export class $IPermissionHandlerFactory {
     }
@@ -24,13 +24,13 @@ declare module "@package/net/neoforged/neoforge/server/permission/handler" {
      */
     export type $IPermissionHandlerFactory_ = ((arg0: $Collection<$PermissionNode<never>>) => $IPermissionHandler);
     export class $DefaultPermissionHandler implements $IPermissionHandler {
+        getOfflinePermission<T>(arg0: $UUID_, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
+        getRegisteredNodes(): $Set<$PermissionNode<never>>;
         getPermission<T>(arg0: $ServerPlayer, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
         getIdentifier(): $ResourceLocation;
-        getRegisteredNodes(): $Set<$PermissionNode<never>>;
-        getOfflinePermission<T>(arg0: $UUID_, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
         static IDENTIFIER: $ResourceLocation;
         constructor(arg0: $Collection_<$PermissionNode<never>>);
-        get identifier(): $ResourceLocation;
         get registeredNodes(): $Set<$PermissionNode<never>>;
+        get identifier(): $ResourceLocation;
     }
 }

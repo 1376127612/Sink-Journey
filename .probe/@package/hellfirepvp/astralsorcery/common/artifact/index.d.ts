@@ -15,8 +15,8 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/hellfirepvp/astralsorcery/common/artifact" {
     export class $ArtifactCondition$Type<T extends $ArtifactCondition> extends $Record {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         codec(): $MapCodec<T>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         constructor(codec: $MapCodec_<T>, streamCodec: $StreamCodec<$RegistryFriendlyByteBuf, T>);
     }
     /**
@@ -24,10 +24,10 @@ declare module "@package/hellfirepvp/astralsorcery/common/artifact" {
      */
     export type $ArtifactCondition$Type_<T> = RegistryTypes.AstralsorceryArtifactConditionTypes | { streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ArtifactCondition>, codec?: $MapCodec_<$ArtifactCondition>,  } | [streamCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $ArtifactCondition>, codec?: $MapCodec_<$ArtifactCondition>, ];
     export class $ArtifactEffect {
+        applyEffect(arg0: $RandomSource, arg1: $ServerLevel, arg2: $ItemEntityArtifact): void;
+        unwrapType(): $ArtifactEffect$Type<never>;
         getId(): $ResourceLocation;
         getType(): $ArtifactEffect$DeferredType<never>;
-        unwrapType(): $ArtifactEffect$Type<never>;
-        applyEffect(arg0: $RandomSource, arg1: $ServerLevel, arg2: $ItemEntityArtifact): void;
         static CODEC: $Codec<$ArtifactEffect>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ArtifactEffect>;
         get id(): $ResourceLocation;
@@ -35,28 +35,28 @@ declare module "@package/hellfirepvp/astralsorcery/common/artifact" {
     }
     export interface $ArtifactEffect$Type<T> extends RegistryMarked<RegistryTypes.AstralsorceryArtifactEffectTypesTag, RegistryTypes.AstralsorceryArtifactEffectTypes> {}
     export class $ArtifactStability extends $Enum<$ArtifactStability> {
-        static values(): $ArtifactStability[];
-        static valueOf(arg0: string): $ArtifactStability;
+        getPulseEffectChanceMultiplier(): number;
         getChatColor(): $ChatFormatting;
-        mayCauseBreak(): boolean;
+        mayTriggerPulse(): boolean;
+        getPulseDelayMultiplier(): number;
         getWorseStability(): ($ArtifactStability) | undefined;
         getBetterStability(): ($ArtifactStability) | undefined;
+        mayCauseBreak(): boolean;
+        static values(): $ArtifactStability[];
+        static valueOf(arg0: string): $ArtifactStability;
         getDisplay(): $Component;
-        mayTriggerPulse(): boolean;
-        getPulseEffectChanceMultiplier(): number;
-        getPulseDelayMultiplier(): number;
         static VOLATILE: $ArtifactStability;
         static ACTIVE: $ArtifactStability;
         static INERT: $ArtifactStability;
         static STABLE: $ArtifactStability;
         static UNSTABLE: $ArtifactStability;
         static CRITICAL: $ArtifactStability;
+        get pulseEffectChanceMultiplier(): number;
         get chatColor(): $ChatFormatting;
+        get pulseDelayMultiplier(): number;
         get worseStability(): ($ArtifactStability) | undefined;
         get betterStability(): ($ArtifactStability) | undefined;
         get display(): $Component;
-        get pulseEffectChanceMultiplier(): number;
-        get pulseDelayMultiplier(): number;
     }
     /**
      * Values that may be interpreted as {@link $ArtifactStability}.
@@ -72,26 +72,26 @@ declare module "@package/hellfirepvp/astralsorcery/common/artifact" {
      */
     export type $ArtifactCondition$DeferredType_<T> = { holder?: $DeferredHolder<$ArtifactCondition$Type_<never>, $ArtifactCondition$Type_<$ArtifactCondition>>,  } | [holder?: $DeferredHolder<$ArtifactCondition$Type_<never>, $ArtifactCondition$Type_<$ArtifactCondition>>, ];
     export class $ArtifactCondition {
-        getId(): $ResourceLocation;
-        getType(): $ArtifactCondition$DeferredType<never>;
         unwrapType(): $ArtifactCondition$Type<never>;
         isFulfilled(arg0: $RandomSource, arg1: $ServerLevel, arg2: $ItemEntityArtifact): $List<$Vector3>;
         fulfillCondition(arg0: $RandomSource, arg1: $ServerLevel, arg2: $ItemEntityArtifact): void;
         getDisplayHint(arg0: $RandomSource, arg1: boolean): $Component;
+        getId(): $ResourceLocation;
+        getType(): $ArtifactCondition$DeferredType<never>;
         static CODEC: $Codec<$ArtifactCondition>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ArtifactCondition>;
         get id(): $ResourceLocation;
         get type(): $ArtifactCondition$DeferredType<never>;
     }
     export class $ArtifactStats extends $Record {
-        eligibleForStabilityDecrease(): boolean;
-        eligibleForBreak(): boolean;
-        emptyTriggers(): number;
-        partialTriggers(): number;
         pulses(): number;
         incrementPulse(): $ArtifactStats;
-        incrementPartialTrigger(): $ArtifactStats;
         incrementEmptyTrigger(): $ArtifactStats;
+        incrementPartialTrigger(): $ArtifactStats;
+        eligibleForStabilityDecrease(): boolean;
+        emptyTriggers(): number;
+        eligibleForBreak(): boolean;
+        partialTriggers(): number;
         static CODEC: $Codec<$ArtifactStats>;
         static EMPTY: $ArtifactStats;
         constructor(pulses: number, emptyTriggers: number, partialTriggers: number);
@@ -99,17 +99,17 @@ declare module "@package/hellfirepvp/astralsorcery/common/artifact" {
     /**
      * Values that may be interpreted as {@link $ArtifactStats}.
      */
-    export type $ArtifactStats_ = { emptyTriggers?: number, pulses?: number, partialTriggers?: number,  } | [emptyTriggers?: number, pulses?: number, partialTriggers?: number, ];
+    export type $ArtifactStats_ = { partialTriggers?: number, emptyTriggers?: number, pulses?: number,  } | [partialTriggers?: number, emptyTriggers?: number, pulses?: number, ];
     export interface $ArtifactType extends RegistryMarked<RegistryTypes.AstralsorceryArtifactTypesTag, RegistryTypes.AstralsorceryArtifactTypes> {}
     export class $TestableArtifactCondition extends $Record {
-        condition(): $ArtifactCondition;
         getRandom(): $RandomSource;
-        conditionSeed(): number;
-        getColor(): $ColorWrapper;
-        getDisplay(arg0: boolean): $Component;
-        successEffect(): $ChancedArtifactEffect;
         isFulfilled(arg0: $ItemEntityArtifact): $List<$Vector3>;
         fulfillCondition(arg0: $ItemEntityArtifact): void;
+        successEffect(): $ChancedArtifactEffect;
+        conditionSeed(): number;
+        condition(): $ArtifactCondition;
+        getColor(): $ColorWrapper;
+        getDisplay(arg0: boolean): $Component;
         static CODEC: $Codec<$TestableArtifactCondition>;
         constructor(condition: $ArtifactCondition, conditionSeed: number, successEffect: $ChancedArtifactEffect_);
         get random(): $RandomSource;
@@ -147,8 +147,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/artifact" {
      */
     export type $ChancedArtifactEffect_ = { effect?: $ArtifactEffect, chance?: number,  } | [effect?: $ArtifactEffect, chance?: number, ];
     export class $ArtifactEffect$Type<T extends $ArtifactEffect> extends $Record {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         codec(): $MapCodec<T>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         constructor(codec: $MapCodec_<T>, streamCodec: $StreamCodec<$RegistryFriendlyByteBuf, T>);
     }
     /**

@@ -6,26 +6,26 @@ import { $SimpleJsonResourceReloadListener } from "@package/net/minecraft/server
 
 declare module "@package/net/neoforged/neoforge/client/entity/animation/json" {
     export class $AnimationTypeManager {
+        static getInterpolation(arg0: $ResourceLocation_): $AnimationChannel$Interpolation;
+        static getTargetList(): string;
+        static getKeyframeCodec(arg0: $AnimationTarget_): $Codec<$Keyframe>;
+        static getTargetFromChannelTarget(arg0: $AnimationChannel$Target_): $AnimationTarget;
+        static getInterpolationList(): string;
+        static getInterpolationName(arg0: $AnimationChannel$Interpolation_): $ResourceLocation;
         static init(): void;
         static getTarget(arg0: $ResourceLocation_): $AnimationTarget;
         static getTargetName(arg0: $AnimationTarget_): $ResourceLocation;
-        static getInterpolation(arg0: $ResourceLocation_): $AnimationChannel$Interpolation;
-        static getKeyframeCodec(arg0: $AnimationTarget_): $Codec<$Keyframe>;
-        static getTargetList(): string;
-        static getInterpolationName(arg0: $AnimationChannel$Interpolation_): $ResourceLocation;
-        static getInterpolationList(): string;
-        static getTargetFromChannelTarget(arg0: $AnimationChannel$Target_): $AnimationTarget;
         static get targetList(): string;
         static get interpolationList(): string;
     }
     export class $AnimationHolder {
+        getOrNull(): $AnimationDefinition;
         get(): $AnimationDefinition;
         key(): $ResourceLocation;
         isBound(): boolean;
-        getOrNull(): $AnimationDefinition;
         static EMPTY_ANIMATION: $AnimationDefinition;
-        get bound(): boolean;
         get orNull(): $AnimationDefinition;
+        get bound(): boolean;
     }
     export class $AnimationLoader extends $SimpleJsonResourceReloadListener {
         getAnimationHolder(arg0: $ResourceLocation_): $AnimationHolder;

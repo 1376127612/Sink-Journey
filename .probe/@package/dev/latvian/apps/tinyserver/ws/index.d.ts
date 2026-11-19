@@ -7,6 +7,11 @@ import { $ByteBuffer } from "@package/java/nio";
 
 declare module "@package/dev/latvian/apps/tinyserver/ws" {
     export class $FrameInfo extends $Record {
+        maskZero(): boolean;
+        rsv1(): boolean;
+        maskKey(): number;
+        rsv2(): boolean;
+        rsv3(): boolean;
         applyMask(payload: number[]): void;
         mask(): boolean;
         size(): number;
@@ -15,17 +20,12 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
         static read(connection: $HTTPConnection<any>): $FrameInfo;
         opcode(): $Opcode;
         fin(): boolean;
-        maskZero(): boolean;
-        rsv3(): boolean;
-        maskKey(): number;
-        rsv2(): boolean;
-        rsv1(): boolean;
         constructor(opcode: $Opcode_, mask: boolean, fin: boolean, rsv1: boolean, rsv2: boolean, rsv3: boolean, maskKey: number, size: number);
     }
     /**
      * Values that may be interpreted as {@link $FrameInfo}.
      */
-    export type $FrameInfo_ = { mask?: boolean, opcode?: $Opcode_, rsv3?: boolean, rsv2?: boolean, rsv1?: boolean, fin?: boolean, maskKey?: number, size?: number,  } | [mask?: boolean, opcode?: $Opcode_, rsv3?: boolean, rsv2?: boolean, rsv1?: boolean, fin?: boolean, maskKey?: number, size?: number, ];
+    export type $FrameInfo_ = { maskKey?: number, size?: number, mask?: boolean, opcode?: $Opcode_, rsv3?: boolean, rsv2?: boolean, rsv1?: boolean, fin?: boolean,  } | [maskKey?: number, size?: number, mask?: boolean, opcode?: $Opcode_, rsv3?: boolean, rsv2?: boolean, rsv1?: boolean, fin?: boolean, ];
     export class $WSSessionFactory<REQ extends $HTTPRequest, WSS extends $WSSession<REQ>> {
         static DEFAULT: $WSSessionFactory<$HTTPRequest, $WSSession<$HTTPRequest>>;
     }
@@ -37,6 +37,7 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
      */
     export type $WSSessionFactory_<REQ, WSS> = (() => WSS);
     export class $Frame extends $Record {
+        static ping(buffer: number[]): $Frame;
         applyMask(): void;
         payload(): number[];
         info(): $FrameInfo;
@@ -44,7 +45,6 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
         static text(text: string): $Frame;
         static binary(buffer: number[]): $Frame;
         static simple(opcode: $Opcode_, mask: number, payload: number[]): $Frame;
-        static ping(buffer: number[]): $Frame;
         constructor(info: $FrameInfo_, payload: number[]);
     }
     /**
@@ -65,6 +65,14 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
      */
     export type $WSCloseStatus_ = "closed" | "going_away" | "protocol_error" | "unsupported_data";
     export class $WSSession<REQ extends $HTTPRequest> implements $HTTPUpgrade<REQ> {
+        onError(error: $Throwable): void;
+        onBinaryMessage(message: number[]): void;
+        onTextMessage(message: string): void;
+        onPong(payload: number[]): void;
+        sendText(payload: string): void;
+        sendBinary(payload: number[]): void;
+        onPing(payload: number[]): void;
+        sendPing(payload: number[]): void;
         id(): $UUID;
         start(req: REQ): void;
         close(status: $WSCloseStatus_, reason: string): void;
@@ -72,15 +80,7 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
         onClose(reason: $StatusCode_, remote: boolean): void;
         isClosed(): boolean;
         send(frame: $Frame_): void;
-        onBinaryMessage(message: number[]): void;
-        onTextMessage(message: string): void;
-        onError(error: $Throwable): void;
         onOpen(req: REQ): void;
-        sendBinary(payload: number[]): void;
-        sendPing(payload: number[]): void;
-        sendText(payload: string): void;
-        onPong(payload: number[]): void;
-        onPing(payload: number[]): void;
         constructor();
         get closed(): boolean;
     }
@@ -105,16 +105,16 @@ declare module "@package/dev/latvian/apps/tinyserver/ws" {
         [Symbol.iterator](): Iterator<WSS>
     }
     export interface $WSHandler<REQ extends $HTTPRequest, WSS extends $WSSession<REQ>> extends $Iterable<WSS> {
-        iterator(): $Iterator<WSS>;
-        spliterator(): $Spliterator<WSS>;
-        broadcast(frame: $Frame_): void;
-        broadcastText(payload: $Supplier_<string>): void;
-        broadcastText(payload: string): void;
         broadcastBinary(payload: $Supplier_<number[]>): void;
         broadcastBinary(payload: number[]): void;
+        broadcastText(payload: $Supplier_<string>): void;
+        broadcastText(payload: string): void;
         broadcastPing(payload: number[]): void;
         broadcastPing(payload: $Supplier_<number[]>): void;
         sessions(): $Map<$UUID, WSS>;
+        iterator(): $Iterator<WSS>;
+        spliterator(): $Spliterator<WSS>;
+        broadcast(frame: $Frame_): void;
         [Symbol.iterator](): Iterator<WSS>
     }
     /**

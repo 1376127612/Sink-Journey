@@ -7,44 +7,44 @@ import { $Record, $Runnable, $Class } from "@package/java/lang";
 
 declare module "@package/cn/howxu/mmcr/api/capability/type" {
     export class $CapabilityBinding extends $Record {
-        type(): $CapabilityType;
-        factory(): $CapabilityFactory;
-        supports(tier: number): boolean;
+        static internalOnly(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_): $CapabilityBinding;
+        directions(): $CapabilityDirections;
         /**
          * @deprecated
          */
         ioType(): $IOType;
-        directions(): $CapabilityDirections;
-        tierPolicy(): $PortTierPolicy;
-        static internalOnly(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_): $CapabilityBinding;
         nativeTransferExposure(): boolean;
         externalExposure(): ($CapabilityBinding$ExternalExposure<never>) | undefined;
-        constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_, externalExposure: $CapabilityBinding$ExternalExposure_<never>);
+        tierPolicy(): $PortTierPolicy;
+        type(): $CapabilityType;
+        factory(): $CapabilityFactory;
+        supports(tier: number): boolean;
+        constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_);
+        /**
+         * @deprecated
+         */
+        constructor(type: $CapabilityType_, ioType: $IOType_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_);
+        constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_, externalExposure: ($CapabilityBinding$ExternalExposure_<never>) | undefined);
         constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_, nativeTransferExposure: boolean);
         /**
          * @deprecated
          */
         constructor(type: $CapabilityType_, ioType: $IOType_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_, externalExposure: $CapabilityBinding$ExternalExposure_<never>);
+        constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_, externalExposure: $CapabilityBinding$ExternalExposure_<never>);
         constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_, externalExposure: ($CapabilityBinding$ExternalExposure_<never>) | undefined, nativeTransferExposure: boolean);
-        constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_);
-        constructor(type: $CapabilityType_, directions: $CapabilityDirections_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_, externalExposure: ($CapabilityBinding$ExternalExposure_<never>) | undefined);
-        /**
-         * @deprecated
-         */
-        constructor(type: $CapabilityType_, ioType: $IOType_, factory: $CapabilityFactory_, tierPolicy: $PortTierPolicy_);
     }
     /**
      * Values that may be interpreted as {@link $CapabilityBinding}.
      */
-    export type $CapabilityBinding_ = { tierPolicy?: $PortTierPolicy_, type?: $CapabilityType_, factory?: $CapabilityFactory_, nativeTransferExposure?: boolean, directions?: $CapabilityDirections_, externalExposure?: ($CapabilityBinding$ExternalExposure_<never>) | undefined,  } | [tierPolicy?: $PortTierPolicy_, type?: $CapabilityType_, factory?: $CapabilityFactory_, nativeTransferExposure?: boolean, directions?: $CapabilityDirections_, externalExposure?: ($CapabilityBinding$ExternalExposure_<never>) | undefined, ];
+    export type $CapabilityBinding_ = { type?: $CapabilityType_, factory?: $CapabilityFactory_, nativeTransferExposure?: boolean, directions?: $CapabilityDirections_, externalExposure?: ($CapabilityBinding$ExternalExposure_<never>) | undefined, tierPolicy?: $PortTierPolicy_,  } | [type?: $CapabilityType_, factory?: $CapabilityFactory_, nativeTransferExposure?: boolean, directions?: $CapabilityDirections_, externalExposure?: ($CapabilityBinding$ExternalExposure_<never>) | undefined, tierPolicy?: $PortTierPolicy_, ];
     export class $CapabilityCreationContext {
     }
     export interface $CapabilityCreationContext {
+        directions(): $CapabilityDirections;
+        ioType(): $IOType;
         host(): $CapabilityHost;
         service<T>(serviceType: $Class<T>): (T) | undefined;
-        ioType(): $IOType;
         onChanged(): $Runnable;
-        directions(): $CapabilityDirections;
     }
     export class $CapabilityBinding$ExternalExposure<T> extends $Record {
         id(): $ResourceLocation;
@@ -55,7 +55,7 @@ declare module "@package/cn/howxu/mmcr/api/capability/type" {
     /**
      * Values that may be interpreted as {@link $CapabilityBinding$ExternalExposure}.
      */
-    export type $CapabilityBinding$ExternalExposure_<T> = { resolver?: $CapabilityBinding$Resolver_<any>, valueType?: $Class<any>, id?: $ResourceLocation_,  } | [resolver?: $CapabilityBinding$Resolver_<any>, valueType?: $Class<any>, id?: $ResourceLocation_, ];
+    export type $CapabilityBinding$ExternalExposure_<T> = { valueType?: $Class<any>, id?: $ResourceLocation_, resolver?: $CapabilityBinding$Resolver_<any>,  } | [valueType?: $Class<any>, id?: $ResourceLocation_, resolver?: $CapabilityBinding$Resolver_<any>, ];
     export class $CapabilityBinding$Resolver<T> {
     }
     export interface $CapabilityBinding$Resolver<T> {

@@ -7,8 +7,8 @@ import { $List_, $List } from "@package/java/util";
 
 declare module "@package/cn/howxu/mmcr/internal/preview" {
     export class $MultiblockPreviewSnapshot$Entry extends $Record {
-        state(): $BlockState;
         relativePos(): $BlockPos;
+        state(): $BlockState;
         constructor(relativePos: $BlockPos_, state: $BlockState_);
     }
     /**
@@ -16,15 +16,15 @@ declare module "@package/cn/howxu/mmcr/internal/preview" {
      */
     export type $MultiblockPreviewSnapshot$Entry_ = { state?: $BlockState_, relativePos?: $BlockPos_,  } | [state?: $BlockState_, relativePos?: $BlockPos_, ];
     export class $MultiblockPreviewSnapshot extends $Record {
+        controllerPos(): $BlockPos;
         isEmpty(): boolean;
         entries(): $List<$MultiblockPreviewSnapshot$Entry>;
         dimension(): $ResourceKey<$Level>;
-        controllerPos(): $BlockPos;
         constructor(dimension: $ResourceKey_<$Level>, controllerPos: $BlockPos_, entries: $List_<$MultiblockPreviewSnapshot$Entry_>);
         get empty(): boolean;
     }
     /**
      * Values that may be interpreted as {@link $MultiblockPreviewSnapshot}.
      */
-    export type $MultiblockPreviewSnapshot_ = { controllerPos?: $BlockPos_, dimension?: $ResourceKey_<$Level>, entries?: $List_<$MultiblockPreviewSnapshot$Entry_>,  } | [controllerPos?: $BlockPos_, dimension?: $ResourceKey_<$Level>, entries?: $List_<$MultiblockPreviewSnapshot$Entry_>, ];
+    export type $MultiblockPreviewSnapshot_ = { dimension?: $ResourceKey_<$Level>, entries?: $List_<$MultiblockPreviewSnapshot$Entry_>, controllerPos?: $BlockPos_,  } | [dimension?: $ResourceKey_<$Level>, entries?: $List_<$MultiblockPreviewSnapshot$Entry_>, controllerPos?: $BlockPos_, ];
 }

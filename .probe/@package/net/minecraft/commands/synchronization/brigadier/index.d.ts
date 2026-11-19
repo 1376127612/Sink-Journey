@@ -15,24 +15,24 @@ declare module "@package/net/minecraft/commands/synchronization/brigadier" {
         constructor(type: $StringArgumentSerializer, arg1: $StringArgumentType$StringType_);
     }
     export class $FloatArgumentInfo implements $ArgumentTypeInfo<$FloatArgumentType, $FloatArgumentInfo$Template> {
-        unpack(argument: $FloatArgumentType): $FloatArgumentInfo$Template;
-        serializeToNetwork(template: $FloatArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         serializeToJson(template: $FloatArgumentInfo$Template, json: $JsonObject_): void;
+        serializeToNetwork(template: $FloatArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         deserializeFromNetwork(buffer: $FriendlyByteBuf): $FloatArgumentInfo$Template;
+        unpack(argument: $FloatArgumentType): $FloatArgumentInfo$Template;
         constructor();
     }
     export class $LongArgumentInfo implements $ArgumentTypeInfo<$LongArgumentType, $LongArgumentInfo$Template> {
-        unpack(argument: $LongArgumentType): $LongArgumentInfo$Template;
-        serializeToNetwork(template: $LongArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         serializeToJson(template: $LongArgumentInfo$Template, json: $JsonObject_): void;
+        serializeToNetwork(template: $LongArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         deserializeFromNetwork(buffer: $FriendlyByteBuf): $LongArgumentInfo$Template;
+        unpack(argument: $LongArgumentType): $LongArgumentInfo$Template;
         constructor();
     }
     export class $StringArgumentSerializer implements $ArgumentTypeInfo<$StringArgumentType, $StringArgumentSerializer$Template> {
-        unpack(argument: $StringArgumentType): $StringArgumentSerializer$Template;
-        serializeToNetwork(template: $StringArgumentSerializer$Template, buffer: $FriendlyByteBuf): void;
         serializeToJson(template: $StringArgumentSerializer$Template, json: $JsonObject_): void;
+        serializeToNetwork(template: $StringArgumentSerializer$Template, buffer: $FriendlyByteBuf): void;
         deserializeFromNetwork(buffer: $FriendlyByteBuf): $StringArgumentSerializer$Template;
+        unpack(argument: $StringArgumentType): $StringArgumentSerializer$Template;
         constructor();
     }
     export class $DoubleArgumentInfo$Template implements $ArgumentTypeInfo$Template<$DoubleArgumentType> {
@@ -48,17 +48,17 @@ declare module "@package/net/minecraft/commands/synchronization/brigadier" {
         instantiate(context: $CommandBuildContext): $IntegerArgumentType;
     }
     export class $DoubleArgumentInfo implements $ArgumentTypeInfo<$DoubleArgumentType, $DoubleArgumentInfo$Template> {
-        unpack(argument: $DoubleArgumentType): $DoubleArgumentInfo$Template;
-        serializeToNetwork(template: $DoubleArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         serializeToJson(template: $DoubleArgumentInfo$Template, json: $JsonObject_): void;
+        serializeToNetwork(template: $DoubleArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         deserializeFromNetwork(buffer: $FriendlyByteBuf): $DoubleArgumentInfo$Template;
+        unpack(argument: $DoubleArgumentType): $DoubleArgumentInfo$Template;
         constructor();
     }
     export class $IntegerArgumentInfo implements $ArgumentTypeInfo<$IntegerArgumentType, $IntegerArgumentInfo$Template> {
-        unpack(argument: $IntegerArgumentType): $IntegerArgumentInfo$Template;
-        serializeToNetwork(template: $IntegerArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         serializeToJson(template: $IntegerArgumentInfo$Template, json: $JsonObject_): void;
+        serializeToNetwork(template: $IntegerArgumentInfo$Template, buffer: $FriendlyByteBuf): void;
         deserializeFromNetwork(buffer: $FriendlyByteBuf): $IntegerArgumentInfo$Template;
+        unpack(argument: $IntegerArgumentType): $IntegerArgumentInfo$Template;
         constructor();
     }
 }

@@ -42,40 +42,7 @@
 // 整轮重载结束后触发，晚于 IU 初始化，anvil 配方列表已经生成完毕。
 // 不做物品清单、不读标签：直接遍历机器 anvil 的配方列表，按每条配方的
 // 实际产物注册删除项（铁砧只有「锭->板」和「板->2 外壳」两类配方）。
-ServerEvents.afterRecipes(event => banAnvil())
-
-function banAnvil() {
-    const core = Java.loadClass('com.denfop.api.Recipes').recipes
-    if (!core) {
-        console.warn('[iu_handcraft] Recipes.recipes 尚未初始化，跳过铁砧敲板删除')
-        return
-    }
-
-    const ANVIL = 'anvil'
-    const list = core.getRecipeList(ANVIL)
-    if (!list) {
-        console.warn('[iu_handcraft] 取不到 anvil 配方列表，跳过铁砧敲板删除')
-        return
-    }
-    if (list.isEmpty()) {
-        console.info('[iu_handcraft] anvil 配方已全部删除')
-        return
-    }
-
-    let added = 0
-    for (let i = 0; i < list.size(); i++) {
-        const recipe = list.get(i)
-        const output = recipe ? recipe.getOutput() : null
-        if (!output || !output.items) continue
-        for (let j = 0; j < output.items.size(); j++) {
-            const stack = output.items.get(j)
-            if (!stack) continue
-            core.addRemoveRecipe(ANVIL, stack, true)
-            added++
-        }
-    }
-
-    const total = list.size()
-    core.removeAllRecipesFromList()
-    console.info('[iu_handcraft] anvil 配方 ' + total + ' 条，新增 ' + added + ' 个删除项，剩余 ' + list.size() + ' 条')
-}
+ServerEvents.recipes(event => {
+    const iu = Java.loadClass('com.kubejsiu.recipe.IURecipeBridge')
+    i('anvil')
+})

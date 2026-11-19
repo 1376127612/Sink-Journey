@@ -12,13 +12,13 @@ declare module "@package/sirttas/dpanvil/api/predicate/block/world" {
         getType(): $BlockPosPredicateType<$CacheBlockPredicate>;
         predicate(): $IBlockPosPredicate;
         getTooltip(): $List<$Component>;
+        simplify(): $IBlockPosPredicate;
         cache(): $IBlockPosPredicate;
-        offset(arg0: $Vec3i): $IBlockPosPredicate;
         offset(arg0: number, arg1: number, arg2: number): $IBlockPosPredicate;
+        offset(arg0: $Vec3i): $IBlockPosPredicate;
         or(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
         and(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
         not(): $IBlockPosPredicate;
-        simplify(): $IBlockPosPredicate;
         static CODEC: $MapCodec<$CacheBlockPredicate>;
         static NAME: string;
         constructor(predicate: $IBlockPosPredicate);
@@ -30,12 +30,12 @@ declare module "@package/sirttas/dpanvil/api/predicate/block/world" {
      */
     export type $CacheBlockPredicate_ = { predicate?: $IBlockPosPredicate,  } | [predicate?: $IBlockPosPredicate, ];
     export class $OffsetBlockPredicate extends $Record implements $IBlockPosPredicate {
+        simplify(): $IBlockPosPredicate;
         test(arg0: $LevelReader, arg1: $BlockPos_, arg2: $Direction_ | null): boolean;
         offset(): $Vec3i;
         offset(arg0: $Vec3i): $IBlockPosPredicate;
         getType(): $BlockPosPredicateType<$OffsetBlockPredicate>;
         predicate(): $IBlockPosPredicate;
-        simplify(): $IBlockPosPredicate;
         cache(): $IBlockPosPredicate;
         offset(arg0: number, arg1: number, arg2: number): $IBlockPosPredicate;
         or(...arg0: $IBlockPosPredicate[]): $IBlockPosPredicate;
@@ -51,5 +51,5 @@ declare module "@package/sirttas/dpanvil/api/predicate/block/world" {
     /**
      * Values that may be interpreted as {@link $OffsetBlockPredicate}.
      */
-    export type $OffsetBlockPredicate_ = { predicate?: $IBlockPosPredicate, offset?: $Vec3i,  } | [predicate?: $IBlockPosPredicate, offset?: $Vec3i, ];
+    export type $OffsetBlockPredicate_ = { offset?: $Vec3i, predicate?: $IBlockPosPredicate,  } | [offset?: $Vec3i, predicate?: $IBlockPosPredicate, ];
 }

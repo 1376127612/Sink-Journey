@@ -28,43 +28,43 @@ import { $Vector3d, $Vector3f } from "@package/org/joml";
 
 declare module "@package/net/neoforged/neoforge/client/extensions/common" {
     export class $RegisterClientExtensionsEvent extends $Event implements $IModBusEvent {
-        isItemRegistered(arg0: $Item_): boolean;
-        registerItem(arg0: $IClientItemExtensions, ...arg1: $Item_[]): void;
-        registerItem(arg0: $IClientItemExtensions, ...arg1: $Holder_<$Item>[]): void;
         isBlockRegistered(arg0: $Block_): boolean;
-        registerBlock(arg0: $IClientBlockExtensions, ...arg1: $Block_[]): void;
         registerBlock(arg0: $IClientBlockExtensions, ...arg1: $Holder_<$Block>[]): void;
-        registerFluidType(arg0: $IClientFluidTypeExtensions, ...arg1: $Holder_<$FluidType>[]): void;
-        registerFluidType(arg0: $IClientFluidTypeExtensions, ...arg1: $FluidType_[]): void;
-        registerMobEffect(arg0: $IClientMobEffectExtensions, ...arg1: $MobEffect_[]): void;
-        registerMobEffect(arg0: $IClientMobEffectExtensions, ...arg1: $Holder_<$MobEffect>[]): void;
+        registerBlock(arg0: $IClientBlockExtensions, ...arg1: $Block_[]): void;
+        isItemRegistered(arg0: $Item_): boolean;
         isFluidTypeRegistered(arg0: $FluidType_): boolean;
         isMobEffectRegistered(arg0: $MobEffect_): boolean;
+        registerMobEffect(arg0: $IClientMobEffectExtensions, ...arg1: $MobEffect_[]): void;
+        registerMobEffect(arg0: $IClientMobEffectExtensions, ...arg1: $Holder_<$MobEffect>[]): void;
+        registerFluidType(arg0: $IClientFluidTypeExtensions, ...arg1: $FluidType_[]): void;
+        registerFluidType(arg0: $IClientFluidTypeExtensions, ...arg1: $Holder_<$FluidType>[]): void;
+        registerItem(arg0: $IClientItemExtensions, ...arg1: $Holder_<$Item>[]): void;
+        registerItem(arg0: $IClientItemExtensions, ...arg1: $Item_[]): void;
     }
     export class $IClientFluidTypeExtensions {
         static of(arg0: $FluidState): $IClientFluidTypeExtensions;
-        static of(arg0: $FluidType_): $IClientFluidTypeExtensions;
         static of(arg0: $Fluid_): $IClientFluidTypeExtensions;
+        static of(arg0: $FluidType_): $IClientFluidTypeExtensions;
         static DEFAULT: $IClientFluidTypeExtensions;
     }
     export interface $IClientFluidTypeExtensions {
-        getOverlayTexture(): $ResourceLocation;
-        getOverlayTexture(arg0: $FluidStack_): $ResourceLocation;
-        getOverlayTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
-        getTintColor(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
-        getTintColor(arg0: $FluidStack_): number;
-        getTintColor(): number;
-        getRenderOverlayTexture(arg0: $Minecraft): $ResourceLocation;
-        renderOverlay(arg0: $Minecraft, arg1: $PoseStack): void;
-        renderFluid(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $VertexConsumer, arg4: $BlockState_): boolean;
-        modifyFogRender(arg0: $Camera, arg1: $FogRenderer$FogMode_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $FogShape_): void;
         modifyFogColor(arg0: $Camera, arg1: number, arg2: $ClientLevel, arg3: number, arg4: number, arg5: $Vector3f): $Vector3f;
-        getFlowingTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
-        getFlowingTexture(): $ResourceLocation;
-        getFlowingTexture(arg0: $FluidStack_): $ResourceLocation;
+        modifyFogRender(arg0: $Camera, arg1: $FogRenderer$FogMode_, arg2: number, arg3: number, arg4: number, arg5: number, arg6: $FogShape_): void;
+        getStillTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
         getStillTexture(arg0: $FluidStack_): $ResourceLocation;
         getStillTexture(): $ResourceLocation;
-        getStillTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
+        getFlowingTexture(arg0: $FluidStack_): $ResourceLocation;
+        getFlowingTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
+        getFlowingTexture(): $ResourceLocation;
+        renderOverlay(arg0: $Minecraft, arg1: $PoseStack): void;
+        renderFluid(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_, arg3: $VertexConsumer, arg4: $BlockState_): boolean;
+        getOverlayTexture(arg0: $FluidStack_): $ResourceLocation;
+        getOverlayTexture(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): $ResourceLocation;
+        getOverlayTexture(): $ResourceLocation;
+        getRenderOverlayTexture(arg0: $Minecraft): $ResourceLocation;
+        getTintColor(arg0: $FluidStack_): number;
+        getTintColor(): number;
+        getTintColor(arg0: $FluidState, arg1: $BlockAndTintGetter, arg2: $BlockPos_): number;
     }
     export class $IClientBlockExtensions {
         static of(arg0: $BlockState_): $IClientBlockExtensions;
@@ -72,11 +72,11 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
         static DEFAULT: $IClientBlockExtensions;
     }
     export interface $IClientBlockExtensions {
-        addHitEffects(arg0: $BlockState_, arg1: $Level_, arg2: $HitResult, arg3: $ParticleEngine): boolean;
         addDestroyEffects(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_, arg3: $ParticleEngine): boolean;
+        addHitEffects(arg0: $BlockState_, arg1: $Level_, arg2: $HitResult, arg3: $ParticleEngine): boolean;
+        areBreakingParticlesTinted(arg0: $BlockState_, arg1: $ClientLevel, arg2: $BlockPos_): boolean;
         getFogColor(arg0: $BlockState_, arg1: $LevelReader, arg2: $BlockPos_, arg3: $Entity, arg4: $Vector3d, arg5: number): $Vector3d;
         playBreakSound(arg0: $BlockState_, arg1: $Level_, arg2: $BlockPos_): boolean;
-        areBreakingParticlesTinted(arg0: $BlockState_, arg1: $ClientLevel, arg2: $BlockPos_): boolean;
     }
     export class $IClientItemExtensions {
         static of(arg0: $ItemStack_): $IClientItemExtensions;
@@ -85,22 +85,22 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
     }
     export interface $IClientItemExtensions {
         getCustomRenderer(): $BlockEntityWithoutLevelRenderer;
-        getFont(arg0: $ItemStack_, arg1: $IClientItemExtensions$FontContext_): $Font;
-        getDefaultDyeColor(arg0: $ItemStack_): number;
-        shouldBobAsEntity(arg0: $ItemStack_): boolean;
         getArmPose(arg0: $LivingEntity, arg1: $InteractionHand_, arg2: $ItemStack_): $HumanoidModel$ArmPose;
-        getArmorLayerTintColor(arg0: $ItemStack_, arg1: $LivingEntity, arg2: $ArmorMaterial$Layer, arg3: number, arg4: number): number;
+        shouldBobAsEntity(arg0: $ItemStack_): boolean;
+        getDefaultDyeColor(arg0: $ItemStack_): number;
+        getFont(arg0: $ItemStack_, arg1: $IClientItemExtensions$FontContext_): $Font;
+        getHumanoidArmorModel(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: $HumanoidModel<never>): $HumanoidModel<never>;
+        applyForgeHandTransform(arg0: $PoseStack, arg1: $LocalPlayer, arg2: $HumanoidArm_, arg3: $ItemStack_, arg4: number, arg5: number, arg6: number): boolean;
+        setupModelAnimations(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: $Model, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
+        shouldSpreadAsEntity(arg0: $ItemStack_): boolean;
         getScopeOverlayTexture(arg0: $ItemStack_): $ResourceLocation;
+        getGenericArmorModel(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: $HumanoidModel<never>): $Model;
+        getArmorLayerTintColor(arg0: $ItemStack_, arg1: $LivingEntity, arg2: $ArmorMaterial$Layer, arg3: number, arg4: number): number;
         /**
          * @deprecated
          */
         renderHelmetOverlay(arg0: $ItemStack_, arg1: $Player, arg2: number, arg3: number, arg4: number): void;
         renderHelmetOverlay(arg0: $ItemStack_, arg1: $Player, arg2: $GuiGraphics, arg3: $DeltaTracker): void;
-        getHumanoidArmorModel(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: $HumanoidModel<never>): $HumanoidModel<never>;
-        applyForgeHandTransform(arg0: $PoseStack, arg1: $LocalPlayer, arg2: $HumanoidArm_, arg3: $ItemStack_, arg4: number, arg5: number, arg6: number): boolean;
-        getGenericArmorModel(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: $HumanoidModel<never>): $Model;
-        setupModelAnimations(arg0: $LivingEntity, arg1: $ItemStack_, arg2: $EquipmentSlot_, arg3: $Model, arg4: number, arg5: number, arg6: number, arg7: number, arg8: number, arg9: number): void;
-        shouldSpreadAsEntity(arg0: $ItemStack_): boolean;
         get customRenderer(): $BlockEntityWithoutLevelRenderer;
     }
     export class $IClientItemExtensions$FontContext extends $Enum<$IClientItemExtensions$FontContext> {
@@ -115,15 +115,15 @@ declare module "@package/net/neoforged/neoforge/client/extensions/common" {
      */
     export type $IClientItemExtensions$FontContext_ = "item_count" | "tooltip" | "selected_item_name";
     export class $ClientExtensionsManager {
-        static init(): void;
         /**
          * @deprecated
          */
         static earlyInit(): void;
+        static init(): void;
     }
     export class $IClientMobEffectExtensions {
-        static of(arg0: $MobEffectInstance): $IClientMobEffectExtensions;
         static of(arg0: $MobEffect_): $IClientMobEffectExtensions;
+        static of(arg0: $MobEffectInstance): $IClientMobEffectExtensions;
         static DEFAULT: $IClientMobEffectExtensions;
     }
     export interface $IClientMobEffectExtensions {

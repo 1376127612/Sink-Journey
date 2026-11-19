@@ -35,6 +35,9 @@ declare module "@package/com/mojang/brigadier" {
     export class $ImmutableStringReader {
     }
     export interface $ImmutableStringReader {
+        getRemainingLength(): number;
+        getTotalLength(): number;
+        getRead(): string;
         canRead(): boolean;
         canRead(arg0: number): boolean;
         peek(arg0: number): string;
@@ -42,15 +45,12 @@ declare module "@package/com/mojang/brigadier" {
         getRemaining(): string;
         getString(): string;
         getCursor(): number;
-        getRemainingLength(): number;
-        getTotalLength(): number;
-        getRead(): string;
-        get remaining(): string;
-        get string(): string;
-        get cursor(): number;
         get remainingLength(): number;
         get totalLength(): number;
         get read(): string;
+        get remaining(): string;
+        get string(): string;
+        get cursor(): number;
     }
     export class $ResultConsumer<S> {
     }
@@ -90,20 +90,20 @@ declare module "@package/com/mojang/brigadier" {
      */
     export type $RedirectModifier_<S> = ((arg0: $CommandContext<S>) => $Collection_<S>);
     export class $CommandDispatcher<S> {
+        getCompletionSuggestions(arg0: $ParseResults<S>, arg1: number): $CompletableFuture<$Suggestions>;
+        getCompletionSuggestions(arg0: $ParseResults<S>): $CompletableFuture<$Suggestions>;
         register(arg0: $LiteralArgumentBuilder<S>): $LiteralCommandNode<S>;
-        execute(arg0: $ParseResults<S>): number;
-        execute(arg0: $StringReader, arg1: S): number;
         execute(arg0: string, arg1: S): number;
+        execute(arg0: $StringReader, arg1: S): number;
+        execute(arg0: $ParseResults<S>): number;
         parse(arg0: $StringReader, arg1: S): $ParseResults<S>;
         parse(arg0: string, arg1: S): $ParseResults<S>;
         getRoot(): $RootCommandNode<S>;
         getPath(arg0: $CommandNode<S>): $Collection<string>;
         findNode(arg0: $Collection_<string>): $CommandNode<S>;
         setConsumer(arg0: $ResultConsumer_<S>): void;
-        getCompletionSuggestions(arg0: $ParseResults<S>, arg1: number): $CompletableFuture<$Suggestions>;
-        getCompletionSuggestions(arg0: $ParseResults<S>): $CompletableFuture<$Suggestions>;
-        findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
         getAllUsage(arg0: $CommandNode<S>, arg1: S, arg2: boolean): string[];
+        findAmbiguities(arg0: $AmbiguityConsumer_<S>): void;
         getSmartUsage(arg0: $CommandNode<S>, arg1: S): $Map<$CommandNode<S>, string>;
         static ARGUMENT_SEPARATOR: string;
         static ARGUMENT_SEPARATOR_CHAR: string;
@@ -113,12 +113,18 @@ declare module "@package/com/mojang/brigadier" {
         set consumer(value: $ResultConsumer_<S>);
     }
     export class $StringReader implements $ImmutableStringReader {
+        getRemainingLength(): number;
+        getTotalLength(): number;
+        static isQuotedStringStart(arg0: string): boolean;
+        static isAllowedInUnquotedString(arg0: string): boolean;
+        getRead(): string;
+        setCursor(arg0: number): void;
         read(): string;
         readInt(): number;
         canRead(): boolean;
         canRead(arg0: number): boolean;
-        peek(): string;
         peek(arg0: number): string;
+        peek(): string;
         skip(): void;
         expect(arg0: string): void;
         readFloat(): number;
@@ -128,24 +134,18 @@ declare module "@package/com/mojang/brigadier" {
         readDouble(): number;
         getRemaining(): string;
         getString(): string;
-        static isQuotedStringStart(arg0: string): boolean;
-        static isAllowedInUnquotedString(arg0: string): boolean;
-        getCursor(): number;
         skipWhitespace(): void;
+        static isAllowedNumber(arg0: string): boolean;
+        readStringUntil(arg0: string): string;
         readUnquotedString(): string;
         readQuotedString(): string;
-        readStringUntil(arg0: string): string;
-        static isAllowedNumber(arg0: string): boolean;
-        getRemainingLength(): number;
-        getTotalLength(): number;
-        setCursor(arg0: number): void;
-        getRead(): string;
+        getCursor(): number;
         constructor(arg0: $StringReader);
         constructor(arg0: string);
-        get remaining(): string;
-        get string(): string;
         get remainingLength(): number;
         get totalLength(): number;
+        get remaining(): string;
+        get string(): string;
     }
     export class $ParseResults<S> {
         getContext(): $CommandContextBuilder<S>;

@@ -23,17 +23,17 @@ declare module "@package/cn/howxu/mmcr/api/capability" {
     export class $CapabilityRequest {
     }
     export interface $CapabilityRequest {
+        ioType(): $IOType;
         type(): $CapabilityType;
         parallelism(): number;
-        ioType(): $IOType;
     }
     export class $CapabilityDirections extends $Record {
+        static bidirectional(): $CapabilityDirections;
         values(): $Set<$IOType>;
         static of(...values: $IOType_[]): $CapabilityDirections;
         static input(): $CapabilityDirections;
         static output(): $CapabilityDirections;
         supports(direction: $IOType_): boolean;
-        static bidirectional(): $CapabilityDirections;
         constructor(values: $Set_<$IOType_>);
     }
     /**
@@ -43,23 +43,23 @@ declare module "@package/cn/howxu/mmcr/api/capability" {
     export class $CapabilityView {
     }
     export interface $CapabilityView {
-        type(): $CapabilityType;
-        tags(): $List<string>;
+        directions(): $CapabilityDirections;
         matchesTag(requirementTag: string): boolean;
-        facets(): $Set<$Class<$CapabilityFacet>>;
         /**
          * @deprecated
          */
         ioType(): $IOType;
-        directions(): $CapabilityDirections;
+        facets(): $Set<$Class<$CapabilityFacet>>;
+        type(): $CapabilityType;
+        tags(): $List<string>;
     }
     /**
      * Values that may be interpreted as {@link $CapabilityView}.
      */
     export type $CapabilityView_ = (() => $CapabilityType_);
     export class $CapabilitySnapshot extends $Record {
-        capabilities(): $List<$MachineCapability>;
         facets<F extends $CapabilityFacet>(facetType: $Class<F>): $List<F>;
+        capabilities(): $List<$MachineCapability>;
         additionalFacets(): $List<$CapabilityFacet>;
         constructor(capabilities: $List_<$MachineCapability>);
         constructor(capabilities: $List_<$MachineCapability>, additionalFacets: $List_<$CapabilityFacet>);
@@ -71,22 +71,22 @@ declare module "@package/cn/howxu/mmcr/api/capability" {
     export class $MachineCapability {
     }
     export interface $MachineCapability {
-        type(): $CapabilityType;
-        prepare(request: $CapabilityRequest): $CapabilityOperation;
-        view(): $CapabilityView;
-        outputPriority(): number;
-        facet<F extends $CapabilityFacet>(facetType: $Class<F>): (F) | undefined;
+        directions(): $CapabilityDirections;
         /**
          * @deprecated
          */
         ioType(): $IOType;
-        directions(): $CapabilityDirections;
+        facet<F extends $CapabilityFacet>(facetType: $Class<F>): (F) | undefined;
+        outputPriority(): number;
+        type(): $CapabilityType;
+        prepare(request: $CapabilityRequest): $CapabilityOperation;
+        view(): $CapabilityView;
     }
     export class $CapabilityHost {
     }
     export interface $CapabilityHost {
-        capabilities(): $List<$MachineCapability>;
         capabilitySnapshot(): $CapabilitySnapshot;
+        capabilities(): $List<$MachineCapability>;
     }
     /**
      * Values that may be interpreted as {@link $CapabilityHost}.

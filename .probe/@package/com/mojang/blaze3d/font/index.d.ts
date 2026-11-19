@@ -33,24 +33,24 @@ declare module "@package/com/mojang/blaze3d/font" {
     export class $GlyphInfo {
     }
     export interface $GlyphInfo {
-        getBoldOffset(): number;
         bake(glyphProvider: $Function_<$SheetGlyphInfo, $BakedGlyph>): $BakedGlyph;
-        getAdvance(bold: boolean): number;
         getAdvance(): number;
+        getAdvance(bold: boolean): number;
+        getBoldOffset(): number;
         getShadowOffset(): number;
         get boldOffset(): number;
         get shadowOffset(): number;
     }
     export class $TrueTypeGlyphProvider implements $GlyphProvider {
-        close(): void;
         getGlyph(character: number): $GlyphInfo;
         getSupportedGlyphs(): $IntSet;
+        close(): void;
         constructor(fontMemory: $ByteBuffer, face: $FT_Face, size: number, oversample: number, shiftX: number, shiftY: number, skip: string);
         get supportedGlyphs(): $IntSet;
     }
     export class $SpaceProvider$Definition extends $Record implements $GlyphProviderDefinition {
-        type(): $GlyphProviderType;
         advances(): $Map<number, number>;
+        type(): $GlyphProviderType;
         unpack(): $Either<$GlyphProviderDefinition$Loader, $GlyphProviderDefinition$Reference>;
         static CODEC: $MapCodec<$SpaceProvider$Definition>;
         constructor(arg0: $Map_<number, number>);
@@ -60,8 +60,8 @@ declare module "@package/com/mojang/blaze3d/font" {
      */
     export type $SpaceProvider$Definition_ = { advances?: $Map_<number, number>,  } | [advances?: $Map_<number, number>, ];
     export class $TrueTypeGlyphProvider$Glyph implements $GlyphInfo {
-        getBoldOffset(): number;
         getAdvance(bold: boolean): number;
+        getBoldOffset(): number;
         getShadowOffset(): number;
         get boldOffset(): number;
         get shadowOffset(): number;
@@ -76,35 +76,35 @@ declare module "@package/com/mojang/blaze3d/font" {
     export class $SheetGlyphInfo {
     }
     export interface $SheetGlyphInfo {
-        getRight(): number;
-        getLeft(): number;
-        upload(xOffset: number, yOffset: number): void;
-        getTop(): number;
-        getBottom(): number;
-        getBearingLeft(): number;
-        getPixelWidth(): number;
-        getPixelHeight(): number;
-        getOversample(): number;
-        getBearingTop(): number;
         isColored(): boolean;
-        get right(): number;
-        get left(): number;
-        get top(): number;
-        get bottom(): number;
-        get bearingLeft(): number;
-        get pixelWidth(): number;
-        get pixelHeight(): number;
-        get oversample(): number;
-        get bearingTop(): number;
+        getBearingLeft(): number;
+        getBearingTop(): number;
+        getPixelHeight(): number;
+        getPixelWidth(): number;
+        getOversample(): number;
+        upload(xOffset: number, yOffset: number): void;
+        getBottom(): number;
+        getTop(): number;
+        getLeft(): number;
+        getRight(): number;
         get colored(): boolean;
+        get bearingLeft(): number;
+        get bearingTop(): number;
+        get pixelHeight(): number;
+        get pixelWidth(): number;
+        get oversample(): number;
+        get bottom(): number;
+        get top(): number;
+        get left(): number;
+        get right(): number;
     }
     export class $GlyphProvider {
         static BASELINE: number;
     }
     export interface $GlyphProvider extends $AutoCloseable {
-        close(): void;
         getGlyph(character: number): $GlyphInfo;
         getSupportedGlyphs(): $IntSet;
+        close(): void;
         get supportedGlyphs(): $IntSet;
     }
     /**

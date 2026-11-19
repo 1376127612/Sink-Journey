@@ -4,7 +4,8 @@ import { $Logger } from "@package/org/slf4j";
 import { $HashCode } from "@package/com/google/common/hash";
 import { $ConcurrentMap, $CompletableFuture } from "@package/java/util/concurrent";
 import { $ImmutableMap } from "@package/com/google/common/collect";
-import { $Comparator, $Map, $Set, $Collection_ } from "@package/java/util";
+import { $CallbackInfo } from "@package/org/spongepowered/asm/mixin/injection/callback";
+import { $Comparator, $Map, $Set, $Set_, $Collection_ } from "@package/java/util";
 import { $ToIntFunction } from "@package/java/util/function";
 import { $WorldVersion } from "@package/net/minecraft";
 import { $HolderLookup$Provider, $Registry } from "@package/net/minecraft/core";
@@ -27,13 +28,13 @@ export * as metadata from "@package/net/minecraft/data/metadata";
 
 declare module "@package/net/minecraft/data" {
     export class $BlockFamily {
+        shouldGenerateModel(): boolean;
         get(variant: $BlockFamily$Variant_): $Block;
         getVariants(): $Map<$BlockFamily$Variant, $Block>;
         shouldGenerateRecipe(): boolean;
         getRecipeGroupPrefix(): (string) | undefined;
         getRecipeUnlockedBy(): (string) | undefined;
         getBaseBlock(): $Block;
-        shouldGenerateModel(): boolean;
         get variants(): $Map<$BlockFamily$Variant, $Block>;
         get recipeGroupPrefix(): (string) | undefined;
         get recipeUnlockedBy(): (string) | undefined;
@@ -44,7 +45,7 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$ProviderCacheBuilder}.
      */
-    export type $HashCache$ProviderCacheBuilder_ = { data?: $ConcurrentMap<$Path_, $HashCode>, version?: string,  } | [data?: $ConcurrentMap<$Path_, $HashCode>, version?: string, ];
+    export type $HashCache$ProviderCacheBuilder_ = { version?: string, data?: $ConcurrentMap<$Path_, $HashCode>,  } | [version?: string, data?: $ConcurrentMap<$Path_, $HashCode>, ];
     export class $HashCache$UpdateFunction {
     }
     export interface $HashCache$UpdateFunction {
@@ -116,11 +117,11 @@ declare module "@package/net/minecraft/data" {
         addProvider<T extends $DataProvider>(arg0: boolean, arg1: $DataProvider$Factory_<T>): T;
         getPackOutput(arg0: string): $PackOutput;
         getPackOutput(): $PackOutput;
-        getVanillaPack(toRun: boolean): $DataGenerator$PackGenerator;
-        getBuiltinDatapack(toRun: boolean, providerPrefix: string): $DataGenerator$PackGenerator;
-        getBuiltinDatapack(arg0: boolean, arg1: string, arg2: string): $DataGenerator$PackGenerator;
         getPackGenerator(arg0: boolean, arg1: string, arg2: string): $DataGenerator$PackGenerator;
+        getBuiltinDatapack(arg0: boolean, arg1: string, arg2: string): $DataGenerator$PackGenerator;
+        getBuiltinDatapack(toRun: boolean, providerPrefix: string): $DataGenerator$PackGenerator;
         getProvidersView(): $Map<string, $DataProvider>;
+        getVanillaPack(toRun: boolean): $DataGenerator$PackGenerator;
         rootOutputFolder: $Path;
         constructor(rootOutputFolder: $Path_, version: $WorldVersion, alwaysGenerate: boolean);
         get providersView(): $Map<string, $DataProvider>;
@@ -137,11 +138,11 @@ declare module "@package/net/minecraft/data" {
     /**
      * Values that may be interpreted as {@link $HashCache$ProviderCache}.
      */
-    export type $HashCache$ProviderCache_ = { data?: $ImmutableMap<$Path_, $HashCode>, version?: string,  } | [data?: $ImmutableMap<$Path_, $HashCode>, version?: string, ];
+    export type $HashCache$ProviderCache_ = { version?: string, data?: $ImmutableMap<$Path_, $HashCode>,  } | [version?: string, data?: $ImmutableMap<$Path_, $HashCode>, ];
     export class $HashCache$UpdateResult extends $Record {
-        cache(): $HashCache$ProviderCache;
-        providerId(): string;
         writes(): number;
+        providerId(): string;
+        cache(): $HashCache$ProviderCache;
         constructor(providerId: string, cache: $HashCache$ProviderCache_, writes: number);
     }
     /**
@@ -152,8 +153,8 @@ declare module "@package/net/minecraft/data" {
         addProvider<T extends $DataProvider>(factory: $DataProvider$Factory_<T>): T;
     }
     export class $Main {
-        static createStandardGenerator(outputFolder: $Path_, inputFolders: $Collection_<$Path_>, client: boolean, server: boolean, dev: boolean, reports: boolean, validate: boolean, version: $WorldVersion, alwaysGenerate: boolean): $DataGenerator;
         static main(args: string[]): void;
+        static createStandardGenerator(outputFolder: $Path_, inputFolders: $Collection_<$Path_>, client: boolean, server: boolean, dev: boolean, reports: boolean, validate: boolean, version: $WorldVersion, alwaysGenerate: boolean): $DataGenerator;
         constructor();
     }
     export class $CachedOutput {
@@ -167,15 +168,16 @@ declare module "@package/net/minecraft/data" {
      */
     export type $CachedOutput_ = ((arg0: $Path, arg1: number[], arg2: $HashCode) => void);
     export class $HashCache {
-        applyUpdate(updateResult: $HashCache$UpdateResult_): void;
+        shouldRunInThisVersion(provider: string): boolean;
         generateUpdate(provider: string, updateFunction: $HashCache$UpdateFunction_): $CompletableFuture<$HashCache$UpdateResult>;
         /**
          * Writes the cache file containing the hashes of newly created files to the disk, and deletes any stale files.
          */
         purgeStaleAndWrite(): void;
-        shouldRunInThisVersion(provider: string): boolean;
-        static readCache(rootDir: $Path_, cachePath: $Path_): $HashCache$ProviderCache;
+        applyUpdate(updateResult: $HashCache$UpdateResult_): void;
         getProviderCachePath(provider: string): $Path;
+        handler$eep000$placebo$skipSomeMetadata(arg0: $CallbackInfo, arg1: $Set_<any>): void;
+        static readCache(rootDir: $Path_, cachePath: $Path_): $HashCache$ProviderCache;
         initialCount: number;
         versionId: string;
         cachePaths: $Set<$Path>;
@@ -184,34 +186,34 @@ declare module "@package/net/minecraft/data" {
         constructor(rootDir: $Path_, providers: $Collection_<string>, version: $WorldVersion);
     }
     export class $BlockFamily$Builder {
+        cracked(buttonBlock: $Block_): $BlockFamily$Builder;
+        customFenceGate(buttonBlock: $Block_): $BlockFamily$Builder;
+        customFence(buttonBlock: $Block_): $BlockFamily$Builder;
+        recipeGroupPrefix(recipeGroupPrefix: string): $BlockFamily$Builder;
+        dontGenerateModel(): $BlockFamily$Builder;
+        recipeUnlockedBy(recipeGroupPrefix: string): $BlockFamily$Builder;
+        dontGenerateRecipe(): $BlockFamily$Builder;
+        mosaic(buttonBlock: $Block_): $BlockFamily$Builder;
         fence(buttonBlock: $Block_): $BlockFamily$Builder;
         sign(signBlock: $Block_, wallSignBlock: $Block_): $BlockFamily$Builder;
         wall(buttonBlock: $Block_): $BlockFamily$Builder;
-        getFamily(): $BlockFamily;
-        button(buttonBlock: $Block_): $BlockFamily$Builder;
-        pressurePlate(buttonBlock: $Block_): $BlockFamily$Builder;
-        cracked(buttonBlock: $Block_): $BlockFamily$Builder;
-        fenceGate(buttonBlock: $Block_): $BlockFamily$Builder;
-        stairs(buttonBlock: $Block_): $BlockFamily$Builder;
-        chiseled(buttonBlock: $Block_): $BlockFamily$Builder;
-        cut(buttonBlock: $Block_): $BlockFamily$Builder;
-        polished(buttonBlock: $Block_): $BlockFamily$Builder;
         door(buttonBlock: $Block_): $BlockFamily$Builder;
         trapdoor(buttonBlock: $Block_): $BlockFamily$Builder;
         slab(buttonBlock: $Block_): $BlockFamily$Builder;
-        mosaic(buttonBlock: $Block_): $BlockFamily$Builder;
-        customFenceGate(buttonBlock: $Block_): $BlockFamily$Builder;
-        dontGenerateRecipe(): $BlockFamily$Builder;
-        recipeUnlockedBy(recipeGroupPrefix: string): $BlockFamily$Builder;
-        dontGenerateModel(): $BlockFamily$Builder;
-        customFence(buttonBlock: $Block_): $BlockFamily$Builder;
-        recipeGroupPrefix(recipeGroupPrefix: string): $BlockFamily$Builder;
+        getFamily(): $BlockFamily;
+        pressurePlate(buttonBlock: $Block_): $BlockFamily$Builder;
+        polished(buttonBlock: $Block_): $BlockFamily$Builder;
+        cut(buttonBlock: $Block_): $BlockFamily$Builder;
+        chiseled(buttonBlock: $Block_): $BlockFamily$Builder;
+        stairs(buttonBlock: $Block_): $BlockFamily$Builder;
+        fenceGate(buttonBlock: $Block_): $BlockFamily$Builder;
+        button(buttonBlock: $Block_): $BlockFamily$Builder;
         constructor(baseBlock: $Block_);
         get family(): $BlockFamily;
     }
     export class $DataProvider {
         static saveStable<T>(output: $CachedOutput_, registries: $HolderLookup$Provider, codec: $Codec<T>, value: T, path: $Path_): $CompletableFuture<never>;
-        static saveStable(output: $CachedOutput_, json: $JsonElement_, path: $Path_): $CompletableFuture<never>;
+        static saveStable(output: $CachedOutput_, json: $JsonElement_, path: $Path_): $CompletableFuture<any>;
         static FIXED_ORDER_FIELDS: $ToIntFunction<string>;
         static INDENT_WIDTH: $AtomicInteger;
         static KEY_COMPARATOR: $Comparator<string>;
@@ -226,11 +228,11 @@ declare module "@package/net/minecraft/data" {
         get name(): string;
     }
     export class $PackOutput {
+        createRegistryElementsPathProvider(registryKey: $ResourceKey_<$Registry<never>>): $PackOutput$PathProvider;
+        createRegistryTagsPathProvider(registryKey: $ResourceKey_<$Registry<never>>): $PackOutput$PathProvider;
         getOutputFolder(target: $PackOutput$Target_): $Path;
         getOutputFolder(): $Path;
         createPathProvider(target: $PackOutput$Target_, kind: string): $PackOutput$PathProvider;
-        createRegistryElementsPathProvider(registryKey: $ResourceKey_<$Registry<never>>): $PackOutput$PathProvider;
-        createRegistryTagsPathProvider(registryKey: $ResourceKey_<$Registry<never>>): $PackOutput$PathProvider;
         constructor(outputFolder: $Path_);
     }
     export class $HashCache$CacheUpdater implements $CachedOutput {

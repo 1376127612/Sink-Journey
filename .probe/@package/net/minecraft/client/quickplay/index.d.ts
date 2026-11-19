@@ -29,11 +29,11 @@ declare module "@package/net/minecraft/client/quickplay" {
     /**
      * Values that may be interpreted as {@link $QuickPlayLog$QuickPlayEntry}.
      */
-    export type $QuickPlayLog$QuickPlayEntry_ = { lastPlayedTime?: $Instant, gamemode?: $GameType_, quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_,  } | [lastPlayedTime?: $Instant, gamemode?: $GameType_, quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_, ];
+    export type $QuickPlayLog$QuickPlayEntry_ = { gamemode?: $GameType_, quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_, lastPlayedTime?: $Instant,  } | [gamemode?: $GameType_, quickPlayWorld?: $QuickPlayLog$QuickPlayWorld_, lastPlayedTime?: $Instant, ];
     export class $QuickPlayLog$Type extends $Enum<$QuickPlayLog$Type> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $QuickPlayLog$Type[];
         static valueOf(arg0: string): $QuickPlayLog$Type;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static MULTIPLAYER: $QuickPlayLog$Type;
         static SINGLEPLAYER: $QuickPlayLog$Type;

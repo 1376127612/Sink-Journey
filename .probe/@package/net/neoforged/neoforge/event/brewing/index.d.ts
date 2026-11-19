@@ -7,9 +7,9 @@ import { $PlayerEvent } from "@package/net/neoforged/neoforge/event/entity/playe
 
 declare module "@package/net/neoforged/neoforge/event/brewing" {
     export class $PotionBrewEvent extends $Event {
+        setItem(arg0: number, arg1: $ItemStack_): void;
         getLength(): number;
         getItem(arg0: number): $ItemStack;
-        setItem(arg0: number, arg1: $ItemStack_): void;
         get length(): number;
     }
     export class $PlayerBrewedPotionEvent extends $PlayerEvent {
@@ -18,18 +18,18 @@ declare module "@package/net/neoforged/neoforge/event/brewing" {
         get stack(): $ItemStack;
     }
     export class $RegisterBrewingRecipesEvent extends $Event {
-        getBuilder(): $PotionBrewing$Builder;
         getRegistryAccess(): $RegistryAccess;
+        getBuilder(): $PotionBrewing$Builder;
         constructor(arg0: $PotionBrewing$Builder, arg1: $RegistryAccess);
-        get builder(): $PotionBrewing$Builder;
         get registryAccess(): $RegistryAccess;
+        get builder(): $PotionBrewing$Builder;
     }
     export class $PotionBrewEvent$Post extends $PotionBrewEvent {
         constructor(arg0: $NonNullList<$ItemStack_>);
     }
     export class $PotionBrewEvent$Pre extends $PotionBrewEvent implements $ICancellableEvent {
-        isCanceled(): boolean;
         setCanceled(arg0: boolean): void;
+        isCanceled(): boolean;
         constructor(arg0: $NonNullList<$ItemStack_>);
     }
 }

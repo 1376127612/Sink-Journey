@@ -18,59 +18,99 @@ export * as config from "@package/xaero/hud/minimap/world/container/config";
 
 declare module "@package/xaero/hud/minimap/world/container" {
     export class $MinimapWorldContainer {
+        getSession(): $MinimapSession;
+        addWorld(arg0: $MinimapWorld): void;
+        addWorld(arg0: string): $MinimapWorld;
+        getThirdPartyWaypointManager(): $ThirdPartyWaypointManager;
+        getFirstWorld(): $MinimapWorld;
+        getRootConfig(): $RootConfig;
+        deleteSubContainer(arg0: $XaeroPath): boolean;
+        addSubContainer(arg0: $XaeroPath): $MinimapWorldContainer;
+        removeWorld(arg0: string): void;
+        getFullWorldName(arg0: string, arg1: string): string;
+        getWorldsCopy(): $List<$MinimapWorld>;
+        getSubContainers(): $Iterable<$MinimapWorldContainer>;
+        getEquivalentDimId(): $ResourceLocation;
+        getDirectoryPath(): $Path;
+        getLastNode(): string;
+        /**
+         * @deprecated
+         */
+        getServerWaypointManager(): $ServerWaypointManager;
+        getFirstWorldConnectedTo(arg0: $MinimapWorld): $MinimapWorld;
+        getEquivalentDimKey(): $ResourceKey<$Level>;
+        fixPathCharacterCases(arg0: $XaeroPath): $XaeroPath;
+        containsSubContainer(arg0: $XaeroPath): boolean;
+        getAllWorldsIterable(): $Iterable<$MinimapWorld>;
+        removeName(arg0: string): void;
+        getWorlds(): $Iterable<$MinimapWorld>;
         getName(arg0: string): string;
         isEmpty(): boolean;
         setName(arg0: string, arg1: string): void;
         getRoot(): $MinimapWorldRootContainer;
         getPath(): $XaeroPath;
-        setPath(arg0: $XaeroPath): void;
-        getSession(): $MinimapSession;
         getSubName(): string;
-        addWorld(arg0: string): $MinimapWorld;
-        addWorld(arg0: $MinimapWorld): void;
-        removeName(arg0: string): void;
-        getWorlds(): $Iterable<$MinimapWorld>;
-        containsSubContainer(arg0: $XaeroPath): boolean;
-        getFirstWorldConnectedTo(arg0: $MinimapWorld): $MinimapWorld;
-        fixPathCharacterCases(arg0: $XaeroPath): $XaeroPath;
-        getAllWorldsIterable(): $Iterable<$MinimapWorld>;
-        getEquivalentDimKey(): $ResourceKey<$Level>;
-        /**
-         * @deprecated
-         */
-        getServerWaypointManager(): $ServerWaypointManager;
-        getThirdPartyWaypointManager(): $ThirdPartyWaypointManager;
-        getFirstWorld(): $MinimapWorld;
-        getRootConfig(): $RootConfig;
-        getLastNode(): string;
-        addSubContainer(arg0: $XaeroPath): $MinimapWorldContainer;
-        deleteSubContainer(arg0: $XaeroPath): boolean;
-        getWorldsCopy(): $List<$MinimapWorld>;
-        getFullWorldName(arg0: string, arg1: string): string;
-        getDirectoryPath(): $Path;
-        getSubContainers(): $Iterable<$MinimapWorldContainer>;
-        removeWorld(arg0: string): void;
-        getEquivalentDimId(): $ResourceLocation;
+        setPath(arg0: $XaeroPath): void;
         static UNKNOWN_DIM_ID: $ResourceLocation;
-        get empty(): boolean;
-        get root(): $MinimapWorldRootContainer;
         get session(): $MinimapSession;
-        get subName(): string;
-        get worlds(): $Iterable<$MinimapWorld>;
-        get allWorldsIterable(): $Iterable<$MinimapWorld>;
-        get equivalentDimKey(): $ResourceKey<$Level>;
-        get serverWaypointManager(): $ServerWaypointManager;
         get thirdPartyWaypointManager(): $ThirdPartyWaypointManager;
         get firstWorld(): $MinimapWorld;
         get rootConfig(): $RootConfig;
-        get lastNode(): string;
         get worldsCopy(): $List<$MinimapWorld>;
-        get directoryPath(): $Path;
         get subContainers(): $Iterable<$MinimapWorldContainer>;
         get equivalentDimId(): $ResourceLocation;
+        get directoryPath(): $Path;
+        get lastNode(): string;
+        get serverWaypointManager(): $ServerWaypointManager;
+        get equivalentDimKey(): $ResourceKey<$Level>;
+        get allWorldsIterable(): $Iterable<$MinimapWorld>;
+        get worlds(): $Iterable<$MinimapWorld>;
+        get empty(): boolean;
+        get root(): $MinimapWorldRootContainer;
+        get subName(): string;
     }
     export class $MinimapWorldRootContainer extends $WaypointWorldContainer {
-        getConfig(): $RootConfig;
+        /**
+         * @deprecated
+         */
+        setSortType(arg0: $WaypointsSort_): void;
+        /**
+         * @deprecated
+         */
+        getSortType(): $WaypointsSort;
+        /**
+         * @deprecated
+         */
+        isIgnoreHeightmaps(): boolean;
+        getDimensionType(arg0: $ResourceKey_<$Level>): $DimensionType;
+        /**
+         * @deprecated
+         */
+        setIgnoreHeightmaps(arg0: boolean): void;
+        isConfigLoaded(): boolean;
+        /**
+         * @deprecated
+         */
+        isSortReversed(): boolean;
+        /**
+         * @deprecated
+         */
+        toggleSortReversed(): void;
+        setDimensionTypeId(arg0: $ResourceKey_<$Level>, arg1: $ResourceLocation_): void;
+        getDimensionScale(arg0: $ResourceKey_<$Level>): number;
+        /**
+         * @deprecated
+         */
+        setSortReversed(arg0: boolean): void;
+        /**
+         * @deprecated
+         */
+        toggleSortType(): void;
+        renameOldContainer(arg0: $XaeroPath): void;
+        /**
+         * @deprecated
+         */
+        isUsingDefaultTeleportCommand(): boolean;
         /**
          * @deprecated
          */
@@ -82,10 +122,6 @@ declare module "@package/xaero/hud/minimap/world/container" {
         /**
          * @deprecated
          */
-        isUsingDefaultTeleportCommand(): boolean;
-        /**
-         * @deprecated
-         */
         getServerTeleportCommandFormat(): string;
         /**
          * @deprecated
@@ -94,53 +130,12 @@ declare module "@package/xaero/hud/minimap/world/container" {
         /**
          * @deprecated
          */
-        setServerTeleportCommandRotationFormat(arg0: string): void;
-        /**
-         * @deprecated
-         */
-        getServerTeleportCommandRotationFormat(): string;
-        isConfigLoaded(): boolean;
-        /**
-         * @deprecated
-         */
-        getSortType(): $WaypointsSort;
-        /**
-         * @deprecated
-         */
-        setSortType(arg0: $WaypointsSort_): void;
-        getDimensionType(arg0: $ResourceKey_<$Level>): $DimensionType;
-        /**
-         * @deprecated
-         */
-        isIgnoreHeightmaps(): boolean;
-        getDimensionTypeIds(): $Iterable<$Map$Entry<$ResourceKey<$Level>, $ResourceLocation>>;
-        /**
-         * @deprecated
-         */
-        setTeleportationEnabled(arg0: boolean): void;
-        /**
-         * @deprecated
-         */
-        isUsingMultiworldDetection(): boolean;
-        updateConnectionsField(arg0: $WaypointSession): void;
-        updateDimensionType(arg0: $ClientLevel): void;
-        getSubWorldConnections(): $MinimapWorldConnectionManager;
-        /**
-         * @deprecated
-         */
-        setIgnoreHeightmaps(arg0: boolean): void;
-        /**
-         * @deprecated
-         */
-        getDefaultMultiworldId(): string;
+        isTeleportationEnabled(): boolean;
         /**
          * @deprecated
          */
         isIgnoreServerLevelId(): boolean;
-        /**
-         * @deprecated
-         */
-        setDefaultMultiworldId(arg0: string): void;
+        updateDimensionType(arg0: $ClientLevel): void;
         /**
          * @deprecated
          */
@@ -148,30 +143,35 @@ declare module "@package/xaero/hud/minimap/world/container" {
         /**
          * @deprecated
          */
-        isSortReversed(): boolean;
+        getDefaultMultiworldId(): string;
+        updateConnectionsField(arg0: $WaypointSession): void;
         /**
          * @deprecated
          */
-        isTeleportationEnabled(): boolean;
+        isUsingMultiworldDetection(): boolean;
+        getDimensionTypeIds(): $Iterable<$Map$Entry<$ResourceKey<$Level>, $ResourceLocation>>;
         /**
          * @deprecated
          */
-        setSortReversed(arg0: boolean): void;
-        setDimensionTypeId(arg0: $ResourceKey_<$Level>, arg1: $ResourceLocation_): void;
-        renameOldContainer(arg0: $XaeroPath): void;
+        setTeleportationEnabled(arg0: boolean): void;
+        getSubWorldConnections(): $MinimapWorldConnectionManager;
         /**
          * @deprecated
          */
-        toggleSortReversed(): void;
+        setDefaultMultiworldId(arg0: string): void;
         /**
          * @deprecated
          */
-        toggleSortType(): void;
-        getDimensionScale(arg0: $ResourceKey_<$Level>): number;
+        setServerTeleportCommandRotationFormat(arg0: string): void;
+        /**
+         * @deprecated
+         */
+        getServerTeleportCommandRotationFormat(): string;
+        getConfig(): $RootConfig;
         static UNKNOWN_DIM_ID: $ResourceLocation;
-        get config(): $RootConfig;
         get configLoaded(): boolean;
         get dimensionTypeIds(): $Iterable<$Map$Entry<$ResourceKey<$Level>, $ResourceLocation>>;
         get subWorldConnections(): $MinimapWorldConnectionManager;
+        get config(): $RootConfig;
     }
 }

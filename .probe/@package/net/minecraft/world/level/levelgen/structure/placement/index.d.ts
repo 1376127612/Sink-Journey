@@ -20,10 +20,10 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/placement"
     export type $StructurePlacement$FrequencyReducer_ = ((arg0: number, arg1: number, arg2: number, arg3: number, arg4: number) => boolean);
     export interface $StructurePlacementType<SP> extends RegistryMarked<RegistryTypes.WorldgenStructurePlacementTag, RegistryTypes.WorldgenStructurePlacement> {}
     export class $RandomSpreadType extends $Enum<$RandomSpreadType> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $RandomSpreadType[];
         static valueOf(arg0: string): $RandomSpreadType;
         evaluate(random: $RandomSource, bound: number): number;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$RandomSpreadType>;
         static LINEAR: $RandomSpreadType;
@@ -47,10 +47,10 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/placement"
      */
     export type $StructurePlacementType_<SP> = RegistryTypes.WorldgenStructurePlacement | (() => $MapCodec_<SP>);
     export class $StructurePlacement$FrequencyReductionMethod extends $Enum<$StructurePlacement$FrequencyReductionMethod> implements $StringRepresentable {
+        shouldGenerate(levelSeed: number, arg1: number, salt: number, regionX: number, regionZ: number): boolean;
+        getSerializedName(): string;
         static values(): $StructurePlacement$FrequencyReductionMethod[];
         static valueOf(arg0: string): $StructurePlacement$FrequencyReductionMethod;
-        getSerializedName(): string;
-        shouldGenerate(levelSeed: number, arg1: number, salt: number, regionX: number, regionZ: number): boolean;
         getRemappedEnumConstantName(): string;
         static CODEC: $Codec<$StructurePlacement$FrequencyReductionMethod>;
         static LEGACY_TYPE_3: $StructurePlacement$FrequencyReductionMethod;
@@ -65,19 +65,19 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/placement"
      */
     export type $StructurePlacement$FrequencyReductionMethod_ = "default" | "legacy_type_1" | "legacy_type_2" | "legacy_type_3";
     export class $StructurePlacement {
-        type(): $StructurePlacementType<never>;
-        applyAdditionalChunkRestrictions(regionX: number, regionZ: number, levelSeed: number): boolean;
-        applyInteractionsWithOtherStructures(structureState: $ChunkGeneratorStructureState, x: number, z: number): boolean;
         getLocatePos(chunkPos: $ChunkPos): $BlockPos;
         isStructureChunk(structureState: $ChunkGeneratorStructureState, x: number, z: number): boolean;
+        type(): $StructurePlacementType<never>;
+        applyInteractionsWithOtherStructures(structureState: $ChunkGeneratorStructureState, x: number, z: number): boolean;
+        applyAdditionalChunkRestrictions(regionX: number, regionZ: number, levelSeed: number): boolean;
         static CODEC: $Codec<$StructurePlacement>;
     }
     /**
      * @deprecated
      */
     export class $StructurePlacement$ExclusionZone extends $Record {
-        chunkCount(): number;
         otherSet(): $Holder<$StructureSet>;
+        chunkCount(): number;
         static CODEC: $Codec<$StructurePlacement$ExclusionZone>;
         constructor(arg0: $Holder_<$StructureSet>, arg1: number);
     }
@@ -86,19 +86,19 @@ declare module "@package/net/minecraft/world/level/levelgen/structure/placement"
      */
     export type $StructurePlacement$ExclusionZone_ = { chunkCount?: number, otherSet?: $Holder_<$StructureSet>,  } | [chunkCount?: number, otherSet?: $Holder_<$StructureSet>, ];
     export class $RandomSpreadStructurePlacement extends $StructurePlacement {
-        spreadType(): $RandomSpreadType;
         spacing(): number;
         separation(): number;
         getPotentialStructureChunk(seed: number, arg1: number, regionX: number): $ChunkPos;
+        spreadType(): $RandomSpreadType;
         static CODEC: $MapCodec<$RandomSpreadStructurePlacement>;
         constructor(spacing: number, separation: number, spreadType: $RandomSpreadType_, salt: number);
         constructor(locateOffset: $Vec3i, frequencyReductionMethod: $StructurePlacement$FrequencyReductionMethod_, frequency: number, salt: number, exclusionZone: ($StructurePlacement$ExclusionZone_) | undefined, spacing: number, separation: number, spreadType: $RandomSpreadType_);
     }
     export class $ConcentricRingsStructurePlacement extends $StructurePlacement {
+        preferredBiomes(): $HolderSet<$Biome>;
         count(): number;
         spread(): number;
         distance(): number;
-        preferredBiomes(): $HolderSet<$Biome>;
         static CODEC: $MapCodec<$ConcentricRingsStructurePlacement>;
         constructor(distance: number, spread: number, count: number, preferrredBiomes: $HolderSet_<$Biome>);
         constructor(locateOffset: $Vec3i, frequencyReductionMethod: $StructurePlacement$FrequencyReductionMethod_, frequency: number, salt: number, exclusionZone: ($StructurePlacement$ExclusionZone_) | undefined, distance: number, spread: number, count: number, preferredBiomes: $HolderSet_<$Biome>);

@@ -29,12 +29,12 @@ declare module "@package/com/mojang/authlib" {
     /**
      * Values that may be interpreted as {@link $Environment}.
      */
-    export type $Environment_ = { servicesHost?: string, name?: string, sessionHost?: string,  } | [servicesHost?: string, name?: string, sessionHost?: string, ];
+    export type $Environment_ = { name?: string, sessionHost?: string, servicesHost?: string,  } | [name?: string, sessionHost?: string, servicesHost?: string, ];
     export class $HttpAuthenticationService implements $AuthenticationService {
-        getProxy(): $Proxy;
-        static buildQuery(arg0: $Map_<string, $Object>): string;
-        static concatenateURL(arg0: $URL, arg1: string): $URL;
         static constantURL(arg0: string): $URL;
+        static concatenateURL(arg0: $URL, arg1: string): $URL;
+        static buildQuery(arg0: $Map_<string, $Object>): string;
+        getProxy(): $Proxy;
         get proxy(): $Proxy;
     }
     export class $GameProfile {

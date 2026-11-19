@@ -6,9 +6,9 @@ declare module "@package/com/denfop/api/item" {
     export class $DamageItem {
     }
     export interface $DamageItem {
-        setCustomDamage(arg0: $ItemStack_, arg1: number): void;
         getCustomDamage(arg0: $ItemStack_): number;
-        applyCustomDamage(arg0: $ItemStack_, arg1: number, arg2: $LivingEntity): boolean;
+        setCustomDamage(arg0: $ItemStack_, arg1: number): void;
         getMaxCustomDamage(arg0: $ItemStack_): number;
+        applyCustomDamage(arg0: $ItemStack_, arg1: number, arg2: $LivingEntity): boolean;
     }
 }

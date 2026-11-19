@@ -11,21 +11,21 @@ export * as language from "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/co
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor" {
     export class $CodeEditor extends $TextArea {
+        getStyledLines(): $List<$StyledLine>;
+        getSyntaxParser(): $SyntaxParser;
+        getStyleManager(): $StyleManager;
+        setStyleManager(arg0: $StyleManager): $CodeEditor;
         setValue(arg0: string[], arg1: boolean): $CodeEditor;
         getLanguage(): $ILanguageDefinition;
         setLanguage(arg0: $ILanguageDefinition): $CodeEditor;
-        getStyleManager(): $StyleManager;
-        getSyntaxParser(): $SyntaxParser;
-        setStyleManager(arg0: $StyleManager): $CodeEditor;
-        getStyledLines(): $List<$StyledLine>;
         contentView: $UIElement;
         verticalScroller: $Scroller;
         static CODEC: $Codec<$UIElement>;
         horizontalScroller: $Scroller;
         static EMPTY_LAYOUT: $Layout;
         constructor();
-        get syntaxParser(): $SyntaxParser;
         get styledLines(): $List<$StyledLine>;
+        get syntaxParser(): $SyntaxParser;
     }
     export class $StyledLine extends $Record {
         line(): number;
@@ -45,5 +45,5 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/elements/codeeditor" {
     /**
      * Values that may be interpreted as {@link $StyledText}.
      */
-    export type $StyledText_ = { text?: string, style?: $Style,  } | [text?: string, style?: $Style, ];
+    export type $StyledText_ = { style?: $Style, text?: string,  } | [style?: $Style, text?: string, ];
 }

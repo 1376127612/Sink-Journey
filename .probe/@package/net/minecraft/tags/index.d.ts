@@ -2,6 +2,7 @@ import { $RegistryLayer_ } from "@package/net/minecraft/server";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $WorldPreset } from "@package/net/minecraft/world/level/levelgen/presets";
 import { $Executor_, $CompletableFuture } from "@package/java/util/concurrent";
+import { $AccessTagManager, $AccessTagNetworkSerialization } from "@package/com/blamejared/crafttweaker/mixin/common/access/tag";
 import { $EntityType } from "@package/net/minecraft/world/entity";
 import { $GameEvent } from "@package/net/minecraft/world/level/gameevent";
 import { $ResourceManager, $PreparableReloadListener, $PreparableReloadListener$PreparationBarrier_ } from "@package/net/minecraft/server/packs/resources";
@@ -9,7 +10,7 @@ import { $PaintingVariant } from "@package/net/minecraft/world/entity/decoration
 import { $List, $Map_, $Collection_, $List_, $Collection, $Map } from "@package/java/util";
 import { $DependencySorter$Entry, $ExtraCodecs$TagOrElementLocation } from "@package/net/minecraft/util";
 import { $CatVariant } from "@package/net/minecraft/world/entity/animal";
-import { $Function_, $Consumer_, $Predicate_ } from "@package/java/util/function";
+import { $Consumer, $Function_, $Consumer_, $Predicate_ } from "@package/java/util/function";
 import { $Holder_, $Holder, $RegistryAccess, $Registry, $LayeredRegistryAccess } from "@package/net/minecraft/core";
 import { $ITagBuilderExtension } from "@package/net/neoforged/neoforge/common/extensions";
 import { RegistryTypes } from "@special/types";
@@ -208,13 +209,14 @@ declare module "@package/net/minecraft/tags" {
      */
     export type $TagFile_ = { remove?: $List_<$TagEntry>, entries?: $List_<$TagEntry>, replace?: boolean,  } | [remove?: $List_<$TagEntry>, entries?: $List_<$TagEntry>, replace?: boolean, ];
     export class $TagLoader<T> implements $TagLoaderExtension, $TagLoaderKJS<any> {
-        supermartijn642corelibSetRegistry(registry: $Registry<any>): void;
+        kjs$getRegistry(): $Registry<any>;
+        kjs$init(resources: $ReloadableServerResourcesKJS, registry: $Registry<any>): void;
         loadAndBuild(resourceManager: $ResourceManager): $Map<$ResourceLocation, $Collection<$Object>>;
+        kjs$getResources(): $ReloadableServerResourcesKJS;
+        supermartijn642corelibSetRegistry(registry: $Registry<any>): void;
         load(resourceManager: $ResourceManager): $Map<$ResourceLocation, $List<$TagLoader$EntryWithSource>>;
         build(builders: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>): $Map<$ResourceLocation, $Collection<$Object>>;
-        kjs$getRegistry(): $Registry<any>;
-        kjs$getResources(): $ReloadableServerResourcesKJS;
-        kjs$init(resources: $ReloadableServerResourcesKJS, registry: $Registry<any>): void;
+        modify$ecc000$wover$modifyTags(builders: $Map_<any, any>): $Map<any, any>;
         kjs$customTags(kjs$resources: $ReloadableServerResourcesKJS, map: $Map_<$ResourceLocation_, $List_<$TagLoader$EntryWithSource_>>): void;
         constructor(idToValue: $Function_<$ResourceLocation, (never) | undefined>, directory: string);
     }
@@ -406,13 +408,13 @@ declare module "@package/net/minecraft/tags" {
         static NEEDS_STONE_TOOL: $TagKey<$Block>;
     }
     export class $TagKey<T> extends $Record {
+        static codec<T>(registry: $ResourceKey_<$Registry<T>>): $Codec<$TagKey<T>>;
+        isFor(registry: $ResourceKey_<$Registry<never>>): boolean;
+        static hashedCodec<T>(registry: $ResourceKey_<$Registry<T>>): $Codec<$TagKey<T>>;
         cast<E>(registry: $ResourceKey_<$Registry<E>>): ($TagKey<E>) | undefined;
         location(): $ResourceLocation;
         static create<T>(registry: $ResourceKey_<$Registry<T>>, location: $ResourceLocation_): $TagKey<T>;
         registry(): $ResourceKey<$Registry<T>>;
-        isFor(registry: $ResourceKey_<$Registry<never>>): boolean;
-        static codec<T>(registry: $ResourceKey_<$Registry<T>>): $Codec<$TagKey<T>>;
-        static hashedCodec<T>(registry: $ResourceKey_<$Registry<T>>): $Codec<$TagKey<T>>;
         /**
          * @deprecated
          */
@@ -423,32 +425,32 @@ declare module "@package/net/minecraft/tags" {
      */
     export type $TagKey_<T> = RegistryTypes.ResolveTag<T>;
     export class $TagBuilder implements $ITagBuilderExtension {
+        getRemoveEntries(): $Stream<$TagEntry>;
+        addOptionalTag(elementLocation: $ResourceLocation_): $TagBuilder;
+        addOptionalElement(elementLocation: $ResourceLocation_): $TagBuilder;
         remove(entry: $TagEntry): $TagBuilder;
         replace(): $TagBuilder;
         replace(arg0: boolean): $TagBuilder;
         add(entry: $TagEntry): $TagBuilder;
         static create(): $TagBuilder;
         build(): $List<$TagEntry>;
-        addOptionalElement(elementLocation: $ResourceLocation_): $TagBuilder;
         addElement(elementLocation: $ResourceLocation_): $TagBuilder;
-        getRemoveEntries(): $Stream<$TagEntry>;
         isReplace(): boolean;
         addTag(elementLocation: $ResourceLocation_): $TagBuilder;
-        addOptionalTag(elementLocation: $ResourceLocation_): $TagBuilder;
-        /**
-         * @deprecated
-         */
-        remove(arg0: $TagEntry, arg1: string): $TagBuilder;
-        /**
-         * @deprecated
-         */
-        removeElement(arg0: $ResourceLocation_, arg1: string): $TagBuilder;
-        removeElement(elementLocation: $ResourceLocation_): $TagBuilder;
         /**
          * @deprecated
          */
         removeTag(arg0: $ResourceLocation_, arg1: string): $TagBuilder;
         removeTag(elementLocation: $ResourceLocation_): $TagBuilder;
+        /**
+         * @deprecated
+         */
+        remove(arg0: $TagEntry, arg1: string): $TagBuilder;
+        removeElement(elementLocation: $ResourceLocation_): $TagBuilder;
+        /**
+         * @deprecated
+         */
+        removeElement(arg0: $ResourceLocation_, arg1: string): $TagBuilder;
         getRawBuilder(): $TagBuilder;
         entries: $List<$TagEntry>;
         constructor();
@@ -590,10 +592,10 @@ declare module "@package/net/minecraft/tags" {
     export interface $EnchantmentTags {
     }
     export class $TagNetworkSerialization$NetworkPayload {
+        applyToRegistry<T>(registry: $Registry<T>): void;
         size(): number;
         write(buffer: $FriendlyByteBuf): void;
         static read(buffer: $FriendlyByteBuf): $TagNetworkSerialization$NetworkPayload;
-        applyToRegistry<T>(registry: $Registry<T>): void;
     }
     export class $GameEventTags {
         static WARDEN_CAN_LISTEN: $TagKey<$GameEvent>;
@@ -608,23 +610,24 @@ declare module "@package/net/minecraft/tags" {
         static LAVA: $TagKey<$Fluid>;
         static WATER: $TagKey<$Fluid>;
     }
-    export class $TagNetworkSerialization {
+    export class $TagNetworkSerialization implements $AccessTagNetworkSerialization {
         static serializeTagsToNetwork(registryAccess: $LayeredRegistryAccess<$RegistryLayer_>): $Map<$ResourceKey<$Registry<never>>, $TagNetworkSerialization$NetworkPayload>;
+        static $callDeserializeTagsFromNetwork$crafttweaker_$md$e03d8d$0(registryKey: $ResourceKey_<any>, registry: $Registry<any>, networkPayload: $TagNetworkSerialization$NetworkPayload, output: $TagNetworkSerialization$TagOutput_<any>): void;
         constructor();
     }
     export class $TagEntry {
+        verifyIfPresent(elementPredicate: $Predicate_<$ResourceLocation>, tagPredicate: $Predicate_<$ResourceLocation>): boolean;
+        visitRequiredDependencies(visitor: $Consumer_<$ResourceLocation>): void;
+        visitOptionalDependencies(visitor: $Consumer_<$ResourceLocation>): void;
+        static optionalTag(elementLocation: $ResourceLocation_): $TagEntry;
+        elementOrTag(): $ExtraCodecs$TagOrElementLocation;
         getId(): $ResourceLocation;
         static element(elementLocation: $ResourceLocation_): $TagEntry;
         build<T>(lookup: $TagEntry$Lookup<T>, consumer: $Consumer_<T>): boolean;
         static tag(elementLocation: $ResourceLocation_): $TagEntry;
-        isRequired(): boolean;
         static optionalElement(elementLocation: $ResourceLocation_): $TagEntry;
-        verifyIfPresent(elementPredicate: $Predicate_<$ResourceLocation>, tagPredicate: $Predicate_<$ResourceLocation>): boolean;
+        isRequired(): boolean;
         isTag(): boolean;
-        visitOptionalDependencies(visitor: $Consumer_<$ResourceLocation>): void;
-        visitRequiredDependencies(visitor: $Consumer_<$ResourceLocation>): void;
-        elementOrTag(): $ExtraCodecs$TagOrElementLocation;
-        static optionalTag(elementLocation: $ResourceLocation_): $TagEntry;
         static CODEC: $Codec<$TagEntry>;
         id: $ResourceLocation;
         required: boolean;
@@ -677,12 +680,14 @@ declare module "@package/net/minecraft/tags" {
      * Values that may be interpreted as {@link $TagNetworkSerialization$TagOutput}.
      */
     export type $TagNetworkSerialization$TagOutput_<T> = ((arg0: $TagKey<T>, arg1: $List<$Holder<T>>) => void);
-    export class $TagManager implements $PreparableReloadListener, $TagManagerKJS {
+    export class $TagManager implements $PreparableReloadListener, $AccessTagManager, $TagManagerKJS {
+        modify$cnp000$crafttweaker$appendConsumer(arg0: $Consumer_<any>): $Consumer<any>;
+        kjs$getResources(): $ReloadableServerResourcesKJS;
+        kjs$setResources(resources: $ReloadableServerResourcesKJS): void;
         getResult(): $List<$TagManager$LoadResult<never>>;
         reload(stage: $PreparableReloadListener$PreparationBarrier_, resourceManager: $ResourceManager, preparationsProfiler: $ProfilerFiller, reloadProfiler: $ProfilerFiller, backgroundExecutor: $Executor_, gameExecutor: $Executor_): $CompletableFuture<void>;
-        kjs$setResources(resources: $ReloadableServerResourcesKJS): void;
-        kjs$getResources(): $ReloadableServerResourcesKJS;
         getName(): string;
+        crafttweaker$getRegistryAccess(): $RegistryAccess;
         constructor(registryAccess: $RegistryAccess);
         get result(): $List<$TagManager$LoadResult<never>>;
         get name(): string;
@@ -695,7 +700,7 @@ declare module "@package/net/minecraft/tags" {
     /**
      * Values that may be interpreted as {@link $TagManager$LoadResult}.
      */
-    export type $TagManager$LoadResult_<T> = { key?: $ResourceKey_<$Registry<any>>, tags?: $Map_<$ResourceLocation_, $Collection_<$Holder_<any>>>,  } | [key?: $ResourceKey_<$Registry<any>>, tags?: $Map_<$ResourceLocation_, $Collection_<$Holder_<any>>>, ];
+    export type $TagManager$LoadResult_<T> = { tags?: $Map_<$ResourceLocation_, $Collection_<$Holder_<any>>>, key?: $ResourceKey_<$Registry<any>>,  } | [tags?: $Map_<$ResourceLocation_, $Collection_<$Holder_<any>>>, key?: $ResourceKey_<$Registry<any>>, ];
     export class $BiomeTags {
         static IS_DEEP_OCEAN: $TagKey<$Biome>;
         static HAS_VILLAGE_TAIGA: $TagKey<$Biome>;
@@ -784,5 +789,5 @@ declare module "@package/net/minecraft/tags" {
     /**
      * Values that may be interpreted as {@link $TagLoader$EntryWithSource}.
      */
-    export type $TagLoader$EntryWithSource_ = { source?: string, entry?: $TagEntry, remove?: boolean,  } | [source?: string, entry?: $TagEntry, remove?: boolean, ];
+    export type $TagLoader$EntryWithSource_ = { remove?: boolean, source?: string, entry?: $TagEntry,  } | [remove?: boolean, source?: string, entry?: $TagEntry, ];
 }

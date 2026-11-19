@@ -21,8 +21,8 @@ declare module "@package/earth/terrarium/adastra/mixins/common" {
      */
     export type $LivingEntityAccessor_ = (() => boolean);
     export class $SkullBlockEntityInvoker {
-        static invokeFetchGameProfile(arg0: string): $CompletableFuture<($GameProfile) | undefined>;
         static getCheckedMainThreadExecutor(): $Executor;
+        static invokeFetchGameProfile(arg0: string): $CompletableFuture<($GameProfile) | undefined>;
         static get checkedMainThreadExecutor(): $Executor;
     }
     export interface $SkullBlockEntityInvoker {

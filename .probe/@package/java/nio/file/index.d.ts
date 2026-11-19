@@ -32,19 +32,19 @@ declare module "@package/java/nio/file" {
         close(): void;
         getPath(arg0: string, ...arg1: string[]): $Path;
         isReadOnly(): boolean;
+        getSeparator(): string;
         supportedFileAttributeViews(): $Set<string>;
         getRootDirectories(): $Iterable<$Path>;
         getFileStores(): $Iterable<$FileStore>;
         getUserPrincipalLookupService(): $UserPrincipalLookupService;
         getPathMatcher(arg0: string): $PathMatcher;
         newWatchService(): $WatchService;
-        getSeparator(): string;
         get open(): boolean;
         get readOnly(): boolean;
+        get separator(): string;
         get rootDirectories(): $Iterable<$Path>;
         get fileStores(): $Iterable<$FileStore>;
         get userPrincipalLookupService(): $UserPrincipalLookupService;
-        get separator(): string;
     }
     export class $WatchKey {
     }

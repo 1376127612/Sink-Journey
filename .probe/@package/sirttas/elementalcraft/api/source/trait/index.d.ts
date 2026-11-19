@@ -13,25 +13,25 @@ export * as value from "@package/sirttas/elementalcraft/api/source/trait/value";
 
 declare module "@package/sirttas/elementalcraft/api/source/trait" {
     export class $SourceTrait {
+        breed(arg0: $RandomSource, arg1: number, arg2: $ISourceTraitValue, arg3: $ISourceTraitValue): $ISourceTraitValue;
+        valueStreamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ISourceTraitValue>;
         load(arg0: $Tag_): $ISourceTraitValue;
         static builder(): $SourceTrait$Builder;
         getId(): $ResourceLocation;
         save(arg0: $ISourceTraitValue): $Tag;
-        getOrder(): number;
-        setId(arg0: $ResourceLocation_): void;
         roll(arg0: $ServerLevelAccessor, arg1: $BlockPos_, arg2: number): $ISourceTraitValue;
-        breed(arg0: $RandomSource, arg1: number, arg2: $ISourceTraitValue, arg3: $ISourceTraitValue): $ISourceTraitValue;
+        setId(arg0: $ResourceLocation_): void;
         valueCodec(): $Codec<$ISourceTraitValue>;
-        valueStreamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, $ISourceTraitValue>;
+        getOrder(): number;
         static CODEC: $Codec<$SourceTrait>;
         constructor(arg0: number, arg1: $ISourceTraitValueProvider);
         get order(): number;
     }
     export class $SourceTrait$Type extends $Enum<$SourceTrait$Type> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $SourceTrait$Type[];
         static valueOf(arg0: string): $SourceTrait$Type;
         static byName(arg0: string): $SourceTrait$Type;
-        getSerializedName(): string;
         static valueCodec<T>(arg0: $Codec<T>): $Codec<$Map<$SourceTrait$Type, T>>;
         getRemappedEnumConstantName(): string;
         static PRESERVATION: $SourceTrait$Type;
@@ -62,5 +62,5 @@ declare module "@package/sirttas/elementalcraft/api/source/trait" {
     /**
      * Values that may be interpreted as {@link $SourceTraitRollContext}.
      */
-    export type $SourceTraitRollContext_ = { luck?: number, trait?: $SourceTrait, random?: $RandomSource,  } | [luck?: number, trait?: $SourceTrait, random?: $RandomSource, ];
+    export type $SourceTraitRollContext_ = { trait?: $SourceTrait, random?: $RandomSource, luck?: number,  } | [trait?: $SourceTrait, random?: $RandomSource, luck?: number, ];
 }

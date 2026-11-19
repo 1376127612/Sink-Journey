@@ -5,21 +5,21 @@ import { $AABB_ } from "@package/net/minecraft/world/phys";
 declare module "@package/net/caffeinemc/mods/lithium/common/util/tuples" {
     export class $WorldSectionBox extends $Record {
         numSections(): number;
+        static entityAccessBox(arg0: $Level_, arg1: $AABB_): $WorldSectionBox;
         world(): $Level;
+        chunkX2(): number;
         chunkX1(): number;
         chunkZ2(): number;
-        chunkX2(): number;
-        chunkZ1(): number;
         chunkY1(): number;
         chunkY2(): number;
-        static relevantFluidBox(arg0: $Level_, arg1: $AABB_): $WorldSectionBox;
-        static entityAccessBox(arg0: $Level_, arg1: $AABB_): $WorldSectionBox;
-        static relevantExpandedBlocksBox(arg0: $Level_, arg1: $AABB_): $WorldSectionBox;
+        chunkZ1(): number;
         matchesRelevantBlocksBox(arg0: $AABB_): boolean;
+        static relevantExpandedBlocksBox(arg0: $Level_, arg1: $AABB_): $WorldSectionBox;
+        static relevantFluidBox(arg0: $Level_, arg1: $AABB_): $WorldSectionBox;
         constructor(world: $Level_, chunkX1: number, chunkY1: number, chunkZ1: number, chunkX2: number, chunkY2: number, chunkZ2: number);
     }
     /**
      * Values that may be interpreted as {@link $WorldSectionBox}.
      */
-    export type $WorldSectionBox_ = { chunkZ2?: number, chunkZ1?: number, chunkY2?: number, chunkY1?: number, chunkX2?: number, chunkX1?: number, world?: $Level_,  } | [chunkZ2?: number, chunkZ1?: number, chunkY2?: number, chunkY1?: number, chunkX2?: number, chunkX1?: number, world?: $Level_, ];
+    export type $WorldSectionBox_ = { chunkX2?: number, chunkX1?: number, world?: $Level_, chunkZ2?: number, chunkZ1?: number, chunkY2?: number, chunkY1?: number,  } | [chunkX2?: number, chunkX1?: number, world?: $Level_, chunkZ2?: number, chunkZ1?: number, chunkY2?: number, chunkY1?: number, ];
 }

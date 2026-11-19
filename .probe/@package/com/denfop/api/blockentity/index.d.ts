@@ -16,52 +16,52 @@ declare module "@package/com/denfop/api/blockentity" {
     export class $Wrenchable {
     }
     export interface $Wrenchable {
-        wrenchCanRemove(arg0: $Level_, arg1: $BlockPos_, arg2: $Player): boolean;
         wrenchBreak(arg0: $Level_, arg1: $BlockPos_): void;
+        wrenchCanRemove(arg0: $Level_, arg1: $BlockPos_, arg2: $Player): boolean;
         getWrenchDrops(arg0: $Level_, arg1: $BlockPos_, arg2: $BlockState_, arg3: $BlockEntity, arg4: $Player, arg5: number): $List<$ItemStack>;
-        getFacing(arg0: $Level_, arg1: $BlockPos_): $Direction;
         setFacing(arg0: $Level_, arg1: $BlockPos_, arg2: $Direction_, arg3: $Player): boolean;
+        getFacing(arg0: $Level_, arg1: $BlockPos_): $Direction;
     }
     export class $MultiBlockEntity {
         static CABLE: $MapColor;
     }
     export interface $MultiBlockEntity extends $ISubEnum {
-        ordinal(): number;
-        setIdBlock(arg0: number): void;
-        setType(arg0: $DeferredHolder<$BlockEntityType_<never>, $BlockEntityType_<$BlockEntityBase>>): void;
+        getMaterial(): $MapColor;
+        getUniqueName(): string;
+        getDummyTe(): $BlockEntityBase;
+        getSupportedFacings(): $Set<$Direction>;
+        allowWrenchRotating(): boolean;
+        buildDummies(): void;
+        setDefaultState(arg0: $BlockState_): void;
+        hasUniqueName(): boolean;
+        getHarvestTool(): $HarvestTool;
+        hasOtherVersion(): boolean;
+        getHardness(): number;
+        getDefaultDrop(): $DefaultDrop;
+        getMultiModels(arg0: $MultiBlockEntity): string[];
+        getOtherVersion(arg0: $ItemStack_): $List<$ItemStack>;
         getIDBlock(): number;
+        ordinal(): number;
+        setType(arg0: $DeferredHolder<$BlockEntityType_<never>, $BlockEntityType_<$BlockEntityBase>>): void;
         hasItem(): boolean;
         getCreativeTab(): $CreativeModeTab;
-        getUniqueName(): string;
         getBlockType(): $BlockEntityType<$BlockEntityBase>;
-        getDummyTe(): $BlockEntityBase;
+        setIdBlock(arg0: number): void;
         getTeClass(): $Class<$BlockEntityBase>;
-        getMaterial(): $MapColor;
-        hasUniqueName(): boolean;
-        getDefaultDrop(): $DefaultDrop;
-        getHardness(): number;
-        hasOtherVersion(): boolean;
-        setDefaultState(arg0: $BlockState_): void;
-        getHarvestTool(): $HarvestTool;
-        getOtherVersion(arg0: $ItemStack_): $List<$ItemStack>;
-        getMultiModels(arg0: $MultiBlockEntity): string[];
         hasActive(): boolean;
-        buildDummies(): void;
-        allowWrenchRotating(): boolean;
-        getSupportedFacings(): $Set<$Direction>;
-        set idBlock(value: number);
-        set type(value: $DeferredHolder<$BlockEntityType_<never>, $BlockEntityType_<$BlockEntityBase>>);
-        get IDBlock(): number;
-        get creativeTab(): $CreativeModeTab;
-        get uniqueName(): string;
-        get blockType(): $BlockEntityType<$BlockEntityBase>;
-        get dummyTe(): $BlockEntityBase;
-        get teClass(): $Class<$BlockEntityBase>;
         get material(): $MapColor;
-        get defaultDrop(): $DefaultDrop;
-        get hardness(): number;
+        get uniqueName(): string;
+        get dummyTe(): $BlockEntityBase;
+        get supportedFacings(): $Set<$Direction>;
         set defaultState(value: $BlockState_);
         get harvestTool(): $HarvestTool;
-        get supportedFacings(): $Set<$Direction>;
+        get hardness(): number;
+        get defaultDrop(): $DefaultDrop;
+        get IDBlock(): number;
+        set type(value: $DeferredHolder<$BlockEntityType_<never>, $BlockEntityType_<$BlockEntityBase>>);
+        get creativeTab(): $CreativeModeTab;
+        get blockType(): $BlockEntityType<$BlockEntityBase>;
+        set idBlock(value: number);
+        get teClass(): $Class<$BlockEntityBase>;
     }
 }

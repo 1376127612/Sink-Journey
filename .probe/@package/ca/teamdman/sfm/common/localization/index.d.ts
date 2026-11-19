@@ -21,5 +21,5 @@ declare module "@package/ca/teamdman/sfm/common/localization" {
     /**
      * Values that may be interpreted as {@link $LocalizationEntry}.
      */
-    export type $LocalizationEntry_ = { key?: $Supplier_<string>, value?: $Supplier_<string>,  } | [key?: $Supplier_<string>, value?: $Supplier_<string>, ];
+    export type $LocalizationEntry_ = { value?: $Supplier_<string>, key?: $Supplier_<string>,  } | [value?: $Supplier_<string>, key?: $Supplier_<string>, ];
 }

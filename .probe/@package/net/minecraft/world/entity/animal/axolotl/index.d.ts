@@ -39,8 +39,8 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         constructor(...types: $Axolotl$Variant_[]);
     }
     export class $AxolotlAi {
-        static updateActivity(axolotl: $Axolotl): void;
         static getTemptations(): $Predicate<$ItemStack>;
+        static updateActivity(axolotl: $Axolotl): void;
         constructor();
         static get temptations(): $Predicate<$ItemStack>;
     }
@@ -49,8 +49,6 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         static MIN_SPEED: number;
     }
     export class $Axolotl extends $Animal implements $LerpingModel, $VariantHolder<$Axolotl$Variant>, $Bucketable {
-        getVariant(): $Axolotl$Variant;
-        setVariant(variant: $Axolotl$Variant_): void;
         /**
          * Gets called every tick from main Entity class
          */
@@ -61,23 +59,19 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
          * Gets called every tick from main Entity class
          */
         playAttackSound(): void;
-        loadFromBucketTag(compound: $CompoundTag_): void;
-        setFromBucket(fromBucket: boolean): void;
-        saveToBucketTag(stack: $ItemStack_): void;
-        getBucketItemStack(): $ItemStack;
         getModelRotationValues(): $Map<string, $Vector3f>;
         applySupportingEffects(player: $Player): void;
         static checkAxolotlSpawnRules(axolotl: $EntityType_<$LivingEntity>, level: $ServerLevelAccessor, spawnType: $MobSpawnType_, pos: $BlockPos_, random: $RandomSource): boolean;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         fromBucket(): boolean;
-        static onStopAttacking(axolotl: $Axolotl, target: $LivingEntity): void;
-        /**
-         * Return whether this entity should be rendered as on fire.
-         */
         isPlayingDead(): boolean;
         setPlayingDead(fromBucket: boolean): void;
+        static onStopAttacking(axolotl: $Axolotl, target: $LivingEntity): void;
+        getBucketItemStack(): $ItemStack;
+        saveToBucketTag(stack: $ItemStack_): void;
+        setFromBucket(fromBucket: boolean): void;
+        loadFromBucketTag(compound: $CompoundTag_): void;
+        getVariant(): $Axolotl$Variant;
+        setVariant(variant: $Axolotl$Variant_): void;
         static MAX_WEARING_ARMOR_CHANCE: number;
         static PRESERVE_ITEM_DROP_CHANCE_THRESHOLD: number;
         static DEFAULT_BASE_GRAVITY: number;
@@ -128,6 +122,7 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         zOld: number;
         static BABY_START_AGE: number;
         timeOffs: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         wasTouchingWater: boolean;
         rotA: number;
         horizontalCollision: boolean;
@@ -138,6 +133,7 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         tickCount: number;
         static MAX_ENCHANTED_ARMOR_CHANCE: number;
         static MAX_ENCHANTED_WEAPON_CHANCE: number;
+        lastHurtByPlayer: $Player;
         static BOARDING_COOLDOWN: number;
         static PRESERVE_ITEM_DROP_CHANCE: number;
         static SWING_DURATION: number;
@@ -191,18 +187,18 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         effectsDirty: boolean;
         constructor(entityType: $EntityType_<$Axolotl>, level: $Level_);
         get pickupSound(): $SoundEvent;
-        get bucketItemStack(): $ItemStack;
         get modelRotationValues(): $Map<string, $Vector3f>;
+        get bucketItemStack(): $ItemStack;
     }
     export class $Axolotl$Variant extends $Enum<$Axolotl$Variant> implements $StringRepresentable {
+        static byId(id: number): $Axolotl$Variant;
+        getSerializedName(): string;
+        static getRareSpawnVariant(random: $RandomSource): $Axolotl$Variant;
+        static getCommonSpawnVariant(random: $RandomSource): $Axolotl$Variant;
         getName(): string;
         static values(): $Axolotl$Variant[];
         static valueOf(arg0: string): $Axolotl$Variant;
         getId(): number;
-        getSerializedName(): string;
-        static byId(id: number): $Axolotl$Variant;
-        static getCommonSpawnVariant(random: $RandomSource): $Axolotl$Variant;
-        static getRareSpawnVariant(random: $RandomSource): $Axolotl$Variant;
         getRemappedEnumConstantName(): string;
         static GOLD: $Axolotl$Variant;
         static WILD: $Axolotl$Variant;
@@ -210,8 +206,8 @@ declare module "@package/net/minecraft/world/entity/animal/axolotl" {
         static BLUE: $Axolotl$Variant;
         static LUCY: $Axolotl$Variant;
         static CYAN: $Axolotl$Variant;
-        get id(): number;
         get serializedName(): string;
+        get id(): number;
         get remappedEnumConstantName(): string;
     }
     /**

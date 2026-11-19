@@ -29,8 +29,8 @@ declare module "@package/com/nred/nuclearcraft/payload/processor" {
         tankInfos: $List<$Tank$TankInfo>;
         static TYPE: $CustomPacketPayload$Type<$EnergyProcessorUpdatePacket>;
         baseProcessTime: number;
+        constructor(arg0: $BlockPos_, arg1: boolean, arg2: number, arg3: number, arg4: $List_<$Tank>);
         constructor(arg0: $ProcessorUpdatePacket);
         constructor(arg0: $TileUpdatePacket, arg1: boolean, arg2: number, arg3: number, arg4: $List_<$Tank$TankInfo_>);
-        constructor(arg0: $BlockPos_, arg1: boolean, arg2: number, arg3: number, arg4: $List_<$Tank>);
     }
 }

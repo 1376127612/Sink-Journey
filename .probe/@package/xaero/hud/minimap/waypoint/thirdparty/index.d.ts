@@ -7,8 +7,8 @@ declare module "@package/xaero/hud/minimap/waypoint/thirdparty" {
         get(arg0: $ResourceLocation_): $ThirdPartyWaypoints;
         clear(): void;
         getCount(): number;
-        getByIndex(arg0: number): $ThirdPartyWaypoints;
         getAll(): $List<$ThirdPartyWaypoints>;
+        getByIndex(arg0: number): $ThirdPartyWaypoints;
         clearOrigin(arg0: $ResourceLocation_): void;
         getOriginCount(): number;
         constructor(arg0: $MinimapSession);

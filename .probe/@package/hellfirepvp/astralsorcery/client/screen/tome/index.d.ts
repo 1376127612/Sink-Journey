@@ -45,11 +45,11 @@ declare module "@package/hellfirepvp/astralsorcery/client/screen/tome" {
     }
     export class $TomeResearchScreen extends $TomeScreen {
         removeWidget(arg0: $GuiEventListener): void;
-        getViewType(): $TomeResearchScreen$ViewType;
-        static getOpenTome(): $TomeScreen;
-        preventViewRefresh(): void;
-        expectNewInit(): void;
         static resetOpenTome(): void;
+        expectNewInit(): void;
+        preventViewRefresh(): void;
+        static getOpenTome(): $TomeScreen;
+        getViewType(): $TomeResearchScreen$ViewType;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -66,13 +66,13 @@ declare module "@package/hellfirepvp/astralsorcery/client/screen/tome" {
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
         font: $Font;
-        get viewType(): $TomeResearchScreen$ViewType;
         static get openTome(): $TomeScreen;
+        get viewType(): $TomeResearchScreen$ViewType;
     }
     export class $TomePagesScreen extends $TomeScreen {
         static fromLumen(arg0: $TomeLumenScreen, arg1: $Lumen_): $TomePagesScreen;
-        static fromResearchNode(arg0: $ResearchNode, arg1: number): $TomePagesScreen;
         static fromConstellation(arg0: $TomeConstellationScreen, arg1: $BaseConstellation_): $TomePagesScreen;
+        static fromResearchNode(arg0: $ResearchNode, arg1: number): $TomePagesScreen;
         static fromProgressNode(arg0: $TomeResearchScreen, arg1: $ResearchNode): $TomePagesScreen;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
@@ -91,9 +91,9 @@ declare module "@package/hellfirepvp/astralsorcery/client/screen/tome" {
         font: $Font;
     }
     export class $TomeScreen extends $FixedSizeScreen {
-        getBookmarkIndex(): number;
-        doBookmarkClick(arg0: $BookmarkProvider): void;
         static addBookmark(arg0: $BookmarkProvider): void;
+        doBookmarkClick(arg0: $BookmarkProvider): void;
+        getBookmarkIndex(): number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -112,9 +112,9 @@ declare module "@package/hellfirepvp/astralsorcery/client/screen/tome" {
         get bookmarkIndex(): number;
     }
     export class $TomeResearchScreen$ViewType extends $Enum<$TomeResearchScreen$ViewType> {
+        getRenderer(arg0: $TomeResearchScreen): $TomeResearchPartRenderer;
         static values(): $TomeResearchScreen$ViewType[];
         static valueOf(arg0: string): $TomeResearchScreen$ViewType;
-        getRenderer(arg0: $TomeResearchScreen): $TomeResearchPartRenderer;
         static RESEARCH: $TomeResearchScreen$ViewType;
         static SEARCH: $TomeResearchScreen$ViewType;
     }
@@ -125,13 +125,13 @@ declare module "@package/hellfirepvp/astralsorcery/client/screen/tome" {
     export class $TomeStarParallaxLayer {
     }
     export interface $TomeStarParallaxLayer {
-        drawStarParallaxLayer(arg0: $VertexConsumer, arg1: $GuiGraphics, arg2: $ScreenRectangle_, arg3: number, arg4: number, arg5: number, arg6: number): void;
         drawStarParallaxLayers(arg0: $GuiGraphics, arg1: number, arg2: $ScreenRectangle_, arg3: number, arg4: number): void;
+        drawStarParallaxLayer(arg0: $VertexConsumer, arg1: $GuiGraphics, arg2: $ScreenRectangle_, arg3: number, arg4: number, arg5: number, arg6: number): void;
     }
     export class $TomeLumenScreen extends $TomeScreen implements $TomeStarParallaxLayer {
         static recipesSyncedFromServer(arg0: $RecipesUpdatedEvent): void;
-        drawStarParallaxLayer(arg0: $VertexConsumer, arg1: $GuiGraphics, arg2: $ScreenRectangle_, arg3: number, arg4: number, arg5: number, arg6: number): void;
         drawStarParallaxLayers(arg0: $GuiGraphics, arg1: number, arg2: $ScreenRectangle_, arg3: number, arg4: number): void;
+        drawStarParallaxLayer(arg0: $VertexConsumer, arg1: $GuiGraphics, arg2: $ScreenRectangle_, arg3: number, arg4: number, arg5: number, arg6: number): void;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -150,17 +150,17 @@ declare module "@package/hellfirepvp/astralsorcery/client/screen/tome" {
         font: $Font;
     }
     export class $BookmarkProvider implements $Comparable<$BookmarkProvider> {
-        getName(): $MutableComponent;
-        compareTo(arg0: $BookmarkProvider): number;
-        getOnBookmarkSelected(): void;
         canSee(): boolean;
         getBookmarkIndex(): number;
         getBookmarkTexture(): $AbstractRenderTexture;
+        getOnBookmarkSelected(): void;
+        getName(): $MutableComponent;
+        compareTo(arg0: $BookmarkProvider): number;
         constructor(arg0: string, arg1: number, arg2: $Runnable_, arg3: $Supplier_<boolean>);
         constructor(arg0: $MutableComponent_, arg1: number, arg2: $Runnable_, arg3: $Supplier_<boolean>);
-        get name(): $MutableComponent;
-        get onBookmarkSelected(): void;
         get bookmarkIndex(): number;
         get bookmarkTexture(): $AbstractRenderTexture;
+        get onBookmarkSelected(): void;
+        get name(): $MutableComponent;
     }
 }

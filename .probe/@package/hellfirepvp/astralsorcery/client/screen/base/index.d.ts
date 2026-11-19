@@ -10,11 +10,11 @@ import { $Font } from "@package/net/minecraft/client/gui";
 
 declare module "@package/hellfirepvp/astralsorcery/client/screen/base" {
     export class $FixedSizeScreen extends $Screen {
-        getScreenHeight(): number;
-        getScreenWidth(): number;
+        getScreenRectangle(): $ScreenRectangle;
         getScreenLeft(): number;
         getScreenTop(): number;
-        getScreenRectangle(): $ScreenRectangle;
+        getScreenWidth(): number;
+        getScreenHeight(): number;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -29,10 +29,10 @@ declare module "@package/hellfirepvp/astralsorcery/client/screen/base" {
         static HEADER_SEPARATOR: $ResourceLocation;
         height: number;
         font: $Font;
-        get screenHeight(): number;
-        get screenWidth(): number;
+        get screenRectangle(): $ScreenRectangle;
         get screenLeft(): number;
         get screenTop(): number;
-        get screenRectangle(): $ScreenRectangle;
+        get screenWidth(): number;
+        get screenHeight(): number;
     }
 }

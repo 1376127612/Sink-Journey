@@ -4,6 +4,19 @@ import { $FlexDirection_, $TaffyDimension, $AvailableSpace } from "@package/dev/
 
 declare module "@package/dev/vfyjxf/taffy/geometry" {
     export class $TaffyRect<T> {
+        horizontalAxisSum(): number;
+        verticalAxisSum(): number;
+        static fromPercent(arg0: number): $TaffyRect<$TaffyDimension>;
+        mainAxisSum(arg0: $FlexDirection_): number;
+        crossAxisSum(arg0: $FlexDirection_): number;
+        verticalComponents(): $TaffyLine<T>;
+        gridAxisSum(arg0: $AbsoluteAxis_): number;
+        zipSize<U, R>(arg0: $TaffySize<U>, arg1: $BiFunction_<T, U, R>): $TaffyRect<R>;
+        horizontalComponents(): $TaffyLine<T>;
+        resolveOrZero(arg0: number): $TaffyRect<number>;
+        resolveOrZero(arg0: number): $TaffyRect<number>;
+        resolveOrZero(arg0: $TaffySize<number>): $TaffyRect<number>;
+        resolveOrZero(arg0: $FloatSize): $TaffyRect<number>;
         add(arg0: $TaffyRect<number>): $TaffyRect<number>;
         map<R>(arg0: $Function_<T, R>): $TaffyRect<R>;
         static of<T>(arg0: T, arg1: T, arg2: T, arg3: T): $TaffyRect<T>;
@@ -11,31 +24,18 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         static zero(): $TaffyRect<number>;
         static all<T>(arg0: T): $TaffyRect<T>;
         static hv<T>(arg0: T, arg1: T): $TaffyRect<T>;
-        getRight(): T;
-        getLeft(): T;
         static auto<T>(arg0: $Supplier_<T>): $TaffyRect<T>;
-        getTop(): T;
-        getBottom(): T;
+        mainStart(arg0: $FlexDirection_): T;
+        sumAxes(): $TaffySize<number>;
         static fromLength(arg0: number): $TaffyRect<$TaffyDimension>;
         static ltrb<T>(arg0: T, arg1: T, arg2: T, arg3: T): $TaffyRect<T>;
-        sumAxes(): $TaffySize<number>;
         mainEnd(arg0: $FlexDirection_): T;
-        crossEnd(arg0: $FlexDirection_): T;
-        zipSize<U, R>(arg0: $TaffySize<U>, arg1: $BiFunction_<T, U, R>): $TaffyRect<R>;
-        mainStart(arg0: $FlexDirection_): T;
         crossStart(arg0: $FlexDirection_): T;
-        resolveOrZero(arg0: number): $TaffyRect<number>;
-        resolveOrZero(arg0: number): $TaffyRect<number>;
-        resolveOrZero(arg0: $TaffySize<number>): $TaffyRect<number>;
-        resolveOrZero(arg0: $FloatSize): $TaffyRect<number>;
-        crossAxisSum(arg0: $FlexDirection_): number;
-        static fromPercent(arg0: number): $TaffyRect<$TaffyDimension>;
-        gridAxisSum(arg0: $AbsoluteAxis_): number;
-        mainAxisSum(arg0: $FlexDirection_): number;
-        horizontalAxisSum(): number;
-        verticalAxisSum(): number;
-        verticalComponents(): $TaffyLine<T>;
-        horizontalComponents(): $TaffyLine<T>;
+        crossEnd(arg0: $FlexDirection_): T;
+        getBottom(): T;
+        getTop(): T;
+        getLeft(): T;
+        getRight(): T;
         static ZERO: $TaffyRect<number>;
         top: T;
         left: T;
@@ -44,6 +44,9 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         constructor(arg0: T, arg1: T, arg2: T, arg3: T);
     }
     export class $TaffyPoint<T> {
+        static fromMainCross<T>(arg0: $FlexDirection_, arg1: T, arg2: T): $TaffyPoint<T>;
+        zipWith<U, R>(arg0: $TaffyPoint<U>, arg1: $BiFunction_<T, U, R>): $TaffyPoint<R>;
+        cross(arg0: $FlexDirection_): T;
         main(arg0: $FlexDirection_): T;
         get(arg0: $AbsoluteAxis_): T;
         map<R>(arg0: $Function_<T, R>): $TaffyPoint<R>;
@@ -52,18 +55,22 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         static zero(): $TaffyPoint<number>;
         static all<T>(arg0: T): $TaffyPoint<T>;
         static none(): $TaffyPoint<number>;
-        cross(arg0: $FlexDirection_): T;
         transpose(): $TaffyPoint<T>;
-        zipWith<U, R>(arg0: $TaffyPoint<U>, arg1: $BiFunction_<T, U, R>): $TaffyPoint<R>;
         setMain(arg0: $FlexDirection_, arg1: T): void;
         setCross(arg0: $FlexDirection_, arg1: T): void;
-        static fromMainCross<T>(arg0: $FlexDirection_, arg1: T, arg2: T): $TaffyPoint<T>;
         static ZERO: $TaffyPoint<number>;
         x: T;
         y: T;
         constructor(arg0: T, arg1: T);
     }
     export class $TaffySize<T> {
+        static fromMainCross<T>(arg0: $FlexDirection_, arg1: T, arg2: T): $TaffySize<T>;
+        static fromCross<T>(arg0: $FlexDirection_, arg1: T): $TaffySize<T>;
+        isBoth(): boolean;
+        zipWith<U, R>(arg0: $TaffySize<U>, arg1: $BiFunction_<T, U, R>): $TaffySize<R>;
+        getHeight(): T;
+        cross(arg0: $FlexDirection_): T;
+        maybeResolve(arg0: $FloatSize): $FloatSize;
         main(arg0: $FlexDirection_): T;
         get(arg0: $AbsoluteAxis_): T;
         map<R>(arg0: $Function_<T, R>): $TaffySize<R>;
@@ -72,21 +79,14 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         copy(): $TaffySize<T>;
         static zero(): $TaffySize<number>;
         static all<T>(arg0: T): $TaffySize<T>;
-        static none<T>(): $TaffySize<T>;
         getWidth(): T;
-        cross(arg0: $FlexDirection_): T;
         static auto<T>(arg0: $Supplier_<T>): $TaffySize<T>;
-        getHeight(): T;
+        static none<T>(): $TaffySize<T>;
+        setMain(arg0: $FlexDirection_, arg1: T): void;
+        setCross(arg0: $FlexDirection_, arg1: T): void;
+        isNone(): boolean;
         static maxContent(): $TaffySize<$AvailableSpace>;
         static minContent(): $TaffySize<$AvailableSpace>;
-        isNone(): boolean;
-        static fromCross<T>(arg0: $FlexDirection_, arg1: T): $TaffySize<T>;
-        zipWith<U, R>(arg0: $TaffySize<U>, arg1: $BiFunction_<T, U, R>): $TaffySize<R>;
-        setMain(arg0: $FlexDirection_, arg1: T): void;
-        isBoth(): boolean;
-        setCross(arg0: $FlexDirection_, arg1: T): void;
-        maybeResolve(arg0: $FloatSize): $FloatSize;
-        static fromMainCross<T>(arg0: $FlexDirection_, arg1: T, arg2: T): $TaffySize<T>;
         static ZERO: $TaffySize<number>;
         width: T;
         height: T;
@@ -94,6 +94,8 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         get both(): boolean;
     }
     export class $FloatSize {
+        getHeight(): number;
+        cross(arg0: $FlexDirection_): number;
         main(arg0: $FlexDirection_): number;
         get(arg0: $AbsoluteAxis_): number;
         static of(arg0: number, arg1: number): $FloatSize;
@@ -102,14 +104,12 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         static zero(): $FloatSize;
         static all(arg0: number): $FloatSize;
         isZero(): boolean;
-        static none(): $FloatSize;
         getWidth(): number;
-        cross(arg0: $FlexDirection_): number;
         static auto(arg0: $FloatSupplier_): $FloatSize;
-        getHeight(): number;
+        static none(): $FloatSize;
+        isNone(): boolean;
         static maxContent(): $TaffySize<$AvailableSpace>;
         static minContent(): $TaffySize<$AvailableSpace>;
-        isNone(): boolean;
         static ZERO: $FloatSize;
         width: number;
         static NONE: $FloatSize;
@@ -120,32 +120,32 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         constructor(arg0: number, arg1: number);
     }
     export class $FloatRect {
+        horizontalAxisSum(): number;
+        verticalAxisSum(): number;
+        static fromPercent(arg0: number): $TaffyRect<$TaffyDimension>;
+        mainAxisSum(arg0: $FlexDirection_): number;
+        crossAxisSum(arg0: $FlexDirection_): number;
+        verticalComponents(): $FloatLine;
+        gridAxisSum(arg0: $AbsoluteAxis_): number;
+        horizontalComponents(): $FloatLine;
         add(arg0: $FloatRect): $FloatRect;
         static of(arg0: number, arg1: number, arg2: number, arg3: number): $FloatRect;
         copy(): $FloatRect;
         static zero(): $FloatRect;
         static all(arg0: number): $FloatRect;
         static hv(arg0: number, arg1: number): $FloatRect;
-        getRight(): number;
-        getLeft(): number;
         static auto(arg0: $FloatSupplier_): $FloatRect;
-        getTop(): number;
-        getBottom(): number;
+        mainStart(arg0: $FlexDirection_): number;
+        sumAxes(): $FloatSize;
         static fromLength(arg0: number): $TaffyRect<$TaffyDimension>;
         static ltrb(arg0: number, arg1: number, arg2: number, arg3: number): $FloatRect;
-        sumAxes(): $FloatSize;
         mainEnd(arg0: $FlexDirection_): number;
-        crossEnd(arg0: $FlexDirection_): number;
-        mainStart(arg0: $FlexDirection_): number;
         crossStart(arg0: $FlexDirection_): number;
-        crossAxisSum(arg0: $FlexDirection_): number;
-        static fromPercent(arg0: number): $TaffyRect<$TaffyDimension>;
-        gridAxisSum(arg0: $AbsoluteAxis_): number;
-        mainAxisSum(arg0: $FlexDirection_): number;
-        horizontalAxisSum(): number;
-        verticalAxisSum(): number;
-        verticalComponents(): $FloatLine;
-        horizontalComponents(): $FloatLine;
+        crossEnd(arg0: $FlexDirection_): number;
+        getBottom(): number;
+        getTop(): number;
+        getLeft(): number;
+        getRight(): number;
         static ZERO: $FloatRect;
         top: number;
         left: number;
@@ -185,6 +185,8 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
      */
     export type $AbsoluteAxis_ = "horizontal" | "vertical";
     export class $FloatPoint {
+        static fromMainCross(arg0: $FlexDirection_, arg1: number, arg2: number): $FloatPoint;
+        cross(arg0: $FlexDirection_): number;
         main(arg0: $FlexDirection_): number;
         get(arg0: $AbsoluteAxis_): number;
         set(arg0: $AbsoluteAxis_, arg1: number): void;
@@ -192,11 +194,9 @@ declare module "@package/dev/vfyjxf/taffy/geometry" {
         static zero(): $FloatPoint;
         static all(arg0: number): $FloatPoint;
         static none(): $FloatPoint;
-        cross(arg0: $FlexDirection_): number;
         transpose(): $FloatPoint;
         setMain(arg0: $FlexDirection_, arg1: number): void;
         setCross(arg0: $FlexDirection_, arg1: number): void;
-        static fromMainCross(arg0: $FlexDirection_, arg1: number, arg2: number): $FloatPoint;
         static ZERO: $FloatPoint;
         x: number;
         y: number;

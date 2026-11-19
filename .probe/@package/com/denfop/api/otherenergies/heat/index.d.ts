@@ -5,25 +5,35 @@ import { $BlockEntity } from "@package/net/minecraft/world/level/block/entity";
 export * as event from "@package/com/denfop/api/otherenergies/heat/event";
 
 declare module "@package/com/denfop/api/otherenergies/heat" {
+    export class $IHeatEmitter {
+    }
+    export interface $IHeatEmitter extends $IHeatTile {
+        emitsHeatTo(arg0: $IHeatAcceptor, arg1: $Direction_): boolean;
+    }
     export class $IHeatTile {
     }
     export interface $IHeatTile {
-        hashCode(): number;
-        setId(arg0: number): void;
-        setHashCodeSource(arg0: number): void;
+        getPos(): $BlockPos;
         getHashCodeSource(): number;
         getIdNetwork(): number;
-        getPos(): $BlockPos;
-        getTile(): $BlockEntity;
+        getHeatValidReceivers(): $List<$InfoTile<$IHeatTile>>;
+        setHashCodeSource(arg0: number): void;
+        RemoveHeatTile(arg0: $IHeatTile, arg1: $Direction_): void;
         getHeatTiles(): $Map<$Direction, $IHeatTile>;
         AddHeatTile(arg0: $IHeatTile, arg1: $Direction_): void;
-        RemoveHeatTile(arg0: $IHeatTile, arg1: $Direction_): void;
-        getHeatValidReceivers(): $List<$InfoTile<$IHeatTile>>;
-        set id(value: number);
-        get idNetwork(): number;
+        hashCode(): number;
+        setId(arg0: number): void;
+        getTile(): $BlockEntity;
         get pos(): $BlockPos;
-        get tile(): $BlockEntity;
-        get heatTiles(): $Map<$Direction, $IHeatTile>;
+        get idNetwork(): number;
         get heatValidReceivers(): $List<$InfoTile<$IHeatTile>>;
+        get heatTiles(): $Map<$Direction, $IHeatTile>;
+        set id(value: number);
+        get tile(): $BlockEntity;
+    }
+    export class $IHeatAcceptor {
+    }
+    export interface $IHeatAcceptor extends $IHeatTile {
+        acceptsHeatFrom(arg0: $IHeatEmitter, arg1: $Direction_): boolean;
     }
 }

@@ -7,39 +7,39 @@ declare module "@package/io/netty/util/concurrent" {
     export class $Promise<V> {
     }
     export interface $Promise<V> extends $Future<V> {
+        setSuccess(arg0: V): $Promise<V>;
+        setUncancellable(): boolean;
+        syncUninterruptibly(): $Promise<V>;
+        addListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $Promise<V>;
         await(): $Promise<V>;
         sync(): $Promise<V>;
         awaitUninterruptibly(): $Promise<V>;
-        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $Promise<V>;
         removeListener(arg0: $GenericFutureListener_<$Future<V>>): $Promise<V>;
         addListener(arg0: $GenericFutureListener_<$Future<V>>): $Promise<V>;
-        setSuccess(arg0: V): $Promise<V>;
-        syncUninterruptibly(): $Promise<V>;
-        setUncancellable(): boolean;
-        addListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $Promise<V>;
         setFailure(arg0: $Throwable): $Promise<V>;
         trySuccess(arg0: V): boolean;
         tryFailure(arg0: $Throwable): boolean;
+        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $Promise<V>;
         set success(value: V);
         set failure(value: $Throwable);
     }
     export class $AbstractEventExecutor extends $AbstractExecutorService implements $EventExecutor {
-        lazyExecute(arg0: $Runnable_): void;
+        newProgressivePromise<V>(): $ProgressivePromise<V>;
+        inEventLoop(): boolean;
+        newPromise<V>(): $Promise<V>;
         parent(): $EventExecutorGroup;
         iterator(): $Iterator<$EventExecutor>;
         next(): $EventExecutor;
         schedule(arg0: $Runnable_, arg1: number, arg2: $TimeUnit_): $ScheduledFuture<never>;
         schedule<V>(arg0: $Callable_<V>, arg1: number, arg2: $TimeUnit_): $ScheduledFuture<V>;
         submit<T>(arg0: $Callable_<T>): $Future<T>;
-        submit(arg0: $Runnable_): $Future<never>;
         submit<T>(arg0: $Runnable_, arg1: T): $Future<T>;
+        submit(arg0: $Runnable_): $Future<never>;
         scheduleWithFixedDelay(arg0: $Runnable_, arg1: number, arg2: number, arg3: $TimeUnit_): $ScheduledFuture<never>;
         scheduleAtFixedRate(arg0: $Runnable_, arg1: number, arg2: number, arg3: $TimeUnit_): $ScheduledFuture<never>;
-        newPromise<V>(): $Promise<V>;
-        newSucceededFuture<V>(arg0: V): $Future<V>;
         newFailedFuture<V>(arg0: $Throwable): $Future<V>;
-        inEventLoop(): boolean;
-        newProgressivePromise<V>(): $ProgressivePromise<V>;
+        newSucceededFuture<V>(arg0: V): $Future<V>;
+        lazyExecute(arg0: $Runnable_): void;
         shutdownGracefully(): $Future<never>;
         spliterator(): $Spliterator<$EventExecutor>;
         forEach(arg0: $Consumer_<$EventExecutor>): void;
@@ -49,24 +49,24 @@ declare module "@package/io/netty/util/concurrent" {
         [Symbol.iterator](): Iterator<$EventExecutor>
     }
     export interface $EventExecutorGroup extends $ScheduledExecutorService, $Iterable<$EventExecutor> {
+        isShuttingDown(): boolean;
         /**
          * @deprecated
          */
         shutdown(): void;
         iterator(): $Iterator<$EventExecutor>;
         next(): $EventExecutor;
-        schedule<V>(arg0: $Callable_<V>, arg1: number, arg2: $TimeUnit_): $ScheduledFuture<V>;
         schedule(arg0: $Runnable_, arg1: number, arg2: $TimeUnit_): $ScheduledFuture<never>;
+        schedule<V>(arg0: $Callable_<V>, arg1: number, arg2: $TimeUnit_): $ScheduledFuture<V>;
         /**
          * @deprecated
          */
         shutdownNow(): $List<$Runnable>;
+        submit(arg0: $Runnable_): $Future<never>;
         submit<T>(arg0: $Callable_<T>): $Future<T>;
         submit<T>(arg0: $Runnable_, arg1: T): $Future<T>;
-        submit(arg0: $Runnable_): $Future<never>;
         scheduleWithFixedDelay(arg0: $Runnable_, arg1: number, arg2: number, arg3: $TimeUnit_): $ScheduledFuture<never>;
         scheduleAtFixedRate(arg0: $Runnable_, arg1: number, arg2: number, arg3: $TimeUnit_): $ScheduledFuture<never>;
-        isShuttingDown(): boolean;
         shutdownGracefully(arg0: number, arg1: number, arg2: $TimeUnit_): $Future<never>;
         shutdownGracefully(): $Future<never>;
         terminationFuture(): $Future<never>;
@@ -110,28 +110,28 @@ declare module "@package/io/netty/util/concurrent" {
     export class $EventExecutor {
     }
     export interface $EventExecutor extends $EventExecutorGroup {
-        parent(): $EventExecutorGroup;
-        next(): $EventExecutor;
-        newPromise<V>(): $Promise<V>;
-        newSucceededFuture<V>(arg0: V): $Future<V>;
-        newFailedFuture<V>(arg0: $Throwable): $Future<V>;
+        newProgressivePromise<V>(): $ProgressivePromise<V>;
         inEventLoop(arg0: $Thread): boolean;
         inEventLoop(): boolean;
-        newProgressivePromise<V>(): $ProgressivePromise<V>;
+        newPromise<V>(): $Promise<V>;
+        parent(): $EventExecutorGroup;
+        next(): $EventExecutor;
+        newFailedFuture<V>(arg0: $Throwable): $Future<V>;
+        newSucceededFuture<V>(arg0: V): $Future<V>;
     }
     export class $AbstractScheduledEventExecutor extends $AbstractEventExecutor {
     }
     export class $ProgressiveFuture<V> {
     }
     export interface $ProgressiveFuture<V> extends $Future<V> {
+        syncUninterruptibly(): $ProgressiveFuture<V>;
+        addListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $ProgressiveFuture<V>;
         await(): $ProgressiveFuture<V>;
         sync(): $ProgressiveFuture<V>;
         awaitUninterruptibly(): $ProgressiveFuture<V>;
-        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $ProgressiveFuture<V>;
         removeListener(arg0: $GenericFutureListener_<$Future<V>>): $ProgressiveFuture<V>;
         addListener(arg0: $GenericFutureListener_<$Future<V>>): $ProgressiveFuture<V>;
-        syncUninterruptibly(): $ProgressiveFuture<V>;
-        addListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $ProgressiveFuture<V>;
+        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $ProgressiveFuture<V>;
     }
     export class $EventExecutorChooserFactory$EventExecutorChooser {
     }
@@ -145,26 +145,26 @@ declare module "@package/io/netty/util/concurrent" {
     export class $Future<V> {
     }
     export interface $Future<V> extends $Future$1<V> {
-        cause(): $Throwable;
-        cancel(arg0: boolean): boolean;
-        await(arg0: number, arg1: $TimeUnit_): boolean;
-        await(): $Future<V>;
-        await(arg0: number): boolean;
-        sync(): $Future<V>;
-        awaitUninterruptibly(): $Future<V>;
-        awaitUninterruptibly(arg0: number): boolean;
-        awaitUninterruptibly(arg0: number, arg1: $TimeUnit_): boolean;
-        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $Future<V>;
-        isCancellable(): boolean;
-        removeListener(arg0: $GenericFutureListener_<$Future<V>>): $Future<V>;
-        addListener(arg0: $GenericFutureListener_<$Future<V>>): $Future<V>;
-        isSuccess(): boolean;
-        getNow(): V;
         syncUninterruptibly(): $Future<V>;
         addListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $Future<V>;
-        get cancellable(): boolean;
+        isSuccess(): boolean;
+        cause(): $Throwable;
+        cancel(arg0: boolean): boolean;
+        await(arg0: number): boolean;
+        await(arg0: number, arg1: $TimeUnit_): boolean;
+        await(): $Future<V>;
+        sync(): $Future<V>;
+        awaitUninterruptibly(arg0: number): boolean;
+        awaitUninterruptibly(arg0: number, arg1: $TimeUnit_): boolean;
+        awaitUninterruptibly(): $Future<V>;
+        getNow(): V;
+        removeListener(arg0: $GenericFutureListener_<$Future<V>>): $Future<V>;
+        addListener(arg0: $GenericFutureListener_<$Future<V>>): $Future<V>;
+        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $Future<V>;
+        isCancellable(): boolean;
         get success(): boolean;
         get now(): V;
+        get cancellable(): boolean;
     }
     export class $GenericFutureListener<F extends $Future<never>> {
     }
@@ -204,26 +204,26 @@ declare module "@package/io/netty/util/concurrent" {
     export interface $ScheduledFuture<V> extends $Future<V>, $ScheduledFuture$1<V> {
     }
     export class $SingleThreadEventExecutor extends $AbstractScheduledEventExecutor implements $OrderedEventExecutor {
-        threadProperties(): $ThreadProperties;
+        pendingTasks(): number;
         addShutdownHook(arg0: $Runnable_): void;
         removeShutdownHook(arg0: $Runnable_): void;
-        pendingTasks(): number;
+        threadProperties(): $ThreadProperties;
     }
     export class $ProgressivePromise<V> {
     }
     export interface $ProgressivePromise<V> extends $Promise<V>, $ProgressiveFuture<V> {
-        tryProgress(arg0: number, arg1: number): boolean;
-        await(): $ProgressivePromise<V>;
-        sync(): $ProgressivePromise<V>;
-        awaitUninterruptibly(): $ProgressivePromise<V>;
-        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $ProgressivePromise<V>;
-        removeListener(arg0: $GenericFutureListener_<$Future<V>>): $ProgressivePromise<V>;
-        addListener(arg0: $GenericFutureListener_<$Future<V>>): $ProgressivePromise<V>;
         setSuccess(arg0: V): $ProgressivePromise<V>;
         setProgress(arg0: number, arg1: number): $ProgressivePromise<V>;
         syncUninterruptibly(): $ProgressivePromise<V>;
         addListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $ProgressivePromise<V>;
+        await(): $ProgressivePromise<V>;
+        sync(): $ProgressivePromise<V>;
+        awaitUninterruptibly(): $ProgressivePromise<V>;
+        removeListener(arg0: $GenericFutureListener_<$Future<V>>): $ProgressivePromise<V>;
+        addListener(arg0: $GenericFutureListener_<$Future<V>>): $ProgressivePromise<V>;
         setFailure(arg0: $Throwable): $ProgressivePromise<V>;
+        removeListeners(...arg0: $GenericFutureListener_<$Future<V>>[]): $ProgressivePromise<V>;
+        tryProgress(arg0: number, arg1: number): boolean;
         set success(value: V);
         set failure(value: $Throwable);
     }

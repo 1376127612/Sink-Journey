@@ -12,10 +12,10 @@ declare module "@package/mekanism/common/lib/transmitter/acceptor" {
         constructor(transmitterTile: $TileEntityTransmitter, capability: $BlockCapability<ACCEPTOR, $Direction_>);
     }
     export class $AbstractAcceptorCache<ACCEPTOR, INFO extends $AcceptorInfo<ACCEPTOR>> {
-        getConnectedAcceptors(sides: $Set_<$Direction_>): $List<ACCEPTOR>;
+        initializeCache(level: $ServerLevel): void;
         getConnectedAcceptor(side: $Direction_): ACCEPTOR;
         getCachedAcceptor(side: $Direction_): ACCEPTOR;
-        initializeCache(level: $ServerLevel): void;
+        getConnectedAcceptors(sides: $Set_<$Direction_>): $List<ACCEPTOR>;
         currentAcceptorConnections: number;
     }
     export class $AcceptorInfo<ACCEPTOR> {
@@ -32,8 +32,8 @@ declare module "@package/mekanism/common/lib/transmitter/acceptor" {
         constructor(transmitterTile: $TileEntityTransmitter);
     }
     export class $AcceptorCache$CacheBasedInfo<ACCEPTOR> extends $Record implements $AcceptorInfo<ACCEPTOR> {
-        cache(): $BlockCapabilityCache<ACCEPTOR, $Direction>;
         acceptor(): ACCEPTOR;
+        cache(): $BlockCapabilityCache<ACCEPTOR, $Direction>;
         constructor(cache: $BlockCapabilityCache<ACCEPTOR, $Direction_>);
     }
     /**

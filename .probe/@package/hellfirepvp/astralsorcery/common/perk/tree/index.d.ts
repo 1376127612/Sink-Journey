@@ -52,64 +52,64 @@ declare module "@package/hellfirepvp/astralsorcery/common/perk/tree" {
     export type $PerkDataType_<D> = RegistryTypes.AstralsorceryPerkDataTypes | { emptyDataFn?: $Supplier_<$AbstractPerk$Data>, syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $AbstractPerk$Data>, codec?: $MapCodec_<$AbstractPerk$Data>,  } | [emptyDataFn?: $Supplier_<$AbstractPerk$Data>, syncCodec?: $StreamCodec<$RegistryFriendlyByteBuf, $AbstractPerk$Data>, codec?: $MapCodec_<$AbstractPerk$Data>, ];
     export interface $PerkDataType<D> extends RegistryMarked<RegistryTypes.AstralsorceryPerkDataTypesTag, RegistryTypes.AstralsorceryPerkDataTypes> {}
     export class $AttributeConverterPerk<D extends $AbstractPerk$Data> extends $ProgressPerk<D> implements $AttributeConverterProvider {
-        addConverter<P extends $AttributeConverterPerk<never>>(arg0: $PerkAttributeConverter_): P;
         getConverters(arg0: $Player, arg1: $LogicalSide_, arg2: boolean): $Collection<$PerkAttributeConverter>;
+        addConverter<P extends $AttributeConverterPerk<never>>(arg0: $PerkAttributeConverter_): P;
         static TO_CLIENT_PERKTREE_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $AbstractPerk<never>>;
         static DATAPACK_CODEC: $Codec<$AbstractPerk<never>>;
     }
     export class $AbstractPerk<T extends $AbstractPerk$Data> implements $ModifierSource {
+        hasPlayerPerkAllowingUnlock(arg0: $PlayerProgress, arg1: $Player): boolean;
+        onRemove(arg0: $Player, arg1: $LogicalSide_): void;
+        mayRemovePerk(arg0: $PlayerProgress, arg1: $Player): boolean;
+        setNameKey<P extends $AbstractPerk<never>>(arg0: string): P;
+        getPerkData(arg0: $Player, arg1: $LogicalSide_): (T) | undefined;
+        clearTooltipCache(): void;
+        getDescriptionIds(): $List<string>;
+        getConnectedPerks(arg0: $PlayerProgress, arg1: $LogicalSide_, arg2: boolean): $Collection<$AbstractPerk<never>>;
+        canApplySource(arg0: $Player, arg1: $LogicalSide_): boolean;
+        getSourceProvider(): $ModifierSourceProvider<never>;
+        getAlwaysDependentPerks(arg0: $PlayerProgress, arg1: $LogicalSide_): $Collection<$AbstractPerk<never>>;
+        onUnlockPerkServer(arg0: $Player | null, arg1: $PerkAllocationType_, arg2: $PlayerProgress, arg3: T): void;
+        static getInfoText(arg0: string): $MutableComponent;
+        onRemovePerkServer(arg0: $ServerPlayer, arg1: $PerkAllocationType_, arg2: $PlayerProgress, arg3: T): void;
+        providesAllocation(arg0: $PlayerProgress, arg1: $Player, arg2: $AbstractPerk<never>): ($PerkAllocation) | undefined;
+        mayUnlockPerk(arg0: $PlayerProgress, arg1: $Player): boolean;
+        getPerkTreePoint(): $PerkTreePoint<never>;
+        getPerkStatus(arg0: $Player | null, arg1: $LogicalSide_): $PerkAllocationStatus;
+        getPerkSource(): $List<$MutableComponent>;
         getName(arg0: $PlayerProgress, arg1: $Player): $MutableComponent;
         validate(arg0: $LogicalSide_): void;
         getKey(): $ResourceLocation;
         getType(): $PerkType<never>;
         getOffset(): $FloatPoint;
-        getDescription(arg0: $PlayerProgress, arg1: $Player | null): $List<$MutableComponent>;
         invalidate(arg0: $LogicalSide_): void;
-        setNameKey<P extends $AbstractPerk<never>>(arg0: string): P;
-        clearCaches(arg0: $LogicalSide_): void;
-        onApply(arg0: $Player, arg1: $LogicalSide_): void;
-        getY(): number;
+        getDescription(arg0: $PlayerProgress, arg1: $Player | null): $List<$MutableComponent>;
         getNameKey(): string;
         getCategory(): $PerkCategory;
         setCategory<P extends $AbstractPerk<never>>(arg0: $PerkCategory): P;
+        clearCaches(arg0: $LogicalSide_): void;
         getX(): number;
+        getY(): number;
+        onApply(arg0: $Player, arg1: $LogicalSide_): void;
         getTooltip(arg0: $PlayerProgress, arg1: $Player | null, arg2: $LogicalSide_): $Collection<$MutableComponent>;
-        onRemove(arg0: $Player, arg1: $LogicalSide_): void;
-        getSourceProvider(): $ModifierSourceProvider<never>;
-        canApplySource(arg0: $Player, arg1: $LogicalSide_): boolean;
-        getPerkData(arg0: $Player, arg1: $LogicalSide_): (T) | undefined;
-        clearTooltipCache(): void;
-        getPerkTreePoint(): $PerkTreePoint<never>;
-        onRemovePerkServer(arg0: $ServerPlayer, arg1: $PerkAllocationType_, arg2: $PlayerProgress, arg3: T): void;
-        getPerkSource(): $List<$MutableComponent>;
-        mayUnlockPerk(arg0: $PlayerProgress, arg1: $Player): boolean;
-        getDescriptionIds(): $List<string>;
-        providesAllocation(arg0: $PlayerProgress, arg1: $Player, arg2: $AbstractPerk<never>): ($PerkAllocation) | undefined;
-        static getInfoText(arg0: string): $MutableComponent;
-        onUnlockPerkServer(arg0: $Player | null, arg1: $PerkAllocationType_, arg2: $PlayerProgress, arg3: T): void;
-        getPerkStatus(arg0: $Player | null, arg1: $LogicalSide_): $PerkAllocationStatus;
-        getAlwaysDependentPerks(arg0: $PlayerProgress, arg1: $LogicalSide_): $Collection<$AbstractPerk<never>>;
-        getConnectedPerks(arg0: $PlayerProgress, arg1: $LogicalSide_, arg2: boolean): $Collection<$AbstractPerk<never>>;
-        hasPlayerPerkAllowingUnlock(arg0: $PlayerProgress, arg1: $Player): boolean;
-        mayRemovePerk(arg0: $PlayerProgress, arg1: $Player): boolean;
         isEqual(arg0: $ModifierSource): boolean;
         static TO_CLIENT_PERKTREE_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $AbstractPerk<never>>;
         static DATAPACK_CODEC: $Codec<$AbstractPerk<never>>;
-        get key(): $ResourceLocation;
-        get type(): $PerkType<never>;
-        get offset(): $FloatPoint;
-        get y(): number;
-        get x(): number;
+        get descriptionIds(): $List<string>;
         get sourceProvider(): $ModifierSourceProvider<never>;
         get perkTreePoint(): $PerkTreePoint<never>;
         get perkSource(): $List<$MutableComponent>;
-        get descriptionIds(): $List<string>;
+        get key(): $ResourceLocation;
+        get type(): $PerkType<never>;
+        get offset(): $FloatPoint;
+        get x(): number;
+        get y(): number;
     }
     export class $PerkType<T extends $AbstractPerk<never>> {
-        static of<T extends $AbstractPerk<never>>(arg0: $MapCodec_<T>, arg1: $Supplier_<$PerkDataType<never>>, arg2: $TriFunction_<$ResourceLocation, number, number, T>): $PerkType<T>;
-        perkCodec(): $MapCodec<T>;
         dataType(): $PerkDataType<never>;
+        perkCodec(): $MapCodec<T>;
         newBlankPerk(arg0: $ResourceLocation_, arg1: number, arg2: number): T;
+        static of<T extends $AbstractPerk<never>>(arg0: $MapCodec_<T>, arg1: $Supplier_<$PerkDataType<never>>, arg2: $TriFunction_<$ResourceLocation, number, number, T>): $PerkType<T>;
         constructor(arg0: $MapCodec_<T>, arg1: $Supplier_<$PerkDataType<never>>);
     }
     /**
@@ -117,32 +117,32 @@ declare module "@package/hellfirepvp/astralsorcery/common/perk/tree" {
      */
     export type $PerkType_<T> = RegistryTypes.AstralsorceryPerkTypes;
     export class $PerkTreePoint<T extends $AbstractPerk<never>> {
-        getOffset(): $FloatPoint;
-        getPerk(): T;
         getRenderer(): $Supplier<$PerkRenderer<never, T>>;
-        getRenderSize(): number;
+        getPerk(): T;
         getFixedRenderTypes(): $Supplier<$List<$PerkRenderType>>;
+        getRenderSize(): number;
+        getOffset(): $FloatPoint;
         static PERK_RENDER_SIZE: number;
         constructor(arg0: $FloatPoint_, arg1: T);
-        get offset(): $FloatPoint;
-        get perk(): T;
         get renderer(): $Supplier<$PerkRenderer<never, T>>;
-        get renderSize(): number;
+        get perk(): T;
         get fixedRenderTypes(): $Supplier<$List<$PerkRenderType>>;
+        get renderSize(): number;
+        get offset(): $FloatPoint;
     }
     export class $AbstractPerk$Data {
+        setSealed(arg0: boolean): void;
         isSealed(): boolean;
         getType(): $PerkDataType<never>;
         copy<T extends $AbstractPerk$Data>(): T;
         static create(): $AbstractPerk$Data;
-        setSealed(arg0: boolean): void;
         static CODEC: $MapCodec<$AbstractPerk$Data>;
         static SYNC_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $AbstractPerk$Data>;
         get type(): $PerkDataType<never>;
     }
     export class $AttributeModifierPerk<D extends $AbstractPerk$Data> extends $AttributeConverterPerk<D> implements $AttributeModifierProvider {
-        getModifiers(arg0: $Player, arg1: $LogicalSide_, arg2: boolean): $Collection<$PerkAttributeModifier>;
         addModifier<P extends $AttributeModifierPerk<never>>(arg0: $PerkAttributeModifier_): P;
+        getModifiers(arg0: $Player, arg1: $LogicalSide_, arg2: boolean): $Collection<$PerkAttributeModifier>;
         static CODEC: $MapCodec<$AttributeModifierPerk<never>>;
         static TO_CLIENT_PERKTREE_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $AbstractPerk<never>>;
         static DATAPACK_CODEC: $Codec<$AbstractPerk<never>>;

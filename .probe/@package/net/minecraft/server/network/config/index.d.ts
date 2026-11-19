@@ -8,9 +8,9 @@ import { $List_ } from "@package/java/util";
 
 declare module "@package/net/minecraft/server/network/config" {
     export class $SynchronizeRegistriesTask implements $ConfigurationTask {
+        handleResponse(packs: $List_<$KnownPack_>, packetSender: $Consumer_<$Packet<never>>): void;
         type(): $ConfigurationTask$Type;
         start(task: $Consumer_<$Packet<never>>): void;
-        handleResponse(packs: $List_<$KnownPack_>, packetSender: $Consumer_<$Packet<never>>): void;
         static TYPE: $ConfigurationTask$Type;
         constructor(requestedPacks: $List_<$KnownPack_>, registries: $LayeredRegistryAccess<$RegistryLayer_>);
     }

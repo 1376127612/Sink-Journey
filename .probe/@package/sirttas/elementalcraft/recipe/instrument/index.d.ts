@@ -24,7 +24,7 @@ declare module "@package/sirttas/elementalcraft/recipe/instrument" {
     export class $ILuckRecipe<I extends $RandomSourceRecipeInput> {
     }
     export interface $ILuckRecipe<I extends $RandomSourceRecipeInput> extends $IECRecipe<I> {
-        getLuck(arg0: I): number;
         getRandomSource(arg0: I): $RandomSource;
+        getLuck(arg0: I): number;
     }
 }

@@ -7,16 +7,16 @@ export * as util from "@package/codechicken/mixin/util";
 
 declare module "@package/codechicken/mixin" {
     export class $SidedFactory<B, F, T> extends $MixinFactoryImpl<B, F> {
-        registerTrait(arg0: $Class<never>, arg1: $Class<never>): void;
-        registerTrait(arg0: $Class<never>, arg1: $Class<never>, arg2: $Class<never>): void;
         getTraitsForObject(arg0: T, arg1: boolean): $ImmutableSet<$MixinFactory$TraitKey>;
+        registerTrait(arg0: $Class<never>, arg1: $Class<never>, arg2: $Class<never>): void;
+        registerTrait(arg0: $Class<never>, arg1: $Class<never>): void;
     }
     export class $MixinFactoryImpl<B, F> implements $MixinFactory<B, F> {
-        construct(arg0: $ImmutableSet<$MixinFactory$TraitKey_>): F;
-        registerTrait(arg0: $Class<never>): $MixinFactory$TraitKey;
-        registerTrait(arg0: $ClassNode): $MixinFactory$TraitKey;
-        getMixinCompiler(): $MixinCompiler;
         getTraitsForClass(arg0: $Class<never>): $ImmutableSet<$MixinFactory$TraitKey>;
+        getMixinCompiler(): $MixinCompiler;
+        construct(arg0: $ImmutableSet<$MixinFactory$TraitKey_>): F;
+        registerTrait(arg0: $ClassNode): $MixinFactory$TraitKey;
+        registerTrait(arg0: $Class<never>): $MixinFactory$TraitKey;
         constructor(arg0: $MixinCompiler, arg1: $Class<B>, arg2: $Class<F>, arg3: string);
         get mixinCompiler(): $MixinCompiler;
     }

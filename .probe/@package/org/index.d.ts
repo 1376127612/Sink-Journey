@@ -8,6 +8,8 @@ export * as objectweb from "@package/org/objectweb";
 export * as apache from "@package/org/apache";
 export * as spongepowered from "@package/org/spongepowered";
 export * as w3c from "@package/org/w3c";
+export * as betterx from "@package/org/betterx";
+export * as jgrapht from "@package/org/jgrapht";
 export * as jline from "@package/org/jline";
 export * as xml from "@package/org/xml";
 export * as embeddedt from "@package/org/embeddedt";

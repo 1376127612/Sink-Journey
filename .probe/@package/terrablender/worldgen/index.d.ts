@@ -17,12 +17,12 @@ declare module "@package/terrablender/worldgen" {
     export class $IExtendedParameterList<T> {
     }
     export interface $IExtendedParameterList<T> extends $Cloneable {
-        clone(): $Climate$ParameterList<T>;
-        getRegion(arg0: number): $Region;
         initializeForTerraBlender(arg0: $RegistryAccess, arg1: $RegionType_, arg2: number): void;
         findValuePositional(arg0: $Climate$TargetPoint_, arg1: number, arg2: number, arg3: number): T;
-        getTree(arg0: number): $Climate$RTree<any>;
+        clone(): $Climate$ParameterList<T>;
+        getRegion(arg0: number): $Region;
         isInitialized(): boolean;
+        getTree(arg0: number): $Climate$RTree<any>;
         recreateUniqueness(): void;
         getUniqueness(arg0: number, arg1: number, arg2: number): number;
         getTreeCount(): number;

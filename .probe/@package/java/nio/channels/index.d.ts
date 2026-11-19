@@ -42,30 +42,30 @@ declare module "@package/java/nio/channels" {
         read(arg0: $ByteBuffer): number;
     }
     export class $SelectionKey {
+        isAcceptable(): boolean;
+        readyOps(): number;
         cancel(): void;
         attachment(): $Object;
         attach(arg0: $Object): $Object;
         channel(): $SelectableChannel;
         isReadable(): boolean;
         isWritable(): boolean;
+        isValid(): boolean;
         selector(): $Selector;
         interestOps(): number;
         interestOps(arg0: number): $SelectionKey;
-        isValid(): boolean;
         interestOpsOr(arg0: number): number;
         interestOpsAnd(arg0: number): number;
         isConnectable(): boolean;
-        readyOps(): number;
-        isAcceptable(): boolean;
         static OP_CONNECT: number;
         static OP_ACCEPT: number;
         static OP_READ: number;
         static OP_WRITE: number;
+        get acceptable(): boolean;
         get readable(): boolean;
         get writable(): boolean;
         get valid(): boolean;
         get connectable(): boolean;
-        get acceptable(): boolean;
     }
     export class $SeekableByteChannel {
     }
@@ -104,19 +104,19 @@ declare module "@package/java/nio/channels" {
         get remoteAddress(): $SocketAddress;
     }
     export class $Selector implements $Closeable {
+        selectedKeys(): $Set<$SelectionKey>;
+        selectNow(): number;
+        selectNow(arg0: $Consumer_<$SelectionKey>): number;
         isOpen(): boolean;
         provider(): $SelectorProvider;
         close(): void;
         keys(): $Set<$SelectionKey>;
         static open(): $Selector;
-        select(arg0: $Consumer_<$SelectionKey>, arg1: number): number;
-        select(arg0: $Consumer_<$SelectionKey>): number;
         select(): number;
+        select(arg0: $Consumer_<$SelectionKey>, arg1: number): number;
         select(arg0: number): number;
+        select(arg0: $Consumer_<$SelectionKey>): number;
         wakeup(): $Selector;
-        selectNow(): number;
-        selectNow(arg0: $Consumer_<$SelectionKey>): number;
-        selectedKeys(): $Set<$SelectionKey>;
     }
     export class $ServerSocketChannel extends $AbstractSelectableChannel implements $NetworkChannel {
         accept(): $SocketChannel;
@@ -152,14 +152,14 @@ declare module "@package/java/nio/channels" {
         read(arg0: $ByteBuffer[]): number;
     }
     export class $MembershipKey {
-        sourceAddress(): $InetAddress;
+        networkInterface(): $NetworkInterface;
+        unblock(arg0: $InetAddress): $MembershipKey;
         group(): $InetAddress;
         block(arg0: $InetAddress): $MembershipKey;
         channel(): $MulticastChannel;
-        drop(): void;
         isValid(): boolean;
-        networkInterface(): $NetworkInterface;
-        unblock(arg0: $InetAddress): $MembershipKey;
+        drop(): void;
+        sourceAddress(): $InetAddress;
         get valid(): boolean;
     }
     export class $CompletionHandler<V, A> {
@@ -190,19 +190,19 @@ declare module "@package/java/nio/channels" {
         force(arg0: boolean): void;
         tryLock(): $FileLock;
         tryLock(arg0: number, arg1: number, arg2: boolean): $FileLock;
-        truncate(arg0: number): $FileChannel;
         transferFrom(arg0: $ReadableByteChannel, arg1: number, arg2: number): number;
+        truncate(arg0: number): $FileChannel;
     }
     export class $SelectableChannel extends $AbstractInterruptibleChannel implements $Channel {
         isRegistered(): boolean;
         register(arg0: $Selector, arg1: number): $SelectionKey;
         register(arg0: $Selector, arg1: number, arg2: $Object): $SelectionKey;
         provider(): $SelectorProvider;
+        isBlocking(): boolean;
+        configureBlocking(arg0: boolean): $SelectableChannel;
         validOps(): number;
         keyFor(arg0: $Selector): $SelectionKey;
         blockingLock(): $Object;
-        isBlocking(): boolean;
-        configureBlocking(arg0: boolean): $SelectableChannel;
         get registered(): boolean;
         get blocking(): boolean;
     }
@@ -260,24 +260,24 @@ declare module "@package/java/nio/channels" {
         sink(): $Pipe$SinkChannel;
     }
     export class $DatagramChannel extends $AbstractSelectableChannel implements $ByteChannel, $ScatteringByteChannel, $GatheringByteChannel, $MulticastChannel {
+        receive(arg0: $ByteBuffer): $SocketAddress;
+        write(arg0: $ByteBuffer): number;
         write(arg0: $ByteBuffer[]): number;
         write(arg0: $ByteBuffer[], arg1: number, arg2: number): number;
-        write(arg0: $ByteBuffer): number;
         read(arg0: $ByteBuffer[]): number;
         read(arg0: $ByteBuffer): number;
         read(arg0: $ByteBuffer[], arg1: number, arg2: number): number;
         connect(arg0: $SocketAddress): $DatagramChannel;
-        static open(arg0: $ProtocolFamily_): $DatagramChannel;
         static open(): $DatagramChannel;
+        static open(arg0: $ProtocolFamily_): $DatagramChannel;
         bind(arg0: $SocketAddress): $DatagramChannel;
         socket(): $DatagramSocket;
         isConnected(): boolean;
         setOption<T>(arg0: $SocketOption<T>, arg1: T): $DatagramChannel;
         getLocalAddress(): $SocketAddress;
         getRemoteAddress(): $SocketAddress;
-        send(arg0: $ByteBuffer, arg1: $SocketAddress): number;
         disconnect(): $DatagramChannel;
-        receive(arg0: $ByteBuffer): $SocketAddress;
+        send(arg0: $ByteBuffer, arg1: $SocketAddress): number;
         get connected(): boolean;
         get localAddress(): $SocketAddress;
         get remoteAddress(): $SocketAddress;

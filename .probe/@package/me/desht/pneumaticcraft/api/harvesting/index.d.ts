@@ -10,10 +10,10 @@ import { $IDrone } from "@package/me/desht/pneumaticcraft/api/drone";
 
 declare module "@package/me/desht/pneumaticcraft/api/harvesting" {
     export class $HarvestHandler {
-        harvestAndReplant(arg0: $Level_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $IDrone): boolean;
-        addFilterItems(arg0: $Level_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $IDrone): $List<$ItemStack>;
-        harvest(arg0: $Level_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $IDrone): void;
         canHarvest(arg0: $Level_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $IDrone): boolean;
+        harvest(arg0: $Level_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $IDrone): void;
+        addFilterItems(arg0: $Level_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $IDrone): $List<$ItemStack>;
+        harvestAndReplant(arg0: $Level_, arg1: $BlockGetter, arg2: $BlockPos_, arg3: $BlockState_, arg4: $IDrone): boolean;
         constructor();
     }
     /**
@@ -21,8 +21,8 @@ declare module "@package/me/desht/pneumaticcraft/api/harvesting" {
      */
     export type $HarvestHandler_ = RegistryTypes.PneumaticcraftHarvestHandlers;
     export class $HoeHandler implements $Predicate<$ItemStack> {
-        test(arg0: $ItemStack_): boolean;
         getConsumer(arg0: $ItemStack_): $Consumer<$Player>;
+        test(arg0: $ItemStack_): boolean;
         or(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;
         negate(): $Predicate<$ItemStack>;
         and(arg0: $Predicate_<$ItemStack>): $Predicate<$ItemStack>;

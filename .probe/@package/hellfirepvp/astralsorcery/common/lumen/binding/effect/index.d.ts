@@ -22,11 +22,11 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen/binding/effect" 
      */
     export type $LumenBindingEffect$DeferredType_<T> = { holder?: $DeferredHolder<$LumenBindingEffect$Type_<never>, $LumenBindingEffect$Type_<$LumenBindingEffect>>,  } | [holder?: $DeferredHolder<$LumenBindingEffect$Type_<never>, $LumenBindingEffect$Type_<$LumenBindingEffect>>, ];
     export class $LumenBindingEffect {
-        getType(): $LumenBindingEffect$DeferredType<never>;
-        static forEachEffect<T extends $LumenBindingEffect, R>(arg0: $LivingEntity, arg1: $Class<T>, arg2: $BiFunction_<$ItemStack, T, R>): $List<R>;
         static forEachEffect<T extends $LumenBindingEffect>(arg0: $LivingEntity, arg1: $Class<T>, arg2: $BiConsumer_<$ItemStack, T>): void;
+        static forEachEffect<T extends $LumenBindingEffect, R>(arg0: $LivingEntity, arg1: $Class<T>, arg2: $BiFunction_<$ItemStack, T, R>): $List<R>;
         unwrapType(): $LumenBindingEffect$Type<never>;
         getDisplayText(arg0: $LogicalSide_, arg1: $ItemStack_): $List<$Component>;
+        getType(): $LumenBindingEffect$DeferredType<never>;
         static CODEC: $Codec<$LumenBindingEffect>;
         static NONE: $LumenBindingEffect;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $LumenBindingEffect>;
@@ -34,8 +34,8 @@ declare module "@package/hellfirepvp/astralsorcery/common/lumen/binding/effect" 
         get type(): $LumenBindingEffect$DeferredType<never>;
     }
     export class $LumenBindingEffect$Type<T extends $LumenBindingEffect> extends $Record {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         codec(): $MapCodec<T>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         constructor(codec: $MapCodec_<T>, streamCodec: $StreamCodec<$RegistryFriendlyByteBuf, T>);
     }
     /**

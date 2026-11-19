@@ -9,10 +9,10 @@ declare module "@package/sirttas/dpanvil/api/data/preprocessor" {
     }
     export interface $DataPreprocessor$Context {
         getProcessed(arg0: $ResourceLocation_): $List<$JsonElement>;
-        getConditionContext(): $ICondition$IContext;
         getRegistryLookup(): $HolderLookup$Provider;
-        get conditionContext(): $ICondition$IContext;
+        getConditionContext(): $ICondition$IContext;
         get registryLookup(): $HolderLookup$Provider;
+        get conditionContext(): $ICondition$IContext;
     }
     export class $DataPreprocessor {
     }

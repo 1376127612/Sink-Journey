@@ -26,26 +26,26 @@ import { $Vector4f } from "@package/org/joml";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
     export class $UIResourceTexture extends $TransformTexture {
-        getResourcePath(): $IResourcePath;
         getInternalTexture(): $IGuiTexture;
-        constructor(arg0: $IResourcePath);
+        getResourcePath(): $IResourcePath;
         constructor();
-        get resourcePath(): $IResourcePath;
+        constructor(arg0: $IResourcePath);
         get internalTexture(): $IGuiTexture;
+        get resourcePath(): $IResourcePath;
     }
     export class $RectTexture extends $TransformTexture {
+        setBorderColor(arg0: number): $RectTexture;
+        getCornerSegments(): number;
+        setCornerSegments(arg0: number): $RectTexture;
+        getBorderColor(): number;
+        setRadius(arg0: $Vector4f): $RectTexture;
         static of(arg0: number): $RectTexture;
         copy(): $RectTexture;
         setColor(arg0: number): $RectTexture;
-        setRadius(arg0: $Vector4f): $RectTexture;
-        getRadius(): $Vector4f;
         getColor(): number;
+        getRadius(): $Vector4f;
         setStroke(arg0: number): $RectTexture;
         getStroke(): number;
-        setBorderColor(arg0: number): $RectTexture;
-        getBorderColor(): number;
-        getCornerSegments(): number;
-        setCornerSegments(arg0: number): $RectTexture;
         constructor();
     }
     export class $DynamicTexture implements $IGuiTexture {
@@ -56,44 +56,44 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         copy(): $IGuiTexture;
         rotate(arg0: number): $IGuiTexture;
         setColor(arg0: number): $IGuiTexture;
-        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
+        getRawTexture(): $IGuiTexture;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
         createPreview(arg0: $ConfiguratorGroup): void;
+        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
         draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        getRawTexture(): $IGuiTexture;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         afterSerialize(): void;
+        beforeDeserialize(): void;
+        writeToBuff(arg0: $ByteBuf): void;
         afterDeserialize(): void;
         readFromBuff(arg0: $ByteBuf): void;
         beforeSerialize(): void;
-        writeToBuff(arg0: $ByteBuf): void;
-        beforeDeserialize(): void;
-        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         deserializeAdditionalNBT(arg0: $Tag_, arg1: $HolderLookup$Provider): void;
+        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
         name(): string;
         group(): string;
-        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
-        registryName(): $ResourceLocation;
         getChatComponent(): $Component;
-        isLDLRegister(): boolean;
         getTranslateKey(): string;
+        isLDLRegister(): boolean;
         getRegistryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         getRegisterUIClient(): $LDLRegisterClient;
         getRegistryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
+        registryName(): $ResourceLocation;
         textureSupplier: $Supplier<$IGuiTexture>;
         constructor(arg0: $Supplier_<$IGuiTexture>);
         set color(value: number);
         get rawTexture(): $IGuiTexture;
         get configurableName(): string;
-        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get chatComponent(): $Component;
-        get LDLRegister(): boolean;
         get translateKey(): string;
+        get LDLRegister(): boolean;
         get registryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get registerUIClient(): $LDLRegisterClient;
         get registryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
     }
@@ -109,30 +109,30 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
      */
     export type $SpriteTexture$WrapMode_ = "clamp" | "repeat" | "mirrored_repeat";
     export class $ItemStackTexture extends $TransformTexture {
+        updateTick(): void;
+        setItems(...arg0: $ItemStack_[]): $ItemStackTexture;
         copy(): $ItemStackTexture;
         setColor(arg0: number): $ItemStackTexture;
-        setItems(...arg0: $ItemStack_[]): $ItemStackTexture;
-        updateTick(): void;
         items: $ItemStack[];
+        constructor();
         constructor(...arg0: $Item_[]);
         constructor(...arg0: $ItemStack_[]);
-        constructor();
         set color(value: number);
     }
     export class $TextTexture extends $TransformTexture {
+        updateTick(): void;
+        setRollSpeed(arg0: number): void;
+        setDropShadow(arg0: boolean): $TextTexture;
+        updateText(arg0: string): void;
         copy(): $TextTexture;
         static raw(arg0: string): $TextTexture;
         setColor(arg0: number): $TextTexture;
         setType(arg0: $TextTexture$TextType_): $TextTexture;
-        getLines(): number;
         setWidth(arg0: number): $TextTexture;
-        updateTick(): void;
-        updateText(arg0: string): void;
-        setRawText(arg0: string): $TextTexture;
         setSupplier(arg0: $Supplier_<string>): $TextTexture;
+        getLines(): number;
         setBackgroundColor(arg0: number): $TextTexture;
-        setRollSpeed(arg0: number): void;
-        setDropShadow(arg0: boolean): $TextTexture;
+        setRawText(arg0: string): $TextTexture;
         dropShadow: boolean;
         backgroundColor: number;
         color: number;
@@ -141,10 +141,10 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         width: number;
         text: string;
         type: $TextTexture$TextType;
+        constructor();
+        constructor(arg0: string, arg1: number);
         constructor(arg0: $Supplier_<string>);
         constructor(arg0: string);
-        constructor(arg0: string, arg1: number);
-        constructor();
         get lines(): number;
         set rawText(value: string);
     }
@@ -154,9 +154,9 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         setBorder(arg0: number): $ColorBorderTexture;
         border: number;
         color: number;
+        constructor();
         constructor(arg0: number, arg1: $Color);
         constructor(arg0: number, arg1: number);
-        constructor();
     }
     export class $IGuiTexture$EmptyTexture implements $IGuiTexture {
         copy(): $IGuiTexture;
@@ -165,52 +165,52 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         transform(arg0: number, arg1: number): $IGuiTexture;
         rotate(arg0: number): $IGuiTexture;
         setColor(arg0: number): $IGuiTexture;
-        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
+        getRawTexture(): $IGuiTexture;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
         createPreview(arg0: $ConfiguratorGroup): void;
+        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
         draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        getRawTexture(): $IGuiTexture;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         afterSerialize(): void;
+        beforeDeserialize(): void;
+        writeToBuff(arg0: $ByteBuf): void;
         afterDeserialize(): void;
         readFromBuff(arg0: $ByteBuf): void;
         beforeSerialize(): void;
-        writeToBuff(arg0: $ByteBuf): void;
-        beforeDeserialize(): void;
-        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         deserializeAdditionalNBT(arg0: $Tag_, arg1: $HolderLookup$Provider): void;
+        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
         name(): string;
         group(): string;
-        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
-        registryName(): $ResourceLocation;
         getChatComponent(): $Component;
-        isLDLRegister(): boolean;
         getTranslateKey(): string;
+        isLDLRegister(): boolean;
         getRegistryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         getRegisterUIClient(): $LDLRegisterClient;
         getRegistryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
+        registryName(): $ResourceLocation;
         constructor();
         set color(value: number);
         get rawTexture(): $IGuiTexture;
         get configurableName(): string;
-        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get chatComponent(): $Component;
-        get LDLRegister(): boolean;
         get translateKey(): string;
+        get LDLRegister(): boolean;
         get registryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get registerUIClient(): $LDLRegisterClient;
         get registryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
     }
     export class $GuiTextureGroup extends $TransformTexture {
+        setTextures(...arg0: $IGuiTexture_[]): $GuiTextureGroup;
         static of(...arg0: $IGuiTexture_[]): $GuiTextureGroup;
         copy(): $GuiTextureGroup;
         setColor(arg0: number): $GuiTextureGroup;
         getTextures(): $IGuiTexture[];
-        setTextures(...arg0: $IGuiTexture_[]): $GuiTextureGroup;
         constructor();
         constructor(...arg0: $IGuiTexture_[]);
         set color(value: number);
@@ -218,17 +218,17 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
     export class $ITextureSize {
     }
     export interface $ITextureSize {
-        getWidth(): number;
+        getHeight(): number;
         ldlib2$getImageWidth(): number;
         ldlib2$getImageHeight(): number;
-        getHeight(): number;
-        get width(): number;
+        getWidth(): number;
         get height(): number;
+        get width(): number;
     }
     export class $IGuiTexture {
+        static createCodec(): $Codec<$IGuiTexture>;
         static group(...arg0: $IGuiTexture_[]): $GuiTextureGroup;
         static dynamic(arg0: $Supplier_<$IGuiTexture>): $DynamicTexture;
-        static createCodec(): $Codec<$IGuiTexture>;
         static getTextureFromFile(arg0: $File_): $ResourceLocation;
         static CODEC: $Codec<$IGuiTexture>;
         static EMPTY: $IGuiTexture$EmptyTexture;
@@ -240,12 +240,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         copy(): $IGuiTexture;
         rotate(arg0: number): $IGuiTexture;
         setColor(arg0: number): $IGuiTexture;
-        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
+        getRawTexture(): $IGuiTexture;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
         createPreview(arg0: $ConfiguratorGroup): void;
-        draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
+        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
         draw(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        getRawTexture(): $IGuiTexture;
+        draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
         set color(value: number);
         get rawTexture(): $IGuiTexture;
     }
@@ -254,20 +254,20 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
      */
     export type $IGuiTexture_ = ((arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number) => void);
     export class $SpriteTexture extends $TransformTexture {
+        setBorderRB(arg0: $Position): $SpriteTexture;
+        getImageLocation(): $ResourceLocation;
+        setSpritePosition(arg0: $Position): $SpriteTexture;
+        setBorderLT(arg0: $Position): $SpriteTexture;
+        setSpriteSize(arg0: $Size): $SpriteTexture;
+        getImageSize(): $Size;
+        setWrapMode(arg0: $SpriteTexture$WrapMode_): $SpriteTexture;
+        setImageLocation(arg0: $ResourceLocation_): $SpriteTexture;
         copy(): $SpriteTexture;
         setColor(arg0: number): $SpriteTexture;
         setSprite(arg0: number, arg1: number, arg2: number, arg3: number): $SpriteTexture;
-        setBorder(arg0: number): $SpriteTexture;
-        setBorder(arg0: number, arg1: number, arg2: number, arg3: number): $SpriteTexture;
-        setSpriteSize(arg0: $Size): $SpriteTexture;
-        getImageLocation(): $ResourceLocation;
-        setBorderRB(arg0: $Position): $SpriteTexture;
-        setWrapMode(arg0: $SpriteTexture$WrapMode_): $SpriteTexture;
-        getImageSize(): $Size;
-        setImageLocation(arg0: $ResourceLocation_): $SpriteTexture;
-        setSpritePosition(arg0: $Position): $SpriteTexture;
-        setBorderLT(arg0: $Position): $SpriteTexture;
         static of(arg0: $ResourceLocation_): $SpriteTexture;
+        setBorder(arg0: number, arg1: number, arg2: number, arg3: number): $SpriteTexture;
+        setBorder(arg0: number): $SpriteTexture;
         borderLT: $Position;
         color: number;
         wrapMode: $SpriteTexture$WrapMode;
@@ -278,36 +278,36 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         get imageSize(): $Size;
     }
     export class $SDFRectTexture extends $TransformTexture {
+        setBorderColor(arg0: number): $SDFRectTexture;
+        getBorderColor(): number;
+        setRadius(arg0: $Vector4f): $SDFRectTexture;
+        setRadius(arg0: number): $SDFRectTexture;
         static of(arg0: number): $SDFRectTexture;
         copy(): $SDFRectTexture;
         setColor(arg0: number): $SDFRectTexture;
-        setRadius(arg0: $Vector4f): $SDFRectTexture;
-        setRadius(arg0: number): $SDFRectTexture;
-        getRadius(): $Vector4f;
         getColor(): number;
+        getRadius(): $Vector4f;
         setStroke(arg0: number): $SDFRectTexture;
         getStroke(): number;
-        setBorderColor(arg0: number): $SDFRectTexture;
-        getBorderColor(): number;
         constructor();
     }
     export class $AnimationTexture extends $TransformTexture {
+        updateTick(): void;
+        setCellSize(arg0: number): $AnimationTexture;
+        getCellSize(): number;
+        setAnimation(arg0: number): $AnimationTexture;
+        setAnimation(arg0: number, arg1: number): $AnimationTexture;
         copy(): $AnimationTexture;
         setColor(arg0: number): $AnimationTexture;
         getFrom(): number;
         getTo(): number;
         getColor(): number;
-        updateTick(): void;
         getAnimation(): number;
         setTexture(arg0: string): $AnimationTexture;
-        getCellSize(): number;
-        setCellSize(arg0: number): $AnimationTexture;
-        setAnimation(arg0: number): $AnimationTexture;
-        setAnimation(arg0: number, arg1: number): $AnimationTexture;
         imageLocation: $ResourceLocation;
-        constructor(arg0: $ResourceLocation_);
-        constructor(arg0: string);
         constructor();
+        constructor(arg0: string);
+        constructor(arg0: $ResourceLocation_);
         get from(): number;
         get to(): number;
         set texture(value: string);
@@ -338,71 +338,71 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         constructor();
     }
     export class $TransformTexture implements $IGuiTexture {
-        scale(arg0: number, arg1: number): $TransformTexture;
-        scale(arg0: number): $TransformTexture;
-        transform(arg0: number, arg1: number): $TransformTexture;
-        rotate(arg0: number): $TransformTexture;
-        draw(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
-        draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        beforeDeserialize(): void;
         copyTransform(arg0: $Transform2D): void;
         copyTransform(arg0: $TransformTexture): void;
         getTransform2D(): $Transform2D;
+        scale(arg0: number): $TransformTexture;
+        scale(arg0: number, arg1: number): $TransformTexture;
+        transform(arg0: number, arg1: number): $TransformTexture;
+        rotate(arg0: number): $TransformTexture;
+        beforeDeserialize(): void;
+        draw(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
         transform(arg0: number, arg1: number): $IGuiTexture;
         copy(): $IGuiTexture;
         setColor(arg0: number): $IGuiTexture;
-        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
+        getRawTexture(): $IGuiTexture;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
         createPreview(arg0: $ConfiguratorGroup): void;
-        getRawTexture(): $IGuiTexture;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         afterSerialize(): void;
+        writeToBuff(arg0: $ByteBuf): void;
         afterDeserialize(): void;
         readFromBuff(arg0: $ByteBuf): void;
         beforeSerialize(): void;
-        writeToBuff(arg0: $ByteBuf): void;
-        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         deserializeAdditionalNBT(arg0: $Tag_, arg1: $HolderLookup$Provider): void;
+        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
         name(): string;
         group(): string;
-        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
-        registryName(): $ResourceLocation;
         getChatComponent(): $Component;
-        isLDLRegister(): boolean;
         getTranslateKey(): string;
+        isLDLRegister(): boolean;
         getRegistryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         getRegisterUIClient(): $LDLRegisterClient;
         getRegistryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
+        registryName(): $ResourceLocation;
         constructor();
         get transform2D(): $Transform2D;
         set color(value: number);
         get rawTexture(): $IGuiTexture;
         get configurableName(): string;
-        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get chatComponent(): $Component;
-        get LDLRegister(): boolean;
         get translateKey(): string;
+        get LDLRegister(): boolean;
         get registryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get registerUIClient(): $LDLRegisterClient;
         get registryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
     }
     export class $ShaderTexture extends $TransformTexture implements $AutoCloseable {
-        close(): void;
-        setColor(arg0: number): $ShaderTexture;
-        setShader(arg0: $ResourceLocation_): $ShaderTexture;
-        getColor(): number;
+        getShaderHolder(): $LDShaderHolder;
         getShaderFromFile(arg0: $File_): $ResourceLocation;
         getShaderLocation(): $ResourceLocation;
-        getShaderHolder(): $LDShaderHolder;
+        close(): void;
+        setColor(arg0: number): $ShaderTexture;
+        getColor(): number;
+        setShader(arg0: $ResourceLocation_): $ShaderTexture;
         constructor();
         constructor(arg0: $ResourceLocation_);
-        set shader(value: $ResourceLocation_);
-        get shaderLocation(): $ResourceLocation;
         get shaderHolder(): $LDShaderHolder;
+        get shaderLocation(): $ResourceLocation;
+        set shader(value: $ResourceLocation_);
     }
     export class $IGuiTexture$MissingTexture implements $IGuiTexture {
         copy(): $IGuiTexture;
@@ -411,62 +411,72 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/texture" {
         transform(arg0: number, arg1: number): $IGuiTexture;
         rotate(arg0: number): $IGuiTexture;
         setColor(arg0: number): $IGuiTexture;
-        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
+        getRawTexture(): $IGuiTexture;
         buildConfigurator(arg0: $ConfiguratorGroup): void;
         createPreview(arg0: $ConfiguratorGroup): void;
+        interpolate(arg0: $IGuiTexture_, arg1: number): $IGuiTexture;
         draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
-        getRawTexture(): $IGuiTexture;
-        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         deserializeNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
+        serializeNBT(arg0: $HolderLookup$Provider): $CompoundTag;
         afterSerialize(): void;
+        beforeDeserialize(): void;
+        writeToBuff(arg0: $ByteBuf): void;
         afterDeserialize(): void;
         readFromBuff(arg0: $ByteBuf): void;
         beforeSerialize(): void;
-        writeToBuff(arg0: $ByteBuf): void;
-        beforeDeserialize(): void;
-        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
         deserializeAdditionalNBT(arg0: $Tag_, arg1: $HolderLookup$Provider): void;
+        serializeAdditionalNBT(arg0: $HolderLookup$Provider): $Tag;
+        getConfigurableName(): string;
         createDirectConfigurator(): $Configurator;
         createHistoryRecorder(): $IConfigurableHistory;
-        getConfigurableName(): string;
         name(): string;
         group(): string;
-        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
-        registryName(): $ResourceLocation;
         getChatComponent(): $Component;
-        isLDLRegister(): boolean;
         getTranslateKey(): string;
+        isLDLRegister(): boolean;
         getRegistryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        getRegistry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         getRegisterUIClient(): $LDLRegisterClient;
         getRegistryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
+        registryName(): $ResourceLocation;
         constructor();
         set color(value: number);
         get rawTexture(): $IGuiTexture;
         get configurableName(): string;
-        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get chatComponent(): $Component;
-        get LDLRegister(): boolean;
         get translateKey(): string;
+        get LDLRegister(): boolean;
         get registryHolder(): $AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>;
+        get registry(): $AutoRegistry$LDLibRegisterClient<$CompoundTag, $Supplier<$IGuiTexture>>;
         get registerUIClient(): $LDLRegisterClient;
         get registryHolderOptional(): ($AutoRegistry$Holder<$LDLRegisterClient, $CompoundTag, $Supplier<$IGuiTexture>>) | undefined;
     }
     export class $FluidStackTexture extends $TransformTexture {
+        updateTick(): void;
         copy(): $FluidStackTexture;
         setColor(arg0: number): $FluidStackTexture;
-        updateTick(): void;
         setFluids(...arg0: $FluidStack_[]): $FluidStackTexture;
         fluids: $FluidStack[];
+        constructor();
         constructor(...arg0: $Fluid_[]);
         constructor(...arg0: $FluidStack_[]);
-        constructor();
         set color(value: number);
     }
+    export class $IGuiRenderable {
+    }
+    export interface $IGuiRenderable extends $IGuiTexture {
+        draw(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: number, arg7: number): void;
+        draw(arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number): void;
+    }
+    /**
+     * Values that may be interpreted as {@link $IGuiRenderable}.
+     */
+    export type $IGuiRenderable_ = ((arg0: $GUIContext, arg1: number, arg2: number, arg3: number, arg4: number) => void);
     export class $VanillaSpriteTexture extends $TransformTexture {
         copy(): $VanillaSpriteTexture;
         setColor(arg0: number): $VanillaSpriteTexture;
-        getSprite(): $ResourceLocation;
         getColor(): number;
+        getSprite(): $ResourceLocation;
         setSprite(arg0: $ResourceLocation_): $VanillaSpriteTexture;
         static of(arg0: $ResourceLocation_): $VanillaSpriteTexture;
         constructor();

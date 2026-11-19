@@ -6,9 +6,9 @@ import { $List_ } from "@package/java/util";
 
 declare module "@package/net/minecraft/client/gui/narration" {
     export class $NarrationThunk<T> {
-        static from(components: $List_<$Component_>): $NarrationThunk<never>;
         static from(text: string): $NarrationThunk<never>;
         static from(component: $Component_): $NarrationThunk<never>;
+        static from(components: $List_<$Component_>): $NarrationThunk<never>;
         getText(consumer: $Consumer_<string>): void;
         static EMPTY: $NarrationThunk<never>;
     }
@@ -51,13 +51,13 @@ declare module "@package/net/minecraft/client/gui/narration" {
     }
     export interface $NarratableEntry extends $TabOrderedElement, $NarrationSupplier {
         /**
-         * @return `true` if the element is active, `false` otherwise
-         */
-        isActive(): boolean;
-        /**
          * @return the narration priority
          */
         narrationPriority(): $NarratableEntry$NarrationPriority;
+        /**
+         * @return `true` if the element is active, `false` otherwise
+         */
+        isActive(): boolean;
         get active(): boolean;
     }
     export class $NarratedElementType extends $Enum<$NarratedElementType> {
@@ -95,8 +95,8 @@ declare module "@package/net/minecraft/client/gui/narration" {
      */
     export type $NarrationSupplier_ = ((arg0: $NarrationElementOutput) => void);
     export class $ScreenNarrationCollector$Output implements $NarrationElementOutput {
-        add(type: $NarratedElementType_, ...contents: $Component_[]): void;
-        add(type: $NarratedElementType_, contents: string): void;
-        add(type: $NarratedElementType_, contents: $Component_): void;
+        add(arg0: $NarratedElementType_, ...arg1: $Component_[]): void;
+        add(arg0: $NarratedElementType_, arg1: string): void;
+        add(arg0: $NarratedElementType_, arg1: $Component_): void;
     }
 }

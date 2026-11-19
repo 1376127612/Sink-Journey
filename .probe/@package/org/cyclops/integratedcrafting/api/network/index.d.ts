@@ -11,23 +11,23 @@ declare module "@package/org/cyclops/integratedcrafting/api/network" {
     export class $ICraftingNetwork {
     }
     export interface $ICraftingNetwork {
-        removeCraftingInterfaceRecipe(arg0: number, arg1: $ICraftingInterface, arg2: $IRecipeDefinition): boolean;
-        getCraftingJobDependencyGraph(): $CraftingJobDependencyGraph;
-        getRunningTicks(arg0: $CraftingJob): number;
         getRecipeCraftingInterfaces(arg0: number): $Multimap<$IRecipeDefinition, $ICraftingInterface>;
-        getRecipeIndex(arg0: number): $IRecipeIndex;
-        getCraftingJobs<T, M>(arg0: number, arg1: $IngredientComponent_<T, M>, arg2: T, arg3: M): $Iterator<$CraftingJob>;
-        getCraftingJobs(arg0: number): $Iterator<$CraftingJob>;
-        getCraftingJob(arg0: number, arg1: number): $CraftingJob;
+        getCraftingJobDependencyGraph(): $CraftingJobDependencyGraph;
         cancelCraftingJob(arg0: number, arg1: number): boolean;
+        getRecipeIndex(arg0: number): $IRecipeIndex;
+        getCraftingJob(arg0: number, arg1: number): $CraftingJob;
+        getCraftingJobs(arg0: number): $Iterator<$CraftingJob>;
+        getCraftingJobs<T, M>(arg0: number, arg1: $IngredientComponent_<T, M>, arg2: T, arg3: M): $Iterator<$CraftingJob>;
+        getRunningTicks(arg0: $CraftingJob): number;
+        removeCraftingInterfaceRecipe(arg0: number, arg1: $ICraftingInterface, arg2: $IRecipeDefinition): boolean;
+        addCraftingInterfaceRecipe(arg0: number, arg1: $ICraftingInterface, arg2: $IRecipeDefinition): boolean;
+        removeCraftingInterface(arg0: number, arg1: $ICraftingInterface): boolean;
+        addCraftingInterface(arg0: number, arg1: $ICraftingInterface): boolean;
+        scheduleCraftingJob(arg0: $CraftingJob, arg1: boolean, arg2: $Function_<$IngredientComponent<never, never>, $IIngredientComponentStorage<any, any>>): void;
         getChannels(): number[];
+        getCraftingJobInterface(arg0: number, arg1: number): $ICraftingInterface;
         getEstimatedRecipeDuration(arg0: number, arg1: $IRecipeDefinition): number;
         onCraftingJobFinished(arg0: $CraftingJob): void;
-        getCraftingJobInterface(arg0: number, arg1: number): $ICraftingInterface;
-        scheduleCraftingJob(arg0: $CraftingJob, arg1: boolean, arg2: $Function_<$IngredientComponent<never, never>, $IIngredientComponentStorage<any, any>>): void;
-        addCraftingInterface(arg0: number, arg1: $ICraftingInterface): boolean;
-        removeCraftingInterface(arg0: number, arg1: $ICraftingInterface): boolean;
-        addCraftingInterfaceRecipe(arg0: number, arg1: $ICraftingInterface, arg2: $IRecipeDefinition): boolean;
         getCraftingInterfaces(arg0: number): $Set<$ICraftingInterface>;
         get craftingJobDependencyGraph(): $CraftingJobDependencyGraph;
         get channels(): number[];

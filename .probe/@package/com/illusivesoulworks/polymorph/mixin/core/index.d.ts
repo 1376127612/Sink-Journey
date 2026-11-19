@@ -18,31 +18,31 @@ declare module "@package/com/illusivesoulworks/polymorph/mixin/core" {
     }
     export interface $AccessorCraftingMenu {
         getCraftSlots(): $CraftingContainer;
-        getPlayer(): $Player;
         getResultSlots(): $ResultContainer;
+        getPlayer(): $Player;
         get craftSlots(): $CraftingContainer;
-        get player(): $Player;
         get resultSlots(): $ResultContainer;
+        get player(): $Player;
     }
     export class $AccessorInventoryMenu {
     }
     export interface $AccessorInventoryMenu {
-        getOwner(): $Player;
         getCraftSlots(): $CraftingContainer;
         getResultSlots(): $ResultContainer;
-        get owner(): $Player;
+        getOwner(): $Player;
         get craftSlots(): $CraftingContainer;
         get resultSlots(): $ResultContainer;
+        get owner(): $Player;
     }
     export class $AccessorSmithingTrimRecipe {
     }
     export interface $AccessorSmithingTrimRecipe {
+        getAddition(): $Ingredient;
         getBase(): $Ingredient;
         getTemplate(): $Ingredient;
-        getAddition(): $Ingredient;
+        get addition(): $Ingredient;
         get base(): $Ingredient;
         get template(): $Ingredient;
-        get addition(): $Ingredient;
     }
     export class $AccessorCrafterMenu {
     }
@@ -66,11 +66,11 @@ declare module "@package/com/illusivesoulworks/polymorph/mixin/core" {
     export class $AccessorSmithingTransformRecipe {
     }
     export interface $AccessorSmithingTransformRecipe {
+        getAddition(): $Ingredient;
         getBase(): $Ingredient;
         getTemplate(): $Ingredient;
-        getAddition(): $Ingredient;
+        get addition(): $Ingredient;
         get base(): $Ingredient;
         get template(): $Ingredient;
-        get addition(): $Ingredient;
     }
 }

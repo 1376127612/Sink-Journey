@@ -1,39 +1,39 @@
-import { $InputStream, $OutputStream } from "@package/java/io";
+import { $OutputStream, $InputStream } from "@package/java/io";
 export * as entity from "@package/org/apache/http/entity";
 
 declare module "@package/org/apache/http" {
     export class $HttpEntity {
     }
     export interface $HttpEntity {
-        getContent(): $InputStream;
-        writeTo(arg0: $OutputStream): void;
-        getContentType(): $Header;
-        getContentEncoding(): $Header;
-        getContentLength(): number;
-        isRepeatable(): boolean;
+        isChunked(): boolean;
         isStreaming(): boolean;
+        isRepeatable(): boolean;
         /**
          * @deprecated
          */
         consumeContent(): void;
-        isChunked(): boolean;
+        getContent(): $InputStream;
+        getContentType(): $Header;
+        getContentEncoding(): $Header;
+        writeTo(arg0: $OutputStream): void;
+        getContentLength(): number;
+        get chunked(): boolean;
+        get streaming(): boolean;
+        get repeatable(): boolean;
         get content(): $InputStream;
         get contentType(): $Header;
         get contentEncoding(): $Header;
         get contentLength(): number;
-        get repeatable(): boolean;
-        get streaming(): boolean;
-        get chunked(): boolean;
     }
     export class $HeaderElement {
     }
     export interface $HeaderElement {
+        getParameterByName(arg0: string): $NameValuePair;
         getParameters(): $NameValuePair[];
         getName(): string;
         getValue(): string;
         getParameterCount(): number;
         getParameter(arg0: number): $NameValuePair;
-        getParameterByName(arg0: string): $NameValuePair;
         get parameters(): $NameValuePair[];
         get name(): string;
         get value(): string;

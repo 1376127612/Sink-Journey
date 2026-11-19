@@ -15,6 +15,7 @@ import { $Screen, $Screen$DeferredTooltipRendering } from "@package/net/minecraf
 import { $ResourceLocation } from "@package/net/minecraft/resources";
 import { $LanguageManager, $LanguageInfo_ } from "@package/net/minecraft/client/resources/language";
 import { $Font } from "@package/net/minecraft/client/gui";
+import { $AccessOptionsSubScreen } from "@package/com/blamejared/controlling/mixin";
 export * as controls from "@package/net/minecraft/client/gui/screens/options/controls";
 
 declare module "@package/net/minecraft/client/gui/screens/options" {
@@ -56,7 +57,8 @@ declare module "@package/net/minecraft/client/gui/screens/options" {
         font: $Font;
         constructor(lastScreen: $Screen, options: $Options);
     }
-    export class $OptionsSubScreen extends $Screen {
+    export class $OptionsSubScreen extends $Screen implements $AccessOptionsSubScreen {
+        controlling$getLastScreen(): $Screen;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -117,7 +119,7 @@ declare module "@package/net/minecraft/client/gui/screens/options" {
     export class $LanguageSelectScreen extends $OptionsSubScreen implements $ILanguageOptionsScreen {
         languagereload_focusList(arg0: $LanguageListWidget): void;
         languagereload_focusEntry(arg0: $LanguageEntry): void;
-        wrapOperation$ded000$chloride$redirect$resourcesReload(arg0: $Minecraft, arg1: $Operation_<any>): $CompletableFuture<any>;
+        wrapOperation$flc000$chloride$redirect$resourcesReload(arg0: $Minecraft, arg1: $Operation_<any>): $CompletableFuture<any>;
         static MENU_BACKGROUND: $ResourceLocation;
         minecraft: $Minecraft;
         static INWORLD_FOOTER_SEPARATOR: $ResourceLocation;
@@ -156,15 +158,21 @@ declare module "@package/net/minecraft/client/gui/screens/options" {
         constructor(lastScreen: $Screen, options: $Options);
     }
     export class $LanguageSelectScreen$LanguageSelectionList extends $ObjectSelectionList<$LanguageSelectScreen$LanguageSelectionList$Entry> implements $LanguageSelectionListWidgetAccessor {
-        static languagereload_init$neo_language_reload_$md$796745$0(arg0: $LanguageSelectScreen, arg1: $Minecraft): $LanguageSelectScreen$LanguageSelectionList;
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static languagereload_init$neo_language_reload_$md$e03d8d$0(arg0: $LanguageSelectScreen, arg1: $Minecraft): $LanguageSelectScreen$LanguageSelectionList;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $LanguageSelectScreen$LanguageSelectionList$Entry;
+        height: number;
         constructor(minecraft: $LanguageSelectScreen, arg1: $Minecraft);
     }
     export class $UnsupportedGraphicsWarningScreen$ButtonOption {

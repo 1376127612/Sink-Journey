@@ -6,14 +6,14 @@ import { $LivingEntity } from "@package/net/minecraft/world/entity";
 
 declare module "@package/org/cyclops/integrateddynamics/core/network/event" {
     export class $NetworkInitializedEvent extends $Event {
-        getLevel(): $Level;
         getPos(): $BlockPos;
         getPlacer(): $LivingEntity;
+        getLevel(): $Level;
         getNetwork(): $INetwork;
         constructor(arg0: $INetwork, arg1: $Level_, arg2: $BlockPos_, arg3: $LivingEntity | null);
-        get level(): $Level;
         get pos(): $BlockPos;
         get placer(): $LivingEntity;
+        get level(): $Level;
         get network(): $INetwork;
     }
 }

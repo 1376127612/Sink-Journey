@@ -7,8 +7,8 @@ import { $Record } from "@package/java/lang";
 declare module "@package/hellfirepvp/astralsorcery/common/perk/tree/requirement" {
     export interface $PerkRequirement$Type<T> extends RegistryMarked<RegistryTypes.AstralsorceryPerkRequirementTypesTag, RegistryTypes.AstralsorceryPerkRequirementTypes> {}
     export class $PerkRequirement {
-        getType(): $PerkRequirement$Type<never>;
         createProgressCondition(): $Predicate<$PlayerProgress>;
+        getType(): $PerkRequirement$Type<never>;
         static CODEC: $Codec<$PerkRequirement>;
         constructor();
         get type(): $PerkRequirement$Type<never>;

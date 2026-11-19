@@ -19,13 +19,13 @@ declare module "@package/net/minecraft/core/cauldron" {
     /**
      * Values that may be interpreted as {@link $CauldronInteraction$InteractionMap}.
      */
-    export type $CauldronInteraction$InteractionMap_ = { name?: string, map?: $Map_<$Item_, $CauldronInteraction_>,  } | [name?: string, map?: $Map_<$Item_, $CauldronInteraction_>, ];
+    export type $CauldronInteraction$InteractionMap_ = { map?: $Map_<$Item_, $CauldronInteraction_>, name?: string,  } | [map?: $Map_<$Item_, $CauldronInteraction_>, name?: string, ];
     export class $CauldronInteraction {
         static bootStrap(): void;
-        static newInteractionMap(name: string): $CauldronInteraction$InteractionMap;
-        static emptyBucket(level: $Level_, pos: $BlockPos_, player: $Player, hand: $InteractionHand_, filledStack: $ItemStack_, state: $BlockState_, emptySound: $SoundEvent_): $ItemInteractionResult;
-        static addDefaultInteractions(interactionsMap: $Map_<$Item_, $CauldronInteraction_>): void;
         static fillBucket(state: $BlockState_, level: $Level_, pos: $BlockPos_, player: $Player, hand: $InteractionHand_, emptyStack: $ItemStack_, filledStack: $ItemStack_, statePredicate: $Predicate_<$BlockState>, fillSound: $SoundEvent_): $ItemInteractionResult;
+        static addDefaultInteractions(interactionsMap: $Map_<$Item_, $CauldronInteraction_>): void;
+        static emptyBucket(level: $Level_, pos: $BlockPos_, player: $Player, hand: $InteractionHand_, filledStack: $ItemStack_, state: $BlockState_, emptySound: $SoundEvent_): $ItemInteractionResult;
+        static newInteractionMap(name: string): $CauldronInteraction$InteractionMap;
         static CODEC: $Codec<$CauldronInteraction$InteractionMap>;
         static LAVA: $CauldronInteraction$InteractionMap;
         static FILL_POWDER_SNOW: $CauldronInteraction;

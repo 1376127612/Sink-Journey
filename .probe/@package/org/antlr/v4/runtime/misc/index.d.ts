@@ -30,22 +30,22 @@ declare module "@package/org/antlr/v4/runtime/misc" {
         and(arg0: $IntSet): $IntervalSet;
         subtract(arg0: $IntSet): $IntervalSet;
         static subtract(arg0: $IntervalSet, arg1: $IntervalSet): $IntervalSet;
-        setReadonly(arg0: boolean): void;
-        isReadonly(): boolean;
-        isNil(): boolean;
+        toIntegerList(): $IntegerList;
+        getIntervals(): $List<$Interval>;
         getMaxElement(): number;
         getMinElement(): number;
-        getIntervals(): $List<$Interval>;
-        toIntegerList(): $IntegerList;
+        isReadonly(): boolean;
+        isNil(): boolean;
+        setReadonly(arg0: boolean): void;
         static EMPTY_SET: $IntervalSet;
         static COMPLETE_CHAR_SET: $IntervalSet;
         constructor(...arg0: number[]);
         constructor(arg0: $IntervalSet);
         constructor(arg0: $List_<$Interval>);
-        get nil(): boolean;
+        get intervals(): $List<$Interval>;
         get maxElement(): number;
         get minElement(): number;
-        get intervals(): $List<$Interval>;
+        get nil(): boolean;
     }
     export class $IntegerList {
         size(): number;
@@ -77,14 +77,14 @@ declare module "@package/org/antlr/v4/runtime/misc" {
         static of(arg0: number, arg1: number): $Interval;
         disjoint(arg0: $Interval): boolean;
         union(arg0: $Interval): $Interval;
-        startsBeforeDisjoint(arg0: $Interval): boolean;
-        startsAfterNonDisjoint(arg0: $Interval): boolean;
         startsAfterDisjoint(arg0: $Interval): boolean;
+        startsAfterNonDisjoint(arg0: $Interval): boolean;
         startsBeforeNonDisjoint(arg0: $Interval): boolean;
-        adjacent(arg0: $Interval): boolean;
-        differenceNotProperlyContained(arg0: $Interval): $Interval;
+        startsBeforeDisjoint(arg0: $Interval): boolean;
         properlyContains(arg0: $Interval): boolean;
         startsAfter(arg0: $Interval): boolean;
+        differenceNotProperlyContained(arg0: $Interval): $Interval;
+        adjacent(arg0: $Interval): boolean;
         intersection(arg0: $Interval): $Interval;
         a: number;
         b: number;

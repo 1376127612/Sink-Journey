@@ -7,8 +7,8 @@ import { $RandomSource } from "@package/net/minecraft/util";
 
 declare module "@package/dev/worldgen/lithostitched/worldgen/modifier/template" {
     export class $TemplateList extends $Record {
-        addAll(arg0: $List_<$ResourceLocation_>): void;
         getRandom(arg0: $RandomSource): $ResourceLocation;
+        addAll(arg0: $List_<$ResourceLocation_>): void;
         templates(): $List<$ResourceLocation>;
         static CODEC: $Codec<$TemplateList>;
         constructor(templates: $List_<$ResourceLocation_>);

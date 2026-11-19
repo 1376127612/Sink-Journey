@@ -8,9 +8,9 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dan200/computercraft/shared/turtle" {
     export class $TurtleOverlay extends $Record {
-        model(): $ResourceLocation;
-        static showElfOverlay(arg0: $TurtleOverlay_, arg1: boolean): boolean;
         showElfOverlay(): boolean;
+        static showElfOverlay(arg0: $TurtleOverlay_, arg1: boolean): boolean;
+        model(): $ResourceLocation;
         static CODEC: $Codec<$Holder<$TurtleOverlay>>;
         static ELF_MODEL: $ResourceLocation;
         static DIRECT_CODEC: $Codec<$TurtleOverlay>;
@@ -21,6 +21,6 @@ declare module "@package/dan200/computercraft/shared/turtle" {
     /**
      * Values that may be interpreted as {@link $TurtleOverlay}.
      */
-    export type $TurtleOverlay_ = RegistryTypes.ComputercraftTurtleOverlay | { showElfOverlay?: boolean, model?: $ResourceLocation_,  } | [showElfOverlay?: boolean, model?: $ResourceLocation_, ];
+    export type $TurtleOverlay_ = RegistryTypes.ComputercraftTurtleOverlay | { model?: $ResourceLocation_, showElfOverlay?: boolean,  } | [model?: $ResourceLocation_, showElfOverlay?: boolean, ];
     export interface $TurtleOverlay extends RegistryMarked<RegistryTypes.ComputercraftTurtleOverlayTag, RegistryTypes.ComputercraftTurtleOverlay> {}
 }

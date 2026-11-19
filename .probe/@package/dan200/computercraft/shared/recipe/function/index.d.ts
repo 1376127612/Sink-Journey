@@ -11,8 +11,8 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/dan200/computercraft/shared/recipe/function" {
     export class $RecipeFunction$Type<T extends $RecipeFunction> extends $Record {
-        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         codec(): $MapCodec<T>;
+        streamCodec(): $StreamCodec<$RegistryFriendlyByteBuf, T>;
         constructor(codec: $MapCodec_<T>, streamCodec: $StreamCodec<$RegistryFriendlyByteBuf, T>);
     }
     /**

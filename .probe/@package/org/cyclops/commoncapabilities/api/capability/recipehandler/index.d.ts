@@ -11,10 +11,10 @@ declare module "@package/org/cyclops/commoncapabilities/api/capability/recipehan
         static SERIALIZERS: $Byte2ObjectMap<$IPrototypedIngredientAlternatives$ISerializer<never>>;
     }
     export interface $IPrototypedIngredientAlternatives<T, M> {
-        getSerializer(): $IPrototypedIngredientAlternatives$ISerializer<never>;
         getAlternatives(): $Collection<$IPrototypedIngredient<T, M>>;
-        get serializer(): $IPrototypedIngredientAlternatives$ISerializer<never>;
+        getSerializer(): $IPrototypedIngredientAlternatives$ISerializer<never>;
         get alternatives(): $Collection<$IPrototypedIngredient<T, M>>;
+        get serializer(): $IPrototypedIngredientAlternatives$ISerializer<never>;
     }
     export class $IPrototypedIngredientAlternatives$ISerializer<A extends $IPrototypedIngredientAlternatives<never, never>> {
     }
@@ -29,34 +29,34 @@ declare module "@package/org/cyclops/commoncapabilities/api/capability/recipehan
         static serialize(arg0: $HolderLookup$Provider, arg1: $IRecipeDefinition): $CompoundTag;
     }
     export interface $IRecipeDefinition extends $Comparable<$IRecipeDefinition> {
+        getRecipeId(): $ResourceLocation;
+        getInputComponents(): $Set<$IngredientComponent<never, never>>;
+        isInputReusable<T, M>(arg0: $IngredientComponent_<T, M>, arg1: number): boolean;
         getOutput(): $IMixedIngredients;
         getInputs<T, M>(arg0: $IngredientComponent_<T, M>): $List<$IPrototypedIngredientAlternatives<T, M>>;
-        isInputReusable<T, M>(arg0: $IngredientComponent_<T, M>, arg1: number): boolean;
-        getInputComponents(): $Set<$IngredientComponent<never, never>>;
-        getRecipeId(): $ResourceLocation;
-        get output(): $IMixedIngredients;
-        get inputComponents(): $Set<$IngredientComponent<never, never>>;
         get recipeId(): $ResourceLocation;
+        get inputComponents(): $Set<$IngredientComponent<never, never>>;
+        get output(): $IMixedIngredients;
     }
     export class $RecipeDefinition implements $IRecipeDefinition {
+        static fromRecipeId(arg0: $HolderLookup$Provider, arg1: $ResourceLocation_): $RecipeDefinition;
+        getRecipeId(): $ResourceLocation;
+        getInputComponents(): $Set<$IngredientComponent<never, never>>;
+        isInputReusable<T, M>(arg0: $IngredientComponent_<T, M>, arg1: number): boolean;
+        static ofAlternatives<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$IPrototypedIngredientAlternatives<T, M>>, arg2: $IMixedIngredients): $RecipeDefinition;
+        static ofAlternatives<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$IPrototypedIngredientAlternatives<T, M>>, arg2: $IMixedIngredients, arg3: $ResourceLocation_ | null): $RecipeDefinition;
+        static ofIngredients<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$List_<$IPrototypedIngredient<T, M>>>, arg2: $IMixedIngredients): $RecipeDefinition;
+        static ofIngredients<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$List_<$IPrototypedIngredient<T, M>>>, arg2: $IMixedIngredients, arg3: $ResourceLocation_ | null): $RecipeDefinition;
+        static ofIngredient<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$IPrototypedIngredient<T, M>>, arg2: $IMixedIngredients): $RecipeDefinition;
         compareTo(arg0: $IRecipeDefinition): number;
         getOutput(): $IMixedIngredients;
         getInputs<T, M>(arg0: $IngredientComponent_<T, M>): $List<$IPrototypedIngredientAlternatives<T, M>>;
-        isInputReusable<T, M>(arg0: $IngredientComponent_<T, M>, arg1: number): boolean;
-        getInputComponents(): $Set<$IngredientComponent<never, never>>;
-        static fromRecipeId(arg0: $HolderLookup$Provider, arg1: $ResourceLocation_): $RecipeDefinition;
-        getRecipeId(): $ResourceLocation;
-        static ofIngredients<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$List_<$IPrototypedIngredient<T, M>>>, arg2: $IMixedIngredients): $RecipeDefinition;
-        static ofIngredients<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$List_<$IPrototypedIngredient<T, M>>>, arg2: $IMixedIngredients, arg3: $ResourceLocation_ | null): $RecipeDefinition;
-        static ofAlternatives<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$IPrototypedIngredientAlternatives<T, M>>, arg2: $IMixedIngredients): $RecipeDefinition;
-        static ofAlternatives<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$IPrototypedIngredientAlternatives<T, M>>, arg2: $IMixedIngredients, arg3: $ResourceLocation_ | null): $RecipeDefinition;
-        static ofIngredient<T, R, M>(arg0: $IngredientComponent_<T, M>, arg1: $List_<$IPrototypedIngredient<T, M>>, arg2: $IMixedIngredients): $RecipeDefinition;
-        constructor(arg0: $Map_<$IngredientComponent_<never, never>, $List_<$IPrototypedIngredientAlternatives<never, never>>>, arg1: $Map_<$IngredientComponent_<never, never>, $List_<boolean>>, arg2: $IMixedIngredients, arg3: $ResourceLocation_ | null);
-        constructor(arg0: $Map_<$IngredientComponent_<never, never>, $List_<$IPrototypedIngredientAlternatives<never, never>>>, arg1: $Map_<$IngredientComponent_<never, never>, $List_<boolean>>, arg2: $IMixedIngredients);
-        constructor(arg0: $Map_<$IngredientComponent_<never, never>, $List_<$IPrototypedIngredientAlternatives<never, never>>>, arg1: $IMixedIngredients);
         constructor(arg0: $Map_<$IngredientComponent_<never, never>, $List_<$IPrototypedIngredientAlternatives<never, never>>>, arg1: $IMixedIngredients, arg2: $ResourceLocation_ | null);
-        get output(): $IMixedIngredients;
-        get inputComponents(): $Set<$IngredientComponent<never, never>>;
+        constructor(arg0: $Map_<$IngredientComponent_<never, never>, $List_<$IPrototypedIngredientAlternatives<never, never>>>, arg1: $Map_<$IngredientComponent_<never, never>, $List_<boolean>>, arg2: $IMixedIngredients, arg3: $ResourceLocation_ | null);
+        constructor(arg0: $Map_<$IngredientComponent_<never, never>, $List_<$IPrototypedIngredientAlternatives<never, never>>>, arg1: $IMixedIngredients);
+        constructor(arg0: $Map_<$IngredientComponent_<never, never>, $List_<$IPrototypedIngredientAlternatives<never, never>>>, arg1: $Map_<$IngredientComponent_<never, never>, $List_<boolean>>, arg2: $IMixedIngredients);
         get recipeId(): $ResourceLocation;
+        get inputComponents(): $Set<$IngredientComponent<never, never>>;
+        get output(): $IMixedIngredients;
     }
 }

@@ -11,24 +11,24 @@ declare module "@package/javax/sound/sampled" {
         constructor(arg0: string);
     }
     export class $AudioFormat {
+        getSampleSizeInBits(): number;
+        getSampleRate(): number;
         getProperty(arg0: string): $Object;
         matches(arg0: $AudioFormat): boolean;
         properties(): $Map<string, $Object>;
         isBigEndian(): boolean;
         getEncoding(): $AudioFormat$Encoding;
         getFrameRate(): number;
-        getSampleRate(): number;
-        getSampleSizeInBits(): number;
         getChannels(): number;
         getFrameSize(): number;
+        constructor(arg0: $AudioFormat$Encoding, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean);
         constructor(arg0: number, arg1: number, arg2: number, arg3: boolean, arg4: boolean);
         constructor(arg0: $AudioFormat$Encoding, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean, arg7: $Map_<string, $Object>);
-        constructor(arg0: $AudioFormat$Encoding, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number, arg6: boolean);
+        get sampleSizeInBits(): number;
+        get sampleRate(): number;
         get bigEndian(): boolean;
         get encoding(): $AudioFormat$Encoding;
         get frameRate(): number;
-        get sampleRate(): number;
-        get sampleSizeInBits(): number;
         get channels(): number;
         get frameSize(): number;
     }

@@ -9,6 +9,7 @@ import { $MobEffectInstance } from "@package/net/minecraft/world/effect";
 import { $Player } from "@package/net/minecraft/world/entity/player";
 import { $Record } from "@package/java/lang";
 import { $List, $List_ } from "@package/java/util";
+import { $FoodComponentBuilderInjector } from "@package/de/dafuqs/spectrum/injectors";
 import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/minecraft/world/food" {
@@ -87,67 +88,67 @@ declare module "@package/net/minecraft/world/food" {
     }
     export class $FoodData {
         /**
-         * Writes the food data for the player.
+         * Get whether the player must eat food.
          */
-        readAdditionalSaveData(compoundTag: $CompoundTag_): void;
+        needsFood(): boolean;
         /**
          * Writes the food data for the player.
          */
         addAdditionalSaveData(compoundTag: $CompoundTag_): void;
         /**
-         * Handles the food game logic.
+         * Writes the food data for the player.
          */
-        tick(player: $Player): void;
-        eat(foodProperties: $FoodProperties_): void;
-        eat(foodLevel: number, saturationLevel: number): void;
+        readAdditionalSaveData(compoundTag: $CompoundTag_): void;
+        /**
+         * Adds input to `foodExhaustionLevel` to a max of 40.
+         */
+        setSaturation(exhaustion: number): void;
+        /**
+         * Get the player's food level.
+         */
+        getFoodLevel(): number;
         setFoodLevel(foodLevel: number): void;
         /**
          * Get the player's food saturation level.
          */
         getSaturationLevel(): number;
         /**
-         * Get the player's food level.
-         */
-        getFoodLevel(): number;
-        /**
-         * Adds input to `foodExhaustionLevel` to a max of 40.
-         */
-        setSaturation(exhaustion: number): void;
-        /**
          * Adds input to `foodExhaustionLevel` to a max of 40.
          */
         addExhaustion(exhaustion: number): void;
-        /**
-         * Get whether the player must eat food.
-         */
-        needsFood(): boolean;
         /**
          * Get the player's food saturation level.
          */
         getExhaustionLevel(): number;
         /**
+         * Adds input to `foodExhaustionLevel` to a max of 40.
+         */
+        setExhaustion(exhaustion: number): void;
+        /**
          * Get the player's food level.
          */
         getLastFoodLevel(): number;
         /**
-         * Adds input to `foodExhaustionLevel` to a max of 40.
+         * Handles the food game logic.
          */
-        setExhaustion(exhaustion: number): void;
+        tick(player: $Player): void;
+        eat(foodLevel: number, saturationLevel: number): void;
+        eat(foodProperties: $FoodProperties_): void;
         constructor();
-        get saturationLevel(): number;
         set saturation(value: number);
+        get saturationLevel(): number;
         get exhaustionLevel(): number;
-        get lastFoodLevel(): number;
         set exhaustion(value: number);
+        get lastFoodLevel(): number;
     }
     export class $FoodProperties extends $Record {
-        saturation(): number;
-        canAlwaysEat(): boolean;
         eatDurationTicks(): number;
+        canAlwaysEat(): boolean;
         usingConvertsTo(): ($ItemStack) | undefined;
-        effects(): $List<$FoodProperties$PossibleEffect>;
-        nutrition(): number;
         eatSeconds(): number;
+        effects(): $List<$FoodProperties$PossibleEffect>;
+        saturation(): number;
+        nutrition(): number;
         static DIRECT_CODEC: $Codec<$FoodProperties>;
         static DIRECT_STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $FoodProperties>;
         constructor(nutrition: number, saturation: number, canAlwaysEat: boolean, eatSeconds: number, usingConvertsTo: ($ItemStack_) | undefined, effects: $List_<$FoodProperties$PossibleEffect_>);
@@ -155,11 +156,11 @@ declare module "@package/net/minecraft/world/food" {
     /**
      * Values that may be interpreted as {@link $FoodProperties}.
      */
-    export type $FoodProperties_ = { usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number, canAlwaysEat?: boolean,  } | [usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number, effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number, canAlwaysEat?: boolean, ];
+    export type $FoodProperties_ = { effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number, canAlwaysEat?: boolean, usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number,  } | [effects?: $List_<$FoodProperties$PossibleEffect_>, saturation?: number, nutrition?: number, canAlwaysEat?: boolean, usingConvertsTo?: ($ItemStack_) | undefined, eatSeconds?: number, ];
     export class $FoodProperties$PossibleEffect extends $Record {
         probability(): number;
-        effect(): $MobEffectInstance;
         effectSupplier(): $Supplier<$MobEffectInstance>;
+        effect(): $MobEffectInstance;
         static CODEC: $Codec<$FoodProperties$PossibleEffect>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $FoodProperties$PossibleEffect>;
         constructor(effectSupplier: $Supplier_<$MobEffectInstance>, probability: number);
@@ -167,19 +168,20 @@ declare module "@package/net/minecraft/world/food" {
     /**
      * Values that may be interpreted as {@link $FoodProperties$PossibleEffect}.
      */
-    export type $FoodProperties$PossibleEffect_ = { effectSupplier?: $Supplier_<$MobEffectInstance>, probability?: number,  } | [effectSupplier?: $Supplier_<$MobEffectInstance>, probability?: number, ];
-    export class $FoodProperties$Builder implements $InjectedFoodPropertiesBuilderExtension {
+    export type $FoodProperties$PossibleEffect_ = { probability?: number, effectSupplier?: $Supplier_<$MobEffectInstance>,  } | [probability?: number, effectSupplier?: $Supplier_<$MobEffectInstance>, ];
+    export class $FoodProperties$Builder implements $FoodComponentBuilderInjector, $InjectedFoodPropertiesBuilderExtension {
+        spectrum$setEatSeconds(saturationModifier: number): $FoodProperties$Builder;
+        fast(): $FoodProperties$Builder;
+        usingConvertsTo(item: $ItemLike_): $FoodProperties$Builder;
+        saturationModifier(saturationModifier: number): $FoodProperties$Builder;
+        alwaysEdible(): $FoodProperties$Builder;
         build(): $FoodProperties;
         /**
          * @deprecated
          */
         effect(effect: $MobEffectInstance, probability: number): $FoodProperties$Builder;
         effect(arg0: $Supplier_<$MobEffectInstance>, arg1: number): $FoodProperties$Builder;
-        fast(): $FoodProperties$Builder;
-        usingConvertsTo(item: $ItemLike_): $FoodProperties$Builder;
         nutrition(nutrition: number): $FoodProperties$Builder;
-        alwaysEdible(): $FoodProperties$Builder;
-        saturationModifier(saturationModifier: number): $FoodProperties$Builder;
         arch$effect(effectSupplier: $Supplier_<$MobEffectInstance>, chance: number): $FoodProperties$Builder;
         constructor();
     }

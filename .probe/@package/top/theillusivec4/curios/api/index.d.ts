@@ -7,20 +7,20 @@ export * as extensions from "@package/top/theillusivec4/curios/api/extensions";
 
 declare module "@package/top/theillusivec4/curios/api" {
     export class $SlotContext extends $Record {
+        cosmetic(): boolean;
         index(): number;
         visible(): boolean;
         identifier(): string;
         entity(): $LivingEntity;
-        cosmetic(): boolean;
         constructor(identifier: string, entity: $LivingEntity, index: number, cosmetic: boolean, visible: boolean);
     }
     /**
      * Values that may be interpreted as {@link $SlotContext}.
      */
-    export type $SlotContext_ = { visible?: boolean, cosmetic?: boolean, index?: number, identifier?: string, entity?: $LivingEntity,  } | [visible?: boolean, cosmetic?: boolean, index?: number, identifier?: string, entity?: $LivingEntity, ];
+    export type $SlotContext_ = { identifier?: string, entity?: $LivingEntity, visible?: boolean, cosmetic?: boolean, index?: number,  } | [identifier?: string, entity?: $LivingEntity, visible?: boolean, cosmetic?: boolean, index?: number, ];
     export class $SlotResult extends $Record {
-        stack(): $ItemStack;
         slotContext(): $SlotContext;
+        stack(): $ItemStack;
         constructor(slotContext: $SlotContext_, stack: $ItemStack_);
     }
     /**

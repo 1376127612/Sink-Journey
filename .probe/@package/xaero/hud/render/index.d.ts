@@ -6,9 +6,9 @@ export * as module from "@package/xaero/hud/render/module";
 
 declare module "@package/xaero/hud/render" {
     export class $HudRenderer {
-        render(arg0: $Hud, arg1: $GuiGraphics, arg2: number): void;
         getCustomVertexConsumers(): $CustomVertexConsumers;
         getPushboxHandler(): $PushboxHandler;
+        render(arg0: $Hud, arg1: $GuiGraphics, arg2: number): void;
         constructor(arg0: $PushboxHandler);
         get customVertexConsumers(): $CustomVertexConsumers;
         get pushboxHandler(): $PushboxHandler;

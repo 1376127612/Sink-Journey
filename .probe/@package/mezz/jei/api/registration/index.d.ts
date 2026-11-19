@@ -31,23 +31,23 @@ declare module "@package/mezz/jei/api/registration" {
     export class $IVanillaCategoryExtensionRegistration {
     }
     export interface $IVanillaCategoryExtensionRegistration {
-        getJeiHelpers(): $IJeiHelpers;
-        addCookingCategoryExtension<R>(arg0: $Class<R>, arg1: $ICookingCategoryExtension_<R>): void;
-        getSmokingCategory(): $IExtendableCookingRecipeCategory;
-        getBrewingCategory(): $IExtendableBrewingRecipeCategory;
-        getBlastingCategory(): $IExtendableCookingRecipeCategory;
         getSmeltingCategory(): $IExtendableCookingRecipeCategory;
-        getCraftingCategory(): $IExtendableCraftingRecipeCategory;
-        getSmithingCategory(): $IExtendableSmithingRecipeCategory;
         getCampfireCookingCategory(): $IExtendableCookingRecipeCategory;
-        get jeiHelpers(): $IJeiHelpers;
-        get smokingCategory(): $IExtendableCookingRecipeCategory;
-        get brewingCategory(): $IExtendableBrewingRecipeCategory;
-        get blastingCategory(): $IExtendableCookingRecipeCategory;
+        getBlastingCategory(): $IExtendableCookingRecipeCategory;
+        getSmithingCategory(): $IExtendableSmithingRecipeCategory;
+        getCraftingCategory(): $IExtendableCraftingRecipeCategory;
+        getJeiHelpers(): $IJeiHelpers;
+        getBrewingCategory(): $IExtendableBrewingRecipeCategory;
+        getSmokingCategory(): $IExtendableCookingRecipeCategory;
+        addCookingCategoryExtension<R>(arg0: $Class<R>, arg1: $ICookingCategoryExtension_<R>): void;
         get smeltingCategory(): $IExtendableCookingRecipeCategory;
-        get craftingCategory(): $IExtendableCraftingRecipeCategory;
-        get smithingCategory(): $IExtendableSmithingRecipeCategory;
         get campfireCookingCategory(): $IExtendableCookingRecipeCategory;
+        get blastingCategory(): $IExtendableCookingRecipeCategory;
+        get smithingCategory(): $IExtendableSmithingRecipeCategory;
+        get craftingCategory(): $IExtendableCraftingRecipeCategory;
+        get jeiHelpers(): $IJeiHelpers;
+        get brewingCategory(): $IExtendableBrewingRecipeCategory;
+        get smokingCategory(): $IExtendableCookingRecipeCategory;
     }
     export class $IModInfoRegistration {
     }
@@ -62,31 +62,31 @@ declare module "@package/mezz/jei/api/registration" {
     export class $IAdvancedSearchRegistration {
     }
     export interface $IAdvancedSearchRegistration {
-        getDefaultSearchStorageBuilderFactory(): $ISearchStorageBuilderFactory;
         replaceSearchStorage(arg0: $ISearchStorageFactory_): void;
         replaceSearchStorage(arg0: $ISearchStorageBuilderFactory_): void;
+        getDefaultSearchStorageBuilderFactory(): $ISearchStorageBuilderFactory;
         get defaultSearchStorageBuilderFactory(): $ISearchStorageBuilderFactory;
     }
     export class $IRecipeCatalystRegistration {
     }
     export interface $IRecipeCatalystRegistration {
+        getIngredientManager(): $IIngredientManager;
         addRecipeCatalysts<T>(arg0: $RecipeType<never>, arg1: $IIngredientType_<T>, arg2: $List_<T>): void;
-        addRecipeCatalysts(arg0: $RecipeType<never>, ...arg1: $ItemLike_[]): void;
         addRecipeCatalysts(arg0: $RecipeType<never>, ...arg1: $ItemStack_[]): void;
+        addRecipeCatalysts(arg0: $RecipeType<never>, ...arg1: $ItemLike_[]): void;
         getJeiHelpers(): $IJeiHelpers;
+        addRecipeCatalyst<T>(arg0: $IIngredientType_<T>, arg1: T, ...arg2: $RecipeType<never>[]): void;
         addRecipeCatalyst(arg0: $ItemStack_, ...arg1: $RecipeType<never>[]): void;
         addRecipeCatalyst(arg0: $ItemLike_, ...arg1: $RecipeType<never>[]): void;
-        addRecipeCatalyst<T>(arg0: $IIngredientType_<T>, arg1: T, ...arg2: $RecipeType<never>[]): void;
         addRecipeCatalyst(arg0: $RecipeType<never>, arg1: $Consumer_<$IIngredientAcceptor<never>>): void;
-        getIngredientManager(): $IIngredientManager;
-        get jeiHelpers(): $IJeiHelpers;
         get ingredientManager(): $IIngredientManager;
+        get jeiHelpers(): $IJeiHelpers;
     }
     export class $IExtraIngredientRegistration {
     }
     export interface $IExtraIngredientRegistration {
-        addExtraItemStacks(arg0: $Collection_<$ItemStack_>): void;
         addExtraIngredients<V>(arg0: $IIngredientType_<V>, arg1: $Collection_<V>): void;
+        addExtraItemStacks(arg0: $Collection_<$ItemStack_>): void;
     }
     /**
      * Values that may be interpreted as {@link $IExtraIngredientRegistration}.
@@ -95,8 +95,8 @@ declare module "@package/mezz/jei/api/registration" {
     export class $IRecipeCategoryRegistration {
     }
     export interface $IRecipeCategoryRegistration {
-        getJeiHelpers(): $IJeiHelpers;
         addRecipeCategories(...arg0: $IRecipeCategory<never>[]): void;
+        getJeiHelpers(): $IJeiHelpers;
         get jeiHelpers(): $IJeiHelpers;
     }
     export class $ISubtypeRegistration {
@@ -116,19 +116,19 @@ declare module "@package/mezz/jei/api/registration" {
     export class $IAdvancedRegistration {
     }
     export interface $IAdvancedRegistration {
-        getJeiHelpers(): $IJeiHelpers;
-        addTypedRecipeManagerPlugin<T>(arg0: $RecipeType<T>, arg1: $ISimpleRecipeManagerPlugin<T>): void;
-        getRecipeManagerPluginHelper(): $IRecipeManagerPluginHelper;
+        addRecipeManagerPlugin(arg0: $IRecipeManagerPlugin): void;
+        addRecipeCategoryDecorator<T>(arg0: $RecipeType<T>, arg1: $IRecipeCategoryDecorator<T>): void;
+        addRecipeButtonFactory(arg0: $IRecipeButtonControllerFactory_): void;
         /**
          * @deprecated
          */
         getJeiFeatures(): $IJeiFeatures;
-        addRecipeButtonFactory(arg0: $IRecipeButtonControllerFactory_): void;
-        addRecipeCategoryDecorator<T>(arg0: $RecipeType<T>, arg1: $IRecipeCategoryDecorator<T>): void;
-        addRecipeManagerPlugin(arg0: $IRecipeManagerPlugin): void;
+        getJeiHelpers(): $IJeiHelpers;
+        getRecipeManagerPluginHelper(): $IRecipeManagerPluginHelper;
+        addTypedRecipeManagerPlugin<T>(arg0: $RecipeType<T>, arg1: $ISimpleRecipeManagerPlugin<T>): void;
+        get jeiFeatures(): $IJeiFeatures;
         get jeiHelpers(): $IJeiHelpers;
         get recipeManagerPluginHelper(): $IRecipeManagerPluginHelper;
-        get jeiFeatures(): $IJeiFeatures;
     }
     export class $IIngredientAliasRegistration {
     }
@@ -152,44 +152,50 @@ declare module "@package/mezz/jei/api/registration" {
     export class $IRuntimeRegistration {
     }
     export interface $IRuntimeRegistration {
-        getRecipeManager(): $IRecipeManager;
-        getJeiHelpers(): $IJeiHelpers;
-        getSearchStorageBuilderFactory(): $ISearchStorageBuilderFactory;
-        getEditModeConfig(): $IEditModeConfig;
-        setBookmarkManager(arg0: $IBookmarkManager): void;
-        setRecipesGui(arg0: $IRecipesGui): void;
-        setBookmarkOverlay(arg0: $IBookmarkOverlay): void;
-        getScreenHelper(): $IScreenHelper;
-        getIngredientManager(): $IIngredientManager;
-        setIngredientFilter(arg0: $IIngredientFilter): void;
-        /**
-         * @deprecated
-         */
-        getSearchStorageFactory(): $ISearchStorageFactory;
-        setIngredientListOverlay(arg0: $IIngredientListOverlay): void;
-        getRecipeTransferManager(): $IRecipeTransferManager;
         /**
          * @deprecated
          */
         getIngredientVisibility(): $IIngredientVisibility;
+        /**
+         * @deprecated
+         */
+        getSearchStorageFactory(): $ISearchStorageFactory;
+        setIngredientFilter(arg0: $IIngredientFilter): void;
+        setIngredientListOverlay(arg0: $IIngredientListOverlay): void;
+        getIngredientManager(): $IIngredientManager;
+        getRecipeTransferManager(): $IRecipeTransferManager;
+        getRecipeManager(): $IRecipeManager;
+        getJeiHelpers(): $IJeiHelpers;
+        setBookmarkOverlay(arg0: $IBookmarkOverlay): void;
+        getEditModeConfig(): $IEditModeConfig;
+        setRecipesGui(arg0: $IRecipesGui): void;
+        setBookmarkManager(arg0: $IBookmarkManager): void;
+        getScreenHelper(): $IScreenHelper;
+        getSearchStorageBuilderFactory(): $ISearchStorageBuilderFactory;
+        get ingredientVisibility(): $IIngredientVisibility;
+        get searchStorageFactory(): $ISearchStorageFactory;
+        set ingredientFilter(value: $IIngredientFilter);
+        set ingredientListOverlay(value: $IIngredientListOverlay);
+        get ingredientManager(): $IIngredientManager;
+        get recipeTransferManager(): $IRecipeTransferManager;
         get recipeManager(): $IRecipeManager;
         get jeiHelpers(): $IJeiHelpers;
-        get searchStorageBuilderFactory(): $ISearchStorageBuilderFactory;
-        get editModeConfig(): $IEditModeConfig;
-        set bookmarkManager(value: $IBookmarkManager);
-        set recipesGui(value: $IRecipesGui);
         set bookmarkOverlay(value: $IBookmarkOverlay);
+        get editModeConfig(): $IEditModeConfig;
+        set recipesGui(value: $IRecipesGui);
+        set bookmarkManager(value: $IBookmarkManager);
         get screenHelper(): $IScreenHelper;
-        get ingredientManager(): $IIngredientManager;
-        set ingredientFilter(value: $IIngredientFilter);
-        get searchStorageFactory(): $ISearchStorageFactory;
-        set ingredientListOverlay(value: $IIngredientListOverlay);
-        get recipeTransferManager(): $IRecipeTransferManager;
-        get ingredientVisibility(): $IIngredientVisibility;
+        get searchStorageBuilderFactory(): $ISearchStorageBuilderFactory;
     }
     export class $IRecipeRegistration {
     }
     export interface $IRecipeRegistration {
+        /**
+         * @deprecated
+         */
+        getIngredientVisibility(): $IIngredientVisibility;
+        getVanillaRecipeFactory(): $IVanillaRecipeFactory;
+        getIngredientManager(): $IIngredientManager;
         addRecipes<T>(arg0: $RecipeType<T>, arg1: $List_<T>): void;
         getJeiHelpers(): $IJeiHelpers;
         addItemStackInfo(arg0: $ItemStack_, ...arg1: $Component_[]): void;
@@ -197,55 +203,49 @@ declare module "@package/mezz/jei/api/registration" {
         addIngredientInfo<T>(arg0: T, arg1: $IIngredientType_<T>, ...arg2: $Component_[]): void;
         addIngredientInfo<T>(arg0: $List_<T>, arg1: $IIngredientType_<T>, ...arg2: $Component_[]): void;
         addIngredientInfo(arg0: $ItemLike_, ...arg1: $Component_[]): void;
-        getIngredientManager(): $IIngredientManager;
-        getVanillaRecipeFactory(): $IVanillaRecipeFactory;
-        /**
-         * @deprecated
-         */
-        getIngredientVisibility(): $IIngredientVisibility;
-        get jeiHelpers(): $IJeiHelpers;
-        get ingredientManager(): $IIngredientManager;
-        get vanillaRecipeFactory(): $IVanillaRecipeFactory;
         get ingredientVisibility(): $IIngredientVisibility;
+        get vanillaRecipeFactory(): $IVanillaRecipeFactory;
+        get ingredientManager(): $IIngredientManager;
+        get jeiHelpers(): $IJeiHelpers;
     }
     export class $IGuiHandlerRegistration {
     }
     export interface $IGuiHandlerRegistration {
+        addGuiScreenHandler<T extends $Screen>(arg0: $Class<T>, arg1: $IScreenHandler_<T>): void;
+        addGhostIngredientHandler<T extends $Screen>(arg0: $Class<T>, arg1: $IGhostIngredientHandler<T>): void;
+        addGuiContainerHandler<T extends $AbstractContainerScreen<never>>(arg0: $Class<T>, arg1: $IGuiContainerHandler<T>): void;
+        addGlobalGuiHandler(arg0: $IGlobalGuiHandler): void;
+        addGenericGuiContainerHandler<T extends $AbstractContainerScreen<never>>(arg0: $Class<T>, arg1: $IGuiContainerHandler<never>): void;
         addRecipeClickArea<T extends $AbstractContainerScreen<never>>(arg0: $Class<T>, arg1: number, arg2: number, arg3: number, arg4: number, ...arg5: $RecipeType<never>[]): void;
         getJeiHelpers(): $IJeiHelpers;
-        addGenericGuiContainerHandler<T extends $AbstractContainerScreen<never>>(arg0: $Class<T>, arg1: $IGuiContainerHandler<never>): void;
-        addGhostIngredientHandler<T extends $Screen>(arg0: $Class<T>, arg1: $IGhostIngredientHandler<T>): void;
-        addGlobalGuiHandler(arg0: $IGlobalGuiHandler): void;
-        addGuiScreenHandler<T extends $Screen>(arg0: $Class<T>, arg1: $IScreenHandler_<T>): void;
-        addGuiContainerHandler<T extends $AbstractContainerScreen<never>>(arg0: $Class<T>, arg1: $IGuiContainerHandler<T>): void;
         get jeiHelpers(): $IJeiHelpers;
     }
     export class $IRecipeTransferRegistration {
     }
     export interface $IRecipeTransferRegistration {
+        getTransferHelper(): $IRecipeTransferHandlerHelper;
+        addRecipeTransferHandler<C extends $AbstractContainerMenu, R>(arg0: $IRecipeTransferInfo<C, R>): void;
+        addRecipeTransferHandler<C extends $AbstractContainerMenu, R>(arg0: $Class<C>, arg1: $MenuType_<C>, arg2: $RecipeType<R>, arg3: number, arg4: number, arg5: number, arg6: number): void;
+        addRecipeTransferHandler<C extends $AbstractContainerMenu, R>(arg0: $IRecipeTransferHandler<C, R>, arg1: $RecipeType<R>): void;
+        addRecipeTransferListener(arg0: $IRecipeTransferListener): void;
         getJeiHelpers(): $IJeiHelpers;
-        addUniversalRecipeTransferHandler<C extends $AbstractContainerMenu>(arg0: $IUniversalRecipeTransferHandler<C>): void;
         /**
          * @deprecated
          */
         addUniversalRecipeTransferHandler<C extends $AbstractContainerMenu, R>(arg0: $IRecipeTransferHandler<C, R>): void;
-        getTransferHelper(): $IRecipeTransferHandlerHelper;
-        addRecipeTransferHandler<C extends $AbstractContainerMenu, R>(arg0: $IRecipeTransferHandler<C, R>, arg1: $RecipeType<R>): void;
-        addRecipeTransferHandler<C extends $AbstractContainerMenu, R>(arg0: $IRecipeTransferInfo<C, R>): void;
-        addRecipeTransferHandler<C extends $AbstractContainerMenu, R>(arg0: $Class<C>, arg1: $MenuType_<C>, arg2: $RecipeType<R>, arg3: number, arg4: number, arg5: number, arg6: number): void;
-        addRecipeTransferListener(arg0: $IRecipeTransferListener): void;
-        get jeiHelpers(): $IJeiHelpers;
+        addUniversalRecipeTransferHandler<C extends $AbstractContainerMenu>(arg0: $IUniversalRecipeTransferHandler<C>): void;
         get transferHelper(): $IRecipeTransferHandlerHelper;
+        get jeiHelpers(): $IJeiHelpers;
     }
     export class $IModIngredientRegistration {
     }
     export interface $IModIngredientRegistration {
+        getColorHelper(): $IColorHelper;
         /**
          * @deprecated
          */
         register<V>(arg0: $IIngredientType_<V>, arg1: $Collection_<V>, arg2: $IIngredientHelper<V>, arg3: $IIngredientRenderer<V>): void;
         register<V>(arg0: $IIngredientType_<V>, arg1: $Collection_<V>, arg2: $IIngredientHelper<V>, arg3: $IIngredientRenderer<V>, arg4: $Codec<V>): void;
-        getColorHelper(): $IColorHelper;
         getSubtypeManager(): $ISubtypeManager;
         get colorHelper(): $IColorHelper;
         get subtypeManager(): $ISubtypeManager;

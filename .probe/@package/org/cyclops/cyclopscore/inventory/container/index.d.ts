@@ -7,9 +7,9 @@ import { $IValueNotifiable, $IValueNotifier } from "@package/org/cyclops/cyclops
 import { $CompoundTag, $CompoundTag_ } from "@package/net/minecraft/nbt";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $Inventory } from "@package/net/minecraft/world/entity/player";
-import { $Slot, $MenuType_, $AbstractContainerMenu, $MenuType } from "@package/net/minecraft/world/inventory";
+import { $ContainerListener, $Slot, $MenuType_, $AbstractContainerMenu, $MenuType } from "@package/net/minecraft/world/inventory";
 import { $Class } from "@package/java/lang";
-import { $Map, $Set } from "@package/java/util";
+import { $List, $Map, $Set } from "@package/java/util";
 export * as button from "@package/org/cyclops/cyclopscore/inventory/container/button";
 
 declare module "@package/org/cyclops/cyclopscore/inventory/container" {
@@ -17,19 +17,19 @@ declare module "@package/org/cyclops/cyclopscore/inventory/container" {
      * @deprecated
      */
     export class $ContainerExtended extends $AbstractContainerMenu implements $IContainerButtonClickAcceptorServer<$ContainerExtended>, $IValueNotifier, $IValueNotifiable {
-        getValue(arg0: number): $CompoundTag;
-        setValue(arg0: number, arg1: $CompoundTag_): void;
-        putButtonAction(arg0: string, arg1: $IContainerButtonAction_<$ContainerExtended>): void;
+        setGuiValueListener(arg0: $IValueNotifiable): void;
+        getValueNotifiableType(): $MenuType<never>;
+        onButtonClick(arg0: string): boolean;
+        static setSlotPosY(arg0: $Slot, arg1: number): void;
+        getValueIds(): $Set<number>;
+        static setSlotPosX(arg0: $Slot, arg1: number): void;
+        getPlayerIInventory(): $Inventory;
         registerSyncedVariable<T>(arg0: $Class<T>, arg1: $Supplier_<T>): $Supplier<T>;
         getHolderLookupProvider(): $HolderLookup$Provider;
-        getPlayerIInventory(): $Inventory;
+        putButtonAction(arg0: string, arg1: $IContainerButtonAction_<$ContainerExtended>): void;
+        getValue(arg0: number): $CompoundTag;
+        setValue(arg0: number, arg1: $CompoundTag_): void;
         onUpdate(arg0: number, arg1: $CompoundTag_): void;
-        static setSlotPosY(arg0: $Slot, arg1: number): void;
-        static setSlotPosX(arg0: $Slot, arg1: number): void;
-        onButtonClick(arg0: string): boolean;
-        getValueIds(): $Set<number>;
-        getValueNotifiableType(): $MenuType<never>;
-        setGuiValueListener(arg0: $IValueNotifiable): void;
         stateId: number;
         static QUICKCRAFT_HEADER_START: number;
         remoteSlots: $NonNullList<$ItemStack>;
@@ -43,14 +43,15 @@ declare module "@package/org/cyclops/cyclopscore/inventory/container" {
         ldlib2$itemSlotMap: $Map<any, any>;
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         constructor(arg0: $MenuType_<never> | null, arg1: number, arg2: $Inventory);
-        get holderLookupProvider(): $HolderLookup$Provider;
-        get playerIInventory(): $Inventory;
-        get valueIds(): $Set<number>;
-        get valueNotifiableType(): $MenuType<never>;
         set guiValueListener(value: $IValueNotifiable);
+        get valueNotifiableType(): $MenuType<never>;
+        get valueIds(): $Set<number>;
+        get playerIInventory(): $Inventory;
+        get holderLookupProvider(): $HolderLookup$Provider;
     }
     /**
      * @deprecated
@@ -70,6 +71,7 @@ declare module "@package/org/cyclops/cyclopscore/inventory/container" {
         ldlib2$itemSlotMap: $Map<any, any>;
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         constructor(arg0: $MenuType_<never> | null, arg1: number, arg2: $Inventory, arg3: $Container);

@@ -11,47 +11,47 @@ import { $BoundingBox } from "@package/net/minecraft/world/level/levelgen/struct
 
 declare module "@package/ca/teamdman/sfm/common/util" {
     export class $BlockPosSet extends $LongOpenHashSet {
+        boundingBox(): $BoundingBox;
+        addAllPositions(arg0: $Collection_<$BlockPos_>): void;
+        removeIfPosition(arg0: $Predicate_<$BlockPos>): boolean;
         remove(arg0: $BlockPos_): boolean;
         add(arg0: $BlockPos_): boolean;
         static of(...arg0: $BlockPos_[]): $BlockPosSet;
         contains(arg0: $BlockPos_): boolean;
         static collector(): $Collector<$BlockPos, $BlockPosSet, $BlockPosSet>;
         blockPosIterator(): $BlockPosIterator;
-        boundingBox(): $BoundingBox;
-        addAllPositions(arg0: $Collection_<$BlockPos_>): void;
-        removeIfPosition(arg0: $Predicate_<$BlockPos>): boolean;
         constructor(arg0: number[], arg1: number, arg2: number, arg3: number);
-        constructor(arg0: $Iterator<never>);
-        constructor(arg0: $Iterator<never>, arg1: number);
-        constructor(arg0: $LongIterator);
-        constructor(arg0: $Collection_<$BlockPos_>);
-        constructor(arg0: number[]);
-        constructor(arg0: number[], arg1: number);
         constructor(arg0: number[], arg1: number, arg2: number);
-        constructor(arg0: $Collection_<number>, arg1: number);
-        constructor();
-        constructor(arg0: number);
+        constructor(arg0: number[], arg1: number);
+        constructor(arg0: number[]);
+        constructor(arg0: $Collection_<$BlockPos_>);
         constructor(arg0: number, arg1: number);
-        constructor(arg0: $LongIterator, arg1: number);
         constructor(arg0: $LongCollection);
         constructor(arg0: $LongCollection, arg1: number);
+        constructor(arg0: number);
+        constructor(arg0: $Collection_<number>, arg1: number);
+        constructor();
+        constructor(arg0: $Iterator<never>);
+        constructor(arg0: $LongIterator);
+        constructor(arg0: $LongIterator, arg1: number);
+        constructor(arg0: $Iterator<never>, arg1: number);
     }
     export class $BlockPosMap<T> extends $Long2ObjectOpenHashMap<T> {
+        getFromPosition(arg0: $BlockPos_): number;
+        removeAllPositions(arg0: $BlockPosSet): void;
+        removePosition(arg0: $BlockPos_): number;
         put(arg0: $BlockPos_, arg1: number): number;
         containsKey(arg0: $BlockPos_): boolean;
         positions(): $BlockPosIterator;
-        removeAllPositions(arg0: $BlockPosSet): void;
-        getFromPosition(arg0: $BlockPos_): number;
-        removePosition(arg0: $BlockPos_): number;
-        constructor(arg0: $Map_<number, number>);
-        constructor(arg0: $Long2ObjectMap<number>, arg1: number);
         constructor(arg0: $Long2ObjectMap<number>);
         constructor(arg0: number[], arg1: number[], arg2: number);
         constructor(arg0: number[], arg1: number[]);
         constructor(arg0: number, arg1: number);
-        constructor(arg0: number);
         constructor();
         constructor(arg0: $Map_<number, number>, arg1: number);
+        constructor(arg0: number);
+        constructor(arg0: $Long2ObjectMap<number>, arg1: number);
+        constructor(arg0: $Map_<number, number>);
     }
     export class $ChunkPosMap<T> {
         remove(arg0: $ChunkAccess): T;
@@ -77,13 +77,13 @@ declare module "@package/ca/teamdman/sfm/common/util" {
         get empty(): boolean;
     }
     export class $BlockPosIterator implements $Iterator<$BlockPos$MutableBlockPos>, $Iterable<$BlockPos$MutableBlockPos> {
+        forEachLong(arg0: $LongConsumer_): void;
         remove(): void;
         iterator(): $Iterator<$BlockPos$MutableBlockPos>;
         hasNext(): boolean;
         next(): $BlockPos$MutableBlockPos;
         stream(): $Stream<$BlockPos$MutableBlockPos>;
         skip(arg0: number): number;
-        forEachLong(arg0: $LongConsumer_): void;
         forEachRemaining(arg0: $Consumer_<$BlockPos$MutableBlockPos>): void;
         spliterator(): $Spliterator<$BlockPos$MutableBlockPos>;
         forEach(arg0: $Consumer_<$BlockPos$MutableBlockPos>): void;

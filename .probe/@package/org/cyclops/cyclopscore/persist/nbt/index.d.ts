@@ -5,13 +5,13 @@ declare module "@package/org/cyclops/cyclopscore/persist/nbt" {
     export class $INBTProvider {
     }
     export interface $INBTProvider {
-        writeGeneratedFieldsToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
         readGeneratedFieldsFromNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
+        writeGeneratedFieldsToNBT(arg0: $CompoundTag_, arg1: $HolderLookup$Provider): void;
     }
     export class $INBTSerializable {
     }
     export interface $INBTSerializable {
-        fromNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
         toNBT(arg0: $HolderLookup$Provider): $CompoundTag;
+        fromNBT(arg0: $HolderLookup$Provider, arg1: $CompoundTag_): void;
     }
 }

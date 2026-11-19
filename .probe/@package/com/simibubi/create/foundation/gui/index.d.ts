@@ -14,15 +14,15 @@ export * as widget from "@package/com/simibubi/create/foundation/gui/widget";
 
 declare module "@package/com/simibubi/create/foundation/gui" {
     export class $AllGuiTextures extends $Enum<$AllGuiTextures> implements $ScreenElement, $TextureSheetSegment {
+        getHeight(): number;
+        getStartX(): number;
+        getStartY(): number;
         static values(): $AllGuiTextures[];
         static valueOf(arg0: string): $AllGuiTextures;
         getLocation(): $ResourceLocation;
+        getWidth(): number;
         render(arg0: $GuiGraphics, arg1: number, arg2: number, arg3: $Color): void;
         render(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        getWidth(): number;
-        getHeight(): number;
-        getStartY(): number;
-        getStartX(): number;
         bind(): void;
         static FROGPORT_HEADER: $AllGuiTextures;
         static CURSEFORGE_LOGO: $AllGuiTextures;
@@ -237,31 +237,31 @@ declare module "@package/com/simibubi/create/foundation/gui" {
         static PLAYER_INVENTORY: $AllGuiTextures;
         static HOTSLOT: $AllGuiTextures;
         static TOOLBELT_HOTBAR_OFF: $AllGuiTextures;
-        get width(): number;
         get height(): number;
-        get startY(): number;
         get startX(): number;
+        get startY(): number;
+        get width(): number;
     }
     /**
      * Values that may be interpreted as {@link $AllGuiTextures}.
      */
     export type $AllGuiTextures_ = "player_inventory" | "wand_of_symmetry" | "blockzapper" | "terrainzapper" | "terrainzapper_inactive_param" | "logo" | "curseforge_logo" | "modrinth_logo" | "schematic" | "schematic_title" | "schematic_slot" | "schematic_prompt" | "hud_background" | "schematic_table" | "schematic_table_progress" | "schematicannon_top" | "schematicannon_bottom" | "schematicannon_progress" | "schematicannon_checklist_progress" | "schematicannon_highlight" | "schematicannon_fuel" | "schematicannon_fuel_creative" | "threshold_switch" | "threshold_switch_itemcount_inputs" | "threshold_switch_misc_inputs" | "threshold_switch_current_state" | "filter" | "attribute_filter" | "package_filter" | "postbox_header" | "frogport_header" | "frogport_slot" | "frogport_edit_name" | "frogport_bg" | "toolbox" | "toolbelt_slot" | "toolbelt_slot_highlight" | "toolbelt_main_slot" | "toolbelt_empty_slot" | "toolbelt_inactive_slot" | "toolbelt_hotbar_off" | "toolbelt_hotbar_on" | "toolbelt_selected_off" | "toolbelt_selected_on" | "sequencer" | "sequencer_instruction" | "sequencer_delay" | "sequencer_end" | "sequencer_empty" | "sequencer_await" | "linked_controller" | "blueprint" | "clipboard" | "clipboard_address" | "clipboard_address_inactive" | "data_gatherer" | "data_area_start" | "data_area_speech" | "data_area" | "data_area_end" | "schedule" | "schedule_card_dark" | "schedule_card_medium" | "schedule_card_light" | "schedule_card_move_up" | "schedule_card_move_down" | "schedule_card_remove" | "schedule_card_duplicate" | "schedule_card_new" | "schedule_condition_new" | "schedule_condition_left" | "schedule_condition_left_clean" | "schedule_condition_middle" | "schedule_condition_item" | "schedule_condition_right" | "schedule_condition_append" | "schedule_scroll_left" | "schedule_scroll_right" | "schedule_strip_dark" | "schedule_strip_light" | "schedule_strip_wait" | "schedule_strip_travel" | "schedule_strip_dotted" | "schedule_strip_end" | "schedule_strip_action" | "schedule_editor" | "schedule_editor_additional_slot" | "schedule_editor_inactive_slot" | "schedule_pointer" | "schedule_pointer_offscreen" | "station" | "station_assembling" | "station_textbox_top" | "station_textbox_middle" | "station_textbox_bottom" | "station_textbox_speech" | "station_edit_name" | "station_edit_train_name" | "i_new_train" | "i_disassemble_train" | "i_assemble_train" | "elevator_contact" | "brass_frame_tl" | "brass_frame_tr" | "brass_frame_bl" | "brass_frame_br" | "brass_frame_left" | "brass_frame_right" | "brass_frame_top" | "brass_frame_bottom" | "value_settings_milestone" | "value_settings_wide_milestone" | "value_settings_bar" | "value_settings_bar_bg" | "value_settings_outer_bg" | "value_settings_cursor_left" | "value_settings_cursor" | "value_settings_cursor_right" | "value_settings_cursor_icon" | "value_settings_label_bg" | "factory_gauge_recipe" | "factory_gauge_restock" | "factory_gauge_bottom" | "factory_gauge_set_item" | "stock_keeper_request_header" | "stock_keeper_request_body" | "stock_keeper_request_footer" | "stock_keeper_request_search" | "stock_keeper_request_says" | "stock_keeper_request_locked" | "stock_keeper_request_unlocked" | "stock_keeper_request_slot" | "stock_keeper_request_blueprint_left" | "stock_keeper_request_blueprint_middle" | "stock_keeper_request_blueprint_right" | "stock_keeper_request_send_hover" | "stock_keeper_request_scroll_top" | "stock_keeper_request_scroll_pad" | "stock_keeper_request_scroll_mid" | "stock_keeper_request_scroll_bot" | "stock_keeper_request_banner_l" | "stock_keeper_request_banner_m" | "stock_keeper_request_banner_r" | "stock_keeper_request_bg" | "stock_keeper_category_hidden" | "stock_keeper_category_shown" | "numbers" | "stock_keeper_search_sync_both" | "stock_keeper_search_sync_from_stock_keeper" | "stock_keeper_search_sync_from_jei" | "stock_keeper_search_sync_disabled" | "stock_keeper_category" | "stock_keeper_category_says" | "stock_keeper_category_header" | "stock_keeper_category_edit" | "stock_keeper_category_footer" | "stock_keeper_category_new" | "stock_keeper_category_entry" | "stock_keeper_category_up" | "stock_keeper_category_down" | "redstone_requester" | "jei_slot" | "jei_chance_slot" | "jei_catalyst_slot" | "jei_arrow" | "jei_long_arrow" | "jei_down_arrow" | "jei_light" | "jei_question_mark" | "jei_shadow" | "blockzapper_upgrade_recipe" | "jei_heat_bar" | "jei_no_heat_bar" | "button" | "button_hover" | "button_down" | "button_green" | "button_disabled" | "indicator" | "indicator_white" | "indicator_green" | "indicator_yellow" | "indicator_red" | "hotslot_arrow" | "hotslot_arrow_bad" | "hotslot" | "hotslot_active" | "hotslot_super_active" | "speech_tooltip_background" | "speech_tooltip_color" | "train_hud_speed_bg" | "train_hud_speed" | "train_hud_throttle" | "train_hud_throttle_pointer" | "train_hud_frame" | "train_hud_direction" | "train_prompt_l" | "train_prompt_r" | "train_prompt" | "trade_overlay" | "placement_indicator_sheet" | "trainmap_sprites" | "trainmap_signal" | "trainmap_station_ortho" | "trainmap_station_diago" | "trainmap_station_ortho_highlight" | "trainmap_station_diago_highlight" | "trainmap_toggle_panel" | "trainmap_toggle_on" | "trainmap_toggle_off" | "computer";
     export class $ModularGuiLine {
+        saveValues(arg0: $CompoundTag_): void;
+        loadValues<T extends $GuiEventListener>(arg0: $CompoundTag_, arg1: $Consumer_<T>, arg2: $Consumer_<T>): void;
+        renderWidgetBG(arg0: number, arg1: $GuiGraphics): void;
         clear(): void;
         add(arg0: $Pair<$AbstractWidget, string>): void;
         forEach(arg0: $Consumer_<$GuiEventListener>): void;
-        renderWidgetBG(arg0: number, arg1: $GuiGraphics): void;
-        saveValues(arg0: $CompoundTag_): void;
-        loadValues<T extends $GuiEventListener>(arg0: $CompoundTag_, arg1: $Consumer_<T>, arg2: $Consumer_<T>): void;
         constructor();
     }
     export class $ModularGuiLineBuilder {
-        customArea(arg0: number, arg1: number): $ModularGuiLineBuilder;
-        speechBubble(): $ModularGuiLineBuilder;
         addSelectionScrollInput(arg0: number, arg1: number, arg2: $BiConsumer_<$SelectionScrollInput, $Label>, arg3: string): $ModularGuiLineBuilder;
         addScrollInput(arg0: number, arg1: number, arg2: $BiConsumer_<$ScrollInput, $Label>, arg3: string): $ModularGuiLineBuilder;
-        addIntegerTextInput(arg0: number, arg1: number, arg2: $BiConsumer_<$EditBox, $TooltipArea>, arg3: string): $ModularGuiLineBuilder;
         addTextInput(arg0: number, arg1: number, arg2: $BiConsumer_<$EditBox, $TooltipArea>, arg3: string): $ModularGuiLineBuilder;
+        customArea(arg0: number, arg1: number): $ModularGuiLineBuilder;
+        addIntegerTextInput(arg0: number, arg1: number, arg2: $BiConsumer_<$EditBox, $TooltipArea>, arg3: string): $ModularGuiLineBuilder;
+        speechBubble(): $ModularGuiLineBuilder;
         constructor(arg0: $Font, arg1: $ModularGuiLine, arg2: number, arg3: number);
     }
 }

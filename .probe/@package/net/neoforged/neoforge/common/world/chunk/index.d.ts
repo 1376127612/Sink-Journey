@@ -14,18 +14,18 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
     export class $ForcedChunkManager$TicketOwner<T extends $Comparable<T>> implements $Comparable<$ForcedChunkManager$TicketOwner<T>> {
     }
     export class $TicketController extends $Record {
+        forceChunk(arg0: $ServerLevel, arg1: $BlockPos_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
+        forceChunk(arg0: $ServerLevel, arg1: $UUID_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
+        forceChunk(arg0: $ServerLevel, arg1: $Entity, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
         id(): $ResourceLocation;
         callback(): $LoadingValidationCallback;
-        forceChunk(arg0: $ServerLevel, arg1: $UUID_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
-        forceChunk(arg0: $ServerLevel, arg1: $BlockPos_, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
-        forceChunk(arg0: $ServerLevel, arg1: $Entity, arg2: number, arg3: number, arg4: boolean, arg5: boolean): boolean;
         constructor(id: $ResourceLocation_, callback: $LoadingValidationCallback_);
         constructor(arg0: $ResourceLocation_);
     }
     /**
      * Values that may be interpreted as {@link $TicketController}.
      */
-    export type $TicketController_ = { id?: $ResourceLocation_, callback?: $LoadingValidationCallback_,  } | [id?: $ResourceLocation_, callback?: $LoadingValidationCallback_, ];
+    export type $TicketController_ = { callback?: $LoadingValidationCallback_, id?: $ResourceLocation_,  } | [callback?: $LoadingValidationCallback_, id?: $ResourceLocation_, ];
     export class $LoadingValidationCallback {
     }
     export interface $LoadingValidationCallback {
@@ -48,14 +48,14 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
      */
     export type $TicketSet_ = { ticking?: $LongSet, nonTicking?: $LongSet,  } | [ticking?: $LongSet, nonTicking?: $LongSet, ];
     export class $TicketHelper {
-        getEntityTickets(): $Map<$UUID, $TicketSet>;
+        removeAllTickets(arg0: $BlockPos_): void;
+        removeAllTickets(arg0: $UUID_): void;
         removeTicket(arg0: $UUID_, arg1: number, arg2: boolean): void;
         removeTicket(arg0: $BlockPos_, arg1: number, arg2: boolean): void;
         getBlockTickets(): $Map<$BlockPos, $TicketSet>;
-        removeAllTickets(arg0: $UUID_): void;
-        removeAllTickets(arg0: $BlockPos_): void;
-        get entityTickets(): $Map<$UUID, $TicketSet>;
+        getEntityTickets(): $Map<$UUID, $TicketSet>;
         get blockTickets(): $Map<$BlockPos, $TicketSet>;
+        get entityTickets(): $Map<$UUID, $TicketSet>;
     }
     export class $ForcedChunkManager$TicketTracker<T extends $Comparable<T>> {
         remove(arg0: $ForcedChunkManager$TicketOwner<T>, arg1: number, arg2: boolean): boolean;
@@ -68,12 +68,12 @@ declare module "@package/net/neoforged/neoforge/common/world/chunk" {
         get tickingChunks(): $Map<$ForcedChunkManager$TicketOwner<T>, $LongSet>;
     }
     export class $ForcedChunkManager {
+        static writeBlockPos(arg0: $BlockPos_): $CompoundTag;
+        static reinstatePersistentChunks(arg0: $ServerLevel, arg1: $ForcedChunksSavedData): void;
+        static hasForcedChunks(arg0: $ServerLevel): boolean;
         static writeModForcedChunks(arg0: $CompoundTag_, arg1: $ForcedChunkManager$TicketTracker<$BlockPos_>, arg2: $ForcedChunkManager$TicketTracker<$UUID_>): void;
         static readModForcedChunks(arg0: $CompoundTag_, arg1: $ForcedChunkManager$TicketTracker<$BlockPos_>, arg2: $ForcedChunkManager$TicketTracker<$UUID_>): void;
         static init(): void;
-        static writeBlockPos(arg0: $BlockPos_): $CompoundTag;
-        static hasForcedChunks(arg0: $ServerLevel): boolean;
-        static reinstatePersistentChunks(arg0: $ServerLevel, arg1: $ForcedChunksSavedData): void;
         constructor();
     }
 }

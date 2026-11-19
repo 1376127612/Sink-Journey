@@ -11,5 +11,5 @@ declare module "@package/hellfirepvp/astralsorcery/common/starlight/transmission
     /**
      * Values that may be interpreted as {@link $StarlightTransmissionPacket}.
      */
-    export type $StarlightTransmissionPacket_ = { constellation?: $BaseConstellation_, amount?: number,  } | [constellation?: $BaseConstellation_, amount?: number, ];
+    export type $StarlightTransmissionPacket_ = { amount?: number, constellation?: $BaseConstellation_,  } | [amount?: number, constellation?: $BaseConstellation_, ];
 }

@@ -30,7 +30,7 @@ declare module "@package/net/minecraft/client/animation" {
     /**
      * Values that may be interpreted as {@link $AnimationDefinition}.
      */
-    export type $AnimationDefinition_ = { lengthInSeconds?: number, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean,  } | [lengthInSeconds?: number, boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean, ];
+    export type $AnimationDefinition_ = { boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean, lengthInSeconds?: number,  } | [boneAnimations?: $Map_<string, $List_<$AnimationChannel_>>, looping?: boolean, lengthInSeconds?: number, ];
     export class $AnimationChannel$Interpolation {
     }
     export interface $AnimationChannel$Interpolation {
@@ -41,40 +41,40 @@ declare module "@package/net/minecraft/client/animation" {
      */
     export type $AnimationChannel$Interpolation_ = ((arg0: $Vector3f, arg1: number, arg2: $Keyframe[], arg3: number, arg4: number, arg5: number) => $Vector3f);
     export class $KeyframeAnimations {
-        static posVec(xDegrees: number, yDegrees: number, zDegrees: number): $Vector3f;
-        static animate(model: $HierarchicalModel<never>, animationDefinition: $AnimationDefinition_, accumulatedTime: number, arg3: number, scale: $Vector3f): void;
         static degreeVec(xDegrees: number, yDegrees: number, zDegrees: number): $Vector3f;
         static scaleVec(xScale: number, arg1: number, yScale: number): $Vector3f;
+        static posVec(xDegrees: number, yDegrees: number, zDegrees: number): $Vector3f;
+        static animate(model: $HierarchicalModel<never>, animationDefinition: $AnimationDefinition_, accumulatedTime: number, arg3: number, scale: $Vector3f): void;
         constructor();
     }
     export class $AnimationDefinition$Builder {
-        addAnimation(bone: string, animationChannel: $AnimationChannel_): $AnimationDefinition$Builder;
-        build(): $AnimationDefinition;
         looping(): $AnimationDefinition$Builder;
         static withLength(lengthInSeconds: number): $AnimationDefinition$Builder;
+        build(): $AnimationDefinition;
+        addAnimation(bone: string, animationChannel: $AnimationChannel_): $AnimationDefinition$Builder;
     }
     export class $Keyframe extends $Record {
+        interpolation(): $AnimationChannel$Interpolation;
         target(): $Vector3f;
         timestamp(): number;
-        interpolation(): $AnimationChannel$Interpolation;
         constructor(arg0: number, arg1: $Vector3f, arg2: $AnimationChannel$Interpolation_);
     }
     /**
      * Values that may be interpreted as {@link $Keyframe}.
      */
-    export type $Keyframe_ = { timestamp?: number, target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_,  } | [timestamp?: number, target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_, ];
+    export type $Keyframe_ = { target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_, timestamp?: number,  } | [target?: $Vector3f, interpolation?: $AnimationChannel$Interpolation_, timestamp?: number, ];
     export class $AnimationChannel$Interpolations {
         static CATMULLROM: $AnimationChannel$Interpolation;
         static LINEAR: $AnimationChannel$Interpolation;
         constructor();
     }
     export class $AnimationChannel extends $Record {
-        target(): $AnimationChannel$Target;
         keyframes(): $Keyframe[];
+        target(): $AnimationChannel$Target;
         constructor(arg0: $AnimationChannel$Target_, ...arg1: $Keyframe_[]);
     }
     /**
      * Values that may be interpreted as {@link $AnimationChannel}.
      */
-    export type $AnimationChannel_ = { target?: $AnimationChannel$Target_, keyframes?: $Keyframe_[],  } | [target?: $AnimationChannel$Target_, keyframes?: $Keyframe_[], ];
+    export type $AnimationChannel_ = { keyframes?: $Keyframe_[], target?: $AnimationChannel$Target_,  } | [keyframes?: $Keyframe_[], target?: $AnimationChannel$Target_, ];
 }

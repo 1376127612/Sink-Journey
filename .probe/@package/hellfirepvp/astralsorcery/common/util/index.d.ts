@@ -14,25 +14,25 @@ export * as tank from "@package/hellfirepvp/astralsorcery/common/util/tank";
 
 declare module "@package/hellfirepvp/astralsorcery/common/util" {
     export class $RandomMobEffectInstance {
+        getDurationRange(): $IntRange;
+        createEffect(arg0: $RandomSource): $MobEffectInstance;
+        getHiddenEffect(): ($RandomMobEffectInstance) | undefined;
+        getAmplifierRange(): $IntRange;
         static of(arg0: $Holder_<$MobEffect>, arg1: $IntRange, arg2: $IntRange, arg3: $RandomMobEffectInstance | null): $RandomMobEffectInstance;
         static of(arg0: $Holder_<$MobEffect>, arg1: $IntRange, arg2: $IntRange): $RandomMobEffectInstance;
         getEffect(): $Holder<$MobEffect>;
         getDisplay(): $Component;
-        getDurationRange(): $IntRange;
-        getAmplifierRange(): $IntRange;
-        getHiddenEffect(): ($RandomMobEffectInstance) | undefined;
-        createEffect(arg0: $RandomSource): $MobEffectInstance;
         static CODEC: $Codec<$RandomMobEffectInstance>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $RandomMobEffectInstance>;
+        get durationRange(): $IntRange;
+        get hiddenEffect(): ($RandomMobEffectInstance) | undefined;
+        get amplifierRange(): $IntRange;
         get effect(): $Holder<$MobEffect>;
         get display(): $Component;
-        get durationRange(): $IntRange;
-        get amplifierRange(): $IntRange;
-        get hiddenEffect(): ($RandomMobEffectInstance) | undefined;
     }
     export class $MutableIdentity {
-        getIdentifier(): string;
         setIdentifier(arg0: string): void;
+        getIdentifier(): string;
     }
     export class $TriFunction<S, T, U, R> {
     }

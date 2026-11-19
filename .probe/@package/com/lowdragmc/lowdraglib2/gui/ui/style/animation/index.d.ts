@@ -11,23 +11,23 @@ import { $Object, $Record } from "@package/java/lang";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style/animation" {
     export class $TransitionAnimation<T> implements $IFrameValueHandler<T> {
+        onFinished(arg0: $AnimationRuntime): void;
+        getCurrentValue(): T;
+        getSubscription(): $ISubscription;
         accept(arg0: $AnimationRuntime, arg1: T): void;
         owner(): $Object;
         stop(): void;
-        play(arg0: T, arg1: T): void;
         getInitialValue(): T;
-        onFinished(arg0: $AnimationRuntime): void;
-        getCurrentValue(): T;
+        play(arg0: T, arg1: T): void;
         getTargetValue(): T;
-        getSubscription(): $ISubscription;
         styleBag: $StyleBag;
         property: $Property<T>;
         animation: $Animation;
         constructor(arg0: $StyleBag, arg1: $Property<T>, arg2: $Animation_);
-        get initialValue(): T;
         get currentValue(): T;
-        get targetValue(): T;
         get subscription(): $ISubscription;
+        get initialValue(): T;
+        get targetValue(): T;
     }
     export class $Transition extends $Record {
         animations(): $Map<$Property<never>, $Animation>;
@@ -40,6 +40,12 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style/animation" {
      */
     export type $Transition_ = { animations?: $Map_<$Property<never>, $Animation_>,  } | [animations?: $Map_<$Property<never>, $Animation_>, ];
     export class $StyleAnimation {
+        onFinished(arg0: $Consumer_<$UIElement>): $StyleAnimation;
+        specificity(arg0: number): $StyleAnimation;
+        ease(arg0: $IEase_): $StyleAnimation;
+        lss(arg0: string, arg1: $Object): $StyleAnimation;
+        animationOrigin(arg0: $StyleOrigin_): $StyleAnimation;
+        onInterpolate(arg0: $BiConsumer_<$AnimationRuntime, $UIElement>): $StyleAnimation;
         static of(arg0: $ModularUI): $StyleAnimation;
         start(): $ISubscription;
         duration(arg0: number): $StyleAnimation;
@@ -50,11 +56,5 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/ui/style/animation" {
         select(arg0: string): $StyleAnimation;
         select(arg0: $UIElement): $StyleAnimation;
         sourceOrder(arg0: number): $StyleAnimation;
-        ease(arg0: $IEase_): $StyleAnimation;
-        onFinished(arg0: $Consumer_<$UIElement>): $StyleAnimation;
-        specificity(arg0: number): $StyleAnimation;
-        lss(arg0: string, arg1: $Object): $StyleAnimation;
-        animationOrigin(arg0: $StyleOrigin_): $StyleAnimation;
-        onInterpolate(arg0: $BiConsumer_<$AnimationRuntime, $UIElement>): $StyleAnimation;
     }
 }

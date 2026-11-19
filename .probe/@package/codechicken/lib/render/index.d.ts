@@ -15,32 +15,32 @@ export * as pipeline from "@package/codechicken/lib/render/pipeline";
 
 declare module "@package/codechicken/lib/render" {
     export class $CCRenderState {
-        reset(): void;
-        static instance(): $CCRenderState;
-        bind(arg0: $BufferBuilder): void;
-        bind(arg0: $RenderType, arg1: $MultiBufferSource_, arg2: $Matrix4): void;
-        bind(arg0: $VertexConsumer, arg1: $VertexFormat): void;
-        bind(arg0: $RenderType, arg1: $MultiBufferSource_): void;
-        bind(arg0: $RenderType, arg1: $MultiBufferSource_, arg2: $PoseStack): void;
-        render(...arg0: $IVertexOperation[]): void;
-        render(): void;
-        getVertexFormat(): $VertexFormat;
-        setModel(arg0: $IVertexSource, arg1: number, arg2: number): void;
-        setModel(arg0: $IVertexSource): void;
-        setColour(arg0: $Colour): void;
-        getColour(): $ColourRGBA;
         getConsumer(): $VertexConsumer;
+        setModel(arg0: $IVertexSource): void;
+        setModel(arg0: $IVertexSource, arg1: number, arg2: number): void;
+        getColour(): $ColourRGBA;
+        setColour(arg0: $Colour): void;
+        setBrightness(arg0: $BlockAndTintGetter, arg1: $BlockPos_): void;
+        setBrightness(arg0: $Entity, arg1: number): void;
         setPipeline(...arg0: $IVertexOperation[]): void;
         setPipeline(arg0: $IVertexSource, arg1: number, arg2: number, ...arg3: $IVertexOperation[]): void;
-        setBrightness(arg0: $Entity, arg1: number): void;
-        setBrightness(arg0: $BlockAndTintGetter, arg1: $BlockPos_): void;
+        reset(): void;
+        static instance(): $CCRenderState;
+        bind(arg0: $RenderType, arg1: $MultiBufferSource_): void;
+        bind(arg0: $VertexConsumer, arg1: $VertexFormat): void;
+        bind(arg0: $BufferBuilder): void;
+        bind(arg0: $RenderType, arg1: $MultiBufferSource_, arg2: $PoseStack): void;
+        bind(arg0: $RenderType, arg1: $MultiBufferSource_, arg2: $Matrix4): void;
+        getVertexFormat(): $VertexFormat;
+        render(): void;
+        render(...arg0: $IVertexOperation[]): void;
+        bindModel(arg0: $IVertexSource): void;
+        writeVert(): void;
         setVertexRange(arg0: number, arg1: number): void;
+        setFluidColour(arg0: $FluidStack_): void;
+        setFluidColour(arg0: $FluidStack_, arg1: number): void;
         runPipeline(): void;
         preRenderWorld(arg0: $BlockAndTintGetter, arg1: $BlockPos_): void;
-        setFluidColour(arg0: $FluidStack_, arg1: number): void;
-        setFluidColour(arg0: $FluidStack_): void;
-        writeVert(): void;
-        bindModel(arg0: $IVertexSource): void;
         cFmt: $CachedFormat;
         lightingAttrib: $VertexAttribute<number[]>;
         vert: $Vertex5;
@@ -70,7 +70,7 @@ declare module "@package/codechicken/lib/render" {
         vertexIndex: number;
         lc: $LC;
         lightCoordAttrib: $VertexAttribute<$LC[]>;
-        get vertexFormat(): $VertexFormat;
         get consumer(): $VertexConsumer;
+        get vertexFormat(): $VertexFormat;
     }
 }

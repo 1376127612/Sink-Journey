@@ -1,4 +1,4 @@
-import { $IFluidHandler$FluidAction, $IFluidHandler$FluidAction_ } from "@package/net/neoforged/neoforge/fluids/capability";
+import { $IFluidHandler$FluidAction_, $IFluidHandler$FluidAction } from "@package/net/neoforged/neoforge/fluids/capability";
 import { $Codec } from "@package/com/mojang/serialization";
 import { $FriendlyByteBuf } from "@package/net/minecraft/network";
 import { $Enum } from "@package/java/lang";
@@ -7,10 +7,10 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/appeng/api/config" {
     export class $FuzzyMode extends $Enum<$FuzzyMode> implements $StringRepresentable {
-        static values(): $FuzzyMode[];
-        static valueOf(arg0: string): $FuzzyMode;
         getSerializedName(): string;
         calculateBreakPoint(arg0: number): number;
+        static values(): $FuzzyMode[];
+        static valueOf(arg0: string): $FuzzyMode;
         getRemappedEnumConstantName(): string;
         static PERCENT_75: $FuzzyMode;
         static PERCENT_99: $FuzzyMode;
@@ -29,12 +29,12 @@ declare module "@package/appeng/api/config" {
      */
     export type $FuzzyMode_ = "ignore_all" | "percent_99" | "percent_75" | "percent_50" | "percent_25";
     export class $Actionable extends $Enum<$Actionable> {
+        isSimulate(): boolean;
+        getFluidAction(): $IFluidHandler$FluidAction;
+        static ofSimulate(arg0: boolean): $Actionable;
         static values(): $Actionable[];
         static valueOf(arg0: string): $Actionable;
         static of(arg0: $IFluidHandler$FluidAction_): $Actionable;
-        static ofSimulate(arg0: boolean): $Actionable;
-        isSimulate(): boolean;
-        getFluidAction(): $IFluidHandler$FluidAction;
         static MODULATE: $Actionable;
         static SIMULATE: $Actionable;
         get simulate(): boolean;

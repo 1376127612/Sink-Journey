@@ -34,15 +34,19 @@ declare module "@package/java/security" {
         update(arg0: $ByteBuffer): void;
         update(arg0: number[], arg1: number, arg2: number): void;
         update(arg0: number[]): void;
-        static getInstance(arg0: string, arg1: string): $Signature;
         static getInstance(arg0: string): $Signature;
+        static getInstance(arg0: string, arg1: string): $Signature;
         static getInstance(arg0: string, arg1: $Provider): $Signature;
-        sign(arg0: number[], arg1: number, arg2: number): number;
         sign(): number[];
+        sign(arg0: number[], arg1: number, arg2: number): number;
         verify(arg0: number[], arg1: number, arg2: number): boolean;
         verify(arg0: number[]): boolean;
         getAlgorithm(): string;
         getProvider(): $Provider;
+        /**
+         * @deprecated
+         */
+        getParameter(arg0: string): $Object;
         initVerify(arg0: $Certificate): void;
         initVerify(arg0: $PublicKey): void;
         initSign(arg0: $PrivateKey): void;
@@ -52,10 +56,6 @@ declare module "@package/java/security" {
          * @deprecated
          */
         setParameter(arg0: string, arg1: $Object): void;
-        /**
-         * @deprecated
-         */
-        getParameter(arg0: string): $Object;
         get parameters(): $AlgorithmParameters;
         get algorithm(): string;
         get provider(): $Provider;
@@ -124,12 +124,12 @@ declare module "@package/java/security" {
          * @deprecated
          */
         getVersion(): number;
-        configure(arg0: string): $Provider;
         getService(arg0: string, arg1: string): $Provider$Service;
         isConfigured(): boolean;
         getVersionStr(): string;
         getInfo(): string;
         getServices(): $Set<$Provider$Service>;
+        configure(arg0: string): $Provider;
         get name(): string;
         get version(): number;
         get configured(): boolean;
@@ -146,14 +146,14 @@ declare module "@package/java/security" {
         static getInstance(arg0: string, arg1: string): $SecureRandom;
         static getInstance(arg0: string, arg1: $Provider): $SecureRandom;
         getAlgorithm(): string;
+        static getSeed(arg0: number): number[];
+        setSeed(arg0: number[]): void;
         nextBytes(arg0: number[], arg1: $SecureRandomParameters): void;
         getProvider(): $Provider;
         generateSeed(arg0: number): number[];
         static getInstanceStrong(): $SecureRandom;
-        reseed(): void;
         reseed(arg0: $SecureRandomParameters): void;
-        static getSeed(arg0: number): number[];
-        setSeed(arg0: number[]): void;
+        reseed(): void;
         constructor(arg0: number[]);
         constructor();
         get parameters(): $SecureRandomParameters;

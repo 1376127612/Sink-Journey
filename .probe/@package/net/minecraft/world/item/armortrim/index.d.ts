@@ -14,12 +14,12 @@ import { $StreamCodec } from "@package/net/minecraft/network/codec";
 
 declare module "@package/net/minecraft/world/item/armortrim" {
     export class $TrimMaterial extends $Record {
-        static create(assetName: string, ingredient: $Item_, itemModelIndex: number, description: $Component_, overrideArmorMaterials: $Map_<$Holder_<$ArmorMaterial>, string>): $TrimMaterial;
-        description(): $Component;
-        ingredient(): $Holder<$Item>;
         overrideArmorMaterials(): $Map<$Holder<$ArmorMaterial>, string>;
         assetName(): string;
         itemModelIndex(): number;
+        static create(assetName: string, ingredient: $Item_, itemModelIndex: number, description: $Component_, overrideArmorMaterials: $Map_<$Holder_<$ArmorMaterial>, string>): $TrimMaterial;
+        description(): $Component;
+        ingredient(): $Holder<$Item>;
         static CODEC: $Codec<$Holder<$TrimMaterial>>;
         static DIRECT_CODEC: $Codec<$TrimMaterial>;
         static DIRECT_STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $TrimMaterial>;
@@ -29,13 +29,13 @@ declare module "@package/net/minecraft/world/item/armortrim" {
     /**
      * Values that may be interpreted as {@link $TrimMaterial}.
      */
-    export type $TrimMaterial_ = RegistryTypes.TrimMaterial | { description?: $Component_, ingredient?: $Holder_<$Item>, overrideArmorMaterials?: $Map_<$Holder_<$ArmorMaterial>, string>, itemModelIndex?: number, assetName?: string,  } | [description?: $Component_, ingredient?: $Holder_<$Item>, overrideArmorMaterials?: $Map_<$Holder_<$ArmorMaterial>, string>, itemModelIndex?: number, assetName?: string, ];
+    export type $TrimMaterial_ = RegistryTypes.TrimMaterial | { overrideArmorMaterials?: $Map_<$Holder_<$ArmorMaterial>, string>, itemModelIndex?: number, assetName?: string, description?: $Component_, ingredient?: $Holder_<$Item>,  } | [overrideArmorMaterials?: $Map_<$Holder_<$ArmorMaterial>, string>, itemModelIndex?: number, assetName?: string, description?: $Component_, ingredient?: $Holder_<$Item>, ];
     export class $TrimPattern extends $Record {
-        description(): $Component;
-        assetId(): $ResourceLocation;
         decal(): boolean;
-        copyWithStyle(trimMaterial: $Holder_<$TrimMaterial>): $Component;
         templateItem(): $Holder<$Item>;
+        copyWithStyle(trimMaterial: $Holder_<$TrimMaterial>): $Component;
+        assetId(): $ResourceLocation;
+        description(): $Component;
         static CODEC: $Codec<$Holder<$TrimPattern>>;
         static DIRECT_CODEC: $Codec<$TrimPattern>;
         static DIRECT_STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $TrimPattern>;
@@ -45,7 +45,7 @@ declare module "@package/net/minecraft/world/item/armortrim" {
     /**
      * Values that may be interpreted as {@link $TrimPattern}.
      */
-    export type $TrimPattern_ = RegistryTypes.TrimPattern | { decal?: boolean, templateItem?: $Holder_<$Item>, description?: $Component_, assetId?: $ResourceLocation_,  } | [decal?: boolean, templateItem?: $Holder_<$Item>, description?: $Component_, assetId?: $ResourceLocation_, ];
+    export type $TrimPattern_ = RegistryTypes.TrimPattern | { description?: $Component_, assetId?: $ResourceLocation_, decal?: boolean, templateItem?: $Holder_<$Item>,  } | [description?: $Component_, assetId?: $ResourceLocation_, decal?: boolean, templateItem?: $Holder_<$Item>, ];
     export class $TrimPatterns {
         static register(context: $BootstrapContext<$TrimPattern_>, templateItem: $Item_, trimPatternKey: $ResourceKey_<$TrimPattern>): void;
         static bootstrap(context: $BootstrapContext<$TrimPattern_>): void;
@@ -72,21 +72,21 @@ declare module "@package/net/minecraft/world/item/armortrim" {
     }
     export interface $TrimMaterial extends RegistryMarked<RegistryTypes.TrimMaterialTag, RegistryTypes.TrimMaterial> {}
     export class $ArmorTrim implements $TooltipProvider {
-        pattern(): $Holder<$TrimPattern>;
-        material(): $Holder<$TrimMaterial>;
-        withTooltip(showInTooltip: boolean): $ArmorTrim;
-        addToTooltip(context: $Item$TooltipContext, tooltipAdder: $Consumer_<$Component>, tooltipFlag: $TooltipFlag): void;
         hasPatternAndMaterial(pattern: $Holder_<$TrimPattern>, material: $Holder_<$TrimMaterial>): boolean;
-        outerTexture(armorMaterial: $Holder_<$ArmorMaterial>): $ResourceLocation;
+        withTooltip(showInTooltip: boolean): $ArmorTrim;
         innerTexture(armorMaterial: $Holder_<$ArmorMaterial>): $ResourceLocation;
+        outerTexture(armorMaterial: $Holder_<$ArmorMaterial>): $ResourceLocation;
+        pattern(): $Holder<$TrimPattern>;
+        addToTooltip(context: $Item$TooltipContext, tooltipAdder: $Consumer_<$Component>, tooltipFlag: $TooltipFlag): void;
+        material(): $Holder<$TrimMaterial>;
         static CODEC: $Codec<$ArmorTrim>;
         static STREAM_CODEC: $StreamCodec<$RegistryFriendlyByteBuf, $ArmorTrim>;
         constructor(material: $Holder_<$TrimMaterial>, pattern: $Holder_<$TrimPattern>);
         constructor(material: $Holder_<$TrimMaterial>, pattern: $Holder_<$TrimPattern>, showInTooltip: boolean);
     }
     export class $TrimMaterials {
-        static bootstrap(context: $BootstrapContext<$TrimMaterial_>): void;
         static getFromIngredient(regustries: $HolderLookup$Provider, ingredient: $ItemStack_): ($Holder$Reference<$TrimMaterial>) | undefined;
+        static bootstrap(context: $BootstrapContext<$TrimMaterial_>): void;
         static GOLD: $ResourceKey<$TrimMaterial>;
         static EMERALD: $ResourceKey<$TrimMaterial>;
         static AMETHYST: $ResourceKey<$TrimMaterial>;

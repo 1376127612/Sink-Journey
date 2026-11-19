@@ -7,7 +7,7 @@ declare module "@package/dev/worldgen/lithostitched/api/worldgen/bandlands" {
         static CODEC: $Codec<$Band>;
     }
     export interface $Band {
-        fill(arg0: $BlockState_[], arg1: $RandomSource): void;
         codec(): $MapCodec<$Band>;
+        fill(arg0: $BlockState_[], arg1: $RandomSource): void;
     }
 }

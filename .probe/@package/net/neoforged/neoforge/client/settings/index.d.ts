@@ -17,25 +17,25 @@ declare module "@package/net/neoforged/neoforge/client/settings" {
         remove(arg0: $KeyMapping): void;
         put(arg0: $InputConstants$Key, arg1: $KeyMapping): void;
         clear(): void;
-        getAll(arg0: $InputConstants$Key, arg1: boolean): $List<$KeyMapping>;
         getAll(arg0: $InputConstants$Key): $List<$KeyMapping>;
+        getAll(arg0: $InputConstants$Key, arg1: boolean): $List<$KeyMapping>;
         constructor();
     }
     export class $KeyModifier extends $Enum<$KeyModifier> {
-        static values(): $KeyModifier[];
-        static valueOf(arg0: string): $KeyModifier;
-        matches(arg0: $InputConstants$Key): boolean;
-        isActive(arg0: $IKeyConflictContext): boolean;
-        codes(): $InputConstants$Key[];
-        getCombinedName(arg0: $InputConstants$Key, arg1: $Supplier_<$Component>): $Component;
-        static getKeyModifier(arg0: $InputConstants$Key): $KeyModifier;
         /**
          * @deprecated
          */
         static getActiveModifier(): $KeyModifier;
         static getActiveModifiers(): $List<$KeyModifier>;
         static isKeyCodeModifier(arg0: $InputConstants$Key): boolean;
+        static values(): $KeyModifier[];
+        static valueOf(arg0: string): $KeyModifier;
+        matches(arg0: $InputConstants$Key): boolean;
+        isActive(arg0: $IKeyConflictContext): boolean;
+        getCombinedName(arg0: $InputConstants$Key, arg1: $Supplier_<$Component>): $Component;
+        static getKeyModifier(arg0: $InputConstants$Key): $KeyModifier;
         static valueFromString(arg0: string): $KeyModifier;
+        codes(): $InputConstants$Key[];
         static SHIFT: $KeyModifier;
         static MODIFIER_VALUES: $KeyModifier[];
         static ALT: $KeyModifier;

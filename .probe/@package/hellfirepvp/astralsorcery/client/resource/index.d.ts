@@ -7,12 +7,12 @@ export * as query from "@package/hellfirepvp/astralsorcery/client/resource/query
 
 declare module "@package/hellfirepvp/astralsorcery/client/resource" {
     export class $UVFrame extends $Record {
+        static fromAtlasSprite(arg0: $TextureAtlasSprite): $UVFrame;
+        multiplyVHeight(arg0: number): $UVFrame;
         v(): number;
         u(): number;
         uWidth(): number;
         vHeight(): number;
-        static fromAtlasSprite(arg0: $TextureAtlasSprite): $UVFrame;
-        multiplyVHeight(arg0: number): $UVFrame;
         multiplyUWidth(arg0: number): $UVFrame;
         static FULL: $UVFrame;
         constructor(u: number, v: number, uWidth: number, vHeight: number);
@@ -20,34 +20,34 @@ declare module "@package/hellfirepvp/astralsorcery/client/resource" {
     /**
      * Values that may be interpreted as {@link $UVFrame}.
      */
-    export type $UVFrame_ = { v?: number, u?: number, vHeight?: number, uWidth?: number,  } | [v?: number, u?: number, vHeight?: number, uWidth?: number, ];
+    export type $UVFrame_ = { uWidth?: number, v?: number, u?: number, vHeight?: number,  } | [uWidth?: number, v?: number, u?: number, vHeight?: number, ];
     export class $SpriteSheet extends $AbstractRenderTexture {
-        getTexture(): $AbstractRenderTexture;
-        getRows(): number;
         getColumns(): number;
-        getFrameCount(): number;
+        getRows(): number;
         getUV(arg0: number): $UVFrame;
+        getFrameCount(): number;
+        getTexture(): $AbstractRenderTexture;
         constructor(arg0: $AbstractRenderTexture, arg1: number, arg2: number);
-        get texture(): $AbstractRenderTexture;
-        get rows(): number;
         get columns(): number;
+        get rows(): number;
         get frameCount(): number;
+        get texture(): $AbstractRenderTexture;
     }
     export class $AbstractRenderTexture implements $ReloadableResource {
-        getKey(): $ResourceLocation;
-        bindTexture(): void;
         asState(): $RenderStateShard$TextureStateShard;
+        getUV(): $UVFrame;
         asSpriteSheet(arg0: number, arg1: number): $SpriteSheet;
         asSpriteSheet(): $SpriteSheet;
-        getUV(): $UVFrame;
-        get key(): $ResourceLocation;
+        getKey(): $ResourceLocation;
+        bindTexture(): void;
         get UV(): $UVFrame;
+        get key(): $ResourceLocation;
     }
     export class $AssetLocation extends $Enum<$AssetLocation> implements $StringRepresentable {
+        getSerializedName(): string;
         static values(): $AssetLocation[];
         static valueOf(arg0: string): $AssetLocation;
         getLocation(): string;
-        getSerializedName(): string;
         getRemappedEnumConstantName(): string;
         static SCREEN: $AssetLocation;
         static BLOCKS: $AssetLocation;
@@ -57,8 +57,8 @@ declare module "@package/hellfirepvp/astralsorcery/client/resource" {
         static EFFECT: $AssetLocation;
         static ITEMS: $AssetLocation;
         static MODEL: $AssetLocation;
-        get location(): string;
         get serializedName(): string;
+        get location(): string;
         get remappedEnumConstantName(): string;
     }
     /**

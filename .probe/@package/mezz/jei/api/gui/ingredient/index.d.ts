@@ -15,26 +15,26 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
     export class $IRecipeSlotView {
     }
     export interface $IRecipeSlotView {
-        isEmpty(): boolean;
-        getItemStacks(): $Stream<$ItemStack>;
-        drawHighlight(arg0: $GuiGraphics, arg1: number): void;
-        getIngredients<T>(arg0: $IIngredientType_<T>): $Stream<T>;
         getAllIngredients(): $Stream<$ITypedIngredient<never>>;
-        getRole(): $RecipeIngredientRole;
+        drawHighlight(arg0: $GuiGraphics, arg1: number): void;
+        getItemStacks(): $Stream<$ItemStack>;
+        getIngredients<T>(arg0: $IIngredientType_<T>): $Stream<T>;
         getSlotName(): (string) | undefined;
+        getDisplayedItemStack(): ($ItemStack) | undefined;
         getDisplayedIngredient(): ($ITypedIngredient<never>) | undefined;
         getDisplayedIngredient<T>(arg0: $IIngredientType_<T>): (T) | undefined;
+        isEmpty(): boolean;
         getTagKey(): ($TagKey<never>) | undefined;
-        getDisplayedItemStack(): ($ItemStack) | undefined;
+        getRole(): $RecipeIngredientRole;
         getAllIngredientsList(): $List<$ITypedIngredient<never>>;
         getDisplayedIngredients(): $Stream<$ITypedIngredient<never>>;
-        get empty(): boolean;
-        get itemStacks(): $Stream<$ItemStack>;
         get allIngredients(): $Stream<$ITypedIngredient<never>>;
-        get role(): $RecipeIngredientRole;
+        get itemStacks(): $Stream<$ItemStack>;
         get slotName(): (string) | undefined;
-        get tagKey(): ($TagKey<never>) | undefined;
         get displayedItemStack(): ($ItemStack) | undefined;
+        get empty(): boolean;
+        get tagKey(): ($TagKey<never>) | undefined;
+        get role(): $RecipeIngredientRole;
         get allIngredientsList(): $List<$ITypedIngredient<never>>;
         get displayedIngredients(): $Stream<$ITypedIngredient<never>>;
     }
@@ -61,7 +61,20 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
     export class $IRecipeSlotDrawable {
     }
     export interface $IRecipeSlotDrawable extends $IRecipeSlotView {
-        getAreaIncludingBackground(): $Rect2i;
+        isMouseOver(arg0: number, arg1: number): boolean;
+        /**
+         * @deprecated
+         */
+        getRect(): $Rect2i;
+        drawTooltip(arg0: $GuiGraphics, arg1: number, arg2: number): void;
+        /**
+         * @deprecated
+         */
+        addTooltipCallback(arg0: $IRecipeSlotTooltipCallback_): void;
+        /**
+         * @deprecated
+         */
+        drawHoverOverlays(arg0: $GuiGraphics): void;
         setPosition(arg0: number, arg1: number): void;
         /**
          * @deprecated
@@ -76,24 +89,11 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
          * @deprecated
          */
         getTooltip(arg0: $ITooltipBuilder): void;
-        isMouseOver(arg0: number, arg1: number): boolean;
-        drawTooltip(arg0: $GuiGraphics, arg1: number, arg2: number): void;
-        /**
-         * @deprecated
-         */
-        getRect(): $Rect2i;
-        /**
-         * @deprecated
-         */
-        addTooltipCallback(arg0: $IRecipeSlotTooltipCallback_): void;
         createDisplayOverrides(): $IIngredientConsumer;
         clearDisplayOverrides(): void;
-        /**
-         * @deprecated
-         */
-        drawHoverOverlays(arg0: $GuiGraphics): void;
-        get areaIncludingBackground(): $Rect2i;
+        getAreaIncludingBackground(): $Rect2i;
         get rect(): $Rect2i;
+        get areaIncludingBackground(): $Rect2i;
     }
     export class $IRecipeSlotDrawablesView {
     }
@@ -109,16 +109,16 @@ declare module "@package/mezz/jei/api/gui/ingredient" {
     export class $ICraftingGridHelper {
     }
     export interface $ICraftingGridHelper {
-        createAndSetNamedIngredients(arg0: $IRecipeLayoutBuilder, arg1: $List_<$Pair<string, $Ingredient_>>, arg2: number, arg3: number): $List<$IRecipeSlotBuilder>;
-        setInputs<T>(arg0: $List_<$IRecipeSlotBuilder>, arg1: $IIngredientType_<T>, arg2: $List_<$List_<T>>, arg3: number, arg4: number): void;
+        getCraftingIndex(arg0: number, arg1: number, arg2: number): number;
         createAndSetInputs(arg0: $IRecipeLayoutBuilder, arg1: $List_<$List_<$ItemStack_>>, arg2: number, arg3: number): $List<$IRecipeSlotBuilder>;
         createAndSetInputs<T>(arg0: $IRecipeLayoutBuilder, arg1: $IIngredientType_<T>, arg2: $List_<$List_<T>>, arg3: number, arg4: number): $List<$IRecipeSlotBuilder>;
-        getCraftingIndex(arg0: number, arg1: number, arg2: number): number;
+        setInputs<T>(arg0: $List_<$IRecipeSlotBuilder>, arg1: $IIngredientType_<T>, arg2: $List_<$List_<T>>, arg3: number, arg4: number): void;
+        createAndSetNamedIngredients(arg0: $IRecipeLayoutBuilder, arg1: $List_<$Pair<string, $Ingredient_>>, arg2: number, arg3: number): $List<$IRecipeSlotBuilder>;
         createAndSetNamedInputs<T>(arg0: $IRecipeLayoutBuilder, arg1: $IIngredientType_<T>, arg2: $List_<$Pair<string, $List_<T>>>, arg3: number, arg4: number): $List<$IRecipeSlotBuilder>;
         createAndSetNamedInputs(arg0: $IRecipeLayoutBuilder, arg1: $List_<$Pair<string, $List_<$ItemStack_>>>, arg2: number, arg3: number): $List<$IRecipeSlotBuilder>;
         createAndSetIngredients(arg0: $IRecipeLayoutBuilder, arg1: $List_<$Ingredient_>, arg2: number, arg3: number): void;
-        createAndSetOutputs<T>(arg0: $IRecipeLayoutBuilder, arg1: $IIngredientType_<T>, arg2: $List_<T>): $IRecipeSlotBuilder;
         createAndSetOutputs(arg0: $IRecipeLayoutBuilder, arg1: $List_<$ItemStack_>): $IRecipeSlotBuilder;
+        createAndSetOutputs<T>(arg0: $IRecipeLayoutBuilder, arg1: $IIngredientType_<T>, arg2: $List_<T>): $IRecipeSlotBuilder;
     }
     /**
      * @deprecated

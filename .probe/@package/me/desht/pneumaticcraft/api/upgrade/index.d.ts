@@ -6,19 +6,19 @@ declare module "@package/me/desht/pneumaticcraft/api/upgrade" {
         static from(arg0: $ItemStack_): $PNCUpgrade;
     }
     export interface $PNCUpgrade {
+        getMaxTier(): number;
+        getCacheId(): number;
+        isDependencyLoaded(): boolean;
+        getItemRegistryName(arg0: number): $ResourceLocation;
+        getItemRegistryName(): $ResourceLocation;
         getId(): $ResourceLocation;
         getItem(arg0: number): $Item;
         getItem(): $Item;
-        getItemStack(): $ItemStack;
         getItemStack(arg0: number): $ItemStack;
-        getItemRegistryName(): $ResourceLocation;
-        getItemRegistryName(arg0: number): $ResourceLocation;
-        getMaxTier(): number;
-        isDependencyLoaded(): boolean;
-        getCacheId(): number;
-        get id(): $ResourceLocation;
+        getItemStack(): $ItemStack;
         get maxTier(): number;
-        get dependencyLoaded(): boolean;
         get cacheId(): number;
+        get dependencyLoaded(): boolean;
+        get id(): $ResourceLocation;
     }
 }

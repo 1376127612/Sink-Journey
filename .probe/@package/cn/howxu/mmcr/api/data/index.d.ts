@@ -6,6 +6,13 @@ export * as view from "@package/cn/howxu/mmcr/api/data/view";
 
 declare module "@package/cn/howxu/mmcr/api/data" {
     export class $DataValue {
+        asBoolean(): (boolean) | undefined;
+        asByte(): (number) | undefined;
+        asShort(): (number) | undefined;
+        asLong(): (number) | undefined;
+        asFloat(): (number) | undefined;
+        asBigDecimal(): ($BigDecimal) | undefined;
+        bigDecimalValue(): $BigDecimal;
         type(): $DataValueType;
         value(): $Object;
         booleanValue(): boolean;
@@ -16,32 +23,25 @@ declare module "@package/cn/howxu/mmcr/api/data" {
         floatValue(): number;
         doubleValue(): number;
         static map(values: $Map_<string, $DataValue>): $DataValue;
+        static of(value: number): $DataValue;
         static of(value: boolean): $DataValue;
-        static of(value: string): $DataValue;
         static of(value: number): $DataValue;
         static of(value: number): $DataValue;
         static of(value: number): $DataValue;
         static of(value: number): $DataValue;
-        static of(value: $BigInteger): $DataValue;
         static of(value: $BigDecimal): $DataValue;
+        static of(value: $BigInteger): $DataValue;
         static of(value: number): $DataValue;
-        static of(value: number): $DataValue;
+        static of(value: string): $DataValue;
         static list(values: $List_<$DataValue>): $DataValue;
         asList(): ($List<$DataValue>) | undefined;
         stringValue(): string;
-        asString(): (string) | undefined;
+        asBigInteger(): ($BigInteger) | undefined;
+        asMap(): ($Map<string, $DataValue>) | undefined;
         asInt(): (number) | undefined;
+        asString(): (string) | undefined;
         bigIntegerValue(): $BigInteger;
         asDouble(): (number) | undefined;
-        asMap(): ($Map<string, $DataValue>) | undefined;
-        asBigInteger(): ($BigInteger) | undefined;
-        asByte(): (number) | undefined;
-        asShort(): (number) | undefined;
-        asFloat(): (number) | undefined;
-        asLong(): (number) | undefined;
-        asBoolean(): (boolean) | undefined;
-        bigDecimalValue(): $BigDecimal;
-        asBigDecimal(): ($BigDecimal) | undefined;
     }
     export class $DataStorage$Transaction {
         commit(): void;

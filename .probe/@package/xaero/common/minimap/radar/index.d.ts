@@ -16,31 +16,7 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
-        updateRadar(arg0: $ClientLevel, arg1: $Player, arg2: $Entity, arg3: $MinimapProcessor): void;
-        /**
-         * @deprecated
-         */
-        getEntityColour(arg0: $Player, arg1: $Entity, arg2: number, arg3: boolean, arg4: $EntityRadarCategory, arg5: number, arg6: number, arg7: boolean, arg8: number): number;
-        /**
-         * @deprecated
-         */
         getTeamColour(arg0: $Entity): number;
-        /**
-         * @deprecated
-         */
-        getEntityCategoryManager(): $EntityRadarCategoryManager;
-        /**
-         * @deprecated
-         */
-        getEntityBrightness(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
-        /**
-         * @deprecated
-         */
-        getRadarListsIterator(): $Iterator<$MinimapRadarList>;
-        /**
-         * @deprecated
-         */
-        getEntityY(arg0: $Entity, arg1: number): number;
         /**
          * @deprecated
          */
@@ -52,6 +28,10 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
+        getEntityY(arg0: $Entity, arg1: number): number;
+        /**
+         * @deprecated
+         */
         getMaxDistance(arg0: $MinimapProcessor, arg1: boolean): number;
         /**
          * @deprecated
@@ -60,10 +40,30 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
+        getEntityColour(arg0: $Player, arg1: $Entity, arg2: number, arg3: boolean, arg4: $EntityRadarCategory, arg5: number, arg6: number, arg7: boolean, arg8: number): number;
+        /**
+         * @deprecated
+         */
+        updateRadar(arg0: $ClientLevel, arg1: $Player, arg2: $Entity, arg3: $MinimapProcessor): void;
+        /**
+         * @deprecated
+         */
+        getRadarListsIterator(): $Iterator<$MinimapRadarList>;
+        /**
+         * @deprecated
+         */
+        getEntityBrightness(arg0: number, arg1: number, arg2: number, arg3: boolean): number;
+        /**
+         * @deprecated
+         */
+        getEntityCategoryManager(): $EntityRadarCategoryManager;
+        /**
+         * @deprecated
+         */
         constructor(arg0: $EntityRadarCategoryManager);
-        get entityCategoryManager(): $EntityRadarCategoryManager;
-        get radarListsIterator(): $Iterator<$MinimapRadarList>;
         set lastRenderViewEntity(value: $Entity);
+        get radarListsIterator(): $Iterator<$MinimapRadarList>;
+        get entityCategoryManager(): $EntityRadarCategoryManager;
     }
     /**
      * @deprecated
@@ -72,16 +72,16 @@ declare module "@package/xaero/common/minimap/radar" {
         /**
          * @deprecated
          */
-        getEntities(): $List<$Entity>;
-        /**
-         * @deprecated
-         */
         setClientCategory(arg0: $EntityRadarCategory): $MinimapRadarList;
         /**
          * @deprecated
          */
+        getEntities(): $List<$Entity>;
+        /**
+         * @deprecated
+         */
         constructor();
-        get entities(): $List<$Entity>;
         set clientCategory(value: $EntityRadarCategory);
+        get entities(): $List<$Entity>;
     }
 }

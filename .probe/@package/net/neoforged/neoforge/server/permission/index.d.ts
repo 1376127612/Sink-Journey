@@ -9,12 +9,12 @@ export * as exceptions from "@package/net/neoforged/neoforge/server/permission/e
 
 declare module "@package/net/neoforged/neoforge/server/permission" {
     export class $PermissionAPI {
+        static getOfflinePermission<T>(arg0: $UUID_, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
+        static getRegisteredNodes(): $Collection<$PermissionNode<never>>;
+        static initializePermissionAPI(): void;
         static getActivePermissionHandler(): $ResourceLocation;
         static getPermission<T>(arg0: $ServerPlayer, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
-        static getRegisteredNodes(): $Collection<$PermissionNode<never>>;
-        static getOfflinePermission<T>(arg0: $UUID_, arg1: $PermissionNode<T>, ...arg2: $PermissionDynamicContext<never>[]): T;
-        static initializePermissionAPI(): void;
-        static get activePermissionHandler(): $ResourceLocation;
         static get registeredNodes(): $Collection<$PermissionNode<never>>;
+        static get activePermissionHandler(): $ResourceLocation;
     }
 }

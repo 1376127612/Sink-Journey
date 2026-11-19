@@ -1,4 +1,5 @@
 import { $Level_ } from "@package/net/minecraft/world/level";
+import { $EntityDataAccessor } from "@package/net/minecraft/network/syncher";
 import { $BlockPos } from "@package/net/minecraft/core";
 import { $ItemStack, $ItemStack_ } from "@package/net/minecraft/world/item";
 import { $RegistryFriendlyByteBuf } from "@package/net/minecraft/network";
@@ -10,22 +11,23 @@ import { $Vec3_ } from "@package/net/minecraft/world/phys";
 
 declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
     export class $PotatoProjectileEntity extends $AbstractHurtingProjectile implements $IEntityWithComplexSpawn {
-        static build(arg0: $EntityType$Builder<never>): $EntityType$Builder<never>;
-        getItem(): $ItemStack;
         setEnchantmentEffectsFromCannon(arg0: $ItemStack_): void;
         setItem(arg0: $ItemStack_): void;
-        readSpawnData(arg0: $RegistryFriendlyByteBuf): void;
         writeSpawnData(arg0: $RegistryFriendlyByteBuf): void;
-        static playLaunchSound(arg0: $Level_, arg1: $Vec3_, arg2: number): void;
+        readSpawnData(arg0: $RegistryFriendlyByteBuf): void;
         getProjectileType(): $PotatoCannonProjectileType;
-        setStuckEntity(arg0: $Entity): void;
         getStuckEntity(): $Entity;
         static playHitSound(arg0: $Level_, arg1: $Vec3_): void;
+        setStuckEntity(arg0: $Entity): void;
+        static playLaunchSound(arg0: $Level_, arg1: $Vec3_, arg2: number): void;
         getRenderMode(): $PotatoProjectileRenderMode;
+        static build(arg0: $EntityType$Builder<never>): $EntityType$Builder<never>;
+        getItem(): $ItemStack;
         hasImpulse: boolean;
         tickCount: number;
         noPhysics: boolean;
         yo: number;
+        leftOwner: boolean;
         static BOARDING_COOLDOWN: number;
         removalReason: $Entity$RemovalReason;
         yRotO: number;
@@ -64,12 +66,14 @@ declare module "@package/com/simibubi/create/content/equipment/potatoCannon" {
         flyDist: number;
         isInPowderSnow: boolean;
         static ATTACHMENTS_NBT_KEY: string;
+        hasBeenShot: boolean;
         static PASSENGERS_TAG: string;
         blocksBuilding: boolean;
         wasOnFire: boolean;
         zOld: number;
         static TOTAL_AIR_SUPPLY: number;
         xo: number;
+        static DATA_SHARED_FLAGS_ID: $EntityDataAccessor<number>;
         static BASE_SAFE_FALL_DISTANCE: number;
         wasTouchingWater: boolean;
         horizontalCollision: boolean;

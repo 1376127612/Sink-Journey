@@ -19,19 +19,19 @@ import { $IModBusEvent } from "@package/net/neoforged/fml/event";
 
 declare module "@package/cn/howxu/mmcr/publicapi/event" {
     export class $RegisterJeiWorkstationsEvent extends $Event {
-        entries(): $List<$Workstation>;
         registrar(): $WorkstationRegistrar;
-        addRecipePoolWorkstation(pool: $ResourceLocation_, item: $ItemLike_): void;
+        addMachineWorkstation(machine: $ResourceLocation_, type: $ResourceLocation_): void;
         addRecipePoolWorkstation(pool: $ResourceLocation_, item: $ItemStack_): void;
         addRecipePoolWorkstation(pool: $ResourceLocation_, item: $ResourceLocation_): void;
-        addMachineWorkstation(machine: $ResourceLocation_, type: $ResourceLocation_): void;
+        addRecipePoolWorkstation(pool: $ResourceLocation_, item: $ItemLike_): void;
+        entries(): $List<$Workstation>;
         constructor();
     }
     export class $RegisterJeiRecipeInformationEvent extends $Event {
-        entries(): $List<$RecipeInformation>;
         registrar(): $RecipeInformationRegistrar;
         registerRecipe(id: $ResourceLocation_, key: string, ...args: $Object[]): void;
         registerRecipePool(id: $ResourceLocation_, key: string, ...args: $Object[]): void;
+        entries(): $List<$RecipeInformation>;
         constructor();
     }
     export class $RegisterMachineRecipesEvent extends $Event {
@@ -39,48 +39,48 @@ declare module "@package/cn/howxu/mmcr/publicapi/event" {
         recipes(): $Map<$ResourceLocation, $RecipeSpec>;
         registerRecipe(id: $ResourceLocation_, configuration: $Consumer_<$RecipeDraft>): void;
         registerRecipe(recipe: $RecipeSpec): void;
-        constructor();
         constructor(registrar: $RecipeRegistrar);
+        constructor();
     }
     export class $RegisterControllerUiProtocolsEvent extends $Event implements $IModBusEvent {
         registrar(): $UiProtocolRegistrar;
         constructor(machineIds: $Collection_<$ResourceLocation_>);
     }
     export class $RegisterMachineDefinitionsEvent extends $Event {
-        definitions(): $Map<$ResourceLocation, $MachineSpec>;
         registrar(): $MachineRegistrar;
-        registerMachine(definition: $MachineSpec): void;
         registerMachine(id: $ResourceLocation_, configuration: $Consumer_<$MachineDraft>): void;
+        registerMachine(definition: $MachineSpec): void;
+        definitions(): $Map<$ResourceLocation, $MachineSpec>;
         constructor();
         constructor(registrar: $MachineRegistrar);
     }
     export class $RegisterControllerUisEvent extends $Event implements $IModBusEvent {
-        register(machineId: $ResourceLocation_, factory: $ControllerUiFactory_): void;
         registrar(): $RegisterControllerUisEvent$Registrar;
+        register(machineId: $ResourceLocation_, factory: $ControllerUiFactory_): void;
         constructor(machineIds: $Collection_<$ResourceLocation_>);
     }
     export class $RegisterControllerRenderersEvent extends $Event implements $IModBusEvent {
-        register(id: $ResourceLocation_, renderer: $ControllerRenderer_): void;
         registrar(): $RendererRegistrar;
+        register(id: $ResourceLocation_, renderer: $ControllerRenderer_): void;
         renderers(): $Map<$ResourceLocation, $ControllerRenderer>;
         constructor(machineIds: $Collection_<$ResourceLocation_>);
     }
     export class $RegisterMachineStructuresEvent extends $Event {
-        modifiers(): $Map<$ResourceLocation, $ModifierBundle>;
-        levels(): $Map<$ResourceLocation, $MachineLevelSpec>;
-        registerLevelType(type: $LevelTypeSpec): void;
-        registerLevel(level: $MachineLevelSpec): void;
-        registerModifier(id: $ResourceLocation_, modifier: $ModifierBundle_): void;
-        registerStructure(id: $ResourceLocation_, configuration: $Consumer_<$StructureDraft>): void;
-        registerStructure(structure: $StructureSpec): void;
         structures(): $Map<$ResourceLocation, $StructureSpec>;
         registrar(): $StructureRegistrar;
+        registerStructure(id: $ResourceLocation_, configuration: $Consumer_<$StructureDraft>): void;
+        registerStructure(structure: $StructureSpec): void;
         registerModifierItem(itemId: $ResourceLocation_, id: $ResourceLocation_): void;
+        registerLevelType(type: $LevelTypeSpec): void;
         modifierItems(): $Map<$ResourceLocation, $List<$ItemStack>>;
+        registerModifier(id: $ResourceLocation_, modifier: $ModifierBundle_): void;
+        registerLevel(level: $MachineLevelSpec): void;
         modifierItemIds(): $Map<$ResourceLocation, $ResourceLocation>;
         levelTypes(): $Map<$ResourceLocation, $LevelTypeSpec>;
-        constructor(machineIds: $Collection_<$ResourceLocation_>);
+        modifiers(): $Map<$ResourceLocation, $ModifierBundle>;
+        levels(): $Map<$ResourceLocation, $MachineLevelSpec>;
         constructor(registrar: $StructureRegistrar);
+        constructor(machineIds: $Collection_<$ResourceLocation_>);
     }
     export class $RegisterControllerUisEvent$Registrar {
     }

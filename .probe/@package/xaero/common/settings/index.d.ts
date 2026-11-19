@@ -8,32 +8,46 @@ import { $KeyMapping } from "@package/net/minecraft/client";
 
 declare module "@package/xaero/common/settings" {
     export class $ModSettings {
+        getEntityRadarBackwardsCompatibilityConfig(): $EntityRadarBackwardsCompatibilityConfig;
+        static getTranslation(arg0: boolean): string;
         /**
          * @deprecated
          */
         getMinimap(): boolean;
-        writeSettings(arg0: $PrintWriter): void;
-        static getTranslation(arg0: boolean): string;
-        removeLegacySlimeChunksSeed(arg0: $XaeroPath): number;
-        getEntityRadarBackwardsCompatibilityConfig(): $EntityRadarBackwardsCompatibilityConfig;
         loadSettings(arg0: boolean): void;
+        getUIScale(arg0: number, arg1: number, arg2: number): number;
         saveSettings(): void;
-        resetEntityRadarBackwardsCompatibilityConfig(): void;
+        isIgnoreHeightmaps(): boolean;
         resetServerSettings(): void;
         static canEditIngameSettings(): boolean;
-        getUIScale(arg0: number, arg1: number, arg2: number): number;
-        showWaypointsDisabled(): boolean;
         deathpointsDisabled(): boolean;
-        getMinimapScale(): number;
-        getAutoUIScale(): number;
+        showWaypointsDisabled(): boolean;
+        caveMapsDisabled(): boolean;
+        minimapDisabled(): boolean;
         /**
          * @deprecated
          */
-        getSlimeChunks(arg0: $WaypointsManager): boolean;
+        getLegacySlimeChunksSeed(arg0: $XaeroPath): number;
+        loadDefaultSettings(arg0: boolean): void;
+        removeLoadedWaypointLines(): void;
+        getLoadedWaypointLines(): string;
+        foundOldRadarSettings(): boolean;
+        writeSettings(arg0: $PrintWriter): void;
+        /**
+         * @deprecated
+         */
+        waypointsGUI(arg0: $WaypointsManager): boolean;
+        waypointsGUI(arg0: $MinimapSession): boolean;
+        removeLegacySlimeChunksSeed(arg0: $XaeroPath): number;
         /**
          * @deprecated
          */
         getSlimeChunks(arg0: $MinimapSession): boolean;
+        /**
+         * @deprecated
+         */
+        getSlimeChunks(arg0: $WaypointsManager): boolean;
+        getAutoUIScale(): number;
         /**
          * @deprecated
          */
@@ -42,26 +56,7 @@ declare module "@package/xaero/common/settings" {
          * @deprecated
          */
         saveWaypoints(arg0: $WaypointWorld): void;
-        isIgnoreHeightmaps(): boolean;
-        minimapDisabled(): boolean;
-        caveMapsDisabled(): boolean;
-        foundOldRadarSettings(): boolean;
-        /**
-         * @deprecated
-         */
-        getLegacySlimeChunksSeed(arg0: $XaeroPath): number;
-        removeLoadedWaypointLines(): void;
-        loadDefaultSettings(arg0: boolean): void;
-        getLoadedWaypointLines(): string;
-        /**
-         * @deprecated
-         */
-        waypointsGUI(arg0: $WaypointsManager): boolean;
-        waypointsGUI(arg0: $MinimapSession): boolean;
-        /**
-         * @deprecated
-         */
-        getSlimeChunksSeed(arg0: $XaeroPath): number;
+        getMinimapScale(): number;
         /**
          * @deprecated
          */
@@ -70,12 +65,17 @@ declare module "@package/xaero/common/settings" {
          * @deprecated
          */
         saveAllWaypoints(arg0: $WaypointsManager): void;
+        static setServerSettings(): void;
         /**
          * @deprecated
          */
         isKeyRepeat(arg0: $KeyMapping): boolean;
-        static setServerSettings(): void;
         readSetting(arg0: string[]): void;
+        /**
+         * @deprecated
+         */
+        getSlimeChunksSeed(arg0: $XaeroPath): number;
+        resetEntityRadarBackwardsCompatibilityConfig(): void;
         /**
          * @deprecated
          */
@@ -176,11 +176,11 @@ declare module "@package/xaero/common/settings" {
          */
         static keyToggleRadar: $KeyMapping;
         constructor(arg0: $IXaeroMinimap);
-        get minimap(): boolean;
         get entityRadarBackwardsCompatibilityConfig(): $EntityRadarBackwardsCompatibilityConfig;
-        get minimapScale(): number;
-        get autoUIScale(): number;
+        get minimap(): boolean;
         get ignoreHeightmaps(): boolean;
         get loadedWaypointLines(): string;
+        get autoUIScale(): number;
+        get minimapScale(): number;
     }
 }

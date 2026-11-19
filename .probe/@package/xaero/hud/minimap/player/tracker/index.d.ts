@@ -24,38 +24,38 @@ declare module "@package/xaero/hud/minimap/player/tracker" {
         constructor();
     }
     export class $PlayerTrackerMinimapElementCollector {
+        playerExists(arg0: $UUID_): boolean;
+        confirmPlayerRadarRender(arg0: $Player): void;
+        resetRenderedOnRadarFlags(): void;
         update(arg0: $Minecraft): void;
         getElements(): $Iterable<$PlayerTrackerMinimapElement<never>>;
-        playerExists(arg0: $UUID_): boolean;
-        resetRenderedOnRadarFlags(): void;
-        confirmPlayerRadarRender(arg0: $Player): void;
         constructor(arg0: $RenderedPlayerTrackerManager);
         get elements(): $Iterable<$PlayerTrackerMinimapElement<never>>;
     }
     export class $PlayerTrackerMinimapElementRenderer extends $MinimapElementRenderer<$PlayerTrackerMinimapElement<never>, $PlayerTrackerMinimapElementRenderContext> {
-        getCollector(): $PlayerTrackerMinimapElementCollector;
-        getPlayerSkin(arg0: $Player, arg1: $PlayerInfo): $ResourceLocation;
         renderElement(arg0: $PlayerTrackerMinimapElement<never>, arg1: boolean, arg2: boolean, arg3: number, arg4: number, arg5: number, arg6: number, arg7: $MinimapElementRenderInfo, arg8: $GuiGraphics, arg9: $MultiBufferSource$BufferSource): boolean;
+        getPlayerSkin(arg0: $Player, arg1: $PlayerInfo): $ResourceLocation;
+        getCollector(): $PlayerTrackerMinimapElementCollector;
         get collector(): $PlayerTrackerMinimapElementCollector;
     }
     export class $PlayerTrackerMinimapElement<P> {
-        setRenderedOnRadar(arg0: boolean): void;
-        getY(): number;
-        getDimension(): $ResourceKey<$Level>;
-        getX(): number;
         getZ(): number;
-        getPlayer(): P;
         getSystem(): $IRenderedPlayerTracker<P>;
-        getPlayerId(): $UUID;
         wasRenderedOnRadar(): boolean;
+        getPlayerId(): $UUID;
+        setRenderedOnRadar(arg0: boolean): void;
+        getDimension(): $ResourceKey<$Level>;
+        getPlayer(): P;
+        getX(): number;
+        getY(): number;
         constructor(arg0: P, arg1: $IRenderedPlayerTracker<P>);
-        set renderedOnRadar(value: boolean);
-        get y(): number;
-        get dimension(): $ResourceKey<$Level>;
-        get x(): number;
         get z(): number;
-        get player(): P;
         get system(): $IRenderedPlayerTracker<P>;
         get playerId(): $UUID;
+        set renderedOnRadar(value: boolean);
+        get dimension(): $ResourceKey<$Level>;
+        get player(): P;
+        get x(): number;
+        get y(): number;
     }
 }

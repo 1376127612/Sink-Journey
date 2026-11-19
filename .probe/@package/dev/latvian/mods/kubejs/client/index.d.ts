@@ -61,15 +61,15 @@ export * as editor from "@package/dev/latvian/mods/kubejs/client/editor";
 
 declare module "@package/dev/latvian/mods/kubejs/client" {
     export class $KeybindRegistryKubeEvent$Builder {
+        gui(): $KeybindRegistryKubeEvent$Builder;
+        inGame(): $KeybindRegistryKubeEvent$Builder;
+        defaultKey(keyName: string): $KeybindRegistryKubeEvent$Builder;
+        conflictContext(keyConflictContext: $KeyConflictContext_): $KeybindRegistryKubeEvent$Builder;
+        scanCodeInputType(): $KeybindRegistryKubeEvent$Builder;
+        mouseInputType(): $KeybindRegistryKubeEvent$Builder;
         modifier(modifier: $KeyModifier_): $KeybindRegistryKubeEvent$Builder;
         category(category: string): $KeybindRegistryKubeEvent$Builder;
-        defaultKey(keyName: string): $KeybindRegistryKubeEvent$Builder;
         inputType(inputType: $InputConstants$Type_): $KeybindRegistryKubeEvent$Builder;
-        gui(): $KeybindRegistryKubeEvent$Builder;
-        conflictContext(keyConflictContext: $KeyConflictContext_): $KeybindRegistryKubeEvent$Builder;
-        inGame(): $KeybindRegistryKubeEvent$Builder;
-        mouseInputType(): $KeybindRegistryKubeEvent$Builder;
-        scanCodeInputType(): $KeybindRegistryKubeEvent$Builder;
     }
     export class $ClientAssetPacks {
         inject(original: $List_<$PackResources>): $List<$PackResources>;
@@ -79,8 +79,8 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor();
     }
     export class $MultipartBlockStateGenerator {
-        part(when: string, model: $ResourceLocation_): void;
         part(when: string, consumer: $Consumer_<$MultipartBlockStateGenerator$Part>): void;
+        part(when: string, model: $ResourceLocation_): void;
         toJson(): $JsonObject;
         constructor();
     }
@@ -112,62 +112,57 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
      */
     export type $ItemTintFunctionWrapper_ = { function?: $ItemTintFunction_,  } | [function?: $ItemTintFunction_, ];
     export class $KubeAnimatedParticle extends $SimpleAnimatedParticle {
-        setColor(color: $KubeColor_): void;
-        setColor(color: $KubeColor_, alpha: boolean): void;
-        getRandom(): $RandomSource;
-        getY(): number;
-        getLevel(): $ClientLevel;
-        getX(): number;
         getZ(): number;
-        setSpeed(speed: $Vec3_): void;
         onTick(tick: $Consumer_<$KubeAnimatedParticle>): void;
         getSpriteSet(): $SpriteSet;
+        getRandom(): $RandomSource;
         setGravity(g: number): void;
-        setFasterWhenYMotionBlocked(b: boolean): void;
-        getYSpeed(): number;
-        getXSpeed(): number;
-        getZSpeed(): number;
         /**
          * Sets teh friction of the particle, the particle's motion is multiplied by this value every tick
          */
         setFriction(f: number): void;
-        setPhysicality(hasPhysics: boolean): void;
+        setFasterWhenYMotionBlocked(b: boolean): void;
         setLightColor(arg0: $Float2IntFunction_): void;
+        setPhysicality(hasPhysics: boolean): void;
+        setColor(color: $KubeColor_): void;
+        setColor(color: $KubeColor_, alpha: boolean): void;
+        getLevel(): $ClientLevel;
+        setSpeed(speed: $Vec3_): void;
+        getX(): number;
+        getY(): number;
+        getXSpeed(): number;
+        getYSpeed(): number;
+        getZSpeed(): number;
+        stoppedByCollision: boolean;
+        gravity: number;
         constructor(level: $ClientLevel, x: number, y: number, z: number, sprites: $SpriteSet);
-        get random(): $RandomSource;
-        get y(): number;
-        get level(): $ClientLevel;
-        get x(): number;
         get z(): number;
-        set speed(value: $Vec3_);
         get spriteSet(): $SpriteSet;
-        set gravity(value: number);
-        set fasterWhenYMotionBlocked(value: boolean);
-        get YSpeed(): number;
-        get XSpeed(): number;
-        get ZSpeed(): number;
+        get random(): $RandomSource;
         set friction(value: number);
-        set physicality(value: boolean);
+        set fasterWhenYMotionBlocked(value: boolean);
         set lightColor(value: $Float2IntFunction_);
+        set physicality(value: boolean);
+        get level(): $ClientLevel;
+        set speed(value: $Vec3_);
+        get x(): number;
+        get y(): number;
+        get XSpeed(): number;
+        get YSpeed(): number;
+        get ZSpeed(): number;
     }
     export class $LangKubeEvent extends $Record implements $KubeEvent {
-        add(namespace: string, key: string, value: string): void;
-        add(key: string, value: string): void;
-        map(): $Map<$LangKubeEvent$Key, string>;
-        addAll(namespace: string, map: $Map_<string, string>): void;
-        addAll(map: $Map_<string, string>): void;
-        lang(): string;
         renameBlock(block: $Block_, name: string): void;
-        renameItem(item: $ItemStack_, name: string): void;
-        painting(paintingId: $ResourceLocation_, title: string, author: string): void;
         renameEntity(id: $ResourceLocation_, name: string): void;
         renameBiome(id: $ResourceLocation_, name: string): void;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
+        renameItem(item: $ItemStack_, name: string): void;
+        add(key: string, value: string): void;
+        add(namespace: string, key: string, value: string): void;
+        map(): $Map<$LangKubeEvent$Key, string>;
+        addAll(map: $Map_<string, string>): void;
+        addAll(namespace: string, map: $Map_<string, string>): void;
+        lang(): string;
+        painting(paintingId: $ResourceLocation_, title: string, author: string): void;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -175,17 +170,23 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -204,16 +205,10 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     /**
      * Values that may be interpreted as {@link $LangKubeEvent}.
      */
-    export type $LangKubeEvent_ = { lang?: string, map?: $Map_<$LangKubeEvent$Key_, string>,  } | [lang?: string, map?: $Map_<$LangKubeEvent$Key_, string>, ];
+    export type $LangKubeEvent_ = { map?: $Map_<$LangKubeEvent$Key_, string>, lang?: string,  } | [map?: $Map_<$LangKubeEvent$Key_, string>, lang?: string, ];
     export class $EntityRendererRegistryKubeEvent implements $ClientKubeEvent {
         register(type: $EntityType_<never>, renderer: $EntityRendererProvider_<any>): void;
         getClient(): $Minecraft;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -221,17 +216,23 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -248,17 +249,11 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         get client(): $Minecraft;
     }
     export class $ParticleProviderRegistryKubeEvent implements $ClientKubeEvent {
-        register<T extends $ParticleOptions>(type: $ParticleType_<T>): void;
-        register<T extends $ParticleOptions>(type: $ParticleType_<T>, particle: $Consumer_<$KubeAnimatedParticle>): void;
-        register<T extends $ParticleOptions>(type: $ParticleType_<T>, spriteProvider: $ParticleProviderRegistryKubeEvent$SpriteSetParticleProvider_<T>): void;
         registerSpecial<T extends $ParticleOptions>(type: $ParticleType_<T>, provider: $ParticleProvider_<T>): void;
+        register<T extends $ParticleOptions>(type: $ParticleType_<T>, spriteProvider: $ParticleProviderRegistryKubeEvent$SpriteSetParticleProvider_<T>): void;
+        register<T extends $ParticleOptions>(type: $ParticleType_<T>, particle: $Consumer_<$KubeAnimatedParticle>): void;
+        register<T extends $ParticleOptions>(type: $ParticleType_<T>): void;
         getClient(): $Minecraft;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -266,17 +261,23 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -293,25 +294,25 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         get client(): $Minecraft;
     }
     export class $SoundsGenerator {
-        toJson(): $JsonObject;
-        addSound(path: string, consumer: $Consumer_<$SoundsGenerator$SoundGen>, overlayExisting: boolean): void;
         addSound(path: string, consumer: $Consumer_<$SoundsGenerator$SoundGen>): void;
+        addSound(path: string, consumer: $Consumer_<$SoundsGenerator$SoundGen>, overlayExisting: boolean): void;
+        toJson(): $JsonObject;
         constructor();
     }
     export class $LoadedTexture {
+        remap(remap: $Map_<$KubeColor_, $KubeColor_>): $LoadedTexture;
+        tint(tint: $KubeColor_): $LoadedTexture;
         toBytes(): number[];
         static load(id: $ResourceLocation_): $LoadedTexture;
         copy(): $LoadedTexture;
         resize(newWidth: number, newHeight: number): $LoadedTexture;
-        tint(tint: $KubeColor_): $LoadedTexture;
-        remap(remap: $Map_<$KubeColor_, $KubeColor_>): $LoadedTexture;
         pixels: number[];
         width: number;
         static EMPTY: $LoadedTexture;
         mcmeta: number[];
         height: number;
-        constructor(img: $BufferedImage, mcmeta: number[]);
         constructor(width: number, height: number, pixels: number[], mcmeta: number[]);
+        constructor(img: $BufferedImage, mcmeta: number[]);
     }
     export class $ModelGenerator$OverridePredicate extends $Record {
         property(): $ResourceLocation;
@@ -322,13 +323,13 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     /**
      * Values that may be interpreted as {@link $ModelGenerator$OverridePredicate}.
      */
-    export type $ModelGenerator$OverridePredicate_ = { value?: number, property?: $ResourceLocation_,  } | [value?: number, property?: $ResourceLocation_, ];
+    export type $ModelGenerator$OverridePredicate_ = { property?: $ResourceLocation_, value?: number,  } | [property?: $ResourceLocation_, value?: number, ];
     export class $VariantBlockStateGenerator$Model {
         x(x: number): $VariantBlockStateGenerator$Model;
         y(y: number): $VariantBlockStateGenerator$Model;
         model(s: $ResourceLocation_): $VariantBlockStateGenerator$Model;
-        toJson(): $JsonObject;
         uvlock(): $VariantBlockStateGenerator$Model;
+        toJson(): $JsonObject;
         constructor();
     }
     export class $LangKubeEvent$Key extends $Record {
@@ -340,16 +341,10 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     /**
      * Values that may be interpreted as {@link $LangKubeEvent$Key}.
      */
-    export type $LangKubeEvent$Key_ = { namespace?: string, lang?: string, key?: string,  } | [namespace?: string, lang?: string, key?: string, ];
+    export type $LangKubeEvent$Key_ = { key?: string, namespace?: string, lang?: string,  } | [key?: string, namespace?: string, lang?: string, ];
     export class $BlockEntityRendererRegistryKubeEvent implements $ClientKubeEvent {
         register(type: $BlockEntityType_<never>, renderer: $BlockEntityRendererProvider_<any>): void;
         getClient(): $Minecraft;
-        /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
         /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
@@ -357,17 +352,23 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -397,16 +398,22 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         get token(): $Object;
     }
     export class $KubeJSErrorScreen$ErrorList extends $ObjectSelectionList<$KubeJSErrorScreen$Entry> {
-        static PERIOD_PER_SCROLLED_PIXEL: number;
-        scrolling: boolean;
-        static UNSET_FG_COLOR: number;
+        static SCROLLER_BACKGROUND_SPRITE: $ResourceLocation;
         visible: boolean;
-        focused: boolean;
         tooltip: $WidgetTooltipHolder;
         screen: $KubeJSErrorScreen;
         active: boolean;
         static MIN_SCROLL_PERIOD: number;
+        static INWORLD_MENU_LIST_BACKGROUND: $ResourceLocation;
+        static PERIOD_PER_SCROLLED_PIXEL: number;
+        scrolling: boolean;
+        static UNSET_FG_COLOR: number;
+        static MENU_LIST_BACKGROUND: $ResourceLocation;
+        static SCROLLER_SPRITE: $ResourceLocation;
+        focused: boolean;
+        hovered: $KubeJSErrorScreen$Entry;
         lines: $List<$ConsoleLine>;
+        height: number;
         constructor(screen: $KubeJSErrorScreen, minecraft: $Minecraft, width: number, height: number, top: number, bottom: number, lines: $List_<$ConsoleLine>);
     }
     export class $ScheduledClientEvent extends $ScheduledEvents$ScheduledEvent {
@@ -422,11 +429,11 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         get client(): $Minecraft;
     }
     export class $KubeJSKeybinds {
-        static get(id: string): $KubeJSKeybinds$KubeKey;
-        static getOrCreate(id: string): $KubeJSKeybinds$KubeKey;
-        static triggerKeyEvents(client: $Minecraft): void;
         static generateLang(event: $LangKubeEvent_): void;
         static triggerReload(): void;
+        static triggerKeyEvents(client: $Minecraft): void;
+        static get(id: string): $KubeJSKeybinds$KubeKey;
+        static getOrCreate(id: string): $KubeJSKeybinds$KubeKey;
         static TARGET: $EventTargetType<$KubeJSKeybinds$KubeKey>;
         constructor();
     }
@@ -440,20 +447,20 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         parent(s: $ResourceLocation_): void;
         override(model: $ResourceLocation_, override: $Consumer_<$ModelGenerator$Override>): void;
         element(consumer: $Consumer_<$ModelGenerator$Element>): void;
-        toJson(): $JsonObject;
         custom(json: $Consumer_<$JsonObject>): void;
         textures(map: $Map_<string, string>): void;
         texture(name: string[], texture: string): void;
+        toJson(): $JsonObject;
         constructor();
     }
     export class $SoundsGenerator$SoundGen {
+        subtitle(subtitle: string): $SoundsGenerator$SoundGen;
         replace(): $SoundsGenerator$SoundGen;
         replace(b: boolean): $SoundsGenerator$SoundGen;
-        toJson(): $JsonObject;
-        subtitle(subtitle: string): $SoundsGenerator$SoundGen;
         sounds(...sounds: string[]): $SoundsGenerator$SoundGen;
-        sound(file: string, consumer: $Consumer_<$SoundsGenerator$SoundInstance>): $SoundsGenerator$SoundGen;
         sound(file: string): $SoundsGenerator$SoundGen;
+        sound(file: string, consumer: $Consumer_<$SoundsGenerator$SoundInstance>): $SoundsGenerator$SoundGen;
+        toJson(): $JsonObject;
         constructor();
     }
     export class $KeybindRegistryKubeEvent implements $ClientKubeEvent {
@@ -461,29 +468,29 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         register(id: string): $KeybindRegistryKubeEvent$Builder;
         getClient(): $Minecraft;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -500,12 +507,12 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         get client(): $Minecraft;
     }
     export class $ModelGenerator$Face {
+        tintindex(i: number): $ModelGenerator$Face;
+        cull(d: $Direction_): $ModelGenerator$Face;
+        cull(): $ModelGenerator$Face;
+        tex(t: string): $ModelGenerator$Face;
         toJson(): $JsonObject;
         uv(u0: number, v0: number, u1: number, v1: number): $ModelGenerator$Face;
-        tex(t: string): $ModelGenerator$Face;
-        tintindex(i: number): $ModelGenerator$Face;
-        cull(): $ModelGenerator$Face;
-        cull(d: $Direction_): $ModelGenerator$Face;
         side: $Direction;
         constructor(side: $Direction_);
     }
@@ -514,29 +521,29 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         getPlayer(): $LocalPlayer;
         getClient(): $Minecraft;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -563,29 +570,29 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     export class $AtlasSpriteRegistryKubeEvent implements $KubeEvent {
         register(id: $ResourceLocation_): void;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -604,29 +611,29 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         register(type: $MenuType_<never>, arg1: $MenuScreens$ScreenConstructor_<any, any>): void;
         getClient(): $Minecraft;
         /**
-         * Stops the event with default exit value. Execution will be stopped **immediately**.
-         * 
-         * `exit` denotes a `default` outcome.
-         */
-        exit(): $Object;
-        /**
          * Stops the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `exit` denotes a `default` outcome.
          */
         exit(value: $Object): $Object;
         /**
-         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
-         * `cancel` denotes a `false` outcome.
+         * `exit` denotes a `default` outcome.
          */
-        cancel(): $Object;
+        exit(): $Object;
         /**
          * Cancels the event with the given exit value. Execution will be stopped **immediately**.
          * 
          * `cancel` denotes a `false` outcome.
          */
         cancel(value: $Object): $Object;
+        /**
+         * Cancels the event with default exit value. Execution will be stopped **immediately**.
+         * 
+         * `cancel` denotes a `false` outcome.
+         */
+        cancel(): $Object;
         /**
          * Stops the event with default exit value. Execution will be stopped **immediately**.
          * 
@@ -644,16 +651,16 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     }
     export class $DebugInfoKubeEvent extends $ClientPlayerKubeEvent {
         /**
-         * The lines of debug info. Mutating this list will change the debug info.
-         */
-        getLines(): $List<string>;
-        /**
          * Whether the debug info should be rendered.
          */
         getShowDebug(): boolean;
+        /**
+         * The lines of debug info. Mutating this list will change the debug info.
+         */
+        getLines(): $List<string>;
         constructor(player: $LocalPlayer, l: $List_<string>);
-        get lines(): $List<string>;
         get showDebug(): boolean;
+        get lines(): $List<string>;
     }
     export class $VariantBlockStateGenerator$Variant {
         model(s: $ResourceLocation_): $VariantBlockStateGenerator$Model;
@@ -661,12 +668,12 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor();
     }
     export class $KubeJSClient extends $KubeJSCommon {
+        static copyDefaultOptionsFile(optionsFile: $File_): void;
+        static formatNumber(count: number): string;
         static drawStackSize(graphics: $GuiGraphics, font: $Font, size: number, x: number, y: number, color: number, dropShadow: boolean): number;
+        static reloadClientScripts(): void;
         static resizePostChains(width: number, height: number): void;
         static loadPostChains(mc: $Minecraft): void;
-        static formatNumber(count: number): string;
-        static copyDefaultOptionsFile(optionsFile: $File_): void;
-        static reloadClientScripts(): void;
         static CLIENT_PACKS: $Map<$GeneratedDataStage, $VirtualAssetPack>;
         static WHITE_TEXTURE: $ResourceLocation;
         static clientItemTooltips: $List<$ItemTooltipData>;
@@ -678,30 +685,30 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor(errorList: $KubeJSErrorScreen$ErrorList, minecraft: $Minecraft, index: number, line: $ConsoleLine, calendar: $Calendar);
     }
     export class $KubeJSClientEventHandler {
-        static tagsUpdated(event: $TagsUpdatedEvent): void;
-        static blockColors(event: $RegisterColorHandlersEvent$Block): void;
+        static onRegisterClientCommands(event: $RegisterClientCommandsEvent): void;
+        static registerKeyMappings(event: $RegisterKeyMappingsEvent): void;
+        static registerRenderers(event: $EntityRenderersEvent$RegisterRenderers): void;
+        static registerParticleProviders(event: $RegisterParticleProvidersEvent): void;
+        static registerClientExtensions(event: $RegisterClientExtensionsEvent): void;
+        static registerMenuScreens(event: $RegisterMenuScreensEvent): void;
+        static registerCoreShaders(event: $RegisterShadersEvent): void;
+        static loggingIn(event: $ClientPlayerNetworkEvent$LoggingIn): void;
+        static loggingOut(event: $ClientPlayerNetworkEvent$LoggingOut): void;
         static testRequirements(mc: $Minecraft, event: $DynamicItemTooltipsKubeEvent, r: $TooltipRequirements_): boolean;
+        static openScreenEvent(event: $ScreenEvent$Opening): void;
         static hudPostDraw(event: $RenderGuiEvent$Post): void;
+        static worldRender(event: $RenderLevelStageEvent): void;
         static addClientPacks(event: $AddPackFindersEvent): void;
         static guiPostInit(event: $ScreenEvent$Init$Post): void;
         static screenPostDraw(event: $ScreenEvent$Render$Post): void;
-        static worldRender(event: $RenderLevelStageEvent): void;
-        static openScreenEvent(event: $ScreenEvent$Opening): void;
-        static setScreen(screen: $Screen): $Screen;
-        static itemColors(event: $RegisterColorHandlersEvent$Item): void;
-        static clientTick(event: $ClientTickEvent$Pre): void;
-        static registerMenuScreens(event: $RegisterMenuScreensEvent): void;
+        static tagsUpdated(event: $TagsUpdatedEvent): void;
         static debugInfo(event: $CustomizeGuiOverlayEvent$DebugText): void;
+        static itemColors(event: $RegisterColorHandlersEvent$Item): void;
+        static setScreen(screen: $Screen): $Screen;
+        static clientTick(event: $ClientTickEvent$Pre): void;
+        static blockColors(event: $RegisterColorHandlersEvent$Block): void;
         static onItemTooltip(event: $ItemTooltipEvent): void;
-        static registerClientExtensions(event: $RegisterClientExtensionsEvent): void;
-        static registerCoreShaders(event: $RegisterShadersEvent): void;
-        static registerParticleProviders(event: $RegisterParticleProvidersEvent): void;
         static setupClient(event: $FMLClientSetupEvent): void;
-        static registerRenderers(event: $EntityRenderersEvent$RegisterRenderers): void;
-        static onRegisterClientCommands(event: $RegisterClientCommandsEvent): void;
-        static loggingIn(event: $ClientPlayerNetworkEvent$LoggingIn): void;
-        static loggingOut(event: $ClientPlayerNetworkEvent$LoggingOut): void;
-        static registerKeyMappings(event: $RegisterKeyMappingsEvent): void;
         static COMPONENT_ERROR: $Pattern;
         constructor();
         static set screen(value: $Screen);
@@ -710,24 +717,24 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
     export class $ParticleProviderRegistryKubeEvent$SpriteSetParticleProvider<T extends $ParticleOptions> {
     }
     export interface $ParticleProviderRegistryKubeEvent$SpriteSetParticleProvider<T extends $ParticleOptions> extends $ParticleEngine$SpriteParticleRegistration<T> {
-        create(type: T, clientLevel: $ClientLevel, x: number, y: number, z: number, sprites: $SpriteSet, xSpeed: number, ySpeed: number, zSpeed: number): $Particle;
         create(sprites: $SpriteSet): $ParticleProvider<T>;
+        create(type: T, clientLevel: $ClientLevel, x: number, y: number, z: number, sprites: $SpriteSet, xSpeed: number, ySpeed: number, zSpeed: number): $Particle;
     }
     /**
      * Values that may be interpreted as {@link $ParticleProviderRegistryKubeEvent$SpriteSetParticleProvider}.
      */
     export type $ParticleProviderRegistryKubeEvent$SpriteSetParticleProvider_<T> = ((type: T, clientLevel: $ClientLevel, x: number, y: number, z: number, sprites: $SpriteSet, xSpeed: number, ySpeed: number, zSpeed: number) => $Particle);
     export class $SoundsGenerator$SoundInstance {
+        preload(b: boolean): $SoundsGenerator$SoundInstance;
+        preload(): $SoundsGenerator$SoundInstance;
+        attenuationDistance(i: number): $SoundsGenerator$SoundInstance;
+        volume(f: number): $SoundsGenerator$SoundInstance;
+        asReferenceToEvent(): $SoundsGenerator$SoundInstance;
         stream(): $SoundsGenerator$SoundInstance;
         stream(b: boolean): $SoundsGenerator$SoundInstance;
         weight(i: number): $SoundsGenerator$SoundInstance;
         toJson(): $JsonElement;
-        volume(f: number): $SoundsGenerator$SoundInstance;
-        preload(): $SoundsGenerator$SoundInstance;
-        preload(b: boolean): $SoundsGenerator$SoundInstance;
         pitch(f: number): $SoundsGenerator$SoundInstance;
-        attenuationDistance(i: number): $SoundsGenerator$SoundInstance;
-        asReferenceToEvent(): $SoundsGenerator$SoundInstance;
         constructor(fileLocation: string);
     }
     export class $KubeSessionData {
@@ -747,20 +754,20 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor();
     }
     export class $VariantBlockStateGenerator {
+        simpleVariant(key: string, model: $ResourceLocation_): void;
         variant(key: string, consumer: $Consumer_<$VariantBlockStateGenerator$Variant>): void;
         toJson(): $JsonObject;
-        simpleVariant(key: string, model: $ResourceLocation_): void;
         constructor();
     }
     export class $ParticleGenerator {
-        toJson(): $JsonObject;
         textures(textures: $List_<string>): $ParticleGenerator;
         texture(texture: string): $ParticleGenerator;
+        toJson(): $JsonObject;
         constructor();
     }
     export class $EditorExt {
-        static openFile(path: $Path_, line: number, column: number): void;
         static isKnownVSCode(): boolean;
+        static openFile(path: $Path_, line: number, column: number): void;
         static VSCODE_OSS: string;
         static VSCODE: string;
         static VSCODIUM: string;
@@ -773,10 +780,10 @@ declare module "@package/dev/latvian/mods/kubejs/client" {
         constructor();
     }
     export class $ModelGenerator$Element {
-        size(b: $AABB_): $ModelGenerator$Element;
-        toJson(): $JsonObject;
-        faces(sides: $Direction_[], face: $Consumer_<$ModelGenerator$Face>): void;
         allFaces(face: $Consumer_<$ModelGenerator$Face>): void;
+        size(b: $AABB_): $ModelGenerator$Element;
+        faces(sides: $Direction_[], face: $Consumer_<$ModelGenerator$Face>): void;
+        toJson(): $JsonObject;
         constructor();
     }
     export class $KubeJSKeybinds$TickingKeyEvent extends $KubeJSKeybinds$KeyEvent {

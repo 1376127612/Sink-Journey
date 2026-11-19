@@ -16,44 +16,44 @@ declare module "@package/appeng/api/networking/crafting" {
     export class $ICraftingCPU {
     }
     export interface $ICraftingCPU {
-        getName(): $Component;
         isBusy(): boolean;
-        cancelJob(): void;
         getCoProcessors(): number;
         getSelectionMode(): $CpuSelectionMode;
         getJobStatus(): $CraftingJobStatus;
+        cancelJob(): void;
         getAvailableStorage(): number;
-        get name(): $Component;
+        getName(): $Component;
         get busy(): boolean;
         get coProcessors(): number;
         get selectionMode(): $CpuSelectionMode;
         get jobStatus(): $CraftingJobStatus;
         get availableStorage(): number;
+        get name(): $Component;
     }
     export class $ICraftingPlan {
     }
     export interface $ICraftingPlan {
-        bytes(): number;
-        simulation(): boolean;
-        usedItems(): $KeyCounter;
-        finalOutput(): $GenericStack;
-        multiplePaths(): boolean;
-        patternTimes(): $Map<$IPatternDetails, number>;
         emittedItems(): $KeyCounter;
         missingItems(): $KeyCounter;
+        patternTimes(): $Map<$IPatternDetails, number>;
+        multiplePaths(): boolean;
+        finalOutput(): $GenericStack;
+        usedItems(): $KeyCounter;
+        bytes(): number;
+        simulation(): boolean;
     }
     export class $ICraftingProvider {
         static requestUpdate(arg0: $IManagedGridNode): void;
     }
     export interface $ICraftingProvider extends $IGridNodeService {
-        isBusy(): boolean;
+        getPatternPriority(): number;
         pushPattern(arg0: $IPatternDetails, arg1: $KeyCounter[]): boolean;
         getEmitableItems(): $Set<$AEKey>;
-        getPatternPriority(): number;
+        isBusy(): boolean;
         getAvailablePatterns(): $List<$IPatternDetails>;
-        get busy(): boolean;
-        get emitableItems(): $Set<$AEKey>;
         get patternPriority(): number;
+        get emitableItems(): $Set<$AEKey>;
+        get busy(): boolean;
         get availablePatterns(): $List<$IPatternDetails>;
     }
     export class $CraftingSubmitErrorCode extends $Enum<$CraftingSubmitErrorCode> {
@@ -74,43 +74,43 @@ declare module "@package/appeng/api/networking/crafting" {
     export class $ICraftingLink {
     }
     export interface $ICraftingLink {
+        getCraftingID(): $UUID;
         isDone(): boolean;
         cancel(): void;
-        writeToNBT(arg0: $CompoundTag_): void;
         isStandalone(): boolean;
         isCanceled(): boolean;
-        getCraftingID(): $UUID;
+        writeToNBT(arg0: $CompoundTag_): void;
+        get craftingID(): $UUID;
         get done(): boolean;
         get standalone(): boolean;
         get canceled(): boolean;
-        get craftingID(): $UUID;
     }
     export class $CraftingJobStatus extends $Record {
-        progress(): number;
         crafting(): $GenericStack;
-        elapsedTimeNanos(): number;
         totalItems(): number;
+        elapsedTimeNanos(): number;
+        progress(): number;
         constructor(crafting: $GenericStack_, totalItems: number, progress: number, elapsedTimeNanos: number);
     }
     /**
      * Values that may be interpreted as {@link $CraftingJobStatus}.
      */
-    export type $CraftingJobStatus_ = { elapsedTimeNanos?: number, progress?: number, totalItems?: number, crafting?: $GenericStack_,  } | [elapsedTimeNanos?: number, progress?: number, totalItems?: number, crafting?: $GenericStack_, ];
+    export type $CraftingJobStatus_ = { totalItems?: number, crafting?: $GenericStack_, elapsedTimeNanos?: number, progress?: number,  } | [totalItems?: number, crafting?: $GenericStack_, elapsedTimeNanos?: number, progress?: number, ];
     export class $ICraftingRequester {
     }
     export interface $ICraftingRequester extends $IActionHost, $IGridNodeService {
         getRequestedJobs(): $ImmutableSet<$ICraftingLink>;
-        jobStateChange(arg0: $ICraftingLink): void;
         insertCraftedItems(arg0: $ICraftingLink, arg1: $AEKey, arg2: number, arg3: $Actionable_): number;
+        jobStateChange(arg0: $ICraftingLink): void;
         get requestedJobs(): $ImmutableSet<$ICraftingLink>;
     }
     export class $ICraftingSimulationRequester {
     }
     export interface $ICraftingSimulationRequester {
-        getActionSource(): $IActionSource;
         getGridNode(): $IGridNode;
-        get actionSource(): $IActionSource;
+        getActionSource(): $IActionSource;
         get gridNode(): $IGridNode;
+        get actionSource(): $IActionSource;
     }
     /**
      * Values that may be interpreted as {@link $ICraftingSimulationRequester}.
@@ -119,21 +119,21 @@ declare module "@package/appeng/api/networking/crafting" {
     export class $ICraftingService {
     }
     export interface $ICraftingService extends $IGridService {
-        isCraftable(arg0: $AEKey): boolean;
-        submitJob(arg0: $ICraftingPlan, arg1: $ICraftingRequester, arg2: $ICraftingCPU, arg3: boolean, arg4: $IActionSource): $ICraftingSubmitResult;
+        refreshNodeCraftingProvider(arg0: $IGridNode): void;
         getCpus(): $ImmutableSet<$ICraftingCPU>;
-        canEmitFor(arg0: $AEKey): boolean;
+        getRequestedAmount(arg0: $AEKey): number;
+        getCraftables(arg0: $AEKeyFilter_): $Set<$AEKey>;
+        submitJob(arg0: $ICraftingPlan, arg1: $ICraftingRequester, arg2: $ICraftingCPU, arg3: boolean, arg4: $IActionSource): $ICraftingSubmitResult;
         beginCraftingCalculation(arg0: $Level_, arg1: $ICraftingSimulationRequester_, arg2: $AEKey, arg3: number, arg4: $CalculationStrategy_): $Future<$ICraftingPlan>;
         addGlobalCraftingProvider(arg0: $ICraftingProvider): void;
-        refreshNodeCraftingProvider(arg0: $IGridNode): void;
         removeGlobalCraftingProvider(arg0: $ICraftingProvider): void;
         refreshGlobalCraftingProvider(arg0: $ICraftingProvider): void;
-        getFuzzyCraftable(arg0: $AEKey, arg1: $AEKeyFilter_): $AEKey;
-        isRequestingAny(): boolean;
-        getCraftables(arg0: $AEKeyFilter_): $Set<$AEKey>;
         getCraftingFor(arg0: $AEKey): $Collection<$IPatternDetails>;
+        getFuzzyCraftable(arg0: $AEKey, arg1: $AEKeyFilter_): $AEKey;
         isRequesting(arg0: $AEKey): boolean;
-        getRequestedAmount(arg0: $AEKey): number;
+        isRequestingAny(): boolean;
+        canEmitFor(arg0: $AEKey): boolean;
+        isCraftable(arg0: $AEKey): boolean;
         get cpus(): $ImmutableSet<$ICraftingCPU>;
         get requestingAny(): boolean;
     }
@@ -150,9 +150,9 @@ declare module "@package/appeng/api/networking/crafting" {
     export class $ICraftingSubmitResult {
     }
     export interface $ICraftingSubmitResult {
-        link(): $ICraftingLink;
-        errorCode(): $CraftingSubmitErrorCode;
         successful(): boolean;
         errorDetail(): $Object;
+        link(): $ICraftingLink;
+        errorCode(): $CraftingSubmitErrorCode;
     }
 }

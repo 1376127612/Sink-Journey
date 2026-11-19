@@ -9,28 +9,28 @@ import { $Animation, $AnimationProcessor, $AnimationState } from "@package/softw
 
 declare module "@package/software/bernie/geckolib/model" {
     export class $GeoModel<T extends $GeoAnimatable> {
-        getAnimationProcessor(): $AnimationProcessor<T>;
-        getAnimationResourceFallbacks(arg0: T): $ResourceLocation[];
-        applyMolangQueries(arg0: $AnimationState<T>, arg1: number): void;
-        getTextureResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
-        /**
-         * @deprecated
-         */
-        getTextureResource(arg0: T): $ResourceLocation;
-        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
         /**
          * @deprecated
          */
         getModelResource(arg0: T): $ResourceLocation;
-        handleAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>, arg3: number): void;
+        getModelResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
+        applyMolangQueries(arg0: $AnimationState<T>, arg1: number): void;
         crashIfBoneMissing(): boolean;
-        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
-        getAnimationResource(arg0: T): $ResourceLocation;
+        /**
+         * @deprecated
+         */
+        getTextureResource(arg0: T): $ResourceLocation;
+        getTextureResource(arg0: T, arg1: $GeoRenderer<T>): $ResourceLocation;
         getRenderType(arg0: T, arg1: $ResourceLocation_): $RenderType;
         getBone(arg0: string): ($GeoBone) | undefined;
-        getAnimation(arg0: T, arg1: string): $Animation;
+        addAdditionalStateData(arg0: T, arg1: number, arg2: $BiConsumer_<$DataTicket<T>, T>): void;
         setCustomAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>): void;
+        getAnimationResource(arg0: T): $ResourceLocation;
+        getAnimationProcessor(): $AnimationProcessor<T>;
         getBakedModel(arg0: $ResourceLocation_): $BakedGeoModel;
+        handleAnimations(arg0: T, arg1: number, arg2: $AnimationState<T>, arg3: number): void;
+        getAnimation(arg0: T, arg1: string): $Animation;
+        getAnimationResourceFallbacks(arg0: T): $ResourceLocation[];
         constructor();
         get animationProcessor(): $AnimationProcessor<T>;
     }

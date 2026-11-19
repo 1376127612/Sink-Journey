@@ -4,8 +4,8 @@ import { $ItemStack } from "@package/net/minecraft/world/item";
 import { $IContainerUIHolder } from "@package/com/lowdragmc/lowdraglib2/gui/factory";
 import { $ModularUI } from "@package/com/lowdragmc/lowdraglib2/gui/ui";
 import { $Inventory } from "@package/net/minecraft/world/entity/player";
-import { $Slot, $MenuType_, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
-import { $Map } from "@package/java/util";
+import { $ContainerListener, $Slot, $MenuType_, $AbstractContainerMenu } from "@package/net/minecraft/world/inventory";
+import { $List, $Map } from "@package/java/util";
 import { $ItemSlot } from "@package/com/lowdragmc/lowdraglib2/gui/ui/elements";
 
 declare module "@package/com/lowdragmc/lowdraglib2/gui/holder" {
@@ -13,8 +13,8 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/holder" {
     }
     export interface $IModularUIHolder extends $IUISyncManagerHolder {
         getModularUI(): $ModularUI;
-        getSyncManager(): $UISyncManager;
         hasModularUI(): boolean;
+        getSyncManager(): $UISyncManager;
         get modularUI(): $ModularUI;
         get syncManager(): $UISyncManager;
     }
@@ -40,6 +40,7 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/holder" {
         ldlib2$itemSlotMap: $Map<any, any>;
         static SLOT_CLICKED_OUTSIDE: number;
         ldlib2$modularUI: $ModularUI;
+        containerListeners: $List<$ContainerListener>;
         containerId: number;
         static QUICKCRAFT_TYPE_CHARITABLE: number;
         constructor(arg0: $MenuType_<$ModularUIContainerMenu>, arg1: number, arg2: $Inventory, arg3: $IContainerUIHolder);
@@ -47,22 +48,22 @@ declare module "@package/com/lowdragmc/lowdraglib2/gui/holder" {
     export class $IModularUIHolderMenu {
     }
     export interface $IModularUIHolderMenu extends $IModularUIHolder, $IItemSlotHolderMenu {
+        addSlot(arg0: $ItemSlot): void;
         getModularUI(): $ModularUI;
-        getItemSlot(arg0: $Slot): $ItemSlot;
         ldlib2$getItemSlot(arg0: $Slot): $ItemSlot;
-        setModularUI(arg0: $ModularUI): void;
         ldlib2$addSlot(arg0: $ItemSlot): void;
+        getItemSlot(arg0: $Slot): $ItemSlot;
+        setModularUI(arg0: $ModularUI): void;
         ldlib2$setModularUI(arg0: $ModularUI): void;
         ldlib2$getModularUI(): $ModularUI;
-        addSlot(arg0: $ItemSlot): void;
     }
     export class $IItemSlotHolderMenu {
     }
     export interface $IItemSlotHolderMenu {
+        addSlot(arg0: $ItemSlot): void;
+        getItemSlot(arg0: $Slot): $ItemSlot;
         self(): $AbstractContainerMenu;
         isItemSlot(arg0: $Slot): boolean;
-        getItemSlot(arg0: $Slot): $ItemSlot;
-        addSlot(arg0: $ItemSlot): void;
     }
     /**
      * Values that may be interpreted as {@link $IItemSlotHolderMenu}.

@@ -1,4 +1,4 @@
-import { $BlockAndTintGetter, $Level_ } from "@package/net/minecraft/world/level";
+import { $BlockAndTintGetter, $Level_, $BlockGetter } from "@package/net/minecraft/world/level";
 import { $BlockColorsExtension } from "@package/net/caffeinemc/mods/sodium/client/model/color/interop";
 import { $ToIntFunction_ } from "@package/java/util/function";
 import { $Property } from "@package/net/minecraft/world/level/block/state/properties";
@@ -21,16 +21,21 @@ declare module "@package/net/minecraft/client/color/block" {
      */
     export type $BlockColor_ = ((arg0: $BlockState, arg1: $BlockAndTintGetter, arg2: $BlockPos, arg3: number) => number);
     export class $BlockColors implements $BlockColorsExtension {
+        sodium$getProviders(): $Reference2ReferenceMap<any, any>;
+        getColoringProperties(block: $Block_): $Set<$Property<never>>;
+        modifyReceiver$dfe000$astages$getMapColor(original: $BlockState_, blockGetter: $BlockGetter, blockPos: $BlockPos_): $BlockState;
+        modify$dfe000$astages$getColorSecondMethod(original: $BlockState_): $BlockState;
+        modifyReceiver$dfe000$astages$getBlock(original: $BlockState_): $BlockState;
+        modifyReceiver$dfe000$astages$getBlockSecondMethod(original: $BlockState_): $BlockState;
+        modify$dfe000$astages$getColor(original: $BlockState_): $BlockState;
+        sodium$getOverridenVanillaBlocks(): $ReferenceSet<any>;
         /**
          * @deprecated
          */
         register(blockColor: $BlockColor_, ...blocks: $Block_[]): void;
-        sodium$getProviders(): $Reference2ReferenceMap<any, any>;
-        getColoringProperties(block: $Block_): $Set<$Property<never>>;
-        static createDefault(): $BlockColors;
         getColor(state: $BlockState_, level: $BlockAndTintGetter | null, pos: $BlockPos_ | null, tintIndex: number): number;
         getColor(state: $BlockState_, level: $Level_, pos: $BlockPos_): number;
-        sodium$getOverridenVanillaBlocks(): $ReferenceSet<any>;
+        static createDefault(): $BlockColors;
         constructor();
     }
     export class $BlockTintCache$CacheData {
