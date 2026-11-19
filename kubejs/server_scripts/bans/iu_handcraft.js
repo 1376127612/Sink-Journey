@@ -40,11 +40,12 @@ ServerEvents.recipes(event => {
     }
 
     const ANVIL = 'anvil'
-    const ModUtils = Java.loadClass('com.denfop.utils.ModUtils')
     const removes = core.recipeRemoves
-    const plates = Ingredient.of('#c:plates').getItems()
+    // Ingredient 在 KubeJS 里是 @RemapPrefixForJS("kjs$") 包装类，
+    // 只能调用去掉 kjs$ 前缀的 shim 方法，原版 getItems() 不可见。
+    const plates = Ingredient.of('#c:plates').getStackArray()
 
-    if (plates.length === 0) {
+    if (!plates || plates.length === 0) {
         console.warn('[iu_handcraft] #c:plates 为空，未注册铁砧敲板删除项')
         return
     }
@@ -52,7 +53,7 @@ ServerEvents.recipes(event => {
     let added = 0
     for (let i = 0; i < plates.length; i++) {
         const stack = plates[i]
-        if (stack.isEmpty() || isRemoved(ModUtils, removes, ANVIL, stack)) continue
+        if (isRemoved(removes, ANVIL, stack)) continue
         core.addRemoveRecipe(ANVIL, stack, true)
         added++
     }
@@ -63,11 +64,13 @@ ServerEvents.recipes(event => {
     if (added > 0) console.info('[iu_handcraft] 新增 ' + added + ' 个铁砧敲板删除项')
 })
 
-function isRemoved(ModUtils, removes, machine, stack) {
+function isRemoved(removes, machine, stack) {
     if (!removes) return false
     for (let i = 0; i < removes.size(); i++) {
         const entry = removes.get(i)
-        if (entry.getNameRecipe() === machine && ModUtils.checkItemEquality(entry.getStack(), stack)) return true
+        // 用 KubeJS 的 ItemStack.areItemsEqual 判同物品；
+        // ModUtils.checkItemEquality 有 (ItemStack, Item) 重载，Rhino 解析会歧义。
+        if (entry.getNameRecipe() === machine && entry.getStack().areItemsEqual(stack)) return true
     }
     return false
 }

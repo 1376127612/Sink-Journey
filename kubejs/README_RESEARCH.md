@@ -1,7 +1,7 @@
 # 溯洄研究系统（P1–P3）—— 放置说明与验收
 
 > ⚠️ **待验证项与风险备忘统一放在 [docs/RESEARCH_VERIFY.md](docs/RESEARCH_VERIFY.md)**，
-> 改代码前先看一眼，尤其是 AStages recipe 限制的 `//` 格式（写错会崩服）。
+> 改 AStages 限制前先看一眼 recipe 的 `//` 格式（写错会崩服）。
 
 > 与既有 `research/` 系列脚本**互不修改**，仅通过同一套 JSON 配置交互。
 > 状态不再使用 `global`（KubeJS 2101 禁止 server 脚本写 global）。
@@ -57,54 +57,21 @@ kubejs/client_scripts/research_core/
 修法：`research_core/` 下 4 个脚本里 **所有 `const`/`let` 一律改成 `var`**（共 222 处），逻辑不变。
 以后在本目录写脚本请统一用 `var`，或保证函数内不出现同名 `const`。
 
-## 2.3 P2：解锁拦截层（纯 AStages 实现）
+## 2.3 P2：解锁限制（AStages，手工配置）
 
-> 早期版本试过"配方移除 + BlockEvents 拦截"的自建方案，已废弃（`gate.js` 只剩占位注释）。
+限制不再由脚本生成，`kubejs/config/sinkresearch/gates.json` 和 `astages_gate.js` 均已移除。
+唯一来源是 AStages 自己的配置文件：
 
-**AStages 的机制（从 jar 字节码反查，非猜测）：**
+- `config/astages/simple/astages/item.json` / `recipe.json`：JSON 数组，一条 = `{ id, stage, object }`
+- AStages 在 `ServerStartingEvent` 直接读取，改完需重启生效
+- `stage` 就是研究系统授予的阶段名（`era.kinetic` / `era.ember` / `era.radiance` / `era.electric`）
+- recipe 限制的 `object` 必须写成 `<配方类型>//<配方 id>`，裸 id 会让 `ASimpleElaborator`
+  抛 `ArrayIndexOutOfBoundsException` 崩服；不想冒险就让 `recipe.json` 保持 `[]`
 
-- 限制模型叫 "simple restriction"，一条 = `(id, stage, object)`，字段见 `ASimpleRestriction{id, stage, object}`
-- 运行时入口：`com.alessandro.astages.engine.ASimpleRestrictionManager.addRestriction(type, id, stage, object)`，
-  类型常量在 `engine/store/ASimpleRestrictionTypes`（`ITEM` / `RECIPE` / `MOD` / `DIMENSION` …）
-- 命令入口：`/astages_simple restrict <id> stage <stage> recipe <配方id>`
-  （`ASimpleCommands` 里 recipe/item/mod/dimension/gui/ore/structure/tame/mount 各自一个子命令）
-- 存储：`AFolderPaths.getSimpleRestrictionsFolderForMod(modId)` 下按 mod 分目录的 `.json`，
-  旧版单文件是 `astages/simple_restrictions.json`（`ASimpleMigrationManager` 负责迁移）
-- 三处拦截由 AStages 自己完成：mixin 进 `ACraftingMenu / ACrafterMenu / ASmithingMenu / AStonecutterMenu /
-  AAbstractFurnaceBlockEntity / ACampfireBlock`，客户端侧 `SyncRecipeS2C` + `RECIPE_RESTRICTION_MARKED_AS_DIRTY`
-  负责配方查看器隐藏（`config/astages/astages-client.toml` 的 `Recipe Viewer = DEFAULT`）
+阶段的授予和撤销仍由 `core.js` 负责：
+`astages server add <stage>`（解锁）/ `astages server remove <stage>`（`/research reset`）。
 
-**本包怎么用：**
-
-`kubejs/config/sinkresearch/gates.json`（数据不变：哪些产物/方块要锁）
-→ `astages_gate.js` 在配方事件里把"产物 id"翻译成**真实配方 id**
-→ 在 `ServerEvents.loaded` / 玩家登录时，按 `(gateId, stage=unlock, 配方 id)` 注册 AStages 限制
-→ 同时给方块注册 `ITEM` 限制（拦截放置与使用）
-
-注册方式优先走 Java API，失败自动降级到命令，日志会打 `方式 api / cmd`。
-`/research gate probe` 可以现场打印 AStages 的字段与方法，升级版本后一条命令就能确认接口是否变了。
-
-## 2.4 P2（已废弃）自建拦截层
-
-新增 `kubejs/config/sinkresearch/gates.json` + `kubejs/server_scripts/research_core/gate.js`。
-
-**为什么不走 AStages 的 recipe restriction**：它的限制是 `/astages_simple restrict <id> stage <stage> recipe <rid>` 这种
-"simple restriction"，入口需要玩家上下文、schema 没有公开文档，而且本包 `config/astages/` 从未生成过限制目录；
-一旦照猜写就是又一轮报错。所以改用完全可控的三处拦截：
-
-| 层 | 做法 |
-|---|---|
-| 合成 | `ServerEvents.recipes` 里按当前解锁状态 `event.remove({ output: ... })`，未解锁就不进配方表 |
-| 查看器 | 配方不在表里，JEI 自然查不到，不需要客户端逻辑 |
-| 机器/物品 | `BlockEvents.rightClicked` / `placed` 拦截，给出"需要研究 era.electric"提示 |
-
-**解锁即生效**：`srGrant` 检测到授予的是 `era.*` 时，`server.scheduleInTicks(40, ...)` 后自动执行一次 `/reload`，
-配方表按新状态重算（约 2 秒）。
-
-**配置**：`gates.json` 里每条规则 = `{ id, unlock, outputs[], blocks[], recipes[] }`。
-想锁别的时代，复制一条改 `unlock` 和清单即可，`/reload` 生效。
-
-## 2.5 P3.1：研究网络（成员登记 + 算力聚合）
+## 2.4 P3.1：研究网络（成员登记 + 算力聚合）
 
 新增：
 - `kubejs/startup_scripts/research_core/network_blocks.js` —— 6 个构件方块
@@ -136,7 +103,7 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 **本阶段未做（留到 P3.2）：** 数据库容量对**并发研究数**的硬性限制、断电/断网时"暂停并保留进度"的显式状态机
 （目前进度由 MMCR 自己保存，缺料/缺电会停在那一步，不清零）。
 
-## 2.6 P3.2：并发限制 + 网络准入
+## 2.5 P3.2：并发限制 + 网络准入
 
 新增 `kubejs/config/sinkresearch/network.json`：
 
@@ -172,7 +139,7 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 3. 加一台基础数据库 → 可同时跑 2 条
 4. 跑一条研究时拆掉机器 → 10 秒后该占位过期，并发位自动释放
 
-## 2.7 P4：研究终端（双通道）
+## 2.6 P4：研究终端（双通道）
 
 新增：
 - `startup_scripts/research_core/terminal_block.js` —— `kubejs:research_terminal` 方块
@@ -192,7 +159,7 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 已知：LDLib 的界面搭建 API 没有文档，`Label` 的尺寸/布局没设，可能出现"打开了但看不见/尺寸不对"，
 这种情况直接用聊天版；界面打磨需要一次游戏内迭代。
 
-## 2.8 P5：剧情对接（FTB Quests + Patchouli）
+## 2.7 P5：剧情对接（FTB Quests + Patchouli）
 
 **FTB Quests**：新增 `config/ftbquests/quests/chapters/a1b2c3d4e5f60718.snbt`
 - 章节「研究图谱」，挂在现有分组「工业革命」`1D6589548F232270`，order_index 9
@@ -235,4 +202,4 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 - 研究站是新机器，不是 `trace_nexus`：MMCR 的 `recipeBehavior` 只能在 `createMachine()` 时挂载。
 - `/research balance` 只统计静态成本，不含并行与提速。
 - `advancement_any_player` 回填依赖 `player.advancements` 的实际形状，失败会静默跳过（物品回填不受影响）。
-- JEI 不会隐藏未解锁配方（P2 交给 AStages recipe restriction）。
+- JEI 不会隐藏未解锁配方（recipe 限制需手写进 `config/astages/simple/astages/recipe.json`，默认留空）。

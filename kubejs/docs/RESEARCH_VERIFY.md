@@ -1,6 +1,6 @@
 # 溯洄研究系统 —— 待验证清单与风险备忘
 
-> 更新时间：2026-11-18
+> 更新时间：2026-11-19
 > 用途：记录"代码已写但**尚未在游戏里实际验证**"的部分。每项都给了步骤、期望日志、失败判定和回滚方式。
 > 验证完一项就把对应的 ✅ 勾上并写日期，避免以后重复踩坑。
 
@@ -12,7 +12,7 @@
 |---|---|---|
 | 研究图 / 解锁表 / 里程碑 / 命令 | `server_scripts/research_core/core.js` | ✅ 已验证（节点加载、末影龙解锁、/research list） |
 | 研究站机器 + 配方生成 | `startup_scripts/research_core/station_startup.js`、`server_scripts/.../station_structure.js` | ✅ 已验证（出研究数据、解锁生效） |
-| AStages 方块拦截 | `server_scripts/research_core/astages_gate.js` + `config/sinkresearch/gates.json` | ✅ item 限制已验证；⚠️ recipe 限制刚启用格式修正 |
+| AStages 限制（手工配置） | `config/astages/simple/astages/{item,recipe}.json` | ✅ item 格式已验证；recipe 保持 `[]` |
 | 研究网络（算力聚合） | `startup_scripts/.../network_blocks.js`、`server_scripts/.../network.js` | ⚠️ 未完整验证（只确认过不崩） |
 | 网络并发限制 | `station_startup.js` 内 `srNetState/srJobs*` | ⚠️ 未验证 |
 | 断网中断 | `station_startup.js` 内 `srTryStop` | ⚠️ 未验证（含两级兜底） |
@@ -49,23 +49,6 @@
 如果两个都不是，说明 `mc.controller()` 拿到的对象没有这些方法 → 需要改用
 `FactoryRuntime`（`pause()/resume()`）或换成"拆中心时直接清配方"方案。
 
-### V3. AStages recipe 限制的 `//` 格式 ⚠️中
-
-**背景**：`gates.json` → `settings.recipe_restrictions` 目前是 `false`（避免再崩服）。
-格式必须是 `<配方类型>//<配方 id>`（裸 id 会让 `ASimpleElaborator` 抛
-`ArrayIndexOutOfBoundsException` 直接崩服，**已实际发生过一次**）。
-
-**步骤**
-1. 把 `settings.recipe_restrictions` 改成 `true`
-2. 重启，检查 `config/astages/simple/astages/recipe.json` 内容形如
-   `{"object": "minecraft:crafting//ae2:network/blocks/inscribers"}`
-3. 正常进世界（不崩即格式对）
-4. 未解锁状态下在工作台摆 AE2 压印器配方 → 应合不出来
-
-**失败判定**：进世界即崩 → 立刻把开关改回 `false`，并把 `recipe.json` 内容改成 `[]`。
-**已知副作用**：AStages 的 `addRestriction` 不幂等，反复 `/research gate apply` 会重复写条目；
-正常流程有指纹防重，但强制 apply 会追加。
-
 ### V4. 网络清理时机 ⚠️低
 
 1. 放中心 → `/research net` 有条目
@@ -94,11 +77,6 @@ LDLib 方块界面需要验证：
 4. 如果日志是 `[SRT] LDLib2UI 注册失败` → 说明事件组名或签名不对，
    把那一行发我（`LDLib2UI` 这个名字是从 `UIEvents.class` 的 `EventGroup.of("LDLib2UI")` 读出来的）
 
-### V5. 研究站配方 id 收集 ⚠️低
-
-日志应有 `[SRA] electric_entry 收集到 N 条配方 id`，N 目前是 13。
-如果变成 0 → `event.forEachRecipe({output: ...})` 过滤器在该版本不生效。
-
 ---
 
 ## 2. 已知限制（不是 bug，是设计取舍）
@@ -122,7 +100,6 @@ LDLib 方块界面需要验证：
 |---|---|---|
 | 研究网络准入 | `config/sinkresearch/network.json` | `require_network: false` |
 | 并发限制 | 同上 | `default_capacity: 99` |
-| AStages 配方限制 | `config/sinkresearch/gates.json` | `settings.recipe_restrictions: false` |
 | 全部 AStages 拦截 | 把 `config/astages/simple/astages/` 下两个 json 改成 `[]` | — |
 | 整个研究系统 | 把 `research_core/` 目录改名为 `research_core.off` | — |
 
