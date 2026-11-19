@@ -1,0 +1,8 @@
+[furnace_materials]
+	#False uses only QMD dust inputs. True uses the matching c:dusts/<material> tags.
+	#This is a data-generation policy; regenerate QMD's data after changing it.
+	shared_material_inputs = false
+	#Mod namespaces considered in order for furnace outputs from c:ingots/<material>.
+	#The QMD ingot is used when no preferred tagged item is available.
+	#This is a data-generation policy; regenerate QMD's data after changing it.
+	preferred_output_mods = ["qmd"]

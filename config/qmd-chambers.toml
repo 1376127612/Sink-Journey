@@ -1,0 +1,70 @@
+[particle_chamber]
+	# Default: 40000
+	# Range: > 1
+	base_energy_capacity = 40000
+	# Default: 16000
+	# Range: > 1
+	base_input_tank_capacity = 16000
+	# Default: 1000
+	# Range: > 1
+	base_output_tank_capacity = 1000
+	# Default: 5000
+	# Range: > 0
+	target_chamber_power = 5000
+	# Default: 5000
+	# Range: > 0
+	decay_chamber_power = 5000
+	# Default: 5000
+	# Range: > 0
+	collision_chamber_power = 5000
+	# Default: 5000
+	# Range: > 0
+	beam_dump_power = 5000
+
+	[particle_chamber.bubble_chamber]
+		# Default: 200
+		# Range: > 0
+		power = 200
+		# Default: 0.075
+		# Range: 0.0 ~ 100.0
+		efficiency = 0.075
+
+	[particle_chamber.silicon_tracker]
+		# Default: 2000
+		# Range: > 0
+		power = 2000
+		# Default: 0.15
+		# Range: 0.0 ~ 100.0
+		efficiency = 0.15
+
+	[particle_chamber.wire_chamber]
+		# Default: 1000
+		# Range: > 0
+		power = 1000
+		# Default: 0.1
+		# Range: 0.0 ~ 100.0
+		efficiency = 0.1
+
+	[particle_chamber.em_calorimeter]
+		# Default: 200
+		# Range: > 0
+		power = 200
+		# Default: 0.05
+		# Range: 0.0 ~ 100.0
+		efficiency = 0.05
+
+	[particle_chamber.hadron_calorimeter]
+		# Default: 100
+		# Range: > 0
+		power = 100
+		# Default: 0.025
+		# Range: 0.0 ~ 100.0
+		efficiency = 0.025
+
+[recipes]
+	# Default: 100
+	# Range: > 1
+	rsf_target_chamber = 100
+	# Default: 100
+	# Range: > 1
+	rsf_nucleosynthesis = 100

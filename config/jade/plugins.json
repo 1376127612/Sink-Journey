@@ -52,37 +52,11 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
-  "compactmachines": {
-    "show_owner": false,
-    "bound_machine": true
-  },
-  "neoecoae": {
-    "large_workstation_current_inputs": true,
-    "eco_computation_system": true,
-    "eco_drive": true,
-    "eco_crafting_worker": true,
-    "eco_storage_interface": true,
-    "eco_storage_system": true,
-    "eco_crafting_system": true,
-    "eco_computation_drive": true
-  },
-  "jade_access": {
-    "held_item": true,
-    "sign": true,
-    "block": true,
-    "entity": true,
-    "entity_variant": true
+  "apothic_spawners": {
+    "spawner": true
   },
   "astralsorcery": {
     "lumen": true
-  },
-  "pneumaticcraft": {
-    "pneumatic": true,
-    "tube_module": true,
-    "entity": true,
-    "redstone": true,
-    "camo": true,
-    "semiblock": true
   },
   "jade": {
     "coordinates.rel": false,
@@ -95,20 +69,9 @@
     "block_properties": false,
     "mod_name": true
   },
-  "embers": {
-    "machine_details": true
-  },
   "extendedae": {
     "jade_chamber": true,
     "jade_wireless": true
-  },
-  "integrateddynamicscompat": {
-    "proxy": true,
-    "mechanical_squeezer": true,
-    "mechanical_drying_basin": true,
-    "drying_basin": true,
-    "part": true,
-    "squeezer": true
   },
   "neoecoprototype": {
     "simplify_storage_controller": true,
@@ -127,6 +90,10 @@
     "power_storage": true,
     "crafting_monitor": true,
     "part_name": true
+  },
+  "mbd2": {
+    "recipe_logic_provider": true,
+    "multiblock_provider": true
   },
   "extendedcrafting": {
     "elite_auto_table": true,
@@ -153,9 +120,6 @@
     "wt_master_location": true,
     "wt_owner": true
   },
-  "enderio_evolution": {
-    "capacitor_bank_render": true
-  },
   "ae2lt": {
     "frequency_card_wireless_node": true,
     "lightning_collector": true,
@@ -164,9 +128,6 @@
   },
   "enderio": {
     "soul_bound": true
-  },
-  "enderio_conduit_opt": {
-    "item_conduit_info": true
   },
   "mekanism": {
     "chemical": true,
@@ -178,14 +139,73 @@
   "pipez": {
     "pipe": true
   },
+  "astages": {
+    "block_component_provider": true
+  },
+  "appliedcreate": {
+    "grid_node_state": true,
+    "power_storage": true
+  },
+  "compactmachines": {
+    "show_owner": false,
+    "bound_machine": true
+  },
+  "neoecoae": {
+    "large_workstation_current_inputs": true,
+    "eco_computation_system": true,
+    "eco_drive": true,
+    "eco_crafting_worker": true,
+    "eco_storage_interface": true,
+    "eco_storage_system": true,
+    "eco_crafting_system": true,
+    "eco_computation_drive": true
+  },
+  "jade_access": {
+    "held_item": true,
+    "sign": true,
+    "block": true,
+    "entity": true,
+    "entity_variant": true
+  },
+  "pneumaticcraft": {
+    "pneumatic": true,
+    "tube_module": true,
+    "entity": true,
+    "redstone": true,
+    "camo": true,
+    "semiblock": true
+  },
+  "apotheosis": {
+    "adventure": true
+  },
+  "embers": {
+    "machine_details": true
+  },
+  "apothic_enchanting": {
+    "ench": true
+  },
+  "integrateddynamicscompat": {
+    "proxy": true,
+    "mechanical_squeezer": true,
+    "mechanical_drying_basin": true,
+    "drying_basin": true,
+    "part": true,
+    "squeezer": true
+  },
+  "enderio_evolution": {
+    "capacitor_bank_render": true
+  },
+  "enderio_conduit_opt": {
+    "item_conduit_info": true
+  },
+  "betterend": {
+    "plant_growth": true
+  },
   "ae2cs": {
     "ender_emitter": true,
     "ender_channels": true,
     "ender_broadcaster": true,
     "mirror_pattern_provider": true
-  },
-  "astages": {
-    "block_component_provider": true
   },
   "mmcr": {
     "ae2_input_interface_grid": true,
@@ -193,9 +213,5 @@
     "parallel_controller": true,
     "recipe_output": true,
     "air_port": true
-  },
-  "appliedcreate": {
-    "grid_node_state": true,
-    "power_storage": true
   }
 }

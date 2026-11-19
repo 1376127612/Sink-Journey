@@ -1,0 +1,36 @@
+# Default: 1000
+# Range: 1 ~ 1000000
+energy_capacity_per_exterior_block = 1000
+# Default: 640
+# Range: 1 ~ 1000000
+gas_input_capacity_per_exterior_block = 640
+# Default: 10
+# Range: 1 ~ 1000000
+liquid_output_capacity_per_exterior_block = 10
+# Default: 0.4
+# Range: 1.0E-6 ~ 1000000.0
+nozzle_speed = 0.4
+
+[copper]
+	# Default: 0.9
+	# Range: 1.0E-6 ~ 1.0
+	energy_efficiency = 0.9
+	# Default: 0.9
+	# Range: 1.0E-6 ~ 1.0
+	heat_efficiency = 0.9
+
+[neodymium]
+	# Default: 0.95
+	# Range: 1.0E-6 ~ 1.0
+	energy_efficiency = 0.95
+	# Default: 0.85
+	# Range: 1.0E-6 ~ 1.0
+	heat_efficiency = 0.85
+
+[samarium_cobalt]
+	# Default: 0.85
+	# Range: 1.0E-6 ~ 1.0
+	energy_efficiency = 0.85
+	# Default: 0.95
+	# Range: 1.0E-6 ~ 1.0
+	heat_efficiency = 0.95

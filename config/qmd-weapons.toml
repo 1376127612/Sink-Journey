@@ -1,0 +1,63 @@
+# Default: 500
+# Range: 1 ~ 100000
+lepton_cannon_use = 500
+# Default: 8
+# Range: 0 ~ 72000
+lepton_cannon_cool_down = 8
+# Default: 10
+# Range: 1 ~ 100000
+gluon_gun_use = 10
+# Default: 10.0
+# Range: 0.0 ~ 1.7976931348623157E308
+gluon_gun_damage = 10.0
+# Default: 10.0
+# Range: 0.0 ~ 1.7976931348623157E308
+gluon_gun_radiation = 10.0
+# Default: 40.0
+# Range: 0.0 ~ 1024.0
+gluon_gun_range = 40.0
+# Default: 5000
+# Range: 1 ~ 100000
+antimatter_launcher_use = 5000
+# Default: 30
+# Range: 0 ~ 72000
+antimatter_launcher_cool_down = 30
+# Default: 20.0
+# Range: 0.0 ~ 1.7976931348623157E308
+antimatter_launcher_damage = 20.0
+# Default: 2.5
+# Range: 0.0 ~ 1000.0
+antimatter_launcher_explosion_size = 2.5
+
+[positronium]
+	# Default: 7.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	damage = 7.0
+	# Default: 10.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	radiation = 10.0
+	# Default: 30.0
+	# Range: 0.0 ~ 1024.0
+	range = 30.0
+
+[muonium]
+	# Default: 14.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	damage = 14.0
+	# Default: 20.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	radiation = 20.0
+	# Default: 60.0
+	# Range: 0.0 ~ 1024.0
+	range = 60.0
+
+[tauonium]
+	# Default: 28.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	damage = 28.0
+	# Default: 40.0
+	# Range: 0.0 ~ 1.7976931348623157E308
+	radiation = 40.0
+	# Default: 90.0
+	# Range: 0.0 ~ 1024.0
+	range = 90.0

@@ -10,5 +10,27 @@
 	images: [ ]
 	order_index: 4
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			id: "247D4DC8E3DA1846"
+			tasks: [{
+				dimension: "minecraft:the_end"
+				id: "31C653416C932CC3"
+				type: "dimension"
+			}]
+			x: -0.5d
+			y: -0.5d
+		}
+		{
+			id: "5C5DA82A1A015B2C"
+			tasks: [{
+				entity: "minecraft:ender_dragon"
+				id: "4EF488C5D987F508"
+				type: "kill"
+				value: 1L
+			}]
+			x: 2.5d
+			y: -0.5d
+		}
+	]
 }
