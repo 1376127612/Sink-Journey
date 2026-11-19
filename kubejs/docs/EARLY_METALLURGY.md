@@ -58,7 +58,7 @@
 | roots 柴堆 pyre | 明火热源，`roots:pyre` 数据配方（现有铜链已用） | **L0 热源** |
 | roots 研钵 mortar | 右键交互 N 次出料（`times` 字段） | 破磨 |
 | roots 矿物 | 自带 `silver_ore`、`raw_silver`、`copper_pickaxe` | 银矿来源；铜镐已是现有工具 |
-| IndustrialUpgrade | `raw_tin/lead`、全套 `crushed/*`、`baseblockingot/electrum` | 碎矿统一走 IU 物品，避免自建。**仅借用物品 id，获取仍靠研钵**（原始时代没有别的来源；IU 电动破碎机属 era.electric，被 gates.json 锁住，不会提前漏出碎矿）；`purifiedcrushed/iron` 已从链路退役，土高炉直接吃 `crushed/iron` |
+| IndustrialUpgrade | `raw_tin/lead`、全套 `crushed/*`、`baseblockingot/electrum` | 碎矿统一走 IU 物品，避免自建。**仅借用物品 id，获取仍靠研钵**（原始时代没有别的来源；IU 电动破碎机属 era.electric，被 AStages item 限制（`config/astages/simple/astages/item.json`，stage `era.electric`）锁住，不会提前漏出碎矿）；`purifiedcrushed/iron` 已从链路退役，土高炉直接吃 `crushed/iron` |
 | Embers | `atmospheric_bellows`（风箱方块，L1 复用；炉体材质已改用原版砖块，不再用 caminite） | L1 鼓风 |
 | IndustrialUpgrade | `itemingots/electrum_ingot` + 全套 electrum 粒/粉/板/齿轮 | 琥珀金 canonical 物品（`c:ingots/electrum` 唯一成员）与奖励 |
 | firestarters | fire_starter | 点燃柴堆/炭炉 |
@@ -300,8 +300,8 @@ industrialupgrade:crushed/<metal>
 - **roots pyre/mortar 是数据驱动配方**：走 `roots:pyre` / `roots:mortar` 类型 JSON
   （kubejsstudio.js 已有可用样例），改配方后需完全重启（generateData 不吃 /reload）。
 - **Rhino `const` 冲突**：server_scripts 内新脚本统一用 `var`（research_core 先例）。
-- **AStages 格式坑**：若锁炭炉，gates.json 只用 `blocks` 锁，不碰 `recipes`
-  （README_RESEARCH.md §2.1 有崩服先例）。
+- **AStages 限制直接改 config**：锁炭炉就编辑 `config/astages/simple/astages/item.json`
+  （只加 item 条目，别动 `recipe.json`；recipe 的 `//` 格式写错会崩服），重启生效。
 - **c:ingots/electrum 空标签条件**：embers/NC 的琥珀金配方都带
   `tag_empty` 条件守卫，包内 tag 已被 Embers 填充，新增配方无需再写条件。
 - 数值为纸面推导，上线后按实测调：目标"进 Create 前 2~3 个游戏日内凑齐 1 组琥珀金锭"。

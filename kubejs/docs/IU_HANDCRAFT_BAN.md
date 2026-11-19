@@ -42,13 +42,20 @@ event.remove({ type: 'industrialupgrade:shapeless_recipe' })
 
 ```js
 const core = Java.loadClass('com.denfop.api.Recipes').recipes
-const plates = Ingredient.of('#c:plates').getItems()
+const plates = Ingredient.of('#c:plates').getStackArray()
 
 for (let i = 0; i < plates.length; i++) {
     core.addRemoveRecipe('anvil', plates[i], true)   // true = 删除所有输出匹配的配方
 }
 core.removeAllRecipesFromList()                      // 立即生效
 ```
+
+**KubeJS 包装类的调用注意**：`Ingredient` 等类被 KubeJS 用
+`@dev.latvian.mods.rhino.util.RemapPrefixForJS("kjs$")` 标成了包装类，
+Rhino 只暴露 `kjs$` 前缀接口里的方法，并且去掉前缀后调用。
+所以原版的 `Ingredient.getItems()` / `ItemStack.isEmpty()` 在脚本里**不可用**，
+要写 `getStackArray()`；`ItemStack` 的判空同理不能用 `isEmpty()`。
+（`IngredientKJS.kjs$getStackArray()` 返回 `ItemStack[]`。）
 
 关键依据（均从 IU jar 字节码确认）：
 
@@ -59,7 +66,12 @@ core.removeAllRecipesFromList()                      // 立即生效
   - `false`：只删**第一条**输出匹配的配方；
   - `true`：删**所有**输出匹配的配方。
   所以这里必须传 `true`。
-- 输出匹配用 `ModUtils.checkItemEquality`（物品 + NBT），与脚本里的去重判断一致。
+- 输出匹配在 IU 内部用 `ModUtils.checkItemEquality`（物品 + NBT）。
+  **脚本里不要直接调它**：它同时有 `(ItemStack, ItemStack)` 和 `(ItemStack, Item)`
+  两个重载，Rhino 在 KubeJS 包装对象上无法消歧，会抛
+  `The choice of Java method ... is ambiguous`。去重判断改用 KubeJS 包装方法
+  `ItemStack.areItemsEqual(other)`（底层是 `kjs$areItemsEqual`，只比物品、不比数量/NBT，
+  对板这种无组件物品足够）。
 - `recipeRemoves` 会由 IU 在 `TagsUpdatedEvent` 初始化流程中重放；脚本再手动调一次
   `removeAllRecipesFromList()`，保证首次启动和 `/reload` 当次就生效。
 - 删除项保留在 `recipeRemoves` 中，因此即使日后 IU 重新初始化，敲板配方也不会复活。
