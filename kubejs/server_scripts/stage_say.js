@@ -46,29 +46,52 @@
 
 // ============================ 剧本数据 =====================================
 // 每个剧本是一个数组，按顺序播放；delay 是「距离上一条」的延时时长。
+//
+// ---------------------------------------------------------------------------
+// 【统一配色规则】改台词时请照着来：
+//
+//   玩家的自说自话 / 旁白  →  一律用【全角括号（）包起来】+ 统一灰色 #adb5bd
+//                             例：'（我……这是在哪？）'
+//                             注意是全角（）不是半角 ()，方便一眼认出「不是系统在说话」
+//
+//   系统说的话             →  基调【青色 #4dabf7】，整条用 color: '#4dabf7'
+//
+//   系统句里的强调色（可以叠在青色底上，但只用于强调个别词）：
+//     #ffd700 金色 = 奖励 / 承诺 / 重要名词
+//     #ff4d4f 红色 = 威胁 / 危险
+//     #20c997 绿色 = 正面 / 认可 / 操作指引
+//
+//   其他角色（例如「？？？」这种未知声音）→ 灰蓝 #5a6a7a，不加括号
+//     （它是个「声音」，不是玩家的心声，所以不能和括号灰混在一起）
+// ---------------------------------------------------------------------------
 const STAGES = {
+    // ------------------------------------------------------------------
+    // stage1 —— 开场：玩家醒来（玩家自己说话，全部用括号灰）
+    // ------------------------------------------------------------------
     stage1: [
-    { delay: 0, color: '#adb5bd', text: '该死的盒饭...烧得胃里像有火在烧...',
+    { delay: 0, color: '#adb5bd', text: '（该死的盒饭……烧得胃里像有火在烧……）',
       sound: 'minecraft:entity.player.burp', volume: 0.6, pitch: 0.8 },
-    { delay: 2, color: '#ced4da', text: '我...这是在哪？',
+    { delay: 2, color: '#adb5bd', text: '（我……这是在哪？）',
       particle: 'minecraft:smoke', count: 12, speed: 0.02 },
-    { delay: 2.5, color: '#495057', text: '......' },
-    { delay: 2, color: '#adb5bd', text: '呃...头好疼，像要裂开一样...',
+    { delay: 2.5, color: '#adb5bd', text: '（……）' },
+    { delay: 2, color: '#adb5bd', text: '（呃……头好疼，像要裂开一样……）',
       sound: 'minecraft:entity.player.hurt', volume: 0.7, pitch: 0.9 },
-    { delay: 2.5, color: '#6c757d', text: '？？？：博士......我们的[c=#ff4d4f]计划[c=#adb5bd]...好像[c=#ff4d4f]失败[c=#adb5bd]了...[c=#6c757d]@@@@￥#%...',
+    // 未知声音：灰蓝、不加括号（不是玩家心声）
+    { delay: 2.5, color: '#5a6a7a', text: '？？？：博士……我们的[c=#ff4d4f]计划[c=#5a6a7a]……好像[c=#ff4d4f]失败[c=#5a6a7a]了……[c=#5a6a7a]@@@@￥#%……',
       sound: 'minecraft:block.note_block.bass', volume: 0.8, pitch: 0.6,
       particle: 'minecraft:soul', count: 20, speed: 0.03 },
-    { delay: 3, text: '[c=#ffd700]叮[c=#ffffff]，[c=#4dabf7]系[c=#20c997]统[c=#ffffff]已[c=#ff6b6b]激[c=#cc5de8]活',
+    // 系统：青色基调
+    { delay: 3, color: '#4dabf7', text: '[c=#ffd700]叮[c=#4dabf7]，系统已激活',
       sound: 'minecraft:ui.toast.challenge_complete', volume: 1.0, pitch: 1.0,
       particle: 'minecraft:end_rod', count: 40, spreadY: 2.0, speed: 0.1,
       title: '系 统 已 激 活', titleColor: '#4dabf7',
       subtitle: '正在为你分配身份', subtitleColor: '#adb5bd',
       fadeIn: 10, stay: 50, fadeOut: 20 },
-    { delay: 2, text: '[c=#ffffff]这里是，[c=#ff6b6b]边[c=#ffa94d]缘[c=#fcc419]世[c=#51cf66]界[c=#339af0]！',
+    { delay: 2, color: '#4dabf7', text: '[c=#4dabf7]这里是，[c=#ffd700]边缘世界[c=#4dabf7]！',
       particle: 'minecraft:totem_of_undying', count: 30, speed: 0.15,
-      title: '边 缘 世 界', titleColor: '#ffffff',
+      title: '边 缘 世 界', titleColor: '#4dabf7',
       subtitle: '第 一 章 · 错 误 登 录', subtitleColor: '#adb5bd' },
-    { delay: 2, text: '[c=#ffffff]现在，请[c=#ff4d4f]活[c=#ffffff]下去[c=#ff4d4f]！活[c=#ffffff]下[c=#ff4d4f]去[c=#ffffff]！',
+    { delay: 2, color: '#4dabf7', text: '[c=#4dabf7]现在，请[c=#ff4d4f]活[c=#4dabf7]下去[c=#ff4d4f]！活[c=#4dabf7]下去[c=#ff4d4f]！',
       sound: 'minecraft:entity.ender_dragon.growl', volume: 0.5, pitch: 1.3,
       title: '活 下 去', titleColor: '#ff4d4f',
       fadeIn: 5, stay: 60, fadeOut: 30,
@@ -76,13 +99,53 @@ const STAGES = {
       actionbar: '已获得：面包 x3', actionbarColor: '#ffd43b' }
 ],
 
+    // ------------------------------------------------------------------
+    // stage2 —— 火（系统：青色基调）
+    // ------------------------------------------------------------------
     stage2: [
-        {
-            delay: 0,
-            text: '[c=#ff0000]只[c=#ff8800]要[c=#ffff00]你[c=#00ff00]愿[c=#00ffff]意[c=#0000ff]，' +
-                '[c=#ff00ff]火[c=#ff0000]就[c=#ff8800]不[c=#ffff00]会[c=#00ff00]熄[c=#00ffff]灭[c=#0000ff]。'
-        },
-        { delay: 2, color: '#ffd43b', text: '——守着火的人，终会被火记住。' }
+        { delay: 0, color: '#4dabf7',
+          text: '[c=#4dabf7]只要你愿意，[c=#ffd700]火[c=#4dabf7]就不会熄灭。' },
+        { delay: 2, color: '#4dabf7', text: '[c=#4dabf7]——守着[c=#ffd700]火[c=#4dabf7]的人，终会被[c=#ffd700]火[c=#4dabf7]记住。' }
+    ],
+
+    // ------------------------------------------------------------------
+    // stone —— 系统第一次「正式」跟玩家对话（第 1 章之后）
+    // 语气：不凶、不热情，像在念操作手册；但每句话都在划界线。
+    // ------------------------------------------------------------------
+    stone: [
+        // ① 开场：先夸你一句，把你稳住
+        { delay: 0, color: '#4dabf7', text: '[c=#4dabf7]看出来，你还[c=#20c997]适应得不错[c=#4dabf7]。',
+          sound: 'minecraft:ui.toast.in', volume: 0.7, pitch: 1.2 },
+        { delay: 2, color: '#adb5bd', text: '（那个声音又出现了。这次很清楚。）' },
+
+        // ② 自我介绍：名字很轻，身份很重
+        { delay: 1.6, color: '#4dabf7', text: '[c=#4dabf7]你[c=#ffd700]可以称呼我[c=#4dabf7]为[c=#ffd700]系统[c=#4dabf7]。' },
+        { delay: 1.8, color: '#adb5bd', text: '（……我好像没有别的选择。）' },
+
+        // ③ 任务指引：把玩家推去 FTB Quests
+        { delay: 1.4, color: '#4dabf7',
+          text: '[c=#4dabf7]打开[c=#20c997]FTB 任务[c=#4dabf7]，在[c=#20c997]任务书[c=#4dabf7]里查询[c=#ffd700]我发布的任务[c=#4dabf7]。' },
+
+        // ④ 免责声明：一句一句剥夺安全感
+        { delay: 2.6, color: '#adb5bd', text: '（——）' },
+        { delay: 1.2, color: '#4dabf7', text: '[c=#4dabf7]完成了任务，[c=#ffd700]不一定有奖励[c=#4dabf7]。',
+          sound: 'minecraft:block.note_block.pling', volume: 0.6, pitch: 0.9 },
+        { delay: 2, color: '#4dabf7', text: '[c=#4dabf7]不完成，[c=#ff4d4f]也不一定会死[c=#4dabf7]。',
+          sound: 'minecraft:block.note_block.pling', volume: 0.6, pitch: 0.7 },
+        { delay: 2.2, color: '#adb5bd', text: '（……这话怎么听着系统像是反派。）' },
+
+        // ⑤ 落点：真正的台词
+        { delay: 2.6, color: '#4dabf7', text: '[c=#4dabf7]但我[c=#ffd700]希望[c=#4dabf7]你，[c=#ffd700]最好还是[c=#4dabf7]按照[c=#ffd700]我发派的任务[c=#4dabf7]来。',
+          particle: 'minecraft:end_rod', count: 20, speed: 0.05,
+          title: '按 我 说 的 做', titleColor: '#4dabf7',
+          subtitle: '这不是建议', subtitleColor: '#a63d40',
+          fadeIn: 10, stay: 45, fadeOut: 20 },
+        { delay: 2.2, color: '#adb5bd', text: '（为什么？）' },
+
+        // ⑥ 结尾：不回答，留寒气
+        { delay: 2, color: '#4dabf7', text: '[c=#4dabf7]现在，欢迎来到[c=#ffd700]边缘世界[c=#4dabf7]。',
+          sound: 'minecraft:entity.ender_dragon.growl', volume: 0.4, pitch: 1.5 },
+        { delay: 2.4, color: '#adb5bd', text: '（声音消失了。像从来没来过。）' }
     ]
 }
 
@@ -307,6 +370,22 @@ function allPlayersTarget(server) {
 }
 
 /**
+ * 安全地写日志。
+ *
+ * KubeJS 提供了全局 console，但精简的脚本环境里不一定有；
+ * 这里做一层保护，保证「报错处理」本身不会再抛错。
+ */
+function logError(msg) {
+    try {
+        if (typeof console !== 'undefined' && console && console.error) {
+            logError('' + msg)
+        }
+    } catch (e) {
+        // 日志失败就算了，绝不影响演出
+    }
+}
+
+/**
  * 执行一条命令。
  *
  * 统一走 server.runCommandSilent（内部是 withSuppressedOutput + performPrefixedCommand），
@@ -317,11 +396,75 @@ function runCmd(server, cmd) {
     try {
         server.runCommandSilent(cmd)
     } catch (e) {
-        console.error('[stage_say] 命令执行失败: ' + cmd + ' -> ' + e)
+        logError('命令执行失败: ' + cmd + ' -> ' + e)
     }
 }
 
-/** 给全服播放音效（players 不给就全服） */
+/** 把 server.players 转成 Java 玩家对象数组 */
+function onlinePlayers(server) {
+    var out = []
+    var list = server.players
+    if (!list) {
+        return out
+    }
+    var i
+    for (i = 0; i < list.size(); i++) {
+        out.push(list.get(i))
+    }
+    return out
+}
+
+/**
+ * 解析 line.to：'Steve' / 'Steve,Alex' / 省略=全服。
+ * 返回玩家名数组；省略时返回 null（表示全服）。
+ */
+function targetNames(line) {
+    if (!line.to) {
+        return null
+    }
+    var raw = String(line.to)
+    var parts = raw.split(',')
+    var out = []
+    var i
+    for (i = 0; i < parts.length; i++) {
+        var n = parts[i].trim()
+        if (n) {
+            out.push(n)
+        }
+    }
+    return out
+}
+
+/** 按 line.to 过滤出要影响的玩家；返回 Java 玩家对象数组 */
+function pickPlayers(server, line) {
+    var all = onlinePlayers(server)
+    var names = targetNames(line)
+    if (!names) {
+        return all
+    }
+    var out = []
+    var i, j
+    for (i = 0; i < all.length; i++) {
+        var uname = String(all[i].username)
+        for (j = 0; j < names.length; j++) {
+            if (names[j] === uname) {
+                out.push(all[i])
+                break
+            }
+        }
+    }
+    return out
+}
+
+/**
+ * 给玩家播放音效。
+ *
+ * ⚠ 这里故意不走 `playsound ... ~ ~ ~` 命令：
+ *   server.runCommandSilent 的命令源是控制台（没有实体、没有位置），
+ *   `~ ~ ~` 会被解析成世界原点 (0,0,0)，音效在原点播放，
+ *   玩家在自己脚下根本听不到 —— 这就是之前「没声音」的原因。
+ *   改用实体级 playSound，声源就是玩家自己，必定能听到。
+ */
 function playSound(server, line) {
     var snd = line.sound
     if (!snd) {
@@ -329,21 +472,57 @@ function playSound(server, line) {
     }
     var vol = (line.volume == null ? 1.0 : line.volume)
     var pitch = (line.pitch == null ? 1.0 : line.pitch)
-    var who = line.to ? String(line.to) : allPlayersTarget(server)
-    if (!who) {
-        return // 没人在线
+    var players = pickPlayers(server, line)
+    if (players.length === 0) {
+        return // 没人在线 / 指定玩家不在线
     }
-    runCmd(server, 'playsound ' + snd + ' players ' + who + ' ~ ~ ~ ' + vol + ' ' + pitch)
+
+    var soundEvent = null
+    try {
+        // Utils.getSound 接受 ResourceLocation；传字符串由 KubeJS 自动转换
+        soundEvent = Utils.getSound(String(snd))
+    } catch (e) {
+        logError('音效 id 无效: ' + snd + ' -> ' + e)
+        return
+    }
+    if (!soundEvent) {
+        logError('找不到音效: ' + snd + '（请检查 id 是否拼错）')
+        return
+    }
+
+    var ok = 0
+    var i
+    for (i = 0; i < players.length; i++) {
+        try {
+            // 实体级播放：声源 = 玩家自身位置，必定能听到
+            players[i].playSound(soundEvent, vol, pitch)
+            ok++
+        } catch (e) {
+            logError('播放音效失败(' + snd + '): ' + e)
+        }
+    }
+    if (ok === 0) {
+        logError('音效一个都没播出去: ' + snd)
+    }
 }
 
-/** 粒子：默认在玩家脚下放一圈 */
+/**
+ * 粒子。
+ *
+ * 同样不能用控制台的 `~ ~ ~`（会落在世界原点），
+ * 改成对每个玩家所在的 ServerLevel 直接 sendParticles，
+ * 坐标取玩家当前位置（脚下往上 1 格）。
+ *
+ * particle 传字符串即可：KubeJS 的 $ParticleOptions_ 支持 string，
+ * 会自动包装成对应的 ParticleOptions。
+ */
 function spawnParticles(server, line) {
     var particle = line.particle
     if (!particle) {
         return
     }
-    var who = line.to ? String(line.to) : allPlayersTarget(server)
-    if (!who) {
+    var players = pickPlayers(server, line)
+    if (players.length === 0) {
         return
     }
     var count = (line.count == null ? 30 : line.count)
@@ -351,9 +530,21 @@ function spawnParticles(server, line) {
     var dy = (line.spreadY == null ? 1.2 : line.spreadY)
     var dz = (line.spreadZ == null ? 0.6 : line.spreadZ)
     var speed = (line.speed == null ? 0.05 : line.speed)
-    var mode = (line.particleMode == null ? 'normal' : String(line.particleMode))
-    runCmd(server, 'particle ' + particle + ' ~ ~1 ~ ' + dx + ' ' + dy + ' ' + dz +
-        ' ' + speed + ' ' + count + ' ' + mode + ' ' + who)
+
+    var i
+    for (i = 0; i < players.length; i++) {
+        try {
+            var p = players[i]
+            // 用 getX()/getY()/getZ()/getLevel() 而不是属性别名，避免不同版本差异
+            p.getLevel().sendParticles(
+                String(particle),
+                p.getX(), p.getY() + 1.0, p.getZ(),
+                count, dx, dy, dz, speed
+            )
+        } catch (e) {
+            logError('生成粒子失败(' + particle + '): ' + e)
+        }
+    }
 }
 
 /** title / subtitle / actionbar 三种屏幕文字 */
@@ -496,7 +687,7 @@ function scheduleLine(server, id, run, when, line, player) {
         try {
             runActions(server, line, player)
         } catch (e) {
-            console.error('[stage_say] 动作执行失败: ' + e)
+            logError('动作执行失败: ' + e)
         }
     })
 }

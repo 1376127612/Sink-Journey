@@ -1,0 +1,74 @@
+{
+	always_invisible: true
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "1b0887c91c13c7d3"
+	group: "672ED601CC36FA35"
+	id: "1B0887C91C13C7D3"
+	images: [ ]
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			can_repeat: false
+			dependencies: ["1057DBBF8DC8C7C0"]
+			hide_dependency_lines: true
+			hide_dependent_lines: true
+			hide_details_until_startable: true
+			hide_lock_icon: true
+			hide_text_until_complete: true
+			hide_until_deps_complete: true
+			hide_until_deps_visible: true
+			id: "2F67C84DFB5047F8"
+			rewards: [
+				{
+					auto: "enabled"
+					command: "/stage_say stage1"
+					id: "01A16484F8D51DAB"
+					permission_level: 2
+					type: "command"
+				}
+				{
+					auto: "enabled"
+					command: "/effect give @s minecraft:nausea 10 1 true"
+					id: "241E2B4043066DB7"
+					type: "command"
+				}
+				{
+					command: "/effect give @s minecraft:blindness 10 4 true"
+					id: "6924803A19DAD444"
+					type: "command"
+				}
+			]
+			tasks: [{
+				id: "40F87827A6A50A91"
+				stat: "minecraft:total_world_time"
+				type: "stat"
+				value: 5
+			}]
+			x: 0.0d
+			y: -0.5d
+		}
+		{
+			dependencies: [
+				"2F67C84DFB5047F8"
+				"3CB5ED5FCBF41934"
+			]
+			id: "39F9A7586935F24F"
+			rewards: [{
+				auto: "enabled"
+				command: "/stage_say stone"
+				id: "6406318AA7A40DBE"
+				type: "command"
+			}]
+			tasks: [{
+				id: "08E9940484C47886"
+				stat: "minecraft:total_world_time"
+				type: "stat"
+				value: 5
+			}]
+			x: -1.5d
+			y: 1.5d
+		}
+	]
+}

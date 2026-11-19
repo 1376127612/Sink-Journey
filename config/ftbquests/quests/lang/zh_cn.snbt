@@ -4,7 +4,7 @@
 	chapter.078B49689C174792.title: "机械动力"
 	chapter.11BB336EC9B9533E.title: "高温气体"
 	chapter.1615B92EC329CC3D.title: "征战末地"
-	chapter.194AF753DB4E19B0.title: "自然魔法"
+	chapter.1B0887C91C13C7D3.title: "时代"
 	chapter.25ACB136E49B8BB8.title: "第一小步"
 	chapter.32C910BDF9B9291A.title: "水晶晶簇"
 	chapter.345D123B1DD75B75.title: "物质基础"
@@ -12,8 +12,8 @@
 	chapter.5255FDF38AF51C93.title: "仰望星空"
 	chapter.5E566DB5411E083C.title: "科技先锋"
 	chapter.5FE0048B1A2B6A65.title: "工业之始"
-	chapter.62B1F88B36FCD09D.title: "旅途之始"
-	chapter.676F67C1DE6CC626.title: "余烬科技"
+	chapter.62B1F88B36FCD09D.title: "异乡来客"
+	chapter.676F67C1DE6CC626.title: "余烬初火"
 	chapter.6BB0D29314D7C897.title: "星界探索"
 	chapter.6CD44026301F6F75.title: "触及星辰"
 	chapter.6E59CB6F7D053B92.title: "前情提要"
@@ -62,7 +62,7 @@
 		"如果你现在试图对着一棵树长按左键，我会假装没看见。但树会记住的。"
 	]
 	quest.1057DBBF8DC8C7C0.quest_subtitle: "你连树都撸不了"
-	quest.1057DBBF8DC8C7C0.title: "你连树都撸不了"
+	quest.1057DBBF8DC8C7C0.title: "开始游戏"
 	quest.124E5A52D0F2A72D.quest_subtitle: "黎明石锭真的是一块好锭吗"
 	quest.1408793381C97EC0.quest_desc: ["制作坚固外壳！"]
 	quest.14E2E0D36E686107.quest_desc: ["打开炉顶活板门，投入满热值的装备，再投入若干灰烬晶体（灰烬晶体越多成功率越高），关闭活板门，即可开始强化。无论成功失败都会消耗所有的灰烬晶体。"]
@@ -106,11 +106,16 @@
 	quest.2EECA8F74F7C235B.title: "量产黄铜"
 	quest.2F418266BAA45470.quest_desc: ["我相信你很快就会用用上的。"]
 	quest.2F418266BAA45470.quest_subtitle: "单片眼镜"
+	quest.2F67C84DFB5047F8.quest_desc: ["穿越异界，系统降临"]
+	quest.2F67C84DFB5047F8.title: "阶段一"
 	quest.33CA917A7FF636A6.quest_desc: [
 		"很好，现在终于能够挖矿了。"
 		""
 		"可恶，难道我辛辛苦苦制作的燧石镐，连一块铁都挖不下来吗。我到底该怎么制作更强大的镐子来供我驱使。"
 	]
+	quest.34201481CF72171A.quest_desc: ["这是一种拙劣的合金锭，似乎只能用于某些土制方法制作的机器。"]
+	quest.34201481CF72171A.quest_subtitle: "对前世记忆的仿造"
+	quest.34201481CF72171A.title: "拙劣的合金"
 	quest.34D552E8494DF63D.quest_desc: ["用搅拌器制作通红的坚固合金，再用水进行冷却"]
 	quest.34D552E8494DF63D.quest_subtitle: "这样的合金有什么用呢"
 	quest.34D552E8494DF63D.title: "坚固的合金"
@@ -171,6 +176,12 @@
 	quest.48BEE62B80F62549.quest_desc: ["或许，你真的可以挖一点东西了？"]
 	quest.4A1B91231661F70F.quest_desc: ["你的第一个机械动力机壳"]
 	quest.4A1B91231661F70F.quest_subtitle: "安山时代"
+	quest.4D92FDC6EA6BDD71.quest_desc: [
+		"汇聚生灵之气，调转玄妙之间，聚火成堆。"
+		""
+		"柴堆，司炼造、调灵、转化。"
+	]
+	quest.4D92FDC6EA6BDD71.quest_subtitle: "柴堆？小熔炉！"
 	quest.4E2996D1346A91DD.quest_desc: ["我发现粘土与沙子可以混合成一种奇妙的物质，它似乎蕴含着某种神奇的力量。或许，我可以通过柴堆把它们烤干？"]
 	quest.5395E48294293E81.quest_desc: [
 		"炼金台每接入一个熵演枚举器，便允许两个正确的元素象征与原材料错配，在此基础上每额外接入一个，则额外多允许一个正确的元素象征错配。"
