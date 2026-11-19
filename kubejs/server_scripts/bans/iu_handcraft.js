@@ -1,5 +1,6 @@
 // ============================================================
 // Industrial Upgrade 工作台手搓 / 铁砧敲板封禁
+// 详细说明与验收清单：kubejs/docs/IU_HANDCRAFT_BAN.md
 //
 // 1. 工作台手搓
 //    IU 的 shaped / shapeless 配方是数据包配方，序列化器类型为
