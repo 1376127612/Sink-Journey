@@ -1,0 +1,39 @@
+["Structure Shield Config"]
+	#
+	# --- Protect All Structures ---
+	#If all structures should be protected.
+	#This will bypass the structure_shield_protected structure tag and just make every structure protected.
+	protectAllStructures = false
+	#
+	# --- Sanctums Curse Effect Duration ---
+	#How long in seconds a player will be affected by the Sanctums Curse when they try
+	#to place or break a protected block inside a protected structure.
+	#Sanctums Curse prevents players from placing or breaking blocks while they are under its effect.
+	#This is intended to prevent players from spam placing or breaking blocks inside protected structures.
+	#It is not necessary as performance should be great without it, but it will guarantee less structure checks.
+	#Default: 4 seconds. Set to 0 to disable this entirely.
+	# Default: 4
+	# Range: > 0
+	sanctumsCurseEffectDuration = 4
+	#
+	# --- Protect From Explosions ---
+	#If protected blocks inside protected structures should be immune to explosions (TNT, creepers, etc.).
+	#Blocks in the structure_shield_breakable tag are still destroyed by explosions.
+	protectFromExplosions = true
+	#
+	# --- Protect From Bucket Scooping ---
+	#If fluids (water, lava, powder snow) inside protected structures should be protected from being scooped with a bucket.
+	#Add a fluid's block (e.g. minecraft:water) to the structure_shield_breakable tag to allow scooping that specific fluid.
+	#Set to false to allow all bucket scooping inside protected structures.
+	protectFromBucketScooping = true
+	#
+	# --- Protect From Fire Spread ---
+	#If fire should be prevented from spreading onto or burning away blocks inside protected structures.
+	#This stops natural fire spread within protected structures; it does not stop players from lighting fires.
+	protectFromFireSpread = true
+	#
+	# --- Protect From Pistons ---
+	#If pistons should be prevented from pushing blocks into, pulling blocks out of, or moving blocks within protected structures.
+	#Cancels the entire piston movement if any affected block's source or destination is inside a protected structure.
+	#Default: false. Piston-based grief is a niche, advanced technique, and this is the only check that inspects redstone activity, so it is opt-in.
+	protectFromPistons = false

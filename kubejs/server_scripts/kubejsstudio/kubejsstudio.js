@@ -230,7 +230,6 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
-<<<<<<< HEAD
 // kubejsstudio custom: roots:pyre/bafflecap
 ServerEvents.generateData('after_mods', event => {
     event.json(
@@ -392,7 +391,6 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
-=======
 // kubejsstudio custom: industrialupgrade:industrialupgrade_1742
 ServerEvents.generateData('after_mods', event => {
     event.json(
@@ -535,6 +533,3 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
-// kubejsstudio custom: industrialupgrade:industrialupgrade_735
-
->>>>>>> ebfe3ca00eff4dbaea77ae3cc99c573806140ec4

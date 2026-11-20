@@ -1,0 +1,219 @@
+[worldgen]
+	#Exact dimension IDs blocked for new automatic RC generation. Editable structures may explicitly override this. Accepted work finishes; manual placement is unaffected.
+	dimensionBlacklist = []
+	#Enables RC natural generation.
+	enabled = true
+	#Uses a modern Structure/StructureSet shell for natural RC structures so vanilla /locate can find reccomplex:natural_structure. Disable to fall back to the older placed-feature natural bridge.
+	nativeNaturalStructure = true
+	#Includes bundled jar/dev-resource RC .rcst structures in default RC worldgen catalogs. Disable to make only config/user structures generate by default. Explicit worldgen.allowedStructureIds entries still work.
+	includeBundledStructures = true
+	#RC .rcst structure ids allowed to generate naturally. Empty means all supported natural structures permitted by includeBundledStructures.
+	allowedStructureIds = []
+	#Extra chance denominator applied after the RC natural category spawn chance. 1 means the default RC rate.
+	# Default: 1
+	# Range: 1 ~ 4096
+	rarity = 1
+	#Minimum horizontal distance from the world spawn before RC natural structures may generate.
+	# Default: 96
+	# Range: 0 ~ 100000
+	minSpawnDistance = 96
+	#Maximum allowed height spread across a surface-placement footprint before RC natural placement is skipped.
+	# Default: 7
+	# Range: 0 ~ 384
+	maxSurfaceDelta = 7
+	#Uses the old RC SelectivePlacer-style safe surface footprint for natural surface Y/spread checks. Disable to compare with the stricter full-footprint modern check.
+	compatSurfaceFootprint = true
+	#Maximum live queued deferred RC worldgen placements. Accepted root worldgen can park in planned storage when this live queue is busy; non-root follow-up work still waits for the queue to catch up.
+	# Default: 96
+	# Range: 1 ~ 4096
+	maxPendingPlacements = 96
+	#Maximum parked RC worldgen placements persisted per dimension while waiting for their chunks to load naturally.
+	# Default: 512
+	# Range: 0 ~ 16384
+	maxStoredPlacements = 512
+	#Maximum already-started phased RC worldgen placements persisted per dimension for resume after save/reload.
+	# Default: 64
+	# Range: 0 ~ 4096
+	maxStoredActivePlacements = 64
+	#Maximum planned/complement-style RC natural structure entries persisted per dimension for chunk-by-chunk completion.
+	# Default: 2048
+	# Range: 0 ~ 16384
+	maxGenerationLedgerEntries = 2048
+	#Maximum recorded RC structure footprints persisted per dimension for /rc whatisthis. 0 disables new footprint records.
+	# Default: 4096
+	# Range: 0 ~ 65536
+	maxStructureFootprintEntries = 4096
+	#Maximum concurrent chunk worker callbacks allowed to perform RC worldgen planning. Extra callbacks skip RC planning until workers catch up.
+	# Default: 2
+	# Range: 1 ~ 32
+	maxConcurrentPlanning = 2
+
+	[worldgen.activePlacement]
+		#Lets already-started loaded RC natural/village/script-child placements run several safe phased steps per tick so visible structures finish sooner. Disable to restore the older conservative active-placement pacing.
+		fastLaneEnabled = true
+		#Maximum phased block operations an eligible loaded active RC placement may perform per tick. Each safe quantum remains capped internally.
+		# Default: 1024
+		# Range: 128 ~ 65536
+		fastLaneMaxBlockOperationsPerTick = 1024
+		#Approximate per-placement time budget, in milliseconds, for the active placement fast lane. Checked between phased quanta.
+		# Default: 8
+		# Range: 1 ~ 1000
+		fastLaneTickBudgetMs = 8
+
+	[worldgen.balance]
+		#Global multiplier for RC natural structure attempts after rarity is applied. 0 disables natural attempts, 0.5 halves them, 1 is normal, 2 doubles them.
+		# Default: 1.0
+		# Range: 0.0 ~ 16.0
+		naturalFrequencyMultiplier = 1.0
+		#Multiplier for natural structures in the RC 'decoration' category. 0 disables this category, 1 is normal.
+		# Default: 1.0
+		# Range: 0.0 ~ 16.0
+		decoration = 1.0
+		#Multiplier for natural structures in the RC 'frequent' category. 0 disables this category, 1 is normal.
+		# Default: 1.0
+		# Range: 0.0 ~ 16.0
+		frequent = 1.0
+		#Multiplier for natural structures in the RC 'adventure' category. 0 disables this category, 1 is normal.
+		# Default: 1.0
+		# Range: 0.0 ~ 16.0
+		adventure = 1.0
+		#Multiplier for natural structures in the RC 'rare' category. 0 disables this category, 1 is normal.
+		# Default: 1.0
+		# Range: 0.0 ~ 16.0
+		rare = 1.0
+		#Multiplier for natural structures in the RC 'ultrarare' category. 0 disables this category, 1 is normal.
+		# Default: 1.0
+		# Range: 0.0 ~ 16.0
+		ultrarare = 1.0
+
+	[worldgen.spacing]
+		#Opt-in minimum-distance filter for accepted RC natural structures. Disabled by default to preserve existing worlds.
+		enabled = false
+		#Global minimum distance, in chunks, between accepted RC natural structures in the same generation category. 0 disables the distance check.
+		# Default: 8
+		# Range: 0 ~ 4096
+		minDistanceChunks = 8
+		#Category override for RC natural category 'decoration'. -1 inherits minDistanceChunks.
+		# Default: -1
+		# Range: -1 ~ 4096
+		decorationMinDistanceChunks = -1
+		#Category override for RC natural category 'frequent'. -1 inherits minDistanceChunks.
+		# Default: -1
+		# Range: -1 ~ 4096
+		frequentMinDistanceChunks = -1
+		#Category override for RC natural category 'adventure'. -1 inherits minDistanceChunks.
+		# Default: -1
+		# Range: -1 ~ 4096
+		adventureMinDistanceChunks = -1
+		#Category override for RC natural category 'rare'. -1 inherits minDistanceChunks.
+		# Default: -1
+		# Range: -1 ~ 4096
+		rareMinDistanceChunks = -1
+		#Category override for RC natural category 'ultrarare'. -1 inherits minDistanceChunks.
+		# Default: -1
+		# Range: -1 ~ 4096
+		ultrarareMinDistanceChunks = -1
+		#Whether spacing also applies to RC natural structures in the 'decoration' category. This does not affect the separate vanilla decoration/tree bridge.
+		includeDecoration = false
+
+	[worldgen.chunkComplements]
+		#Enables alpha chunk-by-chunk complementation for eligible RC natural structures. Disable to fall back to the older all-chunks-loaded deferred path.
+		enabled = true
+		#Maximum pending server-thread ledger admission requests accepted from worldgen workers.
+		# Default: 256
+		# Range: 0 ~ 4096
+		maxPendingLedgerAdmissions = 256
+		#Maximum pending ledger admission requests drained on the server thread per tick.
+		# Default: 8
+		# Range: 0 ~ 256
+		maxLedgerAdmissionsPerTick = 8
+		#Maximum generation-ledger chunk positions scanned per server tick while looking for ready complement work.
+		# Default: 64
+		# Range: 0 ~ 4096
+		maxLedgerComplementScanChunksPerTick = 64
+		#Lets already-started loaded RC ledger complement chunks run several safe phased steps per tick so visible chunk slices finish sooner. Disable to restore conservative complement pacing.
+		fastLaneEnabled = true
+		#Maximum phased block operations an eligible loaded RC chunk-complement task may perform per tick. Each safe quantum remains capped internally.
+		# Default: 1024
+		# Range: 128 ~ 65536
+		fastLaneMaxBlockOperationsPerTick = 1024
+		#Approximate per-complement time budget, in milliseconds, for the chunk-complement fast lane. Checked between phased quanta.
+		# Default: 8
+		# Range: 1 ~ 1000
+		fastLaneTickBudgetMs = 8
+
+	[worldgen.freezeDiagnostics]
+		#Enables optional developer diagnostics that log RC queue/planning state and selected thread stacks when the integrated server tick heartbeat stalls. Keep disabled for normal release/tester builds.
+		enabled = false
+		#Milliseconds without a server tick heartbeat before RC freeze diagnostics emit one compact dump.
+		# Default: 8000
+		# Range: 1000 ~ 60000
+		thresholdMs = 8000
+
+[saplings]
+	#Enables RC sapling replacement for bundled/custom sapling generation entries.
+	enabled = true
+	#Chance that a sapling growth event may be considered for RC replacement. Matches old saplingTriggerChance semantics.
+	# Default: 1.0
+	# Range: 0.0 ~ 1.0
+	triggerChance = 1.0
+	#Legacy baseSaplingSpawnWeight. Vanilla tree weight is 1; higher values make RC sapling structures win more often.
+	# Default: 0.2
+	# Range: 0.0 ~ 100000.0
+	baseWeight = 0.2
+	#Records sapling-generated RC structure footprints for /rc whatisthis. Disabled by default because sapling structures can be common.
+	recordFootprints = false
+
+[decorations]
+	#Enables RC decoration replacement for old tree, mushroom, cactus, desert well, and fossil decoration entries.
+	enabled = true
+	#Chance per eligible chunk that RC tree decoration replacement may run. 0 disables RC decoration trees; 1 restores the old base-weight-plus-cap behavior.
+	# Default: 0.1
+	# Range: 0.0 ~ 1.0
+	treeChunkChance = 0.1
+	#Legacy baseWeight_TREE. Vanilla tree decoration weight is 1; higher values make RC decoration trees win more often.
+	# Default: 0.03
+	# Range: 0.0 ~ 100000.0
+	treeBaseWeight = 0.03
+	#Legacy baseWeight_BIG_SHROOM. Vanilla big mushroom decoration weight is 1.
+	# Default: 0.2
+	# Range: 0.0 ~ 100000.0
+	bigMushroomBaseWeight = 0.2
+	#Legacy baseWeight_CACTUS. Vanilla cactus decoration weight is 1.
+	# Default: 0.2
+	# Range: 0.0 ~ 100000.0
+	cactusBaseWeight = 0.2
+	#Legacy baseWeight_DESERT_WELL. Vanilla desert well decoration weight is 1.
+	# Default: 0.2
+	# Range: 0.0 ~ 100000.0
+	desertWellBaseWeight = 0.2
+	#Legacy baseWeight_FOSSIL. Vanilla fossil decoration weight is 1.
+	# Default: 0.2
+	# Range: 0.0 ~ 100000.0
+	fossilBaseWeight = 0.2
+	#Maximum live queued deferred RC decoration placements. Accepted root decorations can park in planned storage when this live queue is busy.
+	# Default: 96
+	# Range: 0 ~ 4096
+	maxPendingPlacements = 96
+	#Records decoration-generated RC structure footprints for /rc whatisthis. Disabled by default because tree/mushroom decorations can be very common.
+	recordFootprints = false
+	#Logs every planned and queued RC decoration placement. Keep false for normal testing because tree decoration can be very frequent.
+	verboseLogging = false
+
+[villages]
+	#Enables the bounded RC village-piece bridge. This does not yet inject real 1.20 jigsaw pool pieces.
+	enabled = true
+	#Chance per eligible village chunk that the RC village-piece bridge attempts a selection. This softly reduces RC village density without changing per-village caps.
+	# Default: 0.35
+	# Range: 0.0 ~ 1.0
+	attemptChance = 0.35
+	#Legacy baseVillageSpawnWeight. Vanilla average is about 10; higher values make RC village pieces win more often.
+	# Default: 10.0
+	# Range: 0.0 ~ 100000.0
+	baseWeight = 10.0
+	#Base per-village RC budget for the bounded village-piece bridge. Each RC village piece costs at least 1.0; larger pieces cost more. Raise for denser legacy/RLCraft-style villages.
+	# Default: 8.0
+	# Range: 0.0 ~ 100000.0
+	budget = 8.0
+	#Logs planned and skipped RC village-piece bridge placements.
+	verboseLogging = false
