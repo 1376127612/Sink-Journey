@@ -25,22 +25,24 @@
     "jei.sinkjourney.primitive_research.info2": "Recipes: paper + ink sac -> research notes x2 (5 min); research notes x4 + paper -> primitive blueprint (5 min). Research notes are the entry material for the mechanical research bench.",
     "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so every recipe takes 5 minutes. The UI has a minesweeper entry: clearing one round advances the current progress by 50%.",
 
-    "machine.kubejs.charcoal_furnace": "Charcoal Furnace",
-    "jei.kubejs.charcoal_furnace.info": "A 3x3x3 brick-built charcoal furnace: crushed silver/gold and the electrum alloy can only be smelted here. Fuel is fed through the input bus; any coal or charcoal works (minecraft:coals).",
-    "jei.kubejs.charcoal_furnace.info2": "Build layout: controller in the middle of the front face, input bus on its left, output bus on its right, plus one input bus in each side wall of the hearth (three input buses in total); a lit campfire sits at the very heart of the furnace (directly behind the controller) with a one-block flue left open at the top centre so you can see the flame. Dousing the fire halts the furnace; an atmospheric bellows attached anywhere to the furnace shell speeds it up by 20%.",
+    "block.kubejs.charcoal_furnace": "Charcoal Furnace",
+    "recipe_type.sinkjourney.charcoal_furnace": "Charcoal Furnace Smelting",
+    "recipe_pool.kubejs.charcoal_furnace": "Charcoal Furnace",
+    "jei.kubejs.charcoal_furnace.info": "A 3x3x3 brick-built charcoal furnace: crushed silver/gold and the electrum alloy can only be smelted here. Fuel goes into the input slots of the machine UI; any coal or charcoal works (minecraft:coals).",
+    "jei.kubejs.charcoal_furnace.info2": "Build: a 3x3x3 brick shell with the controller block in the middle of the front face; a lit campfire sits at the very heart of the furnace (directly behind the controller) with a one-block flue left open at the top centre so you can see the flame. The controller has its own input/output slots, no extra hatches needed. Dousing the fire halts the furnace; an atmospheric bellows attached anywhere to the furnace shell speeds it up by 20%.",
     "jei.kubejs.charcoal_furnace.info3": "Pyres cannot touch precious metals: crushed silver/gold have no pyre recipe at all; their reducing smelt belongs to the charcoal furnace only.",
 
-    "block.mmcr.charcoal_furnace_controller": "Charcoal Furnace Controller",
-    "block.mmcr.earth_blast_furnace_controller": "Earthen Blast Furnace Controller",
     "block.mmcr.mechanical_lab_controller": "Mechanical Research Bench Controller",
     "block.mmcr.trace_nexus_controller": "Backflow Research Nexus Controller",
     "block.mmcr.trace_compute_controller": "Backflow Computation Core Controller",
     "block.mmcr.trace_cooling_controller": "Entropy-Reversal Cooling Core Controller",
     "block.mmcr.research_station_controller": "Backflow Research Station Controller",
 
-    "machine.kubejs.earth_blast_furnace": "Earthen Blast Furnace",
+    "block.kubejs.earth_blast_furnace": "Earthen Blast Furnace",
+    "recipe_type.sinkjourney.earth_blast_furnace": "Earthen Blast Furnace Smelting",
+    "recipe_pool.kubejs.earth_blast_furnace": "Earthen Blast Furnace",
     "jei.kubejs.earth_blast_furnace.info": "A 3x3x4 mud-brick earthen blast furnace: the dedicated iron reduction furnace. Crushed iron x2 + calcite x1 + coal/charcoal x2 -> iron ingot x2, 70s per batch. Vanilla smelting of iron ore, raw iron and iron dust has been removed.",
-    "jei.kubejs.earth_blast_furnace.info2": "Build: set one electrum block into the middle of the bottom front row (the tuyere); the row above is input bus | controller | output bus, with one more input bus in each side wall of the hearth (three input buses in total), everything else is mud bricks; a lit campfire sits at the heart (directly behind the controller), and the two-block flue above it must reach the sky.",
+    "jei.kubejs.earth_blast_furnace.info2": "Build: a 3x3x4 mud-brick shell with one electrum block in the middle of the bottom front row (the tuyere) and the controller block directly above it; everything else is mud bricks. A lit campfire sits at the heart (directly behind the controller), and the two-block flue above it must reach the sky. The controller has its own input/output slots, no extra hatches needed.",
     "jei.kubejs.earth_blast_furnace.info3": "Forced draft: an atmospheric bellows must be attached to the lower half of the shell (at or below tuyere height), otherwise the machine will not start. Dousing the campfire also halts it.",
     "jei.kubejs.earth_blast_furnace.info4": "Why: under forced draft the coal burns to CO first, and CO reduces the iron oxides; the calcite decomposes into CaO, which fluxes the silica/alumina gangue into slag, protecting the lining and cutting iron loss. Puddling/forging is abstracted away, so the furnace taps usable iron ingots directly."
 }

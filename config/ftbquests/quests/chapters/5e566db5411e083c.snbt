@@ -10,5 +10,21 @@
 	images: [ ]
 	order_index: 0
 	quest_links: [ ]
-	quests: [ ]
+	quests: [{
+		id: "5319BE2FE47DFFE5"
+		tasks: [
+			{
+				id: "02F4E88F656A8664"
+				item: { count: 1, id: "industrialupgrade:electronics_assembler/electronics_assembler" }
+				type: "item"
+			}
+			{
+				id: "5ED0B864217CE22B"
+				item: { count: 1, id: "industrialupgrade:primal_soldering_mechanism/primal_soldering_mechanism" }
+				type: "item"
+			}
+		]
+		x: -2.0d
+		y: -2.5d
+	}]
 }

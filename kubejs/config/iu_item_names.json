@@ -1,0 +1,3946 @@
+{
+  "source": "[工业升级] IndustrialUpgrade-1.21.1-3.4.0.11.jar",
+  "count": 788,
+  "items": {
+    "0": {
+      "id": "industrialupgrade:crafting_elements/crafting_0_element",
+      "zh": "防辐射面料",
+      "en": "Anti-radiation Fabric"
+    },
+    "1": {
+      "id": "industrialupgrade:crafting_elements/crafting_1_element",
+      "zh": "改良元件:挤压",
+      "en": "Improved Sensor: Press"
+    },
+    "2": {
+      "id": "industrialupgrade:crafting_elements/crafting_2_element",
+      "zh": "改良元件:粉碎",
+      "en": "Improved Sensor: Macerator"
+    },
+    "3": {
+      "id": "industrialupgrade:crafting_elements/crafting_3_element",
+      "zh": "改良元件:风",
+      "en": "Improved Sensor: Wind"
+    },
+    "4": {
+      "id": "industrialupgrade:crafting_elements/crafting_4_element",
+      "zh": "改良元件:水",
+      "en": "Improved Sensor: Water"
+    },
+    "5": {
+      "id": "industrialupgrade:crafting_elements/crafting_5_element",
+      "zh": "改良元件:地热能",
+      "en": "Improved Sensor: Geothermal"
+    },
+    "6": {
+      "id": "industrialupgrade:crafting_elements/crafting_6_element",
+      "zh": "改良元件:流动（流量）",
+      "en": "Improved Sensor: Liquid"
+    },
+    "7": {
+      "id": "industrialupgrade:crafting_elements/crafting_7_element",
+      "zh": "改良元件:核残渣",
+      "en": "Improved Sensor: Residual Products of the Reactor"
+    },
+    "8": {
+      "id": "industrialupgrade:crafting_elements/crafting_8_element",
+      "zh": "改良元件:蒸汽",
+      "en": "Improved Sensor: Steam"
+    },
+    "9": {
+      "id": "industrialupgrade:crafting_elements/crafting_9_element",
+      "zh": "改良元件:精炼",
+      "en": "Improved Sensor: Refining"
+    },
+    "10": {
+      "id": "industrialupgrade:crafting_elements/crafting_10_element",
+      "zh": "改良元件:转换器",
+      "en": "Enhanced Sensor: Transducer"
+    },
+    "11": {
+      "id": "industrialupgrade:crafting_elements/crafting_11_element",
+      "zh": "元件:发电机",
+      "en": "Sensor: Generator"
+    },
+    "12": {
+      "id": "industrialupgrade:crafting_elements/crafting_12_element",
+      "zh": "改良元件:矿石淘洗",
+      "en": "Improved Sensor: Ore Flushing"
+    },
+    "13": {
+      "id": "industrialupgrade:crafting_elements/crafting_13_element",
+      "zh": "改良元件:辐射",
+      "en": "Improved Sensor: Radiation"
+    },
+    "14": {
+      "id": "industrialupgrade:crafting_elements/crafting_14_element",
+      "zh": "改良元件:反应炉温度",
+      "en": "Improved Sensor: Reactor Temperature"
+    },
+    "15": {
+      "id": "industrialupgrade:crafting_elements/crafting_15_element",
+      "zh": "改良元件:热量",
+      "en": "Improved Sensor: Thermal"
+    },
+    "16": {
+      "id": "industrialupgrade:crafting_elements/crafting_16_element",
+      "zh": "改良控制器",
+      "en": "Improved Controller"
+    },
+    "17": {
+      "id": "industrialupgrade:crafting_elements/crafting_17_element",
+      "zh": "改良元件:复制机",
+      "en": "Improved Sensor: Replicator"
+    },
+    "18": {
+      "id": "industrialupgrade:crafting_elements/crafting_18_element",
+      "zh": "改良元件:大地",
+      "en": "Improved Sensor: Earth"
+    },
+    "19": {
+      "id": "industrialupgrade:crafting_elements/crafting_19_element",
+      "zh": "改良元件:作物",
+      "en": "Improved Sensor: Plants"
+    },
+    "20": {
+      "id": "industrialupgrade:crafting_elements/crafting_20_element",
+      "zh": "改良型电动机",
+      "en": "Improved Electric Motor"
+    },
+    "21": {
+      "id": "industrialupgrade:crafting_elements/crafting_21_element",
+      "zh": "元件模板",
+      "en": "Sensor Template"
+    },
+    "22": {
+      "id": "industrialupgrade:crafting_elements/crafting_22_element",
+      "zh": "元件:地热能",
+      "en": "Sensor: Geothermal"
+    },
+    "23": {
+      "id": "industrialupgrade:crafting_elements/crafting_23_element",
+      "zh": "高级元件模板",
+      "en": "Advanced Sensor Template"
+    },
+    "24": {
+      "id": "industrialupgrade:crafting_elements/crafting_24_element",
+      "zh": "完美元件模板",
+      "en": "Perfect Sensor Template"
+    },
+    "25": {
+      "id": "industrialupgrade:crafting_elements/crafting_25_element",
+      "zh": "改良元件模板",
+      "en": "Enhanced Sensor Template"
+    },
+    "26": {
+      "id": "industrialupgrade:crafting_elements/crafting_26_element",
+      "zh": "电子",
+      "en": "Electron"
+    },
+    "27": {
+      "id": "industrialupgrade:crafting_elements/crafting_27_element",
+      "zh": "元件:流体",
+      "en": "Sensor: Liquid"
+    },
+    "28": {
+      "id": "industrialupgrade:crafting_elements/crafting_28_element",
+      "zh": "元件:凋零",
+      "en": "Sensor: Wither"
+    },
+    "29": {
+      "id": "industrialupgrade:crafting_elements/crafting_29_element",
+      "zh": "元件:磁性",
+      "en": "Sensor: Magnet"
+    },
+    "30": {
+      "id": "industrialupgrade:crafting_elements/crafting_30_element",
+      "zh": "元件:夜间",
+      "en": "Sensor: Night"
+    },
+    "31": {
+      "id": "industrialupgrade:crafting_elements/crafting_31_element",
+      "zh": "元件:核辐射",
+      "en": "Sensor: Reactor Residue"
+    },
+    "32": {
+      "id": "industrialupgrade:crafting_elements/crafting_32_element",
+      "zh": "元件:蒸汽",
+      "en": "Sensor: Steam"
+    },
+    "33": {
+      "id": "industrialupgrade:crafting_elements/crafting_33_element",
+      "zh": "元件:精炼",
+      "en": "Sensor: Refining"
+    },
+    "34": {
+      "id": "industrialupgrade:crafting_elements/crafting_34_element",
+      "zh": "元件:矿石粉碎",
+      "en": "Sensor: Ore Flushing"
+    },
+    "35": {
+      "id": "industrialupgrade:crafting_elements/crafting_35_element",
+      "zh": "经验储罐",
+      "en": "Experience Container"
+    },
+    "36": {
+      "id": "industrialupgrade:crafting_elements/crafting_36_element",
+      "zh": "元件:辐射",
+      "en": "Sensor: Radiation"
+    },
+    "37": {
+      "id": "industrialupgrade:crafting_elements/crafting_37_element",
+      "zh": "元件:白昼",
+      "en": "Sensor: Day"
+    },
+    "38": {
+      "id": "industrialupgrade:crafting_elements/crafting_38_element",
+      "zh": "元件:反应炉温度",
+      "en": "Sensor: Reactor Temperature"
+    },
+    "39": {
+      "id": "industrialupgrade:crafting_elements/crafting_39_element",
+      "zh": "元件:热量",
+      "en": "Sensor: Thermal"
+    },
+    "40": {
+      "id": "industrialupgrade:crafting_elements/crafting_40_element",
+      "zh": "放射性剂量仪",
+      "en": "Dosimeter"
+    },
+    "41": {
+      "id": "industrialupgrade:crafting_elements/crafting_41_element",
+      "zh": "粉碎球",
+      "en": "Crushing Element"
+    },
+    "42": {
+      "id": "industrialupgrade:crafting_elements/crafting_42_element",
+      "zh": "控制器",
+      "en": "Controller"
+    },
+    "43": {
+      "id": "industrialupgrade:crafting_elements/crafting_43_element",
+      "zh": "元件:水箱",
+      "en": "Sensor: Tank"
+    },
+    "44": {
+      "id": "industrialupgrade:crafting_elements/crafting_44_element",
+      "zh": "元件:一插槽",
+      "en": "Sensor: Slot"
+    },
+    "45": {
+      "id": "industrialupgrade:crafting_elements/crafting_45_element",
+      "zh": "元件:改良水箱",
+      "en": "Sensor: Improved Tank"
+    },
+    "46": {
+      "id": "industrialupgrade:crafting_elements/crafting_46_element",
+      "zh": "真空腔室",
+      "en": "Empty Container"
+    },
+    "47": {
+      "id": "industrialupgrade:crafting_elements/crafting_47_element",
+      "zh": "元件:双插槽",
+      "en": "Sensor: Dual Slot"
+    },
+    "48": {
+      "id": "industrialupgrade:crafting_elements/crafting_48_element",
+      "zh": "元件:高级水箱",
+      "en": "Sensor: Advanced Tank"
+    },
+    "49": {
+      "id": "industrialupgrade:crafting_elements/crafting_49_element",
+      "zh": "元件:三插槽",
+      "en": "Sensor: Triple Slot"
+    },
+    "50": {
+      "id": "industrialupgrade:crafting_elements/crafting_50_element",
+      "zh": "元件:完美水箱",
+      "en": "Sensor: Perfect Tank"
+    },
+    "51": {
+      "id": "industrialupgrade:crafting_elements/crafting_51_element",
+      "zh": "元件:四插槽",
+      "en": "Sensor: Quad Slot"
+    },
+    "52": {
+      "id": "industrialupgrade:crafting_elements/crafting_52_element",
+      "zh": "元件:八插槽",
+      "en": "Sensor: 8x Slot"
+    },
+    "53": {
+      "id": "industrialupgrade:crafting_elements/crafting_53_element",
+      "zh": "元件:矿石",
+      "en": "Sensor: Ore"
+    },
+    "54": {
+      "id": "industrialupgrade:crafting_elements/crafting_54_element",
+      "zh": "元件:围拢",
+      "en": "Sensor: Mob"
+    },
+    "55": {
+      "id": "industrialupgrade:crafting_elements/crafting_55_element",
+      "zh": "元件:浓缩",
+      "en": "Sensor: Enrichment"
+    },
+    "56": {
+      "id": "industrialupgrade:crafting_elements/crafting_56_element",
+      "zh": "元件:聚合",
+      "en": "Sensor: Fusion"
+    },
+    "57": {
+      "id": "industrialupgrade:crafting_elements/crafting_57_element",
+      "zh": "元件:RF",
+      "en": "Sensor: RF"
+    },
+    "58": {
+      "id": "industrialupgrade:crafting_elements/crafting_58_element",
+      "zh": "元件:复制机",
+      "en": "Sensor: Replicator"
+    },
+    "59": {
+      "id": "industrialupgrade:crafting_elements/crafting_59_element",
+      "zh": "元件:刷怪",
+      "en": "Sensor: Spawner"
+    },
+    "60": {
+      "id": "industrialupgrade:crafting_elements/crafting_60_element",
+      "zh": "元件:能源",
+      "en": "Sensor: Energy"
+    },
+    "61": {
+      "id": "industrialupgrade:crafting_elements/crafting_61_element",
+      "zh": "元件:大地",
+      "en": "Sensor: Earth"
+    },
+    "62": {
+      "id": "industrialupgrade:crafting_elements/crafting_62_element",
+      "zh": "元件:油漆",
+      "en": "Sensor: Paint"
+    },
+    "63": {
+      "id": "industrialupgrade:crafting_elements/crafting_63_element",
+      "zh": "元件:挤压",
+      "en": "Sensor: Press"
+    },
+    "64": {
+      "id": "industrialupgrade:crafting_elements/crafting_64_element",
+      "zh": "元件:播种",
+      "en": "Sensor: Plant"
+    },
+    "65": {
+      "id": "industrialupgrade:crafting_elements/crafting_65_element",
+      "zh": "元件:塑料合成",
+      "en": "Sensor: Plastic Synthesis"
+    },
+    "66": {
+      "id": "industrialupgrade:crafting_elements/crafting_66_element",
+      "zh": "元件:增强",
+      "en": "Sensor: Enhancement"
+    },
+    "67": {
+      "id": "industrialupgrade:crafting_elements/crafting_67_element",
+      "zh": "元件:退化",
+      "en": "Sensor: Deterioration"
+    },
+    "68": {
+      "id": "industrialupgrade:crafting_elements/crafting_68_element",
+      "zh": "元件:QE",
+      "en": "Sensor: QE"
+    },
+    "69": {
+      "id": "industrialupgrade:crafting_elements/crafting_69_element",
+      "zh": "元件:粉碎",
+      "en": "Sensor: Macerator"
+    },
+    "70": {
+      "id": "industrialupgrade:crafting_elements/crafting_70_element",
+      "zh": "热水箱",
+      "en": "Heating Container"
+    },
+    "71": {
+      "id": "industrialupgrade:crafting_elements/crafting_71_element",
+      "zh": "元件:气流",
+      "en": "Sensor: Wind"
+    },
+    "72": {
+      "id": "industrialupgrade:crafting_elements/crafting_72_element",
+      "zh": "冷却水箱",
+      "en": "Cooling Container"
+    },
+    "73": {
+      "id": "industrialupgrade:crafting_elements/crafting_73_element",
+      "zh": "元件:板",
+      "en": "Sensor: Board"
+    },
+    "74": {
+      "id": "industrialupgrade:crafting_elements/crafting_74_element",
+      "zh": "元件:合金",
+      "en": "Sensor: Alloy"
+    },
+    "75": {
+      "id": "industrialupgrade:crafting_elements/crafting_75_element",
+      "zh": "元件:转换",
+      "en": "Sensor: Transforms"
+    },
+    "76": {
+      "id": "industrialupgrade:crafting_elements/crafting_76_element",
+      "zh": "挤压部件",
+      "en": "Press"
+    },
+    "77": {
+      "id": "industrialupgrade:crafting_elements/crafting_77_element",
+      "zh": "高级元件:挤压",
+      "en": "Advanced Sensor: Press"
+    },
+    "78": {
+      "id": "industrialupgrade:crafting_elements/crafting_78_element",
+      "zh": "高级元件:粉碎",
+      "en": "Advanced Sensor: Macerator"
+    },
+    "79": {
+      "id": "industrialupgrade:crafting_elements/crafting_79_element",
+      "zh": "元件:SE",
+      "en": "Sensor: SE"
+    },
+    "80": {
+      "id": "industrialupgrade:crafting_elements/crafting_80_element",
+      "zh": "高级元件:气流",
+      "en": "Advanced Sensor: Wind"
+    },
+    "81": {
+      "id": "industrialupgrade:crafting_elements/crafting_81_element",
+      "zh": "高级元件:水",
+      "en": "Advanced Sensor: Water"
+    },
+    "82": {
+      "id": "industrialupgrade:crafting_elements/crafting_82_element",
+      "zh": "高级元件:地热",
+      "en": "Advanced Sensor: Geothermal"
+    },
+    "83": {
+      "id": "industrialupgrade:crafting_elements/crafting_83_element",
+      "zh": "高级元件:流体",
+      "en": "Advanced Sensor: Liquid"
+    },
+    "84": {
+      "id": "industrialupgrade:crafting_elements/crafting_84_element",
+      "zh": "高级元件:核辐射",
+      "en": "Advanced Sensor: Reactor Residue"
+    },
+    "85": {
+      "id": "industrialupgrade:crafting_elements/crafting_85_element",
+      "zh": "高级元件:蒸汽",
+      "en": "Advanced Sensor: Steam"
+    },
+    "86": {
+      "id": "industrialupgrade:crafting_elements/crafting_86_element",
+      "zh": "高级元件:精炼",
+      "en": "Advanced Sensor: Refining"
+    },
+    "87": {
+      "id": "industrialupgrade:crafting_elements/crafting_87_element",
+      "zh": "高级元件:矿石粉碎",
+      "en": "Advanced Sensor: Ore Flushing"
+    },
+    "88": {
+      "id": "industrialupgrade:crafting_elements/crafting_88_element",
+      "zh": "高级元件:辐射",
+      "en": "Advanced Sensor: Radiation"
+    },
+    "89": {
+      "id": "industrialupgrade:crafting_elements/crafting_89_element",
+      "zh": "高级元件:反应炉温度",
+      "en": "Advanced Sensor: Reactor Temperature"
+    },
+    "90": {
+      "id": "industrialupgrade:crafting_elements/crafting_90_element",
+      "zh": "元件:无线",
+      "en": "Sensor: Wireless"
+    },
+    "91": {
+      "id": "industrialupgrade:crafting_elements/crafting_91_element",
+      "zh": "高级元件:热量",
+      "en": "Advanced Sensor: Thermal"
+    },
+    "92": {
+      "id": "industrialupgrade:crafting_elements/crafting_92_element",
+      "zh": "高级控制器",
+      "en": "Advanced Controller"
+    },
+    "93": {
+      "id": "industrialupgrade:crafting_elements/crafting_93_element",
+      "zh": "高级元件:复制机",
+      "en": "Advanced Sensor: Replicator"
+    },
+    "94": {
+      "id": "industrialupgrade:crafting_elements/crafting_94_element",
+      "zh": "高级元件:大地",
+      "en": "Advanced Sensor: Earth"
+    },
+    "95": {
+      "id": "industrialupgrade:crafting_elements/crafting_95_element",
+      "zh": "高级元件:作物",
+      "en": "Advanced Sensor: Plants"
+    },
+    "96": {
+      "id": "industrialupgrade:crafting_elements/crafting_96_element",
+      "zh": "高级电动机",
+      "en": "Advanced Electric Motor"
+    },
+    "97": {
+      "id": "industrialupgrade:crafting_elements/crafting_97_element",
+      "zh": "防毒面具",
+      "en": "Gas Mask"
+    },
+    "98": {
+      "id": "industrialupgrade:crafting_elements/crafting_98_element",
+      "zh": "元件:石油合成",
+      "en": "Sensor: Oil Synthesis"
+    },
+    "99": {
+      "id": "industrialupgrade:crafting_elements/crafting_99_element",
+      "zh": "元件:聚变辐射",
+      "en": "Sensor: Radiation Fusion"
+    },
+    "100": {
+      "id": "industrialupgrade:crafting_elements/crafting_100_element",
+      "zh": "元件:合成",
+      "en": "Sensor: Synthesis"
+    },
+    "101": {
+      "id": "industrialupgrade:crafting_elements/crafting_101_element",
+      "zh": "元件:水",
+      "en": "Sensor: Water"
+    },
+    "102": {
+      "id": "industrialupgrade:crafting_elements/crafting_102_element",
+      "zh": "完美元件:挤压",
+      "en": "Perfect Sensor: Press"
+    },
+    "103": {
+      "id": "industrialupgrade:crafting_elements/crafting_103_element",
+      "zh": "完美元件:粉碎",
+      "en": "Perfect Sensor: Macerator"
+    },
+    "104": {
+      "id": "industrialupgrade:crafting_elements/crafting_104_element",
+      "zh": "完美元件:气流",
+      "en": "Perfect Sensor: Wind"
+    },
+    "105": {
+      "id": "industrialupgrade:crafting_elements/crafting_105_element",
+      "zh": "完美元件:水",
+      "en": "Perfect Sensor: Water"
+    },
+    "106": {
+      "id": "industrialupgrade:crafting_elements/crafting_106_element",
+      "zh": "完美元件:地热",
+      "en": "Perfect Sensor: Geothermal"
+    },
+    "107": {
+      "id": "industrialupgrade:crafting_elements/crafting_107_element",
+      "zh": "完美元件:流体",
+      "en": "Perfect Sensor: Liquid"
+    },
+    "108": {
+      "id": "industrialupgrade:crafting_elements/crafting_108_element",
+      "zh": "完美元件:聚变辐射",
+      "en": "Perfect Sensor: Reactor Residue"
+    },
+    "109": {
+      "id": "industrialupgrade:crafting_elements/crafting_109_element",
+      "zh": "完美元件:蒸汽",
+      "en": "Perfect Sensor: Steam"
+    },
+    "110": {
+      "id": "industrialupgrade:crafting_elements/crafting_110_element",
+      "zh": "完美元件:精炼",
+      "en": "Perfect Sensor: Refining"
+    },
+    "111": {
+      "id": "industrialupgrade:crafting_elements/crafting_111_element",
+      "zh": "完美元件:矿石粉碎",
+      "en": "Perfect Sensor: Ore Flushing"
+    },
+    "112": {
+      "id": "industrialupgrade:crafting_elements/crafting_112_element",
+      "zh": "元件:空气",
+      "en": "Sensor: Air"
+    },
+    "113": {
+      "id": "industrialupgrade:crafting_elements/crafting_113_element",
+      "zh": "完美元件:辐射",
+      "en": "Perfect Sensor: Radiation"
+    },
+    "114": {
+      "id": "industrialupgrade:crafting_elements/crafting_114_element",
+      "zh": "完美元件:反应炉温度",
+      "en": "Perfect Sensor: Reactor Temperature"
+    },
+    "115": {
+      "id": "industrialupgrade:crafting_elements/crafting_115_element",
+      "zh": "完美元件:热量",
+      "en": "Perfect Sensor: Thermal"
+    },
+    "116": {
+      "id": "industrialupgrade:crafting_elements/crafting_116_element",
+      "zh": "完美控制器",
+      "en": "Perfect Controller"
+    },
+    "117": {
+      "id": "industrialupgrade:crafting_elements/crafting_117_element",
+      "zh": "完美元件:复制机",
+      "en": "Perfect Sensor: Replicator"
+    },
+    "118": {
+      "id": "industrialupgrade:crafting_elements/crafting_118_element",
+      "zh": "完美元件:大地",
+      "en": "Perfect Sensor: Earth"
+    },
+    "119": {
+      "id": "industrialupgrade:crafting_elements/crafting_119_element",
+      "zh": "完美元件:作物",
+      "en": "Perfect Sensor: Plants"
+    },
+    "120": {
+      "id": "industrialupgrade:crafting_elements/crafting_120_element",
+      "zh": "完美电动机",
+      "en": "Perfect Electric Motor"
+    },
+    "121": {
+      "id": "industrialupgrade:crafting_elements/crafting_121_element",
+      "zh": "科技渔网",
+      "en": "Technical Fishing Net"
+    },
+    "122": {
+      "id": "industrialupgrade:crafting_elements/crafting_122_element",
+      "zh": "管道模板",
+      "en": "Pipe Template"
+    },
+    "123": {
+      "id": "industrialupgrade:crafting_elements/crafting_123_element",
+      "zh": "元件:蒸发",
+      "en": "Sensor: Evaporation"
+    },
+    "124": {
+      "id": "industrialupgrade:crafting_elements/crafting_124_element",
+      "zh": "元件:装配",
+      "en": "Sensor: Combination"
+    },
+    "125": {
+      "id": "industrialupgrade:crafting_elements/crafting_125_element",
+      "zh": "改良元件:挤出机",
+      "en": "Improved Sensor: Extruder"
+    },
+    "126": {
+      "id": "industrialupgrade:crafting_elements/crafting_126_element",
+      "zh": "高级元件:挤出机",
+      "en": "Advanced Sensor: Extruder"
+    },
+    "127": {
+      "id": "industrialupgrade:crafting_elements/crafting_127_element",
+      "zh": "完美元件:挤出机",
+      "en": "Perfect Sensor: Extruder"
+    },
+    "128": {
+      "id": "industrialupgrade:crafting_elements/crafting_128_element",
+      "zh": "元件:工艺",
+      "en": "Sensor: Craft"
+    },
+    "129": {
+      "id": "industrialupgrade:crafting_elements/crafting_129_element",
+      "zh": "改良元件:工艺",
+      "en": "Improved Sensor: Craft"
+    },
+    "130": {
+      "id": "industrialupgrade:crafting_elements/crafting_130_element",
+      "zh": "高级元件:工艺",
+      "en": "Advanced Sensor: Craft"
+    },
+    "131": {
+      "id": "industrialupgrade:crafting_elements/crafting_131_element",
+      "zh": "完美元件:工艺",
+      "en": "Perfect Sensor: Craft"
+    },
+    "132": {
+      "id": "industrialupgrade:crafting_elements/crafting_132_element",
+      "zh": "元件:自动裁切",
+      "en": "Sensor: Auto Cutter"
+    },
+    "133": {
+      "id": "industrialupgrade:crafting_elements/crafting_133_element",
+      "zh": "改良元件:自动裁切",
+      "en": "Improved Sensor: Auto Cutter"
+    },
+    "134": {
+      "id": "industrialupgrade:crafting_elements/crafting_134_element",
+      "zh": "高级元件:自动裁切",
+      "en": "Advanced Sensor: Automaton Cutter"
+    },
+    "135": {
+      "id": "industrialupgrade:crafting_elements/crafting_135_element",
+      "zh": "改良元件:混合",
+      "en": "Enhanced Sensor: Combination"
+    },
+    "136": {
+      "id": "industrialupgrade:crafting_elements/crafting_136_element",
+      "zh": "完美元件:自动裁切",
+      "en": "Perfect Sensor: Automaton Cutter"
+    },
+    "137": {
+      "id": "industrialupgrade:crafting_elements/crafting_137_element",
+      "zh": "电镀外壳",
+      "en": "Machine Casing"
+    },
+    "138": {
+      "id": "industrialupgrade:crafting_elements/crafting_138_element",
+      "zh": "改良电镀外壳",
+      "en": "Improved Machine Casing"
+    },
+    "139": {
+      "id": "industrialupgrade:crafting_elements/crafting_139_element",
+      "zh": "高级电镀外壳",
+      "en": "Advanced Machine Casing"
+    },
+    "140": {
+      "id": "industrialupgrade:crafting_elements/crafting_140_element",
+      "zh": "完美电镀外壳",
+      "en": "Perfect Machine Casing"
+    },
+    "141": {
+      "id": "industrialupgrade:crafting_elements/crafting_141_element",
+      "zh": "萃取器",
+      "en": "Extractor Element"
+    },
+    "142": {
+      "id": "industrialupgrade:crafting_elements/crafting_142_element",
+      "zh": "挤出机",
+      "en": "Extruder Element"
+    },
+    "143": {
+      "id": "industrialupgrade:crafting_elements/crafting_143_element",
+      "zh": "反应器编码器模板",
+      "en": "Reactor Schematic Template"
+    },
+    "144": {
+      "id": "industrialupgrade:crafting_elements/crafting_144_element",
+      "zh": "切割机",
+      "en": "Cutting Machine Element"
+    },
+    "145": {
+      "id": "industrialupgrade:crafting_elements/crafting_145_element",
+      "zh": "元件:水物质",
+      "en": "Sensor: Water Matter"
+    },
+    "146": {
+      "id": "industrialupgrade:crafting_elements/crafting_146_element",
+      "zh": "完美元件:装配",
+      "en": "Advanced Sensor: Combination"
+    },
+    "147": {
+      "id": "industrialupgrade:crafting_elements/crafting_147_element",
+      "zh": "元件:大气物质",
+      "en": "Sensor: Air Matter"
+    },
+    "148": {
+      "id": "industrialupgrade:crafting_elements/crafting_148_element",
+      "zh": "元件:太阳物质",
+      "en": "Sensor: Solar Matter"
+    },
+    "149": {
+      "id": "industrialupgrade:crafting_elements/crafting_149_element",
+      "zh": "元件:月夜物质",
+      "en": "Sensor: Night Matter"
+    },
+    "150": {
+      "id": "industrialupgrade:crafting_elements/crafting_150_element",
+      "zh": "元件:地狱物质",
+      "en": "Sensor: Infernal Matter"
+    },
+    "151": {
+      "id": "industrialupgrade:crafting_elements/crafting_151_element",
+      "zh": "元件:固态物质",
+      "en": "Sensor: Solid Matter"
+    },
+    "152": {
+      "id": "industrialupgrade:crafting_elements/crafting_152_element",
+      "zh": "元件:末地物质",
+      "en": "Sensor: Edge Matter"
+    },
+    "153": {
+      "id": "industrialupgrade:crafting_elements/crafting_153_element",
+      "zh": "元件:大地物质",
+      "en": "Sensor: Earth Matter"
+    },
+    "154": {
+      "id": "industrialupgrade:crafting_elements/crafting_154_element",
+      "zh": "元件:液体储存",
+      "en": "Sensor: Liquid Storage"
+    },
+    "155": {
+      "id": "industrialupgrade:crafting_elements/crafting_155_element",
+      "zh": "元件:加速度",
+      "en": "Sensor: Acceleration"
+    },
+    "156": {
+      "id": "industrialupgrade:crafting_elements/crafting_156_element",
+      "zh": "元件:变压器",
+      "en": "Sensor: Transformer"
+    },
+    "157": {
+      "id": "industrialupgrade:crafting_elements/crafting_157_element",
+      "zh": "完美元件:装配",
+      "en": "Perfect Sensor: Combination"
+    },
+    "158": {
+      "id": "industrialupgrade:crafting_elements/crafting_158_element",
+      "zh": "元件:采石场",
+      "en": "Sensor: Quarry"
+    },
+    "159": {
+      "id": "industrialupgrade:crafting_elements/crafting_159_element",
+      "zh": "元件:提纯",
+      "en": "Sensor: Extractor"
+    },
+    "160": {
+      "id": "industrialupgrade:crafting_elements/crafting_160_element",
+      "zh": "改良元件:提纯",
+      "en": "Improved Sensor: Extractor"
+    },
+    "161": {
+      "id": "industrialupgrade:crafting_elements/crafting_161_element",
+      "zh": "高级元件:提纯",
+      "en": "Advanced Sensor: Extractor"
+    },
+    "162": {
+      "id": "industrialupgrade:crafting_elements/crafting_162_element",
+      "zh": "完美元件:提纯",
+      "en": "Perfect Sensor: Extractor"
+    },
+    "163": {
+      "id": "industrialupgrade:crafting_elements/crafting_163_element",
+      "zh": "元件:挤出机",
+      "en": "Sensor: Extruder"
+    },
+    "164": {
+      "id": "industrialupgrade:crafting_elements/crafting_164_element",
+      "zh": "轧辊组",
+      "en": "Rolling Machine Element"
+    },
+    "165": {
+      "id": "industrialupgrade:crafting_elements/crafting_165_element",
+      "zh": "元件:金属轧制",
+      "en": "Sensor: Rolling Machine"
+    },
+    "166": {
+      "id": "industrialupgrade:crafting_elements/crafting_166_element",
+      "zh": "改良元件:金属轧制",
+      "en": "Improved Sensor: Rolling Machine"
+    },
+    "167": {
+      "id": "industrialupgrade:crafting_elements/crafting_167_element",
+      "zh": "高级元件:金属轧制",
+      "en": "Advanced Sensor: Rolling Machine"
+    },
+    "168": {
+      "id": "industrialupgrade:crafting_elements/crafting_168_element",
+      "zh": "完美元件:金属轧制",
+      "en": "Perfect Sensor: Rolling Machine"
+    },
+    "169": {
+      "id": "industrialupgrade:crafting_elements/crafting_169_element",
+      "zh": "功率限制器",
+      "en": "Power Limiter"
+    },
+    "170": {
+      "id": "industrialupgrade:crafting_elements/crafting_170_element",
+      "zh": "元件:物质扫描仪",
+      "en": "Sensor: Scanner"
+    },
+    "171": {
+      "id": "industrialupgrade:crafting_elements/crafting_171_element",
+      "zh": "改良元件:物质扫描仪",
+      "en": "Improved Sensor: Scanner"
+    },
+    "172": {
+      "id": "industrialupgrade:crafting_elements/crafting_172_element",
+      "zh": "高级元件:物质扫描仪",
+      "en": "Advanced Sensor: Scanner"
+    },
+    "173": {
+      "id": "industrialupgrade:crafting_elements/crafting_173_element",
+      "zh": "完美元件:物质扫描仪",
+      "en": "Perfect Sensor: Scanner"
+    },
+    "174": {
+      "id": "industrialupgrade:crafting_elements/crafting_174_element",
+      "zh": "高级元件:SE",
+      "en": "Advanced Sensor: SE"
+    },
+    "175": {
+      "id": "industrialupgrade:crafting_elements/crafting_175_element",
+      "zh": "完美元件:SE",
+      "en": "Perfect Sensor: SE"
+    },
+    "176": {
+      "id": "industrialupgrade:crafting_elements/crafting_176_element",
+      "zh": "增强元件:SE",
+      "en": "Enhanced Sensor: SE"
+    },
+    "177": {
+      "id": "industrialupgrade:crafting_elements/crafting_177_element",
+      "zh": "高级元件:QE",
+      "en": "Advanced Sensor: QE"
+    },
+    "178": {
+      "id": "industrialupgrade:crafting_elements/crafting_178_element",
+      "zh": "完美元件:QE",
+      "en": "Perfect Sensor: QE"
+    },
+    "179": {
+      "id": "industrialupgrade:crafting_elements/crafting_179_element",
+      "zh": "增强元件:QE",
+      "en": "Enhanced Sensor: QE"
+    },
+    "180": {
+      "id": "industrialupgrade:crafting_elements/crafting_180_element",
+      "zh": "铜铁格架 (1)",
+      "en": "Horizontal Copper-Iron Binding Pipe"
+    },
+    "181": {
+      "id": "industrialupgrade:crafting_elements/crafting_181_element",
+      "zh": "铜铁格架 (2)",
+      "en": "Lower Copper-Iron Binding Pipe"
+    },
+    "182": {
+      "id": "industrialupgrade:crafting_elements/crafting_182_element",
+      "zh": "铜铁格架 (3)",
+      "en": "Vertical Copper-Iron Binding Pipe"
+    },
+    "183": {
+      "id": "industrialupgrade:crafting_elements/crafting_183_element",
+      "zh": "铜铁格架 (4)",
+      "en": "Upper Copper-Iron Binding Pipe"
+    },
+    "184": {
+      "id": "industrialupgrade:crafting_elements/crafting_184_element",
+      "zh": "上管座",
+      "en": "Bottom Rod"
+    },
+    "185": {
+      "id": "industrialupgrade:crafting_elements/crafting_185_element",
+      "zh": "下管座",
+      "en": "Top Rod"
+    },
+    "186": {
+      "id": "industrialupgrade:crafting_elements/crafting_186_element",
+      "zh": "左包覆层",
+      "en": "Left Piece of Rod"
+    },
+    "187": {
+      "id": "industrialupgrade:crafting_elements/crafting_187_element",
+      "zh": "右包覆层",
+      "en": "Right Rod"
+    },
+    "188": {
+      "id": "industrialupgrade:crafting_elements/crafting_188_element",
+      "zh": "硬铝格架 (1)",
+      "en": "Horizontal Duralumin-Silver Binding Pipe"
+    },
+    "189": {
+      "id": "industrialupgrade:crafting_elements/crafting_189_element",
+      "zh": "硬铝格架 (2)",
+      "en": "Vertical Duralumin-Silver Binding Pipe"
+    },
+    "190": {
+      "id": "industrialupgrade:crafting_elements/crafting_190_element",
+      "zh": "硬铝格架 (3)",
+      "en": "Upper Duralumin-Silver Binding Pipe"
+    },
+    "191": {
+      "id": "industrialupgrade:crafting_elements/crafting_191_element",
+      "zh": "硬铝格架 (4)",
+      "en": "Lower Duralumin-Silver Binding Pipe"
+    },
+    "192": {
+      "id": "industrialupgrade:crafting_elements/crafting_192_element",
+      "zh": "改良型 右包覆层",
+      "en": "Improved Rod Right"
+    },
+    "193": {
+      "id": "industrialupgrade:crafting_elements/crafting_193_element",
+      "zh": "改良型 左包覆层",
+      "en": "Improved Rod Left"
+    },
+    "194": {
+      "id": "industrialupgrade:crafting_elements/crafting_194_element",
+      "zh": "改良型 上管座",
+      "en": "Improved Rod Top"
+    },
+    "195": {
+      "id": "industrialupgrade:crafting_elements/crafting_195_element",
+      "zh": "改良型 下管座",
+      "en": "Improved Rod Bottom"
+    },
+    "196": {
+      "id": "industrialupgrade:crafting_elements/crafting_196_element",
+      "zh": "元件:蒸馏器",
+      "en": "Sensor: Distiller"
+    },
+    "197": {
+      "id": "industrialupgrade:crafting_elements/crafting_197_element",
+      "zh": "高级元件:蒸馏器",
+      "en": "Advanced Sensor: Distiller"
+    },
+    "198": {
+      "id": "industrialupgrade:crafting_elements/crafting_198_element",
+      "zh": "完美元件:蒸馏器",
+      "en": "Perfect Sensor: Distiller"
+    },
+    "199": {
+      "id": "industrialupgrade:crafting_elements/crafting_199_element",
+      "zh": "改良元件:蒸馏器",
+      "en": "Improved Sensor: Distiller"
+    },
+    "200": {
+      "id": "industrialupgrade:crafting_elements/crafting_200_element",
+      "zh": "轧辊",
+      "en": "Rolling Machine Part"
+    },
+    "201": {
+      "id": "industrialupgrade:crafting_elements/crafting_201_element",
+      "zh": "蒸馏器",
+      "en": "Distiller Element"
+    },
+    "202": {
+      "id": "industrialupgrade:crafting_elements/crafting_202_element",
+      "zh": "高级元件:矿物",
+      "en": "Advanced Sensor: Mineral"
+    },
+    "203": {
+      "id": "industrialupgrade:crafting_elements/crafting_203_element",
+      "zh": "完美元件:矿物",
+      "en": "Perfect Sensor: Mineral"
+    },
+    "204": {
+      "id": "industrialupgrade:crafting_elements/crafting_204_element",
+      "zh": "改良元件:矿物",
+      "en": "Improved Sensor: Mineral"
+    },
+    "205": {
+      "id": "industrialupgrade:crafting_elements/crafting_205_element",
+      "zh": "元件:矿物",
+      "en": "Sensor: Mineral"
+    },
+    "206": {
+      "id": "industrialupgrade:crafting_elements/crafting_206_element",
+      "zh": "元件:低压变压器",
+      "en": "Sensor: LV Transformer"
+    },
+    "207": {
+      "id": "industrialupgrade:crafting_elements/crafting_207_element",
+      "zh": "元件:中压变压器",
+      "en": "Sensor: MV Transformer"
+    },
+    "208": {
+      "id": "industrialupgrade:crafting_elements/crafting_208_element",
+      "zh": "元件:高压变压器",
+      "en": "Sensor: HV Transformer"
+    },
+    "209": {
+      "id": "industrialupgrade:crafting_elements/crafting_209_element",
+      "zh": "元件:超高压变压器",
+      "en": "Sensor: EV Transformer"
+    },
+    "210": {
+      "id": "industrialupgrade:crafting_elements/crafting_210_element",
+      "zh": "元件:特高压变压器",
+      "en": "Sensor: UV Transformer"
+    },
+    "211": {
+      "id": "industrialupgrade:crafting_elements/crafting_211_element",
+      "zh": "元件:终极变压器",
+      "en": "Sensor: LkV Transformer"
+    },
+    "212": {
+      "id": "industrialupgrade:crafting_elements/crafting_212_element",
+      "zh": "元件:临界变压器",
+      "en": "Sensor: MkV Transformer"
+    },
+    "213": {
+      "id": "industrialupgrade:crafting_elements/crafting_213_element",
+      "zh": "元件:特异变压器",
+      "en": "Sensor: HkV Transformer"
+    },
+    "214": {
+      "id": "industrialupgrade:crafting_elements/crafting_214_element",
+      "zh": "元件:相态变压器",
+      "en": "Sensor: EkV Transformer"
+    },
+    "215": {
+      "id": "industrialupgrade:crafting_elements/crafting_215_element",
+      "zh": "元件:零点变压器",
+      "en": "Sensor: UkV Transformer"
+    },
+    "216": {
+      "id": "industrialupgrade:crafting_elements/crafting_216_element",
+      "zh": "元件:超弦变压器",
+      "en": "Sensor: MegaV Transformer"
+    },
+    "217": {
+      "id": "industrialupgrade:crafting_elements/crafting_217_element",
+      "zh": "元件:垂钓",
+      "en": "Sensor: Angler"
+    },
+    "218": {
+      "id": "industrialupgrade:crafting_elements/crafting_218_element",
+      "zh": "元件:机械冲压",
+      "en": "Sensor: Mechanical Stamp"
+    },
+    "219": {
+      "id": "industrialupgrade:crafting_elements/crafting_219_element",
+      "zh": "元件:冶炼电炉",
+      "en": "Sensor: Electric Furnace"
+    },
+    "220": {
+      "id": "industrialupgrade:crafting_elements/crafting_220_element",
+      "zh": "高级元件:机械冲压",
+      "en": "Advanced Sensor: Mechanical Stamp"
+    },
+    "221": {
+      "id": "industrialupgrade:crafting_elements/crafting_221_element",
+      "zh": "高级元件:冶炼电炉",
+      "en": "Advanced Sensor: Electric Furnace"
+    },
+    "222": {
+      "id": "industrialupgrade:crafting_elements/crafting_222_element",
+      "zh": "完美元件:机械冲压",
+      "en": "Perfect Sensor: Mechanical Stamp"
+    },
+    "223": {
+      "id": "industrialupgrade:crafting_elements/crafting_223_element",
+      "zh": "完美元件:冶炼电炉",
+      "en": "Perfect Sensor: Electric Furnace"
+    },
+    "224": {
+      "id": "industrialupgrade:crafting_elements/crafting_224_element",
+      "zh": "改良元件:机械冲压",
+      "en": "Improved Sensor: Mechanical Stamp"
+    },
+    "225": {
+      "id": "industrialupgrade:crafting_elements/crafting_225_element",
+      "zh": "改良元件:冶炼电炉",
+      "en": "Improved Sensor: Electric Furnace"
+    },
+    "226": {
+      "id": "industrialupgrade:crafting_elements/crafting_226_element",
+      "zh": "元件:分析仪",
+      "en": "Sensor: Analyzer"
+    },
+    "227": {
+      "id": "industrialupgrade:crafting_elements/crafting_227_element",
+      "zh": "元件:圆石",
+      "en": "Sensor: Cobblestone"
+    },
+    "228": {
+      "id": "industrialupgrade:crafting_elements/crafting_228_element",
+      "zh": "元件:岩浆",
+      "en": "Sensor: Lava"
+    },
+    "229": {
+      "id": "industrialupgrade:crafting_elements/crafting_229_element",
+      "zh": "元件:黑曜石",
+      "en": "Sensor: Obsidian"
+    },
+    "230": {
+      "id": "industrialupgrade:crafting_elements/crafting_230_element",
+      "zh": "元件:沙子",
+      "en": "Sensor: Sand"
+    },
+    "231": {
+      "id": "industrialupgrade:crafting_elements/crafting_231_element",
+      "zh": "元件:沙砾",
+      "en": "Sensor: Gravel"
+    },
+    "232": {
+      "id": "industrialupgrade:crafting_elements/crafting_232_element",
+      "zh": "高级元件:发电机",
+      "en": "Advanced Sensor: Generator"
+    },
+    "233": {
+      "id": "industrialupgrade:crafting_elements/crafting_233_element",
+      "zh": "完美元件:发电机",
+      "en": "Perfect Sensor: Generator"
+    },
+    "234": {
+      "id": "industrialupgrade:crafting_elements/crafting_234_element",
+      "zh": "改良元件:发电机",
+      "en": "Improved Sensor: Generator"
+    },
+    "235": {
+      "id": "industrialupgrade:crafting_elements/crafting_235_element",
+      "zh": "改良元件:合金",
+      "en": "Improved Sensor: Alloy"
+    },
+    "236": {
+      "id": "industrialupgrade:crafting_elements/crafting_236_element",
+      "zh": "元件:汽油",
+      "en": "Sensor: Gasoline"
+    },
+    "237": {
+      "id": "industrialupgrade:crafting_elements/crafting_237_element",
+      "zh": "元件:氢气",
+      "en": "Sensor: Hydrogen"
+    },
+    "238": {
+      "id": "industrialupgrade:crafting_elements/crafting_238_element",
+      "zh": "元件:氦气",
+      "en": "Sensor: Helium"
+    },
+    "239": {
+      "id": "industrialupgrade:crafting_elements/crafting_239_element",
+      "zh": "元件:柴油",
+      "en": "Sensor: Diesel"
+    },
+    "240": {
+      "id": "industrialupgrade:crafting_elements/crafting_240_element",
+      "zh": "元件:流体物质",
+      "en": "Sensor: Liquid Matter"
+    },
+    "241": {
+      "id": "industrialupgrade:crafting_elements/crafting_241_element",
+      "zh": "元件:泵",
+      "en": "Sensor: Pump"
+    },
+    "242": {
+      "id": "industrialupgrade:crafting_elements/crafting_242_element",
+      "zh": "元件:反应室",
+      "en": "Sensor: Reactor Chamber"
+    },
+    "243": {
+      "id": "industrialupgrade:crafting_elements/crafting_243_element",
+      "zh": "元件:装配",
+      "en": "Sensor: Assembler"
+    },
+    "244": {
+      "id": "industrialupgrade:crafting_elements/crafting_244_element",
+      "zh": "元件:电解机",
+      "en": "Sensor: Electrolyzer"
+    },
+    "245": {
+      "id": "industrialupgrade:crafting_elements/crafting_245_element",
+      "zh": "高级元件:泵",
+      "en": "Advanced Sensor: Pump"
+    },
+    "246": {
+      "id": "industrialupgrade:crafting_elements/crafting_246_element",
+      "zh": "高级元件:反应室",
+      "en": "Advanced Sensor: Reactor Chamber"
+    },
+    "247": {
+      "id": "industrialupgrade:crafting_elements/crafting_247_element",
+      "zh": "完美元件:反应室",
+      "en": "Perfect Sensor: Reactor Chamber"
+    },
+    "248": {
+      "id": "industrialupgrade:crafting_elements/crafting_248_element",
+      "zh": "改良元件:泵",
+      "en": "Improved Sensor: Pump"
+    },
+    "249": {
+      "id": "industrialupgrade:crafting_elements/crafting_249_element",
+      "zh": "改良元件:反应室",
+      "en": "Improved Sensor: Reactor Chamber"
+    },
+    "250": {
+      "id": "industrialupgrade:crafting_elements/crafting_250_element",
+      "zh": "元件:量子采石场",
+      "en": "Sensor: Quantum Quarry"
+    },
+    "251": {
+      "id": "industrialupgrade:crafting_elements/crafting_251_element",
+      "zh": "元件:石油",
+      "en": "Sensor: Oil"
+    },
+    "252": {
+      "id": "industrialupgrade:crafting_elements/crafting_252_element",
+      "zh": "高级元件:采石场",
+      "en": "Advanced Sensor: Quarry"
+    },
+    "253": {
+      "id": "industrialupgrade:crafting_elements/crafting_253_element",
+      "zh": "高级元件:量子采石场",
+      "en": "Advanced Sensor: Quantum Quarry"
+    },
+    "254": {
+      "id": "industrialupgrade:crafting_elements/crafting_254_element",
+      "zh": "完美元件:采石场",
+      "en": "Perfect Sensor: Quarry"
+    },
+    "255": {
+      "id": "industrialupgrade:crafting_elements/crafting_255_element",
+      "zh": "完美元件:量子采石场",
+      "en": "Perfect Sensor: Quantum Quarry"
+    },
+    "256": {
+      "id": "industrialupgrade:crafting_elements/crafting_256_element",
+      "zh": "改良元件:采石场",
+      "en": "Improved Sensor: Quarry"
+    },
+    "257": {
+      "id": "industrialupgrade:crafting_elements/crafting_257_element",
+      "zh": "改良元件:量子采石场",
+      "en": "Improved Sensor: Quantum Quarry"
+    },
+    "258": {
+      "id": "industrialupgrade:crafting_elements/crafting_258_element",
+      "zh": "元件:红石发电机",
+      "en": "Sensor: Redstone Generator"
+    },
+    "259": {
+      "id": "industrialupgrade:crafting_elements/crafting_259_element",
+      "zh": "高级元件:红石发电机",
+      "en": "Advanced Sensor: Redstone Generator"
+    },
+    "260": {
+      "id": "industrialupgrade:crafting_elements/crafting_260_element",
+      "zh": "完美元件:红石发电机",
+      "en": "Perfect Sensor: Redstone Generator"
+    },
+    "261": {
+      "id": "industrialupgrade:crafting_elements/crafting_261_element",
+      "zh": "改良元件:红石发电机",
+      "en": "Improved Sensor: Redstone Generator"
+    },
+    "262": {
+      "id": "industrialupgrade:crafting_elements/crafting_262_element",
+      "zh": "元件:焊接",
+      "en": "Sensor: Welder"
+    },
+    "263": {
+      "id": "industrialupgrade:crafting_elements/crafting_263_element",
+      "zh": "元件:燃气发电机",
+      "en": "Sensor: Gas Generator"
+    },
+    "264": {
+      "id": "industrialupgrade:crafting_elements/crafting_264_element",
+      "zh": "元件:装罐",
+      "en": "Sensor: Canning"
+    },
+    "265": {
+      "id": "industrialupgrade:crafting_elements/crafting_265_element",
+      "zh": "元件:填充",
+      "en": "Sensor: Filler"
+    },
+    "266": {
+      "id": "industrialupgrade:crafting_elements/crafting_266_element",
+      "zh": "元件:红石",
+      "en": "Sensor: Redstone"
+    },
+    "267": {
+      "id": "industrialupgrade:crafting_elements/crafting_267_element",
+      "zh": "元件:混合",
+      "en": "Sensor: Mixer"
+    },
+    "268": {
+      "id": "industrialupgrade:crafting_elements/crafting_268_element",
+      "zh": "元件:传送",
+      "en": "Sensor: Teleportation"
+    },
+    "269": {
+      "id": "industrialupgrade:crafting_elements/crafting_269_element",
+      "zh": "传送水晶",
+      "en": "Teleport Crystal"
+    },
+    "270": {
+      "id": "industrialupgrade:crafting_elements/crafting_270_element",
+      "zh": "传送核心",
+      "en": "Teleporter Core"
+    },
+    "271": {
+      "id": "industrialupgrade:crafting_elements/crafting_271_element",
+      "zh": "橡胶",
+      "en": "Rubber"
+    },
+    "272": {
+      "id": "industrialupgrade:crafting_elements/crafting_272_element",
+      "zh": "电子电路",
+      "en": "Electronic Circuit"
+    },
+    "273": {
+      "id": "industrialupgrade:crafting_elements/crafting_273_element",
+      "zh": "高级电路",
+      "en": "Advanced Circuit"
+    },
+    "274": {
+      "id": "industrialupgrade:crafting_elements/crafting_274_element",
+      "zh": "复合金属板",
+      "en": "Advanced Alloy"
+    },
+    "275": {
+      "id": "industrialupgrade:crafting_elements/crafting_275_element",
+      "zh": "工业铱星",
+      "en": "Industrial Iridium"
+    },
+    "276": {
+      "id": "industrialupgrade:crafting_elements/crafting_276_element",
+      "zh": "电动机",
+      "en": "Electric Motor"
+    },
+    "277": {
+      "id": "industrialupgrade:crafting_elements/crafting_277_element",
+      "zh": "热传导器",
+      "en": "Heat Conductor"
+    },
+    "278": {
+      "id": "industrialupgrade:crafting_elements/crafting_278_element",
+      "zh": "小型驱动把手",
+      "en": "Small Power Unit"
+    },
+    "279": {
+      "id": "industrialupgrade:crafting_elements/crafting_279_element",
+      "zh": "驱动把手",
+      "en": "Power Unit"
+    },
+    "280": {
+      "id": "industrialupgrade:crafting_elements/crafting_280_element",
+      "zh": "碳纤维生料",
+      "en": "Raw Carbon Fibre"
+    },
+    "281": {
+      "id": "industrialupgrade:crafting_elements/crafting_281_element",
+      "zh": "碳网生料",
+      "en": "Raw Carbon Mesh"
+    },
+    "282": {
+      "id": "industrialupgrade:crafting_elements/crafting_282_element",
+      "zh": "碳板",
+      "en": "Carbon Plate"
+    },
+    "283": {
+      "id": "industrialupgrade:crafting_elements/crafting_283_element",
+      "zh": "煤球",
+      "en": "Coal Ball"
+    },
+    "284": {
+      "id": "industrialupgrade:crafting_elements/crafting_284_element",
+      "zh": "铜锅炉",
+      "en": "Copper Boiler"
+    },
+    "285": {
+      "id": "industrialupgrade:crafting_elements/crafting_285_element",
+      "zh": "工业铱板",
+      "en": "Industrial Iridium Plate"
+    },
+    "286": {
+      "id": "industrialupgrade:crafting_elements/crafting_286_element",
+      "zh": "煤块",
+      "en": "Coal Chunk"
+    },
+    "287": {
+      "id": "industrialupgrade:crafting_elements/crafting_287_element",
+      "zh": "废料",
+      "en": "Scrap"
+    },
+    "288": {
+      "id": "industrialupgrade:crafting_elements/crafting_288_element",
+      "zh": "废料盒",
+      "en": "Scrap Box"
+    },
+    "289": {
+      "id": "industrialupgrade:crafting_elements/crafting_289_element",
+      "zh": "建筑泡沫粉",
+      "en": "CF Powder"
+    },
+    "290": {
+      "id": "industrialupgrade:crafting_elements/crafting_290_element",
+      "zh": "生橡胶",
+      "en": "Sticky Resin"
+    },
+    "291": {
+      "id": "industrialupgrade:crafting_elements/crafting_291_element",
+      "zh": "工业铱星片",
+      "en": "Industrial Iridium Shard"
+    },
+    "292": {
+      "id": "industrialupgrade:crafting_elements/crafting_292_element",
+      "zh": "项目存储水晶(粗制)",
+      "en": "Crystal Memory (raw)"
+    },
+    "293": {
+      "id": "industrialupgrade:crafting_elements/crafting_293_element",
+      "zh": "糠",
+      "en": "Bio Chaff"
+    },
+    "294": {
+      "id": "industrialupgrade:crafting_elements/crafting_294_element",
+      "zh": "线圈",
+      "en": "Coil"
+    },
+    "295": {
+      "id": "industrialupgrade:crafting_elements/crafting_295_element",
+      "zh": "植物球",
+      "en": "Plantball"
+    },
+    "296": {
+      "id": "industrialupgrade:crafting_elements/crafting_296_element",
+      "zh": "锡罐",
+      "en": "Tin Can"
+    },
+    "297": {
+      "id": "industrialupgrade:crafting_elements/crafting_297_element",
+      "zh": "压缩煤球",
+      "en": "Compressed Coal Ball"
+    },
+    "298": {
+      "id": "industrialupgrade:crafting_elements/crafting_298_element",
+      "zh": "10k 冷却单元罐",
+      "en": "10k Coolant Cell"
+    },
+    "299": {
+      "id": "industrialupgrade:crafting_elements/crafting_299_element",
+      "zh": "30k 冷却单元罐",
+      "en": "30k Coolant Cell"
+    },
+    "300": {
+      "id": "industrialupgrade:crafting_elements/crafting_300_element",
+      "zh": "60k 冷却单元罐",
+      "en": "60k Coolant Cell"
+    },
+    "301": {
+      "id": "industrialupgrade:crafting_elements/crafting_301_element",
+      "zh": "强子安装螺丝",
+      "en": "Hadron Mounting Screw"
+    },
+    "302": {
+      "id": "industrialupgrade:crafting_elements/crafting_302_element",
+      "zh": "强子密封垫",
+      "en": "Hadron Gasket"
+    },
+    "303": {
+      "id": "industrialupgrade:crafting_elements/crafting_303_element",
+      "zh": "强子插座部件",
+      "en": "Hadron Socket Part"
+    },
+    "304": {
+      "id": "industrialupgrade:crafting_elements/crafting_304_element",
+      "zh": "强子活性物质",
+      "en": "Hadronic Active Mass"
+    },
+    "305": {
+      "id": "industrialupgrade:crafting_elements/crafting_305_element",
+      "zh": "钻石插套",
+      "en": "Diamond Brace"
+    },
+    "306": {
+      "id": "industrialupgrade:crafting_elements/crafting_306_element",
+      "zh": "重子安装螺丝",
+      "en": "Baryonic Mounting Screw"
+    },
+    "307": {
+      "id": "industrialupgrade:crafting_elements/crafting_307_element",
+      "zh": "重子密封垫",
+      "en": "Baryonic Gasket"
+    },
+    "308": {
+      "id": "industrialupgrade:crafting_elements/crafting_308_element",
+      "zh": "重子插座部件",
+      "en": "Baryonic Socket part"
+    },
+    "309": {
+      "id": "industrialupgrade:crafting_elements/crafting_309_element",
+      "zh": "重子活性物质",
+      "en": "Baryonic Active Mass"
+    },
+    "310": {
+      "id": "industrialupgrade:crafting_elements/crafting_310_element",
+      "zh": "高功率石墨棒",
+      "en": "Large Graphite Rod"
+    },
+    "311": {
+      "id": "industrialupgrade:crafting_elements/crafting_311_element",
+      "zh": "融合密封垫",
+      "en": "Hybrid Gasket"
+    },
+    "312": {
+      "id": "industrialupgrade:crafting_elements/crafting_312_element",
+      "zh": "融合插座部件",
+      "en": "Hybrid Socket Part"
+    },
+    "313": {
+      "id": "industrialupgrade:crafting_elements/crafting_313_element",
+      "zh": "完美活性物质",
+      "en": "Perfect Active Mass"
+    },
+    "314": {
+      "id": "industrialupgrade:crafting_elements/crafting_314_element",
+      "zh": "融合安装螺丝",
+      "en": "Hybrid Mounting Screw"
+    },
+    "315": {
+      "id": "industrialupgrade:crafting_elements/crafting_315_element",
+      "zh": "引力安装螺丝",
+      "en": "Gravitonic Mounting Screw"
+    },
+    "316": {
+      "id": "industrialupgrade:crafting_elements/crafting_316_element",
+      "zh": "引力密封垫",
+      "en": "Graviton Gasket"
+    },
+    "317": {
+      "id": "industrialupgrade:crafting_elements/crafting_317_element",
+      "zh": "引力插座部件",
+      "en": "Graviton Socket Part"
+    },
+    "318": {
+      "id": "industrialupgrade:crafting_elements/crafting_318_element",
+      "zh": "引力活性物质",
+      "en": "Graviton Active Mass"
+    },
+    "319": {
+      "id": "industrialupgrade:crafting_elements/crafting_319_element",
+      "zh": "石墨碎片",
+      "en": "Graphite Shard"
+    },
+    "320": {
+      "id": "industrialupgrade:crafting_elements/crafting_320_element",
+      "zh": "石墨板",
+      "en": "Graphite Plate"
+    },
+    "321": {
+      "id": "industrialupgrade:crafting_elements/crafting_321_element",
+      "zh": "安全传感器",
+      "en": "Security Sensor"
+    },
+    "322": {
+      "id": "industrialupgrade:crafting_elements/crafting_322_element",
+      "zh": "反应堆压力传感器",
+      "en": "Reactor Pressure Sensor"
+    },
+    "323": {
+      "id": "industrialupgrade:crafting_elements/crafting_323_element",
+      "zh": "元件:装配厂",
+      "en": "Sensor Factory"
+    },
+    "324": {
+      "id": "industrialupgrade:crafting_elements/crafting_324_element",
+      "zh": "反应堆数据传感器",
+      "en": "Reactor Data Acquisition Sensor"
+    },
+    "325": {
+      "id": "industrialupgrade:crafting_elements/crafting_325_element",
+      "zh": "元件:燃料棒装配器",
+      "en": "Sensor Assembly Rod"
+    },
+    "326": {
+      "id": "industrialupgrade:crafting_elements/crafting_326_element",
+      "zh": "燃料控制系统传感器",
+      "en": "Fuel control sensor"
+    },
+    "327": {
+      "id": "industrialupgrade:crafting_elements/crafting_327_element",
+      "zh": "反应堆能量控制传感器",
+      "en": "Reactor Energy Control Sensor"
+    },
+    "328": {
+      "id": "industrialupgrade:crafting_elements/crafting_328_element",
+      "zh": "元件:模块冲压",
+      "en": "Sensor: Stamp"
+    },
+    "329": {
+      "id": "industrialupgrade:crafting_elements/crafting_329_element",
+      "zh": "衍射安装螺丝",
+      "en": "Diffractive Mounting Screw"
+    },
+    "330": {
+      "id": "industrialupgrade:crafting_elements/crafting_330_element",
+      "zh": "衍射密封垫",
+      "en": "Diffractive Gasket"
+    },
+    "331": {
+      "id": "industrialupgrade:crafting_elements/crafting_331_element",
+      "zh": "衍射插座部件",
+      "en": "Diffractive Socket part"
+    },
+    "332": {
+      "id": "industrialupgrade:crafting_elements/crafting_332_element",
+      "zh": "衍射活性物质",
+      "en": "Diffractive Active Mass"
+    },
+    "333": {
+      "id": "industrialupgrade:crafting_elements/crafting_333_element",
+      "zh": "高温反应堆加速器",
+      "en": "High-Temperature Reactor Nuclear Accelerator"
+    },
+    "334": {
+      "id": "industrialupgrade:crafting_elements/crafting_334_element",
+      "zh": "石墨水冷堆加速器",
+      "en": "Graphite-Water Reactor Nuclear Accelerator"
+    },
+    "335": {
+      "id": "industrialupgrade:crafting_elements/crafting_335_element",
+      "zh": "气冷堆核心加速器",
+      "en": "Gas-Cooled Reactor Nuclear Accelerator"
+    },
+    "336": {
+      "id": "industrialupgrade:crafting_elements/crafting_336_element",
+      "zh": "流体反应堆加速器",
+      "en": "Liquid Reactor Nuclear Accelerator"
+    },
+    "337": {
+      "id": "industrialupgrade:crafting_elements/crafting_337_element",
+      "zh": "铁质插套",
+      "en": "Iron Brace"
+    },
+    "338": {
+      "id": "industrialupgrade:crafting_elements/crafting_338_element",
+      "zh": "铁质插头",
+      "en": "Iron Staple"
+    },
+    "339": {
+      "id": "industrialupgrade:crafting_elements/crafting_339_element",
+      "zh": "金质插套",
+      "en": "Golden Brace"
+    },
+    "340": {
+      "id": "industrialupgrade:crafting_elements/crafting_340_element",
+      "zh": "绝热套",
+      "en": "Insulation Cover"
+    },
+    "341": {
+      "id": "industrialupgrade:crafting_elements/crafting_341_element",
+      "zh": "绿宝石插套",
+      "en": "Emerald Brace"
+    },
+    "342": {
+      "id": "industrialupgrade:crafting_elements/crafting_342_element",
+      "zh": "核反应堆控制面板",
+      "en": "Reactor Control Interface"
+    },
+    "343": {
+      "id": "industrialupgrade:crafting_elements/crafting_343_element",
+      "zh": "铱质插头",
+      "en": "Iridium Staple"
+    },
+    "344": {
+      "id": "industrialupgrade:crafting_elements/crafting_344_element",
+      "zh": "碳化硅",
+      "en": "Silicon Carbide"
+    },
+    "345": {
+      "id": "industrialupgrade:crafting_elements/crafting_345_element",
+      "zh": "量子安装螺丝",
+      "en": "Quantum Mounting Screw"
+    },
+    "346": {
+      "id": "industrialupgrade:crafting_elements/crafting_346_element",
+      "zh": "量子密封垫",
+      "en": "Quantum Gasket"
+    },
+    "347": {
+      "id": "industrialupgrade:crafting_elements/crafting_347_element",
+      "zh": "量子插座部件",
+      "en": "Quantum Socket Part"
+    },
+    "348": {
+      "id": "industrialupgrade:crafting_elements/crafting_348_element",
+      "zh": "量子活性物质",
+      "en": "Quantum Active Mass"
+    },
+    "349": {
+      "id": "industrialupgrade:crafting_elements/crafting_349_element",
+      "zh": "夸克安装螺丝",
+      "en": "Quark Mounting Screw"
+    },
+    "350": {
+      "id": "industrialupgrade:crafting_elements/crafting_350_element",
+      "zh": "夸克密封垫",
+      "en": "Quark Gasket"
+    },
+    "351": {
+      "id": "industrialupgrade:crafting_elements/crafting_351_element",
+      "zh": "夸克插座部件",
+      "en": "Quark Socket Part"
+    },
+    "352": {
+      "id": "industrialupgrade:crafting_elements/crafting_352_element",
+      "zh": "中微子",
+      "en": "Neutrino"
+    },
+    "353": {
+      "id": "industrialupgrade:crafting_elements/crafting_353_element",
+      "zh": "夸克活性物质",
+      "en": "Quark Active Mass"
+    },
+    "354": {
+      "id": "industrialupgrade:crafting_elements/crafting_354_element",
+      "zh": "激光器",
+      "en": "Laser"
+    },
+    "355": {
+      "id": "industrialupgrade:crafting_elements/crafting_355_element",
+      "zh": "黄铜棒",
+      "en": "Brass Rod"
+    },
+    "356": {
+      "id": "industrialupgrade:crafting_elements/crafting_356_element",
+      "zh": "线轴",
+      "en": "Reinforced coil"
+    },
+    "357": {
+      "id": "industrialupgrade:crafting_elements/crafting_357_element",
+      "zh": "小功率石墨棒",
+      "en": "Small Graphite Rod"
+    },
+    "358": {
+      "id": "industrialupgrade:crafting_elements/crafting_358_element",
+      "zh": "中子安装螺丝",
+      "en": "Neutron Mounting Screw"
+    },
+    "359": {
+      "id": "industrialupgrade:crafting_elements/crafting_359_element",
+      "zh": "中子密封圈",
+      "en": "Neutron Gasket"
+    },
+    "360": {
+      "id": "industrialupgrade:crafting_elements/crafting_360_element",
+      "zh": "中子插座部件",
+      "en": "Neutron Socket Part"
+    },
+    "361": {
+      "id": "industrialupgrade:crafting_elements/crafting_361_element",
+      "zh": "中子活性物质",
+      "en": "Neutron Active Mass"
+    },
+    "362": {
+      "id": "industrialupgrade:crafting_elements/crafting_362_element",
+      "zh": "中子转相器",
+      "en": "Neutron Transmutator"
+    },
+    "363": {
+      "id": "industrialupgrade:crafting_elements/crafting_363_element",
+      "zh": "第一代高温反应堆钣金件",
+      "en": "High-Temperature Reactor Shell"
+    },
+    "364": {
+      "id": "industrialupgrade:crafting_elements/crafting_364_element",
+      "zh": "第一代气冷堆钣金件",
+      "en": "Gas-Cooled Fast Reactor Shell"
+    },
+    "365": {
+      "id": "industrialupgrade:crafting_elements/crafting_365_element",
+      "zh": "第一代石墨水冷堆钣金件",
+      "en": "Graphite-Water Reactor Shell"
+    },
+    "366": {
+      "id": "industrialupgrade:crafting_elements/crafting_366_element",
+      "zh": "第一代流体反应堆钣金件",
+      "en": "Liquid Reactor Shell"
+    },
+    "367": {
+      "id": "industrialupgrade:crafting_elements/crafting_367_element",
+      "zh": "汽缸",
+      "en": "Cylinder"
+    },
+    "368": {
+      "id": "industrialupgrade:crafting_elements/crafting_368_element",
+      "zh": "超高功率石墨棒",
+      "en": "Huge Graphite Rod"
+    },
+    "369": {
+      "id": "industrialupgrade:crafting_elements/crafting_369_element",
+      "zh": "冷却棒冲压模板",
+      "en": "Cooling Rod Stamp"
+    },
+    "370": {
+      "id": "industrialupgrade:crafting_elements/crafting_370_element",
+      "zh": "反应堆护板冲压模板",
+      "en": "Reactor Plate Stamp"
+    },
+    "371": {
+      "id": "industrialupgrade:crafting_elements/crafting_371_element",
+      "zh": "高级线轴",
+      "en": "Advanced Reinforced coil"
+    },
+    "372": {
+      "id": "industrialupgrade:crafting_elements/crafting_372_element",
+      "zh": "高级超导线圈",
+      "en": "Advanced Superconducting Coil"
+    },
+    "373": {
+      "id": "industrialupgrade:crafting_elements/crafting_373_element",
+      "zh": "高级晶体管",
+      "en": "Advanced Transistor"
+    },
+    "374": {
+      "id": "industrialupgrade:crafting_elements/crafting_374_element",
+      "zh": "第三代流体反应堆电解分离器",
+      "en": "Advanced Liquid Reactor Electrolytic Separator"
+    },
+    "375": {
+      "id": "industrialupgrade:crafting_elements/crafting_375_element",
+      "zh": "第三代高温反应堆钣金件",
+      "en": "Advanced High-Temperature Reactor Shell"
+    },
+    "376": {
+      "id": "industrialupgrade:crafting_elements/crafting_376_element",
+      "zh": "第三代气冷堆钣金件",
+      "en": "Advanced Gas Cooled Fast Reactor Shell"
+    },
+    "377": {
+      "id": "industrialupgrade:crafting_elements/crafting_377_element",
+      "zh": "第三代石墨水冷堆钣金件",
+      "en": "Advanced Graphite-Water Reactor Shell"
+    },
+    "378": {
+      "id": "industrialupgrade:crafting_elements/crafting_378_element",
+      "zh": "第三代流体反应堆钣金件",
+      "en": "Advanced Liquid Reactor Shell"
+    },
+    "379": {
+      "id": "industrialupgrade:crafting_elements/crafting_379_element",
+      "zh": "第三代石墨水冷堆电解分离器",
+      "en": "Advanced Graphite-Water Reactor Electrolytic Separator"
+    },
+    "380": {
+      "id": "industrialupgrade:crafting_elements/crafting_380_element",
+      "zh": "高级气缸",
+      "en": "Advanced Cylinder"
+    },
+    "381": {
+      "id": "industrialupgrade:crafting_elements/crafting_381_element",
+      "zh": "质子安装螺丝",
+      "en": "Proton Mounting Screw"
+    },
+    "382": {
+      "id": "industrialupgrade:crafting_elements/crafting_382_element",
+      "zh": "质子密封垫",
+      "en": "Proton Gasket"
+    },
+    "383": {
+      "id": "industrialupgrade:crafting_elements/crafting_383_element",
+      "zh": "质子插座部件",
+      "en": "Proton Socket Part"
+    },
+    "384": {
+      "id": "industrialupgrade:crafting_elements/crafting_384_element",
+      "zh": "质子活性物质",
+      "en": "Proton Active Mass"
+    },
+    "385": {
+      "id": "industrialupgrade:crafting_elements/crafting_385_element",
+      "zh": "反应堆调温器",
+      "en": "Reactor Temperature Controller"
+    },
+    "386": {
+      "id": "industrialupgrade:crafting_elements/crafting_386_element",
+      "zh": "亚原子元素瓦97",
+      "en": "Rivium-97"
+    },
+    "387": {
+      "id": "industrialupgrade:crafting_elements/crafting_387_element",
+      "zh": "超导线圈",
+      "en": "Superconducting Coil"
+    },
+    "388": {
+      "id": "industrialupgrade:crafting_elements/crafting_388_element",
+      "zh": "奇异活性物质",
+      "en": "Singular Active Mass"
+    },
+    "389": {
+      "id": "industrialupgrade:crafting_elements/crafting_389_element",
+      "zh": "奇异密封垫",
+      "en": "Singular Gasket"
+    },
+    "390": {
+      "id": "industrialupgrade:crafting_elements/crafting_390_element",
+      "zh": "奇异插座部件",
+      "en": "Singular Socket Part"
+    },
+    "391": {
+      "id": "industrialupgrade:crafting_elements/crafting_391_element",
+      "zh": "奇异安装螺丝",
+      "en": "Singular Mounting Screw"
+    },
+    "392": {
+      "id": "industrialupgrade:crafting_elements/crafting_392_element",
+      "zh": "第四代高温反应堆钣金件",
+      "en": "Perfect High-Temperature Reactor Shell"
+    },
+    "393": {
+      "id": "industrialupgrade:crafting_elements/crafting_393_element",
+      "zh": "第四代气冷堆钣金件",
+      "en": "Perfect Gas Cooled Fast Reactor Shell"
+    },
+    "394": {
+      "id": "industrialupgrade:crafting_elements/crafting_394_element",
+      "zh": "第四代石墨水冷堆钣金件",
+      "en": "Perfect Graphite-Water Reactor Shell"
+    },
+    "395": {
+      "id": "industrialupgrade:crafting_elements/crafting_395_element",
+      "zh": "融合活性物质",
+      "en": "Hybrid Active Mass"
+    },
+    "396": {
+      "id": "industrialupgrade:crafting_elements/crafting_396_element",
+      "zh": "完美气缸",
+      "en": "Perfect Cylinder"
+    },
+    "397": {
+      "id": "industrialupgrade:crafting_elements/crafting_397_element",
+      "zh": "完美线轴",
+      "en": "Perfect Reinforced coil"
+    },
+    "398": {
+      "id": "industrialupgrade:crafting_elements/crafting_398_element",
+      "zh": "完美超导线圈",
+      "en": "Perfect Superconducting Coil"
+    },
+    "399": {
+      "id": "industrialupgrade:crafting_elements/crafting_399_element",
+      "zh": "完美密封垫",
+      "en": "Perfect Gasket"
+    },
+    "400": {
+      "id": "industrialupgrade:crafting_elements/crafting_400_element",
+      "zh": "完美插座部件",
+      "en": "Perfect Socket Part"
+    },
+    "401": {
+      "id": "industrialupgrade:crafting_elements/crafting_401_element",
+      "zh": "完美安装螺丝",
+      "en": "Perfect Mounting Screw"
+    },
+    "402": {
+      "id": "industrialupgrade:crafting_elements/crafting_402_element",
+      "zh": "完美晶体管",
+      "en": "Perfect Transistor"
+    },
+    "403": {
+      "id": "industrialupgrade:crafting_elements/crafting_403_element",
+      "zh": "第四代流体反应堆电离分解器",
+      "en": "Perfect Liquid Reactor Electrolytic Separator"
+    },
+    "404": {
+      "id": "industrialupgrade:crafting_elements/crafting_404_element",
+      "zh": "第四代石墨水冷堆电离分解器",
+      "en": "Perfect Graphite-Water Reactor Electrolytic Separator"
+    },
+    "405": {
+      "id": "industrialupgrade:crafting_elements/crafting_405_element",
+      "zh": "第四代流体反应堆钣金件",
+      "en": "Perfect Liquid Reactor Shell"
+    },
+    "406": {
+      "id": "industrialupgrade:crafting_elements/crafting_406_element",
+      "zh": "光谱安装螺丝",
+      "en": "Spectral Mounting Screw"
+    },
+    "407": {
+      "id": "industrialupgrade:crafting_elements/crafting_407_element",
+      "zh": "光谱密封垫",
+      "en": "Spectral Gasket"
+    },
+    "408": {
+      "id": "industrialupgrade:crafting_elements/crafting_408_element",
+      "zh": "光谱插座部件",
+      "en": "Spectral Socket Part"
+    },
+    "409": {
+      "id": "industrialupgrade:crafting_elements/crafting_409_element",
+      "zh": "光谱活性物质",
+      "en": "Spectral Active Mass"
+    },
+    "410": {
+      "id": "industrialupgrade:crafting_elements/crafting_410_element",
+      "zh": "标准功率石墨棒",
+      "en": "Medium Graphite Rod"
+    },
+    "411": {
+      "id": "industrialupgrade:crafting_elements/crafting_411_element",
+      "zh": "钢质插头",
+      "en": "Steel Staple"
+    },
+    "412": {
+      "id": "industrialupgrade:crafting_elements/crafting_412_element",
+      "zh": "交换器冲压模板",
+      "en": "Exchanger stamp"
+    },
+    "413": {
+      "id": "industrialupgrade:crafting_elements/crafting_413_element",
+      "zh": "散热器冲压模板",
+      "en": "Heatsink Stamp"
+    },
+    "414": {
+      "id": "industrialupgrade:crafting_elements/crafting_414_element",
+      "zh": "晶体管",
+      "en": "Transistor"
+    },
+    "415": {
+      "id": "industrialupgrade:crafting_elements/crafting_415_element",
+      "zh": "改良气缸",
+      "en": "Improved Cylinder"
+    },
+    "416": {
+      "id": "industrialupgrade:crafting_elements/crafting_416_element",
+      "zh": "改良安装螺丝",
+      "en": "Improved Mounting Screw"
+    },
+    "417": {
+      "id": "industrialupgrade:crafting_elements/crafting_417_element",
+      "zh": "第二代高温反应堆钣金件",
+      "en": "Improved High-Temperature Reactor Shell"
+    },
+    "418": {
+      "id": "industrialupgrade:crafting_elements/crafting_418_element",
+      "zh": "第二代气冷堆钣金件",
+      "en": "Improved Gas Cooled Fast Reactor Shell"
+    },
+    "419": {
+      "id": "industrialupgrade:crafting_elements/crafting_419_element",
+      "zh": "第二代石墨水冷堆钣金件",
+      "en": "Improved Graphite-Water Reactor Shell"
+    },
+    "420": {
+      "id": "industrialupgrade:crafting_elements/crafting_420_element",
+      "zh": "第二代流体反应堆钣金件",
+      "en": "Improved Liquid Reactor Shell"
+    },
+    "421": {
+      "id": "industrialupgrade:crafting_elements/crafting_421_element",
+      "zh": "改良密封垫",
+      "en": "Improved Gasket"
+    },
+    "422": {
+      "id": "industrialupgrade:crafting_elements/crafting_422_element",
+      "zh": "改良插座部件",
+      "en": "Improved Socket Part"
+    },
+    "423": {
+      "id": "industrialupgrade:crafting_elements/crafting_423_element",
+      "zh": "改良活性物质",
+      "en": "Improved Active Mass"
+    },
+    "424": {
+      "id": "industrialupgrade:crafting_elements/crafting_424_element",
+      "zh": "改良线轴",
+      "en": "Improved Reinforced coil"
+    },
+    "425": {
+      "id": "industrialupgrade:crafting_elements/crafting_425_element",
+      "zh": "改良超导线圈",
+      "en": "Improved Superconducting Coil"
+    },
+    "426": {
+      "id": "industrialupgrade:crafting_elements/crafting_426_element",
+      "zh": "改良晶体管",
+      "en": "Improved Transistor"
+    },
+    "427": {
+      "id": "industrialupgrade:crafting_elements/crafting_427_element",
+      "zh": "第二代流体反应堆电离分解器",
+      "en": "Improved Liquid Reactor Electrolytic Separator"
+    },
+    "428": {
+      "id": "industrialupgrade:crafting_elements/crafting_428_element",
+      "zh": "第二代石墨水冷堆电离分解器",
+      "en": "Improved Graphite-Water Reactor Electrolytic Separator"
+    },
+    "429": {
+      "id": "industrialupgrade:crafting_elements/crafting_429_element",
+      "zh": "光子安装螺丝",
+      "en": "Photonic Mounting Screw"
+    },
+    "430": {
+      "id": "industrialupgrade:crafting_elements/crafting_430_element",
+      "zh": "光子密封垫",
+      "en": "Photonic Gasket"
+    },
+    "431": {
+      "id": "industrialupgrade:crafting_elements/crafting_431_element",
+      "zh": "光子插座部件",
+      "en": "Photonic Socket Part"
+    },
+    "432": {
+      "id": "industrialupgrade:crafting_elements/crafting_432_element",
+      "zh": "光子活性物质",
+      "en": "Photonic Active Mass"
+    },
+    "433": {
+      "id": "industrialupgrade:crafting_elements/crafting_433_element",
+      "zh": "电池母版",
+      "en": "Battery Template"
+    },
+    "434": {
+      "id": "industrialupgrade:crafting_elements/crafting_434_element",
+      "zh": "特种材料",
+      "en": "Exotic Material"
+    },
+    "435": {
+      "id": "industrialupgrade:crafting_elements/crafting_435_element",
+      "zh": "第一代流体反应堆电解分离器",
+      "en": "Electrolytic Liquid Reactor Separator"
+    },
+    "436": {
+      "id": "industrialupgrade:crafting_elements/crafting_436_element",
+      "zh": "第一代石墨水冷堆电解分离器",
+      "en": "Graphite-water Reactor Electrolytic Separator"
+    },
+    "437": {
+      "id": "industrialupgrade:crafting_elements/crafting_437_element",
+      "zh": "密封垫",
+      "en": "Gasket"
+    },
+    "438": {
+      "id": "industrialupgrade:crafting_elements/crafting_438_element",
+      "zh": "电容元件冲压模板",
+      "en": "Capacitor Stamp"
+    },
+    "439": {
+      "id": "industrialupgrade:crafting_elements/crafting_439_element",
+      "zh": "元件:辐射屏蔽罩",
+      "en": "Sensor: Protective Dome"
+    },
+    "440": {
+      "id": "industrialupgrade:crafting_elements/crafting_440_element",
+      "zh": "元件:石墨处理机",
+      "en": "Sensor: Graphite Processing"
+    },
+    "441": {
+      "id": "industrialupgrade:crafting_elements/crafting_441_element",
+      "zh": "元件:核废料再循环",
+      "en": "Sensor: Radioactive Waste Processing"
+    },
+    "442": {
+      "id": "industrialupgrade:crafting_elements/crafting_442_element",
+      "zh": "元件:活性物质转换",
+      "en": "Sensor: Solarite Splitter"
+    },
+    "443": {
+      "id": "industrialupgrade:crafting_elements/crafting_443_element",
+      "zh": "放射性残渣",
+      "en": "Radioactive Waste"
+    },
+    "444": {
+      "id": "industrialupgrade:crafting_elements/crafting_444_element",
+      "zh": "集富面线",
+      "en": "Enriched String"
+    },
+    "445": {
+      "id": "industrialupgrade:crafting_elements/crafting_445_element",
+      "zh": "富红石铀锭",
+      "en": "Enriched Redstone Ingot"
+    },
+    "446": {
+      "id": "industrialupgrade:crafting_elements/crafting_446_element",
+      "zh": "富钚青金石晶体",
+      "en": "Plutonium-plated Lapis Lazuli Crystal"
+    },
+    "447": {
+      "id": "industrialupgrade:crafting_elements/crafting_447_element",
+      "zh": "锂锭",
+      "en": "Lithium"
+    },
+    "448": {
+      "id": "industrialupgrade:crafting_elements/crafting_448_element",
+      "zh": "硼晶体",
+      "en": "Boron"
+    },
+    "449": {
+      "id": "industrialupgrade:crafting_elements/crafting_449_element",
+      "zh": "铍碎块",
+      "en": "Beryllium"
+    },
+    "450": {
+      "id": "industrialupgrade:crafting_elements/crafting_450_element",
+      "zh": "锂质板",
+      "en": "Lithium Plate"
+    },
+    "451": {
+      "id": "industrialupgrade:crafting_elements/crafting_451_element",
+      "zh": "硼质板",
+      "en": "Boron Plate"
+    },
+    "452": {
+      "id": "industrialupgrade:crafting_elements/crafting_452_element",
+      "zh": "铍质板",
+      "en": "Beryllium Plate"
+    },
+    "453": {
+      "id": "industrialupgrade:crafting_elements/crafting_453_element",
+      "zh": "高级光辉合金板",
+      "en": "Enriched Advanced Alloy"
+    },
+    "454": {
+      "id": "industrialupgrade:crafting_elements/crafting_454_element",
+      "zh": "硝酸铵粉尘",
+      "en": "Nitrate Ammonium Dust"
+    },
+    "455": {
+      "id": "industrialupgrade:crafting_elements/crafting_455_element",
+      "zh": "元件:核聚变",
+      "en": "Sensor: Nuclear Fusion"
+    },
+    "456": {
+      "id": "industrialupgrade:crafting_elements/crafting_456_element",
+      "zh": "硝酸钾粉",
+      "en": "Nitrate Potassium Dust"
+    },
+    "457": {
+      "id": "industrialupgrade:crafting_elements/crafting_457_element",
+      "zh": "小撮油灰",
+      "en": "Tiny Pile of Oil"
+    },
+    "458": {
+      "id": "industrialupgrade:crafting_elements/crafting_458_element",
+      "zh": "元件:垃圾桶",
+      "en": "Sensor: Trash Can"
+    },
+    "459": {
+      "id": "industrialupgrade:crafting_elements/crafting_459_element",
+      "zh": "元件:升级套件",
+      "en": "Sensor: Upgrade Kit"
+    },
+    "460": {
+      "id": "industrialupgrade:crafting_elements/crafting_460_element",
+      "zh": "硝酸钠粉尘",
+      "en": "Nitrate Sodium Dust"
+    },
+    "461": {
+      "id": "industrialupgrade:crafting_elements/crafting_461_element",
+      "zh": "小捧硝酸铵",
+      "en": "Small Pile of Ammonium Nitrate"
+    },
+    "462": {
+      "id": "industrialupgrade:crafting_elements/crafting_462_element",
+      "zh": "小捧硝酸钾",
+      "en": "Small Pile of Potassium Nitrate"
+    },
+    "463": {
+      "id": "industrialupgrade:crafting_elements/crafting_463_element",
+      "zh": "小捧硝酸钠",
+      "en": "Small Pile of Sodium Nitrate"
+    },
+    "464": {
+      "id": "industrialupgrade:crafting_elements/crafting_464_element",
+      "zh": "小捧油灰",
+      "en": "Small Pile of Oil"
+    },
+    "465": {
+      "id": "industrialupgrade:crafting_elements/crafting_465_element",
+      "zh": "油灰",
+      "en": "Oil Dust"
+    },
+    "466": {
+      "id": "industrialupgrade:crafting_elements/crafting_466_element",
+      "zh": "高级元件:解构",
+      "en": "Advanced Sensor: Unpacking"
+    },
+    "467": {
+      "id": "industrialupgrade:crafting_elements/crafting_467_element",
+      "zh": "完美元件:解构",
+      "en": "Perfect Sensor: Unpacking"
+    },
+    "468": {
+      "id": "industrialupgrade:crafting_elements/crafting_468_element",
+      "zh": "改良元件:解构",
+      "en": "Improved Sensor: Unpacking"
+    },
+    "469": {
+      "id": "industrialupgrade:crafting_elements/crafting_469_element",
+      "zh": "元件:解构",
+      "en": "Sensor: Unpacking"
+    },
+    "470": {
+      "id": "industrialupgrade:crafting_elements/crafting_470_element",
+      "zh": "元件:模拟",
+      "en": "Sensor: Simulation"
+    },
+    "471": {
+      "id": "industrialupgrade:crafting_elements/crafting_471_element",
+      "zh": "元件:状态",
+      "en": "Sensor: State"
+    },
+    "472": {
+      "id": "industrialupgrade:crafting_elements/crafting_472_element",
+      "zh": "高级元件:废料",
+      "en": "Advanced Sensor: Scrap"
+    },
+    "473": {
+      "id": "industrialupgrade:crafting_elements/crafting_473_element",
+      "zh": "完美元件:废料",
+      "en": "Perfect Sensor: Scrap"
+    },
+    "474": {
+      "id": "industrialupgrade:crafting_elements/crafting_474_element",
+      "zh": "改良元件:废料",
+      "en": "Improved Sensor: Scrap"
+    },
+    "475": {
+      "id": "industrialupgrade:crafting_elements/crafting_475_element",
+      "zh": "元件:废料",
+      "en": "Sensor: Scrap"
+    },
+    "476": {
+      "id": "industrialupgrade:crafting_elements/crafting_476_element",
+      "zh": "硫磺晶体",
+      "en": "Sulfur crystal"
+    },
+    "477": {
+      "id": "industrialupgrade:crafting_elements/crafting_477_element",
+      "zh": "硼卵石",
+      "en": "Boron Pebbles"
+    },
+    "478": {
+      "id": "industrialupgrade:crafting_elements/crafting_478_element",
+      "zh": "防护面料",
+      "en": "Protective Fabric"
+    },
+    "479": {
+      "id": "industrialupgrade:crafting_elements/crafting_479_element",
+      "zh": "碳纤维增强塑料",
+      "en": "Carbon Plastic"
+    },
+    "480": {
+      "id": "industrialupgrade:crafting_elements/crafting_480_element",
+      "zh": "碳化钨锭",
+      "en": "Carbon Tungsten Ingot"
+    },
+    "481": {
+      "id": "industrialupgrade:crafting_elements/crafting_481_element",
+      "zh": "钙粉",
+      "en": "Calcium Dust"
+    },
+    "482": {
+      "id": "industrialupgrade:crafting_elements/crafting_482_element",
+      "zh": "电石",
+      "en": "Calcium Carbide"
+    },
+    "483": {
+      "id": "industrialupgrade:crafting_elements/crafting_483_element",
+      "zh": "聚乙烯",
+      "en": "Polyethylene"
+    },
+    "484": {
+      "id": "industrialupgrade:crafting_elements/crafting_484_element",
+      "zh": "聚丙烯",
+      "en": "Polypropylene"
+    },
+    "485": {
+      "id": "industrialupgrade:crafting_elements/crafting_485_element",
+      "zh": "量子制程模板",
+      "en": "Programmed Quantum Plate"
+    },
+    "486": {
+      "id": "industrialupgrade:crafting_elements/crafting_486_element",
+      "zh": "纳米制程模板",
+      "en": "Programmed Nano Plate"
+    },
+    "487": {
+      "id": "industrialupgrade:crafting_elements/crafting_487_element",
+      "zh": "基础模板",
+      "en": "Printed Circuit Board"
+    },
+    "488": {
+      "id": "industrialupgrade:crafting_elements/crafting_488_element",
+      "zh": "制程模板",
+      "en": "Programmed Printed Circuit Board"
+    },
+    "489": {
+      "id": "industrialupgrade:crafting_elements/crafting_489_element",
+      "zh": "雏形模板",
+      "en": "Prototype Printed Circuit Board"
+    },
+    "490": {
+      "id": "industrialupgrade:crafting_elements/crafting_490_element",
+      "zh": "光谱制程模板",
+      "en": "Programmed Spectral Plate"
+    },
+    "491": {
+      "id": "industrialupgrade:crafting_elements/crafting_491_element",
+      "zh": "先进制程模板",
+      "en": "Programmed Improved Plate"
+    },
+    "492": {
+      "id": "industrialupgrade:crafting_elements/crafting_492_element",
+      "zh": "粗制硅晶体",
+      "en": "Grown Silicon Crystal"
+    },
+    "493": {
+      "id": "industrialupgrade:crafting_elements/crafting_493_element",
+      "zh": "硅晶体",
+      "en": "Silicon Crystal"
+    },
+    "494": {
+      "id": "industrialupgrade:crafting_elements/crafting_494_element",
+      "zh": "晶圆",
+      "en": "Polished Silicon Disk"
+    },
+    "495": {
+      "id": "industrialupgrade:crafting_elements/crafting_495_element",
+      "zh": "单晶硅",
+      "en": "Polished Silicon Crystal"
+    },
+    "496": {
+      "id": "industrialupgrade:crafting_elements/crafting_496_element",
+      "zh": "铸型模具",
+      "en": "Ingot Casting Mold"
+    },
+    "497": {
+      "id": "industrialupgrade:crafting_elements/crafting_497_element",
+      "zh": "齿轮铸造模具",
+      "en": "Gear Casting Mold"
+    },
+    "498": {
+      "id": "industrialupgrade:crafting_elements/crafting_498_element",
+      "zh": "混合煤粉",
+      "en": "Coal Dust with Impurity"
+    },
+    "499": {
+      "id": "industrialupgrade:crafting_elements/crafting_499_element",
+      "zh": "铸造用煤粉",
+      "en": "Coal Dust for Alloys"
+    },
+    "501": {
+      "id": "industrialupgrade:crafting_elements/crafting_501_element",
+      "zh": "精加工钛钢板",
+      "en": "Processed Titanium Steel Plate"
+    },
+    "502": {
+      "id": "industrialupgrade:crafting_elements/crafting_502_element",
+      "zh": "粗钢锭",
+      "en": "Raw Steel Ingot"
+    },
+    "503": {
+      "id": "industrialupgrade:crafting_elements/crafting_503_element",
+      "zh": "粗钛钢锭",
+      "en": "Raw Titanium Steel Ingot"
+    },
+    "504": {
+      "id": "industrialupgrade:crafting_elements/crafting_504_element",
+      "zh": "精钛钢锭",
+      "en": "Processed Titanium Steel Ingot"
+    },
+    "505": {
+      "id": "industrialupgrade:crafting_elements/crafting_505_element",
+      "zh": "镍钨合金外壳",
+      "en": "Wolframite Casing"
+    },
+    "508": {
+      "id": "industrialupgrade:crafting_elements/crafting_508_element",
+      "zh": "钻头",
+      "en": "Drill Bit"
+    },
+    "509": {
+      "id": "industrialupgrade:crafting_elements/crafting_509_element",
+      "zh": "量子钻头",
+      "en": "Quantum Drill Bit"
+    },
+    "510": {
+      "id": "industrialupgrade:crafting_elements/crafting_510_element",
+      "zh": "量子铲左部",
+      "en": "Left Part of Quantum Shovel"
+    },
+    "511": {
+      "id": "industrialupgrade:crafting_elements/crafting_511_element",
+      "zh": "量子斧左部",
+      "en": "Left Part of Quantum Axe"
+    },
+    "512": {
+      "id": "industrialupgrade:crafting_elements/crafting_512_element",
+      "zh": "量子镐左部",
+      "en": "Left Part of Quantum Pickaxe"
+    },
+    "513": {
+      "id": "industrialupgrade:crafting_elements/crafting_513_element",
+      "zh": "量子铲右部",
+      "en": "Right Part of Quantum Shovel"
+    },
+    "514": {
+      "id": "industrialupgrade:crafting_elements/crafting_514_element",
+      "zh": "量子斧右部",
+      "en": "Right Part of Quantum Axe"
+    },
+    "515": {
+      "id": "industrialupgrade:crafting_elements/crafting_515_element",
+      "zh": "量子镐右部",
+      "en": "Right Part of Quantum Pickaxe"
+    },
+    "516": {
+      "id": "industrialupgrade:crafting_elements/crafting_516_element",
+      "zh": "量子能源水晶",
+      "en": "Quantum Energy Crystal"
+    },
+    "517": {
+      "id": "industrialupgrade:crafting_elements/crafting_517_element",
+      "zh": "纳米钻头",
+      "en": "Nano Drill Bit"
+    },
+    "518": {
+      "id": "industrialupgrade:crafting_elements/crafting_518_element",
+      "zh": "纳米铲左部",
+      "en": "Left Part of Nano Shovel"
+    },
+    "519": {
+      "id": "industrialupgrade:crafting_elements/crafting_519_element",
+      "zh": "纳米斧左部",
+      "en": "Left Part of Nano Axe"
+    },
+    "520": {
+      "id": "industrialupgrade:crafting_elements/crafting_520_element",
+      "zh": "纳米镐左部",
+      "en": "Left Part of Nano Pickaxe"
+    },
+    "521": {
+      "id": "industrialupgrade:crafting_elements/crafting_521_element",
+      "zh": "纳米铲右部",
+      "en": "Right Part of Nano Shovel"
+    },
+    "522": {
+      "id": "industrialupgrade:crafting_elements/crafting_522_element",
+      "zh": "纳米斧右部",
+      "en": "Right Part of Nano Axe"
+    },
+    "523": {
+      "id": "industrialupgrade:crafting_elements/crafting_523_element",
+      "zh": "纳米镐右部",
+      "en": "Right Part of Nano Pickaxe"
+    },
+    "524": {
+      "id": "industrialupgrade:crafting_elements/crafting_524_element",
+      "zh": "纳米能源水晶",
+      "en": "Nano Energy Crystal"
+    },
+    "525": {
+      "id": "industrialupgrade:crafting_elements/crafting_525_element",
+      "zh": "光谱钻头",
+      "en": "Spectral Drill Bit"
+    },
+    "526": {
+      "id": "industrialupgrade:crafting_elements/crafting_526_element",
+      "zh": "光谱铲左部",
+      "en": "Left Part of Spectral Shovel"
+    },
+    "527": {
+      "id": "industrialupgrade:crafting_elements/crafting_527_element",
+      "zh": "光谱斧左部",
+      "en": "Left Part of Spectral Axe"
+    },
+    "528": {
+      "id": "industrialupgrade:crafting_elements/crafting_528_element",
+      "zh": "光谱镐左部",
+      "en": "Left Part of Spectral Pickaxe"
+    },
+    "529": {
+      "id": "industrialupgrade:crafting_elements/crafting_529_element",
+      "zh": "光谱铲右部",
+      "en": "Right Part of Spectral Shovel"
+    },
+    "530": {
+      "id": "industrialupgrade:crafting_elements/crafting_530_element",
+      "zh": "光谱斧右部",
+      "en": "Right Part of Spectral Axe"
+    },
+    "531": {
+      "id": "industrialupgrade:crafting_elements/crafting_531_element",
+      "zh": "光谱镐右部",
+      "en": "Right Part of Spectral Pickaxe"
+    },
+    "532": {
+      "id": "industrialupgrade:crafting_elements/crafting_532_element",
+      "zh": "光谱能源水晶",
+      "en": "Spectral Energy Crystal"
+    },
+    "533": {
+      "id": "industrialupgrade:crafting_elements/crafting_533_element",
+      "zh": "第1代处理器",
+      "en": "1st Generation Processor"
+    },
+    "534": {
+      "id": "industrialupgrade:crafting_elements/crafting_534_element",
+      "zh": "第10代处理器",
+      "en": "10th Generation Processor"
+    },
+    "535": {
+      "id": "industrialupgrade:crafting_elements/crafting_535_element",
+      "zh": "16MB内部存储器",
+      "en": "16 MB Internal Memory"
+    },
+    "536": {
+      "id": "industrialupgrade:crafting_elements/crafting_536_element",
+      "zh": "16MB RAM",
+      "en": "16 MB RAM"
+    },
+    "537": {
+      "id": "industrialupgrade:crafting_elements/crafting_537_element",
+      "zh": "1GB内部存储器",
+      "en": "1 GB Internal Memory"
+    },
+    "538": {
+      "id": "industrialupgrade:crafting_elements/crafting_538_element",
+      "zh": "1KB RAM",
+      "en": "1 KB RAM"
+    },
+    "539": {
+      "id": "industrialupgrade:crafting_elements/crafting_539_element",
+      "zh": "1MB内部存储器",
+      "en": "1 MB Internal Memory"
+    },
+    "540": {
+      "id": "industrialupgrade:crafting_elements/crafting_540_element",
+      "zh": "1MB RAM",
+      "en": "1 MB RAM"
+    },
+    "541": {
+      "id": "industrialupgrade:crafting_elements/crafting_541_element",
+      "zh": "第二代处理器",
+      "en": "2nd Generation Processor"
+    },
+    "542": {
+      "id": "industrialupgrade:crafting_elements/crafting_542_element",
+      "zh": "256KB RAM",
+      "en": "256 KB RAM"
+    },
+    "543": {
+      "id": "industrialupgrade:crafting_elements/crafting_543_element",
+      "zh": "第三代处理器",
+      "en": "3rd Generation Processor"
+    },
+    "544": {
+      "id": "industrialupgrade:crafting_elements/crafting_544_element",
+      "zh": "32MB内部存储器",
+      "en": "32 MB Internal Memory"
+    },
+    "545": {
+      "id": "industrialupgrade:crafting_elements/crafting_545_element",
+      "zh": "第四代处理器",
+      "en": "4th Generation Processor"
+    },
+    "546": {
+      "id": "industrialupgrade:crafting_elements/crafting_546_element",
+      "zh": "4GB内部存储器",
+      "en": "4 GB Internal Memory"
+    },
+    "547": {
+      "id": "industrialupgrade:crafting_elements/crafting_547_element",
+      "zh": "4MB内部存储器",
+      "en": "4 MB Internal Memory"
+    },
+    "548": {
+      "id": "industrialupgrade:crafting_elements/crafting_548_element",
+      "zh": "4MB RAM",
+      "en": "4 MB RAM"
+    },
+    "549": {
+      "id": "industrialupgrade:crafting_elements/crafting_549_element",
+      "zh": "第五代处理器",
+      "en": "5th Generation Processor"
+    },
+    "550": {
+      "id": "industrialupgrade:crafting_elements/crafting_550_element",
+      "zh": "512MB内部存储器",
+      "en": "512 MB Internal Memory"
+    },
+    "551": {
+      "id": "industrialupgrade:crafting_elements/crafting_551_element",
+      "zh": "第六代处理器",
+      "en": "6th Generation Processor"
+    },
+    "552": {
+      "id": "industrialupgrade:crafting_elements/crafting_552_element",
+      "zh": "64KB RAM",
+      "en": "64 KB RAM"
+    },
+    "553": {
+      "id": "industrialupgrade:crafting_elements/crafting_553_element",
+      "zh": "64MB内部存储器",
+      "en": "64 MB Internal Memory"
+    },
+    "554": {
+      "id": "industrialupgrade:crafting_elements/crafting_554_element",
+      "zh": "64MB RAM",
+      "en": "64 MB RAM"
+    },
+    "555": {
+      "id": "industrialupgrade:crafting_elements/crafting_555_element",
+      "zh": "第七代处理器",
+      "en": "7th Generation Processor"
+    },
+    "556": {
+      "id": "industrialupgrade:crafting_elements/crafting_556_element",
+      "zh": "第八代处理器",
+      "en": "8th Generation Processor"
+    },
+    "557": {
+      "id": "industrialupgrade:crafting_elements/crafting_557_element",
+      "zh": "8KB RAM",
+      "en": "8 KB RAM"
+    },
+    "558": {
+      "id": "industrialupgrade:crafting_elements/crafting_558_element",
+      "zh": "第九代处理器",
+      "en": "9th Generation Processor"
+    },
+    "559": {
+      "id": "industrialupgrade:crafting_elements/crafting_559_element",
+      "zh": "金刚石镍铬合金刀头",
+      "en": "Diamond-Nichrome Head"
+    },
+    "560": {
+      "id": "industrialupgrade:crafting_elements/crafting_560_element",
+      "zh": "铝青铜数据总线",
+      "en": "Aluminum Bronze Data Bus"
+    },
+    "561": {
+      "id": "industrialupgrade:crafting_elements/crafting_561_element",
+      "zh": "硼化铪寻址总线",
+      "en": "Boride-Hafnium Address Bus"
+    },
+    "562": {
+      "id": "industrialupgrade:crafting_elements/crafting_562_element",
+      "zh": "青铜主轴",
+      "en": "Bronze Spindle"
+    },
+    "563": {
+      "id": "industrialupgrade:crafting_elements/crafting_563_element",
+      "zh": "钨电阻器",
+      "en": "Tungsten Resistor"
+    },
+    "564": {
+      "id": "industrialupgrade:crafting_elements/crafting_564_element",
+      "zh": "伍德合金存储模块",
+      "en": "Wood Alloy Memory Module"
+    },
+    "565": {
+      "id": "industrialupgrade:crafting_elements/crafting_565_element",
+      "zh": "砷化镓二极管",
+      "en": "Gallium Arsenic Diode"
+    },
+    "566": {
+      "id": "industrialupgrade:crafting_elements/crafting_566_element",
+      "zh": "碳化铪存储模块",
+      "en": "Hafnium Carbide Memory Module"
+    },
+    "567": {
+      "id": "industrialupgrade:crafting_elements/crafting_567_element",
+      "zh": "锗二极管",
+      "en": "Germanium Diode"
+    },
+    "568": {
+      "id": "industrialupgrade:crafting_elements/crafting_568_element",
+      "zh": "二极管",
+      "en": "Diode"
+    },
+    "569": {
+      "id": "industrialupgrade:crafting_elements/crafting_569_element",
+      "zh": "铁寻址总线",
+      "en": "Iron Address Bus"
+    },
+    "570": {
+      "id": "industrialupgrade:crafting_elements/crafting_570_element",
+      "zh": "铁硅头",
+      "en": "Iron-Silicon Head"
+    },
+    "571": {
+      "id": "industrialupgrade:crafting_elements/crafting_571_element",
+      "zh": "铁主轴",
+      "en": "Iron Spindle"
+    },
+    "572": {
+      "id": "industrialupgrade:crafting_elements/crafting_572_element",
+      "zh": "铁磁盘",
+      "en": "Iron Disk"
+    },
+    "573": {
+      "id": "industrialupgrade:crafting_elements/crafting_573_element",
+      "zh": "金硅头",
+      "en": "Gold-Silicon Head"
+    },
+    "574": {
+      "id": "industrialupgrade:crafting_elements/crafting_574_element",
+      "zh": "数据接口",
+      "en": "Data Interface"
+    },
+    "575": {
+      "id": "industrialupgrade:crafting_elements/crafting_575_element",
+      "zh": "铝钇磁盘",
+      "en": "Yttrium Aluminum Disk"
+    },
+    "576": {
+      "id": "industrialupgrade:crafting_elements/crafting_576_element",
+      "zh": "陶瓷存储模块",
+      "en": "Ceramic Memory Module"
+    },
+    "577": {
+      "id": "industrialupgrade:crafting_elements/crafting_577_element",
+      "zh": "钴铬磁盘",
+      "en": "Cobalt-Chrome Disk"
+    },
+    "578": {
+      "id": "industrialupgrade:crafting_elements/crafting_578_element",
+      "zh": "硬盘外壳",
+      "en": "Casing"
+    },
+    "579": {
+      "id": "industrialupgrade:crafting_elements/crafting_579_element",
+      "zh": "蓝色电阻器",
+      "en": "Lazurite Resistor"
+    },
+    "580": {
+      "id": "industrialupgrade:crafting_elements/crafting_580_element",
+      "zh": "铜数据线",
+      "en": "Copper Data Bus"
+    },
+    "581": {
+      "id": "industrialupgrade:crafting_elements/crafting_581_element",
+      "zh": "铜电阻器",
+      "en": "Copper Resistor"
+    },
+    "582": {
+      "id": "industrialupgrade:crafting_elements/crafting_582_element",
+      "zh": "铜扭线线圈电感",
+      "en": "Copper Twisted Coil Inductor"
+    },
+    "583": {
+      "id": "industrialupgrade:crafting_elements/crafting_583_element",
+      "zh": "金属螺线管线圈",
+      "en": "Metal Solenoid Inductor"
+    },
+    "584": {
+      "id": "industrialupgrade:crafting_elements/crafting_584_element",
+      "zh": "钼钢存储模块",
+      "en": "Molybdenum Steel Memory Module"
+    },
+    "585": {
+      "id": "industrialupgrade:crafting_elements/crafting_585_element",
+      "zh": "钼电阻器",
+      "en": "Molybdenum Resistor"
+    },
+    "586": {
+      "id": "industrialupgrade:crafting_elements/crafting_586_element",
+      "zh": "不锈钢主轴",
+      "en": "Stainless Steel Spindle"
+    },
+    "587": {
+      "id": "industrialupgrade:crafting_elements/crafting_587_element",
+      "zh": "镍磁盘",
+      "en": "Nickel Disk"
+    },
+    "588": {
+      "id": "industrialupgrade:crafting_elements/crafting_588_element",
+      "zh": "冷却系统",
+      "en": "Cooling System"
+    },
+    "589": {
+      "id": "industrialupgrade:crafting_elements/crafting_589_element",
+      "zh": "坡莫合金数据线",
+      "en": "Permalloy Data Bus"
+    },
+    "590": {
+      "id": "industrialupgrade:crafting_elements/crafting_590_element",
+      "zh": "铂钕头",
+      "en": "Platinum-Neodymium Head"
+    },
+    "591": {
+      "id": "industrialupgrade:crafting_elements/crafting_591_element",
+      "zh": "铂寻址总线",
+      "en": "Platinum Address Bus"
+    },
+    "592": {
+      "id": "industrialupgrade:crafting_elements/crafting_592_element",
+      "zh": "高级冷却系统",
+      "en": "Advanced Cooling System"
+    },
+    "593": {
+      "id": "industrialupgrade:crafting_elements/crafting_593_element",
+      "zh": "电源连接器",
+      "en": "Power Connector"
+    },
+    "594": {
+      "id": "industrialupgrade:crafting_elements/crafting_594_element",
+      "zh": "完美冷却系统",
+      "en": "Perfect Cooling System"
+    },
+    "595": {
+      "id": "industrialupgrade:crafting_elements/crafting_595_element",
+      "zh": "钢主轴",
+      "en": "Steel Spindle"
+    },
+    "596": {
+      "id": "industrialupgrade:crafting_elements/crafting_596_element",
+      "zh": "钴基硬质合金数据线",
+      "en": "Stellite Data Bus"
+    },
+    "597": {
+      "id": "industrialupgrade:crafting_elements/crafting_597_element",
+      "zh": "坡莫合金环形电感",
+      "en": "Permalloy Toroidal Inductor"
+    },
+    "598": {
+      "id": "industrialupgrade:crafting_elements/crafting_598_element",
+      "zh": "改进型冷却系统",
+      "en": "Improved Cooling System"
+    },
+    "599": {
+      "id": "industrialupgrade:crafting_elements/crafting_599_element",
+      "zh": "铁氧体环形电感",
+      "en": "Ferrite Ring Inductor"
+    },
+    "600": {
+      "id": "industrialupgrade:crafting_elements/crafting_600_element",
+      "zh": "琥珀金寻址总线",
+      "en": "Electrum Address Bus"
+    },
+    "601": {
+      "id": "industrialupgrade:crafting_elements/crafting_601_element",
+      "zh": "琥珀金锅炉",
+      "en": "Electrum Boiler"
+    },
+    "602": {
+      "id": "industrialupgrade:crafting_elements/crafting_602_element",
+      "zh": "光子元件:粉碎",
+      "en": "Photonic Sensor: Macerator"
+    },
+    "603": {
+      "id": "industrialupgrade:crafting_elements/crafting_603_element",
+      "zh": "光子元件:流体",
+      "en": "Photonic Sensor: Liquid"
+    },
+    "604": {
+      "id": "industrialupgrade:crafting_elements/crafting_604_element",
+      "zh": "光子元件:大地",
+      "en": "Photonic Sensor: Earth"
+    },
+    "605": {
+      "id": "industrialupgrade:crafting_elements/crafting_605_element",
+      "zh": "光子元件:工艺",
+      "en": "Photonic Sensor: Craft"
+    },
+    "606": {
+      "id": "industrialupgrade:crafting_elements/crafting_606_element",
+      "zh": "光子元件:机械冲压",
+      "en": "Photonic Sensor: Mechanical Stamp"
+    },
+    "607": {
+      "id": "industrialupgrade:crafting_elements/crafting_607_element",
+      "zh": "光子元件:精炼",
+      "en": "Photonic Sensor: Refining"
+    },
+    "608": {
+      "id": "industrialupgrade:crafting_elements/crafting_608_element",
+      "zh": "光子元件:挤压",
+      "en": "Photonic Sensor: Press"
+    },
+    "609": {
+      "id": "industrialupgrade:crafting_elements/crafting_609_element",
+      "zh": "光子元件:金属轧制",
+      "en": "Photonic Sensor: Rolling Machine"
+    },
+    "610": {
+      "id": "industrialupgrade:crafting_elements/crafting_610_element",
+      "zh": "光子元件:矿石粉碎",
+      "en": "Photonic Sensor: Ore Flushing"
+    },
+    "611": {
+      "id": "industrialupgrade:crafting_elements/crafting_611_element",
+      "zh": "光子元件:作物",
+      "en": "Photonic Sensor: Plants"
+    },
+    "612": {
+      "id": "industrialupgrade:crafting_elements/crafting_612_element",
+      "zh": "光子元件:自动裁切",
+      "en": "Photonic Sensor: Auto Cutter"
+    },
+    "613": {
+      "id": "industrialupgrade:crafting_elements/crafting_613_element",
+      "zh": "光子元件:热量",
+      "en": "Photonic Sensor: Thermal"
+    },
+    "614": {
+      "id": "industrialupgrade:crafting_elements/crafting_614_element",
+      "zh": "元件:增强能量",
+      "en": "Sensor: Improved Energy"
+    },
+    "615": {
+      "id": "industrialupgrade:crafting_elements/crafting_615_element",
+      "zh": "光子元件:提纯",
+      "en": "Photonic Sensor: Extractor"
+    },
+    "616": {
+      "id": "industrialupgrade:crafting_elements/crafting_616_element",
+      "zh": "光子元件:挤出机",
+      "en": "Photonic Sensor: Extruder"
+    },
+    "617": {
+      "id": "industrialupgrade:crafting_elements/crafting_617_element",
+      "zh": "光子元件:冶炼电炉",
+      "en": "Photonic Sensor: Electric Furnace"
+    },
+    "618": {
+      "id": "industrialupgrade:crafting_elements/crafting_618_element",
+      "zh": "高级元件:合金",
+      "en": "Advanced Sensor: Alloy"
+    },
+    "619": {
+      "id": "industrialupgrade:crafting_elements/crafting_619_element",
+      "zh": "完美元件:合金",
+      "en": "Perfect Sensor: Alloy"
+    },
+    "620": {
+      "id": "industrialupgrade:crafting_elements/crafting_620_element",
+      "zh": "光子元件模板",
+      "en": "Photonic Sensor Template"
+    },
+    "621": {
+      "id": "industrialupgrade:crafting_elements/crafting_621_element",
+      "zh": "光子控制器",
+      "en": "Photonic Controller"
+    },
+    "622": {
+      "id": "industrialupgrade:crafting_elements/crafting_622_element",
+      "zh": "光子电机",
+      "en": "Photonic Motor"
+    },
+    "623": {
+      "id": "industrialupgrade:crafting_elements/crafting_623_element",
+      "zh": "光子电镀外壳",
+      "en": "Photonic Machine Casing"
+    },
+    "624": {
+      "id": "industrialupgrade:crafting_elements/crafting_624_element",
+      "zh": "改良光子工具盒",
+      "en": "Improved Photonic Box"
+    },
+    "625": {
+      "id": "industrialupgrade:crafting_elements/crafting_625_element",
+      "zh": "光子工具盒",
+      "en": "Photonic Box"
+    },
+    "626": {
+      "id": "industrialupgrade:crafting_elements/crafting_626_element",
+      "zh": "光子元件:QE",
+      "en": "Photonic Sensor: QE"
+    },
+    "627": {
+      "id": "industrialupgrade:crafting_elements/crafting_627_element",
+      "zh": "光子元件:SE",
+      "en": "Photonic Sensor: SE"
+    },
+    "628": {
+      "id": "industrialupgrade:crafting_elements/crafting_628_element",
+      "zh": "光子元件:红石发电机",
+      "en": "Photonic Sensor: Redstone Generator"
+    },
+    "629": {
+      "id": "industrialupgrade:crafting_elements/crafting_629_element",
+      "zh": "光子元件:发电机",
+      "en": "Photonic Sensor: Generator"
+    },
+    "630": {
+      "id": "industrialupgrade:crafting_elements/crafting_630_element",
+      "zh": "光子元件:地热",
+      "en": "Photonic Sensor: Geothermal"
+    },
+    "631": {
+      "id": "industrialupgrade:crafting_elements/crafting_631_element",
+      "zh": "光子元件:采石场",
+      "en": "Photonic Sensor: Quarry"
+    },
+    "632": {
+      "id": "industrialupgrade:crafting_elements/crafting_632_element",
+      "zh": "光子元件:装配",
+      "en": "Photonic Sensor: Combination"
+    },
+    "633": {
+      "id": "industrialupgrade:crafting_elements/crafting_633_element",
+      "zh": "光子元件:矿物",
+      "en": "Photonic Sensor: Mineral"
+    },
+    "634": {
+      "id": "industrialupgrade:crafting_elements/crafting_634_element",
+      "zh": "光子元件:复制机",
+      "en": "Photonic Sensor: Replicator"
+    },
+    "635": {
+      "id": "industrialupgrade:crafting_elements/crafting_635_element",
+      "zh": "光子元件:扫描仪",
+      "en": "Photonic Sensor: Scanner"
+    },
+    "636": {
+      "id": "industrialupgrade:crafting_elements/crafting_636_element",
+      "zh": "光子元件:蒸馏器",
+      "en": "Photonic Sensor: Distiller"
+    },
+    "637": {
+      "id": "industrialupgrade:crafting_elements/crafting_637_element",
+      "zh": "地狱精质",
+      "en": "Nether Essence"
+    },
+    "638": {
+      "id": "industrialupgrade:crafting_elements/crafting_638_element",
+      "zh": "水精质",
+      "en": "Water Essence"
+    },
+    "639": {
+      "id": "industrialupgrade:crafting_elements/crafting_639_element",
+      "zh": "大气精质",
+      "en": "Air Essence"
+    },
+    "640": {
+      "id": "industrialupgrade:crafting_elements/crafting_640_element",
+      "zh": "大地精质",
+      "en": "Earth Essence"
+    },
+    "641": {
+      "id": "industrialupgrade:crafting_elements/crafting_641_element",
+      "zh": "量子缓冲器",
+      "en": "Quantum Buffer"
+    },
+    "642": {
+      "id": "industrialupgrade:crafting_elements/crafting_642_element",
+      "zh": "量子原生质",
+      "en": "Quantum Plasma"
+    },
+    "643": {
+      "id": "industrialupgrade:crafting_elements/crafting_643_element",
+      "zh": "末地精质",
+      "en": "End Essence"
+    },
+    "644": {
+      "id": "industrialupgrade:crafting_elements/crafting_644_element",
+      "zh": "月夜精质",
+      "en": "Night essence"
+    },
+    "645": {
+      "id": "industrialupgrade:crafting_elements/crafting_645_element",
+      "zh": "原生质",
+      "en": "Plasma"
+    },
+    "646": {
+      "id": "industrialupgrade:crafting_elements/crafting_646_element",
+      "zh": "量子世界原生质",
+      "en": "Quantum World Spatial Plasma"
+    },
+    "647": {
+      "id": "industrialupgrade:crafting_elements/crafting_647_element",
+      "zh": "空间缓冲器",
+      "en": "Spatial Buffer"
+    },
+    "648": {
+      "id": "industrialupgrade:crafting_elements/crafting_648_element",
+      "zh": "太阳精质",
+      "en": "Solar Essence"
+    },
+    "649": {
+      "id": "industrialupgrade:crafting_elements/crafting_649_element",
+      "zh": "量子精质",
+      "en": "Quantum Essence"
+    },
+    "650": {
+      "id": "industrialupgrade:crafting_elements/crafting_650_element",
+      "zh": "镍铬灯",
+      "en": "Nichrome Lamp"
+    },
+    "651": {
+      "id": "industrialupgrade:crafting_elements/crafting_651_element",
+      "zh": "镍钨合金灯",
+      "en": "Wolframite Lamp"
+    },
+    "652": {
+      "id": "industrialupgrade:crafting_elements/crafting_652_element",
+      "zh": "奥利哈刚灯",
+      "en": "Orichalcum Lamp"
+    },
+    "653": {
+      "id": "industrialupgrade:crafting_elements/crafting_653_element",
+      "zh": "镍合金灯",
+      "en": "Nickel Alloy Lamp"
+    },
+    "654": {
+      "id": "industrialupgrade:crafting_elements/crafting_654_element",
+      "zh": "精金灯",
+      "en": "Adamantine Lamp"
+    },
+    "655": {
+      "id": "industrialupgrade:crafting_elements/crafting_655_element",
+      "zh": "镍钨合金板",
+      "en": "Wolframite Plate"
+    },
+    "656": {
+      "id": "industrialupgrade:crafting_elements/crafting_656_element",
+      "zh": "元件：医疗包",
+      "en": "Sensor: Medkit"
+    },
+    "657": {
+      "id": "industrialupgrade:crafting_elements/crafting_657_element",
+      "zh": "元件：全息投影",
+      "en": "Sensor: Hologram"
+    },
+    "658": {
+      "id": "industrialupgrade:crafting_elements/crafting_658_element",
+      "zh": "元件：酿造",
+      "en": "Sensor: Brewing"
+    },
+    "659": {
+      "id": "industrialupgrade:crafting_elements/crafting_659_element",
+      "zh": "元件：基因学",
+      "en": "Sensor: Genetics"
+    },
+    "660": {
+      "id": "industrialupgrade:crafting_elements/crafting_660_element",
+      "zh": "元件：花岗岩",
+      "en": "Sensor: Granite"
+    },
+    "661": {
+      "id": "industrialupgrade:crafting_elements/crafting_661_element",
+      "zh": "元件：药水",
+      "en": "Sensor: Potion"
+    },
+    "662": {
+      "id": "industrialupgrade:crafting_elements/crafting_662_element",
+      "zh": "元件：孵化器",
+      "en": "Sensor: Incubator"
+    },
+    "663": {
+      "id": "industrialupgrade:crafting_elements/crafting_663_element",
+      "zh": "元件：仙人掌",
+      "en": "Sensor: Cactus"
+    },
+    "664": {
+      "id": "industrialupgrade:crafting_elements/crafting_664_element",
+      "zh": "元件：牛",
+      "en": "Sensor: Cow"
+    },
+    "665": {
+      "id": "industrialupgrade:crafting_elements/crafting_665_element",
+      "zh": "元件：鸡",
+      "en": "Sensor: Chicken"
+    },
+    "666": {
+      "id": "industrialupgrade:crafting_elements/crafting_666_element",
+      "zh": "元件：蜂王浆",
+      "en": "Sensor: Royal Jelly"
+    },
+    "667": {
+      "id": "industrialupgrade:crafting_elements/crafting_667_element",
+      "zh": "元件：蜂蜜",
+      "en": "Sensor: Honey"
+    },
+    "668": {
+      "id": "industrialupgrade:crafting_elements/crafting_668_element",
+      "zh": "元件：逆向转录器",
+      "en": "Sensor: Reverse Transcriptor"
+    },
+    "669": {
+      "id": "industrialupgrade:crafting_elements/crafting_669_element",
+      "zh": "元件：转速",
+      "en": "Sensor: Cycles"
+    },
+    "670": {
+      "id": "industrialupgrade:crafting_elements/crafting_670_element",
+      "zh": "元件：羊",
+      "en": "Sensor: Sheep"
+    },
+    "671": {
+      "id": "industrialupgrade:crafting_elements/crafting_671_element",
+      "zh": "元件：杀虫剂",
+      "en": "Sensor: Pesticide"
+    },
+    "672": {
+      "id": "industrialupgrade:crafting_elements/crafting_672_element",
+      "zh": "元件：方块苗床",
+      "en": "Sensor: Block Spawner"
+    },
+    "673": {
+      "id": "industrialupgrade:crafting_elements/crafting_673_element",
+      "zh": "元件：伐木机",
+      "en": "Sensor: Sawmill"
+    },
+    "674": {
+      "id": "industrialupgrade:crafting_elements/crafting_674_element",
+      "zh": "元件：树苗",
+      "en": "Sensor: Sapling"
+    },
+    "675": {
+      "id": "industrialupgrade:crafting_elements/crafting_675_element",
+      "zh": "元件：猪",
+      "en": "Sensor: Pig"
+    },
+    "676": {
+      "id": "industrialupgrade:crafting_elements/crafting_676_element",
+      "zh": "元件：DNA",
+      "en": "Sensor: DNA"
+    },
+    "677": {
+      "id": "industrialupgrade:crafting_elements/crafting_677_element",
+      "zh": "元件：探测器",
+      "en": "Sensor: Probe"
+    },
+    "678": {
+      "id": "industrialupgrade:crafting_elements/crafting_678_element",
+      "zh": "元件：殖民地",
+      "en": "Sensor: Colonies"
+    },
+    "679": {
+      "id": "industrialupgrade:crafting_elements/crafting_679_element",
+      "zh": "元件：航天器",
+      "en": "Sensor: Spacecraft"
+    },
+    "680": {
+      "id": "industrialupgrade:crafting_elements/crafting_680_element",
+      "zh": "元件：太空",
+      "en": "Sensor: Space"
+    },
+    "681": {
+      "id": "industrialupgrade:crafting_elements/crafting_681_element",
+      "zh": "元件：行星探测车",
+      "en": "Sensor: Rover"
+    },
+    "682": {
+      "id": "industrialupgrade:crafting_elements/crafting_682_element",
+      "zh": "元件：突变",
+      "en": "Sensor: Mutation"
+    },
+    "683": {
+      "id": "industrialupgrade:crafting_elements/crafting_683_element",
+      "zh": "元件：行星",
+      "en": "Sensor: Planet"
+    },
+    "684": {
+      "id": "industrialupgrade:crafting_elements/crafting_684_element",
+      "zh": "元件：火箭",
+      "en": "Sensor: Rocket"
+    },
+    "685": {
+      "id": "industrialupgrade:crafting_elements/crafting_685_element",
+      "zh": "元件：RNA",
+      "en": "Sensor: RNA"
+    },
+    "686": {
+      "id": "industrialupgrade:crafting_elements/crafting_686_element",
+      "zh": "元件：砍伐",
+      "en": "Sensor: Logging"
+    },
+    "687": {
+      "id": "industrialupgrade:crafting_elements/crafting_687_element",
+      "zh": "元件：采集",
+      "en": "Sensor: Harvesting"
+    },
+    "688": {
+      "id": "industrialupgrade:crafting_elements/crafting_688_element",
+      "zh": "元件：卫星",
+      "en": "Sensor: Satellite"
+    },
+    "689": {
+      "id": "industrialupgrade:crafting_elements/crafting_689_element",
+      "zh": "元件：肥料",
+      "en": "Sensor: Fertilizer"
+    },
+    "690": {
+      "id": "industrialupgrade:crafting_elements/crafting_690_element",
+      "zh": "粒子分析仪",
+      "en": "Particle Analyzer"
+    },
+    "691": {
+      "id": "industrialupgrade:crafting_elements/crafting_691_element",
+      "zh": "通信天线",
+      "en": "Communication Antenna"
+    },
+    "692": {
+      "id": "industrialupgrade:crafting_elements/crafting_692_element",
+      "zh": "钒铝微加速器",
+      "en": "Vanadium-Aluminum Microaccelerators"
+    },
+    "693": {
+      "id": "industrialupgrade:crafting_elements/crafting_693_element",
+      "zh": "维塔合金护盾",
+      "en": "Vitalium Shield"
+    },
+    "694": {
+      "id": "industrialupgrade:crafting_elements/crafting_694_element",
+      "zh": "红外传感器",
+      "en": "Infrared Sensor"
+    },
+    "695": {
+      "id": "industrialupgrade:crafting_elements/crafting_695_element",
+      "zh": "铱微加速器",
+      "en": "Iridium Microaccelerators"
+    },
+    "696": {
+      "id": "industrialupgrade:crafting_elements/crafting_696_element",
+      "zh": "锂铝大型太阳能板",
+      "en": "Lithium-Aluminum Large Solar Battery"
+    },
+    "697": {
+      "id": "industrialupgrade:crafting_elements/crafting_697_element",
+      "zh": "锂中型太阳能板",
+      "en": "Medium Lithium Solar Battery"
+    },
+    "698": {
+      "id": "industrialupgrade:crafting_elements/crafting_698_element",
+      "zh": "样本采集模块",
+      "en": "Sample Collection Module"
+    },
+    "699": {
+      "id": "industrialupgrade:crafting_elements/crafting_699_element",
+      "zh": "不锈钢微加速器",
+      "en": "Stainless Steel Microaccelerators"
+    },
+    "700": {
+      "id": "industrialupgrade:crafting_elements/crafting_700_element",
+      "zh": "镍莫合金护盾",
+      "en": "Nimonic Shield"
+    },
+    "701": {
+      "id": "industrialupgrade:crafting_elements/crafting_701_element",
+      "zh": "光学透镜",
+      "en": "Optical Lens"
+    },
+    "702": {
+      "id": "industrialupgrade:crafting_elements/crafting_702_element",
+      "zh": "锇铱微加速器",
+      "en": "Osmiridium Microaccelerators"
+    },
+    "703": {
+      "id": "industrialupgrade:crafting_elements/crafting_703_element",
+      "zh": "坡莫合金护盾",
+      "en": "Permalloy Shield"
+    },
+    "704": {
+      "id": "industrialupgrade:crafting_elements/crafting_704_element",
+      "zh": "铅小型太阳能板",
+      "en": "Small Lead Solar Battery"
+    },
+    "705": {
+      "id": "industrialupgrade:crafting_elements/crafting_705_element",
+      "zh": "定向稳定器",
+      "en": "Orientation Stabilizer"
+    },
+    "706": {
+      "id": "industrialupgrade:crafting_elements/crafting_706_element",
+      "zh": "钢护盾",
+      "en": "Steel Shield"
+    },
+    "707": {
+      "id": "industrialupgrade:crafting_elements/crafting_707_element",
+      "zh": "铝钛合金外壳",
+      "en": "Alumide-Titanium Casing"
+    },
+    "708": {
+      "id": "industrialupgrade:crafting_elements/crafting_708_element",
+      "zh": "铍钢热防护层",
+      "en": "Beryllium Bronze Thermal Coating"
+    },
+    "709": {
+      "id": "industrialupgrade:crafting_elements/crafting_709_element",
+      "zh": "钨履带",
+      "en": "Tungsten Track"
+    },
+    "710": {
+      "id": "industrialupgrade:crafting_elements/crafting_710_element",
+      "zh": "液压稳定器",
+      "en": "Hydrostabilizer"
+    },
+    "711": {
+      "id": "industrialupgrade:crafting_elements/crafting_711_element",
+      "zh": "龙晶外壳",
+      "en": "Draconium Casing"
+    },
+    "712": {
+      "id": "industrialupgrade:crafting_elements/crafting_712_element",
+      "zh": "碳化铪电动驱动",
+      "en": "Hafnium Carbide Drive"
+    },
+    "713": {
+      "id": "industrialupgrade:crafting_elements/crafting_713_element",
+      "zh": "自主供能模块",
+      "en": "Autonomous Power Module"
+    },
+    "714": {
+      "id": "industrialupgrade:crafting_elements/crafting_714_element",
+      "zh": "钼热防护层",
+      "en": "Molybdenum Thermal Coating"
+    },
+    "715": {
+      "id": "industrialupgrade:crafting_elements/crafting_715_element",
+      "zh": "镍钛诺履带",
+      "en": "Nitinol Track"
+    },
+    "716": {
+      "id": "industrialupgrade:crafting_elements/crafting_716_element",
+      "zh": "钕电动驱动",
+      "en": "Neodymium Drive"
+    },
+    "717": {
+      "id": "industrialupgrade:crafting_elements/crafting_717_element",
+      "zh": "不锈钢履带",
+      "en": "Stainless Steel Track"
+    },
+    "718": {
+      "id": "industrialupgrade:crafting_elements/crafting_718_element",
+      "zh": "镍合金电动驱动",
+      "en": "Nickel Alloy Drive"
+    },
+    "719": {
+      "id": "industrialupgrade:crafting_elements/crafting_719_element",
+      "zh": "铌钛电动驱动",
+      "en": "Niobium-Titanium Drive"
+    },
+    "720": {
+      "id": "industrialupgrade:crafting_elements/crafting_720_element",
+      "zh": "蒙茨合金履带",
+      "en": "Munz Track"
+    },
+    "721": {
+      "id": "industrialupgrade:crafting_elements/crafting_721_element",
+      "zh": "奥利哈刚热防护层",
+      "en": "Orichalcum Thermal Coating"
+    },
+    "722": {
+      "id": "industrialupgrade:crafting_elements/crafting_722_element",
+      "zh": "防尘过滤器",
+      "en": "Dustproof Filter"
+    },
+    "723": {
+      "id": "industrialupgrade:crafting_elements/crafting_723_element",
+      "zh": "近程雷达",
+      "en": "Short-Range Radar"
+    },
+    "724": {
+      "id": "industrialupgrade:crafting_elements/crafting_724_element",
+      "zh": "扫描模块",
+      "en": "Scanning Module"
+    },
+    "725": {
+      "id": "industrialupgrade:crafting_elements/crafting_725_element",
+      "zh": "钢质覆层",
+      "en": "Steel Coating"
+    },
+    "726": {
+      "id": "industrialupgrade:crafting_elements/crafting_726_element",
+      "zh": "钛外壳",
+      "en": "Titanium Casing"
+    },
+    "727": {
+      "id": "industrialupgrade:crafting_elements/crafting_727_element",
+      "zh": "钛合金外壳",
+      "en": "Titanium Alloy Casing"
+    },
+    "728": {
+      "id": "industrialupgrade:crafting_elements/crafting_728_element",
+      "zh": "包铝高频天线",
+      "en": "Alclad High-Frequency Antenna"
+    },
+    "729": {
+      "id": "industrialupgrade:crafting_elements/crafting_729_element",
+      "zh": "铝高频天线",
+      "en": "Aluminum High-Frequency Antenna"
+    },
+    "730": {
+      "id": "industrialupgrade:crafting_elements/crafting_730_element",
+      "zh": "砷化镓轨道稳定器",
+      "en": "Gallium-Arsenide Orbital Stabilizer"
+    },
+    "731": {
+      "id": "industrialupgrade:crafting_elements/crafting_731_element",
+      "zh": "能量流发生器",
+      "en": "Energy Flow Generator"
+    },
+    "732": {
+      "id": "industrialupgrade:crafting_elements/crafting_732_element",
+      "zh": "密封舱",
+      "en": "Sealed Compartment"
+    },
+    "733": {
+      "id": "industrialupgrade:crafting_elements/crafting_733_element",
+      "zh": "加速度传感器",
+      "en": "Acceleration Sensors"
+    },
+    "734": {
+      "id": "industrialupgrade:crafting_elements/crafting_734_element",
+      "zh": "辐射探测器",
+      "en": "Radiation Detector"
+    },
+    "735": {
+      "id": "industrialupgrade:crafting_elements/crafting_735_element",
+      "zh": "硬铝高频天线",
+      "en": "Duralumin High-Frequency Antenna"
+    },
+    "736": {
+      "id": "industrialupgrade:crafting_elements/crafting_736_element",
+      "zh": "钇铝磁覆层",
+      "en": "Yttrium-Aluminum Magnetic Coating"
+    },
+    "737": {
+      "id": "industrialupgrade:crafting_elements/crafting_737_element",
+      "zh": "钇铝轨道稳定器",
+      "en": "Yttrium-Aluminum Orbital Stabilizer"
+    },
+    "738": {
+      "id": "industrialupgrade:crafting_elements/crafting_738_element",
+      "zh": "数据容器",
+      "en": "Data Container"
+    },
+    "739": {
+      "id": "industrialupgrade:crafting_elements/crafting_739_element",
+      "zh": "导航传感器",
+      "en": "Navigation Sensors"
+    },
+    "740": {
+      "id": "industrialupgrade:crafting_elements/crafting_740_element",
+      "zh": "钕磁覆层",
+      "en": "Neodymium Magnetic Coating"
+    },
+    "741": {
+      "id": "industrialupgrade:crafting_elements/crafting_741_element",
+      "zh": "镍莫合金磁覆层",
+      "en": "Nimonic Magnetic Coating"
+    },
+    "742": {
+      "id": "industrialupgrade:crafting_elements/crafting_742_element",
+      "zh": "离子防护罩",
+      "en": "Ion Protector"
+    },
+    "743": {
+      "id": "industrialupgrade:crafting_elements/crafting_743_element",
+      "zh": "发射稳定器",
+      "en": "Launch Stabilizer"
+    },
+    "744": {
+      "id": "industrialupgrade:crafting_elements/crafting_744_element",
+      "zh": "燃料箱",
+      "en": "Fuel Tank"
+    },
+    "745": {
+      "id": "industrialupgrade:crafting_elements/crafting_745_element",
+      "zh": "发动机",
+      "en": "Engine"
+    },
+    "746": {
+      "id": "industrialupgrade:crafting_elements/crafting_746_element",
+      "zh": "锇轨道稳定器",
+      "en": "Osmium Orbital Stabilizer"
+    },
+    "747": {
+      "id": "industrialupgrade:crafting_elements/crafting_747_element",
+      "zh": "控制面板",
+      "en": "Control Panel"
+    },
+    "748": {
+      "id": "industrialupgrade:crafting_elements/crafting_748_element",
+      "zh": "高级离子防护罩",
+      "en": "Advanced Ion Protector"
+    },
+    "749": {
+      "id": "industrialupgrade:crafting_elements/crafting_749_element",
+      "zh": "高级发射稳定器",
+      "en": "Advanced Launch Stabilizer"
+    },
+    "750": {
+      "id": "industrialupgrade:crafting_elements/crafting_750_element",
+      "zh": "高级燃料箱",
+      "en": "Advanced Fuel Tank"
+    },
+    "751": {
+      "id": "industrialupgrade:crafting_elements/crafting_751_element",
+      "zh": "高级发动机",
+      "en": "Advanced Engine"
+    },
+    "752": {
+      "id": "industrialupgrade:crafting_elements/crafting_752_element",
+      "zh": "备用电源模块",
+      "en": "Backup Power Module"
+    },
+    "753": {
+      "id": "industrialupgrade:crafting_elements/crafting_753_element",
+      "zh": "通信中继器",
+      "en": "Communication Relay"
+    },
+    "754": {
+      "id": "industrialupgrade:crafting_elements/crafting_754_element",
+      "zh": "完美离子防护罩",
+      "en": "Perfect Ion Protector"
+    },
+    "755": {
+      "id": "industrialupgrade:crafting_elements/crafting_755_element",
+      "zh": "完美发射稳定器",
+      "en": "Perfect Launch Stabilizer"
+    },
+    "756": {
+      "id": "industrialupgrade:crafting_elements/crafting_756_element",
+      "zh": "完美燃料箱",
+      "en": "Perfect Fuel Tank"
+    },
+    "757": {
+      "id": "industrialupgrade:crafting_elements/crafting_757_element",
+      "zh": "完美发动机",
+      "en": "Perfect Engine"
+    },
+    "758": {
+      "id": "industrialupgrade:crafting_elements/crafting_758_element",
+      "zh": "飞行稳定器",
+      "en": "Flight Stabilizers"
+    },
+    "759": {
+      "id": "industrialupgrade:crafting_elements/crafting_759_element",
+      "zh": "钨铬钴轨道稳定器",
+      "en": "Stellite Orbital Stabilizer"
+    },
+    "760": {
+      "id": "industrialupgrade:crafting_elements/crafting_760_element",
+      "zh": "海恩斯超合金高频天线",
+      "en": "Haynes Superalloy High-Frequency Antenna"
+    },
+    "761": {
+      "id": "industrialupgrade:crafting_elements/crafting_761_element",
+      "zh": "改进型离子防护罩",
+      "en": "Improved Ion Protector"
+    },
+    "762": {
+      "id": "industrialupgrade:crafting_elements/crafting_762_element",
+      "zh": "改进型发射稳定器",
+      "en": "Improved Launch Stabilizer"
+    },
+    "763": {
+      "id": "industrialupgrade:crafting_elements/crafting_763_element",
+      "zh": "改进型发动机",
+      "en": "Improved Engine"
+    },
+    "764": {
+      "id": "industrialupgrade:crafting_elements/crafting_764_element",
+      "zh": "改进型燃料箱",
+      "en": "Improved Fuel Tank"
+    },
+    "765": {
+      "id": "industrialupgrade:crafting_elements/crafting_765_element",
+      "zh": "主控计算机",
+      "en": "Control Computer"
+    },
+    "766": {
+      "id": "industrialupgrade:crafting_elements/crafting_766_element",
+      "zh": "轨道修正推进器",
+      "en": "Orbital Correction Booster"
+    },
+    "767": {
+      "id": "industrialupgrade:crafting_elements/crafting_767_element",
+      "zh": "铁锰磁覆层",
+      "en": "Ferromanganese Magnetic Coating"
+    },
+    "768": {
+      "id": "industrialupgrade:crafting_elements/crafting_768_element",
+      "zh": "光子摄像机",
+      "en": "Photon Camera"
+    },
+    "769": {
+      "id": "industrialupgrade:crafting_elements/crafting_769_element",
+      "zh": "氦气球",
+      "en": "Helium Pellet"
+    },
+    "770": {
+      "id": "industrialupgrade:crafting_elements/crafting_770_element",
+      "zh": "高炉混合料",
+      "en": "Blast Furnace Mixture"
+    },
+    "771": {
+      "id": "industrialupgrade:crafting_elements/crafting_771_element",
+      "zh": "高炉砖",
+      "en": "Blast Furnace Brick"
+    },
+    "772": {
+      "id": "industrialupgrade:crafting_elements/crafting_772_element",
+      "zh": "熔炼砖",
+      "en": "Smeltery Brick"
+    },
+    "773": {
+      "id": "industrialupgrade:crafting_elements/crafting_773_element",
+      "zh": "熔炼混合料",
+      "en": "Smeltery Mixture"
+    },
+    "774": {
+      "id": "industrialupgrade:crafting_elements/crafting_774_element",
+      "zh": "液体存储单元样板",
+      "en": "Fluid Storage Cell Pattern"
+    },
+    "775": {
+      "id": "industrialupgrade:crafting_elements/crafting_775_element",
+      "zh": "存储单元样板",
+      "en": "Storage Cell Pattern"
+    },
+    "776": {
+      "id": "industrialupgrade:crafting_elements/crafting_776_element",
+      "zh": "1k 存储组件",
+      "en": "1k Storage Component"
+    },
+    "777": {
+      "id": "industrialupgrade:crafting_elements/crafting_777_element",
+      "zh": "4k 存储组件",
+      "en": "4k Storage Component"
+    },
+    "778": {
+      "id": "industrialupgrade:crafting_elements/crafting_778_element",
+      "zh": "16k 存储组件",
+      "en": "16k Storage Component"
+    },
+    "779": {
+      "id": "industrialupgrade:crafting_elements/crafting_779_element",
+      "zh": "64k 存储组件",
+      "en": "64k Storage Component"
+    },
+    "780": {
+      "id": "industrialupgrade:crafting_elements/crafting_780_element",
+      "zh": "256k 存储组件",
+      "en": "256k Storage Component"
+    },
+    "781": {
+      "id": "industrialupgrade:crafting_elements/crafting_781_element",
+      "zh": "1024k 存储组件",
+      "en": "1024k Storage Component"
+    },
+    "782": {
+      "id": "industrialupgrade:crafting_elements/crafting_782_element",
+      "zh": "4096k 存储组件",
+      "en": "4096k Storage Component"
+    },
+    "783": {
+      "id": "industrialupgrade:crafting_elements/crafting_783_element",
+      "zh": "16384k 存储组件",
+      "en": "16384k Storage Component"
+    },
+    "784": {
+      "id": "industrialupgrade:crafting_elements/crafting_784_element",
+      "zh": "65536k 存储组件",
+      "en": "65536k Storage Component"
+    },
+    "785": {
+      "id": "industrialupgrade:crafting_elements/crafting_785_element",
+      "zh": "262144k 存储组件",
+      "en": "262144k Storage Component"
+    },
+    "786": {
+      "id": "industrialupgrade:crafting_elements/crafting_786_element",
+      "zh": "1048576k 存储组件",
+      "en": "1048576k Storage Component"
+    },
+    "787": {
+      "id": "industrialupgrade:crafting_elements/crafting_787_element",
+      "zh": "2097152k 存储组件",
+      "en": "2097152k Storage Component"
+    },
+    "788": {
+      "id": "industrialupgrade:crafting_elements/crafting_788_element",
+      "zh": "一堆放射性废料",
+      "en": ""
+    },
+    "789": {
+      "id": "industrialupgrade:crafting_elements/crafting_789_element",
+      "zh": "一堆煤粉",
+      "en": ""
+    },
+    "790": {
+      "id": "industrialupgrade:crafting_elements/crafting_790_element",
+      "zh": "精制硝石",
+      "en": ""
+    }
+  }
+}

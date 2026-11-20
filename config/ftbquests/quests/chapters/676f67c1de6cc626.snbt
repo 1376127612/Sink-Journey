@@ -293,7 +293,7 @@
 			id: "0C43CCAA70AB234A"
 			tasks: [{
 				id: "31CF2FBA37E09DE9"
-				item: { count: 1, id: "mmcr:charcoal_furnace_controller" }
+				item: { components: { "ftbquests:missing_item": "mmcr:charcoal_furnace_controller" }, count: 1, id: "ftbquests:missing_item" }
 				type: "item"
 			}]
 			x: 10.5d

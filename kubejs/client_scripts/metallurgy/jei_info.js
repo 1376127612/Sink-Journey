@@ -1,14 +1,7 @@
 // ============================================================
-// 初期冶金 —— 炭炉 / 土高炉 JEI 配方池说明（client）
+// 已废弃 —— 炭炉 / 土高炉 JEI 配方池说明（MMCR 版）
+// ------------------------------------------------------------
+// 机器已移植到 Multiblocked2，配方类型改为
+//   sinkjourney:charcoal_furnace / sinkjourney:earth_blast_furnace
+// MMCR 的 addRecipePoolInfo 不再适用，本文件保留为空壳。
 // ============================================================
-
-MMCREvents.client(event => {
-    event.addRecipePoolInfo('kubejs:charcoal_furnace', 'jei.kubejs.charcoal_furnace.info')
-    event.addRecipePoolInfo('kubejs:charcoal_furnace', 'jei.kubejs.charcoal_furnace.info2')
-    event.addRecipePoolInfo('kubejs:charcoal_furnace', 'jei.kubejs.charcoal_furnace.info3')
-
-    event.addRecipePoolInfo('kubejs:earth_blast_furnace', 'jei.kubejs.earth_blast_furnace.info')
-    event.addRecipePoolInfo('kubejs:earth_blast_furnace', 'jei.kubejs.earth_blast_furnace.info2')
-    event.addRecipePoolInfo('kubejs:earth_blast_furnace', 'jei.kubejs.earth_blast_furnace.info3')
-    event.addRecipePoolInfo('kubejs:earth_blast_furnace', 'jei.kubejs.earth_blast_furnace.info4')
-})
