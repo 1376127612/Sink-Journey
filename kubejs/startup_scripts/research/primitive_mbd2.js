@@ -61,13 +61,84 @@
         'com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots'
     )
     var UITemplate = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UITemplate')
+
+    // 布局枚举直接传实例：lss 传字符串时 flex-direction / align-items 不会被解析
+    var FlexDirection = Java.loadClass('dev.vfyjxf.taffy.style.FlexDirection')
+    var AlignItems = Java.loadClass('dev.vfyjxf.taffy.style.AlignItems')
+    var JustifyContent = Java.loadClass('dev.vfyjxf.taffy.style.JustifyContent')
+    var Size = Java.loadClass('com.lowdragmc.lowdraglib2.math.Size')
     var StylesheetManager = Java.loadClass(
         'com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager'
     )
 
-    // ---- 配方类型 ---------------------------------------------
+    // ---- JEI 配方界面模板 -------------------------------------
+    var buildXeiTemplate = function () {
+        var root = new UIElement()
+        root.addClass('panel_bg')
+        root.lss('width', 176)
+        root.lss('height', 58)
+        root.lss('flex-direction', FlexDirection.COLUMN)
+        root.lss('padding-all', 7)
+        root.lss('gap-all', 4)
+
+        var row = new UIElement()
+        row.lss('flex-direction', FlexDirection.ROW)
+        row.lss('align-items', AlignItems.CENTER)
+        row.lss('justify-content', JustifyContent.CENTER)
+        row.lss('width', 'stretch')
+        row.lss('height', 18)
+        row.lss('gap-all', 4)
+
+        var addSlot = function (id) {
+            var slot = new ItemSlot()
+            slot.setId(id)
+            row.addChild(slot)
+        }
+        var addLabel = function (text) {
+            var element = new Label()
+            element.setText(text)
+            row.addChild(element)
+        }
+        addSlot('@item_import_0')
+        addLabel('+')
+        addSlot('@item_import_1')
+        addLabel('→')
+        addSlot('@item_export_0')
+        root.addChild(row)
+
+        var bar = new ProgressBar()
+        bar.setId('@progress_bar')
+        bar.setRange(0, 1)
+        bar.lss('width', 'stretch')
+        bar.lss('height', 8)
+        root.addChild(bar)
+
+        var duration = new Label()
+        duration.setId('@duration')
+        duration.lss('color', 0x808080)
+        root.addChild(duration)
+
+        return UITemplate.of(root, StylesheetManager.MC_MERGED)
+    }
+
+    // 启动期是 modloading 线程，Minecraft 还没建好，new Label 会 NPE；
+    // 所以模板等机器设置真正构建时（字体已就绪）再挂到配方类型上。
+    var xeiTemplateApplied = false
+    var applyXeiTemplate = function () {
+        if (xeiTemplateApplied) return
+        var recipeType = MBDRegistries.RECIPE_TYPES.get(RL.parse(RECIPE_TYPE_ID))
+        if (recipeType === null) return
+        recipeType.setUiTemplate(buildXeiTemplate())
+        recipeType.setUiSize(Size.of(176, 58))
+        xeiTemplateApplied = true
+    }
+    // JEI 模板 id 约定：输入 @item_import_<index> / 输出 @item_export_<index>，
+    // 进度条 @progress_bar、时长 @duration（MBD2 的 bindCapIOUI 按此绑定内容）。
     MBDRegistryEvents.recipeType(function (event) {
-        event.createRecipeType(RL.parse(RECIPE_TYPE_ID)).setXEIVisible(true)
+        event.createRecipeType(RL.parse(RECIPE_TYPE_ID))
+            .setXEIVisible(true)
+
+
         console.info('[MBD2] 配方类型 ' + RECIPE_TYPE_ID + ' 已注册')
     })
 
@@ -118,7 +189,7 @@
         root.lss('width', 206)
         // 比原来高 24：给客户端插入的扫雷按钮留位（16px 按钮 + 6 间距）
         root.lss('height', 194)
-        root.lss('flex-direction', 'column')
+        root.lss('flex-direction', FlexDirection.COLUMN)
         root.lss('padding-all', 8)
         root.lss('gap-all', 6)
 
@@ -128,8 +199,9 @@
         var row = new UIElement()
         row.lss('width', 'stretch')
         row.lss('height', 18)
-        row.lss('flex-direction', 'row')
-        row.lss('align-items', 'center')
+        row.lss('flex-direction', FlexDirection.ROW)
+        row.lss('align-items', AlignItems.CENTER)
+        row.lss('justify-content', JustifyContent.CENTER)
         row.lss('gap-all', 4)
         row.addChild(itemSlot('ui:input_0'))
         row.addChild(label('+'))
@@ -142,6 +214,7 @@
         bar.setId('ui:progress_bar')
         bar.setRange(0, 1)
         bar.lss('width', 'stretch')
+        bar.lss('height', 8)
         root.addChild(bar)
 
         // 扫雷按钮由客户端插在进度条和背包之间（见文件头说明）
@@ -156,6 +229,7 @@
     var machineSettings = null
     var getMachineSettings = function () {
         if (machineSettings === null) {
+            applyXeiTemplate()
             machineSettings = ConfigMachineSettings.builder()
                 .hasUI(true)
                 .traitDefinitions(traitDefinitions)

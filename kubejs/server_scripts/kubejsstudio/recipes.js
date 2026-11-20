@@ -11,7 +11,10 @@ ServerEvents.generateData('after_mods', event => {
     event.json('minecraft:recipe/chest', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","ABA","#A#"],"key":{"#":{"tag":"minecraft:oak_logs"},"A":{"tag":"minecraft:planks"},"B":{"item":"minecraft:iron_nugget"}},"result":{"id":"minecraft:chest","count":1}})
     event.json('roots:recipe/wildwood_chest_from_logs_planks', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","ABA","#A#"],"key":{"#":{"tag":"roots:logs/wildwood"},"A":{"tag":"roots:planks/wildwood"},"B":{"item":"minecraft:iron_nugget"}},"result":{"id":"roots:wildwood_chest","count":1}})
     event.json('minecraft:recipe/bucket', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["# #"," # "],"key":{"#":{"item":"create:iron_sheet"}},"result":{"id":"minecraft:bucket","count":1}})
+<<<<<<< HEAD
     event.json('roots:recipe/grove_crafter', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","BCB","BDB"],"key":{"#":{"item":"roots:cloud_berry"},"A":{"item":"roots:wildroot"},"B":{"item":"roots:runestone"},"C":{"item":"roots:grove_moss"},"D":{"item":"roots:chiseled_runestone"}},"result":{"id":"roots:grove_crafter","count":1}})
+=======
+>>>>>>> ebfe3ca00eff4dbaea77ae3cc99c573806140ec4
 })
 ServerEvents.recipes(event => {
     event.shapeless('notreepunchingremastered:plant_string', ['notreepunchingremastered:grass_fiber', 'notreepunchingremastered:grass_fiber', 'notreepunchingremastered:grass_fiber', 'notreepunchingremastered:grass_fiber']).id('notreepunchingremastered:plant_string')
@@ -45,5 +48,10 @@ ServerEvents.recipes(event => {
     event.shaped('minecraft:crafting_table', ['##', 'AA'], { '#': 'minecraft:leather', 'A': '#minecraft:logs' }).id('kubejsstudio:crafting_table')
     event.remove({ id: 'minecraft:crafting_table' })
     event.remove({ id: 'minecraft:furnace' })
+<<<<<<< HEAD
     event.remove({ id: 'roots:grove_pedestal' })
+=======
+    event.remove({ id: 'industrialupgrade:industrialupgrade_735' })
+    event.shaped('industrialupgrade:crafting_elements/crafting_276_element', ['###', 'ABA', ' C '], { '#': 'industrialupgrade:casing/bronze', 'A': 'industrialupgrade:crafting_elements/crafting_294_element', 'B': 'industrialupgrade:crafting_elements/crafting_60_element', 'C': 'industrialupgrade:crafting_elements/crafting_42_element' }).id('kubejsstudio:elector_motor')
+>>>>>>> ebfe3ca00eff4dbaea77ae3cc99c573806140ec4
 })

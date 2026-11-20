@@ -50,6 +50,12 @@
         'com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots'
     )
     var UITemplate = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UITemplate')
+
+    // 布局枚举直接传实例：lss 传字符串时 flex-direction / align-items 不会被解析
+    var FlexDirection = Java.loadClass('dev.vfyjxf.taffy.style.FlexDirection')
+    var AlignItems = Java.loadClass('dev.vfyjxf.taffy.style.AlignItems')
+    var JustifyContent = Java.loadClass('dev.vfyjxf.taffy.style.JustifyContent')
+    var Size = Java.loadClass('com.lowdragmc.lowdraglib2.math.Size')
     var StylesheetManager = Java.loadClass(
         'com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager'
     )
@@ -62,9 +68,76 @@
     var GuavaIterables = Java.loadClass('com.google.common.collect.Iterables')
     var MBDRegistries = Java.loadClass('com.lowdragmc.mbd2.api.registry.MBDRegistries')
 
-    // ---- 配方类型 ---------------------------------------------
+    // ---- JEI 配方界面模板 -------------------------------------
+    var buildXeiTemplate = function () {
+        var root = new UIElement()
+        root.addClass('panel_bg')
+        root.lss('width', 176)
+        root.lss('height', 58)
+        root.lss('flex-direction', FlexDirection.COLUMN)
+        root.lss('padding-all', 7)
+        root.lss('gap-all', 4)
+
+        var row = new UIElement()
+        row.lss('flex-direction', FlexDirection.ROW)
+        row.lss('align-items', AlignItems.CENTER)
+        row.lss('justify-content', JustifyContent.CENTER)
+        row.lss('width', 'stretch')
+        row.lss('height', 18)
+        row.lss('gap-all', 4)
+
+        var addSlot = function (id) {
+            var slot = new ItemSlot()
+            slot.setId(id)
+            row.addChild(slot)
+        }
+        var addLabel = function (text) {
+            var element = new Label()
+            element.setText(text)
+            row.addChild(element)
+        }
+        addSlot('@item_import_0')
+        addLabel('+')
+        addSlot('@item_import_1')
+        addLabel('+')
+        addSlot('@item_import_2')
+        addLabel('→')
+        addSlot('@item_export_0')
+        root.addChild(row)
+
+        var bar = new ProgressBar()
+        bar.setId('@progress_bar')
+        bar.setRange(0, 1)
+        bar.lss('width', 'stretch')
+        bar.lss('height', 8)
+        root.addChild(bar)
+
+        var duration = new Label()
+        duration.setId('@duration')
+        duration.lss('color', 0x808080)
+        root.addChild(duration)
+
+        return UITemplate.of(root, StylesheetManager.MC_MERGED)
+    }
+
+    // 启动期是 modloading 线程，Minecraft 还没建好，new Label 会 NPE；
+    // 所以模板等机器设置真正构建时（字体已就绪）再挂到配方类型上。
+    var xeiTemplateApplied = false
+    var applyXeiTemplate = function () {
+        if (xeiTemplateApplied) return
+        var recipeType = MBDRegistries.RECIPE_TYPES.get(RL.parse(RECIPE_TYPE_ID))
+        if (recipeType === null) return
+        recipeType.setUiTemplate(buildXeiTemplate())
+        recipeType.setUiSize(Size.of(176, 58))
+        xeiTemplateApplied = true
+    }
+    // JEI 模板 id 约定：输入 @item_import_<index> / 输出 @item_export_<index>，
+    // 进度条 @progress_bar、时长 @duration（MBD2 的 bindCapIOUI 按此绑定内容）。
     MBDRegistryEvents.recipeType(function (event) {
-        event.createRecipeType(RL.parse(RECIPE_TYPE_ID)).setXEIVisible(true)
+        event.createRecipeType(RL.parse(RECIPE_TYPE_ID))
+            .setXEIVisible(true)
+
+
         console.info('[EBF] 配方类型 ' + RECIPE_TYPE_ID + ' 已注册')
     })
 
@@ -109,20 +182,23 @@
     var buildUiTemplate = function () {
         var root = new UIElement()
         root.addClass('panel_bg')
-        root.lss('width', 206)
-        root.lss('height', 170)
-        root.lss('flex-direction', 'column')
-        root.lss('padding-all', 8)
-        root.lss('gap-all', 6)
+        root.lss('width', 176)
+        root.lss('height', 166)
+        root.lss('flex-direction', FlexDirection.COLUMN)
+        root.lss('padding-all', 7)
+        root.lss('gap-all', 5)
 
-        root.addChild(label('土高炉', 'ui:machine_name'))
+        var title = label('土高炉', 'ui:machine_name')
+        title.lss('color', 0x404040)    // 原版标题灰
+        root.addChild(title)
 
         // 3 个输入槽 + 1 个输出槽
         var row = new UIElement()
         row.lss('width', 'stretch')
         row.lss('height', 18)
-        row.lss('flex-direction', 'row')
-        row.lss('align-items', 'center')
+        row.lss('flex-direction', FlexDirection.ROW)
+        row.lss('align-items', AlignItems.CENTER)
+        row.lss('justify-content', JustifyContent.CENTER)
         row.lss('gap-all', 4)
         row.addChild(itemSlot('ui:input_0'))
         row.addChild(label('+'))
@@ -137,7 +213,13 @@
         bar.setId('ui:progress_bar')
         bar.setRange(0, 1)
         bar.lss('width', 'stretch')
+        bar.lss('height', 8)
         root.addChild(bar)
+
+        // 一行小字提示炉况门槛，比空着好看也实用
+        var hint = label('篝火需点燃 · 风口贴陶风箱强制鼓风')
+        hint.lss('color', 0x808080)
+        root.addChild(hint)
 
         root.addChild(new InventorySlots())
 
@@ -149,6 +231,7 @@
     var machineSettings = null
     var getMachineSettings = function () {
         if (machineSettings === null) {
+            applyXeiTemplate()
             machineSettings = ConfigMachineSettings.builder()
                 .hasUI(true)
                 .traitDefinitions(traitDefinitions)

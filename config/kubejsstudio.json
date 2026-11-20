@@ -3,7 +3,7 @@
   "browserCollapsed": false,
   "pendingCollapsed": false,
   "sideListCollapsed": false,
-  "tab": 4,
+  "tab": 0,
   "propsBlocks": false,
   "filesExplorerCollapsed": false,
   "apiBrowserCollapsed": false,
@@ -38,15 +38,20 @@
   "tooltipEditH": 0,
   "tooltipSplit": 65,
   "dropdownH": 180,
-  "windowX": 0,
-  "windowY": 0,
+  "windowX": 237,
+  "windowY": 44,
   "windowW": 1280,
   "windowH": 800,
   "pinnedFiles": [],
   "pinnedFolders": [],
   "favorites": [],
+<<<<<<< HEAD
   "recipesSelected": "roots:grove_pedestal",
   "recipesSearch": "roots:grove_pedestal",
+=======
+  "recipesSelected": "industrialupgrade:industrialupgrade_735",
+  "recipesSearch": "industrialupgrade:industrialupgrade_735",
+>>>>>>> ebfe3ca00eff4dbaea77ae3cc99c573806140ec4
   "tagsRegistry": "item",
   "tagsSelected": "c:doubleplate",
   "tagsSearch": "c:doubleplate",
@@ -59,6 +64,7 @@
   "createSearch": "",
   "filesOpen": [],
   "recentPicks": [
+<<<<<<< HEAD
     "item roots:wildroot",
     "item roots:cloud_berry",
     "item roots:grove_moss",
@@ -71,6 +77,20 @@
     "item industrialupgrade:baseblockingot/spinel",
     "item industrialupgrade:itemingots/spinel_ingot",
     "item create:iron_sheet"
+=======
+    "item industrialupgrade:crafting_elements/crafting_276_element",
+    "item industrialupgrade:crafting_elements/crafting_42_element",
+    "item industrialupgrade:crafting_elements/crafting_294_element",
+    "item industrialupgrade:crafting_elements/crafting_60_element",
+    "item industrialupgrade:casing/bronze",
+    "item create:iron_sheet",
+    "item minecraft:iron_nugget",
+    "item #minecraft:planks",
+    "item #minecraft:oak_logs",
+    "item #c:stripped_woods",
+    "item notreepunchingremastered:flint_shard",
+    "item notreepunchingremastered:stone_rock"
+>>>>>>> ebfe3ca00eff4dbaea77ae3cc99c573806140ec4
   ],
   "filesActive": -1
 }
