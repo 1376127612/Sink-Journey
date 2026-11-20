@@ -289,15 +289,15 @@
 			y: -0.5d
 		}
 		{
-			dependencies: ["34201481CF72171A"]
-			id: "0C43CCAA70AB234A"
+			dependencies: ["0056045684755D67"]
+			id: "25D01AF8BA18BB6D"
 			tasks: [{
-				id: "31CF2FBA37E09DE9"
-				item: { components: { "ftbquests:missing_item": "mmcr:charcoal_furnace_controller" }, count: 1, id: "ftbquests:missing_item" }
+				id: "7D9FD0E2B5F11C54"
+				item: { count: 1, id: "minecraft:ancient_debris" }
 				type: "item"
 			}]
-			x: 10.5d
-			y: -2.0d
+			x: 12.0d
+			y: 3.5d
 		}
 	]
 }

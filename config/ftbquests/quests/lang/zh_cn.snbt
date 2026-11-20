@@ -36,6 +36,7 @@
 		"但如果你问我解码石板也要炼金制作怎么办，那我的回答是，只有天知道。"
 	]
 	quest.0056045684755D67.quest_subtitle: "这很魔法，对吧"
+	quest.03232381B779A520.quest_desc: ["奇怪，下界森林中居然还有这种硕大蘑菇，难道下界生物有着自己获取能量的方式吗？"]
 	quest.058676663FEB137F.quest_desc: ["制作扩展构件，你可以用它来扩展嵌套工厂的空间"]
 	quest.058676663FEB137F.quest_subtitle: "空间"
 	quest.05C904B7B3FB589E.quest_desc: ["我还以为你会喜欢这个。"]
@@ -49,6 +50,7 @@
 	quest.0932DD0AA54FD551.title: "做一把斧头有哪些步骤"
 	quest.0B73D9E1303C41BD.quest_desc: ["如果我是你的话，我会尽快制作这台机器并完成它的自动化。"]
 	quest.0B73D9E1303C41BD.quest_subtitle: "好像是没有什么用的机器"
+	quest.0C743B1D27F300AB.quest_desc: ["多么奇怪的植物，明明从腐烂之物中生长出来的植物，却有如月光般的色彩。"]
 	quest.0E2A114F298F8ACD.quest_desc: [
 		"将海蓝宝石放入聚星缸，它会产出星能液，收集你的星能液，在后面会消耗很多"
 		"你还可以用共振宝石，水晶石/共鸣水晶石，天辉水晶石/共鸣天辉水晶石来获取星能液"
@@ -71,6 +73,7 @@
 	quest.156E0D27F03959DC.title: "开火车！"
 	quest.15C7029E66E838F0.title: "最强的熔炉"
 	quest.16DD4183EE52B969.quest_desc: ["它就像手一样"]
+	quest.174358FC22916BA6.quest_desc: ["散发着令人作呕的腐烂气息，我不想再接触这种东西了。"]
 	quest.176BDCB97FADED40.quest_subtitle: "化为更聚焦的力量"
 	quest.176BDCB97FADED40.title: "挑剔的工作台"
 	quest.18F18597F7065BA1.quest_desc: ["由于精密构件用量较大，我把循环次数改为了3次并取消了副产物"]
@@ -86,12 +89,18 @@
 	quest.1F47C907397E6D9B.quest_desc: ["好大的工作台，材料也好贵"]
 	quest.1F47C907397E6D9B.title: "超大工作台"
 	quest.214D1C36178640C8.quest_desc: ["制作坍缩构件，你可以用它减少不需要的空间"]
+	quest.2193FBA1E0B50F7E.quest_desc: ["或许是一种美味的食物？"]
 	quest.2228F6297919FB7A.quest_desc: ["这或许是你的第一个机器框架，但请注意，它也可以用作为拓展坞来使用。"]
 	quest.2228F6297919FB7A.quest_subtitle: "机械核心"
+	quest.223A36F78B6F517E.quest_desc: ["莫非这个世界的菌类都会生长到一立方米吗。"]
 	quest.22BECA4CD5C08010.quest_desc: ["这把工具将用于旋转方块、链接余烬传输机器（发射器/接收器/中继器）、关闭管道侧面连接"]
 	quest.22BECA4CD5C08010.quest_subtitle: "铁匠锤？扳手！"
+	quest.24825836D1002DDD.quest_desc: ["像是黄色棉花糖一样，可为什么是蛙蛙呢？"]
+	quest.25D01AF8BA18BB6D.quest_desc: ["在一次偶然的炼金过程中，你将一些失败的产物混合在了一起，组成了这种奇妙的物品。它似乎在呼唤你前往某个地方。"]
+	quest.25D01AF8BA18BB6D.title: "远古之证"
 	quest.261BB0E84BC72316.quest_desc: ["高版本删除了所有望远镜，你现在需要用星盘寻找星座"]
 	quest.261BB0E84BC72316.title: "开始观星！"
+	quest.266C2F26B743AD58.quest_desc: ["每当我靠近它的时候就仿佛会传来一阵哭声。"]
 	quest.26C109209120EE25.quest_subtitle: "与星共振"
 	quest.2723FD4DEFF29767.quest_desc: ["水车的应力被减半了，减慢你的转速"]
 	quest.2723FD4DEFF29767.title: "水车仙人"
@@ -108,6 +117,8 @@
 	quest.2F418266BAA45470.quest_subtitle: "单片眼镜"
 	quest.2F67C84DFB5047F8.quest_desc: ["穿越异界，系统降临"]
 	quest.2F67C84DFB5047F8.title: "阶段一"
+	quest.306FF3E1D993000C.quest_desc: ["像是紫色棉花糖一样，可为什么不甜呢？"]
+	quest.32D77C0E69A7F0F5.quest_desc: ["我喜欢这种植物，看起来很美味，有一种盎然的生意在其中。"]
 	quest.33CA917A7FF636A6.quest_desc: [
 		"很好，现在终于能够挖矿了。"
 		""
@@ -129,6 +140,7 @@
 	quest.38AE7BE9A1702B16.quest_subtitle: "光芒会教会它聆听"
 	quest.39F17AE9D43DCF5C.quest_desc: ["哈哈哈，天不亡我，我现在就将那铁矿斩于镐下。"]
 	quest.39F17AE9D43DCF5C.quest_subtitle: "似乎更强大了？"
+	quest.39F9A7586935F24F.title: "获取燧石刀"
 	quest.3C36940FAC6404ED.quest_desc: ["植物纤维，植物绳。看起来很简单，对吧？割草，捡纤维，搓绳子。但如果你割了十丛草只掉了两根纤维，请不要质疑概率——概率是给有工作台的人准备的，你现在没有。"]
 	quest.3C36940FAC6404ED.quest_subtitle: "植物纤维，不是植物人"
 	quest.3C36940FAC6404ED.title: "草：我招谁惹谁了"
@@ -176,6 +188,7 @@
 	quest.48BEE62B80F62549.quest_desc: ["或许，你真的可以挖一点东西了？"]
 	quest.4A1B91231661F70F.quest_desc: ["你的第一个机械动力机壳"]
 	quest.4A1B91231661F70F.quest_subtitle: "安山时代"
+	quest.4D7D787C9864FCEF.quest_desc: ["奇特的菌类物质好像，它似乎还会发光，难道这是诱捕某种微小生物的方式吗？"]
 	quest.4D92FDC6EA6BDD71.quest_desc: [
 		"汇聚生灵之气，调转玄妙之间，聚火成堆。"
 		""
@@ -183,6 +196,8 @@
 	]
 	quest.4D92FDC6EA6BDD71.quest_subtitle: "柴堆？小熔炉！"
 	quest.4E2996D1346A91DD.quest_desc: ["我发现粘土与沙子可以混合成一种奇妙的物质，它似乎蕴含着某种神奇的力量。或许，我可以通过柴堆把它们烤干？"]
+	quest.50E6857A8D8A924B.quest_desc: ["在通过这扇门的同时，你的脑海中涌入了大量的信息。原来，这里叫作下界。"]
+	quest.50E6857A8D8A924B.title: "远古回响"
 	quest.5319BE2FE47DFFE5.quest_desc: ["制作电子装配台和电子工作台，你可以用他们手搓电路板"]
 	quest.5319BE2FE47DFFE5.title: "手搓电路板！"
 	quest.5395E48294293E81.quest_desc: [
@@ -203,6 +218,7 @@
 	quest.54292046716034B6.quest_desc: ["我曾在森林的树荫底下发现过这些自然造物，它们似乎具有某种特别的魔力？"]
 	quest.54A917D73EE764DB.title: "黄铜物流"
 	quest.55F9AE8981565D51.title: "终于不要手搓变速了"
+	quest.56D4CDDFAE01BAD1.quest_desc: ["来自地狱的植物。"]
 	quest.585589616E4ADF3F.quest_desc: [
 		"机械动力的教程很多，因此任务的描述会略简略"
 		"另外，本整合包禁用了所有动态结构"
@@ -236,19 +252,28 @@
 	quest.5A1B000000000003.title: "龙之证"
 	quest.5A7A4F5ED830FF4C.quest_desc: ["你可能需要很多，但并不用现在制作很多。"]
 	quest.5A7A4F5ED830FF4C.quest_subtitle: "不是石头"
+	quest.5A958F86CC00F8C4.quest_desc: ["它浑身散发着一股寒意，来自下界灵魂沙峡谷的灵阶怪的核心。"]
+	quest.5BC3C00F49EEC9AD.quest_desc: ["可以在部分裸露的石英矿石发现这种奇特的结晶。"]
 	quest.5F132AD862CA787E.quest_desc: ["你需要将坚固合金烧红再把它压成板，或者你在一开始就这么做"]
 	quest.5F132AD862CA787E.quest_subtitle: "冲压机的力气没这么大"
 	quest.5F132AD862CA787E.title: "我想你很难把它压成板"
 	quest.60E6C5DE278F8AD0.quest_desc: ["是的，你或许发现了，目前你似乎并没有能力组装出一个工作台。现在只能通过石匠工作台来制作一些现阶段必要的工具了。"]
 	quest.60E6C5DE278F8AD0.quest_subtitle: "工作台，但是石匠。"
 	quest.60E6C5DE278F8AD0.title: "奇怪，我的工作台呢？"
+	quest.60F89FEE277681EC.quest_desc: ["通过种植一些野根，在其成熟时分启动野性涌动仪式即可催生出一株野树。"]
+	quest.60F89FEE277681EC.quest_subtitle: "野性勃勃"
+	quest.6258080BE6F0EEC4.quest_desc: ["一种生长于岩石之间的植物。"]
 	quest.62DA5DC7C85BB882.quest_desc: ["利用你的余烬机器做出指杆用于制作安山机壳"]
 	quest.62DA5DC7C85BB882.quest_subtitle: "指指点点"
 	quest.6880526327344216.quest_subtitle: "也许你也可以组装一个镐子？"
 	quest.6880526327344216.title: "燧石镐的顶端"
+	quest.698C48B9BF81BDBF.quest_desc: ["奇怪，下界森林中居然还有这种硕大蘑菇，难道下界生物有着自己获取能量的方式吗？"]
+	quest.6ABB17E689175F68.quest_desc: ["来自名为容器的怪物身上的肉，击败容器似乎会释放它蕴含的灵魂。"]
 	quest.6BDDB3A36AADF646.quest_desc: ["制作一些青铜板用于制作蒸汽机器"]
 	quest.6BDDB3A36AADF646.title: "好用的合金"
 	quest.6C12306C5CC22051.title: "蒸汽机"
+	quest.6DF0542F0876BFC5.quest_desc: ["埋藏在下界的燃料，似乎与煤炭有些不同之处。"]
+	quest.6E16E688AE7E429D.quest_desc: ["我喜欢这株植物，有着阳光的味道，也似棉花糖柔软的果实。"]
 	quest.73F4EE5CA018D3AE.quest_desc: [
 		"这台机器将产出本模组最重要的材料，在放置之前你需要去寻找一块余烬能量浓郁的地方。"
 		""
@@ -264,6 +289,8 @@
 		"也许，它需要红石激活？"
 	]
 	quest.749AF51E60268100.quest_subtitle: "一种新奇的能量传输方式"
+	quest.76588A9B06D5DDC7.quest_desc: ["我能够感受到一股灵魂的气息扑面而来。"]
+	quest.77020F764ED60722.quest_desc: ["像是绿色棉花糖一样，可为什么是蛙蛙呢？"]
 	quest.7A52841255FD1EFA.quest_desc: ["很简单，也很有用"]
 	quest.7A52841255FD1EFA.title: "基础传动元件"
 	quest.7BFD015338811BC2.quest_desc: ["或许你现在可以尝试狩猎一些动物？哈哈，我是说，你需要它们的皮革。"]
@@ -271,6 +298,7 @@
 	quest.7C5D2124B8AE69A6.quest_desc: ["升级你的余烬机器！"]
 	quest.7E2342ED402B6E97.quest_desc: [""]
 	quest.7E2342ED402B6E97.quest_subtitle: "燃煤发电机？......！"
+	quest.7F037DF5FFF945BB.quest_desc: ["来自灵魂沙峡谷随处可见的岩石。"]
 	task.0DFBBB1E418A4DB5.title: "不要动"
 	task.31C653416C932CC3.title: "进入末地"
 }

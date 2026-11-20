@@ -10,5 +10,294 @@
 	images: [ ]
 	order_index: 2
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			dependencies: ["25D01AF8BA18BB6D"]
+			id: "50E6857A8D8A924B"
+			tasks: [{
+				dimension: "minecraft:the_nether"
+				id: "76094F8DFE7062D8"
+				type: "dimension"
+			}]
+			x: -5.5d
+			y: -3.0d
+		}
+		{
+			dependencies: [
+				"5BC3C00F49EEC9AD"
+				"6ABB17E689175F68"
+				"6DF0542F0876BFC5"
+				"76588A9B06D5DDC7"
+			]
+			id: "56D4CDDFAE01BAD1"
+			tasks: [{
+				id: "051094544FF9071B"
+				item: { count: 1, id: "roots:inferno_bulb" }
+				type: "item"
+			}]
+			x: -3.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["7F037DF5FFF945BB"]
+			id: "6258080BE6F0EEC4"
+			tasks: [{
+				id: "3211F5E4FD5F9489"
+				item: { count: 1, id: "roots:stalicripe" }
+				type: "item"
+			}]
+			x: -8.0d
+			y: 3.5d
+		}
+		{
+			dependencies: [
+				"03232381B779A520"
+				"698C48B9BF81BDBF"
+				"4D7D787C9864FCEF"
+			]
+			id: "2193FBA1E0B50F7E"
+			tasks: [{
+				id: "3098CDB39EA5B8CF"
+				item: { count: 1, id: "roots:bafflecap" }
+				type: "item"
+			}]
+			x: -12.0d
+			y: 1.0d
+		}
+		{
+			dependencies: [
+				"5A958F86CC00F8C4"
+				"223A36F78B6F517E"
+				"174358FC22916BA6"
+			]
+			id: "0C743B1D27F300AB"
+			tasks: [{
+				id: "495049099E69C037"
+				item: { count: 1, id: "roots:moonglow" }
+				type: "item"
+			}]
+			x: -13.0d
+			y: -6.0d
+		}
+		{
+			dependencies: ["266C2F26B743AD58"]
+			id: "32D77C0E69A7F0F5"
+			tasks: [{
+				id: "4C66DB6B7F729FE4"
+				item: { count: 1, id: "roots:pereskia" }
+				type: "item"
+			}]
+			x: -10.0d
+			y: -10.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "5BC3C00F49EEC9AD"
+			tasks: [{
+				id: "12728A1C671801AC"
+				item: { count: 1, id: "netherexp:quartz_crystal" }
+				type: "item"
+			}]
+			x: -5.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "76588A9B06D5DDC7"
+			tasks: [{
+				id: "24194A6198D8B931"
+				item: { count: 1, id: "netherexp:soul_magma_block" }
+				type: "item"
+			}]
+			x: -2.0d
+			y: -0.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "6ABB17E689175F68"
+			tasks: [{
+				id: "02E091101B7FB8E4"
+				item: { count: 1, id: "netherexp:wraithing_flesh" }
+				type: "item"
+			}]
+			x: -4.0d
+			y: 0.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "6DF0542F0876BFC5"
+			tasks: [{
+				id: "50C976647FA6D7A2"
+				item: { count: 1, id: "netherexp:fossil_fuel" }
+				type: "item"
+			}]
+			x: -3.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "7F037DF5FFF945BB"
+			tasks: [{
+				id: "776E56C897EA54BF"
+				item: { count: 1, id: "netherexp:pale_soul_slate" }
+				type: "item"
+			}]
+			x: -7.0d
+			y: 1.0d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "698C48B9BF81BDBF"
+			tasks: [{
+				id: "270BB07DB1D1FEE7"
+				item: { count: 1, id: "netherexp:warped_sporeshroom" }
+				type: "item"
+			}]
+			x: -9.5d
+			y: -0.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "4D7D787C9864FCEF"
+			tasks: [{
+				id: "3F5209ED91179A3A"
+				item: { count: 1, id: "netherexp:shroomnight" }
+				type: "item"
+			}]
+			x: -8.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "03232381B779A520"
+			tasks: [{
+				id: "2C4A2F9D48630037"
+				item: { count: 1, id: "netherexp:crimson_sporeshroom" }
+				type: "item"
+			}]
+			x: -10.0d
+			y: -2.0d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "174358FC22916BA6"
+			tasks: [{
+				id: "2D9FD3E8A568C741"
+				item: { count: 1, id: "netherexp:blotted_netherrack" }
+				type: "item"
+			}]
+			x: -10.5d
+			y: -3.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "223A36F78B6F517E"
+			tasks: [{
+				id: "56DD779786A1DE7D"
+				item: { count: 1, id: "minecraft:warped_wart_block" }
+				type: "item"
+			}]
+			x: -10.5d
+			y: -5.0d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "5A958F86CC00F8C4"
+			tasks: [{
+				id: "19F5BE40BDC6545C"
+				item: { count: 1, id: "netherexp:phasmo_shard" }
+				type: "item"
+			}]
+			x: -10.0d
+			y: -6.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "266C2F26B743AD58"
+			tasks: [{
+				id: "6DE324E897157278"
+				item: { count: 1, id: "netherexp:weeping_ivy" }
+				type: "item"
+			}]
+			x: -8.5d
+			y: -8.0d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "77020F764ED60722"
+			tasks: [{
+				id: "4439FEEFEBE342A4"
+				item: { count: 1, id: "netherexp:verdant_frogmist" }
+				type: "item"
+			}]
+			x: -7.0d
+			y: -9.0d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "24825836D1002DDD"
+			tasks: [{
+				id: "081D22D1F22F2EC2"
+				item: { count: 1, id: "netherexp:ochre_frogmist" }
+				type: "item"
+			}]
+			x: -5.5d
+			y: -9.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "306FF3E1D993000C"
+			tasks: [{
+				id: "49F1C357B895C0C6"
+				item: { count: 1, id: "netherexp:pearlescent_frogmist" }
+				type: "item"
+			}]
+			x: -4.0d
+			y: -9.0d
+		}
+		{
+			dependencies: [
+				"77020F764ED60722"
+				"24825836D1002DDD"
+				"306FF3E1D993000C"
+			]
+			id: "6E16E688AE7E429D"
+			tasks: [{
+				id: "4E0F3057E868FD4C"
+				item: { count: 1, id: "roots:cloud_berry" }
+				type: "item"
+			}]
+			x: -5.5d
+			y: -11.5d
+		}
+		{
+			dependencies: ["60F89FEE277681EC"]
+			id: "154B342B39E12DC3"
+			tasks: [
+				{
+					id: "733B38BD63EFC985"
+					item: { count: 1, id: "roots:grove_crafter" }
+					type: "item"
+				}
+				{
+					id: "65C26873F66865FC"
+					item: { count: 1, id: "roots:wildwood_pedestal" }
+					type: "item"
+				}
+			]
+			x: -0.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["50E6857A8D8A924B"]
+			id: "60F89FEE277681EC"
+			tasks: [{
+				id: "6B6FC5BE9C4F0816"
+				item: { count: 1, id: "roots:wildwood_log" }
+				type: "item"
+			}]
+			x: -2.5d
+			y: -6.0d
+		}
+	]
 }

@@ -7,6 +7,11 @@ ServerEvents.generateData('after_mods', event => {
     event.json('roots:recipe/copper_pickaxe', {"type":"minecraft:crafting_shaped","category":"equipment","pattern":["###"," A "," A "],"key":{"#":{"item":"minecraft:copper_ingot"},"A":{"tag":"c:rods/wooden"}},"result":{"id":"roots:copper_pickaxe","count":1}})
     event.json('firestarters:recipe/fire_starter', {"type":"minecraft:crafting_shaped","pattern":["#  "," #A"," AB"],"key":{"#":{"tag":"c:stripped_woods"},"A":{"item":"notreepunchingremastered:flint_shard"},"B":{"item":"notreepunchingremastered:stone_rock"}},"result":{"id":"firestarters:fire_starter","count":1}})
     event.json('roots:recipe/pyre', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","BBB"],"key":{"#":{"tag":"c:stripped_woods"},"A":{"tag":"minecraft:coals"},"B":{"tag":"roots:runestone"}},"result":{"id":"roots:pyre","count":1}})
+    event.json('roots:recipe/runestone_simple_crafting', {"type":"minecraft:crafting_shaped","category":"building","pattern":["###","#A#","###"],"key":{"#":{"tag":"roots:stonelike"},"A":{"tag":"roots:runestone_herbs"}},"result":{"id":"roots:runestone","count":1}})
+    event.json('minecraft:recipe/chest', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","ABA","#A#"],"key":{"#":{"tag":"minecraft:oak_logs"},"A":{"tag":"minecraft:planks"},"B":{"item":"minecraft:iron_nugget"}},"result":{"id":"minecraft:chest","count":1}})
+    event.json('roots:recipe/wildwood_chest_from_logs_planks', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","ABA","#A#"],"key":{"#":{"tag":"roots:logs/wildwood"},"A":{"tag":"roots:planks/wildwood"},"B":{"item":"minecraft:iron_nugget"}},"result":{"id":"roots:wildwood_chest","count":1}})
+    event.json('minecraft:recipe/bucket', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["# #"," # "],"key":{"#":{"item":"create:iron_sheet"}},"result":{"id":"minecraft:bucket","count":1}})
+    event.json('roots:recipe/grove_crafter', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","BCB","BDB"],"key":{"#":{"item":"roots:cloud_berry"},"A":{"item":"roots:wildroot"},"B":{"item":"roots:runestone"},"C":{"item":"roots:grove_moss"},"D":{"item":"roots:chiseled_runestone"}},"result":{"id":"roots:grove_crafter","count":1}})
 })
 ServerEvents.recipes(event => {
     event.shapeless('notreepunchingremastered:plant_string', ['notreepunchingremastered:grass_fiber', 'notreepunchingremastered:grass_fiber', 'notreepunchingremastered:grass_fiber', 'notreepunchingremastered:grass_fiber']).id('notreepunchingremastered:plant_string')
@@ -40,4 +45,5 @@ ServerEvents.recipes(event => {
     event.shaped('minecraft:crafting_table', ['##', 'AA'], { '#': 'minecraft:leather', 'A': '#minecraft:logs' }).id('kubejsstudio:crafting_table')
     event.remove({ id: 'minecraft:crafting_table' })
     event.remove({ id: 'minecraft:furnace' })
+    event.remove({ id: 'roots:grove_pedestal' })
 })
