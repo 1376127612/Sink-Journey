@@ -351,3 +351,52 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: industrialupgrade:industrialupgrade_739
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_739',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"tag":"c:ingots/steel"},
+          "B": {"item":"industrialupgrade:circuit/circuit_part3"},
+          "C": {"item":"minecraft:redstone"}
+        },
+        "pattern": ["AAA","CBC","   "],
+        "result": {
+          "count": 1,
+          "id": "industrialupgrade:crafting_elements/crafting_42_element"
+        },
+        "show_notification": false
+      }
+    )
+})
+// kubejsstudio custom: industrialupgrade:industrialupgrade_735
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_735',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"item":"industrialupgrade:casing/bronze"},
+          "B": {
+            "item": "industrialupgrade:crafting_elements/crafting_294_element"
+          },
+          "C": {
+            "item": "industrialupgrade:crafting_elements/crafting_60_element"
+          },
+          "D": {
+            "item": "industrialupgrade:crafting_elements/crafting_42_element"
+          }
+        },
+        "pattern": ["AAA","BCB"," D "],
+        "result": {
+          "count": 1,
+          "id": "industrialupgrade:crafting_elements/crafting_276_element"
+        },
+        "show_notification": false,
+      }
+    )
+})
