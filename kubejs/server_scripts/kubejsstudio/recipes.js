@@ -44,4 +44,6 @@ ServerEvents.recipes(event => {
     event.shaped('minecraft:crafting_table', ['##', 'AA'], { '#': 'minecraft:leather', 'A': '#minecraft:logs' }).id('kubejsstudio:crafting_table')
     event.remove({ id: 'minecraft:crafting_table' })
     event.remove({ id: 'minecraft:furnace' })
+    event.remove({ id: 'industrialupgrade:industrialupgrade_735' })
+    event.shaped('industrialupgrade:crafting_elements/crafting_276_element', ['###', 'ABA', ' C '], { '#': 'industrialupgrade:casing/bronze', 'A': 'industrialupgrade:crafting_elements/crafting_294_element', 'B': 'industrialupgrade:crafting_elements/crafting_60_element', 'C': 'industrialupgrade:crafting_elements/crafting_42_element' }).id('kubejsstudio:elector_motor')
 })

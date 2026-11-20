@@ -59,18 +59,18 @@
   "createSearch": "",
   "filesOpen": [],
   "recentPicks": [
+    "item industrialupgrade:crafting_elements/crafting_276_element",
+    "item industrialupgrade:crafting_elements/crafting_42_element",
+    "item industrialupgrade:crafting_elements/crafting_294_element",
+    "item industrialupgrade:crafting_elements/crafting_60_element",
+    "item industrialupgrade:casing/bronze",
     "item create:iron_sheet",
     "item minecraft:iron_nugget",
     "item #minecraft:planks",
     "item #minecraft:oak_logs",
     "item #c:stripped_woods",
     "item notreepunchingremastered:flint_shard",
-    "item notreepunchingremastered:stone_rock",
-    "item minecraft:crafting_table",
-    "item minecraft:leather",
-    "item minecraft:copper_ingot",
-    "item kubejs:handle",
-    "item notreepunchingremastered:grass_fiber"
+    "item notreepunchingremastered:stone_rock"
   ],
   "filesActive": -1
 }
