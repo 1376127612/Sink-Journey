@@ -190,3 +190,164 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: kubejsstudio:caminite_brick
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/caminite_brick',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"embers:caminite_blend"},
+            {"item":"embers:caminite_blend"},
+            {"tag":"minecraft:coals"},
+            {"item":"embers:caminite_blend"},
+            {"item":"embers:caminite_blend"}
+          ],
+          "priority": 0,
+          "result": {"count":4,"id":"embers:caminite_brick"}
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:iron_nugget1
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/iron_nugget1',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"industrialupgrade:crushed/iron"},
+            {"item":"minecraft:calcite"},
+            {"tag":"minecraft:coals"},
+            {"item":"industrialupgrade:crushed/iron"},
+            {"item":"minecraft:calcite"}
+          ],
+          "priority": 0,
+          "result": {"count":6,"id":"minecraft:iron_nugget"}
+        }
+      }
+    )
+})
+// kubejsstudio custom: industrialupgrade:industrialupgrade_1742
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_1742',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"item":"create:electron_tube"},
+          "B": {"tag":"c:ingots/steel"},
+          "C": {"tag":"c:rods/silver"}
+        },
+        "pattern": [" A ","CCC"," B "],
+        "result": {
+          "count": 2,
+          "id": "industrialupgrade:crafting_elements/crafting_568_element"
+        },
+        "show_notification": false
+      }
+    )
+})
+// kubejsstudio custom: industrialupgrade:industrialupgrade_435
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_435',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"tag":"c:plates/iron"},
+          "B": {"item":"minecraft:gold_ingot"},
+          "C": {"item":"minecraft:redstone"},
+          "D": {"item":"create:electron_tube"}
+        },
+        "pattern": ["BAB","ADA","CAC"],
+        "result": {"count":1,"id":"industrialupgrade:circuit/circuit_part1"},
+        "show_notification": false
+      }
+    )
+})
+// kubejsstudio custom: industrialupgrade:industrialupgrade_437
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_437',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"item":"industrialupgrade:circuit/circuit_part1"},
+          "C": {"item":"industrialupgrade:wiring/copper1"},
+          "D": {"tag":"c:plates/silver"},
+          "E": {"item":"pneumaticcraft:printed_circuit_board"}
+        },
+        "pattern": ["CCC","AEA","DDD"],
+        "result": {"count":1,"id":"industrialupgrade:circuit/circuit_part3"},
+        "show_notification": false
+      }
+    )
+})
+// kubejsstudio custom: industrialupgrade:industrialupgrade_1259
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_1259',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"tag":"c:plates/steel"},
+          "B": {"item":"minecraft:glass"},
+          "C": {"item":"industrialupgrade:circuit/circuit_part3"},
+          "D": {"tag":"c:plates/iron"}
+        },
+        "pattern": [" B ","ADA","ACA"],
+        "result": {
+          "count": 1,
+          "id": "industrialupgrade:electronics_assembler/electronics_assembler"
+        },
+        "show_notification": false
+      }
+    )
+})
+// kubejsstudio custom: industrialupgrade:industrialupgrade_1258
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_1258',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"tag":"c:plates/steel"},
+          "B": {"item":"minecraft:glass"},
+          "C": {"item":"industrialupgrade:solderingiron"},
+          "D": {"tag":"c:plates/iron"}
+        },
+        "pattern": [" B ","ADA","ACA"],
+        "result": {
+          "count": 1,
+          "id": "industrialupgrade:primal_soldering_mechanism/primal_soldering_mechanism"
+        },
+        "show_notification": false
+      }
+    )
+})
+// kubejsstudio custom: industrialupgrade:industrialupgrade_1926
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_1926',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"item":"create:electron_tube"},
+          "B": {"tag":"c:plates/gold"},
+          "C": {"tag":"c:ingots/steel"}
+        },
+        "pattern": [" A "," C "," B "],
+        "result": {"count":1,"id":"industrialupgrade:solderingiron"},
+        "show_notification": false
+      }
+    )
+})
