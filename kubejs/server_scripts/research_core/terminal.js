@@ -120,6 +120,64 @@ var SRT_lines = function (server) {
     return { head: head, lines: lines }
 }
 
+// ---- 状态推送（客户端界面用这份，不再自己读存档） -------------
+// 打开终端时把"解锁集合 + 正在跑的研究"塞进一个 CompoundTag 发给客户端：
+//   channel: sinkresearch:state
+//   unlocks: "era.kinetic,era.steam"
+//   running: "sink:ember_notes|x_y_z|剩余毫秒;..."
+// 同一个连接上的包是 FIFO，所以先发状态再 openBlockUI，客户端建界面时已经拿到了。
+// 客户端拿不到（旧客户端/发送失败）会退回自己读 persistentData 的老路径。
+
+var SRT_STATE_CHANNEL = 'sinkresearch:state'
+var SRT_JOB_TTL_MS = 30000
+
+var SRT_runningList = function (server) {
+    var out = []
+    try {
+        var idx = String(server.persistentData.getString('sinkresearch.net.index') || '')
+        if (idx.length === 0) return out
+        var now = Date.now()
+        var tokens = idx.split(';')
+        for (var i = 0; i < tokens.length; i++) {
+            var tok = String(tokens[i])
+            if (tok.length === 0) continue
+            var raw = ''
+            try {
+                raw = String(server.persistentData.getString('sinkresearch.jobs.' + tok) || '')
+            } catch (e0) { continue }
+            if (raw.length === 0) continue
+            var jobs = null
+            try { jobs = JSON.parse(raw) } catch (e1) { continue }
+            if (!jobs) continue
+            for (var k in jobs) {
+                var entry = jobs[k]
+                var hb = (typeof entry === 'number') ? Number(entry) : Number((entry && entry.ts) || 0)
+                if (!hb || now - hb > SRT_JOB_TTL_MS) continue
+                var recipeId = (entry && entry.node) ? String(entry.node) : ''
+                var node = null
+                for (var d = 0; d < SRT_ORDER.length; d++) {
+                    var cand = SRT_NODES[SRT_ORDER[d]]
+                    if (cand && String(cand.recipe_id || '') === recipeId) { node = cand; break }
+                }
+                var start = (entry && entry.start) ? Number(entry.start) : hb
+                var totalMs = node ? Number(node.duration || 0) * 50 : 0
+                var left = totalMs > 0 ? Math.max(0, totalMs - (now - start)) : -1
+                out.push((node ? String(node.id) : recipeId) + '|' + String(k) + '|' + left)
+            }
+        }
+    } catch (e) { }
+    return out
+}
+
+var SRT_stateTag = function (server) {
+    var Tag = Java.loadClass('net.minecraft.nbt.CompoundTag')
+    var tag = new Tag()
+    try { tag.putString('unlocks', Object.keys(SRT_unlocks(server)).join(',')) } catch (e) { }
+    try { tag.putString('running', SRT_runningList(server).join(';')) } catch (e) { }
+    try { tag.putLong('gen', Date.now()) } catch (e) { }
+    return tag
+}
+
 // ---- 聊天版终端 ---------------------------------------------
 
 ServerEvents.commandRegistry(function (event) {
@@ -196,6 +254,14 @@ try {
 BlockEvents.rightClicked('kubejs:research_terminal', function (event) {
     var player = event.player
     if (!player) return
+    // 先发状态再开界面（同一连接 FIFO，客户端建界面时已经有数据）
+    try {
+        var srv = null
+        try { srv = player.level.server } catch (eSrv) { srv = null }
+        if (srv) player.sendData(SRT_STATE_CHANNEL, SRT_stateTag(srv))
+    } catch (eState) {
+        console.warn('[SRT] 状态推送失败（客户端会退回本地读取）: ' + eState)
+    }
     try {
         var Types = Java.loadClass('com.lowdragmc.lowdraglib2.integration.kjs.ui.LDKJSMenuTypes')
         var opened = Types.openBlockUI(player, event.block.pos, SRT_UI_ID)

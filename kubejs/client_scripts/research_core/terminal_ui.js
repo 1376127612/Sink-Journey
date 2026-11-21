@@ -223,9 +223,50 @@ var SRTU_jobs = function (server) {
     return out
 }
 
+// ---- 服务端推送的状态快照 ------------------------------------
+// 打开终端时服务端先发一包 sinkresearch:state（见 terminal.js）：
+//   unlocks: "era.kinetic,era.steam"
+//   running: "sink:ember_notes|x_y_z|剩余毫秒;..."
+// 包在同一连接上是 FIFO，所以界面构建时一般已经拿到；拿不到就退回本地读
+// persistentData（单人模式一直有效），专用服才真正依赖这包数据。
+var SRTU_REMOTE_TTL_MS = 600000
+var SRTU_remote = null
+
+NetworkEvents.dataReceived('sinkresearch:state', function (ev) {
+    try {
+        var tag = ev.data
+        var unlocks = {}
+        var parts = String(tag.getString('unlocks') || '').split(',')
+        for (var i = 0; i < parts.length; i++) {
+            if (parts[i].length > 0) unlocks[parts[i]] = true
+        }
+        var running = []
+        var raw = String(tag.getString('running') || '')
+        if (raw.length > 0) {
+            var items = raw.split(';')
+            for (var k = 0; k < items.length; k++) {
+                var f = String(items[k]).split('|')
+                if (f.length < 3) continue
+                running.push({ at: 0, id: f[0], left: Number(f[2]), pos: f[1] })
+            }
+        }
+        SRTU_remote = { unlocks: unlocks, running: running, at: Date.now() }
+    } catch (e) {
+        console.warn('[SRTU] 状态快照解析失败（退回本地读取）: ' + e)
+    }
+})
+
 // 汇总：[headerCount, nodeRows[{line, tips}]]，专用服模式 noData=true
 var SRTU_model = function (server) {
-    var unlocks = SRTU_unlocks(server)
+    var unlocks = null
+    var running = []
+    if (SRTU_remote && (Date.now() - SRTU_remote.at) < SRTU_REMOTE_TTL_MS) {
+        unlocks = SRTU_remote.unlocks
+        running = SRTU_remote.running
+    } else {
+        unlocks = SRTU_unlocks(server)
+        if (unlocks !== null) running = SRTU_jobs(server)
+    }
     if (unlocks === null) {
         var info = { noData: true, done: 0, total: 0, rows: [], running: [] }
         if (SRTU_nodes && SRTU_order.length > 0) {
@@ -247,7 +288,7 @@ var SRTU_model = function (server) {
             rows.push({ line: st[0] + ' §f' + n.id + ' §8· ' + SRTU_eraName(n.era), tips: SRTU_tips(n, unlocks) })
         }
     }
-    return { noData: false, done: done, total: rows.length, rows: rows, running: SRTU_jobs(server) }
+    return { noData: false, done: done, total: rows.length, rows: rows, running: running }
 }
 
 // ---- 界面构建 ------------------------------------------------
