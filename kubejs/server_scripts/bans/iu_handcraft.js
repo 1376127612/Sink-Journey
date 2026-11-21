@@ -44,5 +44,5 @@
 // 实际产物注册删除项（铁砧只有「锭->板」和「板->2 外壳」两类配方）。
 ServerEvents.recipes(event => {
     const iu = Java.loadClass('com.kubejsiu.recipe.IURecipeBridge')
-    i('anvil')
+
 })

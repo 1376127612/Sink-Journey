@@ -7,6 +7,7 @@
 //   碎银×2 + 煤×1 -> 银粒×7      800t（40s）
 //   碎金×2 + 煤×1 -> 金粒×7      800t
 //   金锭×1 + 银锭×1 + 煤×1 -> 琥珀金锭×2   1200t（60s）
+//   石英×2 + 煤×1 -> 冶金硅×1              1200t（60s）—— 硅线的前期起点
 // 燃料 = 煤炭类 tag minecraft:coals（煤/木炭通用）；锭类 tag 覆盖全家族。
 // ============================================================
 
@@ -42,6 +43,12 @@
         add('kubejs:charcoal_furnace/smelt_gold', 800,
             [Item.of('industrialupgrade:crushed/gold', 2), tag('minecraft:coals', 1)],
             [Item.of('minecraft:gold_nugget', 7)])
+
+        // 烧硅：石英被碳还原成冶金硅（SiO2 + 2C -> Si + 2CO）
+        // 没建核科技机器之前，先用炭炉把第一批硅烧出来，再走区域熔炼
+        add('kubejs:charcoal_furnace/smelt_silicon', 1200,
+            [Item.of('minecraft:quartz', 2), tag('minecraft:coals', 1)],
+            [Item.of('nuclearcraftneohaul:silicon_gem', 1)])
 
         // 琥珀金（L1 唯一合金；银锭用 tag 覆盖全家族）
         add('kubejs:charcoal_furnace/electrum', 1200,
