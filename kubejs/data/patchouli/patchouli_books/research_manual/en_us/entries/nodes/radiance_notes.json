@@ -1,0 +1,16 @@
+{
+  "name": "星辉：共鸣笔记",
+  "category": "patchouli:basics",
+  "icon": "kubejs:research_notes_radiance",
+  "sortnum": 14,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "以余烬笔记为底稿记录星辉的观测与共鸣，为终界远征补上最后一块拼图；拿到笔记即解锁星辉科技。$(br2)节点：sink:radiance_notes　时代：星辉$(br2)前置：sink:ember_notes"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "成本：astralsorcery:starmetal_ingot ×4、kubejs:research_notes_ember ×1、kubejs:research_data ×12、能量 5000 FE、时长 45.0 秒$(br2)产出：kubejs:research_notes_radiance ×1$(br2)解锁：era.radiance$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；前置没完成时研究站会拒绝开工并在聊天栏提示。"
+    }
+  ]
+}

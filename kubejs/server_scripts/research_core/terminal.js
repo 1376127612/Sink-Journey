@@ -169,11 +169,73 @@ var SRT_runningList = function (server) {
     return out
 }
 
-var SRT_stateTag = function (server) {
+// 终端 16 格内最近的那个研究网络：算力 / 并发上限 / 正在跑几条。
+// 返回 "1|算力|并发|在跑" 或 "0"（没有网络）。数据形状同 network.js：
+//   sinkresearch.net.index   -> "dim@x_y_z;..."
+//   sinkresearch.net.<token> -> {"compute":n,"capacity":n,"stations":n,"ts":t}
+var SRT_netLine = function (server, pos, dim) {
+    try {
+        if (!server || !pos) return ''
+        var raw = String(server.persistentData.getString('sinkresearch.net.index') || '')
+        if (raw.length === 0) return '0'
+        var best = null
+        var bestD = 16 * 16
+        var list = raw.split(';')
+        for (var i = 0; i < list.length; i++) {
+            var tok = String(list[i])
+            if (tok.length === 0) continue
+            var tokDim = 'minecraft:overworld'
+            var at = tok.indexOf('@')
+            var coords = tok
+            if (at >= 0) {
+                tokDim = tok.substring(0, at)
+                coords = tok.substring(at + 1)
+            }
+            if (dim && String(dim) !== tokDim) continue
+            var p = coords.split('_')
+            if (p.length < 3) continue
+            var dx = Number(p[0]) - pos.getX()
+            var dy = Number(p[1]) - pos.getY()
+            var dz = Number(p[2]) - pos.getZ()
+            var d = dx * dx + dy * dy + dz * dz
+            if (d > bestD) continue
+            var state = ''
+            try {
+                state = String(server.persistentData.getString('sinkresearch.net.' + tok) || '')
+            } catch (e0) { continue }
+            if (state.length === 0) continue
+            var info = null
+            try { info = JSON.parse(state) } catch (e1) { continue }
+            if (!info) continue
+            bestD = d
+            best = { token: tok, compute: Number(info.compute) || 0, capacity: Number(info.capacity) || 0 }
+        }
+        if (!best) return '0'
+        var running = 0
+        try {
+            var jraw = String(server.persistentData.getString('sinkresearch.jobs.' + best.token) || '')
+            if (jraw.length > 0) {
+                var jobs = JSON.parse(jraw)
+                var now = Date.now()
+                for (var k in jobs) {
+                    var entry = jobs[k]
+                    var hb = (typeof entry === 'number') ? Number(entry) : Number((entry && entry.ts) || 0)
+                    if (hb && now - hb <= SRT_JOB_TTL_MS) running++
+                }
+            }
+        } catch (e2) { }
+        return '1|' + best.compute + '|' + best.capacity + '|' + running
+    } catch (e) {
+        return ''
+    }
+}
+
+var SRT_stateTag = function (server, pos, dim) {
     var Tag = Java.loadClass('net.minecraft.nbt.CompoundTag')
     var tag = new Tag()
     try { tag.putString('unlocks', Object.keys(SRT_unlocks(server)).join(',')) } catch (e) { }
     try { tag.putString('running', SRT_runningList(server).join(';')) } catch (e) { }
+    try { tag.putString('net', SRT_netLine(server, pos, dim)) } catch (e) { }
     try { tag.putLong('gen', Date.now()) } catch (e) { }
     return tag
 }
@@ -258,7 +320,9 @@ BlockEvents.rightClicked('kubejs:research_terminal', function (event) {
     try {
         var srv = null
         try { srv = player.level.server } catch (eSrv) { srv = null }
-        if (srv) player.sendData(SRT_STATE_CHANNEL, SRT_stateTag(srv))
+        var dim = ''
+        try { dim = String(event.level.dimension) } catch (eDim) { dim = '' }
+        if (srv) player.sendData(SRT_STATE_CHANNEL, SRT_stateTag(srv, event.block.pos, dim))
     } catch (eState) {
         console.warn('[SRT] 状态推送失败（客户端会退回本地读取）: ' + eState)
     }

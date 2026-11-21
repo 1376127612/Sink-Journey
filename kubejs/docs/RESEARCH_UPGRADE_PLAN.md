@@ -51,6 +51,9 @@
 `player.sendData('sinkresearch:state', tag)` 再开界面（同一连接 FIFO，界面构建时已有数据）；
 客户端 `NetworkEvents.dataReceived` 只存不判，`SRTU_model` 优先用这份快照，
 本地 `persistentData` 读取降级成兜底。收益：专用服终端终于有进度数据。
+快照里还带了终端 16 格内最近那个研究网络的算力／并发上限／正在跑几条，
+终端顶部显示成「网络 在线 · 算力 4 · 并发 1/2」，离线时直接提示研究站会拒绝开工——
+以前"为什么研究慢/不开工"只能靠猜。
 
 **仍未做**：图加载/判定在 core.js（服务端）、terminal.js（服务端）、terminal_ui.js（客户端）
 各有一份，属于"改一条规则要改三处"。真正的去重需要把节点图下沉成一份共享数据
@@ -100,15 +103,19 @@
 产出 / 解锁的 stage / `ui.doc` 那段说明文字（`Text.translatable` 取出来按 19 字换行）。
 打开时默认选中第一条「可研究」的节点。
 
-**3.3 未解锁配方在 JEI 里可见但标灰**
-硬隐藏要靠 AStages 的 `recipe.json` 手写 `<类型>//<id>`，很容易崩服。
-折中：`RecipeViewerEvents` 给未解锁产物加一行"未解锁：需要 sink:xxx"，
-比"看不见"更友好，也不会碰 AStages 的坑。
+**3.3 未解锁配方在 JEI 里可见但标灰（已完成，采用"门槛说明页"）**
+真正的"按玩家状态标灰"JEI 做不到：`RecipeViewerEvents` 注册的信息页是静态的，
+拿不到当前玩家的解锁表；硬隐藏还得靠 AStages 的 `recipe.json` 手写 `<类型>//<id>`，
+写错直接崩服。所以做成数据驱动的前置说明页：`client_scripts/research/jei.js`
+在加载时读节点 JSON，给每个节点的产物挂 5 行（节点 id / 前置 / 成本 / 解锁 / 去哪看实时状态），
+新增节点自动生效，不碰 AStages。
 
-**3.4 Patchouli 手册与节点数据同步**
-现在手册 3 个条目是手写的。节点数一多就会漂移：改成 core.js 在
-`ServerEvents.loaded` 里按节点生成手册条目（Patchouli 支持 datapack 目录热读），
-或至少把手册页码从节点 `ui.doc` 反推。
+**3.4 Patchouli 手册与节点数据同步（已完成）**
+新增 `kubejs/tools/gen_research_book.py`：读 manifest + 各页节点 + `zh_cn.json` 里的
+`research.*.desc`，给每个节点写一条 `patchouli:text` 条目到
+`data/patchouli/patchouli_books/research_manual/en_us/entries/nodes/`（两页：说明+前置 /
+成本+产出+解锁），顺带删除已经不对应任何节点的旧条目。节点增删后重跑一次即可，
+改完 `/reload` 或重启进书。原来的 3 个手写条目（研究站 / 研究网络 / 时代门槛）保留不动。
 
 ## 4. P3 机制层面（可选，做完 P1/P2 再评估）
 

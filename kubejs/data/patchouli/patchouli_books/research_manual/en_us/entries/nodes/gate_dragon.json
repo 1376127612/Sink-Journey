@@ -1,0 +1,16 @@
+{
+  "name": "末地：龙之证",
+  "category": "patchouli:basics",
+  "icon": "kubejs:research_data",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "击败末影龙，证明这条产线撑得起末地远征，末地门由此通过（解锁 gate.end）。$(br2)节点：sink:gate_dragon　时代：末地$(br2)前置：sink:steam_precision"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "成本：无（里程碑，不需要投料）$(br2)产出：无（里程碑）$(br2)解锁：gate.end$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；前置没完成时研究站会拒绝开工并在聊天栏提示。"
+    }
+  ]
+}

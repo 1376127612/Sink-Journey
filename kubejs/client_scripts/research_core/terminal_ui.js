@@ -256,7 +256,24 @@ NetworkEvents.dataReceived('sinkresearch:state', function (ev) {
                 running.push({ at: 0, id: f[0], left: Number(f[2]), pos: f[1] })
             }
         }
-        SRTU_remote = { unlocks: unlocks, running: running, at: Date.now() }
+        var net = null
+        var netRaw = String(tag.getString('net') || '')
+        if (netRaw.length > 0) {
+            if (netRaw === '0') {
+                net = { online: false, compute: 0, capacity: 0, running: 0 }
+            } else {
+                var nf = netRaw.split('|')
+                if (nf.length >= 4) {
+                    net = {
+                        online: true,
+                        compute: Number(nf[1]) || 0,
+                        capacity: Number(nf[2]) || 0,
+                        running: Number(nf[3]) || 0
+                    }
+                }
+            }
+        }
+        SRTU_remote = { unlocks: unlocks, running: running, net: net, at: Date.now() }
     } catch (e) {
         console.warn('[SRTU] 状态快照解析失败（退回本地读取）: ' + e)
     }
@@ -266,15 +283,17 @@ NetworkEvents.dataReceived('sinkresearch:state', function (ev) {
 var SRTU_model = function (server) {
     var unlocks = null
     var running = []
+    var net = null
     if (SRTU_remote && (Date.now() - SRTU_remote.at) < SRTU_REMOTE_TTL_MS) {
         unlocks = SRTU_remote.unlocks
         running = SRTU_remote.running
+        net = SRTU_remote.net || null
     } else {
         unlocks = SRTU_unlocks(server)
         if (unlocks !== null) running = SRTU_jobs(server)
     }
     if (unlocks === null) {
-        var info = { noData: true, done: 0, total: 0, rows: [], running: [], unlocks: {} }
+        var info = { noData: true, done: 0, total: 0, rows: [], running: [], unlocks: {}, net: net }
         if (SRTU_nodes && SRTU_order.length > 0) {
             for (var i = 0; i < SRTU_order.length; i++) {
                 var n0 = SRTU_nodes[SRTU_order[i]]
@@ -294,7 +313,7 @@ var SRTU_model = function (server) {
             rows.push({ line: st[0] + ' §f' + n.id + ' §8· ' + SRTU_eraName(n.era), tips: SRTU_tips(n, unlocks) })
         }
     }
-    return { noData: false, done: done, total: rows.length, rows: rows, running: running, unlocks: unlocks }
+    return { noData: false, done: done, total: rows.length, rows: rows, running: running, unlocks: unlocks, net: net }
 }
 
 // ---- 界面构建 ------------------------------------------------
@@ -504,8 +523,16 @@ var SRTU_openStyled = function (ev, model) {
         return box
     }
 
+    var netText = ''
+    if (model.net) {
+        netText = model.net.online
+            ? ('§7网络 §f在线 §8· §7算力 §f' + model.net.compute +
+                ' §8· §7并发 §f' + model.net.running + '/' + (model.net.capacity > 0 ? model.net.capacity : 1))
+            : '§8研究网络离线（研究站会拒绝开工）'
+    }
+
     var runH = (model.running && model.running.length > 0) ? (10 + model.running.length * (NODE_H - 2) + 6) : 0
-    var leftH = 12 + 4 + 10 + 4 + runH + 4 + 1 + 4 + pagesH + 8
+    var leftH = 12 + 4 + 10 + 4 + (netText.length > 0 ? 10 : 0) + 4 + runH + 4 + 1 + 4 + pagesH + 8
     var totalW = PAD * 2 + treeW + 8 + DETAIL_W
     var totalH = PAD * 2 + Math.max(leftH, 160) + 8
 
@@ -530,6 +557,7 @@ var SRTU_openStyled = function (ev, model) {
         ? ('§7节点 §f' + model.total + ' §8· 进度待同步')
         : ('§7已完成 §f' + model.done + '§7/§f' + model.total)
     left.addChild(SRTU_mkLabel(Label, prog))
+    if (netText.length > 0) left.addChild(SRTU_mkLabel(Label, netText))
 
     if (model.running && model.running.length > 0) {
         left.addChild(SRTU_mkLabel(Label, '§6进行中 §7' + model.running.length + ' 条'))
@@ -668,6 +696,12 @@ try {
                 plain.push('§7进度请用 §e/research tree')
             } else {
                 plain.push('§b研究树 §7(' + model.done + '/' + model.total + ' 已完成)')
+                if (model.net) {
+                    plain.push(model.net.online
+                        ? ('§7网络 在线 · 算力 ' + model.net.compute + ' · 并发 ' + model.net.running + '/' +
+                            (model.net.capacity > 0 ? model.net.capacity : 1))
+                        : '§8研究网络离线')
+                }
                 if (model.running && model.running.length > 0) {
                     plain.push('§6进行中 ' + model.running.length + ' 条')
                     for (var q = 0; q < model.running.length; q++) {

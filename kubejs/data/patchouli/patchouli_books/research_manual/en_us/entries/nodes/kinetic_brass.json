@@ -1,0 +1,16 @@
+{
+  "name": "机动：黄铜配比",
+  "category": "patchouli:basics",
+  "icon": "kubejs:research_data",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "用安山合金与研究基质在演算环境里复现黄铜配比。$(br2)节点：sink:kinetic_brass　时代：机动$(br2)前置：无"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "成本：create:andesite_alloy ×32、kubejs:research_substrate ×4、minecraft:water 500mB、能量 1000 FE、算力 1、时长 15.0 秒$(br2)产出：kubejs:research_data ×2$(br2)解锁：era.kinetic$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；前置没完成时研究站会拒绝开工并在聊天栏提示。"
+    }
+  ]
+}
