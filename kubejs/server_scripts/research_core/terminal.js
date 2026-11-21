@@ -230,10 +230,26 @@ var SRT_netLine = function (server, pos, dim) {
     }
 }
 
+// 每个节点的状态由服务端算好（terminal_ui.js 不再自己判 requires 的 and/or）：
+//   states: "sink:kinetic_brass=done;sink:steam_precision=ready;..."
+var SRT_stateList = function (unlocks) {
+    var out = []
+    for (var i = 0; i < SRT_ORDER.length; i++) {
+        var node = SRT_NODES[SRT_ORDER[i]]
+        if (!node) continue
+        var st = 'locked'
+        if (SRT_done(node, unlocks)) st = 'done'
+        else if (SRT_ready(node, unlocks)) st = 'ready'
+        out.push(String(node.id) + '=' + st)
+    }
+    return out.join(';')
+}
+
 var SRT_stateTag = function (server, pos, dim) {
     var Tag = Java.loadClass('net.minecraft.nbt.CompoundTag')
     var tag = new Tag()
     try { tag.putString('unlocks', Object.keys(SRT_unlocks(server)).join(',')) } catch (e) { }
+    try { tag.putString('states', SRT_stateList(SRT_unlocks(server))) } catch (e) { }
     try { tag.putString('running', SRT_runningList(server).join(';')) } catch (e) { }
     try { tag.putString('net', SRT_netLine(server, pos, dim)) } catch (e) { }
     try { tag.putLong('gen', Date.now()) } catch (e) { }

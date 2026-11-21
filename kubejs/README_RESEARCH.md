@@ -176,6 +176,20 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 2. `/give @s patchouli:guide_book{patchouli:book:"patchouli:research_manual"}` 或按配方合成手册
 3. 手册能翻页、三个条目可读
 
+## 2.8 里程碑触发类型（P3 扩展）
+
+`kind: "milestone"` 的节点由玩法事件推进，`core.js` 的 `srRegisterMilestones()` 按节点声明注册监听：
+
+| `trigger.type` | 字段 | 触发 |
+|---|---|---|
+| `entity_death` | `entity`、`dimension?`、`require_player_kill?` | 实体死亡；要求玩家亲手时非玩家击杀不算 |
+| `advancement` | `advancement` | 玩家拿到指定成就 |
+| `item_obtain` | `item` | 物品进背包（`PlayerEvents.inventoryChanged`） |
+| `dimension_enter` | `dimension` | 换维度进入指定维度（每 10 tick 比对 `sinkresearch.lastdim`） |
+
+触发后还要过 `requires`，前置没完成只写日志。加新类型：在 `srRegisterMilestones()` 里加一个
+分支，并在节点 JSON 里写对应 `trigger`。
+
 ## 3. 对既有文件的改动（纯追加，共 2 处）
 
 1. `kubejs/assets/kubejs/lang/zh_cn.json` —— 追加 6 个键（机器名 / JEI 说明 / 节点描述）

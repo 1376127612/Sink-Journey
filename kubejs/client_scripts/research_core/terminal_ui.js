@@ -134,12 +134,26 @@ var SRTU_eraName = function (era) {
     return map[String(era)] ? map[String(era)] : String(era)
 }
 
+// 节点状态优先用服务端快照算好的（SRTU_states，来自 terminal.js 的 states 字段），
+// 没有快照时才在本地按 requires 推一遍。两条路径的结果必须一致，
+// 但规则只有服务端那一处是权威：以后改解锁规则不用再同步客户端。
+var SRTU_states = null
+
+var SRTU_stateOf = function (node, unlocks) {
+    if (SRTU_states) {
+        var known = SRTU_states[String(node.id)]
+        if (known) return known
+    }
+    if (SRTU_done(node, unlocks)) return 'done'
+    if (SRTU_ready(node, unlocks)) return 'ready'
+    return 'locked'
+}
+
 // 节点状态 -> [符号, 状态文本]
 var SRTU_mark = function (node, unlocks) {
-    var done = SRTU_done(node, unlocks)
-    var ready = SRTU_ready(node, unlocks)
-    if (done) return ['§a✔', '已完成']
-    if (ready) return ['§e▶', '可研究']
+    var st = SRTU_stateOf(node, unlocks)
+    if (st === 'done') return ['§a✔', '已完成']
+    if (st === 'ready') return ['§e▶', '可研究']
     return ['§8✘', '锁定']
 }
 
@@ -273,7 +287,18 @@ NetworkEvents.dataReceived('sinkresearch:state', function (ev) {
                 }
             }
         }
-        SRTU_remote = { unlocks: unlocks, running: running, net: net, at: Date.now() }
+        var states = null
+        var stRaw = String(tag.getString('states') || '')
+        if (stRaw.length > 0) {
+            states = {}
+            var stItems = stRaw.split(';')
+            for (var si = 0; si < stItems.length; si++) {
+                var pair = String(stItems[si]).split('=')
+                if (pair.length === 2 && pair[0].length > 0) states[pair[0]] = pair[1]
+            }
+        }
+        SRTU_states = states
+        SRTU_remote = { unlocks: unlocks, running: running, net: net, states: states, at: Date.now() }
     } catch (e) {
         console.warn('[SRTU] 状态快照解析失败（退回本地读取）: ' + e)
     }
@@ -289,6 +314,7 @@ var SRTU_model = function (server) {
         running = SRTU_remote.running
         net = SRTU_remote.net || null
     } else {
+        SRTU_states = null
         unlocks = SRTU_unlocks(server)
         if (unlocks !== null) running = SRTU_jobs(server)
     }
@@ -309,7 +335,7 @@ var SRTU_model = function (server) {
         for (var j = 0; j < SRTU_order.length; j++) {
             var n = SRTU_nodes[SRTU_order[j]]
             var st = SRTU_mark(n, unlocks)
-            if (st[0] === '§a✔') done++
+            if (SRTU_stateOf(n, unlocks) === 'done') done++
             rows.push({ line: st[0] + ' §f' + n.id + ' §8· ' + SRTU_eraName(n.era), tips: SRTU_tips(n, unlocks) })
         }
     }
@@ -642,7 +668,7 @@ var SRTU_openStyled = function (ev, model) {
     for (var i9 = 0; i9 < SRTU_order.length; i9++) {
         var cand = SRTU_nodes[SRTU_order[i9]]
         if (!cand) continue
-        if (!pick && SRTU_ready(cand, unlocks) && !SRTU_done(cand, unlocks)) pick = cand
+        if (!pick && SRTU_stateOf(cand, unlocks) === 'ready') pick = cand
     }
     if (!pick && SRTU_order.length > 0) pick = SRTU_nodes[SRTU_order[0]]
     if (pick) showDetail(pick)

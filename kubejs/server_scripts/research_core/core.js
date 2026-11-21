@@ -288,43 +288,135 @@ var srGrant = (server, keys, reason, silent) => {
     return true
 }
 
-// ---- 3. 里程碑：击败末影龙 = 蒸汽 -> 电力 -----------------------
+// ---- 3. 里程碑：kind = milestone 的节点由玩法事件推进 -----------
+// 支持的 trigger.type（加新类型：这里加一个分支 + 节点 JSON 里写对应 trigger）：
+//   entity_death     { entity, dimension?, require_player_kill? }
+//   advancement      { advancement }
+//   item_obtain      { item }
+//   dimension_enter  { dimension }
+// 触发后仍要过前置（srRequirementsMet）：里程碑不能绕过研究树。
 
-EntityEvents.death('minecraft:ender_dragon', event => {
-    var server = event.level && event.level.server ? event.level.server : null
-    if (!server) return
-
-    var dimension = ''
-    try { dimension = String(event.entity.level.dimension) } catch (err) { dimension = '' }
-
-    var killer = null
-    try { killer = event.source && event.source.player ? event.source.player : null } catch (err) { killer = null }
-
+var srMilestoneNodes = () => {
+    var out = []
     for (var id of SR.order) {
         var node = SR.nodes[id]
-        if (node.kind !== 'milestone') continue
-        var trigger = node.trigger
-        if (!trigger || trigger.type !== 'entity_death') continue
-        if (String(trigger.entity) !== 'minecraft:ender_dragon') continue
-        if (trigger.dimension && dimension && String(trigger.dimension) !== dimension) continue
-        if (trigger.require_player_kill && !killer) {
-            srLog('忽略非玩家击杀（节点 ' + node.id + ' 要求玩家击杀）')
-            continue
-        }
-        if (!srRequirementsMet(node.id)) {
-            srLog('节点 ' + node.id + ' 前置未满足，跳过')
-            continue
-        }
-        srGrant(server, node.unlock || [], 'milestone:' + node.id)
+        if (node && node.kind === 'milestone') out.push(node)
     }
-})
+    return out
+}
 
-// 老玩家回填：拿到击杀末影龙成就即补一次（幂等、静默）
-PlayerEvents.advancement('minecraft:end/kill_dragon', event => {
-    var node = SR.nodes['sink:gate_dragon']
-    if (!node) return
-    srGrant(event.server, node.unlock || [], 'advancement:kill_dragon', true)
-})
+var srFireMilestone = (server, node, reason, info) => {
+    if (!server) return
+    var trigger = node.trigger || {}
+    if (trigger.dimension && info && info.dimension &&
+        String(trigger.dimension) !== String(info.dimension)) {
+        srLog('里程碑 ' + node.id + ' 维度不符（' + info.dimension + '），跳过')
+        return
+    }
+    if (trigger.require_player_kill && info && !info.player) {
+        srLog('里程碑 ' + node.id + ' 要求玩家亲手完成，跳过（' + reason + '）')
+        return
+    }
+    if (!srRequirementsMet(node.id)) {
+        srLog('里程碑 ' + node.id + ' 前置未满足，跳过')
+        return
+    }
+    srGrant(server, node.unlock || [], reason)
+}
+
+var srRegisterMilestones = () => {
+    var nodes = srMilestoneNodes()
+    if (nodes.length === 0) return
+
+    var entityIds = []
+    var advIds = []
+    var itemIds = []
+    var needTick = false
+
+    for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i]
+        var t = node.trigger || {}
+        if (t.type === 'entity_death' && t.entity) {
+            if (entityIds.indexOf(String(t.entity)) < 0) entityIds.push(String(t.entity))
+        } else if (t.type === 'advancement' && t.advancement) {
+            if (advIds.indexOf(String(t.advancement)) < 0) advIds.push(String(t.advancement))
+        } else if (t.type === 'item_obtain' && t.item) {
+            if (itemIds.indexOf(String(t.item)) < 0) itemIds.push(String(t.item))
+        } else if (t.type === 'dimension_enter') {
+            needTick = true
+        } else {
+            srWarn('里程碑 ' + node.id + ' 的 trigger.type 不认识: ' + t.type)
+        }
+    }
+
+    var fireByType = (server, type, match, reason, info) => {
+        var all = srMilestoneNodes()
+        for (var k = 0; k < all.length; k++) {
+            var t2 = all[k].trigger || {}
+            if (t2.type !== type) continue
+            if (!match(t2)) continue
+            srFireMilestone(server, all[k], reason, info)
+        }
+    }
+
+    var bindEntity = (entityId) => {
+        EntityEvents.death(entityId, event => {
+            var server = event.level && event.level.server ? event.level.server : null
+            if (!server) return
+            var killer = null
+            try { killer = event.source && event.source.player ? event.source.player : null } catch (err) { killer = null }
+            var dimension = ''
+            try { dimension = String(event.entity.level.dimension) } catch (err) { dimension = '' }
+            fireByType(server, 'entity_death', t => String(t.entity) === String(entityId),
+                'milestone:' + entityId, { player: killer, dimension: dimension })
+        })
+    }
+    for (var e = 0; e < entityIds.length; e++) bindEntity(entityIds[e])
+
+    var bindAdvancement = (advId) => {
+        PlayerEvents.advancement(advId, event => {
+            var advDim = ''
+            try { advDim = String(event.player.level.dimension) } catch (e) { advDim = '' }
+            fireByType(event.server, 'advancement', t => String(t.advancement) === String(advId),
+                'advancement:' + advId, { player: event.player, dimension: advDim })
+        })
+    }
+    for (var a = 0; a < advIds.length; a++) bindAdvancement(advIds[a])
+
+    var bindItem = (itemId) => {
+        PlayerEvents.inventoryChanged(itemId, event => {
+            var itemDim = ''
+            try { itemDim = String(event.player.level.dimension) } catch (e) { itemDim = '' }
+            fireByType(event.server, 'item_obtain', t => String(t.item) === String(itemId),
+                'item:' + itemId, { player: event.player, dimension: itemDim })
+        })
+    }
+    for (var m = 0; m < itemIds.length; m++) bindItem(itemIds[m])
+
+    if (needTick) {
+        var dimKey = 'sinkresearch.lastdim'
+        PlayerEvents.tick(event => {
+            try {
+                var player = event.player
+                if (!player) return
+                var level = player.level
+                // 每 10 tick 查一次，且只在真的换了维度时才继续
+                if (Number(level.gameTime || 0) % 10 !== 0) return
+                var dim = String(level.dimension)
+                var last = ''
+                try { last = String(player.persistentData.getString(dimKey) || '') } catch (e0) { return }
+                if (last === dim) return
+                try { player.persistentData.putString(dimKey, dim) } catch (e1) { }
+                // 第一次记录（新玩家/老存档第一次进）不算"进入"
+                if (last.length === 0) return
+                var server = null
+                try { server = player.server } catch (e2) { server = null }
+                fireByType(server, 'dimension_enter', t => !t.dimension || String(t.dimension) === dim,
+                    'dimension:' + dim, { player: player, dimension: dim })
+            } catch (e) { }
+        })
+    }
+}
 
 // ---- 3b. 研究笔记：解锁机械时代（电力前唯一的时代入口） --------
 
@@ -665,5 +757,6 @@ ServerEvents.commandRegistry(event => {
 })
 
 srLoadGraph()
+srRegisterMilestones()
 
 srLog('core.js 已加载')
