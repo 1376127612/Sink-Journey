@@ -1,0 +1,4 @@
+{
+  "matchFluid": ["qmd:nitrogen_dioxide"],
+  "resultFluid": "industrialupgrade:iufluidnitrogendioxide"
+}

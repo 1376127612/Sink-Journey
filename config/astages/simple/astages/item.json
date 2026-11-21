@@ -193,5 +193,40 @@
     "id": "electric_entry_i12",
     "stage": "era.electric",
     "object": "mmcr:research_station_controller"
+  },
+  {
+    "id": "steam_gate_i0",
+    "stage": "era.steam",
+    "object": "industrialupgrade:itemingots/steel_ingot"
+  },
+  {
+    "id": "steam_gate_i1",
+    "stage": "era.steam",
+    "object": "industrialupgrade:itemplates/steel_plate"
+  },
+  {
+    "id": "steam_gate_i2",
+    "stage": "era.steam",
+    "object": "industrialupgrade:blockresource/steel_block"
+  },
+  {
+    "id": "steam_gate_i3",
+    "stage": "era.steam",
+    "object": "industrialupgrade:casing/steel"
+  },
+  {
+    "id": "steam_gate_i4",
+    "stage": "era.steam",
+    "object": "mekanism:ingot_steel"
+  },
+  {
+    "id": "steam_gate_i5",
+    "stage": "era.steam",
+    "object": "ad_astra:steel_ingot"
+  },
+  {
+    "id": "steam_gate_i6",
+    "stage": "era.steam",
+    "object": "nuclearcraftneohaul:steel_alloy"
   }
 ]

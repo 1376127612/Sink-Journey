@@ -1,0 +1,9 @@
+{
+  "Default_Rules_data": {
+    "recipe": "replace",
+    "advancement": "replace",
+    "loot_table": "retain"
+  },
+  "Default_Rules_tag": {},
+  "__cfg_version": 1
+}

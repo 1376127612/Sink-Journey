@@ -1,0 +1,4 @@
+{
+  "matchFluid": ["create:honey"],
+  "resultFluid": "industrialupgrade:iufluidhoney"
+}

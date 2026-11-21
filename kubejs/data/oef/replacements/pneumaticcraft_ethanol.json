@@ -1,0 +1,4 @@
+{
+  "matchFluid": ["pneumaticcraft:ethanol"],
+  "resultFluid": "industrialupgrade:iufluidethanol"
+}

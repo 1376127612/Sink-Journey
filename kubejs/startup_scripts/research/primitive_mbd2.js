@@ -22,7 +22,9 @@
 // 扫雷按钮不在这里建：模板要过一遍 NBT 序列化，元素构造期注册的
 // 交互监听不保证跟着走。按钮由客户端在界面打开后自己 new 一个插进来：
 //   client_scripts/research/minesweeper_ui.js（SM_tryAttach）。
-// 这里只把 root 高度留够（见 buildUiTemplate）。
+// root 上带 sweeper_host 这个 class，客户端只往带它的界面里插按钮，
+// 土高炉/炭炉这些别的 MBD2 机器界面不会出现扫雷入口。
+// 高度已经按内容算好并给按钮留了 16px（见 buildUiTemplate）。
 //
 // 所有代码包在 IIFE 里：KubeJS 的 Rhino 各脚本共享顶层作用域，
 // 顶层 const/let 重名会直接报错，包起来最省事。
@@ -70,24 +72,27 @@
     var StylesheetManager = Java.loadClass(
         'com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager'
     )
+    // 样式必须用 INLINE 源写入：UIElement 序列化只保存 INLINE 源，
+    // lss(name, value) 走的是 STYLESHEET 源，过一遍 UITemplate 就被清空。
+    var StyleOrigin = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.style.StyleOrigin')
 
     // ---- JEI 配方界面模板 -------------------------------------
     var buildXeiTemplate = function () {
         var root = new UIElement()
         root.addClass('panel_bg')
-        root.lss('width', 176)
-        root.lss('height', 58)
-        root.lss('flex-direction', FlexDirection.COLUMN)
-        root.lss('padding-all', 7)
-        root.lss('gap-all', 4)
+        root.lss('width', 176, StyleOrigin.INLINE)
+        root.lss('height', 58, StyleOrigin.INLINE)
+        root.lss('flex-direction', FlexDirection.COLUMN, StyleOrigin.INLINE)
+        root.lss('padding-all', 7, StyleOrigin.INLINE)
+        root.lss('gap-all', 4, StyleOrigin.INLINE)
 
         var row = new UIElement()
-        row.lss('flex-direction', FlexDirection.ROW)
-        row.lss('align-items', AlignItems.CENTER)
-        row.lss('justify-content', JustifyContent.CENTER)
-        row.lss('width', 'stretch')
-        row.lss('height', 18)
-        row.lss('gap-all', 4)
+        row.lss('flex-direction', FlexDirection.ROW, StyleOrigin.INLINE)
+        row.lss('align-items', AlignItems.CENTER, StyleOrigin.INLINE)
+        row.lss('justify-content', JustifyContent.CENTER, StyleOrigin.INLINE)
+        row.lss('width', 'stretch', StyleOrigin.INLINE)
+        row.lss('height', 18, StyleOrigin.INLINE)
+        row.lss('gap-all', 4, StyleOrigin.INLINE)
 
         var addSlot = function (id) {
             var slot = new ItemSlot()
@@ -109,13 +114,13 @@
         var bar = new ProgressBar()
         bar.setId('@progress_bar')
         bar.setRange(0, 1)
-        bar.lss('width', 'stretch')
-        bar.lss('height', 8)
+        bar.lss('width', 'stretch', StyleOrigin.INLINE)
+        bar.lss('height', 8, StyleOrigin.INLINE)
         root.addChild(bar)
 
         var duration = new Label()
         duration.setId('@duration')
-        duration.lss('color', 0x808080)
+        duration.lss('color', '#808080', StyleOrigin.INLINE)
         root.addChild(duration)
 
         return UITemplate.of(root, StylesheetManager.MC_MERGED)
@@ -167,7 +172,10 @@
     // ============================================================
     // UI 模板 —— 想改界面就只改这一段
     // ------------------------------------------------------------
-    // 样式用 .lss('属性', 值)，规则与 LDLib2 的 lss 一致。
+    // 样式用 .lss('属性', 值, StyleOrigin.INLINE)。
+    // 第三个参数不能省：模板要序列化成 NBT，而 UIElement 只保存
+    // INLINE 源的样式；默认的 lss(属性, 值) 是 STYLESHEET 源，会在
+    // UITemplate.of() 里被整个丢掉，进游戏后就是一堆零散元素挤在一起。
     // 元素 id 见文件头约定；ui: 前缀的 id 不要加别的后缀。
     // ============================================================
     var label = function (text, id) {
@@ -186,23 +194,26 @@
     var buildUiTemplate = function () {
         var root = new UIElement()
         root.addClass('panel_bg')
-        root.lss('width', 206)
-        // 比原来高 24：给客户端插入的扫雷按钮留位（16px 按钮 + 6 间距）
-        root.lss('height', 194)
-        root.lss('flex-direction', FlexDirection.COLUMN)
-        root.lss('padding-all', 8)
-        root.lss('gap-all', 6)
+        // 客户端扫雷按钮只在带这个 class 的界面上挂载（别的机器界面不放）
+        root.addClass('sweeper_host')
+        root.lss('width', 206, StyleOrigin.INLINE)
+        // 高度按内容算：8 + 9 标题 + 6 + 18 槽位行 + 6 + 8 进度条 + 6
+        //   + 16 扫雷按钮 + 6 + 77 背包 + 8 = 168，留 4px 余量
+        root.lss('height', 172, StyleOrigin.INLINE)
+        root.lss('flex-direction', FlexDirection.COLUMN, StyleOrigin.INLINE)
+        root.lss('padding-all', 8, StyleOrigin.INLINE)
+        root.lss('gap-all', 6, StyleOrigin.INLINE)
 
         root.addChild(label('原始研究台', 'ui:machine_name'))
 
         // 输入 0 + 输入 1 -> 输出 0
         var row = new UIElement()
-        row.lss('width', 'stretch')
-        row.lss('height', 18)
-        row.lss('flex-direction', FlexDirection.ROW)
-        row.lss('align-items', AlignItems.CENTER)
-        row.lss('justify-content', JustifyContent.CENTER)
-        row.lss('gap-all', 4)
+        row.lss('width', 'stretch', StyleOrigin.INLINE)
+        row.lss('height', 18, StyleOrigin.INLINE)
+        row.lss('flex-direction', FlexDirection.ROW, StyleOrigin.INLINE)
+        row.lss('align-items', AlignItems.CENTER, StyleOrigin.INLINE)
+        row.lss('justify-content', JustifyContent.CENTER, StyleOrigin.INLINE)
+        row.lss('gap-all', 4, StyleOrigin.INLINE)
         row.addChild(itemSlot('ui:input_0'))
         row.addChild(label('+'))
         row.addChild(itemSlot('ui:input_1'))
@@ -213,8 +224,8 @@
         var bar = new ProgressBar()
         bar.setId('ui:progress_bar')
         bar.setRange(0, 1)
-        bar.lss('width', 'stretch')
-        bar.lss('height', 8)
+        bar.lss('width', 'stretch', StyleOrigin.INLINE)
+        bar.lss('height', 8, StyleOrigin.INLINE)
         root.addChild(bar)
 
         // 扫雷按钮由客户端插在进度条和背包之间（见文件头说明）

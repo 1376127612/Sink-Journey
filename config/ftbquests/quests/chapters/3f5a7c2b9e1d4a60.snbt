@@ -1,0 +1,194 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "3f5a7c2b9e1d4a60"
+	group: "705D4C8363D05D0F"
+	icon: {
+		id: "industrialupgrade:macerator/macerator"
+	}
+	id: "3F5A7C2B9E1D4A60"
+	images: [ ]
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["5F132AD862CA787E"]
+			id: "7421786593C68B0E"
+			tasks: [{
+				id: "1269E7A81F288E21"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_76_element" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "079D6EAF9A441826"
+			tasks: [{
+				id: "4974A5AF372FF0DD"
+				item: { count: 1, id: "industrialupgrade:compressor/compressor" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			id: "055588A7FFB2D789"
+			tasks: [{
+				count: 8L
+				id: "7A46AE8FFABA5B8D"
+				item: { count: 1, id: "industrialupgrade:itemplates/iron_plate" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			id: "7830616AA30B63CD"
+			tasks: [{
+				id: "11CD3045B19E9890"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_41_element" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			id: "49C6261827C7A7B3"
+			tasks: [{
+				id: "13F736B532BDD845"
+				item: { count: 1, id: "industrialupgrade:macerator/macerator" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			id: "21DC1429D7B64A75"
+			tasks: [{
+				id: "48BF4F38FFE84968"
+				item: { count: 1, id: "industrialupgrade:dryer/dryer" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			id: "0A449D27D8734333"
+			tasks: [{
+				id: "13C8F016363EAF68"
+				item: { count: 1, id: "industrialupgrade:primal_pump/primal_pump" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: -3.0d
+		}
+		{
+			id: "6CF34942F438033D"
+			tasks: [{
+				count: 16L
+				id: "7F9DCCE78C32634F"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_772_element" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -3.0d
+		}
+		{
+			id: "13A2604227513CA1"
+			tasks: [{
+				count: 32L
+				id: "4BEB72C8016464BF"
+				item: { count: 1, id: "industrialupgrade:smeltery/smeltery_casing" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: -3.0d
+		}
+		{
+			id: "6BE74B67D1F9D1C3"
+			tasks: [{
+				count: 8L
+				id: "7F53323BE2818396"
+				item: { count: 1, id: "industrialupgrade:smeltery/smeltery_tank" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: -3.0d
+		}
+		{
+			id: "44D17A7248C73706"
+			tasks: [{
+				id: "27491055559E30D7"
+				item: { count: 1, id: "industrialupgrade:smeltery/smeltery_controller" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			id: "13B0197D7A36A72F"
+			tasks: [
+				{
+					count: 2L
+					id: "462B2D895B66F259"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_fuel_tank" }
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "44A99C457585A49F"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_furnace" }
+					type: "item"
+				}
+				{
+					id: "43CB3E4DB3D4E531"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_casting" }
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: -3.0d
+		}
+		{
+			id: "4180DCBFB8DD7D48"
+			tasks: [{
+				id: "56DE8E8656DF8520"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_496_element" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -6.0d
+		}
+		{
+			id: "15E3CFD26FA821E0"
+			tasks: [{
+				id: "5679E05C95A35D3D"
+				item: { count: 1, id: "industrialupgrade:primal_wire_insulator/primal_wire_insulator" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -6.0d
+		}
+		{
+			id: "2C447CF0BBF40408"
+			tasks: [{
+				id: "41E3649B7BFD2520"
+				item: { count: 1, id: "kubejs:copper_boiler" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: -6.0d
+		}
+		{
+			id: "04775118903D8E3F"
+			tasks: [{
+				id: "43B86FCC1ADD4FD4"
+				item: { count: 1, id: "industrialupgrade:primal_fluid_integrator/primal_fluid_integrator" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: -6.0d
+		}
+	]
+}

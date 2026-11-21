@@ -1,0 +1,4 @@
+{
+  "matchFluid": ["pneumaticcraft:vegetable_oil", "electroenergetics:plant_oil"],
+  "resultFluid": "industrialupgrade:iufluidseedoil"
+}

@@ -38,6 +38,19 @@
         recipe.duration(1400)
         recipe.id('kubejs:earth_blast_furnace/smelt_iron')
 
+        // ---- 土高炉炼钢（蒸汽时代末期）----
+        // 渗碳钢：把铁在富碳还原气氛里长时间保温，碳扩散进铁晶格。
+        // 比炼铁更费燃料、更慢：2 铁锭 + 4 煤/木炭 + 1 方解石 -> 1 钢锭（120s）。
+        // 钢锭在 config/astages/simple/astages/item.json 里锁到 era.steam，
+        // 所以原始时代打到钢也拿不起来 —— 钢属于蒸汽时代末期。
+        var steel = event.recipes.sinkjourney.earth_blast_furnace()
+        steel.inputs(ITEM_CAP, Item.of('minecraft:iron_ingot', 2))
+        steel.inputs(ITEM_CAP, Item.of('minecraft:calcite', 1))
+        steel.inputs(ITEM_CAP, tag('minecraft:coals', 4))
+        steel.outputs(ITEM_CAP, Item.of('industrialupgrade:itemingots/steel_ingot', 1))
+        steel.duration(2400)
+        steel.id('kubejs:earth_blast_furnace/cementation_steel')
+
         // ---- 控制器合成 ----
         // 泥砖炉体 + 黏土封泥 + 两锭琥珀金（风口镶件）
         try {

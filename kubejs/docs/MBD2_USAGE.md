@@ -132,24 +132,27 @@ var itemSlot = function (id) {
     return slot
 }
 
+// 样式第三个参数必须是 StyleOrigin.INLINE，见下面那段说明
+var StyleOrigin = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.style.StyleOrigin')
+
 var buildUiTemplate = function () {
     var root = new UIElement()
     root.addClass('panel_bg')
-    root.lss('width', 206)
-    root.lss('height', 170)
-    root.lss('flex-direction', 'column')
-    root.lss('padding-all', 8)
-    root.lss('gap-all', 6)
+    root.lss('width', 176, StyleOrigin.INLINE)
+    root.lss('height', 155, StyleOrigin.INLINE)
+    root.lss('flex-direction', 'column', StyleOrigin.INLINE)
+    root.lss('padding-all', 7, StyleOrigin.INLINE)
+    root.lss('gap-all', 5, StyleOrigin.INLINE)
 
     root.addChild(label('土高炉', 'ui:machine_name'))
 
-    // 3 个输入槽 + 1 个输出槽
+    // 3 个输入槽 + 1 个输出槽，一行排开
     var row = new UIElement()
-    row.lss('width', 'stretch')
-    row.lss('height', 18)
-    row.lss('flex-direction', 'row')
-    row.lss('align-items', 'center')
-    row.lss('gap-all', 4)
+    row.lss('width', 'stretch', StyleOrigin.INLINE)
+    row.lss('height', 18, StyleOrigin.INLINE)
+    row.lss('flex-direction', 'row', StyleOrigin.INLINE)
+    row.lss('align-items', 'center', StyleOrigin.INLINE)
+    row.lss('gap-all', 4, StyleOrigin.INLINE)
     row.addChild(itemSlot('ui:input_0'))
     row.addChild(label('+'))
     row.addChild(itemSlot('ui:input_1'))
@@ -162,13 +165,23 @@ var buildUiTemplate = function () {
     var bar = new ProgressBar()    // com.lowdragmc.lowdraglib2.gui.ui.elements.ProgressBar
     bar.setId('ui:progress_bar')
     bar.setRange(0, 1)
-    bar.lss('width', 'stretch')
+    bar.lss('width', 'stretch', StyleOrigin.INLINE)
+    bar.lss('height', 8, StyleOrigin.INLINE)
     root.addChild(bar)
 
     root.addChild(new InventorySlots())  // 玩家背包
 
     return UITemplate.of(root, StylesheetManager.MC_MERGED)
 }
+
+// **样式源是必须写对的一步**：模板要过一遍 `root.serializeNBT()`，
+// 而 `Style.serializeNBT()` 只导出 INLINE 源的候选
+// （`getInline(property)`）。`lss(属性, 值)` 用的是 STYLESHEET 源，
+// 序列化时会被整段丢掉，进游戏后宽高/方向/间距全部回默认——
+// LayoutProperties 的默认 `flex-direction` 是 `column`，
+// 于是槽位会竖着叠成一列，`panel_bg` 背景也没有，看着就是一坨。
+// 第三个参数传 `StyleOrigin.INLINE` 就正常了（MBD2 官方测试用例也是这么写的）。
+// 顺带一句：颜色要写 `'#404040'` 这种字符串，`ColorValue` 不吃 `0x404040`。
 ```
 
 **UI 元素 id 约定（MBD2 自动绑定，改名即失效）：**
@@ -498,5 +511,6 @@ MBDMachineEvents.onBeforeRecipeModify(CF, function (event) {
 4. **`shapeInfoFactory` 返回 JS 数组**：运行时 CCE，必须返回真 Java 数组（§3.2）。
 5. **图案里 `' '` 默认任意方块**：要"必须空"就得显式 `.where(' ', Predicates.air())`。
 6. **旧 MMCR 机器已退役**：`mmcr:charcoal_furnace_controller` 等旧方块不再注册，旧存档里会显示为未知方块；新机器 id 是 `kubejs:charcoal_furnace` / `kubejs:earth_blast_furnace`。
-7. **`machineSettings` 不要提前构建**：`UITemplate.of` 必须在注册阶段执行（§1.4）。
-8. **日志位置**：`logs/kubejs/startup.log`（startup 脚本）、`logs/kubejs/server.log`（server 脚本）、`logs/latest.log`（整体）。
+7. **UI 样式必须用 `StyleOrigin.INLINE`**：`lss(属性, 值)` 是 STYLESHEET 源，序列化时被丢弃，界面会塌回默认的纵向排列（见 §1.3）。
+8. **`machineSettings` 不要提前构建**：`UITemplate.of` 必须在注册阶段执行（§1.4）。
+9. **日志位置**：`logs/kubejs/startup.log`（startup 脚本）、`logs/kubejs/server.log`（server 脚本）、`logs/latest.log`（整体）。

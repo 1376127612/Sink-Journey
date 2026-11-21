@@ -1,0 +1,4 @@
+{
+  "matchFluid": ["mekanism:hydrogen_chloride"],
+  "resultFluid": "industrialupgrade:iufluidhydrogenchloride"
+}

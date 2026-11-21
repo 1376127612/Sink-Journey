@@ -400,13 +400,28 @@ try {
 // 注册的（Button 的 mouseDown/mouseUp 等），模板这条路不保证带着走。
 // 所以按钮干脆不在模板里建：客户端等界面打开后自己 new 一个插进去，
 // 监听、点击都在客户端本地，不依赖序列化。
-// 模板 root 高度 194 已经给按钮留了位置（16px + 6 间距）。
+// 模板 root 已经给按钮留了 16px + 6 间距。
+//
+// 只往原始研究台的界面里插：它的 UI 模板 root 带 sweeper_host class
+// （见 startup_scripts/research/primitive_mbd2.js）。土高炉、炭炉这些
+// 别的 MBD2 机器界面也有 ui:progress_bar，没有这个标记就会被误插。
 
 var SM_TABLE_BTN_ID = 'sweeper_btn'
+var SM_HOST_CLASS = 'sweeper_host'
 var SM_uiScreen = null
 var SM_uiHandled = false
 var SM_uiTries = 0
 var SM_ButtonClass = null
+var SM_StyleOriginClass = null
+
+// 插进机器界面的元素用 INLINE 源写样式：界面已经挂上 stylesheet，
+// STYLESHEET 源的行内候选会被样式表重算清掉。
+var SM_styleOrigin = function () {
+    if (SM_StyleOriginClass === null) {
+        SM_StyleOriginClass = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.style.StyleOrigin')
+    }
+    return SM_StyleOriginClass.INLINE
+}
 
 var SM_buttonClass = function () {
     if (SM_ButtonClass === null) {
@@ -461,23 +476,24 @@ var SM_getModularUI = function (screen) {
     return null
 }
 
-// 返回 true：已确认这是原始研究台界面（插好了，或结构对不上已放弃）
+// 返回 true：这个界面已经判定过（宿主已插好，或别的机器界面直接放过）
 var SM_tryAttach = function (mu) {
     var root = null
     try { root = mu.ui.rootElement } catch (e) { return false }
     if (!root) return false
 
-    // 只有原始研究台带进度条；没有就不是这台机器
+    // 只有原始研究台在模板 root 上带 sweeper_host；别的机器界面到此为止
+    var isHost = false
+    try { isHost = root.hasClass(SM_HOST_CLASS) } catch (e) { isHost = false }
+    if (!isHost) return true
+
+    // 宿主界面的结构校验：没有进度条就没法把按钮放在进度条下面
     var bar = null
     try { bar = mu.getElementById('ui:progress_bar') } catch (e) { bar = null }
     if (!bar) bar = SM_findById(root, 'ui:progress_bar')
     if (!bar) {
-        // ui:machine_name 是 MBD2 机器界面的标志：是机器但没进度条才算异常
-        if (SM_findById(root, 'ui:machine_name')) {
-            console.warn('[SM] 原始研究台界面里没找到 ui:progress_bar，跳过插按钮')
-            return true
-        }
-        return false
+        console.warn('[SM] 原始研究台界面里没找到 ui:progress_bar，跳过插按钮')
+        return true
     }
 
     var btn = null
@@ -488,8 +504,9 @@ var SM_tryAttach = function (mu) {
         btn = new Button()
         btn.setId(SM_TABLE_BTN_ID)
         btn.setText('§e扫雷 §7· 通关加速进度')
-        btn.lss('width', 'stretch')
-        btn.lss('height', 16)
+        var origin = SM_styleOrigin()
+        btn.lss('width', 'stretch', origin)
+        btn.lss('height', 16, origin)
         var at = SM_childIndex(root, 'ui:progress_bar')
         at = at < 0 ? root.getChildren().size() : at + 1
         root.addChildAt(btn, at)

@@ -59,6 +59,9 @@
     var StylesheetManager = Java.loadClass(
         'com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager'
     )
+    // 样式必须用 INLINE 源写入：UIElement 序列化只保存 INLINE 源，
+    // lss(name, value) 走的是 STYLESHEET 源，过一遍 UITemplate 就被清空。
+    var StyleOrigin = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.style.StyleOrigin')
 
     var FactoryBlockPattern = Java.loadClass('com.lowdragmc.mbd2.api.pattern.FactoryBlockPattern')
     var Predicates = Java.loadClass('com.lowdragmc.mbd2.api.pattern.Predicates')
@@ -72,19 +75,19 @@
     var buildXeiTemplate = function () {
         var root = new UIElement()
         root.addClass('panel_bg')
-        root.lss('width', 176)
-        root.lss('height', 58)
-        root.lss('flex-direction', FlexDirection.COLUMN)
-        root.lss('padding-all', 7)
-        root.lss('gap-all', 4)
+        root.lss('width', 176, StyleOrigin.INLINE)
+        root.lss('height', 58, StyleOrigin.INLINE)
+        root.lss('flex-direction', FlexDirection.COLUMN, StyleOrigin.INLINE)
+        root.lss('padding-all', 7, StyleOrigin.INLINE)
+        root.lss('gap-all', 4, StyleOrigin.INLINE)
 
         var row = new UIElement()
-        row.lss('flex-direction', FlexDirection.ROW)
-        row.lss('align-items', AlignItems.CENTER)
-        row.lss('justify-content', JustifyContent.CENTER)
-        row.lss('width', 'stretch')
-        row.lss('height', 18)
-        row.lss('gap-all', 4)
+        row.lss('flex-direction', FlexDirection.ROW, StyleOrigin.INLINE)
+        row.lss('align-items', AlignItems.CENTER, StyleOrigin.INLINE)
+        row.lss('justify-content', JustifyContent.CENTER, StyleOrigin.INLINE)
+        row.lss('width', 'stretch', StyleOrigin.INLINE)
+        row.lss('height', 18, StyleOrigin.INLINE)
+        row.lss('gap-all', 4, StyleOrigin.INLINE)
 
         var addSlot = function (id) {
             var slot = new ItemSlot()
@@ -108,13 +111,13 @@
         var bar = new ProgressBar()
         bar.setId('@progress_bar')
         bar.setRange(0, 1)
-        bar.lss('width', 'stretch')
-        bar.lss('height', 8)
+        bar.lss('width', 'stretch', StyleOrigin.INLINE)
+        bar.lss('height', 8, StyleOrigin.INLINE)
         root.addChild(bar)
 
         var duration = new Label()
         duration.setId('@duration')
-        duration.lss('color', 0x808080)
+        duration.lss('color', '#808080', StyleOrigin.INLINE)
         root.addChild(duration)
 
         return UITemplate.of(root, StylesheetManager.MC_MERGED)
@@ -165,6 +168,12 @@
 
     // ============================================================
     // UI 模板 —— 想改界面就只改这一段
+    // ------------------------------------------------------------
+    // 元素 id 约定见 primitive_mbd2.js 文件头。
+    // 样式一律写成 .lss('属性', 值, StyleOrigin.INLINE)：模板要序列化
+    // 成 NBT，而 UIElement 只保存 INLINE 源的样式，默认的 lss(属性, 值)
+    // 是 STYLESHEET 源，会在 UITemplate.of() 里被清空，进游戏后槽位会
+    // 退回默认的纵向排列。
     // ============================================================
     var label = function (text, id) {
         var element = new Label()
@@ -182,24 +191,24 @@
     var buildUiTemplate = function () {
         var root = new UIElement()
         root.addClass('panel_bg')
-        root.lss('width', 176)
-        root.lss('height', 166)
-        root.lss('flex-direction', FlexDirection.COLUMN)
-        root.lss('padding-all', 7)
-        root.lss('gap-all', 5)
+        root.lss('width', 176, StyleOrigin.INLINE)
+        root.lss('height', 155, StyleOrigin.INLINE)
+        root.lss('flex-direction', FlexDirection.COLUMN, StyleOrigin.INLINE)
+        root.lss('padding-all', 7, StyleOrigin.INLINE)
+        root.lss('gap-all', 5, StyleOrigin.INLINE)
 
         var title = label('土高炉', 'ui:machine_name')
-        title.lss('color', 0x404040)    // 原版标题灰
+        title.lss('color', '#404040', StyleOrigin.INLINE)    // 原版标题灰
         root.addChild(title)
 
         // 3 个输入槽 + 1 个输出槽
         var row = new UIElement()
-        row.lss('width', 'stretch')
-        row.lss('height', 18)
-        row.lss('flex-direction', FlexDirection.ROW)
-        row.lss('align-items', AlignItems.CENTER)
-        row.lss('justify-content', JustifyContent.CENTER)
-        row.lss('gap-all', 4)
+        row.lss('width', 'stretch', StyleOrigin.INLINE)
+        row.lss('height', 18, StyleOrigin.INLINE)
+        row.lss('flex-direction', FlexDirection.ROW, StyleOrigin.INLINE)
+        row.lss('align-items', AlignItems.CENTER, StyleOrigin.INLINE)
+        row.lss('justify-content', JustifyContent.CENTER, StyleOrigin.INLINE)
+        row.lss('gap-all', 4, StyleOrigin.INLINE)
         row.addChild(itemSlot('ui:input_0'))
         row.addChild(label('+'))
         row.addChild(itemSlot('ui:input_1'))
@@ -212,13 +221,13 @@
         var bar = new ProgressBar()
         bar.setId('ui:progress_bar')
         bar.setRange(0, 1)
-        bar.lss('width', 'stretch')
-        bar.lss('height', 8)
+        bar.lss('width', 'stretch', StyleOrigin.INLINE)
+        bar.lss('height', 8, StyleOrigin.INLINE)
         root.addChild(bar)
 
         // 一行小字提示炉况门槛，比空着好看也实用
         var hint = label('篝火需点燃 · 风口贴陶风箱强制鼓风')
-        hint.lss('color', 0x808080)
+        hint.lss('color', '#808080', StyleOrigin.INLINE)
         root.addChild(hint)
 
         root.addChild(new InventorySlots())

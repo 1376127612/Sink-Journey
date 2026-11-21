@@ -1,9 +1,14 @@
 # 矿物 → 物品对照表（Sink Journey）
 
 > 本文按**材料**列出整合包里每一种矿及其加工形态，标出统一后的 canonical 物品。
-> 数据来源：`unify-tags.json`（122 个候选 tag）、`config/almostunified/unification/materials.json`、
+> 数据来源：`unify-tags.json`（152 个候选 tag）、`config/almostunified/unification/materials.json`、
 > `config/instantunify-common.toml`，以及 `mods/*.jar` 内的 `data/*/tags/item/*`。
-> 最后核对：2026-11-18。本文档由 `unify-tags.json` 与 `mods/*.jar` 内的 tag 扫描生成；改配置后需同步更新本文档。
+> 最后核对：2026-11-21。本文档由 `unify-tags.json` 与 `mods/*.jar` 内的 tag 扫描生成；改配置后需同步更新本文档。
+>
+> **统一优先级**：`industrialupgrade`（IU）> `create` > `minecraft` / `kubejs` > 其他模组。
+> IU 有该形态时一律统一到 IU；IU 没有该形态时才落到 Create，再往后才是原版和其他模组。
+> 需要逐物品例外（AU / InstantUnify 覆盖不到的自定义配方、方块、流体）时，
+> 不要加进 tag 白名单，改用 OneEnough 系列精修，见 `kubejs/docs/ONEENOUGH_POLISH.md`。
 
 ## 0. 读法与统计
 
@@ -19,8 +24,8 @@
 
 | 项目 | 数量 |
 | --- | --- |
-| 候选 tag（同 tag ≥2 个模组物品） | 122 |
-| 已统一 | 101 |
+| 候选 tag（同 tag ≥2 个模组物品） | 152 |
+| 已统一 | 131 |
 | 不统一 | 21 |
 | `c:ores/*` 材料 | 113（铝的 `aluminum` / `aluminium` 分开计） |
 | 其中多模组矿石 | 15（矿石方块全部不统一，产物照常统一） |
@@ -59,8 +64,8 @@
 | 碎矿 | `c:crushed/copper` | `industrialupgrade:crushed/copper` | — | 唯一 |
 | 锭 | `c:ingots/copper` | `minecraft:copper_ingot` | — | 唯一 |
 | 粒 | `c:nuggets/copper` | **`create:copper_nugget`** | `embers:copper_nugget`、`pneumaticcraft:copper_nugget`、`roots:copper_nugget` | ✅ 统一 |
-| 粉 | `c:dusts/copper` | **`mekanism:dust_copper`** | `enderio:powdered_copper`、`industrialupgrade:itemdust/copper_dust`、`nuclearcraftneohaul:copper_dust` | ✅ 统一 |
-| 板 | `c:plates/copper` | **`create:copper_sheet`** | `embers:copper_plate`、`industrialupgrade:itemplates/copper_plate` | ✅ 统一 |
+| 粉 | `c:dusts/copper` | **`industrialupgrade:itemdust/copper_dust`** | `enderio:powdered_copper`、`mekanism:dust_copper`、`nuclearcraftneohaul:copper_dust` | ✅ 统一 |
+| 板 | `c:plates/copper` | **`industrialupgrade:itemplates/copper_plate`** | `create:copper_sheet`、`embers:copper_plate` | ✅ 统一 |
 | 块 | `c:storage_blocks/copper` | `minecraft:copper_block` | — | 唯一 |
 | 原矿块 | `c:storage_blocks/raw_copper` | `minecraft:raw_copper_block` | — | 唯一 |
 
@@ -86,8 +91,8 @@
 | 碎矿 | `c:crushed/gold` | `industrialupgrade:crushed/gold` | — | 唯一 |
 | 锭 | `c:ingots/gold` | `minecraft:gold_ingot` | — | 唯一 |
 | 粒 | `c:nuggets/gold` | `minecraft:gold_nugget` | — | 唯一 |
-| 粉 | `c:dusts/gold` | **`mekanism:dust_gold`** | `enderio:powdered_gold`、`industrialupgrade:itemdust/gold_dust` | ✅ 统一 |
-| 板 | `c:plates/gold` | **`create:golden_sheet`** | `industrialupgrade:itemplates/gold_plate` | ✅ 统一 |
+| 粉 | `c:dusts/gold` | **`industrialupgrade:itemdust/gold_dust`** | `enderio:powdered_gold`、`mekanism:dust_gold` | ✅ 统一 |
+| 板 | `c:plates/gold` | **`industrialupgrade:itemplates/gold_plate`** | `create:golden_sheet` | ✅ 统一 |
 | 块 | `c:storage_blocks/gold` | `minecraft:gold_block` | — | 唯一 |
 | 原矿块 | `c:storage_blocks/raw_gold` | `minecraft:raw_gold_block` | — | 唯一 |
 | 齿轮 | `c:gears/gold` | `industrialforegoing:gold_gear` | — | 唯一 |
@@ -113,8 +118,8 @@
 | 碎矿 | `c:crushed/iron` | `industrialupgrade:crushed/iron` | — | 唯一 |
 | 锭 | `c:ingots/iron` | `minecraft:iron_ingot` | — | 唯一 |
 | 粒 | `c:nuggets/iron` | `minecraft:iron_nugget` | — | 唯一 |
-| 粉 | `c:dusts/iron` | **`mekanism:dust_iron`** | `enderio:powdered_iron`、`industrialupgrade:itemdust/iron_dust`、`neoecoae:iron_dust` | ✅ 统一 |
-| 板 | `c:plates/iron` | **`create:iron_sheet`** | `ad_astra:iron_plate`、`embers:iron_plate`、`industrialupgrade:itemplates/iron_plate` | ✅ 统一 |
+| 粉 | `c:dusts/iron` | **`industrialupgrade:itemdust/iron_dust`** | `enderio:powdered_iron`、`mekanism:dust_iron`、`neoecoae:iron_dust` | ✅ 统一 |
+| 板 | `c:plates/iron` | **`industrialupgrade:itemplates/iron_plate`** | `ad_astra:iron_plate`、`create:iron_sheet`、`embers:iron_plate` | ✅ 统一 |
 | 块 | `c:storage_blocks/iron` | `minecraft:iron_block` | — | 唯一 |
 | 原矿块 | `c:storage_blocks/raw_iron` | `minecraft:raw_iron_block` | — | 唯一 |
 | 齿轮 | `c:gears/iron` | — | `enderio:iron_gear`、`industrialforegoing:iron_gear` | ❌ 不统一 |
@@ -136,14 +141,14 @@
 
 | 形态 | tag | 统一目标 | 同 tag 其他物品 | 状态 |
 | --- | --- | --- | --- | --- |
-| 原矿 | `c:raw_materials/lead` | **`mekanism:raw_lead`** | `embers:raw_lead`、`industrialupgrade:raw_metals/raw_lead`、`nuclearcraftneohaul:lead_raw` | ✅ 统一 |
+| 原矿 | `c:raw_materials/lead` | **`industrialupgrade:raw_metals/raw_lead`** | `embers:raw_lead`、`mekanism:raw_lead`、`nuclearcraftneohaul:lead_raw` | ✅ 统一 |
 | 碎矿 | `c:crushed/lead` | `industrialupgrade:crushed/lead` | — | 唯一 |
-| 锭 | `c:ingots/lead` | **`mekanism:ingot_lead`** | `embers:lead_ingot`、`industrialupgrade:itemingots/lead_ingot`、`nuclearcraftneohaul:lead_ingot` | ✅ 统一 |
+| 锭 | `c:ingots/lead` | **`industrialupgrade:itemingots/lead_ingot`** | `embers:lead_ingot`、`mekanism:ingot_lead`、`nuclearcraftneohaul:lead_ingot` | ✅ 统一 |
 | 粒 | `c:nuggets/lead` | **`mekanism:nugget_lead`** | `embers:lead_nugget`、`nuclearcraftneohaul:lead_nugget` | ✅ 统一 |
-| 粉 | `c:dusts/lead` | **`mekanism:dust_lead`** | `industrialupgrade:itemdust/lead_dust`、`nuclearcraftneohaul:lead_dust` | ✅ 统一 |
-| 板 | `c:plates/lead` | **`embers:lead_plate`** | `industrialupgrade:itemplates/lead_plate` | ✅ 统一 |
-| 块 | `c:storage_blocks/lead` | **`mekanism:block_lead`** | `embers:lead_block`、`industrialupgrade:blockresource/lead_block`、`nuclearcraftneohaul:lead_block` | ✅ 统一 |
-| 原矿块 | `c:storage_blocks/raw_lead` | **`mekanism:block_raw_lead`** | `embers:raw_lead_block`、`industrialupgrade:raw_block/raw_lead`、`nuclearcraftneohaul:raw_lead_block` | ✅ 统一 |
+| 粉 | `c:dusts/lead` | **`industrialupgrade:itemdust/lead_dust`** | `mekanism:dust_lead`、`nuclearcraftneohaul:lead_dust` | ✅ 统一 |
+| 板 | `c:plates/lead` | **`industrialupgrade:itemplates/lead_plate`** | `embers:lead_plate` | ✅ 统一 |
+| 块 | `c:storage_blocks/lead` | **`industrialupgrade:blockresource/lead_block`** | `embers:lead_block`、`mekanism:block_lead`、`nuclearcraftneohaul:lead_block` | ✅ 统一 |
+| 原矿块 | `c:storage_blocks/raw_lead` | **`industrialupgrade:raw_block/raw_lead`** | `embers:raw_lead_block`、`mekanism:block_raw_lead`、`nuclearcraftneohaul:raw_lead_block` | ✅ 统一 |
 
 > 矿石结论：❌ 不统一。矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过
 
@@ -162,14 +167,14 @@
 
 | 形态 | tag | 统一目标 | 同 tag 其他物品 | 状态 |
 | --- | --- | --- | --- | --- |
-| 原矿 | `c:raw_materials/silver` | **`mekmm:raw_silver`** | `embers:raw_silver`、`enderio_evolution:raw_silver`、`industrialupgrade:raw_metals/raw_silver`、`roots:raw_silver` | ✅ 统一 |
+| 原矿 | `c:raw_materials/silver` | **`industrialupgrade:raw_metals/raw_silver`** | `embers:raw_silver`、`enderio_evolution:raw_silver`、`mekmm:raw_silver`、`roots:raw_silver` | ✅ 统一 |
 | 碎矿 | `c:crushed/silver` | `industrialupgrade:crushed/silver` | — | 唯一 |
-| 锭 | `c:ingots/silver` | **`mekmm:ingot_silver`** | `embers:silver_ingot`、`enderio_evolution:silver_ingot`、`industrialupgrade:itemingots/silver_ingot`、`nuclearcraftneohaul:silver_ingot`、`roots:silver_ingot` | ✅ 统一 |
-| 粒 | `c:nuggets/silver` | **`mekmm:nugget_silver`** | `embers:silver_nugget`、`enderio_evolution:silver_nugget`、`industrialupgrade:nugget/silver`、`roots:silver_nugget` | ✅ 统一 |
-| 粉 | `c:dusts/silver` | **`mekmm:dust_silver`** | `industrialupgrade:itemdust/silver_dust`、`nuclearcraftneohaul:silver_dust` | ✅ 统一 |
-| 板 | `c:plates/silver` | **`embers:silver_plate`** | `industrialupgrade:itemplates/silver_plate` | ✅ 统一 |
-| 块 | `c:storage_blocks/silver` | **`mekmm:block_silver`** | `embers:silver_block`、`enderio_evolution:silver_block`、`industrialupgrade:baseblockingot/silver`、`nuclearcraftneohaul:silver_block`、`roots:silver_block` | ✅ 统一 |
-| 原矿块 | `c:storage_blocks/raw_silver` | **`mekmm:block_raw_silver`** | `embers:raw_silver_block`、`enderio_evolution:raw_silver_block`、`industrialupgrade:raw_block/raw_silver`、`roots:raw_silver_block` | ✅ 统一 |
+| 锭 | `c:ingots/silver` | **`industrialupgrade:itemingots/silver_ingot`** | `embers:silver_ingot`、`enderio_evolution:silver_ingot`、`mekmm:ingot_silver`、`nuclearcraftneohaul:silver_ingot`、`roots:silver_ingot` | ✅ 统一 |
+| 粒 | `c:nuggets/silver` | **`industrialupgrade:nugget/silver`** | `embers:silver_nugget`、`enderio_evolution:silver_nugget`、`mekmm:nugget_silver`、`roots:silver_nugget` | ✅ 统一 |
+| 粉 | `c:dusts/silver` | **`industrialupgrade:itemdust/silver_dust`** | `mekmm:dust_silver`、`nuclearcraftneohaul:silver_dust` | ✅ 统一 |
+| 板 | `c:plates/silver` | **`industrialupgrade:itemplates/silver_plate`** | `embers:silver_plate` | ✅ 统一 |
+| 块 | `c:storage_blocks/silver` | **`industrialupgrade:baseblockingot/silver`** | `embers:silver_block`、`enderio_evolution:silver_block`、`mekmm:block_silver`、`nuclearcraftneohaul:silver_block`、`roots:silver_block` | ✅ 统一 |
+| 原矿块 | `c:storage_blocks/raw_silver` | **`industrialupgrade:raw_block/raw_silver`** | `embers:raw_silver_block`、`enderio_evolution:raw_silver_block`、`mekmm:block_raw_silver`、`roots:raw_silver_block` | ✅ 统一 |
 | 齿轮 | `c:gears/silver` | `industrialupgrade:gear/silver` | — | 唯一 |
 
 > 矿石结论：❌ 不统一。矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过
@@ -189,14 +194,14 @@
 
 | 形态 | tag | 统一目标 | 同 tag 其他物品 | 状态 |
 | --- | --- | --- | --- | --- |
-| 原矿 | `c:raw_materials/tin` | **`mekanism:raw_tin`** | `industrialupgrade:raw_metals/raw_tin`、`nuclearcraftneohaul:tin_raw` | ✅ 统一 |
+| 原矿 | `c:raw_materials/tin` | **`industrialupgrade:raw_metals/raw_tin`** | `mekanism:raw_tin`、`nuclearcraftneohaul:tin_raw` | ✅ 统一 |
 | 碎矿 | `c:crushed/tin` | `industrialupgrade:crushed/tin` | — | 唯一 |
-| 锭 | `c:ingots/tin` | **`mekanism:ingot_tin`** | `industrialupgrade:itemingots/tin_ingot`、`nuclearcraftneohaul:tin_ingot` | ✅ 统一 |
+| 锭 | `c:ingots/tin` | **`industrialupgrade:itemingots/tin_ingot`** | `mekanism:ingot_tin`、`nuclearcraftneohaul:tin_ingot` | ✅ 统一 |
 | 粒 | `c:nuggets/tin` | **`mekanism:nugget_tin`** | `nuclearcraftneohaul:tin_nugget` | ✅ 统一 |
-| 粉 | `c:dusts/tin` | **`mekanism:dust_tin`** | `enderio:powdered_tin`、`industrialupgrade:itemdust/tin_dust`、`nuclearcraftneohaul:tin_dust` | ✅ 统一 |
+| 粉 | `c:dusts/tin` | **`industrialupgrade:itemdust/tin_dust`** | `enderio:powdered_tin`、`mekanism:dust_tin`、`nuclearcraftneohaul:tin_dust` | ✅ 统一 |
 | 板 | `c:plates/tin` | `industrialupgrade:itemplates/tin_plate` | — | 唯一 |
-| 块 | `c:storage_blocks/tin` | **`mekanism:block_tin`** | `industrialupgrade:blockresource/tin_block`、`nuclearcraftneohaul:tin_block` | ✅ 统一 |
-| 原矿块 | `c:storage_blocks/raw_tin` | **`mekanism:block_raw_tin`** | `industrialupgrade:raw_block/raw_tin`、`nuclearcraftneohaul:raw_tin_block` | ✅ 统一 |
+| 块 | `c:storage_blocks/tin` | **`industrialupgrade:blockresource/tin_block`** | `mekanism:block_tin`、`nuclearcraftneohaul:tin_block` | ✅ 统一 |
+| 原矿块 | `c:storage_blocks/raw_tin` | **`industrialupgrade:raw_block/raw_tin`** | `mekanism:block_raw_tin`、`nuclearcraftneohaul:raw_tin_block` | ✅ 统一 |
 
 > 矿石结论：❌ 不统一。矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过
 
@@ -217,9 +222,9 @@
 | --- | --- | --- | --- | --- |
 | 原矿 | `c:raw_materials/tungsten` | **`industrialupgrade:raw_metals/raw_tungsten`** | `neoecoae:raw_tungsten_ore` | ✅ 统一 |
 | 碎矿 | `c:crushed/tungsten` | `industrialupgrade:crushed/tungsten` | — | 唯一 |
-| 锭 | `c:ingots/tungsten` | **`industrialupgrade:itemingots/tungsten_ingot`** | `neoecoae:tungsten_ingot` | ✅ 统一 |
+| 锭 | `c:ingots/tungsten` | **`industrialupgrade:itemingots/tungsten_ingot`** | `neoecoae:tungsten_ingot`、`qmd:ingot_tungsten` | ✅ 统一 |
 | 粒 | `c:nuggets/tungsten` | `industrialupgrade:nugget/tungsten` | — | 唯一 |
-| 粉 | `c:dusts/tungsten` | **`industrialupgrade:itemdust/tungsten_dust`** | `neoecoae:tungsten_dust` | ✅ 统一 |
+| 粉 | `c:dusts/tungsten` | **`industrialupgrade:itemdust/tungsten_dust`** | `neoecoae:tungsten_dust`、`qmd:dust_tungsten` | ✅ 统一 |
 | 板 | `c:plates/tungsten` | `industrialupgrade:itemplates/tungsten_plate` | — | 唯一 |
 | 块 | `c:storage_blocks/tungsten` | **`industrialupgrade:baseblockingot/tungsten`** | `neoecoae:tungsten_block` | ✅ 统一 |
 | 原矿块 | `c:storage_blocks/raw_tungsten` | **`industrialupgrade:raw_block/raw_tungsten`** | `neoecoae:raw_tungsten_block` | ✅ 统一 |
@@ -245,7 +250,7 @@
 | 锭 | `c:ingots/uranium` | — | `industrialupgrade:itemiucrafring/itemuraningot`、`mekanism:ingot_uranium`、`nuclearcraftneohaul:uranium_ingot` | ❌ 不统一 |
 | 粒 | `c:nuggets/uranium` | **`mekanism:nugget_uranium`** | `nuclearcraftneohaul:uranium_nugget` | ✅ 统一 |
 | 粉 | `c:dusts/uranium` | **`mekanism:dust_uranium`** | `nuclearcraftneohaul:uranium_dust` | ✅ 统一 |
-| 块 | `c:storage_blocks/uranium` | **`mekanism:block_uranium`** | `industrialupgrade:blockresource/uranium_block`、`nuclearcraftneohaul:fertile_isotope_uranium_block`、`nuclearcraftneohaul:uranium_block` | ✅ 统一 |
+| 块 | `c:storage_blocks/uranium` | **`industrialupgrade:blockresource/uranium_block`** | `mekanism:block_uranium`、`nuclearcraftneohaul:fertile_isotope_uranium_block`、`nuclearcraftneohaul:uranium_block` | ✅ 统一 |
 | 原矿块 | `c:storage_blocks/raw_uranium` | **`mekanism:block_raw_uranium`** | `nuclearcraftneohaul:raw_uranium_block` | ✅ 统一 |
 
 > 矿石结论：❌ 不统一。矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过
@@ -269,14 +274,14 @@
 
 | 形态 | tag | 统一目标 | 同 tag 其他物品 | 状态 |
 | --- | --- | --- | --- | --- |
-| 原矿 | `c:raw_materials/zinc` | **`create:raw_zinc`** | `industrialupgrade:raw_metals/raw_zinc` | ✅ 统一 |
+| 原矿 | `c:raw_materials/zinc` | **`industrialupgrade:raw_metals/raw_zinc`** | `create:raw_zinc` | ✅ 统一 |
 | 碎矿 | `c:crushed/zinc` | `industrialupgrade:crushed/zinc` | — | 唯一 |
-| 锭 | `c:ingots/zinc` | **`create:zinc_ingot`** | `industrialupgrade:itemingots/zinc_ingot` | ✅ 统一 |
-| 粒 | `c:nuggets/zinc` | **`create:zinc_nugget`** | `industrialupgrade:nugget/zinc` | ✅ 统一 |
-| 粉 | `c:dusts/zinc` | `industrialupgrade:itemdust/zinc_dust` | — | 唯一 |
+| 锭 | `c:ingots/zinc` | **`industrialupgrade:itemingots/zinc_ingot`** | `create:zinc_ingot`、`qmd:ingot_zinc` | ✅ 统一 |
+| 粒 | `c:nuggets/zinc` | **`industrialupgrade:nugget/zinc`** | `create:zinc_nugget` | ✅ 统一 |
+| 粉 | `c:dusts/zinc` | **`industrialupgrade:itemdust/zinc_dust`** | `qmd:dust_zinc` | 唯一 |
 | 板 | `c:plates/zinc` | `industrialupgrade:itemplates/zinc_plate` | — | 唯一 |
-| 块 | `c:storage_blocks/zinc` | **`create:zinc_block`** | `industrialupgrade:baseblockingot/zinc` | ✅ 统一 |
-| 原矿块 | `c:storage_blocks/raw_zinc` | **`create:raw_zinc_block`** | `industrialupgrade:raw_block/raw_zinc` | ✅ 统一 |
+| 块 | `c:storage_blocks/zinc` | **`industrialupgrade:baseblockingot/zinc`** | `create:zinc_block` | ✅ 统一 |
+| 原矿块 | `c:storage_blocks/raw_zinc` | **`industrialupgrade:raw_block/raw_zinc`** | `create:raw_zinc_block` | ✅ 统一 |
 | 齿轮 | `c:gears/zinc` | `industrialupgrade:gear/zinc` | — | 唯一 |
 
 > 矿石结论：❌ 不统一。矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过
@@ -296,14 +301,14 @@
 
 | 形态 | tag | 统一目标 | 同 tag 其他物品 | 状态 |
 | --- | --- | --- | --- | --- |
-| 原矿 | `c:raw_materials/osmium` | **`mekanism:raw_osmium`** | `industrialupgrade:raw_metals/raw_osmium` | ✅ 统一 |
+| 原矿 | `c:raw_materials/osmium` | **`industrialupgrade:raw_metals/raw_osmium`** | `mekanism:raw_osmium` | ✅ 统一 |
 | 碎矿 | `c:crushed/osmium` | `industrialupgrade:crushed/osmium` | — | 唯一 |
-| 锭 | `c:ingots/osmium` | **`mekanism:ingot_osmium`** | `industrialupgrade:itemingots/osmium` | ✅ 统一 |
-| 粒 | `c:nuggets/osmium` | **`mekanism:nugget_osmium`** | `industrialupgrade:nugget/osmium` | ✅ 统一 |
-| 粉 | `c:dusts/osmium` | **`mekanism:dust_osmium`** | `industrialupgrade:itemdust/osmium_dust` | ✅ 统一 |
+| 锭 | `c:ingots/osmium` | **`industrialupgrade:itemingots/osmium`** | `mekanism:ingot_osmium`、`qmd:ingot_osmium` | ✅ 统一 |
+| 粒 | `c:nuggets/osmium` | **`industrialupgrade:nugget/osmium`** | `mekanism:nugget_osmium` | ✅ 统一 |
+| 粉 | `c:dusts/osmium` | **`industrialupgrade:itemdust/osmium_dust`** | `mekanism:dust_osmium`、`qmd:dust_osmium` | ✅ 统一 |
 | 板 | `c:plates/osmium` | `industrialupgrade:itemplates/osmium` | — | 唯一 |
-| 块 | `c:storage_blocks/osmium` | **`mekanism:block_osmium`** | `industrialupgrade:baseblockingot1/osmium` | ✅ 统一 |
-| 原矿块 | `c:storage_blocks/raw_osmium` | **`mekanism:block_raw_osmium`** | `industrialupgrade:raw_block/raw_osmium` | ✅ 统一 |
+| 块 | `c:storage_blocks/osmium` | **`industrialupgrade:baseblockingot1/osmium`** | `mekanism:block_osmium` | ✅ 统一 |
+| 原矿块 | `c:storage_blocks/raw_osmium` | **`industrialupgrade:raw_block/raw_osmium`** | `mekanism:block_raw_osmium` | ✅ 统一 |
 | 齿轮 | `c:gears/osmium` | `industrialupgrade:gear/osmium` | — | 唯一 |
 
 > 矿石结论：❌ 不统一。矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过
@@ -425,7 +430,7 @@
 
 | 形态 | tag | 统一目标 | 同 tag 其他物品 | 状态 |
 | --- | --- | --- | --- | --- |
-| 粉 | `c:dusts/quartz` | **`mekanism:dust_quartz`** | `ae2cs:nether_quartz_dust`、`enderio:powdered_quartz`、`industrialupgrade:itemdust/quartz_dust`、`nuclearcraftneohaul:quartz_gem_dust` | ✅ 统一 |
+| 粉 | `c:dusts/quartz` | **`industrialupgrade:itemdust/quartz_dust`** | `ae2cs:nether_quartz_dust`、`enderio:powdered_quartz`、`mekanism:dust_quartz`、`nuclearcraftneohaul:quartz_gem_dust` | ✅ 统一 |
 | 块 | `c:storage_blocks/quartz` | `minecraft:quartz_block` | — | 唯一 |
 | 宝石 | `c:gems/quartz` | `minecraft:quartz` | — | 唯一 |
 
@@ -560,23 +565,23 @@
 
 | 材料 | 形态 | tag | 统一目标 | 同 tag 其他物品 | 状态 |
 | --- | --- | --- | --- | --- | --- |
-| **青铜** bronze | 锭 | `c:ingots/bronze` | **`mekanism:ingot_bronze`** | `industrialupgrade:itemingots/bronze_ingot`、`nuclearcraftneohaul:bronze_alloy` | ✅ 统一 |
+| **青铜** bronze | 锭 | `c:ingots/bronze` | **`industrialupgrade:itemingots/bronze_ingot`** | `mekanism:ingot_bronze`、`nuclearcraftneohaul:bronze_alloy` | ✅ 统一 |
 |  | 粒 | `c:nuggets/bronze` | `mekanism:nugget_bronze` | — | 唯一 |
-|  | 粉 | `c:dusts/bronze` | **`mekanism:dust_bronze`** | `industrialupgrade:itemdust/bronze_dust` | ✅ 统一 |
+|  | 粉 | `c:dusts/bronze` | **`industrialupgrade:itemdust/bronze_dust`** | `mekanism:dust_bronze` | ✅ 统一 |
 |  | 板 | `c:plates/bronze` | `industrialupgrade:itemplates/bronze_plate` | — | 唯一 |
-|  | 块 | `c:storage_blocks/bronze` | **`mekanism:block_bronze`** | `industrialupgrade:blockresource/bronze_block` | ✅ 统一 |
-| **钢** steel | 锭 | `c:ingots/steel` | **`mekanism:ingot_steel`** | `ad_astra:steel_ingot`、`industrialupgrade:itemingots/steel_ingot`、`nuclearcraftneohaul:steel_alloy` | ✅ 统一 |
+|  | 块 | `c:storage_blocks/bronze` | **`industrialupgrade:blockresource/bronze_block`** | `mekanism:block_bronze` | ✅ 统一 |
+| **钢** steel | 锭 | `c:ingots/steel` | **`industrialupgrade:itemingots/steel_ingot`** | `ad_astra:steel_ingot`、`mekanism:ingot_steel`、`nuclearcraftneohaul:steel_alloy` | ✅ 统一 |
 |  | 粒 | `c:nuggets/steel` | **`mekanism:nugget_steel`** | `ad_astra:steel_nugget` | ✅ 统一 |
 |  | 粉 | `c:dusts/steel` | `mekanism:dust_steel` | — | 唯一 |
-|  | 板 | `c:plates/steel` | **`ad_astra:steel_plate`** | `industrialupgrade:itemplates/steel_plate` | ✅ 统一 |
-|  | 块 | `c:storage_blocks/steel` | **`mekanism:block_steel`** | `ad_astra:steel_block`、`industrialupgrade:blockresource/steel_block` | ✅ 统一 |
+|  | 板 | `c:plates/steel` | **`industrialupgrade:itemplates/steel_plate`** | `ad_astra:steel_plate` | ✅ 统一 |
+|  | 块 | `c:storage_blocks/steel` | **`industrialupgrade:blockresource/steel_block`** | `ad_astra:steel_block`、`mekanism:block_steel` | ✅ 统一 |
 | **硅** silicon | 硅 | `c:silicon` | **`ae2:silicon`** | `enderio:silicon` | ✅ 统一 |
 |  | 粉 | `c:dusts/silicon` | `industrialupgrade:itemdust/silicon_dust` | — | 唯一 |
 |  | 块 | `c:storage_blocks/silicon` | **`extendedae:silicon_block`** | `ae2cs:silicon_block`、`ae2lt:silicon_block` | ✅ 统一 |
 |  | 宝石 | `c:gems/silicon` | `nuclearcraftneohaul:silicon_gem` | — | 唯一 |
-| **黑曜石** obsidian | 粉 | `c:dusts/obsidian` | **`create:powdered_obsidian`** | `enderio:powdered_obsidian`、`industrialupgrade:itemdust/obsidian_dust`、`mekanism:dust_obsidian`、`nuclearcraftneohaul:obsidian_gem_dust` | ✅ 统一 |
-|  | 板 | `c:plates/obsidian` | **`create:sturdy_sheet`** | `industrialupgrade:itemplates/obsidian_plate` | ✅ 统一 |
-| **煤** coal | 粉 | `c:dusts/coal` | **`mekanism:dust_coal`** | `enderio:powdered_coal`、`industrialupgrade:itemdust/coal_dust`、`nuclearcraftneohaul:coal_gem_dust` | ✅ 统一 |
+| **黑曜石** obsidian | 粉 | `c:dusts/obsidian` | **`industrialupgrade:itemdust/obsidian_dust`** | `create:powdered_obsidian`、`enderio:powdered_obsidian`、`mekanism:dust_obsidian`、`nuclearcraftneohaul:obsidian_gem_dust` | ✅ 统一 |
+|  | 板 | `c:plates/obsidian` | **`industrialupgrade:itemplates/obsidian_plate`** | `create:sturdy_sheet` | ✅ 统一 |
+| **煤** coal | 粉 | `c:dusts/coal` | **`industrialupgrade:itemdust/coal_dust`** | `enderio:powdered_coal`、`mekanism:dust_coal`、`nuclearcraftneohaul:coal_gem_dust` | ✅ 统一 |
 |  | 块 | `c:storage_blocks/coal` | `minecraft:coal_block` | — | 唯一 |
 | **末影珍珠** ender_pearl | 粉 | `c:dusts/ender_pearl` | **`ae2:ender_dust`** | `enderio:powdered_ender_pearl` | ✅ 统一 |
 | **硫酸钙** calcium_sulfate | 粉 | `c:dusts/calcium_sulfate` | **`industrialupgrade:itemdust/calcium_sulfate_dust`** | `nuclearcraftneohaul:calcium_sulfate` | ✅ 统一 |
@@ -622,10 +627,79 @@
    ```
    python unify_tags.py review   # 重新扫描 jar，刷新 unify-tags.json / unify-review.md
    python unify_tags.py apply    # 写入 Almost Unified 与 InstantUnify 配置
-   python unify_tags.py status   # 复核 101 true / 21 false
+   python unify_tags.py status   # 复核 131 true / 21 false
    ```
 
 3. 完全退出游戏再启动。Almost Unified 在启动时读取 tag 并改写配方，`/reload` 不会重新加载。
 4. 自定义配方类型（如 `roots:pyre` 的 `data.result`）不受 AU 改写，必须手写本文档里的 canonical id。
 5. 本文档的 canonical 目标按 `unify-tags.json` 的 `mod_priorities` 取「该 tag 内优先级最高的模组物品」；
    改优先级后需要同步更新本文档。
+
+## 6. 其他已统一的 tag（60 个）
+
+前文按矿石和材料列出的 tag 之外，还有这些已统一的多模组 tag（含 QMD 等新模组材料）；
+这里只列 canonical 目标，未并入前面的材料小节。
+
+| tag | 统一目标 | 同 tag 其他物品 |
+| --- | --- | --- |
+| `c:dusts/aluminum` | **`nuclearcraftneohaul:aluminum_dust`** | `neoecoae:aluminum_dust` |
+| `c:dusts/arsenic` | **`industrialupgrade:itemdust/arsenic_dust`** | `nuclearcraftneohaul:arsenic_gem_dust` |
+| `c:dusts/barium` | **`industrialupgrade:itemdust/barium_dust`** | `qmd:dust_barium` |
+| `c:dusts/bismuth` | **`industrialupgrade:itemdust/bismuth_dust`** | `nuclearcraftneohaul:bismuth_dust` |
+| `c:dusts/chromium` | **`industrialupgrade:itemdust/chromium_dust`** | `qmd:dust_chromium` |
+| `c:dusts/cobalt` | **`industrialupgrade:itemdust/cobalt_dust`** | `qmd:dust_cobalt` |
+| `c:dusts/diamond` | **`industrialupgrade:itemdust/diamond_dust`** | `appflux:diamond_dust`、`mekanism:dust_diamond`、`nuclearcraftneohaul:diamond_gem_dust` |
+| `c:dusts/emerald` | **`industrialupgrade:itemdust/emerald_dust`** | `appflux:emerald_dust`、`mekanism:dust_emerald` |
+| `c:dusts/fluorite` | **`mekanism:dust_fluorite`** | `nuclearcraftneohaul:fluorite_gem_dust` |
+| `c:dusts/gadolinium` | **`industrialupgrade:itemdust/gadolinium_dust`** | `nuclearcraftneohaul:gadolinium_dust` |
+| `c:dusts/hafnium` | **`industrialupgrade:itemdust/hafnium_dust`** | `qmd:dust_hafnium` |
+| `c:dusts/iridium` | **`industrialupgrade:itemdust/iridium_dust`** | `qmd:dust_iridium` |
+| `c:dusts/lapis` | **`industrialupgrade:itemdust/lapis_dust`** | `enderio:powdered_lapis_lazuli`、`mekanism:dust_lapis_lazuli` |
+| `c:dusts/manganese` | **`industrialupgrade:itemdust/manganese_dust`** | `nuclearcraftneohaul:manganese_dust` |
+| `c:dusts/molybdenum` | **`industrialupgrade:itemdust/molybdenum_dust`** | `nuclearcraftneohaul:molybdenum_dust` |
+| `c:dusts/neodymium` | **`industrialupgrade:itemdust/neodymium_dust`** | `qmd:dust_neodymium` |
+| `c:dusts/nickel` | **`industrialupgrade:itemdust/nickel_dust`** | `qmd:dust_nickel` |
+| `c:dusts/niobium` | **`industrialupgrade:itemdust/niobium_dust`** | `qmd:dust_niobium` |
+| `c:dusts/palladium` | **`industrialupgrade:itemdust/palladium_dust`** | `nuclearcraftneohaul:palladium_dust` |
+| `c:dusts/platinum` | **`industrialupgrade:itemdust/platinum_dust`** | `qmd:dust_platinum` |
+| `c:dusts/polonium` | **`industrialupgrade:itemdust/polonium_dust`** | `nuclearcraftneohaul:polonium_dust` |
+| `c:dusts/potassium` | **`industrialupgrade:itemdust/potassium_dust`** | `qmd:dust_potassium` |
+| `c:dusts/salt` | **`mekanism:salt`** | `qmd:chemical_dust_sodium_chloride` |
+| `c:dusts/sodium` | **`industrialupgrade:itemdust/sodium_dust`** | `qmd:dust_sodium` |
+| `c:dusts/strontium` | **`industrialupgrade:itemdust/strontium_dust`** | `qmd:dust_strontium` |
+| `c:dusts/sulfur` | **`industrialupgrade:itemdust/sulfur_dust`** | `mekanism:dust_sulfur`、`nuclearcraftneohaul:sulfur_gem_dust` |
+| `c:dusts/titanium` | **`industrialupgrade:itemdust/titanium_dust`** | `qmd:dust_titanium` |
+| `c:dusts/yttrium` | **`industrialupgrade:itemdust/yttrium_dust`** | `qmd:dust_yttrium` |
+| `c:dusts/zirconium` | **`industrialupgrade:itemdust/zirconium_dust`** | `nuclearcraftneohaul:zirconium_dust` |
+| `c:gems/fluorite` | **`mekanism:fluorite_gem`** | `nuclearcraftneohaul:fluorite_gem` |
+| `c:gems/ruby` | **`industrialupgrade:preciousgem/ruby_gem`** | `projectred_core:ruby` |
+| `c:gems/sapphire` | **`industrialupgrade:preciousgem/sapphire_gem`** | `projectred_core:sapphire` |
+| `c:ingots/aluminum` | **`nuclearcraftneohaul:aluminum_ingot`** | `neoecoae:aluminum_ingot` |
+| `c:ingots/barium` | **`industrialupgrade:itemingots/barium`** | `qmd:ingot_barium` |
+| `c:ingots/chromium` | **`industrialupgrade:itemingots/chromium_ingot`** | `qmd:ingot_chromium` |
+| `c:ingots/cobalt` | **`industrialupgrade:itemingots/cobalt_ingot`** | `qmd:ingot_cobalt` |
+| `c:ingots/gadolinium` | **`industrialupgrade:itemingots/gadolinium`** | `nuclearcraftneohaul:gadolinium_ingot` |
+| `c:ingots/hafnium` | **`industrialupgrade:itemingots/hafnium`** | `qmd:ingot_hafnium` |
+| `c:ingots/iridium` | **`industrialupgrade:itemingots/iridium_ingot`** | `qmd:ingot_iridium` |
+| `c:ingots/manganese` | **`industrialupgrade:itemingots/manganese_ingot`** | `nuclearcraftneohaul:manganese_ingot` |
+| `c:ingots/neodymium` | **`industrialupgrade:itemingots/neodymium`** | `qmd:ingot_neodymium` |
+| `c:ingots/nichrome` | **`industrialupgrade:alloyingot/nichrome`** | `qmd:ingot_nichrome` |
+| `c:ingots/nickel` | **`industrialupgrade:itemingots/nickel_ingot`** | `qmd:ingot_nickel` |
+| `c:ingots/niobium` | **`industrialupgrade:itemingots/niobium`** | `qmd:ingot_niobium` |
+| `c:ingots/osmiridium` | **`industrialupgrade:alloyingot/osmiridium`** | `qmd:ingot_osmiridium` |
+| `c:ingots/palladium` | **`industrialupgrade:itemingots/palladium`** | `nuclearcraftneohaul:palladium_ingot` |
+| `c:ingots/platinum` | **`industrialupgrade:itemingots/platinum_ingot`** | `qmd:ingot_platinum` |
+| `c:ingots/strontium` | **`industrialupgrade:itemingots/strontium`** | `qmd:ingot_strontium` |
+| `c:ingots/titanium` | **`industrialupgrade:itemingots/titanium_ingot`** | `qmd:ingot_titanium` |
+| `c:ingots/yttrium` | **`industrialupgrade:itemingots/yttrium`** | `qmd:ingot_yttrium` |
+| `c:ingots/zirconium` | **`industrialupgrade:itemingots/zirconium`** | `nuclearcraftneohaul:zirconium_ingot` |
+| `c:storage_blocks/aluminum` | **`nuclearcraftneohaul:aluminum_block`** | `neoecoae:aluminum_block` |
+| `c:storage_blocks/cobalt` | **`industrialupgrade:baseblockingot/cobalt`** | `nuclearcraftneohaul:cobalt_block` |
+| `c:storage_blocks/gadolinium` | **`industrialupgrade:baseblockingot2/gadolinium`** | `nuclearcraftneohaul:gadolinium_block` |
+| `c:storage_blocks/manganese` | **`industrialupgrade:baseblockingot1/manganese`** | `nuclearcraftneohaul:manganese_block` |
+| `c:storage_blocks/molybdenum` | **`industrialupgrade:baseblockingot2/molybdenum`** | `nuclearcraftneohaul:molybdenum_block` |
+| `c:storage_blocks/nickel` | **`industrialupgrade:baseblockingot/nickel`** | `nuclearcraftneohaul:nickel_block` |
+| `c:storage_blocks/palladium` | **`industrialupgrade:baseblockingot2/palladium`** | `nuclearcraftneohaul:palladium_block` |
+| `c:storage_blocks/platinum` | **`industrialupgrade:baseblockingot/platinum`** | `nuclearcraftneohaul:platinum_block` |
+| `c:storage_blocks/zirconium` | **`industrialupgrade:baseblockingot2/zirconium`** | `nuclearcraftneohaul:zirconium_block` |
+
