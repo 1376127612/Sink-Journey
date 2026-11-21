@@ -532,7 +532,7 @@ var SRTU_openStyled = function (ev, model) {
     left.addChild(SRTU_mkLabel(Label, prog))
 
     if (model.running && model.running.length > 0) {
-        left.addChild(SRTU_mkLabel(Label, '§6▣ 进行中 §7' + model.running.length + ' 条'))
+        left.addChild(SRTU_mkLabel(Label, '§6进行中 §7' + model.running.length + ' 条'))
         for (var r1 = 0; r1 < model.running.length; r1++) {
             var job = model.running[r1]
             var jrow = new UIElement()
@@ -541,7 +541,7 @@ var SRTU_openStyled = function (ev, model) {
             jrow.style(function (s) {
                 s.background(SDFRectTexture.of(776616474).setRadius(3))
             })
-            jrow.addChild(SRTU_mkLabel(Label, '§e▸ §f' + SRTU_short(job.id, 16) + ' §7' + SRTU_fmtLeft(job.left)))
+            jrow.addChild(SRTU_mkLabel(Label, '§e- §f' + SRTU_short(job.id, 16) + ' §7' + SRTU_fmtLeft(job.left)))
             left.addChild(jrow)
         }
     }
@@ -669,9 +669,9 @@ try {
             } else {
                 plain.push('§b研究树 §7(' + model.done + '/' + model.total + ' 已完成)')
                 if (model.running && model.running.length > 0) {
-                    plain.push('§6▣ 进行中 ' + model.running.length + ' 条')
+                    plain.push('§6进行中 ' + model.running.length + ' 条')
                     for (var q = 0; q < model.running.length; q++) {
-                        plain.push('§e▸ §f' + model.running[q].id + ' §7' + SRTU_fmtLeft(model.running[q].left))
+                        plain.push('§e- §f' + model.running[q].id + ' §7' + SRTU_fmtLeft(model.running[q].left))
                     }
                 }
                 for (var j = 0; j < model.rows.length; j++) plain.push(model.rows[j].line)
