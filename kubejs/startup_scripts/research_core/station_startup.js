@@ -311,17 +311,54 @@ var srWriteJobs = (server, token, jobs) => {
     try { server.persistentData.putString(srJobsKey(token), JSON.stringify(jobs)) } catch (e) { }
 }
 
+// 占位记录有两种形状：老存档是数字（时间戳），新版是 { ts, node }。
+// 带 node 是为了让终端能显示"正在跑哪条研究"，只存时间戳做不到这一点。
+var srJobsEntryTs = (v) => {
+    if (typeof v === 'number') return v
+    if (v && typeof v === 'object' && v.ts !== undefined) return Number(v.ts) || 0
+    return Number(v) || 0
+}
+
 // 心跳超过 10 秒的占位视为失效（崩溃/拆机留下的脏数据）
 var srPurgeJobs = (jobs, ttlMs) => {
     var now = Date.now()
     var out = {}
     for (var k in jobs) {
-        if (now - Number(jobs[k] || 0) < ttlMs) out[k] = jobs[k]
+        if (now - srJobsEntryTs(jobs[k]) < ttlMs) out[k] = jobs[k]
     }
     return out
 }
 
 var srStationKey = (pos) => pos.getX() + '_' + pos.getY() + '_' + pos.getZ()
+
+// ---- 拒绝开工要说给玩家听 ------------------------------------
+// 以前只有日志：机器立在那儿不动，玩家不知道是没网络、并发满了，还是前置没做。
+// 每个站点每种原因 4 秒最多提示一次，避免开工失败时每 tick 刷屏。
+var srNotifyState = {}
+var SR_NOTIFY_COOLDOWN = 4000
+
+var srNotifyNear = (ctx, code, msg) => {
+    try {
+        var mc = ctx.machineContext()
+        var level = mc.level()
+        var pos = mc.controllerPos()
+        var key = srStationKey(pos) + '@' + code
+        var now = Date.now()
+        if (srNotifyState[key] && now - srNotifyState[key] < SR_NOTIFY_COOLDOWN) return
+        srNotifyState[key] = now
+        var r2 = 12 * 12
+        var players = level.players()
+        for (var i = 0; i < players.size(); i++) {
+            var p = players.get(i)
+            var bp = p.blockPosition()
+            var dx = bp.getX() - pos.getX()
+            var dy = bp.getY() - pos.getY()
+            var dz = bp.getZ() - pos.getZ()
+            if (dx * dx + dy * dy + dz * dz > r2) continue
+            p.tell(Text.of('§b[研究] §f' + msg))
+        }
+    } catch (e) { }
+}
 
 // ---- 断网中断（P3.2） ----------------------------------------
 // MMCR 的 RecipeTickContext 没有 cancel，只能尝试在控制器上找暂停入口；
@@ -373,6 +410,16 @@ MMCREvents.startup(event => {
                 if (!srRequirementsMet(node, unlocks)) {
                     try { ctx.cancel() } catch (err) { console.warn('[SR] 无法取消配方（版本差异）') }
                     console.info('[SR] 拒绝未解锁研究: ' + recipeId)
+                    var missing = []
+                    try {
+                        var req = node.requires || {}
+                        var children = req.or || req.and || []
+                        for (var mi = 0; mi < children.length; mi++) {
+                            if (!srNodeDone(String(children[mi]), unlocks)) missing.push(String(children[mi]))
+                        }
+                    } catch (eMiss) { }
+                    srNotifyNear(ctx, 'req', '研究站拒绝开工：前置研究未完成' +
+                        (missing.length > 0 ? '（还差 ' + missing.join('、') + '）' : ''))
                     return
                 }
 
@@ -391,6 +438,7 @@ MMCREvents.startup(event => {
                     if (srNetCfg.require_network) {
                         try { ctx.cancel() } catch (e) { }
                         console.info('[SR] 未接入研究网络，拒绝开工: ' + recipeId)
+                        srNotifyNear(ctx, 'net', '研究站拒绝开工：16 格内没有在线的研究网络中心')
                         return
                     }
                     // 调试模式：不要求网络，直接按默认时长开工
@@ -405,9 +453,15 @@ MMCREvents.startup(event => {
                 if (!jobs[stationKey] && running >= cap) {
                     try { ctx.cancel() } catch (e) { }
                     console.info('[SR] 并发已满 ' + running + '/' + cap + '，拒绝开工: ' + recipeId)
+                    srNotifyNear(ctx, 'cap', '研究站拒绝开工：并发已满 ' + running + '/' + cap +
+                        '，加数据库或等一条跑完')
                     return
                 }
-                jobs[stationKey] = Date.now()
+                // ts 是心跳（每次都刷），start 是这次开工的时间（只写一次），
+                // 终端的"还剩多久"要按 start 算，不能按心跳刷新的 ts 算。
+                var prevJob = jobs[stationKey]
+                var startedAt = (prevJob && prevJob.start) ? Number(prevJob.start) : Date.now()
+                jobs[stationKey] = { ts: Date.now(), start: startedAt, node: recipeId }
                 srWriteJobs(server, net.token, jobs)
 
                 var ticks = Math.max(40, Math.floor(node.duration * srSpeedFactor(ctx, unlocks)))
@@ -435,7 +489,12 @@ MMCREvents.startup(event => {
 
                     var jobs = srPurgeJobs(srReadJobs(server, net.token), srNetCfg.job_ttl_ms)
                     if (jobs[key]) {
-                        jobs[key] = Date.now()
+                        var prev = jobs[key]
+                        jobs[key] = {
+                            ts: Date.now(),
+                            start: (prev && prev.start) ? Number(prev.start) : Number(srJobsEntryTs(prev)),
+                            node: (prev && prev.node) ? prev.node : ''
+                        }
                         srWriteJobs(server, net.token, jobs)
                     }
                 } catch (e) { }

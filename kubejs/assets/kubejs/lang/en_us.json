@@ -21,7 +21,7 @@
     "jei.sinkjourney.primitive_research": "Primitive Research",
     "jei.sinkjourney.primitive_research.info": "The primitive research table: the only research device before the stress era. Right-click to open its UI, put the materials into the two input slots (paper + ink sac, or research notes x4 + paper), and the machine starts on its own; when the bar fills the product moves to the output slot on the right.",
     "jei.sinkjourney.primitive_research.info2": "Recipes: paper + ink sac -> research notes x2 (5 min); research notes x4 + paper -> primitive blueprint (5 min). Research notes are the entry material for the mechanical research bench.",
-    "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so every recipe takes 5 minutes.",
+    "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so every recipe takes 5 minutes. The UI has a minesweeper entry: clearing one round advances the current progress by 50%.",
     "block.kubejs.charcoal_furnace": "Charcoal Furnace",
     "recipe_type.sinkjourney.charcoal_furnace": "Charcoal Furnace Smelting",
     "recipe_pool.kubejs.charcoal_furnace": "Charcoal Furnace",

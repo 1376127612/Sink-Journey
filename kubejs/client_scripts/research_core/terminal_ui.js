@@ -158,11 +158,76 @@ var SRTU_tips = function (node, unlocks) {
     return out
 }
 
+// ---- 进行中的研究 --------------------------------------------
+// 研究站把占位写进 server.persistentData（见 station_startup.js）：
+//   sinkresearch.net.index     -> "dim@x_y_z;..."
+//   sinkresearch.jobs.<token>  -> {"x_y_z": {"ts":..., "node":"<配方 id>"}}
+// 客户端在单人模式能读到同一个 persistentData，所以终端能显示"正在跑什么"；
+// 专用服读不到 server（返回空表），退化成只显示节点列表。
+
+var SRTU_byRecipe = function (recipeId) {
+    if (!recipeId) return null
+    for (var i = 0; i < SRTU_order.length; i++) {
+        var n = SRTU_nodes[SRTU_order[i]]
+        if (n && String(n.recipe_id || '') === String(recipeId)) return n
+    }
+    return null
+}
+
+var SRTU_fmtLeft = function (ms) {
+    if (ms < 0) return '剩余未知'
+    var sec = Math.round(ms / 1000)
+    if (sec >= 60) return '剩 ' + Math.floor(sec / 60) + 'm' + (sec % 60) + 's'
+    return '剩 ' + sec + 's'
+}
+
+var SRTU_jobs = function (server) {
+    var out = []
+    if (!server) return out
+    var now = Date.now()
+    try {
+        var idx = String(server.persistentData.getString('sinkresearch.net.index') || '')
+        if (idx.length === 0) return out
+        var tokens = idx.split(';')
+        for (var i = 0; i < tokens.length; i++) {
+            var tok = String(tokens[i])
+            if (tok.length === 0) continue
+            var raw = ''
+            try {
+                raw = String(server.persistentData.getString('sinkresearch.jobs.' + tok) || '')
+            } catch (e0) { continue }
+            if (raw.length === 0) continue
+            var jobs = null
+            try { jobs = JSON.parse(raw) } catch (e1) { continue }
+            if (!jobs) continue
+            for (var k in jobs) {
+                var entry = jobs[k]
+                var ts = (typeof entry === 'number') ? Number(entry) : Number((entry && entry.ts) || 0)
+                // 心跳每秒刷一次；超过 30 秒没心跳说明机器/服务器已经不在跑了，
+                // 这种脏占位不该出现在"进行中"里
+                if (!ts || now - ts > 30000) continue
+                var recipeId = (entry && entry.node) ? String(entry.node) : ''
+                var startedAt = (entry && entry.start) ? Number(entry.start) : ts
+                var node = SRTU_byRecipe(recipeId)
+                var totalMs = node ? Number(node.duration || 0) * 50 : 0
+                out.push({
+                    at: startedAt,
+                    id: node ? String(node.id) : (recipeId || '未知研究'),
+                    left: totalMs > 0 ? Math.max(0, totalMs - (now - startedAt)) : -1,
+                    pos: String(k)
+                })
+            }
+        }
+    } catch (e) { }
+    out.sort(function (a, b) { return a.at - b.at })
+    return out
+}
+
 // 汇总：[headerCount, nodeRows[{line, tips}]]，专用服模式 noData=true
 var SRTU_model = function (server) {
     var unlocks = SRTU_unlocks(server)
     if (unlocks === null) {
-        var info = { noData: true, done: 0, total: 0, rows: [] }
+        var info = { noData: true, done: 0, total: 0, rows: [], running: [] }
         if (SRTU_nodes && SRTU_order.length > 0) {
             for (var i = 0; i < SRTU_order.length; i++) {
                 var n0 = SRTU_nodes[SRTU_order[i]]
@@ -182,7 +247,7 @@ var SRTU_model = function (server) {
             rows.push({ line: st[0] + ' §f' + n.id + ' §8· ' + SRTU_eraName(n.era), tips: SRTU_tips(n, unlocks) })
         }
     }
-    return { noData: false, done: done, total: rows.length, rows: rows }
+    return { noData: false, done: done, total: rows.length, rows: rows, running: SRTU_jobs(server) }
 }
 
 // ---- 界面构建 ------------------------------------------------
@@ -217,7 +282,8 @@ var SRTU_openStyled = function (ev, model) {
     var WIDTH = 236
     var rowsH = 0
     for (var r = 0; r < model.rows.length; r++) rowsH += 20
-    var height = model.rows.length === 0 ? 60 : (16 + 12 + 4 + 10 + 4 + 1 + 4 + rowsH + 4 + 10)
+    var runH = (model.running && model.running.length > 0) ? (10 + model.running.length * 20 + 4) : 0
+    var height = Math.max(60, 16 + 12 + 4 + 10 + 4 + 1 + 4 + runH + rowsH + 4 + 10)
 
     var root = new UIElement()
     root.lss('width', WIDTH, INLINE)
@@ -247,6 +313,22 @@ var SRTU_openStyled = function (ev, model) {
         s.background(SDFRectTexture.of(-13024949))
     })
     root.addChild(sep)
+
+    // 进行中：研究站此刻在跑哪条、大概还剩多久
+    if (model.running && model.running.length > 0) {
+        root.addChild(SRTU_mkLabel(Label, '§6▣ 进行中 §7' + model.running.length + ' 条'))
+        for (var q = 0; q < model.running.length; q++) {
+            var job = model.running[q]
+            var jrow = new UIElement()
+            jrow.lss('width', 'stretch', INLINE)
+            jrow.lss('padding-all', 3, INLINE)
+            jrow.style(function (s) {
+                s.background(SDFRectTexture.of(776616474).setRadius(4))
+            })
+            jrow.addChild(SRTU_mkLabel(Label, '§e▸ §f' + job.id + ' §7' + SRTU_fmtLeft(job.left) + ' §8@' + job.pos))
+            root.addChild(jrow)
+        }
+    }
 
     // 节点行
     for (var i = 0; i < model.rows.length; i++) {
@@ -323,6 +405,12 @@ try {
                 plain.push('§7进度请用 §e/research tree')
             } else {
                 plain.push('§b研究树 §7(' + model.done + '/' + model.total + ' 已完成)')
+                if (model.running && model.running.length > 0) {
+                    plain.push('§6▣ 进行中 ' + model.running.length + ' 条')
+                    for (var q = 0; q < model.running.length; q++) {
+                        plain.push('§e▸ §f' + model.running[q].id + ' §7' + SRTU_fmtLeft(model.running[q].left))
+                    }
+                }
                 for (var j = 0; j < model.rows.length; j++) plain.push(model.rows[j].line)
             }
             SRTU_openPlain(ev, plain)

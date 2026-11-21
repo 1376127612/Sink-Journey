@@ -27,7 +27,7 @@
     "jei.sinkjourney.primitive_research": "原始研究",
     "jei.sinkjourney.primitive_research.info": "原始研究台：应力时代之前唯一的研究设备。右键打开界面，两个输入槽放入材料（纸 + 墨囊，或研究笔记×4 + 纸），放入后机器自动开始研究，进度条走完产物进入右侧产物槽。",
     "jei.sinkjourney.primitive_research.info2": "配方：纸 + 墨囊 → 研究笔记×2（5 分钟）；研究笔记×4 + 纸 → 蓝图·原始（5 分钟）。研究笔记是机械研究台的入场材料。",
-    "jei.sinkjourney.primitive_research.info3": "为什么：记录与复现是两种不同的劳动——先花墨把观察写成笔记，再拿多份笔记互相比对、誊抄成蓝图；原始阶段没有机械，全靠手抄，每条配方都要 5 分钟。",
+    "jei.sinkjourney.primitive_research.info3": "为什么：记录与复现是两种不同的劳动——先花墨把观察写成笔记，再拿多份笔记互相比对、誊抄成蓝图；原始阶段没有机械，全靠手抄，每条配方都要 5 分钟。界面上有扫雷入口，通关一局可推进当前进度的 50%。",
     "block.kubejs.charcoal_furnace": "炭炉",
     "recipe_type.sinkjourney.charcoal_furnace": "炭炉冶炼",
     "recipe_pool.kubejs.charcoal_furnace": "炭炉",

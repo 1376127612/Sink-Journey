@@ -19,6 +19,13 @@
 //   ui:output_0       输出槽（trait 名 output）
 // 新加输入槽：先改 inputTrait.setSlotSize(n)，再加一个 ui:input_<n-1>。
 //
+// 扫雷按钮不在这里建：模板要过一遍 NBT 序列化，元素构造期注册的
+// 交互监听不保证跟着走。按钮由客户端在界面打开后自己 new 一个插进来：
+//   client_scripts/research/minesweeper_ui.js（SM_tryAttach）。
+// root 上带 sweeper_host 这个 class，客户端只往带它的界面里插按钮，
+// 所以扫雷只出现在原始研究台，土高炉/炭炉/研究终端都不会有。
+// 高度已经按内容算好并给按钮留了 16px（见 buildUiTemplate）。
+//
 // 所有代码包在 IIFE 里：KubeJS 的 Rhino 各脚本共享顶层作用域，
 // 顶层 const/let 重名会直接报错，包起来最省事。
 // ============================================================
@@ -187,9 +194,12 @@
     var buildUiTemplate = function () {
         var root = new UIElement()
         root.addClass('panel_bg')
+        // 客户端扫雷按钮只在带这个 class 的界面上挂载（别的界面不放）
+        root.addClass('sweeper_host')
         root.lss('width', 206, StyleOrigin.INLINE)
-        // 高度按内容算：8 + 9 标题 + 6 + 18 槽位行 + 6 + 8 进度条 + 6 + 77 背包 + 8 = 146，留 4px 余量
-        root.lss('height', 150, StyleOrigin.INLINE)
+        // 高度按内容算：8 + 9 标题 + 6 + 18 槽位行 + 6 + 8 进度条 + 6
+        //   + 16 扫雷按钮 + 6 + 77 背包 + 8 = 168，留 4px 余量
+        root.lss('height', 172, StyleOrigin.INLINE)
         root.lss('flex-direction', FlexDirection.COLUMN, StyleOrigin.INLINE)
         root.lss('padding-all', 8, StyleOrigin.INLINE)
         root.lss('gap-all', 6, StyleOrigin.INLINE)
@@ -217,6 +227,8 @@
         bar.lss('width', 'stretch', StyleOrigin.INLINE)
         bar.lss('height', 8, StyleOrigin.INLINE)
         root.addChild(bar)
+
+        // 扫雷按钮由客户端插在进度条和背包之间（见文件头说明）
 
         root.addChild(new InventorySlots())
 

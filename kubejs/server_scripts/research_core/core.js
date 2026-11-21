@@ -589,21 +589,24 @@ var srFormatState = (node) => {
 ServerEvents.commandRegistry(event => {
     var { commands: Commands, arguments: Arguments } = event
 
+    // 根节点对所有人开放（玩家用的 tree/need 在 terminal.js 里），
+    // 调试子命令各自要 2 级：两个文件注册同名根时 Brigadier 会合并子节点，
+    // 权限写在根上会让"谁能用 /research tree"取决于加载顺序。
     var root = Commands.literal('research')
-        .requires(src => src.hasPermission(2))
+        .requires(src => src.hasPermission(0))
         .executes(ctx => {
             ctx.getSource().sendSystemMessage(Text.of('§b[研究] §flist | dump | validate | unlock <key> | reset | draft | balance'))
             return 1
         })
 
-    root.then(Commands.literal('list').executes(ctx => {
+    root.then(Commands.literal('list').requires(src => src.hasPermission(2)).executes(ctx => {
         var source = ctx.getSource()
         source.sendSystemMessage(Text.of('§b[研究] §f节点总数 ' + SR.order.length))
         for (var id of SR.order) source.sendSystemMessage(Text.of(srFormatState(SR.nodes[id])))
         return 1
     }))
 
-    root.then(Commands.literal('validate').executes(ctx => {
+    root.then(Commands.literal('validate').requires(src => src.hasPermission(2)).executes(ctx => {
         var source = ctx.getSource()
         if (SR.errors.length === 0) {
             source.sendSystemMessage(Text.of('§a[研究] 校验通过，无错误'))
@@ -613,7 +616,7 @@ ServerEvents.commandRegistry(event => {
         return 0
     }))
 
-    root.then(Commands.literal('dump').executes(ctx => {
+    root.then(Commands.literal('dump').requires(src => src.hasPermission(2)).executes(ctx => {
         var source = ctx.getSource()
         source.sendSystemMessage(Text.of('§b[研究] §f已解锁 ' + Object.keys(SR.unlocks).length + ' 项'))
         for (var key of Object.keys(SR.unlocks)) {
@@ -622,7 +625,7 @@ ServerEvents.commandRegistry(event => {
         return 1
     }))
 
-    root.then(Commands.literal('unlock')
+    root.then(Commands.literal('unlock').requires(src => src.hasPermission(2))
         .then(Commands.argument('key', Arguments.STRING.create(event))
             .executes(ctx => {
                 var key = String(Arguments.STRING.getResult(ctx, 'key'))
@@ -631,7 +634,7 @@ ServerEvents.commandRegistry(event => {
                 return ok ? 1 : 0
             })))
 
-    root.then(Commands.literal('reset').executes(ctx => {
+    root.then(Commands.literal('reset').requires(src => src.hasPermission(2)).executes(ctx => {
         var server = ctx.getSource().getServer()
         var keys = Object.keys(SR.unlocks)
         SR.unlocks = {}
@@ -643,13 +646,13 @@ ServerEvents.commandRegistry(event => {
         return 1
     }))
 
-    root.then(Commands.literal('draft').executes(ctx => {
+    root.then(Commands.literal('draft').requires(src => src.hasPermission(2)).executes(ctx => {
         var result = srBuildDraft()
         ctx.getSource().sendSystemMessage(Text.of('§b[研究] §f草稿 ' + result.count + ' 条' + (result.ok ? '，已写入 ' + result.path : '，写入失败 ' + result.error)))
         return 1
     }))
 
-    root.then(Commands.literal('balance').executes(ctx => {
+    root.then(Commands.literal('balance').requires(src => src.hasPermission(2)).executes(ctx => {
         var source = ctx.getSource()
         var sim = srSimulateBalance()
         source.sendSystemMessage(Text.of('§b[研究] §f节点 ' + sim.nodes + '，全解锁约 ' + sim.total_minutes + ' 分钟（' + sim.total_ticks + ' ticks）'))
