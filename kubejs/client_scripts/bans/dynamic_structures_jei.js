@@ -16,11 +16,10 @@
         'create:secondary_linear_chassis',
         'create:radial_chassis',
 
-        // 轴承类（含附加模组的矿机轴承）
+        // 轴承类（create_rns 已停用，其矿机轴承不再列出）
         'create:mechanical_bearing',
         'create:clockwork_bearing',
         'create:windmill_bearing',
-        'create_rns:miner_bearing',
 
         // 活塞类
         'create:mechanical_piston',

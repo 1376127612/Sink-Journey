@@ -113,7 +113,7 @@ ServerEvents.recipes(event => {
             D: { item: 'kubejs:copper_boiler' },
             E: { item: 'industrialupgrade:tools/treetap' }
         },
-        'industrialupgrade:squeezer/squeezer')
+        'industrialupgrade:block_squeezer/squeezer')
 
     // ---- 5. 激光器（元件 354）----
     pShaped('industrialupgrade:industrialupgrade_976',

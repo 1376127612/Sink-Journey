@@ -5,9 +5,9 @@
 // ============================================================
 
 ServerEvents.recipes(function (event) {
-    // 手册：Patchouli 的 guide_book + NBT 指向我们的书
+    // 手册：Patchouli 的 guide_book + patchouli:book 组件指向我们的书
     try {
-        event.shaped(Item.of('patchouli:guide_book', '{patchouli:book:"patchouli:research_manual"}'), [
+        event.shaped(Item.of('patchouli:guide_book[patchouli:book="patchouli:research_manual"]'), [
             'PSP',
             'SBS',
             'PSP'
