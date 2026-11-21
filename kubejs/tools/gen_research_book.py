@@ -20,7 +20,7 @@ CFG = os.path.join(ROOT, 'config', 'sinkresearch')
 BOOK = os.path.join(ROOT, 'data', 'patchouli', 'patchouli_books', 'research_manual', 'en_us', 'entries', 'nodes')
 LANG = os.path.join(ROOT, 'assets', 'kubejs', 'lang', 'zh_cn.json')
 
-# 节点 id 短名 -> 手册标题；没登记的节点退回短 id
+# 标题优先取 lang 的 research.node.<短 id>.name；这里只是没配语言时的兜底
 TITLES = {
     'kinetic_brass': '机动：黄铜配比',
     'steam_precision': '蒸汽：精密构件',
@@ -114,7 +114,7 @@ def main():
 
         icon = outs[0].get('id') if outs else 'kubejs:research_data'
         entry = {
-            'name': TITLES.get(slug, slug),
+            'name': lang.get('research.node.%s.name' % slug) or TITLES.get(slug, slug),
             'category': 'patchouli:basics',
             'icon': icon,
             'sortnum': 10 + idx,

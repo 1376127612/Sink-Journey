@@ -85,11 +85,11 @@ terminal.js 只是复述节点状态，terminal_ui.js 不再参与判定。
 单人整合包这样没问题；多人要么写清"团队共享"，要么改成每人一份
 （`player.persistentData` + 客户端各自同步，数据版本升 v3 并写迁移）。
 
-**2.5 关掉"物品入包直接送时代"的口子**
-`PlayerEvents.inventoryChanged` 那 4 段让时代解锁与研究方向脱钩：原始研究台做出笔记
-就把 `era.kinetic` 送出去了，`sink:kinetic_brass` 这个节点变成可选路径。
-要么删掉这 4 段、让 stage 只从节点走；要么把它们降级成"回填/迁移专用"（只在
-`srRunMigrations` 里用，不做常驻监听）。
+**2.5 关掉"物品入包直接送时代"的口子（已完成）**
+那 4 段 `PlayerEvents.inventoryChanged` 已删除：时代 stage 现在只从节点的 `unlock` 走，
+也就是研究配方跑完时发放。老存档不受影响（已发的 unlock 存在 `sinkresearch.unlocks`，
+迁移规则在 `migrations.json`）。想让"拿到笔记那一刻才解锁"，用第 3 节的新触发器
+加一条 `kind: milestone` + `trigger: { type: "item_obtain" }` 的节点即可。
 
 ## 3. P2 让终端看起来像个研究系统（3–4 天）
 
@@ -117,6 +117,12 @@ terminal.js 只是复述节点状态，terminal_ui.js 不再参与判定。
 `data/patchouli/patchouli_books/research_manual/en_us/entries/nodes/`（两页：说明+前置 /
 成本+产出+解锁），顺带删除已经不对应任何节点的旧条目。节点增删后重跑一次即可，
 改完 `/reload` 或重启进书。原来的 3 个手写条目（研究站 / 研究网络 / 时代门槛）保留不动。
+
+**3.5 节点名字进语言文件（已完成）**
+节点原来只有 `research.<短 id>.desc` 一段描述，名字全靠界面里截断的 id。现在每个节点有
+`research.node.<短 id>.name`（中英各一份），四处都改用它：终端树格子（截 6 字）与详情标题、
+`/research tree` 聊天版（`Text.translatable`，各客户端自己翻译）、JEI 信息页首行、
+Patchouli 生成器（`gen_research_book.py` 优先读 lang，读不到才用脚本里的兜底表）。
 
 ## 4. P3 机制层面（可选，做完 P1/P2 再评估）
 

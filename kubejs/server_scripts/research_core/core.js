@@ -418,23 +418,16 @@ var srRegisterMilestones = () => {
     }
 }
 
-// ---- 3b. 研究笔记：解锁机械时代（电力前唯一的时代入口） --------
-
-PlayerEvents.inventoryChanged('kubejs:research_notes', event => {
-    srGrant(event.server, ['era.kinetic'], 'item:research_notes')
-})
-
-PlayerEvents.inventoryChanged('kubejs:research_notes_ember', event => {
-    srGrant(event.server, ['era.ember'], 'item:research_notes_ember')
-})
-
-PlayerEvents.inventoryChanged('kubejs:research_notes_radiance', event => {
-    srGrant(event.server, ['era.radiance'], 'item:research_notes_radiance')
-})
-
-PlayerEvents.inventoryChanged('kubejs:research_notes_electric', event => {
-    srGrant(event.server, ['era.electric'], 'item:research_notes_electric')
-})
+// ---- 3b. 时代解锁只走研究节点 ----------------------------------
+// 以前这里有四段 PlayerEvents.inventoryChanged('kubejs:research_notes*')，
+// "物品进背包就发时代 stage"，等于绕开研究站：原始研究台抄出笔记就把 era.kinetic
+// 发出去了，机械研究台做出笔记也能直接拿到 era.ember / radiance / electric。
+// 现在删掉了——每个时代的 unlock 只写在对应节点的 unlock 里（core.js 在节点配方
+// 跑完时发放），解锁路径只剩一条。
+// 想让"拿到笔记那一刻才解锁"，就在节点 JSON 里加 kind: milestone、
+// trigger: { type: "item_obtain", item: "<笔记 id>" }、requires 指向产它的 craft 节点。
+// 老存档不会掉 stage：已经发过的 unlock 存在 sinkresearch.unlocks 里，
+// 迁移规则见 migrations.json。
 
 // ---- 4. 存档迁移 / 回填 --------------------------------------
 

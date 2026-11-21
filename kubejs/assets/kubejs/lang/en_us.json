@@ -39,5 +39,15 @@
     "jei.kubejs.earth_blast_furnace.info": "A 3x3x4 mud-brick earthen blast furnace: the dedicated iron reduction furnace. Crushed iron x2 + calcite x1 + coal/charcoal x2 -> iron ingot x2, 70s per batch. Vanilla smelting of iron ore, raw iron and iron dust has been removed.",
     "jei.kubejs.earth_blast_furnace.info2": "Build: a 3x3x4 mud-brick shell with one electrum block in the middle of the bottom front row (the tuyere) and the controller block directly above it; everything else is mud bricks. A lit campfire sits at the heart (directly behind the controller), and the two-block flue above it must reach the sky. The controller has its own input/output slots, no extra hatches needed.",
     "jei.kubejs.earth_blast_furnace.info3": "Forced draft: an atmospheric bellows must be attached to the lower half of the shell (at or below tuyere height), otherwise the machine will not start. Dousing the campfire also halts it.",
-    "jei.kubejs.earth_blast_furnace.info4": "Why: under forced draft the coal burns to CO first, and CO reduces the iron oxides; the calcite decomposes into CaO, which fluxes the silica/alumina gangue into slag, protecting the lining and cutting iron loss. Puddling/forging is abstracted away, so the furnace taps usable iron ingots directly."
+    "jei.kubejs.earth_blast_furnace.info4": "Why: under forced draft the coal burns to CO first, and CO reduces the iron oxides; the calcite decomposes into CaO, which fluxes the silica/alumina gangue into slag, protecting the lining and cutting iron loss. Puddling/forging is abstracted away, so the furnace taps usable iron ingots directly.",
+    "research.node.kinetic_brass.name": "Kinetic: Brass Ratio",
+    "research.node.steam_precision.name": "Steam: Precision Parts",
+    "research.node.gate_dragon.name": "End: Dragon's Proof",
+    "research.node.ember_notes.name": "Ember: Heat Cycle Notes",
+    "research.node.radiance_notes.name": "Starlight: Resonance Notes",
+    "research.node.electric_notes.name": "Electric: Basic Notes",
+    "research.page.era_steam": "Steam and the End",
+    "research.kinetic_brass.desc": "Reproduce the brass ratio with andesite alloy and research substrate inside the computation environment.",
+    "research.steam_precision.desc": "Press brass into precision parts: the ticket into the steam age.",
+    "research.gate_dragon.desc": "Kill the ender dragon to prove this production line can carry an expedition into the End; the End gate opens (unlocks gate.end)."
 }

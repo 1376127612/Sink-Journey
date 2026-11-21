@@ -70,5 +70,11 @@
     "jei.kubejs.zone_refiner.info2": "只用物理方法：加热圈从管底缓慢扫到管顶，把杂质赶到两端。4× 冶金硅 → 1× 多晶硅棒，铁圈 60 秒、钻石圈 30 秒，不要任何化学品，前期有旋转应力就能用。",
     "jei.kubejs.single_crystal.info": "单晶硅：电子级多晶硅在晶体生长室里长成，送激光处理厂切片。",
     "jei.kubejs.iu_wafer.info": "工业升级晶圆：1 根单晶硅在激光处理厂切 4 片。基础电路板（circuit_part1）现在要消耗晶圆，所以 IU 的电路/处理器都要先有晶圆。",
-    "jei.kubejs.eg_silicon.info": "电子级多晶硅：硅烷沉积直接产出，或由粗制硅晶体 492 在晶体生长室里提纯。可以拉单晶，也可以熔成熔融硅喂 qmd 结晶器。"
+    "jei.kubejs.eg_silicon.info": "电子级多晶硅：硅烷沉积直接产出，或由粗制硅晶体 492 在晶体生长室里提纯。可以拉单晶，也可以熔成熔融硅喂 qmd 结晶器。",
+    "research.node.kinetic_brass.name": "机动：黄铜配比",
+    "research.node.steam_precision.name": "蒸汽：精密构件",
+    "research.node.gate_dragon.name": "末地：龙之证",
+    "research.node.ember_notes.name": "余烬：热循环笔记",
+    "research.node.radiance_notes.name": "星辉：共鸣笔记",
+    "research.node.electric_notes.name": "电力：基础笔记"
 }

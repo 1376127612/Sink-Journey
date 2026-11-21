@@ -74,14 +74,24 @@ RecipeViewerEvents.addInformation('item', event => {
         if (outs.length === 0) continue
         var req = node.requires || {}
         var reqList = req.or || req.and || []
+        var comps = []
+        // 名字走 lang（research.node.<短 id>.name），客户端按自己的语言显示
+        var head = null
+        try {
+            head = Text.of('研究节点：')
+            head.append(Text.translatable('research.node.' + String(node.id).split(':').pop() + '.name'))
+            head.append(Text.of(' (' + String(node.id) + ')'))
+        } catch (eHead) {
+            head = Text.of('研究节点：' + String(node.id))
+        }
+        comps.push(head)
+
         var lines = []
-        lines.push('研究节点：' + String(node.id))
         lines.push('前置：' + (reqList.length > 0 ? reqList.join(', ') : '无'))
         lines.push('成本：' + SRJ_costLine(node))
         var keys = node.unlock || []
         if (keys.length > 0) lines.push('解锁：' + keys.join(', '))
         lines.push('在溯洄研究终端里看完整图谱；前置没完成时研究站会拒绝开工。')
-        var comps = []
         for (var t = 0; t < lines.length; t++) comps.push(Text.of(lines[t]))
         event.add(String(outs[0].id), comps)
     }

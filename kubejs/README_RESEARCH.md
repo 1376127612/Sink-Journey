@@ -190,6 +190,19 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 触发后还要过 `requires`，前置没完成只写日志。加新类型：在 `srRegisterMilestones()` 里加一个
 分支，并在节点 JSON 里写对应 `trigger`。
 
+## 2.9 节点显示名与语言文件
+
+每个节点在 `assets/kubejs/lang/{zh_cn,en_us}.json` 里有：
+
+- `research.node.<短 id>.name` —— 显示名，如 `research.node.kinetic_brass.name` = 机动：黄铜配比
+- `research.<短 id>.desc` —— 长描述（节点 JSON 的 `ui.doc` 指向它）
+
+用到名字的地方：研究终端格子与详情标题、`/research tree` 聊天列表、JEI 信息页首行、
+Patchouli 条目（`kubejs/tools/gen_research_book.py` 生成时读 lang）。缺 key 时各处会退回短 id。
+
+时代解锁只从节点的 `unlock` 走：`core.js` 不再监听"物品进背包发时代"，
+想让"拿到笔记才解锁"就加 `kind: milestone` + `trigger: { type: "item_obtain", item: ... }` 的节点。
+
 ## 3. 对既有文件的改动（纯追加，共 2 处）
 
 1. `kubejs/assets/kubejs/lang/zh_cn.json` —— 追加 6 个键（机器名 / JEI 说明 / 节点描述）

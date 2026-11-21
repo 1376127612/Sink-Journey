@@ -104,20 +104,24 @@ var SRT_costLine = function (node) {
     return out.join(' §7/ ')
 }
 
+var SRT_nodeNameKey = (node) => 'research.node.' + String(node.id).split(':').pop() + '.name'
+
 var SRT_lines = function (server) {
     var unlocks = SRT_unlocks(server)
-    var lines = []
+    var rows = []
     var done = 0
     for (var i = 0; i < SRT_ORDER.length; i++) {
         var n = SRT_NODES[SRT_ORDER[i]]
         var isDone = SRT_done(n, unlocks)
         var ready = SRT_ready(n, unlocks)
         if (isDone) done++
-        var mark = isDone ? '§a✔' : (ready ? '§e▶' : '§7✘')
-        lines.push(mark + ' §f' + n.id + ' §7(' + n.era + ')')
+        rows.push({
+            mark: isDone ? '§a✔' : (ready ? '§e▶' : '§7✘'),
+            node: n
+        })
     }
     var head = '§b研究树 §7(' + done + '/' + SRT_ORDER.length + ' 已完成)'
-    return { head: head, lines: lines }
+    return { head: head, rows: rows, done: done, total: SRT_ORDER.length }
 }
 
 // ---- 状态推送（客户端界面用这份，不再自己读存档） -------------
@@ -267,7 +271,18 @@ ServerEvents.commandRegistry(function (event) {
         var src = ctx.getSource()
         var data = SRT_lines(src.getServer())
         src.sendSystemMessage(Text.of(data.head))
-        for (var i = 0; i < data.lines.length; i++) src.sendSystemMessage(Text.of(data.lines[i]))
+        for (var i = 0; i < data.rows.length; i++) {
+            var row = data.rows[i]
+            // 名字走 lang 的 research.node.<短 id>.name，客户端各自翻译
+            var line = Text.of(row.mark + ' ')
+            try {
+                line.append(Text.translatable(SRT_nodeNameKey(row.node)))
+            } catch (e) {
+                line.append(Text.of(String(row.node.id)))
+            }
+            line.append(Text.of(' §7(' + row.node.era + ')'))
+            src.sendSystemMessage(line)
+        }
         src.sendSystemMessage(Text.of('§7/research need <物品id> 查某个产物还差什么'))
         return 1
     }))
@@ -305,7 +320,7 @@ ServerEvents.commandRegistry(function (event) {
 var SRT_buildText = function (server) {
     var d = SRT_lines(server)
     var all = [d.head]
-    for (var i = 0; i < d.lines.length; i++) all.push(d.lines[i])
+    for (var i = 0; i < d.rows.length; i++) all.push(d.rows[i].mark + ' §f' + d.rows[i].node.id + ' §7(' + d.rows[i].node.era + ')')
     return all.join('\n')
 }
 

@@ -323,7 +323,7 @@ var SRTU_model = function (server) {
         if (SRTU_nodes && SRTU_order.length > 0) {
             for (var i = 0; i < SRTU_order.length; i++) {
                 var n0 = SRTU_nodes[SRTU_order[i]]
-                info.rows.push({ line: '§f' + n0.id + ' §8· ' + SRTU_eraName(n0.era), tips: [] })
+                info.rows.push({ line: '§f' + SRTU_nodeName(n0) + ' §8· ' + SRTU_eraName(n0.era), tips: [] })
             }
             info.total = SRTU_order.length
         }
@@ -336,7 +336,7 @@ var SRTU_model = function (server) {
             var n = SRTU_nodes[SRTU_order[j]]
             var st = SRTU_mark(n, unlocks)
             if (SRTU_stateOf(n, unlocks) === 'done') done++
-            rows.push({ line: st[0] + ' §f' + n.id + ' §8· ' + SRTU_eraName(n.era), tips: SRTU_tips(n, unlocks) })
+            rows.push({ line: st[0] + ' §f' + SRTU_nodeName(n) + ' §8· ' + SRTU_eraName(n.era), tips: SRTU_tips(n, unlocks) })
         }
     }
     return { noData: false, done: done, total: rows.length, rows: rows, running: running, unlocks: unlocks, net: net }
@@ -378,6 +378,17 @@ var SRTU_lang = function (key) {
         if (t.length > 0 && t !== String(key)) return t
     } catch (e) { }
     return ''
+}
+
+// 节点显示名：lang 里的 research.node.<短 id>.name，没有就退回短 id。
+// 格子放不下全名，所以传 max 截断（CJK 一格约 9px，格子 76px 内最多 6 个字）。
+var SRTU_nodeName = function (node, max) {
+    var shortId = String(node.id).split(':').pop()
+    var name = SRTU_lang('research.node.' + shortId + '.name')
+    var out = name.length > 0 ? name : SRTU_short(node.id, 12)
+    var lim = max || 0
+    if (lim > 0 && out.length > lim) out = out.substring(0, lim)
+    return out
 }
 
 // 真树界面：左列是按节点 JSON 的 ui.x / ui.y 还原出来的格子图（按页面分带，
@@ -511,7 +522,7 @@ var SRTU_openStyled = function (ev, model) {
             for (var i8 = 0; i8 < wrapped.length; i8++) lines.push('§8' + wrapped[i8])
         }
 
-        detailTitle.setText('§b' + SRTU_short(node.id, 18))
+        detailTitle.setText('§b' + SRTU_nodeName(node, 20))
         detailBody.setText(lines.join('\n'))
     }
 
@@ -530,7 +541,7 @@ var SRTU_openStyled = function (ev, model) {
             border = -3562969
         }
         var box = new Label()
-        box.setText(mark[0] + ' §f' + SRTU_short(node.id, 8))
+        box.setText(mark[0] + ' §f' + SRTU_nodeName(node, 6))
         box.lss('width', NODE_W, INLINE)
         box.lss('height', NODE_H, INLINE)
         box.lss('padding-all', 3, INLINE)
