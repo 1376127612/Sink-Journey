@@ -40,8 +40,13 @@
   `create:pressing/*_ingot`，铅/银用 Embers 自带的 `embers:create/pressing/*_plate`。
   这些配方的产出会被 Almost Unified 换成 IU 板，所以不再重复注册（否则金板会出现两条压板配方）。
 - 铁 1538℃、钢 ~1450℃，余烬压印不适用；铁仍有 Create 的冷压路线，钢只走 IU 挤压机。
-- 齿轮：余烬压印本来就是齿轮的主要来源（黄铜/青铜走 `kubejs:*_gear`），
-  另外把 IU 的锌/银/琥珀金齿轮显式挂到压印上（180mB + `embers:gear_stamp`）。
+- 齿轮：
+  - 余烬压印：kubejs 黄铜/青铜齿轮（`embers/gears.js`），本次另把 IU 的锌/银/琥珀金齿轮
+    显式挂上去（180mB + `embers:gear_stamp`）。
+  - IU 冲压机（gearing）：kubejs 的黄铜/青铜齿轮不在 `c:gears/*` 标签里，冲压机自动生成不出配方。
+    本次给它们建了 `kubejs:gears/kb_brass` / `kb_bronze` 两个专用标签，并调用
+    `BlockEntityGearMachine.addrecipe('c:ingots/brass', 'kubejs:gears/kb_brass')`
+    （和 `industrial/if_gears.js` 给 IF 齿轮加配方用的是同一个接口）。4 锭 → 1 齿轮。
 - 红铜没有对应的熔融流体，所以只有 Create 压板与 IU 挤压机两条路。
 
 ---

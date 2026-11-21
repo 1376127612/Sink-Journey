@@ -533,3 +533,20 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: industrialupgrade:industrialupgrade_436
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_436',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {"item":"create_connected:control_chip"},
+          "B": {"item":"industrialupgrade:stick/zinc"}
+        },
+        "pattern": ["BBB","BAB","BBB"],
+        "result": {"count":1,"id":"industrialupgrade:circuit/circuit_part2"},
+        "show_notification": false
+      }
+    )
+})

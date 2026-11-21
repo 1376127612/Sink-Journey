@@ -18,11 +18,19 @@
 // 这样 JEI 里不管从哪条线进来，拿到的都是同一个物品。
 //
 // 齿轮：余烬的压印本来就是齿轮的主要来源（brass/bronze 走 kubejs 齿轮，
-// zinc/silver/electrum 走 IU 齿轮），这里把这三样 IU 齿轮显式挂到压印上。
+// zinc/silver/electrum 走 IU 齿轮），这里把这三样 IU 齿轮显式挂到压印上；
+// 另外 kubejs 的黄铜/青铜齿轮不在 c:gears 标签里，冲压机（gearing）生成不出配方，
+// 补两条专用标签 + addrecipe，和其它 IF 齿轮走同一个接口。
 // 铁与钢熔点超过 1500℃，余烬压印不适用；铁保留 Create 冷压，钢只走 IU 挤压机。
 //
 // 详细说明：kubejs/docs/IU_PRIMAL_STEAM.md
 // ============================================================
+
+ServerEvents.tags('item', event => {
+    // 冲压机只认可 c:gears/<金属> 里第一个物品，kubejs 齿轮单独建标签
+    event.add('kubejs:gears/kb_brass', 'kubejs:brass_gear')
+    event.add('kubejs:gears/kb_bronze', 'kubejs:bronze_gear')
+})
 
 ServerEvents.recipes(event => {
     var PLATE = function (metal) {
@@ -96,5 +104,19 @@ ServerEvents.recipes(event => {
         }
     })
 
-    console.info('[IU] 板材路线：余烬压印 8 种 / Create 压板 5 种 / IU 挤压机全通用')
+
+    // ---- 路线 3：IU 冲压机（齿轮，4 锭 -> 1 齿轮）----
+    // kubejs 的黄铜/青铜齿轮没有 c:gears 标签，冲压机不会自动生成配方
+    try {
+        var gearMachine = Java.loadClass(
+            'com.denfop.blockentity.mechanism.multimechanism.simple.BlockEntityGearMachine'
+        )
+        gearMachine.addrecipe('c:ingots/brass', 'kubejs:gears/kb_brass')
+        gearMachine.addrecipe('c:ingots/bronze', 'kubejs:gears/kb_bronze')
+        console.info('[IU] 冲压机齿轮：黄铜 / 青铜')
+    } catch (e) {
+        console.error('[IU] 冲压机齿轮注册失败: ' + e)
+    }
+
+    console.info('[IU] 板材路线：余烬压印 8 种 / Create 压板 5 种 / IU 挤压机全通用 / 冲压机齿轮 2 种')
 })
