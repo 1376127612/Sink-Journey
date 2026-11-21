@@ -11,8 +11,7 @@
 //   纸 + 墨囊          -> 研究笔记 x2      （5min / 6000 ticks）
 //   研究笔记 x4 + 纸   -> 蓝图·原始 x1     （5min / 6000 ticks）
 //
-// 所有配方统一 5 分钟；扫雷通关一次推进当前进度的 50%
-// （见 server_scripts/research/minesweeper.js）。
+// 所有配方统一 5 分钟。
 // ============================================================
 
 ServerEvents.recipes(function (event) {

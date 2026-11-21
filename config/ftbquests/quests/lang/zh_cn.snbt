@@ -8,6 +8,8 @@
 	chapter.25ACB136E49B8BB8.title: "第一小步"
 	chapter.32C910BDF9B9291A.title: "水晶晶簇"
 	chapter.345D123B1DD75B75.title: "物质基础"
+	chapter.3F5A7C2B9E1D4A60.title: "原始时代"
+	chapter.4591D783FFFC8E8C.title: "电力时代"
 	chapter.514FD6A3F6EE847D.title: "外星科技"
 	chapter.5255FDF38AF51C93.title: "仰望星空"
 	chapter.5E566DB5411E083C.title: "科技先锋"
@@ -19,6 +21,7 @@
 	chapter.6E59CB6F7D053B92.title: "前情提要"
 	chapter.7C4E2F5CB393C0AE.title: "深入原子"
 	chapter.A1B2C3D4E5F60718.title: "研究图谱"
+	chapter.E1C0000000000000.title: "电力时代"
 	chapter_group.110ED09B617A1F32.title: "初来乍到"
 	chapter_group.1D6589548F232270.title: "科技革命"
 	chapter_group.672ED601CC36FA35.title: "扉页"
@@ -43,6 +46,9 @@
 	quest.05C904B7B3FB589E.quest_subtitle: "美丽的建材"
 	quest.0688CF0589EE3128.quest_desc: ["你不这么认为吗？"]
 	quest.0688CF0589EE3128.quest_subtitle: "这是一种很漂亮的建材"
+	quest.0706F92EF2C236B8.quest_desc: ["八张蒸汽机壳夹一颗黄铜之心，就是蒸汽机机身。本时代所有机器都长在它上面。"]
+	quest.0706F92EF2C236B8.quest_subtitle: "机身、蒸汽与压力"
+	quest.0706F92EF2C236B8.title: "蒸汽时代"
 	quest.09200AF098A644DF.quest_desc: ["现在，来制作你的第一块合金吧。"]
 	quest.09200AF098A644DF.quest_subtitle: "一种新奇的合金炉"
 	quest.0932DD0AA54FD551.quest_subtitle: "或许你要自己组装？"
@@ -56,6 +62,9 @@
 	]
 	quest.0E2A114F298F8ACD.quest_subtitle: "收集星能"
 	quest.0F63E5FD6083EF59.title: "不要动"
+	quest.0FEC076007556020.quest_desc: ["输入普通蒸汽，输出过热蒸汽。压力调节器只吃过热蒸汽，所以它是整条压力线的上游。"]
+	quest.0FEC076007556020.quest_subtitle: "把蒸汽烧得更烫"
+	quest.0FEC076007556020.title: "蒸汽流体加热器"
 	quest.1057DBBF8DC8C7C0.quest_desc: [
 		"我们认为一个原始人能够徒手砍伐树木过于超模了，于是对steve的双手进行了一定的限制，现在你无法通过双手来砍伐树木了。"
 		""
@@ -71,6 +80,9 @@
 	quest.156E0D27F03959DC.quest_desc: ["坚固的列车机壳当然不会只用于火车，自动化！"]
 	quest.156E0D27F03959DC.title: "开火车！"
 	quest.15C7029E66E838F0.title: "最强的熔炉"
+	quest.160B66057D2A2BC2.quest_desc: ["蒸汽驱动的挤压机。板和外壳从此可以流水线生产——虽然挤压原型机还得留着，它不要蒸汽。"]
+	quest.160B66057D2A2BC2.quest_subtitle: "压力之下"
+	quest.160B66057D2A2BC2.title: "蒸汽挤压机"
 	quest.16DD4183EE52B969.quest_desc: ["它就像手一样"]
 	quest.174358FC22916BA6.quest_desc: ["散发着令人作呕的腐烂气息，我不想再接触这种东西了。"]
 	quest.176BDCB97FADED40.quest_subtitle: "化为更聚焦的力量"
@@ -91,6 +103,9 @@
 	quest.2193FBA1E0B50F7E.quest_desc: ["或许是一种美味的食物？"]
 	quest.2228F6297919FB7A.quest_desc: ["这或许是你的第一个机器框架，但请注意，它也可以用作为拓展坞来使用。"]
 	quest.2228F6297919FB7A.quest_subtitle: "机械核心"
+	quest.22372738BD8CBD0F.quest_desc: ["原始包线机升级成蒸汽驱动，一次处理更多线，也不会再把绝缘层扯歪。"]
+	quest.22372738BD8CBD0F.quest_subtitle: "线，还是那根线"
+	quest.22372738BD8CBD0F.title: "蒸汽包线机"
 	quest.223A36F78B6F517E.quest_desc: ["莫非这个世界的菌类都会生长到一立方米吗。"]
 	quest.22BECA4CD5C08010.quest_desc: ["这把工具将用于旋转方块、链接余烬传输机器（发射器/接收器/中继器）、关闭管道侧面连接"]
 	quest.22BECA4CD5C08010.quest_subtitle: "铁匠锤？扳手！"
@@ -104,6 +119,12 @@
 	quest.2723FD4DEFF29767.quest_desc: ["水车的应力被减半了，减慢你的转速"]
 	quest.2723FD4DEFF29767.title: "水车仙人"
 	quest.292AC0D0FB6D3181.title: "圆石生万物！"
+	quest.2C027D8994527225.quest_desc: [
+		"六节管道，铜板加青铜外壳。普通蒸汽只能走管道，不能走胶囊。"
+		"相邻放置也能传压，但长距离还是老老实实铺管。"
+	]
+	quest.2C027D8994527225.quest_subtitle: "流体喜欢铜"
+	quest.2C027D8994527225.title: "蒸汽管道"
 	quest.2EC7210E5C7222BA.quest_desc: [
 		"夜晚寻找太古魔像，击杀后用其掉落物合成 “远古法典” 。"
 		"不管你是不是第一次游玩这个mod，我都希望你不要去查询一些过时的，不正确的攻略。"
@@ -129,6 +150,12 @@
 	quest.34D552E8494DF63D.quest_desc: ["用搅拌器制作通红的坚固合金，再用水进行冷却"]
 	quest.34D552E8494DF63D.quest_subtitle: "这样的合金有什么用呢"
 	quest.34D552E8494DF63D.title: "坚固的合金"
+	quest.35B9A0B50B6D5A7C.quest_desc: [
+		"轧机把锭压成板、把板压成薄片，是蒸汽时代最后的成型设备。"
+		"它必须架在强化铁砧上，所以整条线走到这里，才算是把钢用上了。"
+	]
+	quest.35B9A0B50B6D5A7C.quest_subtitle: "得先有一块好砧"
+	quest.35B9A0B50B6D5A7C.title: "蒸汽轧机"
 	quest.36A0B043CD532395.quest_subtitle: "流体喜欢铜"
 	quest.38388EADB17FD482.quest_desc: ["现在你需要匍匐在地上寻找石子或者是rock？然后再去河岸搜索一些沙砾挖掘后掉落的燧石，接着将它分解为flint shard（燧石碎片）。然后与破坏树叶后掉落的木棍组合起来，你将获得一把燧石小刀。"]
 	quest.38388EADB17FD482.quest_subtitle: "燧石，但不是打火机"
@@ -187,6 +214,9 @@
 	quest.48BEE62B80F62549.quest_desc: ["或许，你真的可以挖一点东西了？"]
 	quest.4A1B91231661F70F.quest_desc: ["你的第一个机械动力机壳"]
 	quest.4A1B91231661F70F.quest_subtitle: "安山时代"
+	quest.4C2722480E36EC49.quest_desc: ["机身的第一份工作：烧水。每三刻消耗 2mB 水，产出 2mB 蒸汽。"]
+	quest.4C2722480E36EC49.quest_subtitle: "每三刻，两桶水"
+	quest.4C2722480E36EC49.title: "蒸汽锅炉"
 	quest.4D7D787C9864FCEF.quest_desc: ["奇特的菌类物质好像，它似乎还会发光，难道这是诱捕某种微小生物的方式吗？"]
 	quest.4D92FDC6EA6BDD71.quest_desc: [
 		"汇聚生灵之气，调转玄妙之间，聚火成堆。"
@@ -197,6 +227,12 @@
 	quest.4E2996D1346A91DD.quest_desc: ["我发现粘土与沙子可以混合成一种奇妙的物质，它似乎蕴含着某种神奇的力量。或许，我可以通过柴堆把它们烤干？"]
 	quest.50E6857A8D8A924B.quest_desc: ["在通过这扇门的同时，你的脑海中涌入了大量的信息。原来，这里叫作下界。"]
 	quest.50E6857A8D8A924B.title: "远古回响"
+	quest.50FFF3DA2CF84C7F.quest_desc: [
+		"普通蒸汽在加热器里过一遍就是过热蒸汽。它不能走蒸汽管道，只能走流体管道或胶囊。"
+		"手里拿一桶，再去调压力。"
+	]
+	quest.50FFF3DA2CF84C7F.quest_subtitle: "再烧一次"
+	quest.50FFF3DA2CF84C7F.title: "过热蒸汽"
 	quest.5319BE2FE47DFFE5.quest_desc: ["制作电子装配台和电子工作台，你可以用他们手搓电路板"]
 	quest.5319BE2FE47DFFE5.title: "手搓电路板！"
 	quest.5395E48294293E81.quest_desc: [
@@ -216,6 +252,9 @@
 	quest.541A81224FDBD420.quest_subtitle: "熔炉？！"
 	quest.54292046716034B6.quest_desc: ["我曾在森林的树荫底下发现过这些自然造物，它们似乎具有某种特别的魔力？"]
 	quest.54A917D73EE764DB.title: "黄铜物流"
+	quest.553DE08FF8207EFC.quest_desc: ["你终于不用站在粉碎原型机旁边。蒸汽粉碎机一次吃更多，也快得多。"]
+	quest.553DE08FF8207EFC.quest_subtitle: "不用自己动手了"
+	quest.553DE08FF8207EFC.title: "蒸汽粉碎机"
 	quest.55F9AE8981565D51.title: "终于不要手搓变速了"
 	quest.56D4CDDFAE01BAD1.quest_desc: ["来自地狱的植物。"]
 	quest.585589616E4ADF3F.quest_desc: [
@@ -268,6 +307,9 @@
 	quest.6880526327344216.title: "燧石镐的顶端"
 	quest.698C48B9BF81BDBF.quest_desc: ["奇怪，下界森林中居然还有这种硕大蘑菇，难道下界生物有着自己获取能量的方式吗？"]
 	quest.6ABB17E689175F68.quest_desc: ["来自名为容器的怪物身上的肉，击败容器似乎会释放它蕴含的灵魂。"]
+	quest.6BDDB3A36AADF646.quest_desc: ["青铜锭压成板，板再压成外壳。工具链从这一步开始规整：锭 → 板 → 外壳，全在挤压原型机里完成。"]
+	quest.6BDDB3A36AADF646.quest_subtitle: "青铜，第一次配比"
+	quest.6BDDB3A36AADF646.title: "好用的合金"
 	quest.6C12306C5CC22051.title: "蒸汽机"
 	quest.6DF0542F0876BFC5.quest_desc: ["埋藏在下界的燃料，似乎与煤炭有些不同之处。"]
 	quest.6E16E688AE7E429D.quest_desc: ["我喜欢这株植物，有着阳光的味道，也似棉花糖柔软的果实。"]
@@ -288,6 +330,12 @@
 	quest.749AF51E60268100.quest_subtitle: "一种新奇的能量传输方式"
 	quest.76588A9B06D5DDC7.quest_desc: ["我能够感受到一股灵魂的气息扑面而来。"]
 	quest.77020F764ED60722.quest_desc: ["像是绿色棉花糖一样，可为什么是蛙蛙呢？"]
+	quest.79789218839D6E7D.quest_desc: [
+		"过热蒸汽从这里变成压力。调到机器要求的那一档：高了不动，低了也不动，只有刚好才转。"
+		"不需要压力的机器就把旋钮归零，能省一点蒸汽。"
+	]
+	quest.79789218839D6E7D.quest_subtitle: "0 到 4，别调错"
+	quest.79789218839D6E7D.title: "蒸汽压力调节器"
 	quest.7A52841255FD1EFA.quest_desc: ["很简单，也很有用"]
 	quest.7A52841255FD1EFA.title: "基础传动元件"
 	quest.7BFD015338811BC2.quest_desc: ["或许你现在可以尝试狩猎一些动物？哈哈，我是说，你需要它们的皮革。"]
@@ -296,173 +344,211 @@
 	quest.7E2342ED402B6E97.quest_desc: [""]
 	quest.7E2342ED402B6E97.quest_subtitle: "燃煤发电机？......！"
 	quest.7F037DF5FFF945BB.quest_desc: ["来自灵魂沙峡谷随处可见的岩石。"]
-	task.0DFBBB1E418A4DB5.title: "不要动"
-	task.31C653416C932CC3.title: "进入末地"
-	chapter.3F5A7C2B9E1D4A60.title: "原始时代"
-	quest.E1A0000000000051.title: "挤压部件"
-	quest.E1A0000000000051.quest_subtitle: "一块会动的铁"
 	quest.E1A0000000000051.quest_desc: ["六张铁板箍住一块铁块，就成了挤压部件。它是挤压原型机的心脏——在你做出蒸汽挤压机之前，一切板材都从这台机器里出来。"]
-	quest.E1A0000000000052.title: "挤压原型机"
-	quest.E1A0000000000052.quest_subtitle: "第一台不用右手帮忙的机器"
+	quest.E1A0000000000051.quest_subtitle: "一块会动的铁"
+	quest.E1A0000000000051.title: "挤压部件"
 	quest.E1A0000000000052.quest_desc: [
 		"挤压部件、铁锭外壳、木板机架。它没有界面也没有电：右键投料，等它压，右键取件。"
 		"铁砧在这一版里被封掉了——锭变板不再是锤子的事，而是这台机器的事。"
 	]
-	quest.E1A0000000000053.title: "铁板"
-	quest.E1A0000000000053.quest_subtitle: "八块，起步价"
+	quest.E1A0000000000052.quest_subtitle: "第一台不用右手帮忙的机器"
+	quest.E1A0000000000052.title: "挤压原型机"
 	quest.E1A0000000000053.quest_desc: ["把铁锭塞进挤压原型机，压出八块铁板。后面每一台原型机都要吃它。"]
-	quest.E1A0000000000054.title: "粉碎球"
-	quest.E1A0000000000054.quest_subtitle: "会滚的那种"
+	quest.E1A0000000000053.quest_subtitle: "八块，起步价"
+	quest.E1A0000000000053.title: "铁板"
 	quest.E1A0000000000054.quest_desc: ["燧石包着铁。它会被装进粉碎原型机当磨盘，没有它什么也磨不动。"]
-	quest.E1A0000000000055.title: "粉碎原型机"
-	quest.E1A0000000000055.quest_subtitle: "手摇的磨"
+	quest.E1A0000000000054.quest_subtitle: "会滚的那种"
+	quest.E1A0000000000054.title: "粉碎球"
 	quest.E1A0000000000055.quest_desc: ["铁板做壳，铜板做衬，中间一颗粉碎球。右键投料、右键取料，你站在旁边就是它的动力。"]
-	quest.E1A0000000000056.title: "干燥原型机"
-	quest.E1A0000000000056.quest_subtitle: "晾干也是一种工艺"
+	quest.E1A0000000000055.quest_subtitle: "手摇的磨"
+	quest.E1A0000000000055.title: "粉碎原型机"
 	quest.E1A0000000000056.quest_desc: ["木板加玻璃。乳胶从这里开始变成橡胶，湿的零件也从这里变干。"]
-	quest.E1A0000000000057.title: "原型泵"
-	quest.E1A0000000000057.quest_subtitle: "液体必须待在它下方"
+	quest.E1A0000000000056.quest_subtitle: "晾干也是一种工艺"
+	quest.E1A0000000000056.title: "干燥原型机"
 	quest.E1A0000000000057.quest_desc: ["长按右键启动，胶囊负责把抽上来的液体装走。它覆盖下方 3×1×3 的范围。"]
-	quest.E1A0000000000058.title: "熔炼砖"
-	quest.E1A0000000000058.quest_subtitle: "黏土、沙、砂砾"
+	quest.E1A0000000000057.quest_subtitle: "液体必须待在它下方"
+	quest.E1A0000000000057.title: "原型泵"
 	quest.E1A0000000000058.quest_desc: [
 		"两张黏土一张沙一份砂砾，先揉成坯再烧成砖。原配方要尖晶石粒和钇粒，那是电力时代的金属，忘掉它们。"
 		"十六块砖只是起步，熔炼炉是多方块结构，砖永远不嫌多。"
 	]
-	quest.E1A0000000000059.title: "熔炼炉体"
-	quest.E1A0000000000059.quest_subtitle: "四块砖换一层壳"
+	quest.E1A0000000000058.quest_subtitle: "黏土、沙、砂砾"
+	quest.E1A0000000000058.title: "熔炼砖"
 	quest.E1A0000000000059.quest_desc: ["四块熔炼砖拼成一节炉体。三十来节就够围出一个小炉子。"]
-	quest.E1A000000000005A.title: "熔炼炉炉缸"
-	quest.E1A000000000005A.quest_subtitle: "锡衬里，铅底座"
+	quest.E1A0000000000059.quest_subtitle: "四块砖换一层壳"
+	quest.E1A0000000000059.title: "熔炼炉体"
 	quest.E1A000000000005A.quest_desc: ["锡板做内衬，铅板做底座，中间垫一层木桶。熔融金属的容器不需要漂亮，只需要不漏。"]
-	quest.E1A000000000005B.title: "熔炼炉控制器"
-	quest.E1A000000000005B.quest_subtitle: "红石与中继器"
+	quest.E1A000000000005A.quest_subtitle: "锡衬里，铅底座"
+	quest.E1A000000000005A.title: "熔炼炉炉缸"
 	quest.E1A000000000005B.quest_desc: ["整个熔炼炉的大脑。搭好结构后右键它，炉子就算立起来了。"]
-	quest.E1A000000000005C.title: "熔炼炉"
-	quest.E1A000000000005C.quest_subtitle: "你的第一炉水"
+	quest.E1A000000000005B.quest_subtitle: "红石与中继器"
+	quest.E1A000000000005B.title: "熔炼炉控制器"
 	quest.E1A000000000005C.quest_desc: [
 		"燃料箱、炉体、浇注块加上控制器，熔炼炉才算完整。往燃料箱灌熔岩，把锭、方块、矿石丢进炉子等它们化开。"
 		"液体可以在炉内混合，也可以倒进浇注块配模具成型。从此你不再一块一块地烧金属。"
 		"注意：钢不在它的菜单里。这个炉子只做基础金属，钢是蒸汽时代末尾的事。"
 	]
-	quest.E1A000000000005D.title: "铸型模具"
-	quest.E1A000000000005D.quest_subtitle: "把水变回锭"
+	quest.E1A000000000005C.quest_subtitle: "你的第一炉水"
+	quest.E1A000000000005C.title: "熔炼炉"
 	quest.E1A000000000005D.quest_desc: ["八块铁板围出一个锭模。放进浇注块，再把液体倒进去，锭就回来了。"]
-	quest.E1A000000000005E.title: "原始包线机"
-	quest.E1A000000000005E.quest_subtitle: "给铜穿上衣服"
+	quest.E1A000000000005D.quest_subtitle: "把水变回锭"
+	quest.E1A000000000005D.title: "铸型模具"
 	quest.E1A000000000005E.quest_desc: ["木板、原木、铁板，拉动手柄把裸线裹上绝缘层。没有它，铜线只能当装饰品。"]
-	quest.E1A000000000005F.title: "铜锅炉"
-	quest.E1A000000000005F.quest_subtitle: "一套锅炉，到处复用"
+	quest.E1A000000000005E.quest_subtitle: "给铜穿上衣服"
+	quest.E1A000000000005E.title: "原始包线机"
 	quest.E1A000000000005F.quest_desc: [
 		"铜板围壳、铜机壳做胆、里面塞一台熔炉。这台铜锅炉是 IU 原始与蒸汽两代的通用件："
 		"原型流体加热器、乳胶提取机、原型流式腐蚀釜、蒸汽储存器、蒸汽流体加热器、固液反应釜、锅炉储罐，里面装的都是它，别只做一个。"
 	]
-	quest.E1A0000000000060.title: "原型流式腐蚀釜"
-	quest.E1A0000000000060.quest_subtitle: "把东西泡进去"
+	quest.E1A000000000005F.quest_subtitle: "一套锅炉，到处复用"
+	quest.E1A000000000005F.title: "铜锅炉"
 	quest.E1A0000000000060.quest_desc: [
 		"把物品浸泡在储罐里的液体中：金板做内衬，铜板做衬底，琥珀金锅炉供热。"
 		"需要吸收溶液或试剂的固体毛坯都要过它一手。到这里，原始时代的手工机器就齐了——下一站是青铜。"
 	]
-	quest.6BDDB3A36AADF646.title: "好用的合金"
-	quest.6BDDB3A36AADF646.quest_subtitle: "青铜，第一次配比"
-	quest.6BDDB3A36AADF646.quest_desc: ["青铜锭压成板，板再压成外壳。工具链从这一步开始规整：锭 → 板 → 外壳，全在挤压原型机里完成。"]
-	quest.0706F92EF2C236B8.title: "蒸汽时代"
-	quest.0706F92EF2C236B8.quest_subtitle: "机身、蒸汽与压力"
-	quest.0706F92EF2C236B8.quest_desc: ["八张蒸汽机壳夹一颗黄铜之心，就是蒸汽机机身。本时代所有机器都长在它上面。"]
-	quest.2C027D8994527225.title: "蒸汽管道"
-	quest.2C027D8994527225.quest_subtitle: "流体喜欢铜"
-	quest.2C027D8994527225.quest_desc: [
-		"六节管道，铜板加青铜外壳。普通蒸汽只能走管道，不能走胶囊。"
-		"相邻放置也能传压，但长距离还是老老实实铺管。"
-	]
-	quest.4C2722480E36EC49.title: "蒸汽锅炉"
-	quest.4C2722480E36EC49.quest_subtitle: "每三刻，两桶水"
-	quest.4C2722480E36EC49.quest_desc: ["机身的第一份工作：烧水。每三刻消耗 2mB 水，产出 2mB 蒸汽。"]
-	quest.0FEC076007556020.title: "蒸汽流体加热器"
-	quest.0FEC076007556020.quest_subtitle: "把蒸汽烧得更烫"
-	quest.0FEC076007556020.quest_desc: ["输入普通蒸汽，输出过热蒸汽。压力调节器只吃过热蒸汽，所以它是整条压力线的上游。"]
-	quest.50FFF3DA2CF84C7F.title: "过热蒸汽"
-	quest.50FFF3DA2CF84C7F.quest_subtitle: "再烧一次"
-	quest.50FFF3DA2CF84C7F.quest_desc: [
-		"普通蒸汽在加热器里过一遍就是过热蒸汽。它不能走蒸汽管道，只能走流体管道或胶囊。"
-		"手里拿一桶，再去调压力。"
-	]
-	quest.79789218839D6E7D.title: "蒸汽压力调节器"
-	quest.79789218839D6E7D.quest_subtitle: "0 到 4，别调错"
-	quest.79789218839D6E7D.quest_desc: [
-		"过热蒸汽从这里变成压力。调到机器要求的那一档：高了不动，低了也不动，只有刚好才转。"
-		"不需要压力的机器就把旋钮归零，能省一点蒸汽。"
-	]
-	quest.553DE08FF8207EFC.title: "蒸汽粉碎机"
-	quest.553DE08FF8207EFC.quest_subtitle: "不用自己动手了"
-	quest.553DE08FF8207EFC.quest_desc: ["你终于不用站在粉碎原型机旁边。蒸汽粉碎机一次吃更多，也快得多。"]
-	quest.160B66057D2A2BC2.title: "蒸汽挤压机"
-	quest.160B66057D2A2BC2.quest_subtitle: "压力之下"
-	quest.160B66057D2A2BC2.quest_desc: ["蒸汽驱动的挤压机。板和外壳从此可以流水线生产——虽然挤压原型机还得留着，它不要蒸汽。"]
-	quest.E1B0000000000001.title: "蒸汽切割机"
-	quest.E1B0000000000001.quest_subtitle: "一刀两断"
+	quest.E1A0000000000060.quest_subtitle: "把东西泡进去"
+	quest.E1A0000000000060.title: "原型流式腐蚀釜"
 	quest.E1B0000000000001.quest_desc: ["把板切成杆、把块切成片。切割是很多零件的最后一道工序。"]
-	quest.E1B0000000000002.title: "蒸汽挤出机"
-	quest.E1B0000000000002.quest_subtitle: "挤出来就是一根"
+	quest.E1B0000000000001.quest_subtitle: "一刀两断"
+	quest.E1B0000000000001.title: "蒸汽切割机"
 	quest.E1B0000000000002.quest_desc: ["熔融材料从模具里挤成线材和杆件。和轧机配一对，板与杆都不缺。"]
-	quest.E1B0000000000003.title: "蒸汽提取机"
-	quest.E1B0000000000003.quest_subtitle: "榨干最后一点"
+	quest.E1B0000000000002.quest_subtitle: "挤出来就是一根"
+	quest.E1B0000000000002.title: "蒸汽挤出机"
 	quest.E1B0000000000003.quest_desc: ["从物品里榨出液体：橡胶、树脂、植物油。副产物是它最可爱的地方。"]
-	quest.E1B0000000000004.title: "蒸汽抛光机"
-	quest.E1B0000000000004.quest_subtitle: "金属也需要体面"
+	quest.E1B0000000000003.quest_subtitle: "榨干最后一点"
+	quest.E1B0000000000003.title: "蒸汽提取机"
 	quest.E1B0000000000004.quest_desc: ["用蒸汽和激光把零件表面磨到镜面。晶体和精密件过一遍，后面装机才不卡。"]
-	quest.E1B0000000000005.title: "蒸汽乳胶提取机"
-	quest.E1B0000000000005.quest_subtitle: "橡胶的前半生"
+	quest.E1B0000000000004.quest_subtitle: "金属也需要体面"
+	quest.E1B0000000000004.title: "蒸汽抛光机"
 	quest.E1B0000000000005.quest_desc: ["从橡胶木里榨乳胶。乳胶干燥之后才是橡胶，橡胶是蒸汽时代一切密封件的原料。"]
-	quest.E1B0000000000006.title: "蒸汽泵"
-	quest.E1B0000000000006.quest_subtitle: "终于不用长按右键"
+	quest.E1B0000000000005.quest_subtitle: "橡胶的前半生"
+	quest.E1B0000000000005.title: "蒸汽乳胶提取机"
 	quest.E1B0000000000006.quest_desc: ["原型泵的成年版：通上蒸汽与水，它自己把液体送到你要去的地方。"]
-	quest.22372738BD8CBD0F.title: "蒸汽包线机"
-	quest.22372738BD8CBD0F.quest_subtitle: "线，还是那根线"
-	quest.22372738BD8CBD0F.quest_desc: ["原始包线机升级成蒸汽驱动，一次处理更多线，也不会再把绝缘层扯歪。"]
-	quest.E1B0000000000007.title: "蒸汽储存器"
-	quest.E1B0000000000007.quest_subtitle: "存一点压力"
+	quest.E1B0000000000006.quest_subtitle: "终于不用长按右键"
+	quest.E1B0000000000006.title: "蒸汽泵"
 	quest.E1B0000000000007.quest_desc: ["只从安装面输入蒸汽，其余方向只输出。把它当成蒸汽电池，机器挨着它就不怕断供。"]
-	quest.E1B0000000000008.title: "蒸汽电解器"
-	quest.E1B0000000000008.quest_subtitle: "通了电才算完整"
+	quest.E1B0000000000007.quest_subtitle: "存一点压力"
+	quest.E1B0000000000007.title: "蒸汽储存器"
 	quest.E1B0000000000008.quest_desc: [
 		"蒸汽提供热量与加压，真正的化学过程还得靠电流转换器给的电流。"
 		"它可以把水拆成氢和氧，是你第一次真正接触气体工艺。"
 	]
-	quest.E1B0000000000009.title: "蒸汽矿物分离器"
-	quest.E1B0000000000009.quest_subtitle: "把石头还回去"
+	quest.E1B0000000000008.quest_subtitle: "通了电才算完整"
+	quest.E1B0000000000008.title: "蒸汽电解器"
 	quest.E1B0000000000009.quest_desc: ["处理致密矿石，把有用的部分和废石分开，不需要电网。产物概率比电动的低一点，蒸汽时代够用。"]
-	quest.E1B000000000000A.title: "蒸汽锅炉（多方块）"
-	quest.E1B000000000000A.quest_subtitle: "这次是真的锅炉房"
+	quest.E1B0000000000009.quest_subtitle: "把石头还回去"
+	quest.E1B0000000000009.title: "蒸汽矿物分离器"
 	quest.E1B000000000000A.quest_desc: [
 		"外壳、控制器、储罐、加热器、热交换器：五件套围起来才是正经锅炉，每刻 1mB 水换 2mB 蒸汽，效率是小型锅炉的两倍。"
 		"控制器自己开不了，必须靠热交换器：往加热器供热，往储罐注水。热交换器里要十根线圈和一个铁氧体环形电感。"
 	]
-	quest.E1B000000000000B.title: "电动蒸汽发生器"
-	quest.E1B000000000000B.quest_subtitle: "蒸汽与电的第一次握手"
+	quest.E1B000000000000A.quest_subtitle: "这次是真的锅炉房"
+	quest.E1B000000000000A.title: "蒸汽锅炉（多方块）"
 	quest.E1B000000000000B.quest_desc: ["高压蒸汽锅炉、机器外壳、电动机拼在一起：蒸汽进去，电出来。这是蒸汽时代向电力时代递出的请柬。"]
-	quest.E1B000000000000C.title: "蒸汽采石机"
-	quest.E1B000000000000C.quest_subtitle: "往地下钻"
+	quest.E1B000000000000B.quest_subtitle: "蒸汽与电的第一次握手"
+	quest.E1B000000000000B.title: "电动蒸汽发生器"
 	quest.E1B000000000000C.quest_desc: ["接上蒸汽和钻管，它会一路向下把工作区域的方块挖出来。记得在它下面留空间，也记得回来收矿。"]
-	quest.E1B000000000000D.title: "微型熔炉"
-	quest.E1B000000000000D.quest_subtitle: "一炉一小块"
+	quest.E1B000000000000C.quest_subtitle: "往地下钻"
+	quest.E1B000000000000C.title: "蒸汽采石机"
 	quest.E1B000000000000D.quest_desc: ["熔炼炉的袖珍版：拿熔融矿石胶囊右键它，上方出现粗金属锭，再右键取走。适合分散的小规模铸造。"]
-	quest.E1B000000000000E.title: "渗碳成钢"
-	quest.E1B000000000000E.quest_subtitle: "往铁里塞点碳"
+	quest.E1B000000000000D.quest_subtitle: "一炉一小块"
+	quest.E1B000000000000D.title: "微型熔炉"
 	quest.E1B000000000000E.quest_desc: [
 		"把铁锭和大量煤一起闷在土高炉里：碳渗进铁里，钢就出来了。很慢，很费燃料，但这是你第一次拿到比铁更硬的东西。"
 		"熔炼炉那条捷径已经封掉了。钢只从这里出，而且在这个阶段解锁之前你拿不起它。"
 	]
-	quest.E1B000000000000F.title: "强化铁砧"
-	quest.E1B000000000000F.quest_subtitle: "配得上钢的砧"
+	quest.E1B000000000000E.quest_subtitle: "往铁里塞点碳"
+	quest.E1B000000000000E.title: "渗碳成钢"
 	quest.E1B000000000000F.quest_desc: [
 		"钢要配一块钢做的砧。普通铁砧敲不动重活，强化铁砧可以。"
 		"它还是蒸汽轧机的地基——没有它，轧机连立都立不起来。"
 	]
-	quest.35B9A0B50B6D5A7C.title: "蒸汽轧机"
-	quest.35B9A0B50B6D5A7C.quest_subtitle: "得先有一块好砧"
-	quest.35B9A0B50B6D5A7C.quest_desc: [
-		"轧机把锭压成板、把板压成薄片，是蒸汽时代最后的成型设备。"
-		"它必须架在强化铁砧上，所以整条线走到这里，才算是把钢用上了。"
-	]
+	quest.E1B000000000000F.quest_subtitle: "配得上钢的砧"
+	quest.E1B000000000000F.title: "强化铁砧"
+	quest.E1C0000000000001.quest_desc: ["研究站里用 8 片晶圆和 16 份演算数据，把电磁感应、真空管与硅器件写成一份可复制的笔记。拿到它，电力时代才算真正开始：AE2 本体与工业先锋同时开门。"]
+	quest.E1C0000000000001.quest_subtitle: "电流的第一份证词"
+	quest.E1C0000000000001.title: "研究笔记·电力"
+	quest.E1C0000000000002.quest_desc: ["一个元件:发电机加一块电力机壳。它吃煤、吃生物质，吐出 IU 自己的电。整个时代的机器都挂在这台机器后面。"]
+	quest.E1C0000000000002.quest_subtitle: "烧煤换电"
+	quest.E1C0000000000002.title: "发电机"
+	quest.E1C0000000000003.quest_desc: ["四块电镀外壳压成一块机壳。电力时代的每一台机器都要它，先囤十六块再说。"]
+	quest.E1C0000000000003.quest_subtitle: "机器的骨头"
+	quest.E1C0000000000003.title: "电力机壳"
+	quest.E1C0000000000004.quest_desc: ["蒸汽干燥机通电之后的版本。同样把湿料烘干，但不烧蒸汽，只要有电就一直转。"]
+	quest.E1C0000000000004.quest_subtitle: "蒸汽的电动版"
+	quest.E1C0000000000004.title: "电力干燥机"
+	quest.E1C0000000000005.quest_desc: ["蒸汽乳胶提取机的电力版。工业先锋的塑料全靠这条橡胶线，早一步通电就早一步摸到它。"]
+	quest.E1C0000000000005.quest_subtitle: "橡胶的电动版"
+	quest.E1C0000000000005.title: "电动乳胶提取机"
+	quest.E1C0000000000006.quest_desc: ["木头进去，木板和木屑出来。木材第一次不用手砍，后面的机壳、脚手架、箱子都从这里供应。"]
+	quest.E1C0000000000006.quest_subtitle: "把树变成车间"
+	quest.E1C0000000000006.title: "锯木厂"
+	quest.E1C0000000000007.quest_desc: ["轧辊组是轧机的核心件：六块钢板围一个轧辊，才能把锭压成板。轧机一通，钢板就再也不靠铁砧了。"]
+	quest.E1C0000000000007.quest_subtitle: "板还是那张板"
+	quest.E1C0000000000007.title: "手工轧机"
+	quest.E1C0000000000008.quest_desc: ["蒸汽电解器的电力版。水进去，氢和氧出来；氢是硅烷线的原料，氧是后面一堆化工配方的原料。"]
+	quest.E1C0000000000008.quest_subtitle: "把水拆开"
+	quest.E1C0000000000008.title: "电解器"
+	quest.E1C0000000000009.quest_desc: ["给 3×3 区块内的机器隔空充电。电网从此不用一根一根拉线，机台摆在哪里都能吃到电。"]
+	quest.E1C0000000000009.quest_subtitle: "线缆可以收起来了"
+	quest.E1C0000000000009.title: "无线供能器"
+	quest.E1C000000000000A.quest_desc: ["单晶硅在这里被激光切成晶圆。没有它，硅料就只是根漂亮的棒子。"]
+	quest.E1C000000000000A.quest_subtitle: "切晶圆的那把刀"
+	quest.E1C000000000000A.title: "激光处理厂"
+	quest.E1C000000000000B.quest_desc: ["粗制硅晶体在这里再长一次，才变成能拉单晶的电子级多晶硅。物理熔炼只能做到粗料。"]
+	quest.E1C000000000000B.quest_subtitle: "把粗料长成电子级"
+	quest.E1C000000000000B.title: "晶体生长室"
+	quest.E1C000000000000C.quest_desc: ["电子级多晶硅在生长室里直拉成单晶硅。它不是最终产品，是切片前的坯料。"]
+	quest.E1C000000000000C.quest_subtitle: "一根棒子"
+	quest.E1C000000000000C.title: "单晶硅"
+	quest.E1C000000000000D.quest_desc: ["一根单晶硅切四片晶圆。从这一格开始，硅才真正变成器件：IU 的电路要用它，AE 的处理器也要用它。"]
+	quest.E1C000000000000D.quest_subtitle: "八片薄片"
+	quest.E1C000000000000D.title: "晶圆"
+	quest.E1C000000000000E.quest_desc: ["钢锭做骨架、银锭走电流、活塞压制具。AE2 本体就从这台机器开始，它的硅印刷片现在吃的是你的晶圆。压印模板不在合成表里——去天空石坑里挖，或者从别的模板翻制。"]
+	quest.E1C000000000000E.quest_subtitle: "AE 的第一台机器"
+	quest.E1C000000000000E.title: "压印器"
+	quest.E1C000000000000F.quest_desc: ["晶圆加硅压印模板，压出印刷硅片。AE 原本「石英粉烧成硅」那条捷径已经封了，硅只能从晶圆线上来。"]
+	quest.E1C000000000000F.quest_subtitle: "晶圆换成芯片"
+	quest.E1C000000000000F.title: "硅印刷片"
+	quest.E1C0000000000010.quest_desc: ["印刷硅片、印刷逻辑电路和红石一起压成逻辑处理器。存储、终端、线缆，全挂在它身上。"]
+	quest.E1C0000000000010.quest_subtitle: "AE 的通用大脑"
+	quest.E1C0000000000010.title: "逻辑处理器"
+	quest.E1C0000000000011.quest_desc: ["把福鲁伊克斯水晶充成带电的。这是网络里唯一不需要额外机器的循环：电进去，水晶出来。"]
+	quest.E1C0000000000011.quest_subtitle: "给水晶充电"
+	quest.E1C0000000000011.title: "充能器"
+	quest.E1C0000000000012.quest_desc: ["AE 网络的门。IU 的电从这里进来，换成 AE 自己的能量单位。"]
+	quest.E1C0000000000012.quest_subtitle: "电网接进网络"
+	quest.E1C0000000000012.title: "能量接收器"
+	quest.E1C0000000000013.quest_desc: ["装存储元件的柜子。一个驱动器塞十个元件，从此箱子不再是箱子。"]
+	quest.E1C0000000000013.quest_subtitle: "第一个仓库"
+	quest.E1C0000000000013.title: "ME 驱动器"
+	quest.E1C0000000000014.quest_desc: ["把所有存储元件摊在一张列表上。第一次点开它的时候，你会明白为什么大家都在往 AE 里搬东西。"]
+	quest.E1C0000000000014.quest_subtitle: "看见整个网络"
+	quest.E1C0000000000014.title: "ME 终端"
+	quest.E1C0000000000015.quest_desc: ["终端加工作台再加一个运算处理器。省下的不是那两步路，是每次找配方的时间。"]
+	quest.E1C0000000000015.quest_subtitle: "在终端里直接合成"
+	quest.E1C0000000000015.title: "合成终端"
+	quest.E1C0000000000016.quest_desc: ["中心换成一台 IU 电动机：没有电力工业，就没有 ME 网络。控制器一立，网络才会有稳定的频道数。"]
+	quest.E1C0000000000016.quest_subtitle: "网络的心脏"
+	quest.E1C0000000000016.title: "ME 控制器"
+	quest.E1C0000000000017.quest_desc: ["接口收料，样板供应器按样板把料送出去。这一对凑齐，AE 才从仓库变成工厂。"]
+	quest.E1C0000000000017.quest_subtitle: "让网络自己干活"
+	quest.E1C0000000000017.title: "接口与样板供应器"
+	quest.E1C0000000000018.quest_desc: ["工业先锋的第一台发电机。它发不了多少电，但足够让一台机器先转起来——工业先锋的机器都吃 FE，不是 IU 的电。"]
+	quest.E1C0000000000018.quest_subtitle: "聊胜于无的电"
+	quest.E1C0000000000018.title: "怜悯发电机"
+	quest.E1C0000000000019.quest_desc: ["八块钢板围一个红石块，再配四根原木。工业先锋的每一台机器都要先有它。"]
+	quest.E1C0000000000019.quest_subtitle: "工业先锋的入场券"
+	quest.E1C0000000000019.title: "简陋机器框架"
+	quest.E1C000000000001A.quest_desc: ["割胶碗收来的乳胶在这里聚成干胶，烧一遍就是塑料。塑料是高级机器框架的必需品。"]
+	quest.E1C000000000001A.quest_subtitle: "橡胶变塑料"
+	quest.E1C000000000001A.title: "乳胶处理单元"
+	quest.E1C000000000001B.quest_desc: ["贴着原木就能抽出乳胶。它和乳胶处理单元是一对，缺一个橡胶线就不转。"]
+	quest.E1C000000000001B.quest_subtitle: "从原木里挤汁"
+	quest.E1C000000000001B.title: "流体提取机"
+	quest.E1C000000000001C.quest_desc: ["塑料、框架、齿轮、桶，泡在乳胶里溶一遍，出来就是更高级的机器框架。工业先锋的分水岭。"]
+	quest.E1C000000000001C.quest_subtitle: "往液体里配东西"
+	quest.E1C000000000001C.title: "溶解室"
+	task.0DFBBB1E418A4DB5.title: "不要动"
+	task.31C653416C932CC3.title: "进入末地"
 }

@@ -1,0 +1,31 @@
+{
+  "_comment": "基础电力时代研究页：末地门通过后可研究电力，产出研究笔记·电力并解锁 era.electric（AE2 本体 / 工业先锋 由此开放）。",
+  "page": "era_electric",
+  "title_key": "research.page.era_electric",
+  "nodes": [
+    {
+      "id": "sink:electric_notes",
+      "kind": "craft",
+      "era": "electric",
+      "rank": 4,
+      "requires": { "and": [ "sink:gate_dragon" ] },
+      "inputs": {
+        "items": [
+          { "id": "industrialupgrade:crafting_elements/crafting_494_element", "count": 8 },
+          { "id": "kubejs:research_data", "count": 16 }
+        ],
+        "fluids": [],
+        "energy": 8000,
+        "compute": 2
+      },
+      "duration": 900,
+      "outputs": {
+        "items": [ { "id": "kubejs:research_notes_electric", "count": 1 } ]
+      },
+      "unlock": [ "era.electric" ],
+      "ui": { "x": 0, "y": 0, "doc": "research.electric_notes.desc" },
+      "recipe_pool": "sinkjourney:research_station",
+      "recipe_id": "kubejs:research_station/electric_notes"
+    }
+  ]
+}

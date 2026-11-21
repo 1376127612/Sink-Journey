@@ -4,11 +4,11 @@
     "machine.sinkjourney.trace_compute": "Backflow Computation Core",
     "machine.sinkjourney.trace_cooling": "Entropy-Reversal Cooling Core",
     "level.sinkjourney.research_tier": "Research Core Tier",
-
     "research.page.era_ember": "Embers and Starlight",
     "research.ember_notes.desc": "Reproduce the ember heat cycle with dawnstone and write the furnace, heat and ash down as a transferable research note; obtaining the note unlocks Ember tech.",
     "research.radiance_notes.desc": "Using the ember note as a base, record the observation and resonance of starlight to complete the last piece for the End expedition; obtaining the note unlocks Starlight tech.",
-
+    "research.page.era_electric": "The Basic Electric Age",
+    "research.electric_notes.desc": "Write induction, vacuum tubes and silicon devices down as a transferable note: 8 wafers plus 16 computation data through the Backflow Research Station for 900 seconds. Obtaining the note unlocks the Basic Electric Age, opening AE2 itself and Industrial Foregoing.",
     "recipe_pool.sinkjourney.mechanical_lab": "Mechanical Research Bench",
     "jei.sinkjourney.mechanical_lab.info": "The stage-two bench: its west face takes a stress input interface (32 RPM minimum) and turns research notes from the primitive table into computation data, engraving the Mechanical blueprint. A hollow 3x3x3 brass shell with four upgrade slots; before the electric era there is no FE, so it runs purely on Create rotational stress.",
     "jei.sinkjourney.mechanical_lab.ember_notes": "Research Notes: Embers",
@@ -16,28 +16,23 @@
     "jei.sinkjourney.trace_nexus.info": "Engraves blueprints: feed blank blueprints, computation data and era materials, then spend FE. Upgrade modules can be installed on all four sides; the level slot decides which era can be engraved.",
     "jei.sinkjourney.trace_compute.info": "The CPU of the array: continuously consumes research substrate and water while venting steam. That steam must be reclaimed by the cooling core, otherwise backed-up outputs stall the computation.",
     "jei.sinkjourney.trace_cooling.info": "Continuously draws off the steam vented by the computation core and dissipates it as heat. It needs constant power; without it steam backs up and the CPU stops.",
-
     "recipe_type.sinkjourney.primitive_research": "Primitive Research",
     "block.kubejs.primitive_research_table": "Primitive Research Table",
-
     "jei.sinkjourney.primitive_research": "Primitive Research",
     "jei.sinkjourney.primitive_research.info": "The primitive research table: the only research device before the stress era. Right-click to open its UI, put the materials into the two input slots (paper + ink sac, or research notes x4 + paper), and the machine starts on its own; when the bar fills the product moves to the output slot on the right.",
     "jei.sinkjourney.primitive_research.info2": "Recipes: paper + ink sac -> research notes x2 (5 min); research notes x4 + paper -> primitive blueprint (5 min). Research notes are the entry material for the mechanical research bench.",
-    "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so every recipe takes 5 minutes. The UI has a minesweeper entry: clearing one round advances the current progress by 50%.",
-
+    "jei.sinkjourney.primitive_research.info3": "Why: recording and reproducing are two different kinds of labour. First ink turns observations into notes, then several notes are compared and copied into a blueprint. With no machinery in the primitive era everything is done by hand, so every recipe takes 5 minutes.",
     "block.kubejs.charcoal_furnace": "Charcoal Furnace",
     "recipe_type.sinkjourney.charcoal_furnace": "Charcoal Furnace Smelting",
     "recipe_pool.kubejs.charcoal_furnace": "Charcoal Furnace",
     "jei.kubejs.charcoal_furnace.info": "A 3x3x3 brick-built charcoal furnace: crushed silver/gold and the electrum alloy can only be smelted here. Fuel goes into the input slots of the machine UI; any coal or charcoal works (minecraft:coals).",
     "jei.kubejs.charcoal_furnace.info2": "Build: a 3x3x3 brick shell with the controller block in the middle of the front face; a lit campfire sits at the very heart of the furnace (directly behind the controller) with a one-block flue left open at the top centre so you can see the flame. The controller has its own input/output slots, no extra hatches needed. Dousing the fire halts the furnace; an atmospheric bellows attached anywhere to the furnace shell speeds it up by 20%.",
     "jei.kubejs.charcoal_furnace.info3": "Pyres cannot touch precious metals: crushed silver/gold have no pyre recipe at all; their reducing smelt belongs to the charcoal furnace only.",
-
     "block.mmcr.mechanical_lab_controller": "Mechanical Research Bench Controller",
     "block.mmcr.trace_nexus_controller": "Backflow Research Nexus Controller",
     "block.mmcr.trace_compute_controller": "Backflow Computation Core Controller",
     "block.mmcr.trace_cooling_controller": "Entropy-Reversal Cooling Core Controller",
     "block.mmcr.research_station_controller": "Backflow Research Station Controller",
-
     "block.kubejs.earth_blast_furnace": "Earthen Blast Furnace",
     "recipe_type.sinkjourney.earth_blast_furnace": "Earthen Blast Furnace Smelting",
     "recipe_pool.kubejs.earth_blast_furnace": "Earthen Blast Furnace",

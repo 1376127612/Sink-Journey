@@ -45,8 +45,8 @@
   "pinnedFiles": [],
   "pinnedFolders": [],
   "favorites": [],
-  "recipesSelected": "industrialupgrade:industrialupgrade_436",
-  "recipesSearch": "industrialupgrade:industrialupgrade_436",
+  "recipesSelected": "industrialupgrade:industrialupgrade_1245",
+  "recipesSearch": "industrialupgrade:industrialupgrade_1245",
   "tagsRegistry": "item",
   "tagsSelected": "c:doubleplate",
   "tagsSearch": "c:doubleplate",
@@ -59,18 +59,18 @@
   "createSearch": "",
   "filesOpen": [],
   "recentPicks": [
+    "item create:iron_sheet",
+    "item minecraft:blue_ice",
+    "item industrialupgrade:crafting_elements/crafting_588_element",
     "item industrialupgrade:crafting_elements/crafting_276_element",
     "item industrialupgrade:crafting_elements/crafting_42_element",
     "item industrialupgrade:crafting_elements/crafting_294_element",
     "item industrialupgrade:crafting_elements/crafting_60_element",
     "item industrialupgrade:casing/bronze",
-    "item create:iron_sheet",
     "item minecraft:iron_nugget",
     "item #minecraft:planks",
     "item #minecraft:oak_logs",
-    "item #c:stripped_woods",
-    "item notreepunchingremastered:flint_shard",
-    "item notreepunchingremastered:stone_rock"
+    "item #c:stripped_woods"
   ],
   "filesActive": -1
 }

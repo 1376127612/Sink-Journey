@@ -63,7 +63,7 @@
         "dimension": "minecraft:the_end",
         "require_player_kill": true
       },
-      "unlock": [ "era.electric" ],
+      "unlock": [ "gate.end" ],
       "ui": { "x": 4, "y": 0, "doc": "research.gate_dragon.desc" }
     }
   ]

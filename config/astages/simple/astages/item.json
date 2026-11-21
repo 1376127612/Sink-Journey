@@ -1,198 +1,243 @@
 [
   {
-    "id": "electric_entry_i0",
+    "id": "electric_entry_m0",
     "stage": "era.electric",
     "object": "mekanism:metallurgic_infuser"
   },
   {
-    "id": "electric_entry_i1",
+    "id": "electric_entry_m1",
     "stage": "era.electric",
     "object": "mekanism:enrichment_chamber"
   },
   {
-    "id": "electric_entry_i2",
+    "id": "electric_entry_m2",
     "stage": "era.electric",
     "object": "mekanism:crusher"
   },
   {
-    "id": "electric_entry_i3",
+    "id": "electric_entry_m3",
     "stage": "era.electric",
     "object": "mekanism:energized_smelter"
   },
   {
-    "id": "electric_entry_i4",
+    "id": "electric_entry_m4",
     "stage": "era.electric",
     "object": "mekanism:osmium_compressor"
   },
   {
-    "id": "electric_entry_i5",
+    "id": "electric_entry_ae0",
     "stage": "era.electric",
     "object": "ae2:inscriber"
   },
   {
-    "id": "electric_entry_i6",
+    "id": "electric_entry_ae1",
     "stage": "era.electric",
     "object": "ae2:charger"
   },
   {
-    "id": "electric_entry_i7",
+    "id": "electric_entry_ae2",
     "stage": "era.electric",
     "object": "ae2:energy_acceptor"
   },
   {
-    "id": "electric_entry_i8",
+    "id": "electric_entry_ae3",
+    "stage": "era.electric",
+    "object": "ae2:growth_accelerator"
+  },
+  {
+    "id": "electric_entry_ae4",
+    "stage": "era.electric",
+    "object": "ae2:energy_cell"
+  },
+  {
+    "id": "electric_entry_ae5",
     "stage": "era.electric",
     "object": "ae2:drive"
   },
   {
-    "id": "electric_entry_i9",
+    "id": "electric_entry_ae6",
+    "stage": "era.electric",
+    "object": "ae2:controller"
+  },
+  {
+    "id": "electric_entry_ae7",
+    "stage": "era.electric",
+    "object": "ae2:terminal"
+  },
+  {
+    "id": "electric_entry_ae8",
     "stage": "era.electric",
     "object": "ae2:crafting_terminal"
   },
   {
-    "id": "electric_entry_i10",
+    "id": "electric_entry_ae9",
+    "stage": "era.electric",
+    "object": "ae2:pattern_encoding_terminal"
+  },
+  {
+    "id": "electric_entry_ae10",
+    "stage": "era.electric",
+    "object": "ae2:interface"
+  },
+  {
+    "id": "electric_entry_ae11",
+    "stage": "era.electric",
+    "object": "ae2:pattern_provider"
+  },
+  {
+    "id": "electric_entry_if0",
     "stage": "era.electric",
     "object": "industrialforegoing:machine_frame_pity"
   },
   {
-    "id": "electric_entry_i11",
+    "id": "electric_entry_if1",
+    "stage": "era.electric",
+    "object": "industrialforegoing:pitiful_generator"
+  },
+  {
+    "id": "electric_entry_if2",
+    "stage": "era.electric",
+    "object": "industrialforegoing:fluid_extractor"
+  },
+  {
+    "id": "electric_entry_if3",
+    "stage": "era.electric",
+    "object": "industrialforegoing:latex_processing_unit"
+  },
+  {
+    "id": "electric_entry_if4",
     "stage": "era.electric",
     "object": "industrialforegoing:dissolution_chamber"
   },
   {
-    "id": "electric_entry_i12",
+    "id": "electric_entry_if5",
     "stage": "era.electric",
-    "object": "mmcr:research_station_controller"
+    "object": "industrialforegoing:resourceful_furnace"
   },
   {
-    "id": "electric_entry_i0",
+    "id": "electric_entry_if6",
     "stage": "era.electric",
-    "object": "mekanism:metallurgic_infuser"
+    "object": "industrialforegoing:bioreactor"
   },
   {
-    "id": "electric_entry_i1",
-    "stage": "era.electric",
-    "object": "mekanism:enrichment_chamber"
+    "id": "ae_dlc_0",
+    "stage": "era.ae_dlc",
+    "object": "extendedae:circuit_cutter"
   },
   {
-    "id": "electric_entry_i2",
-    "stage": "era.electric",
-    "object": "mekanism:crusher"
+    "id": "ae_dlc_1",
+    "stage": "era.ae_dlc",
+    "object": "extendedae:crystal_assembler"
   },
   {
-    "id": "electric_entry_i3",
-    "stage": "era.electric",
-    "object": "mekanism:energized_smelter"
+    "id": "ae_dlc_2",
+    "stage": "era.ae_dlc",
+    "object": "extendedae:ex_pattern_provider"
   },
   {
-    "id": "electric_entry_i4",
-    "stage": "era.electric",
-    "object": "mekanism:osmium_compressor"
+    "id": "ae_dlc_3",
+    "stage": "era.ae_dlc",
+    "object": "extendedae:ex_inscriber"
   },
   {
-    "id": "electric_entry_i5",
-    "stage": "era.electric",
-    "object": "ae2:inscriber"
+    "id": "ae_dlc_4",
+    "stage": "era.ae_dlc",
+    "object": "extendedae:ex_interface"
   },
   {
-    "id": "electric_entry_i6",
-    "stage": "era.electric",
-    "object": "ae2:charger"
+    "id": "ae_dlc_5",
+    "stage": "era.ae_dlc",
+    "object": "extendedae:assembler_matrix_frame"
   },
   {
-    "id": "electric_entry_i7",
-    "stage": "era.electric",
-    "object": "ae2:energy_acceptor"
+    "id": "ae_dlc_6",
+    "stage": "era.ae_dlc",
+    "object": "ae2lt:overloaded_controller"
   },
   {
-    "id": "electric_entry_i8",
-    "stage": "era.electric",
-    "object": "ae2:drive"
+    "id": "ae_dlc_7",
+    "stage": "era.ae_dlc",
+    "object": "ae2lt:overloaded_interface"
   },
   {
-    "id": "electric_entry_i9",
-    "stage": "era.electric",
-    "object": "ae2:crafting_terminal"
+    "id": "ae_dlc_8",
+    "stage": "era.ae_dlc",
+    "object": "ae2lt:lightning_assembly_chamber"
   },
   {
-    "id": "electric_entry_i10",
-    "stage": "era.electric",
-    "object": "industrialforegoing:machine_frame_pity"
+    "id": "ae_dlc_9",
+    "stage": "era.ae_dlc",
+    "object": "ae2lt:lightning_collector"
   },
   {
-    "id": "electric_entry_i11",
-    "stage": "era.electric",
-    "object": "industrialforegoing:dissolution_chamber"
+    "id": "ae_dlc_10",
+    "stage": "era.ae_dlc",
+    "object": "ae2lt:matter_warping_matrix_controller"
   },
   {
-    "id": "electric_entry_i12",
-    "stage": "era.electric",
-    "object": "mmcr:research_station_controller"
+    "id": "ae_dlc_11",
+    "stage": "era.ae_dlc",
+    "object": "ae2cs:circuit_etcher"
   },
   {
-    "id": "electric_entry_i0",
-    "stage": "era.electric",
-    "object": "mekanism:metallurgic_infuser"
+    "id": "ae_dlc_12",
+    "stage": "era.ae_dlc",
+    "object": "ae2cs:crystal_aggregator"
   },
   {
-    "id": "electric_entry_i1",
-    "stage": "era.electric",
-    "object": "mekanism:enrichment_chamber"
+    "id": "ae_dlc_13",
+    "stage": "era.ae_dlc",
+    "object": "ae2cs:crystal_growth_chamber"
   },
   {
-    "id": "electric_entry_i2",
-    "stage": "era.electric",
-    "object": "mekanism:crusher"
+    "id": "ae_dlc_14",
+    "stage": "era.ae_dlc",
+    "object": "ae2cs:crystal_pulverizer"
   },
   {
-    "id": "electric_entry_i3",
-    "stage": "era.electric",
-    "object": "mekanism:energized_smelter"
+    "id": "ae_dlc_15",
+    "stage": "era.ae_dlc",
+    "object": "appflux:flux_accessor"
   },
   {
-    "id": "electric_entry_i4",
-    "stage": "era.electric",
-    "object": "mekanism:osmium_compressor"
+    "id": "ae_dlc_16",
+    "stage": "era.ae_dlc",
+    "object": "appflux:energy_processor"
   },
   {
-    "id": "electric_entry_i5",
-    "stage": "era.electric",
-    "object": "ae2:inscriber"
+    "id": "ae_dlc_17",
+    "stage": "era.ae_dlc",
+    "object": "appliedpneumatics:me_pressure_interface_block"
   },
   {
-    "id": "electric_entry_i6",
-    "stage": "era.electric",
-    "object": "ae2:charger"
+    "id": "ae_dlc_18",
+    "stage": "era.ae_dlc",
+    "object": "appliedcreate:andesite_pattern_provider"
   },
   {
-    "id": "electric_entry_i7",
-    "stage": "era.electric",
-    "object": "ae2:energy_acceptor"
+    "id": "ae_dlc_19",
+    "stage": "era.ae_dlc",
+    "object": "appliedcreate:brass_pattern_provider"
   },
   {
-    "id": "electric_entry_i8",
-    "stage": "era.electric",
-    "object": "ae2:drive"
+    "id": "ae_dlc_20",
+    "stage": "era.ae_dlc",
+    "object": "appliedcreate:kinetic_energy_acceptor"
   },
   {
-    "id": "electric_entry_i9",
-    "stage": "era.electric",
-    "object": "ae2:crafting_terminal"
+    "id": "ae_dlc_21",
+    "stage": "era.ae_dlc",
+    "object": "appmek:chemical_cell_housing"
   },
   {
-    "id": "electric_entry_i10",
-    "stage": "era.electric",
-    "object": "industrialforegoing:machine_frame_pity"
+    "id": "ae_dlc_22",
+    "stage": "era.ae_dlc",
+    "object": "ae2wtlib:wireless_universal_terminal"
   },
   {
-    "id": "electric_entry_i11",
-    "stage": "era.electric",
-    "object": "industrialforegoing:dissolution_chamber"
-  },
-  {
-    "id": "electric_entry_i12",
-    "stage": "era.electric",
-    "object": "mmcr:research_station_controller"
+    "id": "ae_dlc_23",
+    "stage": "era.ae_dlc",
+    "object": "extendedae_plus:network_pattern_controller"
   },
   {
     "id": "steam_gate_i0",

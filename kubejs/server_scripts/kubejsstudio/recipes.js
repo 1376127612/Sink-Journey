@@ -48,4 +48,6 @@ ServerEvents.recipes(event => {
     event.remove({ id: 'roots:grove_pedestal' })
     event.remove({ id: 'industrialupgrade:industrialupgrade_735' })
     event.shaped('industrialupgrade:crafting_elements/crafting_276_element', ['###', 'ABA', ' C '], { '#': 'industrialupgrade:casing/bronze', 'A': 'industrialupgrade:crafting_elements/crafting_294_element', 'B': 'industrialupgrade:crafting_elements/crafting_60_element', 'C': 'industrialupgrade:crafting_elements/crafting_42_element' }).id('kubejsstudio:elector_motor')
+    event.remove({ id: 'industrialupgrade:industrialupgrade_1245' })
+    event.shaped('industrialupgrade:crafting_elements/crafting_588_element', ['##A', '#AA', '##A'], { '#': 'minecraft:blue_ice', 'A': 'create:iron_sheet' }).id('kubejsstudio:crafting_elements/crafting_588_element')
 })

@@ -199,18 +199,34 @@ var SRTU_openStyled = function (ev, model) {
     var UI = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UI')
     var ModularUI = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.ModularUI')
     var SDFRectTexture = Java.loadClass('com.lowdragmc.lowdraglib2.gui.texture.SDFRectTexture')
-    var YogaFlexDirection = Java.loadClass('org.appliedenergistics.yoga.YogaFlexDirection')
-    var Size = Java.loadClass('com.lowdragmc.lowdraglib2.math.Size')
+    var FlexDirection = Java.loadClass('dev.vfyjxf.taffy.style.FlexDirection')
+    var StyleOrigin = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.style.StyleOrigin')
+    var INLINE = StyleOrigin.INLINE
+
+    // 这个界面之前一次都没成功过，三处都是独立踩坑（日志里那条
+    // "样式版界面构建失败，退回纯文本版" 是第一条）：
+    //   1) layout(l => l.flexDirection(...))：LayoutStyle 同时有 setter 和
+    //      getFlexDirection() getter，Rhino 取成员先命中 getter，拿到的是
+    //      FlexDirection 对象，再当函数调用就抛 "not a function, it is object"。
+    //      -> 布局一律走 lss(...)，并且显式传 StyleOrigin.INLINE
+    //   2) UI.of(root, function)：DynamicSizeProvider 继承 Function 的桥接方法，
+    //      Rhino 转不了 JS 函数（会当 List/Stylesheet[]/String[] 重载竞争）。
+    //      -> 尺寸直接写在 root 的 lss 上，UI.of(root) 单参
+    //   3) SDFRectTexture.of(0xF010141A)：超过 int 上限的字面量在 Rhino 里是
+    //      double，传给 int 参数会抛错 -> 一律写等值的有符号 ARGB 负数。
+    var WIDTH = 236
+    var rowsH = 0
+    for (var r = 0; r < model.rows.length; r++) rowsH += 20
+    var height = model.rows.length === 0 ? 60 : (16 + 12 + 4 + 10 + 4 + 1 + 4 + rowsH + 4 + 10)
 
     var root = new UIElement()
-    root.layout(function (l) {
-        l.width(236)
-        l.flexDirection(YogaFlexDirection.COLUMN)
-        l.paddingAll(8)
-        l.gapAll(4)
-    })
+    root.lss('width', WIDTH, INLINE)
+    root.lss('height', height, INLINE)
+    root.lss('flex-direction', FlexDirection.COLUMN, INLINE)
+    root.lss('padding-all', 8, INLINE)
+    root.lss('gap-all', 4, INLINE)
     root.style(function (s) {
-        s.background(SDFRectTexture.of(0xF010141A).setRadius(6).setBorderColor(0xFF47505C).setStroke(1))
+        s.background(SDFRectTexture.of(-267381734).setRadius(6).setBorderColor(-12103588).setStroke(1))
     })
 
     // 标题
@@ -225,70 +241,51 @@ var SRTU_openStyled = function (ev, model) {
 
     // 分隔线
     var sep = new UIElement()
-    sep.layout(function (l) {
-        l.widthStretch()
-        l.height(1)
-    })
+    sep.lss('width', 'stretch', INLINE)
+    sep.lss('height', 1, INLINE)
     sep.style(function (s) {
-        s.background(SDFRectTexture.of(0xFF39414B))
+        s.background(SDFRectTexture.of(-13024949))
     })
     root.addChild(sep)
 
     // 节点行
     for (var i = 0; i < model.rows.length; i++) {
         var row = new UIElement()
-        row.layout(function (l) {
-            l.widthStretch()
-            l.paddingAll(3)
-        })
+        row.lss('width', 'stretch', INLINE)
+        row.lss('padding-all', 3, INLINE)
+        // 悬停提示必须在 style 回调里设置（原来写在回调外，那里没有 s 变量，
+        // ReferenceError 被 catch 吞掉，tooltips 从来没生效过）
+        var tips = model.rows[i].tips || []
         row.style(function (s) {
-            s.background(SDFRectTexture.of(0x2E7A8794).setRadius(4))
-        })
-        try {
-            var tips = model.rows[i].tips
-            if (tips.length > 0) {
-                var arr = []
-                for (var t = 0; t < tips.length; t++) arr.push(tips[t])
-                s.tooltips(arr)
+            s.background(SDFRectTexture.of(779782036).setRadius(4))
+            try {
+                if (tips.length > 0) s.tooltips(tips)
+            } catch (eTip) {
+                console.warn('[SRTU] 节点悬停提示设置失败（不影响显示）: ' + eTip)
             }
-        } catch (eTip) {
-            console.warn('[SRTU] 节点悬停提示设置失败（不影响显示）: ' + eTip)
-        }
+        })
         row.addChild(SRTU_mkLabel(Label, model.rows[i].line))
         root.addChild(row)
     }
 
     // 页脚
     var foot = new UIElement()
-    foot.layout(function (l) {
-        l.widthStretch()
-        l.heightAuto()
-    })
+    foot.lss('width', 'stretch', INLINE)
     foot.addChild(SRTU_mkLabel(Label, '§8/research tree · /research need <物品id>'))
     root.addChild(foot)
 
-    // 动态窗口高度：按行数估算
-    var rowsH = 0
-    for (var r = 0; r < model.rows.length; r++) rowsH += 20
-    var totalH = 16 + 12 + 4 + 10 + 4 + 1 + 4 + rowsH + 4 + 10
-    if (model.rows.length === 0) totalH = 60
-
-    ev.modularUI = ModularUI.of(UI.of(root, function (size) {
-        return Size.of(236, totalH)
-    }), ev.player)
+    ev.modularUI = ModularUI.of(UI.of(root), ev.player)
 }
 
 // 兜底：样式版构建失败时退回纯文本版，保证一定能打开
-// 顺便放一个扫雷入口：通关后由服务端加速原始研究台当前进度
 var SRTU_openPlain = function (ev, lines) {
     var Label = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.elements.Label')
-    var Button = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.elements.Button')
     var UIElement = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UIElement')
     var UI = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UI')
     var ModularUI = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.ModularUI')
 
     var width = 240
-    var height = Math.max(60, lines.length * 10 + 44)
+    var height = Math.max(60, lines.length * 10 + 28)
 
     var root = new UIElement()
     root.lss('width', width)
@@ -301,21 +298,6 @@ var SRTU_openPlain = function (ev, lines) {
     label.setText(lines.join('\n'))
     label.lss('width', 'stretch')
     root.addChild(label)
-
-    var btn = new Button()
-    btn.setText('§e扫雷 §7· 通关加速原始研究台')
-    btn.lss('width', 'stretch')
-    btn.lss('height', 16)
-    btn.setOnClick(function () {
-        try {
-            // 由服务端 /sweeper 打开玩家界面
-            ev.player.connection.sendCommand('sweeper')
-        } catch (e2) {
-            console.warn('[SRTU] 打开扫雷失败: ' + e2)
-            try { ev.player.tell(Text.of('§7扫雷打不开，用 §e/sweeper')) } catch (e3) { }
-        }
-    })
-    root.addChild(btn)
 
     ev.modularUI = ModularUI.of(UI.of(root), ev.player)
 }

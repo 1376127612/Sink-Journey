@@ -1,0 +1,299 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "e1c0000000000000"
+	group: "1D6589548F232270"
+	icon: {
+		id: "industrialupgrade:basemachine3/generator_iu"
+	}
+	id: "4591D783FFFC8E8C"
+	images: [ ]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["35B9A0B50B6D5A7C"]
+			id: "6598E70D2B013335"
+			tasks: [{
+				id: "09C1502D0DE379BC"
+				item: { count: 1, id: "kubejs:research_notes_electric" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			id: "4A3C44501E2E4EBE"
+			tasks: [{
+				id: "43D8285D7937F95D"
+				item: { count: 1, id: "industrialupgrade:basemachine3/generator_iu" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: 0.0d
+		}
+		{
+			id: "47288C78398A483D"
+			tasks: [{
+				count: 16L
+				id: "66268AA1EEF7ECDF"
+				item: { count: 1, id: "industrialupgrade:blockresource/machine" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: 0.0d
+		}
+		{
+			id: "759CE071C62F7828"
+			tasks: [{
+				id: "5E0F504B22BBBBF0"
+				item: { count: 1, id: "industrialupgrade:basemachine3/electric_dryer" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: 0.0d
+		}
+		{
+			id: "19FBDF891F2A2D1A"
+			tasks: [{
+				id: "70F9306E69F0AE2E"
+				item: { count: 1, id: "industrialupgrade:basemachine3/electric_squeezer" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			id: "77AAA4247AD5F8FF"
+			tasks: [{
+				id: "1A72B5F47787C904"
+				item: { count: 1, id: "industrialupgrade:basemachine3/sawmill" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: 0.0d
+		}
+		{
+			id: "649891A244FD0BF3"
+			tasks: [{
+				id: "6A4C5D857519B4F8"
+				item: { count: 1, id: "industrialupgrade:basemachine2/electrolyzer_iu" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -3.0d
+		}
+		{
+			id: "2E27EB9AE8646E22"
+			tasks: [{
+				id: "51911160ED24E797"
+				item: { count: 1, id: "industrialupgrade:basemachine3/machine_charger" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: -3.0d
+		}
+		{
+			id: "1C7FAECA90C888F8"
+			tasks: [{
+				id: "2E22D74E9D55C77C"
+				item: { count: 1, id: "industrialupgrade:basemachine3/laser_polisher" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: -3.0d
+		}
+		{
+			id: "60E63B47743E8117"
+			tasks: [{
+				id: "09AA922764BB8ACA"
+				item: { count: 1, id: "industrialupgrade:basemachine3/silicon_crystal_handler" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -3.0d
+		}
+		{
+			id: "1B7E5957F8966C13"
+			tasks: [{
+				count: 2L
+				id: "58E0C9CCE2E89F98"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_495_element" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -3.0d
+		}
+		{
+			id: "3437F33FFBE53C4F"
+			tasks: [{
+				count: 8L
+				id: "7D40514DDA94E10B"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_494_element" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -6.0d
+		}
+		{
+			id: "4F873A6D435CC4C4"
+			tasks: [{
+				id: "62323292DA38BD62"
+				item: { count: 1, id: "ae2:inscriber" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -6.0d
+		}
+		{
+			id: "2180DC78F9A01842"
+			tasks: [{
+				count: 4L
+				id: "348437AE2D54CB84"
+				item: { count: 1, id: "ae2:printed_silicon" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: -6.0d
+		}
+		{
+			id: "29F951B2995CE402"
+			tasks: [{
+				count: 4L
+				id: "604322395E5398A5"
+				item: { count: 1, id: "ae2:logic_processor" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: -6.0d
+		}
+		{
+			id: "03DDAA881059E878"
+			tasks: [{
+				id: "44998D42F681BB20"
+				item: { count: 1, id: "ae2:charger" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -6.0d
+		}
+		{
+			id: "15EE1D0B0E4716BF"
+			tasks: [{
+				id: "16B3BA58C8B92FF0"
+				item: { count: 1, id: "ae2:energy_acceptor" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: -6.0d
+		}
+		{
+			id: "70DA7660ACBB320E"
+			tasks: [{
+				id: "108ED7D60C6F41FB"
+				item: { count: 1, id: "ae2:drive" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: -9.0d
+		}
+		{
+			id: "7ACE93EC8204B651"
+			tasks: [{
+				id: "0AD60806DB0E1F8B"
+				item: { count: 1, id: "ae2:terminal" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -9.0d
+		}
+		{
+			id: "70F98ED2C068FAEA"
+			tasks: [{
+				id: "0FA35387559E0355"
+				item: { count: 1, id: "ae2:crafting_terminal" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: -9.0d
+		}
+		{
+			id: "0FC5052F1A436972"
+			tasks: [{
+				id: "5B5C29CBC359CE5F"
+				item: { count: 1, id: "ae2:controller" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: -9.0d
+		}
+		{
+			id: "720025C66313C2C6"
+			tasks: [
+				{
+					id: "03368BB562D046F9"
+					item: { count: 1, id: "ae2:interface" }
+					type: "item"
+				}
+				{
+					id: "70C73AA6B944944E"
+					item: { count: 1, id: "ae2:pattern_provider" }
+					type: "item"
+				}
+			]
+			x: 1.5d
+			y: -9.0d
+		}
+		{
+			id: "3D241785EDD13C8D"
+			tasks: [{
+				id: "387A37C3404FA933"
+				item: { count: 1, id: "industrialforegoing:pitiful_generator" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -9.0d
+		}
+		{
+			id: "03B4867738AD7EBF"
+			tasks: [{
+				count: 4L
+				id: "5ECB52B50D93AE06"
+				item: { count: 1, id: "industrialforegoing:machine_frame_pity" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -12.0d
+		}
+		{
+			id: "5754619E9CA9D0F0"
+			tasks: [{
+				id: "5623BC7839F11414"
+				item: { count: 1, id: "industrialforegoing:latex_processing_unit" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: -12.0d
+		}
+		{
+			id: "5C741FDE56BF03F6"
+			tasks: [{
+				id: "4FDACCA9C250E5F9"
+				item: { count: 1, id: "industrialforegoing:fluid_extractor" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: -12.0d
+		}
+		{
+			id: "1A1FA26750C0224F"
+			tasks: [{
+				id: "4517673871E7A620"
+				item: { count: 1, id: "industrialforegoing:dissolution_chamber" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: -12.0d
+		}
+	]
+}

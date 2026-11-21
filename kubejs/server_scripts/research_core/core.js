@@ -340,6 +340,10 @@ PlayerEvents.inventoryChanged('kubejs:research_notes_radiance', event => {
     srGrant(event.server, ['era.radiance'], 'item:research_notes_radiance')
 })
 
+PlayerEvents.inventoryChanged('kubejs:research_notes_electric', event => {
+    srGrant(event.server, ['era.electric'], 'item:research_notes_electric')
+})
+
 // ---- 4. 存档迁移 / 回填 --------------------------------------
 
 var srPlayerHasItem = (server, itemId) => {

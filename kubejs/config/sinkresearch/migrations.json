@@ -32,6 +32,17 @@
           "grant": [ "era.kinetic" ]
         }
       ]
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "rules": [
+        {
+          "id": "backfill_gate_end_by_advancement",
+          "when": { "advancement_any_player": "minecraft:end/kill_dragon" },
+          "grant": [ "gate.end" ]
+        }
+      ]
     }
   ]
 }

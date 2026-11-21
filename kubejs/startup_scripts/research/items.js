@@ -31,6 +31,10 @@ StartupEvents.registry('item', event => {
         .displayName('研究笔记·星辉')
         .tooltip('§7记录星辉观测的笔记，拿到即解锁星辉科技')
 
+    event.create('research_notes_electric')
+        .displayName('研究笔记·电力')
+        .tooltip('§7记录电磁感应与硅器件的笔记，拿到即解锁基础电力时代')
+
     event.create('blank_blueprint')
         .displayName('空白蓝图')
         .tooltip('§7放入研究枢纽，配合演算数据刻录蓝图')
