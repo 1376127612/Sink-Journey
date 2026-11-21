@@ -45,17 +45,23 @@ var SRTU_readJson = function (path) {
 
 var SRTU_nodes = null
 var SRTU_order = null
+var SRTU_pageTitles = {}
 
 var SRTU_load = function () {
     SRTU_nodes = {}
     SRTU_order = []
+    SRTU_pageTitles = {}
     var man = SRTU_readJson('kubejs/config/sinkresearch/manifest.json')
     if (!man || !man.pages) return
     for (var i = 0; i < man.pages.length; i++) {
         var page = SRTU_readJson('kubejs/config/sinkresearch/' + String(man.pages[i]))
         if (!page || !page.nodes) continue
+        // 树面板要按页分带排布，所以节点必须记住自己属于哪一页
+        var pid = String(page.page || man.pages[i])
+        if (page.title_key) SRTU_pageTitles[pid] = String(page.title_key)
         for (var k = 0; k < page.nodes.length; k++) {
             var n = page.nodes[k]
+            n.page = pid
             SRTU_nodes[String(n.id)] = n
             SRTU_order.push(String(n.id))
         }
@@ -268,7 +274,7 @@ var SRTU_model = function (server) {
         if (unlocks !== null) running = SRTU_jobs(server)
     }
     if (unlocks === null) {
-        var info = { noData: true, done: 0, total: 0, rows: [], running: [] }
+        var info = { noData: true, done: 0, total: 0, rows: [], running: [], unlocks: {} }
         if (SRTU_nodes && SRTU_order.length > 0) {
             for (var i = 0; i < SRTU_order.length; i++) {
                 var n0 = SRTU_nodes[SRTU_order[i]]
@@ -288,7 +294,7 @@ var SRTU_model = function (server) {
             rows.push({ line: st[0] + ' §f' + n.id + ' §8· ' + SRTU_eraName(n.era), tips: SRTU_tips(n, unlocks) })
         }
     }
-    return { noData: false, done: done, total: rows.length, rows: rows, running: running }
+    return { noData: false, done: done, total: rows.length, rows: rows, running: running, unlocks: unlocks }
 }
 
 // ---- 界面构建 ------------------------------------------------
@@ -299,6 +305,40 @@ var SRTU_mkLabel = function (Label, text) {
     return lab
 }
 
+var SRTU_short = function (id, max) {
+    var s = String(id)
+    var at = s.indexOf(':')
+    if (at >= 0) s = s.substring(at + 1)
+    var lim = max || 10
+    if (s.length > lim) s = s.substring(0, lim)
+    return s
+}
+
+var SRTU_wrap = function (text, per) {
+    var out = []
+    var s = String(text || '')
+    var lim = per || 19
+    while (s.length > lim) {
+        out.push(s.substring(0, lim))
+        s = s.substring(lim)
+    }
+    if (s.length > 0) out.push(s)
+    return out
+}
+
+var SRTU_lang = function (key) {
+    if (!key) return ''
+    try {
+        var t = String(Text.translatable(String(key)).getString())
+        if (t.length > 0 && t !== String(key)) return t
+    } catch (e) { }
+    return ''
+}
+
+// 真树界面：左列是按节点 JSON 的 ui.x / ui.y 还原出来的格子图（按页面分带，
+// 同行的前置用 1px 细线连起来），右列是选中节点的详情。
+// 只用 LDLib2 里已验证可用的 API：lss(...) 写布局、style(...) 写背景与 tooltip、
+// Label 收 mouseDown、setText 改文本。整段仍在外层 try/catch 里，出错退纯文本版。
 var SRTU_openStyled = function (ev, model) {
     var UIElement = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.UIElement')
     var Label = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.elements.Label')
@@ -309,93 +349,275 @@ var SRTU_openStyled = function (ev, model) {
     var StyleOrigin = Java.loadClass('com.lowdragmc.lowdraglib2.gui.ui.style.StyleOrigin')
     var INLINE = StyleOrigin.INLINE
 
-    // 这个界面之前一次都没成功过，三处都是独立踩坑（日志里那条
-    // "样式版界面构建失败，退回纯文本版" 是第一条）：
-    //   1) layout(l => l.flexDirection(...))：LayoutStyle 同时有 setter 和
-    //      getFlexDirection() getter，Rhino 取成员先命中 getter，拿到的是
-    //      FlexDirection 对象，再当函数调用就抛 "not a function, it is object"。
-    //      -> 布局一律走 lss(...)，并且显式传 StyleOrigin.INLINE
-    //   2) UI.of(root, function)：DynamicSizeProvider 继承 Function 的桥接方法，
-    //      Rhino 转不了 JS 函数（会当 List/Stylesheet[]/String[] 重载竞争）。
-    //      -> 尺寸直接写在 root 的 lss 上，UI.of(root) 单参
-    //   3) SDFRectTexture.of(0xF010141A)：超过 int 上限的字面量在 Rhino 里是
-    //      double，传给 int 参数会抛错 -> 一律写等值的有符号 ARGB 负数。
-    var WIDTH = 236
-    var rowsH = 0
-    for (var r = 0; r < model.rows.length; r++) rowsH += 20
-    var runH = (model.running && model.running.length > 0) ? (10 + model.running.length * 20 + 4) : 0
-    var height = Math.max(60, 16 + 12 + 4 + 10 + 4 + 1 + 4 + runH + rowsH + 4 + 10)
+    var NODE_W = 76
+    var NODE_H = 20
+    var GAP_W = 12
+    var ROW_GAP = 6
+    var DETAIL_W = 216
+    var PAD = 8
+
+    var unlocks = model.unlocks || {}
+
+    // ---- 每页的网格坐标：ui.x / ui.y 去重排序后当列号 / 行号 --------------
+    var pages = []
+    var byPage = {}
+    for (var i = 0; i < SRTU_order.length; i++) {
+        var nd = SRTU_nodes[SRTU_order[i]]
+        if (!nd) continue
+        var pid = String(nd.page || 'default')
+        if (!byPage[pid]) {
+            byPage[pid] = { id: pid, items: [], xs: [], ys: [] }
+            pages.push(byPage[pid])
+        }
+        var uiDef = nd.ui || {}
+        byPage[pid].items.push({
+            node: nd,
+            x: Number(uiDef.x) || 0,
+            y: Number(uiDef.y) || 0,
+            gx: 0,
+            gy: 0
+        })
+    }
+
+    var maxCols = 1
+    var pagesH = 0
+    for (var p = 0; p < pages.length; p++) {
+        var page = pages[p]
+        for (var a = 0; a < page.items.length; a++) {
+            if (page.xs.indexOf(page.items[a].x) < 0) page.xs.push(page.items[a].x)
+            if (page.ys.indexOf(page.items[a].y) < 0) page.ys.push(page.items[a].y)
+        }
+        page.xs.sort(function (m, n) { return m - n })
+        page.ys.sort(function (m, n) { return m - n })
+        for (var b = 0; b < page.items.length; b++) {
+            page.items[b].gx = page.xs.indexOf(page.items[b].x)
+            page.items[b].gy = page.ys.indexOf(page.items[b].y)
+        }
+        if (page.xs.length > maxCols) maxCols = page.xs.length
+        pagesH += 11 + page.ys.length * NODE_H + (page.ys.length - 1) * ROW_GAP + 8
+    }
+    var treeW = maxCols * NODE_W + (maxCols - 1) * GAP_W
+
+    var findAt = function (page, c, r) {
+        for (var i2 = 0; i2 < page.items.length; i2++) {
+            if (page.items[i2].gx === c && page.items[i2].gy === r) return page.items[i2]
+        }
+        return null
+    }
+    var findInPage = function (page, id) {
+        for (var i3 = 0; i3 < page.items.length; i3++) {
+            if (String(page.items[i3].node.id) === String(id)) return page.items[i3]
+        }
+        return null
+    }
+    var requireList = function (node) {
+        var req = node.requires || {}
+        return req.or || req.and || []
+    }
+    // 只有"左邻列同一行"的前置画线；跨行/跨列的前置在右侧详情里列出来
+    var hasLink = function (page, c, r) {
+        var child = findAt(page, c + 1, r)
+        if (!child) return false
+        var list = requireList(child.node)
+        for (var i4 = 0; i4 < list.length; i4++) {
+            var par = findInPage(page, String(list[i4]))
+            if (par && par.gx === c && par.gy === r) return true
+        }
+        return false
+    }
+
+    // ---- 右列：详情 ----------------------------------------------------
+    var detailTitle = SRTU_mkLabel(Label, '§b—')
+    var detailBody = SRTU_mkLabel(Label, '§8点一个节点看详情')
+    detailBody.lss('width', 'stretch', INLINE)
+
+    var showDetail = function (node) {
+        var st = SRTU_mark(node, unlocks)
+        var lines = []
+        lines.push('§7状态 §f' + st[1] + ' §8· §7' + SRTU_eraName(node.era))
+
+        var inputs = node.inputs || {}
+        var inItems = inputs.items || []
+        for (var i5 = 0; i5 < inItems.length; i5++) {
+            lines.push('§8· §7' + SRTU_short(inItems[i5].id, 18) + ' §f×' + inItems[i5].count)
+        }
+        var inFluids = inputs.fluids || []
+        for (var i6 = 0; i6 < inFluids.length; i6++) {
+            lines.push('§8· §7' + SRTU_short(inFluids[i6].id, 14) + ' §f' + inFluids[i6].amount + 'mB')
+        }
+        if (inputs.energy) lines.push('§8· §7能量 §f' + inputs.energy + ' FE')
+        if (inputs.compute) lines.push('§8· §7算力需求 §f' + inputs.compute)
+        if (node.duration) lines.push('§8· §7时长 §f' + Math.round(Number(node.duration) / 20) + 's')
+
+        var req = requireList(node)
+        if (req.length > 0) lines.push('§7前置 §f' + req.join('§7, §f'))
+
+        var outItems = (node.outputs || {}).items || []
+        for (var i7 = 0; i7 < outItems.length; i7++) {
+            lines.push('§7产出 §f' + SRTU_short(outItems[i7].id, 16) + '§7 ×' + outItems[i7].count)
+        }
+        var keys = node.unlock || []
+        if (keys.length > 0) lines.push('§7解锁 §f' + keys.join('§7, §f'))
+
+        var doc = SRTU_lang((node.ui || {}).doc)
+        if (doc.length > 0) {
+            lines.push('')
+            var wrapped = SRTU_wrap(doc, 19)
+            for (var i8 = 0; i8 < wrapped.length; i8++) lines.push('§8' + wrapped[i8])
+        }
+
+        detailTitle.setText('§b' + SRTU_short(node.id, 18))
+        detailBody.setText(lines.join('\n'))
+    }
+
+    // ---- 左列：格子 -----------------------------------------------------
+    // 格子用 Label 而不是 UIElement：挖雷界面里 Label 的 mouseDown 是验证过的，
+    // UIElement 收不收鼠标事件没试过。
+    var makeNode = function (node) {
+        var mark = SRTU_mark(node, unlocks)
+        var bg = 858008112
+        var border = -11906984
+        if (mark[0] === '§a✔') {
+            bg = 858417978
+            border = -10835862
+        } else if (mark[0] === '§e▶') {
+            bg = 862673450
+            border = -3562969
+        }
+        var box = new Label()
+        box.setText(mark[0] + ' §f' + SRTU_short(node.id, 8))
+        box.lss('width', NODE_W, INLINE)
+        box.lss('height', NODE_H, INLINE)
+        box.lss('padding-all', 3, INLINE)
+        box.style(function (s) {
+            s.background(SDFRectTexture.of(bg).setRadius(3).setBorderColor(border).setStroke(1))
+            try {
+                var tips = SRTU_tips(node, unlocks)
+                if (tips.length > 0) s.tooltips(tips)
+            } catch (eTip) { }
+        })
+        try {
+            box.addEventListener('mouseDown', function (e) { showDetail(node) })
+        } catch (eClick) {
+            console.warn('[SRTU] 节点点击监听失败: ' + eClick)
+        }
+        return box
+    }
+
+    var runH = (model.running && model.running.length > 0) ? (10 + model.running.length * (NODE_H - 2) + 6) : 0
+    var leftH = 12 + 4 + 10 + 4 + runH + 4 + 1 + 4 + pagesH + 8
+    var totalW = PAD * 2 + treeW + 8 + DETAIL_W
+    var totalH = PAD * 2 + Math.max(leftH, 160) + 8
 
     var root = new UIElement()
-    root.lss('width', WIDTH, INLINE)
-    root.lss('height', height, INLINE)
-    root.lss('flex-direction', FlexDirection.COLUMN, INLINE)
-    root.lss('padding-all', 8, INLINE)
-    root.lss('gap-all', 4, INLINE)
+    root.lss('width', totalW, INLINE)
+    root.lss('height', totalH, INLINE)
+    root.lss('flex-direction', FlexDirection.ROW, INLINE)
+    root.lss('padding-all', PAD, INLINE)
+    root.lss('gap-all', 8, INLINE)
     root.style(function (s) {
         s.background(SDFRectTexture.of(-267381734).setRadius(6).setBorderColor(-12103588).setStroke(1))
     })
 
-    // 标题
-    var head = SRTU_mkLabel(Label, '§b§l溯洄研究终端')
-    root.addChild(head)
+    var left = new UIElement()
+    left.lss('width', treeW, INLINE)
+    left.lss('flex-direction', FlexDirection.COLUMN, INLINE)
+    left.lss('gap-all', 4, INLINE)
+    root.addChild(left)
 
-    // 进度
-    var progText = model.noData
-        ? ('§7节点 §f' + model.total + ' §8（专用服模式，进度以 /research tree 为准）')
+    left.addChild(SRTU_mkLabel(Label, '§b§l溯洄研究终端'))
+    var prog = model.noData
+        ? ('§7节点 §f' + model.total + ' §8· 进度待同步')
         : ('§7已完成 §f' + model.done + '§7/§f' + model.total)
-    root.addChild(SRTU_mkLabel(Label, progText))
+    left.addChild(SRTU_mkLabel(Label, prog))
 
-    // 分隔线
+    if (model.running && model.running.length > 0) {
+        left.addChild(SRTU_mkLabel(Label, '§6▣ 进行中 §7' + model.running.length + ' 条'))
+        for (var r1 = 0; r1 < model.running.length; r1++) {
+            var job = model.running[r1]
+            var jrow = new UIElement()
+            jrow.lss('width', 'stretch', INLINE)
+            jrow.lss('padding-all', 2, INLINE)
+            jrow.style(function (s) {
+                s.background(SDFRectTexture.of(776616474).setRadius(3))
+            })
+            jrow.addChild(SRTU_mkLabel(Label, '§e▸ §f' + SRTU_short(job.id, 16) + ' §7' + SRTU_fmtLeft(job.left)))
+            left.addChild(jrow)
+        }
+    }
+
     var sep = new UIElement()
     sep.lss('width', 'stretch', INLINE)
     sep.lss('height', 1, INLINE)
     sep.style(function (s) {
         s.background(SDFRectTexture.of(-13024949))
     })
-    root.addChild(sep)
+    left.addChild(sep)
 
-    // 进行中：研究站此刻在跑哪条、大概还剩多久
-    if (model.running && model.running.length > 0) {
-        root.addChild(SRTU_mkLabel(Label, '§6▣ 进行中 §7' + model.running.length + ' 条'))
-        for (var q = 0; q < model.running.length; q++) {
-            var job = model.running[q]
-            var jrow = new UIElement()
-            jrow.lss('width', 'stretch', INLINE)
-            jrow.lss('padding-all', 3, INLINE)
-            jrow.style(function (s) {
-                s.background(SDFRectTexture.of(776616474).setRadius(4))
-            })
-            jrow.addChild(SRTU_mkLabel(Label, '§e▸ §f' + job.id + ' §7' + SRTU_fmtLeft(job.left) + ' §8@' + job.pos))
-            root.addChild(jrow)
+    for (var p2 = 0; p2 < pages.length; p2++) {
+        var page2 = pages[p2]
+        var ptitle = SRTU_lang(SRTU_pageTitles[page2.id])
+        left.addChild(SRTU_mkLabel(Label, '§8§l' + (ptitle.length > 0 ? ptitle : page2.id)))
+
+        for (var r2 = 0; r2 < page2.ys.length; r2++) {
+            var rowEl = new UIElement()
+            rowEl.lss('width', treeW, INLINE)
+            rowEl.lss('height', NODE_H, INLINE)
+            rowEl.lss('flex-direction', FlexDirection.ROW, INLINE)
+
+            for (var c2 = 0; c2 < page2.xs.length; c2++) {
+                var slot = findAt(page2, c2, r2)
+                if (slot) {
+                    rowEl.addChild(makeNode(slot.node))
+                } else {
+                    var blank = new UIElement()
+                    blank.lss('width', NODE_W, INLINE)
+                    blank.lss('height', NODE_H, INLINE)
+                    rowEl.addChild(blank)
+                }
+
+                if (c2 < page2.xs.length - 1) {
+                    var link = new UIElement()
+                    link.lss('width', GAP_W, INLINE)
+                    link.lss('height', NODE_H, INLINE)
+                    if (hasLink(page2, c2, r2)) {
+                        link.lss('padding-top', NODE_H / 2 - 1, INLINE)
+                        var bar = new UIElement()
+                        bar.lss('width', GAP_W, INLINE)
+                        bar.lss('height', 1, INLINE)
+                        bar.style(function (s) {
+                            s.background(SDFRectTexture.of(-9532518))
+                        })
+                        link.addChild(bar)
+                    }
+                    rowEl.addChild(link)
+                }
+            }
+            left.addChild(rowEl)
         }
     }
 
-    // 节点行
-    for (var i = 0; i < model.rows.length; i++) {
-        var row = new UIElement()
-        row.lss('width', 'stretch', INLINE)
-        row.lss('padding-all', 3, INLINE)
-        // 悬停提示必须在 style 回调里设置（原来写在回调外，那里没有 s 变量，
-        // ReferenceError 被 catch 吞掉，tooltips 从来没生效过）
-        var tips = model.rows[i].tips || []
-        row.style(function (s) {
-            s.background(SDFRectTexture.of(779782036).setRadius(4))
-            try {
-                if (tips.length > 0) s.tooltips(tips)
-            } catch (eTip) {
-                console.warn('[SRTU] 节点悬停提示设置失败（不影响显示）: ' + eTip)
-            }
-        })
-        row.addChild(SRTU_mkLabel(Label, model.rows[i].line))
-        root.addChild(row)
-    }
+    var detail = new UIElement()
+    detail.lss('width', DETAIL_W, INLINE)
+    detail.lss('flex-direction', FlexDirection.COLUMN, INLINE)
+    detail.lss('padding-all', 6, INLINE)
+    detail.lss('gap-all', 4, INLINE)
+    detail.style(function (s) {
+        s.background(SDFRectTexture.of(772806688).setRadius(4).setBorderColor(-11906984).setStroke(1))
+    })
+    detail.addChild(detailTitle)
+    detail.addChild(detailBody)
+    root.addChild(detail)
 
-    // 页脚
-    var foot = new UIElement()
-    foot.lss('width', 'stretch', INLINE)
-    foot.addChild(SRTU_mkLabel(Label, '§8/research tree · /research need <物品id>'))
-    root.addChild(foot)
+    // 默认选中第一条"可研究"的节点
+    var pick = null
+    for (var i9 = 0; i9 < SRTU_order.length; i9++) {
+        var cand = SRTU_nodes[SRTU_order[i9]]
+        if (!cand) continue
+        if (!pick && SRTU_ready(cand, unlocks) && !SRTU_done(cand, unlocks)) pick = cand
+    }
+    if (!pick && SRTU_order.length > 0) pick = SRTU_nodes[SRTU_order[0]]
+    if (pick) showDetail(pick)
 
     ev.modularUI = ModularUI.of(UI.of(root), ev.player)
 }
