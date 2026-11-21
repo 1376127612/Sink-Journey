@@ -292,8 +292,8 @@
 			dependencies: ["0056045684755D67"]
 			id: "25D01AF8BA18BB6D"
 			tasks: [{
-				id: "7D9FD0E2B5F11C54"
-				item: { count: 1, id: "minecraft:ancient_debris" }
+				id: "795335BBA7CE4392"
+				item: { count: 1, id: "kubejs:proof_ancients" }
 				type: "item"
 			}]
 			x: 12.0d

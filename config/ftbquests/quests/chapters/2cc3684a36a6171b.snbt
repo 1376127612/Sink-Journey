@@ -1,0 +1,339 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "2cc3684a36a6171b"
+	group: "1D6589548F232270"
+	icon: {
+		id: "seroka_hole:hole_oeuf_desir"
+	}
+	id: "2CC3684A36A6171B"
+	images: [ ]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["53CD91001F021592"]
+			id: "0DAEFCCE3BFBEF69"
+			tasks: [
+				{
+					id: "1D11D9948801554B"
+					item: { count: 1, id: "seroka_hole:hole_casque_guettemare" }
+					type: "item"
+				}
+				{
+					id: "49F4A2E9D153EB3B"
+					item: { count: 1, id: "seroka_hole:hole_plastron_guettemare" }
+					type: "item"
+				}
+				{
+					id: "6DC9453BE56FFC13"
+					item: { count: 1, id: "seroka_hole:hole_jambieres_guettemare" }
+					type: "item"
+				}
+				{
+					id: "46827C109216CCE7"
+					item: { count: 1, id: "seroka_hole:hole_bottes_guettemare" }
+					type: "item"
+				}
+			]
+			x: -12.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["03CF66A8B862AB79"]
+			id: "3351625F36EC0194"
+			tasks: [
+				{
+					id: "7AEF480D1919DAD5"
+					item: { count: 1, id: "seroka_hole:hole_casque_rodeur" }
+					type: "item"
+				}
+				{
+					id: "6A4B8AE6FFE6651A"
+					item: { count: 1, id: "seroka_hole:hole_plastron_rodeur" }
+					type: "item"
+				}
+				{
+					id: "625F3C95267CEDF3"
+					item: { count: 1, id: "seroka_hole:hole_jambieres_rodeur" }
+					type: "item"
+				}
+				{
+					id: "0198EBBB372AE503"
+					item: { count: 1, id: "seroka_hole:hole_bottes_rodeur" }
+					type: "item"
+				}
+			]
+			x: -11.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["0AFA7391D17E0228"]
+			id: "03CF66A8B862AB79"
+			tasks: [{
+				entity: "seroka_hole:hole_rodeur"
+				id: "41F725EEEF183979"
+				type: "kill"
+				value: 5L
+			}]
+			x: -10.0d
+			y: -3.5d
+		}
+		{
+			id: "2E74C539C92E94EF"
+			tasks: [{
+				dimension: "seroka_hole:strate_1"
+				id: "7599EBF656938E5A"
+				type: "dimension"
+			}]
+			x: -8.5d
+			y: -4.5d
+		}
+		{
+			dependencies: ["2E74C539C92E94EF"]
+			id: "0AFA7391D17E0228"
+			tasks: [{
+				id: "70A21E1FCEB06479"
+				type: "checkmark"
+			}]
+			x: -8.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["0AFA7391D17E0228"]
+			id: "53CD91001F021592"
+			tasks: [{
+				entity: "seroka_hole:hole_guettemare"
+				id: "35381426FCD2940C"
+				type: "kill"
+				value: 5L
+			}]
+			x: -10.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["0AFA7391D17E0228"]
+			id: "1359BE3C77A806B6"
+			tasks: [{
+				entity: "seroka_hole:hole_piquemite"
+				id: "7AC246AA81928189"
+				type: "kill"
+				value: 5L
+			}]
+			x: -10.5d
+			y: -1.0d
+		}
+		{
+			dependencies: ["1359BE3C77A806B6"]
+			id: "32A506E2D35153FF"
+			tasks: [
+				{
+					id: "5AD0C7CB019EB884"
+					item: { count: 1, id: "seroka_hole:hole_bottes_piquemite" }
+					type: "item"
+				}
+				{
+					id: "4002EB6CFC0831B0"
+					item: { count: 1, id: "seroka_hole:hole_jambieres_piquemite" }
+					type: "item"
+				}
+				{
+					id: "4334FEDB978171CF"
+					item: { count: 1, id: "seroka_hole:hole_plastron_piquemite" }
+					type: "item"
+				}
+				{
+					id: "76B96B59753126E9"
+					item: { count: 1, id: "seroka_hole:hole_casque_piquemite" }
+					type: "item"
+				}
+			]
+			x: -12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0AFA7391D17E0228"]
+			id: "42223DDF2528A3FB"
+			tasks: [{
+				id: "3A6230E78077EEAC"
+				type: "checkmark"
+			}]
+			x: -7.5d
+			y: 0.5d
+		}
+		{
+			dependencies: ["42223DDF2528A3FB"]
+			id: "180BF6A63BBFFEB7"
+			tasks: [{
+				id: "730D9A7451CA739E"
+				type: "checkmark"
+			}]
+			x: -5.0d
+			y: 2.5d
+		}
+		{
+			dependencies: ["180BF6A63BBFFEB7"]
+			id: "41BE19EC32B35C5C"
+			tasks: [{
+				entity: "seroka_hole:hole_mimoroche"
+				id: "54C0DF8697C94D1B"
+				type: "kill"
+				value: 5L
+			}]
+			x: -7.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["180BF6A63BBFFEB7"]
+			id: "4A80AEC1F882B8F5"
+			tasks: [{
+				entity: "seroka_hole:hole_bourrebouche"
+				id: "31E298F8E605115B"
+				type: "kill"
+				value: 5L
+			}]
+			x: -6.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["180BF6A63BBFFEB7"]
+			id: "6EAB6F79AF50C5C4"
+			tasks: [{
+				entity: "seroka_hole:hole_happevoile"
+				id: "4F7591CC5E90846B"
+				type: "kill"
+				value: 5L
+			}]
+			x: -4.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["41BE19EC32B35C5C"]
+			id: "0EA3298116452494"
+			tasks: [
+				{
+					id: "2EB8F21528DABFF9"
+					item: { count: 1, id: "seroka_hole:hole_casque_mimoroche" }
+					type: "item"
+				}
+				{
+					id: "1AB8872C386B8937"
+					item: { count: 1, id: "seroka_hole:hole_plastron_mimoroche" }
+					type: "item"
+				}
+				{
+					id: "139F52E9CA47CFDF"
+					item: { count: 1, id: "seroka_hole:hole_jambieres_mimoroche" }
+					type: "item"
+				}
+				{
+					id: "794D9C994A0E5B32"
+					item: { count: 1, id: "seroka_hole:hole_bottes_mimoroche" }
+					type: "item"
+				}
+			]
+			x: -10.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["4A80AEC1F882B8F5"]
+			id: "22588AC642B80FCF"
+			tasks: [
+				{
+					id: "3869E642BB4A4629"
+					item: { count: 1, id: "seroka_hole:hole_casque_bourrebouche" }
+					type: "item"
+				}
+				{
+					id: "70B93DE060C6B798"
+					item: { count: 1, id: "seroka_hole:hole_plastron_bourrebouche" }
+					type: "item"
+				}
+				{
+					id: "0ADA15683D02E509"
+					item: { count: 1, id: "seroka_hole:hole_jambieres_bourrebouche" }
+					type: "item"
+				}
+				{
+					id: "091216B75D34922E"
+					item: { count: 1, id: "seroka_hole:hole_bottes_bourrebouche" }
+					type: "item"
+				}
+			]
+			x: -8.0d
+			y: 7.0d
+		}
+		{
+			dependencies: ["6EAB6F79AF50C5C4"]
+			id: "47F2C61AC03773F7"
+			tasks: [
+				{
+					id: "4A70CABFCC0B69DF"
+					item: { count: 1, id: "seroka_hole:hole_casque_happevoile" }
+					type: "item"
+				}
+				{
+					id: "79E2FB28213934FB"
+					item: { count: 1, id: "seroka_hole:hole_plastron_happevoile" }
+					type: "item"
+				}
+				{
+					id: "058970081D76B15A"
+					item: { count: 1, id: "seroka_hole:hole_bottes_happevoile" }
+					type: "item"
+				}
+				{
+					id: "050B045508CC0C94"
+					item: { count: 1, id: "seroka_hole:hole_jambieres_happevoile" }
+					type: "item"
+				}
+			]
+			x: -4.0d
+			y: 7.5d
+		}
+		{
+			dependencies: ["16B6A6EE43F7862F"]
+			id: "7204CF628CB6AF47"
+			tasks: [{
+				id: "13E9EE6ECF93D21B"
+				item: { count: 1, id: "seroka_hole:hole_braiselle" }
+				type: "item"
+			}]
+			x: -2.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["16B6A6EE43F7862F"]
+			id: "47323966F5E2572C"
+			tasks: [{
+				id: "76864F06CADA503F"
+				item: { count: 1, id: "seroka_hole:hole_ombrelline" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["180BF6A63BBFFEB7"]
+			id: "16B6A6EE43F7862F"
+			tasks: [{
+				dimension: "seroka_hole:strate_3"
+				id: "5AD4E7525FD8CEDC"
+				type: "dimension"
+			}]
+			x: -0.5d
+			y: 3.5d
+		}
+		{
+			dependencies: ["6EAB6F79AF50C5C4"]
+			id: "77741AB6F2713F58"
+			tasks: [{
+				id: "4CB942DF6CD8B292"
+				item: { count: 1, id: "seroka_hole:hole_ballon" }
+				type: "item"
+			}]
+			x: -5.5d
+			y: 7.5d
+		}
+	]
+}

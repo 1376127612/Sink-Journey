@@ -6,6 +6,7 @@
 	chapter.1615B92EC329CC3D.title: "征战末地"
 	chapter.1B0887C91C13C7D3.title: "时代"
 	chapter.25ACB136E49B8BB8.title: "第一小步"
+	chapter.2CC3684A36A6171B.title: "坠入深渊"
 	chapter.32C910BDF9B9291A.title: "水晶晶簇"
 	chapter.345D123B1DD75B75.title: "物质基础"
 	chapter.3F5A7C2B9E1D4A60.title: "原始时代"
@@ -40,6 +41,7 @@
 	]
 	quest.0056045684755D67.quest_subtitle: "这很魔法，对吧"
 	quest.03232381B779A520.quest_desc: ["奇怪，下界森林中居然还有这种硕大蘑菇，难道下界生物有着自己获取能量的方式吗？"]
+	quest.03CF66A8B862AB79.quest_desc: ["经过你的猎杀研究，这种生活在深渊一层倒悬之树上的生物的鳞片具有很好的减震效果。如果把它制作成一种盔甲会怎么样呢？"]
 	quest.058676663FEB137F.quest_desc: ["制作扩展构件，你可以用它来扩展嵌套工厂的空间"]
 	quest.058676663FEB137F.quest_subtitle: "空间"
 	quest.05C904B7B3FB589E.quest_desc: ["我还以为你会喜欢这个。"]
@@ -53,9 +55,15 @@
 	quest.09200AF098A644DF.quest_subtitle: "一种新奇的合金炉"
 	quest.0932DD0AA54FD551.quest_subtitle: "或许你要自己组装？"
 	quest.0932DD0AA54FD551.title: "做一把斧头有哪些步骤"
+	quest.0AFA7391D17E0228.quest_desc: [
+		"//......我在四处张望着，这里似乎都是倒悬生长的树木，深渊之眼坠落之处有着不同方向连接而来的枝蔓将我接住了，幸好我还活着。"
+		"//.....这里有许多生物活动的迹象，或许我应该尝试捕捉一些来了解这些生物。"
+		"//.....深渊似乎并不都是死物，这里的植物也生长的茂密，不知道再深入时候也是如此。"
+	]
 	quest.0B73D9E1303C41BD.quest_desc: ["如果我是你的话，我会尽快制作这台机器并完成它的自动化。"]
 	quest.0B73D9E1303C41BD.quest_subtitle: "好像是没有什么用的机器"
 	quest.0C743B1D27F300AB.quest_desc: ["多么奇怪的植物，明明从腐烂之物中生长出来的植物，却有如月光般的色彩。"]
+	quest.0DAEFCCE3BFBEF69.quest_desc: ["穿戴完整的套装可以获得免受灼伤的能力。"]
 	quest.0E2A114F298F8ACD.quest_desc: [
 		"将海蓝宝石放入聚星缸，它会产出星能液，收集你的星能液，在后面会消耗很多"
 		"你还可以用共振宝石，水晶石/共鸣水晶石，天辉水晶石/共鸣天辉水晶石来获取星能液"
@@ -74,6 +82,7 @@
 	quest.1057DBBF8DC8C7C0.quest_subtitle: "你连树都撸不了"
 	quest.1057DBBF8DC8C7C0.title: "开始游戏"
 	quest.124E5A52D0F2A72D.quest_subtitle: "黎明石锭真的是一块好锭吗"
+	quest.1359BE3C77A806B6.quest_desc: ["这是一种生活在深渊一层地面上泥土沙砾中的生物。"]
 	quest.1408793381C97EC0.quest_desc: ["制作坚固外壳！"]
 	quest.14E2E0D36E686107.quest_desc: ["打开炉顶活板门，投入满热值的装备，再投入若干灰烬晶体（灰烬晶体越多成功率越高），关闭活板门，即可开始强化。无论成功失败都会消耗所有的灰烬晶体。"]
 	quest.14E2E0D36E686107.quest_subtitle: "！？强强？！"
@@ -83,10 +92,23 @@
 	quest.160B66057D2A2BC2.quest_desc: ["蒸汽驱动的挤压机。板和外壳从此可以流水线生产——虽然挤压原型机还得留着，它不要蒸汽。"]
 	quest.160B66057D2A2BC2.quest_subtitle: "压力之下"
 	quest.160B66057D2A2BC2.title: "蒸汽挤压机"
+	quest.16B6A6EE43F7862F.quest_desc: [
+		"//......说实话，我很难想象深渊之中居然也能看到如此明媚和谐的场景，到底是什么在制造阳光，地上那些随处可见的阳辉吗？"
+		"//......我收回我刚刚说的话，这里终究是深渊，这里的怪物如此的可怕与强大。"
+		""
+		"{@pagebreak}"
+		"(后续内容多过于重复，可前往进度查看，不作过多赘述。)"
+	]
+	quest.16B6A6EE43F7862F.title: "阳光平原"
 	quest.16DD4183EE52B969.quest_desc: ["它就像手一样"]
 	quest.174358FC22916BA6.quest_desc: ["散发着令人作呕的腐烂气息，我不想再接触这种东西了。"]
 	quest.176BDCB97FADED40.quest_subtitle: "化为更聚焦的力量"
 	quest.176BDCB97FADED40.title: "挑剔的工作台"
+	quest.180BF6A63BBFFEB7.quest_desc: [
+		"//......万幸的是下一层深渊之上有着数条枝蔓，似乎可以当作前往更深层次的桥梁？"
+		"//......我再也不想经历第一次坠入深渊那种自由落地的感觉了，我害怕我的内脏将会变成外脏。"
+	]
+	quest.180BF6A63BBFFEB7.title: "深渊之井"
 	quest.18F18597F7065BA1.quest_desc: ["由于精密构件用量较大，我把循环次数改为了3次并取消了副产物"]
 	quest.18F18597F7065BA1.quest_subtitle: "你一定会想自动化它的"
 	quest.18F18597F7065BA1.title: "这个构件很精密"
@@ -125,6 +147,12 @@
 	]
 	quest.2C027D8994527225.quest_subtitle: "流体喜欢铜"
 	quest.2C027D8994527225.title: "蒸汽管道"
+	quest.2E74C539C92E94EF.quest_desc: [
+		"//......我透过深渊之眼下潜到了这里，那片浓雾似乎有着减缓下降的功能，我并未感受到很快的坠落速度，希望不是我的错觉。"
+		"//......但我发现只要我产生了向上攀爬的念头，我就感到一阵头晕眼花与视物模糊，难道这深渊是&0活的&r？"
+		"//......&4它&r并不希望我离开这里，我得想办法&4逃出去&r。"
+	]
+	quest.2E74C539C92E94EF.title: "潜入深渊"
 	quest.2EC7210E5C7222BA.quest_desc: [
 		"夜晚寻找太古魔像，击杀后用其掉落物合成 “远古法典” 。"
 		"不管你是不是第一次游玩这个mod，我都希望你不要去查询一些过时的，不正确的攻略。"
@@ -138,7 +166,9 @@
 	quest.2F67C84DFB5047F8.quest_desc: ["穿越异界，系统降临"]
 	quest.2F67C84DFB5047F8.title: "阶段一"
 	quest.306FF3E1D993000C.quest_desc: ["像是紫色棉花糖一样，可为什么不甜呢？"]
+	quest.32A506E2D35153FF.quest_desc: [""]
 	quest.32D77C0E69A7F0F5.quest_desc: ["我喜欢这种植物，看起来很美味，有一种盎然的生意在其中。"]
+	quest.3351625F36EC0194.quest_desc: ["穿戴完整的套装可以获得一定的摔落保护，帮助你在深渊下潜。"]
 	quest.33CA917A7FF636A6.quest_desc: [
 		"很好，现在终于能够挖矿了。"
 		""
@@ -199,6 +229,11 @@
 		"共鸣之铃是嵌入到工具的升级。它能通过拥有此升级的工具右键敲击某类方块，使得附近的同类方块发光。共鸣的范围随升级的等级增加而增加。"
 	]
 	quest.3D94735C2E3745DD.quest_subtitle: "？！强强！？"
+	quest.41BE19EC32B35C5C.quest_desc: ["//......来自深渊二层的怪物，生活在岩壁之中"]
+	quest.42223DDF2528A3FB.quest_desc: [
+		"//......该死的，&4它&r分明是想将我拉入深渊，可为什么我无法从深渊之眼下方继续下潜。"
+		"//......所幸我有携带飞路粉的习惯，我可以试着通过飞路粉返回，从而避免那该死的攀返症。"
+	]
 	quest.42EBA0AD040439BF.quest_desc: ["神之手的力量是无穷的"]
 	quest.42EBA0AD040439BF.title: "神之手"
 	quest.469AD01E07552C3C.quest_desc: [
@@ -211,9 +246,11 @@
 		"另外，你需要用指杆制作你的第一个黄铜机壳来制作机械手"
 	]
 	quest.4717D5F0DFBD7A6C.title: "手搓仙人"
+	quest.47323966F5E2572C.quest_desc: ["生长于伞树上的水果"]
 	quest.48BEE62B80F62549.quest_desc: ["或许，你真的可以挖一点东西了？"]
 	quest.4A1B91231661F70F.quest_desc: ["你的第一个机械动力机壳"]
 	quest.4A1B91231661F70F.quest_subtitle: "安山时代"
+	quest.4A80AEC1F882B8F5.quest_desc: ["//......来自深渊二层的怪物，生活在岩壁之中"]
 	quest.4C2722480E36EC49.quest_desc: ["机身的第一份工作：烧水。每三刻消耗 2mB 水，产出 2mB 蒸汽。"]
 	quest.4C2722480E36EC49.quest_subtitle: "每三刻，两桶水"
 	quest.4C2722480E36EC49.title: "蒸汽锅炉"
@@ -244,6 +281,7 @@
 		"想要偷懒，就要接受最严厉的惩罚。"
 	]
 	quest.5395E48294293E81.quest_subtitle: "我想你可能会喜欢这个"
+	quest.53CD91001F021592.quest_desc: ["经过你的猎杀研究，这种生活在深渊一层地面上的生物的鳞片与皮毛具有很好的防火效果。如果把它制作成一种盔甲会怎么样呢？"]
 	quest.541A81224FDBD420.quest_desc: [
 		"通过熔炼炉熔炼你的矿物吧，并将流体导出到压印基座，接着在压印基座上方空出一格放置压印锤。"
 		""
@@ -313,6 +351,8 @@
 	quest.6C12306C5CC22051.title: "蒸汽机"
 	quest.6DF0542F0876BFC5.quest_desc: ["埋藏在下界的燃料，似乎与煤炭有些不同之处。"]
 	quest.6E16E688AE7E429D.quest_desc: ["我喜欢这株植物，有着阳光的味道，也似棉花糖柔软的果实。"]
+	quest.6EAB6F79AF50C5C4.quest_desc: ["//......来自深渊二层的怪物，在竖井之中到处捕猎，它的翼膜似乎可以做出一些滑翔伞或者是气球？"]
+	quest.7204CF628CB6AF47.quest_desc: ["生长于瘤木上的水果"]
 	quest.73F4EE5CA018D3AE.quest_desc: [
 		"这台机器将产出本模组最重要的材料，在放置之前你需要去寻找一块余烬能量浓郁的地方。"
 		""
@@ -330,6 +370,11 @@
 	quest.749AF51E60268100.quest_subtitle: "一种新奇的能量传输方式"
 	quest.76588A9B06D5DDC7.quest_desc: ["我能够感受到一股灵魂的气息扑面而来。"]
 	quest.77020F764ED60722.quest_desc: ["像是绿色棉花糖一样，可为什么是蛙蛙呢？"]
+	quest.77741AB6F2713F58.quest_desc: [
+		"对着箱子shift右键可以捆绑箱子，使用掠食者的皮毛摩擦防止其遭受掠食者的捕猎。"
+		""
+		"//......这或许就是在深渊之中运送物资的方式吧，可那些没有掌握飞路粉的人应该如何离开呢？"
+	]
 	quest.79789218839D6E7D.quest_desc: [
 		"过热蒸汽从这里变成压力。调到机器要求的那一档：高了不动，低了也不动，只有刚好才转。"
 		"不需要压力的机器就把旋钮归零，能省一点蒸汽。"
@@ -551,4 +596,7 @@
 	quest.E1C000000000001C.title: "溶解室"
 	task.0DFBBB1E418A4DB5.title: "不要动"
 	task.31C653416C932CC3.title: "进入末地"
+	task.3A6230E78077EEAC.title: "返回"
+	task.70A21E1FCEB06479.title: "探索"
+	task.730D9A7451CA739E.title: "深渊之井"
 }
