@@ -12,16 +12,27 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["04775118903D8E3F"]
+			icon: {
+				id: "mekanism:ingot_bronze"
+			}
 			id: "6BDDB3A36AADF646"
+			rewards: [{
+				count: 16
+				id: "07B7156C04479289"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemplates/bronze_plate"
+				}
+				type: "item"
+			}]
 			tasks: [
 				{
-					count: 16L
 					id: "52AEA2353CB74016"
 					item: { count: 1, id: "mekanism:ingot_bronze" }
 					type: "item"
 				}
 				{
-					count: 16L
 					id: "1CF53A4CE997DE1C"
 					item: { count: 1, id: "industrialupgrade:itemplates/bronze_plate" }
 					type: "item"
@@ -32,10 +43,12 @@
 		}
 		{
 			dependencies: ["6BDDB3A36AADF646"]
+			icon: {
+				id: "kubejs:steam_casing"
+			}
 			id: "0706F92EF2C236B8"
 			tasks: [
 				{
-					count: 8L
 					id: "50761490B0A07143"
 					item: { count: 1, id: "kubejs:steam_casing" }
 					type: "item"
@@ -46,44 +59,56 @@
 					type: "item"
 				}
 			]
-			x: 1.5d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["0706F92EF2C236B8"]
+			icon: {
+				id: "industrialupgrade:wiring/steam"
+			}
 			id: "2C027D8994527225"
 			tasks: [{
 				id: "3C726FD7B45D8F8D"
 				item: { count: 1, id: "industrialupgrade:wiring/steam" }
 				type: "item"
 			}]
-			x: 3.0d
+			x: 4.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["2C027D8994527225"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steamboiler"
+			}
 			id: "4C2722480E36EC49"
 			tasks: [{
 				id: "323032CD82CA5D11"
 				item: { count: 1, id: "industrialupgrade:basemachine3/steamboiler" }
 				type: "item"
 			}]
-			x: 4.5d
+			x: 6.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["4C2722480E36EC49"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_fluid_heater"
+			}
 			id: "0FEC076007556020"
 			tasks: [{
 				id: "43601EAB9C4DA254"
 				item: { count: 1, id: "industrialupgrade:basemachine3/steam_fluid_heater" }
 				type: "item"
 			}]
-			x: 6.0d
+			x: 8.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["0FEC076007556020"]
+			icon: {
+				id: "mekanism:steam_bucket"
+			}
 			id: "50FFF3DA2CF84C7F"
 			tasks: [
 				{
@@ -97,149 +122,42 @@
 					type: "item"
 				}
 			]
-			x: 7.5d
+			x: 10.0d
 			y: 0.0d
 		}
 		{
 			dependencies: ["50FFF3DA2CF84C7F"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steampressureconverter"
+			}
 			id: "79789218839D6E7D"
+			shape: "hexagon"
 			tasks: [{
 				id: "2238E391CE5EB728"
 				item: { count: 1, id: "industrialupgrade:basemachine3/steampressureconverter" }
 				type: "item"
 			}]
-			x: 7.5d
-			y: -3.0d
+			x: 12.0d
+			y: 0.0d
 		}
 		{
 			dependencies: ["79789218839D6E7D"]
-			id: "553DE08FF8207EFC"
-			tasks: [{
-				id: "0F615F33F4E66A11"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_macerator" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: -3.0d
-		}
-		{
-			dependencies: ["553DE08FF8207EFC"]
-			id: "160B66057D2A2BC2"
-			tasks: [{
-				id: "702E2A509877A282"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_compressor" }
-				type: "item"
-			}]
-			x: 4.5d
-			y: -3.0d
-		}
-		{
-			dependencies: ["160B66057D2A2BC2"]
-			id: "3FFD6CD6131BB41E"
-			tasks: [{
-				id: "068840D1920F9F3A"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_cutting" }
-				type: "item"
-			}]
-			x: 3.0d
-			y: -3.0d
-		}
-		{
-			id: "39E580844A461AC5"
-			tasks: [{
-				id: "703092FCEB8ED0BD"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_extruder" }
-				type: "item"
-			}]
-			x: 1.5d
-			y: -3.0d
-		}
-		{
-			id: "0C5D79478D494E93"
-			tasks: [{
-				id: "415DA2DF4C3456F9"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_extractor" }
-				type: "item"
-			}]
-			x: 0.0d
-			y: -3.0d
-		}
-		{
-			id: "268F9CB2F5488846"
-			tasks: [{
-				id: "48A824F042DA822A"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_sharpener" }
-				type: "item"
-			}]
-			x: 0.0d
-			y: -6.0d
-		}
-		{
-			id: "19F5071BFF298275"
-			tasks: [{
-				id: "3319761E22CEBCAA"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_squeezer" }
-				type: "item"
-			}]
-			x: 1.5d
-			y: -6.0d
-		}
-		{
-			id: "34DB73A960C0D660"
-			tasks: [{
-				id: "48C0ACC1FDDC763A"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_pump" }
-				type: "item"
-			}]
-			x: 3.0d
-			y: -6.0d
-		}
-		{
-			id: "22372738BD8CBD0F"
-			tasks: [{
-				id: "443267D608841610"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_wire_insulator" }
-				type: "item"
-			}]
-			x: 4.5d
-			y: -6.0d
-		}
-		{
-			dependencies: ["22372738BD8CBD0F"]
-			id: "3144BDD432A185BD"
-			tasks: [{
-				id: "6215392C458AA20A"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_storage" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: -6.0d
-		}
-		{
-			id: "57E4815EC1E82AC0"
-			tasks: [{
-				id: "75A1BAD577883F89"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_electrolyzer" }
-				type: "item"
-			}]
-			x: 7.5d
-			y: -6.0d
-		}
-		{
-			id: "285AC19CE5FBC3ED"
-			tasks: [{
-				id: "3CCB23F5DF423358"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_handler_ore" }
-				type: "item"
-			}]
-			x: 7.5d
-			y: -9.0d
-		}
-		{
+			icon: {
+				id: "industrialupgrade:steam_boiler/steam_boiler_casing"
+			}
 			id: "43D5726B73FFD4E3"
+			rewards: [{
+				count: 16
+				id: "6A39353D439925B8"
+				item: {
+					count: 1
+					id: "industrialupgrade:casing/bronze"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
 			tasks: [
 				{
-					count: 6L
 					id: "2133F3FC98B4B758"
 					item: { count: 1, id: "industrialupgrade:steam_boiler/steam_boiler_casing" }
 					type: "item"
@@ -265,20 +183,262 @@
 					type: "item"
 				}
 			]
-			x: 6.0d
-			y: -9.0d
+			x: 14.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["43D5726B73FFD4E3"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_generator"
+			}
 			id: "15F9B4F39AC30284"
 			tasks: [{
 				id: "0945A397F6121C9E"
 				item: { count: 1, id: "industrialupgrade:basemachine3/steam_generator" }
 				type: "item"
 			}]
-			x: 4.5d
-			y: -9.0d
+			x: 16.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["15F9B4F39AC30284"]
+			icon: {
+				id: "industrialupgrade:mini_smeltery/mini_smeltery"
+			}
+			id: "35673E8862ECC966"
+			tasks: [{
+				id: "30F9A76C30460D03"
+				item: { count: 1, id: "industrialupgrade:mini_smeltery/mini_smeltery" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["35673E8862ECC966"]
+			icon: {
+				id: "industrialupgrade:itemingots/steel_ingot"
+			}
+			id: "6FC90AA2AAA16C3F"
+			tasks: [{
+				id: "4CDB0CD7DC7BCACA"
+				item: { count: 1, id: "industrialupgrade:itemingots/steel_ingot" }
+				type: "item"
+			}]
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6FC90AA2AAA16C3F"]
+			icon: {
+				id: "industrialupgrade:block_strong_anvil/block_strong_anvil"
+			}
+			id: "39224A23A36F5D89"
+			tasks: [{
+				id: "4701505F14B91C66"
+				item: { count: 1, id: "industrialupgrade:block_strong_anvil/block_strong_anvil" }
+				type: "item"
+			}]
+			x: 22.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["39224A23A36F5D89"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_rolling"
+			}
+			id: "35B9A0B50B6D5A7C"
+			rewards: [{
+				count: 16
+				id: "32CD185C4B258BB3"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
+			tasks: [{
+				id: "3C8C8C900B41F32C"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_rolling" }
+				type: "item"
+			}]
+			x: 24.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["79789218839D6E7D"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_macerator"
+			}
+			id: "553DE08FF8207EFC"
+			tasks: [{
+				id: "0F615F33F4E66A11"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_macerator" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["553DE08FF8207EFC"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_compressor"
+			}
+			id: "160B66057D2A2BC2"
+			tasks: [{
+				id: "702E2A509877A282"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_compressor" }
+				type: "item"
+			}]
+			x: 14.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["160B66057D2A2BC2"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_cutting"
+			}
+			id: "3FFD6CD6131BB41E"
+			tasks: [{
+				id: "068840D1920F9F3A"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_cutting" }
+				type: "item"
+			}]
+			x: 16.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["3FFD6CD6131BB41E"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_extruder"
+			}
+			id: "39E580844A461AC5"
+			tasks: [{
+				id: "703092FCEB8ED0BD"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_extruder" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["39E580844A461AC5"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_extractor"
+			}
+			id: "0C5D79478D494E93"
+			tasks: [{
+				id: "415DA2DF4C3456F9"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_extractor" }
+				type: "item"
+			}]
+			x: 20.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["0C5D79478D494E93"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_sharpener"
+			}
+			id: "268F9CB2F5488846"
+			tasks: [{
+				id: "48A824F042DA822A"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_sharpener" }
+				type: "item"
+			}]
+			x: 22.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["268F9CB2F5488846"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_squeezer"
+			}
+			id: "19F5071BFF298275"
+			tasks: [{
+				id: "3319761E22CEBCAA"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_squeezer" }
+				type: "item"
+			}]
+			x: 24.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["0706F92EF2C236B8"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_wire_insulator"
+			}
+			id: "22372738BD8CBD0F"
+			tasks: [{
+				id: "443267D608841610"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_wire_insulator" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["22372738BD8CBD0F"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_pump"
+			}
+			id: "34DB73A960C0D660"
+			tasks: [{
+				id: "48C0ACC1FDDC763A"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_pump" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["34DB73A960C0D660"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_storage"
+			}
+			id: "3144BDD432A185BD"
+			tasks: [{
+				id: "6215392C458AA20A"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_storage" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["15F9B4F39AC30284"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_handler_ore"
+			}
+			id: "285AC19CE5FBC3ED"
+			tasks: [{
+				id: "3CCB23F5DF423358"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_handler_ore" }
+				type: "item"
+			}]
+			x: 16.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["285AC19CE5FBC3ED"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_electrolyzer"
+			}
+			id: "57E4815EC1E82AC0"
+			tasks: [{
+				id: "75A1BAD577883F89"
+				item: { count: 1, id: "industrialupgrade:basemachine3/steam_electrolyzer" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["57E4815EC1E82AC0"]
+			icon: {
+				id: "industrialupgrade:basemachine3/steam_quarry"
+			}
 			id: "3EEBC200020CEC1A"
 			tasks: [
 				{
@@ -287,55 +447,13 @@
 					type: "item"
 				}
 				{
-					count: 4L
 					id: "44B734BC73826A16"
 					item: { count: 1, id: "industrialupgrade:basemachine3/quarry_pipe" }
 					type: "item"
 				}
 			]
-			x: 3.0d
-			y: -9.0d
-		}
-		{
-			id: "35673E8862ECC966"
-			tasks: [{
-				id: "30F9A76C30460D03"
-				item: { count: 1, id: "industrialupgrade:mini_smeltery/mini_smeltery" }
-				type: "item"
-			}]
-			x: 1.5d
-			y: -9.0d
-		}
-		{
-			id: "6FC90AA2AAA16C3F"
-			tasks: [{
-				count: 4L
-				id: "4CDB0CD7DC7BCACA"
-				item: { count: 1, id: "industrialupgrade:itemingots/steel_ingot" }
-				type: "item"
-			}]
-			x: 0.0d
-			y: -9.0d
-		}
-		{
-			id: "39224A23A36F5D89"
-			tasks: [{
-				id: "4701505F14B91C66"
-				item: { count: 1, id: "industrialupgrade:block_strong_anvil/block_strong_anvil" }
-				type: "item"
-			}]
-			x: 0.0d
-			y: -12.0d
-		}
-		{
-			id: "35B9A0B50B6D5A7C"
-			tasks: [{
-				id: "3C8C8C900B41F32C"
-				item: { count: 1, id: "industrialupgrade:basemachine3/steam_rolling" }
-				type: "item"
-			}]
-			x: 1.5d
-			y: -12.0d
+			x: 20.0d
+			y: -8.0d
 		}
 	]
 }
