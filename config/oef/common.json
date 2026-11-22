@@ -4,6 +4,8 @@
     "advancement": "replace",
     "loot_table": "retain"
   },
-  "Default_Rules_tag": {},
+  "Default_Rules_tag": {
+    "fluid": "replace"
+  },
   "__cfg_version": 1
 }

@@ -1,0 +1,4 @@
+{
+  "matchFluid": ["industrialupgrade:iufluidmoltencopper"],
+  "resultFluid": "industrialupgrade:iufluidcopper"
+}
