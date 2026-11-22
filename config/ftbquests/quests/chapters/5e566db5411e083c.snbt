@@ -35,7 +35,7 @@
 				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_533_element" }
 				type: "item"
 			}]
-			x: 1.0d
+			x: 2.0d
 			y: -2.5d
 		}
 	]

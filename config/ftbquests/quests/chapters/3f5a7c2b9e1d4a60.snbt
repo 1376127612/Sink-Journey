@@ -13,6 +13,9 @@
 	quests: [
 		{
 			dependencies: ["5F132AD862CA787E"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_76_element"
+			}
 			id: "7421786593C68B0E"
 			tasks: [{
 				id: "1269E7A81F288E21"
@@ -23,120 +26,124 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["7421786593C68B0E"]
+			icon: {
+				id: "industrialupgrade:compressor/compressor"
+			}
 			id: "079D6EAF9A441826"
+			rewards: [{
+				count: 16
+				id: "3C03BF7135AC42FC"
+				item: {
+					count: 1
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			}]
 			tasks: [{
 				id: "4974A5AF372FF0DD"
 				item: { count: 1, id: "industrialupgrade:compressor/compressor" }
 				type: "item"
 			}]
-			x: 1.5d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["079D6EAF9A441826"]
+			icon: {
+				id: "industrialupgrade:itemplates/iron_plate"
+			}
 			id: "055588A7FFB2D789"
 			tasks: [{
-				count: 8L
 				id: "7A46AE8FFABA5B8D"
 				item: { count: 1, id: "industrialupgrade:itemplates/iron_plate" }
 				type: "item"
 			}]
-			x: 3.0d
+			x: 4.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["055588A7FFB2D789"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_41_element"
+			}
 			id: "7830616AA30B63CD"
 			tasks: [{
 				id: "11CD3045B19E9890"
 				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_41_element" }
 				type: "item"
 			}]
-			x: 4.5d
+			x: 6.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["7830616AA30B63CD"]
+			icon: {
+				id: "industrialupgrade:macerator/macerator"
+			}
 			id: "49C6261827C7A7B3"
 			tasks: [{
 				id: "13F736B532BDD845"
 				item: { count: 1, id: "industrialupgrade:macerator/macerator" }
 				type: "item"
 			}]
-			x: 6.0d
+			x: 8.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["49C6261827C7A7B3"]
+			icon: {
+				id: "industrialupgrade:dryer/dryer"
+			}
 			id: "21DC1429D7B64A75"
 			tasks: [{
 				id: "48BF4F38FFE84968"
 				item: { count: 1, id: "industrialupgrade:dryer/dryer" }
 				type: "item"
 			}]
-			x: 7.5d
+			x: 10.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["21DC1429D7B64A75"]
+			icon: {
+				id: "industrialupgrade:primal_pump/primal_pump"
+			}
 			id: "0A449D27D8734333"
 			tasks: [{
 				id: "13C8F016363EAF68"
 				item: { count: 1, id: "industrialupgrade:primal_pump/primal_pump" }
 				type: "item"
 			}]
-			x: 7.5d
-			y: -3.0d
+			x: 12.0d
+			y: 0.0d
 		}
 		{
-			id: "6CF34942F438033D"
-			tasks: [{
-				count: 16L
-				id: "7F9DCCE78C32634F"
-				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_772_element" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: -3.0d
-		}
-		{
-			id: "13A2604227513CA1"
-			tasks: [{
-				count: 32L
-				id: "4BEB72C8016464BF"
-				item: { count: 1, id: "industrialupgrade:smeltery/smeltery_casing" }
-				type: "item"
-			}]
-			x: 4.5d
-			y: -3.0d
-		}
-		{
-			id: "6BE74B67D1F9D1C3"
-			tasks: [{
-				count: 8L
-				id: "7F53323BE2818396"
-				item: { count: 1, id: "industrialupgrade:smeltery/smeltery_tank" }
-				type: "item"
-			}]
-			x: 3.0d
-			y: -3.0d
-		}
-		{
-			id: "44D17A7248C73706"
-			tasks: [{
-				id: "27491055559E30D7"
-				item: { count: 1, id: "industrialupgrade:smeltery/smeltery_controller" }
-				type: "item"
-			}]
-			x: 1.5d
-			y: -3.0d
-		}
-		{
+			dependencies: ["0A449D27D8734333"]
+			icon: {
+				id: "industrialupgrade:smeltery/smeltery_controller"
+			}
 			id: "13B0197D7A36A72F"
+			rewards: [{
+				count: 16
+				id: "0201FA998C3BF2B4"
+				item: {
+					components: {
+						"ftbquests:missing_item": "industrialupgrade:itemingots/copper_ingot"
+					}
+					count: 1
+					id: "ftbquests:missing_item"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
 			tasks: [
 				{
-					count: 2L
 					id: "462B2D895B66F259"
 					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_fuel_tank" }
 					type: "item"
 				}
 				{
-					count: 2L
 					id: "44A99C457585A49F"
 					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_furnace" }
 					type: "item"
@@ -146,49 +153,110 @@
 					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_casting" }
 					type: "item"
 				}
+				{
+					count: 16L
+					id: "7F9DCCE78C32634F"
+					item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_772_element" }
+					type: "item"
+				}
+				{
+					id: "4BEB72C8016464BF"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_casing" }
+					type: "item"
+				}
+				{
+					id: "7F53323BE2818396"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_tank" }
+					type: "item"
+				}
+				{
+					id: "27491055559E30D7"
+					item: { count: 1, id: "industrialupgrade:smeltery/smeltery_controller" }
+					type: "item"
+				}
 			]
-			x: 0.0d
-			y: -3.0d
+			x: 14.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["13B0197D7A36A72F"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_496_element"
+			}
 			id: "4180DCBFB8DD7D48"
 			tasks: [{
 				id: "56DE8E8656DF8520"
 				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_496_element" }
 				type: "item"
 			}]
-			x: 0.0d
-			y: -6.0d
+			x: 16.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["4180DCBFB8DD7D48"]
+			icon: {
+				id: "industrialupgrade:primal_wire_insulator/primal_wire_insulator"
+			}
 			id: "15E3CFD26FA821E0"
 			tasks: [{
 				id: "5679E05C95A35D3D"
 				item: { count: 1, id: "industrialupgrade:primal_wire_insulator/primal_wire_insulator" }
 				type: "item"
 			}]
-			x: 1.5d
-			y: -6.0d
+			x: 18.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["15E3CFD26FA821E0"]
+			icon: {
+				id: "kubejs:copper_boiler"
+			}
 			id: "2C447CF0BBF40408"
 			tasks: [{
 				id: "41E3649B7BFD2520"
 				item: { count: 1, id: "kubejs:copper_boiler" }
 				type: "item"
 			}]
-			x: 3.0d
-			y: -6.0d
+			x: 20.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["2C447CF0BBF40408"]
+			icon: {
+				id: "industrialupgrade:primal_fluid_integrator/primal_fluid_integrator"
+			}
 			id: "04775118903D8E3F"
+			rewards: [{
+				count: 8
+				id: "50AD868514164D52"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemplates/gold_plate"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
 			tasks: [{
 				id: "43B86FCC1ADD4FD4"
 				item: { count: 1, id: "industrialupgrade:primal_fluid_integrator/primal_fluid_integrator" }
 				type: "item"
 			}]
-			x: 4.5d
-			y: -6.0d
+			x: 22.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["055588A7FFB2D789"]
+			icon: {
+				id: "industrialupgrade:basemachine3/rolling_machine"
+			}
+			id: "73F4FB7D17278454"
+			tasks: [{
+				id: "05E4BA4F23E6124F"
+				item: { count: 1, id: "industrialupgrade:basemachine3/rolling_machine" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -4.0d
 		}
 	]
 }
