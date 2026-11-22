@@ -13,7 +13,20 @@
 	quests: [
 		{
 			dependencies: ["35B9A0B50B6D5A7C"]
+			icon: {
+				id: "kubejs:research_notes_electric"
+			}
 			id: "6598E70D2B013335"
+			rewards: [{
+				count: 16
+				id: "53E29EB9E734065C"
+				item: {
+					count: 1
+					id: "industrialupgrade:blockresource/machine"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
 			tasks: [{
 				id: "09C1502D0DE379BC"
 				item: { count: 1, id: "kubejs:research_notes_electric" }
@@ -23,16 +36,24 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["6598E70D2B013335"]
+			icon: {
+				id: "industrialupgrade:basemachine3/generator_iu"
+			}
 			id: "4A3C44501E2E4EBE"
 			tasks: [{
 				id: "43D8285D7937F95D"
 				item: { count: 1, id: "industrialupgrade:basemachine3/generator_iu" }
 				type: "item"
 			}]
-			x: 1.5d
+			x: 2.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["4A3C44501E2E4EBE"]
+			icon: {
+				id: "industrialupgrade:blockresource/machine"
+			}
 			id: "47288C78398A483D"
 			tasks: [{
 				count: 16L
@@ -40,80 +61,28 @@
 				item: { count: 1, id: "industrialupgrade:blockresource/machine" }
 				type: "item"
 			}]
-			x: 3.0d
+			x: 4.0d
 			y: 0.0d
 		}
 		{
-			id: "759CE071C62F7828"
-			tasks: [{
-				id: "5E0F504B22BBBBF0"
-				item: { count: 1, id: "industrialupgrade:basemachine3/electric_dryer" }
-				type: "item"
-			}]
-			x: 4.5d
-			y: 0.0d
-		}
-		{
-			id: "19FBDF891F2A2D1A"
-			tasks: [{
-				id: "70F9306E69F0AE2E"
-				item: { count: 1, id: "industrialupgrade:basemachine3/electric_squeezer" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: 0.0d
-		}
-		{
-			id: "77AAA4247AD5F8FF"
-			tasks: [{
-				id: "1A72B5F47787C904"
-				item: { count: 1, id: "industrialupgrade:basemachine3/sawmill" }
-				type: "item"
-			}]
-			x: 7.5d
-			y: 0.0d
-		}
-		{
-			id: "649891A244FD0BF3"
-			tasks: [{
-				id: "6A4C5D857519B4F8"
-				item: { count: 1, id: "industrialupgrade:basemachine2/electrolyzer_iu" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: -3.0d
-		}
-		{
-			id: "2E27EB9AE8646E22"
-			tasks: [{
-				id: "51911160ED24E797"
-				item: { count: 1, id: "industrialupgrade:basemachine3/machine_charger" }
-				type: "item"
-			}]
-			x: 4.5d
-			y: -3.0d
-		}
-		{
-			id: "1C7FAECA90C888F8"
-			tasks: [{
-				id: "2E22D74E9D55C77C"
-				item: { count: 1, id: "industrialupgrade:basemachine3/laser_polisher" }
-				type: "item"
-			}]
-			x: 3.0d
-			y: -3.0d
-		}
-		{
+			dependencies: ["47288C78398A483D"]
+			icon: {
+				id: "industrialupgrade:basemachine3/silicon_crystal_handler"
+			}
 			id: "60E63B47743E8117"
 			tasks: [{
 				id: "09AA922764BB8ACA"
 				item: { count: 1, id: "industrialupgrade:basemachine3/silicon_crystal_handler" }
 				type: "item"
 			}]
-			x: 1.5d
-			y: -3.0d
+			x: 6.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["60E63B47743E8117"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_495_element"
+			}
 			id: "1B7E5957F8966C13"
 			tasks: [{
 				count: 2L
@@ -121,10 +90,28 @@
 				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_495_element" }
 				type: "item"
 			}]
-			x: 0.0d
-			y: -3.0d
+			x: 8.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["1B7E5957F8966C13"]
+			icon: {
+				id: "industrialupgrade:basemachine3/laser_polisher"
+			}
+			id: "1C7FAECA90C888F8"
+			tasks: [{
+				id: "2E22D74E9D55C77C"
+				item: { count: 1, id: "industrialupgrade:basemachine3/laser_polisher" }
+				type: "item"
+			}]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["1C7FAECA90C888F8"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_494_element"
+			}
 			id: "3437F33FFBE53C4F"
 			tasks: [{
 				count: 8L
@@ -132,20 +119,28 @@
 				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_494_element" }
 				type: "item"
 			}]
-			x: 0.0d
-			y: -6.0d
+			x: 12.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["3437F33FFBE53C4F"]
+			icon: {
+				id: "ae2:inscriber"
+			}
 			id: "4F873A6D435CC4C4"
 			tasks: [{
 				id: "62323292DA38BD62"
 				item: { count: 1, id: "ae2:inscriber" }
 				type: "item"
 			}]
-			x: 1.5d
-			y: -6.0d
+			x: 14.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["4F873A6D435CC4C4"]
+			icon: {
+				id: "ae2:printed_silicon"
+			}
 			id: "2180DC78F9A01842"
 			tasks: [{
 				count: 4L
@@ -153,81 +148,261 @@
 				item: { count: 1, id: "ae2:printed_silicon" }
 				type: "item"
 			}]
-			x: 3.0d
-			y: -6.0d
+			x: 16.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["2180DC78F9A01842"]
+			icon: {
+				id: "ae2:logic_processor"
+			}
 			id: "29F951B2995CE402"
+			rewards: [{
+				count: 4
+				id: "027E0F0D933E8C0D"
+				item: {
+					count: 1
+					id: "industrialupgrade:battery/advanced_re_battery"
+				}
+				type: "item"
+			}]
 			tasks: [{
 				count: 4L
 				id: "604322395E5398A5"
 				item: { count: 1, id: "ae2:logic_processor" }
 				type: "item"
 			}]
-			x: 4.5d
-			y: -6.0d
+			x: 18.0d
+			y: 0.0d
 		}
 		{
-			id: "03DDAA881059E878"
-			tasks: [{
-				id: "44998D42F681BB20"
-				item: { count: 1, id: "ae2:charger" }
+			dependencies: ["29F951B2995CE402"]
+			icon: {
+				id: "ae2:controller"
+			}
+			id: "0FC5052F1A436972"
+			rewards: [{
+				count: 16
+				id: "3261BD183C7C6358"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemingots/steel_ingot"
+				}
 				type: "item"
 			}]
-			x: 6.0d
-			y: -6.0d
+			shape: "hexagon"
+			tasks: [{
+				id: "5B5C29CBC359CE5F"
+				item: { count: 1, id: "ae2:controller" }
+				type: "item"
+			}]
+			x: 20.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["0FC5052F1A436972"]
+			icon: {
+				id: "ae2:energy_acceptor"
+			}
 			id: "15EE1D0B0E4716BF"
 			tasks: [{
 				id: "16B3BA58C8B92FF0"
 				item: { count: 1, id: "ae2:energy_acceptor" }
 				type: "item"
 			}]
-			x: 7.5d
-			y: -6.0d
+			x: 22.0d
+			y: 0.0d
 		}
 		{
+			dependencies: ["47288C78398A483D"]
+			icon: {
+				id: "industrialupgrade:basemachine3/electric_dryer"
+			}
+			id: "759CE071C62F7828"
+			tasks: [{
+				id: "5E0F504B22BBBBF0"
+				item: { count: 1, id: "industrialupgrade:basemachine3/electric_dryer" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["759CE071C62F7828"]
+			icon: {
+				id: "industrialupgrade:basemachine3/electric_squeezer"
+			}
+			id: "19FBDF891F2A2D1A"
+			tasks: [{
+				id: "70F9306E69F0AE2E"
+				item: { count: 1, id: "industrialupgrade:basemachine3/electric_squeezer" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["19FBDF891F2A2D1A"]
+			icon: {
+				id: "industrialupgrade:basemachine3/sawmill"
+			}
+			id: "77AAA4247AD5F8FF"
+			tasks: [{
+				id: "1A72B5F47787C904"
+				item: { count: 1, id: "industrialupgrade:basemachine3/sawmill" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["77AAA4247AD5F8FF"]
+			icon: {
+				id: "industrialupgrade:basemachine2/electrolyzer_iu"
+			}
+			id: "649891A244FD0BF3"
+			tasks: [{
+				id: "6A4C5D857519B4F8"
+				item: { count: 1, id: "industrialupgrade:basemachine2/electrolyzer_iu" }
+				type: "item"
+			}]
+			x: 10.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["649891A244FD0BF3"]
+			icon: {
+				id: "industrialupgrade:basemachine3/machine_charger"
+			}
+			id: "2E27EB9AE8646E22"
+			tasks: [{
+				id: "51911160ED24E797"
+				item: { count: 1, id: "industrialupgrade:basemachine3/machine_charger" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["4A3C44501E2E4EBE"]
+			icon: {
+				id: "industrialupgrade:battery/advanced_re_battery"
+			}
+			id: "7FBCB9C7839329EE"
+			tasks: [{
+				count: 16L
+				id: "6013FD14E00C1032"
+				item: { count: 1, id: "industrialupgrade:battery/advanced_re_battery" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["7FBCB9C7839329EE"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_60_element"
+			}
+			id: "5FA34533C1B9802F"
+			tasks: [{
+				count: 2L
+				id: "70B9A211108692D9"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_60_element" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5FA34533C1B9802F"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_614_element"
+			}
+			id: "34E2B4C7D5914293"
+			tasks: [{
+				count: 2L
+				id: "7A4A97EC5EFA5B4D"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_614_element" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["0FC5052F1A436972"]
+			icon: {
+				id: "ae2:charger"
+			}
+			id: "03DDAA881059E878"
+			tasks: [{
+				id: "44998D42F681BB20"
+				item: { count: 1, id: "ae2:charger" }
+				type: "item"
+			}]
+			x: 20.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["03DDAA881059E878"]
+			icon: {
+				id: "ae2:item_storage_cell_1k"
+			}
+			id: "384447519B8692CC"
+			tasks: [{
+				id: "53CE5D5E1B938A9A"
+				item: { count: 1, id: "ae2:item_storage_cell_1k" }
+				type: "item"
+			}]
+			x: 22.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["384447519B8692CC"]
+			icon: {
+				id: "ae2:drive"
+			}
 			id: "70DA7660ACBB320E"
 			tasks: [{
 				id: "108ED7D60C6F41FB"
 				item: { count: 1, id: "ae2:drive" }
 				type: "item"
 			}]
-			x: 7.5d
-			y: -9.0d
+			x: 24.0d
+			y: 4.0d
 		}
 		{
+			dependencies: ["70DA7660ACBB320E"]
+			icon: {
+				id: "ae2:terminal"
+			}
 			id: "7ACE93EC8204B651"
 			tasks: [{
 				id: "0AD60806DB0E1F8B"
 				item: { count: 1, id: "ae2:terminal" }
 				type: "item"
 			}]
-			x: 6.0d
-			y: -9.0d
+			x: 26.0d
+			y: 4.0d
 		}
 		{
+			dependencies: ["7ACE93EC8204B651"]
+			icon: {
+				id: "ae2:crafting_terminal"
+			}
 			id: "70F98ED2C068FAEA"
 			tasks: [{
 				id: "0FA35387559E0355"
 				item: { count: 1, id: "ae2:crafting_terminal" }
 				type: "item"
 			}]
-			x: 4.5d
-			y: -9.0d
+			x: 28.0d
+			y: 4.0d
 		}
 		{
-			id: "0FC5052F1A436972"
-			tasks: [{
-				id: "5B5C29CBC359CE5F"
-				item: { count: 1, id: "ae2:controller" }
-				type: "item"
-			}]
-			x: 3.0d
-			y: -9.0d
-		}
-		{
+			dependencies: ["70F98ED2C068FAEA"]
+			icon: {
+				id: "ae2:interface"
+			}
 			id: "720025C66313C2C6"
 			tasks: [
 				{
@@ -241,59 +416,154 @@
 					type: "item"
 				}
 			]
-			x: 1.5d
-			y: -9.0d
+			x: 28.0d
+			y: 8.0d
 		}
 		{
+			dependencies: ["720025C66313C2C6"]
+			icon: {
+				id: "ae2:pattern_encoding_terminal"
+			}
+			id: "1C8365FED8F3CDD7"
+			tasks: [{
+				id: "649D1A56417D6F32"
+				item: { count: 1, id: "ae2:pattern_encoding_terminal" }
+				type: "item"
+			}]
+			x: 26.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["1C8365FED8F3CDD7"]
+			icon: {
+				id: "ae2:import_bus"
+			}
+			id: "5985E9F5ED7AD07D"
+			tasks: [{
+				id: "3DB22DB6802BD22C"
+				item: { count: 1, id: "ae2:import_bus" }
+				type: "item"
+			}]
+			x: 24.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["5985E9F5ED7AD07D"]
+			icon: {
+				id: "ae2:export_bus"
+			}
+			id: "13C9FF48FDE9B092"
+			tasks: [{
+				id: "1F4AD3028376BEA0"
+				item: { count: 1, id: "ae2:export_bus" }
+				type: "item"
+			}]
+			x: 22.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["2E27EB9AE8646E22"]
+			icon: {
+				id: "industrialforegoing:pitiful_generator"
+			}
 			id: "3D241785EDD13C8D"
 			tasks: [{
 				id: "387A37C3404FA933"
 				item: { count: 1, id: "industrialforegoing:pitiful_generator" }
 				type: "item"
 			}]
-			x: 0.0d
-			y: -9.0d
+			x: 12.0d
+			y: -8.0d
 		}
 		{
+			dependencies: ["3D241785EDD13C8D"]
+			icon: {
+				id: "industrialforegoing:machine_frame_pity"
+			}
 			id: "03B4867738AD7EBF"
+			rewards: [{
+				count: 16
+				id: "30CDBCCA03B714E4"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemplates/steel_plate"
+				}
+				type: "item"
+			}]
 			tasks: [{
 				count: 4L
 				id: "5ECB52B50D93AE06"
 				item: { count: 1, id: "industrialforegoing:machine_frame_pity" }
 				type: "item"
 			}]
-			x: 0.0d
-			y: -12.0d
+			x: 14.0d
+			y: -8.0d
 		}
 		{
+			dependencies: ["03B4867738AD7EBF"]
+			icon: {
+				id: "industrialforegoing:latex_processing_unit"
+			}
 			id: "5754619E9CA9D0F0"
 			tasks: [{
 				id: "5623BC7839F11414"
 				item: { count: 1, id: "industrialforegoing:latex_processing_unit" }
 				type: "item"
 			}]
-			x: 1.5d
-			y: -12.0d
+			x: 16.0d
+			y: -8.0d
 		}
 		{
+			dependencies: ["5754619E9CA9D0F0"]
+			icon: {
+				id: "industrialforegoing:fluid_extractor"
+			}
 			id: "5C741FDE56BF03F6"
 			tasks: [{
 				id: "4FDACCA9C250E5F9"
 				item: { count: 1, id: "industrialforegoing:fluid_extractor" }
 				type: "item"
 			}]
-			x: 3.0d
-			y: -12.0d
+			x: 18.0d
+			y: -8.0d
 		}
 		{
+			dependencies: ["5C741FDE56BF03F6"]
+			icon: {
+				id: "industrialforegoing:dissolution_chamber"
+			}
 			id: "1A1FA26750C0224F"
+			rewards: [{
+				count: 16
+				id: "3355C3D927AE14D7"
+				item: {
+					count: 1
+					id: "industrialforegoing:plastic"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
 			tasks: [{
 				id: "4517673871E7A620"
 				item: { count: 1, id: "industrialforegoing:dissolution_chamber" }
 				type: "item"
 			}]
-			x: 4.5d
-			y: -12.0d
+			x: 20.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["1A1FA26750C0224F"]
+			icon: {
+				id: "industrialforegoing:resourceful_furnace"
+			}
+			id: "5FFCF7EAE6D167D4"
+			tasks: [{
+				id: "61609B8DB53E4339"
+				item: { count: 1, id: "industrialforegoing:resourceful_furnace" }
+				type: "item"
+			}]
+			x: 22.0d
+			y: -8.0d
 		}
 	]
 }
