@@ -1,4 +1,8 @@
 {
   "fluid.iufluidsulfuroxide": "二氧化硫",
-  "fluid.iufluidcryogen": "冷冻剂"
+  "fluid.iufluidcryogen": "冷冻剂",
+  "fluid.iufluidchromium": "熔融铬",
+  "fluid.iufluidtungsten": "熔融钨",
+  "fluid.iufluidgold": "熔融金",
+  "fluid.iufluidarsenicum": "熔融砷"
 }
