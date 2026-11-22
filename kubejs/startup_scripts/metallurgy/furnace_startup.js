@@ -70,22 +70,85 @@
     var GuavaIterables = Java.loadClass('com.google.common.collect.Iterables')
     var MBDRegistries = Java.loadClass('com.lowdragmc.mbd2.api.registry.MBDRegistries')
 
+    // ---- 原生进度条 -------------------------------------------
+    // 用 MBD2 自带的 gui/arrow_bar.png 画进度：这张图上半 20×20 是空箭头，
+    // 下半 20×20 是填充箭头，MBD2 自己的机器界面和配方页面都是这么用的。
+    // LDLib2 的 ProgressBar 默认带 4px 内边距和 MC 主题灰条，塞进 8px 高度后
+    // 填充被压成 0，只剩一条空框——所以按 MBD2 的画法重做一个：
+    // 容器铺空箭头，进度靠裁切 20×20 的填充箭头实现。
+    // lss 里 sprite(...) 的参数是逗号分隔的（x, y, w, h），空格会被当成路径的一部分
+    var ARROW_BG = 'sprite(mbd2:textures/gui/arrow_bar.png, 0, 0, 20, 20)'
+    var ARROW_BAR = 'sprite(mbd2:textures/gui/arrow_bar.png, 0, 20, 20, 20)'
+
+    // 加号套一个定宽盒子再居中：Label 的宽度是按字形算的，宽度往往比字形还窄，
+    // 直接摆在行里会贴着后一个槽位，看着像整体偏右。
+    var plusSign = function () {
+        var box = new UIElement()
+        box.lss('width', 12, StyleOrigin.INLINE)
+        box.lss('height', 20, StyleOrigin.INLINE)
+        box.lss('flex-direction', FlexDirection.ROW, StyleOrigin.INLINE)
+        box.lss('align-items', AlignItems.CENTER, StyleOrigin.INLINE)
+        box.lss('justify-content', JustifyContent.CENTER, StyleOrigin.INLINE)
+        var plus = new Label()
+        plus.setText('+')
+        box.addChild(plus)
+        return box
+    }
+
+    var nativeProgressBar = function (id) {
+        var bar = new ProgressBar()
+        bar.setId(id)
+        bar.setRange(0, 1)
+        bar.lss('width', 20, StyleOrigin.INLINE)
+        bar.lss('height', 20, StyleOrigin.INLINE)
+        try {
+            // bar.barContainer / bar.bar / bar.label 这三个字段和同名 DSL 方法
+            // 撞名，Rhino 取到的是 FieldAndMethods（一个函数），对它们调 lss 会报
+            // "Cannot find function lss"。所以按子元素取，结构固定：
+            // barContainer[ barBackground[ bar, label ] ]
+            var container = bar.getChildren().get(0)
+            var inner = container.getChildren().get(0).getChildren()
+            var fillBox = inner.get(0)
+            var textLabel = inner.get(1)
+
+            // 容器铺空箭头，填充盒裁掉没走完的那段，进度就是箭头被填充的长度
+            container.lss('padding-all', 0, StyleOrigin.INLINE)
+            container.lss('background', ARROW_BG, StyleOrigin.INLINE)
+            fillBox.lss('background', 'empty', StyleOrigin.INLINE)
+            fillBox.lss('overflow', 'hidden', StyleOrigin.INLINE)
+            textLabel.lss('display', 'none', StyleOrigin.INLINE)
+
+            var arrow = new UIElement()
+            arrow.lss('width', 20, StyleOrigin.INLINE)
+            arrow.lss('height', 20, StyleOrigin.INLINE)
+            arrow.lss('background', ARROW_BAR, StyleOrigin.INLINE)
+            fillBox.addChild(arrow)
+            console.info('[UI] 原生箭头进度条已应用: ' + id)
+        } catch (err) {
+            // 内部结构万一变了，退回 LDLib2 默认进度条，别拖垮机器注册
+            console.error('[UI] 箭头进度条样式失败，退回默认进度条: ' + err)
+        }
+        return bar
+    }
+
     // ---- JEI 配方界面模板 -------------------------------------
     var buildXeiTemplate = function () {
         var root = new UIElement()
         root.addClass('panel_bg')
         root.lss('width', 176, StyleOrigin.INLINE)
-        root.lss('height', 58, StyleOrigin.INLINE)
+        root.lss('height', 48, StyleOrigin.INLINE)
         root.lss('flex-direction', FlexDirection.COLUMN, StyleOrigin.INLINE)
         root.lss('padding-all', 7, StyleOrigin.INLINE)
         root.lss('gap-all', 4, StyleOrigin.INLINE)
 
+        // 槽位、箭头进度条、输出槽排在同一行：行高按箭头高度取 20，
+        // 槽位只有 18 高，居中后就自动对齐了。
         var row = new UIElement()
         row.lss('flex-direction', FlexDirection.ROW, StyleOrigin.INLINE)
         row.lss('align-items', AlignItems.CENTER, StyleOrigin.INLINE)
         row.lss('justify-content', JustifyContent.CENTER, StyleOrigin.INLINE)
         row.lss('width', 'stretch', StyleOrigin.INLINE)
-        row.lss('height', 18, StyleOrigin.INLINE)
+        row.lss('height', 20, StyleOrigin.INLINE)
         row.lss('gap-all', 4, StyleOrigin.INLINE)
 
         var addSlot = function (id) {
@@ -93,26 +156,14 @@
             slot.setId(id)
             row.addChild(slot)
         }
-        var addLabel = function (text) {
-            var element = new Label()
-            element.setText(text)
-            row.addChild(element)
-        }
         addSlot('@item_import_0')
-        addLabel('+')
+        row.addChild(plusSign())
         addSlot('@item_import_1')
-        addLabel('+')
+        row.addChild(plusSign())
         addSlot('@item_import_2')
-        addLabel('→')
+        row.addChild(nativeProgressBar('@progress_bar'))
         addSlot('@item_export_0')
         root.addChild(row)
-
-        var bar = new ProgressBar()
-        bar.setId('@progress_bar')
-        bar.setRange(0, 1)
-        bar.lss('width', 'stretch', StyleOrigin.INLINE)
-        bar.lss('height', 8, StyleOrigin.INLINE)
-        root.addChild(bar)
 
         var duration = new Label()
         duration.setId('@duration')
@@ -130,7 +181,7 @@
         var recipeType = MBDRegistries.RECIPE_TYPES.get(RL.parse(RECIPE_TYPE_ID))
         if (recipeType === null) return
         recipeType.setUiTemplate(buildXeiTemplate())
-        recipeType.setUiSize(Size.of(176, 58))
+        recipeType.setUiSize(Size.of(176, 48))
         xeiTemplateApplied = true
     }
     // JEI 模板 id 约定：输入 @item_import_<index> / 输出 @item_export_<index>，
@@ -190,7 +241,7 @@
         var root = new UIElement()
         root.addClass('panel_bg')
         root.lss('width', 176, StyleOrigin.INLINE)
-        root.lss('height', 155, StyleOrigin.INLINE)
+        root.lss('height', 146, StyleOrigin.INLINE)
         root.lss('flex-direction', FlexDirection.COLUMN, StyleOrigin.INLINE)
         root.lss('padding-all', 7, StyleOrigin.INLINE)
         root.lss('gap-all', 5, StyleOrigin.INLINE)
@@ -199,29 +250,23 @@
         title.lss('color', '#404040', StyleOrigin.INLINE)    // 原版标题灰
         root.addChild(title)
 
-        // 3 个输入槽 + 1 个输出槽
+        // 3 个输入槽 → 原生箭头进度条 → 1 个输出槽，一行排开。
+        // 行高取箭头高度 20，槽位 18 高居中，槽位中心和箭头中心在同一条线上。
         var row = new UIElement()
         row.lss('width', 'stretch', StyleOrigin.INLINE)
-        row.lss('height', 18, StyleOrigin.INLINE)
+        row.lss('height', 20, StyleOrigin.INLINE)
         row.lss('flex-direction', FlexDirection.ROW, StyleOrigin.INLINE)
         row.lss('align-items', AlignItems.CENTER, StyleOrigin.INLINE)
         row.lss('justify-content', JustifyContent.CENTER, StyleOrigin.INLINE)
         row.lss('gap-all', 4, StyleOrigin.INLINE)
         row.addChild(itemSlot('ui:input_0'))
-        row.addChild(label('+'))
+        row.addChild(plusSign())
         row.addChild(itemSlot('ui:input_1'))
-        row.addChild(label('+'))
+        row.addChild(plusSign())
         row.addChild(itemSlot('ui:input_2'))
-        row.addChild(label('→'))
+        row.addChild(nativeProgressBar('ui:progress_bar'))
         row.addChild(itemSlot('ui:output_0'))
         root.addChild(row)
-
-        var bar = new ProgressBar()
-        bar.setId('ui:progress_bar')
-        bar.setRange(0, 1)
-        bar.lss('width', 'stretch', StyleOrigin.INLINE)
-        bar.lss('height', 8, StyleOrigin.INLINE)
-        root.addChild(bar)
 
         // 一行小字提示炉况门槛，比空着好看也实用
         var hint = label('篝火需点燃 · 贴陶风箱加速')
