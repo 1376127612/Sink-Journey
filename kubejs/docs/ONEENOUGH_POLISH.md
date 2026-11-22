@@ -150,3 +150,37 @@ OEF 在 `FluidStack` 构造函数里把源流体换成目标流体，并扩展�
 - `kubejs/data/c/tags/fluid/`：把 IU 流体追加进已有的 `c:` 网格
 - `kubejs/assets/industrialupgrade/lang/zh_cn.json`：IU 流体中文名修正（`硫氧化物` → `二氧化硫`、第二个"冷却剂" → `冷冻剂`）
 - `unify-fluids-review.md`：流体统一的决定清单与依据
+
+### 不要给 Mekanism 写流体规则
+
+OEF 改配方时是按**字符串值**匹配的，不是按字段名：配方 JSON 里任何值等于被匹配 id 的字符串都会被换成目标 id。
+Mekanism 的化学品和流体**共用同一个 id**（`mekanism:oxygen` 既是化学注册项也是流体），于是
+`chemical_infusing` / `separator` / `rotary` 这些配方里的化学品 id 会被改写成 IU 的流体 id，
+变成 `Unknown registry key in ResourceKey[minecraft:root / mekanism:chemical]`，整条 Mekanism 化学线解析失败。
+
+所以 Mekanism 只能靠 `c:` 标签互通，**不要写 OEF 规则**。同理：给某个模组写规则前，确认它的这个 id 不会
+在别的注册表（化学、能量等）里出现。
+
+### 合并掉的旧 id 要在 JEI 里隐藏
+
+OEF 只改使用处，不会注销注册项，被替换掉的源流体仍然存在于注册表里，于是 JEI 会出现两个同名条目
+（例：`iufluidiron` 和 `iufluidmolteniron` 都叫"熔融铁"）。
+`kubejs/client_scripts/fluid_unify_hide.js` 想用 `RecipeViewerEvents.removeEntries('fluid', ...)` 把它们从 JEI/EMI 里摘掉，
+列表里是**全部被合并的源 id**（现在 75 个），新增合并项时记得同步这个列表。
+
+**但这个办法目前没生效**：直接传 id 字符串会抛
+`Error in 'RecipeViewerEvents.removeEntries': Failed to read FluidIngredient`（普通 id 不是 KubeJS 的流体 ingredient 语法，
+处理器整体中断，一条也没藏住）。现在脚本改成了 `event.remove(Fluid.of(id, 1000))` 加逐条 try/catch，
+但 KubeJS 2101 的 `FluidWrapper` 只有 `of(FluidStack…)` 重载、没有 String 重载，**大概率仍然失败，尚未验证**。
+要真正去掉重复条目，下一步试：KubeJS 的流体 ingredient 写法（`命名空间:*` 或正则），或直接走 JEI 的隐藏机制。
+
+反过来说：**目标 id 必须确认真的注册过**。IU 的 `iufluidheavy_water` 就是一个只有 lang 键、
+没有实际注册的假 id —— 写进 `c:heavy_water` 会让 tag 变成空（日志 `missing following references`），
+连带把核科技的重水配方解析坏。写规则前先确认目标 id 能在注册表里找到。
+
+### 基准必须是有独立贴图的那一套
+
+IU 的流体分两代命名：`iufluid<金属>` 和 `iufluidmolten<金属>`。后者**没有逐金属贴图**，
+`FluidName.getTextureLocation()` 对所有 `fluidmolten*` 都返回同一张 `block/fluid/molten_still.png`，
+而这张图是纯深红占位图（像素均值 RGB 55,0,0）。所以熔融金属统一到 molten 系列会让 JEI 和世界里整片发红。
+统一基准只能是短名系列；IU 没有短名版的金属（铅、锌、铀、铂、钴、锇、铋…）就不要统一。
