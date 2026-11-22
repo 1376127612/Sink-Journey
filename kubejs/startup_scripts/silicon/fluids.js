@@ -24,6 +24,20 @@ StartupEvents.registry('fluid', event => {
         })
         .tag(['c:trichlorosilane'])
 
+    // 高纯三氯硅烷：精馏塔出来的精料，只给西门子沉积段用
+    event.create('purified_tcs', 'thin')
+        .displayName('高纯三氯硅烷')
+        .translationKey('fluid.kubejs.purified_tcs')
+        .renderType('translucent')
+        .tint(0xE8F2D8)
+        .type(type => {
+            type.renderType('translucent')
+                .density(1340)
+                .viscosity(1000)
+                .temperature(300)
+        })
+        .tag(['c:purified_trichlorosilane'])
+
     // 硅烷：常温气体，极轻
     event.create('silane', 'thin')
         .displayName('硅烷')
