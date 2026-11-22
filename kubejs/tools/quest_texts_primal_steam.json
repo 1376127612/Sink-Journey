@@ -1,0 +1,237 @@
+{
+ "industrialupgrade:crafting_elements/crafting_76_element": {
+  "title": "挤压部件",
+  "sub": "一块会动的铁",
+  "desc": [
+   "六张铁板箍住一块铁块，就成了挤压部件。它是挤压原型机的心脏——在你做出蒸汽挤压机之前，一切板材都从这台机器里出来。"
+  ]
+ },
+ "industrialupgrade:compressor/compressor": {
+  "title": "挤压原型机",
+  "sub": "第一台不用右手帮忙的机器",
+  "desc": [
+   "挤压部件、铁锭外壳、木板机架。它没有界面也没有电：右键投料，等它压，右键取件。",
+   "铁砧在这一版里被封掉了——锭变板不再是锤子的事，而是这台机器的事。"
+  ]
+ },
+ "industrialupgrade:itemplates/iron_plate": {
+  "title": "铁板",
+  "sub": "八块，起步价",
+  "desc": [
+   "把铁锭塞进挤压原型机，压出八块铁板。后面每一台原型机都要吃它。"
+  ]
+ },
+ "industrialupgrade:crafting_elements/crafting_41_element": {
+  "title": "粉碎球",
+  "sub": "会滚的那种",
+  "desc": [
+   "燧石包着铁。它会被装进粉碎原型机当磨盘，没有它什么也磨不动。"
+  ]
+ },
+ "industrialupgrade:macerator/macerator": {
+  "title": "粉碎原型机",
+  "sub": "手摇的磨",
+  "desc": [
+   "铁板做壳，铜板做衬，中间一颗粉碎球。右键投料、右键取料，你站在旁边就是它的动力。"
+  ]
+ },
+ "industrialupgrade:dryer/dryer": {
+  "title": "干燥原型机",
+  "sub": "晾干也是一种工艺",
+  "desc": [
+   "木板加玻璃。乳胶从这里开始变成橡胶，湿的零件也从这里变干。"
+  ]
+ },
+ "industrialupgrade:primal_pump/primal_pump": {
+  "title": "原型泵",
+  "sub": "液体必须待在它下方",
+  "desc": [
+   "长按右键启动，胶囊负责把抽上来的液体装走。它覆盖下方 3×1×3 的范围。"
+  ]
+ },
+ "industrialupgrade:crafting_elements/crafting_772_element": {
+  "title": "熔炼砖",
+  "sub": "黏土、沙、砂砾",
+  "desc": [
+   "两张黏土一张沙一份砂砾，先揉成坯再烧成砖。原配方要尖晶石粒和钇粒，那是电力时代的金属，忘掉它们。",
+   "十六块砖只是起步，熔炼炉是多方块结构，砖永远不嫌多。"
+  ]
+ },
+ "industrialupgrade:smeltery/smeltery_casing": {
+  "title": "熔炼炉体",
+  "sub": "四块砖换一层壳",
+  "desc": [
+   "四块熔炼砖拼成一节炉体。三十来节就够围出一个小炉子。"
+  ]
+ },
+ "industrialupgrade:smeltery/smeltery_tank": {
+  "title": "熔炼炉炉缸",
+  "sub": "锡衬里，铅底座",
+  "desc": [
+   "锡板做内衬，铅板做底座，中间垫一层木桶。熔融金属的容器不需要漂亮，只需要不漏。"
+  ]
+ },
+ "industrialupgrade:smeltery/smeltery_controller": {
+  "title": "熔炼炉控制器",
+  "sub": "红石与中继器",
+  "desc": [
+   "整个熔炼炉的大脑。搭好结构后右键它，炉子就算立起来了。"
+  ]
+ },
+ "industrialupgrade:smeltery/smeltery_fuel_tank": {
+  "title": "熔炼炉",
+  "sub": "你的第一炉水",
+  "desc": [
+   "燃料箱、炉体、浇注块加上控制器，熔炼炉才算完整。往燃料箱灌熔岩，把锭、方块、矿石丢进炉子等它们化开。",
+   "液体可以在炉内混合，也可以倒进浇注块配模具成型。从此你不再一块一块地烧金属。",
+   "注意：钢不在它的菜单里。这个炉子只做基础金属，钢是蒸汽时代末尾的事。"
+  ]
+ },
+ "industrialupgrade:crafting_elements/crafting_496_element": {
+  "title": "铸型模具",
+  "sub": "把水变回锭",
+  "desc": [
+   "八块铁板围出一个锭模。放进浇注块，再把液体倒进去，锭就回来了。"
+  ]
+ },
+ "industrialupgrade:primal_wire_insulator/primal_wire_insulator": {
+  "title": "原始包线机",
+  "sub": "给铜穿上衣服",
+  "desc": [
+   "木板、原木、铁板，拉动手柄把裸线裹上绝缘层。没有它，铜线只能当装饰品。"
+  ]
+ },
+ "kubejs:copper_boiler": {
+  "title": "铜锅炉",
+  "sub": "一套锅炉，到处复用",
+  "desc": [
+   "铜板围壳、铜机壳做胆、里面塞一台熔炉。这台铜锅炉是 IU 原始与蒸汽两代的通用件：",
+   "原型流体加热器、乳胶提取机、原型流式腐蚀釜、蒸汽储存器、蒸汽流体加热器、固液反应釜、锅炉储罐，里面装的都是它，别只做一个。"
+  ]
+ },
+ "industrialupgrade:primal_fluid_integrator/primal_fluid_integrator": {
+  "title": "原型流式腐蚀釜",
+  "sub": "把东西泡进去",
+  "desc": [
+   "把物品浸泡在储罐里的液体中：金板做内衬，铜板做衬底，琥珀金锅炉供热。",
+   "需要吸收溶液或试剂的固体毛坯都要过它一手。到这里，原始时代的手工机器就齐了——下一站是青铜。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_cutting": {
+  "title": "蒸汽切割机",
+  "sub": "一刀两断",
+  "desc": [
+   "把板切成杆、把块切成片。切割是很多零件的最后一道工序。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_extruder": {
+  "title": "蒸汽挤出机",
+  "sub": "挤出来就是一根",
+  "desc": [
+   "熔融材料从模具里挤成线材和杆件。和轧机配一对，板与杆都不缺。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_extractor": {
+  "title": "蒸汽提取机",
+  "sub": "榨干最后一点",
+  "desc": [
+   "从物品里榨出液体：橡胶、树脂、植物油。副产物是它最可爱的地方。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_sharpener": {
+  "title": "蒸汽抛光机",
+  "sub": "金属也需要体面",
+  "desc": [
+   "用蒸汽和激光把零件表面磨到镜面。晶体和精密件过一遍，后面装机才不卡。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_squeezer": {
+  "title": "蒸汽乳胶提取机",
+  "sub": "橡胶的前半生",
+  "desc": [
+   "从橡胶木里榨乳胶。乳胶干燥之后才是橡胶，橡胶是蒸汽时代一切密封件的原料。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_pump": {
+  "title": "蒸汽泵",
+  "sub": "终于不用长按右键",
+  "desc": [
+   "原型泵的成年版：通上蒸汽与水，它自己把液体送到你要去的地方。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_storage": {
+  "title": "蒸汽储存器",
+  "sub": "存一点压力",
+  "desc": [
+   "只从安装面输入蒸汽，其余方向只输出。把它当成蒸汽电池，机器挨着它就不怕断供。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_electrolyzer": {
+  "title": "蒸汽电解器",
+  "sub": "通了电才算完整",
+  "desc": [
+   "蒸汽提供热量与加压，真正的化学过程还得靠电流转换器给的电流。",
+   "它可以把水拆成氢和氧，是你第一次真正接触气体工艺。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_handler_ore": {
+  "title": "蒸汽矿物分离器",
+  "sub": "把石头还回去",
+  "desc": [
+   "处理致密矿石，把有用的部分和废石分开，不需要电网。产物概率比电动的低一点，蒸汽时代够用。"
+  ]
+ },
+ "industrialupgrade:steam_boiler/steam_boiler_casing": {
+  "title": "蒸汽锅炉（多方块）",
+  "sub": "这次是真的锅炉房",
+  "desc": [
+   "外壳、控制器、储罐、加热器、热交换器：五件套围起来才是正经锅炉，每刻 1mB 水换 2mB 蒸汽，效率是小型锅炉的两倍。",
+   "控制器自己开不了，必须靠热交换器：往加热器供热，往储罐注水。热交换器里要十根线圈和一个铁氧体环形电感。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_generator": {
+  "title": "电动蒸汽发生器",
+  "sub": "蒸汽与电的第一次握手",
+  "desc": [
+   "高压蒸汽锅炉、机器外壳、电动机拼在一起：蒸汽进去，电出来。这是蒸汽时代向电力时代递出的请柬。"
+  ]
+ },
+ "industrialupgrade:basemachine3/steam_quarry": {
+  "title": "蒸汽采石机",
+  "sub": "往地下钻",
+  "desc": [
+   "接上蒸汽和钻管，它会一路向下把工作区域的方块挖出来。记得在它下面留空间，也记得回来收矿。"
+  ]
+ },
+ "industrialupgrade:mini_smeltery/mini_smeltery": {
+  "title": "微型熔炉",
+  "sub": "一炉一小块",
+  "desc": [
+   "熔炼炉的袖珍版：拿熔融矿石胶囊右键它，上方出现粗金属锭，再右键取走。适合分散的小规模铸造。"
+  ]
+ },
+ "industrialupgrade:itemingots/steel_ingot": {
+  "title": "渗碳成钢",
+  "sub": "往铁里塞点碳",
+  "desc": [
+   "把铁锭和大量煤一起闷在土高炉里：碳渗进铁里，钢就出来了。很慢，很费燃料，但这是你第一次拿到比铁更硬的东西。",
+   "熔炼炉那条捷径已经封掉了。钢只从这里出，而且在这个阶段解锁之前你拿不起它。"
+  ]
+ },
+ "industrialupgrade:block_strong_anvil/block_strong_anvil": {
+  "title": "强化铁砧",
+  "sub": "配得上钢的砧",
+  "desc": [
+   "钢要配一块钢做的砧。普通铁砧敲不动重活，强化铁砧可以。",
+   "它还是蒸汽轧机的地基——没有它，轧机连立都立不起来。"
+  ]
+ },
+ "industrialupgrade:basemachine3/rolling_machine": {
+  "title": "手工轧机",
+  "sub": "不用电的压板机",
+  "desc": [
+   "轧辊滚一遍，把锭压成板。它不烧蒸汽也不用转轴，一手摇就出板。",
+   "挤压原型机堵了、没料了，这台就是备用产线。轧辊要用铜板包铁板围一圈——钢板得等蒸汽时代。"
+  ]
+ }
+}
