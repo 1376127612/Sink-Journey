@@ -49,6 +49,11 @@ ServerEvents.recipes(event => {
         lead:   { tag: 'c:ingots/lead' },
         nickel: { tag: 'c:ingots/nickel' }
     }
+    var E_CASING = {
+        lead: { item: 'industrialupgrade:casing/lead' },
+        silver: { item: 'industrialupgrade:casing/silver' },
+        nickel: { item: 'industrialupgrade:casing/nickel' }
+    }
     var E_ELEM = function (n) {
         return 'industrialupgrade:crafting_elements/crafting_' + n + '_element'
     }
@@ -105,27 +110,6 @@ ServerEvents.recipes(event => {
         },
         E_ELEM(43))
 
-    // ---- 4. 轧辊（200）----
-    // 原来要 钛板 + 铝板。铝要到太空线，钛更晚。
-    eShaped('industrialupgrade:industrialupgrade_752',
-        ['AAA', 'BCB', '   '],
-        {
-            A: E_PLATE.zinc,
-            B: E_PLATE.iron,
-            C: E_PLATE.steel
-        },
-        E_ELEM(200))
-
-    // ---- 5. 轧辊组（164）----
-    // 原来 6 块钨板。改钢板：手工轧机的核心件。
-    eShaped('industrialupgrade:industrialupgrade_756',
-        ['BAB', 'B B', 'BAB'],
-        {
-            A: eItem(E_ELEM(200)),
-            B: E_PLATE.steel
-        },
-        E_ELEM(164))
-
     // ---- 6. 元件:无线（90）----
     // 原来 米哈伊尔齿轮 / 铂齿轮 / 红铜双板，无线供能器要用。
     eShaped('industrialupgrade:industrialupgrade_1127',
@@ -151,5 +135,39 @@ ServerEvents.recipes(event => {
         },
         'industrialupgrade:basemachine3/machine_charger')
 
-    console.info('[IU] 电力时代魔改已应用：元件 水/流体/水箱/无线、轧辊与轧辊组、无线供能器改用 钢/银/铅/镍')
+    // ---- 8. 阳极（648）----
+    // 原来要 蒙茨合金板（铜锌合金，后期合金炉产物）。
+    // 电解池的阳极本来就是铅：改成铅板，镍板留给阴极。
+    eShaped('industrialupgrade:industrialupgrade_648',
+        ['B B', 'BAB', 'B B'],
+        {
+            A: eItem('industrialupgrade:itemcell/itemcell'),
+            B: E_PLATE.lead
+        },
+        'industrialupgrade:chemistry/anode')
+
+    // ---- 9. 阴极（584）----
+    // 原来要 阿卢梅尔合金板（镍铝合金）。
+    eShaped('industrialupgrade:industrialupgrade_584',
+        ['B B', 'BAB', 'B B'],
+        {
+            A: eItem('industrialupgrade:itemcell/itemcell'),
+            B: E_PLATE.nickel
+        },
+        'industrialupgrade:chemistry/cathode')
+
+    // ---- 10. RE 电池（1609）----
+    // 原来外壳是 铝锂合金外壳，铝要到太空线。
+    // 铅酸电池式的铅外壳：元件 614 与高级 RE 电池都从这一格往上走。
+    eShaped('industrialupgrade:industrialupgrade_1609',
+        ['AEA', 'CDC', 'CDC'],
+        {
+            A: eItem('industrialupgrade:wiring/tin1'),
+            C: E_CASING.lead,
+            D: eItem('industrialupgrade:charged_redstone'),
+            E: eItem('industrialupgrade:charged_quartz')
+        },
+        'industrialupgrade:battery/re_battery')
+
+    console.info('[IU] 电力时代魔改已应用：元件 水/流体/水箱/无线、轧辊与轧辊组、无线供能器、阳极/阴极/RE电池改用 钢/银/铅/镍')
 })

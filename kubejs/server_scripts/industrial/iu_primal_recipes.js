@@ -198,5 +198,26 @@ ServerEvents.recipes(event => {
         },
         P_ELEM(496))
 
-    console.info('[IU] 原始时代魔改已应用：熔炼砖 / 粉碎机 / 挤压机 / 腐蚀釜 / 激光链 / 熔炼炉 / 铸型模具')
+    // ---- 13. 轧辊（200）----
+    // 原来要 钛板 + 铝板。手工轧机是原始时代的机器，轧辊只能是铜和铁。
+    pShaped('industrialupgrade:industrialupgrade_752',
+        ['AAA', 'BCB', '   '],
+        {
+            A: P_MAT.copper,
+            B: P_MAT.iron,
+            C: P_MAT.iron
+        },
+        P_ELEM(200))
+
+    // ---- 14. 轧辊组（164）----
+    // 原来 6 块钨板。手工轧机的主件，改铁板。
+    pShaped('industrialupgrade:industrialupgrade_756',
+        ['BAB', 'B B', 'BAB'],
+        {
+            A: { item: P_ELEM(200) },
+            B: P_MAT.iron
+        },
+        P_ELEM(164))
+
+    console.info('[IU] 原始时代魔改已应用：熔炼砖 / 粉碎机 / 挤压机 / 腐蚀釜 / 激光链 / 熔炼炉 / 铸型模具 / 轧辊')
 })
