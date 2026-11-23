@@ -1,0 +1,32 @@
+{
+    "hydro": {
+        "water_mb": 250,
+        "fe_per_tick": 96
+    },
+    "tidal": {
+        "water_mb": 600,
+        "stress": 16,
+        "min_rpm": 32,
+        "fe_per_tick_tide": 384,
+        "fe_per_tick_slack": 128,
+        "require_seaside": true,
+        "seaside_biome_tags": [
+            "minecraft:is_ocean",
+            "minecraft:is_beach"
+        ],
+        "tide_windows": [
+            [0, 2000],
+            [11000, 14000]
+        ]
+    },
+    "stress": {
+        "stress": 32,
+        "min_rpm": 64,
+        "fe_per_tick": 448
+    },
+    "geomagnetic": {
+        "redstone": 1,
+        "fe_per_tick": 640,
+        "max_y": -56
+    }
+}

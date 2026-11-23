@@ -1,0 +1,3 @@
+[field_guide]
+	#Give every player one Industrial Crops Field Guide the first time they join a world.
+	giveOnFirstJoin = true

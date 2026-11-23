@@ -146,6 +146,9 @@
     "grid_node_state": true,
     "power_storage": true
   },
+  "neovitae": {
+    "block_info": true
+  },
   "compactmachines": {
     "show_owner": false,
     "bound_machine": true

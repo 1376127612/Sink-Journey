@@ -550,3 +550,46 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: industrialupgrade:industrialupgrade_757
+// （已停用：这条配方由 server_scripts/industrial/iu_steam_recipes.js
+//   以青铜板 + 铁板重新写入，这里的旧 JSON 是「钢板 + 铁板」的过期副本，
+//   会被脚本覆盖，留着只会让人误以为 Studio 改了没生效。）
+// kubejsstudio custom: industrialupgrade:industrialupgrade_763
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialupgrade:recipe/industrialupgrade_763',
+      {
+        "type": "industrialupgrade:shaped_recipe",
+        "category": "misc",
+        "key": {
+          "A": {
+            "item": "industrialupgrade:crafting_elements/crafting_137_element"
+          },
+          "B": {"item":"industrialupgrade:blockresource/steam_machine"}
+        },
+        "pattern": ["AAA","ABA","AAA"],
+        "result": {"count":1,"id":"industrialupgrade:blockresource/machine"},
+        "show_notification": false
+      }
+    )
+})
+// kubejsstudio custom: industrialforegoing:machine_frame_pity
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'industrialforegoing:recipe/machine_frame_pity',
+      {
+        "type": "kubejs:shaped",
+        "result": {"id":"industrialforegoing:machine_frame_pity","count":1},
+        "pattern": ["WIW","IRI","WIW"],
+        "key": {
+          "I": {"tag":"c:plates/steel"},
+          "R": {"item":"industrialupgrade:blockresource/machine"},
+          "W": {"tag":"minecraft:logs"}
+        },
+        "_kubejs_changed_marker": {
+          "source": "server_scripts:industrial/if_electric.js",
+          "line": 24
+        }
+      }
+    )
+})

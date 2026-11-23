@@ -140,7 +140,8 @@
 | `kubejs:iu_steam/strong_anvil` | 强化铁砧 | **原配方被删后没有补回** | 钢板 ×3 + 青铜板 ×2 + 铁砧 |
 
 蒸汽机机身（`industrialupgrade_758`）**没有动**：`create/casing_progression.js`
-已经把它的产出接管成「8 蒸汽机壳 + 黄铜之心」。
+已经把它的产出接管成「8 蒸汽机壳 + 黄铜之心」（整条机壳链见
+`kubejs/docs/CASING_PROGRESSION.md`）。
 强化铁砧用独立 id 注册，因为 `kubejsstudio/recipes.js` 在 `industrial/` 之后加载，
 会按 id 再删一次 `industrialupgrade_1968`。
 

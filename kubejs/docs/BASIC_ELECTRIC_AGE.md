@@ -173,6 +173,16 @@ ExtendedAE、扩展+、闪电科技（ae2lt）、水晶科技（ae2cs）、无�
 简易 / 高级 / 完美机器框架的配方保持原样，靠塑料、下界合金、以太气体自然挡在后面。
 齿轮（铁 / 金 / 钻石）沿用 `industrial/if_gears.js` 的 IU 冲压机版本。
 
+> **机器框架已交给 KubeJS Studio。**
+> `industrialforegoing:machine_frame_pity` 现在由 `server_scripts/kubejsstudio/kubejsstudio.js`
+> 里的 `ServerEvents.generateData('after_mods')` 覆盖（写进虚拟数据包，优先级高于模组）。
+> `if_electric.js` 里不要再写 `event.remove` + `event.shaped`：配方事件在数据包之后执行，
+> 同 id 再加一次会把 Studio 的版本盖掉，表现就是「Studio 里改了，进游戏却没生效」。
+> 以后改这条配方请直接在 Studio 里改。
+>
+> 同一条规则适用于所有由脚本 `remove + add` 过的配方：Studio 的 generateData 覆盖
+> 只在「脚本不碰这个 id」时才算数。
+
 ---
 
 ## 6. 时代锁（AStages）

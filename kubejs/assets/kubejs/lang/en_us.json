@@ -49,5 +49,13 @@
     "research.page.era_steam": "Steam and the End",
     "research.kinetic_brass.desc": "Reproduce the brass ratio with andesite alloy and research substrate inside the computation environment.",
     "research.steam_precision.desc": "Press brass into precision parts: the ticket into the steam age.",
-    "research.gate_dragon.desc": "Kill the ender dragon to prove this production line can carry an expedition into the End; the End gate opens (unlocks gate.end)."
+    "research.gate_dragon.desc": "Kill the ender dragon to prove this production line can carry an expedition into the End; the End gate opens (unlocks gate.end).",
+    "machine.sinkjourney.hydro_generator": "Hydro Generator",
+    "machine.sinkjourney.tidal_generator": "Tidal Generator",
+    "machine.sinkjourney.stress_generator": "Stress Generator",
+    "machine.sinkjourney.geomagnetic_generator": "Geomagnetic Generator",
+    "recipe_pool.sinkjourney.hydro_generator": "Hydro Generator",
+    "recipe_pool.sinkjourney.tidal_generator": "Tidal Generator",
+    "recipe_pool.sinkjourney.stress_generator": "Stress Generator",
+    "recipe_pool.sinkjourney.geomagnetic_generator": "Geomagnetic Generator"
 }
