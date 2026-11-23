@@ -593,3 +593,139 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: kubejsstudio:gear_stamp
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/gear_stamp',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"minecraft:clay"},
+            {"item":"mekanism:block_salt"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:sand"},
+            {"item":"embers:raw_gear_stamp"}
+          ],
+          "result": {"id":"embers:gear_stamp","count":1},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:flat_stamp
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/flat_stamp',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"minecraft:clay"},
+            {"item":"mekanism:block_salt"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:sand"},
+            {"item":"embers:raw_flat_stamp"}
+          ],
+          "result": {"id":"embers:flat_stamp","count":1},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:plate_stamp
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/plate_stamp',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"minecraft:clay"},
+            {"item":"mekanism:block_salt"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:sand"},
+            {"item":"embers:raw_plate_stamp"}
+          ],
+          "result": {"id":"embers:plate_stamp","count":1},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:caminite_plate
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/caminite_plate',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"minecraft:clay"},
+            {"item":"mekanism:block_salt"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:sand"},
+            {"item":"embers:raw_caminite_plate"}
+          ],
+          "result": {"id":"embers:caminite_plate","count":1},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:ingot_stamp
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/ingot_stamp',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"minecraft:clay"},
+            {"item":"mekanism:block_salt"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:sand"},
+            {"item":"embers:raw_ingot_stamp"}
+          ],
+          "result": {"id":"embers:ingot_stamp","count":1},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:nugget_stamp
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'kubejsstudio:recipe/nugget_stamp',
+      {
+        "type": "roots:pyre",
+        "data": {
+          "ingredients": [
+            {"item":"minecraft:clay"},
+            {"item":"mekanism:block_salt"},
+            {"tag":"minecraft:coals"},
+            {"tag":"minecraft:sand"},
+            {"item":"embers:raw_nugget_stamp"}
+          ],
+          "result": {"id":"embers:nugget_stamp","count":1},
+          "priority": 0
+        }
+      }
+    )
+})
+// kubejsstudio custom: kubejsstudio:caminite_blend
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'embers:recipe/caminite_blend',
+      {
+        "type": "kubejs:shaped",
+        "result": {"id":"embers:caminite_blend","count":2},
+        "pattern": ["#A#","ABA","#A#"],
+        "key": {
+          "A": {"item":"minecraft:clay_ball"},
+          "B": {"tag":"minecraft:sand"},
+          "#": {"item":"mekanism:salt"}
+        }
+    }
+    )
+})
