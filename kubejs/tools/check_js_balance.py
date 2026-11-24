@@ -1,12 +1,25 @@
 import sys
 
 BS = chr(92)
-FILES = [
+
+# 默认检查"改起来最容易出错、加载失败又最难看出原因"的脚本；
+# 也可以直接传文件：python tools/check_js_balance.py server_scripts/research_core/core.js
+DEFAULT_FILES = [
     'startup_scripts/silicon/chip_items.js',
     'startup_scripts/silicon/litho_machines.js',
     'server_scripts/silicon/litho_structure.js',
     'server_scripts/silicon/litho_recipes.js',
+    'startup_scripts/research_core/station_startup.js',
+    'startup_scripts/research_core/network_blocks.js',
+    'startup_scripts/research_core/terminal_block.js',
+    'server_scripts/research_core/core.js',
+    'server_scripts/research_core/network.js',
+    'server_scripts/research_core/terminal.js',
+    'client_scripts/research_core/terminal_ui.js',
 ]
+
+FILES = sys.argv[1:] or DEFAULT_FILES
+bad = 0
 
 for f in FILES:
     s = open(f, encoding='utf-8').read()
@@ -48,5 +61,9 @@ for f in FILES:
             bal[ch] += 1
         elif ch in pairs:
             bal[pairs[ch]] -= 1
-    ok = all(v == 0 for v in bal.values())
+    ok = all(v == 0 for v in bal.values()) and q is None
+    if not ok:
+        bad += 1
     print(f, bal, 'OK' if ok else 'MISMATCH')
+
+sys.exit(1 if bad else 0)

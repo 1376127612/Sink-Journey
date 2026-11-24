@@ -1,0 +1,11 @@
+{
+  "matchItems": ["ad_astra:steel_plate"],
+  "resultItems": "industrialupgrade:itemplates/steel_plate",
+  "rules": {
+    "data": {
+      "recipe": "replace",
+      "advancement": "replace",
+      "loot_table": "retain"
+    }
+  }
+}

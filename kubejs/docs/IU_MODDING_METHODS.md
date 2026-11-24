@@ -13,7 +13,7 @@
 | 想改的东西 | 走哪条通道 | 写在哪 | 生效时机 |
 |---|---|---|---|
 | 工作台配方（合成表） | 数据包配方：`event.remove` + `event.custom`，**沿用原 id** | `ServerEvents.recipes` | 资源重载 |
-| 给机器加/换/删配方 | ① `universal_recipe` 数据包 ② `kubejs_iu` 桥 | `ServerEvents.recipes` / `ServerEvents.loaded` | 见第 3 节 |
+| 给机器加/换/删配方 | ① Sink Journey Core 的 JSON 补丁（推荐） ② `kubejs_iu` 桥 | `kubejs/sjcore/*.json` / `ServerEvents.loaded` | 见第 3 节 |
 | 想让机器"自动长出新配方" | 只补 `c:` 标签 | `ServerEvents.tags('item')` | `TagsUpdatedEvent` |
 | 机器能耗 / 时长 / 容量 / 效率 | `config/industrialupgrade-common.toml` | 配置文件 | 重启或重进世界 |
 | 矿脉、油田、污染、辐射、变压器档位 | 同上 | 同上 | 同上 |
@@ -113,7 +113,7 @@ event.remove({ output: 'industrialupgrade:itemplates/steel_plate' })
 
 ## 3. 通道 B：机器配方（三条路，按代价从低到高）
 
-### B1 `industrialupgrade:universal_recipe` —— 官方数据包通道，不需要桥模组
+### B1 `industrialupgrade:universal_recipe` —— 官方数据包通道（本包实测无效，仅作记录）
 
 IU 自带一个通用机器配方序列化器，写进数据包/KubeJS 后由
 `IURecipeSerializer` 调用 `Recipes.recipes.addAdderRecipe(...)`，
@@ -156,8 +156,9 @@ event.custom({
 - `params` 里的字符串会被静默丢弃。
 - 新增登记表不清空，每 `/reload` 会再追加一次同样的条目，JEI 里可能出现重复；
   需要干净列表就配一条 `universal_recipe_delete` 或改用桥。
-- 本通道代码路径已核实（`IURecipeSerializer` → `addAdderRecipe`），**尚未在本包实测**，
-  首次使用建议只加一条配方、进游戏用 `/kubejs_iu recipes <池名>` 确认。
+- **本包实测无效**（见 `server_scripts/industrial/iu_oil_line.js` 的注释）：登记表在
+  `TagsUpdatedEvent` 里重放，而数据包配方解析发生在更晚的 `RecipeManager` 阶段，
+  重放时表还是空的，配方进不了池子。别用它，机器配方走桥或 Sink Journey Core。
 
 ### B2 `kubejs_iu` 桥 —— 运行时 Java API（本包主用做法）
 
@@ -259,6 +260,29 @@ addcompressor("c:plates/" + name, 1, "c:doubleplate/" + name);
 多人服务器只认服务端那份。
 
 ---
+
+## 4.5 通道 E：Sink Journey Core 的配置文件补丁（本包新增）
+
+`Sink-Journey-Core` 里有一个 Java 模组 `sinkjourneycore`（产物 `mods/sinkjourneycore-0.1.0.jar`），
+把机器配方补丁从脚本挪到了配置文件：`config/sinkjourneycore/iu_patches.json`，
+字段是 `op`（remove / add / replace）+ `pool` + `inputs` / `outputs`。
+
+关键事实：**IU 的配方 bootstrap 每个 JVM 只跑一次**（`IUCore.getore` 开头的 `register` 标志），
+`/reload` 不会重建配方池，所以任何一方对池子的改动（加、删）都会留到重启——
+这就是桥模组做的封禁把 JS 删掉也撤不回来的原因。
+
+本模组在第一次动某个池子前拍快照，每次施加前先还原快照再重放当前 JSON，因此：
+
+- 装 jar 要重启（和 kubejs_iu 一样），但改 JSON 不用：`/sjcore iu reload` 就生效；
+- 撤销一条封禁也不用重启，删掉那条 JSON 再 reload 即恢复原配方；
+- 加配方前会清同输入同产物的旧条目，重复 reload 不会堆叠；
+- 支持 `energy` / `temperature` / 任意 `meta` 元数据。
+- 前提：同一个池子不要同时被 KubeJS 桥改，快照还原会把它一起抹掉。
+
+配方槽支持 `{item}` / `{tag}` / `{fluid, amount}`：物品池和流体池（`RecipesFluidCore` 的 42 个池）
+都覆盖——只有物品走物品池，流体产物或纯流体输入走流体池，物品+流体混合输入而产物是物品时，
+流体作为物品池的辅助输入。用法见 `Sink-Journey-Core/README.md`；
+同一件事不要和 KubeJS 脚本同时做，否则 JEI 会重复。
 
 ## 5. 通道 D：硬编码，只能改 Java
 

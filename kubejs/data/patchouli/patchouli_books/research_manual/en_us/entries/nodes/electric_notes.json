@@ -2,15 +2,15 @@
   "name": "电力：基础笔记",
   "category": "patchouli:basics",
   "icon": "kubejs:research_notes_electric",
-  "sortnum": 15,
+  "sortnum": 16,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "把电磁感应、真空管与硅器件写成一份可复制的笔记：8 片晶圆 + 16 份演算数据，在溯洄研究站里跑完 900 秒；拿到笔记即解锁基础电力时代（AE2 本体与工业先锋同时开放）。$(br2)节点：sink:electric_notes　时代：电力$(br2)前置：sink:gate_dragon"
+      "text": "机械研究台用晶圆元件与演算数据刻出电力笔记：8 片元件 + 16 份演算数据 + 一张纸，900 秒；拿到笔记即解锁基础电力时代（AE2 本体与工业先锋同时开放）。$(br2)节点：sink:electric_notes　时代：电力$(br2)前置：sink:gate_dragon"
     },
     {
       "type": "patchouli:text",
-      "text": "成本：industrialupgrade:crafting_elements/crafting_494_element ×8、kubejs:research_data ×16、能量 8000 FE、算力 2、时长 45.0 秒$(br2)产出：kubejs:research_notes_electric ×1$(br2)解锁：era.electric$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；前置没完成时研究站会拒绝开工并在聊天栏提示。"
+      "text": "成本：无（里程碑，不需要投料）$(br2)产出：无（拿到 kubejs:research_notes_electric 即触发）$(br2)解锁：era.electric$(br2)里程碑不需要投料、也不经过研究站：条件达成的瞬间就解锁；前置没完成时会被跳过，之后每 10 秒补扫一次背包。"
     }
   ]
 }

@@ -63,15 +63,22 @@ var SRJ_costLine = function (node) {
     var fluids = inputs.fluids || []
     for (var k = 0; k < fluids.length; k++) parts.push(String(fluids[k].id) + ' ' + fluids[k].amount + 'mB')
     if (inputs.energy) parts.push(inputs.energy + ' FE')
+    if (inputs.compute) parts.push('算力 ' + inputs.compute + '（网络不足会拒绝开工）')
     if (node.duration) parts.push(Math.round(Number(node.duration) / 20) + 's')
     return parts.length > 0 ? parts.join(', ') : '无（里程碑）'
 }
 
 RecipeViewerEvents.addInformation('item', event => {
+    // 同一个产物只挂一条说明：kubejs:research_data 现在被十几个节点当产物，
+    // 不去重的话 JEI 里会堆出十几页几乎一样的成本表。
+    var seenOut = {}
     for (var i = 0; i < SRJ_nodes.length; i++) {
         var node = SRJ_nodes[i]
         var outs = (node.outputs || {}).items || []
         if (outs.length === 0) continue
+        var outId = String(outs[0].id)
+        if (seenOut[outId]) continue
+        seenOut[outId] = true
         var req = node.requires || {}
         var reqList = req.or || req.and || []
         var comps = []

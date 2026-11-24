@@ -1,0 +1,16 @@
+{
+  "name": "末地：门的另一侧",
+  "category": "patchouli:basics",
+  "icon": "kubejs:research_data",
+  "sortnum": 14,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "第一次走进末地时就把读数记下来——门的另一侧本身也是研究材料。$(br2)节点：sink:end_door　时代：末地$(br2)前置：sink:blueprint_mechanical"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "成本：无（里程碑，不需要投料）$(br2)产出：无（进入 minecraft:the_end 即触发）$(br2)解锁：gate.enter_end$(br2)里程碑不需要投料、也不经过研究站：条件达成的瞬间就解锁；前置没完成时会被跳过，之后每 10 秒补扫一次背包。"
+    }
+  ]
+}

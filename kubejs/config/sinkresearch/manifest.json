@@ -1,8 +1,8 @@
 {
   "_comment": "研究节点页面清单。KubeJS 无法枚举目录，所以新增页面必须在这里登记。",
   "pages": [
-    "nodes/era_steam.json",
-    "nodes/era_ember.json",
+    "nodes/notes_era.json",
+    "nodes/end_gate.json",
     "nodes/era_electric.json"
   ]
 }

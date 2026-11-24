@@ -87,8 +87,9 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 ```
 
 - 只在**网络中心**的方块实体 tick 里工作，且 `gameTime % 20 == 0` 才扫，扫描盒 13×7×13（约 1183 次方块查询/秒/中心）
-- 算力：计算机 基础 1 / 进阶 2 / 精英 4；并发容量：数据库 基础 1 / 进阶 2
-- 心跳：每次扫描刷新 `ts`；`/research net` 里超过 45 秒没心跳显示 `[离线]`
+- 算力：中心基线 1（`base_compute`）+ 计算机 基础 1 / 进阶 2 / 精英 4；并发容量：数据库 基础 1 / 进阶 2
+- 心跳：每次扫描刷新 `ts`；`/research net` 里超过 45 秒没心跳显示 `[离线]`，
+  研究站判定在线用的是 `net_ttl_ms`（默认 15 秒）
 - 研究站查询：`station_startup.js` 读同一份 persistentData，找 **16 格内** 最近的中心，
   时长 `factor /= (1 + 0.15 × min(算力, 20))`，总下限 0.25（即最快 4 倍速）
 
@@ -102,6 +103,85 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 
 **本阶段未做（留到 P3.2）：** 数据库容量对**并发研究数**的硬性限制、断电/断网时"暂停并保留进度"的显式状态机
 （目前进度由 MMCR 自己保存，缺料/缺电会停在那一步，不清零）。
+
+## 2.4.1 算力门槛（2026-11 补齐：`inputs.compute` 从"只显示"变成"要判定"）
+
+节点 JSON 里的 `inputs.compute` 以前只在终端成本行里显示，判定里没有任何读取方，
+所以精英计算机（算力 4）除了提速毫无意义。现在它是一条**硬门槛**：
+
+- `beforeStart` 依次过三道关：前置 → 并发位 → **算力**（`node.inputs.compute`）。
+  网络算力不足时 `ctx.cancel()` + 就近玩家提示
+  `研究站拒绝开工：算力不足（需要 4，网络只有 1）——加研究计算机`，日志留一行
+  `[SR] 算力不足 1/4，拒绝开工: <recipe>`。
+- 网络中心自身提供 `base_compute`（默认 1），但研究站现在最低的节点也要 2 点算力
+  （电力：基础笔记），所以**光放中心开不了工**：要加一台基础计算机（+1）；
+  电网调度要 4 点 = 基座 1 + 精英计算机 4，或基座 1 + 三台基础计算机。
+  `base_compute: 0` 可恢复"中心不给算力"。
+- 算力同时仍是速度系数（`/(1 + 0.15 × min(算力, 20))`），门槛与提速共用同一个数。
+- 终端详情页在算力那一行标红 `（不足，网络只有 N）`，悬停提示同样标；`/research tree`
+  末尾多一行当前位置的 `算力 / 并发`（没网时直接说"站在离网络中心 16 格内才能给研究站供网"）。
+
+## 2.4.2 解锁路线：电力以前靠笔记，电力以后靠研究站（2026-11 改）
+
+**改之前的现状**：五个时代 stage（`era.kinetic / steam / ember / radiance / electric`）
+全部由溯洄研究站的 craft 节点发放；原始研究台与机械研究台产出的笔记只是材料，
+拿到手不会解锁任何东西。也就是说"机械研究台 → 笔记"这条线在解锁上是断的，
+玩家自然会以为研究站是唯一入口，而研究站又要网络、要算力、要并发位——
+于是前中期的研究体验全压在电力时代才该出场的那套设备上。
+
+**改之后**：解锁只看"东西从哪来"——所有时代 stage 都由"拿到笔记/蓝图"触发，
+研究站不负责开发解锁的门，它只负责电力以后把材料换成演算数据（目前两个节点）。
+
+| 时代 / 门槛 | 触发 | 触发物 | 出处 |
+|---|---|---|---|
+| `era.kinetic` | 拿到 | `kubejs:research_notes` | 原始研究台（纸 + 墨囊） |
+| `era.steam`（钢）+ `recipe.create:precision_mechanism` | 拿到 | `kubejs:blueprint_steam`（蓝图·机械） | 机械研究台 |
+| `era.ember` | 拿到 | `kubejs:research_notes_ember` | 机械研究台 |
+| `era.radiance` | 拿到 | `kubejs:research_notes_radiance` | 机械研究台 |
+| `gate.enter_end` | 进末地 | — | 玩法（`dimension_enter`） |
+| `gate.end` | 亲手杀龙 | — | 玩法（`entity_death`） |
+| `era.electric` | 拿到 | `kubejs:research_notes_electric` | 机械研究台（晶圆元件 ×8 + 数据 ×16 + 纸） |
+
+节点总数 9 个，分三页（`config/sinkresearch/nodes/`）：
+
+| 页 | 节点 | 类型 | 前置 | 触发 / 成本 | 算力 | unlock |
+|---|---|---|---|---|---|---|
+| 笔记时代 | 机动：第一份笔记 | milestone | — | 拿到研究笔记 | — | `era.kinetic` |
+| | 蒸汽：机械蓝图 | milestone | 第一份笔记 | 拿到蓝图·机械 | — | `era.steam`、`recipe.create:precision_mechanism` |
+| | 余烬：热循环笔记 | milestone | 机械蓝图 | 拿到研究笔记·余烬 | — | `era.ember` |
+| | 星辉：共鸣笔记 | milestone | 余烬笔记 | 拿到研究笔记·星辉 | — | `era.radiance` |
+| 末地与龙 | 末地：门的另一侧 | milestone | 机械蓝图 | 进入末地 | — | `gate.enter_end` |
+| | 末地：龙之证 | milestone | 机械蓝图 | 亲手击杀末影龙 | — | `gate.end` |
+| 基础电力 | 电力：基础笔记 | milestone | 龙之证 | 拿到研究笔记·电力 | — | `era.electric` |
+| | 电力：绕组与线圈 | craft | 基础笔记 | 电子管 ×8 + 晶圆元件 ×4 + 数据 ×8 + FE 6000，900 秒 | 3 | `recipe.industrialupgrade:basemachine3/rolling_machine` |
+| | 电力：电网调度 | craft | 绕组与线圈 | 钢板 ×8 + 精密构件 ×2 + 数据 ×12 + FE 12000，1200 秒 | 4 | `recipe.industrialupgrade:basemachine3/generator_iu` |
+
+三条实现细节：
+
+1. **笔记里程碑会补发**：`item_obtain` 只在物品进背包那一刻触发一次，如果当时前置还没完成
+   （先刻出余烬笔记、后拿到机械蓝图），这次就永远错过了。所以 `core.js` 每 10 秒（200 tick）
+   扫一遍在线背包，发现"触发物品在身上 + 前置已补齐"就补发一次，日志写
+   `[SR] 补发笔记解锁: <节点>（背包里有 <物品>）`。笔记被消耗掉了也不会掉 stage——已发的解锁在
+   `sinkresearch.unlocks` 里。
+2. **老存档有回填**：`migrations.json` 加了 v3 → v4，按背包里的笔记/蓝图补发 era stage
+   （`item_any_player` 规则，幂等）。玩家把笔记吃掉了就补不到，但原先解锁过的 stage 本来就在。
+3. **研究站本身没设门槛**：它的控制器配方还是 `blueprint_primitive`，前期就能造出来；
+   只是电力之前的节点都不在它身上了，所以造出来也没东西可跑。想彻底拦住可以在
+   `config/astages/simple/astages/item.json` 里给 `mmcr:research_station_controller`
+   挂一个前置 era stage——那是 AStages 那一半，按需自己配。
+
+`recipe.*` 键现在仍然只是键，不拦配方；要真拦，在 `recipe.json` 里写
+`{ "id": "...", "stage": "<键>", "object": "<配方类型>//<配方 id>" }`（两段式，写错会崩服）。
+
+新增/改动节点后跑三件事：
+
+```
+python tools/check_research_nodes.py     # 节点/前置/成环/lang/阶段对照
+python tools/gen_research_book.py        # 重生成 Patchouli 手册条目
+python tools/check_js_balance.py         # 改过 .js 才需要
+```
+
+JEI 信息页、`/research tree`、终端详情、研究手册都是读节点 JSON 自动生成的。
 
 ## 2.5 P3.2：并发限制 + 网络准入
 
@@ -118,7 +198,7 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
 没有数据库时用 `default_capacity`（默认 1）。
 
 - 占位存 `server.persistentData` → `sinkresearch.jobs.<netToken>` = `{"x_y_z": ts}`
-- `beforeStart` 抢位，`recipeTick` 每 20 tick 刷心跳，`beforeFinish` 释放
+- `beforeStart` 抢位，`recipeTick` 每 40 tick（2 秒）刷心跳，`beforeFinish` 释放
 - `job_ttl_ms`（默认 10 秒）内的占位才算数：服务器崩了 / 机器被拆，脏占位会自动过期，
   不会永久占着并发位
 
@@ -182,6 +262,30 @@ sinkresearch.net.<x>_<y>_<z>  -> {"compute":n,"capacity":n,"stations":n,"ts":t}
   装不下才 `SRTU_elide` 加省略号；小卡与网格节点的完整名放在悬停提示里
 - 屏幕高度不够时先压详情行数（最少 3 行，末行换 `…`），保证窗口不会顶出屏幕
 
+## 2.6.9 调试命令一览（`/research`，根节点 0 级，子命令各自 2 级）
+
+| 命令 | 作用 |
+|---|---|
+| `/research tree` | 聊天版研究树（`✔ 已完成 / ▶ 可研究 / ✘ 锁定`，末尾给当前位置的算力/并发） |
+| `/research need <物品id>` | 反向查询：哪个节点产出/解锁它、成本、前置 |
+| `/research list` | 每个节点的状态与 rank |
+| `/research dump` | 已解锁的 key 与来源（`by=…`），排查"它凭什么能做这个" |
+| `/research validate` | 图校验错误列表（前置缺失、环、重复 key） |
+| `/research unlock <key>` | 解锁单个 key |
+| `/research unlockall`（别名 `/research all`） | **科技全开**：图里所有节点的 unlock key 一次发下去 |
+| `/research reset` | 清空全部解锁，并 `astages server remove` 撤销 stage |
+| `/research draft` / `balance` | 生成草稿候选（`config/sinkresearch/candidates.json`）/ 静态成本统计 |
+| `/research net` | 研究网络：每个中心的算力、并发、心跳 |
+
+`unlockall` 与 `reset` 的语义：
+
+- `unlockall` 走的是正常的 `srGrant` 路径，所以每个 key 都会顺手 `astages server add` 镜像一次，
+  AStages 里 `era.steam` / `era.electric` 那些物品限制会一并放开；`recipe.*` 这类"还没接 AStages"
+  的键也会发下去，效果等于"所有节点都已完成"。
+- 两者都写 `server.persistentData`，**对当前存档永久生效**（解锁本来就是全服共享的），
+  不是只影响这一次登录。想回到零状态就 `/research reset`。
+- 只发解锁、不产出物品：需要材料/机器还得自己搞；研究站的配方仍然要投料。
+
 ## 2.7 P5：剧情对接（FTB Quests + Patchouli）
 
 **FTB Quests**：新增 `config/ftbquests/quests/chapters/a1b2c3d4e5f60718.snbt`
@@ -237,15 +341,21 @@ Patchouli 条目（`kubejs/tools/gen_research_book.py` 生成时读 lang）。�
 
 1. **重启游戏**（机器注册只在 startup 生效，`/reload` 不够）。
 2. 日志应出现：
-   `[SR] 启动缓存节点 3 个` → `[SR] 已注册研究站 sinkjourney:research_station`
-   → `[SR] 页面 era_steam 载入 3 个节点` → `[SR] 研究图校验通过，共 3 个节点`
-   → `[SR] 就绪：节点 3，已解锁 0 项`。
-3. `/research list` → `§e[可研究] sink:kinetic_brass`、`§7[锁定] sink:steam_precision`、`§7[锁定] sink:gate_dragon`。
-4. 用 `mmcr:research_station_controller` 搭 3×3×3 黄铜壳研究站。
-5. 投料安山合金 ×32 + 研究基质 ×4 + 水 500mB + FE → 约 15 秒出 `kubejs:research_data ×2`。
-6. `/research dump` → 出现 `era.kinetic`。
-7. 末地杀龙（玩家击杀）→ 广播 `[研究] 已解锁：era.electric`。
-8. 保存退出重进 → `/research dump` 保持。
+   `[SR] 启动缓存节点 9 个` → `[SR] 已注册研究站 sinkjourney:research_station`
+   → `[SR] 页面 notes 载入 4 个节点` / `end 载入 2 个` / `era_electric 载入 3 个`
+   → `[SR] 研究图校验通过，共 9 个节点` → `[SR] 就绪：节点 9，已解锁 0 项`
+   → 3 行 `[SR] 生成研究配方 ...`（只有电力页三个 craft 节点生成配方）。
+3. `/research list` → 只有 `sink:notes_primitive` 是可研究（其余锁定）。
+4. 原始研究台：纸 + 墨囊 → 研究笔记 → 聊天栏广播 `§b[研究] 已解锁：§eera.kinetic`，
+   日志 `[SR] 解锁 era.kinetic 原因=milestone:kubejs:research_notes`。
+5. 机械研究台：空白蓝图 + 演算数据 ×6 + 精密构件 ×2 + 应力 → 蓝图·机械 →
+   `era.steam` 与 `recipe.create:precision_mechanism` 一起解锁（钢类物品随之可用）。
+6. 机械研究台再出研究笔记·余烬 / 星辉 → `era.ember` / `era.radiance`。
+7. 进末地 → `gate.enter_end`；**亲手**击杀末影龙 → `gate.end`。
+8. 机械研究台：晶圆元件 ×8 + 演算数据 ×16 + 纸 + 应力 32 → 900 秒出研究笔记·电力 →
+   解锁 `era.electric`（通用机械 / AE2 主机同时可用）。
+9. 想用研究站：3×3×3 黄铜壳 + 16 格内网络中心 + 算力 ≥3 → 投料「绕组与线圈」→ 电力数据产线。
+10. 保存退出重进 → `/research dump` 保持；老存档若原本有 era stage，迁移 v3→v4 不会收回。
 
 ## 5. 已知限制
 
@@ -253,3 +363,5 @@ Patchouli 条目（`kubejs/tools/gen_research_book.py` 生成时读 lang）。�
 - `/research balance` 只统计静态成本，不含并行与提速。
 - `advancement_any_player` 回填依赖 `player.advancements` 的实际形状，失败会静默跳过（物品回填不受影响）。
 - JEI 不会隐藏未解锁配方（recipe 限制需手写进 `config/astages/simple/astages/recipe.json`，默认留空）。
+- 笔记解锁判定的是"物品进背包的那一刻"：如果那时前置还没完成，10 秒一次的补扫只在笔记/蓝图**还留在背包里**时有效；吃掉或丢掉了就要再弄一份。
+- 研究站是电力以后的设备，但控制器配方仍然只要 `blueprint_primitive`，前期造得出来（造出来也没东西可跑）。要硬拦就给它挂 AStages 前置时代。

@@ -27,7 +27,7 @@ MMCREvents.server(event => {
             .pattern(['XXX', 'XOX', 'XXX'])
             .set('X', api.block('mmcr:basic_casing'))
             .set('E', api.anyOfEnergyInput())
-            .set('I', api.anyOfItemInput())
+            .set('I', 'mmcr:item_input_bus_steam')
             .set('O', api.anyOfItemOutput())
             .set('R', api.air())
             .controller('C')

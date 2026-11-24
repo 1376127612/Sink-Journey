@@ -10,7 +10,6 @@
 var SR_STATION_ID = 'sinkjourney:research_station'
 var SR_STATION_POOL = 'sinkjourney:research_station'
 var SR_CFG_DIR = 'kubejs/config/sinkresearch/'
-var SR_MIN_TIME_FACTOR = 0.45
 var SR_UNLOCK_KEY = 'sinkresearch.unlocks'
 
 // ---- JSON 读取（Gson -> 纯 JS） ------------------------------
@@ -85,7 +84,15 @@ var srReadJson = (rel) => {
 // ---- 启动时读一次节点配置（只读缓存） ------------------------
 
 // 网络参数（可热改，重启生效）
-var srNetCfg = { require_network: true, default_capacity: 1, job_ttl_ms: 10000, search_radius: 16 }
+// net_ttl_ms：网络中心心跳超过这么久就当离线（中心被拆/区块卸载后状态条目还会留着，
+// 不判离线会让研究站在断网状态下继续跑）。
+var srNetCfg = {
+    require_network: true,
+    default_capacity: 1,
+    job_ttl_ms: 10000,
+    search_radius: 16,
+    net_ttl_ms: 15000
+}
 
 var srLoadNetCfg = () => {
     try {
@@ -95,6 +102,7 @@ var srLoadNetCfg = () => {
             if (cfg.default_capacity !== undefined) srNetCfg.default_capacity = Number(cfg.default_capacity) || 1
             if (cfg.job_ttl_ms !== undefined) srNetCfg.job_ttl_ms = Number(cfg.job_ttl_ms) || 10000
             if (cfg.search_radius !== undefined) srNetCfg.search_radius = Number(cfg.search_radius) || 16
+            if (cfg.net_ttl_ms !== undefined) srNetCfg.net_ttl_ms = Number(cfg.net_ttl_ms) || 15000
         }
     } catch (e) {
         console.warn('[SR] 读取 network.json 失败，使用默认值: ' + e)
@@ -119,6 +127,7 @@ var srLoadNodeCache = () => {
                     duration: Number(node.duration) || 200,
                     unlock: node.unlock || [],
                     requires: node.requires || { and: [] },
+                    inputs: node.inputs || {},
                     recipe_id: node.recipe_id ? String(node.recipe_id) : null
                 }
             }
@@ -182,26 +191,33 @@ var srRequirementsMet = (node, unlocks) => {
     return true
 }
 
-// 网络算力查询：读 network.js 维护的 persistentData，找 16 格内最近的在线中心
-var srNetCompute = (server, pos, dim) => {
-    if (!server || !pos) return 0
-    var bestD = 16 * 16
-    var bestCompute = 0
+// 网络查询：读 network.js 维护的 persistentData，找 search_radius 格内最近的**在线**中心。
+// 心跳（ts）超过 net_ttl_ms 视为离线——中心被拆/区块卸载后，状态条目可能还留着，
+// 拿它当"有网络"会让研究站在断网状态下继续跑。
+// 返回 { token, compute, capacity, stations } 或 null。
+var srNet = (server, pos, dim) => {
+    if (!server || !pos) return null
+    var best = null
+    var radius = Number(srNetCfg.search_radius) || 16
+    var bestD = radius * radius
+    var now = Date.now()
     try {
         var raw = String(server.persistentData.getString('sinkresearch.net.index') || '')
-        if (raw.length === 0) return 0
+        if (raw.length === 0) return null
         var list = raw.split(';')
         for (var i = 0; i < list.length; i++) {
             // token 形如 "minecraft:overworld@12_64_-30"
-            var tok = list[i]
+            var token = String(list[i])
+            if (token.length === 0) continue
             var tokDim = 'minecraft:overworld'
-            var at = tok.indexOf('@')
+            var coords = token
+            var at = token.indexOf('@')
             if (at >= 0) {
-                tokDim = tok.substring(0, at)
-                tok = tok.substring(at + 1)
+                tokDim = token.substring(0, at)
+                coords = token.substring(at + 1)
             }
             if (dim && String(dim) !== tokDim) continue
-            var p = tok.split('_')
+            var p = coords.split('_')
             if (p.length < 3) continue
             var dx = Number(p[0]) - pos.getX()
             var dy = Number(p[1]) - pos.getY()
@@ -209,16 +225,22 @@ var srNetCompute = (server, pos, dim) => {
             var d = dx * dx + dy * dy + dz * dz
             if (d > bestD) continue
             var state = ''
-            try { state = String(server.persistentData.getString('sinkresearch.net.' + list[i]) || '') } catch (e) { continue }
+            try { state = String(server.persistentData.getString('sinkresearch.net.' + token) || '') } catch (e) { continue }
             if (state.length === 0) continue
             var info = null
             try { info = JSON.parse(state) } catch (e) { continue }
             if (!info) continue
+            if (now - (Number(info.ts) || 0) > srNetCfg.net_ttl_ms) continue
             bestD = d
-            bestCompute = Number(info.compute) || 0
+            best = {
+                token: token,
+                compute: Number(info.compute) || 0,
+                capacity: Number(info.capacity) || 0,
+                stations: Number(info.stations) || 0
+            }
         }
     } catch (e) { }
-    return bestCompute
+    return best
 }
 
 // 速率：f(已解锁时代数, 并行, 网络算力)。P3.2 再接入供电与等级。
@@ -237,7 +259,8 @@ var srSpeedFactor = (ctx, unlocks) => {
         var mc = ctx.machineContext()
         var dim = ''
         try { dim = String(mc.level().dimension) } catch (e) { dim = '' }
-        compute = srNetCompute(srServerOf(ctx), mc.controllerPos(), dim)
+        var net = srNet(srServerOf(ctx), mc.controllerPos(), dim)
+        compute = net ? net.compute : 0
     } catch (err) { compute = 0 }
     factor = factor / (1 + 0.15 * Math.min(compute, 20))
 
@@ -252,47 +275,6 @@ var srNodeByRecipeId = (recipeId) => {
 }
 
 // ---- 网络状态与并发（P3.2） ----------------------------------
-
-var srNetState = (server, pos, dim) => {
-    if (!server || !pos) return null
-    var best = null
-    var bestD = 16 * 16
-    try {
-        var raw = String(server.persistentData.getString('sinkresearch.net.index') || '')
-        if (raw.length === 0) return null
-        var list = raw.split(';')
-        for (var i = 0; i < list.length; i++) {
-            var tok = list[i]
-            var tokDim = 'minecraft:overworld'
-            var at = tok.indexOf('@')
-            if (at >= 0) {
-                tokDim = tok.substring(0, at)
-                tok = tok.substring(at + 1)
-            }
-            if (dim && String(dim) !== tokDim) continue
-            var p = tok.split('_')
-            if (p.length < 3) continue
-            var dx = Number(p[0]) - pos.getX()
-            var dy = Number(p[1]) - pos.getY()
-            var dz = Number(p[2]) - pos.getZ()
-            var d = dx * dx + dy * dy + dz * dz
-            if (d > bestD) continue
-            var state = ''
-            try { state = String(server.persistentData.getString('sinkresearch.net.' + list[i]) || '') } catch (e) { continue }
-            if (state.length === 0) continue
-            var info = null
-            try { info = JSON.parse(state) } catch (e) { continue }
-            if (!info) continue
-            bestD = d
-            best = {
-                token: list[i],
-                compute: Number(info.compute) || 0,
-                capacity: Number(info.capacity) || 0
-            }
-        }
-    } catch (e) { }
-    return best
-}
 
 var srJobsKey = (token) => 'sinkresearch.jobs.' + token
 
@@ -433,7 +415,7 @@ MMCREvents.startup(event => {
                 // 开工前清掉上一次的作废标记
                 try { server.persistentData.remove(srAbortKey(srStationKey(pos))) } catch (e) { }
 
-                var net = srNetState(server, pos, dim)
+                var net = srNet(server, pos, dim)
                 if (!net) {
                     if (srNetCfg.require_network) {
                         try { ctx.cancel() } catch (e) { }
@@ -457,6 +439,17 @@ MMCREvents.startup(event => {
                         '，加数据库或等一条跑完')
                     return
                 }
+
+                // ---- 算力门槛：节点 inputs.compute 是"研究本身要多少算力"，不是速度加成 ----
+                // 以前这个字段只在终端里显示，精英计算机/数据库对能否开工毫无影响。
+                var needCompute = Number((node.inputs || {}).compute) || 0
+                if (needCompute > net.compute) {
+                    try { ctx.cancel() } catch (e) { }
+                    console.info('[SR] 算力不足 ' + net.compute + '/' + needCompute + '，拒绝开工: ' + recipeId)
+                    srNotifyNear(ctx, 'compute', '研究站拒绝开工：算力不足（需要 ' + needCompute +
+                        '，网络只有 ' + net.compute + '）——加研究计算机')
+                    return
+                }
                 // ts 是心跳（每次都刷），start 是这次开工的时间（只写一次），
                 // 终端的"还剩多久"要按 start 算，不能按心跳刷新的 ts 算。
                 var prevJob = jobs[stationKey]
@@ -468,17 +461,17 @@ MMCREvents.startup(event => {
                 try { ctx.setDuration(ticks) } catch (err) { console.warn('[SR] 无法改写时长: ' + err) }
             })
 
-            // 心跳：每 20 tick 刷一次占位时间，防止崩溃后脏数据永久占用并发
+            // 心跳：每 40 tick（2 秒）刷一次占位时间，防止崩溃后脏数据永久占用并发。
+            // 占位 TTL 是 10 秒，2 秒的心跳留了 5 次容错，同时把 persistentData 的写盘减半。
             behavior.recipeTick(ctx => {
                 try {
-                    if (Number(ctx.currentTick()) % 20 !== 0) return
+                    if (Number(ctx.currentTick()) % 40 !== 0) return
                     var server = srServerOf(ctx)
                     var mc = ctx.machineContext()
                     var pos = mc.controllerPos()
                     var dim = String(mc.level().dimension)
                     var key = srStationKey(pos)
-                    var raw = String(server.persistentData.getString('sinkresearch.net.index') || '')
-                    var net = srNetState(server, pos, dim)
+                    var net = srNet(server, pos, dim)
 
                     if (!net) {
                         // 断网：尝试立刻停住；并把这一条标记为作废（完成时丢产出）
@@ -519,7 +512,7 @@ MMCREvents.startup(event => {
                     }
 
                     var dim = String(mc.level().dimension)
-                    var net = srNetState(server, pos, dim)
+                    var net = srNet(server, pos, dim)
                     if (!net) return
                     var jobs = srReadJobs(server, net.token)
                     delete jobs[key]

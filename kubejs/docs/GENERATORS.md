@@ -62,7 +62,7 @@ y=2  XXX        y=1  XFX        y=0  XXX
      XXX             XCX             XXX
 ```
 
-- `F` = 北墙中层**流体输入仓**（水）
+- `F` = 北墙中层**机动流体输入仓**（水，`mmcr:kinetic_fluid_input_hatch`；分级输入仓见 `PORT_TIERS.md`，下同）
 - `E` = 东墙中层**能量输出仓**
 - `C` = 南墙中层控制器
 
@@ -74,7 +74,7 @@ y=3  XXX        y=2  XXX        y=1  XFX        y=0  XXX
      XXX             XXX             XCX             XXX
 ```
 
-- `F` = y=1 层北墙中层流体输入仓（水）
+- `F` = y=1 层北墙中层机动流体输入仓（水，`mmcr:kinetic_fluid_input_hatch`）
 - `S` = y=2 层**西墙中层**应力输入接口 —— 贴 Create 的轴/齿轮箱
 - `E` = y=1 层东墙中层能量输出仓，`C` = y=1 层南墙中层控制器
 
@@ -96,7 +96,7 @@ y=4  XXX        y=3  XXX        y=2  XXX        y=1  XIX        y=0  XXX
      XXX             XXX             XCX             XXX             XXX
 ```
 
-- `I` = 北墙中层物品输入仓（红石粉）
+- `I` = 北墙中层机动物品输入总线（红石粉，`mmcr:kinetic_item_input_bus`）
 - `M` = **y=1 层腔体正中**那块磁石，被机壳完全包住；不放磁石组不起来
 - `E` = y=2 层东墙能量输出仓，`C` = y=2 层南墙控制器
 

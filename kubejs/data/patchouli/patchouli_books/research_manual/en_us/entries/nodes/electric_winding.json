@@ -1,0 +1,16 @@
+{
+  "name": "电力：绕组与线圈",
+  "category": "patchouli:basics",
+  "icon": "kubejs:research_data",
+  "sortnum": 17,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "把绕组的匝数、线径与磁通写成表，电力机器的复现从此不必靠试。$(br2)节点：sink:electric_winding　时代：电力$(br2)前置：sink:electric_notes"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "成本：create:electron_tube ×8、industrialupgrade:crafting_elements/crafting_494_element ×4、kubejs:research_data ×8、能量 6000 FE、算力 3、时长 45.0 秒$(br2)产出：kubejs:research_data ×12$(br2)解锁：recipe.industrialupgrade:basemachine3/rolling_machine$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；前置没完成时研究站会拒绝开工并在聊天栏提示。"
+    }
+  ]
+}

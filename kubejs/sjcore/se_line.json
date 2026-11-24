@@ -1,0 +1,18 @@
+{
+  "_comment": "电力初期 SE 线 —— 阳光化合物（sunnarium2）的机器配方。原配方第 4 个输入是钨锭（industrialupgrade:itemingots/tungsten_ingot），钨不属于电力时代；换成镍锭（耐热坩埚），其余三项（碎片 ×4、荧石粉、石英）与产物数量保持 IU 原样。池名是 IU 自己的拼写 sunnurium。改完 `/sjcore iu reload` 生效，不用重启。",
+  "patches": [
+    {
+      "op": "replace",
+      "pool": "sunnurium",
+      "inputs": [
+        { "item": "industrialupgrade:itemsunnarium/sunnariumpart", "count": 4 },
+        { "item": "minecraft:glowstone_dust", "count": 1 },
+        { "item": "minecraft:quartz", "count": 1 },
+        { "tag": "c:ingots/nickel", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemsunnarium/sunnarium2", "count": 1 }
+      ]
+    }
+  ]
+}

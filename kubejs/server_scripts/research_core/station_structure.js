@@ -13,7 +13,7 @@ MMCREvents.server(event => {
         .pattern(['XXX', 'E O', 'XXX'])
         .pattern(['XXX', 'XFX', 'UXU'])
         .set('X', api.block('create:brass_casing'))
-        .set('I', api.anyOfItemInput())
+        .set('I', 'mmcr:item_input_bus_kinetic')
         .set('O', api.anyOfItemOutput())
         .set('E', api.anyOfEnergyInput())
         .set('U', api.block('create:brass_casing'))

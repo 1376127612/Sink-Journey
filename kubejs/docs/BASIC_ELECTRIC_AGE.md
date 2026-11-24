@@ -5,6 +5,7 @@
 >
 > 脚本：
 > - `kubejs/server_scripts/industrial/iu_electric_recipes.js`（IU 电力元件）
+> - `kubejs/server_scripts/industrial/iu_se_line.js`（SE 线，见 `SE_LINE.md`）
 > - `kubejs/server_scripts/industrial/if_electric.js`（工业先锋）
 > - `kubejs/server_scripts/ae2/ae2_core.js`（AE2 本体 + 晶圆）
 > - `kubejs/startup_scripts/research/items.js`（研究笔记·电力）
@@ -73,6 +74,11 @@ IU 把第一批电力机器全写成钛板 / 钨板 / 锗板 / 镍铬齿轮 / �
 | `industrialupgrade_648` | 阳极 | 蒙茨合金板 ×6 | 铅板 ×6 |
 | `industrialupgrade_584` | 阴极 | 阿卢梅尔合金板 ×6 | 镍板 ×6 |
 | `industrialupgrade_1609` | RE 电池 | 铝锂合金外壳 ×4 | 铅外壳 ×4 |
+
+SE 线（元件:SE、元件:浓缩、阳光化合物制造厂、SE 线，配方 id
+`industrialupgrade_1128 / 1341 / 1467 / 680`，以及机器池 `sunnurium`）
+单独写在 `SE_LINE.md`：IU 把它们锁在钨 / 锗 / 铂后面，而吃 SE 的机器在电力初期就要用，
+不改这条线整章都走不动。
 
 **没有动的东西**：
 
@@ -202,6 +208,10 @@ ExtendedAE、扩展+、闪电科技（ae2lt）、水晶科技（ae2cs）、无�
 ---
 
 ## 7. 任务结构（35 步：主线 12 + 支线 23）
+
+> 2026-11 追加：AE 与通用机械两条线（AE 11 格、通用机械 9 格）落在「外星科技」章
+> （`514fd6a3f6ee847d.snbt`）的「是」下面，不在本章。结构、物品 id、时代锁复核都写在
+> [`AE_MEK_LINES.md`](AE_MEK_LINES.md)。下面的表是加线之前的版本。
 
 章节 `e1c0000000000000.snbt`（35 个任务）在分组「科技革命」`1D6589548F232270` 里，`order_index: 1`。
 主线 `y = 0` 一格 2.0，第 N 个只依赖第 N-1 个，走的全是必经工序；五条产线落在 `y = -8 / -4 / +4 / +8`，

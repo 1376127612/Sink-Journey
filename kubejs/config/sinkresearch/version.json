@@ -1,5 +1,5 @@
 {
   "_comment": "溯洄研究系统：存档数据版本。迁移逻辑见 migrations.json 与 server_scripts/research_core/core.js",
-  "data_version": 2,
+  "data_version": 4,
   "min_supported": 0
 }

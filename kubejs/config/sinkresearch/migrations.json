@@ -7,18 +7,30 @@
       "rules": [
         {
           "id": "backfill_era_electric_by_advancement",
-          "when": { "advancement_any_player": "minecraft:end/kill_dragon" },
-          "grant": [ "era.electric" ]
+          "when": {
+            "advancement_any_player": "minecraft:end/kill_dragon"
+          },
+          "grant": [
+            "era.electric"
+          ]
         },
         {
           "id": "backfill_era_kinetic_by_blueprint",
-          "when": { "item_any_player": "kubejs:blueprint_steam" },
-          "grant": [ "era.kinetic" ]
+          "when": {
+            "item_any_player": "kubejs:blueprint_steam"
+          },
+          "grant": [
+            "era.kinetic"
+          ]
         },
         {
           "id": "backfill_era_kinetic_by_item",
-          "when": { "item_any_player": "kubejs:blueprint_primitive" },
-          "grant": [ "era.kinetic" ]
+          "when": {
+            "item_any_player": "kubejs:blueprint_primitive"
+          },
+          "grant": [
+            "era.kinetic"
+          ]
         }
       ]
     },
@@ -28,8 +40,12 @@
       "rules": [
         {
           "id": "backfill_era_kinetic_by_research_notes",
-          "when": { "item_any_player": "kubejs:research_notes" },
-          "grant": [ "era.kinetic" ]
+          "when": {
+            "item_any_player": "kubejs:research_notes"
+          },
+          "grant": [
+            "era.kinetic"
+          ]
         }
       ]
     },
@@ -39,8 +55,54 @@
       "rules": [
         {
           "id": "backfill_gate_end_by_advancement",
-          "when": { "advancement_any_player": "minecraft:end/kill_dragon" },
-          "grant": [ "gate.end" ]
+          "when": {
+            "advancement_any_player": "minecraft:end/kill_dragon"
+          },
+          "grant": [
+            "gate.end"
+          ]
+        }
+      ]
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "rules": [
+        {
+          "id": "backfill_era_kinetic_by_notes",
+          "when": {
+            "item_any_player": "kubejs:research_notes"
+          },
+          "grant": [
+            "era.kinetic"
+          ]
+        },
+        {
+          "id": "backfill_era_steam_by_blueprint",
+          "when": {
+            "item_any_player": "kubejs:blueprint_steam"
+          },
+          "grant": [
+            "era.steam"
+          ]
+        },
+        {
+          "id": "backfill_era_ember_by_notes",
+          "when": {
+            "item_any_player": "kubejs:research_notes_ember"
+          },
+          "grant": [
+            "era.ember"
+          ]
+        },
+        {
+          "id": "backfill_era_radiance_by_notes",
+          "when": {
+            "item_any_player": "kubejs:research_notes_radiance"
+          },
+          "grant": [
+            "era.radiance"
+          ]
         }
       ]
     }

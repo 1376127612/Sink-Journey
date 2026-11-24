@@ -1,0 +1,47 @@
+{
+  "_comment": "电力时代以前：科技只靠「拿到研究笔记/蓝图」解锁，笔记只从原始研究台（研究笔记）与机械研究台（蓝图·机械、研究笔记·余烬/星辉）来。节点是 milestone + item_obtain，不生成研究站配方。",
+  "page": "notes",
+  "title_key": "research.page.notes",
+  "nodes": [
+    {
+      "id": "sink:notes_primitive",
+      "kind": "milestone",
+      "era": "kinetic",
+      "rank": 1,
+      "requires": { "and": [] },
+      "trigger": { "type": "item_obtain", "item": "kubejs:research_notes" },
+      "unlock": [ "era.kinetic" ],
+      "ui": { "x": 0, "y": 0, "doc": "research.notes_primitive.desc" }
+    },
+    {
+      "id": "sink:blueprint_mechanical",
+      "kind": "milestone",
+      "era": "steam",
+      "rank": 3,
+      "requires": { "and": [ "sink:notes_primitive" ] },
+      "trigger": { "type": "item_obtain", "item": "kubejs:blueprint_steam" },
+      "unlock": [ "era.steam", "recipe.create:precision_mechanism" ],
+      "ui": { "x": 2, "y": 0, "doc": "research.blueprint_mechanical.desc" }
+    },
+    {
+      "id": "sink:ember_notes",
+      "kind": "milestone",
+      "era": "ember",
+      "rank": 4,
+      "requires": { "and": [ "sink:blueprint_mechanical" ] },
+      "trigger": { "type": "item_obtain", "item": "kubejs:research_notes_ember" },
+      "unlock": [ "era.ember" ],
+      "ui": { "x": 4, "y": 0, "doc": "research.ember_notes.desc" }
+    },
+    {
+      "id": "sink:radiance_notes",
+      "kind": "milestone",
+      "era": "radiance",
+      "rank": 5,
+      "requires": { "and": [ "sink:ember_notes" ] },
+      "trigger": { "type": "item_obtain", "item": "kubejs:research_notes_radiance" },
+      "unlock": [ "era.radiance" ],
+      "ui": { "x": 6, "y": 0, "doc": "research.radiance_notes.desc" }
+    }
+  ]
+}

@@ -54,6 +54,20 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["5A1B000000000003"]
+			icon: {
+				id: "kubejs:research_notes_electric"
+			}
+			id: "5A1B000000000004"
+			tasks: [{
+				id: "5A1B0000000000A4"
+				item: { count: 1, id: "kubejs:research_notes_electric" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
 			id: "0F63E5FD6083EF59"
 			tasks: [{
 				id: "0DFBBB1E418A4DB5"

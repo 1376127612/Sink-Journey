@@ -1,31 +1,67 @@
 {
-  "_comment": "基础电力时代研究页：末地门通过后可研究电力，产出研究笔记·电力并解锁 era.electric（AE2 本体 / 工业先锋 由此开放）。",
+  "_comment": "基础电力时代：电力笔记也由机械研究台刻出，拿到即解锁 era.electric；研究站从电力以后接手，负责把材料换成演算数据（绕组 3 算力、电网 4 算力）。era.ae_dlc 不在这里授予，留给后续时代。",
   "page": "era_electric",
   "title_key": "research.page.era_electric",
   "nodes": [
     {
       "id": "sink:electric_notes",
-      "kind": "craft",
+      "kind": "milestone",
       "era": "electric",
       "rank": 4,
       "requires": { "and": [ "sink:gate_dragon" ] },
+      "trigger": { "type": "item_obtain", "item": "kubejs:research_notes_electric" },
+      "unlock": [ "era.electric" ],
+      "ui": { "x": 0, "y": 0, "doc": "research.electric_notes.desc" }
+    },
+    {
+      "id": "sink:electric_winding",
+      "kind": "craft",
+      "era": "electric",
+      "rank": 4.4,
+      "requires": { "and": [ "sink:electric_notes" ] },
       "inputs": {
         "items": [
-          { "id": "industrialupgrade:crafting_elements/crafting_494_element", "count": 8 },
-          { "id": "kubejs:research_data", "count": 16 }
+          { "id": "create:electron_tube", "count": 8 },
+          { "id": "industrialupgrade:crafting_elements/crafting_494_element", "count": 4 },
+          { "id": "kubejs:research_data", "count": 8 }
         ],
         "fluids": [],
-        "energy": 8000,
-        "compute": 2
+        "energy": 6000,
+        "compute": 3
       },
       "duration": 900,
       "outputs": {
-        "items": [ { "id": "kubejs:research_notes_electric", "count": 1 } ]
+        "items": [ { "id": "kubejs:research_data", "count": 12 } ]
       },
-      "unlock": [ "era.electric" ],
-      "ui": { "x": 0, "y": 0, "doc": "research.electric_notes.desc" },
+      "unlock": [ "recipe.industrialupgrade:basemachine3/rolling_machine" ],
+      "ui": { "x": 0, "y": 1, "doc": "research.electric_winding.desc" },
       "recipe_pool": "sinkjourney:research_station",
-      "recipe_id": "kubejs:research_station/electric_notes"
+      "recipe_id": "kubejs:research_station/electric_winding"
+    },
+    {
+      "id": "sink:electric_grid",
+      "kind": "craft",
+      "era": "electric",
+      "rank": 4.8,
+      "requires": { "and": [ "sink:electric_winding" ] },
+      "inputs": {
+        "items": [
+          { "id": "industrialupgrade:itemplates/steel_plate", "count": 8 },
+          { "id": "create:precision_mechanism", "count": 2 },
+          { "id": "kubejs:research_data", "count": 12 }
+        ],
+        "fluids": [],
+        "energy": 12000,
+        "compute": 4
+      },
+      "duration": 1200,
+      "outputs": {
+        "items": [ { "id": "kubejs:research_data", "count": 16 } ]
+      },
+      "unlock": [ "recipe.industrialupgrade:basemachine3/generator_iu" ],
+      "ui": { "x": 0, "y": 2, "doc": "research.electric_grid.desc" },
+      "recipe_pool": "sinkjourney:research_station",
+      "recipe_id": "kubejs:research_station/electric_grid"
     }
   ]
 }

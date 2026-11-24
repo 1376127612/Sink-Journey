@@ -5,7 +5,7 @@
 | 层 | 负责 | 配置位置 |
 | --- | --- | --- |
 | 批量统一 | Almost Unified + InstantUnify：按 `c:*` tag 把整条 tag 合并到 canonical 物品 | `config/almostunified/`、`config/instantunify-common.toml` |
-| 逐物品精修 | OneEnough Item / Block / Fluid：按物品 id、方块 id、流体 id 做定点替换 | `kubejs/data/<namespace>/replacements/*.json` |
+| 逐物品精修 | OneEnough Item / Block / Fluid：按物品 id、方块 id、流体 id 做定点替换 | `kubejs/data/oei/replacements/*.json`（方块 `oeb`、流体 `oef`） |
 
 优先级固定为：
 
@@ -34,30 +34,32 @@ industrialupgrade（IU） > create > minecraft / kubejs > 其他模组
 放在数据包里，路径：
 
 ```
-kubejs/data/<namespace>/replacements/<任意名字>.json
+kubejs/data/oei/replacements/<任意名字>.json
 ```
 
-`<namespace>` 用整合包自己的命名空间即可（例如 `sinkjourney`），文件名随意。
-OneEnoughItem 1.0.10 会读取 `data/*/replacements/**.json`，文件内容可以是单个对象，也可以是对象数组。
+命名空间**必须是 `oei`**，和流体域的 `oef` 同理：`Oneenoughitem` 里
+`DataRegistry.registerWithNamespaces(Replacements.class, CODEC, "oei")` 只登记了这一个命名空间，
+`MixinUtils$ReplacementLoader` 的加载谓词也写死了 `"oei".equals(rl.getNamespace())`；
+放在 `sinkjourney` 或别的命名空间下**不会被读**（1.0.10 实测字节码如此）。
+
+文件名随意。文件内容可以是单个对象，也可以是对象数组（`Replacements` 上的
+`@DataDriven(folder = "replacements", syncToClient = true, supportArray = true)` 两条读取路径都认），
+但本包按“一个文件一个物品”的约定统一写单对象，回滚和定位都更方便。
 
 ### 格式
 
 ```json
-[
-  {
-    "matchItems": [
-      "create:iron_sheet"
-    ],
-    "resultItems": "industrialupgrade:itemplates/iron_plate",
-    "rules": {
-      "data": {
-        "recipe": "replace",
-        "advancement": "replace",
-        "loot_table": "retain"
-      }
+{
+  "matchItems": ["create:iron_sheet"],
+  "resultItems": "industrialupgrade:itemplates/iron_plate",
+  "rules": {
+    "data": {
+      "recipe": "replace",
+      "advancement": "replace",
+      "loot_table": "retain"
     }
   }
-]
+}
 ```
 
 | 字段 | 说明 |
@@ -86,6 +88,8 @@ OneEnoughItem 1.0.10 会读取 `data/*/replacements/**.json`，文件内容可�
 
 - `unify_tags.py`：批量统一的唯一入口（`review` / `apply` / `status`）
 - `unify-tags.json`：每个 tag 的统一决定与当前优先级
+- `kubejs/data/oei/replacements/`：物品域逐条规则（例如 `ad_astra_steel_plate.json`：
+  Ad Astra 的 `ad_astra:steel_plate` → IU 的 `industrialupgrade:itemplates/steel_plate`）
 - `kubejs/docs/ORE_ITEM_MAP.md`：统一后的 canonical 物品对照表
 - `config/almostunified/unification/materials.json`、`config/instantunify-common.toml`：生成结果，不要手改
 

@@ -1,0 +1,16 @@
+{
+  "name": "电力：电网调度",
+  "category": "patchouli:basics",
+  "icon": "kubejs:research_data",
+  "sortnum": 18,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "研究发电机与负载的调度关系，让电网在不跳闸的前提下吃满负载。$(br2)节点：sink:electric_grid　时代：电力$(br2)前置：sink:electric_winding"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "成本：industrialupgrade:itemplates/steel_plate ×8、create:precision_mechanism ×2、kubejs:research_data ×12、能量 12000 FE、算力 4、时长 60.0 秒$(br2)产出：kubejs:research_data ×16$(br2)解锁：recipe.industrialupgrade:basemachine3/generator_iu$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；前置没完成时研究站会拒绝开工并在聊天栏提示。"
+    }
+  ]
+}

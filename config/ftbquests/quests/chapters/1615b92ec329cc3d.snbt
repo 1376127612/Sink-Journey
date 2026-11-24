@@ -32,5 +32,25 @@
 			x: 2.5d
 			y: -0.5d
 		}
+		{
+			id: "4C818472A5267465"
+			rewards: [{
+				count: 16
+				id: "2585F966E288D51B"
+				item: {
+					count: 1
+					id: "industrialupgrade:charged_redstone"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 16L
+				id: "20A6D646E6984904"
+				item: { count: 1, id: "industrialupgrade:charged_redstone" }
+				type: "item"
+			}]
+			x: 1.0d
+			y: 2.0d
+		}
 	]
 }

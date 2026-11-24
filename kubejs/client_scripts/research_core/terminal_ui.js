@@ -186,6 +186,15 @@ var SRTU_tips = function (node, unlocks) {
         out.push('§7流体 §f' + fluids[k].id + ' §7' + fluids[k].amount + 'mB')
     }
     if (inputs.energy) out.push('§7能量 §f' + inputs.energy + ' FE')
+    if (inputs.compute) {
+        var needC = Number(inputs.compute) || 0
+        var tipLine = '§7算力 §f' + needC
+        var netNow = SRTU_remote ? (SRTU_remote.net || null) : null
+        if (netNow && netNow.online && (Number(netNow.compute) || 0) < needC) {
+            tipLine += ' §c（网络只有 ' + (Number(netNow.compute) || 0) + '）'
+        }
+        out.push(tipLine)
+    }
     if (node.duration) out.push('§7时长 §f' + Math.round(Number(node.duration) / 20) + 's')
     var req = (node.requires || {}).and || (node.requires || {}).or || []
     if (req.length > 0) out.push('§7前置 §f' + req.join('§7, §f'))
@@ -674,7 +683,17 @@ var SRTU_openStyled = function (ev, model) {
             cost.push('§7· §f' + SRTU_short(fluids[i2].id, 24) + ' §7§f' + fluids[i2].amount + ' mB')
         }
         if (inputs.energy) cost.push('§7· 能量 §f' + inputs.energy + ' FE')
-        if (inputs.compute) cost.push('§7· 算力 §f' + inputs.compute)
+        if (inputs.compute) {
+            var needCompute = Number(inputs.compute) || 0
+            var line = '§7· 算力 §f' + needCompute
+            // 算力是硬门槛（不是速度）：网络给不够，研究站会直接拒绝开工，
+            // 所以在详情里就把"你现在的网络够不够"标出来，别让玩家跑过去才被拒。
+            if (model.net && model.net.online) {
+                var haveCompute = Number(model.net.compute) || 0
+                if (haveCompute < needCompute) line += ' §c（不足，网络只有 ' + haveCompute + '）'
+            }
+            cost.push(line)
+        }
         if (node.duration) cost.push('§7· 时长 §f' + Math.round(Number(node.duration) / 20) + ' 秒')
         section('成本', cost)
 

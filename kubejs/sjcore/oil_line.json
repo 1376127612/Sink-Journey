@@ -1,0 +1,42 @@
+{
+  "_comment": "石油线 —— IU 侧（v4）。注意：高级炼油厂 / 炼油厂 各有 2 个输出罐（fluidTank2/3），update() 里无条件读 output_fluid.get(1)，所以这两个池的每一条配方都必须有 2 个流体产物，否则机器一匹配到就 IndexOutOfBounds、干脆不工作。v4 起：石脑油裂解交给 MMCR 蒸汽裂解炉，高级炼油厂（imp_oil_refiner）整池清空、不再产乙烯；炼油厂（oil_refiner）只留渣油回炼与柴油裂化补丙烯，重整（石脑油→汽油）也撤掉，归 G2 的催化重整装置。",
+  "patches": [
+    { "op": "clear", "pool": "imp_oil_refiner" },
+    { "op": "clear", "pool": "oil_refiner" },
+
+    {
+      "op": "remove",
+      "pool": "gas_combiner",
+      "outputs": [
+        { "fluid": "industrialupgrade:iufluidethylene", "amount": 1000 },
+        { "fluid": "industrialupgrade:iufluiddibromopropane", "amount": 1000 }
+      ]
+    },
+    {
+      "op": "remove",
+      "pool": "fluid_integrator",
+      "outputs": [
+        { "fluid": "industrialupgrade:iufluidpropylene", "amount": 1000 }
+      ]
+    },
+
+    {
+      "op": "add",
+      "pool": "oil_refiner",
+      "inputs": [ { "fluid": "industrialupgrade:iufluidblackoil", "amount": 1000 } ],
+      "outputs": [
+        { "fluid": "kubejs:naphtha", "amount": 350 },
+        { "fluid": "industrialupgrade:iufluiddiesel", "amount": 200 }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "oil_refiner",
+      "inputs": [ { "fluid": "industrialupgrade:iufluiddiesel", "amount": 1000 } ],
+      "outputs": [
+        { "fluid": "industrialupgrade:iufluidpropylene", "amount": 450 },
+        { "fluid": "industrialupgrade:iufluidblackoil", "amount": 250 }
+      ]
+    }
+  ]
+}

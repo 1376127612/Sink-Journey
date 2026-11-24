@@ -1,7 +1,10 @@
 {
-  "_comment": "P3 研究网络参数。require_network=false 时，没有网络中心也允许研究站开工（调试用）。",
+  "_comment": "P3 研究网络参数。require_network=false 时，没有网络中心也允许研究站开工（调试用）。base_compute=中心自身提供的基线算力；net_ttl_ms=中心心跳过期判定；purge_every=每多少次扫描清理一次失效网络。",
   "require_network": true,
   "default_capacity": 1,
   "job_ttl_ms": 10000,
-  "search_radius": 16
+  "search_radius": 16,
+  "net_ttl_ms": 15000,
+  "base_compute": 1,
+  "purge_every": 20
 }

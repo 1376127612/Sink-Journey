@@ -30,6 +30,24 @@ var SRN_CAPACITY = {
 var SRN_RADIUS_XZ = 6
 var SRN_RADIUS_Y = 3
 
+// 中心本身提供的基线算力：没有计算机时网络也算力 1，够开第一条研究，
+// 第二条（compute=2）才逼玩家去造研究计算机。可在 network.json 里改。
+var SRN_CFG = { base_compute: 1, purge_every: 20 }
+
+var SRN_loadCfg = function () {
+    try {
+        var text = String(JsonIO.readString('kubejs/config/sinkresearch/network.json'))
+        var cfg = JSON.parse(text)
+        if (cfg) {
+            if (cfg.base_compute !== undefined) SRN_CFG.base_compute = Number(cfg.base_compute) || 0
+            if (cfg.purge_every !== undefined) SRN_CFG.purge_every = Math.max(1, Number(cfg.purge_every) || 20)
+        }
+    } catch (e) {
+        console.warn('[SRN] 读取 network.json 失败，使用默认值: ' + e)
+    }
+}
+SRN_loadCfg()
+
 // token 形如 "minecraft:overworld@12_64_-30"；老格式（无 @）按主世界处理
 var SRN_token = function (level, pos) {
     var dim = 'minecraft:overworld'
@@ -79,12 +97,14 @@ var SRN_writeIndex = function (server, list) {
 
 // ---- 扫描与聚合（每 20 tick，仅中心方块所在区块加载时） --------
 
+var SRN_scanCount = 0
+
 var SRN_scan = function (event) {
     var level = event.level
     var pos = event.block.pos
     var server = level.server
 
-    var compute = 0
+    var compute = SRN_CFG.base_compute
     var capacity = 0
     var stations = 0
 
@@ -128,8 +148,10 @@ var SRN_scan = function (event) {
         console.info('[SRN] 新网络登记 ' + token + ' 算力=' + compute + ' 并发=' + capacity)
     }
 
-    // 顺手清理失效条目（中心被拆 / 区块已卸载很久）
-    SRN_purge(server, level, 15000)
+    // 顺手清理失效条目（中心被拆 / 区块已卸载很久）。
+    // 清理要遍历索引并对每个条目做方块查询，没必要每秒跑一遍：每 purge_every 次扫描清一次。
+    SRN_scanCount++
+    if (SRN_scanCount % SRN_CFG.purge_every === 0) SRN_purge(server, level, 15000)
 }
 
 // 清理：条目超过 staleMs 没有心跳，且该坐标已经不是网络中心 -> 删除

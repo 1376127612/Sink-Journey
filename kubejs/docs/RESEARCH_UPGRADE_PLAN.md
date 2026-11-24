@@ -10,14 +10,14 @@
 
 | 项 | 现状 | 依据 |
 |---|---|---|
-| 节点数 | 6 个：craft 5 + milestone 1，分 3 页 | `config/sinkresearch/nodes/*.json` |
+| 节点数 | 9 个：milestone 6 + craft 3，分 3 页（2026-11 解锁路线改版，见 2.1 / 2.5） | `config/sinkresearch/nodes/*.json` |
 | 解锁粒度 | 一个节点 = 一个 `unlock` key（时代 stage），没有"单项科技" | `era_steam/ember/electric.json` |
 | 研究数据 | `kubejs:research_data` 只是配方输入货币，无消费端、无累积 | 同上 |
 | 时代解锁 | **物品入包就送 stage**，绕过了研究站节点 | `core.js` `PlayerEvents.inventoryChanged` |
 | 站点准入 | 无网络 / 并发满 / 前置不足 → 只写日志，玩家零反馈 | `station_startup.js` beforeStart |
 | 终端 | 样式版 100% 构建失败 → 纯文本列表；专用服无数据 | `logs/latest.log` `[SRTU] 样式版界面构建失败` |
 | 图逻辑 | core.js / terminal.js / terminal_ui.js **三份重复实现** | 三个文件各自 `srLoadGraph` 同构代码 |
-| 死字段 | `node.inputs.compute`、`node.ui.x/y`、`node.rank` 无任何读取方 | `grep compute` 只命中网络侧 |
+| 死字段 | `node.inputs.compute` 已接进准入（2026-11），`node.rank` 仍无读取方 | `station_startup.js` beforeStart |
 | 权限 | `/research` 两个根注册权限不一致：core 要 2，terminal 要 0 | `core.js` vs `terminal.js` |
 
 `node.inputs.compute` 属于"写了但没接"的典型：把它接进准入判定，就是现成的
@@ -66,15 +66,31 @@ terminal.js 只是复述节点状态，terminal_ui.js 不再参与判定。
 
 ## 2. P1 把"6 个开关"变成一条研究线（3–5 天）
 
-**2.1 节点粒度下沉到"科技"而不是"时代"**
+**2.1 节点粒度下沉到"科技"而不是"时代"（结构部分已完成）**
 每个时代 6–10 个节点，节点产出分三类，都已在数据模型里能表达：
 - `outputs.items`：研究笔记 / 数据
 - `unlock`：`recipe.<id>`（解锁某条配方，AStages 已有）、`machine.<id>`、`era.<x>`
 - `requires` 从线性链改成有分叉的 DAG（`or` 已经支持，只是没人用）
 
-**2.2 把 `compute` 接进准入**
+2026-11 两次落地，最终形态是 9 个节点（`notes` 页 4、`end` 页 2、`electric` 页 3）：
+
+- **第一次**（已撤销）：把树扩到 14 个，支线全部挂在研究站上，作用是"时代材料 → 研究数据"
+  的第二条产线。
+- **第二次**（当前）：按作者要求把解锁全部改成"拿到笔记"——原始研究台 / 机械研究台出
+  研究笔记、蓝图·机械、余烬/星辉/电力笔记。研究站上的前电力支线全删，电力页也只剩
+  两个数据产线节点（绕组与线圈、电网调度）；`notes` / `end` / 电力笔记共 7 个节点是
+  `kind: milestone`，不生成配方。
+  详见 `README_RESEARCH.md` 2.4.2。
+
+`era.ae_dlc` 保持不授予（作者自己处理）；`node.rank` 仍然没有读取方。
+以后要再加内容，优先往电力页加 craft 节点，别再往电力之前塞研究站节点。
+
+**2.2 把 `compute` 接进准入（已完成）**
 `beforeStart` 里比较 `net.compute` 与 `node.inputs.compute`：不够就拒绝并告诉玩家
-"需要算力 4，当前 2"。这样精英计算机/数据库才有存在意义，而不是只影响速度。
+"需要算力 4，网络只有 2"。这样精英计算机/数据库才有存在意义，而不是只影响速度。
+落地时的两个配套：网络中心自身给 `base_compute`（默认 1，保证第一条研究不卡死），
+终端详情与悬停提示标红"不足"，`/research tree` 末尾报当前位置的算力/并发。
+详见 `README_RESEARCH.md` 2.4.1。
 
 **2.3 研究队列（2–4 条）**
 研究站现在一次一条 + 并发靠数据库。加队列后：投料即排队，站点按并发数推进，
@@ -85,11 +101,15 @@ terminal.js 只是复述节点状态，terminal_ui.js 不再参与判定。
 单人整合包这样没问题；多人要么写清"团队共享"，要么改成每人一份
 （`player.persistentData` + 客户端各自同步，数据版本升 v3 并写迁移）。
 
-**2.5 关掉"物品入包直接送时代"的口子（已完成）**
-那 4 段 `PlayerEvents.inventoryChanged` 已删除：时代 stage 现在只从节点的 `unlock` 走，
-也就是研究配方跑完时发放。老存档不受影响（已发的 unlock 存在 `sinkresearch.unlocks`，
-迁移规则在 `migrations.json`）。想让"拿到笔记那一刻才解锁"，用第 3 节的新触发器
-加一条 `kind: milestone` + `trigger: { type: "item_obtain" }` 的节点即可。
+**2.5 解锁路径按时代分流（2026-11 改，覆盖原"关掉物品入包"的做法）**
+原先那 4 段 `PlayerEvents.inventoryChanged` 被删过，结果是"笔记只是材料、解锁全靠研究站"。
+现在改成两条路：
+- **笔记解锁**：`kind: milestone` + `trigger: { type: "item_obtain" }`，笔记/蓝图从
+  原始研究台与机械研究台来（研究笔记、蓝图·机械、余烬/星辉/电力笔记），拿到即解锁
+  （`core.js` 每 10 秒还会补扫一次背包，防止"先拿到笔记、后补前置"的那次触发被丢掉）。
+- **研究站**：`kind: craft`，电力以后用来把材料换成演算数据（绕组与线圈、电网调度），
+  目前不负责发时代 stage。
+老存档靠 `migrations.json` 的 v3→v4 按背包里的笔记/蓝图回填；已发的 unlock 不受影响。
 
 ## 3. P2 让终端看起来像个研究系统（3–4 天）
 

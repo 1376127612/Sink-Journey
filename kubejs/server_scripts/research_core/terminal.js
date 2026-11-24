@@ -99,6 +99,7 @@ var SRT_costLine = function (node) {
     var fluids = inputs.fluids || []
     for (var k = 0; k < fluids.length; k++) out.push(fluids[k].id + ' ' + fluids[k].amount + 'mB')
     if (inputs.energy) out.push('FE ' + inputs.energy)
+    if (inputs.compute) out.push('算力 ' + inputs.compute)
     if (node.duration) out.push('基础 ' + Math.round(Number(node.duration) / 20) + 's')
     if (node.kind === 'milestone') out.push('§d[里程碑] ' + (node.trigger ? JSON.stringify(node.trigger) : ''))
     return out.join(' §7/ ')
@@ -235,7 +236,7 @@ var SRT_netLine = function (server, pos, dim) {
 }
 
 // 每个节点的状态由服务端算好（terminal_ui.js 不再自己判 requires 的 and/or）：
-//   states: "sink:kinetic_brass=done;sink:steam_precision=ready;..."
+//   states: "sink:notes_primitive=done;sink:blueprint_mechanical=ready;..."
 var SRT_stateList = function (unlocks) {
     var out = []
     for (var i = 0; i < SRT_ORDER.length; i++) {
@@ -284,6 +285,24 @@ ServerEvents.commandRegistry(function (event) {
             src.sendSystemMessage(line)
         }
         src.sendSystemMessage(Text.of('§7/research need <物品id> 查某个产物还差什么'))
+
+        // 玩家站在哪个网络旁边，就在这里告诉他能开什么：算力/并发是拒绝开工的两个硬门槛
+        var pos = null
+        var dim = ''
+        try {
+            pos = src.player.blockPosition()
+            dim = String(src.player.level.dimension)
+        } catch (ePos) { pos = null }
+        if (pos) {
+            var netLine = SRT_netLine(src.getServer(), pos, dim)
+            if (!netLine || netLine === '0') {
+                src.sendSystemMessage(Text.of('§c[研究网络] §7站在离网络中心 16 格内才能给研究站供网'))
+            } else {
+                var nf = netLine.split('|')
+                src.sendSystemMessage(Text.of('§b[研究网络] §7算力 §f' + nf[1] + ' §7· 并发 §f' + nf[3] +
+                    '/' + (Number(nf[2]) > 0 ? nf[2] : 1)))
+            }
+        }
         return 1
     }))
 

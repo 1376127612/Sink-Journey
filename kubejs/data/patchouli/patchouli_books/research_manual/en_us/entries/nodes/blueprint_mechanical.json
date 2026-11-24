@@ -1,0 +1,16 @@
+{
+  "name": "蒸汽：机械蓝图",
+  "category": "patchouli:basics",
+  "icon": "kubejs:blueprint_steam",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "机械研究台把空白蓝图刻成蓝图·机械——机器第一次有图纸可依，蒸汽（钢）随之开放。$(br2)节点：sink:blueprint_mechanical　时代：蒸汽$(br2)前置：sink:notes_primitive"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "成本：无（里程碑，不需要投料）$(br2)产出：无（拿到 kubejs:blueprint_steam 即触发）$(br2)解锁：era.steam、recipe.create:precision_mechanism$(br2)里程碑不需要投料、也不经过研究站：条件达成的瞬间就解锁；前置没完成时会被跳过，之后每 10 秒补扫一次背包。"
+    }
+  ]
+}

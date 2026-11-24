@@ -10,7 +10,7 @@
 
 | 子系统 | 文件 | 状态 |
 |---|---|---|
-| 研究图 / 解锁表 / 里程碑 / 命令 | `server_scripts/research_core/core.js` | ✅ 已验证（节点加载、末影龙解锁、/research list） |
+| 研究图 / 解锁表 / 里程碑 / 命令 | `server_scripts/research_core/core.js` | ✅ 已验证（节点加载、末影龙解锁、/research list）；⚠️ 笔记解锁与补扫见 V7 |
 | 研究站机器 + 配方生成 | `startup_scripts/research_core/station_startup.js`、`server_scripts/.../station_structure.js` | ✅ 已验证（出研究数据、解锁生效） |
 | AStages 限制（手工配置） | `config/astages/simple/astages/{item,recipe}.json` | ✅ item 格式已验证；recipe 保持 `[]` |
 | 研究网络（算力聚合） | `startup_scripts/.../network_blocks.js`、`server_scripts/.../network.js` | ⚠️ 未完整验证（只确认过不崩） |
@@ -55,6 +55,47 @@
 2. 拆中心 → 条目应立刻消失（`BlockEvents.broken`）
 3. 中心放在未加载区块 → 条目保留但显示 `[离线]`（这是有意为之，防止误删）
 
+### V7. 9 节点 + 笔记解锁（2026-11 改版）⚠️高
+
+**步骤**
+1. 重启后看日志：`研究图校验通过，共 9 个节点` + 2 行 `生成研究配方`
+   （只有电力页的「绕组与线圈」「电网调度」是 craft 节点）
+2. `/research list`：只有 `sink:notes_primitive` 可研究
+3. 原始研究台做研究笔记 → 应广播 `已解锁：era.kinetic`，日志
+   `[SR] 解锁 era.kinetic 原因=milestone:kubejs:research_notes`
+4. 机械研究台刻蓝图·机械 → 解锁 `era.steam`（钢类物品立即可用）
+5. 机械研究台出余烬笔记 / 星辉笔记 → `era.ember` / `era.radiance`
+6. 杀龙后：机械研究台用晶圆元件 ×8 + 数据 ×16 + 纸刻电力笔记 → `era.electric`
+7. 打开终端 → 三页：`笔记时代` 一行四格、`末地与龙` 一行两格、`基础电力` 一列三格
+
+**补发扫描要单独验一次**：先做出余烬笔记（前置蓝图·机械还没拿），此时不该解锁；
+再拿到一张蓝图·机械 → 10 秒内应自动补发，日志 `[SR] 补发笔记解锁: sink:ember_notes`。
+
+**失败判定**
+- 拿笔记没有任何广播 → 先看 `[SR] 里程碑 <节点> 前置未满足，跳过`；若一直不补发，
+  说明 `PlayerEvents.tick` 里取不到 server（补发失效，但不崩服；手动再拿一份笔记即可）
+- 机械研究台找不到电力笔记配方 → 看 `kubejs:mechanical_lab/electric_notes` 有没有注册失败
+- `/research list` 里电力页节点显示"可研究"却没杀龙 → 前置写错
+- 手册里出现已删除节点（黄铜配比 / 精密构件 / 压床试制…）→ 重跑
+  `python tools/gen_research_book.py`
+
+**回滚**：节点 JSON 改回 craft 版本即可；老存档的 stage 不会因为删节点被收回。
+
+### V6. 算力门槛（2026-11 新增，`inputs.compute` 判定）⚠️高
+
+**步骤**
+1. 只放网络中心（不造计算机）→ 投料 `sink:kinetic_brass`（`compute: 1`）→ 应能开工
+2. 同一网络投料 `sink:steam_precision`（`compute: 2`）→ 应被拒
+3. 加一台研究计算机·基础（+1 算力）→ 同一条应能开工
+
+**期望**：第 2 步聊天提示 `研究站拒绝开工：算力不足（需要 2，网络只有 1）——加研究计算机`，
+日志 `[SR] 算力不足 1/2，拒绝开工: <recipe>`；终端详情算力行显示 `§c（不足，网络只有 1）`。
+**失败判定**：算力不足仍开工 → `srNet` 读到的 compute 不对，先看 `/research net` 那行的算力值。
+**回滚**：节点 JSON 删掉 `inputs.compute`（缺省 0 = 不设门槛）；或 `network.json` 加 `"base_compute": 99`。
+
+> 前提：`network.json` 的 `base_compute`（默认 1）决定"只放中心"时算力为几；
+> 改成 0 会让 `compute: 1` 的节点在没计算机时也开不了工。
+
 ### V4.5 终端界面（P4）⚠️中
 
 `/research tree` 与 `/research need <id>` 是纯聊天输出，一定可用。
@@ -97,7 +138,8 @@ LDLib 方块界面需要验证：
 1. **断网中断不能保证立刻**：MMCR tick 上下文没有 cancel，见 V2。
 2. **并发限制只统计"研究站"**：其他机器不受影响；并发位靠 10 秒心跳维持，
    服务器卡顿时可能出现短暂误判。
-3. **算力只影响研究时长**，不影响产量；上限 20 点（再高无收益）。
+3. **算力是门槛 + 提速**：`node.inputs.compute` 不够直接拒绝开工（见 V6），够用后按
+   `/(1 + 0.15 × min(算力, 20))` 提速；不影响产量，速度收益 20 点封顶。
 4. **网络扫描是 13×7×13 盒**：中心离计算机超过 6 格就统计不到。
 5. **研究节点 JSON 不支持热改**：改 `nodes/*.json` 需 `/reload`（配方会重算）。
 6. **AStages item 限制会拦"使用/放置"**：已放置的旧机器在未解锁时也点不动，
@@ -112,6 +154,7 @@ LDLib 方块界面需要验证：
 | 想关掉什么 | 改哪里 | 值 |
 |---|---|---|
 | 研究网络准入 | `config/sinkresearch/network.json` | `require_network: false` |
+| 算力门槛 | 同上 | `base_compute: 99`（或节点里删 `inputs.compute`） |
 | 并发限制 | 同上 | `default_capacity: 99` |
 | 全部 AStages 拦截 | 把 `config/astages/simple/astages/` 下两个 json 改成 `[]` | — |
 | 整个研究系统 | 把 `research_core/` 目录改名为 `research_core.off` | — |

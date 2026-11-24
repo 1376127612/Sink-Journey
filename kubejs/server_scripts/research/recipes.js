@@ -75,6 +75,22 @@ ServerEvents.recipes(event => {
         ]
     }).id('kubejs:mechanical_lab/radiance_notes')
 
+    // 电力笔记：电力时代的入场券也在这台机器上刻，用末地的晶圆元件当载体。
+    // 拿到笔记即解锁 era.electric——研究站是电力以后的设备，不负责开这个门。
+    event.custom({
+        type: 'mmcr:machine_recipe',
+        recipe_pool: 'sinkjourney:mechanical_lab',
+        tick_time: 900,
+        parallelized: true,
+        requirements: [
+            { type: 'minecraft:item', io: 'input', item: { item: 'industrialupgrade:crafting_elements/crafting_494_element' }, count: 8 },
+            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 16 },
+            { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
+            { type: 'create:stress', io: 'input', stress: 32, min_rpm: 32 },
+            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_notes_electric', count: 1 } }
+        ]
+    }).id('kubejs:mechanical_lab/electric_notes')
+
     // ---- 阶段三：主机蓝图刻录 ----
     const blueprints = [
         {

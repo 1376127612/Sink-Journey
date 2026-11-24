@@ -418,16 +418,55 @@ var srRegisterMilestones = () => {
     }
 }
 
-// ---- 3b. 时代解锁只走研究节点 ----------------------------------
-// 以前这里有四段 PlayerEvents.inventoryChanged('kubejs:research_notes*')，
-// "物品进背包就发时代 stage"，等于绕开研究站：原始研究台抄出笔记就把 era.kinetic
-// 发出去了，机械研究台做出笔记也能直接拿到 era.ember / radiance / electric。
-// 现在删掉了——每个时代的 unlock 只写在对应节点的 unlock 里（core.js 在节点配方
-// 跑完时发放），解锁路径只剩一条。
-// 想让"拿到笔记那一刻才解锁"，就在节点 JSON 里加 kind: milestone、
-// trigger: { type: "item_obtain", item: "<笔记 id>" }、requires 指向产它的 craft 节点。
-// 老存档不会掉 stage：已经发过的 unlock 存在 sinkresearch.unlocks 里，
-// 迁移规则见 migrations.json。
+// ---- 3b. 笔记时代：拿到笔记就解锁 ----------------------------------
+// 电力时代以前不经过研究站：原始研究台产出 kubejs:research_notes，机械研究台产出
+// kubejs:blueprint_steam / research_notes_ember / research_notes_radiance，
+// 节点 JSON 里对应 kind: milestone + trigger: { type: "item_obtain" }。
+// 电力时代以后（era_electric 页）才回到研究站：投料跑完 craft 节点才发 unlock。
+//
+// item_obtain 只在"物品进背包"那一刻触发一次。如果那一刻前置还没完成
+// （先刻出余烬笔记、后拿到机械蓝图），这次触发会被丢掉，玩家必须再弄一份。
+// 所以下面加了一次低频补扫：每 10 秒看有没有"触发物品在身上、前置也补齐了"的
+// 笔记类里程碑，补发一次。
+var SR_SWEEP_MS = 10000
+var srLastSweepMs = 0
+var srServerRef = null
+
+var srSweepNoteMilestones = (server) => {
+    if (!server) return
+    var list = srMilestoneNodes()
+    var i, k
+    for (i = 0; i < list.length; i++) {
+        var node = list[i]
+        var trigger = node.trigger || {}
+        if (trigger.type !== 'item_obtain' || !trigger.item) continue
+
+        var keys = node.unlock || []
+        var granted = false
+        for (k = 0; k < keys.length; k++) {
+            if (srHas(String(keys[k]))) { granted = true; break }
+        }
+        if (granted) continue
+        if (!srRequirementsMet(node.id)) continue
+        if (!srPlayerHasItem(server, String(trigger.item))) continue
+
+        srLog('补发笔记解锁: ' + node.id + '（背包里有 ' + trigger.item + '）')
+        srFireMilestone(server, node, 'sweep:' + trigger.item, { player: null, dimension: '' })
+    }
+}
+
+// 用 PlayerEvents.tick（本整合包里已经在用的事件）+ 10 秒节流，
+// 而不是 ServerEvents.tick：后者在不带玩家实体的事件对象上取 server 不可靠。
+PlayerEvents.tick(event => {
+    var now = Date.now()
+    if (now - srLastSweepMs < SR_SWEEP_MS) return
+    srLastSweepMs = now
+    var server = null
+    try { server = event.player.server } catch (e0) { server = null }
+    if (!server) server = srServerRef
+    if (!server) return
+    try { srSweepNoteMilestones(server) } catch (e1) { }
+})
 
 // ---- 4. 存档迁移 / 回填 --------------------------------------
 
@@ -656,6 +695,7 @@ var srSimulateBalance = () => {
 
 ServerEvents.loaded(event => {
     var server = event.server
+    srServerRef = server
     if (!SR.loaded || SR.order.length === 0) srLoadGraph()
     srLoadUnlocks(server)
     srRunMigrations(server)
@@ -680,7 +720,7 @@ ServerEvents.commandRegistry(event => {
     var root = Commands.literal('research')
         .requires(src => src.hasPermission(0))
         .executes(ctx => {
-            ctx.getSource().sendSystemMessage(Text.of('§b[研究] §flist | dump | validate | unlock <key> | reset | draft | balance'))
+            ctx.getSource().sendSystemMessage(Text.of('§b[研究] §flist | dump | validate | unlock <key> | unlockall | reset | draft | balance'))
             return 1
         })
 
@@ -718,6 +758,36 @@ ServerEvents.commandRegistry(event => {
                 ctx.getSource().sendSystemMessage(Text.of(ok ? '§a已解锁 ' + key : '§7已存在 ' + key))
                 return ok ? 1 : 0
             })))
+
+    // 调试：科技全开。把图里所有节点的 unlock key 一次性发下去（含 recipe.* 那种没接 AStages 的键），
+    // 同时按 srGrant 的常规路径镜像 astages stage，所以研究站的门槛判定也会一起放开。
+    // 想回到"什么都没解锁"的状态用 /research reset（它就是清空 unlock key）。
+    var srUnlockAll = (ctx) => {
+        var server = ctx.getSource().getServer()
+        var keys = []
+        for (var id of SR.order) {
+            var node = SR.nodes[id]
+            var list = node.unlock || []
+            for (var k of list) {
+                var key = String(k)
+                if (keys.indexOf(key) < 0) keys.push(key)
+            }
+        }
+        if (keys.length === 0) {
+            ctx.getSource().sendSystemMessage(Text.of('§c[研究] 图里没有可解锁的 key（节点没加载？）'))
+            return 0
+        }
+        var before = Object.keys(SR.unlocks).length
+        srGrant(server, keys, 'command:unlockall', true)
+        var after = Object.keys(SR.unlocks).length
+        ctx.getSource().sendSystemMessage(Text.of('§b[研究] §f科技全开：新增 §e' + (after - before) +
+            ' §f项，共 §e' + after + ' §f项解锁（/research reset 可清空）'))
+        srLog('调试：科技全开，新增 ' + (after - before) + ' 项，keys=' + keys.join(','))
+        return 1
+    }
+
+    root.then(Commands.literal('unlockall').requires(src => src.hasPermission(2)).executes(srUnlockAll))
+    root.then(Commands.literal('all').requires(src => src.hasPermission(2)).executes(srUnlockAll))
 
     root.then(Commands.literal('reset').requires(src => src.hasPermission(2)).executes(ctx => {
         var server = ctx.getSource().getServer()

@@ -21,7 +21,7 @@ MMCREvents.server(event => {
         .pattern(['XXX', 'X X', 'XXX'])
         .pattern(['XXX', 'XFX', 'XXX'])
         .set('X', api.block('minecraft:quartz_block'))
-        .set('I', api.anyOfItemInput())
+        .set('I', 'mmcr:item_input_bus_steam')
         .set('O', api.anyOfItemOutput())
         .set('S', api.anyStressInput())
         .set('R', api.levelSlot('sinkjourney:zone_heater'))

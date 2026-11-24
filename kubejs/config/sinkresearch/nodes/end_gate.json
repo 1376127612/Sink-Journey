@@ -1,0 +1,32 @@
+{
+  "_comment": "末地门槛：进末地与亲手杀龙都是里程碑，不投料。末地门只负责记录（gate.enter_end），进末地之后才轮得到电力研究。",
+  "page": "end",
+  "title_key": "research.page.end",
+  "nodes": [
+    {
+      "id": "sink:end_door",
+      "kind": "milestone",
+      "era": "end",
+      "rank": 3.4,
+      "requires": { "and": [ "sink:blueprint_mechanical" ] },
+      "trigger": { "type": "dimension_enter", "dimension": "minecraft:the_end" },
+      "unlock": [ "gate.enter_end" ],
+      "ui": { "x": 0, "y": 0, "doc": "research.end_door.desc" }
+    },
+    {
+      "id": "sink:gate_dragon",
+      "kind": "milestone",
+      "era": "end",
+      "rank": 3.5,
+      "requires": { "and": [ "sink:blueprint_mechanical" ] },
+      "trigger": {
+        "type": "entity_death",
+        "entity": "minecraft:ender_dragon",
+        "dimension": "minecraft:the_end",
+        "require_player_kill": true
+      },
+      "unlock": [ "gate.end" ],
+      "ui": { "x": 2, "y": 0, "doc": "research.gate_dragon.desc" }
+    }
+  ]
+}

@@ -92,7 +92,18 @@ def main():
         req_text = '、'.join(req_list) if req_list else '无'
 
         outs = (node.get('outputs') or {}).get('items') or []
-        out_text = '、'.join('%s ×%s' % (o.get('id'), o.get('count', 1)) for o in outs) or '无（里程碑）'
+        out_text = '、'.join('%s ×%s' % (o.get('id'), o.get('count', 1)) for o in outs)
+        if not out_text:
+            trigger = node.get('trigger') or {}
+            ttype = str(trigger.get('type') or '')
+            if ttype == 'item_obtain':
+                out_text = '无（拿到 %s 即触发）' % trigger.get('item')
+            elif ttype == 'dimension_enter':
+                out_text = '无（进入 %s 即触发）' % trigger.get('dimension')
+            elif ttype == 'entity_death':
+                out_text = '无（击杀 %s 即触发）' % trigger.get('entity')
+            else:
+                out_text = '无（里程碑）'
         keys = node.get('unlock') or []
         unlock_text = '、'.join(keys) if keys else '无'
 
@@ -108,11 +119,21 @@ def main():
         page2_body = '成本：' + ('、'.join(costs) if costs else '无（里程碑，不需要投料）')
         page2_body += '$(br2)产出：' + out_text
         page2_body += '$(br2)解锁：' + unlock_text
-        page2_body += '$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；'
-        page2_body += '前置没完成时研究站会拒绝开工并在聊天栏提示。'
+        if node.get('kind') == 'craft':
+            page2_body += '$(br2)研究站必须接入研究网络（16 格内有在线网络中心），并发受数据库限制；'
+            page2_body += '前置没完成时研究站会拒绝开工并在聊天栏提示。'
+        else:
+            page2_body += '$(br2)里程碑不需要投料、也不经过研究站：条件达成的瞬间就解锁；'
+            page2_body += '前置没完成时会被跳过，之后每 10 秒补扫一次背包。'
         page2 = {'type': 'patchouli:text', 'text': page2_body}
 
-        icon = outs[0].get('id') if outs else 'kubejs:research_data'
+        trigger_item = (node.get('trigger') or {}).get('item')
+        if outs:
+            icon = outs[0].get('id')
+        elif trigger_item:
+            icon = trigger_item
+        else:
+            icon = 'kubejs:research_data'
         entry = {
             'name': lang.get('research.node.%s.name' % slug) or TITLES.get(slug, slug),
             'category': 'patchouli:basics',
