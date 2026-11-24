@@ -10,14 +10,17 @@
 // 注意：流体注册属于 startup 阶段，改完要整个重启游戏，/reload 不生效。
 // ============================================================
 
+// 液体显示名取自 FluidType（fluid_type.kubejs.<id>），外层 displayName
+// 只覆盖方块与桶，所以 type() 里也要再设一次同名。
 StartupEvents.registry('fluid', event => {
     // 石脑油：无色偏黄的轻质馏分，密度小于水
+    const naphthaName = '石脑油'
     event.create('naphtha', 'thin')
-        .displayName('石脑油')
-        .translationKey('fluid.kubejs.naphtha')
+        .displayName(naphthaName)
         .renderType('translucent')
         .tint(0xE6D9A8)
         .type(type => {
+            type.displayName(naphthaName)
             type.renderType('translucent')
                 .density(720)
                 .viscosity(500)

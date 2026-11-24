@@ -258,5 +258,19 @@
 			x: 4.0d
 			y: -4.0d
 		}
+		{
+			dependencies: ["7421786593C68B0E"]
+			icon: {
+				id: "kubejs:research_notes"
+			}
+			id: "5A1B000000000001"
+			tasks: [{
+				id: "5A1B0000000000A1"
+				item: { count: 1, id: "kubejs:research_notes" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -8.0d
+		}
 	]
 }

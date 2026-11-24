@@ -7,5 +7,18 @@
 	images: [ ]
 	order_index: 3
 	quest_links: [ ]
-	quests: [ ]
+	quests: [{
+		dependencies: ["5A1B000000000006"]
+		icon: {
+			id: "kubejs:research_notes_radiance"
+		}
+		id: "5A1B000000000007"
+		tasks: [{
+			id: "5A1B0000000000A7"
+			item: { count: 1, id: "kubejs:research_notes_radiance" }
+			type: "item"
+		}]
+		x: 0.0d
+		y: 0.0d
+	}]
 }

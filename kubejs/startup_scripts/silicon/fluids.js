@@ -5,18 +5,23 @@
 // 硅烷 SiH4：歧化提纯段产物，进结晶器沉积多晶硅
 // 四氯化硅 SiCl4：歧化副产，配氢还原后回到三氯硅烷
 //
+// 流体的显示名取自 FluidType（fluid_type.kubejs.<id>），外层
+// displayName 只覆盖方块与桶，不覆盖液体本身，所以 type() 里
+// 必须再设一次同名，否则名字会退回 KubeJS 自动生成的英文 ID 名。
+//
 // 配方在 server_scripts/silicon/wafer_line.js
 // 说明文档：kubejs/docs/SILICON_WAFER_LINE.md
 // ============================================================
 
 StartupEvents.registry('fluid', event => {
     // 三氯硅烷：无色微黄、密度大于水
+    const trichlorosilaneName = '三氯硅烷'
     event.create('trichlorosilane', 'thin')
-        .displayName('三氯硅烷')
-        .translationKey('fluid.kubejs.trichlorosilane')
+        .displayName(trichlorosilaneName)
         .renderType('translucent')
         .tint(0xD4E6C3)
         .type(type => {
+            type.displayName(trichlorosilaneName)
             type.renderType('translucent')
                 .density(1340)
                 .viscosity(1000)
@@ -25,12 +30,13 @@ StartupEvents.registry('fluid', event => {
         .tag(['c:trichlorosilane'])
 
     // 高纯三氯硅烷：精馏塔出来的精料，只给西门子沉积段用
+    const purifiedTcsName = '高纯三氯硅烷'
     event.create('purified_tcs', 'thin')
-        .displayName('高纯三氯硅烷')
-        .translationKey('fluid.kubejs.purified_tcs')
+        .displayName(purifiedTcsName)
         .renderType('translucent')
         .tint(0xE8F2D8)
         .type(type => {
+            type.displayName(purifiedTcsName)
             type.renderType('translucent')
                 .density(1340)
                 .viscosity(1000)
@@ -39,12 +45,13 @@ StartupEvents.registry('fluid', event => {
         .tag(['c:purified_trichlorosilane'])
 
     // 硅烷：常温气体，极轻
+    const silaneName = '硅烷'
     event.create('silane', 'thin')
-        .displayName('硅烷')
-        .translationKey('fluid.kubejs.silane')
+        .displayName(silaneName)
         .renderType('translucent')
         .tint(0xC9D9E6)
         .type(type => {
+            type.displayName(silaneName)
             type.renderType('translucent')
                 .density(1)
                 .viscosity(200)
@@ -53,12 +60,13 @@ StartupEvents.registry('fluid', event => {
         .tag(['c:silane'])
 
     // 四氯化硅：无色重液，遇水水解
+    const siliconTetrachlorideName = '四氯化硅'
     event.create('silicon_tetrachloride', 'thin')
-        .displayName('四氯化硅')
-        .translationKey('fluid.kubejs.silicon_tetrachloride')
+        .displayName(siliconTetrachlorideName)
         .renderType('translucent')
         .tint(0xE3DCC4)
         .type(type => {
+            type.displayName(siliconTetrachlorideName)
             type.renderType('translucent')
                 .density(1480)
                 .viscosity(1200)

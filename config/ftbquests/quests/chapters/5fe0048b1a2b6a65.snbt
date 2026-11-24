@@ -455,5 +455,33 @@
 			x: 20.0d
 			y: -8.0d
 		}
+		{
+			dependencies: ["0706F92EF2C236B8"]
+			icon: {
+				id: "kubejs:research_data"
+			}
+			id: "5A1B000000000005"
+			tasks: [{
+				id: "5A1B0000000000A5"
+				item: { count: 1, id: "kubejs:research_data" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -12.0d
+		}
+		{
+			dependencies: ["5A1B000000000005"]
+			icon: {
+				id: "kubejs:blueprint_steam"
+			}
+			id: "5A1B000000000002"
+			tasks: [{
+				id: "5A1B0000000000A2"
+				item: { count: 1, id: "kubejs:blueprint_steam" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: -12.0d
+		}
 	]
 }

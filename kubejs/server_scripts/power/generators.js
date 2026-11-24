@@ -1,5 +1,5 @@
 // ============================================================
-// 四台发电机 —— 结构与配方
+// 五台发电机 —— 结构与配方
 // ------------------------------------------------------------
 // 控制器一律在南墙中层，东墙中层是能量输出仓，输入口按燃料放另外三面：
 //
@@ -7,6 +7,7 @@
 //   潮汐   3×3×4 黄铜壳    北墙 流体输入（水）+ 西墙 应力接口（潮汐轮）
 //   应力   3×3×3 工业铁壳  北墙 应力接口
 //   地磁   3×3×5 基础机壳  北墙 物品输入（红石）；腔内正中必须是磁石
+//   燃油   3×3×4 钢壳      北墙 流体输入（LPG/汽油/柴油/重油）+ 气压输入；顶部排气要露天
 //
 // 数值全部来自 kubejs/config/sinkpower/generators.json（改完 /reload 生效）。
 // 场地机制（海边 / 潮窗 / 基岩层）写在 startup_scripts/power/generators.js，
@@ -29,7 +30,19 @@
             tide_windows: [[0, 2000], [11000, 14000]]
         },
         stress: { stress: 32, min_rpm: 64, fe_per_tick: 448 },
-        geomagnetic: { redstone: 1, fe_per_tick: 640, max_y: -56 }
+        geomagnetic: { redstone: 1, fe_per_tick: 640, max_y: -56 },
+        fuel: {
+            air_per_tick: 20,
+            min_pressure: 2,
+            require_open_sky: true,
+            vent_offset: 3,
+            fuels: {
+                lpg: { fluid: 'pneumaticcraft:lpg', mb: 400, fe_per_tick: 1280 },
+                gasoline: { fluid: 'industrialupgrade:iufluidgasoline', mb: 500, fe_per_tick: 1024 },
+                diesel: { fluid: 'industrialupgrade:iufluiddiesel', mb: 500, fe_per_tick: 768 },
+                residue: { fluid: 'industrialupgrade:iufluidblackoil', mb: 500, fe_per_tick: 256 }
+            }
+        }
     }
 
     var mergeCfg = (base, over) => {
@@ -120,6 +133,19 @@
             .set('A', api.air())
             .controller('C')
             .build()
+
+        // ---- 燃油发电机：3×3×4，北面进燃料与压缩空气，东面出电，顶部排气要露天 ----
+        event.createStructure('sinkjourney:fuel_generator')
+            .pattern(['XPX', 'XXX', 'XXX'])
+            .pattern(['XFX', 'XXX', 'XXX'])
+            .pattern(['XXX', 'XAE', 'XCX'])
+            .pattern(['XXX', 'XXX', 'XXX'])
+            .set('X', api.block('industrialupgrade:blockresource/steel_block'))
+            .set('F', api.anyOfFluidInput())
+            .set('P', api.anyOfAirInput())
+            .set('E', api.anyOfEnergyOutput())
+            .controller('C')
+            .build()
     })
 
     ServerEvents.recipes(event => {
@@ -168,6 +194,17 @@
             S: '#c:plates/silver',
             M: 'minecraft:lodestone'
         }).id('kubejs:sink_power/geomagnetic_generator_controller')
+
+        // 燃油：钢管 + 钢板，中间一台精密构件当发动机
+        event.shaped('mmcr:fuel_generator_controller', [
+            'PSP',
+            'SMS',
+            'PSP'
+        ], {
+            P: 'create:fluid_pipe',
+            S: '#c:plates/steel',
+            M: 'create:precision_mechanism'
+        }).id('kubejs:sink_power/fuel_generator_controller')
 
         // ---- 发电配方 ----
 
@@ -232,9 +269,46 @@
             ]
         }).id('kubejs:power/geomagnetic_generator')
 
-        console.info('[电力] 四台发电机已装载：水力 ' + Number(CFG.hydro.fe_per_tick)
+        // ---- 燃油发电机：四种液体燃料各一条配方，机器按仓里实际有的那种走 ----
+        // 燃料表在 generators.json 的 fuel.fuels 段：mb 是每轮消耗，fe_per_tick 是输出。
+        // 压缩空气走 pneumaticcraft:air 需求（air_per_tick <= 0 时不加这条，方便调试）。
+        const FUEL_ORDER = ['lpg', 'gasoline', 'diesel', 'residue']
+
+        // Rhino 的 const 是按函数作用域记名的：循环体里再声明 const f 第二轮就报
+        // "redeclaration of var f"，所以这里用 var。
+        for (const key of FUEL_ORDER) {
+            var f = CFG.fuel.fuels[key]
+            if (!f || !f.fluid || !(Number(f.mb) > 0)) continue
+
+            var reqs = [
+                { type: 'minecraft:fluid', io: 'input', fluid: { fluid: String(f.fluid) }, amount: Number(f.mb) }
+            ]
+            if (Number(CFG.fuel.air_per_tick) > 0) {
+                reqs.push({
+                    type: 'pneumaticcraft:air', io: 'input',
+                    air_per_tick: Number(CFG.fuel.air_per_tick),
+                    min_pressure: Number(CFG.fuel.min_pressure)
+                })
+            }
+            reqs.push({ type: 'neoforge:energy', io: 'output', fe_per_tick: Number(f.fe_per_tick) })
+
+            event.custom({
+                type: 'mmcr:machine_recipe',
+                recipe_pool: 'sinkjourney:fuel_generator',
+                tick_time: TICK,
+                requirements: reqs
+            }).id('kubejs:power/fuel_generator_' + key)
+        }
+
+        const fuelSummary = FUEL_ORDER
+            .filter(key => CFG.fuel.fuels[key] && Number(CFG.fuel.fuels[key].mb) > 0)
+            .map(key => key + ' ' + Number(CFG.fuel.fuels[key].fe_per_tick))
+            .join(' / ')
+
+        console.info('[电力] 五台发电机已装载：水力 ' + Number(CFG.hydro.fe_per_tick)
             + ' / 潮汐 ' + Number(CFG.tidal.fe_per_tick_slack) + '-' + Number(CFG.tidal.fe_per_tick_tide)
             + ' / 应力 ' + Number(CFG.stress.fe_per_tick)
-            + ' / 地磁 ' + Number(CFG.geomagnetic.fe_per_tick) + ' FE/t')
+            + ' / 地磁 ' + Number(CFG.geomagnetic.fe_per_tick)
+            + ' / 燃油 ' + fuelSummary + ' FE/t')
     })
 })()

@@ -1,0 +1,132 @@
+{
+  "_comment": "电力时代以前的研究配方（机械研究台）。唯一来源：server_scripts/research/recipes.js 读它生成 MMCR 配方，tools/gen_research_quests.py 读它写任务书文案，改配方只改这里。时间单位=ticks（20=1 秒）。",
+  "machine": "sinkjourney:mechanical_lab",
+  "notes": [
+    {
+      "_note": "演算数据：研究笔记是解锁用的门票，不是耗材。这里改成研究基质 + 纸，笔记不再被吃。",
+      "id": "research_data",
+      "recipe_id": "kubejs:mechanical_lab/research_data",
+      "tick_time": 120,
+      "stress": 8,
+      "min_rpm": 32,
+      "inputs": [
+        {
+          "id": "kubejs:research_substrate",
+          "count": 1
+        },
+        {
+          "id": "minecraft:paper",
+          "count": 1
+        }
+      ],
+      "output": {
+        "id": "kubejs:research_data",
+        "count": 2
+      }
+    },
+    {
+      "_note": "蓝图·机械：原来要 2 个精密构件，而精密构件的解锁键正是这张蓝图发的——换成黄铜板，去掉这个循环依赖。",
+      "id": "blueprint_steam",
+      "recipe_id": "kubejs:mechanical_lab/blueprint_steam",
+      "tick_time": 240,
+      "stress": 16,
+      "min_rpm": 32,
+      "inputs": [
+        {
+          "id": "kubejs:blank_blueprint",
+          "count": 1
+        },
+        {
+          "id": "kubejs:research_data",
+          "count": 6
+        },
+        {
+          "id": "create:brass_sheet",
+          "count": 4
+        }
+      ],
+      "output": {
+        "id": "kubejs:blueprint_steam",
+        "count": 1
+      }
+    },
+    {
+      "_note": "余烬笔记：数据 8 → 4（4 份数据 = 10 分钟原始台时间，够一顿）。",
+      "id": "research_notes_ember",
+      "recipe_id": "kubejs:mechanical_lab/ember_notes",
+      "tick_time": 600,
+      "stress": 16,
+      "min_rpm": 32,
+      "inputs": [
+        {
+          "id": "embers:dawnstone_ingot",
+          "count": 4
+        },
+        {
+          "id": "kubejs:research_data",
+          "count": 4
+        },
+        {
+          "id": "minecraft:paper",
+          "count": 1
+        }
+      ],
+      "output": {
+        "id": "kubejs:research_notes_ember",
+        "count": 1
+      }
+    },
+    {
+      "_note": "星辉笔记：不再要求「余烬笔记」当材料——余烬笔记已经当过解锁门票，不该再被消耗一次。",
+      "id": "research_notes_radiance",
+      "recipe_id": "kubejs:mechanical_lab/radiance_notes",
+      "tick_time": 900,
+      "stress": 32,
+      "min_rpm": 32,
+      "inputs": [
+        {
+          "id": "astralsorcery:starmetal_ingot",
+          "count": 4
+        },
+        {
+          "id": "kubejs:research_data",
+          "count": 8
+        },
+        {
+          "id": "minecraft:paper",
+          "count": 1
+        }
+      ],
+      "output": {
+        "id": "kubejs:research_notes_radiance",
+        "count": 1
+      }
+    },
+    {
+      "_note": "电力笔记：晶圆 8→4、数据 16→8；晶圆来自硅产线，是电力时代的材料，不该在一张笔记上吃掉大半产量。",
+      "id": "research_notes_electric",
+      "recipe_id": "kubejs:mechanical_lab/electric_notes",
+      "tick_time": 1200,
+      "stress": 32,
+      "min_rpm": 32,
+      "inputs": [
+        {
+          "id": "industrialupgrade:crafting_elements/crafting_494_element",
+          "count": 4
+        },
+        {
+          "id": "kubejs:research_data",
+          "count": 8
+        },
+        {
+          "id": "minecraft:paper",
+          "count": 1
+        }
+      ],
+      "output": {
+        "id": "kubejs:research_notes_electric",
+        "count": 1
+      }
+    }
+  ]
+}

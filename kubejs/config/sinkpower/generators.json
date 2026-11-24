@@ -28,5 +28,33 @@
         "redstone": 1,
         "fe_per_tick": 640,
         "max_y": -56
+    },
+    "fuel": {
+        "air_per_tick": 20,
+        "min_pressure": 2,
+        "require_open_sky": true,
+        "vent_offset": 3,
+        "fuels": {
+            "lpg": {
+                "fluid": "pneumaticcraft:lpg",
+                "mb": 400,
+                "fe_per_tick": 1280
+            },
+            "gasoline": {
+                "fluid": "industrialupgrade:iufluidgasoline",
+                "mb": 500,
+                "fe_per_tick": 1024
+            },
+            "diesel": {
+                "fluid": "industrialupgrade:iufluiddiesel",
+                "mb": 500,
+                "fe_per_tick": 768
+            },
+            "residue": {
+                "fluid": "industrialupgrade:iufluidblackoil",
+                "mb": 500,
+                "fe_per_tick": 256
+            }
+        }
     }
 }

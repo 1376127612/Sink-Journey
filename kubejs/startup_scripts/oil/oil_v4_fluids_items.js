@@ -21,14 +21,17 @@
 // 注意：流体注册属于 startup，改完必须重启游戏，/reload 不生效。
 // ============================================================
 
+// 液体显示名取自 FluidType（fluid_type.kubejs.<id>），外层 displayName
+// 只覆盖方块与桶，所以每个流体在 type() 里也要再设一次同名。
 StartupEvents.registry('fluid', event => {
     // 精制石脑油：加氢后颜色变浅、硫被摘掉
+    const treatedNaphthaName = '精制石脑油'
     event.create('treated_naphtha', 'thin')
-        .displayName('精制石脑油')
-        .translationKey('fluid.kubejs.treated_naphtha')
+        .displayName(treatedNaphthaName)
         .renderType('translucent')
         .tint(0xF0E7C8)
         .type(type => {
+            type.displayName(treatedNaphthaName)
             type.renderType('translucent')
                 .density(700)
                 .viscosity(450)
@@ -37,12 +40,13 @@ StartupEvents.registry('fluid', event => {
         .tag(['c:treated_naphtha'])
 
     // 减压蜡油：深琥珀色、黏度大
+    const vgoName = '减压蜡油'
     event.create('vgo', 'thick')
-        .displayName('减压蜡油')
-        .translationKey('fluid.kubejs.vgo')
+        .displayName(vgoName)
         .renderType('translucent')
         .tint(0x6B4A1E)
         .type(type => {
+            type.displayName(vgoName)
             type.renderType('translucent')
                 .density(900)
                 .viscosity(1800)
@@ -51,12 +55,13 @@ StartupEvents.registry('fluid', event => {
         .tag(['c:vgo'])
 
     // 减压渣油：接近沥青，几乎不流动
+    const vacuumResidueName = '减压渣油'
     event.create('vacuum_residue', 'thick')
-        .displayName('减压渣油')
-        .translationKey('fluid.kubejs.vacuum_residue')
+        .displayName(vacuumResidueName)
         .renderType('translucent')
         .tint(0x1C1512)
         .type(type => {
+            type.displayName(vacuumResidueName)
             type.renderType('translucent')
                 .density(1020)
                 .viscosity(6000)

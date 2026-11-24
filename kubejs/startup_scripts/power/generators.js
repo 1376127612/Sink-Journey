@@ -1,10 +1,11 @@
 // ============================================================
-// 四台发电机（MMCR）—— 机器注册 + 场地机制（startup）
+// 五台发电机（MMCR）—— 机器注册 + 场地机制（startup）
 // ------------------------------------------------------------
 //   水力发电机  sinkjourney:hydro_generator        水管进水
 //   潮汐发电机  sinkjourney:tidal_generator        必须建在海边；涨潮时段功率翻倍
 //   应力发电机  sinkjourney:stress_generator       只吃 Create 旋转应力
 //   地磁发电机  sinkjourney:geomagnetic_generator  必须建在基岩层；红石励磁
+//   燃油发电机  sinkjourney:fuel_generator         烧石油线液体燃料 + 压缩空气；排气口必须露天
 //
 // 数值全部在 kubejs/config/sinkpower/generators.json 里改（改完重启游戏）。
 // 结构和配方：server_scripts/power/generators.js
@@ -27,7 +28,19 @@
             tide_windows: [[0, 2000], [11000, 14000]]
         },
         stress: { stress: 32, min_rpm: 64, fe_per_tick: 448 },
-        geomagnetic: { redstone: 1, fe_per_tick: 640, max_y: -56 }
+        geomagnetic: { redstone: 1, fe_per_tick: 640, max_y: -56 },
+        fuel: {
+            air_per_tick: 20,
+            min_pressure: 2,
+            require_open_sky: true,
+            vent_offset: 3,
+            fuels: {
+                lpg: { fluid: 'pneumaticcraft:lpg', mb: 400, fe_per_tick: 1280 },
+                gasoline: { fluid: 'industrialupgrade:iufluidgasoline', mb: 500, fe_per_tick: 1024 },
+                diesel: { fluid: 'industrialupgrade:iufluiddiesel', mb: 500, fe_per_tick: 768 },
+                residue: { fluid: 'industrialupgrade:iufluidblackoil', mb: 500, fe_per_tick: 256 }
+            }
+        }
     }
 
     // ---- 配置读取 ----
@@ -217,6 +230,28 @@
                         notifyNear(ctx, 'y', '地磁发电机拒绝开工：控制器必须位于基岩层（Y ≤ '
                             + Number(CFG.geomagnetic.max_y) + '），当前 Y = ' + y)
                     }
+                })
+            })
+            .register()
+
+        event.createMachine('sinkjourney:fuel_generator')
+            .displayNameKey('machine.sinkjourney.fuel_generator')
+            .recipePool('sinkjourney:fuel_generator')
+            .appearance('industrialupgrade:blockresource/steel_block')
+            .recipeBehavior(behavior => {
+                behavior.beforeStart(ctx => {
+                    if (!CFG.fuel.require_open_sky) return
+                    var mc = ctx.machineContext()
+                    // 排气口 = 控制器正上方第 vent_offset 格（机壳顶上那一格空气）。
+                    // 判定失败就放行：宁可少一条机制，也不要因为某个类被过滤把机器弄哑。
+                    try {
+                        var vent = mc.controllerPos().above(Number(CFG.fuel.vent_offset))
+                        if (!mc.level().canSeeSky(vent)) {
+                            ctx.cancel()
+                            notifyNear(ctx, 'vent', '燃油发电机拒绝开工：排气口被遮住，控制器上方第 '
+                                + Number(CFG.fuel.vent_offset) + ' 格必须露天')
+                        }
+                    } catch (err) { }
                 })
             })
             .register()

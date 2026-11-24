@@ -13,83 +13,68 @@
 // 冷却核心停转时蒸汽排不出去，演算核心会被自身产物堵死。
 // ============================================================
 
+// ---- 笔记配方：数据在 config/sinkresearch/notes.json --------------
+// 唯一来源：这份 JSON 同时喂给 tools/gen_research_quests.py（任务书里的成本表），
+// 所以改配方只改 JSON，再重跑一次生成器，任务描述不会和配方对不上。
+var SRR_DIR = 'kubejs/config/sinkresearch/'
+
+var SRR_readNotes = function () {
+    var text = ''
+    try {
+        text = String(JsonIO.readString(SRR_DIR + 'notes.json'))
+    } catch (e1) {
+        try {
+            var Path = Java.loadClass('java.nio.file.Path')
+            text = String(JsonIO.readString(Path.of(SRR_DIR + 'notes.json')))
+        } catch (e2) {
+            console.error('[SRR] 读取 notes.json 失败: ' + e2)
+            return null
+        }
+    }
+    try {
+        return JSON.parse(text)
+    } catch (e3) {
+        console.error('[SRR] notes.json 解析失败: ' + e3)
+        return null
+    }
+}
+
 ServerEvents.recipes(event => {
-    // ---- 阶段二：机械研究台 ----
-    // 应力按 Create 负载计：8 基础应力 @32 RPM ≈ 256 SU（约一台机械压床），刻录蓝图翻倍
-    event.custom({
-        type: 'mmcr:machine_recipe',
-        recipe_pool: 'sinkjourney:mechanical_lab',
-        tick_time: 100,
-        parallelized: true,
-        requirements: [
-            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_notes' }, count: 2 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
-            { type: 'create:stress', io: 'input', stress: 8, min_rpm: 32 },
-            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_data', count: 1 } }
-        ]
-    }).id('kubejs:mechanical_lab/research_data')
+    // ---- 阶段二：机械研究台的笔记配方（数据驱动） ----
+    // 应力按 Create 负载计：8 基础应力 @32 RPM ≈ 256 SU（约一台机械压床），刻录蓝图翻倍。
+    var noteBook = SRR_readNotes()
+    if (!noteBook || !noteBook.notes) {
+        console.error('[SRR] notes.json 不可用，机械研究台的笔记配方没有生成')
+    } else {
+        for (var n of noteBook.notes) {
+            var reqs = []
+            for (var inp of (n.inputs || [])) {
+                reqs.push({
+                    type: 'minecraft:item', io: 'input',
+                    item: { item: String(inp.id) },
+                    count: Number(inp.count) || 1
+                })
+            }
+            reqs.push({
+                type: 'create:stress', io: 'input',
+                stress: Number(n.stress) || 8,
+                min_rpm: Number(n.min_rpm) || 32
+            })
+            var out = n.output || {}
+            reqs.push({
+                type: 'minecraft:item', io: 'output',
+                stack: { id: String(out.id), count: Number(out.count) || 1 }
+            })
+            event.custom({
+                type: 'mmcr:machine_recipe',
+                recipe_pool: String(n.pool || noteBook.machine || 'sinkjourney:mechanical_lab'),
+                tick_time: Number(n.tick_time) || 200,
+                parallelized: true,
+                requirements: reqs
+            }).id(String(n.recipe_id))
+        }
+    }
 
-    event.custom({
-        type: 'mmcr:machine_recipe',
-        recipe_pool: 'sinkjourney:mechanical_lab',
-        tick_time: 200,
-        parallelized: true,
-        requirements: [
-            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:blank_blueprint' }, count: 1 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 6 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'create:precision_mechanism' }, count: 2 },
-            { type: 'create:stress', io: 'input', stress: 16, min_rpm: 32 },
-            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:blueprint_steam', count: 1 } }
-        ]
-    }).id('kubejs:mechanical_lab/blueprint_steam')
-
-    // ---- 阶段二：时代研究笔记 ----
-    // 机械研究台没有流体/能量口，研究站配方里的水冷与 FE 折算成持续应力；
-    // 笔记是纸面记录，机械刻录只需一张纸作载体。
-    event.custom({
-        type: 'mmcr:machine_recipe',
-        recipe_pool: 'sinkjourney:mechanical_lab',
-        tick_time: 600,
-        parallelized: true,
-        requirements: [
-            { type: 'minecraft:item', io: 'input', item: { item: 'embers:dawnstone_ingot' }, count: 4 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 8 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
-            { type: 'create:stress', io: 'input', stress: 16, min_rpm: 32 },
-            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_notes_ember', count: 1 } }
-        ]
-    }).id('kubejs:mechanical_lab/ember_notes')
-
-    event.custom({
-        type: 'mmcr:machine_recipe',
-        recipe_pool: 'sinkjourney:mechanical_lab',
-        tick_time: 900,
-        parallelized: true,
-        requirements: [
-            { type: 'minecraft:item', io: 'input', item: { item: 'astralsorcery:starmetal_ingot' }, count: 4 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_notes_ember' }, count: 1 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 12 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
-            { type: 'create:stress', io: 'input', stress: 32, min_rpm: 32 },
-            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_notes_radiance', count: 1 } }
-        ]
-    }).id('kubejs:mechanical_lab/radiance_notes')
-
-    // 电力笔记：电力时代的入场券也在这台机器上刻，用末地的晶圆元件当载体。
-    // 拿到笔记即解锁 era.electric——研究站是电力以后的设备，不负责开这个门。
-    event.custom({
-        type: 'mmcr:machine_recipe',
-        recipe_pool: 'sinkjourney:mechanical_lab',
-        tick_time: 900,
-        parallelized: true,
-        requirements: [
-            { type: 'minecraft:item', io: 'input', item: { item: 'industrialupgrade:crafting_elements/crafting_494_element' }, count: 8 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:research_data' }, count: 16 },
-            { type: 'minecraft:item', io: 'input', item: { item: 'minecraft:paper' }, count: 1 },
-            { type: 'create:stress', io: 'input', stress: 32, min_rpm: 32 },
-            { type: 'minecraft:item', io: 'output', stack: { id: 'kubejs:research_notes_electric', count: 1 } }
-        ]
-    }).id('kubejs:mechanical_lab/electric_notes')
 
     // ---- 阶段三：主机蓝图刻录 ----
     const blueprints = [

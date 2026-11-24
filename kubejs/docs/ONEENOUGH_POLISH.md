@@ -84,6 +84,36 @@ kubejs/data/oei/replacements/<任意名字>.json
 4. 精修规则只补 AU / InstantUnify 的漏，不替代它们；如果发现某个 tag 整体都该统一，
    应该回到 `unify-tags.json` 改决定，而不是堆 OneEnough 规则。
 
+## 排查：看着“没统一”先排除阶段锁定
+
+AStages 会把同一材料的多个物品一起挂在某个阶段上（`config/astages/simple/astages/item.json`）。
+例如钢的 7 个条目都在 `era.steam`：
+
+```
+steam_gate_i0..i6
+  industrialupgrade:itemingots/steel_ingot
+  industrialupgrade:itemplates/steel_plate
+  industrialupgrade:blockresource/steel_block
+  industrialupgrade:casing/steel
+  mekanism:ingot_steel
+  ad_astra:steel_ingot
+  nuclearcraftneohaul:steel_alloy
+```
+
+阶段没解锁时这些物品的获取/使用被限制，JEI 里仍然会看到多个条目，很容易误判成
+“矿辞没统一”。实际上 Almost Unified 已经在 tag 层合并了，判断依据看
+`logs/almostunified/almostunified.log`：
+
+```
+[AutoHiding] Hiding 3/4 items for tag '#c:ingots/steel' -> [ad_astra:steel_ingot, mekanism:ingot_steel, nuclearcraftneohaul:steel_alloy]
+```
+
+有这行就说明统一配置生效了，剩下的差异来自阶段锁定、已存在的旧物品或创造模式物品栏。
+验证统一效果前，先把对应阶段加上（AStages 的 add 命令，或用已经解锁该阶段的存档）。
+
+另外 `c:nuggets/steel` 的 canonical 是 `mekanism:nugget_steel`，因为 IU 没有“钢粒”物品，
+这条不是漏配。
+
 ## 相关文件
 
 - `unify_tags.py`：批量统一的唯一入口（`review` / `apply` / `status`）

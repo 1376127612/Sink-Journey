@@ -16,7 +16,6 @@ RecipeViewerEvents.removeEntries('fluid', event => {
     'embers:molten_nickel',
     'embers:molten_silver',
     'embers:molten_tin',
-    'industrialforegoing:protein',
     'industrialupgrade:iufluidapianroyaljelly',
     'industrialupgrade:iufluidethene',
     'industrialupgrade:iufluidgasolineene',

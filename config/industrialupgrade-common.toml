@@ -34,7 +34,7 @@
 	#Additional chance if biome is hill
 	# Default: 25
 	# Range: 0 ~ 100
-	hillChanceBonus = 25
+	hillChanceBonus = 0
 	#Chance penalty for taiga or snowy biomes
 	# Default: 15
 	# Range: 0 ~ 100
@@ -42,7 +42,7 @@
 	#Base chance threshold
 	# Default: 15
 	# Range: 0 ~ 100
-	baseChance = 15
+	baseChance = 0
 	#Chance (in %) to NOT generate gas vein
 	# Default: 85
 	# Range: 0 ~ 100

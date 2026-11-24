@@ -729,3 +729,55 @@ ServerEvents.generateData('after_mods', event => {
     }
     )
 })
+// kubejsstudio custom: ae2:network/parts/import_bus
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'ae2:recipe/network/parts/import_bus',
+      {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "pattern": [" # ","ABA"],
+        "key": {
+          "#": {"item":"ae2:annihilation_core"},
+          "A": {"tag":"c:ingots/steel"},
+          "B": {"item":"minecraft:piston"}
+        },
+        "result": {"id":"ae2:import_bus","count":1}
+      }
+    )
+})
+// kubejsstudio custom: ae2:network/parts/export_bus
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'ae2:recipe/network/parts/export_bus',
+      {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "pattern": ["#A#"," B "],
+        "key": {
+          "#": {"tag":"c:ingots/steel"},
+          "A": {"item":"ae2:formation_core"},
+          "B": {"item":"minecraft:piston"}
+        },
+        "result": {"id":"ae2:export_bus","count":1}
+      }
+    )
+})
+// kubejsstudio custom: ae2:network/blocks/interfaces_interface
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'ae2:recipe/network/blocks/interfaces_interface',
+      {
+        "type": "kubejs:shaped",
+        "result": {"id":"ae2:interface","count":1},
+        "pattern": ["ABA","C D","ABA"],
+        "key": {
+          "A": {"tag":"c:plates/steel"},
+          "B": {"tag":"c:glass_blocks/cheap"},
+          "C": {"item":"ae2:export_bus"},
+          "D": {"item":"ae2:import_bus"}
+        },
+        "_kubejs_changed_marker": {"source":"server_scripts:ae2/ae2_core.js","line":30}
+      }
+    )
+})
