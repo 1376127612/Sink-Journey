@@ -165,8 +165,8 @@
 				item: { count: 1, id: "embers:caminite_lever" }
 				type: "item"
 			}]
-			x: 2.5d
-			y: 5.0d
+			x: 3.5d
+			y: 2.5d
 		}
 		{
 			dependencies: ["2228F6297919FB7A"]
@@ -210,8 +210,8 @@
 				item: { count: 1, id: "embers:cinder_plinth" }
 				type: "item"
 			}]
-			x: 7.0d
-			y: -1.0d
+			x: 4.5d
+			y: 0.5d
 		}
 		{
 			dependencies: ["124E5A52D0F2A72D"]
@@ -274,8 +274,8 @@
 				item: { count: 1, id: "embers:entropic_enumerator" }
 				type: "item"
 			}]
-			x: 11.0d
-			y: 1.5d
+			x: 14.0d
+			y: 2.0d
 		}
 		{
 			dependencies: ["09200AF098A644DF"]
@@ -312,6 +312,68 @@
 			}]
 			x: 14.5d
 			y: 3.5d
+		}
+		{
+			dependencies: ["0056045684755D67"]
+			id: "5400DADCBBB2C09A"
+			tasks: [{
+				id: "74856E7E1E4C46C1"
+				item: { count: 1, id: "embers:mnemonic_inscriber" }
+				type: "item"
+			}]
+			x: 11.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["749AF51E60268100"]
+			id: "2B3668985A58348C"
+			tasks: [{
+				id: "6FC71B371ABEF3F8"
+				item: { count: 1, id: "embers:ember_ejector" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: 5.0d
+		}
+		{
+			dependencies: [
+				"14D88052708750EA"
+				"154B342B39E12DC3"
+			]
+			id: "649F7E26857F7824"
+			tasks: [{
+				id: "76F7453F4788476A"
+				item: { count: 1, id: "embers:pressure_refinery" }
+				type: "item"
+			}]
+			x: 2.5d
+			y: 9.0d
+		}
+		{
+			dependencies: [
+				"7E2342ED402B6E97"
+				"0056045684755D67"
+			]
+			id: "14D88052708750EA"
+			tasks: [
+				{
+					id: "4073D744229346A3"
+					item: { count: 1, id: "embers:catalysis_chamber" }
+					type: "item"
+				}
+				{
+					id: "14C9CFF2095A54CA"
+					item: { count: 1, id: "embers:combustion_chamber" }
+					type: "item"
+				}
+				{
+					id: "311D2ACE5B3BA0EC"
+					item: { count: 1, id: "embers:ignem_reactor" }
+					type: "item"
+				}
+			]
+			x: 2.5d
+			y: 7.0d
 		}
 	]
 }
