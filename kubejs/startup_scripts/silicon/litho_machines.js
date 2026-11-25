@@ -1,17 +1,16 @@
 // ============================================================
 // 光刻机（MMCR）—— 机器注册（startup）
 // ------------------------------------------------------------
-// 四台单腔机器，共用一个 3x3x3 结构模板，只有外壳外观和配方池不同：
-//   Mk.I 接触式   recipe_pool sinkjourney:litho_mk1   只认 M1/M2 + H1
-//   Mk.II i-line  recipe_pool sinkjourney:litho_mk2   到 M3，H1/H2
-//   Mk.III DUV    recipe_pool sinkjourney:litho_mk3   到 M4，H2/H3
-//   Mk.IV EUV     recipe_pool sinkjourney:litho_mk4   到 M6，H3/H4
+// 四台单腔机器，共用一个 3x3x3 结构模板，只有光源世代、外壳外观和配方池不同：
+//   Mk.I   g 线 436 nm / NA 0.28   印 1.5 µm、800 nm
+//   Mk.II  i 线 365 nm / NA 0.55   加 350 nm
+//   Mk.III KrF  248 nm / NA 0.70   加 180 nm
+//   Mk.IV  ArF  193 nm / NA 1.35   加 90 nm、28 nm（双重曝光）
 // 另有一台晶圆切割机 wafer_dicer：吃曝光晶圆 + 规格单，切出分级裸片。
 //
-// 结构和配方：
-//   server_scripts/silicon/litho_structure.js
-//   server_scripts/silicon/litho_recipes.js
-// 数值口径：tools/gen_chip_overhaul.py（与下面 TIERS 必须一致）
+// 能印多细由 λ/NA 算，配方表见 server_scripts/silicon/litho_recipes.js；
+// 结构见 server_scripts/silicon/litho_structure.js；
+// 数值口径：tools/gen_chip_overhaul.py。
 // ============================================================
 
 MMCREvents.startup(event => {

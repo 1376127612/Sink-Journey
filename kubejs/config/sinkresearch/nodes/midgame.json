@@ -1,0 +1,30 @@
+{
+  "_comment": "中期铂族入口：普通镍不设节点，走既有链路；只有拿到第一块铂（证明湿法铂族线跑通）才记录 era.mid。era.mid 目前不拦任何东西，只作为后续电压段/精密段的钥匙。",
+  "page": "midgame",
+  "title_key": "research.page.midgame",
+  "nodes": [
+    {
+      "id": "sink:mid_pgm",
+      "kind": "milestone",
+      "era": "end",
+      "rank": 5.0,
+      "requires": {
+        "and": [
+          "sink:gate_dragon"
+        ]
+      },
+      "trigger": {
+        "type": "item_obtain",
+        "item": "industrialupgrade:itemingots/platinum_ingot"
+      },
+      "unlock": [
+        "era.mid"
+      ],
+      "ui": {
+        "x": 0,
+        "y": 0,
+        "doc": "research.mid_pgm.desc"
+      }
+    }
+  ]
+}

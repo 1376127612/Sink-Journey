@@ -152,7 +152,7 @@ industrialupgrade:crushed/<metal>
 
 ### 5.5 铁（L2 土高炉，✔ 已实装）
 
-- 矿源：铜镐挖铁 → `raw_iron`；研钵 → `industrialupgrade:crushed/iron`（kubejsstudio 既有配方，保留）；
+- 矿源：铜镐挖铁 → `raw_iron`；研钵 → `industrialupgrade:crushed/iron`（`misc/metallurgy.js` 的研钵配方）；
 - 还原：土高炉 `crushed/iron ×2 + 方解石 ×1 + 煤/木炭 ×2` → `iron_ingot ×2`（70s）；
 - 收率：每 2 碎铁出 2 锭，与旧"净化碎铁→熔炉"持平（≈1.0 锭/矿），成本换成了强制鼓风与琥珀金风口；
 - **科学性**：
@@ -256,7 +256,8 @@ industrialupgrade:crushed/<metal>
   `event.recipes.sinkjourney.earth_blast_furnace()`：碎铁×2 + 方解石×1 + 煤×2 → 铁锭×2（1400t）；
   本体合成（泥砖 + 琥珀金锭 tag + 黏土球）；
   remove 原版熔炉/高炉的铁直烧（ore / raw / dust / crushed / purifiedcrushed）；
-- `kubejs/server_scripts/kubejsstudio/kubejsstudio.js`：删除柴堆净化碎铁配方 `roots:pyre/crushed/iron1`。
+- `kubejs/server_scripts/misc/metallurgy.js`：柴堆只给铜/锡/铅（碎矿×2 + 煤×2 + 原木 → 6 粒），
+  铁只给「碎铁×2 + 方解石×2 + 煤 → 6 铁粒」，没有净化碎铁直出铁锭的路线。
 
 ### 验收清单（B 档，需完全重启）
 1. 重启日志出现 `[CF] 已注册炭炉 kubejs:charcoal_furnace` 与 `[CF] 配方类型 sinkjourney:charcoal_furnace 已注册`；
@@ -299,7 +300,7 @@ industrialupgrade:crushed/<metal>
   （如 `kubejs:recipe/metallurgy/pyre/tin`），写成 `kubejs:metallurgy/...` 会把 JSON
   写到配方目录外，游戏内完全不显示且**不报错**（第一版踩过）。
 - **roots pyre/mortar 是数据驱动配方**：走 `roots:pyre` / `roots:mortar` 类型 JSON
-  （kubejsstudio.js 已有可用样例），改配方后需完全重启（generateData 不吃 /reload）。
+  （`misc/pyre.js` 与 `embers/stamps.js` 里都是现成样例），改配方后需完全重启（generateData 不吃 /reload）。
 - **Rhino `const` 冲突**：server_scripts 内新脚本统一用 `var`（research_core 先例）。
 - **AStages 限制直接改 config**：锁炭炉就编辑 `config/astages/simple/astages/item.json`
   （只加 item 条目，别动 `recipe.json`；recipe 的 `//` 格式写错会崩服），重启生效。

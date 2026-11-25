@@ -38,7 +38,7 @@ RecipeViewerEvents.addInformation('item', event => {
         Text.translatable('jei.kubejs.fluid_enricher.info')
     ])
     event.add('nuclearcraftneohaul:chemical_reactor', [
-        Text.translatable('jei.kubejs.chemical_reactor.info')
+        Text.translatable('jei.kubejs.nc_chem_reactor.info')
     ])
     event.add('nuclearcraftneohaul:distiller_controller', [
         Text.translatable('jei.kubejs.distiller.info')

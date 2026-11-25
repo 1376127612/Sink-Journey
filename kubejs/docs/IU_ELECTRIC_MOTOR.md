@@ -385,7 +385,7 @@ IU 有两套配方系统：
 
 - 红铜来源优先走 Create 加热搅拌；如果 KubeJS Create 接口不可用，会回退到工作台无序配方。两条都失败时，红铜不可获得，日志会有 [IU] 红铜...注册失败。
 - 本链假设 primal_wire_insulator 和铁砧（青铜外壳）在电动机之前可获得。原版电动机本来就依赖锡外壳和线圈，这个假设与原进度一致。
-- crafting_21_element 的专家配方由 kubejs/server_scripts/kubejsstudio/recipes.js 提供，本文档不重复修改。
+- crafting_21_element 的专家配方由 create/brass_parts.js 的 Create 序列装配提供，本文档不重复修改。
 - crafting_272_element 按需求保持原配方，只作为原料。
 - 当前环境没有启动游戏，本文档和脚本做过 Node 模拟验证，但没有实机 /reload 验收。
 - 无关告警：kubejs/server_scripts/bans/iu_handcraft.js 第 47 行有未定义的 i('anvil')，每次 reload 会报错；它不影响本脚本，但会在日志里出现。

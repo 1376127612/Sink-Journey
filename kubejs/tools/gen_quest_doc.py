@@ -91,7 +91,8 @@ def branches(quests, line):
         group = sorted([q for q in others if quests[q]["y"] == y],
                        key=lambda k: quests[k]["x"])
         while group:
-            head = next(q for q in group if quests[q]["deps"][0] not in group)
+            head = next(q for q in group
+                        if not quests[q]["deps"] or quests[q]["deps"][0] not in group)
             chain = [head]
             group.remove(head)
             while True:
@@ -131,17 +132,20 @@ def chapter_section(ch, name, group, order_index, entry, entry_name, lines):
     for i in range(len(line) - 1):
         graph.append("    M%d --> M%d" % (i + 1, i + 2))
     for bi, (y, chain) in enumerate(branches_, 1):
-        prev = ids[quests[chain[0]]["deps"][0]]
+        _deps = quests[chain[0]]["deps"]
+        prev = ids.get(_deps[0]) if _deps else None
         for i, q in enumerate(chain):
             graph.append('    %s["%s"]' % (ids[q], quests[q]["title"]))
-            graph.append("    %s --> %s" % (prev, ids[q]))
+            if prev:
+                graph.append("    %s --> %s" % (prev, ids[q]))
             prev = ids[q]
     graph.append("```")
     lines += graph + [""]
 
     rows = []
     for i, q in enumerate(line, 1):
-        dep = entry if quests[q]["deps"] == [entry] else quests[q]["deps"][0]
+        _d = quests[q]["deps"]
+        dep = entry if not _d or _d == [entry] else _d[0]
         rows.append("| %d | %s | `%s` | `%s` | %s |"
                     % (i, quests[q]["title"], q, dep,
                        "六边形" if quests[q]["shape"] == "hexagon" else ""))
@@ -150,13 +154,15 @@ def chapter_section(ch, name, group, order_index, entry, entry_name, lines):
     lines += ["第一格的跨章依赖是上一章的出口 `%s`（%s）。" % (entry, entry_name), ""]
 
     for bi, (y, chain) in enumerate(branches_, 1):
-        root = quests[chain[0]]["deps"][0]
+        _d0 = quests[chain[0]]["deps"]
+        root = _d0[0] if _d0 else entry
         anchor = quests[root]["title"] if root in quests else entry_name
         rows = []
         for i, q in enumerate(chain, 1):
-            dep = quests[q]["deps"][0]
+            _dq = quests[q]["deps"]
+            dep = _dq[0] if _dq else entry
             rows.append("| %d | %s | `%s` | `%s` |" % (i, quests[q]["title"], q, dep))
-        lines += ["**支线 %d**，`y = %.0f`，竖直挂在「%s」上，%d 格单链："
+        lines += ["**支线 %d**，`y = %.0f`，挂在「%s」上，%d 格单链："
                   % (bi, y, anchor, len(chain)), "",
                   table(["顺序", "任务", "id", "依赖"], rows), ""]
     return lines

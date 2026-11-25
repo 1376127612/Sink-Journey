@@ -8,7 +8,7 @@
 //    用 KubeJS 的 type 过滤一次全部删除；熔炼 / 高炉（minecraft:smelting /
 //    blasting）不动。
 //    注意：KubeJS 自己 event.shaped() 写的配方类型是 minecraft:crafting_shaped，
-//    不受这里影响（例如 kubejsstudio:block_anvil/block_anvil）。
+//    不受这里影响（例如铁砧方块 industrialupgrade:industrialupgrade_1066）。
 //
 // 2. 铁砧敲板
 //    IU 的机器配方不在数据包里，而是 Java 内存中的 RecipesCore.map_recipes，

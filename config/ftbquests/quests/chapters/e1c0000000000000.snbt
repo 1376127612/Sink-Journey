@@ -70,7 +70,7 @@
 		{
 			dependencies: ["47288C78398A483D"]
 			icon: {
-				id: "mmcr:naphtha_hydrotreater_controller"
+				id: "mmcr:universal_reactor_controller"
 			}
 			id: "0C41A7B3D9E256F1"
 			rewards: [{
@@ -84,7 +84,7 @@
 			}]
 			tasks: [{
 				id: "0C41A7B3D9E256F3"
-				item: { count: 1, id: "mmcr:naphtha_hydrotreater_controller" }
+				item: { count: 1, id: "mmcr:universal_reactor_controller" }
 				type: "item"
 			}]
 			x: 6.0d
@@ -93,7 +93,7 @@
 		{
 			dependencies: ["0C41A7B3D9E256F1"]
 			icon: {
-				id: "mmcr:steam_cracker_controller"
+				id: "industrialupgrade:baseblockalloy1/molybdenum_steel"
 			}
 			id: "0C41A7B3D9E256F2"
 			rewards: [{
@@ -108,7 +108,7 @@
 			tasks: [
 				{
 					id: "0C41A7B3D9E256F4"
-					item: { count: 1, id: "mmcr:steam_cracker_controller" }
+					item: { count: 1, id: "industrialupgrade:baseblockalloy1/molybdenum_steel" }
 					type: "item"
 				}
 				{
@@ -123,12 +123,12 @@
 		{
 			dependencies: ["0C41A7B3D9E256F2"]
 			icon: {
-				id: "industrialupgrade:basemachine3/polymerizer"
+				id: "mmcr:chemical_reactor_steam_controller"
 			}
 			id: "0C41A7B3D9E256F8"
 			tasks: [{
 				id: "0C41A7B3D9E256D1"
-				item: { count: 1, id: "industrialupgrade:basemachine3/polymerizer" }
+				item: { count: 1, id: "mmcr:chemical_reactor_steam_controller" }
 				type: "item"
 			}]
 			x: 6.0d
@@ -137,15 +137,71 @@
 		{
 			dependencies: ["0C41A7B3D9E256F8"]
 			icon: {
-				id: "industrialupgrade:basemachine3/solid_fluid_integrator"
+				id: "mmcr:item_output_bus_steam"
 			}
 			id: "0C41A7B3D9E256F9"
 			tasks: [{
 				id: "0C41A7B3D9E256D2"
-				item: { count: 1, id: "industrialupgrade:basemachine3/solid_fluid_integrator" }
+				item: { count: 1, id: "mmcr:item_output_bus_steam" }
 				type: "item"
 			}]
 			x: 6.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["0C41A7B3D9E256F8"]
+			icon: {
+				id: "mmcr:universal_reactor_controller"
+			}
+			id: "0C41A7B3D9E25710"
+			tasks: [{
+				id: "0C41A7B3D9E25720"
+				item: { count: 1, id: "mmcr:universal_reactor_controller" }
+				type: "item"
+			}]
+			x: 8.5d
+			y: -7.5d
+		}
+		{
+			dependencies: ["0C41A7B3D9E25710"]
+			icon: {
+				id: "mmcr:large_reactor_stainless_controller"
+			}
+			id: "0C41A7B3D9E25712"
+			tasks: [{
+				id: "0C41A7B3D9E25722"
+				item: { count: 1, id: "mmcr:large_reactor_stainless_controller" }
+				type: "item"
+			}]
+			x: 11.0d
+			y: -7.5d
+		}
+		{
+			dependencies: ["0C41A7B3D9E25711"]
+			icon: {
+				id: "mmcr:large_column_inconel_controller"
+			}
+			id: "0C41A7B3D9E25713"
+			tasks: [{
+				id: "0C41A7B3D9E25723"
+				item: { count: 1, id: "mmcr:large_column_inconel_controller" }
+				type: "item"
+			}]
+			x: 11.0d
+			y: -10.0d
+		}
+		{
+			dependencies: ["0C41A7B3D9E256F8"]
+			icon: {
+				id: "mmcr:column_reactor_controller"
+			}
+			id: "0C41A7B3D9E25711"
+			tasks: [{
+				id: "0C41A7B3D9E25721"
+				item: { count: 1, id: "mmcr:column_reactor_controller" }
+				type: "item"
+			}]
+			x: 8.5d
 			y: -10.0d
 		}
 		{
@@ -475,6 +531,118 @@
 			}]
 			x: 2.0d
 			y: 2.5d
+		}
+		{
+			dependencies: ["4A3C44501E2E4EBE"]
+			icon: {
+				id: "industrialupgrade:plast"
+			}
+			id: "5A1B00000000A101"
+			tasks: [{
+				id: "5A1B00000000B101"
+				item: { count: 1, id: "kubejs:photoresist" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5A1B00000000A101"]
+			icon: {
+				id: "mmcr:litho_mk1_controller"
+			}
+			id: "5A1B00000000A102"
+			tasks: [{
+				id: "5A1B00000000B102"
+				item: { count: 1, id: "mmcr:litho_mk1_controller" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5A1B00000000A102"]
+			icon: {
+				id: "mmcr:litho_mk2_controller"
+			}
+			id: "5A1B00000000A103"
+			tasks: [{
+				id: "5A1B00000000B103"
+				item: { count: 1, id: "mmcr:litho_mk2_controller" }
+				type: "item"
+			}]
+			x: 10.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5A1B00000000A103"]
+			icon: {
+				id: "mmcr:litho_mk3_controller"
+			}
+			id: "5A1B00000000A104"
+			tasks: [{
+				id: "5A1B00000000B104"
+				item: { count: 1, id: "mmcr:litho_mk3_controller" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5A1B00000000A104"]
+			icon: {
+				id: "mmcr:litho_mk4_controller"
+			}
+			id: "5A1B00000000A105"
+			tasks: [{
+				id: "5A1B00000000B105"
+				item: { count: 1, id: "mmcr:litho_mk4_controller" }
+				type: "item"
+			}]
+			x: 14.0d
+			y: 10.0d
+		}
+		{
+			dependencies: ["5A1B00000000A103"]
+			icon: {
+				id: "minecraft:quartz"
+			}
+			id: "5A1B00000000A106"
+			tasks: [
+				{
+					id: "5A1B00000000B106"
+					item: { count: 1, id: "kubejs:optics_quartz" }
+					type: "item"
+				}
+				{
+					id: "5A1B00000000B107"
+					item: { count: 1, id: "kubejs:optics_caf2" }
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 12.5d
+		}
+		{
+			dependencies: ["5A1B00000000A102"]
+			icon: {
+				id: "mmcr:wafer_dicer_controller"
+			}
+			id: "5A1B00000000A107"
+			tasks: [
+				{
+					id: "5A1B00000000B108"
+					item: { count: 1, id: "mmcr:wafer_dicer_controller" }
+					type: "item"
+				}
+				{
+					id: "5A1B00000000B109"
+					item: { count: 1, id: "kubejs:spec_i5" }
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 12.5d
 		}
 	]
 }

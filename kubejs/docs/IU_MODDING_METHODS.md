@@ -19,6 +19,23 @@
 | 矿脉、油田、污染、辐射、变压器档位 | 同上 | 同上 | 同上 |
 | 机器等级、升级模块、能量网络、新物品 | 只能改 Java（mixin / 自建桥模组） | — | 编译期 |
 
+### 配方文件的归属（KubeJS Studio 迁出后）
+
+Studio 那个 `server_scripts/kubejsstudio/` 目录已经删掉，原来混在一起的配方按主题归位：
+
+| 内容 | 文件 | 写法 |
+|---|---|---|
+| 前期手工链（燧石工具、箱子/桶、工作台/熔炉、Roots 符文石） | `misc/early_game.js` | generateData + shaped |
+| 柴堆（玻璃、草药与仪式） | `misc/pyre.js` | generateData（`roots:pyre`） |
+| 研钵与柴堆炼金属（铜/铁/银/金/锡/铅） | `misc/metallurgy.js` | generateData（`roots:mortar`） |
+| 余烬压模与灰泥 | `embers/stamps.js` | generateData + remove |
+| 黄铜序列装配（精密构件、空白模板 21） | `create/brass_parts.js` | generateData（`create:sequenced_assembly`） |
+| IU 原始 / 蒸汽 / 电力时代工作台配方 | `industrial/iu_primal_recipes.js`、`iu_steam_recipes.js`、`iu_electric_recipes.js` | `remove` + `custom`，沿用 IU 原 id |
+| AE2 / 工业先锋机器 | `ae2/ae2_core.js`、`industrial/if_electric.js` | shaped，沿用原 mod id |
+
+规矩只有一条：**一个物品只留一个配方来源，id 用原作者的**。
+新增改动先找上表对应的文件，不要再开一个新的"覆盖层"。
+
 ---
 
 ## 1. 先分清两类配方，这是所有坑的根源

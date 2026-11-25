@@ -4,10 +4,13 @@
 > 版本基线：MC 1.21.1 / NeoForge / MMCR 0.1.7 / IU 3.4.0.11 / PneumaticCraft:R 8.2.24 / KubeJS 2101.7.2
 > 相关：`OIL_LINE.md`（现行实现）、`BASIC_ELECTRIC_AGE.md`（材料分级）、`EARLY_METALLURGY.md`、`IU_MODDING_METHODS.md`
 >
-> **实装状态（2026-11-24）**：S1 流体/物品、S2 等级体系、S3 的**精制釜 + 裂解炉**已落地
-> （`startup_scripts/oil/oil_v4_fluids_items.js`、`startup_scripts/oil/g1_machines.js`、
-> `server_scripts/oil/g1_recipes.js`）。分离塔不在 G1：裂解炉直接出五股馏分，
-> 分离塔（C4 抽提 + 氢回收）随 PP 一起排到 G2。
+> **实装状态（2026-11-25）**：S1 流体/物品、S2 等级体系已落地
+> （`startup_scripts/oil/oil_v4_fluids_items.js`、`startup_scripts/oil/g1_machines.js` 只剩等级体系）。
+> G1 的两台装置——石脑油加氢精制与蒸汽裂解——已经并入**通用反应器**
+> `sinkjourney:universal_reactor`：加氢精制走 `reactor_gas_solid` 池（气压 2 bar + 硅铝催化剂床），
+> 裂解走 `reactor_cracking` 池（气压 2 bar + 炉管等级）。配方在
+> `server_scripts/industrial/reactors_v2.js`，机器与内件的说明见 `REACTOR_TYPES_PLAN.md`。
+> 分离塔不在 G1：裂解炉直接出五股馏分，分离塔（C4 抽提 + 氢回收）随 PP 一起排到 G2。
 > 任务：电力时代章节里「电力机壳」之后新增五格支线到塑料（`0C41A7B3D9E256F1` 精制釜 → `…F2` 裂解炉 → `…F8` 聚合器 → `…F9` 固化釜 → `…FA` 化工厂/塑料），
 > 文案在 `config/ftbquests/quests/lang/zh_cn.snbt`。
 
@@ -236,6 +239,11 @@ G2 的分离塔接的是 C4 馏分与裂解富气，用来抽丁二烯、回收�
 ## 8. 中期与后期装置
 
 ### 8.1 电力中期（G2）
+
+> 下面这些装置**不一定都要新机器**：通用反应器与塔器的"池 + 内件"已经能承接大部分工艺。
+> 蒸馏塔（cdu / vdu）与沥青氧化这类连续分馏/氧化仍适合独立塔器，但 FCC、HDS、重整、克劳斯、
+> 加氢裂化、叠合、润滑油这些"固定床 + 气压"的活，都可以落成通用反应器的新池 + 催化剂等级，
+> 不用再造一台只跑一条配方的机器。
 
 | 装置 | id | 结构 | 进料 | 产物 | 等级槽 |
 | --- | --- | --- | --- | --- | --- |

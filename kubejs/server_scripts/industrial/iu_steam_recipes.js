@@ -11,11 +11,10 @@
 // 说明：IU 把蒸汽机器全都写成铝青铜板 / 钛板 / 锇板 / 钢板 / 因瓦齿轮，
 //      这里统一换成青铜 / 黄铜 / 铁 / 铅 / 铜，并保持原配方的形状与数量。
 //
-// 不动的东西：
-//   - kubejsstudio/recipes.js 里已有的改动（元件 32 / 123 / 76 / 41、
-//     蒸汽齿轮、原型流体加热器、电镀外壳用到的 137 除外）一律保持；
-//   - 元件 32（元件:蒸汽）、元件 123（元件:蒸发）、元件 69/63（粉碎/挤压）
-//     已经是作者改好的青铜/黄铜配方，这里直接引用，不重写。
+// 元件 32（元件:蒸汽）、元件 123（元件:蒸发）、元件 76（挤压部件）、
+// 元件 41（粉碎球）原本由 KubeJS Studio 写入，现已迁进本文件与
+// iu_primal_recipes.js（见文件末尾「原 kubejsstudio 迁入」一节）。
+// 元件 69/63（粉碎/挤压）是作者改好的青铜/黄铜配方，这里直接引用，不重写。
 //
 // 详细说明：kubejs/docs/IU_PRIMAL_STEAM.md
 // ============================================================
@@ -220,16 +219,6 @@ ServerEvents.recipes(event => {
         },
         'industrialupgrade:steam_boiler/steam_boiler_controller')
 
-    // ---- 12. 气体混合室 ----
-    sShaped('industrialupgrade:industrialupgrade_1676',
-        ['ABA', 'BBB', 'CAC'],
-        {
-            A: sItem(COPPER_BOILER),
-            B: S_PLATE.iron,
-            C: S_BRONZE_GEAR
-        },
-        'industrialupgrade:gas_chamber/primal_gas_chamber')
-
     // ---- 13. 微型熔炉 ----
     sShaped('industrialupgrade:industrialupgrade_1969',
         ['ACA', 'EDE', 'BBB'],
@@ -243,10 +232,9 @@ ServerEvents.recipes(event => {
         'industrialupgrade:mini_smeltery/mini_smeltery')
 
     // ---- 14. 强化铁砧（蒸汽时代末期：钢板）----
-    // 原配方 industrialupgrade_1968 被 kubejsstudio/recipes.js 删掉后没有补回，
-    // 导致蒸汽轧机无法制造。kubejsstudio 在 industrial/ 之后加载，会再删一次
-    // 同 id 的配方，所以这里用独立 id 注册。
-    sShaped('kubejs:iu_steam/strong_anvil',
+    // 原配方 industrialupgrade_1968 原本被 Studio 删掉后没有补回，导致蒸汽轧机
+    // 无法制造。Studio 已迁走，这条现在用 IU 自己的 id 注册。
+    sShaped('industrialupgrade:industrialupgrade_1968',
         ['CCC', 'ADA', '   '],
         {
             A: S_PLATE.bronze,
@@ -280,17 +268,6 @@ ServerEvents.recipes(event => {
         },
         'industrialupgrade:basemachine3/steam_fluid_heater')
 
-    sShaped('industrialupgrade:industrialupgrade_1289',
-        ['DAE', 'BBB', ' C '],
-        {
-            A: sItem(S_ELEM(32)),
-            B: sItem(COPPER_BOILER),
-            C: sItem('industrialupgrade:blockresource/steam_machine'),
-            D: sItem(S_ELEM(123)),
-            E: sItem(S_ELEM(267))
-        },
-        'industrialupgrade:basemachine3/steam_solid_fluid_mixer')
-
     sShaped('industrialupgrade:industrialupgrade_1981',
         [' B ', ' A ', ' C '],
         {
@@ -312,17 +289,41 @@ ServerEvents.recipes(event => {
         },
         'industrialupgrade:basemachine3/fluid_separator')
 
-    sShaped('industrialupgrade:industrialupgrade_1049',
-        ['AFA', 'CBE', ' D '],
-        {
-            A: sItem(COPPER_BOILER),
-            B: sItem('industrialupgrade:blockresource/machine'),
-            C: sItem(S_ELEM(98)),
-            D: sItem(S_ELEM(276)),
-            E: sItem(S_ELEM(79)),
-            F: sItem(S_ELEM(154))
-        },
-        'industrialupgrade:basemachine3/polymerizer')
+    // ============================================================
+    // 以下三条原在 kubejsstudio/recipes.js（机身 763、元件 32 / 123）
+    // 迁入时 id 改回 IU 自己的配方 id，形状与材料不变。
+    // ============================================================
 
-    console.info('[IU] 蒸汽时代魔改已应用：机身 / 管道 / 锅炉多方块 / 储罐 / 矿分 / 电解 / 微型熔炉 / 强化铁砧 / 铜锅炉统一')
+    // ---- 机身（763）：8 个电镀外壳 + 1 台蒸汽机机身 ----
+    sShaped('industrialupgrade:industrialupgrade_763',
+        ['AAA', 'ABA', 'AAA'],
+        {
+            A: sItem(S_ELEM(137)),
+            B: sItem('industrialupgrade:blockresource/steam_machine')
+        },
+        'industrialupgrade:blockresource/machine')
+
+    // ---- 元件:蒸汽（32）：铁齿轮 + 青铜板 + 青铜齿轮 + 模板 ----
+    sShaped('industrialupgrade:industrialupgrade_1274',
+        ['#A#', 'BCB', 'AAA'],
+        {
+            '#': sItem('industrialforegoing:iron_gear'),
+            A: S_PLATE.bronze,
+            B: { item: 'kubejs:bronze_gear' },
+            C: sItem(S_ELEM(21))
+        },
+        S_ELEM(32))
+
+    // ---- 元件:蒸发（123）：黄铜齿轮 + 铜板 + 煤块 + 模板 ----
+    sShaped('industrialupgrade:industrialupgrade_1275',
+        ['#A#', 'BCB', 'AAA'],
+        {
+            '#': { item: 'kubejs:brass_gear' },
+            A: sItem('create:copper_sheet'),
+            B: sItem('minecraft:coal_block'),
+            C: sItem(S_ELEM(21))
+        },
+        S_ELEM(123))
+
+    console.info('[IU] 蒸汽时代魔改已应用：机身 / 管道 / 锅炉多方块 / 储罐 / 矿分 / 电解 / 微型熔炉 / 强化铁砧 / 铜锅炉统一 / 元件 32 / 元件 123')
 })
