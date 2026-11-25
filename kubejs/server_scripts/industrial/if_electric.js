@@ -14,10 +14,6 @@
 //
 // 齿轮（铁 / 金 / 钻石）已在 industrial/if_gears.js 改成 IU 冲压机产物，
 // 这里不再动。
-//
-// 例外：简陋机器框架（machine_frame_pity）已经整条交给 KubeJS Studio，
-//   Studio 用 ServerEvents.generateData 写虚拟数据包，这里再 remove + add
-//   会把它的版本盖掉。详见下面「1. 简陋机器框架」的注释。
 // ============================================================
 
 ServerEvents.recipes(event => {
@@ -29,13 +25,16 @@ ServerEvents.recipes(event => {
     }
 
     // ---- 1. 简陋机器框架 ----
-    // 这条配方已交给 KubeJS Studio 管理：见
-    // server_scripts/kubejsstudio/kubejsstudio.js 里
-    // industrialforegoing:recipe/machine_frame_pity 的 generateData 覆盖。
-    //
-    // 这里不要再写 event.remove + event.shaped —— recipe 事件在数据包阶段
-    // 之后执行，同一 id 再加一次会把 Studio 的版本盖掉，
-    // 表现就是「Studio 里改了，进游戏却没生效」。
+    // 原：铁锭四角 + 铁块。现在四角是钢板，中心塞一台 IU 机身，
+    // 于是 IF 的整条机器线都压在「蒸汽机机身」之后。
+    fShaped('industrialforegoing:machine_frame_pity',
+        'industrialforegoing:machine_frame_pity',
+        ['WIW', 'IRI', 'WIW'],
+        {
+            I: '#c:plates/steel',
+            R: 'industrialupgrade:blockresource/machine',
+            W: '#minecraft:logs'
+        })
 
     // ---- 2. 怜悯发电机 ----
     // 原：金锭 + 铁栏杆。把铁栏杆换成钢板，发电机才是电的东西。

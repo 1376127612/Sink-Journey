@@ -30,9 +30,12 @@
 | 金属 | 角色 | 用在哪 |
 |---|---|---|
 | **钢** | 结构件 | 机器骨架、框架、压力机滚筒、AE 机壳、工业先锋框架 |
-| **银** | 导体 | 线圈、触头、AE 的导电件、无线元件 |
-| **铅** | 密封 / 屏蔽 | 水腔密封、AE 屏蔽件 |
+| **银** | 触头 / 镀层（**原写「导体」，已修正**） | 触头、镀银铜的射频件、AE 的导电件；**导体是铜，母线是铝**，见 `IU_METAL_PLAN.md` §2 P3 |
+| **铅** | 屏蔽 / 酸槽内衬 | AE 屏蔽件、铅酸电池、电积阳极；密封垫是橡胶／PTFE，不是铅 |
 | **镍** | 抗蚀 / 耐热 | 流体腔、水箱、抗蚀触头、AE 能量件 |
+
+> 这一层只回答"这个时代能不能拿到"，不回答"这台机器该用什么"。
+> 材料按功能与服役条件分工的完整口径见 `IU_METAL_PLAN.md`。
 
 镍在本包里是完整的：`c:ingots/nickel`、`c:dusts/nickel`、
 `industrialupgrade:itemplates/nickel_plate`（本脚本额外注册了 `c:plates/nickel`
@@ -100,7 +103,7 @@ SE 线（元件:SE、元件:浓缩、阳光化合物制造厂、SE 线，配方 
 元件614 增强 = RE电池（铅外壳）+ 元件21（本条改）
 元件154 液储 = 铁板 + itemcell
 itemcell     = 锡外壳 + 玻璃板
-元件159 提纯 = 元件141 + 元件21（141 已由 kubejsstudio 改成铁板）
+元件159 提纯 = 元件141 + 元件21（141 已由 iu_primal_recipes.js 改成铁板）
 电镀外壳 137 = 青铜板 + 铁板（蒸汽时代已改）
 高级机壳     = 钢板 + 碳板 + 元件274 + 电力机壳
 ```
@@ -179,12 +182,9 @@ ExtendedAE、扩展+、闪电科技（ae2lt）、水晶科技（ae2cs）、无�
 简易 / 高级 / 完美机器框架的配方保持原样，靠塑料、下界合金、以太气体自然挡在后面。
 齿轮（铁 / 金 / 钻石）沿用 `industrial/if_gears.js` 的 IU 冲压机版本。
 
-> **机器框架已交给 KubeJS Studio。**
-> `industrialforegoing:machine_frame_pity` 现在由 `server_scripts/kubejsstudio/kubejsstudio.js`
-> 里的 `ServerEvents.generateData('after_mods')` 覆盖（写进虚拟数据包，优先级高于模组）。
-> `if_electric.js` 里不要再写 `event.remove` + `event.shaped`：配方事件在数据包之后执行，
-> 同 id 再加一次会把 Studio 的版本盖掉，表现就是「Studio 里改了，进游戏却没生效」。
-> 以后改这条配方请直接在 Studio 里改。
+> **机器框架就在 `if_electric.js` 里改。**
+> `industrialforegoing:machine_frame_pity` 的四角是钢板、中心是 IU 机身；
+> KubeJS Studio 那层虚拟数据包已经撤掉，这里 `remove` + `shaped` 就是唯一来源。
 >
 > 同一条规则适用于所有由脚本 `remove + add` 过的配方：Studio 的 generateData 覆盖
 > 只在「脚本不碰这个 id」时才算数。

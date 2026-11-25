@@ -1,18 +1,24 @@
 // ============================================================
-// 光刻线配方（MMCR + 工作台）
+// 光刻线配方（MMCR + 工作台）—— 按真实光刻物理排
 // ------------------------------------------------------------
-// 1. 四台光刻机 + 晶圆切割机的控制器（Mk.I 与切割机用气动蚀刻板，前期就能造出来）
-// 2. 晶圆提纯 W1→W2→W3→W4（工作台，只吃现有材料）
-// 3. 掩模 6 片、激光头 4 支（工作台）
-// 4. 光刻（曝光）：机台 × 掩模 × 晶圆 × 激光头 → 曝光晶圆（失败即报废）
-// 5. 切割：曝光晶圆 + 规格单 → 分级裸片
-// 6. 删掉工作台的 12 条芯片直合配方
+// 一台光刻机能印多细，只由两件事决定：光源波长 λ 与投影物镜的数值孔径 NA。
+// 单次曝光的分辨率按 R = k1·λ/NA（k1 = 0.45 当"舒服"的余量）算，
+// 比 R 还小的节点要靠多重曝光，线宽小于 R/2 的直接印不出来：
 //
-// 数值口径与 tools/gen_chip_overhaul.py 完全一致：
-//   Y = clamp((机基础 + 头加成) × 工艺难度, 0.05, 0.99)
-//   通过率 = min(档位上限, Y + 档位放宽量)
-//   裸片数 = 4^Δ（Δ = 晶圆纯度 − 掩模要求纯度，封顶 3）→ 1 / 4 / 16 / 64
-//   产出 = round(裸片数 × 通过率)，至少 1
+//   Mk.I   g 线 436 nm / NA 0.28 → 单次 700 nm   能印 1.5 µm、800 nm
+//   Mk.II  i 线 365 nm / NA 0.55 → 单次 299 nm   多印 350 nm
+//   Mk.III KrF  248 nm / NA 0.70 → 单次 159 nm   多印 180 nm
+//   Mk.IV  ArF  193 nm / NA 1.35 → 单次  64 nm   多印 90 nm；28 nm 要双重曝光
+//
+// 所以旧表里「Mk.III DUV 印 90nm」「Mk.IV EUV 印 3nm」都不成立了：
+// 90 nm 是 ArF 的活，28 nm 是 ArF 浸没 + SADP 的极限，7 nm 以下要 EUV 机台（暂缺）。
+//
+// 一次曝光真实要消耗的东西：
+//   光刻胶 1 片 / 次（双重曝光 2 片）、显影液（NaOH）250 mB / 次、
+//   掩模有磨损（0.1%）、投影物镜是装机配件，不消耗。
+// 良率由 k1 = 节点·NA/λ 与物镜等级决定，不再拍脑袋给百分比。
+//
+// 数值发生器的口径：tools/gen_chip_overhaul.py
 // ============================================================
 
 ServerEvents.recipes(event => {
@@ -25,46 +31,45 @@ ServerEvents.recipes(event => {
         4: 'kubejs:wafer_12n'
     }
 
-    // 掩模 -> 最低晶圆：M1/M2 要 6N(W1)、M3 要 9N(W2)、M4/M5 要 11N(W3)、M6 要 12N(W4)
-    // TODO T5 同位素级晶圆(W5)上线后，M6 改指 5 档。
+    // 掩模：工艺节点 / 节点纳米数 / 最低晶圆纯度
     const MASK = {
-        1: { id: 'kubejs:mask_1p5u', node: '1.5µm', mk: 1, head: 1, wafer: 1 },
-        2: { id: 'kubejs:mask_800n', node: '800nm', mk: 2, head: 1, wafer: 1 },
-        3: { id: 'kubejs:mask_90n', node: '90nm', mk: 3, head: 2, wafer: 2 },
-        4: { id: 'kubejs:mask_28n', node: '28nm', mk: 3, head: 3, wafer: 3 },
-        5: { id: 'kubejs:mask_7n', node: '7nm', mk: 4, head: 3, wafer: 3 },
-        6: { id: 'kubejs:mask_3n', node: '3nm', mk: 4, head: 4, wafer: 4 }
+        1: { id: 'kubejs:mask_1p5u', node: '1.5µm', nm: 1500, wafer: 1 },
+        2: { id: 'kubejs:mask_800n', node: '800nm', nm: 800, wafer: 1 },
+        3: { id: 'kubejs:mask_350n', node: '350nm', nm: 350, wafer: 2 },
+        4: { id: 'kubejs:mask_180n', node: '180nm', nm: 180, wafer: 3 },
+        5: { id: 'kubejs:mask_90n', node: '90nm', nm: 90, wafer: 3 },
+        6: { id: 'kubejs:mask_28n', node: '28nm', nm: 28, wafer: 4 }
     }
 
-    const LENS = {
-        1: { id: 'kubejs:lens_glass', bonus: 0.00 },
-        2: { id: 'kubejs:lens_quartz', bonus: 0.05 },
-        3: { id: 'kubejs:lens_caf2', bonus: 0.10 },
-        4: { id: 'kubejs:lens_multilayer', bonus: 0.15 }
+    // 机台：光源波长 / 数值孔径 / 功耗 / 单片节拍
+    // multi：会不会多重曝光（现实里 SADP / LELE 只在 ArF 浸没这一代用）
+    const MACHINE = {
+        1: { id: 'litho_mk1', name: 'g 线', nm: 436, na: 0.28, fe: 32, secs: 60, multi: false },
+        2: { id: 'litho_mk2', name: 'i 线', nm: 365, na: 0.55, fe: 128, secs: 40, multi: false },
+        3: { id: 'litho_mk3', name: 'KrF', nm: 248, na: 0.70, fe: 512, secs: 20, multi: false },
+        4: { id: 'litho_mk4', name: 'ArF', nm: 193, na: 1.35, fe: 2048, secs: 10, multi: true }
     }
 
-    // heads 全开：任意机器都能装任意激光头（头只影响报废率，不设机器门），
-    // 掩模的上限由机器等级决定，掩模自身还有「最低头」要求（M4 起必须 H3 以上）。
-    const TIER = {
-        1: { id: 'litho_mk1', base: 0.55, masks: [1, 2], heads: [1, 2, 3, 4], secs: 60, fe: 32 },
-        2: { id: 'litho_mk2', base: 0.70, masks: [1, 2, 3], heads: [1, 2, 3, 4], secs: 40, fe: 128 },
-        3: { id: 'litho_mk3', base: 0.85, masks: [1, 2, 3, 4], heads: [1, 2, 3, 4], secs: 20, fe: 512 },
-        4: { id: 'litho_mk4', base: 0.95, masks: [1, 2, 3, 4, 5, 6], heads: [1, 2, 3, 4], secs: 10, fe: 2048 }
+    // 投影物镜：能透的波长区间（决定配哪台机）与良率加成
+    const OPTICS = {
+        1: { id: 'kubejs:optics_glass', minNm: 400, maxNm: 700, bonus: 0.00 },
+        2: { id: 'kubejs:optics_quartz', minNm: 240, maxNm: 450, bonus: 0.03 },
+        3: { id: 'kubejs:optics_caf2', minNm: 150, maxNm: 400, bonus: 0.06 },
+        4: { id: 'kubejs:optics_immersion', minNm: 190, maxNm: 200, bonus: 0.10 }
     }
 
-    const DIFF = { 1: 1.00, 2: 0.95, 3: 0.90, 4: 0.85, 5: 0.80, 6: 0.75 }
-
-    const GRADE = {
-        i9: { spec: 'kubejs:spec_i9', relax: 0.00, cap: 0.99 },
-        i7: { spec: 'kubejs:spec_i7', relax: 0.10, cap: 0.95 },
-        i5: { spec: 'kubejs:spec_i5', relax: 0.20, cap: 0.97 },
-        i3: { spec: 'kubejs:spec_i3', relax: 0.30, cap: 0.99 }
-    }
+    // 单次曝光能印的最小节点按 k1=0.45 算（工艺窗口的下限）；
+    // 多重曝光能把 k1 压到 0.28，等效分辨率再翻一倍。
+    const K1_LIMIT = 0.45
+    const K1_MULTI = 0.28
+    const minNodeSingle = (m) => K1_LIMIT * m.nm / m.na
+    const minNodeMulti = (m) => K1_MULTI * m.nm / m.na / 2
+    const DEVELOPER = 'industrialupgrade:iufluidsodiumhydroxide'
 
     // ---------------- 1. 控制器 ----------------
     const BOARD = {
-        1: 'industrialupgrade:circuit/circuit_part1',
-        2: 'industrialupgrade:circuit/advanced_part2',
+        1: 'pneumaticcraft:printed_circuit_board',
+        2: 'industrialupgrade:circuit/circuit_part1',
         3: 'industrialupgrade:circuit/nanocircuit_part2',
         4: 'industrialupgrade:circuit/photon_part2'
     }
@@ -75,7 +80,6 @@ ServerEvents.recipes(event => {
         4: 'minecraft:diamond_block'
     }
 
-    // 切割机与 Mk.I 用「气动工艺的电路板」，压缩空气阶段就能造出来
     event.shaped('mmcr:wafer_dicer_controller', [
         'SGS',
         'GCG',
@@ -87,27 +91,19 @@ ServerEvents.recipes(event => {
     }).id('kubejs:sink_litho/wafer_dicer_controller')
 
     for (let t = 1; t <= 4; t++) {
-        event.shaped(`mmcr:${TIER[t].id}_controller`, [
+        event.shaped(`mmcr:${MACHINE[t].id}_controller`, [
             'SGS',
             'GCG',
             'SGS'
         ], {
             S: SHELL[t],
             G: 'minecraft:glass',
-            C: t === 1 ? 'pneumaticcraft:printed_circuit_board' : BOARD[t]
-        }).id(`kubejs:sink_litho/${TIER[t].id}_controller`)
+            C: BOARD[t]
+        }).id(`kubejs:sink_litho/${MACHINE[t].id}_controller`)
     }
 
-    // ---------------- 2. 晶圆来源 ----------------
-    // W1 = IU 494（T1 区熔 + 直拉，iu_crystal.js）
-    // W2 = kubejs:wafer_9n（T2 改良西门子，wafer_line.js + iu_crystal.js）
-    // W3 = kubejs:wafer_11n（T3 硅烷裂解，同上）
-    // W4 = kubejs:wafer_12n（T4 磁控直拉，mcz_recipes.js + iu_crystal.js）
-    // 这里以前用工作台把低档晶圆 + 化学品「垫」成高档晶圆，
-    // 现在每档都是独立工艺路线，不再需要升级配方。
-
-    // ---------------- 3. 掩模 ----------------
-    const MASK_BASE = 'industrialupgrade:crafting_elements/crafting_487_element' // 基础模板/电路板
+    // ---------------- 2. 掩模 ----------------
+    const MASK_BASE = 'industrialupgrade:crafting_elements/crafting_487_element'
     const MASK_TARGET = {
         1: '#c:plates/copper',
         2: '#c:plates/silver',
@@ -125,32 +121,46 @@ ServerEvents.recipes(event => {
         }).id(`kubejs:sink_litho/mask_m${m}`)
     }
 
-    // ---------------- 4. 激光头 ----------------
-    event.shaped(LENS[1].id, ['GGG', 'GRG', 'SSS'], {
+    // ---------------- 3. 投影物镜 ----------------
+    event.shaped(OPTICS[1].id, ['GGG', 'GRG', 'SSS'], {
         G: 'minecraft:glass',
         R: 'minecraft:redstone',
         S: '#c:plates/steel'
-    }).id('kubejs:sink_litho/lens_h1')
+    }).id('kubejs:sink_litho/optics_o1')
 
-    event.shaped(LENS[2].id, ['QQQ', 'QLQ', 'SSS'], {
+    event.shaped(OPTICS[2].id, ['QQQ', 'QLQ', 'SSS'], {
         Q: 'minecraft:quartz',
-        L: LENS[1].id,
+        L: OPTICS[1].id,
         S: '#c:plates/titanium'
-    }).id('kubejs:sink_litho/lens_h2')
+    }).id('kubejs:sink_litho/optics_o2')
 
-    event.shaped(LENS[3].id, ['FFF', 'FLF', 'TTT'], {
+    event.shaped(OPTICS[3].id, ['FFF', 'FLF', 'TTT'], {
         F: 'industrialupgrade:crafting_elements/crafting_344_element', // 碳化硅
-        L: LENS[2].id,
+        L: OPTICS[2].id,
         T: '#c:plates/platinum'
-    }).id('kubejs:sink_litho/lens_h3')
+    }).id('kubejs:sink_litho/optics_o3')
 
-    event.shaped(LENS[4].id, ['MMM', 'MLM', 'PPP'], {
+    event.shaped(OPTICS[4].id, ['MMM', 'MLM', 'PPP'], {
         M: 'industrialupgrade:crafting_elements/crafting_490_element', // 光谱制程模板
-        L: LENS[3].id,
+        L: OPTICS[3].id,
         P: 'industrialupgrade:crafting_elements/crafting_620_element'  // 光子元件模板
-    }).id('kubejs:sink_litho/lens_h4')
+    }).id('kubejs:sink_litho/optics_o4')
 
-    // ---------------- 5. 测试规格单（不消耗，等同一张测试程序） ----------------
+    // ---------------- 4. 光刻胶 ----------------
+    // 现实配方是酚醛树脂 + 重氮萘醌感光剂溶于丙二醇甲醚醋酸酯；
+    // 这里用 IU 塑料当树脂、红石粉当感光剂，一份料出两片。
+    event.shapeless('2x kubejs:photoresist', [
+        'industrialupgrade:plast',
+        'minecraft:redstone'
+    ]).id('kubejs:sink_litho/photoresist')
+
+    // ---------------- 5. 测试规格单 ----------------
+    const GRADE = {
+        i9: { spec: 'kubejs:spec_i9', relax: 0.00, cap: 0.99 },
+        i7: { spec: 'kubejs:spec_i7', relax: 0.10, cap: 0.95 },
+        i5: { spec: 'kubejs:spec_i5', relax: 0.20, cap: 0.97 },
+        i3: { spec: 'kubejs:spec_i3', relax: 0.30, cap: 0.99 }
+    }
     const SPEC_MAT = { i3: 'minecraft:copper_ingot', i5: 'minecraft:iron_ingot', i7: 'minecraft:gold_ingot', i9: 'minecraft:diamond' }
     for (const g in GRADE) {
         event.shapeless(GRADE[g].spec, [
@@ -160,45 +170,58 @@ ServerEvents.recipes(event => {
         ]).id(`kubejs:sink_litho/spec_${g}`)
     }
 
-    // ---------------- 6. 光刻（曝光） ----------------
-    // 曝光只做一件事：把掩模图案打到晶圆上，得到「曝光晶圆」。
-    // 报废率就是这一步的失败率 —— 曝光失败整片报废，不产出任何东西，
-    // 所以精度更高的机台/激光头 = 更低的报废率。
-    const exposureRate = (tierId, lensId, maskId) => {
-        const raw = (TIER[tierId].base + LENS[lensId].bonus) * DIFF[maskId]
-        return Math.max(0.05, Math.min(0.99, raw))
+    // ---------------- 6. 光刻（涂胶 + 曝光 + 显影） ----------------
+    // 分辨率、曝光次数、良率都由 λ / NA / 物镜 / 节点算出来，配方表只是它的展开。
+    const exposures = (maskNm, machine) => {
+        if (maskNm >= minNodeSingle(machine)) return 1
+        if (machine.multi && maskNm >= minNodeMulti(machine)) return 2
+        return 0
     }
 
-    const diesPerWafer = (waferId, maskId) => {
-        const delta = Math.min(3, Math.max(0, waferId - MASK[maskId].wafer))
-        return Math.pow(4, delta)
+    const yieldOf = (maskNm, machine, optics, shots) => {
+        const k1 = maskNm * machine.na / machine.nm
+        const base = Math.max(0.05, Math.min(0.97, 0.20 + 0.80 * (k1 / 0.85)))
+        return Math.max(0.05, Math.min(0.99, base + optics.bonus - (shots - 1) * 0.10))
+    }
+
+    const opticsFits = (machine, optics) => machine.nm >= optics.minNm && machine.nm <= optics.maxNm
+
+    // 一条曝光配方：派生量都在函数里算。KubeJS 的 Rhino 会把循环体里的 const 提到函数作用域，
+    // 同一个循环里第二次声明就报 "redeclaration of var"，所以循环体里只留调用。
+    const addExposure = (t, m, o, waferId) => {
+        const machine = MACHINE[t]
+        const mask = MASK[m]
+        const shots = exposures(mask.nm, machine)
+        const optics = OPTICS[o]
+        const rate = yieldOf(mask.nm, machine, optics, shots)
+
+        event.custom({
+            type: 'mmcr:machine_recipe',
+            recipe_pool: `sinkjourney:${machine.id}`,
+            tick_time: machine.secs * 20 * shots,
+            requirements: [
+                { type: 'minecraft:item', io: 'input', item: { item: WAFER[waferId] }, count: 1 },
+                { type: 'minecraft:item', io: 'input', item: { item: mask.id }, count: 1, consume_chance: 0.001 },
+                { type: 'minecraft:item', io: 'input', item: { item: optics.id }, count: 1, consume_chance: 0 },
+                { type: 'minecraft:item', io: 'input', item: { item: 'kubejs:photoresist' }, count: shots },
+                { type: 'minecraft:fluid', io: 'input', fluid: { fluid: DEVELOPER }, amount: 250 * shots },
+                { type: 'neoforge:energy', io: 'input', fe_per_tick: machine.fe },
+                {
+                    type: 'minecraft:item', io: 'output', chance: rate,
+                    stack: { id: `kubejs:exposed_m${m}_w${waferId}`, count: 1 }
+                }
+            ]
+        }).id(`kubejs:sink_litho/${machine.id}_m${m}_w${waferId}_o${o}`)
     }
 
     let count = 0
     for (let t = 1; t <= 4; t++) {
-        let tier = TIER[t]
-        for (const maskId of tier.masks) {
-            for (const lensId of tier.heads) {
-                if (lensId < MASK[maskId].head) continue
-                for (let waferId = MASK[maskId].wafer; waferId <= 4; waferId++) {
-                    let y = exposureRate(t, lensId, maskId)
-
-                    event.custom({
-                        type: 'mmcr:machine_recipe',
-                        recipe_pool: `sinkjourney:${tier.id}`,
-                        tick_time: tier.secs * 20,
-                        requirements: [
-                            { type: 'minecraft:item', io: 'input', item: { item: WAFER[waferId] }, count: 1 },
-                            { type: 'minecraft:item', io: 'input', item: { item: MASK[maskId].id }, count: 1, consume_chance: 0.02 },
-                            { type: 'minecraft:item', io: 'input', item: { item: LENS[lensId].id }, count: 1, consume_chance: 0.5 },
-                            { type: 'neoforge:energy', io: 'input', fe_per_tick: tier.fe },
-                            {
-                                type: 'minecraft:item', io: 'output', chance: y,
-                                stack: { id: `kubejs:exposed_m${maskId}_w${waferId}`, count: 1 }
-                            }
-                        ]
-                    }).id(`kubejs:sink_litho/${tier.id}_m${maskId}_w${waferId}_h${lensId}`)
-
+        for (let m = 1; m <= 6; m++) {
+            if (exposures(MASK[m].nm, MACHINE[t]) === 0) continue
+            for (let o = 1; o <= 4; o++) {
+                if (!opticsFits(MACHINE[t], OPTICS[o])) continue
+                for (let waferId = MASK[m].wafer; waferId <= 4; waferId++) {
+                    addExposure(t, m, o, waferId)
                     count++
                 }
             }
@@ -206,39 +229,41 @@ ServerEvents.recipes(event => {
     }
 
     // ---------------- 7. 切割：曝光晶圆 → 裸片 ----------------
-    // 一片曝光晶圆切出多少颗、按哪一档算，看晶圆本身的等级（纯度决定裸片数）
-    // 和规格单（决定分选标准）。i9 要求最高、出得最少，i3 几乎全过。
     const BIN_RATE = { i9: 0.55, i7: 0.70, i5: 0.85, i3: 0.95 }
+
+    const diesPerWafer = (waferId, maskId) => {
+        const delta = Math.min(3, Math.max(0, waferId - MASK[maskId].wafer))
+        return Math.pow(4, delta)
+    }
+
+    const addDice = (maskId, waferId, g) => {
+        const dies = diesPerWafer(waferId, maskId)
+        const out = Math.max(1, Math.round(dies * BIN_RATE[g]))
+
+        event.custom({
+            type: 'mmcr:machine_recipe',
+            recipe_pool: 'sinkjourney:wafer_dicer',
+            tick_time: 200,
+            requirements: [
+                { type: 'minecraft:item', io: 'input', item: { item: `kubejs:exposed_m${maskId}_w${waferId}` }, count: 1 },
+                { type: 'minecraft:item', io: 'input', item: { item: GRADE[g].spec }, count: 1, consume_chance: 0 },
+                { type: 'neoforge:energy', io: 'input', fe_per_tick: 64 },
+                { type: 'minecraft:item', io: 'output', stack: { id: `kubejs:chip_m${maskId}_${g}`, count: out } }
+            ]
+        }).id(`kubejs:sink_litho/dice_m${maskId}_w${waferId}_${g}`)
+    }
 
     let diceCount = 0
     for (let maskId = 1; maskId <= 6; maskId++) {
         for (let waferId = MASK[maskId].wafer; waferId <= 4; waferId++) {
-            let dies = diesPerWafer(waferId, maskId)
-
             for (const g in BIN_RATE) {
-                let out = Math.max(1, Math.round(dies * BIN_RATE[g]))
-
-                event.custom({
-                    type: 'mmcr:machine_recipe',
-                    recipe_pool: 'sinkjourney:wafer_dicer',
-                    tick_time: 200,
-                    requirements: [
-                        { type: 'minecraft:item', io: 'input', item: { item: `kubejs:exposed_m${maskId}_w${waferId}` }, count: 1 },
-                        { type: 'minecraft:item', io: 'input', item: { item: GRADE[g].spec }, count: 1, consume_chance: 0 },
-                        { type: 'neoforge:energy', io: 'input', fe_per_tick: 64 },
-                        { type: 'minecraft:item', io: 'output', stack: { id: `kubejs:chip_m${maskId}_${g}`, count: out } }
-                    ]
-                }).id(`kubejs:sink_litho/dice_m${maskId}_w${waferId}_${g}`)
-
+                addDice(maskId, waferId, g)
                 diceCount++
             }
         }
     }
 
     // ---------------- 8. 封死工作台直合芯片 ----------------
-    // IU 原本允许「8 根锌棍 + 电容」直接合出封装芯片，这条路会绕过整条光刻线，
-    // 所以把 12 条芯片合成配方（每代 SOIC / QFP 各一条）删掉。
-    // 芯片只能走：光刻 → 切割 → 封装 三步。
     const CHIP_RECIPES = [
         'industrialupgrade:industrialupgrade_436', // 基础 SOIC
         'industrialupgrade:industrialupgrade_437', // 基础 QFP
@@ -255,5 +280,5 @@ ServerEvents.recipes(event => {
     ]
     for (const id of CHIP_RECIPES) event.remove({ id })
 
-    console.info(`[光刻线] 曝光配方 ${count} 条、切割配方 ${diceCount} 条；工作台上已合不出芯片`)
+    console.info(`[光刻线] 曝光配方 ${count} 条、切割配方 ${diceCount} 条；分辨率按 λ/NA 门槛，双重曝光吃两份胶与显影液`)
 })

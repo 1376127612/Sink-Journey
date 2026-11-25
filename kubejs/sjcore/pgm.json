@@ -1,0 +1,85 @@
+{
+  "_comment": "铂族精炼 —— 熔铸补丁 + 封铂钯直炼。湿法段（浸出/王水/沉淀/还原）全部在 kubejs/server_scripts/industrial/pgm_line.js 的化学反应釜池里；这里只做两件事：1) 删掉 IU 电炉里 '铂矿/粗铂/铂粉 直接出铂锭' 那类一步到位的配方，让铂钯必须过湿法线；2) 把海绵铂、海绵钯、以及与它们同源的金属粉补回电炉，能耗按熔点抬高（铂 1768℃ / 钯 1555℃ / 锇 3033℃ / 铱 2446℃），这就是现实里'电弧/感应熔炼'在电炉上的抽象。注意顺序：remove 必须排在 add 前面，否则会把本文件自己加的配方删掉。改完 /sjcore iu reload 生效，不用重启。",
+  "patches": [
+    {
+      "op": "remove",
+      "pool": "furnace",
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/platinum_ingot" }
+      ]
+    },
+    {
+      "op": "remove",
+      "pool": "furnace",
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/palladium" }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "kubejs:platinum_sponge", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/platinum_ingot", "count": 1 }
+      ],
+      "energy": 16000
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "industrialupgrade:itemdust/platinum_dust", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/platinum_ingot", "count": 1 }
+      ],
+      "energy": 16000
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "kubejs:palladium_sponge", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/palladium", "count": 1 }
+      ],
+      "energy": 14000
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "industrialupgrade:itemdust/palladium_dust", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/palladium", "count": 1 }
+      ],
+      "energy": 14000
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "industrialupgrade:itemdust/osmium_dust", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/osmium", "count": 1 }
+      ],
+      "energy": 20000
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "industrialupgrade:itemdust/iridium_dust", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/iridium_ingot", "count": 1 }
+      ],
+      "energy": 20000
+    }
+  ]
+}

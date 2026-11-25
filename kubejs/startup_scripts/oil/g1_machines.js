@@ -1,9 +1,10 @@
 // ============================================================
-// 石油—石化线 v4 —— G1 两台上游装置 + 等级体系（startup）
+// 石油—石化线 v4 —— G1 等级体系（startup）
 // ------------------------------------------------------------
-// 机器
-//   sinkjourney:naphtha_hydrotreater  石脑油加氢精制釜（3×3×4，钢制）
-//   sinkjourney:steam_cracker         蒸汽裂解炉（3×3×7，钢制）
+// 机器已经不在这里：石脑油加氢精制与蒸汽裂解在 v2 之后并入通用反应器
+// （sinkjourney:universal_reactor 的 reactor_gas_solid 与 reactor_cracking 两个池）。
+// 本文件只留等级体系——塔板、炉管、催化剂床、压缩机、真空系统，
+// 通用反应器与塔器都在用。
 //
 // 等级体系（全部按 BASIC_ELECTRIC_AGE.md 的材料分级排）
 //   furnace_tube  炉管    钢 → 钼钢 → 因科镍 → 钛
@@ -20,31 +21,12 @@
 //   钛          industrialupgrade:baseblockingot/titanium
 //   钴铬        industrialupgrade:baseblockalloy1/cobalt_chrome
 //
-// 结构与配方：server_scripts/oil/g1_recipes.js
-// 设计文档：kubejs/docs/OIL_LINE_V2.md
+// 结构与配方：server_scripts/industrial/reactors_v2.js
+// 设计文档：kubejs/docs/OIL_LINE_V2.md、kubejs/docs/REACTOR_TYPES_PLAN.md
 // ============================================================
 
 MMCREvents.startup(event => {
     const api = event.getAPI()
-
-    // ---- 机器注册 ----
-    event.createMachine('sinkjourney:naphtha_hydrotreater')
-        .displayNameKey('machine.sinkjourney.naphtha_hydrotreater')
-        .recipePool('sinkjourney:naphtha_hydrotreater')
-        .appearance('industrialupgrade:blockresource/steel_block')
-        .allowModifiers()
-        .allowParallelism()
-        .maxParallelAmount(4)
-        .register()
-
-    event.createMachine('sinkjourney:steam_cracker')
-        .displayNameKey('machine.sinkjourney.steam_cracker')
-        .recipePool('sinkjourney:steam_cracker')
-        .appearance('industrialupgrade:blockresource/steel_block')
-        .allowModifiers()
-        .allowParallelism()
-        .maxParallelAmount(4)
-        .register()
 
     // ---- 等级类型 ----
     const TYPES = [

@@ -4,7 +4,7 @@
 	filename: "5e566db5411e083c"
 	group: "1D6589548F232270"
 	icon: {
-		id: "industrialforegoing:latex_processing_unit"
+		id: "industrialupgrade:itemingots/platinum_ingot"
 	}
 	id: "5E566DB5411E083C"
 	images: [ ]
@@ -12,31 +12,47 @@
 	quest_links: [ ]
 	quests: [
 		{
-			id: "5319BE2FE47DFFE5"
-			tasks: [
-				{
-					id: "02F4E88F656A8664"
-					item: { count: 1, id: "industrialupgrade:electronics_assembler/electronics_assembler" }
-					type: "item"
-				}
-				{
-					id: "5ED0B864217CE22B"
-					item: { count: 1, id: "industrialupgrade:primal_soldering_mechanism/primal_soldering_mechanism" }
-					type: "item"
-				}
-			]
-			x: -2.0d
-			y: -2.5d
+			icon: {
+				id: "industrialupgrade:purifiedcrushed/nickel"
+			}
+			id: "5E0A0000000000C1"
+			shape: "hexagon"
+			tasks: [{
+				count: 9L
+				id: "5E0A0000000000D1"
+				item: { count: 1, id: "industrialupgrade:purifiedcrushed/nickel" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.0d
 		}
 		{
-			id: "56ED387D72DDDC95"
+			dependencies: ["5E0A0000000000C1"]
+			icon: {
+				id: "industrialupgrade:itemingots/platinum_ingot"
+			}
+			id: "5E0A0000000000C2"
 			tasks: [{
-				id: "3CF36C6F1B057300"
-				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_533_element" }
+				id: "5E0A0000000000D2"
+				item: { count: 1, id: "industrialupgrade:itemingots/platinum_ingot" }
 				type: "item"
 			}]
 			x: 2.0d
-			y: -2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0A0000000000C2"]
+			icon: {
+				id: "industrialupgrade:itemingots/palladium"
+			}
+			id: "5E0A0000000000C3"
+			tasks: [{
+				id: "5E0A0000000000D3"
+				item: { count: 1, id: "industrialupgrade:itemingots/palladium" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 0.0d
 		}
 	]
 }

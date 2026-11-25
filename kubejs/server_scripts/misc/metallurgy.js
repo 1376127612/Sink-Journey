@@ -1,5 +1,5 @@
 // ============================================================
-// 初期冶金链 L0/L1（A 档：纯数据配方，模板照抄 kubejsstudio 铜链）
+// 初期冶金链 L0/L1（A 档：纯数据配方，铜/铁/银/金/锡/铅同一套规则）
 // ------------------------------------------------------------
 // 输入一律用 c: tag（一条配方覆盖 embers/IU/roots/NC/mekmm 所有 raw 家族）
 // 研钵 mortar：#c:raw_materials/<m> -> industrialupgrade:crushed/<m>（1:1 times=5，×5 批量 times=15）
@@ -13,11 +13,11 @@
 
 ServerEvents.generateData('after_mods', event => {
     // ---- 研钵：raw -> crushed（tag 输入，覆盖全部模组 raw 家族） ----
-    // 注意：event.json 的 id 是文件路径，必须带 recipe/ 前缀（模板：kubejsstudio:recipe/crushed/copper1）
+    // 注意：event.json 的 id 是文件路径，必须带 recipe/ 前缀（模板：kubejs:recipe/metallurgy/mortar/crushed/copper）
     var metals = ['silver', 'gold', 'tin', 'lead']
     for (var i = 0; i < metals.length; i++) {
         var metal = metals[i]
-        // 1:1，交互 5 次（模板：kubejsstudio:crushed/copper1）
+        // 1:1，交互 5 次（模板：kubejs:recipe/metallurgy/mortar/crushed/copper）
         event.json(
             'kubejs:recipe/metallurgy/mortar/crushed/' + metal,
             {
@@ -30,7 +30,7 @@ ServerEvents.generateData('after_mods', event => {
                 'times': 5
             }
         )
-        // 5:5 批量，交互 15 次（模板：kubejsstudio:crushed/copper5）
+        // 5:5 批量，交互 15 次（模板：kubejs:recipe/metallurgy/mortar/crushed/copper_batch）
         var five = []
         for (var k = 0; k < 5; k++) five.push({ 'tag': 'c:raw_materials/' + metal })
         event.json(
@@ -97,4 +97,74 @@ ServerEvents.recipes(event => {
     ]
     event.remove({ type: 'minecraft:smelting', input: rawBypass })
     event.remove({ type: 'minecraft:blasting', input: rawBypass })
+})
+
+// ============================================================
+// 铜 / 铁：研钵与柴堆（原 kubejsstudio 模板转正）
+// ============================================================
+// 这两条本来只以 kubejsstudio 的样板形式存在（铜链），
+// 上面那段按模板复制了银/金/锡/铅，却没有正式的铜/铁条目。
+// 这里把它们并进同一套 id 规则，模板从此不再有第二个来源。
+// 铁柴堆要配方解石（造渣），铜柴堆跟锡/铅一样只吃煤与原木。
+// ============================================================
+ServerEvents.generateData('after_mods', event => {
+    var simple = ['copper', 'iron']
+    for (var i = 0; i < simple.length; i++) {
+        var m = simple[i]
+        event.json('kubejs:recipe/metallurgy/mortar/crushed/' + m,
+            {
+                'type': 'roots:mortar',
+                'data': {
+                    'ingredients': [{ 'tag': 'c:raw_materials/' + m }],
+                    'priority': 0,
+                    'result': { 'count': 1, 'id': 'industrialupgrade:crushed/' + m }
+                },
+                'times': 5
+            })
+        var five = []
+        for (var k = 0; k < 5; k++) five.push({ 'tag': 'c:raw_materials/' + m })
+        event.json('kubejs:recipe/metallurgy/mortar/crushed/' + m + '_batch',
+            {
+                'type': 'roots:mortar',
+                'data': {
+                    'ingredients': five,
+                    'priority': 0,
+                    'result': { 'count': 5, 'id': 'industrialupgrade:crushed/' + m }
+                },
+                'times': 15
+            })
+    }
+
+    // 铜：crushed×2 + 煤×2 + 原木 -> 铜粒×6
+    event.json('kubejs:recipe/metallurgy/pyre/copper',
+        {
+            'type': 'roots:pyre',
+            'data': {
+                'ingredients': [
+                    { 'item': 'industrialupgrade:crushed/copper' },
+                    { 'item': 'industrialupgrade:crushed/copper' },
+                    { 'tag': 'minecraft:coals' },
+                    { 'tag': 'minecraft:coals' },
+                    { 'tag': 'minecraft:logs' }
+                ],
+                'result': { 'id': 'create:copper_nugget', 'count': 6 },
+                'priority': 0
+            }
+        })
+    // 铁：crushed×2 + 方解石×2 + 煤 -> 铁粒×6
+    event.json('kubejs:recipe/metallurgy/pyre/iron',
+        {
+            'type': 'roots:pyre',
+            'data': {
+                'ingredients': [
+                    { 'item': 'industrialupgrade:crushed/iron' },
+                    { 'item': 'minecraft:calcite' },
+                    { 'tag': 'minecraft:coals' },
+                    { 'item': 'industrialupgrade:crushed/iron' },
+                    { 'item': 'minecraft:calcite' }
+                ],
+                'result': { 'id': 'minecraft:iron_nugget', 'count': 6 },
+                'priority': 0
+            }
+        })
 })

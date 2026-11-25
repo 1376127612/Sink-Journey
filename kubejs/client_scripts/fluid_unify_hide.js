@@ -17,7 +17,6 @@ RecipeViewerEvents.removeEntries('fluid', event => {
     'embers:molten_silver',
     'embers:molten_tin',
     'industrialupgrade:iufluidapianroyaljelly',
-    'industrialupgrade:iufluidethene',
     'industrialupgrade:iufluidgasolineene',
     'industrialupgrade:iufluidmoltenaluminium',
     'industrialupgrade:iufluidmoltenarsenic',

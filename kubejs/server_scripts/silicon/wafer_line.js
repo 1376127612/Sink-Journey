@@ -6,8 +6,8 @@
 //   冶金硅 + 盐酸 ──流体富集器──> 三氯硅烷
 //   三氯硅烷 ──蒸馏器(精馏)──> 高纯三氯硅烷 + 四氯化硅（西门子法入口）
 //   高纯三氯硅烷 ──结晶器──> 西门子多晶硅棒（9N，T2）
-//   三氯硅烷 ──化学反应釜(歧化)──> 硅烷 + 四氯化硅
-//   四氯化硅 + 氢气 ──化学反应釜──> 三氯硅烷 + 盐酸（闭路回收）
+//   三氯硅烷 ──MMCR 塔器(反应精馏, 歧化)──> 硅烷 + 四氯化硅
+//   四氯化硅 + 氢气 ──MMCR 化学反应釜──> 三氯硅烷 + 盐酸（闭路回收）
 //   硅烷 ──结晶器──> 11N 多晶硅（T3）
 //   11N 多晶硅 ──熔炉──> 熔融硅
 //   熔融硅 ──结晶器(qmd 自带)──> qmd 单晶硅棒
@@ -17,8 +17,11 @@
 //   T1 区熔 + IU 直拉（6N，494）｜T2 改良西门子（9N）｜T3 硅烷裂解（11N）
 //   T4 磁控直拉（12N，见 mcz_recipes.js）｜T5 同位素（暂缓）
 //
-// 机器：核科技 合金炉 / 流体富集器 / 化学反应釜 / 结晶器 / 熔炉 / 蒸馏器
+// 机器：核科技 合金炉 / 流体富集器 / 结晶器 / 熔炉 / 蒸馏器
+//       + MMCR 塔器（歧化，见 industrial/reactors_v2.js）、化学反应釜（氯回收）
 //       + qmd 结晶器、核科技 制造机（后两段是原版自带配方）
+//
+// 核电工艺的化学反应釜不再参与这条线：它只做核燃料循环的溶解与氟化。
 //
 // 说明文档：kubejs/docs/SILICON_WAFER_LINE.md
 // ============================================================
@@ -89,38 +92,12 @@ ServerEvents.recipes(event => {
         timeModifier: 3.0
     }).id('kubejs:silicon/trichlorosilane')
 
-    // ---- 3. 歧化提纯：三氯硅烷 -> 硅烷 + 四氯化硅 --------
-    // 4SiHCl3 -> SiH4 + 3SiCl4，硅烷沸点 -112°C，是整条线的提纯节点
-    event.custom({
-        type: 'nuclearcraftneohaul:chemical_reactor_recipe',
-        fluidIngredients: [
-            { amount: 4000, ingredient: { fluid: TCS } }
-        ],
-        fluidProducts: [
-            { amount: 1000, ingredient: { fluid: SILANE } },
-            { amount: 3000, ingredient: { fluid: STC } }
-        ],
-        powerModifier: 3.0,
-        radiation: 0.0,
-        timeModifier: 6.0
-    }).id('kubejs:silicon/tcs_disproportionation')
-
-    // ---- 4. 尾气回收：四氯化硅 + 氢气 -> 三氯硅烷 + 盐酸 --
-    // SiCl4 + H2 -> SiHCl3 + HCl，把 3/4 的氯重新送回氯化段
-    event.custom({
-        type: 'nuclearcraftneohaul:chemical_reactor_recipe',
-        fluidIngredients: [
-            { amount: 3000, ingredient: { fluid: STC } },
-            { amount: 3000, ingredient: { tag: 'c:hydrogen' } }
-        ],
-        fluidProducts: [
-            { amount: 3000, ingredient: { fluid: TCS } },
-            { amount: 3000, ingredient: { fluid: HCL } }
-        ],
-        powerModifier: 2.0,
-        radiation: 0.0,
-        timeModifier: 3.0
-    }).id('kubejs:silicon/stc_recycle')
+    // ---- 3. 歧化提纯（塔器） / 4. 尾气回收（釜） ------------------------
+    // 这两条原来挂在核电工艺的化学反应釜上。核电工艺那台只做核燃料循环
+    // （溶解、氟化、后处理），化工反应统一交给本包的 sinkjourney:chemical_reactor_*：
+    //   歧化     3 氯硅烷 4000 -> 硅烷 1000 + 四氯化硅 3000
+    //   氯回收   四氯化硅 3000 + 氢 3000 -> 三氯硅烷 3000 + 盐酸 3000
+    // 配方在 server_scripts/industrial/chemical_reactor.js，六档共用同一个池。
 
     // ---- 4.5 精馏：三氯硅烷粗料 -> 高纯三氯硅烷（西门子法入口） ----
     // 现实里靠多级精馏塔按沸点切掉 BCl3（低沸）与 PCl3（高沸），

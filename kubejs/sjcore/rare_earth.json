@@ -1,0 +1,80 @@
+{
+  "_comment": "稀土湿法线 —— 封直炼 + 熔铸。稀土不能像铜铁那样从矿里一步烧出来：现实里氧化物是稳定的，金属只能靠氟化物钙热还原（或熔盐电解）拿到。这里做三件事：1) 删掉 IU 电炉里 '稀土矿/粗稀土/稀土块 → 稀土锭' 那类配方，稀土锭只能从湿法线出的稀土粉熔铸；2) 删掉离心机 '纯净碎稀土矿 → 稀土粉' 那条一步到位的选冶捷径（湿法线自己从氟化物还原出同样的粉）；3) 把稀土粉熔铸回电炉，能耗按熔点排（钕 1024℃ / 钆 1312℃ / 钇 1522℃）。注意顺序：remove 必须排在 add 前面。改完 /sjcore iu reload 生效，不用重启。",
+  "patches": [
+    {
+      "op": "remove",
+      "pool": "furnace",
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/neodymium" }
+      ]
+    },
+    {
+      "op": "remove",
+      "pool": "furnace",
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/gadolinium" }
+      ]
+    },
+    {
+      "op": "remove",
+      "pool": "furnace",
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/yttrium" }
+      ]
+    },
+    {
+      "op": "remove",
+      "pool": "centrifuge",
+      "outputs": [
+        { "item": "industrialupgrade:itemdust/neodymium_dust" }
+      ]
+    },
+    {
+      "op": "remove",
+      "pool": "centrifuge",
+      "outputs": [
+        { "item": "industrialupgrade:itemdust/gadolinium_dust" }
+      ]
+    },
+    {
+      "op": "remove",
+      "pool": "centrifuge",
+      "outputs": [
+        { "item": "industrialupgrade:itemdust/yttrium_dust" }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "industrialupgrade:itemdust/neodymium_dust", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/neodymium", "count": 1 }
+      ],
+      "energy": 12000
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "industrialupgrade:itemdust/gadolinium_dust", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/gadolinium", "count": 1 }
+      ],
+      "energy": 14000
+    },
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "industrialupgrade:itemdust/yttrium_dust", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/yttrium", "count": 1 }
+      ],
+      "energy": 16000
+    }
+  ]
+}

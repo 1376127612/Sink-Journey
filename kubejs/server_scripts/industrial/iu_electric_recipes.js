@@ -18,7 +18,7 @@
 //       镍 = 抗蚀与耐热（板 / 锭）
 //
 // 不改的东西：
-//   - 元件模板 21（kubejsstudio 序列装配已接管）；
+//   - 元件模板 21（create/brass_parts.js 的序列装配已接管）；
 //   - 电动机 276 / 线圈 294 / 能源元件 60（iu_electric_motor.js 专家链）；
 //   - 基础电路板 circuit_part1（silicon/iu_chip.js 已改成吃晶圆）；
 //   - 元件 354 激光器（iu_primal_recipes.js 已改成金板）；
@@ -169,5 +169,27 @@ ServerEvents.recipes(event => {
         },
         'industrialupgrade:battery/re_battery')
 
-    console.info('[IU] 电力时代魔改已应用：元件 水/流体/水箱/无线、轧辊与轧辊组、无线供能器、阳极/阴极/RE电池改用 钢/银/铅/镍')
+    // ---- 11. 元器件（原 kubejsstudio 迁入，id 改回 IU 原配方 id）----
+    // 二极管（568）：电子管 + 钢锭 + 银杆，一次出 2 个
+    eShaped('industrialupgrade:industrialupgrade_1742',
+        [' A ', 'CCC', ' B '],
+        {
+            A: eItem('create:electron_tube'),
+            B: { tag: 'c:ingots/steel' },
+            C: { tag: 'c:rods/silver' }
+        },
+        'industrialupgrade:crafting_elements/crafting_568_element', 2)
+
+    // 电子装配机（1259）：钢板 + 玻璃 + 基础电路板 + 铁板
+    eShaped('industrialupgrade:industrialupgrade_1259',
+        [' B ', 'ADA', 'ACA'],
+        {
+            A: E_PLATE.steel,
+            B: eItem('minecraft:glass'),
+            C: eItem('industrialupgrade:circuit/circuit_part3'),
+            D: E_PLATE.iron
+        },
+        'industrialupgrade:electronics_assembler/electronics_assembler')
+
+    console.info('[IU] 电力时代魔改已应用：元件 水/流体/水箱/无线、轧辊与轧辊组、无线供能器、阳极/阴极/RE电池改用 钢/银/铅/镍；二极管与电子装配机迁入')
 })

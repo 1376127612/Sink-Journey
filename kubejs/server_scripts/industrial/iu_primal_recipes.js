@@ -19,9 +19,11 @@
 //   熔炼炉炉缸 / 燃料箱 / 浇注块: 锡板 / 铅板
 //   铸型模具  : 铁板 + 铁锭
 //
+// 原来由 KubeJS Studio 写入的原始时代配方（铁砧、原型流体加热器、
+// 烙铁、铜锅炉、元件 76/41/141/142/144/158/588）已在本文件末尾迁入，
+// id 一律改回 IU 自己的配方 id，只剩这一处来源。
+//
 // 不动的东西：
-//   - kubejsstudio/recipes.js 里已有的改动（铁砧、原型流体加热器、
-//     元件 32/123/76/41、粉碎机/挤压机用到的 76 与 41）一律保持原样；
 //   - 原型泵（1260）、原始包线机（1967）、原型晶体生长室（1255）、
 //     干燥原型机（1251）、锻造锤（1649/1650）、熔炼炉控制器/炉体/
 //     浇注块底座（1740/1922）本来就是基础材料，不改。
@@ -36,7 +38,11 @@ ServerEvents.recipes(event => {
         copper:  { tag: 'c:plates/copper' },
         tin:     { tag: 'c:plates/tin' },
         lead:    { tag: 'c:plates/lead' },
-        gold:    { tag: 'c:plates/gold' }
+        gold:    { tag: 'c:plates/gold' },
+        // 青铜板用 IU 的物品 id：这里没有 c:plates/bronze 标签，
+        // 缺了这一项会让用到它的三条配方（加热器 1254、挤出机 751、切割机 754）
+        // 在加载时变成 key=null 而整条失败。
+        bronze:  { tag: 'c:plates/bronze' }
     }
     var P_ELEM = function (n) {
         return 'industrialupgrade:crafting_elements/crafting_' + n + '_element'
@@ -219,5 +225,119 @@ ServerEvents.recipes(event => {
         },
         P_ELEM(164))
 
-    console.info('[IU] 原始时代魔改已应用：熔炼砖 / 粉碎机 / 挤压机 / 腐蚀釜 / 激光链 / 熔炼炉 / 铸型模具 / 轧辊')
+    // ============================================================
+    // 15 起：原 kubejsstudio/recipes.js 迁入（id 一律用 IU 自己的配方 id）
+    // ============================================================
+    // 这一段原先由 Studio 用另一个 id 追加、再单删原配方，等于一个物品两处来源。
+    // 现在统一成「删原 id + 用原 id 写回」，形状与材料保持 Studio 的版本。
+
+    // ---- 15. 铜锅炉（kubejs 物品，原始/蒸汽通用的热源）----
+    event.shaped('kubejs:copper_boiler', ['###', '#A#', '#B#'], {
+        '#': 'create:copper_sheet',
+        'A': 'create:copper_casing',
+        'B': 'minecraft:furnace'
+    }).id('kubejs:copper_boiler')
+
+    // ---- 16. 原型流体加热器（1254）----
+    pShaped('industrialupgrade:industrialupgrade_1254',
+        ['#A#', '#A#', 'BCB'],
+        {
+            '#': P_MAT.bronze,
+            A: { item: 'kubejs:copper_boiler' },
+            B: { item: 'create:brass_sheet' },
+            C: { item: 'kubejs:bronze_gear' }
+        },
+        'industrialupgrade:primal_fluid_heater/primal_fluid_heater')
+
+    // ---- 17. 烙铁（1926）：电子管 + 金板 + 钢锭 ----
+    pShaped('industrialupgrade:industrialupgrade_1926',
+        [' A ', ' C ', ' B '],
+        {
+            A: { item: 'create:electron_tube' },
+            B: { tag: 'c:ingots/steel' },
+            C: P_MAT.gold
+        },
+        'industrialupgrade:solderingiron')
+
+    // ---- 18. 铁砧方块（1066）：两块铁板 + 原版铁砧 ----
+    pShaped('industrialupgrade:industrialupgrade_1066',
+        ['###', ' A '],
+        {
+            '#': { item: 'create:iron_sheet' },
+            A: { item: 'minecraft:anvil' }
+        },
+        'industrialupgrade:block_anvil/block_anvil')
+
+    // ---- 19. 粉碎球（41）：燧石 + 铁锭 ----
+    pShaped('industrialupgrade:industrialupgrade_740',
+        ['###', 'AAA', '###'],
+        {
+            '#': { item: 'minecraft:flint' },
+            A: { tag: 'c:ingots/iron' }
+        },
+        P_ELEM(41))
+
+    // ---- 20. 挤压部件（76）：铁板包铁块 ----
+    pShaped('industrialupgrade:industrialupgrade_755',
+        ['###', ' A ', '###'],
+        {
+            '#': { item: 'create:iron_sheet' },
+            A: { item: 'minecraft:iron_block' }
+        },
+        P_ELEM(76))
+
+    // ---- 21. 萃取器（141）：铁板 + 铁杆 + 蓝色玻璃 ----
+    pShaped('industrialupgrade:industrialupgrade_753',
+        ['###', '  A', 'BBB'],
+        {
+            '#': { item: 'create:iron_sheet' },
+            A: { item: 'ad_astra:iron_rod' },
+            B: { item: 'minecraft:blue_stained_glass' }
+        },
+        P_ELEM(141))
+
+    // ---- 22. 挤出机（142）----
+    pShaped('industrialupgrade:industrialupgrade_751',
+        ['###', 'AAA', 'BCB'],
+        {
+            '#': { item: 'minecraft:blue_stained_glass' },
+            A: { item: 'minecraft:light_blue_stained_glass' },
+            B: P_MAT.bronze,
+            C: { item: 'create:iron_sheet' }
+        },
+        P_ELEM(142))
+
+    // ---- 23. 切割机（144）----
+    pShaped('industrialupgrade:industrialupgrade_754',
+        ['###', ' A ', 'BB '],
+        {
+            '#': P_MAT.bronze,
+            A: { item: 'minecraft:blue_stained_glass' },
+            B: { item: 'create:iron_sheet' }
+        },
+        P_ELEM(144))
+
+    // ---- 24. 采石场（158）：钻石工具头 + 齿轮组 ----
+    pShaped('industrialupgrade:industrialupgrade_1121',
+        ['#AB', 'CDC', 'EEE'],
+        {
+            '#': { item: 'minecraft:diamond_axe' },
+            A: { item: 'minecraft:diamond_pickaxe' },
+            B: { item: 'minecraft:diamond_shovel' },
+            C: { item: 'kubejs:bronze_gear' },
+            D: { item: P_ELEM(21) },
+            E: { item: 'kubejs:brass_gear' }
+        },
+        P_ELEM(158))
+
+    // ---- 25. 冷却系统（588）：蓝冰 + 铁板 ----
+    pShaped('industrialupgrade:industrialupgrade_1245',
+        ['##A', '#AA', '##A'],
+        {
+            '#': { item: 'minecraft:blue_ice' },
+            A: { item: 'create:iron_sheet' }
+        },
+        P_ELEM(588))
+
+    console.info('[IU] 原始时代魔改已应用：熔炼砖 / 粉碎机 / 挤压机 / 腐蚀釜 / 激光链 / 熔炼炉 / 铸型模具 / 轧辊 / 铜锅炉 / 烙铁 / 铁砧 / 粉碎球 / 挤压部件 / 三台原型加工件 / 采石场 / 冷却系统')
 })

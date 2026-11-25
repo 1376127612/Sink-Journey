@@ -1,0 +1,14 @@
+{
+  "_comment": "化工侧整池封禁（v4）。IU 的反应釜 / 腐蚀釜 / 气体混合室不再有任何化学配方：配方全部迁到 MMCR 化学反应釜（server_scripts/industrial/iu_chem_migration.js，85 条），料耗比例不动。op=clear 会同时清物品池与流体池；SinkJourneyCore 先给池子拍快照再清，所以 /sjcore iu reload 能重放、能撤销。蒸汽固液反应釜与固液反应釜共用 solid_fluid_mixer 池，不用单列。气体混合室的池名就是 gas_chamber（原始时代那台），封它是为了堵住「乙炔 + 氢 -> 乙烯」这条塑料捷径，它的其余配方要么与反应釜同式、要么也是捷径。原型流式腐蚀釜（primal_fluid_integrator）不在封禁范围：原始章的出口任务挂在它身上。distiller（太阳能蒸馏器）也不列：它没有池内配方，水 -> 蒸馏水是机器里硬编码的。IU 的其它机器（炼油厂、化工厂、塑型机、离心机、洗矿机、电解槽等）不动。改完 /sjcore iu reload 生效。",
+  "patches": [
+    { "op": "clear", "pool": "gas_combiner" },
+    { "op": "clear", "pool": "gas_chamber" },
+    { "op": "clear", "pool": "fluid_mixer" },
+    { "op": "clear", "pool": "solid_fluid_mixer" },
+    { "op": "clear", "pool": "polymerizer" },
+    { "op": "clear", "pool": "solid_fluid_integrator" },
+    { "op": "clear", "pool": "solid_mixer" },
+    { "op": "clear", "pool": "triple_solid_mixer" },
+    { "op": "clear", "pool": "fluid_integrator" }
+  ]
+}

@@ -3,6 +3,7 @@
   "pages": [
     "nodes/notes_era.json",
     "nodes/end_gate.json",
-    "nodes/era_electric.json"
+    "nodes/era_electric.json",
+    "nodes/midgame.json"
   ]
 }

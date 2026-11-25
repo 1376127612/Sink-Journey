@@ -3,7 +3,13 @@
 > 适用版本：MC 1.21.1 / NeoForge / MMCR 0.1.7 / Sink Journey Core 0.1.0+
 > 代码：`Sink-Journey-Core/src/main/java/com/vbiafe/sjcore/port/SinkPorts.java`（改容量 / 加时代）
 > 配方：`kubejs/server_scripts/ports/era_hatches.js`（`/reload` 生效）
-> 结构：`kubejs/server_scripts/power/generators.js` 等（`/reload` 生效）
+> 结构：`kubejs/server_scripts/power/generators.js` 等（**改结构要重启**，见 §4 末尾）
+
+> **MMCR 0.1.7 的一个坑**：同一次游戏会话里，同一个结构 id 不能注册第二次。
+> 会话中途保存结构脚本会触发一次热重载，MMCR 直接抛
+> `Dynamic structure already registered: <机器 id>`，并且**中断这个处理器里后面所有结构的注册**。
+> 所以结构脚本一律按「每台机器各自 try/catch」写（化学反应釜就是样板），
+> 撞到了只记一条警告；真要换结构形状，重启游戏。
 
 ---
 
@@ -57,7 +63,24 @@ MMCR 自带的物品输入总线只有 7 档尺寸（微型 1 格 → 超级 32 
 
 原始档就是给「微型 1 格太小」这件事准备的：4 格起步，前期一台机器能塞一组料。
 
-容量写在 `SinkPorts.ERAS` 里，改 `ItemBusSize` / `FluidHatchSize` 后**重启游戏**并重编 core mod。
+### IU 机器四档
+
+蒸汽之后接的不是时代，而是 **IU 自己的四档机器等级**（`basemachine` → `basemachine1/adv` →
+`basemachine2/imp` → `basemachine3/per`，中文顺序是 基础 → 改良 → 高级 → 完美）。
+电力时代的机器本来就按这四档出，所以仓也照这四档另注册一套，id 后缀是档名，不带 `iu`：
+
+| 档位 id | 中文 | 物品槽 | 流体容量 |
+|---|---|---|---|
+| `basic` | 基础 | 12 | 32,000 mB |
+| `improved` | 改良 | 16 | 64,000 mB |
+| `advanced` | 高级 | 32 | 128,000 mB |
+| `perfect` | 完美 | 32 | 256,000 mB |
+
+写法与时代仓完全一样：`mmcr:item_input_bus_basic`、`mmcr:fluid_output_hatch_perfect` 等。
+这批容量接在蒸汽（12 / 32,000）之后继续往上走，所以它和时代仓是同一条阶梯的两段：
+**原始 → 机动 → 蒸汽 → IU 基础 → IU 改良 → IU 高级 → IU 完美**。
+
+容量写在 `SinkPorts.ERAS` / `SinkPorts.GRADES` 里，改 `ItemBusSize` / `FluidHatchSize` 后**重启游戏**并重编 core mod。
 MMCR 的档位只有固定几种（物品 1/4/6/9/12/16/32 格，流体 1k/4k/8k/16k/32k/64k/128k/256k），
 想要中间值就得改 MMCR 本体，不建议。
 
@@ -86,7 +109,16 @@ P P P
 | 末地 | `c:plates/obsidian` | `_ludicrous` |
 | 星辉 | `c:plates/gold` | `_ludicrous`（流体是 `_vacuum`） |
 
-表在 `kubejs/server_scripts/ports/era_hatches.js` 顶部的 `ERAS`，改一行就换材料。
+IU 机器四档同理，底料换成同尺寸的原版仓，板按 IU 的金属阶梯：
+
+| 档位 | 板 | 档位后缀 |
+|---|---|---|
+| 基础 | `c:plates/steel` | `_big` |
+| 改良 | `industrialupgrade:itemplates/nickel_plate` | `_huge` |
+| 高级 | `c:plates/titanium` | `_ludicrous` |
+| 完美 | `c:plates/niobiumtitanium` | `_ludicrous`（流体是 `_vacuum`） |
+
+表在 `kubejs/server_scripts/ports/era_hatches.js` 顶部的 `ERAS` / `GRADES`，改一行就换材料。
 
 ---
 
@@ -114,11 +146,35 @@ P P P
 | `trace_compute`（演算核心，物品 + 水） | 根源 | `research/structures.js` |
 | `cz_reactor` / `zone_refiner` / `mcz_puller` | 蒸汽 | `silicon/*.js` |
 | `wafer_dicer` / `litho_mk1..4` | 蒸汽 | `silicon/litho_structure.js` |
+| `chemical_reactor_kinetic`（机动） | 机动 | `industrial/chemical_reactor.js` |
+| `chemical_reactor_steam`（蒸汽） | 蒸汽 | `industrial/chemical_reactor.js` |
+| `chemical_reactor_basic`（IU 基础） | 基础 | `industrial/chemical_reactor.js` |
+| `chemical_reactor_improved`（IU 改良） | 改良 | `industrial/chemical_reactor.js` |
+| `chemical_reactor_advanced`（IU 高级） | 高级 | `industrial/chemical_reactor.js` |
+| `chemical_reactor_perfect`（IU 完美） | 完美 | `industrial/chemical_reactor.js` |
 
 **注意**：世界里已经搭好的机器要换成本时代的仓才会重新组装。
 
-能量输入/输出仓暂时还是原版行为（`api.anyOfEnergyInput/Output()`），需要分级再按同一套写法加。
-原始 / 气动 / 末地 / 星辉四档目前还没有 MMCR 机器用到，留待对应时代的机器落地。
+化学反应釜那六台是**全锁**的样板：物品 / 流体仓锁档位，能量仓锁 MMCR 原生档位
+（`energy_input_hatch_small` → `energy_input_hatch` → `_reinforced` → `_big` → `_huge` → `_ludicrous`），
+所以一台机器的输入输出仓、能量仓一起构成它的等级。六档的对照表与并行关系见
+`docs/CHEMICAL_REACTOR.md`。
+
+其它机器（发电机、光刻、研究站…）的能量仓仍是原版行为（`api.anyOfEnergyInput/Output()`）：
+要分级就照化学反应釜的写法，把 `E` 位换成对应的 `mmcr:energy_input_hatch_*`。
+原始 / 根源 / 余烬 / 气动 / 末地 / 星辉这几个时代仓此刻仍没有 MMCR 机器用到，留待对应时代的机器落地。
+
+新写结构脚本时照这个形状包一层，别让一台机器把整批注册带死：
+
+```js
+for (const machine of LIST) {
+    try {
+        event.createStructure('sinkjourney:' + machine).pattern(...)...build()
+    } catch (err) {
+        console.warn('[结构] ' + machine + ' 本次没有重新注册（同一会话已注册过，重启生效）：' + err)
+    }
+}
+```
 
 ---
 
@@ -127,6 +183,8 @@ P P P
 - **加时代**：在 `SinkPorts.ERAS` 里加一行（id / 中英文名 / 物品档 / 流体档），
   重编 core mod 并重启；同时在 `era_hatches.js` 的 `ERAS` 里补一行配方。
   中文名在 `Sink-Journey-Core/src/main/resources/assets/mmcr/lang/zh_cn.json`。
+- **加 IU 机器档**：同上，但改的是 `SinkPorts.GRADES` 与 `era_hatches.js` 的 `GRADES`，
+  并且要补 core mod 的方块标签（`data/mmcr/tags/block/` 下 8 个文件）。
 - **加仓种类**（比如能量输入仓）：在 `SinkPorts.registerAll()` 里照 `registerPort(...)` 再来一行，
   kind 用 `PortKinds.EnergyHatchKind`，方块实体用 `EnergyInputHatchBlockEntity::new`，
   **id 仍然要以 `energy_input_hatch` 这类原版仓名开头**，否则界面打不开。

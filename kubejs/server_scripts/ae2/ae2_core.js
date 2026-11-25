@@ -130,5 +130,23 @@ ServerEvents.recipes(event => {
             D: 'ae2:fluix_block'
         })
 
+    // ---- 11. 输入 / 输出总线 ----
+    // 原：铁锭 + 石英 / 铁锭 + 红石。总线是 AE 最早上量的零件，
+    // 直接挂在钢锭上，和机壳、压印器同一个材料口径。
+    aShaped('ae2:network/parts/import_bus', 'ae2:import_bus',
+        [' # ', 'ABA'],
+        {
+            '#': 'ae2:annihilation_core',
+            A: '#c:ingots/steel',
+            B: 'minecraft:piston'
+        })
+    aShaped('ae2:network/parts/export_bus', 'ae2:export_bus',
+        ['#A#', ' B '],
+        {
+            '#': '#c:ingots/steel',
+            A: 'ae2:formation_core',
+            B: 'minecraft:piston'
+        })
+
     console.info('[AE2] 电力时代 AE 已改：硅印刷片吃晶圆，石英炼硅捷径已封，机器改用 钢/银/铅/镍')
 })

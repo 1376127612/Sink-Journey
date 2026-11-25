@@ -4,6 +4,10 @@
 > 脚本：
 > - `kubejs/server_scripts/industrial/iu_primal_recipes.js`（原始时代配方）
 > - `kubejs/server_scripts/industrial/iu_steam_recipes.js`（蒸汽时代配方）
+> - `kubejs/server_scripts/misc/early_game.js`（燧石/箱子/工作台/熔炉等前期手工链）
+> - `kubejs/server_scripts/create/brass_parts.js`（精密构件与空白模板 21）
+> - `kubejs/server_scripts/embers/stamps.js`（余烬压模与灰泥）
+> - `kubejs/server_scripts/misc/metallurgy.js` / `misc/pyre.js`（研钵与柴堆）
 > - `kubejs/server_scripts/industrial/iu_plate_routes.js`（余烬压印 / Create 压板）
 > - `kubejs/server_scripts/bans/iu_anvil_ban.js`（铁砧封禁 + 熔炼炉禁钢）
 > - `kubejs/server_scripts/metallurgy/blast_furnace_recipes.js`（新增渗碳钢）
@@ -23,6 +27,8 @@
 | 原始时代 | 铜、锡、铅、铁、金、银、琥珀金 | 青铜、黄铜、钢、铝、钛、铱、钨、锇、铋、钡、锶、铊、因瓦、铝青铜、镍铬、镓砷、锰铁…… |
 | 蒸汽时代 | 铜、锡、锌、铅、铁、金、银、琥珀金、青铜、黄铜、红铜 | 铝、钛、铱、钨、锇、铋、钡、锶、铊、因瓦、铝青铜、镍铬、镓砷、锰铁…… |
 | 蒸汽时代末期 | 以上 + **钢** | 其它仍禁止 |
+
+> 本表只作时代准入清单。材料按功能与服役条件分工的完整口径见 `IU_METAL_PLAN.md`。
 
 ---
 
@@ -137,13 +143,13 @@
 | `industrialupgrade_1984` | 蒸汽锅炉控制器 | 锇板、铋外壳 | 青铜板、铜外壳 |
 | `industrialupgrade_1676` | 气体混合室 | 因瓦齿轮 + 601 | 青铜齿轮 + 铜锅炉 |
 | `industrialupgrade_1969` | 微型熔炉 | 锰铁齿轮、铱板 | 青铜齿轮、青铜板 |
-| `kubejs:iu_steam/strong_anvil` | 强化铁砧 | **原配方被删后没有补回** | 钢板 ×3 + 青铜板 ×2 + 铁砧 |
+| `industrialupgrade_1968` | 强化铁砧 | **原配方被删后没有补回** | 钢板 ×3 + 青铜板 ×2 + 铁砧 |
 
 蒸汽机机身（`industrialupgrade_758`）**没有动**：`create/casing_progression.js`
 已经把它的产出接管成「8 蒸汽机壳 + 黄铜之心」（整条机壳链见
 `kubejs/docs/CASING_PROGRESSION.md`）。
-强化铁砧用独立 id 注册，因为 `kubejsstudio/recipes.js` 在 `industrial/` 之后加载，
-会按 id 再删一次 `industrialupgrade_1968`。
+强化铁砧现在直接用 IU 自己的 id `industrialupgrade_1968` 注册；
+原来用独立 id 是为了躲 Studio 的二次删除，Studio 撤掉后这个绕法也一并取消。
 
 ---
 
@@ -252,8 +258,10 @@
    **删除** `42E849ED292EF5E7`（熔炼炉，搬到原始章并拆成 4 步）；新增 15 个任务；
    `order_index` 1 → 2。
 4. `config/ftbquests/quests/lang/zh_cn.snbt`：替换 3 条旧文案，追加 167 行。
-5. 未改动：`kubejsstudio/recipes.js`、`iu_electric_motor.js`、`if_gears.js`、`iu_chip.js`、
-   `iu_crystal.js`、`create/casing_progression.js`、`embers/gears.js`。
+5. 未改动：`iu_electric_motor.js`、`if_gears.js`、`iu_chip.js`、
+   `iu_crystal.js`、`create/casing_progression.js`、`embers/gears.js`；
+   原先归 Studio 的配方已按主题迁入 `misc/early_game.js`、`create/brass_parts.js`、
+   `embers/stamps.js`、`misc/metallurgy.js`、`misc/pyre.js`。
 
 ---
 
