@@ -1,5 +1,5 @@
 {
-  "_comment": "中期铂族入口：普通镍不设节点，走既有链路；只有拿到第一块铂（证明湿法铂族线跑通）才记录 era.mid。era.mid 目前不拦任何东西，只作为后续电压段/精密段的钥匙。",
+  "_comment": "中期铂族入口：普通镍不设节点，走既有链路；只有拿到第一块铂（证明湿法铂族线跑通）才记录 era.mid。era.mid 目前不拦任何东西，只作为后续电压段/精密段的钥匙。 稀土同理：拿到第一块钕（= 镨钕金属，说明浮选 → 碱分解 → 优溶 → P204/P507 → 氟化 → 钙热还原整条湿法跑通）记录同一页的第二个里程碑。",
   "page": "midgame",
   "title_key": "research.page.midgame",
   "nodes": [
@@ -25,6 +25,29 @@
         "y": 0,
         "doc": "research.mid_pgm.desc"
       }
+    },
+    {
+      "id": "sink:mid_re",
+      "kind": "milestone",
+      "era": "end",
+      "rank": 5.0,
+      "requires": {
+        "and": [
+          "sink:gate_dragon"
+        ]
+      },
+      "trigger": {
+        "type": "item_obtain",
+        "item": "industrialupgrade:itemingots/neodymium"
+      },
+      "ui": {
+        "x": 2,
+        "y": 0,
+        "doc": "research.mid_re.desc"
+      },
+      "unlock": [
+        "era.mid_re"
+      ]
     }
   ]
 }

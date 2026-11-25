@@ -22,9 +22,9 @@
 // （基础 → 改良 → 高级 → 完美，basemachine → …per）另注册的一套仓，
 // 容量接在蒸汽之后继续往上：32k → 64k → 128k → 256k。
 //
-// 六台共用六个配方池（按工艺类别分，JEI 一池一页签）：
+// 六台共用七个配方池（按工艺类别分，JEI 一池一页签）：
 //   recycle 氯循环 / polymer 聚合与固化 / leach 浸出与腐蚀 /
-//   gas 气体合成 / liquid 液相反应 / solid 固相合成
+//   gas 气体合成 / liquid 液相反应 / solid 固相合成 / hydromet 稀土湿法
 // 升级只换机器，配方不翻倍。
 // 并行的意义在批量：氯回收一次吃 3000 mB 四氯化硅，并行 8 就是 24000 mB，
 // 所以「想要多大吞吐」和「能做到哪一档的仓」是同一件事。
@@ -60,7 +60,8 @@ MMCREvents.startup(event => {
                 'sinkjourney:chemical_reactor_leach',
                 'sinkjourney:chemical_reactor_gas',
                 'sinkjourney:chemical_reactor_liquid',
-                'sinkjourney:chemical_reactor_solid'
+                'sinkjourney:chemical_reactor_solid',
+                'sinkjourney:chemical_reactor_hydromet'
             )
             .appearance(casing)
             .allowModifiers()

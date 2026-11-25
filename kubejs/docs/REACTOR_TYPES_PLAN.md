@@ -227,7 +227,7 @@ JEI 页签名字：
 | --- | --- |
 | 通用反应器 · 气固固定床 / 流化床 / 高压合成 / 管式裂解 | `reactor_gas_solid` / `reactor_fluidized` / `reactor_high_pressure` / `reactor_cracking` |
 | 塔器 · 气液吸收 / 反应精馏 | `reactor_gas_liquid` / `reactor_reactive_distillation` |
-| 反应釜 · 聚合与固化 / 浸出与腐蚀 / 气体合成 / 液相反应 / 固相合成 / 氯循环 | `chemical_reactor_<类别>` 六个池 |
+| 反应釜 · 聚合与固化 / 浸出与腐蚀 / 气体合成 / 液相反应 / 固相合成 / 氯循环 / 稀土湿法 | `chemical_reactor_<类别>` 七个池 |
 
 三个要点：
 

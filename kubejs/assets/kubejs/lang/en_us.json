@@ -164,6 +164,8 @@
   "research.page.midgame": "Midgame: Platinum Group",
   "research.node.mid_pgm.name": "Midgame: Platinum Group",
   "research.mid_pgm.desc": "Plain nickel does not need this: only platinum-group metals justify feeding a whole stack of nickel concentrate into the heat centrifuge, trading heat and yield for one platinum and one palladium. Obtaining the first platinum records era.mid.",
+  "research.node.mid_re.name": "Midgame: Rare Earths",
+  "research.mid_re.desc": "Rare earth hydrometallurgy: 4 purified crushed rare earth ores float into 1 concentrate; caustic cracking, oxidation roasting and a selective hydrochloric leach strip the cerium first, then P204 splits light from middle-heavy, P507 splits La, Pr-Nd, Gd and Y, oxalate precipitation and calcination give the oxides, fluorination and calciothermic reduction give the metal, and the electric furnace casts it. Obtaining the first neodymium records the rare earth milestone (era.mid_re).",
   "block.mmcr.item_input_bus_basic": "Basic Item Input Bus",
   "container.mmcr.item_input_bus_basic": "Basic Item Input Bus",
   "block.mmcr.item_input_bus_improved": "Improved Item Input Bus",
@@ -242,5 +244,12 @@
   "recipe_pool.sinkjourney.chemical_reactor_gas": "Reactor: Gas Synthesis",
   "recipe_pool.sinkjourney.chemical_reactor_liquid": "Reactor: Liquid Phase",
   "recipe_pool.sinkjourney.chemical_reactor_solid": "Reactor: Solid Phase",
-  "recipe_pool.sinkjourney.chemical_reactor_recycle": "Reactor: Chlorine Loop"
+  "recipe_pool.sinkjourney.chemical_reactor_recycle": "Reactor: Chlorine Loop",
+  "recipe_pool.sinkjourney.chemical_reactor_hydromet": "Reactor: Rare Earth Hydrometallurgy",
+  "jei.kubejs.rare_earth_concentrate.info": "Rare Earth Concentrate: 4 purified crushed rare earth ores float into 1 concentrate (about 60% REO). IndustrialUpgrade splits rare earths into neodymium/yttrium/gadolinium ores, but in reality they are different elements of the same ore - this line unifies the three into one concentrate and then separates them.",
+  "jei.kubejs.rare_earth_concentrate.steps": "Downstream: caustic cracking -> oxidation roast (cerium to Ce(IV)) -> hydrochloric selective leach, cerium stays in the residue -> neutralisation -> P204 light/middle-heavy split -> P507 splits La, Pr-Nd, Gd, Y -> oxalate precipitation and calcination -> fluorination -> calciothermic reduction -> rare earth powder -> electric furnace casting. Per concentrate: Nd 1, Gd 0.25, Y 0.25, La2O3 0.5, CeO2 0.5.",
+  "jei.kubejs.rare_earth_ingot.info": "Rare earth ingots only come from the hydrometallurgical line: ore and purified crushed ore can no longer be smelted into ingots, and the centrifuge no longer yields rare earth dust. Oxide -> fluoride -> calciothermic reduction -> powder -> electric furnace. Rare earth oxides are far too stable for carbon reduction; the metal comes from fluoride calciothermic reduction or molten salt electrolysis.",
+  "jei.kubejs.cerium_rich_residue.info": "Cerium-rich residue: after the oxidation roast turns Ce(III) into Ce(IV), CeO2 does not dissolve in hydrochloric acid, so cerium stays in this residue during the selective leach - that is where cerium is first separated, not in the extractors. Nitric acid dissolution, oxalate precipitation and calcination give cerium oxide.",
+  "jei.kubejs.iron_thorium_residue.info": "Iron-thorium residue: the insoluble part of neutralisation and cerium dissolution, carrying iron, thorium and gangue. Thorium is a naturally occurring radioactive companion of rare earth ores and the heaviest environmental cost of the industry; store it safely.",
+  "jei.kubejs.prnd_oxide.info": "Praseodymium-neodymium oxide: a mixed oxide of Pr6O11 and Nd2O3. The Pr/Nd separation factor is only about 1.5, so industry runs hundreds of extraction stages or simply sells Pr-Nd alloy - the neodymium ingot in this pack is that Pr-Nd metal."
 }
