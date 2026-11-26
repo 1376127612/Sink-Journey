@@ -1,0 +1,121 @@
+{
+  "_comment": "质棍：切割机 1 锭 → 2 棍；挤出机整池清空。改完 /sjcore iu reload。",
+  "patches": [
+    {
+      "op": "clear",
+      "pool": "extruding"
+    },
+    {
+      "op": "add",
+      "pool": "cutting",
+      "inputs": [
+        {
+          "tag": "c:ingots/iron",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "kubejs:iron_rod",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "cutting",
+      "inputs": [
+        {
+          "tag": "c:ingots/copper",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "kubejs:copper_rod",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "cutting",
+      "inputs": [
+        {
+          "tag": "c:ingots/tin",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "kubejs:tin_rod",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "cutting",
+      "inputs": [
+        {
+          "tag": "c:ingots/lead",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "kubejs:lead_rod",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "cutting",
+      "inputs": [
+        {
+          "tag": "c:ingots/gold",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "kubejs:gold_rod",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "cutting",
+      "inputs": [
+        {
+          "tag": "c:ingots/steel",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "kubejs:steel_rod",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "op": "add",
+      "pool": "cutting",
+      "inputs": [
+        {
+          "tag": "c:ingots/bronze",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "kubejs:bronze_rod",
+          "count": 2
+        }
+      ]
+    }
+  ]
+}
