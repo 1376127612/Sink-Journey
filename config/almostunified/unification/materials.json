@@ -20,6 +20,7 @@
     "pneumaticcraft",
     "roots",
     "projectred_core",
+    "neovitae",
     "qmd"
   ],
   "priority_overrides": {},
@@ -127,6 +128,7 @@
     "c:plates/obsidian",
     "c:plates/silver",
     "c:plates/steel",
+    "c:raw_materials/aluminum",
     "c:raw_materials/lead",
     "c:raw_materials/magnesium",
     "c:raw_materials/osmium",

@@ -195,6 +195,8 @@ whitelist = [
 	"forge:plates/silver",
 	"c:plates/steel",
 	"forge:plates/steel",
+	"c:raw_materials/aluminum",
+	"forge:raw_materials/aluminum",
 	"c:raw_materials/lead",
 	"forge:raw_materials/lead",
 	"c:raw_materials/magnesium",
@@ -295,6 +297,7 @@ preferredMods = [
 	"pneumaticcraft",
 	"roots",
 	"projectred_core",
+	"neovitae",
 	"qmd"
 ]
 #Blacklisted Mods: their items are never replaced and never used as a target

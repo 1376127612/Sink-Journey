@@ -1,9 +1,9 @@
 # 矿物 → 物品对照表（Sink Journey）
 
 > 本文按**材料**列出整合包里每一种矿及其加工形态，标出统一后的 canonical 物品。
-> 数据来源：`unify-tags.json`（152 个候选 tag）、`config/almostunified/unification/materials.json`、
+> 数据来源：`unify-tags.json`（155 个候选 tag）、`config/almostunified/unification/materials.json`、
 > `config/instantunify-common.toml`，以及 `mods/*.jar` 内的 `data/*/tags/item/*`。
-> 最后核对：2026-11-21。本文档由 `unify-tags.json` 与 `mods/*.jar` 内的 tag 扫描生成；改配置后需同步更新本文档。
+> 最后核对：2026-11-26。本文档由 `unify-tags.json` 与 `mods/*.jar` 内的 tag 扫描生成；改配置后需同步更新本文档。
 >
 > **统一优先级**：`industrialupgrade`（IU）> `create` > `minecraft` / `kubejs` > 其他模组。
 > IU 有该形态时一律统一到 IU；IU 没有该形态时才落到 Create，再往后才是原版和其他模组。
@@ -24,9 +24,9 @@
 
 | 项目 | 数量 |
 | --- | --- |
-| 候选 tag（同 tag ≥2 个模组物品） | 152 |
-| 已统一 | 131 |
-| 不统一 | 21 |
+| 候选 tag（同 tag ≥2 个模组物品） | 155 |
+| 已统一 | 132 |
+| 不统一 | 23 |
 | `c:ores/*` 材料 | 113（铝的 `aluminum` / `aluminium` 分开计） |
 | 其中多模组矿石 | 15（矿石方块全部不统一，产物照常统一） |
 | 其中单模组矿石 | 98（矿石无需统一） |
@@ -35,8 +35,11 @@
 > 统一会把太空矿替换成主世界矿，直接丢掉矿种。因此 15 个多模组 `c:ores/*` 全部保持原样，
 > 只统一它们的产物（原矿、碎矿、锭、粒、粉、板、块）。
 
-> **命名分裂提醒**：铝有两套拼写。`aluminum`（NeoEcoAE + NuclearCraft）已统一；
-> `aluminium`（IndustrialUpgrade）是另一套 tag，两者**没有**互相统一。写配方时按模组用对应拼写。
+> **铝的拼写**：铝有两套拼写。`aluminum`（NeoEcoAE + NuclearCraft）和 `aluminium`（IndustrialUpgrade）
+> 原本是两条互不相干的 tag，JEI 里因此出现两个「铝锭」。现在用 `kubejs/data/c/tags/item/<kind>/aluminum.json`
+> 把 IU 的四种产物（锭/粉/块/原矿）挂进美式拼写的 tag，由 Almost Unified 按模组优先级落到 IU；
+> 矿石方块仍然分开（`c:ores/aluminum` 是 NeoEcoAE 主世界矿，`c:ores/aluminium` 是 IU 各层矿），
+> 这是刻意保留的。写配方时锭/粉/块统一写 IU 的 id，不要再用 `nuclearcraftneohaul:aluminum_*`。
 
 ## 1. 多模组矿石（15 种）
 
@@ -457,7 +460,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | **精金** adamantium | — | — | `asteroidore/asteroid_adamantium_ore` | `blockspace2/mars_adamantium_ore` | 锭、板、块 | — |
 | **alfildit** | `basaltheavyore/alfildit`<br>`heavyore/alfildit` | — | — | — | 仅矿石方块 | — |
-| **铝** aluminium | `baseore/aluminium` | `deepore/deep_aluminium_ore` | `asteroidore/asteroid_aluminium_ore` | `blockspace2/ganymede_aluminium_ore` | 原矿、碎矿、锭、粒、粉、板、块、原矿块、齿轮 | —<br>英式拼写，与 `aluminum` 不互通 |
+| **铝** aluminium | `baseore/aluminium` | `deepore/deep_aluminium_ore` | `asteroidore/asteroid_aluminium_ore` | `blockspace2/ganymede_aluminium_ore` | 原矿、碎矿、锭、粒、粉、板、块、原矿块、齿轮 | 英式拼写；产物已挂进 `c:*aluminum`，锭→`industrialupgrade:itemingots/aluminium_ingot`<br>粉→`industrialupgrade:itemdust/aluminium_dust`<br>块→`industrialupgrade:baseblockingot/aluminium`<br>原矿→`industrialupgrade:raw_metals/raw_aluminium` |
 | **americium** | `blockradiationore/americium_ore` | `deepore2/deep_americium_ore` | — | — | 块、宝石 | — |
 | **磷灰石** apatite | — | — | `asteroidore/asteroid_apatite_ore` | `blockspace2/haumea_apatite` | 仅矿石方块 | — |
 | **砷** arsenic | `baseore2/arsenic` | `deepore1/deep_arsenic_ore` | `asteroidore/asteroid_arsenic_ore` | `blockspace/charon_arsenic` | 原矿、碎矿、锭、粒、粉、板、块、原矿块、齿轮 | 粉→`industrialupgrade:itemdust/arsenic_dust` |
@@ -547,7 +550,7 @@
 
 | 材料 | 模组 | 矿石 | 产物 | 备注（已统一形态 → canonical） |
 | --- | --- | --- | --- | --- |
-| **铝** aluminum | neoecoae | `neoecoae:aluminum_ore` | 原矿、锭、粉、块、原矿块 | 锭→`nuclearcraftneohaul:aluminum_ingot`<br>粉→`nuclearcraftneohaul:aluminum_dust`<br>块→`nuclearcraftneohaul:aluminum_block` |
+| **铝** aluminum | neoecoae | `neoecoae:aluminum_ore` | 原矿、锭、粉、块、原矿块 | tag 已与 IU 的 `aluminium` 合并：锭→`industrialupgrade:itemingots/aluminium_ingot`<br>粉→`industrialupgrade:itemdust/aluminium_dust`<br>块→`industrialupgrade:baseblockingot/aluminium`<br>原矿→`industrialupgrade:raw_metals/raw_aluminium` |
 | **黑石英** black_quartz | actuallyadditions | `actuallyadditions:black_quartz_ore` | 块、宝石 | — |
 | **卡洛里特** calorite | ad_astra | `ad_astra:deepslate_calorite_ore`<br>`ad_astra:venus_calorite_ore` | 原矿、锭、粒、板、块、原矿块 | — |
 | **赛特斯石英** certus_quartz | ae2cs | `ae2cs:certus_quartz_ore`<br>`ae2cs:charged_certus_quartz_ore`<br>`ae2cs:deepslate_certus_quartz_ore`<br>`ae2cs:deepslate_charged_certus_quartz_ore` | 粉、块、宝石 | — |
@@ -593,7 +596,7 @@
 |  | 宝石 | `c:gems/energized_fluix_crystal` | — | `ae2cs:purified_energized_fluix_crystal`、`neoecoae:energized_fluix_crystal` | ❌ 不统一 |
 | **超载水晶** overload_crystal | 宝石 | `c:gems/overload_crystal` | — | `ae2cs:purified_overload_crystal`、`ae2lt:overload_crystal` | ❌ 不统一 |
 
-## 4. 不统一清单（21 个 tag）
+## 4. 不统一清单（23 个 tag）
 
 | tag | 物品 | 原因 |
 | --- | --- | --- |
@@ -618,6 +621,8 @@
 | `c:ores/tungsten` | `industrialupgrade:asteroidore2/asteroid_tungsten_ore`<br>`industrialupgrade:baseore/tungsten`<br>`industrialupgrade:blockspace2/ganymede_tungsten_ore`<br>`industrialupgrade:deepore/deep_tungsten_ore`<br>`neoecoae:tungsten_ore` | 矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过 |
 | `c:ores/uranium` | `industrialupgrade:classicore/uranium`<br>`industrialupgrade:deepore2/deep_uranium_ore`<br>`mekanism:deepslate_uranium_ore`<br>`mekanism:uranium_ore`<br>`nuclearcraftneohaul:uranium_deepslate_ore`<br>`nuclearcraftneohaul:uranium_ore` | 矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过 |
 | `c:ores/zinc` | `create:deepslate_zinc_ore`<br>`create:zinc_ore`<br>`industrialupgrade:asteroidore3/asteroid_zinc_ore`<br>`industrialupgrade:baseore/zinc`<br>`industrialupgrade:blockspace/charon_zinc`<br>`industrialupgrade:deepore/deep_zinc_ore` | 矿石含主世界/深层/太空等多种变种，统一会丢失种类，全部跳过 |
+| `c:dusts/saltpeter` | `neovitae:saltpeter`<br>`qmd:chemical_dust_sodium_nitrate` | neovitae 的 saltpeter 是硝酸钾，qmd 的是硝酸钠，不是同一种化学物质 |
+| `c:storage_blocks/quartz` | `botania:blaze_quartz`、`botania:dark_quartz`、`botania:elf_quartz`、`botania:lavender_quartz`、`botania:mana_quartz`、`botania:red_quartz`、`botania:sunny_quartz`<br>`minecraft:quartz_block` | 植物魔法的 7 种彩色石英块是装饰方块，和原版石英块不是同一个东西 |
 
 ## 5. 维护流程
 
@@ -635,14 +640,14 @@
 5. 本文档的 canonical 目标按 `unify-tags.json` 的 `mod_priorities` 取「该 tag 内优先级最高的模组物品」；
    改优先级后需要同步更新本文档。
 
-## 6. 其他已统一的 tag（60 个）
+## 6. 其他已统一的 tag
 
 前文按矿石和材料列出的 tag 之外，还有这些已统一的多模组 tag（含 QMD 等新模组材料）；
 这里只列 canonical 目标，未并入前面的材料小节。
 
 | tag | 统一目标 | 同 tag 其他物品 |
 | --- | --- | --- |
-| `c:dusts/aluminum` | **`nuclearcraftneohaul:aluminum_dust`** | `neoecoae:aluminum_dust` |
+| `c:dusts/aluminum` | **`industrialupgrade:itemdust/aluminium_dust`** | `neoecoae:aluminum_dust`、`nuclearcraftneohaul:aluminum_dust` |
 | `c:dusts/arsenic` | **`industrialupgrade:itemdust/arsenic_dust`** | `nuclearcraftneohaul:arsenic_gem_dust` |
 | `c:dusts/barium` | **`industrialupgrade:itemdust/barium_dust`** | `qmd:dust_barium` |
 | `c:dusts/bismuth` | **`industrialupgrade:itemdust/bismuth_dust`** | `nuclearcraftneohaul:bismuth_dust` |
@@ -674,7 +679,7 @@
 | `c:gems/fluorite` | **`mekanism:fluorite_gem`** | `nuclearcraftneohaul:fluorite_gem` |
 | `c:gems/ruby` | **`industrialupgrade:preciousgem/ruby_gem`** | `projectred_core:ruby` |
 | `c:gems/sapphire` | **`industrialupgrade:preciousgem/sapphire_gem`** | `projectred_core:sapphire` |
-| `c:ingots/aluminum` | **`nuclearcraftneohaul:aluminum_ingot`** | `neoecoae:aluminum_ingot` |
+| `c:ingots/aluminum` | **`industrialupgrade:itemingots/aluminium_ingot`** | `neoecoae:aluminum_ingot`、`nuclearcraftneohaul:aluminum_ingot` |
 | `c:ingots/barium` | **`industrialupgrade:itemingots/barium`** | `qmd:ingot_barium` |
 | `c:ingots/chromium` | **`industrialupgrade:itemingots/chromium_ingot`** | `qmd:ingot_chromium` |
 | `c:ingots/cobalt` | **`industrialupgrade:itemingots/cobalt_ingot`** | `qmd:ingot_cobalt` |
@@ -693,7 +698,8 @@
 | `c:ingots/titanium` | **`industrialupgrade:itemingots/titanium_ingot`** | `qmd:ingot_titanium` |
 | `c:ingots/yttrium` | **`industrialupgrade:itemingots/yttrium`** | `qmd:ingot_yttrium` |
 | `c:ingots/zirconium` | **`industrialupgrade:itemingots/zirconium`** | `nuclearcraftneohaul:zirconium_ingot` |
-| `c:storage_blocks/aluminum` | **`nuclearcraftneohaul:aluminum_block`** | `neoecoae:aluminum_block` |
+| `c:raw_materials/aluminum` | **`industrialupgrade:raw_metals/raw_aluminium`** | `neoecoae:raw_aluminum_ore` |
+| `c:storage_blocks/aluminum` | **`industrialupgrade:baseblockingot/aluminium`** | `neoecoae:aluminum_block`、`nuclearcraftneohaul:aluminum_block` |
 | `c:storage_blocks/cobalt` | **`industrialupgrade:baseblockingot/cobalt`** | `nuclearcraftneohaul:cobalt_block` |
 | `c:storage_blocks/gadolinium` | **`industrialupgrade:baseblockingot2/gadolinium`** | `nuclearcraftneohaul:gadolinium_block` |
 | `c:storage_blocks/manganese` | **`industrialupgrade:baseblockingot1/manganese`** | `nuclearcraftneohaul:manganese_block` |
