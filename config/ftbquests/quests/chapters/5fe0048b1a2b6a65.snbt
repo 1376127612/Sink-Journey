@@ -217,6 +217,49 @@
 		{
 			dependencies: ["35673E8862ECC966"]
 			icon: {
+				id: "industrialupgrade:blastfurnace/blast_furnace_main"
+			}
+			id: "5A1B000000000010"
+			shape: "hexagon"
+			tasks: [
+				{
+					count: 22L
+					id: "5A1B000000001010"
+					item: { count: 1, id: "industrialupgrade:blastfurnace/blast_furnace_part" }
+					type: "item"
+				}
+				{
+					id: "5A1B000000001011"
+					item: { count: 1, id: "industrialupgrade:blastfurnace/blast_furnace_main" }
+					type: "item"
+				}
+				{
+					id: "5A1B000000001012"
+					item: { count: 1, id: "industrialupgrade:blastfurnace/blast_furnace_input" }
+					type: "item"
+				}
+				{
+					id: "5A1B000000001013"
+					item: { count: 1, id: "industrialupgrade:blastfurnace/blast_furnace_input_fluid" }
+					type: "item"
+				}
+				{
+					id: "5A1B000000001014"
+					item: { count: 1, id: "industrialupgrade:blastfurnace/blast_furnace_output" }
+					type: "item"
+				}
+				{
+					id: "5A1B000000001015"
+					item: { count: 1, id: "industrialupgrade:blastfurnace/blast_furnace_heat" }
+					type: "item"
+				}
+			]
+			x: 20.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5A1B000000000010"]
+			icon: {
 				id: "industrialupgrade:itemingots/steel_ingot"
 			}
 			id: "6FC90AA2AAA16C3F"
@@ -225,7 +268,7 @@
 				item: { count: 1, id: "industrialupgrade:itemingots/steel_ingot" }
 				type: "item"
 			}]
-			x: 20.0d
+			x: 22.0d
 			y: 0.0d
 		}
 		{
@@ -239,7 +282,7 @@
 				item: { count: 1, id: "industrialupgrade:block_strong_anvil/block_strong_anvil" }
 				type: "item"
 			}]
-			x: 22.0d
+			x: 24.0d
 			y: 0.0d
 		}
 		{
@@ -263,7 +306,7 @@
 				item: { count: 1, id: "industrialupgrade:basemachine3/steam_rolling" }
 				type: "item"
 			}]
-			x: 24.0d
+			x: 26.0d
 			y: 0.0d
 		}
 		{
@@ -466,11 +509,11 @@
 				item: { count: 1, id: "kubejs:research_data" }
 				type: "item"
 			}]
-			x: 0.0d
-			y: -12.0d
+			x: 4.0d
+			y: -4.0d
 		}
 		{
-			dependencies: ["5A1B000000000005"]
+			dependencies: ["0706F92EF2C236B8"]
 			icon: {
 				id: "kubejs:blueprint_steam"
 			}
@@ -480,8 +523,32 @@
 				item: { count: 1, id: "kubejs:blueprint_steam" }
 				type: "item"
 			}]
-			x: 2.0d
-			y: -12.0d
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["285AC19CE5FBC3ED"]
+			icon: {
+				id: "industrialupgrade:purifiedcrushed/copper"
+			}
+			id: "5FE00000000000C1"
+			rewards: [{
+				count: 4
+				id: "5FE01D00000000C1"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemdust/copper_dust"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 8L
+				id: "5FE01C00000000C1"
+				item: { count: 1, id: "industrialupgrade:purifiedcrushed/copper" }
+				type: "item"
+			}]
+			x: 22.0d
+			y: -8.0d
 		}
 	]
 }

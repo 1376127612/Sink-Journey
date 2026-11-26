@@ -75,6 +75,8 @@ STEAM_TRUNK = [
     IU + "basemachine3/steampressureconverter",
 ]
 
+# 注意：高炉（多方块）那条任务 `5A1B000000000010` 是手工写的六条 item 任务
+# （22 个高炉块 + 5 个功能件），本脚本只写单任务，重跑会把它压成一条 —— 别让它接管。
 STEAM_ROWS = [
     (IU + "basemachine3/steam_macerator", 12.0, -4.0, None),
     (IU + "basemachine3/steam_compressor", 14.0, -4.0, None),

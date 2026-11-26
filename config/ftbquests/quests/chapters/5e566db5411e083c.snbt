@@ -29,6 +29,62 @@
 		{
 			dependencies: ["5E0A0000000000C1"]
 			icon: {
+				id: "kubejs:pgm_concentrate"
+			}
+			id: "5E0B0000000000C4"
+			tasks: [{
+				id: "5E0B0000000000D4"
+				item: { count: 1, id: "kubejs:pgm_concentrate" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0B0000000000C4"]
+			icon: {
+				id: "kubejs:iridosmine_residue"
+			}
+			id: "5E0B0000000000C5"
+			tasks: [{
+				id: "5E0B0000000000D5"
+				item: { count: 1, id: "kubejs:iridosmine_residue" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0B0000000000C5"]
+			icon: {
+				id: "kubejs:ammonium_chloroplatinate"
+			}
+			id: "5E0B0000000000C6"
+			tasks: [{
+				id: "5E0B0000000000D6"
+				item: { count: 1, id: "kubejs:ammonium_chloroplatinate" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0B0000000000C6"]
+			icon: {
+				id: "kubejs:platinum_sponge"
+			}
+			id: "5E0B0000000000C7"
+			tasks: [{
+				id: "5E0B0000000000D7"
+				item: { count: 1, id: "kubejs:platinum_sponge" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0B0000000000C7"]
+			icon: {
 				id: "industrialupgrade:itemingots/platinum_ingot"
 			}
 			id: "5E0A0000000000C2"
@@ -37,11 +93,39 @@
 				item: { count: 1, id: "industrialupgrade:itemingots/platinum_ingot" }
 				type: "item"
 			}]
-			x: 2.0d
+			x: 10.0d
 			y: 0.0d
 		}
 		{
-			dependencies: ["5E0A0000000000C2"]
+			dependencies: ["5E0B0000000000C6"]
+			icon: {
+				id: "kubejs:ammonium_chloropalladate"
+			}
+			id: "5E0B0000000000C8"
+			tasks: [{
+				id: "5E0B0000000000D8"
+				item: { count: 1, id: "kubejs:ammonium_chloropalladate" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["5E0B0000000000C8"]
+			icon: {
+				id: "kubejs:palladium_sponge"
+			}
+			id: "5E0B0000000000C9"
+			tasks: [{
+				id: "5E0B0000000000D9"
+				item: { count: 1, id: "kubejs:palladium_sponge" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["5E0B0000000000C9"]
 			icon: {
 				id: "industrialupgrade:itemingots/palladium"
 			}
@@ -51,8 +135,392 @@
 				item: { count: 1, id: "industrialupgrade:itemingots/palladium" }
 				type: "item"
 			}]
+			x: 10.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["5E0B0000000000C5"]
+			icon: {
+				id: "kubejs:iridium_residue"
+			}
+			id: "5E0B0000000000CA"
+			tasks: [{
+				id: "5E0B0000000000DA"
+				item: { count: 1, id: "kubejs:iridium_residue" }
+				type: "item"
+			}]
 			x: 4.0d
-			y: 0.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5E0B0000000000CA"]
+			icon: {
+				id: "kubejs:ammonium_chloroosmate"
+			}
+			id: "5E0B0000000000CB"
+			tasks: [{
+				id: "5E0B0000000000DB"
+				item: { count: 1, id: "kubejs:ammonium_chloroosmate" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5E0B0000000000CB"]
+			icon: {
+				id: "industrialupgrade:itemdust/osmium_dust"
+			}
+			id: "5E0B0000000000CC"
+			tasks: [{
+				id: "5E0B0000000000DC"
+				item: { count: 1, id: "industrialupgrade:itemdust/osmium_dust" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: 4.0d
+		}
+		{
+			dependencies: ["5E0B0000000000CA"]
+			icon: {
+				id: "industrialupgrade:itemdust/silicon_dioxide_dust"
+			}
+			id: "5E0B0000000000CD"
+			tasks: [{
+				id: "5E0B0000000000DD"
+				item: { count: 1, id: "industrialupgrade:itemdust/silicon_dioxide_dust" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["5E0B0000000000CD"]
+			icon: {
+				id: "kubejs:ammonium_chloroiridate"
+			}
+			id: "5E0B0000000000CE"
+			tasks: [{
+				id: "5E0B0000000000DE"
+				item: { count: 1, id: "kubejs:ammonium_chloroiridate" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["5E0B0000000000CE"]
+			icon: {
+				id: "industrialupgrade:itemdust/iridium_dust"
+			}
+			id: "5E0B0000000000CF"
+			tasks: [{
+				id: "5E0B0000000000DF"
+				item: { count: 1, id: "industrialupgrade:itemdust/iridium_dust" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: 8.0d
+		}
+		{
+			icon: {
+				id: "kubejs:rare_earth_concentrate"
+			}
+			id: "5E0C0000000000C1"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0C0000000000D1"
+				item: { count: 1, id: "kubejs:rare_earth_concentrate" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C1"]
+			icon: {
+				id: "kubejs:rare_earth_hydroxide"
+			}
+			id: "5E0C0000000000C2"
+			tasks: [{
+				id: "5E0C0000000000D2"
+				item: { count: 1, id: "kubejs:rare_earth_hydroxide" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C2"]
+			icon: {
+				id: "kubejs:mixed_rare_earth_oxide"
+			}
+			id: "5E0C0000000000C3"
+			tasks: [{
+				id: "5E0C0000000000D3"
+				item: { count: 1, id: "kubejs:mixed_rare_earth_oxide" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C3"]
+			icon: {
+				id: "kubejs:cerium_rich_residue"
+			}
+			id: "5E0C0000000000C4"
+			tasks: [{
+				id: "5E0C0000000000D4"
+				item: { count: 1, id: "kubejs:cerium_rich_residue" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C4"]
+			icon: {
+				id: "kubejs:iron_thorium_residue"
+			}
+			id: "5E0C0000000000C5"
+			tasks: [{
+				id: "5E0C0000000000D5"
+				item: { count: 1, id: "kubejs:iron_thorium_residue" }
+				type: "item"
+			}]
+			x: 8.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C5"]
+			icon: {
+				id: "kubejs:lanthanum_oxide"
+			}
+			id: "5E0C0000000000C6"
+			tasks: [{
+				id: "5E0C0000000000D6"
+				item: { count: 1, id: "kubejs:lanthanum_oxide" }
+				type: "item"
+			}]
+			x: 10.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C6"]
+			icon: {
+				id: "kubejs:prnd_oxide"
+			}
+			id: "5E0C0000000000C7"
+			tasks: [{
+				id: "5E0C0000000000D7"
+				item: { count: 1, id: "kubejs:prnd_oxide" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C7"]
+			icon: {
+				id: "industrialupgrade:itemingots/neodymium"
+			}
+			id: "5E0C0000000000C8"
+			tasks: [{
+				id: "5E0C0000000000D8"
+				item: { count: 1, id: "industrialupgrade:itemingots/neodymium" }
+				type: "item"
+			}]
+			x: 14.0d
+			y: -8.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C4"]
+			icon: {
+				id: "kubejs:cerium_oxide"
+			}
+			id: "5E0C0000000000C9"
+			tasks: [{
+				id: "5E0C0000000000D9"
+				item: { count: 1, id: "kubejs:cerium_oxide" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -12.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C6"]
+			icon: {
+				id: "kubejs:gadolinium_oxide"
+			}
+			id: "5E0C0000000000CA"
+			tasks: [{
+				id: "5E0C0000000000DA"
+				item: { count: 1, id: "kubejs:gadolinium_oxide" }
+				type: "item"
+			}]
+			x: 10.0d
+			y: -12.0d
+		}
+		{
+			dependencies: ["5E0C0000000000C6"]
+			icon: {
+				id: "kubejs:yttrium_oxide"
+			}
+			id: "5E0C0000000000CB"
+			tasks: [{
+				id: "5E0C0000000000DB"
+				item: { count: 1, id: "kubejs:yttrium_oxide" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: -12.0d
+		}
+		{
+			dependencies: [
+				"5E0C0000000000C6"
+				"5E0C0000000000C9"
+			]
+			icon: {
+				id: "kubejs:catalyst_molecular_sieve"
+			}
+			id: "5E0C0000000000CC"
+			tasks: [{
+				id: "5E0C0000000000DC"
+				item: { count: 1, id: "kubejs:catalyst_molecular_sieve" }
+				type: "item"
+			}]
+			x: 14.0d
+			y: -12.0d
+		}
+		{
+			dependencies: ["5E0A0000000000C1"]
+			icon: {
+				id: "kubejs:anode_slime"
+			}
+			id: "5E0D0000000000C1"
+			rewards: [{
+				count: 4
+				id: "5E0D1D00000000C1"
+				item: {
+					count: 1
+					id: "minecraft:gold_ingot"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "5E0D1C00000000C1"
+				item: { count: 1, id: "kubejs:anode_slime" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5E0D0000000000C1"]
+			icon: {
+				id: "kubejs:selenium_rectifier_block"
+			}
+			id: "5E0D0000000000C2"
+			rewards: [{
+				count: 8
+				id: "5E0D1D00000000C2"
+				item: {
+					count: 1
+					id: "kubejs:selenium_dust"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "5E0D1C00000000C2"
+				item: { count: 1, id: "kubejs:selenium_rectifier_block" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: 2.0d
+		}
+		{
+			dependencies: ["5E0D0000000000C2"]
+			icon: {
+				id: "kubejs:electrolytic_copper"
+			}
+			id: "5E0D0000000000C3"
+			rewards: [{
+				count: 8
+				id: "5E0D1D00000000C3"
+				item: {
+					count: 1
+					id: "kubejs:electrolytic_copper"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "5E0D1C00000000C3"
+				item: { count: 1, id: "kubejs:electrolytic_copper" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 2.0d
+		}
+		{
+			icon: {
+				id: "mmcr:litho_mk2_controller"
+			}
+			id: "5A1B00000000A103"
+			shape: "hexagon"
+			tasks: [{
+				id: "5A1B00000000B103"
+				item: { count: 1, id: "mmcr:litho_mk2_controller" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5A1B00000000A102"]
+			icon: {
+				components: {
+					"ftbquests:missing_item": "kubejs:purified_tcs"
+				}
+				id: "ftbquests:missing_item"
+			}
+			id: "40110213F98998F5"
+			tasks: [{
+				count: 1000L
+				id: "3BFE9BBFF97CF7F4"
+				item: { components: { "ftbquests:missing_item": "kubejs:purified_tcs" }, count: 1, id: "ftbquests:missing_item" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 12.0d
+		}
+		{
+			icon: {
+				id: "kubejs:siemens_poly"
+			}
+			id: "2FFEAF4A6C810F1B"
+			tasks: [{
+				id: "137C741DDA4F2B0A"
+				item: { count: 1, id: "kubejs:siemens_poly" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: 12.0d
+		}
+		{
+			icon: {
+				id: "kubejs:wafer_9n"
+			}
+			id: "225B247E5319546F"
+			tasks: [{
+				count: 4L
+				id: "3DD3277D636EB11E"
+				item: { count: 1, id: "kubejs:wafer_9n" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 12.0d
 		}
 	]
 }

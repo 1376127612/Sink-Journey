@@ -270,6 +270,33 @@
 				type: "item"
 			}]
 			x: 0.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["49C6261827C7A7B3"]
+			icon: {
+				id: "industrialupgrade:crushed/copper"
+			}
+			id: "3F5A0000000000C1"
+			rewards: [{
+				count: 8
+				id: "3F5A1D00000000C1"
+				item: {
+					components: {
+						"ftbquests:missing_item": "industrialupgrade:itemingots/copper_ingot"
+					}
+					count: 1
+					id: "ftbquests:missing_item"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 8L
+				id: "3F5A1C00000000C1"
+				item: { count: 1, id: "industrialupgrade:crushed/copper" }
+				type: "item"
+			}]
+			x: 8.0d
 			y: -8.0d
 		}
 	]

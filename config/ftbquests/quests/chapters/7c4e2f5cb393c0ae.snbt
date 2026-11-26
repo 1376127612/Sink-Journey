@@ -10,5 +10,233 @@
 	images: [ ]
 	order_index: 7
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			dependencies: ["6BB00000000000C6"]
+			icon: {
+				id: "industrialupgrade:classicore/uranium"
+			}
+			id: "7C4E0000000000C1"
+			rewards: [{
+				count: 4
+				id: "7C4E1D00000000C1"
+				item: {
+					count: 1
+					id: "industrialupgrade:crushed/uranium"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 8L
+				id: "7C4E1C00000000C1"
+				item: { count: 1, id: "mekanism:raw_uranium" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C4E0000000000C1"]
+			icon: {
+				id: "industrialupgrade:basaltheavyore/uranite"
+			}
+			id: "7C4E0000000000C2"
+			rewards: [{
+				count: 2
+				id: "7C4E1D00000000C2"
+				item: {
+					count: 1
+					id: "mekanism:raw_uranium"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "7C4E1C00000000C2"
+				item: { count: 1, id: "industrialupgrade:basaltheavyore/uranite" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C4E0000000000C2"]
+			icon: {
+				id: "industrialupgrade:thorium_ore/thorium_ore"
+			}
+			id: "7C4E0000000000C3"
+			rewards: [{
+				count: 2
+				id: "7C4E1D00000000C3"
+				item: {
+					count: 1
+					id: "nuclearcraftneohaul:thorium_ingot"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 4L
+				id: "7C4E1C00000000C3"
+				item: { count: 1, id: "nuclearcraftneohaul:thorium_raw" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C4E0000000000C3"]
+			icon: {
+				id: "nuclearcraftneohaul:thorium_ingot"
+			}
+			id: "7C4E0000000000C4"
+			rewards: [{
+				count: 4
+				id: "7C4E1D00000000C4"
+				item: {
+					count: 1
+					id: "nuclearcraftneohaul:thorium_dust"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
+			tasks: [
+				{
+					count: 2L
+					id: "7C4E1C00000000C4"
+					item: { count: 1, id: "mekanism:ingot_uranium" }
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "7C4E1C00000000C5"
+					item: { count: 1, id: "nuclearcraftneohaul:thorium_ingot" }
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7C4E0000000000C1"]
+			icon: {
+				id: "industrialupgrade:nuclearresource/unprocessed_radioactive_uranium"
+			}
+			id: "7C4E0000000000C5"
+			rewards: [{
+				id: "7C4E1D00000000C5"
+				item: {
+					count: 1
+					id: "industrialupgrade:nuclearresource/uranium_235"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 2L
+				id: "7C4E1C00000000C6"
+				item: { count: 1, id: "industrialupgrade:nuclearresource/unprocessed_radioactive_uranium" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -4.0d
+		}
+		{
+			icon: {
+				id: "mmcr:litho_mk3_controller"
+			}
+			id: "5A1B00000000A104"
+			shape: "hexagon"
+			tasks: [{
+				id: "5A1B00000000B104"
+				item: { count: 1, id: "mmcr:litho_mk3_controller" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -8.0d
+		}
+		{
+			icon: {
+				id: "mmcr:litho_mk4_controller"
+			}
+			id: "5A1B00000000A105"
+			shape: "hexagon"
+			tasks: [{
+				id: "5A1B00000000B105"
+				item: { count: 1, id: "mmcr:litho_mk4_controller" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -12.0d
+		}
+		{
+			icon: {
+				components: {
+					"ftbquests:missing_item": "kubejs:silane"
+				}
+				id: "ftbquests:missing_item"
+			}
+			id: "327E8839891E08EE"
+			tasks: [{
+				count: 1000L
+				id: "53837594BCE6E984"
+				item: { components: { "ftbquests:missing_item": "kubejs:silane" }, count: 1, id: "ftbquests:missing_item" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -8.0d
+		}
+		{
+			icon: {
+				id: "kubejs:poly_11n"
+			}
+			id: "0C29A1DD13981ECC"
+			tasks: [{
+				id: "7FCA4178AA34ED6A"
+				item: { count: 1, id: "kubejs:poly_11n" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: -8.0d
+		}
+		{
+			icon: {
+				id: "kubejs:wafer_11n"
+			}
+			id: "703E0470E806934A"
+			tasks: [{
+				count: 4L
+				id: "5964EFF0E3D109C1"
+				item: { count: 1, id: "kubejs:wafer_11n" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -8.0d
+		}
+		{
+			icon: {
+				id: "kubejs:boule_12n"
+			}
+			id: "0C64C102F22F0A8D"
+			tasks: [{
+				id: "403AF5AEB8FA03B6"
+				item: { count: 1, id: "kubejs:boule_12n" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: -12.0d
+		}
+		{
+			icon: {
+				id: "kubejs:wafer_12n"
+			}
+			id: "32BB82143A42C454"
+			tasks: [{
+				count: 4L
+				id: "1486BB14D0B578A3"
+				item: { count: 1, id: "kubejs:wafer_12n" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: -12.0d
+		}
+	]
 }

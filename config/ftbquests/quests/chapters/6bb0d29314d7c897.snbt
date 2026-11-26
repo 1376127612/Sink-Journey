@@ -3,9 +3,299 @@
 	default_quest_shape: ""
 	filename: "6bb0d29314d7c897"
 	group: "110ED09B617A1F32"
+	icon: {
+		id: "industrialupgrade:baseore/nickel"
+	}
 	id: "6BB0D29314D7C897"
 	images: [ ]
 	order_index: 3
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			dependencies: ["285AC19CE5FBC3ED"]
+			icon: {
+				id: "industrialupgrade:baseore2/arsenic"
+			}
+			id: "6BB00000000000C1"
+			rewards: [{
+				count: 4
+				id: "6BB01D00000000C1"
+				item: {
+					count: 1
+					id: "industrialupgrade:raw_metals/raw_arsenic"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 8L
+					id: "6BB01C00000000C1"
+					item: { count: 1, id: "mekanism:dust_sulfur" }
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "6BB01C00000000C2"
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_arsenic" }
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6BB00000000000C1"]
+			icon: {
+				id: "industrialupgrade:basaltheavyore/pyrite"
+			}
+			id: "6BB00000000000C2"
+			rewards: [{
+				count: 2
+				id: "6BB01D00000000C2"
+				item: {
+					count: 1
+					id: "industrialupgrade:basaltheavyore/nickelite"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 4L
+					id: "6BB01C00000000C3"
+					item: { count: 1, id: "industrialupgrade:basaltheavyore/pyrite" }
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "6BB01C00000000C4"
+					item: { count: 1, id: "industrialupgrade:basaltheavyore/magnetite" }
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "6BB01C00000000C5"
+					item: { count: 1, id: "industrialupgrade:basaltheavyore/galena" }
+					type: "item"
+				}
+			]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6BB00000000000C2"]
+			icon: {
+				id: "industrialupgrade:baseore/nickel"
+			}
+			id: "6BB00000000000C3"
+			rewards: [{
+				count: 4
+				id: "6BB01D00000000C3"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemingots/nickel_ingot"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				count: 8L
+				id: "6BB01C00000000C6"
+				item: { count: 1, id: "industrialupgrade:raw_metals/raw_nickel" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6BB00000000000C3"]
+			icon: {
+				id: "industrialupgrade:baseore/cobalt"
+			}
+			id: "6BB00000000000C4"
+			rewards: [{
+				count: 4
+				id: "6BB01D00000000C4"
+				item: {
+					count: 1
+					id: "industrialupgrade:itemingots/cobalt_ingot"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 4L
+					id: "6BB01C00000000C7"
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_cobalt" }
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "6BB01C00000000C8"
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_chromium" }
+					type: "item"
+				}
+				{
+					count: 4L
+					id: "6BB01C00000000C9"
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_manganese" }
+					type: "item"
+				}
+			]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6BB00000000000C4"]
+			icon: {
+				id: "industrialupgrade:mineral/iridosmine"
+			}
+			id: "6BB00000000000C5"
+			rewards: [{
+				id: "6BB01D00000000C5"
+				item: {
+					count: 1
+					id: "industrialupgrade:mineral/braggite"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					count: 2L
+					id: "6BB01C00000000CA"
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_platinum" }
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "6BB01C00000000CB"
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_palladium" }
+					type: "item"
+				}
+				{
+					id: "6BB01C00000000CC"
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_iridium" }
+					type: "item"
+				}
+			]
+			x: 8.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6BB00000000000C5"]
+			icon: {
+				id: "industrialupgrade:preciousgem/ruby_gem"
+			}
+			id: "6BB00000000000C6"
+			rewards: [{
+				count: 2
+				id: "6BB01D00000000C6"
+				item: {
+					count: 1
+					id: "industrialupgrade:preciousgem/topaz_gem"
+				}
+				type: "item"
+			}]
+			shape: "hexagon"
+			tasks: [
+				{
+					id: "6BB01C00000000CD"
+					item: { count: 1, id: "industrialupgrade:preciousgem/ruby_gem" }
+					type: "item"
+				}
+				{
+					id: "6BB01C00000000CE"
+					item: { count: 1, id: "industrialupgrade:preciousgem/sapphire_gem" }
+					type: "item"
+				}
+				{
+					id: "6BB01C00000000CF"
+					item: { count: 1, id: "industrialupgrade:preciousgem/topaz_gem" }
+					type: "item"
+				}
+				{
+					count: 2L
+					id: "6BB01C00000000D0"
+					item: { count: 1, id: "industrialupgrade:mineral/iridosmine" }
+					type: "item"
+				}
+			]
+			x: 10.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["6BB00000000000C3"]
+			icon: {
+				id: "minecraft:iron_pickaxe"
+			}
+			id: "6BB00000000000C7"
+			rewards: [{
+				count: 4
+				id: "6BB01D00000000C7"
+				item: {
+					count: 1
+					id: "minecraft:iron_ingot"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "6BB01C00000000D1"
+				item: { count: 1, id: "minecraft:iron_pickaxe" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["6BB00000000000C7"]
+			icon: {
+				id: "minecraft:diamond_pickaxe"
+			}
+			id: "6BB00000000000C8"
+			rewards: [{
+				count: 2
+				id: "6BB01D00000000C8"
+				item: {
+					count: 1
+					id: "minecraft:diamond"
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "6BB01C00000000D2"
+				item: { count: 1, id: "minecraft:diamond_pickaxe" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: -4.0d
+		}
+		{
+			dependencies: ["6BB00000000000C1"]
+			icon: {
+				id: "botania:orange_mystical_flower"
+			}
+			id: "6BB00000000000C9"
+			rewards: [{
+				count: 4
+				id: "6BB01D00000000C9"
+				item: {
+					count: 1
+					id: "minecraft:poppy"
+				}
+				type: "item"
+			}]
+			tasks: [
+				{
+					id: "6BB01C00000000D3"
+					item: { count: 1, id: "minecraft:orange_tulip" }
+					type: "item"
+				}
+				{
+					id: "6BB01C00000000D4"
+					item: { count: 1, id: "minecraft:cornflower" }
+					type: "item"
+				}
+			]
+			x: 0.0d
+			y: -8.0d
+		}
+	]
 }

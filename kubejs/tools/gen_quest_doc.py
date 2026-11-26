@@ -174,7 +174,9 @@ def build():
         "",
         "> 版本：本包 1.21.1 / NeoForge / FTB Quests 2101.1.38",
         "> 覆盖章节：原始时代 / 工业之始 / 电力时代",
-        "> 排布生成器：`kubejs/tools/gen_linear_quest_tree.py`",
+        "> 排布生成器：`kubejs/tools/gen_linear_quest_tree.py`（三章主线与支线）、"
+        "`kubejs/tools/gen_alien_quests.py`（「外星科技」章）",
+        "> 体检：`python kubejs/tools/check_quests.py`（id 唯一 / 依赖归属 / 坐标 / 文案）",
         "> 本文档生成器：`kubejs/tools/gen_quest_doc.py`（表格与流程图直接从章节文件读）",
         "> 文案：`config/ftbquests/quests/lang/zh_cn.snbt`",
         "",

@@ -202,7 +202,7 @@
   "block.mmcr.chemical_reactor_kinetic_controller": "Chemical Reactor Controller (Kinetic)",
   "machine.sinkjourney.chemical_reactor_steam": "Chemical Reactor (Steam)",
   "block.mmcr.chemical_reactor_steam_controller": "Chemical Reactor Controller (Steam)",
-  "jei.kubejs.nc_chem_reactor.info": "The NuclearCraft chemical reactor is limited to the nuclear fuel cycle: fuel dissolution, fluorination and reprocessing, which is what a dissolution/fluorination vessel in a reprocessing plant does. Silane, sulfuric acid and methanol chemistry now belongs to this pack's chemical reactor (mmcr:chemical_reactor_*), which has graded hatches and parallelism.",
+  "jei.kubejs.nc_chem_reactor.info": "The NuclearCraft hot-cell processing cell is the batch dissolver/fluorinator of a reprocessing plant, not a general reactor: fuel dissolution, fluoride volatilisation and reprocessing, plus molten-salt solvents, coolants and boron/barium auxiliaries. It is highly radioactive, works in small batches and never runs in parallel - build more cells rather than a bigger one. Bulk chemistry (methanol, sulfuric acid, SO2 oxidation) belongs to this pack's MMCR reactors, which carry tiered internals, pressure gates and parallelism, so no reaction runs here twice.",
   "machine.sinkjourney.litho_mk1": "G-line Lithography Machine Mk.I (436 nm)",
   "recipe_pool.sinkjourney.litho_mk1": "G-line Lithography Machine Mk.I (436 nm)",
   "jei.kubejs.litho_mk1.info": "Mercury g-line 436 nm / NA 0.28. Single exposure resolves about 700 nm, so it takes only M1 1.5um and M2 800nm reticles.",
@@ -251,5 +251,8 @@
   "jei.kubejs.rare_earth_ingot.info": "Rare earth ingots only come from the hydrometallurgical line: ore and purified crushed ore can no longer be smelted into ingots, and the centrifuge no longer yields rare earth dust. Oxide -> fluoride -> calciothermic reduction -> powder -> electric furnace. Rare earth oxides are far too stable for carbon reduction; the metal comes from fluoride calciothermic reduction or molten salt electrolysis.",
   "jei.kubejs.cerium_rich_residue.info": "Cerium-rich residue: after the oxidation roast turns Ce(III) into Ce(IV), CeO2 does not dissolve in hydrochloric acid, so cerium stays in this residue during the selective leach - that is where cerium is first separated, not in the extractors. Nitric acid dissolution, oxalate precipitation and calcination give cerium oxide.",
   "jei.kubejs.iron_thorium_residue.info": "Iron-thorium residue: the insoluble part of neutralisation and cerium dissolution, carrying iron, thorium and gangue. Thorium is a naturally occurring radioactive companion of rare earth ores and the heaviest environmental cost of the industry; store it safely.",
-  "jei.kubejs.prnd_oxide.info": "Praseodymium-neodymium oxide: a mixed oxide of Pr6O11 and Nd2O3. The Pr/Nd separation factor is only about 1.5, so industry runs hundreds of extraction stages or simply sells Pr-Nd alloy - the neodymium ingot in this pack is that Pr-Nd metal."
+  "jei.kubejs.prnd_oxide.info": "Praseodymium-neodymium oxide: a mixed oxide of Pr6O11 and Nd2O3. The Pr/Nd separation factor is only about 1.5, so industry runs hundreds of extraction stages or simply sells Pr-Nd alloy - the neodymium ingot in this pack is that Pr-Nd metal.",
+  "block.nuclearcraftneohaul.chemical_reactor": "Hot-Cell Processing Cell",
+  "block.nuclearcraftneohaul.chemical_reactor.desc": "A sealed batch cell for dissolving fuel, volatilising fluorides and mixing salt solvents. Highly radioactive, small batches, no parallelism: build more cells instead of a bigger one.",
+  "nuclearcraftneohaul.menu.title.chemical_reactor": "Hot-Cell Processing Cell"
 }
