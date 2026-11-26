@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "nuclearcraftneohaul_frame=false": {
+      "model": "sinkjourneycore:block/electrolyzer_frame_stainless_wall"
+    },
+    "nuclearcraftneohaul_frame=true": {
+      "model": "sinkjourneycore:block/electrolyzer_frame_stainless_frame"
+    }
+  }
+}
