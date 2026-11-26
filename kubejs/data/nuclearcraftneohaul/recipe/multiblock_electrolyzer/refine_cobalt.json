@@ -1,0 +1,44 @@
+{
+  "type": "nuclearcraftneohaul:multiblock_electrolyzer_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 5000,
+      "ingredient": {
+        "fluid": "kubejs:cobalt_sulfate"
+      }
+    }
+  ],
+  "itemIngredients": [
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "industrialupgrade:itemingots/cobalt_ingot"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "industrialupgrade:itemdust/cobalt_dust"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "kubejs:anode_slime"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 4500,
+      "ingredient": {
+        "fluid": "industrialupgrade:iufluidsulfuricacid"
+      }
+    }
+  ],
+  "name": "sulfate",
+  "powerModifier": 1.5,
+  "timeModifier": 1.0
+}

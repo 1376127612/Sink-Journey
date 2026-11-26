@@ -54,6 +54,12 @@
     // removeEntriesCompletely：连配方里的原料显示一起移除
     RecipeViewerEvents.removeEntriesCompletely('item', event => {
         BANNED_ITEMS.forEach(id => {
+            // 名单里写错/被别家改名的条目会让整个 hide 事件在收尾时抛错，
+            // 后面的条目一起失效，所以先判存在。
+            if (!Item.exists(id)) {
+                console.warn('[封禁] JEI 里找不到这个物品，已跳过：' + id)
+                return
+            }
             event.remove(id)
         })
     })

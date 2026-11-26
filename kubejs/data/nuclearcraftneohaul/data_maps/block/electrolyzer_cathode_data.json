@@ -1,0 +1,13 @@
+{
+  "values": {
+    "industrialupgrade:baseblockalloy/stainless_steel": {
+      "efficiency": 0.75
+    },
+    "industrialupgrade:baseblockingot/aluminium": {
+      "efficiency": 0.85
+    },
+    "industrialupgrade:baseblockingot/nickel": {
+      "efficiency": 0.95
+    }
+  }
+}

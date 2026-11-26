@@ -1,0 +1,13 @@
+{
+  "values": {
+    "industrialupgrade:blockresource/lead_block": {
+      "efficiency": 0.65
+    },
+    "minecraft:coal_block": {
+      "efficiency": 0.8
+    },
+    "industrialupgrade:baseblockingot/titanium": {
+      "efficiency": 0.95
+    }
+  }
+}

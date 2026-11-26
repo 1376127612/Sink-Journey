@@ -21,6 +21,12 @@
     ]
 
     RecipeViewerEvents.removeEntriesCompletely('item', event => {
-        DEAD_MACHINES.forEach(id => event.remove(id))
+        DEAD_MACHINES.forEach(id => {
+            if (!Item.exists(id)) {
+                console.warn('[封禁] JEI 里找不到这台机器，已跳过：' + id)
+                return
+            }
+            event.remove(id)
+        })
     })
 })()

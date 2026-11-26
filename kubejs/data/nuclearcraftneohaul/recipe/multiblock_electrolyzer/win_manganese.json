@@ -1,0 +1,43 @@
+{
+  "type": "nuclearcraftneohaul:multiblock_electrolyzer_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 10000,
+      "ingredient": {
+        "fluid": "kubejs:manganese_sulfate"
+      }
+    }
+  ],
+  "itemIngredients": [],
+  "itemProducts": [
+    {
+      "count": 10,
+      "ingredient": {
+        "item": "industrialupgrade:itemdust/manganese_dust"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "kubejs:anode_slime"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 8000,
+      "ingredient": {
+        "fluid": "industrialupgrade:iufluidsulfuricacid"
+      }
+    },
+    {
+      "amount": 2500,
+      "ingredient": {
+        "fluid": "industrialupgrade:iufluidoxygen"
+      }
+    }
+  ],
+  "name": "sulfate",
+  "powerModifier": 4.0,
+  "timeModifier": 5.0
+}

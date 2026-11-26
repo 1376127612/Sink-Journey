@@ -1,0 +1,12 @@
+{
+  "values": {
+    "industrialupgrade:blockresource/tempered_glass": {
+      "contact_factor": 1.0,
+      "efficiency": 0.85
+    },
+    "industrialupgrade:baseblockalloy1/cobalt_chrome": {
+      "contact_factor": 1.6,
+      "efficiency": 0.95
+    }
+  }
+}

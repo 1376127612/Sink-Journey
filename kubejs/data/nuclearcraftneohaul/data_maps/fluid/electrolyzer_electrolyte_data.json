@@ -1,0 +1,16 @@
+{
+  "values": {
+    "industrialupgrade:iufluidsulfuricacid": {
+      "efficiency": 0.85,
+      "group": "sulfate"
+    },
+    "kubejs:brine": {
+      "efficiency": 0.85,
+      "group": "chlor_alkali"
+    },
+    "qmd:hydrochloric_acid": {
+      "efficiency": 0.8,
+      "group": "chlor_alkali"
+    }
+  }
+}

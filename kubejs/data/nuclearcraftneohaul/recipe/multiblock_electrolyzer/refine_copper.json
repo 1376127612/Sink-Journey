@@ -1,0 +1,44 @@
+{
+  "type": "nuclearcraftneohaul:multiblock_electrolyzer_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 5000,
+      "ingredient": {
+        "fluid": "industrialupgrade:iufluidcoppersulfate"
+      }
+    }
+  ],
+  "itemIngredients": [
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "minecraft:copper_ingot"
+      }
+    }
+  ],
+  "itemProducts": [
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "kubejs:electrolytic_copper"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "kubejs:anode_slime"
+      }
+    }
+  ],
+  "fluidProducts": [
+    {
+      "amount": 4500,
+      "ingredient": {
+        "fluid": "industrialupgrade:iufluidsulfuricacid"
+      }
+    }
+  ],
+  "name": "sulfate",
+  "powerModifier": 0.5,
+  "timeModifier": 0.95
+}

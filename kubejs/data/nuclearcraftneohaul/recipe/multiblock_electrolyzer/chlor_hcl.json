@@ -1,0 +1,30 @@
+{
+  "type": "nuclearcraftneohaul:multiblock_electrolyzer_recipe",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "ingredient": {
+        "fluid": "qmd:hydrochloric_acid"
+      }
+    }
+  ],
+  "itemIngredients": [],
+  "itemProducts": [],
+  "fluidProducts": [
+    {
+      "amount": 500,
+      "ingredient": {
+        "fluid": "industrialupgrade:iufluidchlorum"
+      }
+    },
+    {
+      "amount": 500,
+      "ingredient": {
+        "fluid": "industrialupgrade:iufluidhydrogen"
+      }
+    }
+  ],
+  "name": "chlor_alkali",
+  "powerModifier": 0.95,
+  "timeModifier": 0.3
+}
