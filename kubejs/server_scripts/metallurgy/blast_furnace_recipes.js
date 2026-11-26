@@ -5,6 +5,7 @@
 // 机器定义见 startup_scripts/metallurgy/blast_furnace_startup.js（MBD2 多方块）。
 // 土高炉（L2，强制鼓风 + 熔剂 + 木炭还原），配方类型 sinkjourney:earth_blast_furnace：
 //   碎铁×2 + 方解石×1 + 煤/木炭×2 -> 铁锭×2   1400t（70s）
+// 土高炉只炼铁：渗碳钢已删除，钢改由 IU 高炉出（见 iu_blast_furnace.js）。
 // 拟真要点：
 //   - 破碎：研钵碎矿增大反应界面（原料必须先是 crushed/iron）；
 //   - 鼓风：提高焦炭燃烧速率，炉温过铁熔点，并生成 CO 还原铁氧化物；
@@ -38,19 +39,6 @@
         recipe.outputs(ITEM_CAP, Item.of('minecraft:iron_ingot', 2))
         recipe.duration(1400)
         recipe.id('kubejs:earth_blast_furnace/smelt_iron')
-
-        // ---- 土高炉炼钢（蒸汽时代末期）----
-        // 渗碳钢：把铁在富碳还原气氛里长时间保温，碳扩散进铁晶格。
-        // 比炼铁更费燃料、更慢：2 铁锭 + 4 煤/木炭 + 1 方解石 -> 1 钢锭（120s）。
-        // 钢锭在 config/astages/simple/astages/item.json 里锁到 era.steam，
-        // 所以原始时代打到钢也拿不起来 —— 钢属于蒸汽时代末期。
-        var steel = event.recipes.sinkjourney.earth_blast_furnace()
-        steel.inputs(ITEM_CAP, Item.of('minecraft:iron_ingot', 2))
-        steel.inputs(ITEM_CAP, Item.of('minecraft:calcite', 1))
-        steel.inputs(ITEM_CAP, tag('minecraft:coals', 4))
-        steel.outputs(ITEM_CAP, Item.of('industrialupgrade:itemingots/steel_ingot', 1))
-        steel.duration(2400)
-        steel.id('kubejs:earth_blast_furnace/cementation_steel')
 
         // ---- 控制器合成 ----
         // 泥砖炉体 + 黏土封泥 + 两锭琥珀金（风口镶件）
