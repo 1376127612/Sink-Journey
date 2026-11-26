@@ -185,5 +185,16 @@
   "pneumaticcraft:pneumatic": null,
   "pneumaticcraft:redstone": null,
   "pneumaticcraft:semiblock": null,
-  "pneumaticcraft:tube_module": null
+  "pneumaticcraft:tube_module": null,
+  "thaumaturge:block_details": null,
+  "thaumaturge:golem": null,
+  "thaumaturge:machine_icon": null,
+  "thaumaturge:node": null,
+  "thaumicenergistics_ce:alchemy_provider": null,
+  "thaumicenergistics_ce:alchemy_receiver": null,
+  "thaumicenergistics_ce:arcane_assembler": null,
+  "thaumicenergistics_ce:gacha_box": null,
+  "thaumicenergistics_ce:infusion_provider": null,
+  "thaumicenergistics_ce:occult_monitor": null,
+  "thaumicenergistics_ce:vibration_chamber": null
 }
