@@ -159,20 +159,21 @@
 			}]
 			tasks: [
 				{
-					count: 2L
+					count: 4L
 					id: "6BB01C00000000CA"
-					item: { count: 1, id: "industrialupgrade:raw_metals/raw_platinum" }
+					item: { count: 1, id: "industrialupgrade:raw_metals/raw_nickel" }
 					type: "item"
 				}
 				{
 					count: 2L
 					id: "6BB01C00000000CB"
-					item: { count: 1, id: "industrialupgrade:raw_metals/raw_palladium" }
+					item: { count: 1, id: "industrialupgrade:mineral/braggite" }
 					type: "item"
 				}
 				{
+					count: 2L
 					id: "6BB01C00000000CC"
-					item: { count: 1, id: "industrialupgrade:raw_metals/raw_iridium" }
+					item: { count: 1, id: "industrialupgrade:mineral/iridosmine" }
 					type: "item"
 				}
 			]

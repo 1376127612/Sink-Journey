@@ -46,6 +46,7 @@ StartupEvents.registry('item', event => {
         if (tip) it.tooltip(tip)
     }
 
+    addItem('monazite', '独居石', '§7独居石型稀土磷酸盐，(Ce,La,Nd)PO₄；浮选的进料，一份矿里同时带铈镧钕钆钇')
     addItem('rare_earth_concentrate', '稀土精矿', '§7独居石型稀土精矿，REO 约 60%；碱分解的进料')
     addItem('rare_earth_hydroxide', '氢氧化稀土', '§7浓碱分解产物，磷酸根以磷酸三钠进洗水')
     addItem('mixed_rare_earth_oxide', '混合稀土氧化物', '§7氧化焙烧产物：铈已被氧化成 Ce⁴⁺，这是后面优溶分铈的前提')
@@ -92,4 +93,19 @@ StartupEvents.registry('fluid', event => {
     addFluid('oxalic_acid', '草酸溶液', 0xBFC9C4, 1030, 220, 320)
     addFluid('p204', '萃取剂 P204', 0xC8B87A, 970, 900, 320)
     addFluid('p507', '萃取剂 P507', 0xB9A868, 960, 950, 320)
+})
+
+// 独居石矿 —— 稀土湿法线的矿源（火星）
+// 稀土不做单元素矿：现实里独居石一份矿同时含铈、镧、钕、钆、钇，元素是在萃取段才拆开的。
+// 掉落见 server_scripts/industrial/rare_earth_ore.js，配方见 server_scripts/industrial/rare_earth_line.js。
+StartupEvents.registry('block', event => {
+    event.create('monazite_ore')
+        .displayName('独居石矿')
+        .soundType('stone')
+        .hardness(4.5)
+        .resistance(9.0)
+        .requiresTool()
+        .tagBlock('minecraft:mineable/pickaxe')
+        .item(item => item.displayName('独居石矿'))
+        .texture('kubejs:block/monazite_ore')
 })

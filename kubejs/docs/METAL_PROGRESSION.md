@@ -2,7 +2,7 @@
 
 > 定位：**前期矿链不动**（研钵 / 柴堆 / 炭炉 / 土高炉 / Create 粉碎轮 / IU 九金属洗选全部保留），
 > 这份表只回答一个问题：**某种金属第一次能拿到是在哪一阶段、用什么路线、被什么卡住。**
-> 相关：`ORE_UNIVERSAL_LINE.md`（R1–R6 与机器）、`ELECTROLYSIS_LINE.md`（电解段与能耗）、
+> 相关：`IU_ALLOY_PLAN.md`（合金时代 = max(组元) + 工艺）、`ORE_UNIVERSAL_LINE.md`（R1–R6 与机器）、`ELECTROLYSIS_LINE.md`（电解段与能耗）、
 > `IU_METAL_PLAN.md` §8（现实获取门槛）、`EARLY_METALLURGY.md`（L0–L2 炉子）、`MIDGAME_PLAN.md`（电压段）、
 > `ORE_GENERATION.md`（每种矿在哪个维度、多密）
 >
@@ -170,9 +170,8 @@ IU 的电解器（`industrialupgrade:basemachine2/electrolyzer_iu`）init 里写
 
 | 例外 | 现在的情况 | 处理 |
 | --- | --- | --- |
-| Mek 的锇 | `c:ores/osmium` 世界生成开着，`era.electric` 就能拿 | 保留：Mek 是第四条路，锇在电力就能到手，与 PGM 线并存 |
 | Mek 的 2×–5× | 全套在位 | 保留：产率 5.0 封顶、无副产，与通用线 5.6 并列 |
-| 太空矿（小行星/行星） | IU 自带，固态电解器还能把太空石直接电解成气体 | 太空线能提前拿部分金属；这是太空章节的奖励，不改本表 |
+| 太空矿（小行星/行星） | IU 自带，固态电解器还能把太空石直接电解成气体。2026-11-26 起出矿表按 `ORE_GENERATION.md §4.7` 分层，单元素铂族 / 稀土矿不再从太空来 | 太空章节的奖励，矿种与维度分层对齐，不改本表 |
 | 蒸汽电解器 | 同一张 `electrolyzer` 配方表，吃蒸汽 | 蒸汽末期就有少量氢，属正常提前，不改本表 |
 | 星辉 / 水晶晶簇 | 魔法与晶簇线 | 不参与金属阶梯，单独记账 |
 

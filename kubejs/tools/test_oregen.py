@@ -83,8 +83,8 @@ def test_structure():
         "biome_modifier": len(list((PACK / "data/sj/neoforge/biome_modifier").glob("*.json"))),
         "c_ores_block": len(list((PACK / "data/c/tags/block/ores").glob("*.json"))),
     }
-    check("55 条矿 × 3 类文件", counts["configured_feature"] == counts["placed_feature"] == counts["biome_modifier"] == 55, str(counts))
-    check("c:ores 方块 tag 55 个", counts["c_ores_block"] == 55, str(counts["c_ores_block"]))
+    check("50 条矿 × 3 类文件", counts["configured_feature"] == counts["placed_feature"] == counts["biome_modifier"] == 50, str(counts))
+    check("c:ores 方块 tag 50 个", counts["c_ores_block"] == 50, str(counts["c_ores_block"]))
 
     bad = []
     for rel in DP:
@@ -100,6 +100,22 @@ def test_structure():
 
 # ---------------------------------------------------------------- 2. 引用链与 id
 
+KUBEJS_BLOCK_RE = re.compile(r"event\.create\('([a-z0-9_/]+)'")
+
+
+def kubejs_block_ids():
+    """KubeJS 注册的方块不在 jar 里（blockstate 是运行时生成的），
+    从 startup_scripts 里 `registry('block', …)` 之后的部分按 `event.create('<id>')` 收。"""
+    ids = set()
+    for f in (ROOT / "kubejs/startup_scripts").rglob("*.js"):
+        text = f.read_text(encoding="utf-8")
+        head, sep, tail = text.partition("registry('block'")
+        if not sep:
+            continue
+        ids.update(f"kubejs:{m}" for m in KUBEJS_BLOCK_RE.findall(tail))
+    return ids
+
+
 def block_ids():
     ids = set()
     for n in RES.paths:
@@ -107,6 +123,7 @@ def block_ids():
             ns = n.split("/")[1]
             rest = n.split("/blockstates/", 1)[1][:-5]
             ids.add(f"{ns}:{rest}")
+    ids |= kubejs_block_ids()
     return ids
 
 
@@ -233,7 +250,7 @@ def test_duplicates():
 
     # 我们自己这张表必须都在世界里
     sj = {m for m, v in sources.items() if "sj" in v}
-    check("55 条矿全部能解析到生成源", len(sj) >= 50, f"只解析到 {len(sj)} 种")
+    check("50 条矿全部能解析到生成源", len(sj) >= 45, f"只解析到 {len(sj)} 种")
     print(f"     生成源：{len(sources)} 种金属；其中 IU(sj) 占 {len(sj)} 种")
 
 
@@ -268,7 +285,10 @@ def test_bans():
     check("IU 矿脉仍关闭", json.loads(vein.read_text(encoding="utf-8"))["type"] == "neoforge:none")
 
     space = (ROOT / "kubejs/server_scripts/bans/iu_space.js").read_text(encoding="utf-8")
-    check("IU 行星跃迁导航器被封", "teleporter_iu" in space and "industrialupgrade_1615" in space)
+    space_jei = (ROOT / "kubejs/client_scripts/bans/iu_space_jei.js").read_text(encoding="utf-8")
+    check("IU 行星跃迁导航器被封",
+          "industrialupgrade_2508" in space and "space/planetary_translocator" in space
+          and "space/planetary_translocator" in space_jei)
 
     nuclear = (ROOT / "kubejs/server_scripts/bans/mek_nuclear.js").read_text(encoding="utf-8")
     jei = (ROOT / "kubejs/client_scripts/bans/mek_nuclear_jei.js").read_text(encoding="utf-8")
@@ -287,7 +307,7 @@ def test_tags():
     iron = set(dp_json("data/minecraft/tags/block/needs_iron_tool.json")["values"])
     diamond = set(dp_json("data/minecraft/tags/block/needs_diamond_tool.json")["values"])
     check("铁镐/钻石镐方块不重叠", not (iron & diamond), str(sorted(iron & diamond)[:5]))
-    check("铁镐门 35 块 / 钻石镐门 15 块（stone 级不挂 tag）", (len(iron), len(diamond)) == (35, 15),
+    check("铁镐门 35 块 / 钻石镐门 10 块（stone 级不挂 tag）", (len(iron), len(diamond)) == (35, 10),
           f"iron={len(iron)} diamond={len(diamond)}")
     staples = {"minecraft:iron_ore", "minecraft:deepslate_iron_ore", "minecraft:copper_ore",
                "minecraft:coal_ore", "industrialupgrade:baseore/aluminium", "industrialupgrade:baseore/zinc",

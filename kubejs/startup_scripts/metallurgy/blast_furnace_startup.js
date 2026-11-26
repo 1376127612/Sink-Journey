@@ -5,6 +5,8 @@
 // 3×3×4 泥砖外壳（无输入/输出仓，物料进出全走控制器自己的槽位）：
 //   正面底格中间 = 琥珀金块（风口），上一排中间 = 控制器；
 //   炉膛正中（控制器正后方）= 篝火，上方两格烟道直通天空。
+// 结构成型后点外壳任意一格都能开界面（不用对准控制器），潜行时让位给放方块。
+// 控制器贴图自绘：kubejs:block/earth_blast_furnace_controller（正面是泥砖风嘴 + 炉火），
 // 配方类型 sinkjourney:earth_blast_furnace，配方见 blast_furnace_recipes.js。
 // 炉况门槛（L2 比 L1 多一道硬门槛，见 furnace_events.js）：
 //   1. 炉膛篝火必须点燃（点炉后封砖；被浇灭即停工）
@@ -17,7 +19,7 @@
 (function () {
     var MACHINE_ID = 'kubejs:earth_blast_furnace'
     var RECIPE_TYPE_ID = 'sinkjourney:earth_blast_furnace'
-    var BLOCK_MODEL_ID = 'minecraft:block/mud_bricks'
+    var BLOCK_MODEL_ID = 'kubejs:block/earth_blast_furnace_controller'
     var VENT_BLOCK_ID = 'industrialupgrade:baseblockingot/electrum'
 
     var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
@@ -37,6 +39,9 @@
     )
     var ConfigBlockProperties = Java.loadClass(
         'com.lowdragmc.mbd2.common.machine.definition.config.ConfigBlockProperties'
+    )
+    var ConfigMultiblockSettings = Java.loadClass(
+        'com.lowdragmc.mbd2.common.machine.definition.config.ConfigMultiblockSettings'
     )
     var MachineState = Java.loadClass(
         'com.lowdragmc.mbd2.common.machine.definition.config.MachineState'
@@ -295,6 +300,21 @@
         return machineSettings
     }
 
+    // ---- 多方块设置 -------------------------------------------
+    // showUIWhenClickStructure：结构成型后点外壳任意一格开界面。
+    // MBD2 在 PlayerInteractEvent.RightClickBlock 里遍历覆盖该坐标的控制器，
+    // 图案匹配时把允许开界面的格子记进 openUIMask（PatternPredicate.allowOpenUI，
+    // 默认 true），所以泥砖壳、风口、篝火、控制器格都算数；潜行时事件跳过，留给人放方块。
+    var multiblockSettings = null
+    var getMultiblockSettings = function () {
+        if (multiblockSettings === null) {
+            multiblockSettings = ConfigMultiblockSettings.builder()
+                .showUIWhenClickStructure(true)
+                .build()
+        }
+        return multiblockSettings
+    }
+
     // ---- 配方逻辑 ---------------------------------------------
     var recipeLogic = ConfigRecipeLogicSettings.builder()
         .name('main')
@@ -318,7 +338,16 @@
 
     // ---- 机器定义 ---------------------------------------------
     MBDRegistryEvents.machine(function (event) {
-        event.create('multiblock', RL.parse(MACHINE_ID))
+        var builder = event.create('multiblock', RL.parse(MACHINE_ID))
+        // multiblockSettings 只挂在多方块 builder 上（返回的静态类型是基类，
+        // 运行时才是 MultiblockMachineDefinition.Builder）。万一哪天 API 变了，
+        // 少这个功能也比整台机器注册失败好。
+        try {
+            builder.multiblockSettings(getMultiblockSettings)
+        } catch (err) {
+            console.error('[EBF] 点结构开界面设置失败（机器仍可用，只能点控制器）: ' + err)
+        }
+        builder
             .rootState(rootState)
             .blockProperties(blockProperties)
             .machineSettings(getMachineSettings)

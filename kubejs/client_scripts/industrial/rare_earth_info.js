@@ -5,6 +5,14 @@
 // ============================================================
 
 RecipeViewerEvents.addInformation('item', event => {
+    event.add('kubejs:monazite', [
+        Text.translatable('jei.kubejs.monazite.info')
+    ])
+
+    event.add('kubejs:monazite_ore', [
+        Text.translatable('jei.kubejs.monazite_ore.info')
+    ])
+
     event.add('kubejs:rare_earth_concentrate', [
         Text.translatable('jei.kubejs.rare_earth_concentrate.info'),
         Text.translatable('jei.kubejs.rare_earth_concentrate.steps')

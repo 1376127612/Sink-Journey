@@ -9,6 +9,7 @@
 //
 // 整条线按现实的独居石湿法排（包头碱法 + 酸法优溶的组合）：
 //
+//   4 独居石 --浮选(脂肪酸, 2 bar)--> 稀土精矿
 //   精矿 --浓碱分解--> 氢氧化稀土 + 磷酸三钠
 //   氢氧化稀土 --氧化焙烧(600℃, 空气)--> 混合稀土氧化物（Ce³⁺ → Ce⁴⁺）
 //   混合氧化物 --盐酸优溶--> 氯化稀土料液 + 富铈渣（CeO₂ 不溶于盐酸）
@@ -27,7 +28,7 @@
 //          （硝酸 + 氯离子的热溶液对不锈钢是应力腐蚀，工业上这一段走钛材）
 //   料比   萃取段按"有机相 : 水相 = 1 : 3"给，皂化剂 NaOH 直接写进配方（皂化率 ~35%）
 //
-// 收率口径：1 份稀土精矿（= 4 份纯净碎稀土矿）出
+// 收率口径：1 份稀土精矿（= 4 份独居石）出
 //   钕（镨钕）1、钆 0.25、钇 0.25、氧化镧 0.5、氧化铈 0.5。
 // 镨与钕、钐铕与钆不再细分：现实里镨钕分离系数只有 1.5，要上百级萃取，
 // 磁材工业直接卖镨钕合金 —— 本包的「钕锭」就是镨钕金属，镨作为伴生组分不单列物品。
@@ -35,14 +36,11 @@
 // ============================================================
 
 ServerEvents.tags('item', event => {
-    // 三种稀土矿在 IU 里被拆成了三种独立矿，现实里它们是同一个矿里的元素。
-    // 浮选段统一吃这三种纯净碎矿，把它们当"同一个精矿"的三种标称。
-    const FEED = [
-        'industrialupgrade:purifiedcrushed/neodymium',
-        'industrialupgrade:purifiedcrushed/yttrium',
-        'industrialupgrade:purifiedcrushed/gadolinium'
-    ]
-    FEED.forEach(id => event.add('sinkjourney:rare_earth_feed', id))
+    // 进料是独居石本身（`kubejs:monazite`，从火星的独居石矿来，一块矿掉两份）。
+    // 以前这里挂的是 IU 的三种纯净碎稀土矿（钕/钇/钆）——那三种矿石与粗制原矿
+    // 已经整层删掉（ORE_GENERATION.md §7.3），因为一份矿出三种元素本来就是错的：
+    // 现实里是同一份独居石里同时有铈镧钕钆钇，元素要到萃取段才拆开。
+    event.add('sinkjourney:rare_earth_feed', 'kubejs:monazite')
 })
 
 ServerEvents.recipes(event => {
@@ -121,8 +119,9 @@ ServerEvents.recipes(event => {
     const lining = (level) => ({ type: 'mmcr:level', io: 'input', level_type: 'sinkjourney:lining', level: 'sinkjourney:lining_' + level })
 
     // ---- 1. 浮选 ----
-    // 现实：氟碳铈矿用脂肪酸类捕收剂（塔尔油/油酸）浮选，水玻璃抑制硅酸盐脉石，
+    // 现实：氟碳铈矿/独居石用脂肪酸类捕收剂（塔尔油/油酸）浮选，水玻璃抑制硅酸盐脉石，
     // 粗精矿再精选到 REO 60% 以上。种子油在这里代表脂肪酸捕收剂。
+    // 进料是 4 份独居石（矿里带磷、钍与脉石），浮出 1 份精矿，石粉进尾矿。
     recipe(HYDRO, 'kubejs:chem_reactor/re/flotation', 200, [
         tagIn('sinkjourney:rare_earth_feed', 4),
         fluidIn(SEED_OIL, 500),

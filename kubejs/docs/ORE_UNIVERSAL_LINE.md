@@ -8,6 +8,8 @@
 > `PGM_LINE.md`、`ORE_ITEM_MAP.md`（物品口径）、`IU_METAL_PLAN.md`（选材口径）、`MIDGAME_PLAN.md`（时代与电压）、
 > `ORE_GENERATION.md`（这些矿从哪来：维度分层与生成参数）
 >
+> 阶段归属：basic 档在哪一段建、机壳用什么，见 `IU_L1_BASIC_ELECTRIC.md` §7.3（L1 = 钢锭 → 不锈钢）。
+>
 > 状态：**P1 脚本已写（选矿机 + 87 条配方），待重启验证**。v2 变更：删掉"Mek 5× 封锁"那一章，
 > 改成 §4 的七级路线阶梯 —— 玩家可以一直用 Mek，也可以自己修产线，**修得越全，产率越高**。
 

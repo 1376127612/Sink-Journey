@@ -3,6 +3,9 @@
 > 版本：本包 1.21.1 / NeoForge / KubeJS 2101 / IU 3.4.0.11 / AE2 19.2.19 / 工业先锋 3.6.39
 > 本章接在「工业之始（蒸汽时代）」之后，末地门（`gate.end`）通过后由研究站解锁。
 >
+> **阶段细分**：IU 自己的「基础电力」页签（L1，钢锭 → 不锈钢）的机器与物品口径见
+> [`IU_L1_BASIC_ELECTRIC.md`](IU_L1_BASIC_ELECTRIC.md)；本章讲的是整条电力线，那篇只讲 L1 这一段。
+>
 > 脚本：
 > - `kubejs/server_scripts/industrial/iu_electric_recipes.js`（IU 电力元件）
 > - `kubejs/server_scripts/industrial/iu_se_line.js`（SE 线，见 `SE_LINE.md`）

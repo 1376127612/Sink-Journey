@@ -1,16 +1,16 @@
 {
   "type": "minecraft:ore",
   "config": {
-    "size": 4,
+    "size": 6,
     "discard_chance_on_air_exposure": 0.0,
     "targets": [
       {
         "state": {
-          "Name": "industrialupgrade:baseore/iridium"
+          "Name": "kubejs:monazite_ore"
         },
         "target": {
           "predicate_type": "minecraft:block_match",
-          "block": "minecraft:end_stone"
+          "block": "ad_astra:mars_stone"
         }
       }
     ]

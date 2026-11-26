@@ -39,3 +39,6 @@ __pycache__/
 
 # 反编译产物只保留可读源码
 *.class
+
+# 核心模组源码为独立仓库，仅将构建产物 jar 纳入 mods/
+Sink-Journey-Core/

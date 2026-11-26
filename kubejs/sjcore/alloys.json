@@ -1,0 +1,800 @@
+{
+  "_comment": "IU 合金炉成分与温度（IU_ALLOY_PLAN.md §5、§10 P0）。改完 /sjcore iu reload。注意：①每条只用 2/3/4/5 个进料槽，对应 alloysmelter/advalloysmelter/impalloysmelter/peralloysmelter；②温度按现实熔点填，且不得超过所在池的上限（1500/2000/3000/4000 ℃），超了机器会拒绝；③meta.sj_heat 让 Sink-Journey-Core 的温度门槛只认这些配方，IU 自带的粉料/化学反应配方不受影响；④比例 <10% 或组元超槽位的合金走 kubejs/server_scripts/metallurgy/alloy_blends.js。",
+  "patches": [
+    {
+      "op": "replace",
+      "pool": "alloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/nickel",
+          "count": 4
+        },
+        {
+          "tag": "c:ingots/chromium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/nichrome",
+          "count": 5
+        }
+      ],
+      "temperature": 1450,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "镍铬 Ni80Cr20；原来 1:1 是 50% 铬"
+    },
+    {
+      "op": "replace",
+      "pool": "alloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/cobalt",
+          "count": 7
+        },
+        {
+          "tag": "c:ingots/chromium",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/cobalt_chrome",
+          "count": 10
+        }
+      ],
+      "temperature": 1450,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "钴铬 Co-28Cr-6Mo 无钼时取 Co70Cr30；原来 1:1 是 50% 铬"
+    },
+    {
+      "op": "replace",
+      "pool": "alloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/iron",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/manganese",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/ferromanganese",
+          "count": 4
+        }
+      ],
+      "temperature": 1300,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "锰铁 FeMn78：1:3 折 75% 锰"
+    },
+    {
+      "op": "replace",
+      "pool": "alloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/arsenic",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/gallium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/gallium_arsenic",
+          "count": 2
+        }
+      ],
+      "temperature": 1300,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "砷化镓 1:1 化合物；原来 2:1 是 67% 砷"
+    },
+    {
+      "op": "replace",
+      "pool": "alloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/nickel",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/titanium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/nitenol",
+          "count": 2
+        }
+      ],
+      "temperature": 1450,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "镍钛诺近等原子 1:1 → 2 锭（原来 1+1→1，白丢一颗）；原温度 4000 也超出基础炉"
+    },
+    {
+      "op": "replace",
+      "pool": "advalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/copper",
+          "count": 3
+        },
+        {
+          "tag": "c:ingots/zinc",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/muntsa",
+          "count": 5
+        }
+      ],
+      "temperature": 1050,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "蒙茨黄铜 Cu60Zn40 = 3:2；原来 1:1:1"
+    },
+    {
+      "op": "replace",
+      "pool": "advalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/copper",
+          "count": 3
+        },
+        {
+          "tag": "c:ingots/nickel",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/zinc",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/zeliber",
+          "count": 5
+        }
+      ],
+      "temperature": 1150,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "白铜 Cu60Ni20Zn20；原来 1:1:1"
+    },
+    {
+      "op": "replace",
+      "pool": "advalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/vanadium",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/aluminium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/vanadoalumite",
+          "count": 2
+        }
+      ],
+      "temperature": 1750,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "铝钒中间合金 V-Al；原配方多一颗钴，且重复注册了两遍"
+    },
+    {
+      "op": "replace",
+      "pool": "advalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/cobalt",
+          "count": 13
+        },
+        {
+          "tag": "c:ingots/chromium",
+          "count": 6
+        },
+        {
+          "tag": "c:ingots/molybdenum",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/vitalium",
+          "count": 20
+        }
+      ],
+      "temperature": 1400,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "维塔利姆 Co-28Cr-6Mo；原配方铬+钨+镍，没有钴"
+    },
+    {
+      "op": "replace",
+      "pool": "advalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/yttrium",
+          "count": 3
+        },
+        {
+          "tag": "c:ingots/aluminium",
+          "count": 5
+        },
+        {
+          "tag": "c:ingots/neodymium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/yttrium_aluminium_garnet",
+          "count": 9
+        }
+      ],
+      "temperature": 1950,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "Y3Al5O12 化学计量 + 一颗掺质钕"
+    },
+    {
+      "op": "replace",
+      "pool": "impalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/bismuth",
+          "count": 4
+        },
+        {
+          "tag": "c:ingots/lead",
+          "count": 2
+        },
+        {
+          "tag": "c:ingots/tin",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/cadmium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/woods",
+          "count": 8
+        }
+      ],
+      "temperature": 200,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "伍德合金共晶 Bi50Pb25Sn12.5Cd12.5 = 4:2:1:1"
+    },
+    {
+      "op": "replace",
+      "pool": "impalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/nickel",
+          "count": 11
+        },
+        {
+          "tag": "c:ingots/chromium",
+          "count": 5
+        },
+        {
+          "tag": "c:ingots/tungsten",
+          "count": 3
+        },
+        {
+          "tag": "c:ingots/molybdenum",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/superalloy_haynes",
+          "count": 20
+        }
+      ],
+      "temperature": 1450,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "海恩斯 230 Ni-22Cr-14W-2Mo；原来是五种成品合金乱配"
+    },
+    {
+      "op": "replace",
+      "pool": "peralloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/nickel",
+          "count": 11
+        },
+        {
+          "tag": "c:ingots/chromium",
+          "count": 4
+        },
+        {
+          "tag": "c:ingots/cobalt",
+          "count": 3
+        },
+        {
+          "tag": "c:ingots/titanium",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/aluminium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/nimonic",
+          "count": 20
+        }
+      ],
+      "temperature": 1400,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "尼莫尼克 Ni-20Cr-Co-Ti-Al；钼换成钛"
+    },
+    {
+      "op": "replace",
+      "pool": "peralloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/nickel",
+          "count": 12
+        },
+        {
+          "tag": "c:ingots/chromium",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/cobalt",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/tantalum",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/tungsten",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/superalloy_rene",
+          "count": 16
+        }
+      ],
+      "temperature": 1450,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "雷内 N5 的成分；包内无铼，用钨占位。原配方带钆+钋+锆+伍德"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/niobium_titanium",
+          "count": 1
+        }
+      ],
+      "_why": "铌钛 Nb-47Ti 熔点约 1900 ℃，超过基础炉 1500 ℃；原来 2:1 是 67% 铌（从 alloysmelter 挪到 advalloysmelter）"
+    },
+    {
+      "op": "replace",
+      "pool": "advalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/niobium",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/titanium",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/niobium_titanium",
+          "count": 2
+        }
+      ],
+      "temperature": 1900,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "铌钛 Nb-47Ti 熔点约 1900 ℃，超过基础炉 1500 ℃；原来 2:1 是 67% 铌"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/osmiridium",
+          "count": 1
+        }
+      ],
+      "_why": "锇铱熔点约 2660 ℃，要电弧炉档；原来 2:1 偏锇（从 alloysmelter 挪到 impalloysmelter）"
+    },
+    {
+      "op": "replace",
+      "pool": "impalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/osmium",
+          "count": 3
+        },
+        {
+          "tag": "c:ingots/iridium",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/osmiridium",
+          "count": 5
+        }
+      ],
+      "temperature": 2660,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "锇铱熔点约 2660 ℃，要电弧炉档；原来 2:1 偏锇"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:crafting_elements/crafting_480_element",
+          "count": 1
+        }
+      ],
+      "_why": "碳化钨 WC 熔点 2870 ℃，且原配方根本没有碳（不锈钢 + 2 钨）（从 alloysmelter 挪到 impalloysmelter）"
+    },
+    {
+      "op": "replace",
+      "pool": "impalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/tungsten",
+          "count": 19
+        },
+        {
+          "tag": "c:dusts/coal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:crafting_elements/crafting_480_element",
+          "count": 20
+        }
+      ],
+      "temperature": 2900,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "碳化钨 WC 熔点 2870 ℃，且原配方根本没有碳（不锈钢 + 2 钨）"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:wolframite",
+          "count": 1
+        }
+      ],
+      "_why": "镍钨重合金 90W-7Ni-3Fe 熔点约 2900 ℃；原来 2 钨 + 1 镍是 67% 钨、没有铁（从 alloysmelter 挪到 impalloysmelter）"
+    },
+    {
+      "op": "replace",
+      "pool": "impalloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/tungsten",
+          "count": 18
+        },
+        {
+          "tag": "c:ingots/nickel",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/iron",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:wolframite",
+          "count": 20
+        }
+      ],
+      "temperature": 2900,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "镍钨重合金 90W-7Ni-3Fe 熔点约 2900 ℃；原来 2 钨 + 1 镍是 67% 钨、没有铁"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/hafnium_boride_alloy",
+          "count": 1
+        }
+      ],
+      "_why": "硼化铪 HfB2 熔点 3250 ℃，要完美炉；原来 1:1:1 是 33% 硼（从 advalloysmelter 挪到 peralloysmelter）"
+    },
+    {
+      "op": "replace",
+      "pool": "peralloysmelter",
+      "inputs": [
+        {
+          "tag": "c:gems/bor",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/hafnium",
+          "count": 18
+        },
+        {
+          "tag": "c:ingots/tantalum",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/hafnium_boride_alloy",
+          "count": 20
+        }
+      ],
+      "temperature": 3250,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "硼化铪 HfB2 熔点 3250 ℃，要完美炉；原来 1:1:1 是 33% 硼"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/hafnium_carbide",
+          "count": 1
+        }
+      ],
+      "_why": "碳化铪 HfC 熔点 3890 ℃，要完美炉；原配方 Hf+Ta+4 铜，没有碳（从 advalloysmelter 挪到 peralloysmelter）"
+    },
+    {
+      "op": "replace",
+      "pool": "peralloysmelter",
+      "inputs": [
+        {
+          "tag": "c:ingots/hafnium",
+          "count": 18
+        },
+        {
+          "tag": "c:dusts/coal",
+          "count": 1
+        },
+        {
+          "tag": "c:ingots/tantalum",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/hafnium_carbide",
+          "count": 20
+        }
+      ],
+      "temperature": 3890,
+      "meta": {
+        "sj_heat": true
+      },
+      "_why": "碳化铪 HfC 熔点 3890 ℃，要完美炉；原配方 Hf+Ta+4 铜，没有碳"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/red_brass",
+          "count": 1
+        }
+      ],
+      "_why": "红黄铜要加锡铅，改走混粉 17 铜 + 1 锌 + 1 锡 + 1 铅"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/duralumin",
+          "count": 1
+        }
+      ],
+      "_why": "硬铝 2024 缺铜，改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/aluminium_lithium_alloy",
+          "count": 1
+        }
+      ],
+      "_why": "铝锂 2195 缺铜，改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/alumel",
+          "count": 1
+        }
+      ],
+      "_why": "阿卢梅尔是 Ni-Mn-Al-Si（原配方 Al+Ti 完全不对），改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/aluminum_bronze",
+          "count": 1
+        }
+      ],
+      "_why": "铝青铜不该有锡，改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/beryllium_bronze",
+          "count": 1
+        }
+      ],
+      "_why": "铍青铜 2% 铍在锭粒度上表达不出来，改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/aluminium_silicon",
+          "count": 1
+        }
+      ],
+      "_why": "铝硅要的是硅不是燧石，改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/molybdenum_steel",
+          "count": 1
+        }
+      ],
+      "_why": "原配方含铊；2% 的比例改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/alcled",
+          "count": 1
+        }
+      ],
+      "_why": "5052 是 97.5 铝 / 2.5 镁，炉里 1:1:1 是 33% 镁；改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "advalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/tantalum_tungsten_hafnium",
+          "count": 1
+        }
+      ],
+      "_why": "炉里 1:1:1 是等原子（偏铪 60 倍），改走混粉 90/5/5"
+    },
+    {
+      "op": "remove",
+      "pool": "impalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/stainless_steel",
+          "count": 1
+        }
+      ],
+      "_why": "304 的 72/19/9 在锭粒度上表达不出来，走 stainless_steel.js 的混粉线"
+    },
+    {
+      "op": "remove",
+      "pool": "impalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/inconel",
+          "count": 1
+        }
+      ],
+      "_why": "因科镍 625 是 61 镍 / 22 铬 / 9 钼 / 4 铁，炉里四槽各 25%；改走混粉"
+    },
+    {
+      "op": "remove",
+      "pool": "impalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/permalloy",
+          "count": 1
+        }
+      ],
+      "_why": "原配方加了两颗煤粉；改走混粉 80/15/5"
+    },
+    {
+      "op": "remove",
+      "pool": "impalloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:alloyingot/stellite",
+          "count": 1
+        }
+      ],
+      "_why": "司太立要碳不要铁；改走混粉 55/30/10/5"
+    },
+    {
+      "op": "remove",
+      "pool": "alloysmelter",
+      "outputs": [
+        {
+          "item": "industrialupgrade:nether_star_ingot",
+          "count": 1
+        }
+      ],
+      "_why": "唯一一条奇幻配方（硼 + 下界之星），见 §7"
+    }
+  ]
+}

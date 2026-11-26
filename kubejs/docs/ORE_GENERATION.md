@@ -15,8 +15,9 @@
 
 ## 0. 一句话
 
-**维度就是门**：主世界只做常见矿并还原原版节奏，下界做火山热液，末地做镍与铂族，
-难熔金属与稀土进 Ad Astra 的四颗行星；铜铁煤各给一条原生大矿脉。实现全部是原版
+**维度就是门**：主世界只做常见矿并还原原版节奏，下界做火山热液，末地做镍与两种复合矿，
+难熔金属进 Ad Astra 的行星；铜铁煤各给一条原生大矿脉。**铂族与稀土没有矿**：它们的原矿
+（矿石方块 + 粗制原矿）整层删掉了，这两种金属只能从湿法线来（§4.6、§7.3）。实现全部是原版
 `configured_feature` + `placed_feature` + `biome_modifier`，一条 `/place feature` 就能验。
 
 ---
@@ -79,7 +80,7 @@ AA 黑石英、AE2cs 赛特斯、Spectrum 光谱矿、ElementalCraft 惰性水�
 | Ad Astra 水星 | `ad_astra:mercury_stone` | 太空章节 | 钨、钼、钽、铌 |
 | Ad Astra 火星 | `ad_astra:mars_stone` | 太空章节 | 钕、钆、钇、铪 |
 | Ad Astra 冰星 | `ad_astra:glacio_stone` | 太空章节 | 锂、铍 |
-| IU 太空 34 维 | — | **玩家入口封禁**（§7.1） | 维度覆盖成虚空；无人远征保留 |
+| IU 太空 34 维 | — | **玩家入口封禁**（§7.1） | 维度覆盖成虚空；无人远征保留，出矿按 §4.7 |
 
 **为什么镍在末地**：`MIDGAME_PLAN.md:158` 早就写了"末地镍矿由冒险侧落点，科技侧只接产物"，
 而末地是蒸汽末期的门票，正好对上镍钴的电力段门槛。镍钴是超基性/硫化矿组合，末地石 + 陨铁的
@@ -143,7 +144,6 @@ AA 黑石英、AE2cs 赛特斯、Spectrum 光谱矿、ElementalCraft 惰性水�
 | 钴 | `baseore/cobalt` | 0..80 | 5×7 | 35 |
 | 铬 | `baseore/chromium` | 0..64 | 3×6 | 18 |
 | 锰 | `baseore/manganese` | 0..64 | 3×6 | 18 |
-| 铂 / 钯 / 铱 | `baseore/platinum`、`baseore2/palladium`、`baseore/iridium` | 8..48 | 1×4，rarity 2 | 各 2 |
 | 钍 | `thorium_ore/thorium_ore` | 16..56 | 1×4，rarity 2 | 2 |
 | 硫镍钯铂矿 / 铱锇矿 | `mineral/braggite`、`mineral/iridosmine` | 8..48 | 1×6，rarity 2 | 各 3 |
 | 红宝石 | `blockpreciousore/ruby_ore` | 24..56 | 1×3，rarity 2 | 1.5 |
@@ -158,6 +158,11 @@ AA 黑石英、AE2cs 赛特斯、Spectrum 光谱矿、ElementalCraft 惰性水�
 `mineral/iridosmine` 是 `PGM_LINE.md` 的进料之一（铱锇渣 → 四氧化锇 → 锇粉），
 所以 Mek 的锇矿可以放心关（§6.2）。
 
+> **铂 / 钯 / 铱的矿已删**（2026-11-26）：这三种金属在同层原来各摊 2 块/区块，
+> 但只要有粗制原矿，IU 的粉碎→洗净→离心、Create 的 `crushing/raw_platinum`、
+> NC 的熔盐炉都能把它换成锭，等于绕开 16 步湿法线。现在末地这一层只留镍与两种复合矿，
+> 铂族从镍精矿与阳极泥来（`PGM_LINE.md`）。
+
 ### 4.4 Ad Astra（后期维度）
 
 | 行星 | 矿 | 方块 | count × size | 期望块/区块 |
@@ -165,11 +170,15 @@ AA 黑石英、AE2cs 赛特斯、Spectrum 光谱矿、ElementalCraft 惰性水�
 | 月球 | 钛 / 钒 / 锆 | `baseore/titanium`、`baseore/vanadium`、`baseore2/zirconium` | 2×6 / 1×5 / 1×6 | 12 / 5 / 6 |
 | 水星 | 钨 / 钼 | `baseore/tungsten`、`baseore2/molybdenum` | 2×8 | 各 16 |
 | 水星 | 钽 / 铌 | `baseore1/tantalum`、`baseore2/niobium` | 1×6 | 各 6 |
-| 火星 | 钕 | `baseore2/neodymium` | 1×6 | 6 |
-| 火星 | 钆 | `baseore2/gadolinium` | 1×6 | 6 |
-| 火星 | 钇 | `baseore2/yttrium` | 1×6 | 6 |
+| 火星 | 独居石 | `kubejs:monazite_ore`（KubeJS 注册） | 3×6 | 18 |
 | 火星 | 铪 | `baseore2/hafnium` | 1×6 | 6 |
 | 冰星 | 锂 / 铍 | `baseore1/lithium`、`baseore1/beryllium` | 1×4 | 各 4 |
+
+> **钕 / 钆 / 钇的矿已删，换成一份独居石**（2026-11-26）：那三种单元素矿既能被 IU 的三段机器
+> 换成粉、又能被 NC 熔盐炉换成熔融金属，都是绕开湿法线的路子，所以连粗制原矿一起删掉（§7.3）。
+> 稀土改由 `kubejs:monazite_ore`（独居石矿）供给：一块掉 2 份独居石，4 份浮选出 1 份精矿，
+> 与原先"1 份稀土原矿 → 0.5 份精矿"的口径一致。一份矿里同时含铈镧钕钆钇，正是现实独居石的样子。
+> 方块与掉落见 `RARE_EARTH_LINE.md` §9.1。
 
 Ad Astra 的 biome 不是靠 biome_modifier 挂矿的（它的矿写在 biome JSON 的 `features` 里），
 所以我们反向操作：自己建 `#sj:{moon,mercury,mars,glacio}` 四个 biome tag，用
@@ -195,8 +204,54 @@ Ad Astra 的 biome 不是靠 biome_modifier 挂矿的（它的矿写在 biome JS
 | 条目 | 理由 |
 | --- | --- |
 | `blockradiationore/{americium,curium,neptunium}`、`polonium` | 天然不存在，应来自反应堆/粒子 |
+| `platinum` / `palladium` / `iridium` 矿 | 铂族是硫化物固溶体，工业来源是镍精矿与阳极泥；有矿就能绕过湿法线（§7.3） |
+| `neodymium` / `gadolinium` / `yttrium` 矿 | 稀土不做单元素矿；有矿就能绕过稀土湿法线（§7.3） |
 | `invar` / `electrum` 矿 | 自然界没有合金矿 |
 | `mikhail` / `spinel` 的深层版本 | 虚构磨料，主世界浅层够了（本次未放，留给后期按需补） |
+
+> 例外：完美级航天器才到得了的五颗远处天体仍出这六种单元素矿，见 §4.7。
+
+### 4.7 IU 太空远征（无人，不生成方块）
+
+IU 的探测器 / 卫星 / 漫游车 / 火箭（太空模块「采矿」那条线）给的是**矿块物品**，
+不生成方块，所以 §4.1–§4.4 的维度分层管不到它；IU 自己那张表又是写死的，
+30 个可采天体各 2~6 种矿，里面有"月球出锡和陨铁"这种随机分配，也有 §4.6 已经删掉的
+铂 / 钯 / 铱 / 钕 / 钆 / 钇单元素矿——拿到矿块就能走 IU 的粉碎→洗净，等于绕开湿法线。
+
+现在整张表按本文的分层重排（`sinkjourneycore` 的 `IuSpaceCatalogMixin` + `SpaceOreTable`）：
+**天体按地质归到已有的某一层，只出那一层的矿**。坩埚里没有的矿石不再从太空来。
+
+| 层 | 天体 | 出矿（沿用 §4 的方块） |
+| --- | --- | --- |
+| 月球层 §4.4 | moon、phobos、deimos、proteus | 钛 / 钒 / 锆 |
+| 水星层 §4.4 | mercury | 钨 / 钼 / 钽 / 铌 |
+| 火星层 §4.4 | mars | 独居石（给物品 `kubejs:monazite`，按一块矿掉 2 份翻倍）/ 铪 |
+| 冰星层 §4.4 | europe、ganymede、callisto、enceladus、rhea、tethys、titania、oberon、ariel | 锂 / 铍 |
+| 末地层 §4.3 | asteroids | 镍 / 钴 / 铬 / 锰 + 硫镍钯铂矿 / 铱锇矿（复合矿，不是单元素铂族） |
+| 下界层 §4.2 | venus、io | 砷 / 铋 / 铊 / 硫 |
+| 主世界层 §4.1 | ceres | 锡 / 铅 / 锌 / 银 / 铝 |
+| 主世界层 §4.1（挥发分 / 盐类） | titan、dione、mimas、umbriel、miranda、triton | 硼砂 / 钙 / 锶 / 钡 / 镓 |
+| **完美级层（后期例外）** | pluto、charon、eris、makemake、haumea | 铂 / 钯 / 铱 + 钕 / 钆 / 钇（单元素矿，见下） |
+
+三条约定：
+
+1. **只换矿种，不换节奏**。每个天体原来有几条"卫星 / 火箭出矿"的条目，替换后还是几条，
+   `count / chance / percent` 原样沿用，矿种按上表循环填。石头、卵石、流体资源不动。
+2. **殖民地一起改**。殖民地的采矿产出走 `ColonyNet` 的另一张表，同样是矿块物品；
+   只改远征的话，铂族与单元素稀土还会从殖民地漏出来，所以那张表按同一份对照重排，等级与数量不变。
+3. **单元素铂族 / 稀土只在完美级天体出**。铂钯铱在别处只从 `PGM_LINE.md` 的镍精矿 / 阳极泥来，
+   钕钆钇只从独居石来；只有 `EnumRoversLevel.FOUR`（完美级）才到得了的五颗远处天体
+   ——pluto、charon、eris、makemake、haumea——照旧直接出这六种单元素矿。
+   这是 §4.6「有矿就绕开湿法线」的唯一例外，理由很简单：绕开只在最后一档航天器上解锁，
+   而不是中期的月球 / 水星就能拿到。
+4. **虚构矿留在原处**。米哈洛夫、尖晶石、精金、秘银、山铜、龙矿、血石这几种现实里没有的矿
+   矿物文档没有分层，也就不参与重排，仍按 IU 原来的分配留在 europe / umbriel / mars / mercury /
+   deimos / ariel / mimas，免得 IU 自己那套用它们的配方断料。
+
+实现位置：`Sink-Journey-Core/src/main/java/com/vbiafe/sjcore/space/SpaceOreTable.java`
+（`ORE_BY_BODY` 一张表，改矿只改这张表），挂在
+`SpaceBootstrap.ensureSpaceCatalogInitialized` 的返回点，只跑一次。启动日志会打
+「IU 太空矿表已按矿物文档重排：N 个天体、M 条远征出矿、K 条殖民地出矿」。
 
 ---
 
@@ -269,7 +324,7 @@ IU 的太空有两层含义，必须分开：
 | 层 | 内容 | 处置 |
 | --- | --- | --- |
 | 玩家进入 | 星门（`industrialupgrade:space/planetary_translocator`，配方 `industrialupgrade_2508`）——唯一能把玩家传送进 34 个太空维度的手持设备 | **封禁**：删配方 + output 删除 + JEI 隐藏 + AStages `era.no_iu_space` 锁（stage 永不授予）+ `sinkjourneycore` 的 `IuSpaceTravelBlockMixin` 兜底（创造模式/老存档拿到的也点不开） |
-| 无人远征 | 四台航天器装配机、发射台、空间研究台、全息图、7 块太空模块、探测器/卫星/漫游车/火箭 | **保留**：产物是资源，玩家不进去 |
+| 无人远征 | 四台航天器装配机、发射台、空间研究台、全息图、7 块太空模块、探测器/卫星/漫游车/火箭 | **保留**：产物是资源，玩家不进去；出矿表按本文分层重排，见 §4.7 |
 
 **维度本身**：数据包删不掉注册表条目，但能把 `data/industrialupgrade/dimension/*.json`
 整份覆盖成空生成器——
@@ -316,6 +371,28 @@ IU 的太空有两层含义，必须分开：
 蒸汽涡轮（`turbine_*`）与电磁线圈**不封**：那是通用蒸汽设备，IU 的锅炉也能喂。
 
 只封「获取」：存档里已经摆好的方块照旧可拆可放，只是没有配方再造一座。
+
+### 7.3 铂族与稀土的原矿（矿 + 粗矿）
+
+铂、钯、铱、钕、钆、钇这六种金属**没有矿**。删的是三层：
+
+| 层 | 做法 | 文件 |
+| --- | --- | --- |
+| 世界生成 | `TABLE` 里删掉 6 行，重新生成数据包（feature / placed_feature / biome_modifier / `c:ores` tag 一起消失） | `kubejs/tools/gen_oregen.py` |
+| 配方 | 按产物删掉这六种矿石方块、`raw_metals/raw_<m>`、`raw_block/raw_<m>` 的全部配方 | `kubejs/server_scripts/bans/pgm_re_ore_bans.js` |
+| JEI / EMI | 同 18 个物品 `removeEntriesCompletely` | `kubejs/client_scripts/bans/pgm_re_ore_jei.js` |
+
+为什么连矿一起删、而不是逐台机器封：只要粗制原矿存在，至少有三条捷径——
+IU 的粉碎→洗净→离心出粉（`centrifuge` 池已按产物封过，但 `handlerho`/`熔盐炉` 这些
+没有逐台封）、Create 的 `create:crushing/raw_platinum`、NC 的
+`melter/molten_gadolinium_from_raw_block`（粗制稀土块 → 熔融金属 → 铸锭）。
+每装一个模组就多一条路，逐台封是打地鼠；矿不在，捷径就没有入口。
+
+保留下来的：`nickel`（铂族唯一进料）、`mineral/iridosmine`、`mineral/braggite`（两种复合矿，
+本身没有碎矿形态，不构成捷径）、`hafnium`（通用选矿线在用，不属于稀土湿法线）。
+
+> 稀土湿法线的进料随之换成独居石矿（`kubejs:monazite_ore`，火星，§4.4），
+> 掉落与浮选口径见 `RARE_EARTH_LINE.md` §9.1。
 
 ---
 
@@ -388,9 +465,10 @@ IU 升级后如果新增太空维度，`void_iu_space()` 会从 jar 里读维度
 | IU 原矿链路 | IU 矿块 drop `IUItem.rawMetals`（`raw_*`），研钵/粉碎机/洗矿机直接吃 |
 | 选矿线 R0–R6 | 输入是 `c:raw_materials/*` 与 `crushed/*`，与原矿链路一致 |
 | 蒸汽矿物分离器 | 吃 `heavyore/*` / `basaltheavyore/*`，下界已放 |
-| PGM 线 | 末地 `mineral/iridosmine` 是铱锇渣的进料 |
-| 稀土线 | 火星钕/钆/钇，进 `RARE_EARTH_LINE.md` 的独居石/氟碳铈矿口径 |
+| PGM 线 | 末地 `mineral/iridosmine` 是铱锇渣的独立进料；主料 `纯净碎镍矿` 来自末地镍矿 |
+| 稀土线 | 进料是火星的 `kubejs:monazite_ore`（独居石矿），一块掉 2 份独居石 |
 | 采石场 / JER | `c:ores/<metal>` 方块 tag |
+| IU 太空远征 / 殖民地 | `Sink-Journey-Core` 的 `SpaceOreTable` 按 §4.7 重排出矿表（改矿只改那张 `ORE_BY_BODY`） |
 
 ---
 
@@ -400,8 +478,8 @@ IU 升级后如果新增太空维度，`void_iu_space()` 会从 jar 里读维度
 | --- | ---: | ---: |
 | 主世界（含 3 条大矿脉） | 17 | ≈ 184（大矿脉只摊 9，其余是常见矿） |
 | 下界 | 11 | ≈ 51 |
-| 末地 | 14 | ≈ 139 |
-| Ad Astra 四行星 | 13 | 月球 23 / 水星 44 / 火星 24 / 冰星 8 |
+| 末地 | 11 | ≈ 133 |
+| Ad Astra 四行星 | 11 | 月球 23 / 水星 44 / 火星 24 / 冰星 8 |
 
 原版主世界的矿粗估 150–250 块/区块，加上这些是可控的；想更稀/更密只动 §9.2 的三列。
 
@@ -430,7 +508,7 @@ IU 升级后如果新增太空维度，`void_iu_space()` 会从 jar 里读维度
 python kubejs/tools/test_oregen.py
 ```
 
-31 条静态检查，不需要启动游戏：数据包结构（55 条矿 × 3 类文件、338 个 JSON 可解析、pack_format）、
+31 条静态检查，不需要启动游戏：数据包结构（49 条矿 × 3 类文件、308 个 JSON 可解析、pack_format）、
 引用链（placed → configured → biome_modifier）、方块/biome/维度类型 id 是否存在、
 **同一金属是否被两份不同矿块生成**、封禁清单（NC/Mek/Create/mekmm/EnderIO/neoecoae/Roots + IU 导航器 +
 Mek 核能 16 方块 + IU 矿脉与默认矿表仍关）、工具门不重叠、`c:ores` 指向真实物品、
@@ -443,7 +521,9 @@ Mek 核能 16 方块 + IU 矿脉与默认矿表仍关）、工具门不重叠、
 3. 主世界 y=64 / y=16 横切 16×16×3：锡铅锌银铝硫各至少 1 处；原版铜铁煤密度与改动前一致；
 4. 500 区块内遇到 1–2 条铜/铁大矿脉（size 48 的整条矿体）；
 5. 下界能挖到硫/黄铁矿/方铅矿，蒸汽矿物分离器与釜配方可跑；
-6. 末地能挖到镍/钴/铂；石镐挖镍矿不掉落，铁镐掉 `raw_nickel`；
+6. 末地能挖到镍/钴/铬/锰、硫镍钯铂矿、铱锇矿；石镐挖镍矿不掉落，铁镐掉 `raw_nickel`；
+   搜 JEI 的「粗制铂矿石 / 粗制钕矿石」应当什么都没有，`/place feature sj:ore_platinum` 也找不到该 feature；
+   火星能挖到**独居石矿**（挖一块掉 2 份独居石）与铪矿；
 7. 水星能挖到钨/钼；Ad Astra 原有的 ostrom/calorite/desh/冰晶不受影响；
 8. NC 的铅/锡/硼/锂/镁/钍/铀、Mek 的锡/铀/锇都不再生成；
 9. IU 的行星跃迁导航器在 JEI 里消失、无法合成，旧导航器右键无效；探测器/卫星/漫游车/火箭、
@@ -452,6 +532,10 @@ Mek 核能 16 方块 + IU 矿脉与默认矿表仍关）、工具门不重叠、
 11. Mek 的裂变堆壳/端口/燃料组件、聚变控制器/框架、SPS 激活器都无法合成且 JEI 不显示，
     蒸汽涡轮与电磁线圈仍在；
 12. 找到一处 AdLods 巨矿，地表应有一圈花（下界是菌菇），半径最大 6 格。
+13. IU 太空远征（§4.7）：启动日志里有「IU 太空矿表已按矿物文档重排：30 个天体、226 条远征出矿、
+    N 条殖民地出矿」；打开水星 / 月球 / 火星的远征界面，出矿分别是钨钼钽铌 / 钛钒锆 / 独居石与铪；
+    冰壳卫星（如 ganymede、callisto）只出锂铍；铂/钯/铱/钕/钆/钇单元素矿只出现在
+    pluto / charon / eris / makemake / haumea（完美级航天器才到得了），其余天体搜不到这六种矿块。
 
 ### 12.2 扫存档验（自动，读真实方块）
 
@@ -525,10 +609,10 @@ python kubejs/tools/scan_world.py --max-chunks 200 # 每维度最多读多少区
 | 主 2 | 玄武岩重矿：八种复合矿 | `6BB00000000000C2` | (2, 0) | C1 | 矿块进料 · 各 4 块/区块 |
 | 主 3 | 末地：镍 | `6BB00000000000C3` | (4, 0) | C2 | 6×8 · 铁镐 · 48 块/区块 |
 | 主 4 | 末地：钴 · 铬 · 锰 | `6BB00000000000C4` | (6, 0) | C3 | 三种合金金属 · 铁镐 |
-| 主 5 | 末地：铂族与两种复合矿 | `6BB00000000000C5` | (8, 0) | C4 | 钻石镐 · 各 2 块/区块 |
+| 主 5 | 末地：镍与两种复合矿 | `6BB00000000000C5` | (8, 0) | C4 | 钻石镐 · 镍 4 / 复合矿各 2 |
 | 主 6 | 末地：宝石与铱锇矿 | `6BB00000000000C6` | (10, 0) | C5 | 四宝石 · 24..56（六边形） |
 | 支 1 | 铁镐：末地层的门票 | `6BB00000000000C7` | (4, −4) | C3 | 35 个矿块 · needs_iron_tool |
-| 支 2 | 钻石镐：另一半矿 | `6BB00000000000C8` | (6, −4) | C7 | 15 个矿块 · needs_diamond_tool |
+| 支 2 | 钻石镐：另一半矿 | `6BB00000000000C8` | (6, −4) | C7 | 9 个矿块 · needs_diamond_tool |
 | 支 3 | 地表先看草：巨矿的指示物 | `6BB00000000000C9` | (0, −8) | C1 | 主世界 16 份巨矿 |
 
 ### 14.2 触及星辰（7 格：主线 5 + 支线 2）
@@ -541,7 +625,7 @@ python kubejs/tools/scan_world.py --max-chunks 200 # 每维度最多读多少区
 | 主 1 | 月球：钛 · 钒 · 锆 | `6CD40000000000C1` | (0, 0) | `6BB00000000000C6` | 月岩 · 12 / 5 / 6 块每区块 |
 | 主 2 | 水星：钨 · 钼 | `6CD40000000000C2` | (2, 0) | C1 | 2×8 · 各 16 块/区块 |
 | 主 3 | 水星：钽 · 铌 | `6CD40000000000C3` | (4, 0) | C2 | 1×6 · 各 6 块/区块 |
-| 主 4 | 火星：钕 · 钆 · 钇 · 铪 | `6CD40000000000C4` | (6, 0) | C3 | 稀土四兄弟 · 各 6 块/区块 |
+| 主 4 | 火星：独居石 · 铪 | `6CD40000000000C4` | (6, 0) | C3 | 稀土矿与难熔伴生 · 18 / 6 块每区块 |
 | 主 5 | 冰星：锂 · 铍 | `6CD40000000000C5` | (8, 0) | C4 | 1×4 · 各 4 块/区块（六边形） |
 | 支 1 | 出发前先换镐子 | `6CD40000000000C6` | (0, −4) | C1 | 行星上的工具档 |
 | 支 2 | 行星石本身也是料 | `6CD40000000000C7` | (0, −8) | C1 | 月岩 / 水星石 / 火星石 / 冰星石 |

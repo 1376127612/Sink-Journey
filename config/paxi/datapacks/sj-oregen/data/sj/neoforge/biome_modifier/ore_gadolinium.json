@@ -1,8 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#sj:mars",
-  "features": [
-    "sj:ore_gadolinium_placed"
-  ],
-  "step": "underground_ores"
-}

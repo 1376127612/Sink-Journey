@@ -1,8 +1,8 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#minecraft:is_end",
+  "biomes": "#sj:mars",
   "features": [
-    "sj:ore_iridium_placed"
+    "sj:ore_monazite_placed"
   ],
   "step": "underground_ores"
 }

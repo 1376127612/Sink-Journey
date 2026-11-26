@@ -5,6 +5,8 @@
 // 3×3×3 砖砌外壳（无输入/输出仓，物料进出全走控制器自己的槽位）：
 //   正面中间 = 控制器；炉膛正中（控制器正后方）= 篝火；
 //   篝火上方留一格烟道直通天空。
+// 结构成型后点外壳任意一格都能开界面（不用对准控制器），潜行时让位给放方块。
+// 控制器贴图自绘：kubejs:block/charcoal_furnace_controller（正面是砖砌炉口 + 火床），
 // 配方类型 sinkjourney:charcoal_furnace，配方见 server_scripts/metallurgy/furnace_recipes.js。
 // 炉况门槛（server_scripts/metallurgy/furnace_events.js）：
 //   1. 炉膛篝火必须点燃（lit=true）——先点火后封砖；被浇灭即停工
@@ -18,7 +20,7 @@
 (function () {
     var MACHINE_ID = 'kubejs:charcoal_furnace'
     var RECIPE_TYPE_ID = 'sinkjourney:charcoal_furnace'
-    var BLOCK_MODEL_ID = 'minecraft:block/bricks'
+    var BLOCK_MODEL_ID = 'kubejs:block/charcoal_furnace_controller'
 
     var RL = Java.loadClass('net.minecraft.resources.ResourceLocation')
     var IO = Java.loadClass('com.lowdragmc.mbd2.api.capability.recipe.IO')
@@ -36,6 +38,9 @@
     )
     var ConfigBlockProperties = Java.loadClass(
         'com.lowdragmc.mbd2.common.machine.definition.config.ConfigBlockProperties'
+    )
+    var ConfigMultiblockSettings = Java.loadClass(
+        'com.lowdragmc.mbd2.common.machine.definition.config.ConfigMultiblockSettings'
     )
     var MachineState = Java.loadClass(
         'com.lowdragmc.mbd2.common.machine.definition.config.MachineState'
@@ -293,6 +298,21 @@
         return machineSettings
     }
 
+    // ---- 多方块设置 -------------------------------------------
+    // showUIWhenClickStructure：结构成型后点外壳任意一格开界面。
+    // MBD2 在 PlayerInteractEvent.RightClickBlock 里遍历覆盖该坐标的控制器，
+    // 图案匹配时把允许开界面的格子记进 openUIMask（PatternPredicate.allowOpenUI，
+    // 默认 true），所以砖壳、篝火、控制器格都算数；潜行时事件跳过，留给人放方块。
+    var multiblockSettings = null
+    var getMultiblockSettings = function () {
+        if (multiblockSettings === null) {
+            multiblockSettings = ConfigMultiblockSettings.builder()
+                .showUIWhenClickStructure(true)
+                .build()
+        }
+        return multiblockSettings
+    }
+
     // ---- 配方逻辑 ---------------------------------------------
     // alwaysModifyRecipe：默认连续同一配方不会重新走 onBeforeRecipeModify，
     // 开关鼓风后要等原料变化才生效；打开它每批都从原始配方重新改时长。
@@ -319,7 +339,16 @@
 
     // ---- 机器定义 ---------------------------------------------
     MBDRegistryEvents.machine(function (event) {
-        event.create('multiblock', RL.parse(MACHINE_ID))
+        var builder = event.create('multiblock', RL.parse(MACHINE_ID))
+        // multiblockSettings 只挂在多方块 builder 上（返回的静态类型是基类，
+        // 运行时才是 MultiblockMachineDefinition.Builder）。万一哪天 API 变了，
+        // 少这个功能也比整台机器注册失败好。
+        try {
+            builder.multiblockSettings(getMultiblockSettings)
+        } catch (err) {
+            console.error('[CF] 点结构开界面设置失败（机器仍可用，只能点控制器）: ' + err)
+        }
+        builder
             .rootState(rootState)
             .blockProperties(blockProperties)
             .machineSettings(getMachineSettings)

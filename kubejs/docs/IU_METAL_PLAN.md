@@ -3,7 +3,7 @@
 > 适用版本：MC 1.21.1 / NeoForge / IU 3.4.0.11 / kubejs_iu 1.0.2
 > 本文定位：**取代** `BASIC_ELECTRIC_AGE.md` §1、`IU_PRIMAL_STEAM.md` §1 里那张"四种金属分工"表，
 > 给出从原始时代到超弦电压段**整套 IU 材料的现实口径**。
-> 相关文档：`IU_MODDING_METHODS.md`（改配方的手段）、`CASING_PROGRESSION.md`（机壳套娃链）、
+> 相关文档：`IU_ALLOY_PLAN.md`（合金的成分/炉档/岗位，本文 §7 的展开）、`IU_MODDING_METHODS.md`（改配方的手段）、`CASING_PROGRESSION.md`（机壳套娃链）、
 > `IU_ELECTRIC_MOTOR.md`（电动机专家链）、`SE_LINE.md`、`OIL_LINE_V2.md`、`PGM_LINE.md`、
 > `SILICON_WAFER_TIERS.md`、`IU_CHIP_OVERHAUL.md`、`MIDGAME_PLAN.md`。
 >
@@ -261,7 +261,8 @@ IU 的 294 台机器方块全部挂在 4 档电镀外壳 + 光子外壳上（实
 
 ## 7. 本包已有合金的现实定位
 
-IU 自带一批**真合金名**，这是最值得利用的资产。按现实用途重新定位，不要按稀有度乱塞：
+IU 自带一批**真合金名**，这是最值得利用的资产。按现实用途重新定位，不要按稀有度乱塞
+（成分、炉档、时代门、逐条改动清单见 `IU_ALLOY_PLAN.md`，本节只列用途）：
 
 | 合金 | 现实成分 | 现实用途 | 本包落点 |
 | --- | --- | --- | --- |

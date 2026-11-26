@@ -58,6 +58,9 @@ var ConfigRecipeLogicSettings = Java.loadClass(
 var ConfigBlockProperties = Java.loadClass(
     'com.lowdragmc.mbd2.common.machine.definition.config.ConfigBlockProperties'
 )
+var ConfigMultiblockSettings = Java.loadClass(
+    'com.lowdragmc.mbd2.common.machine.definition.config.ConfigMultiblockSettings'
+)
 var MachineState = Java.loadClass(
     'com.lowdragmc.mbd2.common.machine.definition.config.MachineState'
 )
@@ -238,20 +241,43 @@ var blockProperties = ConfigBlockProperties.builder()
     .build()
 
 var rootState = MachineState.baseBuilder()
-    .modelRenderer(RL.parse('minecraft:block/bricks')) // 可直接用原版方块模型
+    .modelRenderer(RL.parse('kubejs:block/charcoal_furnace_controller'))
     .shape(Shapes.block())
     .lightLevel(0)
     .build()
 ```
 
-- `modelRenderer` 填任意方块模型 id；本包先用原版材质占位（砖块 / 泥砖）。
-- 机器方块和控制器物品不需要单独写模型 JSON。
+- `modelRenderer` 填任意方块模型 id。要用自己的贴图就在 `kubejs/assets/kubejs/models/block/` 放模型、`textures/block/` 放图，
+  引用写 `kubejs:block/<名字>`（KubeJS 的 `assets/` 本身就是一张资源包）。
+- 机器方块的模型**按 `facing` 属性整体旋转**（`ModelFactory.getRotation`），模型自己的 `north` 面就是机器正面，
+  所以正面贴图照原版 `block/orientable` 的写法给（`top` / `front` / `side` 三个纹理键），不用写 blockstate。
+- 机器方块和控制器物品不需要单独写模型 JSON：物品也走这台机器的渲染器。
 
 ### 1.7 机器定义
 
 ```js
+// 多方块专属设置：builder 是 MultiblockMachineDefinition.Builder（运行时类型），
+// 所以 .multiblockSettings(...) 只能写在 create('multiblock', ...) 的返回上
+var multiblockSettings = null
+var getMultiblockSettings = function () {
+    if (multiblockSettings === null) {
+        multiblockSettings = ConfigMultiblockSettings.builder()
+            .showUIWhenClickStructure(true)   // 点结构任意格开界面
+            .build()
+    }
+    return multiblockSettings
+}
+
 MBDRegistryEvents.machine(function (event) {
-    event.create('multiblock', RL.parse(MACHINE_ID))
+    var builder = event.create('multiblock', RL.parse(MACHINE_ID))
+    // multiblockSettings 只在多方块 builder 上；包一层 try，
+    // 免得以后 API 变动把整台机器的注册一起带下去
+    try {
+        builder.multiblockSettings(getMultiblockSettings)
+    } catch (err) {
+        console.error('[XX] 点结构开界面设置失败: ' + err)
+    }
+    builder
         .rootState(rootState)
         .blockProperties(blockProperties)
         .machineSettings(getMachineSettings)
@@ -259,9 +285,26 @@ MBDRegistryEvents.machine(function (event) {
 })
 ```
 
-- `create('multiblock', ...)` 只做多方块；单方块用 `create('single', ...)`（见 `primitive_mbd2.js`）。
+- `create('multiblock', ...)` 只做多方块；单方块用 `create('single', ...)`（见 `primitive_mbd2.js`），单方块**没有** `multiblockSettings`。
 - 该方法会**同时生成方块和同名控制器物品**，所以服务端合成配方直接写 `kubejs:charcoal_furnace` 即可。
-- `machineSettings` 传函数而不是对象（见 1.4）。
+- `machineSettings` / `multiblockSettings` 都传函数而不是对象（见 1.4）。
+
+### 1.8 点结构任意格开界面
+
+`ConfigMultiblockSettings.builder().showUIWhenClickStructure(true)`（默认 `false`）开启后，**不用对准控制器**：
+MBD2 在 `PlayerInteractEvent.RightClickBlock` 里遍历覆盖该坐标的所有控制器，只要图案匹配时把这一格记进了
+`openUIMask`（`PatternPredicate.allowOpenUI`，默认 `true`），就由控制器负责开界面，砖壳、篝火、风口格都算数。
+
+三个配套条件，缺一个都点不开：
+
+| 条件 | 说明 |
+|---|---|
+| `hasUI(true)` | 机器得有界面 |
+| `showUIOnlyFormed`（默认 `true`） | 结构成型后才点得开；想未成型也能开就设 `false` |
+| 不潜行、手上不是 MBD2 调试工具 | MBD2 在这些情况下主动让位，免得挡住放方块 |
+
+> 点击**未成型**的控制器不是这个开关管的：那是 1.7 里控制器方块自己的右键逻辑
+> （`MBDMachine.shouldOpenUI` → `openUI`），只对控制器那一格生效。
 
 ---
 
@@ -496,6 +539,7 @@ MBDMachineEvents.onBeforeRecipeModify(CF, function (event) {
 - [ ] `/give @s <机器id>` 能拿到控制器物品，放下后是机器方块
 - [ ] 按图案搭壳，结构正确成型；JEI 结构预览与实际一致（或预览报错但机器可用时，检查 `shapeInfoFactory`）
 - [ ] 打开控制器界面：槽位数量、输出槽只出不进、进度条可见
+- [ ] 点外壳任意一格（不对准控制器、不潜行）也能开同一个界面；潜行时点砖可以正常放方块
 - [ ] 投料 + 满足炉况 → 开工，进度走完产出正确、时长符合预期
 - [ ] 不满足炉况 → 拒绝开工，日志只打一行、不刷屏
 - [ ] 拆机器 → 内容物正常掉落（`setDropItems(true)`）

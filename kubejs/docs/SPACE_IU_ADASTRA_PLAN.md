@@ -62,7 +62,8 @@
 - `config/ad_astra.jsonc`：**一个开关都不动**。Ad Astra 的氧气/温度/重力照常，宇航服体系继续有效。
 - Ad Astra 的维度、群系、星球表、`placed_feature`：不动。`sj-oregen` 只往 Ad Astra 群系里加 IU 的矿（`neoforge:add_features`），不覆盖原文件。
 - `Ad Astra: More Structures` 的 8 个结构：不动，见 §4。
-- IU 的四台航天器装配机、发射台、空间研究台、全息投影、太空模块、殖民地：不动。
+- IU 的四台航天器装配机、发射台、空间研究台、全息投影、太空模块、殖民地：不动
+  （**出矿表除外**：2026-11-26 起按 `ORE_GENERATION.md §4.7` 重排，远征与殖民地各天体只出它那一层的矿）。
 - IU 的 34 个太空维度：**不再注册**（见 §2.1 的 `IuSpaceDimensionRegistrationMixin`），`industrialupgrade:earth` 例外。
   `sj-oregen` 里那份「把维度覆盖成虚空」的数据包（`gen_oregen.py: void_iu_space()`）保留成备份：
   注册层拦掉之后它们连解析都不会发生，留着只在 mixin 万一失效时兜底。
@@ -76,7 +77,7 @@
 | 上月球/火星/金星/水星/霜原 | Ad Astra 发射台 + 对应阶火箭 | 环境用 Ad Astra 的氧气/温度/重力，宇航服、氧气温室重新变成必需品 |
 | 后期矿（钨钼钽铌、稀土、钕、钕钆钇、锆铪…） | 在 Ad Astra 行星上挖 | `sj-oregen` 的既有投矿位置，未改动 |
 | 星球遗迹/地牢 | Ad Astra 原生 + More Structures 新增 8 种 | §4 |
-| IU 的天体研究、探测器/卫星/漫游车/火箭远征、殖民地 | IU 空间研究台 + 发射台 | 纯模拟，产出 IU 太空矿；**玩家不再需要、也无法亲自落地** |
+| IU 的天体研究、探测器/卫星/漫游车/火箭远征、殖民地 | IU 空间研究台 + 发射台 | 纯模拟，产出 IU 太空矿（天体矿种按 `ORE_GENERATION.md §4.7` 分层）；**玩家不再需要、也无法亲自落地** |
 | 星门 / 行星跃迁 | 已封禁 | 唯一载人入口 |
 
 任务侧**不用改**：`ORE_GENERATION.md` §4.4 与 §14.2 已经把关卡矿（月球钛/钒/锆、水星钨钼钽铌、
