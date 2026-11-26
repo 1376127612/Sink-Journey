@@ -1,0 +1,3 @@
+	[general.kami]
+		#Build164 general.kami.forceenabled; registry-affecting setting, applied on application startup.
+		forceenabled = true

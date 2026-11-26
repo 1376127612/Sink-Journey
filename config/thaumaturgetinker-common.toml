@@ -1,0 +1,20 @@
+#Build 164: enable infused fire transformations and spread.
+enableFire = true
+#Build 164: Aer fire may transform source water into cake.
+enableCake = true
+#Build 164: allow awakened ichorcloth chestplate flight.
+enableFlight = true
+#Legacy Bedrock dimension id; 0 disables portal access. Modern key: thaumaturgetinker:bedrock.
+# Default: -19
+# Range: > -2147483648
+bedrockDimensionID = -19
+#Build 164 vertical ore clusters per chunk (200 vein attempts per cluster).
+# Default: 1
+# Range: > 0
+bedrockOreDensity = 1
+#Original OreDictionary names excluded from Bedrock generation.
+bedrockOreBlacklist = ["oreFirestone"]
+
+	[placementMirror.blocks]
+		#Display phantom preview blocks when holding the Worldshaper's Seeing Glass.
+		show = true
