@@ -129,3 +129,81 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: embers:metal_coefficient/storage_blocks/mithirl
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'embers:recipe/metal_coefficient/storage_blocks/mithirl',
+      {
+        "type": "embers:metal_coefficient",
+        "block_tag": "c:storage_blocks/dwarven_mithril",
+        "coefficient": 3.5
+      }
+    )
+})
+// kubejsstudio custom: embers:metal_coefficient/stellar_alloy_block
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'embers:recipe/metal_coefficient/stellar_alloy_block',
+      {
+        "type": "embers:metal_coefficient",
+        "block_tag": "c:storage_blocks/stellar_alloy",
+        "coefficient": 10
+      }
+    )
+})
+// kubejsstudio custom: embers:metal_coefficient/storage_blocks/
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'embers:recipe/metal_coefficient/storage_blocks/netherite',
+      {
+        "type": "embers:metal_coefficient",
+        "block_tag": "c:storage_blocks/netherite",
+        "coefficient": 4,
+        "neoforge:conditions": [
+          {
+            "type": "almostunified:conditional",
+            "conditions_met": true,
+            "original_conditions": [
+              {
+                "type": "almostunified:conditional",
+                "conditions_met": true,
+                "original_conditions": [
+                  {
+                    "type": "neoforge:not",
+                    "value": {
+                      "type": "neoforge:tag_empty",
+                      "tag": "c:storage_blocks/netherite"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    )
+})
+// kubejsstudio custom: embers:alchemy/ashen_fabric
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'embers:recipe/alchemy/ashen_fabric',
+      {
+        "type": "embers:alchemy",
+        "aspects": [
+          {"tag":"embers:aspectus/iron"},
+          {"tag":"embers:aspectus/lead"},
+          {"tag":"embers:aspectus/dawnstone"},
+          {"tag":"embers:aspectus/dwarven_mithril"}
+        ],
+        "inputs": [
+          {"tag":"c:dusts/ash"},
+          {"tag":"c:dusts/ash"},
+          {"tag":"c:string"},
+          {"tag":"c:string"},
+          {"tag":"c:slime_balls"}
+        ],
+        "output": {"id":"embers:ashen_fabric"},
+        "tablet": {"tag":"minecraft:wool"}
+      }
+    )
+})

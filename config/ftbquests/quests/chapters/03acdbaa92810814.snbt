@@ -299,5 +299,16 @@
 			x: -2.5d
 			y: -6.0d
 		}
+		{
+			dependencies: ["154B342B39E12DC3"]
+			id: "0FBCC897FDF2C9DC"
+			tasks: [{
+				id: "5A428ACC4E6645EB"
+				item: { count: 1, id: "minecraft:furnace" }
+				type: "item"
+			}]
+			x: -0.5d
+			y: -9.5d
+		}
 	]
 }

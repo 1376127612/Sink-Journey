@@ -203,7 +203,10 @@
 			y: 1.5d
 		}
 		{
-			dependencies: ["749AF51E60268100"]
+			dependencies: [
+				"749AF51E60268100"
+				"0FBCC897FDF2C9DC"
+			]
 			id: "0B73D9E1303C41BD"
 			tasks: [{
 				id: "2C4DD5DEA89AA7A0"
@@ -354,6 +357,7 @@
 				"7E2342ED402B6E97"
 				"0056045684755D67"
 			]
+			hide_dependency_lines: true
 			id: "14D88052708750EA"
 			tasks: [
 				{
@@ -374,6 +378,50 @@
 			]
 			x: 2.5d
 			y: 7.0d
+		}
+		{
+			dependencies: ["14E2E0D36E686107"]
+			id: "63D58C0364D64551"
+			tasks: [{
+				id: "1538CA77324DE7D8"
+				item: { count: 1, id: "kubejs:harmony_sounds" }
+				type: "item"
+			}]
+			x: 14.0d
+			y: 5.5d
+		}
+		{
+			dependencies: ["3D94735C2E3745DD"]
+			id: "32D603DE7A5BA336"
+			tasks: [{
+				id: "0969810F9868E5CB"
+				item: { components: { "minecraft:custom_data": { lastUse: 1074073L } }, count: 1, id: "embers:blazing_ray" }
+				type: "item"
+			}]
+			x: 7.0d
+			y: 8.0d
+		}
+		{
+			dependencies: ["3D94735C2E3745DD"]
+			id: "28578D0264003331"
+			tasks: [{
+				id: "22FE372B55964443"
+				item: { components: { "minecraft:custom_data": { lastUse: 1082114L } }, count: 1, id: "embers:cinder_staff" }
+				type: "item"
+			}]
+			x: 8.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["3D94735C2E3745DD"]
+			id: "1C94EF2659EE0C30"
+			tasks: [{
+				id: "610F8453AF4B94B3"
+				item: { count: 1, id: "embers:tyrfing" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 6.5d
 		}
 	]
 }
