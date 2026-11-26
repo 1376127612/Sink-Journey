@@ -1,0 +1,19 @@
+{
+  "values": [
+    "industrialupgrade:baseore/iridium",
+    "industrialupgrade:baseore/platinum",
+    "industrialupgrade:baseore/tungsten",
+    "industrialupgrade:baseore1/tantalum",
+    "industrialupgrade:baseore2/gadolinium",
+    "industrialupgrade:baseore2/hafnium",
+    "industrialupgrade:baseore2/molybdenum",
+    "industrialupgrade:baseore2/neodymium",
+    "industrialupgrade:baseore2/niobium",
+    "industrialupgrade:baseore2/palladium",
+    "industrialupgrade:baseore2/yttrium",
+    "industrialupgrade:baseore2/zirconium",
+    "industrialupgrade:mineral/braggite",
+    "industrialupgrade:mineral/iridosmine",
+    "industrialupgrade:thorium_ore/thorium_ore"
+  ]
+}

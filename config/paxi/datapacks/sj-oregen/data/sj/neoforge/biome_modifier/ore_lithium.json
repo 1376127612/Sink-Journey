@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#sj:glacio",
+  "features": [
+    "sj:ore_lithium_placed"
+  ],
+  "step": "underground_ores"
+}

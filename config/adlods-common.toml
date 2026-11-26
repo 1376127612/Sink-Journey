@@ -32,10 +32,10 @@
 	spawnFlowers = "ANY"
 	#Where to spawn stone pebbles (requires Advanced Finders mod)
 	#Allowed Values: NOWHERE, ON_GROUND, UNDER_WATER, ANYWHERE
-	spawnPebbles = "UNDER_WATER"
+	spawnPebbles = "NOWHERE"
 	#Where to spawn surface samples (requires Surface Samples mod)
 	#Allowed Values: NOWHERE, ON_GROUND, UNDER_WATER, ANYWHERE
-	spawnSurfaceSamples = "ANYWHERE"
+	spawnSurfaceSamples = "NOWHERE"
 
 [Features]
 	#Disables generation of the listed features in the world

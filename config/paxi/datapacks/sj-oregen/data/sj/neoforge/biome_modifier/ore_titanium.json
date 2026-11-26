@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#sj:moon",
+  "features": [
+    "sj:ore_titanium_placed"
+  ],
+  "step": "underground_ores"
+}

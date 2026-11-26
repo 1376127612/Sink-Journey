@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "pack_format": 48,
+    "supported_formats": {
+      "min_inclusive": 15,
+      "max_inclusive": 999
+    },
+    "description": "Sink Journey: 原生矿石生成（主世界常见矿 / 下界热液 / 末地镍与铂族 / Ad Astra 后期矿）"
+  }
+}

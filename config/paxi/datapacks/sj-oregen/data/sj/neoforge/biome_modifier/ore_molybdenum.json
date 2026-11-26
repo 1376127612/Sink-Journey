@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#sj:mercury",
+  "features": [
+    "sj:ore_molybdenum_placed"
+  ],
+  "step": "underground_ores"
+}

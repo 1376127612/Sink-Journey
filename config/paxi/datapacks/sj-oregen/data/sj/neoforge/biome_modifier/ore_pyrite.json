@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": [
+    "sj:ore_pyrite_placed"
+  ],
+  "step": "underground_ores"
+}

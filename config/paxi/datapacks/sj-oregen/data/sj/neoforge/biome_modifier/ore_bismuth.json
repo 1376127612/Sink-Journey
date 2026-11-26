@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_nether",
+  "features": [
+    "sj:ore_bismuth_placed"
+  ],
+  "step": "underground_ores"
+}

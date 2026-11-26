@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "size": 6,
+    "discard_chance_on_air_exposure": 0.0,
+    "targets": [
+      {
+        "state": {
+          "Name": "industrialupgrade:baseore2/niobium"
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "ad_astra:mercury_stone"
+        }
+      }
+    ]
+  }
+}

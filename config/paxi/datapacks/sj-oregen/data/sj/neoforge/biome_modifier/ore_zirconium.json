@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#sj:moon",
+  "features": [
+    "sj:ore_zirconium_placed"
+  ],
+  "step": "underground_ores"
+}

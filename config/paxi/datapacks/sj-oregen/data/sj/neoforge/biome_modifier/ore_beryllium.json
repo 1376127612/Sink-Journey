@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#sj:glacio",
+  "features": [
+    "sj:ore_beryllium_placed"
+  ],
+  "step": "underground_ores"
+}

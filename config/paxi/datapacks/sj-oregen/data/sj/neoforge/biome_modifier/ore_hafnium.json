@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#sj:mars",
+  "features": [
+    "sj:ore_hafnium_placed"
+  ],
+  "step": "underground_ores"
+}
