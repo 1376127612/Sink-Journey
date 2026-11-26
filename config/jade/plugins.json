@@ -93,6 +93,9 @@
     "display.deconstruction_tables": "GOGGLES",
     "machine_icon": true
   },
+  "thaumaturgetinker": {
+    "devices": true
+  },
   "jade": {
     "coordinates.rel": false,
     "registry_name.special": false,
