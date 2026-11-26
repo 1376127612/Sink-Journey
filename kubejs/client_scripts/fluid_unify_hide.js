@@ -79,6 +79,10 @@ RecipeViewerEvents.removeEntries('fluid', event => {
     'qmd:tungsten',
   ]
   merged.forEach(id => {
+    // OEF 会把源流体换成一个统一 id，换掉之后源 id 不在注册表里，
+    // Fluid.of(id, 1000) 会在事件收尾时抛 "Fluid with ID ... does not exist"，
+    // 而那种流体本来也不会出现在 JEI 里，跳过即可。
+    if (!Fluid.exists(id)) return
     try {
       event.remove(Fluid.of(id, 1000))
     } catch (err) {

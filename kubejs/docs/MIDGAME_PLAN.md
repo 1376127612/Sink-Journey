@@ -187,7 +187,8 @@ P1 先做：它同时验证电压布局与机器长相，后面所有段都照�
 2. MMCR 端口只支持"至少 N 档"，新机器一律配 `SinkPorts` 分级仓。
 3. IU 配方池是 Java 内存，增删改走 `SinkJourneyCore` 的 `iu_patches.json`；电压/等级体系硬编码，只能顺着用。
 4. KubeJS Rhino 里 `const/let` 会被当脚本级 var，统一写 `var`。
-5. 铝两套拼写：`aluminum`（NeoEcoAE/NuclearCraft）与 `aluminium`（IU）。
+5. 铝两套拼写：`aluminum`（NeoEcoAE/NuclearCraft）与 `aluminium`（IU）。已用 `kubejs/data/c/tags/item/<kind>/aluminum.json`
+   把 IU 的锭/粉/块/原矿挂进美式 tag，产物统一落到 IU；写配方不要再引用 `nuclearcraftneohaul:aluminum_*`。
 6. 流体 ID 随版本变：`iufluidethene` 在 IU 3.4.0.11 已不存在，只有 `iufluidethylene`。
 7. 改 AStages 先看 `RESEARCH_VERIFY.md`，recipe 的 `//` 格式写错会崩服。
 8. `TransformerMode` 里可以开导线损耗与无线缆限流（`config/industrialupgrade-common.toml` §TransformerMode），

@@ -56,7 +56,7 @@
 |---|---|---|
 | roots 柴堆 pyre | 明火热源，`roots:pyre` 数据配方（现有铜链已用） | **L0 热源** |
 | roots 研钵 mortar | 右键交互 N 次出料（`times` 字段） | 破磨 |
-| roots 矿物 | 自带 `silver_ore`、`raw_silver`、`copper_pickaxe` | 银矿来源；铜镐已是现有工具 |
+| IU 银矿 | `industrialupgrade:baseore/silver`（主世界，见 `ORE_GENERATION.md`） | 银矿来源；roots 自带的 `silver_ore` 已停生成，只留物品 |
 | IndustrialUpgrade | `raw_tin/lead`、全套 `crushed/*`、`baseblockingot/electrum` | 碎矿统一走 IU 物品，避免自建。**仅借用物品 id，获取仍靠研钵**（原始时代没有别的来源；IU 电动破碎机属 era.electric，被 AStages item 限制（`config/astages/simple/astages/item.json`，stage `era.electric`）锁住，不会提前漏出碎矿）；`purifiedcrushed/iron` 已从链路退役，土高炉直接吃 `crushed/iron` |
 | Embers | `atmospheric_bellows`（风箱方块，L1 复用；炉体材质已改用原版砖块，不再用 caminite） | L1 鼓风 |
 | IndustrialUpgrade | `itemingots/electrum_ingot` + 全套 electrum 粒/粉/板/齿轮 | 琥珀金 canonical 物品（`c:ingots/electrum` 唯一成员）与奖励 |
@@ -73,7 +73,7 @@
 
 ```
 矿脉(铜/锡/铅 = L0 ｜ 银/金 = L1 ｜ 铁 = L2)
-    │ 燧石镐/铜镐挖掘 → 掉 raw_*（原版 raw / roots raw_silver / IU raw_tin·lead）
+    │ 燧石镐/铜镐挖掘 → 掉 raw_*（原版 raw / IU raw_silver·raw_tin·raw_lead）
     ▼
 roots:mortar 研磨（右键 5 次或 ×5 批量 15 次）
     │  研钵是原始时代唯一碎矿手段：徒手/熔炉都磨不出碎矿
@@ -133,7 +133,7 @@ industrialupgrade:crushed/<metal>
 
 ### 5.3 银 / 金（L1 主线原料）
 
-- 挖掘：铜镐即可（拟真：金银矿软）；roots `silver_ore` → `raw_silver`；金走原版 raw_gold；
+- 挖掘：铜镐即可（拟真：金银矿软）；IU `baseore/silver` → `raw_silver`；金走原版 raw_gold；
 - 研磨：mortar → `crushed/silver`、`crushed/gold`；
 - **L0 删除**：碎银/碎金没有任何柴堆配方（负反馈方案已废弃）；
 - 炭炉：crushed ×2 + 煤 ×1 → 对应 nugget ×7（银 `mekmm:nugget_silver`、金 `minecraft:gold_nugget`；还原气氛收率高，≈0.78 锭/矿）；

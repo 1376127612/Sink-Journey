@@ -10,7 +10,8 @@
 > - `kubejs/server_scripts/misc/metallurgy.js` / `misc/pyre.js`（研钵与柴堆）
 > - `kubejs/server_scripts/industrial/iu_plate_routes.js`（余烬压印 / Create 压板）
 > - `kubejs/server_scripts/bans/iu_anvil_ban.js`（铁砧封禁 + 熔炼炉禁钢）
-> - `kubejs/server_scripts/metallurgy/blast_furnace_recipes.js`（新增渗碳钢）
+> - `kubejs/server_scripts/metallurgy/blast_furnace_recipes.js`（土高炉炼铁，只有铁）
+> - `kubejs/server_scripts/metallurgy/iu_blast_furnace.js`（IU 高炉的获取 + 炼钢）
 > - `config/astages/simple/astages/item.json`（钢锁在 era.steam）
 > 任务：
 > - `config/ftbquests/quests/chapters/3f5a7c2b9e1d4a60.snbt`「原始时代」（13 步：主线 12 + 支线 1）
@@ -153,13 +154,30 @@
 
 ---
 
-## 7. 钢（蒸汽时代末期）
+## 7. 钢（蒸汽时代末期，IU 高炉）
 
-1. **土高炉渗碳**：铁锭 ×2 + 方解石 ×1 + 煤/木炭 ×4 → 钢锭 ×1，120 秒。
-2. **熔炼炉禁钢**：`iu_anvil_ban.js` 删掉熔炼炉 `ingot_casting` / `smeltery` 两个池里的
+1. **高炉炼钢**：IU 高炉（`industrialupgrade:blastfurnace/*`，3×3×3）铁锭 → 钢锭，3600t 一批。
+   产物表写在 `BlockEntityBlastFurnaceMain` 里（铁锭 → `advIronIngot`，即 `itemingots/steel_ingot`），
+   数据包改不到，所以只魔改「怎么拿到这座炉子」，配方表不动。
+2. **获取改到蒸汽末期**（`metallurgy/iu_blast_furnace.js`）：原版零件要镁 / 因瓦 / 钢制储罐，
+   镁在蒸汽时代不存在，整座炉子等于锁在电力时代。改法：
+   - 高炉混合料 `2423`：镁锭 ×2 → 铁粉 ×2（黏土 + 氧化铁 + 砂石骨料）；
+   - 高炉输入 `688`：因瓦齿轮 ×4 → 青铜齿轮 ×4；
+   - 高炉流体输入 `689`：钢制储罐 → 铜锅炉（钢要等这座炉子，不能自锁）；
+   - 高炉控制器 `691`：中心电子电路 → 机械动力**精密构件**（与 `era.steam` 同节点解锁）；
+   - 加热泵 `687`、输出 `690` 不动（原型流体加热器 / 琥珀金齿轮，蒸汽可造）。
+3. **热源也一起解锁**：高炉要加热泵满热才开工，唯一热源 `basemachine3/fluid_heat`
+   （液体加热器）原配方是电力三件套（元件:发电机 + 电动机 + 元件:流体），蒸汽末期造不出来：
+   - `744` 热水箱：真空腔室（铝板）+ 镁板 ×3 → 铜锅炉 + 铁板 + 铜板；
+   - `1456` 液体加热器：三件套 → 元件:蒸发 + 元件:液体储存 + 热水箱 + 铜锅炉。
+
+   液体加热器贴着加热泵外墙放，烧**岩浆**就能把 1000 热顶满（5 mB/次、每次 +5 热）；
+   IU 没给热管配方，只能贴脸直连。元件:流体（`824`）不动，那是电力时代的镍板版本。
+4. **熔炼炉禁钢**：`iu_anvil_ban.js` 删掉熔炼炉 `ingot_casting` / `smeltery` 两个池里的
    钢锭 / 钢板 / 钢块 / 钢外壳产物——它本来能用「熔融铁 + 熔融碳」混出熔融钢再浇注。
-3. **阶段锁**：7 个钢类物品锁在 `era.steam`（由研究节点 `sink:steam_precision` 授予）。
-4. **下游**：钢板 → 强化铁砧 → 蒸汽轧机，是这条线的终点。
+5. **阶段锁**：7 个钢类物品 + 6 个高炉方块锁在 `era.steam`（由拿到 `kubejs:blueprint_steam` 的
+   研究节点 `sink:blueprint_mechanical` 授予，同一个节点也解锁精密构件配方）。
+6. **下游**：钢板 → 强化铁砧 → 蒸汽轧机，是这条线的终点。
 
 ---
 
@@ -199,7 +217,7 @@
 | ---: | --- | --- | --- |
 | 1 | 手工轧机 | `73F4FB7D17278454` | 挂在「铁板」 |
 
-### 8.2 工业之始（主线 13 步 + 支线 13 步）
+### 8.2 工业之始（主线 14 步 + 支线 13 步）
 
 主线 `y = 0`，从左往右一格 2.0，第 N 个只依赖第 N-1 个：
 
@@ -215,9 +233,10 @@
 | 8 | 蒸汽锅炉（多方块） | `43D5726B73FFD4E3` | `79789218839D6E7D` |
 | 9 | 电动蒸汽发生器 | `15F9B4F39AC30284` | `43D5726B73FFD4E3` |
 | 10 | 微型熔炉 | `35673E8862ECC966` | `15F9B4F39AC30284` |
-| 11 | 渗碳成钢 | `6FC90AA2AAA16C3F` | `35673E8862ECC966` |
-| 12 | 强化铁砧 | `39224A23A36F5D89` | `6FC90AA2AAA16C3F` |
-| 13 | 蒸汽轧机 | `35B9A0B50B6D5A7C` | `39224A23A36F5D89` |
+| 11 | 高炉（多方块） | `5A1B000000000010` | `35673E8862ECC966` |
+| 12 | 高炉出钢 | `6FC90AA2AAA16C3F` | `5A1B000000000010` |
+| 13 | 强化铁砧 | `39224A23A36F5D89` | `6FC90AA2AAA16C3F` |
+| 14 | 蒸汽轧机 | `35B9A0B50B6D5A7C` | `39224A23A36F5D89` |
 
 产线 `y = -4`（7 步，蒸汽粉碎机 → 蒸汽乳胶提取机），竖直挂在主线「蒸汽压力调节器」上：
 
@@ -251,7 +270,8 @@
 
 ## 9. 对既有内容的改动（全部列出）
 
-1. `metallurgy/blast_furnace_recipes.js`：**新增**一条渗碳钢，其余未动。
+1. `metallurgy/blast_furnace_recipes.js`：删掉渗碳钢，土高炉只剩炼铁；
+   `metallurgy/iu_blast_furnace.js`：IU 高炉零件与热源改到蒸汽材料，控制器中心换精密构件。
 2. `config/astages/simple/astages/item.json`：**追加** 7 条 `steam_gate_i*`，原 39 条未动。
 3. `config/ftbquests/quests/chapters/5fe0048b1a2b6a65.snbt`：
    保留 11 个原有任务（id / 任务 id / 奖励不变，重排依赖与坐标）；

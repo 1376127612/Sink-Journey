@@ -272,7 +272,7 @@
       "gravel",
       "dust"
     ],
-    "smelt_to": "nuclearcraftneohaul:aluminum_ingot",
+    "smelt_to": "industrialupgrade:itemingots/aluminium_ingot",
     "smelt_xp": 0.7,
     "ore_tag": "c:ores/aluminum",
     "raw_tag": "c:raw_materials/aluminum",

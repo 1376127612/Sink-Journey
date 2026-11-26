@@ -17,6 +17,9 @@
 //      AE2 本体用的是 铁 + 铜，太便宜，也不体现时代。改成本时代白名单金属：
 //        钢 = 机壳与结构，银 = 导体，镍 = 线圈与抗蚀件，铅 = 屏蔽。
 //      ME 控制器里塞一台 IU 电动机，AE 因此必须建在电力工业之上。
+//   3. 五台主机照 DJ2 的 AppliedEnergistics2.zs 重写（:20-63）：
+//      钢锭 / 钢板 / 粘性活塞 / 福鲁伊克斯水晶与粉 / 充能赛特斯石英，
+//      DJ2 用「注能赛特斯石英」当门禁，本包用同一件料的 1.21 名字（充能赛特斯石英）。
 //
 // 详细说明：kubejs/docs/BASIC_ELECTRIC_AGE.md
 // ============================================================
@@ -24,6 +27,7 @@
 ServerEvents.recipes(event => {
     var WAFER = 'industrialupgrade:crafting_elements/crafting_494_element'
     var MOTOR = 'industrialupgrade:crafting_elements/crafting_276_element'
+    var CHARGED = 'ae2:charged_certus_quartz_crystal'
 
     var aShaped = function (id, output, pattern, key, count) {
         event.remove({ id: id })
@@ -48,54 +52,56 @@ ServerEvents.recipes(event => {
     event.remove({ id: 'ae2:smelting/silicon_from_certus_quartz_dust' })
     event.remove({ id: 'ae2:blasting/silicon_from_certus_quartz_dust' })
 
-    // ---- 3. 压印器 ----
-    // 原：铁锭 / 活塞 / 铜锭
+    // ---- 3. 压印器（DJ2 AppliedEnergistics2.zs:24，镜像型）----
+    // 钢锭 + 粘性活塞 + 福鲁伊克斯水晶 + 充能赛特斯石英：照 DJ2 的料换成本包的物品名
     aShaped('ae2:network/blocks/inscribers', 'ae2:inscriber',
-        ['ABA', 'C A', 'ABA'],
+        ['ABA', 'CDB', 'ABA'],
         {
             A: '#c:ingots/steel',
-            B: 'minecraft:piston',
-            C: '#c:ingots/silver'
+            B: 'minecraft:sticky_piston',
+            C: 'ae2:fluix_crystal',
+            D: CHARGED
         })
 
-    // ---- 4. 充能器 ----
-    // 原：铁锭 / 铜锭
+    // ---- 4. 充能器（:20）----
+    // DJ2 的原形状：钢板立三列、充能赛特斯石英两块，中列空着
     aShaped('ae2:network/blocks/crystal_processing_charger', 'ae2:charger',
-        ['ABA', 'A  ', 'ABA'],
+        ['ABA', 'ACA', 'ABA'],
         {
             A: '#c:plates/steel',
-            B: '#c:ingots/silver'
+            B: CHARGED,
+            C: 'ae2:quartz_glass'
         })
 
-    // ---- 5. 能量接收器 ----
-    // 原：铁锭 / 石英玻璃 / 铜锭
+    // ---- 5. 能源接收器（:50）----
+    // 钢锭四角 + 福鲁伊克斯玻璃线缆一圈 + 中心充能石英块（本包没有充能块，用石英块）
     aShaped('ae2:network/blocks/energy_energy_acceptor', 'ae2:energy_acceptor',
         ['ABA', 'BCB', 'ABA'],
         {
-            A: '#c:plates/steel',
-            B: 'ae2:quartz_glass',
-            C: '#c:ingots/nickel'
+            A: '#c:ingots/steel',
+            B: 'ae2:fluix_glass_cable',
+            C: 'ae2:quartz_block'
         })
 
-    // ---- 6. ME 驱动器 ----
-    // 原：铁锭 / 工程处理器 / 福鲁伊克斯玻璃线缆
+    // ---- 6. ME 驱动器（:63）----
+    // DJ2：钢板块四角 + 福鲁伊克斯粉 + 中心能源接收器
     aShaped('ae2:network/blocks/storage_drive', 'ae2:drive',
-        ['ABA', 'C C', 'ABA'],
+        ['ABA', 'BCB', 'ABA'],
         {
-            A: '#c:plates/steel',
-            B: 'ae2:engineering_processor',
-            C: 'ae2:fluix_glass_cable'
+            A: '#c:storage_blocks/steel',
+            B: 'ae2:fluix_dust',
+            C: 'ae2:energy_acceptor'
         })
 
-    // ---- 7. ME 控制器 ----
-    // 原：平滑天石 / 福鲁伊克斯水晶 / 工程处理器。
-    // 中心换成 IU 电动机：没有电力工业就没有 ME 网络。
+    // ---- 7. ME 控制器（:54）----
+    // DJ2：光滑天石四角 + 福鲁伊克斯粉与水晶 + 中心充能赛特斯石英
     aShaped('ae2:network/blocks/controller', 'ae2:controller',
-        ['ABA', 'BMB', 'ABA'],
+        ['ABA', 'CDC', 'ABA'],
         {
             A: 'ae2:smooth_sky_stone_block',
-            B: 'ae2:fluix_crystal',
-            M: MOTOR
+            B: 'ae2:fluix_dust',
+            C: 'ae2:fluix_crystal',
+            D: CHARGED
         })
 
     // ---- 8. ME 接口 ----
@@ -104,7 +110,7 @@ ServerEvents.recipes(event => {
         ['ABA', 'C D', 'ABA'],
         {
             A: '#c:plates/steel',
-            B: '#c:glass_blocks/cheap',
+            B: '#c:glass_blocks',
             C: 'ae2:annihilation_core',
             D: 'ae2:formation_core'
         })
@@ -148,5 +154,5 @@ ServerEvents.recipes(event => {
             B: 'minecraft:piston'
         })
 
-    console.info('[AE2] 电力时代 AE 已改：硅印刷片吃晶圆，石英炼硅捷径已封，机器改用 钢/银/铅/镍')
+    console.info('[AE2] AE 已改：硅印刷片吃晶圆，石英炼硅捷径已封，机器改用 钢/银/铅/镍')
 })

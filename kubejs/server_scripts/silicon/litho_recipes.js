@@ -73,19 +73,18 @@ ServerEvents.recipes(event => {
         3: 'industrialupgrade:circuit/nanocircuit_part2',
         4: 'industrialupgrade:circuit/photon_part2'
     }
-    const SHELL = {
-        1: 'minecraft:iron_block',
-        2: 'minecraft:copper_block',
-        3: 'minecraft:gold_block',
-        4: 'minecraft:diamond_block'
-    }
+    // 机壳与玻璃跟着阶段走，不拿铁块铜块凑数：
+    //   四代机台都是电力机壳（机壳链到电力机壳封顶，是蒸汽机机身的下一级）
+    //   玻璃：Mk.I 普通玻璃，Mk.II 起石英玻璃（光路要干净）。
+    const SHELL = 'industrialupgrade:blockresource/machine'
+    const GLASS = { 1: 'minecraft:glass', 2: 'ae2:quartz_glass', 3: 'ae2:quartz_glass', 4: 'ae2:quartz_glass' }
 
     event.shaped('mmcr:wafer_dicer_controller', [
         'SGS',
         'GCG',
         'SCS'
     ], {
-        S: 'minecraft:iron_block',
+        S: 'industrialupgrade:blockresource/machine',
         G: 'minecraft:glass',
         C: 'pneumaticcraft:printed_circuit_board'
     }).id('kubejs:sink_litho/wafer_dicer_controller')
@@ -96,8 +95,8 @@ ServerEvents.recipes(event => {
             'GCG',
             'SGS'
         ], {
-            S: SHELL[t],
-            G: 'minecraft:glass',
+            S: SHELL,
+            G: GLASS[t],
             C: BOARD[t]
         }).id(`kubejs:sink_litho/${MACHINE[t].id}_controller`)
     }

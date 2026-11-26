@@ -273,5 +273,40 @@
     "id": "steam_gate_i6",
     "stage": "era.steam",
     "object": "nuclearcraftneohaul:steel_alloy"
+  },
+  {
+    "id": "steam_gate_bf0",
+    "stage": "era.steam",
+    "object": "industrialupgrade:blastfurnace/blast_furnace_part"
+  },
+  {
+    "id": "steam_gate_bf1",
+    "stage": "era.steam",
+    "object": "industrialupgrade:blastfurnace/blast_furnace_main"
+  },
+  {
+    "id": "steam_gate_bf2",
+    "stage": "era.steam",
+    "object": "industrialupgrade:blastfurnace/blast_furnace_input"
+  },
+  {
+    "id": "steam_gate_bf3",
+    "stage": "era.steam",
+    "object": "industrialupgrade:blastfurnace/blast_furnace_input_fluid"
+  },
+  {
+    "id": "steam_gate_bf4",
+    "stage": "era.steam",
+    "object": "industrialupgrade:blastfurnace/blast_furnace_output"
+  },
+  {
+    "id": "steam_gate_bf5",
+    "stage": "era.steam",
+    "object": "industrialupgrade:blastfurnace/blast_furnace_heat"
+  },
+  {
+    "id": "no_iu_space_stargate",
+    "stage": "era.no_iu_space",
+    "object": "industrialupgrade:space/planetary_translocator"
   }
 ]

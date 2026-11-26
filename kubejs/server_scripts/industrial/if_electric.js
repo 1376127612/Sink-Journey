@@ -67,7 +67,7 @@ ServerEvents.recipes(event => {
         ['IGI', 'BMB', 'IFI'],
         {
             I: '#c:plates/steel',
-            G: '#c:storage_blocks/redstone',
+            G: 'minecraft:redstone_block',
             B: 'minecraft:bucket',
             M: FRAME,
             F: 'minecraft:furnace'

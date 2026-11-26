@@ -286,12 +286,12 @@ ServerEvents.recipes(event => {
         },
         P_ELEM(76))
 
-    // ---- 21. 萃取器（141）：铁板 + 铁杆 + 蓝色玻璃 ----
+    // ---- 21. 萃取器（141）：铁板 + 铁质棍 + 蓝色玻璃 ----
     pShaped('industrialupgrade:industrialupgrade_753',
         ['###', '  A', 'BBB'],
         {
             '#': { item: 'create:iron_sheet' },
-            A: { item: 'ad_astra:iron_rod' },
+            A: { item: 'kubejs:iron_rod' },
             B: { item: 'minecraft:blue_stained_glass' }
         },
         P_ELEM(141))
