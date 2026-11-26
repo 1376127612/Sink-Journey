@@ -28,6 +28,8 @@ config/imblocker.json
 
 # 运行时自动生成或按机器变化的配置，不纳入版本控制
 *.bak
+*.bak.*
+config/almostunified/backup-*/
 config/flywheel-client.toml
 config/sodium-fingerprint.json
 config/ftbchunks-client.snbt
