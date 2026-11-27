@@ -4,14 +4,357 @@
 	filename: "25acb136e49b8bb8"
 	group: "1D6589548F232270"
 	icon: {
-		components: {
-			"industrialupgrade:energy": 0.0d
-		}
-		id: "industrialupgrade:rover/rocket"
+		id: "ad_astra:tier_1_rocket"
 	}
 	id: "25ACB136E49B8BB8"
 	images: [ ]
-	order_index: 5
+	order_index: 4
 	quest_links: [ ]
-	quests: [ ]
+	quests: [
+		{
+			dependencies: ["5E0E000000000054"]
+			icon: {
+				id: "ad_astra:nasa_workbench"
+			}
+			id: "25AC0000000000C4"
+			tasks: [{
+				id: "25AC1C00000000C4"
+				item: { count: 1, id: "ad_astra:nasa_workbench" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 3.2d
+		}
+		{
+			dependencies: [
+				"25AC0000000000C4"
+				"5E0E000000000054"
+			]
+			icon: {
+				id: "ad_astra:tier_1_rocket"
+			}
+			id: "5E0E000000000058"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0F000000000058"
+				item: { count: 1, id: "ad_astra:tier_1_rocket" }
+				type: "item"
+			}]
+			x: 1.5d
+			y: 3.2d
+		}
+		{
+			dependencies: ["5E0E000000000058"]
+			icon: {
+				id: "ad_astra:launch_pad"
+			}
+			id: "25AC0000000000C5"
+			tasks: [{
+				id: "25AC1C00000000C5"
+				item: { count: 1, id: "ad_astra:launch_pad" }
+				type: "item"
+			}]
+			x: 3.0d
+			y: 3.2d
+		}
+		{
+			dependencies: ["25AC0000000000C5"]
+			icon: {
+				id: "ad_astra:fuel_refinery"
+			}
+			id: "25AC0000000000C6"
+			tasks: [{
+				id: "25AC1C00000000C6"
+				item: { count: 1, id: "ad_astra:fuel_refinery" }
+				type: "item"
+			}]
+			x: 4.5d
+			y: 3.2d
+		}
+		{
+			dependencies: ["25AC0000000000C6"]
+			icon: {
+				id: "ad_astra:oxygen_loader"
+			}
+			id: "25AC0000000000C7"
+			tasks: [{
+				id: "25AC1C00000000C7"
+				item: { count: 1, id: "ad_astra:oxygen_loader" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 3.2d
+		}
+		{
+			dependencies: ["25AC0000000000C7"]
+			icon: {
+				id: "ad_astra:space_suit"
+			}
+			id: "25AC0000000000C1"
+			shape: "hexagon"
+			tasks: [{
+				id: "25AC1C00000000C1"
+				item: { count: 1, id: "ad_astra:space_suit" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: 3.2d
+		}
+		{
+			dependencies: ["25AC0000000000C1"]
+			icon: {
+				id: "ad_astra:moon_stone"
+			}
+			id: "25AC0000000000C2"
+			tasks: [{
+				count: 8L
+				id: "25AC1C00000000C2"
+				item: { count: 1, id: "ad_astra:moon_stone" }
+				type: "item"
+			}]
+			x: 9.0d
+			y: 3.2d
+		}
+		{
+			dependencies: ["25AC0000000000C2"]
+			icon: {
+				id: "industrialupgrade:raw_metals/raw_titanium"
+			}
+			id: "25AC0000000000C3"
+			shape: "hexagon"
+			tasks: [{
+				count: 8L
+				id: "25AC1C00000000C3"
+				item: { count: 1, id: "industrialupgrade:raw_metals/raw_titanium" }
+				type: "item"
+			}]
+			x: 10.5d
+			y: 3.2d
+		}
+		{
+			dependencies: ["25AC0000000000C3"]
+			icon: {
+				id: "industrialupgrade:itemingots/titanium_ingot"
+			}
+			id: "25AC0000000000C8"
+			tasks: [{
+				count: 8L
+				id: "25AC1C00000000C8"
+				item: { count: 1, id: "industrialupgrade:itemingots/titanium_ingot" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 1.9d
+		}
+		{
+			dependencies: ["25AC0000000000C8"]
+			icon: {
+				id: "industrialupgrade:baseblockingot/titanium"
+			}
+			id: "25AC0000000000C9"
+			shape: "hexagon"
+			tasks: [{
+				id: "25AC1C00000000C9"
+				item: { count: 1, id: "industrialupgrade:baseblockingot/titanium" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 1.9d
+		}
+		{
+			dependencies: [
+				"25AC0000000000C9"
+				"5E0E00000000003A"
+			]
+			icon: {
+				id: "kubejs:pgm_concentrate"
+			}
+			id: "5E0E000000000060"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0F000000000060"
+				item: { count: 1, id: "kubejs:pgm_concentrate" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 1.9d
+		}
+		{
+			dependencies: ["5E0E000000000060"]
+			icon: {
+				id: "kubejs:ammonium_chloroplatinate"
+			}
+			id: "5E0E000000000061"
+			tasks: [{
+				id: "5E0F000000000061"
+				item: { count: 1, id: "kubejs:ammonium_chloroplatinate" }
+				type: "item"
+			}]
+			x: 16.5d
+			y: 0.8d
+		}
+		{
+			dependencies: ["5E0E000000000061"]
+			icon: {
+				id: "kubejs:platinum_sponge"
+			}
+			id: "5E0E000000000062"
+			tasks: [{
+				id: "5E0F000000000062"
+				item: { count: 1, id: "kubejs:platinum_sponge" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0E000000000062"]
+			icon: {
+				id: "industrialupgrade:itemingots/platinum_ingot"
+			}
+			id: "5E0E000000000063"
+			shape: "hexagon"
+			tasks: [{
+				count: 2L
+				id: "5E0F000000000063"
+				item: { count: 1, id: "industrialupgrade:itemingots/platinum_ingot" }
+				type: "item"
+			}]
+			x: 19.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0E000000000060"]
+			icon: {
+				id: "kubejs:iridosmine_residue"
+			}
+			id: "5E0E000000000064"
+			tasks: [{
+				id: "5E0F000000000064"
+				item: { count: 1, id: "kubejs:iridosmine_residue" }
+				type: "item"
+			}]
+			x: 16.5d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5E0E000000000061"]
+			icon: {
+				id: "kubejs:palladium_sponge"
+			}
+			id: "5E0E000000000065"
+			tasks: [{
+				id: "5E0F000000000065"
+				item: { count: 1, id: "kubejs:palladium_sponge" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["25AC0000000000C3"]
+			icon: {
+				id: "industrialupgrade:raw_metals/raw_vanadium"
+			}
+			id: "25AC0000000000D1"
+			tasks: [{
+				count: 5L
+				id: "25AC1C00000000D1"
+				item: { count: 1, id: "industrialupgrade:raw_metals/raw_vanadium" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 4.5d
+		}
+		{
+			dependencies: [
+				"5E0E000000000063"
+				"5E0E000000000052"
+			]
+			icon: {
+				id: "industrialupgrade:basemachine3/rocket_assembler"
+			}
+			id: "25AC0000000000D2"
+			tasks: [{
+				id: "25AC1C00000000D2"
+				item: { count: 1, id: "industrialupgrade:basemachine3/rocket_assembler" }
+				type: "item"
+			}]
+			x: 21.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["25AC0000000000D2"]
+			icon: {
+				id: "industrialupgrade:basemachine3/rocket_launch_pad"
+			}
+			id: "25AC0000000000D3"
+			tasks: [{
+				id: "25AC1C00000000D3"
+				item: { count: 1, id: "industrialupgrade:basemachine3/rocket_launch_pad" }
+				type: "item"
+			}]
+			x: 22.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["25AC0000000000D3"]
+			icon: {
+				id: "industrialupgrade:basemachine3/research_table_space"
+			}
+			id: "25AC0000000000D4"
+			tasks: [{
+				id: "25AC1C00000000D4"
+				item: { count: 1, id: "industrialupgrade:basemachine3/research_table_space" }
+				type: "item"
+			}]
+			x: 24.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["25AC0000000000D4"]
+			icon: {
+				id: "industrialupgrade:itemingots/meteoric_iron"
+			}
+			id: "25AC0000000000D5"
+			tasks: [{
+				count: 8L
+				id: "25AC1C00000000D5"
+				item: { count: 1, id: "industrialupgrade:itemingots/meteoric_iron" }
+				type: "item"
+			}]
+			x: 25.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["25AC0000000000D5"]
+			icon: {
+				id: "industrialupgrade:spaceupgrademodule_schedule"
+			}
+			id: "25AC0000000000D6"
+			shape: "hexagon"
+			tasks: [{
+				id: "25AC1C00000000D6"
+				item: { count: 1, id: "industrialupgrade:spaceupgrademodule_schedule" }
+				type: "item"
+			}]
+			x: 27.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["25AC0000000000D6"]
+			icon: {
+				id: "industrialupgrade:spaceupgrademodules/space_upgrademodule6"
+			}
+			id: "25AC0000000000D7"
+			shape: "hexagon"
+			tasks: [{
+				id: "25AC1C00000000D7"
+				item: { count: 1, id: "industrialupgrade:spaceupgrademodules/space_upgrademodule6" }
+				type: "item"
+			}]
+			x: 28.5d
+			y: 0.0d
+		}
+	]
 }

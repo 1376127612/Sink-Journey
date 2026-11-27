@@ -1,0 +1,16 @@
+{
+  "_comment": "钼线 —— 只加不减：不封矿粉直烧，只给复杂路线一个更好的入口。现实里钼精矿直烧（氧化焙烧后一次还原）收率低、杂质高；而钼酸铵湿法 + 氢还原 + 垂熔能得到高纯钼，这也是贵的那部分。所以这里不 remove 任何东西，只补一条「高纯钼粉 → 钼锭」的低能耗入口（12000 FE，直烧那条约 24000）。真正的产率差在 moly_line.js 里：2 份纯净碎钼矿出 3 份焙砂，最后 3 块锭。注意顺序：add 与 remove 混用时 remove 必须在前，本文件没有 remove。改完 /sjcore iu reload 生效，不用重启。",
+  "patches": [
+    {
+      "op": "add",
+      "pool": "furnace",
+      "inputs": [
+        { "item": "kubejs:moly_powder", "count": 1 }
+      ],
+      "outputs": [
+        { "item": "industrialupgrade:itemingots/molybdenum", "count": 1 }
+      ],
+      "energy": 12000
+    }
+  ]
+}

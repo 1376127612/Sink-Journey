@@ -105,6 +105,30 @@
           ]
         }
       ]
+    },
+    {
+      "from": 4,
+      "to": 5,
+      "rules": [
+        {
+          "id": "backfill_era_improved_by_casing",
+          "when": {
+            "item_any_player": "industrialupgrade:crafting_elements/crafting_138_element"
+          },
+          "grant": [
+            "era.improved"
+          ]
+        },
+        {
+          "id": "backfill_era_improved_by_advanced_casing",
+          "when": {
+            "item_any_player": "industrialupgrade:crafting_elements/crafting_139_element"
+          },
+          "grant": [
+            "era.improved"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -3,7 +3,7 @@
 > 适用版本：MC 1.21.1 / NeoForge / KubeJS 2101 / IU 3.4.0.11 / Sink Journey Core 0.1.0+
 > 相关文档：`PGM_LINE.md`（现行方案）、`CHEMICAL_REACTOR.md`（机器）、`ORE_ITEM_MAP.md`
 > 实装：`kubejs/server_scripts/industrial/pgm_line.js`、`kubejs/startup_scripts/industrial/pgm_items.js`、
-> `kubejs/sjcore/pgm.json`、`config/sinkresearch/nodes/midgame.json`、任务章节「科技先锋」
+> `kubejs/sjcore/pgm.json`、`config/sinkresearch/nodes/midgame.json`、任务章节「第一小步」
 
 ---
 
@@ -36,7 +36,7 @@
 也就没有铂族精炼该有的门槛（酸、氯、铵盐、还原剂）。
 
 改法：离心机那一步换成加压氧浸（浸出渣就是铂族精矿），后面接真实的铵盐沉淀与还原，
-最后才熔铸。占位配方的数值（9 份精矿）保持不变，所以任务章节「科技先锋」里
+最后才熔铸。占位配方的数值（9 份精矿）保持不变，所以任务书里
 "备 9 份镍精矿 → 第一块铂"的入口不用改，只是后面多了几步。
 
 ---
@@ -53,7 +53,7 @@
 
 ## 4. 任务与研究
 
-任务章节「科技先锋」三格仍是直线：
+任务章节「第一小步」六格仍是直线（2026-11-27 从「科技先锋」搬过来，排在钛衬里之后）：
 
 ```
 铂从哪来（备 9 份镍精矿）→ 第一块铂 → 钯：同一炉里的伴生

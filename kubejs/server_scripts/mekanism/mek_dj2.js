@@ -28,6 +28,7 @@ ServerEvents.recipes(event => {
     const PLATE = '#c:plates/steel'
     const CASING = 'mekanism:steel_casing'
     const ALLOY = 'kubejs:alloy_osmium_lumen_black'
+    const INF_RED = 'kubejs:infused_redstone'
     const INFUSED = 'mekanism:alloy_infused'
     const REINFORCED = 'mekanism:alloy_reinforced'
     const ATOMIC = 'mekanism:alloy_atomic'
@@ -52,28 +53,30 @@ ServerEvents.recipes(event => {
         A: 'kubejs:steel_rod', B: PLATE, C: 'industrialupgrade:blockresource/steam_machine'
     }).id('mekanism:steel_casing')
 
-    // Metallurgic Infuser（:13）铁皮三列 + 熔炉 + 钢质机壳，DJ2 是镜像型
+    // Metallurgic Infuser（:13）铁皮四角 + 灌注红石 + 熔炉 + 钢质机壳
+    // DJ2 是「铁皮三列 + 熔炉 + 机壳」；本包把中列两侧换成灌注红石，
+    // 基础段因此吃一件不进时代门的料：灌注红石是工作台做的，不靠锇。
     event.remove({ id: 'mekanism:metallurgic_infuser' })
-    event.shaped('mekanism:metallurgic_infuser', ['FAF', 'FCF', 'FAF'], {
-        F: PLATE, A: 'minecraft:furnace', C: CASING
+    event.shaped('mekanism:metallurgic_infuser', ['FRF', 'ACA', 'FRF'], {
+        F: PLATE, R: INF_RED, A: 'minecraft:furnace', C: CASING
     }).id('mekanism:metallurgic_infuser')
 
-    // Enrichment Chamber（:17）红合金角 + 基础电路 + 两侧灌注合金 + 钢质机壳
-    // DJ2 两侧是 AE 的晶体催生仓；本包 AE 排在通用机械后面，这里换成灌注合金，
-    // 免得第一段机器要靠后一章的方块才能做。
+    // Enrichment Chamber（:17）灌注红石角 + 基础电路 + 两侧灌注合金 + 钢质机壳
+    // DJ2 两侧是 AE 的晶体催生仓、四角是红合金；本包把四角换成灌注红石：
+    // 第一段要的是「过了灌注红石这道门」，不是「过了锇这道门」。
     add('mekanism:enrichment_chamber', 'mekanism:enrichment_chamber', 1,
         ['ABA', 'CDC', 'ABA'],
-        { A: RED, B: CIRCUIT, C: INFUSED, D: CASING })
+        { A: INF_RED, B: CIRCUIT, C: INFUSED, D: CASING })
 
-    // Crusher（:21）
+    // Crusher（:21）四角灌注红石
     add('mekanism:crusher', 'mekanism:crusher', 1,
         ['ABA', 'CDC', 'ABA'],
-        { A: RED, B: CIRCUIT, C: PLATE, D: CASING })
+        { A: INF_RED, B: CIRCUIT, C: PLATE, D: CASING })
 
-    // Energized Smelter（:25）
+    // Energized Smelter（:25）四角灌注红石
     add('mekanism:energized_smelter', 'mekanism:energized_smelter', 1,
         ['ABA', 'CDC', 'ABA'],
-        { A: RED, B: CIRCUIT, C: 'minecraft:furnace', D: CASING })
+        { A: INF_RED, B: CIRCUIT, C: 'minecraft:furnace', D: CASING })
 
     // Advanced Control Circuit（:29）
     add('mekanism:advanced_control_circuit', 'mekanism:advanced_control_circuit', 1,

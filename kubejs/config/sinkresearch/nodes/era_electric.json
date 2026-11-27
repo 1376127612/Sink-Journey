@@ -62,6 +62,31 @@
       "ui": { "x": 0, "y": 2, "doc": "research.electric_grid.desc" },
       "recipe_pool": "sinkjourney:research_station",
       "recipe_id": "kubejs:research_station/electric_grid"
+    },
+    {
+      "id": "sink:improved_notes",
+      "kind": "craft",
+      "era": "improved",
+      "rank": 5.0,
+      "requires": { "and": [ "sink:electric_grid" ] },
+      "inputs": {
+        "items": [
+          { "id": "industrialupgrade:alloyplate/stainless_steel", "count": 4 },
+          { "id": "industrialupgrade:crafting_elements/crafting_494_element", "count": 4 },
+          { "id": "kubejs:research_data", "count": 16 }
+        ],
+        "fluids": [],
+        "energy": 12000,
+        "compute": 4
+      },
+      "duration": 1200,
+      "outputs": {
+        "items": [ { "id": "kubejs:research_data", "count": 20 } ]
+      },
+      "unlock": [ "era.improved" ],
+      "ui": { "x": 1, "y": 0, "doc": "research.improved_notes.desc" },
+      "recipe_pool": "sinkjourney:research_station",
+      "recipe_id": "kubejs:research_station/improved_notes"
     }
   ]
 }

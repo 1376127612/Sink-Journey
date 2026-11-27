@@ -256,5 +256,7 @@
   "jei.kubejs.prnd_oxide.info": "Praseodymium-neodymium oxide: a mixed oxide of Pr6O11 and Nd2O3. The Pr/Nd separation factor is only about 1.5, so industry runs hundreds of extraction stages or simply sells Pr-Nd alloy - the neodymium ingot in this pack is that Pr-Nd metal.",
   "block.nuclearcraftneohaul.chemical_reactor": "Hot-Cell Processing Cell",
   "block.nuclearcraftneohaul.chemical_reactor.desc": "A sealed batch cell for dissolving fuel, volatilising fluorides and mixing salt solvents. Highly radioactive, small batches, no parallelism: build more cells instead of a bigger one.",
-  "nuclearcraftneohaul.menu.title.chemical_reactor": "Hot-Cell Processing Cell"
+  "nuclearcraftneohaul.menu.title.chemical_reactor": "Hot-Cell Processing Cell",
+  "research.node.improved_notes.name": "Electric: Improved Casings and Molybdenum",
+  "research.improved_notes.desc": "Stainless 304 gets you in; only the hydrogen reduction of molybdenum and the 316L charge make the improved machines placeable."
 }

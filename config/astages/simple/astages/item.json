@@ -308,5 +308,95 @@
     "id": "no_iu_space_stargate",
     "stage": "era.no_iu_space",
     "object": "industrialupgrade:space/planetary_translocator"
+  },
+  {
+    "id": "improved_advalloysmelter",
+    "stage": "era.improved",
+    "object": "industrialupgrade:basemachine1/adv_alloy_smelter"
+  },
+  {
+    "id": "improved_advgen",
+    "stage": "era.improved",
+    "object": "industrialupgrade:basemachine/adv_gen"
+  },
+  {
+    "id": "improved_advgeo",
+    "stage": "era.improved",
+    "object": "industrialupgrade:basemachine1/adv_geo"
+  },
+  {
+    "id": "improved_advpump",
+    "stage": "era.improved",
+    "object": "industrialupgrade:basemachine2/adv_pump"
+  },
+  {
+    "id": "improved_advwatergenerator",
+    "stage": "era.improved",
+    "object": "industrialupgrade:basemachine3/adv_water_generator"
+  },
+  {
+    "id": "improved_advwindgenerator",
+    "stage": "era.improved",
+    "object": "industrialupgrade:basemachine3/adv_wind_generator"
+  },
+  {
+    "id": "improved_advsolardestiller",
+    "stage": "era.improved",
+    "object": "industrialupgrade:basemachine3/adv_solar_destiller"
+  },
+  {
+    "id": "improved_doublemacerator",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine/double_macerator"
+  },
+  {
+    "id": "improved_doublefurnace",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine/double_furnace"
+  },
+  {
+    "id": "improved_doubleextractor",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine/double_extractor"
+  },
+  {
+    "id": "improved_doublecommpressor",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine/double_commpressor"
+  },
+  {
+    "id": "improved_doublerolling",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine2/double_rolling"
+  },
+  {
+    "id": "improved_doublecutting",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine2/double_cutting"
+  },
+  {
+    "id": "improved_doubleextruder",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine2/double_extruder"
+  },
+  {
+    "id": "improved_doublegearing",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine3/doublegearing"
+  },
+  {
+    "id": "improved_doubleorewashing",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine3/doubleorewashing"
+  },
+  {
+    "id": "improved_doublecentrifuge",
+    "stage": "era.improved",
+    "object": "industrialupgrade:moremachine3/doublecentrifuge"
+  },
+  {
+    "id": "improved_mfeiu",
+    "stage": "era.improved",
+    "object": "industrialupgrade:wiring_storage/mfe_iu"
   }
 ]
