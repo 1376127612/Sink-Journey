@@ -176,7 +176,7 @@
 				item: { count: 1, id: "embers:tinker_lens" }
 				type: "item"
 			}]
-			x: 0.0d
+			x: -2.5d
 			y: 3.5d
 		}
 		{
@@ -422,6 +422,35 @@
 			}]
 			x: 6.0d
 			y: 6.5d
+		}
+		{
+			dependencies: ["7E2342ED402B6E97"]
+			id: "029A1B562F474256"
+			tasks: [
+				{
+					id: "26738CD1634915CE"
+					item: { count: 1, id: "embers:item_pipe" }
+					type: "item"
+				}
+				{
+					id: "6078AF473DC52396"
+					item: { count: 1, id: "embers:item_extractor" }
+					type: "item"
+				}
+			]
+			x: 2.5d
+			y: 5.0d
+		}
+		{
+			dependencies: ["7E2342ED402B6E97"]
+			id: "44FBDF28C8369A58"
+			tasks: [{
+				id: "448A820292D217A5"
+				item: { count: 1, id: "minecraft:hopper" }
+				type: "item"
+			}]
+			x: 1.0d
+			y: 3.5d
 		}
 	]
 }

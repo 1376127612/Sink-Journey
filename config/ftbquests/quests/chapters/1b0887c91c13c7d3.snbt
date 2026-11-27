@@ -70,5 +70,47 @@
 			x: -1.5d
 			y: 1.5d
 		}
+		{
+			dependencies: [
+				"60E6C5DE278F8AD0"
+				"39F9A7586935F24F"
+			]
+			hide_dependency_lines: true
+			hide_dependent_lines: true
+			id: "7412986BC2D848FB"
+			rewards: [{
+				auto: "enabled"
+				command: "/stage_say stage1_craft"
+				id: "0A8D0F40F77FB033"
+				type: "command"
+			}]
+			tasks: [{
+				id: "43C17E68BDCB58FF"
+				stat: "minecraft:total_world_time"
+				type: "stat"
+				value: 5
+			}]
+			x: -3.0d
+			y: 3.5d
+		}
+		{
+			hide_dependency_lines: true
+			hide_dependent_lines: true
+			id: "2D203F77008E37DA"
+			rewards: [{
+				auto: "enabled"
+				command: "/stage_say stage1_craft"
+				id: "448F21A4BB3167AC"
+				type: "command"
+			}]
+			tasks: [{
+				id: "0B18E1CF5C4778A7"
+				stat: "minecraft:total_world_time"
+				type: "stat"
+				value: 5
+			}]
+			x: -5.5d
+			y: 1.0d
+		}
 	]
 }

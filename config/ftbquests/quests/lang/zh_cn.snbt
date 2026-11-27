@@ -41,6 +41,8 @@
 	]
 	quest.018AA31ED4D322D9.quest_subtitle: "处理器"
 	quest.018AA31ED4D322D9.title: "三个脑子"
+	quest.029A1B562F474256.quest_desc: ["我还以为你根本不会想到我呢。"]
+	quest.029A1B562F474256.quest_subtitle: "“漏斗”"
 	quest.03232381B779A520.quest_desc: ["奇怪，下界森林中居然还有这种硕大蘑菇，难道下界生物有着自己获取能量的方式吗？"]
 	quest.03B4867738AD7EBF.quest_desc: ["八块钢板围一个红石块，再配四根原木。工业先锋的每一台机器都要先有它。"]
 	quest.03B4867738AD7EBF.quest_subtitle: "工业先锋的入场券"
@@ -78,6 +80,7 @@
 	quest.079D6EAF9A441826.title: "挤压原型机"
 	quest.09200AF098A644DF.quest_desc: ["现在，来制作你的第一块合金吧。"]
 	quest.09200AF098A644DF.quest_subtitle: "一种新奇的合金炉"
+	quest.0932DD0AA54FD551.quest_desc: ["很简单，把斧头和斧柄拼起来就好了。"]
 	quest.0932DD0AA54FD551.quest_subtitle: "或许你要自己组装？"
 	quest.0932DD0AA54FD551.title: "做一把斧头有哪些步骤"
 	quest.0A449D27D8734333.quest_desc: ["长按右键启动，胶囊负责把抽上来的液体装走。它覆盖下方 3×1×3 的范围。"]
@@ -88,7 +91,7 @@
 		"//.....这里有许多生物活动的迹象，或许我应该尝试捕捉一些来了解这些生物。"
 		"//.....深渊似乎并不都是死物，这里的植物也生长的茂密，不知道再深入时候也是如此。"
 	]
-	quest.0B73D9E1303C41BD.quest_desc: ["如果我是你的话，我会尽快制作这台机器并完成它的自动化。"]
+	quest.0B73D9E1303C41BD.quest_desc: ["如果我是你的话，我会尽快制作这台机器并完成它的自动化。尽管目前来说，我并不知道它有什么作用。"]
 	quest.0B73D9E1303C41BD.quest_subtitle: "好像是没有什么用的机器"
 	quest.0BDB4E32ADB4A504.quest_desc: [
 		"钢锭裹着合金拉出来的线，一根过 5 kFE/t。"
@@ -204,6 +207,8 @@
 	]
 	quest.1057DBBF8DC8C7C0.quest_subtitle: "你连树都撸不了"
 	quest.1057DBBF8DC8C7C0.title: "开始游戏"
+	quest.10A1CA1C8EC232E2.quest_desc: ["我很理解你目前没有地方放置你的物品，但是我还是希望你能够多去看看外面的世界。"]
+	quest.10A1CA1C8EC232E2.quest_subtitle: "你肯定会喜欢的"
 	quest.113D916789ACE093.quest_desc: [
 		"§a精炼厂控制器§f上竖直堆输出端，堆几个就切几段：2 个 100℃ 出柴油和渣油，3 个 150℃ 多出石脑油，4 个 200℃ 才拿得到液化石油气。"
 		"热量越多跑得越快，但能不能切出某一段只看温度门槛。石脑油现在没人吃，这是故意的——它要等电。"
@@ -405,7 +410,7 @@
 	quest.2EECA8F74F7C235B.quest_subtitle: "真正的合金"
 	quest.2EECA8F74F7C235B.title: "量产黄铜"
 	quest.2F418266BAA45470.quest_desc: ["我相信你很快就会用用上的。"]
-	quest.2F418266BAA45470.quest_subtitle: "单片眼镜"
+	quest.2F418266BAA45470.quest_subtitle: "资本家的眼镜"
 	quest.2F67C84DFB5047F8.quest_desc: ["穿越异界，系统降临"]
 	quest.2F67C84DFB5047F8.title: "阶段一"
 	quest.2FFEAF4A6C810F1B.quest_desc: [
@@ -445,6 +450,8 @@
 		""
 		"可恶，难道我辛辛苦苦制作的燧石镐，连一块铁都挖不下来吗。我到底该怎么制作更强大的镐子来供我驱使。"
 	]
+	quest.33CA917A7FF636A6.quest_subtitle: "天青色等烟雨~"
+	quest.33CA917A7FF636A6.title: "粗铁粗铜"
 	quest.34201481CF72171A.quest_desc: ["这是一种拙劣的合金锭，似乎只能用于某些土制方法制作的机器。"]
 	quest.34201481CF72171A.quest_subtitle: "对前世记忆的仿造"
 	quest.34201481CF72171A.title: "拙劣的合金"
@@ -466,6 +473,12 @@
 	]
 	quest.35B9A0B50B6D5A7C.quest_subtitle: "得先有一块好砧"
 	quest.35B9A0B50B6D5A7C.title: "蒸汽轧机"
+	quest.3679A19AA7492767.quest_desc: [
+		"你知道鲁滨逊要怎么生火吗？"
+		"哈哈，没错，就是通过两根棍木摩擦。"
+	]
+	quest.3679A19AA7492767.quest_subtitle: "棍木！"
+	quest.3679A19AA7492767.title: "木棍？"
 	quest.36A0B043CD532395.quest_subtitle: "流体喜欢铜"
 	quest.38388EADB17FD482.quest_desc: ["现在你需要匍匐在地上寻找石子或者是rock？然后再去河岸搜索一些沙砾挖掘后掉落的燧石，接着将它分解为flint shard（燧石碎片）。然后与破坏树叶后掉落的木棍组合起来，你将获得一把燧石小刀。"]
 	quest.38388EADB17FD482.quest_subtitle: "燧石，但不是打火机"
@@ -596,6 +609,10 @@
 	quest.44F6506A686E7FA4.quest_desc: ["三个 64k 元件：256k，AE2 本体最高的一档；再往上就要靠附属了。"]
 	quest.44F6506A686E7FA4.quest_subtitle: "存储元件 256k"
 	quest.44F6506A686E7FA4.title: "本体到顶"
+	quest.44FBDF28C8369A58.quest_desc: ["即使面对这么复杂的配方，你也坚定的选择我了吗，哈基史，我认可你了。"]
+	quest.44FBDF28C8369A58.quest_subtitle: "漏斗"
+	quest.455244A61EA2782A.quest_desc: ["谁不喜欢能够背着一大包的扳手、铁匠锤、锻造锤、新月扳手、赛特斯石英扳手、配置工具......到处乱跑呢。"]
+	quest.455244A61EA2782A.quest_subtitle: "比潜影盒更好"
 	quest.469AD01E07552C3C.quest_desc: [
 		"用你的动力合成器制作粉碎轮"
 		"当心，不要掉下去"
@@ -610,6 +627,8 @@
 	quest.47288C78398A483D.quest_subtitle: "又是套娃"
 	quest.47288C78398A483D.title: "电力机壳"
 	quest.47323966F5E2572C.quest_desc: ["生长于伞树上的水果"]
+	quest.4745F0C7275E0638.quest_desc: ["你很讨厌我吗？至少现在还请对我温柔一点：）"]
+	quest.4745F0C7275E0638.quest_subtitle: "一个体力活"
 	quest.486569B3D357D2B4.quest_desc: [
 		"做一个冶金灌注机！最左格放灌注料，中间放待灌的东西，一台只吃一种灌注液。"
 		"灌注合金、基础电路、强化黑曜石粉、强化黑曜石锭全从它出来，锇莹黑合金的灌注路也走它。"
@@ -621,6 +640,8 @@
 	quest.4869FCEABEB4800E.quest_subtitle: "存储元件 64k"
 	quest.4869FCEABEB4800E.title: "三份 16k"
 	quest.48BEE62B80F62549.quest_desc: ["或许，你真的可以挖一点东西了？"]
+	quest.48BEE62B80F62549.quest_subtitle: "人类史上的第一步。"
+	quest.48BEE62B80F62549.title: "燧石镐"
 	quest.49C6261827C7A7B3.quest_desc: ["铁板做壳，铜板做衬，中间一颗粉碎球。右键投料、右键取料，你站在旁边就是它的动力。"]
 	quest.49C6261827C7A7B3.quest_subtitle: "手摇的磨"
 	quest.49C6261827C7A7B3.title: "粉碎原型机"
@@ -659,6 +680,7 @@
 	]
 	quest.4D92FDC6EA6BDD71.quest_subtitle: "柴堆？小熔炉！"
 	quest.4E2996D1346A91DD.quest_desc: ["我发现粘土与沙子可以混合成一种奇妙的物质，它似乎蕴含着某种神奇的力量。或许，我可以通过柴堆把它们烤干？"]
+	quest.4E2996D1346A91DD.quest_subtitle: "水泥：（"
 	quest.4F29CA92AAE1AE91.quest_desc: ["再上一层：大部分机器同时开工时，瓶颈就不在电线上了。"]
 	quest.4F29CA92AAE1AE91.quest_subtitle: "精英线缆"
 	quest.4F29CA92AAE1AE91.title: "一根过 80 kFE/t"
@@ -684,6 +706,7 @@
 	]
 	quest.541A81224FDBD420.quest_subtitle: "熔炉？！"
 	quest.54292046716034B6.quest_desc: ["我曾在森林的树荫底下发现过这些自然造物，它们似乎具有某种特别的魔力？"]
+	quest.54292046716034B6.quest_subtitle: "野生的魔力"
 	quest.54A917D73EE764DB.title: "黄铜物流"
 	quest.553DE08FF8207EFC.quest_desc: [
 		"你终于不用站在粉碎原型机旁边。蒸汽粉碎机一次吃更多，也快得多。"
@@ -691,6 +714,7 @@
 	]
 	quest.553DE08FF8207EFC.quest_subtitle: "不用自己动手了"
 	quest.553DE08FF8207EFC.title: "蒸汽粉碎机"
+	quest.55924749FD9C2A0F.quest_desc: ["一种蕴含魔力的黑曜石，似乎可以通过内置的魔力轨迹来制作很多的东西。"]
 	quest.55F9AE8981565D51.title: "终于不要手搓变速了"
 	quest.560D11F9F119EB2B.quest_desc: [
 		"九个压缩铁锭在压力室里压成一块§a压缩铁块§f，压力至少 2 bar。"
@@ -1179,9 +1203,9 @@
 	quest.5FFCF7EAE6D167D4.quest_desc: ["三个输入槽、并行烧炼，塑料外壳包着金齿轮。前面那条橡胶线的塑料，终于有地方用了。"]
 	quest.5FFCF7EAE6D167D4.quest_subtitle: "一台炉子当三台用"
 	quest.5FFCF7EAE6D167D4.title: "资源熔炉"
-	quest.60E6C5DE278F8AD0.quest_desc: ["是的，你或许发现了，目前你似乎并没有能力组装出一个工作台。现在只能通过石匠工作台来制作一些现阶段必要的工具了。"]
-	quest.60E6C5DE278F8AD0.quest_subtitle: "工作台，但是石匠。"
-	quest.60E6C5DE278F8AD0.title: "奇怪，我的工作台呢？"
+	quest.60E6C5DE278F8AD0.quest_desc: ["这真的是工作台吗？"]
+	quest.60E6C5DE278F8AD0.quest_subtitle: "“工作台”"
+	quest.60E6C5DE278F8AD0.title: "这真的是工作台吗？"
 	quest.60E6DBB858AD041A.quest_desc: [
 		"光滑陨石做框，福鲁伊克斯粉与水晶围着中间一块充能赛特斯石英。"
 		"控制器是 ME 网络的心脏：它按方块数分配频道，也决定这张网能长多大。"
@@ -1203,8 +1227,6 @@
 	quest.649891A244FD0BF3.title: "电解器"
 	quest.649F7E26857F7824.quest_desc: [
 		"ohhhh，更为强劲的余烬能量发生器，你会喜欢上的，那么我要怎么给它供水呢？"
-		""
-		""
 		"{@pagebreak}"
 		"在机器的下方放置金属方块，并在金属方块周围放满岩浆。"
 	]
@@ -1218,6 +1240,7 @@
 	]
 	quest.6598E70D2B013335.quest_subtitle: "电流的第一份证词"
 	quest.6598E70D2B013335.title: "研究笔记·电力"
+	quest.6880526327344216.quest_desc: ["难道，你真的可以挖石头了吗。"]
 	quest.6880526327344216.quest_subtitle: "也许你也可以组装一个镐子？"
 	quest.6880526327344216.title: "燧石镐的顶端"
 	quest.69073E45025D285F.quest_desc: ["逻辑处理器、石英玻璃、红石：1k 元件。存储元件、合成存储、便携元件都吃它。"]
@@ -1349,6 +1372,7 @@
 	]
 	quest.73F4FB7D17278454.quest_subtitle: "不用电的压板机"
 	quest.73F4FB7D17278454.title: "手工轧机"
+	quest.7412986BC2D848FB.title: "获取工作台"
 	quest.7421786593C68B0E.quest_desc: ["六张铁板箍住一块铁块，就成了挤压部件。它是挤压原型机的心脏——在你做出蒸汽挤压机之前，一切板材都从这台机器里出来。"]
 	quest.7421786593C68B0E.quest_subtitle: "一块会动的铁"
 	quest.7421786593C68B0E.title: "挤压部件"
@@ -1462,7 +1486,7 @@
 	quest.7C4E0000000000C5.quest_subtitle: "粗铀 → 铀-235 / 238"
 	quest.7C4E0000000000C5.title: "粗铀：下一步才是浓缩"
 	quest.7C5D2124B8AE69A6.quest_desc: ["升级你的余烬机器！"]
-	quest.7E2342ED402B6E97.quest_desc: [""]
+	quest.7E2342ED402B6E97.quest_desc: ["把余烬晶体丢进去烧，烧出来的就是能顺着管道跑的余烬能量。 旁边再接一台接收器，能量就有地方去了。但你需要通过某种机器将材料送进去。"]
 	quest.7E2342ED402B6E97.quest_subtitle: "燃煤发电机？......！"
 	quest.7F037DF5FFF945BB.quest_desc: ["来自灵魂沙峡谷随处可见的岩石。"]
 	quest.7FBCB9C7839329EE.quest_desc: [

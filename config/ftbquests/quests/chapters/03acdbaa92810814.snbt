@@ -300,15 +300,26 @@
 			y: -6.0d
 		}
 		{
-			dependencies: ["154B342B39E12DC3"]
+			dependencies: ["55924749FD9C2A0F"]
 			id: "0FBCC897FDF2C9DC"
 			tasks: [{
 				id: "5A428ACC4E6645EB"
 				item: { count: 1, id: "minecraft:furnace" }
 				type: "item"
 			}]
-			x: -0.5d
+			x: 2.0d
 			y: -9.5d
+		}
+		{
+			dependencies: ["154B342B39E12DC3"]
+			id: "55924749FD9C2A0F"
+			tasks: [{
+				id: "6694CCC294CDE499"
+				item: { count: 1, id: "roots:runed_obsidian" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: -7.5d
 		}
 	]
 }

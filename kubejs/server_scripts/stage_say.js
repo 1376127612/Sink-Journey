@@ -21,6 +21,9 @@
 //   title / subtitle / actionbar      屏幕文字（支持 titleColor 等单独配色）
 //   fadeIn / stay / fadeOut           title 时间，单位 tick，默认 10/40/20
 //
+//   ⚠ title / subtitle 只在【跨越阶段】（章节切换、关键节点）时使用；
+//     普通台词一律不加，屏幕上频繁弹字会打断玩家的游玩体验和沉浸感。
+//
 //   sound / volume / pitch            音效，如 sound: 'minecraft:ui.toast.in'
 //   particle / count / speed          粒子，如 particle: 'minecraft:flame'
 //   spreadX / spreadY / spreadZ       粒子散布范围，默认 0.6 / 1.2 / 0.6
@@ -63,6 +66,9 @@
 //
 //   其他角色（例如「？？？」这种未知声音）→ 灰蓝 #5a6a7a，不加括号
 //     （它是个「声音」，不是玩家的心声，所以不能和括号灰混在一起）
+//
+//   屏幕文字  →  title / subtitle 只在【跨越阶段】（章节切换、关键节点）时才用，
+//               普通台词一律不加，屏幕上频繁弹字会打断玩家的游玩体验和沉浸感。
 // ---------------------------------------------------------------------------
 const STAGES = {
     // ------------------------------------------------------------------
@@ -112,7 +118,7 @@ const STAGES = {
     // stone —— 系统第一次「正式」跟玩家对话（第 1 章之后）
     // 语气：不凶、不热情，像在念操作手册；但每句话都在划界线。
     // ------------------------------------------------------------------
-    stone: [
+    stage1_stone: [
         // ① 开场：先夸你一句，把你稳住
         { delay: 0, color: '#4dabf7', text: '[c=#4dabf7]看出来，你还[c=#20c997]适应得不错[c=#4dabf7]。',
           sound: 'minecraft:ui.toast.in', volume: 0.7, pitch: 1.2 },
@@ -146,6 +152,53 @@ const STAGES = {
         { delay: 2, color: '#4dabf7', text: '[c=#4dabf7]现在，欢迎来到[c=#ffd700]边缘世界[c=#4dabf7]。',
           sound: 'minecraft:entity.ender_dragon.growl', volume: 0.4, pitch: 1.5 },
         { delay: 2.4, color: '#adb5bd', text: '（声音消失了。像从来没来过。）' }
+    ],
+
+    // ------------------------------------------------------------------
+    // stage1_craft —— 拿到工作台之后：系统开始「逗人」，也第一次点破玩家的身份
+    // 语气：轻佻、话里有话；玩家心声照旧括号灰，从疑惑到炸毛。
+    // ⚠ 本剧本不跨越阶段，因此不使用 title / subtitle。
+    // ------------------------------------------------------------------
+    stage1_craft: [
+        // ① 先夸，再补刀
+        { delay: 0, color: '#4dabf7',
+          text: '[c=#4dabf7]啊哦，你[c=#20c997]推进了很多进度[c=#4dabf7]呢，似乎是真的在这里[c=#20c997]适应了[c=#4dabf7]？',
+          sound: 'minecraft:ui.toast.in', volume: 0.7, pitch: 1.2 },
+        { delay: 2, color: '#4dabf7',
+          text: '[c=#4dabf7]不过你四处[c=#ffd700]搜集石子[c=#4dabf7]的模样还真是[c=#ff4d4f]狼狈[c=#4dabf7]呢，啊啦。',
+          sound: 'minecraft:block.note_block.bass', volume: 0.6, pitch: 0.7 },
+
+        // ② 身份三连问
+        { delay: 2.4, color: '#4dabf7',
+          text: '[c=#4dabf7]你有想过[c=#ffd700]你是谁[c=#4dabf7]吗？是[c=#ffd700]史蒂夫[c=#4dabf7]？还是[c=#ffd700]艾利克斯[c=#4dabf7]？亦或者，我应该叫你[c=#ffd700]玩家[c=#4dabf7]？',
+          particle: 'minecraft:end_rod', count: 16, speed: 0.04 },
+        { delay: 2, color: '#adb5bd', text: '（这家伙果然知道些什么吧，不过说话怎么这么欠揍啊(」°ロ°)」）' },
+
+        // ③ 被逗乐的系统
+        { delay: 2.2, color: '#4dabf7',
+          text: '[c=#4dabf7]哇哦[c=#ffd700]( ˘ω˘ )[c=#4dabf7]，看来你对自己的身份[c=#20c997]很认同[c=#4dabf7]嘛',
+          sound: 'minecraft:block.note_block.harp', volume: 0.6, pitch: 1.4 },
+
+        // ④ 专家包的定义
+        { delay: 2, color: '#4dabf7',
+          text: '[c=#4dabf7]那么你知道什么叫做[c=#ffd700]专家包[c=#4dabf7]吗？是[c=#ffd700]时间长短[c=#4dabf7]，[c=#ffd700]设计困难[c=#4dabf7]吗？',
+          sound: 'minecraft:item.book.page_turn', volume: 0.7, pitch: 1.1 },
+        { delay: 2.2, color: '#4dabf7',
+          text: '[c=#4dabf7]哈哈，好吧，看你的表情并不知道我在说些什么。(^_^)',
+          sound: 'minecraft:block.note_block.harp', volume: 0.5, pitch: 1.0 },
+
+        // ⑤ 收尾：像祝福，也像下战书（仍然不加 title）
+        { delay: 2.4, color: '#4dabf7',
+          text: '[c=#4dabf7]那么我希望你会[c=#20c997]喜欢这次的旅程[c=#4dabf7]，即使是在接下来的过程中遇到了一些[c=#ff4d4f]挫折[c=#4dabf7]也不要[c=#ffd700]放弃[c=#4dabf7]噢',
+          particle: 'minecraft:totem_of_undying', count: 18, speed: 0.08 },
+        { delay: 2.2, color: '#4dabf7',
+          text: '[c=#4dabf7]如果是你的话，你一定[c=#ffd700]可以做到[c=#4dabf7]的吧(^_^)',
+          sound: 'minecraft:entity.player.levelup', volume: 0.5, pitch: 1.3,
+          particle: 'minecraft:end_rod', count: 20, spreadY: 1.6, speed: 0.06 },
+        { delay: 2, color: '#adb5bd',
+          text: '（这个表情是什么回事啊，[c=#ff4d4f]一定是在挑衅我吧[c=#adb5bd]！[c=#ff4d4f]一定是的吧[c=#adb5bd]！(╯°□°)╯︵ ┻━┻）',
+          sound: 'minecraft:block.anvil.land', volume: 0.35, pitch: 1.4,
+          particle: 'minecraft:angry_villager', count: 12, speed: 0.03 }
     ]
 }
 
