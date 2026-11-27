@@ -28,6 +28,8 @@ ServerEvents.recipes(event => {
     var WAFER = 'industrialupgrade:crafting_elements/crafting_494_element'
     var MOTOR = 'industrialupgrade:crafting_elements/crafting_276_element'
     var CHARGED = 'ae2:charged_certus_quartz_crystal'
+    var INFUSED = 'kubejs:infused_certus_quartz'      // 矮人燃油泡过的赛特斯石英
+    var INF_RED = 'kubejs:infused_redstone'           // 充能红石 + 红石粉
 
     var aShaped = function (id, output, pattern, key, count) {
         event.remove({ id: id })
@@ -60,7 +62,7 @@ ServerEvents.recipes(event => {
             A: '#c:ingots/steel',
             B: 'minecraft:sticky_piston',
             C: 'ae2:fluix_crystal',
-            D: CHARGED
+            D: INFUSED
         })
 
     // ---- 4. 充能器（:20）----
@@ -69,7 +71,7 @@ ServerEvents.recipes(event => {
         ['ABA', 'ACA', 'ABA'],
         {
             A: '#c:plates/steel',
-            B: CHARGED,
+            B: INFUSED,
             C: 'ae2:quartz_glass'
         })
 
@@ -101,7 +103,7 @@ ServerEvents.recipes(event => {
             A: 'ae2:smooth_sky_stone_block',
             B: 'ae2:fluix_dust',
             C: 'ae2:fluix_crystal',
-            D: CHARGED
+            D: INFUSED
         })
 
     // ---- 8. ME 接口 ----
@@ -131,7 +133,7 @@ ServerEvents.recipes(event => {
         ['ABA', 'CDC', 'ABA'],
         {
             A: '#c:plates/steel',
-            B: 'ae2:fluix_glass_cable',
+            B: INFUSED,
             C: 'ae2:quartz_glass',
             D: 'ae2:fluix_block'
         })
@@ -154,5 +156,20 @@ ServerEvents.recipes(event => {
             B: 'minecraft:piston'
         })
 
-    console.info('[AE2] AE 已改：硅印刷片吃晶圆，石英炼硅捷径已封，机器改用 钢/银/铅/镍')
+    // ---- 12. 福鲁伊克斯水晶：红石粉换成灌注红石 ----
+    // 原：充能赛特斯石英 + 红石粉 + 下界石英，丢进水里出 2 颗（ae2:transform/fluix_crystals）。
+    // 现在红石那格要先把电灌进去，AE 的门槛因此与通用机械基础段站在同一件料上。
+    event.remove({ id: 'ae2:transform/fluix_crystals' })
+    event.custom({
+        type: 'ae2:transform',
+        ingredients: [
+            { item: CHARGED },
+            { item: INF_RED },
+            { item: 'minecraft:quartz' }
+        ],
+        result: { count: 2, id: 'ae2:fluix_crystal' }
+    }).id('ae2:transform/fluix_crystals')
+
+    console.info('[AE2] AE 已改：硅印刷片吃晶圆，石英炼硅捷径已封，机器改用 钢/银/铅/镍；' +
+        '福鲁伊克斯吃灌注红石，四台主机吃灌注赛特斯石英')
 })

@@ -2,8 +2,8 @@
 // 通用机械 —— 锇莹黑合金（物品注册，startup）
 // ------------------------------------------------------------
 // 一条合金把通用机械与 AE 的机器钉在同一个门禁上：
-//   锇荧锭（mekanism:ingot_refined_glowstone，锇压缩机把锇压进荧石）
-//     → 冶金灌注机灌 10 mB 强化黑曜石 → 锇莹黑合金
+//   锇荧锭（mekanism:ingot_refined_glowstone，锇压缩机把锇压进荧石粉）
+//     → EIO 合金炉：2 锇荧锭 + 1 强化黑曜石锭 → 6 锇莹黑合金
 //
 // 配方：server_scripts/mekanism/mek_osmium_alloy.js
 // 用在：MEK 富集仓 / 通电冶炼炉 / 电解分离机；

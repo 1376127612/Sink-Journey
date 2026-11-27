@@ -12,503 +12,519 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["5A1B00000000A107"]
 			icon: {
-				id: "industrialupgrade:purifiedcrushed/nickel"
+				id: "industrialupgrade:circuit/circuit_part1"
 			}
-			id: "5E0A0000000000C1"
-			shape: "hexagon"
+			id: "5E0E000000000022"
 			tasks: [{
-				count: 9L
-				id: "5E0A0000000000D1"
-				item: { count: 1, id: "industrialupgrade:purifiedcrushed/nickel" }
+				count: 4L
+				id: "5E0F000000000023"
+				item: { count: 1, id: "industrialupgrade:circuit/circuit_part1" }
 				type: "item"
 			}]
 			x: 0.0d
-			y: 0.0d
+			y: 10.5d
 		}
 		{
-			dependencies: ["5E0A0000000000C1"]
+			dependencies: ["5E0E000000000022"]
 			icon: {
-				id: "kubejs:pgm_concentrate"
+				id: "industrialupgrade:crafting_elements/crafting_138_element"
 			}
-			id: "5E0B0000000000C4"
-			tasks: [{
-				id: "5E0B0000000000D4"
-				item: { count: 1, id: "kubejs:pgm_concentrate" }
-				type: "item"
-			}]
-			x: 2.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C4"]
-			icon: {
-				id: "kubejs:iridosmine_residue"
-			}
-			id: "5E0B0000000000C5"
-			tasks: [{
-				id: "5E0B0000000000D5"
-				item: { count: 1, id: "kubejs:iridosmine_residue" }
-				type: "item"
-			}]
-			x: 4.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C5"]
-			icon: {
-				id: "kubejs:ammonium_chloroplatinate"
-			}
-			id: "5E0B0000000000C6"
-			tasks: [{
-				id: "5E0B0000000000D6"
-				item: { count: 1, id: "kubejs:ammonium_chloroplatinate" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C6"]
-			icon: {
-				id: "kubejs:platinum_sponge"
-			}
-			id: "5E0B0000000000C7"
-			tasks: [{
-				id: "5E0B0000000000D7"
-				item: { count: 1, id: "kubejs:platinum_sponge" }
-				type: "item"
-			}]
-			x: 8.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C7"]
-			icon: {
-				id: "industrialupgrade:itemingots/platinum_ingot"
-			}
-			id: "5E0A0000000000C2"
-			tasks: [{
-				id: "5E0A0000000000D2"
-				item: { count: 1, id: "industrialupgrade:itemingots/platinum_ingot" }
-				type: "item"
-			}]
-			x: 10.0d
-			y: 0.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C6"]
-			icon: {
-				id: "kubejs:ammonium_chloropalladate"
-			}
-			id: "5E0B0000000000C8"
-			tasks: [{
-				id: "5E0B0000000000D8"
-				item: { count: 1, id: "kubejs:ammonium_chloropalladate" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: -4.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C8"]
-			icon: {
-				id: "kubejs:palladium_sponge"
-			}
-			id: "5E0B0000000000C9"
-			tasks: [{
-				id: "5E0B0000000000D9"
-				item: { count: 1, id: "kubejs:palladium_sponge" }
-				type: "item"
-			}]
-			x: 8.0d
-			y: -4.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C9"]
-			icon: {
-				id: "industrialupgrade:itemingots/palladium"
-			}
-			id: "5E0A0000000000C3"
-			tasks: [{
-				id: "5E0A0000000000D3"
-				item: { count: 1, id: "industrialupgrade:itemingots/palladium" }
-				type: "item"
-			}]
-			x: 10.0d
-			y: -4.0d
-		}
-		{
-			dependencies: ["5E0B0000000000C5"]
-			icon: {
-				id: "kubejs:iridium_residue"
-			}
-			id: "5E0B0000000000CA"
-			tasks: [{
-				id: "5E0B0000000000DA"
-				item: { count: 1, id: "kubejs:iridium_residue" }
-				type: "item"
-			}]
-			x: 4.0d
-			y: 4.0d
-		}
-		{
-			dependencies: ["5E0B0000000000CA"]
-			icon: {
-				id: "kubejs:ammonium_chloroosmate"
-			}
-			id: "5E0B0000000000CB"
-			tasks: [{
-				id: "5E0B0000000000DB"
-				item: { count: 1, id: "kubejs:ammonium_chloroosmate" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: 4.0d
-		}
-		{
-			dependencies: ["5E0B0000000000CB"]
-			icon: {
-				id: "industrialupgrade:itemdust/osmium_dust"
-			}
-			id: "5E0B0000000000CC"
-			tasks: [{
-				id: "5E0B0000000000DC"
-				item: { count: 1, id: "industrialupgrade:itemdust/osmium_dust" }
-				type: "item"
-			}]
-			x: 8.0d
-			y: 4.0d
-		}
-		{
-			dependencies: ["5E0B0000000000CA"]
-			icon: {
-				id: "industrialupgrade:itemdust/silicon_dioxide_dust"
-			}
-			id: "5E0B0000000000CD"
-			tasks: [{
-				id: "5E0B0000000000DD"
-				item: { count: 1, id: "industrialupgrade:itemdust/silicon_dioxide_dust" }
-				type: "item"
-			}]
-			x: 4.0d
-			y: 8.0d
-		}
-		{
-			dependencies: ["5E0B0000000000CD"]
-			icon: {
-				id: "kubejs:ammonium_chloroiridate"
-			}
-			id: "5E0B0000000000CE"
-			tasks: [{
-				id: "5E0B0000000000DE"
-				item: { count: 1, id: "kubejs:ammonium_chloroiridate" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: 8.0d
-		}
-		{
-			dependencies: ["5E0B0000000000CE"]
-			icon: {
-				id: "industrialupgrade:itemdust/iridium_dust"
-			}
-			id: "5E0B0000000000CF"
-			tasks: [{
-				id: "5E0B0000000000DF"
-				item: { count: 1, id: "industrialupgrade:itemdust/iridium_dust" }
-				type: "item"
-			}]
-			x: 8.0d
-			y: 8.0d
-		}
-		{
-			icon: {
-				id: "kubejs:rare_earth_concentrate"
-			}
-			id: "5E0C0000000000C1"
+			id: "5E0E000000000023"
 			shape: "hexagon"
 			tasks: [{
-				id: "5E0C0000000000D1"
-				item: { count: 1, id: "kubejs:rare_earth_concentrate" }
+				count: 4L
+				id: "5E0F000000000024"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_138_element" }
 				type: "item"
 			}]
-			x: 0.0d
-			y: -8.0d
+			x: 1.5d
+			y: 10.5d
 		}
 		{
-			dependencies: ["5E0C0000000000C1"]
+			dependencies: ["5E0E000000000023"]
 			icon: {
-				id: "kubejs:rare_earth_hydroxide"
+				id: "industrialupgrade:crafting_elements/crafting_20_element"
 			}
-			id: "5E0C0000000000C2"
+			id: "5E0E000000000024"
 			tasks: [{
-				id: "5E0C0000000000D2"
-				item: { count: 1, id: "kubejs:rare_earth_hydroxide" }
+				id: "5E0F000000000025"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_20_element" }
 				type: "item"
 			}]
-			x: 2.0d
-			y: -8.0d
+			x: 3.0d
+			y: 10.5d
 		}
 		{
-			dependencies: ["5E0C0000000000C2"]
+			dependencies: ["5E0E000000000024"]
 			icon: {
-				id: "kubejs:mixed_rare_earth_oxide"
+				id: "industrialupgrade:basemachine1/adv_alloy_smelter"
 			}
-			id: "5E0C0000000000C3"
+			id: "5E0E000000000025"
+			shape: "hexagon"
 			tasks: [{
-				id: "5E0C0000000000D3"
-				item: { count: 1, id: "kubejs:mixed_rare_earth_oxide" }
+				id: "5E0F000000000026"
+				item: { count: 1, id: "industrialupgrade:basemachine1/adv_alloy_smelter" }
 				type: "item"
 			}]
-			x: 4.0d
-			y: -8.0d
+			x: 4.5d
+			y: 10.5d
 		}
 		{
-			dependencies: ["5E0C0000000000C3"]
+			dependencies: ["5E0E000000000025"]
 			icon: {
-				id: "kubejs:cerium_rich_residue"
+				id: "industrialupgrade:moremachine/double_macerator"
 			}
-			id: "5E0C0000000000C4"
+			id: "5E0E000000000028"
+			shape: "hexagon"
 			tasks: [{
-				id: "5E0C0000000000D4"
-				item: { count: 1, id: "kubejs:cerium_rich_residue" }
+				id: "5E0F000000000029"
+				item: { count: 1, id: "industrialupgrade:moremachine/double_macerator" }
 				type: "item"
 			}]
 			x: 6.0d
-			y: -8.0d
+			y: 5.9d
 		}
 		{
-			dependencies: ["5E0C0000000000C4"]
+			dependencies: ["5E0E000000000028"]
 			icon: {
-				id: "kubejs:iron_thorium_residue"
+				id: "industrialupgrade:moremachine/double_furnace"
 			}
-			id: "5E0C0000000000C5"
+			id: "5E0E00000000002A"
 			tasks: [{
-				id: "5E0C0000000000D5"
-				item: { count: 1, id: "kubejs:iron_thorium_residue" }
+				id: "5E0F00000000002B"
+				item: { count: 1, id: "industrialupgrade:moremachine/double_furnace" }
 				type: "item"
 			}]
-			x: 8.0d
-			y: -8.0d
+			x: 7.5d
+			y: 2.8d
 		}
 		{
-			dependencies: ["5E0C0000000000C5"]
+			dependencies: ["5E0E00000000002A"]
 			icon: {
-				id: "kubejs:lanthanum_oxide"
+				id: "industrialupgrade:moremachine/double_extractor"
 			}
-			id: "5E0C0000000000C6"
+			id: "5E0E00000000002C"
 			tasks: [{
-				id: "5E0C0000000000D6"
-				item: { count: 1, id: "kubejs:lanthanum_oxide" }
+				id: "5E0F00000000002D"
+				item: { count: 1, id: "industrialupgrade:moremachine/double_extractor" }
 				type: "item"
 			}]
-			x: 10.0d
-			y: -8.0d
+			x: 9.0d
+			y: 2.8d
 		}
 		{
-			dependencies: ["5E0C0000000000C6"]
+			dependencies: ["5E0E00000000002C"]
 			icon: {
-				id: "kubejs:prnd_oxide"
+				id: "industrialupgrade:moremachine/double_commpressor"
 			}
-			id: "5E0C0000000000C7"
+			id: "5E0E00000000002E"
 			tasks: [{
-				id: "5E0C0000000000D7"
-				item: { count: 1, id: "kubejs:prnd_oxide" }
+				id: "6182E5341BE66384"
+				item: { count: 1, id: "industrialupgrade:moremachine/double_commpressor" }
 				type: "item"
 			}]
-			x: 12.0d
-			y: -8.0d
+			x: 10.5d
+			y: 2.8d
 		}
 		{
-			dependencies: ["5E0C0000000000C7"]
+			dependencies: ["5E0E00000000002E"]
 			icon: {
-				id: "industrialupgrade:itemingots/neodymium"
+				id: "industrialupgrade:moremachine2/double_rolling"
 			}
-			id: "5E0C0000000000C8"
+			id: "5E0E000000000030"
 			tasks: [{
-				id: "5E0C0000000000D8"
-				item: { count: 1, id: "industrialupgrade:itemingots/neodymium" }
-				type: "item"
-			}]
-			x: 14.0d
-			y: -8.0d
-		}
-		{
-			dependencies: ["5E0C0000000000C4"]
-			icon: {
-				id: "kubejs:cerium_oxide"
-			}
-			id: "5E0C0000000000C9"
-			tasks: [{
-				id: "5E0C0000000000D9"
-				item: { count: 1, id: "kubejs:cerium_oxide" }
-				type: "item"
-			}]
-			x: 6.0d
-			y: -12.0d
-		}
-		{
-			dependencies: ["5E0C0000000000C6"]
-			icon: {
-				id: "kubejs:gadolinium_oxide"
-			}
-			id: "5E0C0000000000CA"
-			tasks: [{
-				id: "5E0C0000000000DA"
-				item: { count: 1, id: "kubejs:gadolinium_oxide" }
-				type: "item"
-			}]
-			x: 10.0d
-			y: -12.0d
-		}
-		{
-			dependencies: ["5E0C0000000000C6"]
-			icon: {
-				id: "kubejs:yttrium_oxide"
-			}
-			id: "5E0C0000000000CB"
-			tasks: [{
-				id: "5E0C0000000000DB"
-				item: { count: 1, id: "kubejs:yttrium_oxide" }
+				id: "5E0F000000000031"
+				item: { count: 1, id: "industrialupgrade:moremachine2/double_rolling" }
 				type: "item"
 			}]
 			x: 12.0d
-			y: -12.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["5E0E000000000028"]
+			icon: {
+				id: "industrialupgrade:moremachine3/doubleorewashing"
+			}
+			id: "5E0E000000000038"
+			tasks: [{
+				id: "5E0F000000000039"
+				item: { count: 1, id: "industrialupgrade:moremachine3/doubleorewashing" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: 9.0d
+		}
+		{
+			dependencies: ["5E0E000000000038"]
+			icon: {
+				id: "industrialupgrade:moremachine3/doublecentrifuge"
+			}
+			id: "5E0E00000000003A"
+			tasks: [{
+				id: "5E0F00000000003B"
+				item: { count: 1, id: "industrialupgrade:moremachine3/doublecentrifuge" }
+				type: "item"
+			}]
+			x: 9.0d
+			y: 9.0d
+		}
+		{
+			dependencies: ["5E0E00000000002E"]
+			icon: {
+				id: "industrialupgrade:moremachine2/double_extruder"
+			}
+			id: "5E0E000000000034"
+			tasks: [{
+				id: "5E0F000000000035"
+				item: { count: 1, id: "industrialupgrade:moremachine2/double_extruder" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 1.5d
+		}
+		{
+			dependencies: ["5E0E000000000030"]
+			icon: {
+				id: "industrialupgrade:moremachine2/double_cutting"
+			}
+			id: "5E0E000000000032"
+			tasks: [{
+				id: "5E0F000000000033"
+				item: { count: 1, id: "industrialupgrade:moremachine2/double_cutting" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 0.0d
 		}
 		{
 			dependencies: [
-				"5E0C0000000000C6"
-				"5E0C0000000000C9"
+				"5E0E000000000034"
+				"5E0E000000000032"
 			]
 			icon: {
-				id: "kubejs:catalyst_molecular_sieve"
+				id: "industrialupgrade:moremachine3/doublegearing"
 			}
-			id: "5E0C0000000000CC"
+			id: "5E0E000000000036"
 			tasks: [{
-				id: "5E0C0000000000DC"
-				item: { count: 1, id: "kubejs:catalyst_molecular_sieve" }
+				id: "5E0F000000000037"
+				item: { count: 1, id: "industrialupgrade:moremachine3/doublegearing" }
 				type: "item"
 			}]
-			x: 14.0d
-			y: -12.0d
+			x: 15.0d
+			y: 1.5d
 		}
 		{
-			dependencies: ["5E0A0000000000C1"]
+			dependencies: ["5E0E000000000025"]
 			icon: {
-				id: "kubejs:anode_slime"
+				id: "industrialupgrade:basemachine3/adv_water_generator"
 			}
-			id: "5E0D0000000000C1"
-			rewards: [{
-				count: 4
-				id: "5E0D1D00000000C1"
-				item: {
-					count: 1
-					id: "minecraft:gold_ingot"
-				}
-				type: "item"
-			}]
-			tasks: [{
-				id: "5E0D1C00000000C1"
-				item: { count: 1, id: "kubejs:anode_slime" }
-				type: "item"
-			}]
-			x: 0.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["5E0D0000000000C1"]
-			icon: {
-				id: "kubejs:selenium_rectifier_block"
-			}
-			id: "5E0D0000000000C2"
-			rewards: [{
-				count: 8
-				id: "5E0D1D00000000C2"
-				item: {
-					count: 1
-					id: "kubejs:selenium_dust"
-				}
-				type: "item"
-			}]
-			tasks: [{
-				id: "5E0D1C00000000C2"
-				item: { count: 1, id: "kubejs:selenium_rectifier_block" }
-				type: "item"
-			}]
-			x: 2.0d
-			y: 2.0d
-		}
-		{
-			dependencies: ["5E0D0000000000C2"]
-			icon: {
-				id: "kubejs:electrolytic_copper"
-			}
-			id: "5E0D0000000000C3"
-			rewards: [{
-				count: 8
-				id: "5E0D1D00000000C3"
-				item: {
-					count: 1
-					id: "kubejs:electrolytic_copper"
-				}
-				type: "item"
-			}]
-			tasks: [{
-				count: 4L
-				id: "5E0D1C00000000C3"
-				item: { count: 1, id: "kubejs:electrolytic_copper" }
-				type: "item"
-			}]
-			x: 4.0d
-			y: 2.0d
-		}
-		{
-			icon: {
-				id: "mmcr:litho_mk2_controller"
-			}
-			id: "5A1B00000000A103"
+			id: "5E0E00000000003C"
 			shape: "hexagon"
 			tasks: [{
-				id: "5A1B00000000B103"
-				item: { count: 1, id: "mmcr:litho_mk2_controller" }
+				id: "5E0F00000000003D"
+				item: { count: 1, id: "industrialupgrade:basemachine3/adv_water_generator" }
 				type: "item"
 			}]
 			x: 6.0d
 			y: 12.0d
 		}
 		{
-			dependencies: ["5A1B00000000A102"]
+			dependencies: ["5E0E00000000003C"]
 			icon: {
-				components: {
-					"ftbquests:missing_item": "kubejs:purified_tcs"
-				}
-				id: "ftbquests:missing_item"
+				id: "industrialupgrade:basemachine3/adv_wind_generator"
 			}
-			id: "40110213F98998F5"
+			id: "5E0E00000000003E"
 			tasks: [{
-				count: 1000L
-				id: "3BFE9BBFF97CF7F4"
-				item: { components: { "ftbquests:missing_item": "kubejs:purified_tcs" }, count: 1, id: "ftbquests:missing_item" }
+				id: "5E0F00000000003F"
+				item: { count: 1, id: "industrialupgrade:basemachine3/adv_wind_generator" }
 				type: "item"
 			}]
-			x: 0.0d
+			x: 7.5d
 			y: 12.0d
 		}
 		{
+			dependencies: ["5E0E00000000003E"]
+			icon: {
+				id: "industrialupgrade:basemachine1/adv_geo"
+			}
+			id: "5E0E000000000040"
+			tasks: [{
+				id: "5E0F000000000041"
+				item: { count: 1, id: "industrialupgrade:basemachine1/adv_geo" }
+				type: "item"
+			}]
+			x: 9.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5E0E000000000040"]
+			icon: {
+				id: "industrialupgrade:basemachine3/adv_solar_destiller"
+			}
+			id: "5E0E000000000042"
+			tasks: [{
+				id: "5E0F000000000043"
+				item: { count: 1, id: "industrialupgrade:basemachine3/adv_solar_destiller" }
+				type: "item"
+			}]
+			x: 10.5d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"5E0E000000000042"
+				"5A1B00000000B303"
+			]
+			icon: {
+				id: "industrialupgrade:wiring_storage/mfe_iu"
+			}
+			id: "5E0E000000000044"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0F000000000045"
+				item: { count: 1, id: "industrialupgrade:wiring_storage/mfe_iu" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5E0E000000000044"]
+			icon: {
+				id: "kubejs:electrolytic_copper"
+			}
+			id: "5E0E000000000054"
+			shape: "hexagon"
+			tasks: [{
+				count: 32L
+				id: "5E0F000000000054"
+				item: { count: 1, id: "kubejs:electrolytic_copper" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5E0E000000000044"]
+			icon: {
+				id: "industrialupgrade:cooling_mixture"
+			}
+			id: "5E0E000000000055"
+			tasks: [{
+				count: 2L
+				id: "5E0F000000000055"
+				item: { count: 1, id: "industrialupgrade:cooling_mixture" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5E0E000000000055"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_298_element"
+			}
+			id: "5E0E000000000056"
+			tasks: [{
+				count: 2L
+				id: "5E0F000000000056"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_298_element" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 12.0d
+		}
+		{
+			dependencies: ["5E0E000000000056"]
+			icon: {
+				id: "industrialupgrade:upgrades/overclocker"
+			}
+			id: "5E0E000000000057"
+			shape: "hexagon"
+			tasks: [{
+				count: 2L
+				id: "5E0F000000000057"
+				item: { count: 1, id: "industrialupgrade:upgrades/overclocker" }
+				type: "item"
+			}]
+			x: 16.5d
+			y: 12.0d
+		}
+		{
+			dependencies: [
+				"5E0E00000000002E"
+				"03B4867738AD7EBF"
+			]
+			icon: {
+				id: "industrialforegoing:machine_frame_simple"
+			}
+			id: "5E0E000000000046"
+			shape: "hexagon"
+			tasks: [{
+				count: 4L
+				id: "5E0F000000000047"
+				item: { count: 1, id: "industrialforegoing:machine_frame_simple" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 5.6d
+		}
+		{
+			dependencies: ["5E0E000000000046"]
+			icon: {
+				id: "industrialforegoing:machine_frame_advanced"
+			}
+			id: "5E0E000000000066"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0F000000000066"
+				item: { count: 1, id: "industrialforegoing:machine_frame_advanced" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 3.8d
+		}
+		{
+			dependencies: ["5E0E000000000066"]
+			icon: {
+				id: "industrialforegoing:machine_frame_supreme"
+			}
+			id: "5E0E000000000067"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0F000000000067"
+				item: { count: 1, id: "industrialforegoing:machine_frame_supreme" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 3.0d
+		}
+		{
+			dependencies: ["5E0E000000000046"]
+			icon: {
+				id: "industrialforegoing:laser_drill"
+			}
+			id: "5E0E000000000048"
+			tasks: [{
+				id: "5E0F000000000049"
+				item: { count: 1, id: "industrialforegoing:laser_drill" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["5E0E000000000046"]
+			icon: {
+				id: "industrialforegoing:fermentation_station"
+			}
+			id: "5E0E00000000004A"
+			tasks: [{
+				id: "5E0F00000000004B"
+				item: { count: 1, id: "industrialforegoing:fermentation_station" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 7.5d
+		}
+		{
+			dependencies: ["5E0E00000000004A"]
+			icon: {
+				id: "industrialforegoing:hydroponic_bed"
+			}
+			id: "5E0E00000000004C"
+			tasks: [{
+				id: "5E0F00000000004D"
+				item: { count: 1, id: "industrialforegoing:hydroponic_bed" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 7.5d
+		}
+		{
+			dependencies: [
+				"5E0E000000000066"
+				"5E0E000000000048"
+			]
+			icon: {
+				id: "industrialforegoing:ore_laser_base"
+			}
+			id: "5E0E000000000068"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0F000000000068"
+				item: { count: 1, id: "industrialforegoing:ore_laser_base" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 4.5d
+		}
+		{
+			dependencies: ["5E0E000000000025"]
+			icon: {
+				id: "kubejs:moly_oxide"
+			}
+			id: "5E0E000000000051"
+			tasks: [{
+				count: 8L
+				id: "5E0F000000000051"
+				item: { count: 1, id: "kubejs:moly_oxide" }
+				type: "item"
+			}]
+			x: 6.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["5E0E000000000051"]
+			icon: {
+				id: "industrialupgrade:itemingots/molybdenum"
+			}
+			id: "5E0E000000000052"
+			tasks: [{
+				count: 4L
+				id: "5E0F000000000052"
+				item: { count: 1, id: "industrialupgrade:itemingots/molybdenum" }
+				type: "item"
+			}]
+			x: 7.5d
+			y: 15.0d
+		}
+		{
+			dependencies: ["5E0E000000000052"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_139_element"
+			}
+			id: "5E0E000000000050"
+			shape: "hexagon"
+			tasks: [{
+				count: 4L
+				id: "5E0F000000000050"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_139_element" }
+				type: "item"
+			}]
+			x: 9.0d
+			y: 15.0d
+		}
+		{
+			dependencies: ["5E0E000000000044"]
 			icon: {
 				id: "kubejs:siemens_poly"
 			}
 			id: "2FFEAF4A6C810F1B"
+			shape: "hexagon"
 			tasks: [{
+				count: 2L
 				id: "137C741DDA4F2B0A"
 				item: { count: 1, id: "kubejs:siemens_poly" }
 				type: "item"
 			}]
-			x: 2.0d
-			y: 12.0d
+			x: 13.5d
+			y: 13.5d
 		}
 		{
+			dependencies: ["2FFEAF4A6C810F1B"]
 			icon: {
 				id: "kubejs:wafer_9n"
 			}
@@ -519,8 +535,97 @@
 				item: { count: 1, id: "kubejs:wafer_9n" }
 				type: "item"
 			}]
-			x: 4.0d
-			y: 12.0d
+			x: 15.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["225B247E5319546F"]
+			icon: {
+				id: "kubejs:mask_350n"
+			}
+			id: "5E0E000000000053"
+			tasks: [{
+				id: "5E0F000000000053"
+				item: { count: 1, id: "kubejs:mask_350n" }
+				type: "item"
+			}]
+			x: 16.5d
+			y: 13.5d
+		}
+		{
+			dependencies: ["5E0E000000000053"]
+			icon: {
+				id: "mmcr:litho_mk2_controller"
+			}
+			id: "5A1B00000000A103"
+			shape: "hexagon"
+			tasks: [{
+				id: "5E0F00000000002F"
+				item: { count: 1, id: "mmcr:litho_mk2_controller" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: 13.5d
+		}
+		{
+			dependencies: ["5E0E000000000054"]
+			icon: {
+				id: "enderio:void_chassis"
+			}
+			id: "5E0E000000000059"
+			shape: "hexagon"
+			tasks: [{
+				count: 2L
+				id: "5E0F000000000059"
+				item: { count: 1, id: "enderio:void_chassis" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5E0E000000000059"]
+			icon: {
+				id: "enderio:alloy_smelter"
+			}
+			id: "5E0E00000000005A"
+			tasks: [{
+				id: "5E0F00000000005A"
+				item: { count: 1, id: "enderio:alloy_smelter" }
+				type: "item"
+			}]
+			x: 16.5d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5E0E00000000005A"]
+			icon: {
+				id: "enderio:conductive_alloy_ingot"
+			}
+			id: "5E0E00000000005B"
+			tasks: [{
+				count: 4L
+				id: "5E0F00000000005B"
+				item: { count: 1, id: "enderio:conductive_alloy_ingot" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: 10.5d
+		}
+		{
+			dependencies: ["5E0E00000000005B"]
+			icon: {
+				id: "enderio:conduit"
+			}
+			id: "5E0E00000000005C"
+			tasks: [{
+				count: 8L
+				id: "5E0F00000000005C"
+				item: { count: 1, id: "enderio:conduit" }
+				type: "item"
+			}]
+			x: 19.5d
+			y: 10.5d
 		}
 	]
 }

@@ -7,7 +7,7 @@
 //   路线       判据              覆盖金属（只补没有现成配方的）
 //   --------   ---------------   --------------------------------------------
 //   余烬压印   熔点 ≤ 1100℃      锡、铅、锌、铜、金、银、琥珀金、青铜
-//   Create压板 硬度 ≤ 3（莫氏）   锡、锌、琥珀金、青铜、红铜
+//   Create压板 硬度 ≤ 3（莫氏）   锡、锌、琥珀金、青铜、红铜、铝、铝镁
 //   IU 挤压机  全部金属          以上全部 + 铁、钢、钛、钨……
 //
 // 铜/铁/金已经有 Create 自带的压板配方，铅/银有 Embers 自带的 Create 压板配方；
@@ -90,6 +90,8 @@ ServerEvents.recipes(event => {
         ['zinc', 'c:ingots/zinc', PLATE('zinc')],
         ['electrum', 'c:ingots/electrum', PLATE('electrum')],
         ['bronze', 'c:ingots/bronze', PLATE('bronze')],
+        ['aluminium', 'c:ingots/aluminium', PLATE('aluminium')],
+        ['alcled', 'c:ingots/alcled', 'industrialupgrade:alloyplate/alcled'],
         ['redbrass', 'c:ingots/redbrass', 'industrialupgrade:alloyplate/red_brass']
     ]
     createPlate.forEach(function (row) {
@@ -118,5 +120,5 @@ ServerEvents.recipes(event => {
         console.error('[IU] 冲压机齿轮注册失败: ' + e)
     }
 
-    console.info('[IU] 板材路线：余烬压印 8 种 / Create 压板 5 种 / IU 挤压机全通用 / 冲压机齿轮 2 种')
+    console.info('[IU] 板材路线：余烬压印 8 种 / Create 压板 7 种 / IU 挤压机全通用 / 冲压机齿轮 2 种')
 })

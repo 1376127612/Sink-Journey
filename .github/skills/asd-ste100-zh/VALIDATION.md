@@ -1,0 +1,51 @@
+# 验证记录
+
+基线：上游 v0.4.0，`7d4a135a199a5d7447c4886bcd7ffe742a627bc9`。
+
+## 本地检查
+
+- skill-creator 的 `quick_validate.py`：技能 frontmatter 与名称检查通过。将上游顶层 `version` 移入 `metadata`，保留基线版本信息。
+- `ste-lint.py --selftest`：上游英语规则自测通过。
+- 原 `LICENSE` 逐字节保留；基线 SKILL.md blob 与记录一致。
+- 本地 Markdown 链接与临时 `.agents/skills/asd-ste100-zh/` 安装结构检查通过。英语错误样例退出 1，恰有两条 `dangling-conjunction`；正常英语退出 0，故意错误英语退出 1；纯中文、混合文本、扩展汉字、含中文代码块以及 stdin / 文件 / JSON / 多文件批次均返回退出码 2（未检查），JSON 不含违规计数。
+
+## 独立样例评审
+
+独立 gpt-6.1-sol / xhigh 完成四个真实请求的实际输出，再逐项对照原文作语义评审，未发现保真回归。不是按 regex 词匹配判定。所读 SKILL.md SHA-256：`801aa6b6f80fae335491c12af9889bea0862faeece66c81edeeb9fdf3e0d3304`（0.1.0 单文件版本）。
+
+- 导入操作：保留 `ready AND SHA-256 校验通过`，沙盒例外仅作用于 partial artifact 禁止；“应当 / 必须 / 不得”未改变。
+- 技术报告：保留时间窗口、p95 250/310 ms、120 次请求范围、未经确认的因果关系和英文日志原文。
+- 风险操作：保留断电后至少 30 s、压力严格小于 0.2 MPa、温度不高于 45 °C 的组合条件，以及读数不可用时禁止松开；面罩推荐未变为强制。
+- 部署说明：保留 `ready OR (override AND approved)`、`deploy --target zh-CN`、可能无输出和英文引用；未宣称中文通过官方 STE 检查。
+
+这些是有限样例的人工语义验收依据，不是自动合规或认证结论。
+
+## 精确审阅发现与修正
+
+主任务审阅提交 `e1c37eb8e5199ed4f7739aed0deba358323dace3` 时发现：中文示例把原文中 `rate_limit` 对“通常在 500 ms 内返回”的例外从首句漏掉了。后句保留“触发后可以重试”，不能替代时延陈述中的例外。前述四个 forward 样例未涵盖这个已写好的示例，不能据其通过推断全部示例无误。
+
+修正后的首句为：“除非触发 `rate_limit`，否则接口通常会在 500 ms 内返回。”语义验收分别检查：未触发时保留通常 500 ms 内返回；触发时不作这一时延承诺，也不新增一定超时的断言；重试仍是“可以”，`Retry-After` 与英文日志引用保持不变。应核对例外的作用范围，而不是只检查 `rate_limit` 一词是否仍出现。
+
+窄范围独立语义复审确认：正常分支仍“通常在 500 ms 内返回”，触发 `rate_limit` 时撤去该时延陈述；没有新增必然超时或重试结论。数值单位、重试许可和完整英文引用均保留。
+
+同轮审阅发现 CLI 汉字边界遗漏：旧范围止于 U+323AF，且未含 U+3007。修改前实跑 `〇`（U+3007）、扩展 J 首字 U+323B0 和末字 U+33479，均错误返回退出码 0、`hard_count=0`。现补入 U+3007，并把保守补充平面范围扩到 U+3347F；只修改拒绝边界，不改变英语检查逻辑。范围依据：[Unicode 17.0](https://www.unicode.org/versions/Unicode17.0.0/) 与 [Unicode 汉字 FAQ](https://www.unicode.org/faq/han_cjk.html)。
+
+增量验证通过：U+3007、现有汉字范围边界、U+323AF / U+323B0 / U+33479 / U+3347F 均退出 2 且 JSON 不含违规计数；相邻非覆盖字符 U+3006 / U+3008 / U+33480 保持原英语流程；正常/错误 ASCII 英语仍退出 0/1。stdin、文件与混合文件批次边界、原错误 fixture 的两条发现以及原英语 selftest 均通过。新增 CLI 边界正反例也保留在 `--selftest` 中。该范围包含部分未分配字符，是保守拒绝边界，不是完整语言识别。
+
+## 0.2.0 变更检查（2026-10-30）
+
+基线：`12a248747fe5faadf2aae463449b8e45b44a3eff`。本节只记录本轮实际运行的命令与结果。
+
+长 Markdown 围栏（#2）：`python3 scripts/ste-lint.py --selftest` 通过，新增用例覆盖 issue 列出的正例、marker / 长度反例、普通三字符围栏、EOF 未闭合、含汉字负对照，以及多文件状态隔离和 `--baseline` / `--disable`。把 `_fence_step` 换回旧的翻转逻辑后，同一自测失败；正文、列表项查找、列表项内部三个扫描器的用例在旧逻辑下分别误报第 3、3、4 行，新逻辑下只报围栏外的行或不报。纯 ASCII 四反引号围栏文件经 CLI 由旧版退出 1 变为退出 0；同一文件加入汉字后仍退出 2 且 JSON 为 `not_checked`。`examples/linter-edge-cases.md` 仍退出 1，恰有两条 `dangling-conjunction`。
+
+按目标语言加载英文规则（#3）：英文分支移入 [references/english-workflow.md](references/english-workflow.md)，英文示例移入 [examples/before-after-en.md](examples/before-after-en.md)。逐句比对旧英文分支（共 138 句，按句末标点切分且只计长于 25 个字符的句子），有 28 句改动：统一输出条件（mode 不外露；原文已清楚时原样返回；`Kept as-is:` 覆盖超长、时态和 “may have failed” 这类保留置信度的情形；`Note:` 覆盖歧义、缺失信息和空洞内容；规则表、词典限制说明和术语表按请求给出），以及更新相对路径和检查项数量。其余句子原样迁移。英文示例正文未改写，只新增文件标题、读取范围说明和一段说明 Example C 中已标明改动的追溯说明，并把一处路径改为相对链接。根 SKILL.md 与中文示例不含英文规则标记。全部 Markdown 相对链接可解析。
+
+独立 verifier 审查 PR #4 后提出 3 个 should-fix 与 3 个 nit；第一轮修正后复审发现新增路由条目与其他三处描述冲突，第二轮一并修正。修正内容：恢复 “may have failed” 等保留置信度时的 `Kept as-is:` 说明；“先写主要结论”不得把任何文本类型中的条件移到动作之后；路由改为按交付文本语言、按顺序判断且命中第一条即停止，覆盖“用中文要求改写或检查英文文本”的情形，英文工作流入口、frontmatter 与 README 同步（行为变化：0.1.0 中未指定语言的英文改写默认输出中文，0.2.0 起返回英文，除非用户要求译成中文）；套话清单区分术语用法并把句式类条目移到 Structure and framing；新增中文示例保留推论关系；词典限制的说明时机统一为询问规则或合规时。第三轮复审结论为 APPROVE，五种路由情形各只有一条路由。
+
+写作风格（OpenAI [GPT-6 Astra 写作风格指引](https://developers.openai.com/api/docs/guides/latest-model#gpt-6-astra-personality-and-writing-style)）：新增用户明确要求优先、先写主要结论、段落优先、删除套话和原文没有的对比框架、区分模糊限定与置信度词、少追问等规则，并新增一个中文示例。这些规则不改变保真要求，英语检查器也不检查它们。
+
+本轮未找到 skill-creator 的 `quick_validate.py`，改用 PyYAML 解析 SKILL.md frontmatter：`name` 为 `asd-ste100-zh`，`metadata.version` 为 0.2.0。没有用真实模型运行技能输出；路由与输出条件的检查依据指令文本推演。
+
+## 未验证范围
+
+没有验证当前官方 STE 全文、受控词典、认证符合性或现实设备的操作安全性；没有全局安装、付费 API 调用或手动触发 Actions。中文 CLI 边界只是拒绝含汉字输入，不是中文语言识别或自动合规工具。英语内部 `lint()` 不具有该边界保护。样例评审不能保证所有未来输出的语义保真。

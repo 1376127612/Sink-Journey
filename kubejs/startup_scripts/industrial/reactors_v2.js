@@ -120,7 +120,7 @@ MMCREvents.startup(event => {
             ['nickel_alumina', 0, 'industrialupgrade:baseblockalloy/inconel', 1.00, 1.00, 0],
             ['iron_chromia', 1, 'industrialupgrade:blockresource/steel_block', 1.00, 1.00, 0],
             ['copper_zinc', 2, 'industrialupgrade:baseblockalloy/stainless_steel', 0.85, 0.85, 2],
-            ['vanadia', 3, 'industrialupgrade:baseblockalloy1/molybdenum_steel', 0.85, 0.85, 2],
+            ['vanadia', 3, 'industrialupgrade:baseblockingot/vanadium', 0.85, 0.85, 2],
             ['iron_promoted', 4, 'industrialupgrade:baseblockalloy1/cobalt_chrome', 0.72, 0.72, 4],
             ['platinum_rhodium', 5, 'industrialupgrade:baseblockingot/electrum', 0.72, 0.72, 4]
         ],

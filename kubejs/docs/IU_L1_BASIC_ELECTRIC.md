@@ -7,6 +7,7 @@
 > - 每条"现配方"都来自配方 JSON，不是推测。
 > 相关文档：`IU_METAL_PLAN.md`（纯金属：功能决定材料族）、`IU_ALLOY_PLAN.md`（合金：成分 / 炉档 / 岗位）、
 > `METAL_PROGRESSION.md`（金属首次可得阶段）、`BASIC_ELECTRIC_AGE.md`（本阶段已经落地的魔改）、
+> `IU_L2_IMPROVED_ELECTRIC.md`（下一段 L2，304 → 316L 的规划）、
 > `IU_MODDING_METHODS.md`（改配方的手段）、`SE_LINE.md` / `OIL_LINE_V2.md`（SE 与石油两条线）、
 > `ORE_UNIVERSAL_LINE.md`（通用矿处 R1–R6）、`SILICON_WAFER_TIERS.md`（一级晶圆 T1）
 >

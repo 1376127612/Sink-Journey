@@ -365,5 +365,7 @@
   "block.nuclearcraftneohaul.chemical_reactor": "热室处理槽",
   "block.nuclearcraftneohaul.chemical_reactor.desc": "批式密闭槽：燃料溶解、氟化挥发、熔盐溶剂配制。强辐射、小料量、不能并行——要提产就多摆几台，而不是把它放大。",
   "nuclearcraftneohaul.menu.title.chemical_reactor": "热室处理槽",
-  "jei.kubejs.electrolyzer_frame.info": "电解池外壳档位：整圈铺同一档才生效。铜壳（核电工艺的机壳）是底档，不锈钢壳速度 ×1.12，钛壳 ×1.28；混着铺或者还剩一块铜壳，就按铜壳算。外壳只决定速度，电极、隔膜、电解液才决定效率。"
+  "jei.kubejs.electrolyzer_frame.info": "电解池外壳档位：整圈铺同一档才生效。铜壳（核电工艺的机壳）是底档，不锈钢壳速度 ×1.12，钛壳 ×1.28；混着铺或者还剩一块铜壳，就按铜壳算。外壳只决定速度，电极、隔膜、电解液才决定效率。",
+  "research.node.improved_notes.name": "电力：改良外壳与钼",
+  "research.improved_notes.desc": "304 外壳是入场券；把钼的氢还原与 316L 的配比写下来，改良机器才允许落地。"
 }

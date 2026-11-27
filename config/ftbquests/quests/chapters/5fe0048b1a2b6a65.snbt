@@ -321,7 +321,7 @@
 				type: "item"
 			}]
 			x: 12.0d
-			y: -4.0d
+			y: -12.0d
 		}
 		{
 			dependencies: ["553DE08FF8207EFC"]
@@ -335,7 +335,7 @@
 				type: "item"
 			}]
 			x: 14.0d
-			y: -4.0d
+			y: -12.0d
 		}
 		{
 			dependencies: ["160B66057D2A2BC2"]
@@ -349,7 +349,7 @@
 				type: "item"
 			}]
 			x: 16.0d
-			y: -4.0d
+			y: -12.0d
 		}
 		{
 			dependencies: ["3FFD6CD6131BB41E"]
@@ -363,7 +363,7 @@
 				type: "item"
 			}]
 			x: 18.0d
-			y: -4.0d
+			y: -12.0d
 		}
 		{
 			dependencies: ["39E580844A461AC5"]
@@ -377,7 +377,7 @@
 				type: "item"
 			}]
 			x: 20.0d
-			y: -4.0d
+			y: -12.0d
 		}
 		{
 			dependencies: ["0C5D79478D494E93"]
@@ -391,7 +391,7 @@
 				type: "item"
 			}]
 			x: 22.0d
-			y: -4.0d
+			y: -12.0d
 		}
 		{
 			dependencies: ["268F9CB2F5488846"]
@@ -405,7 +405,7 @@
 				type: "item"
 			}]
 			x: 24.0d
-			y: -4.0d
+			y: -12.0d
 		}
 		{
 			dependencies: ["0706F92EF2C236B8"]
@@ -461,7 +461,7 @@
 				type: "item"
 			}]
 			x: 16.0d
-			y: -8.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["285AC19CE5FBC3ED"]
@@ -475,7 +475,7 @@
 				type: "item"
 			}]
 			x: 18.0d
-			y: -8.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["57E4815EC1E82AC0"]
@@ -496,7 +496,7 @@
 				}
 			]
 			x: 20.0d
-			y: -8.0d
+			y: -4.0d
 		}
 		{
 			dependencies: ["0706F92EF2C236B8"]
@@ -513,7 +513,7 @@
 			y: -4.0d
 		}
 		{
-			dependencies: ["0706F92EF2C236B8"]
+			dependencies: ["5A1B000000000005"]
 			icon: {
 				id: "kubejs:blueprint_steam"
 			}
@@ -547,7 +547,7 @@
 				item: { count: 1, id: "industrialupgrade:purifiedcrushed/copper" }
 				type: "item"
 			}]
-			x: 22.0d
+			x: 16.0d
 			y: -8.0d
 		}
 	]
