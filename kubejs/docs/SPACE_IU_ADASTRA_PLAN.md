@@ -62,7 +62,9 @@
 - `config/ad_astra.jsonc`：**一个开关都不动**。Ad Astra 的氧气/温度/重力照常，宇航服体系继续有效。
 - Ad Astra 的维度、群系、星球表、`placed_feature`：不动。`sj-oregen` 只往 Ad Astra 群系里加 IU 的矿（`neoforge:add_features`），不覆盖原文件。
 - `Ad Astra: More Structures` 的 8 个结构：不动，见 §4。
-- IU 的四台航天器装配机、发射台、空间研究台、全息投影、太空模块、殖民地：不动
+- IU 的四台航天器装配机、发射台、空间研究台、全息投影、太空模块、殖民地：**功能不动**，
+  但配方与 Ad Astra 交叉（2026-11-27，见 §8）：装配台/发射台吃 Ad Astra 贮箱，
+  太阳能/耐热/耐寒模块吃电池板/戴斯板/冰晶
   （**出矿表除外**：2026-11-26 起按 `ORE_GENERATION.md §4.7` 重排，远征与殖民地各天体只出它那一层的矿）。
 - IU 的 34 个太空维度：**不再注册**（见 §2.1 的 `IuSpaceDimensionRegistrationMixin`），`industrialupgrade:earth` 例外。
   `sj-oregen` 里那份「把维度覆盖成虚空」的数据包（`gen_oregen.py: void_iu_space()`）保留成备份：
@@ -129,3 +131,63 @@ IU 侧的「第一小步」「外星科技」仍然是探测器/火箭/殖民地
    因为 IU 的维度不成熟、而且会牵动矿物生成。
 3. `industrialupgrade:earth` 维度现在没人能进（星门封了），要不要也一起摘掉。留着是因为
    包里的回程逻辑对它有特判，摘之前得先确认没有别的路径依赖它。
+
+---
+
+## 7. 二阶太空（2026-11-27 落地，「第一小步」29 格）
+
+载人线从月球接到火星，任务是「第一小步」的六格，挂在「着陆月球」下面：
+
+| 格 | 任务 | 依赖 | 门槛 |
+| --- | --- | --- | --- |
+| `25AC0000000000E1` | 月球戴斯（`ad_astra:raw_desh` 8） | 着陆月球 | 月球层的第二种矿 |
+| `25AC0000000000E2` | 二阶火箭 | 月球戴斯 + 月球钛 | 四块戴斯块 + 两块钛块 |
+| `25AC0000000000E3` | 着陆火星（火星石 8） | 二阶火箭 | — |
+| `25AC0000000000E4` | 火星独居石（`kubejs:monazite` 16） | 着陆火星 | 一块矿掉两份 |
+| `25AC0000000000E5` | 火星铪（`industrialupgrade:raw_metals/raw_hafnium` 6） | 火星独居石 | 难熔伴生 |
+| `25AC0000000000E6` | 二阶收口：航天器的料 | 火星铪 | `元件：航天器` 要钕板 + 碳化铪板 |
+
+**二阶火箭的配方改了**（`kubejs/server_scripts/misc/ad_astra_l2.js`）：原作六块戴斯块，
+改成四块戴斯块 + 两块 `industrialupgrade:baseblockingot/titanium`。戴斯管喷管与再入端，
+承压壳体是钛，所以月球这一趟要带回两样料。配方 id 原样写回，任务卡仍收
+`ad_astra:tier_2_rocket`。
+
+**阶数边界按 Ad Astra 自己的 `data/ad_astra/planets/*.json` 的 `tier` 字段**，本包没有覆盖它：
+
+| 天体 | tier | 火箭 |
+| --- | ---: | --- |
+| 月球 | 1 | 一阶 |
+| 火星 | 2 | 二阶 |
+| 金星 / 水星 | 3 | 三阶（奥斯特姆块，火星出） |
+| 冰星 | 4 | 四阶 |
+
+所以二阶到火星为止。水星的钨钼钽铌（`元件：殖民地` 吃钨板）要三阶，冰星的锂铍要四阶，
+都排在 L3 之后；`iu_research` 那一格的文案此前写「二阶火箭才到得了水星」，2026-11-27 改成三阶。
+
+---
+
+## 8. 交叉魔改：两条太空线互相吃件（2026-11-27）
+
+一句话：**载人线给无人线送件，无人线给载人线送件，谁的太空线都开不了单干。**
+实装在 `kubejs/server_scripts/misc/ad_astra_iu_cross.js`（IU 的机器）与
+`server_scripts/misc/ad_astra_l2.js`（二阶火箭）。配方 id 一律不动。
+
+| 方向 | 配方 | 改动 | 理由 |
+| --- | --- | --- | --- |
+| Ad Astra → IU | IU 火箭装配台 `industrialupgrade_2199` | + 两只 `ad_astra:desh_tank` | 戴斯是耐热合金，包内只有 Ad Astra 炼；无人火箭的贮箱不另做一种 |
+| Ad Astra → IU | IU 火箭发射台 `industrialupgrade_2202` | + 两只 `ad_astra:steel_tank` | 承压燃料罐沿用同一套件 |
+| Ad Astra → IU | 太空模块：太阳能 `industrialupgrade_2098` | + 两片 `ad_astra:solar_panel` | 电池板是戴斯框 + 光伏片，模块的电源直接用 |
+| Ad Astra → IU | 太空模块：耐热 `industrialupgrade_2096` | + 两块 `ad_astra:desh_plate` | 耐热模块本来就是戴斯那个用途 |
+| Ad Astra → IU | 太空模块：耐寒 `industrialupgrade_2097` | + 两块 `ad_astra:ice_shard` | 冰晶在月面与火星都有（`moon/mars/glacio_ice_shard_ore`） |
+| IU → Ad Astra | 二阶火箭（`ad_astra_l2.js`） | 四戴斯块 + 两 `baseblockingot/titanium` | 承压壳体用 IU 的钛 |
+| IU → Ad Astra | Ad Astra 发射台 `ad_astra:launch_pad` | 四钢 + 三钢棍 + 两 `#c:plates/stainlesssteel` | 尾焰冲刷的台面不能用普通钢，包内 304 只有这一种 |
+| IU → Ad Astra | Ad Astra 炼油厂 `ad_astra:fuel_refinery` | 四钢 + 两桶 + 熔炉 + 两 `#c:plates/stainlesssteel` | 含硫原油腐蚀塔器，304 是包内唯一的耐蚀钢 |
+
+边界：
+
+- 全部八条只用到 tier ≤ 2 的料（月球戴斯与冰晶、Ad Astra 钢、IU 的 304 与钛）。
+  `ad_astra:oxygen_sensor` 吃奥斯特姆板（火星，tier 3 的下一层）这一类不动，
+  免得把 IU 无人线整个推到火星之后。
+- 没有环：IU 远征要的陨铁来自「发射台 + 研究台」，这两台都不吃陨铁；二阶火箭也不吃模块。
+- JEI 侧不用动，配方还是原 id，解锁链照旧。
+

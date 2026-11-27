@@ -56,4 +56,37 @@ ServerEvents.recipes(event => {
     }).id('ad_astra:space_suit')
 
     console.info('[火箭] 太空服外壳改为铝镁 5052 板：镁进 L2 主线')
+
+    // ============================================================
+    // 二阶火箭：六块戴斯 → 四块戴斯 + 两块钛块
+    // ============================================================
+    // 戴斯是耐热合金，现实里对应喷管、隔热层与再入端的高温合金；
+    // 承压壳体是钛（Ti-6Al-4V 的贮箱与承力框），钢与戴斯都不占这一份。
+    // 所以二阶从月球带回两样料：戴斯（月球本层）与钛（月球钛那一格）。
+    // 二阶到火星为止：金星与水星是 tier 3，冰星是 tier 4（planet json 的 tier 字段）。
+    // 配方 id 原样写回；任务卡仍收 ad_astra:tier_2_rocket。
+    event.remove({ id: 'ad_astra:nasa_workbench/tier_2_rocket_from_nasa_workbench' })
+
+    event.custom({
+        type: 'ad_astra:nasa_workbench',
+        ingredients: [
+            { item: 'ad_astra:rocket_nose_cone' },
+            { tag: 'ad_astra:desh_blocks' },
+            { tag: 'ad_astra:desh_blocks' },
+            { tag: 'ad_astra:desh_blocks' },
+            { tag: 'ad_astra:desh_blocks' },
+            { item: 'industrialupgrade:baseblockingot/titanium' },
+            { item: 'industrialupgrade:baseblockingot/titanium' },
+            { item: 'ad_astra:rocket_fin' },
+            { item: 'ad_astra:desh_tank' },
+            { item: 'ad_astra:desh_tank' },
+            { item: 'ad_astra:rocket_fin' },
+            { item: 'ad_astra:rocket_fin' },
+            { item: 'ad_astra:desh_engine' },
+            { item: 'ad_astra:rocket_fin' }
+        ],
+        result: { count: 1, id: 'ad_astra:tier_2_rocket' }
+    }).id('ad_astra:nasa_workbench/tier_2_rocket_from_nasa_workbench')
+
+    console.info('[火箭] 二阶火箭改为 4 戴斯块 + 2 钛块：钛与戴斯都从月球来')
 })

@@ -1,0 +1,15 @@
+[client]
+	#Show the date and time a trophy was earned on its tooltip and on hover.
+	showEarnedAt = true
+	#Display the author of trophy models on their tooltips.
+	tooltipCredits = false
+
+	[client.perf]
+		#Don't show the items on top of trophies placed in the world.
+		skipBlockItems = false
+		#Don't show the items on top of trophies in inventories and GUIs.
+		skipItemItems = false
+		#Don't show trophy bases in inventories and GUIs.
+		skipItemBases = false
+		#Emergency killswitch for trophies repeating their displayed item's tooltip.
+		noTooltip = false

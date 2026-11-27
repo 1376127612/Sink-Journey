@@ -23,7 +23,7 @@
 				type: "item"
 			}]
 			x: 0.0d
-			y: 3.2d
+			y: 4.6d
 		}
 		{
 			dependencies: [
@@ -41,7 +41,7 @@
 				type: "item"
 			}]
 			x: 1.5d
-			y: 3.2d
+			y: 4.6d
 		}
 		{
 			dependencies: ["5E0E000000000058"]
@@ -55,7 +55,7 @@
 				type: "item"
 			}]
 			x: 3.0d
-			y: 3.2d
+			y: 4.6d
 		}
 		{
 			dependencies: ["25AC0000000000C5"]
@@ -69,7 +69,7 @@
 				type: "item"
 			}]
 			x: 4.5d
-			y: 3.2d
+			y: 4.6d
 		}
 		{
 			dependencies: ["25AC0000000000C6"]
@@ -83,7 +83,7 @@
 				type: "item"
 			}]
 			x: 6.0d
-			y: 3.2d
+			y: 4.6d
 		}
 		{
 			dependencies: ["25AC0000000000C7"]
@@ -98,7 +98,7 @@
 				type: "item"
 			}]
 			x: 7.5d
-			y: 3.2d
+			y: 4.6d
 		}
 		{
 			dependencies: ["25AC0000000000C1"]
@@ -113,7 +113,7 @@
 				type: "item"
 			}]
 			x: 9.0d
-			y: 3.2d
+			y: 4.6d
 		}
 		{
 			dependencies: ["25AC0000000000C2"]
@@ -355,6 +355,98 @@
 			}]
 			x: 28.5d
 			y: 0.0d
+		}
+		{
+			dependencies: ["25AC0000000000C2"]
+			icon: {
+				id: "ad_astra:raw_desh"
+			}
+			id: "25AC0000000000E1"
+			tasks: [{
+				count: 8L
+				id: "25AC1C00000000E1"
+				item: { count: 1, id: "ad_astra:raw_desh" }
+				type: "item"
+			}]
+			x: 10.5d
+			y: 6.0d
+		}
+		{
+			dependencies: [
+				"25AC0000000000E1"
+				"25AC0000000000C3"
+			]
+			icon: {
+				id: "ad_astra:tier_2_rocket"
+			}
+			id: "25AC0000000000E2"
+			tasks: [{
+				id: "25AC1C00000000E2"
+				item: { count: 1, id: "ad_astra:tier_2_rocket" }
+				type: "item"
+			}]
+			x: 12.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["25AC0000000000E2"]
+			icon: {
+				id: "ad_astra:mars_stone"
+			}
+			id: "25AC0000000000E3"
+			tasks: [{
+				count: 8L
+				id: "25AC1C00000000E3"
+				item: { count: 1, id: "ad_astra:mars_stone" }
+				type: "item"
+			}]
+			x: 13.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["25AC0000000000E3"]
+			icon: {
+				id: "kubejs:monazite"
+			}
+			id: "25AC0000000000E4"
+			tasks: [{
+				count: 16L
+				id: "25AC1C00000000E4"
+				item: { count: 1, id: "kubejs:monazite" }
+				type: "item"
+			}]
+			x: 15.0d
+			y: 6.0d
+		}
+		{
+			dependencies: ["25AC0000000000E4"]
+			icon: {
+				id: "industrialupgrade:raw_metals/raw_hafnium"
+			}
+			id: "25AC0000000000E5"
+			tasks: [{
+				count: 6L
+				id: "25AC1C00000000E5"
+				item: { count: 1, id: "industrialupgrade:raw_metals/raw_hafnium" }
+				type: "item"
+			}]
+			x: 16.5d
+			y: 6.0d
+		}
+		{
+			dependencies: ["25AC0000000000E5"]
+			icon: {
+				id: "industrialupgrade:crafting_elements/crafting_679_element"
+			}
+			id: "25AC0000000000E6"
+			shape: "hexagon"
+			tasks: [{
+				id: "25AC1C00000000E6"
+				item: { count: 1, id: "industrialupgrade:crafting_elements/crafting_679_element" }
+				type: "item"
+			}]
+			x: 18.0d
+			y: 6.0d
 		}
 	]
 }
