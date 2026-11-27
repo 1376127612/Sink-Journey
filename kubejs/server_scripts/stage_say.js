@@ -532,7 +532,7 @@ function playSound(server, line) {
 
     var soundEvent = null
     try {
-        // Utils.getSound 接受 ResourceLocation；传字符串由 KubeJS 自动转换
+        // Utils.getSound 接受 ResourceLocation；传字u'fe符串由 KubeJS 自动转换
         soundEvent = Utils.getSound(String(snd))
     } catch (e) {
         logError('音效 id 无效: ' + snd + ' -> ' + e)
