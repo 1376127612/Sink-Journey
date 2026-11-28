@@ -207,3 +207,87 @@ ServerEvents.generateData('after_mods', event => {
       }
     )
 })
+// kubejsstudio custom: roots:grove/runic_shears
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'roots:recipe/grove/runic_shears',
+      {
+        "type": "roots:grove",
+        "data": {
+          "ingredients": [
+            {"tag":"roots:runed_obsidian"},
+            {"tag":"roots:runed_obsidian"},
+            {"tag":"roots:runed_obsidian"},
+            {"tag":"minecraft:small_flowers"},
+            {"tag":"roots:herbs/grove_moss"},
+            [{"item":"roots:wooden_shears"},{"item":"minecraft:shears"}]
+          ],
+          "level_conditions": [
+            {
+              "type": "roots:grove_stone_condition",
+              "grove_type": {"name":"any","tag":"roots:grove_stones"},
+              "require_active": true
+            }
+          ],
+          "priority": 0,
+          "result": {"count":1,"id":"roots:runic_shears"}
+        }
+      }
+    )
+})
+// kubejsstudio custom: roots:grove/runed_obsidian_8
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'roots:recipe/grove/runed_obsidian_4',
+      {
+        "type": "roots:grove",
+        "data": {
+          "ingredients": [
+            {"tag":"roots:runestone"},
+            {"tag":"roots:runestone"},
+            {"tag":"roots:runestone"},
+            {"tag":"c:obsidians"},
+            {"tag":"roots:runestone"},
+            {"tag":"roots:runestone"},
+            {"tag":"roots:runestone"},
+            {"tag":"c:obsidians"}
+          ],
+          "level_conditions": [
+            {
+              "type": "roots:grove_stone_condition",
+              "grove_type": {"name":"any","tag":"roots:grove_stones"},
+              "require_active": true
+            }
+          ],
+          "priority": 0,
+          "result": {"count":4,"id":"roots:runed_obsidian"}
+        }
+      }
+    )
+})
+// kubejsstudio custom: roots:grove/runed_obsidian_4
+ServerEvents.generateData('after_mods', event => {
+    event.json(
+      'roots:recipe/grove/runed_obsidian_2',
+      {
+        "type": "roots:grove",
+        "data": {
+          "ingredients": [
+            {"tag":"roots:runestone"},
+            {"tag":"roots:runestone"},
+            {"tag":"roots:runestone"},
+            {"tag":"c:obsidians"}
+          ],
+          "level_conditions": [
+            {
+              "type": "roots:grove_stone_condition",
+              "grove_type": {"name":"any","tag":"roots:grove_stones"},
+              "require_active": true
+            }
+          ],
+          "priority": 0,
+          "result": {"count":2,"id":"roots:runed_obsidian"}
+        }
+      }
+    )
+})

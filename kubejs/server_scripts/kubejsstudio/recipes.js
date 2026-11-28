@@ -17,6 +17,8 @@ ServerEvents.generateData('after_mods', event => {
     event.json('embers:recipe/crystal_cell', {"type":"minecraft:crafting_shaped","category":"misc","pattern":[" # ","ABA","CDC"],"key":{"#":{"item":"embers:ember_crystal"},"A":{"tag":"c:plates/dawnstone"},"B":{"item":"embers:copper_cell"},"C":{"tag":"c:storage_blocks/copper"},"D":{"tag":"c:storage_blocks/dawnstone"}},"result":{"id":"embers:crystal_cell","count":1}})
     event.json('embers:recipe/atmospheric_bellows', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["#A#","BCB","#D#"],"key":{"#":{"tag":"c:plates/copper"},"A":{"item":"embers:sealed_planks"},"B":{"tag":"c:leather"},"C":{"item":"embers:ember_crystal_cluster"},"D":{"item":"embers:mirror_relay"}},"result":{"id":"embers:atmospheric_bellows","count":1}})
     event.json('embers:recipe/hearth_coil', {"type":"minecraft:crafting_shaped","category":"misc","pattern":["###","ABA"," C "],"key":{"#":{"tag":"c:plates/copper"},"A":{"tag":"c:ingots/iron"},"B":{"item":"minecraft:furnace"},"C":{"item":"embers:mechanical_core"}},"result":{"id":"embers:hearth_coil","count":1}})
+    event.json('roots:recipe/display_pedestal', {"type":"minecraft:crafting_shapeless","category":"misc","ingredients":[{"item":"roots:wildwood_pedestal"},{"tag":"c:levers"}],"result":{"id":"roots:display_pedestal","count":1}})
+    event.json('roots:recipe/copper_pickaxe', {"type":"minecraft:crafting_shaped","category":"equipment","pattern":["###"," A "," A "],"key":{"#":{"item":"minecraft:copper_block"},"A":{"tag":"c:rods/wooden"}},"result":{"id":"roots:copper_pickaxe","count":1}})
 })
 ServerEvents.recipes(event => {
     event.shaped('embers:mithril_block', ['###', '###', '###'], { '#': 'embers:mithril_ingot' }).id('embers:mithril_block')

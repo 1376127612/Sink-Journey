@@ -45,20 +45,22 @@
   "pinnedFiles": [],
   "pinnedFolders": [],
   "favorites": [],
-  "recipesSelected": "roots:grove/runic_shears",
-  "recipesSearch": "runic_sh",
+  "recipesSelected": "roots:grove/bafflecap_fairy_hut",
+  "recipesSearch": "roots:baffle",
   "tagsRegistry": "item",
   "tagsSelected": "c:doubleplate",
   "tagsSearch": "c:doubleplate",
   "lootSelected": "actuallyadditions:blocks/black_quartz_brick_block",
   "lootSearch": "",
-  "propsSelected": "actuallyadditions:black_quartz_brick_wall",
-  "propsSearch": "",
+  "propsSelected": "notreepunchingremastered:copper_pickaxe",
+  "propsSearch": "copper_pic",
   "createRegistry": "item",
   "createSelected": "",
   "createSearch": "",
   "filesOpen": [],
   "recentPicks": [
+    "item minecraft:copper_block",
+    "item roots:wildwood_pedestal",
     "item minecraft:furnace",
     "item embers:mirror_relay",
     "item embers:ember_crystal_cluster",
@@ -68,9 +70,7 @@
     "item embers:crystal_cell",
     "item embers:dawnstone_ingot",
     "item embers:glimmer_lamp",
-    "item spectrum:clover",
-    "item kubejs:harmony_sounds",
-    "item minecraft:sunflower"
+    "item spectrum:clover"
   ],
   "filesActive": -1
 }

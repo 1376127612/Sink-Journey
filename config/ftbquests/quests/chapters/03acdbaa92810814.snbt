@@ -284,6 +284,11 @@
 					item: { count: 1, id: "roots:wildwood_pedestal" }
 					type: "item"
 				}
+				{
+					id: "4A7A9DD4A122CB3B"
+					item: { count: 1, id: "roots:wild_grove_stone" }
+					type: "item"
+				}
 			]
 			x: -0.5d
 			y: -7.5d

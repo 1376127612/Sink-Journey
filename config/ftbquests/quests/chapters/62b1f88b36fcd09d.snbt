@@ -151,8 +151,8 @@
 			dependencies: ["60E6C5DE278F8AD0"]
 			id: "3679A19AA7492767"
 			tasks: [{
-				id: "42E0F2BCCD29A1DB"
-				item: { count: 1, id: "firestarters:fire_starter" }
+				id: "47923BCCB9826160"
+				item: { count: 1, id: "roots:fire_starter" }
 				type: "item"
 			}]
 			x: 10.0d
@@ -240,8 +240,8 @@
 					type: "item"
 				}
 				{
-					id: "01ECD6DC546AD6CB"
-					item: { count: 1, id: "roots:copper_pickaxe" }
+					id: "14B27E6B5A9C25F7"
+					item: { count: 1, id: "notreepunchingremastered:copper_pickaxe" }
 					type: "item"
 				}
 			]
@@ -280,6 +280,17 @@
 			}]
 			x: 7.5d
 			y: 2.5d
+		}
+		{
+			dependencies: ["39F17AE9D43DCF5C"]
+			id: "1AB4D83E6CA29772"
+			tasks: [{
+				id: "453E08E07073D35A"
+				item: { count: 1, id: "notreepunchingremastered:copper_saw" }
+				type: "item"
+			}]
+			x: 14.0d
+			y: 2.0d
 		}
 	]
 }
