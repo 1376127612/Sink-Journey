@@ -13,3 +13,13 @@
 		skipItemBases = false
 		#Emergency killswitch for trophies repeating their displayed item's tooltip.
 		noTooltip = false
+
+		[client.perf.effects]
+			#Don't emit the particle half of trophy effects (aura, orbit, beam sparkles).
+			skipEffectParticles = false
+			#Don't draw the geometry half of trophy effects (halo, beam shaft, light pool).
+			skipGeometryFx = false
+			#Trophies further away than this many blocks stop emitting particles.
+			# Default: 32
+			# Range: 4 ~ 128
+			effectRange = 32
