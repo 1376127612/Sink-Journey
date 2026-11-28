@@ -1,0 +1,110 @@
+	["The Aurorian"."Tools and Armor"]
+		absorption_orb_repairs_all = false
+		#Base max XP required to level up
+		# Default: 100
+		# Range: > 1
+		aurorian_steel_base_level = 100
+		#The next max required XP is this multiplied by the last max required XP
+		# Default: 1.25
+		# Range: 1.0 ~ 2.147483647E9
+		aurorian_steel_level_multiplier = 1.25
+		# Default: 0.2
+		# Range: 0.0 ~ 1.0
+		crystalline_pickaxe_treasure_chance = 0.2
+		crystalline_shield_repairs_all = false
+		# Default: 8.0
+		# Range: 1.0 ~ 2.147483647E9
+		cystalline_sword_beam_damage = 8.0
+		#Sword beam projectile speed (was wrongly keyed as cystalline_sword_beam_damage)
+		# Default: 2.0
+		# Range: 0.25 ~ 2.147483647E9
+		cystalline_sword_beam_velocity = 2.0
+		#Crystalline Sprite beam damage (separate from sword beam)
+		# Default: 2.0
+		# Range: 0.0 ~ 2.147483647E9
+		crystalline_sprite_beam_damage = 2.0
+		#% to take damage, day adds +1 damage to this after, night does not
+		# Default: 0.5
+		# Range: 0.0 ~ 1.0
+		moonstone_damage_chance = 0.5
+		#Ticks between sneaking slime boot high jumps
+		# Default: 100
+		# Range: > 0
+		slime_boots_cooldown = 100
+		#+% per armor piece to cleanse negative effects when attacking
+		# Default: 0.06
+		# Range: 0.0 ~ 0.25
+		spectral_armor_cleanse_chance = 0.06
+		# Default: 15
+		# Range: > 0
+		umbra_pickaxe_selection_cost = 15
+		# Default: 1.5
+		# Range: 1.0 ~ 2.147483647E9
+		umbra_pickaxe_selection_speed_multiplier = 1.5
+		#How different the speed of diggable blocks can be for them to also be mined. 0 = only blocks of the same resistance can be mined together, 0.15 allows for sand/gravel/clay/dirt to all be mined together
+		# Default: 0.15
+		# Range: 0.0 ~ 2.147483647E9
+		aurorianite_shovel_resistance_difference = 0.15
+		# Default: 1
+		# Range: > 0
+		aurorianite_shovel_dig_radius = 1
+
+	["The Aurorian".Blocks]
+		#Max chimneys you can stack on the aurorian furnace
+		# Default: 10
+		# Range: > 0
+		chimney_max = 10
+		#Fuel multiplier when at max chimneys
+		# Default: 2.5
+		# Range: 0.0 ~ 2.147483647E9
+		chimney_multiplier = 2.5
+		# Default: 240
+		# Range: > 2
+		scrapper_base_craft_duration = 240
+		# Default: 0.25
+		# Range: 0.0 ~ 1.0
+		scrapper_crystal_break_chance = 0.25
+		# Default: 0.25
+		# Range: 0.0 ~ 1.0
+		scrapper_crystal_speed_discount = 0.25
+
+	["The Aurorian".Scaling]
+		#Boss scaling is applied when a boss spawner spawns a boss AND when there is more than 1 player. the number of players is multiplied by this, +1, then multiplied by the base value
+		# Default: 0.2
+		# Range: 0.0 ~ 2.147483647E9
+		boss_damage_per_player = 0.2
+		# Default: 0.75
+		# Range: 0.0 ~ 2.147483647E9
+		boss_health_per_player = 0.75
+		# Default: 0.2
+		# Range: 0.0 ~ 2.147483647E9
+		boss_speed_per_player = 0.2
+
+	["The Aurorian".Mobs]
+		#Nearby-density multipliers for dungeon/temple hostiles (upstream default 1). Caps are baseNearby * this value.
+		# Default: 1
+		# Range: 0 ~ 10
+		runestone_dungeon_mob_density = 1
+		# Default: 1
+		# Range: 0 ~ 10
+		moon_temple_mob_density = 1
+		# Default: 1
+		# Range: 0 ~ 10
+		darkstone_dungeon_mob_density = 1
+
+	["The Aurorian"."World Gen"]
+		#Toggles for Aurorian structure generation. Spacing of every structure is configured in data/theaurorian/worldgen/structure_set/. Runestone uses a custom Structure (upstream 15×15 quadrants), not jigsaw.
+		enable_darkstone_dungeon = true
+		enable_moon_temple = true
+		enable_ruins = true
+		enable_umbra_tower = true
+		enable_runestone_dungeon = true
+		#Number of intermediate floors between base and boss (forced even so stairs line up).
+		# Default: 4
+		# Range: 2 ~ 32
+		runestone_dungeon_floors = 4
+
+	["The Aurorian".Compatibility]
+		#Optional mod integrations. The mod always runs without these mods installed; these toggles only matter when the corresponding mod is present.
+		#Set to false to disable the Tinkers' Construct integration (materials, molten fluids and custom traits).
+		enable_tconstruct_compat = true
